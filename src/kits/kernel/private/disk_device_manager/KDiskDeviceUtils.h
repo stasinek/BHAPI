@@ -4,7 +4,7 @@
 #define _K_DISK_DEVICE_UTILS_H
 
 #include <stdlib.h>
-#include <string.h>
+#include <kits/support/String.h>
 
 #include <Haiku.h>
 

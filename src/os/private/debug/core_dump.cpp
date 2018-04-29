@@ -7,7 +7,7 @@
 #include <core_dump.h>
 
 #include <errno.h>
-#include <string.h>
+#include <kits/support/String.h>
 
 #include <algorithm>
 #include <new>

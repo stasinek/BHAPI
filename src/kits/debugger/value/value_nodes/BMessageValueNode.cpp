@@ -13,7 +13,7 @@
 #include <MessagePrivate.h>
 
 #include <Architecture.h>
-#include <StringValue.h>
+#include <kits/support/StringValue.h>
 #include <TeamTypeInformation.h>
 #include <Tracing.h>
 #include <Type.h>

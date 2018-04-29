@@ -13,7 +13,7 @@
 #include <kits/kernel/OS.h>
 
 #include <arch/atomic.h>
-#include <debug.h>
+#include <kits/debug/Debug.h>
 
 
 struct mutex_waiter;

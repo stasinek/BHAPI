@@ -5,7 +5,7 @@
 #ifndef SYMBOL_INFO_H
 #define SYMBOL_INFO_H
 
-#include <StringClass.h>
+#include <kits/support/String.h>
 
 #include <Types.h>
 

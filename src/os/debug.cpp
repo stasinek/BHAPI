@@ -29,11 +29,11 @@
 
 #define BHAPI_DEBUG
 #define BHAPI_WARNING
-#include <Debug.h>
+#include <kits/debug/Debug.h>
 #undef BHAPI_DEBUG
 #undef BHAPI_WARNING
 #include <Kernel.h>
-#include <kits/support/StringClass.h>
+#include <kits/support/String.h>
 #include <kits/support/UTF8.h>
 
 #include <new>

@@ -7,7 +7,7 @@
 #include <unistd.h>
 #include <malloc.h>
 
-#include <StringClass.h>
+#include <kits/support/String.h>
 #include <Message.h>
 #include <Application.h>
 
@@ -15,7 +15,7 @@
 #include <GroupLayoutBuilder.h>
 #include <InterfaceDefs.h>
 #include <SpaceLayoutItem.h>
-#include <StringView.h>
+#include <kits/support/StringView.h>
 #include <TextControl.h>
 
 #include <bluetooth/RemoteDevice.h>

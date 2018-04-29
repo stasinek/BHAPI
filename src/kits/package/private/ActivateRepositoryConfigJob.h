@@ -8,7 +8,7 @@
 
 #include <Directory.h>
 #include <Entry.h>
-#include <StringClass.h>
+#include <kits/support/String.h>
 
 #include <package/Job.h>
 

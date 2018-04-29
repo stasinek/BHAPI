@@ -9,10 +9,10 @@
 #define __ICU_WRAPPER_H__
 
 
-#include <StringClass.h>
+#include <kits/support/String.h>
 
 #include <unicode/bytestream.h>
-#include <StringClass.h>
+#include <kits/support/String.h>
 
 
 /* Convert UnicodeString to BString needs an ICU ByteSink to do the work */

@@ -12,7 +12,7 @@
 
 #include <AppMisc.h>
 #include <DataExchange.h>
-#include <debug.h>
+#include <kits/debug/Debug.h>
 
 
 const char BMediaFiles::B_SOUNDS[] = "Sounds";

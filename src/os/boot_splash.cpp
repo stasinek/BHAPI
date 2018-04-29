@@ -9,7 +9,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
+#include <kits/support/String.h>
 #include <unistd.h>
 
 #include <KernelExport.h>
@@ -18,7 +18,7 @@
 #include <boot/images.h>
 
 #include <boot_item.h>
-#include <debug.h>
+#include <kits/debug/Debug.h>
 #include <frame_buffer_console.h>
 
 #include <boot_splash.h>

@@ -42,7 +42,7 @@
 
 #include <kits/add-ons/graphics/GraphicsEngine.h>
 #include <kits/app/Application.h>
-#include <kits/support/Errors.h>
+#include <kits/debug/Errors.h>
 
 BScreen::BScreen(__be_uint32 id)
     : fID(id)

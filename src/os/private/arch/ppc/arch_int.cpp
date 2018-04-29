@@ -28,7 +28,7 @@
 #include <vm/vm_priv.h>
 #include <vm/VMAddressSpace.h>
 
-#include <string.h>
+#include <kits/support/String.h>
 
 
 // defined in arch_exceptions.S

@@ -10,7 +10,7 @@
 #define _KERNEL_VM_VM_CACHE_H
 
 
-#include <debug.h>
+#include <kits/debug/Debug.h>
 #include <kernel.h>
 #include <util/DoublyLinkedList.h>
 #include <vm/vm.h>

@@ -12,7 +12,7 @@
 #include <Entry.h>
 #include <Locker.h>
 #include <ObjectList.h>
-#include <StringClass.h>
+#include <kits/support/String.h>
 
 class BWindow;
 

@@ -6,7 +6,7 @@
 #define BHAPI_MEDIA_TYPES_H
 
 #include <Messenger.h>
-#include <List.h>
+#include <kits/support/List.h>
 #include <Locker.h>
 
 #include <MediaDefs.h>

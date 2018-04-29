@@ -36,7 +36,7 @@
 #include <module.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
+#include <kits/support/String.h>
 #include <sys/stat.h>
 
 // debugging

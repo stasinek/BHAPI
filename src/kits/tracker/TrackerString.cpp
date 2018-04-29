@@ -36,7 +36,7 @@ All rights reserved.
 
 #include <stdio.h>
 #include <stdlib.h>
-#include <strings.h>
+#include <kits/support/Strings.h>
 
 
 //	#pragma mark - TrackerString

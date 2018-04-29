@@ -45,7 +45,7 @@ All rights reserved.
 #include <Bitmap.h>
 #include <ObjectList.h>
 #include <Mime.h>
-#include <StringClass.h>
+#include <kits/support/String.h>
 
 // Icon cache splits icons into two caches - the shared cache, likely to
 // get the most hits and the node cache. Every icon that is found in a

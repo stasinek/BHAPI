@@ -1,5 +1,5 @@
 
-#include <strings.h>
+#include <kits/support/Strings.h>
 #include <CharacterSet.h>
 #include <CharacterSetRoster.h>
 #include <character_sets.h>

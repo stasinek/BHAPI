@@ -35,7 +35,7 @@ All rights reserved.
 #define _COUNT_VIEW_H
 
 
-#include <StringClass.h>
+#include <kits/support/String.h>
 #include <View.h>
 
 

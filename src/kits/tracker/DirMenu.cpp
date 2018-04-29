@@ -37,7 +37,7 @@ All rights reserved.
 
 
 #include <Catalog.h>
-#include <Debug.h>
+#include <kits/debug/Debug.h>
 #include <Directory.h>
 #include <LocaleClass.h>
 #include <MenuBar.h>

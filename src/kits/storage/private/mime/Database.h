@@ -10,9 +10,9 @@
 
 #include <map>
 #include <set>
-#include <string>
+#include <kits/support/String>
 
-#include <List.h>
+#include <kits/support/List.h>
 #include <Locker.h>
 #include <Mime.h>
 #include <Messenger.h>

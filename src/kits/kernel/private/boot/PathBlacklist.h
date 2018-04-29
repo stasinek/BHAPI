@@ -6,7 +6,7 @@
 #define KERNEL_BOOT_PATH_BLACKLIST_H
 
 
-#include <string.h>
+#include <kits/support/String.h>
 
 #include <util/SinglyLinkedList.h>
 

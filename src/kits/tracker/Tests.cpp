@@ -37,10 +37,10 @@ All rights reserved.
 
 #include <Tests.h>
 
-#include <Debug.h>
+#include <kits/debug/Debug.h>
 #include <Locker.h>
 #include <Path.h>
-#include <StringClass.h>
+#include <kits/support/String.h>
 #include <Window.h>
 
 #include <directories.h>

@@ -1,4 +1,4 @@
-﻿/* --------------------------------------------------------------------------
+/* --------------------------------------------------------------------------
  *
  * BHAPI++ Copyright (C) 2017, Stanislaw Stasiak, based on Haiku & ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2007, Anthony Lee, All Rights Reserved
@@ -31,7 +31,7 @@
 #define BHAPI_STREAM_IO_H
 
 #include <Haiku.h>
-#include <DataIO.h>
+#include <kits/support/DataIO.h>
 #ifdef __cplusplus /* Just for C++ */
 #ifndef BSTRING_DEF
 #define BSTRING_DEF

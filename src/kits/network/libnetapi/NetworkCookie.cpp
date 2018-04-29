@@ -15,7 +15,7 @@
 
 #include <time.h>
 
-#include <Debug.h>
+#include <kits/debug/Debug.h>
 #include <HttpTime.h>
 #include <NetworkCookie.h>
 

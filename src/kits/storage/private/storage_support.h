@@ -18,7 +18,7 @@
 #include <Haiku.h>
 
 #include <dirent.h>
-#include <string>
+#include <kits/support/String>
 
 
 namespace BPrivate {

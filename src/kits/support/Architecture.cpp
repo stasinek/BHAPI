@@ -31,8 +31,8 @@
  */
 #include <Architecture.h>
 
-#include <StringList.h>
-#include <StringClass.h>
+#include <kits/support/StringList.h>
+#include <kits/support/String.h>
 #include <Errors.h>
 
 namespace bhapi {

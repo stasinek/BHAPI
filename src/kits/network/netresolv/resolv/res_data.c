@@ -43,7 +43,7 @@ __RCSID("$NetBSD: res_data.c,v 1.14 2009/10/24 05:35:37 christos Exp $");
 #include <res_update.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
+#include <kits/support/String.h>
 #include <unistd.h>
 
 #include <port_after.h>

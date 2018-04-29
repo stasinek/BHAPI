@@ -8,7 +8,7 @@
 
 #include <RWLocker.h>
 
-#include <StringClass.h>
+#include <kits/support/String.h>
 
 // info about a read lock owner
 struct RWLocker::ReadLockInfo {

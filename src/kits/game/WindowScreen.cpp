@@ -15,11 +15,11 @@
 #include <new>
 #include <stdlib.h>
 #include <stdio.h>
-#include <string.h>
+#include <kits/support/String.h>
 
 #include <Application.h>
 #include <Screen.h>
-#include <StringClass.h>
+#include <kits/support/String.h>
 
 #include <AppServerLink.h>
 #include <input_globals.h>

@@ -34,9 +34,9 @@ All rights reserved.
 
 
 #include <stdlib.h>
-#include <string.h>
+#include <kits/support/String.h>
 
-#include <Debug.h>
+#include <kits/debug/Debug.h>
 #include <NodeMonitor.h>
 #include <Volume.h>
 #include <fs_info.h>

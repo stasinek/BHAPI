@@ -9,7 +9,7 @@
 
 #include <algorithm>
 
-#include <debug.h>
+#include <kits/debug/Debug.h>
 #include <kscheduler.h>
 #include <load_tracking.h>
 #include <smp.h>

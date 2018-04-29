@@ -10,10 +10,10 @@
 #include <stdlib.h>
 #include <sys/stat.h>
 
-#include <string.h>
+#include <kits/support/String.h>
 
 #include <Path.h>
-#include <StringClass.h>
+#include <kits/support/String.h>
 
 #include <libroot_private.h>
 #include <syscalls.h>

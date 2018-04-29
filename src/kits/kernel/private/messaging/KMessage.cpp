@@ -7,10 +7,10 @@
 #include <util/KMessage.h>
 
 #include <stdlib.h>
-#include <string.h>
+#include <kits/support/String.h>
 
 #include <ByteOrder.h>
-#include <Debug.h>
+#include <kits/debug/Debug.h>
 #include <KernelExport.h>
 #include <TypeConstants.h>
 

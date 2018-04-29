@@ -8,8 +8,8 @@
 
 #include <Haiku.h>
 
-#include <list>
-#include <string>
+#include <List.h>
+#include <kits/support/String>
 
 class BFile;
 class BString;

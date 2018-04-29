@@ -29,7 +29,7 @@
 #include <vm/vm.h>
 #include <vm/vm_priv.h>
 #include <vm/VMAddressSpace.h>
-#include <string.h>
+#include <kits/support/String.h>
 
 #warning M68K: writeme!
 

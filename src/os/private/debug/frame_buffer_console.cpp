@@ -7,7 +7,7 @@
 #include <frame_buffer_console.h>
 
 #include <stdlib.h>
-#include <string.h>
+#include <kits/support/String.h>
 #include <stdio.h>
 #include <unistd.h>
 

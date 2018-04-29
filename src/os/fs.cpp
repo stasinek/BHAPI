@@ -19,7 +19,7 @@
 #include <sys/time.h>
 
 #include <map>
-#include <string>
+#include <kits/support/String>
 
 #include <fs_attr.h>
 #include <NodeMonitor.h>	// for B_STAT_* flags

@@ -12,13 +12,13 @@
 #include <TimeSourceObject.h>
 
 #include <stdio.h>
-#include <string.h>
+#include <kits/support/String.h>
 
 #include <MediaRoster.h>
 #include <kits/kernel/OS.h>
 
 #include <MediaMisc.h>
-#include <debug.h>
+#include <kits/debug/Debug.h>
 
 #include <TimeSourceObjectManager.h>
 

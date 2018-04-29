@@ -16,7 +16,7 @@
 
 #include <Archivable.h>
 #include <NetworkAddressResolver.h>
-#include <StringClass.h>
+#include <kits/support/String.h>
 
 class BNetworkAddress : public BFlattenable {
 public:

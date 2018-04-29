@@ -6,7 +6,7 @@
 #define KERNEL_ARCH_PPC_PAGING_PPC_PAGING_METHOD_H
 
 
-#include <SupportDefs.h>
+#include <kits/support/SupportDefs.h>
 
 #include <vm/vm_types.h>
 

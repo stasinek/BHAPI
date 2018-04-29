@@ -6,7 +6,7 @@
  *		François Revol <revol@free.fr>
  */
 
-#include <SupportDefs.h>
+#include <kits/support/SupportDefs.h>
 
 #include <libroot_private.h>
 

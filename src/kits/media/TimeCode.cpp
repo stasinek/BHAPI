@@ -4,8 +4,8 @@
  *  DESCR: Handles all TimeCode functions.
  ***********************************************************************/
 #include <TimeCode.h>
-#include <debug.h>
-#include <string.h>
+#include <kits/debug/Debug.h>
+#include <kits/support/String.h>
 
 status_t us_to_timecode(bigtime_t micros, int * hours, int * minutes, int * seconds, int * frames, const timecode_info * code)
 {

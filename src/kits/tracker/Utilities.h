@@ -34,7 +34,7 @@ All rights reserved.
 #ifndef BHAPI_UTILITIES_H
 #define BHAPI_UTILITIES_H
 
-#include <StringView.h>
+#include <kits/support/StringView.h>
 #include <MenuItem.h>
 #include <Bitmap.h>
 #include <ByteOrder.h>
@@ -48,7 +48,7 @@ All rights reserved.
 #include <DataIO.h>
 #include <ObjectList.h>
 #include <Looper.h>
-#include <StringClass.h>
+#include <kits/support/String.h>
 #include <GraphicsDefs.h>
 
 #include <stdlib.h>

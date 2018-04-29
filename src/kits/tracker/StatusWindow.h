@@ -38,7 +38,7 @@ All rights reserved.
 #include <Bitmap.h>
 #include <ObjectList.h>
 #include <StatusBar.h>
-#include <StringClass.h>
+#include <kits/support/String.h>
 #include <View.h>
 #include <Window.h>
 

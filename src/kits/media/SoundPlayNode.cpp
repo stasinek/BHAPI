@@ -14,13 +14,13 @@
 
 #include <SoundPlayNode.h>
 
-#include <string.h>
+#include <kits/support/String.h>
 #include <stdlib.h>
 #include <unistd.h>
 
 #include <TimeSource.h>
 #include <MediaRoster.h>
-#include <debug.h>
+#include <kits/debug/Debug.h>
 
 
 #define SEND_NEW_BUFFER_EVENT (BTimedEventQueue::B_USER_EVENT + 1)

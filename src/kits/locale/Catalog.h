@@ -21,7 +21,7 @@ class BMessage;
 #include <Entry.h>
 #include <LocaleRoster.h>
 #include <Locker.h>
-#include <StringClass.h>
+#include <kits/support/String.h>
 #include <Haiku.h>
 
 class BHAPI_IMPEXP BCatalog {

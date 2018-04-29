@@ -12,7 +12,7 @@
 #include <Entry.h>
 #include <File.h>
 #include <Path.h>
-#include <StringForSize.h>
+#include <kits/support/StringForSize.h>
 
 #include <Architecture.h>
 #include <AreaInfo.h>
@@ -28,7 +28,7 @@
 #include <StackFrame.h>
 #include <StackTrace.h>
 #include <Statement.h>
-#include <StringUtils.h>
+#include <kits/support/StringUtils.h>
 #include <SystemInfo.h>
 #include <Team.h>
 #include <Thread.h>

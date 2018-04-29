@@ -20,7 +20,7 @@
 #include <util/AutoLock.h>
 
 #include <stdlib.h>
-#include <string.h>
+#include <kits/support/String.h>
 
 
 //#define TRACE_IMAGE

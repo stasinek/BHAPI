@@ -29,8 +29,8 @@
 
 #include <Path.h>
 
-#include <kits/support/StringClass.h>
-#include <kits/support/Errors.h>
+#include <kits/support/String.h>
+#include <kits/debug/Errors.h>
 
 #ifdef _WIN32
 #include <io.h>
@@ -400,7 +400,7 @@ BPath::operator=(const char *path)
 #include <Directory.h>
 #include <Entry.h>
 #include <StorageDefs.h>
-#include <String.h>
+#include <kits/support/String.h>
 
 #include <syscalls.h>
 

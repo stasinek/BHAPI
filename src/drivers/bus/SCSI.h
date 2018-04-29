@@ -26,16 +26,16 @@
 	Something about requests involving data transfer: you can either specify
 	the virtual address in <data> of CCB (in which case it must be continuous),
 	or store a pointer to a S/G list that contains physical addresses in
-	<sg_list>/<sg_count>. If <sg_list> is non-Null, <data> is ignored.
+	<sg_List.h>/<sg_count>. If <sg_List.h> is non-Null, <data> is ignored.
 	The S/G list must be in kernel space because the request can be executed
 	in a different thread context. This is also the	reason why the S/G list has
 	to contain physical addresses. For obvious reason, the data buffer specified
-	by <sg_list> must be locked, but <data> doesn't need to be.
+	by <sg_List.h> must be locked, but <data> doesn't need to be.
 
 	You can either execute the request synchronously ("sync_io") or
 	asynchronously ("async_io"; you have to acquire <completion_sem> to find
 	out when the request is finished). In the first case you can use either
-	<data> or <sg_list>, in the latter <sg_list> only.
+	<data> or <sg_List.h>, in the latter <sg_List.h> only.
 
 	The SCSI bus manager takes care that the controller can access the data
 	via DMA by copying it into a buffer if necessary. For the paging path,

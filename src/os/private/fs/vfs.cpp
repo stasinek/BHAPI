@@ -16,7 +16,7 @@
 #include <limits.h>
 #include <stddef.h>
 #include <stdio.h>
-#include <string.h>
+#include <kits/support/String.h>
 #include <sys/file.h>
 #include <sys/resource.h>
 #include <sys/stat.h>

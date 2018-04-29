@@ -18,7 +18,7 @@
 #include <TypeConstants.h>
 
 #include <cpu.h>
-#include <debug.h>
+#include <kits/debug/Debug.h>
 #include <debug_heap.h>
 #include <elf.h>
 #include <kernel.h>

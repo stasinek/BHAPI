@@ -5,7 +5,7 @@
 #ifndef _KERNEL_ARCH_x86_TIMERS_PIT_H
 #define _KERNEL_ARCH_x86_TIMERS_PIT_H
 
-#include <SupportDefs.h>
+#include <kits/support/SupportDefs.h>
 
 /* ports */
 #define PIT_CTRL	0x43

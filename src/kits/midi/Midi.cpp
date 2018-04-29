@@ -14,12 +14,12 @@
  *		Paul Stadler
  */
 
-#include <List.h>
+#include <kits/support/List.h>
 #include <Midi.h>
 #include <MidiProducer.h>
 
 #include <MidiGlue.h>
-#include <debug.h>
+#include <kits/debug/Debug.h>
 
 using namespace BPrivate;
 

@@ -35,9 +35,9 @@ All rights reserved.
 // generic setting handler classes
 
 
-#include <Debug.h>
+#include <kits/debug/Debug.h>
 
-#include <string.h>
+#include <kits/support/String.h>
 #include <stdlib.h>
 #include <stdio.h>
 

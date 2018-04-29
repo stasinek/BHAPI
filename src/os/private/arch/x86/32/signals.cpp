@@ -6,7 +6,7 @@
 
 #include <x86_signals.h>
 
-#include <string.h>
+#include <kits/support/String.h>
 
 #include <KernelExport.h>
 

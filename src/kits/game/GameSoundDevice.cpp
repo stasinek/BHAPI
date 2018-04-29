@@ -31,10 +31,10 @@
 
 #include <stdlib.h>
 #include <stdio.h>
-#include <string.h>
+#include <kits/support/String.h>
 
 #include <Autolock.h>
-#include <List.h>
+#include <kits/support/List.h>
 #include <Locker.h>
 #include <MediaAddOn.h>
 #include <MediaRoster.h>

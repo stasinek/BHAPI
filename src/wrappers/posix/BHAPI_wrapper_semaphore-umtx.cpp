@@ -52,7 +52,7 @@ extern "C" {
 #include <sys/mman.h>
 
 #include <os/kernel.h>
-#include <kits/support/StringClass.h>
+#include <kits/support/String.h>
 
 typedef struct b_posix_sem_info {
 	b_posix_sem_info()

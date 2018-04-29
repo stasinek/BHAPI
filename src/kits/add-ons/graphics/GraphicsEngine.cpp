@@ -28,7 +28,7 @@
  * --------------------------------------------------------------------------*/
 
 #include <kits/netGraphicsEngine.h>
-#include <kits/support/Errors.h>
+#include <kits/debug/Errors.h>
 #include <kits/interface/Window.h>
 #include <kits/interface/View.h>
 

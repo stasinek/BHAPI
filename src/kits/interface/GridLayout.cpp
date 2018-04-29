@@ -14,7 +14,7 @@
 
 #include <ControlLook.h>
 #include <LayoutItem.h>
-#include <List.h>
+#include <kits/support/List.h>
 #include <Message.h>
 
 #include <ViewLayoutItem.h>

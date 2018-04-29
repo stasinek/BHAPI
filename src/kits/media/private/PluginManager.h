@@ -6,7 +6,7 @@
 #define _PLUGIN_MANAGER_H
 
 
-#include <string.h>
+#include <kits/support/String.h>
 
 
 #include <DecoderPlugin.h>

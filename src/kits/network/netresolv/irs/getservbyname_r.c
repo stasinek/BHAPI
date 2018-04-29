@@ -41,7 +41,7 @@ __RCSID("$NetBSD: getservbyname_r.c,v 1.9 2012/03/13 21:13:41 christos Exp $");
 #include <assert.h>
 #include <netdb.h>
 #include <stdlib.h>
-#include <string.h>
+#include <kits/support/String.h>
 
 #include <servent.h>
 

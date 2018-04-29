@@ -69,12 +69,12 @@
 	<programlisting>
 BLineGenerator::BLineGenerator(BPoint <emphasis>start</emphasis>, BPoint <emphasis>end</emphasis>)
 	</programlisting>
-	<itemizedlist>
+	<itemizedList.h>
 		<listitem><para><emphasis>start</emphasis>是开始点坐标。
 		</para></listitem>
 		<listitem><para><emphasis>end</emphasis>是结束点坐标。
 		</para></listitem>
-	</itemizedlist>
+	</itemizedList.h>
 </section>
 </document>
 -----------------------------------------------------------------------------*/
@@ -116,7 +116,7 @@ bool BLineGenerator::Start(int32 &<emphasis>x</emphasis>,
                            bool <emphasis>isLoopX = true</emphasis>,
                            float <emphasis>pixelSize = 1</emphasis>)
 	</programlisting>
-	<itemizedlist>
+	<itemizedList.h>
 		<listitem><para><emphasis>x</emphasis>是开始像素点 x 坐标。
 		</para></listitem>
 		<listitem><para><emphasis>y</emphasis>是开始像素点 y 坐标。
@@ -131,7 +131,7 @@ bool BLineGenerator::Start(int32 &<emphasis>x</emphasis>,
 		</para></listitem>
 		<listitem><para><emphasis>pixelSize</emphasis>是每个像素相对应的坐标大小。
 		</para></listitem>
-	</itemizedlist>
+	</itemizedList.h>
 	<para>BLineGenerator::Start()声明开始画直线, 返回true时表示需要画点, 反之表示不需要画点。</para>
 </section>
 </document>
@@ -302,14 +302,14 @@ bool BLineGenerator::Start(int32 &x,  int32 &y,  int32 &step,  int32 &pixels, bo
 	<programlisting>
 bool BLineGenerator::Next(int32 &<emphasis>next</emphasis>,  int32 &<emphasis>pixels</emphasis>)
 	</programlisting>
-	<itemizedlist>
+	<itemizedList.h>
 		<listitem><para><emphasis>next</emphasis>是下一像素点 y(x) 坐标。
 			<footnote><para>注意此处自动利用原来像素点坐标进行加减运算。</para></footnote>
 		</para></listitem>
 		<listitem><para><emphasis>pixels</emphasis>是下一像素点处另外需要绘制的像素点数(不包括该像素点)。
 			<footnote><para>正值为 y(x) 递增, 负值为 y(x) 递减。</para></footnote>
 		</para></listitem>
-	</itemizedlist>
+	</itemizedList.h>
 	<para>BLineGenerator::Next()用于取得下一像素点 x(y) 坐标对应 y(x) 坐标, 返回true时表示需要画点, 反之表示不需要画点(或许未使用 Start(...) 函数)；注意使用Next()时x(y)应在此前根据调用Start()返回的step进行相应的加减运算。</para>
 </section>
 </document>

@@ -7,7 +7,7 @@
 
 #include <kits/kernel/OS.h>
 #include <stdlib.h>
-#include <string.h>
+#include <kits/support/String.h>
 
 #ifdef __cplusplus
 using namespace bhapi;

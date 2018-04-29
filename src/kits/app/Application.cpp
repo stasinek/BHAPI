@@ -41,8 +41,8 @@
 #include <kits/app/Message.h>
 #include <kits/app/MessageQueue.h>
 #include <kits/app/Looper.h>
-#include <kits/support/Errors.h>
-#include <kits/support/StringClass.h>
+#include <kits/debug/Errors.h>
+#include <kits/support/String.h>
 
 //-----------------------------------------------------------------------------
 #include <kits/netApplication.h>
@@ -1665,7 +1665,7 @@ BApplication::WindowAt(int32 index) const
 int32
 BApplication::CountLoopers() const
 {
-    AutoLocker<BLooperList> ListLock(gLooperList);
+    AutoLocker<BLooperList.h> ListLock(gLooperList);
     if (ListLock.IsLocked())
         return gLooperList.CountLoopers();
 
@@ -1678,7 +1678,7 @@ BLooper*
 BApplication::LooperAt(int32 index) const
 {
     BLooper* looper = NULL;
-    AutoLocker<BLooperList> listLock(gLooperList);
+    AutoLocker<BLooperList.h> listLock(gLooperList);
     if (listLock.IsLocked())
         looper = gLooperList.LooperAt(index);
 
@@ -1822,7 +1822,7 @@ BApplication::DispatchMessage(BMessage* message, BHandler* handler)
 
         case B_COLORS_UPDATED:
         {
-            AutoLocker<BLooperList> listLock(gLooperList);
+            AutoLocker<BLooperList.h> listLock(gLooperList);
             if (!listLock.IsLocked())
                 break;
 
@@ -2194,7 +2194,7 @@ BApplication::_ReconnectToServer()
     if (_ConnectToServer() != B_OK)
         debugger("Can't reconnect to app server!");
 
-    AutoLocker<BLooperList> listLock(gLooperList);
+    AutoLocker<BLooperList.h> listLock(gLooperList);
     if (!listLock.IsLocked())
         return;
 
@@ -2373,7 +2373,7 @@ BApplication::_CountWindows(bool includeMenus) const
 BWindow*
 BApplication::_WindowAt(uint32 index, bool includeMenus) const
 {
-    AutoLocker<BLooperList> listLock(gLooperList);
+    AutoLocker<BLooperList.h> listLock(gLooperList);
     if (!listLock.IsLocked())
         return NULL;
 

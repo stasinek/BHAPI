@@ -3,7 +3,7 @@
  * Distributed under the terms of the MIT License.
  */
 
-#include <debug.h>
+#include <kits/debug/Debug.h>
 #include <arch/generic/debug_uart_8250.h>
 #include <arch/ppc/arch_cpu.h>
 #include <new>

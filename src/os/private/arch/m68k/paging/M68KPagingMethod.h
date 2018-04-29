@@ -6,7 +6,7 @@
 #define KERNEL_ARCH_M68K_PAGING_M68K_PAGING_METHOD_H
 
 
-#include <SupportDefs.h>
+#include <kits/support/SupportDefs.h>
 
 
 struct kernel_args;

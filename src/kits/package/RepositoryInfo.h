@@ -8,8 +8,8 @@
 
 #include <Archivable.h>
 #include <Entry.h>
-#include <StringList.h>
-#include <StringClass.h>
+#include <kits/support/StringList.h>
+#include <kits/support/String.h>
 
 #include <package/PackageArchitecture.h>
 

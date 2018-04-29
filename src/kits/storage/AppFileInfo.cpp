@@ -10,7 +10,7 @@
 #include <new>
 #include <set>
 
-#include <string>
+#include <kits/support/String>
 
 #include <AppFileInfo.h>
 #include <Bitmap.h>
@@ -21,7 +21,7 @@
 #include <RegistrarDefs.h>
 #include <Resources.h>
 #include <Roster.h>
-#include <StringClass.h>
+#include <kits/support/String.h>
 
 
 // debugging

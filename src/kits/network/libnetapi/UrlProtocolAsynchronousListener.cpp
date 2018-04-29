@@ -11,7 +11,7 @@
 
 #include <kits/AppKit.h>
 #include <UrlProtocolAsynchronousListener.h>
-#include <Debug.h>
+#include <kits/debug/Debug.h>
 
 extern const char* kUrlProtocolMessageType;
 extern const char* kUrlProtocolCaller;

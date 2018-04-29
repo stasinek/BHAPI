@@ -6,12 +6,12 @@
 
 #include <debugger.h>
 #include <OS.h>
-#include <Debug.h>
+#include <kits/debug/Debug.h>
 #include <syscalls.h>
 
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
+#include <kits/support/String.h>
 
 
 typedef struct debug_string_entry {

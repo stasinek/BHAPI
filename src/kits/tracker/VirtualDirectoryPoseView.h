@@ -9,7 +9,7 @@
 #define _VIRTUAL_DIRECTORY_POSE_VIEW_H
 
 
-#include <StringList.h>
+#include <kits/support/StringList.h>
 
 #include <PoseView.h>
 

@@ -42,7 +42,7 @@
 #include <kits/app/AppDefs.h>
 #include <kits/add-ons/graphics/GraphicsEngine.h>
 #include <kits/render/Pixmap.h>
-#include <kits/support/Errors.h>
+#include <kits/debug/Errors.h>
 
 #define ICON_WIDTH	36
 #define ICON_HEIGHT	36

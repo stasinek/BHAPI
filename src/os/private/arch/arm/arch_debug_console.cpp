@@ -17,7 +17,7 @@
 #include <boot/kernel_args.h>
 #include <kernel.h>
 #include <vm/vm.h>
-#include <string.h>
+#include <kits/support/String.h>
 
 #include <board_config.h>
 

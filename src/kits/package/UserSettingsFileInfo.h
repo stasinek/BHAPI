@@ -6,7 +6,7 @@
 #define _PACKAGE__USER_SETTINGS_FILE_INFO_H_
 
 
-#include <StringClass.h>
+#include <kits/support/String.h>
 
 
 namespace BPackageKit {

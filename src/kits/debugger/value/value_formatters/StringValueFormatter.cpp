@@ -3,11 +3,11 @@
  * Copyright 2009, Ingo Weinhold, ingo_weinhold@gmx.de.
  * Distributed under the terms of the MIT License.
  */
-#include <StringValueFormatter.h>
+#include <kits/support/StringValueFormatter.h>
 
 #include <stdio.h>
 
-#include <StringClass.h>
+#include <kits/support/String.h>
 
 #include <Value.h>
 

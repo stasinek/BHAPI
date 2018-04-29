@@ -10,7 +10,7 @@
 
 #include <new>
 
-#include <StringUtils.h>
+#include <kits/support/StringUtils.h>
 
 
 // #pragma mark - TypeComponent

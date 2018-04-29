@@ -53,7 +53,7 @@
 #include <kits/app/Messenger.h>
 #include <kits/app/Message.h>
 #include <kits/app/MessageFilter.h>
-#include <kits/support/Errors.h>
+#include <kits/debug/Errors.h>
 #include <kits/app/AppDefs.h>
 #include <os/debug.h>
 #include <kits/interface/InterfaceDefs.h>

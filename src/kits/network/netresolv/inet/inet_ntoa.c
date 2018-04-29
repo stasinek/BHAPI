@@ -49,7 +49,7 @@ static char sccsid[] = "@(#)inet_ntoa.c	8.1 (Berkeley) 6/4/93";
 #include <arpa/inet.h>
 
 #include <stdio.h>
-#include <string.h>
+#include <kits/support/String.h>
 
 #include <port_after.h>
 

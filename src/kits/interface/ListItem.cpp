@@ -35,7 +35,7 @@
 
 #include <kits/app/Message.h>
 #include <kits/interface/View.h>
-#include <kits/support/Errors.h>
+#include <kits/debug/Errors.h>
 #include <kits/support/List.h>
 
 

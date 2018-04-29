@@ -217,7 +217,7 @@ private:
 		return false;
 	}
 
-	template<typename List>
+	template<typename List.h>
 	static inline bool _IsValueEmpty(const List& value)
 	{
 		return value.IsEmpty();

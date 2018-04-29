@@ -6,7 +6,7 @@
 #define _PACKAGE__SOLVER_PACKAGE_SPECIFIER_LIST_H_
 
 
-#include <StringClass.h>
+#include <kits/support/String.h>
 
 
 namespace BPackageKit {

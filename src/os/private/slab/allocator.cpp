@@ -8,11 +8,11 @@
 #include <slab_private.h>
 
 #include <stdio.h>
-#include <string.h>
+#include <kits/support/String.h>
 
 #include <algorithm>
 
-#include <debug.h>
+#include <kits/debug/Debug.h>
 #include <heap.h>
 #include <kernel.h> // for ROUNDUP
 #include <malloc.h>

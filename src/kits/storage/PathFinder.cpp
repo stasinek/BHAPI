@@ -9,7 +9,7 @@
 #include <AutoDeleter.h>
 #include <FindDirectory.h>
 #include <Path.h>
-#include <StringList.h>
+#include <kits/support/StringList.h>
 
 
 // NOTE: The package kit specific part of BPathFinder (BResolvableExpression

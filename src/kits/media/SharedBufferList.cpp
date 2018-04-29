@@ -15,13 +15,13 @@
 
 #include <SharedBufferList.h>
 
-#include <string.h>
+#include <kits/support/String.h>
 
 #include <Autolock.h>
 #include <Buffer.h>
 #include <Locker.h>
 
-#include <debug.h>
+#include <kits/debug/Debug.h>
 #include <DataExchange.h>
 
 

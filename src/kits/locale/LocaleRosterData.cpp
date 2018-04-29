@@ -14,7 +14,7 @@
 #include <Autolock.h>
 #include <Catalog.h>
 #include <Collator.h>
-#include <Debug.h>
+#include <kits/debug/Debug.h>
 #include <DefaultCatalog.h>
 #include <Directory.h>
 #include <Entry.h>
@@ -27,8 +27,8 @@
 #include <Path.h>
 #include <PathFinder.h>
 #include <Roster.h>
-#include <StringClass.h>
-#include <StringList.h>
+#include <kits/support/String.h>
+#include <kits/support/StringList.h>
 #include <TimeZone.h>
 
 // ICU includes

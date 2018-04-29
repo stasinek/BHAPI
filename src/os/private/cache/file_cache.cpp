@@ -8,7 +8,7 @@
 
 #include <unistd.h>
 #include <stdlib.h>
-#include <string.h>
+#include <kits/support/String.h>
 
 #include <KernelExport.h>
 #include <fs_cache.h>

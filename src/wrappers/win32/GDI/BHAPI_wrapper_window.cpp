@@ -33,9 +33,9 @@
 #include <os/kernel.h>
 #include <os/debug.h>
 #include <kits/support/Autolock.h>
-#include <kits/support/Errors.h>
+#include <kits/debug/Errors.h>
 #include <kits/app/Application.h>
-#include <kits/support/StringClass.h>
+#include <kits/support/String.h>
 #include <kits/support/ClassInfo.h>
 
 

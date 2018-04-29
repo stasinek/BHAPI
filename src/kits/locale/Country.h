@@ -6,9 +6,9 @@
 #define _COUNTRY_H_
 
 
-#include <List.h>
+#include <kits/support/List.h>
 #include <LocaleStrings.h>
-#include <StringClass.h>
+#include <kits/support/String.h>
 #include <Haiku.h>
 
 

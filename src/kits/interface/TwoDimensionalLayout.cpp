@@ -12,7 +12,7 @@
 #include <LayoutContext.h>
 #include <LayoutItem.h>
 #include <LayoutUtils.h>
-#include <List.h>
+#include <kits/support/List.h>
 #include <Message.h>
 #include <View.h>
 

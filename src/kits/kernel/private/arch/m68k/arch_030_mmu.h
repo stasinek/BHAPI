@@ -7,7 +7,7 @@
 
 
 #include <Haiku.h>
-#include <string.h>
+#include <kits/support/String.h>
 
 #include <arch_mmu.h>
 

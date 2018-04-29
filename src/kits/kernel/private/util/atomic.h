@@ -10,7 +10,7 @@
 
 #include <Haiku.h>
 
-#include <debug.h>
+#include <kits/debug/Debug.h>
 
 
 #ifdef __cplusplus

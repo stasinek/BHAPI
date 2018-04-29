@@ -34,13 +34,13 @@
 
 #include <Controllable.h>
 
-#include <string.h>
+#include <kits/support/String.h>
 
 #include <kits/kernel/OS.h>
 #include <ParameterWeb.h>
 #include <Roster.h>
 
-#include <debug.h>
+#include <kits/debug/Debug.h>
 #include <DataExchange.h>
 #include <Notifications.h>
 

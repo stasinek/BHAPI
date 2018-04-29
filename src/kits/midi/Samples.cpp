@@ -20,7 +20,7 @@
  * DEALINGS IN THE SOFTWARE.
  */
 
-#include <debug.h>
+#include <kits/debug/Debug.h>
 #include <Samples.h>
 #include <Synth.h>
 

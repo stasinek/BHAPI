@@ -18,7 +18,7 @@
 #include <LayoutUtils.h>
 #include <Region.h>
 #include <Shape.h>
-#include <StringClass.h>
+#include <kits/support/String.h>
 #include <View.h>
 #include <Window.h>
 

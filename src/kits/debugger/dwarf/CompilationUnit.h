@@ -7,7 +7,7 @@
 #define COMPILATION_UNIT_H
 
 #include <ObjectList.h>
-#include <StringClass.h>
+#include <kits/support/String.h>
 
 #include <BaseUnit.h>
 #include <LineNumberProgram.h>

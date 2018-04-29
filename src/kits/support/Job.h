@@ -34,7 +34,7 @@
 #define BHAPI_SUPPORT_JOB_H
 
 #include <ObjectList.h>
-#include <StringClass.h>
+#include <kits/support/String.h>
 
 namespace BSupportKit {
 class BJob;

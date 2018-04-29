@@ -37,7 +37,7 @@ respective holders. All rights reserved.
 
 #include <Menu.h>
 #include <MenuItem.h>
-#include <List.h>
+#include <kits/support/List.h>
 
 
 namespace BPrivate {

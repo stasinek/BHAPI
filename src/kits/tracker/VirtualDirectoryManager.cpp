@@ -15,7 +15,7 @@
 
 #include <Directory.h>
 #include <File.h>
-#include <StringList.h>
+#include <kits/support/StringList.h>
 
 #include <AutoDeleter.h>
 #include <AutoLocker.h>

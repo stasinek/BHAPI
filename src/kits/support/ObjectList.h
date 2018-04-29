@@ -65,8 +65,8 @@ All rights reserved.
 #define BHAPI_OBJECT_LIST_H
 
 #ifdef __cplusplus
-#include <List.h>
-#include <SupportDefs.h>
+#include <kits/support/List.h>
+#include <kits/support/SupportDefs.h>
 #include <new>
 //
 // ObjectList is a wrapper around BList that adds type safety,

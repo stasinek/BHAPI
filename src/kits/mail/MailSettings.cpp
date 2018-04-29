@@ -12,7 +12,7 @@
 #include <MailSettings.h>
 
 #include <stdio.h>
-#include <string.h>
+#include <kits/support/String.h>
 #include <stdlib.h>
 
 #include <Directory.h>
@@ -24,7 +24,7 @@
 #include <Messenger.h>
 #include <Path.h>
 #include <PathFinder.h>
-#include <StringClass.h>
+#include <kits/support/String.h>
 #include <Window.h>
 
 #include <MailPrivate.h>

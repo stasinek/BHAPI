@@ -4,7 +4,7 @@
  */
 #ifndef BHAPI_SUPPORT_BSTRING_PRIVATE_H
 #define BHAPI_SUPPORT_BSTRING_PRIVATE_H
-#include <kits/support/StringClass.h>
+#include <kits/support/String.h>
 //-------------------------------------------------------------------------------------------------
 #ifdef __cplusplus
 class BHAPI_IMPEXP BString::Private {

@@ -6,12 +6,12 @@
 
 #include <debug_variables.h>
 
-#include <string.h>
+#include <kits/support/String.h>
 
 #include <KernelExport.h>
 
 #include <arch/debug.h>
-#include <debug.h>
+#include <kits/debug/Debug.h>
 #include <elf.h>
 #include <util/DoublyLinkedList.h>
 

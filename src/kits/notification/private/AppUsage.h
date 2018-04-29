@@ -11,10 +11,10 @@
 #include <map>
 
 #include <Entry.h>
-#include <Flattenable.h>
+#include <kits/support/Flattenable.h>
 #include <Notification.h>
 #include <Roster.h>
-#include <StringClass.h>
+#include <kits/support/String.h>
 
 class BMessage;
 class NotificationReceived;

@@ -12,9 +12,9 @@
 
 #include <TrackReader.h>
 
-#include <debug.h>
+#include <kits/debug/Debug.h>
 #include <new>
-#include <string.h>
+#include <kits/support/String.h>
 
 
 BSound::BSound(void* data, size_t size, const media_raw_audio_format& format,

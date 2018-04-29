@@ -11,7 +11,7 @@
 #include <DirectWindow.h>
 
 #include <stdio.h>
-#include <string.h>
+#include <kits/support/String.h>
 
 #include <Screen.h>
 

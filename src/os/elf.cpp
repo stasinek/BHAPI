@@ -16,7 +16,7 @@
 
 #include <unistd.h>
 #include <stdlib.h>
-#include <string.h>
+#include <kits/support/String.h>
 #include <stdio.h>
 #include <ctype.h>
 
@@ -25,7 +25,7 @@
 #include <AutoDeleter.h>
 #include <commpage.h>
 #include <boot/kernel_args.h>
-#include <debug.h>
+#include <kits/debug/Debug.h>
 #include <image_defs.h>
 #include <kernel.h>
 #include <kimage.h>

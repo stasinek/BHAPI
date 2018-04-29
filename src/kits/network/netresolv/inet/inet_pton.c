@@ -35,7 +35,7 @@ __RCSID("$NetBSD: inet_pton.c,v 1.8 2012/03/13 21:13:38 christos Exp $");
 #include <arpa/inet.h>
 #include <arpa/nameser.h>
 #include <stddef.h>
-#include <string.h>
+#include <kits/support/String.h>
 #include <assert.h>
 #include <ctype.h>
 #include <errno.h>

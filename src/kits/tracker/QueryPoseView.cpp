@@ -38,7 +38,7 @@ All rights reserved.
 #include <new>
 
 #include <Catalog.h>
-#include <Debug.h>
+#include <kits/debug/Debug.h>
 #include <LocaleClass.h>
 #include <NodeMonitor.h>
 #include <Query.h>

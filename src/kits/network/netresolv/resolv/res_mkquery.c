@@ -80,7 +80,7 @@ static const char rcsid[] = "$Id: res_mkquery.c,v 1.10 2008/12/11 09:59:00 marka
 #include <netdb.h>
 #include <resolv.h>
 #include <stdio.h>
-#include <string.h>
+#include <kits/support/String.h>
 #include <port_after.h>
 
 /* Options.  Leave them on. */

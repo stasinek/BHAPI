@@ -1,0 +1,20 @@
+C_DEFINES=$(C_DEFINES) -D_KERNEL_ -D__KERNEL__
+
+TARGETNAME=minix
+TARGETPATH=../../
+TARGETTYPE=DRIVER
+DRIVERTYPE=FS
+
+TARGETLIBS=..\..\i386\linux_fs.lib ..\..\i386\linux_mm.lib ..\..\i386\linux_lib.lib ..\..\i386\windows.lib 
+
+INCLUDES=..\..\include
+
+SOURCES=\
+		bitmap.c \
+		dir.c \
+		file.c \
+		inode.c \
+		itree_v1.c \
+		itree_v2.c \
+		namei.c
+

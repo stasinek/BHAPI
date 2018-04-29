@@ -11,12 +11,12 @@
 
 #include <AutoDeleter.h>
 #include <IconUtils.h>
-#include <List.h>
+#include <kits/support/List.h>
 #include <Language.h>
 #include <LocaleClass.h>
 #include <LocaleRoster.h>
 #include <Resources.h>
-#include <StringClass.h>
+#include <kits/support/String.h>
 #include <UnicodeChar.h>
 
 #include <unicode/datefmt.h>

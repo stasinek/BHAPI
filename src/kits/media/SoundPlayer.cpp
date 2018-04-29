@@ -11,7 +11,7 @@
 #include <SoundPlayer.h>
 
 #include <math.h>
-#include <string.h>
+#include <kits/support/String.h>
 
 #include <Autolock.h>
 #include <MediaRoster.h>
@@ -21,7 +21,7 @@
 
 #include <SoundPlayNode.h>
 
-#include <debug.h>
+#include <kits/debug/Debug.h>
 
 
 // Flags used internally in BSoundPlayer

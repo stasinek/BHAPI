@@ -10,9 +10,9 @@
  *		Matthijs Hollemans
  */
 
-#include <string.h>
+#include <kits/support/String.h>
 
-#include <debug.h>
+#include <kits/debug/Debug.h>
 #include <Path.h>
 #include <Synth.h>
 #include <SoftSynth.h>

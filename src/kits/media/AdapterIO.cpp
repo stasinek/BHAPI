@@ -8,9 +8,9 @@
 
 #include <MediaIO.h>
 
-#include <string.h>
+#include <kits/support/String.h>
 
-#include <debug.h>
+#include <kits/debug/Debug.h>
 
 
 #define TIMEOUT_QUANTA 100000

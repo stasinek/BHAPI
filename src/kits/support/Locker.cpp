@@ -32,7 +32,7 @@
 
 #include <os/kernel.h>
 #include <os/debug.h>
-#include <kits/support/Errors.h>
+#include <kits/debug/Errors.h>
 
 BLocker::BLocker()
 {

@@ -5,7 +5,7 @@
 
 #include <SignalInfo.h>
 
-#include <string.h>
+#include <kits/support/String.h>
 
 
 SignalInfo::SignalInfo()

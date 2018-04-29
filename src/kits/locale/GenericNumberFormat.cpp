@@ -5,7 +5,7 @@
 #include <stdlib.h>
 
 #include <GenericNumberFormat.h>
-#include <StringClass.h>
+#include <kits/support/String.h>
 #include <UnicodeChar.h>
 
 #if __GNUC__ > 2

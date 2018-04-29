@@ -64,7 +64,7 @@ All rights reserved.
 
 #include <stdlib.h>
 #include <stdio.h>
-#include <string.h>
+#include <kits/support/String.h>
 
 #include <Errors.h>
 

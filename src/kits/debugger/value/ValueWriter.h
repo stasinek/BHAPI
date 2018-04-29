@@ -8,7 +8,7 @@
 
 
 #include <kits/kernel/OS.h>
-#include <StringClass.h>
+#include <kits/support/String.h>
 
 #include <Variant.h>
 

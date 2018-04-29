@@ -14,7 +14,7 @@
 #include <LocatableDirectory.h>
 #include <LocatableFile.h>
 #include <SourceFile.h>
-#include <StringUtils.h>
+#include <kits/support/StringUtils.h>
 #include <TeamFileManagerSettings.h>
 
 

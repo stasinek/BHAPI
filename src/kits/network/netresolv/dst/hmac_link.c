@@ -27,7 +27,7 @@ static const char rcsid[] = "$Header: /proj/cvs/prod/libbind/dst/hmac_link.c,v 1
 #include <stdio.h>
 #include <unistd.h>
 #include <stdlib.h>
-#include <string.h>
+#include <kits/support/String.h>
 #include <memory.h>
 #include <sys/param.h>
 #include <sys/time.h>

@@ -14,13 +14,13 @@
 
 #include <GameProducer.h>
 
-#include <string.h>
+#include <kits/support/String.h>
 #include <stdio.h>
 
 #include <Buffer.h>
 #include <BufferGroup.h>
 #include <ByteOrder.h>
-#include <List.h>
+#include <kits/support/List.h>
 #include <MediaDefs.h>
 #include <TimeSource.h>
 

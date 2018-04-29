@@ -9,7 +9,7 @@
 #define _ENTRY_OPERATION_ENGINE_BASE_H
 
 
-#include <StringClass.h>
+#include <kits/support/String.h>
 
 
 class BDirectory;

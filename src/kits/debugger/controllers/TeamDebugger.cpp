@@ -15,7 +15,7 @@
 #include <Entry.h>
 #include <InterfaceDefs.h>
 #include <Message.h>
-#include <StringList.h>
+#include <kits/support/StringList.h>
 
 #include <AutoDeleter.h>
 #include <AutoLocker.h>

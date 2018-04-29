@@ -15,7 +15,7 @@
 #include <MidiRoster.h>
 #include <stdlib.h>
 
-#include <debug.h>
+#include <kits/debug/Debug.h>
 #include <MidiGlue.h>
 
 using namespace BPrivate;

@@ -9,7 +9,7 @@
 #include <sys/resource.h>
 #include <sys/stat.h>
 
-#include <SupportDefs.h>
+#include <kits/support/SupportDefs.h>
 #include <errno_private.h>
 #include <fs_info.h>
 #include <fs_volume.h>

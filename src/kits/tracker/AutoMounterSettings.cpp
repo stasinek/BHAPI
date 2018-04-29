@@ -39,7 +39,7 @@ All rights reserved.
 #include <Catalog.h>
 #include <CheckBox.h>
 #include <ControlLook.h>
-#include <Debug.h>
+#include <kits/debug/Debug.h>
 #include <LayoutBuilder.h>
 #include <LocaleClass.h>
 #include <Message.h>

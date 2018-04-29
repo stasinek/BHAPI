@@ -7,10 +7,10 @@
 
 #include <IORequest.h>
 
-#include <string.h>
+#include <kits/support/String.h>
 
 #include <arch/debug.h>
-#include <debug.h>
+#include <kits/debug/Debug.h>
 #include <heap.h>
 #include <kernel.h>
 #include <team.h>

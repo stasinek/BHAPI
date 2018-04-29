@@ -35,7 +35,7 @@
 #include <windows.h>
 
 #include <os/kernel.h>
-#include <kits/support/Errors.h>
+#include <kits/debug/Errors.h>
 #include <os/debug.h>
 
 #define SECS_BETWEEN_EPOCHS    B_INT64_CONSTANT(11644473600)

@@ -30,8 +30,8 @@
 #include <Entry.h>
 #include <Directory.h>
 
-#include <kits/support/StringClass.h>
-#include <kits/support/Errors.h>
+#include <kits/support/String.h>
+#include <kits/debug/Errors.h>
 #include <os/debug.h>
 
 #ifndef _WIN32
@@ -507,7 +507,7 @@ BEntry::operator=(const BEntry &entry)
 #include <new>
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
+#include <kits/support/String.h>
 #include <unistd.h>
 
 //#include <compat/sys/stat.h>

@@ -33,7 +33,7 @@
 #include <sys/stat.h>
 
 #include <map>
-#include <string>
+#include <kits/support/String>
 
 #include <fs_attr.h>
 

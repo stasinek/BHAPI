@@ -11,7 +11,7 @@
 #include <paging/32bit/X86PagingMethod32Bit.h>
 
 #include <stdlib.h>
-#include <string.h>
+#include <kits/support/String.h>
 
 #include <AutoDeleter.h>
 

@@ -36,7 +36,7 @@ respective holders. All rights reserved.
 #include <GroupedMenu.h>
 
 #include <stdlib.h>
-#include <string.h>
+#include <kits/support/String.h>
 
 
 using namespace BPrivate;

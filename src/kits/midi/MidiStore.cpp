@@ -13,13 +13,13 @@
  */
 
 #include <File.h>
-#include <List.h>
+#include <kits/support/List.h>
 #include <MidiDefs.h>
 #include <MidiStore.h>
 #include <stdlib.h>
-#include <string.h>
+#include <kits/support/String.h>
 
-#include <debug.h>
+#include <kits/debug/Debug.h>
 
 
 struct BMidiEvent {

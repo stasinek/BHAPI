@@ -11,7 +11,7 @@
 
 #include <Archivable.h>
 #include <package/PackageDefs.h>
-#include <StringList.h>
+#include <kits/support/StringList.h>
 
 
 namespace BPackageKit {

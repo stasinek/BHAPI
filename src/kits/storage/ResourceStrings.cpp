@@ -16,7 +16,7 @@
 #include <Entry.h>
 #include <File.h>
 #include <Resources.h>
-#include <StringClass.h>
+#include <kits/support/String.h>
 
 #include <AppMisc.h>
 

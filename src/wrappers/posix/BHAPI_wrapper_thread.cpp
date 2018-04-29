@@ -39,7 +39,7 @@
 #include <kits/config.h>
 #include <os/kernel.h>
 #include <kits/support/List.h>
-#include <kits/support/StringClass.h>
+#include <kits/support/String.h>
 
 typedef struct threadCallback {
 	b_thread_func	func;

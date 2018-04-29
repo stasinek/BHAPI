@@ -8,7 +8,7 @@
 
 #include <Archivable.h>
 #include <GraphicsDefs.h>
-#include <List.h>
+#include <kits/support/List.h>
 
 
 class BMessage;

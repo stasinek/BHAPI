@@ -11,7 +11,7 @@
 #include <NetworkDevice.h>
 #include <NetworkInterface.h>
 #include <NetworkRoster.h>
-#include <StringClass.h>
+#include <kits/support/String.h>
 #include <UrlProtocolRoster.h>
 #include <UrlRequest.h>
 

@@ -9,14 +9,14 @@
 
 
 #include <DefaultMediaTheme.h>
-#include <debug.h>
+#include <kits/debug/Debug.h>
 
 #include <MediaTheme.h>
-#include <StringView.h>
+#include <kits/support/StringView.h>
 #include <Locker.h>
 #include <Autolock.h>
 
-#include <string.h>
+#include <kits/support/String.h>
 
 
 static BLocker sLock("media theme lock");

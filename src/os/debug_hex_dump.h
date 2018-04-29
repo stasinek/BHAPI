@@ -6,7 +6,7 @@
 #define _KERNEL_DEBUG_HEX_DUMP_H
 
 
-#include <debug.h>
+#include <kits/debug/Debug.h>
 
 
 namespace BKernel {

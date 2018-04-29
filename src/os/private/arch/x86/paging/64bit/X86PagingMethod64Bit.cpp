@@ -12,7 +12,7 @@
 #include <paging/64bit/X86PagingMethod64Bit.h>
 
 #include <stdlib.h>
-#include <string.h>
+#include <kits/support/String.h>
 
 #include <boot/kernel_args.h>
 #include <util/AutoLock.h>

@@ -75,12 +75,12 @@ BRegion::BRegion(const BRegion &<emphasis>region</emphasis>)
 BRegion::BRegion(const BRect &<emphasis>rect</emphasis>)
 virtual BRegion::~BRegion()
 	</programlisting>
-	<itemizedlist>
+	<itemizedList.h>
 		<listitem><para><emphasis>region</emphasis>是已创建的区域范围描述。
 		</para></listitem>
 		<listitem><para><emphasis>rect</emphasis>是初始的一个矩形区域范围。
 		</para></listitem>
-	</itemizedlist>
+	</itemizedList.h>
 </section>
 </document>
 -----------------------------------------------------------------------------*/
@@ -126,7 +126,7 @@ BRegion BRegion::operator|(const BRegion &<emphasis>region</emphasis>) const
 BRegion& BRegion::operator&=(const BRegion &<emphasis>region</emphasis>)
 BRegion& BRegion::operator|=(const BRegion &<emphasis>region</emphasis>)
 	</programlisting>
-	<itemizedlist>
+	<itemizedList.h>
 		<listitem><para><emphasis>region</emphasis>与其操作的区域范围描述。
 			<footnote><para>如果该区域范围描述为无效区域时，进行赋值(operator=)
 					或位与(operator&=)操作时会导致当前区域范围描述无效。</para></footnote>
@@ -135,7 +135,7 @@ BRegion& BRegion::operator|=(const BRegion &<emphasis>region</emphasis>)
 			<footnote><para>如果该矩形为无效矩形时，进行赋值(operator=)
 					或位与(operator&=)操作时会导致当前区域范围描述无效。</para></footnote>
 		</para></listitem>
-	</itemizedlist>
+	</itemizedList.h>
 	<para>BRegion::operator=()用于赋值给当前区域，返回值为赋值后的当前区域本身引用。</para>
 	<para>BRegion::operator&()用于求当前区域与指定参数的交集，返回值为相交的区域。</para>
 	<para>BRegion::operator&=()用于将当前区域与指定参数进行交集操作，返回值为操作后的当前区域本身引用。</para>
@@ -197,11 +197,11 @@ BRegion::Frame() const
 	<programlisting>
 BRect BRegion::RectAt(__be_int32 <emphasis>index</emphasis>) const
 	</programlisting>
-	<itemizedlist>
+	<itemizedList.h>
 		<listitem><para><emphasis>index</emphasis>是组成矩形的位置索引。
 		<footnote><para>其值应界于0和BRegion::CountRects() - 1之间。</para></footnote>
 		</para></listitem>
-	</itemizedlist>
+	</itemizedList.h>
 	<para>返回值为该区域第index+1个组合矩形，当index处于无效范围时返回值亦无效。</para>
 </section>
 </document>
@@ -260,7 +260,7 @@ void BRegion::Scale(float <emphasis>scaling</emphasis>)
 BRegion& BRegion::ScaleSelf(float <emphasis>scaling</emphasis>)
 BRegion BRegion::ScaleCopy(float <emphasis>scaling</emphasis>)
 	</programlisting>
-	<itemizedlist>
+	<itemizedList.h>
 		<listitem><para><emphasis>singleBound</emphasis>是一个矩形的区域范围描述。
 			<footnote><para>如果该矩形为无效矩形时会导致当前区域范围描述无效。</para></footnote>
 		</para></listitem>
@@ -278,7 +278,7 @@ BRegion BRegion::ScaleCopy(float <emphasis>scaling</emphasis>)
 		<listitem><para><emphasis>scaling</emphasis>是缩放的比例。
 			<footnote><para>scaling不能小于0。</para></footnote>
 		</para></listitem>
-	</itemizedlist>
+	</itemizedList.h>
 	<para>BRegion::Set()用于将当前区域描述赋值成一个单独的矩形区域。
 		<footnote><para>如果该矩形为无效矩形时会导致当前区域范围描述无效。</para></footnote>
 	</para>
@@ -674,7 +674,7 @@ bool BRegion::Contains(const BRegion *<emphasis>region</emphasis>) const;
 
 void BRegion::PrintToStream() const;
 	</programlisting>
-	<itemizedlist>
+	<itemizedList.h>
 		<listitem><para><emphasis>region</emphasis>是已有的区域范围描述。
 		</para></listitem>
 		<listitem><para><emphasis>rect</emphasis>是已有的一个矩形区域范围。
@@ -685,7 +685,7 @@ void BRegion::PrintToStream() const;
 		</para></listitem>
 		<listitem><para><emphasis>x y</emphasis>分别是一个点的X、Y方向坐标值。
 		</para></listitem>
-	</itemizedlist>
+	</itemizedList.h>
 	<para>BRegion::Intersects()用于查询参数指定的矩形、区域描述与当前区域描述是否相交，有相交时返回true，否则返回false。</para>
 	<para>BRegion::Contains()用于查询参数指定的点、矩形或区域描述是否在当前区域描述之内，被其完全包含时返回true，否则返回false。</para>
 	<para>BRegion::PrintToStream()用于将当前区域描述的所有组成矩形内容打印到标准输出流中。

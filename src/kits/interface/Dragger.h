@@ -7,7 +7,7 @@
 
 
 #include <Locker.h>
-#include <List.h>
+#include <kits/support/List.h>
 #include <View.h>
 
 class BBitmap;

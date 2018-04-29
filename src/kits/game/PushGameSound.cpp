@@ -10,8 +10,8 @@
 
 #include <PushGameSound.h>
 
-#include <List.h>
-#include <string.h>
+#include <kits/support/List.h>
+#include <kits/support/String.h>
 
 #include <GSUtility.h>
 

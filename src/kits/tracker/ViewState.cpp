@@ -33,7 +33,7 @@ All rights reserved.
 */
 
 
-#include <Debug.h>
+#include <kits/debug/Debug.h>
 #include <AppDefs.h>
 #include <InterfaceDefs.h>
 
@@ -44,7 +44,7 @@ All rights reserved.
 #include <ViewState.h>
 
 #include <new>
-#include <string.h>
+#include <kits/support/String.h>
 #include <stdlib.h>
 
 

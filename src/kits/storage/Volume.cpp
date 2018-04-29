@@ -32,8 +32,8 @@
 #include <StorageDefs.h>
 
 #include <kits/support/UTF8.h>
-#include <kits/support/Errors.h>
-#include <kits/support/StringClass.h>
+#include <kits/debug/Errors.h>
+#include <kits/support/String.h>
 
 #ifdef __BEOS__
 #include <be/storage/Entry.h>

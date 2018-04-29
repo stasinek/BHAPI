@@ -9,7 +9,7 @@
 #include <vector>
 
 #include <stdlib.h>
-#include <string.h>
+#include <kits/support/String.h>
 
 #include <Referenceable.h>
 

@@ -8,11 +8,11 @@
 
 #include <new>
 
-#include <StringClass.h>
+#include <kits/support/String.h>
 
 #include <AutoLocker.h>
 
-#include <StringUtils.h>
+#include <kits/support/StringUtils.h>
 #include <Type.h>
 #include <TypeLookupConstraints.h>
 

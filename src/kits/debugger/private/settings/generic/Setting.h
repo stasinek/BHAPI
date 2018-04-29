@@ -7,7 +7,7 @@
 #define SETTING_H
 
 
-#include <StringClass.h>
+#include <kits/support/String.h>
 
 #include <ObjectList.h>
 #include <Referenceable.h>

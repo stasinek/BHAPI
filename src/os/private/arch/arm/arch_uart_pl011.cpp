@@ -7,7 +7,7 @@
  */
 
 
-#include <debug.h>
+#include <kits/debug/Debug.h>
 #include <arch/arm/reg.h>
 #include <arch/generic/debug_uart.h>
 #include <arch/arm/arch_uart_pl011.h>

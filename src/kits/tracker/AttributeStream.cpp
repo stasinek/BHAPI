@@ -35,7 +35,7 @@ All rights reserved.
 
 #include <AttributeStream.h>
 
-#include <Debug.h>
+#include <kits/debug/Debug.h>
 #include <Node.h>
 
 #include <Utilities.h>

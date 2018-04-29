@@ -5,10 +5,25 @@
 *.obj
 *.il*
 *.ii
+*.o
+*.s
+*.il
+*.ii
+*.ilk
+*.ils
+*.ilc
+*.ild
+*.ilf
+*.idb
+*.map
+*.drc
+*.tds
+*.pdb
 
 # Precompiled Headers
 *.gch
-*.pch
+*.pch
+*.ipch
 
 # Compiled Dynamic libraries
 *.so
@@ -20,7 +35,24 @@
 # Compiled Static libraries
 *.lai
 *.la
+*.a
+*.ilb
 
 # Executables
 *.out
 *.app
+*.exe
+
+#other
+*.bak
+*.sdf
+*.log
+*.tlog
+*.stat
+*.Release
+*.Debug
+*.cache
+*.~*
+*.#*
+debug/*
+realese/*

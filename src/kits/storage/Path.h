@@ -30,7 +30,7 @@
 #ifndef BHAPI_PATH_H
 #define BHAPI_PATH_H
 
-#include <Flattenable.h>
+#include <kits/support/Flattenable.h>
 #include <Message.h>
 
 // Forward declarations

@@ -6,7 +6,7 @@
 #define SEMAPHORE_INFO_H
 
 #include <kits/kernel/OS.h>
-#include <StringClass.h>
+#include <kits/support/String.h>
 
 #include <Types.h>
 

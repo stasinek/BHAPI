@@ -41,21 +41,21 @@ All rights reserved.
 #include <Button.h>
 #include <Catalog.h>
 #include <ControlLook.h>
-#include <Debug.h>
+#include <kits/debug/Debug.h>
 #include <DurationFormat.h>
 #include <LocaleClass.h>
 #include <MessageFilter.h>
-#include <StringView.h>
-#include <StringClass.h>
+#include <kits/support/StringView.h>
+#include <kits/support/String.h>
 #include <TimeFormat.h>
 
-#include <string.h>
+#include <kits/support/String.h>
 
 #include <AutoLock.h>
 #include <Bitmaps.h>
 #include <Commands.h>
 #include <StatusWindow.h>
-#include <StringForSize.h>
+#include <kits/support/StringForSize.h>
 #include <DeskWindow.h>
 
 

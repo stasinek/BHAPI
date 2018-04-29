@@ -5,7 +5,7 @@
 
 #include <scheduler_profiler.h>
 
-#include <debug.h>
+#include <kits/debug/Debug.h>
 #include <util/AutoLock.h>
 
 #include <algorithm>

@@ -11,7 +11,7 @@
 #include <paging/classic/PPCPagingMethodClassic.h>
 
 #include <stdlib.h>
-#include <string.h>
+#include <kits/support/String.h>
 
 #include <AutoDeleter.h>
 

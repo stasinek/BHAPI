@@ -12,7 +12,7 @@
 #include <algorithm>
 #include <new>
 #include <stdlib.h>
-#include <string.h>
+#include <kits/support/String.h>
 
 #include <KernelExport.h>
 

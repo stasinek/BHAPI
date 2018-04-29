@@ -10,7 +10,7 @@
 // independent values, with minima and maxima.
 
 #include <Control.h>
-#include <StringClass.h>
+#include <kits/support/String.h>
 
 
 class BChannelControl : public BControl {

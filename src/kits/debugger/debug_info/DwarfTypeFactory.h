@@ -6,7 +6,7 @@
 #define DWARF_TYPE_FACTORY_H
 
 
-#include <StringClass.h>
+#include <kits/support/String.h>
 
 #include <Type.h>
 

@@ -41,12 +41,12 @@ their respective holders. All rights reserved.
 #include <algorithm>
 
 #include <stdlib.h>
-#include <string.h>
-#include <strings.h>
+#include <kits/support/String.h>
+#include <kits/support/Strings.h>
 
 #include <Application.h>
 #include <Catalog.h>
-#include <Debug.h>
+#include <kits/debug/Debug.h>
 #include <Directory.h>
 #include <LocaleClass.h>
 #include <Path.h>

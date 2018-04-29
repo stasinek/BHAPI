@@ -39,14 +39,14 @@ All rights reserved.
 #include <fs_info.h>
 #include <image.h>
 #include <stdlib.h>
-#include <strings.h>
+#include <kits/support/Strings.h>
 #include <sys/resource.h>
 #include <unistd.h>
 
 #include <Alert.h>
 #include <Autolock.h>
 #include <Catalog.h>
-#include <Debug.h>
+#include <kits/debug/Debug.h>
 #include <FindDirectory.h>
 #include <LocaleClass.h>
 #include <MenuItem.h>
@@ -293,7 +293,7 @@ TTracker::TTracker()
 		deskDir.GetEntry(&entry);
 		Model* model = new Model(&entry, true);
 		if (model->InitCheck() == B_OK) {
-			AutoLock<WindowList> lock(&fWindowList);
+			AutoLock<WindowList.h> lock(&fWindowList);
 			deskWindow = new BDeskWindow(&fWindowList);
 			AutoLock<BWindow> windowLock(deskWindow);
 			deskWindow->CreatePoseView(model);
@@ -359,7 +359,7 @@ bool TTracker::QuitRequested()
 		// try quitting the copy/move/empty trash threads
 
 	BMessage message;
-	AutoLock<WindowList> lock(&fWindowList);
+	AutoLock<WindowList.h> lock(&fWindowList);
 	// save open windows in a message inside an attribute of the desktop
 	int32 count = fWindowList.CountItems();
 	for (int32 i = 0; i < count; i++) {
@@ -680,7 +680,7 @@ void TTracker::MoveRefsToTrash(const BMessage* message)
 		if (message->FindRef("refs", index, &ref) != B_OK)
 			continue;
 
-		AutoLock<WindowList> lock(&fWindowList);
+		AutoLock<WindowList.h> lock(&fWindowList);
 		BContainerWindow* window = FindParentContainerWindow(&ref);
 		if (window != NULL) {
 			// if we have a window open for this entry, ask the pose to
@@ -710,7 +710,7 @@ void TTracker::SelectRefs(const BMessage* message)
 		if (entry.InitCheck() != B_OK || !entry.Exists())
 			continue;
 
-		AutoLock<WindowList> lock(&fWindowList);
+		AutoLock<WindowList.h> lock(&fWindowList);
 		BContainerWindow* window = FindParentContainerWindow(&ref);
 		if (window == NULL)
 			continue;
@@ -1037,7 +1037,7 @@ void TTracker::OpenContainerWindow(Model* model, BMessage* originalRefsList,
 	OpenSelector openSelector, uint32 openFlags, bool checkAlreadyOpen,
 	const BMessage* stateMessage)
 {
-	AutoLock<WindowList> lock(&fWindowList);
+	AutoLock<WindowList.h> lock(&fWindowList);
 	BContainerWindow* window = NULL;
 	const node_ref* modelNodeRef = model->node_ref();
 	if (checkAlreadyOpen && openSelector != kRunOpenWithWindow) {
@@ -1152,7 +1152,7 @@ void TTracker::OpenInfoWindows(BMessage* message)
 				continue;
 			}
 
-			AutoLock<WindowList> lock(&fWindowList);
+			AutoLock<WindowList.h> lock(&fWindowList);
 			BInfoWindow* wind = FindInfoWindow(model->node_ref());
 
 			if (wind) {
@@ -1227,7 +1227,7 @@ TTracker::FindContainerWindow(const entry_ref* entry, int32 number) const
 
 bool TTracker::EntryHasWindowOpen(const entry_ref* entry)
 {
-	AutoLock<WindowList> lock(&fWindowList);
+	AutoLock<WindowList.h> lock(&fWindowList);
 	return FindContainerWindow(entry) != NULL;
 }
 
@@ -1277,7 +1277,7 @@ TTracker::FindInfoWindow(const node_ref* node) const
 
 bool TTracker::QueryActiveForDevice(dev_t device)
 {
-	AutoLock<WindowList> lock(&fWindowList);
+	AutoLock<WindowList.h> lock(&fWindowList);
 	int32 count = fWindowList.CountItems();
 	for (int32 index = 0; index < count; index++) {
 		BQueryContainerWindow* window = dynamic_cast<BQueryContainerWindow*>(
@@ -1298,7 +1298,7 @@ void TTracker::CloseActiveQueryWindows(dev_t device)
 	// used when trying to unmount a volume - an active query would prevent
 	// that from happening
 	bool closed = false;
-	AutoLock<WindowList> lock(fWindowList);
+	AutoLock<WindowList.h> lock(fWindowList);
 	for (int32 index = fWindowList.CountItems(); index >= 0; index--) {
 		BQueryContainerWindow* window
 			= dynamic_cast<BQueryContainerWindow*>(fWindowList.ItemAt(index));
@@ -1349,7 +1349,7 @@ void TTracker::CloseWindowAndChildren(const node_ref* node)
 	if (dir.InitCheck() != B_OK)
 		return;
 
-	AutoLock<WindowList> lock(&fWindowList);
+	AutoLock<WindowList.h> lock(&fWindowList);
 	BObjectList<BContainerWindow> closeList;
 
 	// make a list of all windows to be closed
@@ -1383,7 +1383,7 @@ void TTracker::CloseWindowAndChildren(const node_ref* node)
 
 void TTracker::CloseAllInWorkspace()
 {
-	AutoLock<WindowList> lock(&fWindowList);
+	AutoLock<WindowList.h> lock(&fWindowList);
 
 	int32 currentWorkspace = 1 << current_workspace();
 	// count from end to beginning so we can remove items safely
@@ -1406,7 +1406,7 @@ void TTracker::CloseAllWindows()
 	// means to say close all your windows. It might be better to have it
 	// send a kCloseAllWindows message and have windowless apps stay running,
 	// which is what we will do for the Tracker
-	AutoLock<WindowList> lock(&fWindowList);
+	AutoLock<WindowList.h> lock(&fWindowList);
 
 	int32 count = CountWindows();
 	for (int32 index = 0; index < count; index++) {
@@ -1571,7 +1571,7 @@ void TTracker::SelectPoseAtLocationSoon(node_ref parent, BPoint pointInPose)
 
 void TTracker::SelectPoseAtLocationInParent(node_ref parent, BPoint pointInPose)
 {
-	AutoLock<WindowList> lock(&fWindowList);
+	AutoLock<WindowList.h> lock(&fWindowList);
 	BContainerWindow* parentWindow = FindContainerWindow(&parent);
 	if (parentWindow != NULL) {
 		AutoLock<BWindow> lock(parentWindow);
@@ -1583,7 +1583,7 @@ void TTracker::SelectPoseAtLocationInParent(node_ref parent, BPoint pointInPose)
 bool TTracker::CloseParentWaitingForChild(const entry_ref* child,
 	const node_ref* parent)
 {
-	AutoLock<WindowList> lock(&fWindowList);
+	AutoLock<WindowList.h> lock(&fWindowList);
 
 	BContainerWindow* parentWindow = FindContainerWindow(parent);
 	if (parentWindow == NULL) {
@@ -1611,7 +1611,7 @@ bool TTracker::CloseParentWaitingForChild(const entry_ref* child,
 
 void TTracker::CloseParent(node_ref parent)
 {
-	AutoLock<WindowList> lock(&fWindowList);
+	AutoLock<WindowList.h> lock(&fWindowList);
 	if (!lock)
 		return;
 
@@ -1653,7 +1653,7 @@ bool TTracker::CloseParentWindowCommon(BContainerWindow* window)
 
 bool TTracker::SelectChildInParent(const entry_ref* parent, const node_ref* child)
 {
-	AutoLock<WindowList> lock(&fWindowList);
+	AutoLock<WindowList.h> lock(&fWindowList);
 
 	BContainerWindow* window = FindContainerWindow(parent);
 	if (window == NULL) {

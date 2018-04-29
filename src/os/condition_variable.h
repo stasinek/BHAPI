@@ -8,7 +8,7 @@
 #include <os/thread_types.h>
 #include <kits/kernel/OS.h>
 #include <thread.h>
-#include <debug.h>
+#include <kits/debug/Debug.h>
 
 #ifdef __cplusplus
 #include <util/DoublyLinkedList.h>

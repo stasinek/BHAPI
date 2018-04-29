@@ -11,7 +11,7 @@
 #include <DefaultSettingsView.h>
 
 #include <LayoutBuilder.h>
-#include <StringView.h>
+#include <kits/support/StringView.h>
 
 
 namespace BPrivate {

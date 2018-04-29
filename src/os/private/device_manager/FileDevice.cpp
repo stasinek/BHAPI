@@ -7,7 +7,7 @@
 #include <FileDevice.h>
 
 #include <errno.h>
-#include <string.h>
+#include <kits/support/String.h>
 #include <unistd.h>
 
 #include <new>

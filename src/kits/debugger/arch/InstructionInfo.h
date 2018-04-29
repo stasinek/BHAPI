@@ -5,7 +5,7 @@
 #ifndef INSTRUCTION_INFO_H
 #define INSTRUCTION_INFO_H
 
-#include <StringClass.h>
+#include <kits/support/String.h>
 
 #include <Types.h>
 

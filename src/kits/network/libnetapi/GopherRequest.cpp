@@ -20,8 +20,8 @@
 #include <Path.h>
 #include <Socket.h>
 #include <StackOrHeapArray.h>
-#include <StringClass.h>
-#include <StringList.h>
+#include <kits/support/String.h>
+#include <kits/support/StringList.h>
 
 /*
  * TODO: fix '+' in selectors, cf. gopher://gophernicus.org/1/doc/gopher/

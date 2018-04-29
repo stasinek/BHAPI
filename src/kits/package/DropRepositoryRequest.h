@@ -6,7 +6,7 @@
 #define _PACKAGE__DROP_REPOSITORY_REQUEST_H_
 
 
-#include <StringClass.h>
+#include <kits/support/String.h>
 
 #include <package/Context.h>
 #include <package/Request.h>

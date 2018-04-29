@@ -30,8 +30,8 @@
 #include <Control.h>
 #include <Window.h>
 
-#include <kits/support/StringClass.h>
-#include <kits/support/Errors.h>
+#include <kits/support/String.h>
+#include <kits/debug/Errors.h>
 #include <os/kernel.h>
 #include <kits/app/Looper.h>
 #include <kits/app/Message.h>

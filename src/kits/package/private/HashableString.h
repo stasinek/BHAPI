@@ -6,7 +6,7 @@
 #define _PACKAGE__PRIVATE__HASHABLE_STRING_H_
 
 
-#include <StringClass.h>
+#include <kits/support/String.h>
 
 #include <HashStringClass.h>
 

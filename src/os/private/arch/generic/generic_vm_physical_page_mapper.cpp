@@ -15,7 +15,7 @@
 #include <thread.h>
 #include <util/queue.h>
 
-#include <string.h>
+#include <kits/support/String.h>
 #include <stdlib.h>
 
 //#define TRACE_VM_PHYSICAL_PAGE_MAPPER

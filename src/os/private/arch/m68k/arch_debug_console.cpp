@@ -16,7 +16,7 @@
 #include <kernel.h>
 #include <vm/vm.h>
 
-#include <string.h>
+#include <kits/support/String.h>
 
 
 void

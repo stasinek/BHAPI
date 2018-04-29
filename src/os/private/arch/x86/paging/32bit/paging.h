@@ -10,7 +10,7 @@
 #define _KERNEL_ARCH_X86_PAGING_32_BIT_PAGING_H
 
 
-#include <SupportDefs.h>
+#include <kits/support/SupportDefs.h>
 
 #include <int.h>
 #include <kernel.h>

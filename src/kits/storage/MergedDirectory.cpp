@@ -13,7 +13,7 @@
 
 #include <new>
 #include <set>
-#include <string>
+#include <kits/support/String>
 
 #include <Directory.h>
 #include <Entry.h>

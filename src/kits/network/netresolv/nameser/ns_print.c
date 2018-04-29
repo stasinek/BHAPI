@@ -43,7 +43,7 @@ static const char rcsid[] = "Id: ns_print.c,v 1.12 2009/03/03 05:29:58 each Exp"
 #include <errno.h>
 #include <resolv.h>
 #include <stddef.h>
-#include <string.h>
+#include <kits/support/String.h>
 #include <ctype.h>
 
 #include <port_after.h>

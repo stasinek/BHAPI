@@ -27,7 +27,7 @@
  *
  * --------------------------------------------------------------------------*/
 
-#include <StringView.h>
+#include <kits/support/StringView.h>
 
 #define BHAPI_STRING_VIEW_LINE_SPACING	0.25f
 

@@ -55,13 +55,13 @@ char __dont_remove_copyright_from_binary[] = "Copyright (c) 2002-2006 Marcus "
 #include <ParameterWeb.h>
 #include <Roster.h>
 #include <StopWatch.h>
-#include <StringClass.h>
+#include <kits/support/String.h>
 #include <TimeSource.h>
 
 #include <AppMisc.h>
 
 #include <DataExchange.h>
-#include <debug.h>
+#include <kits/debug/Debug.h>
 #include <DormantNodeManager.h>
 #include <MediaMisc.h>
 #include <MediaRosterEx.h>

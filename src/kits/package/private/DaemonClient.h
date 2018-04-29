@@ -11,7 +11,7 @@
 
 #include <Messenger.h>
 #include <package/PackageDefs.h>
-#include <StringClass.h>
+#include <kits/support/String.h>
 
 #include <package/DaemonDefs.h>
 

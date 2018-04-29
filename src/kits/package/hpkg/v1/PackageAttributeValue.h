@@ -6,7 +6,7 @@
 #define _PACKAGE__HPKG__V1__PACKAGE_ATTRIBUTE_VALUE_H_
 
 
-#include <string.h>
+#include <kits/support/String.h>
 
 #include <package/hpkg/v1/HPKGDefs.h>
 

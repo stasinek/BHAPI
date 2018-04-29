@@ -8,7 +8,7 @@
 #define _COMMAND_MANAGER_H
 
 #include <malloc.h>
-#include <string.h>
+#include <kits/support/String.h>
 
 #include <bluetooth/bluetooth.h>
 #include <bluetooth/bluetooth_error.h>

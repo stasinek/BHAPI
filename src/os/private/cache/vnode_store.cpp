@@ -7,7 +7,7 @@
 #include <vnode_store.h>
 
 #include <stdlib.h>
-#include <string.h>
+#include <kits/support/String.h>
 
 #include <file_cache.h>
 #include <slab/Slab.h>

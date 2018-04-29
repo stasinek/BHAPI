@@ -10,7 +10,7 @@
 
 #include <new>
 
-#include <StringClass.h>
+#include <kits/support/String.h>
 
 #include <AutoDeleter.h>
 

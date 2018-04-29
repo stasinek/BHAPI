@@ -31,7 +31,7 @@
 #include <BufferConsumer.h>
 
 #include <stdlib.h>
-#include <string.h>
+#include <kits/support/String.h>
 
 #include <AutoDeleter.h>
 #include <BufferProducer.h>
@@ -39,7 +39,7 @@
 #include <Buffer.h>
 #include <TimeSource.h>
 
-#include <debug.h>
+#include <kits/debug/Debug.h>
 #include <MediaMisc.h>
 #include <DataExchange.h>
 

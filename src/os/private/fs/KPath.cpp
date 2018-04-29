@@ -8,7 +8,7 @@
 #include <fs/KPath.h>
 
 #include <stdlib.h>
-#include <string.h>
+#include <kits/support/String.h>
 
 #include <team.h>
 #include <vfs.h>

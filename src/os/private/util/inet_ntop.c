@@ -29,7 +29,7 @@ static const char rcsid[] = "$Id: inet_ntop.c,v 1.5 2005/11/03 22:59:52 marka Ex
 
 #include <errno.h>
 #include <stdio.h>
-#include <string.h>
+#include <kits/support/String.h>
 
 #ifdef SPRINTF_CHAR
 # define SPRINTF(x) strlen(sprintf/**/x)

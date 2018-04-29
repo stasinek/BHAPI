@@ -17,7 +17,7 @@
 #include <arch/timer.h>
 #include <boot/kernel_args.h>
 #include <cpu.h>
-#include <debug.h>
+#include <kits/debug/Debug.h>
 #include <elf.h>
 #include <real_time_clock.h>
 #include <smp.h>

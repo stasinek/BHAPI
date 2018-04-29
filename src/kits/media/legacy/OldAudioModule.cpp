@@ -12,7 +12,7 @@
 
 #include <OldAudioModule.h>
 
-#include <debug.h>
+#include <kits/debug/Debug.h>
 
 
 /*************************************************************

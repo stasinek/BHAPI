@@ -10,7 +10,7 @@
 #define KERNEL_ARCH_PPC_PAGING_PPC_PAGING_STRUCTURES_H
 
 
-#include <SupportDefs.h>
+#include <kits/support/SupportDefs.h>
 
 #include <heap.h>
 

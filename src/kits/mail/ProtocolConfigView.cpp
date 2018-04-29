@@ -22,7 +22,7 @@
 #include <MenuItem.h>
 #include <Message.h>
 #include <PopUpMenu.h>
-#include <StringClass.h>
+#include <kits/support/String.h>
 #include <TextControl.h>
 
 #include <crypt.h>

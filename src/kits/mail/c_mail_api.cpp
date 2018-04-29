@@ -11,13 +11,13 @@
 
 
 #include <stdlib.h>
-#include <string.h>
+#include <kits/support/String.h>
 
 #include <Directory.h>
 #include <E-mail.h>
 #include <File.h>
 #include <FindDirectory.h>
-#include <List.h>
+#include <kits/support/List.h>
 #include <Path.h>
 
 #include <crypt.h>

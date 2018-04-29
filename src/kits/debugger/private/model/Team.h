@@ -9,7 +9,7 @@
 #include <map>
 
 #include <Locker.h>
-#include <StringList.h>
+#include <kits/support/StringList.h>
 
 #include <ObjectList.h>
 

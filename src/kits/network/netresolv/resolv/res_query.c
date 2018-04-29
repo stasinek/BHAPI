@@ -83,7 +83,7 @@ static const char rcsid[] = "$Id: res_query.c,v 1.11 2008/11/14 02:36:51 marka E
 #include <resolv.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
+#include <kits/support/String.h>
 #include <port_after.h>
 
 /* Options.  Leave them on. */

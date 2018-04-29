@@ -38,7 +38,7 @@ __RCSID("$NetBSD: inet_cidr_pton.c,v 1.8 2012/03/20 17:08:13 matt Exp $");
 #include <ctype.h>
 #include <errno.h>
 #include <stdio.h>
-#include <string.h>
+#include <kits/support/String.h>
 #include <stddef.h>
 #include <stdlib.h>
 

@@ -20,7 +20,7 @@
 #include <Printer.h>
 #include <PrinterRoster.h>
 #include <RadioButton.h>
-#include <StringView.h>
+#include <kits/support/StringView.h>
 #include <TextControl.h>
 
 

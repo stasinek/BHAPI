@@ -6,13 +6,13 @@
 
 #include <DataExchange.h>
 
-#include <string.h>
+#include <kits/support/String.h>
 #include <unistd.h>
 
 #include <Messenger.h>
 #include <kits/kernel/OS.h>
 
-#include <debug.h>
+#include <kits/debug/Debug.h>
 #include <MediaMisc.h>
 
 

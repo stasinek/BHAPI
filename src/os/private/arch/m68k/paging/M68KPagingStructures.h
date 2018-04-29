@@ -10,7 +10,7 @@
 #define KERNEL_ARCH_M68K_PAGING_M68K_PAGING_STRUCTURES_H
 
 
-#include <SupportDefs.h>
+#include <kits/support/SupportDefs.h>
 
 #include <heap.h>
 

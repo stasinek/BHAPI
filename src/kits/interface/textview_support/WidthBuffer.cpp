@@ -14,7 +14,7 @@
 #include <WidthBuffer.h>
 
 #include <Autolock.h>
-#include <Debug.h>
+#include <kits/debug/Debug.h>
 #include <Font.h>
 #include <Locker.h>
 

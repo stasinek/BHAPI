@@ -30,7 +30,7 @@
 #include <Archivable.h>
 
 #include <kits/app/Message.h>
-#include <kits/support/Errors.h>
+#include <kits/debug/Errors.h>
 #include <os/debug.h>
 
 BArchivable::BArchivable()

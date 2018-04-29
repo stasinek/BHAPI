@@ -4,7 +4,7 @@
 //---------------------------------------------------------------------
 
 #include <DiskScannerAddOn.h>
-#include <StringClass.h>
+#include <kits/support/String.h>
 
 // BDiskScannerPartitionAddOn
 

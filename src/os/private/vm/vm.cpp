@@ -13,7 +13,7 @@
 #include <ctype.h>
 #include <stdlib.h>
 #include <stdio.h>
-#include <string.h>
+#include <kits/support/String.h>
 #include <sys/mman.h>
 
 #include <algorithm>
@@ -32,7 +32,7 @@
 #include <boot/stage2.h>
 #include <condition_variable.h>
 #include <console.h>
-#include <debug.h>
+#include <kits/debug/Debug.h>
 #include <file_cache.h>
 #include <fs/fd.h>
 #include <heap.h>

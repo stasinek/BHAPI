@@ -1,4 +1,4 @@
-﻿/* --------------------------------------------------------------------------
+/* --------------------------------------------------------------------------
  *
  * BHAPI++ Copyright (C) 2017, Stanislaw Stasiak, based on Haiku & ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2007, Anthony Lee, All Rights Reserved
@@ -30,7 +30,7 @@
 #ifndef BHAPI_DATA_IO_H
 #define BHAPI_DATA_IO_H
 
-#include <kits/kernel/OS.h>
+//#include <kits/kernel/OS.h>
 #ifdef __cplusplus /* Just for C++ */
 class BHAPI_IMPEXP BDataIO {
 public:

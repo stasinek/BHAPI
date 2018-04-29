@@ -6,7 +6,7 @@
 #include <MediaFile.h>
 #include <MediaTrack.h>
 #include <SoundFile.h>
-#include <debug.h>
+#include <kits/debug/Debug.h>
 
 /*************************************************************
  * public BSoundFile

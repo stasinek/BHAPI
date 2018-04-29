@@ -32,7 +32,7 @@
 
 #include <Buffer.h>
 
-#include <debug.h>
+#include <kits/debug/Debug.h>
 #include <DataExchange.h>
 #include <SharedBufferList.h>
 

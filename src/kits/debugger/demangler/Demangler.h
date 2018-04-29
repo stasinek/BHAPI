@@ -5,7 +5,7 @@
 #ifndef DEMANGLER_H
 #define DEMANGLER_H
 
-#include <StringClass.h>
+#include <kits/support/String.h>
 
 
 class Demangler {

@@ -21,7 +21,7 @@
 #include <Locker.h>
 #include <Looper.h>
 #include <Path.h>
-#include <StringClass.h>
+#include <kits/support/String.h>
 
 #include <AutoDeleter.h>
 #include <NotOwningEntryRef.h>

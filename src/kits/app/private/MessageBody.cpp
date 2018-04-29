@@ -30,7 +30,7 @@
 #include <kits/netMessageBody.h>
 #include <kits/netMemory.h>
 
-#include <kits/support/StringClass.h>
+#include <kits/support/String.h>
 #include <os/debug.h>
 
 class BHAPI_LOCAL BMessageNode

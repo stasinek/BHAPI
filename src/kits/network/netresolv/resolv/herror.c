@@ -62,7 +62,7 @@ static const char rcsid[] = "$Id: herror.c,v 1.4 2005/04/27 04:56:41 sra Exp $";
 
 #include <netdb.h>
 #include <resolv.h>
-#include <string.h>
+#include <kits/support/String.h>
 #include <unistd.h>
 
 #include <port_after.h>

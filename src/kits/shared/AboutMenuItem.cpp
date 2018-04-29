@@ -11,7 +11,7 @@
 #include <AboutMenuItem.h>
 #include <Application.h>
 #include <Roster.h>
-#include <StringClass.h>
+#include <kits/support/String.h>
 #include <SystemCatalog.h>
 
 using BPrivate::gSystemCatalog;

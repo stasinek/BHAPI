@@ -5,7 +5,7 @@
 
 #include <commpage.h>
 
-#include <string.h>
+#include <kits/support/String.h>
 
 #include <KernelExport.h>
 

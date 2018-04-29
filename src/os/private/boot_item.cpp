@@ -8,7 +8,7 @@
 #include <util/DoublyLinkedList.h>
 #include <util/kernel_cpp.h>
 
-#include <string.h>
+#include <kits/support/String.h>
 
 
 // ToDo: the boot items are not supposed to be changed after kernel startup

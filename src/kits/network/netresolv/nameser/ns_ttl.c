@@ -36,7 +36,7 @@ static const char rcsid[] = "Id: ns_ttl.c,v 1.4 2005/07/28 06:51:49 marka Exp";
 #include <ctype.h>
 #include <errno.h>
 #include <stdio.h>
-#include <string.h>
+#include <kits/support/String.h>
 
 #include <port_after.h>
 

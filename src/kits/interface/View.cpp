@@ -37,7 +37,7 @@
 #include <GraphicsDefs.h>
 
 #include <kits/support/ClassInfo.h>
-#include <kits/support/Errors.h>
+#include <kits/debug/Errors.h>
 #include <kits/add-ons/font/FontEngine.h>
 #include <kits/support/List.h>
 #include <kits/add-ons/graphics/GraphicsEngine.h>

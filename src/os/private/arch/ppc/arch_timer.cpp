@@ -6,7 +6,7 @@
 
 #include <boot/stage2.h>
 #include <kernel.h>
-#include <debug.h>
+#include <kits/debug/Debug.h>
 
 #include <timer.h>
 #include <arch/timer.h>

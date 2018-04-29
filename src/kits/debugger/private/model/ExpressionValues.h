@@ -7,7 +7,7 @@
 #define EXPRESSION_VALUES_H
 
 
-#include <StringClass.h>
+#include <kits/support/String.h>
 
 #include <Referenceable.h>
 #include <util/OpenHashTable.h>

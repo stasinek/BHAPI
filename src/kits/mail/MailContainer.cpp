@@ -4,12 +4,12 @@
 */
 
 
-#include <StringClass.h>
-#include <List.h>
+#include <kits/support/String.h>
+#include <kits/support/List.h>
 #include <Mime.h>
 
 #include <stdlib.h>
-#include <strings.h>
+#include <kits/support/Strings.h>
 #include <unistd.h>
 
 class _EXPORT BMIMEMultipartMailContainer;

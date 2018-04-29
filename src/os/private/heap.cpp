@@ -9,13 +9,13 @@
 
 
 #include <arch/debug.h>
-#include <debug.h>
+#include <kits/debug/Debug.h>
 #include <elf.h>
 #include <heap.h>
 #include <int.h>
 #include <kernel.h>
 #include <lock.h>
-#include <string.h>
+#include <kits/support/String.h>
 #include <team.h>
 #include <thread.h>
 #include <tracing.h>

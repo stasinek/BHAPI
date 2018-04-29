@@ -19,7 +19,7 @@
 
 	// For atol(), atof()
 
-#include <StringClass.h>	// BString
+#include <kits/support/String.h>	// BString
 
 using namespace BPrivate::Storage::Sniffer;
 

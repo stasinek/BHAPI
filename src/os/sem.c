@@ -99,7 +99,7 @@ _get_next_sem_info(team_id team, int32 *cookie, sem_info *info, size_t size)
 #include <BeOSBuildCompatibility.h>
 
 #include <stdlib.h>
-#include <string.h>
+#include <kits/support/String.h>
 
 #include <OS.h>
 #include <Haiku.h>

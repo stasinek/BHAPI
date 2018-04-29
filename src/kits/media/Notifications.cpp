@@ -44,7 +44,7 @@
 
 #include <AppMisc.h>
 
-#include <debug.h>
+#include <kits/debug/Debug.h>
 #include <DataExchange.h>
 
 

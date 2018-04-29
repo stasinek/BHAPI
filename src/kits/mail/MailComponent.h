@@ -6,9 +6,9 @@
 */
 
 
-#include <UTF8.h>
+#include <kits/textencoding/UTF8.h>
 #include <Message.h>
-#include <StringClass.h>
+#include <kits/support/String.h>
 
 #include <mail_encoding.h>
 

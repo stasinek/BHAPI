@@ -7,7 +7,7 @@
 #include <IOScheduler.h>
 
 #include <stdlib.h>
-#include <string.h>
+#include <kits/support/String.h>
 
 #include <IOSchedulerRoster.h>
 

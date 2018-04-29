@@ -31,8 +31,8 @@
 #include <os/kernel.h>
 #include <os/debug.h>
 #include <kits/support/List.h>
-#include <kits/support/StringClass.h>
-#include <kits/support/Errors.h>
+#include <kits/support/String.h>
+#include <kits/debug/Errors.h>
 #include <kits/support/SimpleLocker.h>
 #include <kits/support/SupportDefs.h>
 

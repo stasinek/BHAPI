@@ -11,7 +11,7 @@
 #include <stdlib.h>
 
 #include <algorithm>
-#include <string>
+#include <kits/support/String>
 
 
 namespace BPackageKit {

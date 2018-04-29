@@ -12,7 +12,7 @@
 #include <AddOnManager.h>
 
 #include <stdio.h>
-#include <string.h>
+#include <kits/support/String.h>
 
 #include <Architecture.h>
 #include <AutoDeleter.h>
@@ -23,7 +23,7 @@
 #include <image.h>
 #include <Path.h>
 
-#include <debug.h>
+#include <kits/debug/Debug.h>
 
 #include <FormatManager.h>
 #include <MetaFormat.h>

@@ -38,7 +38,7 @@ static const char rcsid[] = "Id: ns_parse.c,v 1.10 2009/01/23 19:59:16 each Exp"
 #include <assert.h>
 #include <errno.h>
 #include <resolv.h>
-#include <string.h>
+#include <kits/support/String.h>
 
 #include <port_after.h>
 

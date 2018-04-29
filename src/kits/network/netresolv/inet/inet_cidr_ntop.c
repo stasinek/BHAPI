@@ -37,7 +37,7 @@ __RCSID("$NetBSD: inet_cidr_ntop.c,v 1.8 2012/03/13 21:13:38 christos Exp $");
 #include <assert.h>
 #include <errno.h>
 #include <stdio.h>
-#include <string.h>
+#include <kits/support/String.h>
 #include <stdlib.h>
 
 #include <port_after.h>

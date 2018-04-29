@@ -90,7 +90,7 @@ __RCSID("$NetBSD: gethnamaddr.c,v 1.79 2012/09/09 16:42:23 christos Exp $");
 
 #include <nsswitch.h>
 #include <stdlib.h>
-#include <string.h>
+#include <kits/support/String.h>
 
 #ifdef YP
 #include <rpc/rpc.h>

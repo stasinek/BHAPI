@@ -45,7 +45,7 @@ static const char rcsid[] = "$Header: /proj/cvs/prod/libbind/dst/dst_api.c,v 1.1
 #include <fcntl.h>
 #include <stdlib.h>
 #include <unistd.h>
-#include <string.h>
+#include <kits/support/String.h>
 #include <memory.h>
 #include <ctype.h>
 #include <time.h>

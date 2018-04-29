@@ -88,7 +88,7 @@ static char	privatehid[] = "@(#)private.h	8.2";
 #include <sys/types.h>	/* for time_t */
 #include <stdio.h>
 #include <errno.h>
-#include <string.h>
+#include <kits/support/String.h>
 #include <limits.h>	/* for CHAR_BIT et al. */
 #include <time.h>
 #include <stdlib.h>

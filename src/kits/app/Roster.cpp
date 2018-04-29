@@ -40,7 +40,7 @@
 
 #include <kits/netctype.h>
 #include <kits/netnew>
-#include <strings.h>
+#include <kits/support/Strings.h>
 #include <kits/netunistd.h>
 #include <kits/netlocks.h>
 

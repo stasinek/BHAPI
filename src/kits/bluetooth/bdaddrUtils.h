@@ -7,7 +7,7 @@
 #define _BDADDR_UTILS_H
 
 #include <stdio.h>
-#include <string.h>
+#include <kits/support/String.h>
 
 #include <bluetooth/bluetooth.h>
 

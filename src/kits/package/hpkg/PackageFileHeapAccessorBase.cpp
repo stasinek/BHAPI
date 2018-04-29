@@ -7,7 +7,7 @@
 #include <package/hpkg/PackageFileHeapAccessorBase.h>
 
 #include <stdlib.h>
-#include <string.h>
+#include <kits/support/String.h>
 
 #include <algorithm>
 #include <new>

@@ -11,7 +11,7 @@
 #include <usb_raw.h>
 
 #include <new>
-#include <string.h>
+#include <kits/support/String.h>
 #include <unistd.h>
 
 

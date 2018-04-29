@@ -50,13 +50,13 @@
 #include <DormantNodeManager.h>
 
 #include <stdio.h>
-#include <string.h>
+#include <kits/support/String.h>
 
 #include <Autolock.h>
 #include <Entry.h>
 #include <Path.h>
 
-#include <debug.h>
+#include <kits/debug/Debug.h>
 #include <MediaMisc.h>
 #include <ServerInterface.h>
 #include <DataExchange.h>

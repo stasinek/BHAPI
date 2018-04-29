@@ -28,7 +28,7 @@
  * --------------------------------------------------------------------------*/
 
 #include <DataIO.h>
-#include <kits/support/Errors.h>
+#include <kits/debug/Errors.h>
 
 BDataIO::BDataIO()
 {

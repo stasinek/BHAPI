@@ -1,0 +1,57 @@
+# Makefile
+
+OBJECTS	= $(MODULES:%.cpp=$(TMP_PATH)$(PROJECT)/%.o)
+RES	= $(RESOURCE:%.rc=$(TMP_PATH)$(PROJECT)/%.rsc)
+DEPS	= $(MODULES:%.cpp=$(TMP_PATH)$(PROJECT)/%.d)
+
+#--------------------------------------------------------------------------
+# Dependencies
+
+ifneq ("$(DEPEND)", "")
+
+sinclude $(MODULES:%.cpp=$(TMP_PATH)$(PROJECT)/%.d)
+
+$(TMP_PATH)$(PROJECT)/%.d: %.cpp
+	@echo "Parsing dependency for $< ($(CONFIG))"
+	@[ -d $(@D) ] || mkdir -p $(@D)
+	@$(CC) -MM $(INC_DIR:%=-I%) $< -MT $(@:%.d=%.o) > $@.tmp
+	@sed 's,\($*\)\.o[ :]*,\1.o $@ : ,g' < $@.tmp > $@
+	@rm -f $@.tmp
+
+endif
+
+#--------------------------------------------------------------------------
+
+debug: $(TARGET)
+
+release: $(TARGET)
+
+clean_debug:
+	rm -rf $(TARGET) $(OBJECTS) $(RES) $(DEPS)
+
+clean_release:
+	rm -rf $(TARGET) $(OBJECTS) $(RES) $(DEPS)
+
+ifeq ("$(BUILD_TYPE)", "lib")
+
+$(TARGET): $(OBJECTS)
+	@[ -d $(@D) ] || mkdir -pv $(@D)
+	$(AR) crv $@ $^
+
+else
+
+$(TARGET): $(OBJECTS) $(RES) $(LIB_PATH)libffc.a
+	@[ -d $(@D) ] || mkdir -pv $(@D)
+	$(CC) $(LFLAGS) $^ $(LIB_PATH:%=-L%) $(LIBS:%=-l%) -o $@
+endif
+
+$(TMP_PATH)$(PROJECT)/%.o: %.cpp
+	@[ -d $(@D) ] || mkdir -pv $(@D)
+	$(CC) $(CFLAGS) $(INC_DIR:%=-I%) $< -o $@
+
+$(TMP_PATH)$(PROJECT)/%.rsc: %.rc
+	@[ -d $(@D) ] || mkdir -pv $(@D)
+	$(RC) $(INC_DIR:%=-I%) $< -o $@
+
+#--------------------------------------------------------------------------
+

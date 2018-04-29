@@ -48,7 +48,7 @@ All rights reserved.
 
 #include <BeBuild.h>
 #include <View.h>
-#include <List.h>
+#include <kits/support/List.h>
 #include <Invoker.h>
 #include <ListView.h>
 

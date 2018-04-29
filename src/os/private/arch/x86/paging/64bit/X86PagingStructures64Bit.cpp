@@ -7,7 +7,7 @@
 #include <paging/64bit/X86PagingStructures64Bit.h>
 
 #include <stdlib.h>
-#include <string.h>
+#include <kits/support/String.h>
 
 #include <KernelExport.h>
 

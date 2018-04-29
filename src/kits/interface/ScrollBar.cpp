@@ -33,7 +33,7 @@
 #include <os/kernel.h>
 #include <os/debug.h>
 #include <kits/interface/Window.h>
-#include <kits/support/Errors.h>
+#include <kits/debug/Errors.h>
 
 BScrollBar::BScrollBar(BRect frame, const char *name, float value, float min, float max, bhapi::orientation direction)
 	: BView(frame, name, B_FOLLOW_NONE, B_WILL_DRAW),

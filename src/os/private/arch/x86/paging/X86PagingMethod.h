@@ -6,7 +6,7 @@
 #define KERNEL_ARCH_X86_PAGING_X86_PAGING_METHOD_H
 
 
-#include <SupportDefs.h>
+#include <kits/support/SupportDefs.h>
 
 #include <vm/vm_types.h>
 

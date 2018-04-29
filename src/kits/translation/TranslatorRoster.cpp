@@ -17,7 +17,7 @@
 #include <TranslatorRoster.h>
 
 #include <new>
-#include <strings.h>
+#include <kits/support/Strings.h>
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -27,7 +27,7 @@
 #include <FindDirectory.h>
 #include <NodeMonitor.h>
 #include <Path.h>
-#include <StringClass.h>
+#include <kits/support/String.h>
 
 #include <driver_settings.h>
 #include <image.h>

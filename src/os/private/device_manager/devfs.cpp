@@ -12,7 +12,7 @@
 #include <errno.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
+#include <kits/support/String.h>
 #include <sys/stat.h>
 
 #include <Drivers.h>
@@ -23,7 +23,7 @@
 #include <AutoDeleter.h>
 #include <boot/kernel_args.h>
 #include <boot_device.h>
-#include <debug.h>
+#include <kits/debug/Debug.h>
 #include <elf.h>
 #include <FindDirectory.h>
 #include <fs/devfs.h>

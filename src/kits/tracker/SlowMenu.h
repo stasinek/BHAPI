@@ -43,7 +43,7 @@ All rights reserved.
 
 #include <Menu.h>
 #include <MenuItem.h>
-#include <Debug.h>
+#include <kits/debug/Debug.h>
 
 
 namespace BPrivate {

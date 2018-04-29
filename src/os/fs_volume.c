@@ -7,7 +7,7 @@
 #include <fs_volume.h>
 #include <syscalls.h>
 
-#include <string.h>
+#include <kits/support/String.h>
 
 
 dev_t

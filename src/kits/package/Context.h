@@ -7,7 +7,7 @@
 
 
 #include <Entry.h>
-#include <StringClass.h>
+#include <kits/support/String.h>
 
 
 namespace BSupportKit {

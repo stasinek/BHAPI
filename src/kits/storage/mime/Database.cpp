@@ -12,7 +12,7 @@
 #include <mime/Database.h>
 
 
-#include <string>
+#include <kits/support/String>
 
 #include <iostream>
 #include <new>
@@ -27,7 +27,7 @@
 #include <MimeType.h>
 #include <Node.h>
 #include <Path.h>
-#include <StringClass.h>
+#include <kits/support/String.h>
 #include <HaikuConstants.h>
 
 #include <AutoLocker.h>

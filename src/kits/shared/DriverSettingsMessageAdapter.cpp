@@ -12,10 +12,10 @@
 
 
 
-#include <strings.h>
+#include <kits/support/Strings.h>
 
 #include <File.h>
-#include <StringClass.h>
+#include <kits/support/String.h>
 
 
 DriverSettingsConverter::DriverSettingsConverter()

@@ -36,7 +36,7 @@ All rights reserved.
 #include <DeskWindow.h>
 
 #include <Catalog.h>
-#include <Debug.h>
+#include <kits/debug/Debug.h>
 #include <FindDirectory.h>
 #include <LocaleClass.h>
 #include <Messenger.h>
@@ -48,8 +48,8 @@ All rights reserved.
 #include <Resources.h>
 #include <Roster.h>
 #include <Screen.h>
-#include <StringClass.h>
-#include <StringList.h>
+#include <kits/support/String.h>
+#include <kits/support/StringList.h>
 #include <Volume.h>
 #include <VolumeRoster.h>
 

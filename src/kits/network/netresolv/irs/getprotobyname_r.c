@@ -40,7 +40,7 @@ __RCSID("$NetBSD: getprotobyname_r.c,v 1.3 2005/04/18 19:39:45 kleink Exp $");
 
 #include <assert.h>
 #include <netdb.h>
-#include <string.h>
+#include <kits/support/String.h>
 
 #include <protoent.h>
 

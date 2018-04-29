@@ -11,7 +11,7 @@
 #include <paging/pae/X86PagingMethodPAE.h>
 
 #include <stdlib.h>
-#include <string.h>
+#include <kits/support/String.h>
 
 #include <AutoDeleter.h>
 

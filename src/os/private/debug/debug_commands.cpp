@@ -12,13 +12,13 @@
 
 #include <setjmp.h>
 #include <stdio.h>
-#include <string.h>
+#include <kits/support/String.h>
 
 #include <algorithm>
 
 #include <KernelExport.h>
 
-#include <debug.h>
+#include <kits/debug/Debug.h>
 #include <debug_heap.h>
 #include <lock.h>
 #include <thread.h>

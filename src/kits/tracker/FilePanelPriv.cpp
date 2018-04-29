@@ -35,13 +35,13 @@ All rights reserved.
 
 #include <FilePanelPriv.h>
 
-#include <string.h>
+#include <kits/support/String.h>
 
 #include <Alert.h>
 #include <Application.h>
 #include <Button.h>
 #include <Catalog.h>
-#include <Debug.h>
+#include <kits/debug/Debug.h>
 #include <Directory.h>
 #include <FindDirectory.h>
 #include <LocaleClass.h>
@@ -55,7 +55,7 @@ All rights reserved.
 #include <Roster.h>
 #include <SymLink.h>
 #include <ScrollView.h>
-#include <StringClass.h>
+#include <kits/support/String.h>
 #include <StopWatch.h>
 #include <TextControl.h>
 #include <TextView.h>

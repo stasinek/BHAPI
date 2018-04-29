@@ -16,7 +16,7 @@
 
 #include <driver_settings.h>
 #include <Path.h>
-#include <StringClass.h>
+#include <kits/support/String.h>
 
 #include <Referenceable.h>
 

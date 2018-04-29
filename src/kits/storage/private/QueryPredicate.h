@@ -11,9 +11,9 @@
 
 #include <stdio.h>
 
-#include <List.h>
+#include <kits/support/List.h>
 #include <Query.h>
-#include <StringClass.h>
+#include <kits/support/String.h>
 
 namespace BPrivate {
 namespace Storage {

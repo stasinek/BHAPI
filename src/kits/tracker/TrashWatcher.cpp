@@ -35,9 +35,9 @@ All rights reserved.
 
 #include <TrashWatcher.h>
 
-#include <string.h>
+#include <kits/support/String.h>
 
-#include <Debug.h>
+#include <kits/debug/Debug.h>
 #include <Directory.h>
 #include <NodeMonitor.h>
 #include <Path.h>

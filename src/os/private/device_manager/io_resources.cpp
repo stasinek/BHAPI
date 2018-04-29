@@ -9,7 +9,7 @@
 #include <io_resources.h>
 
 #include <stdlib.h>
-#include <string.h>
+#include <kits/support/String.h>
 
 
 //#define TRACE_IO_RESOURCES

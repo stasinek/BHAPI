@@ -8,10 +8,10 @@
 #include <Url.h>
 #include <NetworkCookie.h>
 #include <Archivable.h>
-#include <Flattenable.h>
+#include <kits/support/Flattenable.h>
 #include <Message.h>
 #include <ObjectList.h>
-#include <StringClass.h>
+#include <kits/support/String.h>
 
 #include <pthread.h>
 

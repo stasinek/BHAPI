@@ -47,7 +47,7 @@ All rights reserved.
 #include <NodeMonitor.h>
 #include <Point.h>
 #include <RadioButton.h>
-#include <StringView.h>
+#include <kits/support/StringView.h>
 
 #include <Commands.h>
 #include <DeskWindow.h>

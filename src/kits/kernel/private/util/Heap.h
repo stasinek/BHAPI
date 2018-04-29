@@ -9,7 +9,7 @@
 #define KERNEL_UTIL_HEAP_H
 
 
-#include <debug.h>
+#include <kits/debug/Debug.h>
 
 #include <Haiku.h>
 

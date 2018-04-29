@@ -22,7 +22,7 @@
  */
 
 
-#include <debug.h>
+#include <kits/debug/Debug.h>
 #include <arch/generic/debug_uart_8250.h>
 
 

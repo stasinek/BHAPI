@@ -6,7 +6,7 @@
 #define _KERNEL_DEBUG_COMMANDS_H
 
 
-#include <SupportDefs.h>
+#include <kits/support/SupportDefs.h>
 
 
 #define MAX_DEBUGGER_COMMAND_PIPE_LENGTH	8

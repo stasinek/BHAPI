@@ -7,7 +7,7 @@
 
 
 #include <Locker.h>
-#include <StringClass.h>
+#include <kits/support/String.h>
 #include <Url.h>
 
 // HTTP authentication method

@@ -9,7 +9,7 @@
 #include <joystick_driver.h>
 
 #include <Entry.h>
-#include <List.h>
+#include <kits/support/List.h>
 
 
 #if DEBUG

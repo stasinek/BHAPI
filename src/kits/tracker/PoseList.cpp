@@ -35,7 +35,7 @@ All rights reserved.
 //	Icon cache is used for drawing node icons; it caches icons
 //	and reuses them for successive draws
 
-#include <Debug.h>
+#include <kits/debug/Debug.h>
 
 #include <PoseList.h>
 

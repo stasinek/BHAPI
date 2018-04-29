@@ -1,4 +1,4 @@
-﻿/* --------------------------------------------------------------------------
+/* --------------------------------------------------------------------------
  *
  * BHAPI++ Copyright (C) 2017, Stanislaw Stasiak, based on Haiku source-code, All Rights Reserved
  *
@@ -32,10 +32,10 @@
  * Distributed under the terms of the MIT License.
  */
 //-----------------------------------------------------------------------------
-#include <StringList.h>
-#include <List.h>
-#include <StringClass.h>
-#include <StringPrivate.h>
+#include <kits/support/StringList.h>
+#include <kits/support/List.h>
+#include <kits/support/String.h>
+#include <kits/support/private/StringPrivate.h>
 //-----------------------------------------------------------------------------
 
 static int compare_private_data(const void *a, const void *b)

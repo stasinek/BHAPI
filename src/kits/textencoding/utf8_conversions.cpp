@@ -8,7 +8,7 @@
 
 #include <CharacterSet.h>
 #include <CharacterSetRoster.h>
-#include <UTF8.h>
+#include <kits/textencoding/UTF8.h>
 
 #include <errno.h>
 #include <iconv.h>

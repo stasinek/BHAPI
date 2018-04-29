@@ -40,7 +40,7 @@ __RCSID("$NetBSD: inet_ntop.c,v 1.11 2014/02/10 16:30:54 christos Exp $");
 #include <errno.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
+#include <kits/support/String.h>
 
 #include <port_after.h>
 

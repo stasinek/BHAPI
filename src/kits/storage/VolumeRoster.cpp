@@ -29,7 +29,7 @@
 
 #include <VolumeRoster.h>
 
-#include <kits/support/Errors.h>
+#include <kits/debug/Errors.h>
 
 BVolumeRoster::BVolumeRoster()
 	: fPos(0)

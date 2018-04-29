@@ -31,7 +31,7 @@
 #include <be/kernel/OS.h>
 
 #include <os/kernel.h>
-#include <kits/support/StringClass.h>
+#include <kits/support/String.h>
 
 
 inline team_id __bhapi_get_current_beos_team_id()

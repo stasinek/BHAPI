@@ -10,7 +10,7 @@
 
 #include <Message.h>
 
-#include <StringUtils.h>
+#include <kits/support/StringUtils.h>
 
 
 // #pragma mark - FunctionID

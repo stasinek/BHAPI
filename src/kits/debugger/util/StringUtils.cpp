@@ -3,7 +3,7 @@
  * Distributed under the terms of the MIT License.
  */
 
-#include <StringUtils.h>
+#include <kits/support/StringUtils.h>
 
 
 // from the Dragon Book: a slightly modified hashpjw()

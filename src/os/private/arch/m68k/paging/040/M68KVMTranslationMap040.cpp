@@ -11,7 +11,7 @@
 #include <paging/040/M68KVMTranslationMap040.h>
 
 #include <stdlib.h>
-#include <string.h>
+#include <kits/support/String.h>
 
 #include <int.h>
 #include <thread.h>

@@ -12,11 +12,11 @@
 #include <KernelExport.h>
 #include <frame_buffer_console.h>
 #include <console.h>
-#include <debug.h>
+#include <kits/debug/Debug.h>
 #include <arch/debug_console.h>
 #include <safemode.h>
 
-#include <string.h>
+#include <kits/support/String.h>
 #include <stdio.h>
 
 #include <debug_commands.h>

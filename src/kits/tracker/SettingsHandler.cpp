@@ -32,7 +32,7 @@ names are registered trademarks or trademarks of their respective holders.
 All rights reserved.
 */
 
-#include <Debug.h>
+#include <kits/debug/Debug.h>
 #include <Directory.h>
 #include <Entry.h>
 #include <FindDirectory.h>
@@ -43,7 +43,7 @@ All rights reserved.
 #include <alloca.h>
 #include <stdlib.h>
 #include <stdio.h>
-#include <string.h>
+#include <kits/support/String.h>
 #include <stdarg.h>
 
 

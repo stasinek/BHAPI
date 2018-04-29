@@ -54,7 +54,7 @@ All rights reserved.
 #include <Directory.h>
 #include <FilePanel.h>
 #include <MessageRunner.h>
-#include <StringClass.h>
+#include <kits/support/String.h>
 #include <ScrollBar.h>
 #include <View.h>
 #include <hash_set>

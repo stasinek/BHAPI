@@ -8,7 +8,7 @@
 #include <algorithm>
 
 #include <stdio.h>
-#include <string.h>
+#include <kits/support/String.h>
 
 #include <Dwarf.h>
 #include <Tracing.h>

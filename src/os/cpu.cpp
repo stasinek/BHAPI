@@ -13,7 +13,7 @@
 #include <cpu.h>
 #include <arch/cpu.h>
 
-#include <string.h>
+#include <kits/support/String.h>
 
 #include <cpufreq.h>
 #include <cpuidle.h>

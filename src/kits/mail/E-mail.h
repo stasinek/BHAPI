@@ -6,7 +6,7 @@
 #define _E_MAIL_H
 
 
-#include <UTF8.h>
+#include <kits/textencoding/UTF8.h>
 
 
 class BList;

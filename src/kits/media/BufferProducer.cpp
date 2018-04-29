@@ -10,7 +10,7 @@
 #include <BufferGroup.h>
 #include <BufferProducer.h>
 
-#include <debug.h>
+#include <kits/debug/Debug.h>
 #include <DataExchange.h>
 #include <MediaMisc.h>
 

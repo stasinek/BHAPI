@@ -55,14 +55,14 @@ All rights reserved.
 #include <Bitmap.h>
 #include <ControlLook.h>
 #include <Cursor.h>
-#include <Debug.h>
+#include <kits/debug/Debug.h>
 #include <GraphicsDefs.h>
 #include <LayoutUtils.h>
 #include <MenuItem.h>
 #include <PopUpMenu.h>
 #include <Region.h>
 #include <ScrollBar.h>
-#include <StringClass.h>
+#include <kits/support/String.h>
 #include <Haiku.h>
 #include <Window.h>
 

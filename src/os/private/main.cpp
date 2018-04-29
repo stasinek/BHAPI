@@ -10,7 +10,7 @@
 /*! This is main - initializes the kernel and launches the Bootscript */
 
 
-#include <string.h>
+#include <kits/support/String.h>
 
 #include <FindDirectory.h>
 #include <OS.h>
@@ -22,7 +22,7 @@
 #include <commpage.h>
 #include <condition_variable.h>
 #include <cpu.h>
-#include <debug.h>
+#include <kits/debug/Debug.h>
 #include <DPC.h>
 #include <elf.h>
 #include <find_directory_private.h>

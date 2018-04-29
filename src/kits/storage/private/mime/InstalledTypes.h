@@ -12,7 +12,7 @@
 
 
 #include <map>
-#include <string>
+#include <kits/support/String>
 
 #include <Haiku.h>
 

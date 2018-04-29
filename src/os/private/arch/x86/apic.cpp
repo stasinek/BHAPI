@@ -12,7 +12,7 @@
 #include <arch/x86/apic.h>
 #include <arch/x86/msi.h>
 
-#include <debug.h>
+#include <kits/debug/Debug.h>
 #include <safemode.h>
 #include <vm/vm.h>
 #include <util/AutoLock.h>

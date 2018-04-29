@@ -20,7 +20,7 @@
 #include <vm/VMAddressSpace.h>
 //#include <arch/vm_translation_map.h>
 
-#include <string.h>
+#include <kits/support/String.h>
 
 // Valid initial arch_thread state. We just memcpy() it when initializing
 // a new thread structure.

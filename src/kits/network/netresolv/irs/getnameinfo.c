@@ -68,7 +68,7 @@ __RCSID("$NetBSD: getnameinfo.c,v 1.53 2012/09/26 23:13:00 christos Exp $");
 #include <netdb.h>
 #include <resolv.h>
 #include <stddef.h>
-#include <string.h>
+#include <kits/support/String.h>
 
 #include <nsswitch.h>
 #include <servent.h>

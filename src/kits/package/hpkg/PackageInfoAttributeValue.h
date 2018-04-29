@@ -8,7 +8,7 @@
 
 #include <Haiku.h>
 
-#include <string.h>
+#include <kits/support/String.h>
 
 #include <package/PackageArchitecture.h>
 #include <package/PackageInfoAttributes.h>

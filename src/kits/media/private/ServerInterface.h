@@ -14,7 +14,7 @@
 #include <MediaNode.h>
 #include <kits/app/Messenger.h>
 
-#include <string.h>
+#include <kits/support/String.h>
 
 // BMessage based server communication
 enum {

@@ -53,7 +53,7 @@ All rights reserved.
 #include <ObjectList.h>
 #include <Node.h>
 #include <Rect.h>
-#include <StringClass.h>
+#include <kits/support/String.h>
 #include <HaikuConstants.h>
 
 #include <fs_attr.h>

@@ -34,7 +34,7 @@
 #include <BHAPI_wrapper_x11.h>
 
 #include <os/kernel.h>
-#include <kits/support/StringClass.h>
+#include <kits/support/String.h>
 #include <kits/support/Locker.h>
 #include <kits/support/Autolock.h>
 #include <kits/app/Application.h>

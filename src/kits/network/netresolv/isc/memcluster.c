@@ -41,7 +41,7 @@ static const char rcsid[] = "$Id: memcluster.c,v 1.11 2006/08/30 23:34:38 marka 
 #include <errno.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
+#include <kits/support/String.h>
 #include <time.h>
 
 #include <isc/memcluster.h>

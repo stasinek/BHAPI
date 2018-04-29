@@ -16,8 +16,8 @@
 #include <Entry.h>
 #include <Messenger.h>
 #include <Path.h>
-#include <StringClass.h>
-#include <StringList.h>
+#include <kits/support/String.h>
+#include <kits/support/StringList.h>
 
 #include <package/InstallationLocationInfo.h>
 #include <package/PackageInfo.h>

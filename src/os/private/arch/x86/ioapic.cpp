@@ -13,7 +13,7 @@
 #include <ACPI.h>
 #include <AutoDeleter.h>
 #include <safemode.h>
-#include <string.h>
+#include <kits/support/String.h>
 #include <stdio.h>
 
 #include <arch/x86/apic.h>

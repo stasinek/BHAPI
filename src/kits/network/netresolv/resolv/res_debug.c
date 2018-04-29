@@ -115,7 +115,7 @@ static const char rcsid[] = "$Id: res_debug.c,v 1.19 2009/02/26 11:20:20 tbox Ex
 #include <resolv_mt.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
+#include <kits/support/String.h>
 #include <time.h>
 
 #include <port_after.h>

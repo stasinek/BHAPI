@@ -13,7 +13,7 @@
 #include <errno.h>
 #include <fcntl.h>
 #include <new>
-#include <string.h>
+#include <kits/support/String.h>
 #include <unistd.h>
 
 #include <compat/sys/stat.h>
@@ -21,7 +21,7 @@
 #include <Directory.h>
 #include <Entry.h>
 #include <fs_attr.h>
-#include <String.h>
+#include <kits/support/String.h>
 #include <TypeConstants.h>
 
 #include <syscalls.h>

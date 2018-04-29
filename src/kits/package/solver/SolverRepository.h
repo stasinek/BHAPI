@@ -9,7 +9,7 @@
 #include <ObjectList.h>
 #include <package/PackageDefs.h>
 #include <package/PackageInfoSet.h>
-#include <StringClass.h>
+#include <kits/support/String.h>
 
 
 namespace BPackageKit {

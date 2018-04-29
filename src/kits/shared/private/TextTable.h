@@ -8,7 +8,7 @@
 
 #include <InterfaceDefs.h>
 #include <ObjectList.h>
-#include <StringList.h>
+#include <kits/support/StringList.h>
 
 
 namespace BPrivate {
@@ -34,7 +34,7 @@ public:
 private:
 			struct Column;
 			typedef BObjectList<Column> ColumnList;
-			typedef BObjectList<BStringList> RowList;
+			typedef BObjectList<BStringList.h> RowList;
 
 private:
 			ColumnList			fColumns;

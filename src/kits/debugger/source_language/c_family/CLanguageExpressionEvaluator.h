@@ -12,7 +12,7 @@
 #define C_LANGUAGE_EXPRESSION_EVALUATOR_H
 
 
-#include <StringClass.h>
+#include <kits/support/String.h>
 
 
 namespace CLanguage {

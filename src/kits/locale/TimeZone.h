@@ -6,7 +6,7 @@
 #define _TIME_ZONE_H
 
 
-#include <StringClass.h>
+#include <kits/support/String.h>
 
 
 #ifndef U_ICU_NAMESPACE

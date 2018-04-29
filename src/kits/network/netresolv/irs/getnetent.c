@@ -54,7 +54,7 @@ __RCSID("$NetBSD: getnetent.c,v 1.21 2012/03/20 17:44:18 matt Exp $");
 #include <arpa/inet.h>
 #include <netdb.h>
 #include <stdio.h>
-#include <string.h>
+#include <kits/support/String.h>
 
 #ifdef __weak_alias
 __weak_alias(endnetent,_endnetent)

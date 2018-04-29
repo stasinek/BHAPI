@@ -33,7 +33,7 @@
 #include <os/kernel.h>
 #include <kits/support/SimpleLocker.h>
 #include <kits/support/List.h>
-#include <kits/support/StringClass.h>
+#include <kits/support/String.h>
 
 
 typedef struct threadCallback {

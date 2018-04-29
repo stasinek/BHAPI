@@ -9,7 +9,7 @@
 #include <image.h>
 
 #include <MediaDefs.h>
-#include <Flattenable.h>
+#include <kits/support/Flattenable.h>
 
 
 class BMediaNode;

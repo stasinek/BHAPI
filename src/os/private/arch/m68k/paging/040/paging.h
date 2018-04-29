@@ -10,7 +10,7 @@
 #define _KERNEL_ARCH_M68K_PAGING_040_PAGING_H
 
 
-#include <SupportDefs.h>
+#include <kits/support/SupportDefs.h>
 
 #include <int.h>
 #include <kernel.h>

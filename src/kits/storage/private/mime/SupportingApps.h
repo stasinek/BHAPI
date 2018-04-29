@@ -14,7 +14,7 @@
 
 #include <map>
 #include <set>
-#include <string>
+#include <kits/support/String>
 
 class BMessage;
 

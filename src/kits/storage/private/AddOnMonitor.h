@@ -6,9 +6,9 @@
 #define _ADD_ON_MONITOR_H
 
 
-#include <list>
+#include <List.h>
 #include <stdio.h>
-#include <string>
+#include <kits/support/String>
 
 #include <Looper.h>
 #include <MessageRunner.h>

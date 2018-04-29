@@ -105,7 +105,7 @@ __RCSID("$NetBSD: res_send.c,v 1.29 2013/02/16 13:45:45 para Exp $");
 #include <stdio.h>
 #include <fcntl.h>
 #include <stdlib.h>
-#include <string.h>
+#include <kits/support/String.h>
 #include <unistd.h>
 
 #include <isc/eventlib.h>

@@ -26,7 +26,7 @@
 #include <Register.h>
 #include <RegisterMap.h>
 #include <SourceLanguageInfo.h>
-#include <StringUtils.h>
+#include <kits/support/StringUtils.h>
 #include <Tracing.h>
 #include <TypeLookupConstraints.h>
 #include <ValueLocation.h>

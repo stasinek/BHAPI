@@ -22,7 +22,7 @@
 
 #ifdef __HAIKU__
 	#ifdef _STRING_H_
-		#include <strings.h>
+		#include <kits/support/Strings.h>
 	#endif
 #endif
 

@@ -8,7 +8,7 @@
 
 #ifdef __cplusplus // C++
 #include <SecureSocket.h>
-#include <StringClass.h>
+#include <kits/support/String.h>
 #include <Haiku.h>
 class BHAPI_IMPEXP BCertificate {
 public:

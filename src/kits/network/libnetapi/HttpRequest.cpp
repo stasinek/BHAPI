@@ -20,7 +20,7 @@
 
 #include <AutoDeleter.h>
 #include <Certificate.h>
-#include <Debug.h>
+#include <kits/debug/Debug.h>
 #include <DynamicBuffer.h>
 #include <File.h>
 #include <ProxySecureSocket.h>

@@ -6,7 +6,7 @@
 
 #include <Certificate.h>
 
-#include <StringClass.h>
+#include <kits/support/String.h>
 
 #include <CertificatePrivate.h>
 

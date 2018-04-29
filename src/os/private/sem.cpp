@@ -14,14 +14,14 @@
 #include <sem.h>
 
 #include <stdlib.h>
-#include <string.h>
+#include <kits/support/String.h>
 
 #include <OS.h>
 
 #include <arch/int.h>
 #include <boot/kernel_args.h>
 #include <cpu.h>
-#include <debug.h>
+#include <kits/debug/Debug.h>
 #include <int.h>
 #include <kernel.h>
 #include <ksignal.h>

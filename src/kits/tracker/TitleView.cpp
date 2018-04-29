@@ -41,12 +41,12 @@ All rights reserved.
 #include <Alert.h>
 #include <Application.h>
 #include <ControlLook.h>
-#include <Debug.h>
+#include <kits/debug/Debug.h>
 #include <PopUpMenu.h>
 #include <Window.h>
 
 #include <stdio.h>
-#include <string.h>
+#include <kits/support/String.h>
 
 #include <Commands.h>
 #include <ContainerWindow.h>

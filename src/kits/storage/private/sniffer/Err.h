@@ -10,7 +10,7 @@
 #define _SNIFFER_ERR_H
 
 #include <Haiku.h>
-#include <string>
+#include <kits/support/String>
 
 namespace BPrivate {
 namespace Storage {

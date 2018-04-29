@@ -6,7 +6,7 @@
 
 #include <Message.h>
 
-#include <string.h>
+#include <kits/support/String.h>
 #include <crypt.h>
 
 

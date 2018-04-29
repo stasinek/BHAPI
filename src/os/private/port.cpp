@@ -17,7 +17,7 @@
 #include <ctype.h>
 #include <iovec.h>
 #include <stdlib.h>
-#include <string.h>
+#include <kits/support/String.h>
 
 #include <OS.h>
 

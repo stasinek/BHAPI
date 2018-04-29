@@ -5,7 +5,7 @@
 #ifndef _KERNEL_DEBUG_HEAP_H
 #define _KERNEL_DEBUG_HEAP_H
 
-#include <debug.h>
+#include <kits/debug/Debug.h>
 
 
 struct DebugAllocPool;

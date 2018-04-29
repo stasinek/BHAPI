@@ -15,7 +15,7 @@
 
 //#include <KernelExport.h>
 
-#include <string.h>
+#include <kits/support/String.h>
 
 
 struct kernel_args;

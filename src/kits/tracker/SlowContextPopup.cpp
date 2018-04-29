@@ -32,10 +32,10 @@ names are registered trademarks or trademarks of their respective holders.
 All rights reserved.
 */
 
-#include <string.h>
+#include <kits/support/String.h>
 #include <stdlib.h>
 
-#include <Debug.h>
+#include <kits/debug/Debug.h>
 
 #include <Application.h>
 #include <Catalog.h>

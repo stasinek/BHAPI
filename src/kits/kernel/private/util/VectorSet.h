@@ -29,7 +29,7 @@
 #define _VECTOR_SET_H
 
 #include <stdlib.h>
-#include <string.h>
+#include <kits/support/String.h>
 
 #include <Haiku.h>
 

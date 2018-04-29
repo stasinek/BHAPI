@@ -8,7 +8,7 @@
 
 #include <Format.h>
 #include <LocaleClass.h>
-#include <StringClass.h>
+#include <kits/support/String.h>
 #include <TimeUnitFormat.h>
 
 

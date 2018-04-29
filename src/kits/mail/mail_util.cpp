@@ -7,18 +7,18 @@
 #include <mail_util.h>
 
 #include <stdlib.h>
-#include <strings.h>
+#include <kits/support/Strings.h>
 #include <stdio.h>
 #define __USE_GNU
 #include <regex.h>
 #include <ctype.h>
 #include <errno.h>
 
-#include <List.h>
+#include <kits/support/List.h>
 #include <Locker.h>
 #include <parsedate.h>
-#include <StringClass.h>
-#include <UTF8.h>
+#include <kits/support/String.h>
+#include <kits/textencoding/UTF8.h>
 
 #include <mail_encoding.h>
 

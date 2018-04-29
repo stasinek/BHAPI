@@ -13,7 +13,7 @@
 #include <MediaFile.h>
 #include <MediaTrack.h>
 #include <stdlib.h>
-#include <string.h>
+#include <kits/support/String.h>
 
 #include <GameSoundBuffer.h>
 #include <GameSoundDefs.h>

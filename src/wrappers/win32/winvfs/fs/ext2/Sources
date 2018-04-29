@@ -1,0 +1,22 @@
+C_DEFINES=$(C_DEFINES) -D_KERNEL_ -D__KERNEL__
+
+TARGETNAME=ext2
+TARGETPATH=../../
+TARGETTYPE=DRIVER
+DRIVERTYPE=FS
+
+TARGETLIBS=..\..\i386\linux_fs.lib ..\..\i386\linux_mm.lib ..\..\i386\linux_lib.lib ..\..\i386\windows.lib
+
+INCLUDES=..\..\include
+
+SOURCES= balloc.c \
+		bitmap.c \
+		dir.c \
+		file.c \
+		fsync.c \
+		ialloc.c \
+		inode.c \
+		ioctl.c \
+		namei.c \
+		super.c \
+		symlink.c

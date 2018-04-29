@@ -2,7 +2,7 @@
 #ifndef _MIDI_PRODUCER_H
 #define _MIDI_PRODUCER_H
 
-#include <List.h>
+#include <kits/support/List.h>
 #include <Locker.h>
 #include <MidiEndpoint.h>
 

@@ -10,7 +10,7 @@
 
 #include <Locker.h>
 #include <Message.h>
-#include <StringClass.h>
+#include <kits/support/String.h>
 
 #include <util/DoublyLinkedList.h>
 #include <util/OpenHashTable.h>

@@ -19,7 +19,7 @@
 #include <fs_attr.h>
 #include <Message.h>
 #include <MimeType.h>
-#include <StringClass.h>
+#include <kits/support/String.h>
 
 #include <AutoLocker.h>
 #include <mime/Database.h>

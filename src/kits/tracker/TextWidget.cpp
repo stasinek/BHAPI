@@ -33,12 +33,12 @@ All rights reserved.
 */
 
 
-#include <string.h>
+#include <kits/support/String.h>
 #include <stdlib.h>
 
 #include <Alert.h>
 #include <Catalog.h>
-#include <Debug.h>
+#include <kits/debug/Debug.h>
 #include <Directory.h>
 #include <MessageFilter.h>
 #include <ScrollView.h>

@@ -27,12 +27,12 @@
 #include <TranslationUtils.h>
 #include <TranslatorFormats.h>
 #include <TranslatorRoster.h>
-#include <UTF8.h>
+#include <kits/textencoding/UTF8.h>
 
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
-#include <strings.h>
+#include <kits/support/String.h>
+#include <kits/support/Strings.h>
 
 
 using namespace BPrivate;

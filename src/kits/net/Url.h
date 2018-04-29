@@ -9,7 +9,7 @@
 #include <Archivable.h>
 #include <Message.h>
 #include <Path.h>
-#include <StringClass.h>
+#include <kits/support/String.h>
 
 
 class BUrl : public BArchivable {

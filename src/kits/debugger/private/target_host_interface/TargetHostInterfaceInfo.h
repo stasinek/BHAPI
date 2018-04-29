@@ -5,7 +5,7 @@
 #ifndef TARGET_HOST_INTERFACE_INFO_H
 #define TARGET_HOST_INTERFACE_INFO_H
 
-#include <StringClass.h>
+#include <kits/support/String.h>
 
 #include <Referenceable.h>
 #include <util/DoublyLinkedList.h>

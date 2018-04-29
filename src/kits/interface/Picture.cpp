@@ -19,8 +19,8 @@
 
 //#define DEBUG 1
 #include <ByteOrder.h>
-#include <Debug.h>
-#include <List.h>
+#include <kits/debug/Debug.h>
+#include <kits/support/List.h>
 #include <Message.h>
 
 #include <AppServerLink.h>

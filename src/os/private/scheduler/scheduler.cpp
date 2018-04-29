@@ -18,7 +18,7 @@
 
 #include <AutoDeleter.h>
 #include <cpu.h>
-#include <debug.h>
+#include <kits/debug/Debug.h>
 #include <int.h>
 #include <kernel.h>
 #include <kscheduler.h>

@@ -18,7 +18,7 @@
 #include <InterfaceDefs.h>
 #include <LayoutUtils.h>
 #include <Message.h>
-#include <StringClass.h>
+#include <kits/support/String.h>
 #include <TextControl.h>
 #include <TextView.h>
 #include <Window.h>

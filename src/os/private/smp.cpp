@@ -15,7 +15,7 @@
 #include <smp.h>
 
 #include <stdlib.h>
-#include <string.h>
+#include <kits/support/String.h>
 
 #include <arch/atomic.h>
 #include <arch/cpu.h>

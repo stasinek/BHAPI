@@ -36,8 +36,8 @@
 #include <layout/Layout.h>
 
 #include <kits/support/ClassInfo.h>
-#include <kits/support/StringClass.h>
-#include <kits/support/Errors.h>
+#include <kits/support/String.h>
+#include <kits/debug/Errors.h>
 #include <os/kernel.h>
 #include <os/debug.h>
 #include <kits/app/Application.h>
@@ -1989,7 +1989,7 @@ BWindow::SetTitle(const char *title)
 #include <PropertyInfo.h>
 #include <Roster.h>
 #include <Screen.h>
-#include <String.h>
+#include <kits/support/String.h>
 #include <UnicodeChar.h>
 
 #include <AppMisc.h>

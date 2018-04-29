@@ -9,13 +9,13 @@
 #include <new>
 
 #include <stdlib.h>
-#include <string.h>
+#include <kits/support/String.h>
 
 #include <BufferIO.h>
 #include <File.h>
 #include <MediaTrack.h>
 
-#include <debug.h>
+#include <kits/debug/Debug.h>
 
 #include <MediaExtractor.h>
 #include <MediaWriter.h>

@@ -38,8 +38,8 @@
 #define BSTRING_DEF
 class BString;
 #endif
-#include <List.h>
-#include <Flattenable.h>
+#include <kits/support/List.h>
+#include <kits/support/Flattenable.h>
 #include <Haiku.h>
 //-------------------------------------------------------------------------------------------------
 class BHAPI_IMPEXP BStringList : public BFlattenable {

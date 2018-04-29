@@ -12,14 +12,14 @@
 #include <DataExchange.h>
 #include <FormatManager.h>
 #include <MetaFormat.h>
-#include <debug.h>
+#include <kits/debug/Debug.h>
 
 #include <MediaFormats.h>
 #include <ObjectList.h>
 #include <Message.h>
 #include <Autolock.h>
 
-#include <string.h>
+#include <kits/support/String.h>
 
 using namespace BPrivate::media;
 

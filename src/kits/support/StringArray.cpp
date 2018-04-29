@@ -26,8 +26,8 @@
  * File: StringList.cpp
  *
  * --------------------------------------------------------------------------*/
-#include <StringArray.h>
-#include <StringClass.h>
+#include <kits/support/StringArray.h>
+#include <kits/support/String.h>
 
 typedef struct __string_node
 {

@@ -7,7 +7,7 @@
 #include <MessageBuilder.h>
 
 #include <AutoDeleter.h>
-#include <StringClass.h>
+#include <kits/support/String.h>
 
 
 namespace BPrivate {

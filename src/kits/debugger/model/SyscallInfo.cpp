@@ -5,7 +5,7 @@
 
 #include <SyscallInfo.h>
 
-#include <string.h>
+#include <kits/support/String.h>
 
 
 SyscallInfo::SyscallInfo()

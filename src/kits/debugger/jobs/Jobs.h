@@ -7,7 +7,7 @@
 #define JOBS_H
 
 #include <Entry.h>
-#include <StringClass.h>
+#include <kits/support/String.h>
 
 #include <ImageDebugInfoLoadingState.h>
 #include <ImageDebugInfoProvider.h>

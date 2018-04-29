@@ -8,9 +8,9 @@
 #ifndef _NOTIFICATION_RECEIVED_H
 #define _NOTIFICATION_RECEIVED_H
 
-#include <Flattenable.h>
+#include <kits/support/Flattenable.h>
 #include <Roster.h>
-#include <StringClass.h>
+#include <kits/support/String.h>
 
 class NotificationReceived : public BFlattenable {
 public:

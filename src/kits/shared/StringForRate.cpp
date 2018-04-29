@@ -3,7 +3,7 @@
  * Distributed under the terms of the MIT License.
  */
 
-#include <StringForRate.h>
+#include <kits/support/StringForRate.h>
 
 
 

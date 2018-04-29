@@ -14,7 +14,7 @@
 #include <Message.h>
 #include <Messenger.h>
 #include <Path.h>
-#include <StringClass.h>
+#include <kits/support/String.h>
 #include <Haiku.h>
 
 

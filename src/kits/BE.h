@@ -1,4 +1,4 @@
-﻿/* --------------------------------------------------------------------------
+/* --------------------------------------------------------------------------
  *
  * BHAPI++ --- The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2007, Anthony Lee, All Rights Reserved
@@ -29,11 +29,11 @@
 #ifndef BHAPI_BE_H
 #define BHAPI_BE_H
 //-----------------------------------------------------------------------------
-#include <kits/AppKit.h>
+//#include <kits/AppKit.h>
 //#include <kits/DeviceKit.h>
 //#include <kits/GameKit.h>
 //#include <kits/InterfaceKit.h>
-#include <kits/KernelKit.h>
+//#include <kits/KernelKit.h>
 //#include <kits/LocaleKit.h>
 //#include <kits/MailKit.h>
 //#include <kits/MediaKit.h>

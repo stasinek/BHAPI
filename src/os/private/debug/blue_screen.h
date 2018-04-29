@@ -6,7 +6,7 @@
 #define BLUE_SCREEN_H
 
 
-#include <SupportDefs.h>
+#include <kits/support/SupportDefs.h>
 
 
 #ifdef __cplusplus

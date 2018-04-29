@@ -13,11 +13,11 @@
 #include <new>
 
 #include <stdio.h>
-#include <string.h>
+#include <kits/support/String.h>
 
 #include <Autolock.h>
 
-#include <debug.h>
+#include <kits/debug/Debug.h>
 
 
 #define TIMEOUT	5000000LL

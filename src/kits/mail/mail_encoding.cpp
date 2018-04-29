@@ -5,8 +5,8 @@
 
 
 #include <ctype.h>
-#include <string.h>
-#include <strings.h>
+#include <kits/support/String.h>
+#include <kits/support/Strings.h>
 
 #include <Haiku.h>
 

@@ -16,7 +16,7 @@
 #include <Autolock.h>
 #include <MediaRoster.h>
 
-#include <debug.h>
+#include <kits/debug/Debug.h>
 #include <MediaMisc.h>
 
 #include <TimeSourceObject.h>

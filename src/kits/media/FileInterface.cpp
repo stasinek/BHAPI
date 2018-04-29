@@ -10,9 +10,9 @@
  *
  */
 
-#include <debug.h>
+#include <kits/debug/Debug.h>
 #include <DataExchange.h>
-#include <string.h>
+#include <kits/support/String.h>
 #include <FileInterface.h>
 #include <MimeType.h>
 

@@ -14,7 +14,7 @@
 
 #include <arch_thread.h>
 
-#include <string.h>
+#include <kits/support/String.h>
 
 #include <arch_cpu.h>
 #include <arch/thread.h>

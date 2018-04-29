@@ -30,8 +30,8 @@
 #include <kits/support/SupportDefs.h>
 #include <os/kernel.h>
 #include <os/debug.h>
-#include <kits/support/StringClass.h>
-#include <kits/support/Errors.h>
+#include <kits/support/String.h>
+#include <kits/debug/Errors.h>
 
 #include <winsock2.h>
 #include <windows.h>

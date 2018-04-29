@@ -8,7 +8,7 @@
 
 #include <algorithm>
 
-#include <debug.h>
+#include <kits/debug/Debug.h>
 #include <tracing.h>
 #include <util/AutoLock.h>
 #include <vm/vm.h>

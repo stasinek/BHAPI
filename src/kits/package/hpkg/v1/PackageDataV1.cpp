@@ -6,7 +6,7 @@
 
 #include <package/hpkg/v1/PackageData.h>
 
-#include <string.h>
+#include <kits/support/String.h>
 
 #include <package/hpkg/v1/HPKGDefsPrivate.h>
 

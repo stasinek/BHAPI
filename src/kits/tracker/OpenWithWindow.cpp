@@ -58,7 +58,7 @@ All rights reserved.
 
 #include <stdlib.h>
 #include <stdio.h>
-#include <strings.h>
+#include <kits/support/Strings.h>
 
 
 const char* kDefaultOpenWithTemplate = "OpenWithSettings";

@@ -74,7 +74,7 @@ __RCSID("$NetBSD: getaddrinfo.c,v 1.105 2013/05/13 17:54:55 christos Exp $");
 #include <stddef.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
+#include <kits/support/String.h>
 #include <unistd.h>
 
 #include <syslog.h>

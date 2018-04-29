@@ -30,7 +30,7 @@
 #include <Box.h>
 
 #include <kits/support/ClassInfo.h>
-#include <kits/support/Errors.h>
+#include <kits/debug/Errors.h>
 #include <kits/interface/StringView.h>
 #include <kits/add-ons/theme/ThemeEngine.h>
 

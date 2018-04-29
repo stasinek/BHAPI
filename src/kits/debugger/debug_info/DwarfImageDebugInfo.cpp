@@ -50,7 +50,7 @@
 #include <SourceFile.h>
 #include <StackFrame.h>
 #include <Statement.h>
-#include <StringUtils.h>
+#include <kits/support/StringUtils.h>
 #include <SymbolInfo.h>
 #include <TargetAddressRangeList.h>
 #include <Team.h>
@@ -455,7 +455,7 @@ status_t DwarfImageDebugInfo::GetFunctions(const BObjectList<SymbolInfo>& symbol
 					return B_NO_MEMORY;
 						// TODO: Clean up already added functions!
 			}
-			BReference<TargetAddressRangeList> rangeListReference(rangeList,
+			BReference<TargetAddressRangeList.h> rangeListReference(rangeList,
 				true);
 
 			// get the source location
@@ -1164,7 +1164,7 @@ status_t DwarfImageDebugInfo::_CreateLocalVariables(CompilationUnit* unit,
 				TRACE_LOCALS("    failed to get ranges\n");
 				continue;
 			}
-			BReference<TargetAddressRangeList> rangeListReference(rangeList,
+			BReference<TargetAddressRangeList.h> rangeListReference(rangeList,
 				true);
 
 			if (!rangeList->Contains(instructionPointer)) {

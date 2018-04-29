@@ -33,7 +33,7 @@ __RCSID("$NetBSD: inet_net_ntop.c,v 1.3 2012/03/20 17:08:13 matt Exp $");
 
 #include <errno.h>
 #include <stdio.h>
-#include <string.h>
+#include <kits/support/String.h>
 #include <stdlib.h>
 
 #include <port_after.h>

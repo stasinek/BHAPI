@@ -30,8 +30,8 @@
 #include <Screen.h>
 #include <ScrollView.h>
 #include <Size.h>
-#include <StringClass.h>
-#include <StringView.h>
+#include <kits/support/String.h>
+#include <kits/support/StringView.h>
 #include <SystemCatalog.h>
 #include <TextView.h>
 #include <View.h>

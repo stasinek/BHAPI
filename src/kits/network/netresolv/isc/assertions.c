@@ -24,7 +24,7 @@ static const char rcsid[] = "$Id: assertions.c,v 1.5 2008/11/14 02:36:51 marka E
 #include <errno.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
+#include <kits/support/String.h>
 
 #include <isc/assertions.h>
 

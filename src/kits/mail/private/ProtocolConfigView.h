@@ -9,7 +9,7 @@
 
 
 #include <CheckBox.h>
-#include <StringView.h>
+#include <kits/support/StringView.h>
 #include <TextControl.h>
 #include <View.h>
 

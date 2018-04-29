@@ -38,7 +38,7 @@ All rights reserved.
 // OpenWithContainerWindow supports the Open With feature
 
 
-#include <StringClass.h>
+#include <kits/support/String.h>
 
 #include <ContainerWindow.h>
 #include <EntryIterator.h>

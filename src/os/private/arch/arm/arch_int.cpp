@@ -28,7 +28,7 @@
 #include <vm/vm.h>
 #include <vm/vm_priv.h>
 #include <vm/VMAddressSpace.h>
-#include <string.h>
+#include <kits/support/String.h>
 
 #include <drivers/bus/FDT.h>
 #include <soc.h>

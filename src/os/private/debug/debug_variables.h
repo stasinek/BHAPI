@@ -5,7 +5,7 @@
 #ifndef _KERNEL_DEBUG_VARIABLES_H
 #define _KERNEL_DEBUG_VARIABLES_H
 
-#include <SupportDefs.h>
+#include <kits/support/SupportDefs.h>
 
 
 #define MAX_DEBUG_VARIABLE_NAME_LEN 24

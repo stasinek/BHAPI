@@ -12,7 +12,7 @@
 
 #include <OldBufferStream.h>
 
-#include <debug.h>
+#include <kits/debug/Debug.h>
 #include <new>
 
 

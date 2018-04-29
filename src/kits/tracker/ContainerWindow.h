@@ -36,7 +36,7 @@ All rights reserved.
 
 
 #include <GroupView.h>
-#include <StringList.h>
+#include <kits/support/StringList.h>
 #include <Window.h>
 
 #include <LockingList.h>

@@ -36,7 +36,7 @@
 #include <kits/support/StringArray.h>
 #include <kits/interface/Window.h>
 #include <kits/interface/View.h>
-#include <kits/support/Errors.h>
+#include <kits/debug/Errors.h>
 #include <os/debug.h>
 
 

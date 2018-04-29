@@ -64,7 +64,7 @@
 #include <Rect.h>
 
 #include <kits/add-ons/theme/ThemeEngine.h>
-#include <kits/support/Errors.h>
+#include <kits/debug/Errors.h>
 #include <os/kernel.h>
 #include <os/kernel.h>
 #include <kits/app/MessageRunner.h>
@@ -83,7 +83,7 @@ BButton::BButton(BRect <emphasis>frame</emphasis>,
                   __be_uint32 <emphasis>flags = B_WILL_DRAW | B_NAVIGABLE</emphasis>)
 virtual BButton::~BButton()
 	</programlisting>
-	<itemizedlist>
+	<itemizedList.h>
 		<listitem><para><emphasis>frame</emphasis>是视图在父视图的轮廓定义矩形。
 			<footnote><para>视图轮廓矩形必须为有效矩形，否则视图将成为不可见。
 					除非你通过MoveTo或ResizeTo成员函数变更视图轮廓，
@@ -103,7 +103,7 @@ virtual BButton::~BButton()
 		<listitem><para><emphasis>flags</emphasis>是视图的事件选择标记。
 			<footnote><para>视图事件选择标记详BView类。</para></footnote>
 		</para></listitem>
-	</itemizedlist>
+	</itemizedList.h>
 </section>
 </document>
 -----------------------------------------------------------------------------*/
@@ -127,13 +127,13 @@ BButton::~BButton()
 virtual void BButton::SetLabel(const char *<emphasis>label</emphasis>)
 const char* BControl::Label() const
 	</programlisting>
-	<itemizedlist>
+	<itemizedList.h>
 		<listitem><para><emphasis>label</emphasis>是按钮的标签文本。
 			<footnote><para>SetLabel()函数被调用时，按钮视图自动发送区域
 					作废消息给窗口(如果有的话)，以便在下次更新时
 					更新其内容。</para></footnote>
 		</para></listitem>
-	</itemizedlist>
+	</itemizedList.h>
 	<para>BButton::SetLabel()用于设置按钮的标签内容。</para>
 	<para>BControl::Label()函数返回按钮标签内容的字符串。</para>
 </section>

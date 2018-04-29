@@ -7,7 +7,7 @@
 #include <platform/openfirmware/openfirmware.h>
 #include <util/kernel_cpp.h>
 
-#include <string.h>
+#include <kits/support/String.h>
 
 
 /** Gets all device types of the specified type by doing a 

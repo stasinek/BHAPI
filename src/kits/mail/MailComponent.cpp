@@ -4,12 +4,12 @@
 */
 
 
-#include <StringClass.h>
+#include <kits/support/String.h>
 #include <Mime.h>
 
 #include <ctype.h>
 #include <stdlib.h>
-#include <strings.h>
+#include <kits/support/Strings.h>
 
 class _EXPORT BMailComponent;
 class _EXPORT BTextMailComponent;

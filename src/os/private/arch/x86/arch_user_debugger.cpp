@@ -6,7 +6,7 @@
 
 #include <arch/user_debugger.h>
 
-#include <string.h>
+#include <kits/support/String.h>
 
 #include <debugger.h>
 #include <driver_settings.h>

@@ -43,7 +43,7 @@ All rights reserved.
 #include <errno.h>
 #include <float.h>
 #include <stdlib.h>
-#include <strings.h>
+#include <kits/support/Strings.h>
 
 #include <compat/sys/stat.h>
 
@@ -51,20 +51,20 @@ All rights reserved.
 #include <Application.h>
 #include <Catalog.h>
 #include <Clipboard.h>
-#include <Debug.h>
+#include <kits/debug/Debug.h>
 #include <Dragger.h>
 #include <fs_attr.h>
 #include <fs_info.h>
 #include <Screen.h>
 #include <Query.h>
-#include <List.h>
+#include <kits/support/List.h>
 #include <LocaleClass.h>
 #include <LongAndDragTrackingFilter.h>
 #include <MenuItem.h>
 #include <NodeMonitor.h>
 #include <Path.h>
 #include <StopWatch.h>
-#include <StringClass.h>
+#include <kits/support/String.h>
 #include <SymLink.h>
 #include <TextView.h>
 #include <VolumeRoster.h>

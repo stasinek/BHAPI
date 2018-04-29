@@ -36,8 +36,8 @@
 #include <os/debug.h>
 #include <os/kernel.h>
 #include <kits/support/StreamIO.h>
-#include <kits/support/StringClass.h>
-#include <kits/support/Errors.h>
+#include <kits/support/String.h>
+#include <kits/debug/Errors.h>
 #include <kits/private/support/Token.h>
 
 status_t BMessage::BGetInfo(type_code type,  int32 index,

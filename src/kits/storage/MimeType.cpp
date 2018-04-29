@@ -23,7 +23,7 @@
 #include <ctype.h>
 #include <new>
 
-#include <strings.h>
+#include <kits/support/Strings.h>
 
 
 using namespace BPrivate;

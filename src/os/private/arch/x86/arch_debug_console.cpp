@@ -17,9 +17,9 @@
 #include <arch/cpu.h>
 #include <arch/debug_console.h>
 #include <boot/stage2.h>
-#include <debug.h>
+#include <kits/debug/Debug.h>
 
-#include <string.h>
+#include <kits/support/String.h>
 #include <stdlib.h>
 
 

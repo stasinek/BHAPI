@@ -35,7 +35,7 @@ static const char rcsid[] = "$Id: ctl_p.c,v 1.4 2005/04/27 04:56:35 sra Exp $";
 #include <errno.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
+#include <kits/support/String.h>
 #include <time.h>
 
 #include <isc/assertions.h>

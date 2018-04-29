@@ -6,7 +6,7 @@
 #define _FSSH_API_WRAPPER_H
 
 
-#include <string.h>
+#include <kits/support/String.h>
 #ifdef __cplusplus
 #include <new>
 #endif

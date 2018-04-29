@@ -38,10 +38,10 @@
 #include <Haiku.h>
 #include <TimeSource.h>
 
-#include <string.h>
+#include <kits/support/String.h>
 
 #include <DataExchange.h>
-#include <debug.h>
+#include <kits/debug/Debug.h>
 #include <MediaMisc.h>
 #include <MediaRosterEx.h>
 #include <Notifications.h>

@@ -1,4 +1,4 @@
-﻿/* --------------------------------------------------------------------------
+/* --------------------------------------------------------------------------
  *
  * BHAPI++ Copyright (C) 2017, Stanislaw Stasiak, based on Haiku & ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2007, Anthony Lee, All Rights Reserved
@@ -27,7 +27,7 @@
  * Description: Body of support functions
  *
  * --------------------------------------------------------------------------*/
-#include <SupportDefs.h>
+#include <kits/support/SupportDefs.h>
 //-------------------------------------------------------------------------------------------------
 #ifdef BHAPI_BUILD_LIBRARY
 namespace bhapi {
@@ -38,23 +38,6 @@ extern BHAPI_EXPORT const  uint8 interface_age;
 extern BHAPI_EXPORT const  uint8 binary_age;
 }
 #endif
-//-------------------------------------------------------------------------------------------------
-BHAPI_EXPORT int32 	bhapi::atomic_add (int32 *value, int32 addValue) { return 0; }
-BHAPI_EXPORT int64 	bhapi::atomic_add64 (int64 *value, int64 addValue) { return 0; }
-BHAPI_EXPORT int32 	bhapi::atomic_and (int32 *value, int32 andValue) { return 0; }
-BHAPI_EXPORT int64 	bhapi::atomic_and64 (int64 *value, int64 andValue) { return 0; }
-BHAPI_EXPORT int32 	bhapi::atomic_get (int32 *value) { return 0; }
-BHAPI_EXPORT int64 	bhapi::atomic_get64 (int64 *value) { return 0;}
-BHAPI_EXPORT int32 	bhapi::atomic_get_and_set (int32 *value, int32 newValue) { return 0; }
-BHAPI_EXPORT int64 	bhapi::atomic_get_and_set64 (int64 *value, int64 newValue) { return 0; }
-BHAPI_EXPORT int32 	bhapi::atomic_or (int32 *value, int32 orValue) { return 0; }
-BHAPI_EXPORT int64 	bhapi::atomic_or64 (int64 *value, int64 orValue) { return 0; }
-BHAPI_EXPORT void 	bhapi::atomic_set (int32 *value, int32 newValue) {}
-BHAPI_EXPORT void 	bhapi::atomic_set64 (int64 *value, int64 newValue) {}
-BHAPI_EXPORT int32 	bhapi::atomic_test_and_set (int32 *value, int32 newValue, int32 testAgains) { return 0; }
-BHAPI_EXPORT int64 	bhapi::atomic_test_and_set64 (int64 *value, int64 newValue, int64 testAgainst) { return 0; }
-//-------------------------------------------------------------------------------------------------
-BHAPI_EXPORT void*  bhapi::get_stack_frame (void) { return NULL; }
 //-------------------------------------------------------------------------------------------------
 BHAPI_EXPORT const char* B_EMPTY_STRING = "";
 //-------------------------------------------------------------------------------------------------

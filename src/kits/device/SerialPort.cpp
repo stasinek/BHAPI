@@ -4,10 +4,10 @@
  * Distributed under the terms of the MIT License.
  */
 
-#include <Debug.h>
+#include <kits/debug/Debug.h>
 #include <Directory.h>
 #include <Entry.h>
-#include <List.h>
+#include <kits/support/List.h>
 #include <SerialPort.h>
 
 #include <new>
@@ -15,7 +15,7 @@
 #include <fcntl.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
+#include <kits/support/String.h>
 #include <unistd.h>
 #include <termios.h>
 

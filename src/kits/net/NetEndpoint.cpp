@@ -31,7 +31,7 @@
 
 #include <NetEndpoint.h>
 
-#include <kits/support/Errors.h>
+#include <kits/debug/Errors.h>
 #include <kits/app/Message.h>
 #include <os/debug.h>
 

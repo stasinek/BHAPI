@@ -33,7 +33,7 @@
 #include <Window.h>
 
 #include <kits/support/ClassInfo.h>
-#include <kits/support/Errors.h>
+#include <kits/debug/Errors.h>
 #include <os/kernel.h>
 #include <kits/interface/ListItem.h>
 #include <kits/app/Message.h>

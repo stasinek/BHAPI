@@ -7,7 +7,7 @@
 
 
 #include <Referenceable.h>
-#include <StringClass.h>
+#include <kits/support/String.h>
 
 
 class DwarfFile;

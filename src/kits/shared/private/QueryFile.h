@@ -8,8 +8,8 @@
 
 #include <EntryList.h>
 #include <Query.h>
-#include <List.h>
-#include <StringClass.h>
+#include <kits/support/List.h>
+#include <kits/support/String.h>
 
 
 class BQueryFile : public BEntryList {

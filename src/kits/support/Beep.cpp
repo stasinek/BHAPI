@@ -34,7 +34,7 @@
 #include <Beep.h>
 #include <kits/app/Messenger.h>
 #include <kits/app/Message.h>
-#include <kits/support/Errors.h>
+#include <kits/debug/Errors.h>
 
 //#include <DataExchange.h>
 #include <kits/private/media/ServerInterface.h>

@@ -1,0 +1,22 @@
+
+- when we free the last entry in dentry_cache the memory pool gets corrupted.
+  (we don't free the last entry now, to avoid this --sadyc)
+
+- dirctl: symbolic links are always threated as files, even if they point to a directory
+
+- problems with device files
+
+
+BUGURI mascate de cache:
+
+ - deschidere cu VC6
+ - cat din mingw nu merg primele cateva
+ - intrarea in arhiva
+
+
+
+fixed bugs:
+
+- fcb are put in vcb->fcb_list (when allocated in alloc.c) but are not removed at close
+(dismount doesn't work if files were opened )  FIXED i think --sadyc
+

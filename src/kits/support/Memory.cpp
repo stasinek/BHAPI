@@ -1,4 +1,4 @@
-﻿/* --------------------------------------------------------------------------
+/* --------------------------------------------------------------------------
  *
  * BHAPI++ Copyright (C) 2017, Stanislaw Stasiak, based on Haiku & ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2007, Anthony Lee, All Rights Reserved
@@ -26,10 +26,8 @@
  * File: Memory.cpp
  *
  * --------------------------------------------------------------------------*/
-
-#include <Memory.h>
-#include <os/debug.h>
-
+#include <kits/support/Memory.h>
+#include <kits/debug/Debug.h>
 //-----------------------------------------------------------------------------
 
 struct BHAPI_LOCAL b_mem {

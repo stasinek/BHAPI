@@ -41,8 +41,8 @@ All rights reserved.
 #include <fs_attr.h>
 #include <parsedate.h>
 #include <stdlib.h>
-#include <string.h>
-#include <strings.h>
+#include <kits/support/String.h>
+#include <kits/support/Strings.h>
 
 #include <Application.h>
 #include <Box.h>
@@ -50,7 +50,7 @@ All rights reserved.
 #include <Catalog.h>
 #include <CheckBox.h>
 #include <ControlLook.h>
-#include <Debug.h>
+#include <kits/debug/Debug.h>
 #include <Directory.h>
 #include <FindDirectory.h>
 #include <File.h>

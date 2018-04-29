@@ -10,7 +10,7 @@
 #include <arch/arm/reg.h>
 #include <arch/generic/debug_uart_8250.h>
 #include <board_config.h>
-#include <debug.h>
+#include <kits/debug/Debug.h>
 #include <new>
 
 

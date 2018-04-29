@@ -8,7 +8,7 @@
  *		Matthijs Hollemans
  */
 
-#include <debug.h>
+#include <kits/debug/Debug.h>
 #include <MidiEndpoint.h>
 #include <MidiRoster.h>
 #include <MidiRosterLooper.h>

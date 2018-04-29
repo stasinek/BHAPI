@@ -7,11 +7,11 @@
 #include <DisassembledCode.h>
 
 #include <stdlib.h>
-#include <string.h>
+#include <kits/support/String.h>
 
 #include <new>
 
-#include <StringClass.h>
+#include <kits/support/String.h>
 
 #include <SourceLanguage.h>
 #include <Statement.h>

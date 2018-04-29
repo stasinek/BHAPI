@@ -35,13 +35,13 @@ All rights reserved.
 
 #include <InfoWindow.h>
 
-#include <string.h>
+#include <kits/support/String.h>
 #include <stdio.h>
 #include <stdlib.h>
 
 #include <Alert.h>
 #include <Catalog.h>
-#include <Debug.h>
+#include <kits/debug/Debug.h>
 #include <Directory.h>
 #include <File.h>
 #include <Font.h>
@@ -72,7 +72,7 @@ All rights reserved.
 #include <Model.h>
 #include <NavMenu.h>
 #include <PoseView.h>
-#include <StringForSize.h>
+#include <kits/support/StringForSize.h>
 #include <Tracker.h>
 #include <WidgetAttributeText.h>
 

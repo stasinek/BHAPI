@@ -37,7 +37,7 @@ All rights reserved.
 
 #include <ctype.h>
 #include <stdlib.h>
-#include <strings.h>
+#include <kits/support/Strings.h>
 
 #include <fs_attr.h>
 #include <parsedate.h>
@@ -47,7 +47,7 @@ All rights reserved.
 #include <Catalog.h>
 #include <DateFormat.h>
 #include <DateTimeFormat.h>
-#include <Debug.h>
+#include <kits/debug/Debug.h>
 #include <LocaleClass.h>
 #include <MessageFormat.h>
 #include <NodeInfo.h>

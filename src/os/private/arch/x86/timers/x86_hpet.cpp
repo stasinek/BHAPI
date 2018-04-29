@@ -4,7 +4,7 @@
  * Distributed under the terms of the MIT License.
  */
 
-#include <debug.h>
+#include <kits/debug/Debug.h>
 #include <int.h>
 #include <smp.h>
 #include <timer.h>

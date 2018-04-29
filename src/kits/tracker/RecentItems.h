@@ -43,7 +43,7 @@ All rights reserved.
 
 #include <Entry.h>
 #include <Message.h>
-#include <StringClass.h>
+#include <kits/support/String.h>
 
 
 class BMenuItem;

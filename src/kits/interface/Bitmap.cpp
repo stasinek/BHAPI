@@ -36,7 +36,7 @@
 #include <os/debug.h>
 #include <kits/app/AppDefs.h>
 #include <kits/render/Pixmap.h>
-#include <kits/support/Errors.h>
+#include <kits/debug/Errors.h>
 
 class BHAPI_LOCAL BBitmapWindow : public BWindow {
 public:

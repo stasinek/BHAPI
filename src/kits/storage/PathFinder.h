@@ -7,7 +7,7 @@
 
 
 #include <FindDirectory.h>
-#include <StringList.h>
+#include <kits/support/StringList.h>
 
 
 class BPath;

@@ -29,7 +29,7 @@ static const char rcsid[] = "$Id: logging.c,v 1.9 2008/11/14 02:36:51 marka Exp 
 #include <limits.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
+#include <kits/support/String.h>
 #include <stdarg.h>
 #include <syslog.h>
 #include <errno.h>

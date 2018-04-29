@@ -7,7 +7,7 @@
 
 #include <x86_syscalls.h>
 
-#include <string.h>
+#include <kits/support/String.h>
 
 #include <KernelExport.h>
 

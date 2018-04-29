@@ -6,7 +6,7 @@
 #define _KERNEL_UTIL_KMESSAGE_H
 
 
-#include <string.h>
+#include <kits/support/String.h>
 
 #include <kits/kernel/OS.h>
 #include <HaikuConstants.h>

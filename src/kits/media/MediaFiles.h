@@ -7,8 +7,8 @@
 
 
 #include <MediaDefs.h>
-#include <List.h>
-#include <StringClass.h>
+#include <kits/support/List.h>
+#include <kits/support/String.h>
 
 struct entry_ref;
 

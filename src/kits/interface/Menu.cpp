@@ -32,7 +32,7 @@
 #include <Window.h>
 
 #include <kits/support/ClassInfo.h>
-#include <kits/support/Errors.h>
+#include <kits/debug/Errors.h>
 #include <os/kernel.h>
 #include <os/debug.h>
 #include <kits/app/AppDefs.h>

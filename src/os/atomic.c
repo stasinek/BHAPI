@@ -4,7 +4,7 @@
 */
 
 
-#include <SupportDefs.h>
+#include <kits/support/SupportDefs.h>
 
 #include <syscalls.h>
 
@@ -114,7 +114,7 @@ extern int32_t __sync_fetch_and_add_4(int32_t *value, int32_t addValue)
 
 #include <BeOSBuildCompatibility.h>
 
-#include <string.h>
+#include <kits/support/String.h>
 
 #include <OS.h>
 #include <Haiku.h>

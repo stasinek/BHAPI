@@ -29,7 +29,7 @@
 
 #include <TabView.h>
 
-#include <kits/support/StringClass.h>
+#include <kits/support/String.h>
 
 BTab::BTab(BView *targetView)
 	: fLabel(NULL), fEnabled(true), fFocus(false), fOwner(NULL)

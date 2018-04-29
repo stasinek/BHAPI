@@ -32,7 +32,7 @@ names are registered trademarks or trademarks of their respective holders.
 All rights reserved.
 */
 
-#include <Debug.h>
+#include <kits/debug/Debug.h>
 #include <InterfaceDefs.h>
 
 #include <AutoLock.h>

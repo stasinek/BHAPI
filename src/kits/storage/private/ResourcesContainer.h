@@ -10,7 +10,7 @@
 #ifndef _RESOURCES_CONTAINER_H
 #define _RESOURCES_CONTAINER_H
 
-#include <List.h>
+#include <kits/support/List.h>
 
 namespace BPrivate {
 namespace Storage {

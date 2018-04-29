@@ -41,7 +41,7 @@ All rights reserved.
 #include <Directory.h>
 #include <Entry.h>
 #include <EntryList.h>
-#include <List.h>
+#include <kits/support/List.h>
 #include <ObjectList.h>
 #include <Query.h>
 #include <Volume.h>

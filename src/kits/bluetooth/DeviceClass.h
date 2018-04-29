@@ -5,7 +5,7 @@
 #ifndef _DEVICE_CLASS_H
 #define _DEVICE_CLASS_H
 
-#include <StringClass.h>
+#include <kits/support/String.h>
 #include <View.h>
 
 namespace Bluetooth {

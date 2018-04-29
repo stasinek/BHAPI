@@ -13,10 +13,10 @@
 
 #include <Archivable.h>
 #include <Entry.h>
-#include <List.h>
+#include <kits/support/List.h>
 #include <Message.h>
 #include <ObjectList.h>
-#include <StringClass.h>
+#include <kits/support/String.h>
 
 
 class BPath;

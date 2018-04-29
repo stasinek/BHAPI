@@ -7,7 +7,7 @@
 
 #include <GroupLayout.h>
 #include <GroupView.h>
-#include <List.h>
+#include <kits/support/List.h>
 
 class BGroupLayoutBuilder {
 public:

@@ -13,7 +13,7 @@
 #include <algorithm>
 
 #include <arch/debug.h>
-#include <debug.h>
+#include <kits/debug/Debug.h>
 #include <debug_heap.h>
 #include <elf.h>
 #include <int.h>

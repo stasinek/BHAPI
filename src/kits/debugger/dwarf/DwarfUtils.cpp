@@ -6,7 +6,7 @@
 
 #include <DwarfUtils.h>
 
-#include <StringClass.h>
+#include <kits/support/String.h>
 
 #include <CompilationUnit.h>
 #include <Dwarf.h>

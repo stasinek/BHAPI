@@ -5,7 +5,7 @@
   #define DEBUG 1
 #endif
 
-#include <Debug.h>
+#include <kits/debug/Debug.h>
 #include <stdio.h>
 
 #undef TRACE

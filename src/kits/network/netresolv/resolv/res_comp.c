@@ -80,7 +80,7 @@ static const char rcsid[] = "$Id: res_comp.c,v 1.5 2005/07/28 06:51:50 marka Exp
 #include <ctype.h>
 #include <resolv.h>
 #include <stdio.h>
-#include <string.h>
+#include <kits/support/String.h>
 #include <unistd.h>
 #include <port_after.h>
 

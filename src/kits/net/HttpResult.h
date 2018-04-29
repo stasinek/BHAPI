@@ -9,7 +9,7 @@
 #include <iostream>
 
 #include <HttpHeaders.h>
-#include <StringClass.h>
+#include <kits/support/String.h>
 #include <Url.h>
 #include <UrlResult.h>
 

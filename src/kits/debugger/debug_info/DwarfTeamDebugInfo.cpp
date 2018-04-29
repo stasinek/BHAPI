@@ -8,7 +8,7 @@
 
 #include <new>
 
-#include <string.h>
+#include <kits/support/String.h>
 
 #include <arch/Architecture.h>
 #include <DebuggerInterface.h>

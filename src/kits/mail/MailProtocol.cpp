@@ -21,8 +21,8 @@
 #include <Path.h>
 #include <Query.h>
 #include <Roster.h>
-#include <StringClass.h>
-#include <StringList.h>
+#include <kits/support/String.h>
+#include <kits/support/StringList.h>
 #include <VolumeRoster.h>
 
 #include <MailFilter.h>

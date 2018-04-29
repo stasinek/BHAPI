@@ -13,14 +13,14 @@
 #include <syscalls.h>
 
 #include <stdlib.h>
-#include <string.h>
+#include <kits/support/String.h>
 
 #include <TypeConstants.h>
 
 #include <arch_config.h>
 #include <arch/system_info.h>
 #include <cpu.h>
-#include <debug.h>
+#include <kits/debug/Debug.h>
 #include <disk_device_manager/ddm_userland_interface.h>
 #include <elf.h>
 #include <frame_buffer_console.h>

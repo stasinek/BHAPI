@@ -11,7 +11,7 @@
 
 #include <cpu.h>
 
-#include <string.h>
+#include <kits/support/String.h>
 #include <stdlib.h>
 #include <stdio.h>
 
@@ -21,7 +21,7 @@
 
 #include <boot_device.h>
 #include <commpage.h>
-#include <debug.h>
+#include <kits/debug/Debug.h>
 #include <elf.h>
 #include <smp.h>
 #include <util/BitUtils.h>

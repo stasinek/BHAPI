@@ -7,9 +7,9 @@
 
 #include <new>
 #include <stdlib.h>
-#include <string.h>
+#include <kits/support/String.h>
 
-#include <debug.h>
+#include <kits/debug/Debug.h>
 #include <kscheduler.h>
 #include <ksignal.h>
 #include <int.h>

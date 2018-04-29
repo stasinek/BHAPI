@@ -38,10 +38,10 @@ All rights reserved.
 
 
 #include <AppFileInfo.h>
-#include <Debug.h>
+#include <kits/debug/Debug.h>
 #include <Mime.h>
 #include <StorageDefs.h>
-#include <StringClass.h>
+#include <kits/support/String.h>
 
 #include <IconCache.h>
 #include <ObjectList.h>
@@ -184,7 +184,7 @@ public:
 		// if zero, all executables, directories and volumes pass
 		// if traverse, dereference symlinks
 	bool IsDropTargetForList(const BObjectList<BString>* list) const;
-		// <list> contains mime types of all documents about to be handled
+		// <List.h> contains mime types of all documents about to be handled
 		// by model
 
 #if DEBUG
@@ -195,7 +195,7 @@ public:
 	bool IsSuperHandler() const;
 	int32 SupportsMimeType(const char* type,
 		const BObjectList<BString>* list, bool exactReason = false) const;
-		// pass in one string in <type> or a bunch in <list>
+		// pass in one string in <type> or a bunch in <List.h>
 		// if <exactReason> false, returns as soon as it figures out that
 		// app supports a given type, if true, returns an exact reason
 

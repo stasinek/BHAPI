@@ -43,7 +43,7 @@ __RCSID("$NetBSD: getservent_r.c,v 1.11 2011/10/15 23:00:02 christos Exp $");
 #include <netdb.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
+#include <kits/support/String.h>
 
 #include <FindDirectory.h>
 

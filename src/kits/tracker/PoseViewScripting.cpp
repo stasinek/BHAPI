@@ -36,10 +36,10 @@ All rights reserved.
 
 #include <stdlib.h>
 #include <stdio.h>
-#include <string.h>
+#include <kits/support/String.h>
 
 #include <ByteOrder.h>
-#include <Debug.h>
+#include <kits/debug/Debug.h>
 #include <Message.h>
 #include <PropertyInfo.h>
 

@@ -2,7 +2,7 @@
 #include <Catalog.h>
 #include <LocaleClass.h>
 #include <CharacterSet.h>
-#include <Debug.h>
+#include <kits/debug/Debug.h>
 
 #undef  B_TRANSLATION_CONTEXT
 #define B_TRANSLATION_CONTEXT "textencodings"

@@ -9,7 +9,7 @@
 
 #include <stdlib.h>
 #include <stdio.h>
-#include <string.h>
+#include <kits/support/String.h>
 #include <ctype.h>
 
 #include <iostream>
@@ -18,7 +18,7 @@
 #include <LocaleClass.h>
 #include <LocaleRoster.h>
 #include <Path.h>
-#include <StringClass.h>
+#include <kits/support/String.h>
 #include <FindDirectory.h>
 
 #include <ICUWrapper.h>

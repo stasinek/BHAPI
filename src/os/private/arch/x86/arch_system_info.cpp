@@ -6,7 +6,7 @@
 
 #include <arch/system_info.h>
 
-#include <string.h>
+#include <kits/support/String.h>
 
 #include <KernelExport.h>
 #include <OS.h>

@@ -47,13 +47,13 @@ respective holders. All rights reserved.
 
 #include <ctype.h>
 #include <errno.h>
-#include <strings.h>
+#include <kits/support/Strings.h>
 #include <unistd.h>
 
 #include <Alert.h>
 #include <Application.h>
 #include <Catalog.h>
-#include <Debug.h>
+#include <kits/debug/Debug.h>
 #include <Directory.h>
 #include <Entry.h>
 #include <FindDirectory.h>
@@ -63,7 +63,7 @@ respective holders. All rights reserved.
 #include <Path.h>
 #include <Roster.h>
 #include <Screen.h>
-#include <StringClass.h>
+#include <kits/support/String.h>
 #include <SymLink.h>
 #include <Volume.h>
 #include <VolumeRoster.h>

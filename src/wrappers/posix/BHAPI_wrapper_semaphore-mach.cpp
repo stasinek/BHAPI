@@ -37,7 +37,7 @@
 #include <mach/semaphore.h>
 
 #include <os/kernel.h>
-#include <kits/support/StringClass.h>
+#include <kits/support/String.h>
 
 typedef struct b_mach_sem_info {
 	b_mach_sem_info()

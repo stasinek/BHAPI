@@ -5,12 +5,12 @@
 
 #include <Path.h>
 #include <image.h>
-#include <string.h>
+#include <kits/support/String.h>
 
 #include <AddOnManager.h>
 #include <PluginManager.h>
 #include <DataExchange.h>
-#include <debug.h>
+#include <kits/debug/Debug.h>
 
 
 PluginManager gPluginManager;

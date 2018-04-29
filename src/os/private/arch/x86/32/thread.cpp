@@ -9,13 +9,13 @@
 
 #include <arch/thread.h>
 
-#include <string.h>
+#include <kits/support/String.h>
 
 #include <arch/user_debugger.h>
 #include <arch_cpu.h>
 #include <commpage.h>
 #include <cpu.h>
-#include <debug.h>
+#include <kits/debug/Debug.h>
 #include <kernel.h>
 #include <ksignal.h>
 #include <int.h>

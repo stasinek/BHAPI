@@ -15,7 +15,7 @@
 #include <system_revision.h>
 #include <arch/system_info.h>
 
-#include <string.h>
+#include <kits/support/String.h>
 
 #include <algorithm>
 
@@ -26,7 +26,7 @@
 
 #include <block_cache.h>
 #include <cpu.h>
-#include <debug.h>
+#include <kits/debug/Debug.h>
 #include <kernel.h>
 #include <lock.h>
 #include <Notifications.h>

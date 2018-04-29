@@ -6,7 +6,7 @@
 
 #include <new>
 #include <stdlib.h>
-#include <string.h>
+#include <kits/support/String.h>
 
 #ifdef FS_SHELL
 #	include <vfs.h>

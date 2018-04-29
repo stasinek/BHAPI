@@ -66,7 +66,7 @@ __RCSID("$NetBSD: base64.c,v 1.14 2012/06/25 22:32:44 abs Exp $");
 #include <resolv.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
+#include <kits/support/String.h>
 
 #include <port_after.h>
 

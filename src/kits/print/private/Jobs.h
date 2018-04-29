@@ -40,7 +40,7 @@
 #include <Entry.h>
 #include <Handler.h>
 #include <Locker.h>
-#include <StringClass.h>
+#include <kits/support/String.h>
 #include <StorageDefs.h>
 
 

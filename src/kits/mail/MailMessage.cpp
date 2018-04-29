@@ -14,7 +14,7 @@
 #include <ctype.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
+#include <kits/support/String.h>
 #include <sys/utsname.h>
 
 #include <parsedate.h>
@@ -24,7 +24,7 @@
 #include <Entry.h>
 #include <File.h>
 #include <FindDirectory.h>
-#include <List.h>
+#include <kits/support/List.h>
 #include <MailAttachment.h>
 #include <MailDaemon.h>
 #include <MailSettings.h>
@@ -32,8 +32,8 @@
 #include <netdb.h>
 #include <NodeInfo.h>
 #include <Path.h>
-#include <StringClass.h>
-#include <StringList.h>
+#include <kits/support/String.h>
+#include <kits/support/StringList.h>
 
 #include <MailPrivate.h>
 #include <mail_util.h>

@@ -14,7 +14,7 @@
 #include <arch/cpu.h>
 
 #include <console.h>
-#include <debug.h>
+#include <kits/debug/Debug.h>
 #include <timer.h>
 #include <int.h>
 #include <safemode.h>

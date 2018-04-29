@@ -9,7 +9,7 @@
 #define INDEX_SERVER_PRIVATE_H
 
 
-#include <StringClass.h>
+#include <kits/support/String.h>
 
 
 const BString kIndexServerDirectory = ".IndexServer";

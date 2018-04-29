@@ -33,9 +33,9 @@ All rights reserved.
 */
 
 
-#include <Debug.h>
+#include <kits/debug/Debug.h>
 #include <stdio.h>
-#include <string.h>
+#include <kits/support/String.h>
 #include <errno.h>
 #include <Haiku.h>
 

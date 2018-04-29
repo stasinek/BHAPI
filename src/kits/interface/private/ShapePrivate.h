@@ -13,7 +13,7 @@
 #include <Rect.h>
 #include <Referenceable.h>
 
-#include <string.h>
+#include <kits/support/String.h>
 #include <stdio.h>
 
 

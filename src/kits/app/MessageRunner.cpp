@@ -36,7 +36,7 @@
 #include <os/kernel.h>
 #include <kits/support/Locker.h>
 #include <kits/support/Autolock.h>
-#include <kits/support/Errors.h>
+#include <kits/debug/Errors.h>
 #include <kits/private/app/PrivateHandler.h>
 #include <kits/app/Messenger.h>
 #include <kits/app/Message.h>

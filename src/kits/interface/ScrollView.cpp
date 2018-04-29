@@ -30,7 +30,7 @@
 #include <ScrollView.h>
 
 #include <os/debug.h>
-#include <kits/support/Errors.h>
+#include <kits/debug/Errors.h>
 
 BRect BScrollView::TargetValidFrame(bool ignore_scrollbar) const
 {

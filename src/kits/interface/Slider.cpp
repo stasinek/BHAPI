@@ -21,7 +21,7 @@
 #include <LayoutUtils.h>
 #include <Message.h>
 #include <Region.h>
-#include <StringClass.h>
+#include <kits/support/String.h>
 #include <Window.h>
 
 #include <binary_compatibility/Interface.h>

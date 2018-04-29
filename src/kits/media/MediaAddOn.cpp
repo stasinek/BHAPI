@@ -29,10 +29,10 @@
 
 
 #include <MediaAddOn.h>
-#include <string.h>
+#include <kits/support/String.h>
 #include <stdlib.h>
 #include <new>
-#include <debug.h>
+#include <kits/debug/Debug.h>
 #include <DataExchange.h>
 
 

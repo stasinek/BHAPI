@@ -31,7 +31,7 @@
 #include <be/kernel/OS.h>
 
 #include <os/kernel.h>
-#include <kits/support/StringClass.h>
+#include <kits/support/String.h>
 
 #define BEOS_AREA_INFO_MAGIC		0xABFC
 

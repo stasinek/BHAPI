@@ -44,7 +44,7 @@ BDiskDeviceList::~BDiskDeviceList()
 */
 void BDiskDeviceList::MessageReceived(BMessage *message)
 {
-	AutoLocker<BDiskDeviceList> _(this);
+	AutoLocker<BDiskDeviceList.h> _(this);
 	switch (message->what) {
 		case B_DEVICE_UPDATE:
 		{
@@ -105,7 +105,7 @@ void BDiskDeviceList::MessageReceived(BMessage *message)
 void BDiskDeviceList::SetNextHandler(BHandler *handler)
 {
 	if (!handler) {
-		AutoLocker<BDiskDeviceList> _(this);
+		AutoLocker<BDiskDeviceList.h> _(this);
 		if (fSubscribed) 
 			_StopWatching();
 	}
@@ -130,7 +130,7 @@ void BDiskDeviceList::SetNextHandler(BHandler *handler)
 status_t BDiskDeviceList::Fetch()
 {
 	Unset();
-	AutoLocker<BDiskDeviceList> _(this);
+	AutoLocker<BDiskDeviceList.h> _(this);
 	// register for notifications
 	status_t error = B_OK;
 	if (Looper())
@@ -165,7 +165,7 @@ status_t BDiskDeviceList::Fetch()
 */
 void BDiskDeviceList::Unset()
 {
-	AutoLocker<BDiskDeviceList> _(this);
+	AutoLocker<BDiskDeviceList.h> _(this);
 	// unsubscribe from notification services
 	_StopWatching();
 	// empty the list

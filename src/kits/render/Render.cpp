@@ -32,7 +32,7 @@
 #include <ArcGenerator.h>
 
 #include <kits/support/List.h>
-#include <kits/support/Errors.h>
+#include <kits/debug/Errors.h>
 #include <os/debug.h>
 
 

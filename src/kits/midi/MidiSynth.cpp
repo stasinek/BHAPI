@@ -13,7 +13,7 @@
 
 #include <MidiSynth.h>
 
-#include <debug.h>
+#include <kits/debug/Debug.h>
 #include <SoftSynth.h>
 
 using namespace BPrivate;

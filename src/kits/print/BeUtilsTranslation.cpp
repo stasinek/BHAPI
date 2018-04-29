@@ -42,7 +42,7 @@
 #include <Messenger.h>
 #include <Resources.h>
 #include <Roster.h>
-#include <StringClass.h>
+#include <kits/support/String.h>
 
 #include <BeUtils.h>
 

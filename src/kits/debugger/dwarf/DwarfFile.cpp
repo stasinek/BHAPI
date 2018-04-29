@@ -716,7 +716,7 @@ DwarfFile::ResolveRangeList(CompilationUnit* unit, uint64 offset) const
 		ERROR("Out of memory.\n");
 		return NULL;
 	}
-	BReference<TargetAddressRangeList> rangesReference(ranges, true);
+	BReference<TargetAddressRangeList.h> rangesReference(ranges, true);
 
 	target_addr_t baseAddress = unit->AddressRangeBase();
 	target_addr_t maxAddress = unit->MaxAddress();

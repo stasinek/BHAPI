@@ -6,7 +6,7 @@
 #define EXPRESSION_INFO_H
 
 
-#include <StringClass.h>
+#include <kits/support/String.h>
 
 #include <Referenceable.h>
 #include <util/DoublyLinkedList.h>

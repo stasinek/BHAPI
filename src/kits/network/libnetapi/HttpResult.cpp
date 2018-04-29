@@ -8,7 +8,7 @@
 
 
 #include <HttpResult.h>
-#include <Debug.h>
+#include <kits/debug/Debug.h>
 
 
 using std::ostream;

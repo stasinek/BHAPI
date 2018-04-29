@@ -10,7 +10,7 @@
 #include <MediaRoster.h>
 #include <TimeSource.h>
 
-#include <debug.h>
+#include <kits/debug/Debug.h>
 
 
 BMediaClient::BMediaClient(const char* name,

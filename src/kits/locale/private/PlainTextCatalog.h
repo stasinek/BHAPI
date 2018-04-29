@@ -8,7 +8,7 @@
 
 #include <HashMapCatalog.h>
 #include <DataIO.h>
-#include <StringClass.h>
+#include <kits/support/String.h>
 
 
 class BFile;

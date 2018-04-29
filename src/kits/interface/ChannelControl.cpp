@@ -8,7 +8,7 @@
 #include <PropertyInfo.h>
 
 #include <map>
-#include <string>
+#include <kits/support/String>
 
 struct limit_label {
 	std::string min_label;

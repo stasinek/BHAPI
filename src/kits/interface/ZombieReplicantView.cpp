@@ -9,7 +9,7 @@
 #include <Alert.h>
 #include <Message.h>
 #include <MimeType.h>
-#include <StringClass.h>
+#include <kits/support/String.h>
 #include <SystemCatalog.h>
 
 #include <ZombieReplicantView.h>

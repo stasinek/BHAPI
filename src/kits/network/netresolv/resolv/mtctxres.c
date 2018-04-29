@@ -7,7 +7,7 @@
 #include <errno.h>
 #include <netdb.h>
 #include <stdlib.h>
-#include <string.h>
+#include <kits/support/String.h>
 #include <resolv_mt.h>
 #include <port_after.h>
 

@@ -18,7 +18,7 @@
  */
 
 #include <des.h>
-#include <string.h>
+#include <kits/support/String.h>
 
 #define ZOIDBERG_KEY "Zoidberg"
 

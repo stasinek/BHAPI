@@ -11,7 +11,7 @@
 #include <vfs_boot.h>
 
 #include <stdio.h>
-#include <strings.h>
+#include <kits/support/Strings.h>
 
 #include <fs_info.h>
 #include <OS.h>

@@ -10,11 +10,11 @@
 
 #include <AutoDeleter.h>
 #include <IconUtils.h>
-#include <List.h>
+#include <kits/support/List.h>
 #include <Language.h>
 #include <LocaleRoster.h>
 #include <Resources.h>
-#include <StringClass.h>
+#include <kits/support/String.h>
 
 #include <unicode/locid.h>
 #include <unicode/ulocdata.h>

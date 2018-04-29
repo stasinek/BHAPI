@@ -10,7 +10,7 @@
 
 
 
-#include <strings.h>
+#include <kits/support/Strings.h>
 
 #include <kits/kernel/OS.h>
 

@@ -26,7 +26,7 @@
 #include <Register.h>
 #include <RegisterMap.h>
 #include <ReturnValueID.h>
-#include <StringUtils.h>
+#include <kits/support/StringUtils.h>
 #include <Tracing.h>
 #include <ValueLocation.h>
 #include <Variable.h>

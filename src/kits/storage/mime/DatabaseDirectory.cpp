@@ -11,7 +11,7 @@
 
 #include <fs_attr.h>
 #include <Node.h>
-#include <StringList.h>
+#include <kits/support/StringList.h>
 
 #include <mime/database_support.h>
 #include <mime/DatabaseLocation.h>

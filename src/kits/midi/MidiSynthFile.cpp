@@ -11,7 +11,7 @@
  *		Jérôme Leveque
  */
 
-#include <debug.h>
+#include <kits/debug/Debug.h>
 #include <MidiStore.h>
 #include <MidiSynthFile.h>
 #include <SoftSynth.h>

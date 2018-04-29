@@ -8,7 +8,7 @@
 #include <ctime>
 
 #include <DateTime.h>
-#include <StringClass.h>
+#include <kits/support/String.h>
 
 namespace BPrivate {
 

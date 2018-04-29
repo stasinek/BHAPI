@@ -15,7 +15,7 @@ class _EXPORT BMailMessage;
 #include <MailMessage.h>
 
 #include <stdio.h>
-#include <strings.h>
+#include <kits/support/Strings.h>
 
 struct CharsetConversionEntry
 {

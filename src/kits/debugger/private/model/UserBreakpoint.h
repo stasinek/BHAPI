@@ -12,7 +12,7 @@
 #include <util/DoublyLinkedList.h>
 
 #include <SourceLocation.h>
-#include <StringClass.h>
+#include <kits/support/String.h>
 #include <Types.h>
 
 

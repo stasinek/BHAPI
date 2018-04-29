@@ -10,7 +10,7 @@
 #define _SNIFFER_PATTERN_H
 
 #include <Haiku.h>
-#include <string>
+#include <kits/support/String>
 #include <sniffer/Range.h>
 
 class BPositionIO;

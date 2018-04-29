@@ -12,7 +12,7 @@
 
 #include <Haiku.h>
 
-#include <string>
+#include <kits/support/String>
 #include <set>
 
 class BMessage;

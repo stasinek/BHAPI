@@ -41,7 +41,7 @@
 #include <os/kernel.h>
 #include <os/kernel.h>
 #include <kits/support/Locker.h>
-#include <kits/support/Errors.h>
+#include <kits/debug/Errors.h>
 #include <kits/support/Autolock.h>
 #include <kits/support/ClassInfo.h>
 #include <kits/private/support/Token.h>

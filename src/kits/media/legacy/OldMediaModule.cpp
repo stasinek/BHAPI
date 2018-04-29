@@ -12,7 +12,7 @@
 
 #include <OldMediaModule.h>
 
-#include <debug.h>
+#include <kits/debug/Debug.h>
 
 
 /*************************************************************

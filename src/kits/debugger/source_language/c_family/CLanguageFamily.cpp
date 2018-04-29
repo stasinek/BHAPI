@@ -15,7 +15,7 @@
 #include <CLanguageTokenizer.h>
 #include <ExpressionInfo.h>
 #include <TeamTypeInformation.h>
-#include <StringValue.h>
+#include <kits/support/StringValue.h>
 #include <Type.h>
 #include <TypeLookupConstraints.h>
 

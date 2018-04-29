@@ -6,7 +6,7 @@
 
 #include <new>
 
-#include <string.h>
+#include <kits/support/String.h>
 
 #include <AutoDeleter.h>
 #include <debug_support.h>

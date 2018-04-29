@@ -9,7 +9,7 @@
 #include <new>
 
 #include <Architecture.h>
-#include <StringValue.h>
+#include <kits/support/StringValue.h>
 #include <Tracing.h>
 #include <Type.h>
 #include <ValueLoader.h>

@@ -12,10 +12,10 @@
 
 #include <new>
 
-#include <string.h>
+#include <kits/support/String.h>
 
 #include <Bitmap.h>
-#include <Debug.h>
+#include <kits/debug/Debug.h>
 
 
 // Initializes this object to either use the BBitmap passed to

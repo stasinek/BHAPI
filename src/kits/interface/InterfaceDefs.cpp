@@ -22,7 +22,7 @@
 #include <Roster.h>
 #include <Screen.h>
 #include <ScrollBar.h>
-#include <StringClass.h>
+#include <kits/support/String.h>
 #include <TextView.h>
 #include <Window.h>
 

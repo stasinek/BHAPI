@@ -11,7 +11,7 @@
 #include <GameSound.h>
 
 #include <stdio.h>
-#include <string.h>
+#include <kits/support/String.h>
 
 #include <GameSoundBuffer.h>
 #include <GameSoundDevice.h>

@@ -7,7 +7,7 @@
 #define TEAM_SETTINGS_H
 
 
-#include <StringClass.h>
+#include <kits/support/String.h>
 
 #include <ObjectList.h>
 

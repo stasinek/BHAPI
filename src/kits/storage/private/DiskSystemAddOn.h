@@ -6,7 +6,7 @@
 #define _DISK_SYSTEM_ADD_ON_H
 
 #include <DiskDeviceDefs.h>
-#include <StringClass.h>
+#include <kits/support/String.h>
 #include <Haiku.h>
 
 

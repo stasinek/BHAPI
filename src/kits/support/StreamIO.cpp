@@ -29,10 +29,10 @@
 
 #include <StreamIO.h>
 
-#include <kits/support/StringClass.h>
+#include <kits/support/String.h>
 #include <kits/support/StandardIO.h>
 #include <os/debug.h>
-#include <kits/support/Errors.h>
+#include <kits/debug/Errors.h>
 
 static BStreamIO _endl;
 static BStreamIO _ends;

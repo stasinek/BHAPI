@@ -1,4 +1,4 @@
-﻿/* --------------------------------------------------------------------------
+/* --------------------------------------------------------------------------
  *
  * BHAPI++ Copyright (C) 2017, Stanislaw Stasiak, based on Haiku & ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2006, Anthony Lee, All Rights Reserved
@@ -29,7 +29,7 @@
 
 #ifndef BHAPI_STRING_ARRAY_H
 #define BHAPI_STRING_ARRAY_H
-#include <List.h>
+#include <kits/support/List.h>
 #include <Haiku.h>
 
 #ifdef __cplusplus /* Just for C++ */

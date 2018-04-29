@@ -15,13 +15,13 @@
 
 #include <errno.h>
 #include <stddef.h>
-#include <string.h>
+#include <kits/support/String.h>
 
 #include <OS.h>
 #include <KernelExport.h>
 
 #include <cpu.h>
-#include <debug.h>
+#include <kits/debug/Debug.h>
 #include <kernel.h>
 #include <kscheduler.h>
 #include <sem.h>

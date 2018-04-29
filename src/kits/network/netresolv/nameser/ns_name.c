@@ -31,7 +31,7 @@ static const char rcsid[] = "$Id: ns_name.c,v 1.11 2009/01/23 19:59:16 each Exp 
 #include <assert.h>
 #include <errno.h>
 #include <resolv.h>
-#include <string.h>
+#include <kits/support/String.h>
 #include <ctype.h>
 #include <stdlib.h>
 #include <limits.h>

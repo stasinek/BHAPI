@@ -11,7 +11,7 @@
 
 
 #include <map>
-#include <string>
+#include <kits/support/String>
 
 #include <Directory.h>
 #include <ObjectList.h>

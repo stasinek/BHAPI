@@ -9,11 +9,11 @@
 #include <new>
 
 #include <stdio.h>
-#include <string.h>
+#include <kits/support/String.h>
 
 #include <Autolock.h>
 
-#include <debug.h>
+#include <kits/debug/Debug.h>
 
 #include <PluginManager.h>
 

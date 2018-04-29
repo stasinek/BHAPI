@@ -11,7 +11,7 @@
 #include <paging/32bit/X86VMTranslationMap32Bit.h>
 
 #include <stdlib.h>
-#include <string.h>
+#include <kits/support/String.h>
 
 #include <int.h>
 #include <thread.h>

@@ -16,12 +16,12 @@
 #include <Autolock.h>
 #include <Catalog.h>
 #include <CatalogData.h>
-#include <Debug.h>
+#include <kits/debug/Debug.h>
 #include <Entry.h>
 #include <FormattingConventions.h>
 #include <Language.h>
 #include <LocaleRosterData.h>
-#include <StringClass.h>
+#include <kits/support/String.h>
 
 
 namespace BPrivate {

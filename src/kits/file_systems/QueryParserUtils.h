@@ -16,7 +16,7 @@
 #	include <fssh_api_wrapper.h>
 #	include <fssh_auto_deleter.h>
 #else
-#	include <SupportDefs.h>
+#	include <kits/support/SupportDefs.h>
 #endif	// !FS_SHELL
 
 

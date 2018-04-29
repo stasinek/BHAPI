@@ -66,7 +66,7 @@ __RCSID("$NetBSD: hesiod.c,v 1.27 2012/03/20 17:44:18 matt Exp $");
 #include <resolv.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
+#include <kits/support/String.h>
 #include <unistd.h>
 
 #include <libutil.h>

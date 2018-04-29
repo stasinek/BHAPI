@@ -11,7 +11,7 @@
 
 #include <AutoDeleter.h>
 
-#include <debug.h>
+#include <kits/debug/Debug.h>
 #include <kernel.h>
 #include <real_time_clock.h>
 #include <team.h>

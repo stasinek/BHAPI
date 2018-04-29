@@ -36,7 +36,7 @@ All rights reserved.
 //	fast display
 //
 
-#include <Debug.h>
+#include <kits/debug/Debug.h>
 #include <Directory.h>
 #include <Entry.h>
 #include <FindDirectory.h>

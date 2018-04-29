@@ -7,7 +7,7 @@
 #include <paging/pae/X86PagingStructuresPAE.h>
 
 #include <stdlib.h>
-#include <string.h>
+#include <kits/support/String.h>
 
 #include <KernelExport.h>
 

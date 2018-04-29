@@ -16,12 +16,12 @@
 
 
 
-#include <Debug.h>
+#include <kits/debug/Debug.h>
 #include <File.h>
 #include <FindDirectory.h>
 #include <Path.h>
 #include <StorageDefs.h>
-#include <StringClass.h>
+#include <kits/support/String.h>
 
 
 ScreenSaverSettings::ScreenSaverSettings()

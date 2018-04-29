@@ -6,8 +6,8 @@
 #define _B_HTTP_HEADERS_H_
 
 
-#include <List.h>
-#include <StringClass.h>
+#include <kits/support/List.h>
+#include <kits/support/String.h>
 
 
 class BHttpHeader {

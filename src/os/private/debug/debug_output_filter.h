@@ -7,7 +7,7 @@
 
 #include <stdarg.h>
 
-#include <SupportDefs.h>
+#include <kits/support/SupportDefs.h>
 
 
 class DebugOutputFilter {

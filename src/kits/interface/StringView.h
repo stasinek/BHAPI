@@ -34,7 +34,7 @@
 #ifdef __cplusplus /* Just for C++ */
 #include <kits/interface/View.h>
 #include <kits/support/StringArray.h>
-#include <kits/support/StringClass.h>
+#include <kits/support/String.h>
 #include <Haiku.h>
 class BHAPI_IMPEXP BStringView : public BView {
 public:

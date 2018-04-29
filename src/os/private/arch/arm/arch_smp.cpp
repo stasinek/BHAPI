@@ -14,7 +14,7 @@
 
 #include <boot/stage2.h>
 #include <arch/smp.h>
-#include <debug.h>
+#include <kits/debug/Debug.h>
 #include <int.h>
 
 

@@ -36,7 +36,7 @@ All rights reserved.
 
 
 #include <ObjectList.h>
-#include <StringClass.h>
+#include <kits/support/String.h>
 
 #include <Utilities.h>
 

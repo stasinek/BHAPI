@@ -17,12 +17,12 @@
 #include <ParameterWeb.h>
 #include <ScrollBar.h>
 #include <Slider.h>
-#include <StringView.h>
+#include <kits/support/StringView.h>
 #include <TabView.h>
 #include <TextControl.h>
 #include <Window.h>
 
-#include <debug.h>
+#include <kits/debug/Debug.h>
 
 
 using namespace BPrivate;

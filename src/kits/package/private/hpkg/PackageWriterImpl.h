@@ -10,7 +10,7 @@
 #include <util/DoublyLinkedList.h>
 #include <util/OpenHashTable.h>
 
-#include <StringClass.h>
+#include <kits/support/String.h>
 
 #include <package/hpkg/PackageWriter.h>
 #include <package/hpkg/Strings.h>

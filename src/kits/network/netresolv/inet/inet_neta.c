@@ -36,7 +36,7 @@ __RCSID("$NetBSD: inet_neta.c,v 1.3 2012/06/25 22:32:44 abs Exp $");
 #include <assert.h>
 #include <errno.h>
 #include <stdio.h>
-#include <string.h>
+#include <kits/support/String.h>
 
 #include <port_after.h>
 

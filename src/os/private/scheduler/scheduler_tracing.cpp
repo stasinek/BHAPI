@@ -6,7 +6,7 @@
 
 #include <scheduler_tracing.h>
 
-#include <debug.h>
+#include <kits/debug/Debug.h>
 
 
 #if SCHEDULER_TRACING

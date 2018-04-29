@@ -6,7 +6,7 @@
 
 #include <package/hpkg/v1/PackageDataReader.h>
 
-#include <string.h>
+#include <kits/support/String.h>
 
 #include <algorithm>
 #include <new>

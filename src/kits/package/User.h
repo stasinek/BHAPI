@@ -6,8 +6,8 @@
 #define _PACKAGE__USER_H_
 
 
-#include <StringClass.h>
-#include <StringList.h>
+#include <kits/support/String.h>
+#include <kits/support/StringList.h>
 
 
 namespace BPackageKit {

@@ -5,9 +5,9 @@
  ***********************************************************************/
 
 #include <TimedEventQueue.h>
-#include <string.h>
+#include <kits/support/String.h>
 #include <TimedEventQueuePrivate.h>
-#include <debug.h>
+#include <kits/debug/Debug.h>
 
 /*************************************************************
  * struct media_timed_event

@@ -7,7 +7,7 @@
 #include <arch/x86/msi.h>
 #include <arch/x86/arch_smp.h>
 
-#include <debug.h>
+#include <kits/debug/Debug.h>
 #include <int.h>
 #include <lock.h>
 

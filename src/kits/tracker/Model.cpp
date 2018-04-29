@@ -42,7 +42,7 @@ All rights reserved.
 #include <Model.h>
 
 #include <stdlib.h>
-#include <strings.h>
+#include <kits/support/Strings.h>
 
 #include <fs_info.h>
 #include <fs_attr.h>
@@ -50,7 +50,7 @@ All rights reserved.
 #include <AppDefs.h>
 #include <Bitmap.h>
 #include <Catalog.h>
-#include <Debug.h>
+#include <kits/debug/Debug.h>
 #include <Directory.h>
 #include <Entry.h>
 #include <File.h>

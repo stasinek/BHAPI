@@ -6,7 +6,7 @@
 #define _KERNEL_ARCH_X86_SYSCALLS_H
 
 
-#include <SupportDefs.h>
+#include <kits/support/SupportDefs.h>
 
 
 void	x86_initialize_syscall();

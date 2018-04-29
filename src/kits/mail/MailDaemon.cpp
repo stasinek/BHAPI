@@ -8,7 +8,7 @@
 
 #include <MailDaemon.h>
 
-#include <List.h>
+#include <kits/support/List.h>
 #include <MailSettings.h>
 #include <Messenger.h>
 #include <Message.h>

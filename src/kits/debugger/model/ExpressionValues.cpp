@@ -11,7 +11,7 @@
 
 #include <FunctionID.h>
 #include <model/Thread.h>
-#include <StringUtils.h>
+#include <kits/support/StringUtils.h>
 
 
 struct ExpressionValues::Key {

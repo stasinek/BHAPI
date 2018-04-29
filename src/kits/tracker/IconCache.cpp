@@ -63,7 +63,7 @@ All rights reserved.
 //			generic icon
 
 
-#include <Debug.h>
+#include <kits/debug/Debug.h>
 #include <Screen.h>
 #include <Volume.h>
 

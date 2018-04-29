@@ -22,12 +22,12 @@
 #include <Path.h>
 #include <PathFinder.h>
 
-#include <string.h>
+#include <kits/support/String.h>
 #include <stdlib.h>
 
 #include <MidiSettings.h>
 
-#include <debug.h>
+#include <kits/debug/Debug.h>
 #include <MidiGlue.h>   // for MAKE_BIGTIME
 #include <SoftSynth.h>
 

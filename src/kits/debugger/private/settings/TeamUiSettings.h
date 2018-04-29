@@ -6,7 +6,7 @@
 #define TEAM_UI_SETTINGS_H
 
 
-#include <StringClass.h>
+#include <kits/support/String.h>
 
 
 class BMessage;

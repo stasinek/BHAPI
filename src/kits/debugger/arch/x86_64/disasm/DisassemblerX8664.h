@@ -6,7 +6,7 @@
 #ifndef DISASSEMBLER_X86_64_H
 #define DISASSEMBLER_X86_64_H
 
-#include <StringClass.h>
+#include <kits/support/String.h>
 
 #include <Types.h>
 

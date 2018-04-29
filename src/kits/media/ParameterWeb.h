@@ -94,7 +94,7 @@ class BTextParameter;
 class BList;
 #endif
 //-------------------------------------------------------------------------------------------------
-#include <Flattenable.h>
+#include <kits/support/Flattenable.h>
 #include <MediaDefs.h>
 #include <MediaNode.h>
 //-------------------------------------------------------------------------------------------------

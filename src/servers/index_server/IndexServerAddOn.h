@@ -13,7 +13,7 @@
 #include <Entry.h>
 #include <image.h>
 #include <ObjectList.h>
-#include <StringClass.h>
+#include <kits/support/String.h>
 #include <Volume.h>
 
 #include <Referenceable.h>

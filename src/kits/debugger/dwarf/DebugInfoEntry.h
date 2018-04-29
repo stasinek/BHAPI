@@ -6,7 +6,7 @@
 #ifndef DEBUG_INFO_ENTRY_H
 #define DEBUG_INFO_ENTRY_H
 
-#include <StringClass.h>
+#include <kits/support/String.h>
 
 #include <util/DoublyLinkedList.h>
 

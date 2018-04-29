@@ -35,7 +35,7 @@ All rights reserved.
 #define __THREAD__
 
 
-#include <Debug.h>
+#include <kits/debug/Debug.h>
 #include <Looper.h>
 #include <kits/kernel/OS.h>
 

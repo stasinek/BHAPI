@@ -6,7 +6,7 @@
 #define _KERNEL_ARCH_X86_SIGNALS_H
 
 
-#include <SupportDefs.h>
+#include <kits/support/SupportDefs.h>
 
 
 void	x86_initialize_commpage_signal_handler();

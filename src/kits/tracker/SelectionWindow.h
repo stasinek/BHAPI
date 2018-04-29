@@ -38,7 +38,7 @@ All rights reserved.
 #include <Button.h>
 #include <CheckBox.h>
 #include <MenuField.h>
-#include <StringClass.h>
+#include <kits/support/String.h>
 #include <TextControl.h>
 #include <Window.h>
 

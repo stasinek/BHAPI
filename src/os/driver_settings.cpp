@@ -51,7 +51,7 @@
 
 
 
-#include <strings.h>
+#include <kits/support/Strings.h>
 #include <unistd.h>
 #include <fcntl.h>
 #include <ctype.h>

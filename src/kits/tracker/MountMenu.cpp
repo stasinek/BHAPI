@@ -38,7 +38,7 @@ All rights reserved.
 #include <MountMenu.h>
 
 #include <Catalog.h>
-#include <Debug.h>
+#include <kits/debug/Debug.h>
 #include <LocaleClass.h>
 #include <MenuItem.h>
 #include <Mime.h>

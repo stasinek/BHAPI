@@ -10,7 +10,7 @@
 
 
 #include <Mime.h>
-#include <StringList.h>
+#include <kits/support/StringList.h>
 
 
 namespace BPrivate {

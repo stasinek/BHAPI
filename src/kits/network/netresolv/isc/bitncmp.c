@@ -23,7 +23,7 @@ static const char rcsid[] = "$Id: bitncmp.c,v 1.5 2008/11/14 02:36:51 marka Exp 
 
 #include <sys/types.h>
 
-#include <string.h>
+#include <kits/support/String.h>
 
 #include <port_after.h>
 

@@ -63,7 +63,7 @@ __RCSID("$NetBSD: getnetnamadr.c,v 1.42 2012/03/13 21:13:41 christos Exp $");
 #include <stdarg.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
+#include <kits/support/String.h>
 
 #ifdef YP
 #include <rpc/rpc.h>

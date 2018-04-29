@@ -27,11 +27,10 @@
  * Description: BList --- ordered list of data pointers
  *
  * --------------------------------------------------------------------------*/
-#include <List.h>
+#include <kits/support/List.h>
 #define MAX_LIST_COUNT  (B_MAXINT32 - 1)
 
 //-----------------------------------------------------------------------------
-
 
 bool BList::_Resize(int32 count)
 {

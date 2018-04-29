@@ -12,7 +12,7 @@
 
 #include <Buffer.h>
 
-#include <debug.h>
+#include <kits/debug/Debug.h>
 
 
 namespace BPrivate {

@@ -12,11 +12,11 @@
 #include <stdio.h>
 #include <sys/ioctl.h>
 
-#include <Debug.h>
+#include <kits/debug/Debug.h>
 #include <Directory.h>
-#include <List.h>
+#include <kits/support/List.h>
 #include <Path.h>
-#include <StringClass.h>
+#include <kits/support/String.h>
 
 
 #if DEBUG

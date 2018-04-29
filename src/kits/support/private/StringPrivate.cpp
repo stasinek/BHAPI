@@ -1,4 +1,4 @@
-﻿#include <StringPrivate.h>
+﻿#include <kits/support/private/StringPrivate.h>
 using namespace bhapi;
 //-------------------------------------------------------------------------------------------------
 

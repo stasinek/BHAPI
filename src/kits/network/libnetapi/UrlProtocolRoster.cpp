@@ -12,7 +12,7 @@
 #include <new>
 
 #include <DataRequest.h>
-#include <Debug.h>
+#include <kits/debug/Debug.h>
 #include <FileRequest.h>
 #include <GopherRequest.h>
 #include <HttpRequest.h>

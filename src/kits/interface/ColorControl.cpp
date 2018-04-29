@@ -31,7 +31,7 @@
 #include <ColorControl.h>
 #include <Bitmap.h>
 
-#include <kits/support/StringClass.h>
+#include <kits/support/String.h>
 #include <kits/render/Pixmap.h>
 
 BColorControl::BColorControl(BPoint leftTop, const char *name, BMessage *message, bool bufferedDrawing)

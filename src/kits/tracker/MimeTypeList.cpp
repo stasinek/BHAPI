@@ -34,7 +34,7 @@ All rights reserved.
 
 #include <Mime.h>
 
-#include <strings.h>
+#include <kits/support/Strings.h>
 
 #include <AutoLock.h>
 #include <MimeTypeList.h>

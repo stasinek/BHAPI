@@ -8,7 +8,7 @@
 #include <errno.h>
 #include <fcntl.h>
 #include <stdlib.h>
-#include <string.h>
+#include <kits/support/String.h>
 #include <sys/mman.h>
 #include <unistd.h>
 

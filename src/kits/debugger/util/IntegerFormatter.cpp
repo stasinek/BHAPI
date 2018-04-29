@@ -8,7 +8,7 @@
 #include <IntegerFormatter.h>
 
 #include <stdio.h>
-#include <string.h>
+#include <kits/support/String.h>
 
 #include <HaikuConstants.h>
 

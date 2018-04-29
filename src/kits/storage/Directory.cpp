@@ -30,8 +30,8 @@
 #include <Directory.h>
 #include <Path.h>
 
-#include <kits/support/StringClass.h>
-#include <kits/support/Errors.h>
+#include <kits/support/String.h>
+#include <kits/debug/Errors.h>
 #include <os/debug.h>
 
 #ifdef HAVE_SYS_TYPES_H

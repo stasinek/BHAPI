@@ -8,7 +8,7 @@
  */
 
 
-#include <string.h>
+#include <kits/support/String.h>
 #include <stdlib.h>
 
 #include <algorithm>

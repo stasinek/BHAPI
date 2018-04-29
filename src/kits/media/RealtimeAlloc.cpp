@@ -14,7 +14,7 @@
 #include <pthread.h>
 #include <stdlib.h>
 #include <stdio.h>
-#include <string.h>
+#include <kits/support/String.h>
 
 #include <kits/kernel/OS.h>
 

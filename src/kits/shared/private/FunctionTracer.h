@@ -7,7 +7,7 @@
 
 #include <stdio.h>
 
-#include <StringClass.h>
+#include <kits/support/String.h>
 
 namespace BPrivate {
 

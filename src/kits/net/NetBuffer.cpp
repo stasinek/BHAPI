@@ -30,7 +30,7 @@
 #include <NetBuffer.h>
 
 #include <kits/support/ByteOrder.h>
-#include <kits/support/Errors.h>
+#include <kits/debug/Errors.h>
 #include <kits/app/Message.h>
 
 BNetBuffer::BNetBuffer(size_t size)

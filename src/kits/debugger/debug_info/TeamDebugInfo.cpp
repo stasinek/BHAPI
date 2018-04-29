@@ -29,7 +29,7 @@
 #include <SourceFile.h>
 #include <SourceLanguage.h>
 #include <SpecificImageDebugInfo.h>
-#include <StringUtils.h>
+#include <kits/support/StringUtils.h>
 #include <Type.h>
 #include <TypeLookupConstraints.h>
 

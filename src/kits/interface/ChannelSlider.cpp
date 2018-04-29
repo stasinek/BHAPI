@@ -13,7 +13,7 @@
 
 #include <Bitmap.h>
 #include <ControlLook.h>
-#include <Debug.h>
+#include <kits/debug/Debug.h>
 #include <PropertyInfo.h>
 #include <Screen.h>
 #include <Window.h>

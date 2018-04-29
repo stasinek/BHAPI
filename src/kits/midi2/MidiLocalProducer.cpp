@@ -10,7 +10,7 @@
 
 #include <stdlib.h>
 
-#include <debug.h>
+#include <kits/debug/Debug.h>
 #include <MidiConsumer.h>
 #include <MidiProducer.h>
 #include <MidiRoster.h>

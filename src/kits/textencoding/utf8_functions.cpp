@@ -1,6 +1,6 @@
 ﻿//-----------------------------------------------------------------------------
 #include <utf8_functions.h>
-#include <StringClass.h>
+#include <kits/support/String.h>
 //-----------------------------------------------------------------------------
 
 BHAPI_EXPORT bool bhapi::utf8_is_token(const char *str)

@@ -37,11 +37,11 @@ All rights reserved.
 
 #include <Autolock.h>
 #include <Bitmap.h>
-#include <Debug.h>
+#include <kits/debug/Debug.h>
 #include <DataIO.h>
 #include <File.h>
 #include <IconUtils.h>
-#include <StringClass.h>
+#include <kits/support/String.h>
 #include <Haiku.h>
 
 

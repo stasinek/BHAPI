@@ -38,7 +38,7 @@ All rights reserved.
 #include <IconCache.h>
 #include <IconMenuItem.h>
 
-#include <Debug.h>
+#include <kits/debug/Debug.h>
 #include <Menu.h>
 #include <NodeInfo.h>
 

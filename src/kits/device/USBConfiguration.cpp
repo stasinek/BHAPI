@@ -9,7 +9,7 @@
 #include <USBKit.h>
 #include <usb_raw.h>
 #include <unistd.h>
-#include <string.h>
+#include <kits/support/String.h>
 #include <new>
 
 

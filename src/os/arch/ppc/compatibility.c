@@ -6,7 +6,7 @@
 // This file includes some known R5 syscalls
 // ToDo: maybe they should indeed do something...
 
-#include <SupportDefs.h>
+#include <kits/support/SupportDefs.h>
 
 
 int _kset_mon_limit_(int num);

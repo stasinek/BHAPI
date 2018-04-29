@@ -10,10 +10,10 @@
 #include <debug_builtin_commands.h>
 
 #include <ctype.h>
-#include <string.h>
-#include <strings.h>
+#include <kits/support/String.h>
+#include <kits/support/Strings.h>
 
-#include <debug.h>
+#include <kits/debug/Debug.h>
 #include <kernel.h>
 
 #include <debug_commands.h>

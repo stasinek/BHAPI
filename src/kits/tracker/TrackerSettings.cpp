@@ -35,7 +35,7 @@ All rights reserved.
 
 #include <TrackerSettings.h>
 
-#include <Debug.h>
+#include <kits/debug/Debug.h>
 
 #include <Tracker.h>
 #include <WidgetAttributeText.h>

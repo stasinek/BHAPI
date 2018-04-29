@@ -31,7 +31,7 @@
 
 #include <kits/app/Message.h>
 #include <os/debug.h>
-#include <kits/support/Errors.h>
+#include <kits/debug/Errors.h>
 #include <kits/support/ByteOrder.h>
 
 #ifndef _WIN32

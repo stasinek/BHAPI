@@ -14,7 +14,7 @@
 
 #include <Drivers.h>
 #ifndef ASSERT
-#include <Debug.h>
+#include <kits/debug/Debug.h>
 #endif
 
 #define B_MULTI_DRIVER_BASE (B_AUDIO_DRIVER_BASE+20)

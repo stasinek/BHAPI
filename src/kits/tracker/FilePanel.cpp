@@ -42,7 +42,7 @@ All rights reserved.
 #include <Screen.h>
 #include <Window.h>
 #include <Looper.h>
-#include <Debug.h>
+#include <kits/debug/Debug.h>
 #include <musl/sys/resource.h>
 
 

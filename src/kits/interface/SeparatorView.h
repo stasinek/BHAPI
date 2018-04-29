@@ -7,7 +7,7 @@
 
 
 #include <Alignment.h>
-#include <StringClass.h>
+#include <kits/support/String.h>
 #include <View.h>
 
 

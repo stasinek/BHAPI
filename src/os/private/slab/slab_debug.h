@@ -9,7 +9,7 @@
 
 
 #include <AllocationTracking.h>
-#include <debug.h>
+#include <kits/debug/Debug.h>
 #include <slab/Slab.h>
 #include <tracing.h>
 

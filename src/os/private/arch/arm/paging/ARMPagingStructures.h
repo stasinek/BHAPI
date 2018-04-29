@@ -10,7 +10,7 @@
 #define KERNEL_ARCH_ARM_PAGING_ARM_PAGING_STRUCTURES_H
 
 
-#include <SupportDefs.h>
+#include <kits/support/SupportDefs.h>
 
 #include <heap.h>
 

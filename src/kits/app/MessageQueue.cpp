@@ -33,7 +33,7 @@
 #include <os/kernel.h>
 #include <os/debug.h>
 #include <kits/support/Locker.h>
-#include <kits/support/Errors.h>
+#include <kits/debug/Errors.h>
 #include <kits/support/List.h>
 #include <kits/private/app/PrivateHandler.h>
 

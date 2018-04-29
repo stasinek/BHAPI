@@ -36,8 +36,8 @@
 
 #include <kits/support/Locker.h>
 #include <kits/support/Autolock.h>
-#include <kits/support/Errors.h>
-#include <kits/support/StringClass.h>
+#include <kits/debug/Errors.h>
+#include <kits/support/String.h>
 #include <kits/app/Application.h>
 #include <kits/add-ons/graphics/GraphicsEngine.h>
 #include <os/debug.h>

@@ -25,7 +25,7 @@
 #include <arch/x86/smp_priv.h>
 #include <arch/x86/timer.h>
 
-#include <string.h>
+#include <kits/support/String.h>
 #include <stdio.h>
 
 #include <algorithm>

@@ -19,7 +19,7 @@
 #include <Alert.h>
 #include <Application.h>
 #include <Button.h>
-#include <Debug.h>
+#include <kits/debug/Debug.h>
 #include <Entry.h>
 #include <File.h>
 #include <FindDirectory.h>

@@ -7,7 +7,7 @@
 #define _BOOT_NET_DEFS_H
 
 
-#include <string.h>
+#include <kits/support/String.h>
 
 #include <ByteOrder.h>
 #include <Haiku.h>

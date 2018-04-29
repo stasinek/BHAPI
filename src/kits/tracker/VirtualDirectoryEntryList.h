@@ -9,7 +9,7 @@
 #define _VIRTUAL_DIRECTORY_ENTRY_LIST_H
 
 
-#include <StringList.h>
+#include <kits/support/StringList.h>
 
 #include <MergedDirectory.h>
 

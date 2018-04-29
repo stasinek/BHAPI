@@ -23,7 +23,7 @@ static const char rcsid[] = "$Header: /proj/cvs/prod/libbind/dst/support.c,v 1.6
 #include <stdio.h>
 #include <unistd.h>
 #include <memory.h>
-#include <string.h>
+#include <kits/support/String.h>
 #include <errno.h>
 #include <sys/stat.h>
 #include <netinet/in.h>

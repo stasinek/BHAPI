@@ -29,7 +29,7 @@
 #include <MutableLocaleRoster.h>
 #include <Node.h>
 #include <Roster.h>
-#include <StringClass.h>
+#include <kits/support/String.h>
 #include <TimeZone.h>
 
 #include <ICUWrapper.h>

@@ -12,7 +12,7 @@
 #include <MenuWindow.h>
 
 #include <ControlLook.h>
-#include <Debug.h>
+#include <kits/debug/Debug.h>
 #include <Menu.h>
 #include <MenuItem.h>
 

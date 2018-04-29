@@ -32,7 +32,7 @@
 
 #include <kits/app/Application.h>
 #include <kits/app/AppDefs.h>
-#include <kits/support/Errors.h>
+#include <kits/debug/Errors.h>
 #include <kits/app/Message.h>
 #include <kits/support/ClassInfo.h>
 #include <os/kernel.h>

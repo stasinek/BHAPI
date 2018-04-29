@@ -82,7 +82,7 @@ __RCSID("$NetBSD: nsdispatch.c,v 1.37 2012/03/13 21:13:42 christos Exp $");
 #include <stdarg.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
+#include <kits/support/String.h>
 #include <unistd.h>
 
 #include <libutil.h>

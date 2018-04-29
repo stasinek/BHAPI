@@ -26,7 +26,7 @@
 #include <arch_vm.h>
 #include <arch/vm_translation_map.h>
 
-#include <string.h>
+#include <kits/support/String.h>
 
 //#define TRACE_ARCH_THREAD
 #ifdef TRACE_ARCH_THREAD

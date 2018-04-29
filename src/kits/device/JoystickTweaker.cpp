@@ -12,12 +12,12 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#include <Debug.h>
+#include <kits/debug/Debug.h>
 #include <Directory.h>
 #include <Joystick.h>
 #include <Path.h>
-#include <StringClass.h>
-#include <UTF8.h>
+#include <kits/support/String.h>
+#include <kits/textencoding/UTF8.h>
 
 
 #define STACK_STRING_BUFFER_SIZE	64

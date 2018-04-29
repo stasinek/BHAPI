@@ -10,7 +10,7 @@
 #include <unistd.h>
 #include <sys/stat.h>
 
-#include <string>
+#include <kits/support/String>
 
 #include <fs_attr.h>
 

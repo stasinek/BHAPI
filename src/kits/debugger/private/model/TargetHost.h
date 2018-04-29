@@ -7,7 +7,7 @@
 
 #include <Locker.h>
 #include <kits/kernel/OS.h>
-#include <StringClass.h>
+#include <kits/support/String.h>
 
 #include <ObjectList.h>
 #include <Referenceable.h>

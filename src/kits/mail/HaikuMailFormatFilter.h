@@ -8,7 +8,7 @@
 
 
 #include <MailFilter.h>
-#include <StringClass.h>
+#include <kits/support/String.h>
 
 
 class HaikuMailFormatFilter : public BMailFilter {

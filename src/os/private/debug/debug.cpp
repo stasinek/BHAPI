@@ -18,7 +18,7 @@
 #include <stdarg.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
+#include <kits/support/String.h>
 #include <syslog.h>
 
 #include <algorithm>
@@ -26,7 +26,7 @@
 #include <AutoDeleter.h>
 #include <boot/kernel_args.h>
 #include <cpu.h>
-#include <debug.h>
+#include <kits/debug/Debug.h>
 #include <debug_heap.h>
 #include <debug_paranoia.h>
 #include <driver_settings.h>

@@ -14,8 +14,8 @@
 #include <sniffer/Err.h>
 #include <sniffer/Range.h>
 #include <sniffer/Rule.h>
-#include <List.h>
-#include <string>
+#include <kits/support/List.h>
+#include <kits/support/String>
 #include <vector>
 
 class BString;

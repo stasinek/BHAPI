@@ -39,13 +39,13 @@ All rights reserved.
 #include <fs_attr.h>
 #include <fs_info.h>
 #include <stdarg.h>
-#include <string.h>
+#include <kits/support/String.h>
 #include <stdlib.h>
 #include <time.h>
 
 #include <BitmapStream.h>
 #include <Catalog.h>
-#include <Debug.h>
+#include <kits/debug/Debug.h>
 #include <Font.h>
 #include <IconUtils.h>
 #include <MenuItem.h>

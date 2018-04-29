@@ -34,9 +34,9 @@
 
 #include <kits/app/Message.h>
 #include <kits/app/AppDefs.h>
-#include <kits/support/StringClass.h>
+#include <kits/support/String.h>
 #include <kits/support/ClassInfo.h>
-#include <kits/support/Errors.h>
+#include <kits/debug/Errors.h>
 #include <os/debug.h>
 
 using namespace bhapi;

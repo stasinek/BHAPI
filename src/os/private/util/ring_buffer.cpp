@@ -12,7 +12,7 @@
 #endif
 
 #include <stdlib.h>
-#include <string.h>
+#include <kits/support/String.h>
 #include <sys/uio.h>
 
 #ifndef HAIKU_TARGET_PLATFORM_HAIKU

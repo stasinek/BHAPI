@@ -10,9 +10,9 @@
 #include <Scheduler.h>
 #include <TimeSource.h>
 
-#include <string.h>
+#include <kits/support/String.h>
 
-#include <debug.h>
+#include <kits/debug/Debug.h>
 
 #define B_NEW_BUFFER (BTimedEventQueue::B_USER_EVENT + 1)
 
