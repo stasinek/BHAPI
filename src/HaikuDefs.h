@@ -50,7 +50,11 @@
  */
 #ifndef __EXPORT
 #  if defined(BHAPI_OS_WIN32) || defined(BHAPI_OS_CYGWIN) || (defined(BHAPI_OS_BEOS) && defined(BHAPI_BIG_ENDIAN))
+#ifndef __GNUC__
 #    define __EXPORT __declspec(dllexport)
+#else
+#    define __EXPORT //__declspec(dllexport)
+#endif
 #  else
 #    define __EXPORT
 #  endif
@@ -58,7 +62,11 @@
 
 #ifndef __IMPORT
 #  if defined(BHAPI_OS_WIN32) || defined(BHAPI_OS_CYGWIN) || (defined(BHAPI_OS_BEOS) && defined(BHAPI_BIG_ENDIAN))
+#ifndef __GNUC__
 #    define __IMPORT __declspec(dllimport)
+#else
+#    define __IMPORT //__declspec(dllimport)
+#endif
 #  else
 #    define __IMPORT
 #  endif

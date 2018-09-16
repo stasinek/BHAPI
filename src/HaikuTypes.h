@@ -110,52 +110,52 @@ typedef __haiku_addr_t   ptr_t;
 typedef __haiku_addr_t   addr_t;
 
 #ifdef _MSC_VER
-typedef __int8   int8_t;
-typedef unsigned __int8   uint8_t;
-typedef __int16  int16_t;
-typedef unsigned __int16  uint16_t;
-typedef __int32  int32_t;
-typedef unsigned __int32  uint32_t;
-typedef __int64  int64_t;
-typedef unsigned __int64  uint64_t;
+typedef __haiku_std_int8   int8_t;
+typedef __haiku_std_uint8   uint8_t;
+typedef __haiku_std_int16  int16_t;
+typedef __haiku_std_uint16  uint16_t;
+typedef __haiku_std_int32  int32_t;
+typedef __haiku_std_uint32  uint32_t;
+typedef __haiku_std_int64  int64_t;
+typedef __haiku_std_uint64  uint64_t;
 #endif
 
-/*typedef	__int8 int8_t;
-typedef	unsigned __int8 uint8_t;
-typedef	__int16 int16_t;
-typedef	unsigned __int16 uint16_t;
-typedef	__int32 int32_t;
-typedef	unsigned __int32 uint32_t;
-typedef	__int64 int64_t;
-typedef	unsigned __int64 uint64_t;
+/*typedef	__haiku_std_int8 int8_t;
+typedef	__haiku_std_uint8 uint8_t;
+typedef	__haiku_std_int16 int16_t;
+typedef	__haiku_std_uint16 uint16_t;
+typedef	__haiku_std_int32 int32_t;
+typedef	__haiku_std_uint32 uint32_t;
+typedef	__haiku_std_int64 int64_t;
+typedef	__haiku_std_uint64 uint64_t;
 */
 
-typedef	__int8  int8;
-typedef	unsigned __int8 uint8;
-typedef	__int16 int16;
-typedef	unsigned __int16 uint16;
-typedef	__int32 int32;
-typedef	unsigned __int32 uint32;
-typedef	__int64 int64;
-typedef	unsigned __int64 uint64;
+typedef	__haiku_std_int8  int8;
+typedef	__haiku_std_uint8 uint8;
+typedef	__haiku_std_int16 int16;
+typedef	__haiku_std_uint16 uint16;
+typedef	__haiku_std_int32 int32;
+typedef	__haiku_std_uint32 uint32;
+typedef	__haiku_std_int64 int64;
+typedef	__haiku_std_uint64 uint64;
 
-typedef	__int8  __be_int8;
-typedef	unsigned __int8  __be_uint8;
-typedef	__int16  __be_int16;
-typedef	unsigned __int16  __be_uint16;
-typedef	__int32  __be_int32;
-typedef	unsigned __int32  __be_uint32;
-typedef	__int64  __be_int64;
-typedef	unsigned __int64  __be_uint64;
+typedef	__haiku_std_int8  __be_int8;
+typedef	__haiku_std_uint8  __be_uint8;
+typedef	__haiku_std_int16  __be_int16;
+typedef	__haiku_std_uint16  __be_uint16;
+typedef	__haiku_std_int32  __be_int32;
+typedef	__haiku_std_uint32  __be_uint32;
+typedef	__haiku_std_int64  __be_int64;
+typedef	__haiku_std_uint64  __be_uint64;
 
-typedef volatile __int8 	vint8;
-typedef volatile unsigned __int8 	vuint8;
-typedef volatile __int16 	vint16;
-typedef volatile unsigned __int16 	vuint16;
-typedef volatile __int32 	vint32;
-typedef volatile unsigned __int32 	vuint32;
-typedef volatile __int64 	vint64;
-typedef volatile unsigned __int64 	vuint64;
+typedef volatile __haiku_std_int8 	vint8;
+typedef volatile __haiku_std_uint8 	vuint8;
+typedef volatile __haiku_std_int16 	vint16;
+typedef volatile __haiku_std_uint16 	vuint16;
+typedef volatile __haiku_std_int32 	vint32;
+typedef volatile __haiku_std_uint32 	vuint32;
+typedef volatile __haiku_std_int64 	vint64;
+typedef volatile __haiku_std_uint64 	vuint64;
 
 typedef volatile long 	vlong;
 typedef volatile unsigned long 	vulong;
@@ -168,32 +168,32 @@ typedef volatile unsigned char 	vuchar;
 
 typedef unsigned char 	uchar;
 typedef unsigned short 	unichar;
-typedef unsigned __int16 unichar16;
-typedef unsigned __int32 unichar32;
+typedef __haiku_std_uint16 unichar16;
+typedef __haiku_std_uint32 unichar32;
 
-typedef __int32 __haiku_status_t;
-typedef __int32 __be_status_t;
-typedef __int32 status_t;
+typedef __haiku_std_int32 __haiku_status_t;
+typedef __haiku_std_int32 __be_status_t;
+typedef __haiku_std_int32 status_t;
 // 	Represents one of the status codes defined in Error.h. More...
-typedef __int64 __haiku_bigtime_t;
-typedef __int64 __be_bigtime_t;
-typedef __int64 bigtime_t;
+typedef __haiku_std_int64 __haiku_bigtime_t;
+typedef __haiku_std_int64 __be_bigtime_t;
+typedef __haiku_std_int64 bigtime_t;
 // 	Represents time. The unit depends on the context of the function. More...
-typedef __int64 __haiku_nanotime_t;
-typedef __int64 __be_nanotime_t;
-typedef __int64 nanotime_t;
+typedef __haiku_std_int64 __haiku_nanotime_t;
+typedef __haiku_std_int64 __be_nanotime_t;
+typedef __haiku_std_int64 nanotime_t;
 // 	Represents time in nanoseconds.
-typedef unsigned __int32 	__haiku_type_code;
-typedef unsigned __int32 	__be_type_code;
-typedef unsigned __int32 	type_code;
+typedef __haiku_std_uint32 	__haiku_type_code;
+typedef __haiku_std_uint32 	__be_type_code;
+typedef __haiku_std_uint32 	type_code;
 // 	Represents a certain type of data. See HaikuConstants.h for possible values. More...
-typedef unsigned __int32 	__haiku_perform_code;
-typedef unsigned __int32 	__be_perform_code;
-typedef unsigned __int32 	perform_code;
+typedef __haiku_std_uint32 	__haiku_perform_code;
+typedef __haiku_std_uint32 	__be_perform_code;
+typedef __haiku_std_uint32 	perform_code;
 
-typedef __haiku_phys_addr_t  gid_t;
-typedef __haiku_phys_addr_t  uid_t;
-typedef __haiku_phys_addr_t  uint;
+//typedef __haiku_phys_addr_t  gid_t;
+//typedef __haiku_phys_addr_t  uid_t;
+//typedef __haiku_phys_addr_t  uint;
 typedef unsigned short ushort;
 
 #ifndef __GNUC__
@@ -207,12 +207,11 @@ typedef unsigned short ushort;
 //#include <sys/types.h>
 #endif
 // POSIX
-#include <posix/sys/types.h>
+//#include <posix/sys/types.h>
 
+#if !defined(__ssize_t_defined) && !defined(__SSIZE_T_TYPE) && !defined(_SSIZE_T_DEFINED)
+    typedef __ssize_t ssize_t;
+    #define __ssize_t_defined
+#endif
 typedef size_t __be_size_t;
-#ifndef __clang__
-    #ifndef _SSIZE_T_DEFINED
-        typedef size_t ssize_t;
-    #endif
-#endif // __GNUC__
 #endif	/* BHAPI_HAIKU_TYPES_H */

@@ -47,7 +47,7 @@
 #define B_MAX_SYMLINKS			LINK_MAX
 #endif
 
-typedef __int32	b_dev_t;
+typedef __haiku_int32	b_dev_t;
 
 #ifdef __cplusplus
 namespace bhapi {
