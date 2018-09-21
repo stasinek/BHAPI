@@ -9,15 +9,15 @@
 #ifdef __cplusplus
 class BHAPI_IMPEXP BString::Private {
 public:
-    static const uint32 kPrivateDataOffset = 2 * sizeof(int32);
+    static const uint32_t kPrivateDataOffset = 2 * sizeof(int32_t);
 public:
     Private(const BString& string);
     char* Data();
     bool IsShareable() const;
-    static int32& DataRefCount(char* data);
-    int32& DataRefCount();
-    static int32& DataLength(char* data);
-    int32& DataLength();
+    static int32_t& DataRefCount(char* data);
+    int32_t& DataRefCount();
+    static int32_t& DataLength(char* data);
+    int32_t& DataLength();
     static void IncrementDataRefCount(char* data);
     static void DecrementDataRefCount(char* data);
     static BString StringFromData(char* data);

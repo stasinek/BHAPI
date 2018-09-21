@@ -1,4 +1,4 @@
-/* --------------------------------------------------------------------------
+﻿/* --------------------------------------------------------------------------
  *
  * BHAPI++ Copyright (C) 2017, Stanislaw Stasiak, based on Haiku & ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2007, Anthony Lee, All Rights Reserved
@@ -31,11 +31,11 @@
 //-------------------------------------------------------------------------------------------------
 #ifdef BHAPI_BUILD_LIBRARY
 namespace bhapi {
-extern BHAPI_EXPORT const  uint8 major_version;
-extern BHAPI_EXPORT const  uint8 minor_version;
-extern BHAPI_EXPORT const  uint8 micro_version;
-extern BHAPI_EXPORT const  uint8 interface_age;
-extern BHAPI_EXPORT const  uint8 binary_age;
+extern BHAPI_EXPORT const  uint8_t major_version;
+extern BHAPI_EXPORT const  uint8_t minor_version;
+extern BHAPI_EXPORT const  uint8_t micro_version;
+extern BHAPI_EXPORT const  uint8_t interface_age;
+extern BHAPI_EXPORT const  uint8_t binary_age;
 }
 #endif
 //-------------------------------------------------------------------------------------------------

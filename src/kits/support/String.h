@@ -45,8 +45,8 @@ BHAPI_IMPEXP int __cdecl strncasecmp(const char *a, const char *b, size_t c);
 #endif
 /* the result must be free by "free" */
 BHAPI_IMPEXP char* strdup(const char *src);
-BHAPI_IMPEXP char* strndup(const char *src,  int32 length);
-BHAPI_IMPEXP char* strdup_dirty(const char* src,  int32 length = -1);
+BHAPI_IMPEXP char* strndup(const char *src,  int32_t length);
+BHAPI_IMPEXP char* strdup_dirty(const char* src,  int32_t length = -1);
 // bhapi::strdup_dirty(): like bhapi::strdup(), but the result must be free by "delete[]"
 BHAPI_IMPEXP char* strdup_vprintf(const char *format, va_list ap);
 BHAPI_IMPEXP char* strdup_printf(const char *format, ...);
@@ -71,36 +71,36 @@ public:
             BString();
             BString(const char* string);
             BString(const BString& string);
-            BString(const char* string, int32 maxLength);
+            BString(const char* string, int32_t maxLength);
            ~BString();
     // Access
     const char*		String() const;
-    int32 			Length() const;
-    int32			CountChars() const;
-    int32			CountBytes(int32 fromCharOffset, int32 charCount) const;
+    int32_t 			Length() const;
+    int32_t			CountChars() const;
+    int32_t			CountBytes(int32_t fromCharOffset, int32_t charCount) const;
     bool			IsEmpty() const;
 
-    uint32			HashValue() const;
-    static	uint32	HashValue(const char* string);
+    uint32_t			HashValue() const;
+    static	uint32_t	HashValue(const char* string);
     // Assignment
     BString&		operator=(const BString& string);
     BString&		operator=(const char* string);
     BString&		operator=(char c);
 
     BString&		SetTo(const char* string);
-    BString&		SetTo(const char* string, int32 maxLength);
+    BString&		SetTo(const char* string, int32_t maxLength);
 
     BString&		SetTo(const BString& string);
     BString&		Adopt(BString& from);
 
-    BString&		SetTo(const BString& string, int32 maxLength);
-    BString&		Adopt(BString& from, int32 maxLength);
+    BString&		SetTo(const BString& string, int32_t maxLength);
+    BString&		Adopt(BString& from, int32_t maxLength);
 
-    BString&		SetTo(char c, int32 count);
+    BString&		SetTo(char c, int32_t count);
 
-    BString&		SetToChars(const char* string, int32 charCount);
-    BString&		SetToChars(const BString& string, int32 charCount);
-    BString&		AdoptChars(BString& from, int32 charCount);
+    BString&		SetToChars(const char* string, int32_t charCount);
+    BString&		SetToChars(const BString& string, int32_t charCount);
+    BString&		AdoptChars(BString& from, int32_t charCount);
 
     BString&		SetToFormat(const char* format, ...)
                 __attribute__((__format__(__printf__, 2, 3)));
@@ -112,11 +112,11 @@ public:
     int				ScanWithFormatVarArgs(const char* format, va_list args)
                 __attribute__((__format__(__scanf__, 2, 0)));
     // Substring copying
-    BString&		CopyInto(BString& into, int32 fromOffset, int32 length) const;
-    void			CopyInto(char* into, int32 fromOffset, int32 length) const;
+    BString&		CopyInto(BString& into, int32_t fromOffset, int32_t length) const;
+    void			CopyInto(char* into, int32_t fromOffset, int32_t length) const;
 
-    BString&		CopyCharsInto(BString& into, int32 fromCharOffset, int32 charCount) const;
-    bool			CopyCharsInto(char* into, int32* intoLength, int32 fromCharOffset, int32 charCount) const;
+    BString&		CopyCharsInto(BString& into, int32_t fromCharOffset, int32_t charCount) const;
+    bool			CopyCharsInto(char* into, int32_t* intoLength, int32_t fromCharOffset, int32_t charCount) const;
 
     bool			Split(const char* separator, bool noEmptyStrings,  BStringList& _list) const;
     // Appending
@@ -127,42 +127,42 @@ public:
     BString&		Append(const BString& string);
     BString&		Append(const char* string);
 
-    BString&		Append(const BString& string, int32 length);
-    BString&		Append(const char* string, int32 length);
-    BString&		Append(char c, int32 count);
+    BString&		Append(const BString& string, int32_t length);
+    BString&		Append(const char* string, int32_t length);
+    BString&		Append(char c, int32_t count);
 
-    BString&		AppendChars(const BString& string, int32 charCount);
-    BString&		AppendChars(const char* string, int32 charCount);
+    BString&		AppendChars(const BString& string, int32_t charCount);
+    BString&		AppendChars(const char* string, int32_t charCount);
     // Prepending
     BString&		Prepend(const char* string);
     BString&		Prepend(const BString& string);
-    BString&		Prepend(const char* string, int32 length);
-    BString&		Prepend(const BString& string, int32 length);
-    BString&		Prepend(char c, int32 count);
+    BString&		Prepend(const char* string, int32_t length);
+    BString&		Prepend(const BString& string, int32_t length);
+    BString&		Prepend(char c, int32_t count);
 
-    BString&		PrependChars(const char* string, int32 charCount);
-    BString&		PrependChars(const BString& string, int32 charCount);
+    BString&		PrependChars(const char* string, int32_t charCount);
+    BString&		PrependChars(const BString& string, int32_t charCount);
     // Inserting
-    BString&		Insert(const char* string, int32 position);
-    BString&		Insert(const char* string, int32 length, int32 position);
-    BString&		Insert(const char* string, int32 fromOffset, int32 length, int32 position);
-    BString&		Insert(const BString& string, int32 position);
-    BString&		Insert(const BString& string, int32 length, int32 position);
-    BString&		Insert(const BString& string, int32 fromOffset, int32 length, int32 position);
-    BString&		Insert(char c, int32 count, int32 position);
+    BString&		Insert(const char* string, int32_t position);
+    BString&		Insert(const char* string, int32_t length, int32_t position);
+    BString&		Insert(const char* string, int32_t fromOffset, int32_t length, int32_t position);
+    BString&		Insert(const BString& string, int32_t position);
+    BString&		Insert(const BString& string, int32_t length, int32_t position);
+    BString&		Insert(const BString& string, int32_t fromOffset, int32_t length, int32_t position);
+    BString&		Insert(char c, int32_t count, int32_t position);
 
-    BString&		InsertChars(const char* string, int32 charPosition);
-    BString&		InsertChars(const char* string, int32 charCount, int32 charPosition);
-    BString&		InsertChars(const char* string, int32 fromCharOffset, int32 charCount, int32 charPosition);
-    BString&		InsertChars(const BString& string, int32 charPosition);
-    BString&		InsertChars(const BString& string, int32 charCount, int32 charPosition);
-    BString&		InsertChars(const BString& string, int32 fromCharOffset, int32 charCount, int32 charPosition);
+    BString&		InsertChars(const char* string, int32_t charPosition);
+    BString&		InsertChars(const char* string, int32_t charCount, int32_t charPosition);
+    BString&		InsertChars(const char* string, int32_t fromCharOffset, int32_t charCount, int32_t charPosition);
+    BString&		InsertChars(const BString& string, int32_t charPosition);
+    BString&		InsertChars(const BString& string, int32_t charCount, int32_t charPosition);
+    BString&		InsertChars(const BString& string, int32_t fromCharOffset, int32_t charCount, int32_t charPosition);
     // Removing
-    BString&		Truncate(int32 newLength, bool lazy = true);
-    BString&		TruncateChars(int32 newCharCount, bool lazy = true);
+    BString&		Truncate(int32_t newLength, bool lazy = true);
+    BString&		TruncateChars(int32_t newCharCount, bool lazy = true);
 
-    BString&		Remove(int32 from, int32 length);
-    BString&		RemoveChars(int32 fromCharOffset, int32 charCount);
+    BString&		Remove(int32_t from, int32_t length);
+    BString&		RemoveChars(int32_t fromCharOffset, int32_t charCount);
 
     BString&		RemoveFirst(const BString& string);
     BString&		RemoveLast(const BString& string);
@@ -175,11 +175,11 @@ public:
     BString&		RemoveSet(const char* setOfBytesToRemove);
     BString&		RemoveCharsSet(const char* setOfCharsToRemove);
 
-    BString&		MoveInto(BString& into, int32 from, int32 length);
-    void			MoveInto(char* into, int32 from, int32 length);
+    BString&		MoveInto(BString& into, int32_t from, int32_t length);
+    void			MoveInto(char* into, int32_t from, int32_t length);
 
-    BString&		MoveCharsInto(BString& into, int32 fromCharOffset,  int32 charCount);
-    bool			MoveCharsInto(char* into, int32* intoLength, int32 fromCharOffset, int32 charCount);
+    BString&		MoveCharsInto(BString& into, int32_t fromCharOffset,  int32_t charCount);
+    bool			MoveCharsInto(char* into, int32_t* intoLength, int32_t fromCharOffset, int32_t charCount);
     // Compare functions
     bool			operator<(const BString& string) const;
     bool			operator<=(const BString& string) const;
@@ -199,94 +199,94 @@ public:
     // strcmp()-style compare functions
     int				Compare(const BString& string) const;
     int				Compare(const char* string) const;
-    int				Compare(const BString& string, int32 length) const;
-    int				Compare(const char* string, int32 length) const;
+    int				Compare(const BString& string, int32_t length) const;
+    int				Compare(const char* string, int32_t length) const;
 
-    int				CompareChars(const BString& string, int32 charCount) const;
-    int				CompareChars(const char* string, int32 charCount) const;
+    int				CompareChars(const BString& string, int32_t charCount) const;
+    int				CompareChars(const char* string, int32_t charCount) const;
 
     int				ICompare(const BString& string) const;
     int				ICompare(const char* string) const;
-    int				ICompare(const BString& string, int32 length) const;
-    int				ICompare(const char* string, int32 length) const;
+    int				ICompare(const BString& string, int32_t length) const;
+    int				ICompare(const char* string, int32_t length) const;
     // Searching
-    int32			FindFirst(const BString& string) const;
-    int32			FindFirst(const char* string) const;
-    int32			FindFirst(const BString& string, int32 fromOffset) const;
-    int32			FindFirst(const char* string, int32 fromOffset) const;
-    int32			FindFirst(char c) const;
-    int32			FindFirst(char c, int32 fromOffset) const;
+    int32_t			FindFirst(const BString& string) const;
+    int32_t			FindFirst(const char* string) const;
+    int32_t			FindFirst(const BString& string, int32_t fromOffset) const;
+    int32_t			FindFirst(const char* string, int32_t fromOffset) const;
+    int32_t			FindFirst(char c) const;
+    int32_t			FindFirst(char c, int32_t fromOffset) const;
 
-    int32			FindFirstChars(const BString& string, int32 fromCharOffset) const;
-    int32			FindFirstChars(const char* string, int32 fromCharOffset) const;
+    int32_t			FindFirstChars(const BString& string, int32_t fromCharOffset) const;
+    int32_t			FindFirstChars(const char* string, int32_t fromCharOffset) const;
 
-    int32			FindLast(const BString& string) const;
-    int32			FindLast(const char* string) const;
-    int32			FindLast(const BString& string, int32 beforeOffset) const;
-    int32			FindLast(const char* string, int32 beforeOffset) const;
-    int32			FindLast(char c) const;
-    int32			FindLast(char c, int32 beforeOffset) const;
+    int32_t			FindLast(const BString& string) const;
+    int32_t			FindLast(const char* string) const;
+    int32_t			FindLast(const BString& string, int32_t beforeOffset) const;
+    int32_t			FindLast(const char* string, int32_t beforeOffset) const;
+    int32_t			FindLast(char c) const;
+    int32_t			FindLast(char c, int32_t beforeOffset) const;
 
-    int32			FindLastChars(const BString& string, int32 beforeCharOffset) const;
-    int32			FindLastChars(const char* string, int32 beforeCharOffset) const;
+    int32_t			FindLastChars(const BString& string, int32_t beforeCharOffset) const;
+    int32_t			FindLastChars(const char* string, int32_t beforeCharOffset) const;
 
-    int32			IFindFirst(const BString& string) const;
-    int32			IFindFirst(const char* string) const;
-    int32			IFindFirst(const BString& string, int32 fromOffset) const;
-    int32			IFindFirst(const char* string, int32 fromOffset) const;
+    int32_t			IFindFirst(const BString& string) const;
+    int32_t			IFindFirst(const char* string) const;
+    int32_t			IFindFirst(const BString& string, int32_t fromOffset) const;
+    int32_t			IFindFirst(const char* string, int32_t fromOffset) const;
 
-    int32			IFindLast(const BString& string) const;
-    int32			IFindLast(const char* string) const;
-    int32			IFindLast(const BString& string, int32 beforeOffset) const;
-    int32			IFindLast(const char* string, int32 beforeOffset) const;
+    int32_t			IFindLast(const BString& string) const;
+    int32_t			IFindLast(const char* string) const;
+    int32_t			IFindLast(const BString& string, int32_t beforeOffset) const;
+    int32_t			IFindLast(const char* string, int32_t beforeOffset) const;
 
     bool			StartsWith(const BString& string) const;
     bool			StartsWith(const char* string) const;
-    bool			StartsWith(const char* string, int32 length) const;
+    bool			StartsWith(const char* string, int32_t length) const;
 
     bool			EndsWith(const BString& string) const;
     bool			EndsWith(const char* string) const;
-    bool			EndsWith(const char* string, int32 length) const;
+    bool			EndsWith(const char* string, int32_t length) const;
     // Replacing
     BString&		ReplaceFirst(char replaceThis, char withThis);
     BString&		ReplaceLast(char replaceThis, char withThis);
-    BString&		ReplaceAll(char replaceThis, char withThis, int32 fromOffset = 0);
-    BString&		Replace(char replaceThis, char withThis, int32 maxReplaceCount, int32 fromOffset = 0);
+    BString&		ReplaceAll(char replaceThis, char withThis, int32_t fromOffset = 0);
+    BString&		Replace(char replaceThis, char withThis, int32_t maxReplaceCount, int32_t fromOffset = 0);
     BString&		ReplaceFirst(const char* replaceThis, const char* withThis);
     BString&		ReplaceLast(const char* replaceThis, const char* withThis);
-    BString&		ReplaceAll(const char* replaceThis, const char* withThis, int32 fromOffset = 0);
-    BString&		Replace(const char* replaceThis, const char* withThis, int32 maxReplaceCount, int32 fromOffset = 0);
+    BString&		ReplaceAll(const char* replaceThis, const char* withThis, int32_t fromOffset = 0);
+    BString&		Replace(const char* replaceThis, const char* withThis, int32_t maxReplaceCount, int32_t fromOffset = 0);
 
-    BString&		ReplaceAllChars(const char* replaceThis, const char* withThis, int32 fromCharOffset);
-    BString&		ReplaceChars(const char* replaceThis, const char* withThis, int32 maxReplaceCount, int32 fromCharOffset);
+    BString&		ReplaceAllChars(const char* replaceThis, const char* withThis, int32_t fromCharOffset);
+    BString&		ReplaceChars(const char* replaceThis, const char* withThis, int32_t maxReplaceCount, int32_t fromCharOffset);
 
     BString&		IReplaceFirst(char replaceThis, char withThis);
     BString&		IReplaceLast(char replaceThis, char withThis);
-    BString&		IReplaceAll(char replaceThis, char withThis, int32 fromOffset = 0);
-    BString&		IReplace(char replaceThis, char withThis, int32 maxReplaceCount, int32 fromOffset = 0);
+    BString&		IReplaceAll(char replaceThis, char withThis, int32_t fromOffset = 0);
+    BString&		IReplace(char replaceThis, char withThis, int32_t maxReplaceCount, int32_t fromOffset = 0);
     BString&		IReplaceFirst(const char* replaceThis, const char* withThis);
     BString&		IReplaceLast(const char* replaceThis, const char* withThis);
-    BString&		IReplaceAll(const char* replaceThis, const char* withThis, int32 fromOffset = 0);
-    BString&		IReplace(const char* replaceThis, const char* withThis, int32 maxReplaceCount, int32 fromOffset = 0);
+    BString&		IReplaceAll(const char* replaceThis, const char* withThis, int32_t fromOffset = 0);
+    BString&		IReplace(const char* replaceThis, const char* withThis, int32_t maxReplaceCount, int32_t fromOffset = 0);
 
     BString&		ReplaceSet(const char* setOfBytes, char with);
     BString&		ReplaceSet(const char* setOfBytes, const char* with);
 
     BString&		ReplaceCharsSet(const char* setOfChars, const char* with);
     // Unchecked char access
-    char			operator[](int32 index) const;
+    char			operator[](int32_t index) const;
 #if __GNUC__ > 3
-    BStringRef		operator[](int32 index);
+    BStringRef		operator[](int32_t index);
 #else
-    char&			operator[](int32 index);
+    char&			operator[](int32_t index);
 #endif
     // Checked char access
-    char			ByteAt(int32 index) const;
-    const char*		CharAt(int32 charIndex, int32* bytes = NULL) const;
-    bool			CharAt(int32 charIndex, char* buffer, int32* bytes) const;
+    char			ByteAt(int32_t index) const;
+    const char*		CharAt(int32_t charIndex, int32_t* bytes = NULL) const;
+    bool			CharAt(int32_t charIndex, char* buffer, int32_t* bytes) const;
     // Fast low-level manipulation
-    char*			LockBuffer(int32 maxLength);
-    BString&		UnlockBuffer(int32 length = -1);
+    char*			LockBuffer(int32_t maxLength);
+    BString&		UnlockBuffer(int32_t length = -1);
     // Upercase <-> Lowercase
     BString&		ToLower();
     BString&		ToUpper();
@@ -330,38 +330,38 @@ private:
 
     // Management
     status_t		__MakeWritable();
-    status_t		__MakeWritable(int32 length, bool copy);
-    static	char*			__Allocate(int32 length);
-    char*			__Resize(int32 length);
-    void			__Init(const char* src, int32 length);
-    char*			__Clone(const char* data, int32 length);
-    char*			__OpenAtBy(int32 offset, int32 length);
-    char*			__ShrinkAtBy(int32 offset, int32 length);
+    status_t		__MakeWritable(int32_t length, bool copy);
+    static	char*			__Allocate(int32_t length);
+    char*			__Resize(int32_t length);
+    void			__Init(const char* src, int32_t length);
+    char*			__Clone(const char* data, int32_t length);
+    char*			__OpenAtBy(int32_t offset, int32_t length);
+    char*			__ShrinkAtBy(int32_t offset, int32_t length);
 
     // Data
-    void			__SetLength(int32 length);
-    bool			__DoAppend(const char* string, int32 length);
-    bool			__DoPrepend(const char* string, int32 length);
-    bool			__DoInsert(const char* string, int32 offset, int32 length);
+    void			__SetLength(int32_t length);
+    bool			__DoAppend(const char* string, int32_t length);
+    bool			__DoPrepend(const char* string, int32_t length);
+    bool			__DoInsert(const char* string, int32_t offset, int32_t length);
 
     // Search
-    int32			__ShortFindAfter(const char* string, int32 length) const;
-    int32			__FindAfter(const char* string, int32 offset, int32 length) const;
-    int32			__IFindAfter(const char* string, int32 offset, int32 length) const;
-    int32			__FindBefore(const char* string, int32 offset, int32 length) const;
-    int32			__IFindBefore(const char* string, int32 offset, int32 length) const;
+    int32_t			__ShortFindAfter(const char* string, int32_t length) const;
+    int32_t			__FindAfter(const char* string, int32_t offset, int32_t length) const;
+    int32_t			__IFindAfter(const char* string, int32_t offset, int32_t length) const;
+    int32_t			__FindBefore(const char* string, int32_t offset, int32_t length) const;
+    int32_t			__IFindBefore(const char* string, int32_t offset, int32_t length) const;
 
     // Escape
     BString&		__DoCharacterEscape(const char* string, const char* setOfCharsToEscape, char escapeChar);
     BString&		__DoCharacterDeescape(const char* string, char escapeChar);
 
     // Replace
-    BString&		__DoReplace(const char* findThis, const char* replaceWith, int32 maxReplaceCount, int32 fromOffset, bool ignoreCase);
-    void			__ReplaceAtPositions(const PosVect* positions, int32 searchLength, const char* with, int32 withLength);
+    BString&		__DoReplace(const char* findThis, const char* replaceWith, int32_t maxReplaceCount, int32_t fromOffset, bool ignoreCase);
+    void			__ReplaceAtPositions(const PosVect* positions, int32_t searchLength, const char* with, int32_t withLength);
 
 private:
-    int32& 			__ReferenceCount();
-    const int32& 	__ReferenceCount() const;
+    int32_t& 			__ReferenceCount();
+    const int32_t& 	__ReferenceCount() const;
     bool			__IsShareable() const;
     void			__FreePrivateData();
 
@@ -371,7 +371,7 @@ private:
 //	#pragma mark - BStringRef
 class BHAPI_IMPEXP BStringRef {
 public:
-     BStringRef(BString& string, int32 position);
+     BStringRef(BString& string, int32_t position);
     ~BStringRef() {}
 
     operator char() const;
@@ -384,12 +384,12 @@ public:
 
 private:
     BString&	fString;
-    int32		fPosition;
+    int32_t		fPosition;
 };
 namespace bhapi {
 template<class TYPE_INT>
-BHAPI_IMPEXP void printf_int(BString &str, TYPE_INT value, uint8 _base, int precision_width, bool upper_style);
-BHAPI_IMPEXP  int32 printf_double(BString &str, double value, int precision_width,  int32 *exponent, bool g_style, bool upper_style);
+BHAPI_IMPEXP void printf_int(BString &str, TYPE_INT value, uint8_t _base, int precision_width, bool upper_style);
+BHAPI_IMPEXP  int32_t printf_double(BString &str, double value, int precision_width,  int32_t *exponent, bool g_style, bool upper_style);
 }
 #endif /* __cplusplus */
 #define BSTRING_DEF

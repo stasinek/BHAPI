@@ -70,21 +70,21 @@ enum {
 #ifdef __cplusplus
 namespace bhapi {
 BHAPI_IMPEXP bool IsInsideGlyph(uchar ch);
-BHAPI_IMPEXP uint32 UTF8NextCharLenUnsafe(const char *text);
-BHAPI_IMPEXP uint32 UTF8NextCharLen(const char *text);
-BHAPI_IMPEXP uint32 UTF8NextCharLen(const char *bytes, size_t length);
-BHAPI_IMPEXP uint32 UTF8PreviousCharLen(const char *text, const char *limit);
+BHAPI_IMPEXP uint32_t UTF8NextCharLenUnsafe(const char *text);
+BHAPI_IMPEXP uint32_t UTF8NextCharLen(const char *text);
+BHAPI_IMPEXP uint32_t UTF8NextCharLen(const char *bytes, size_t length);
+BHAPI_IMPEXP uint32_t UTF8PreviousCharLen(const char *text, const char *limit);
 
 /*!	UTF8CountBytes gets the length (in bytes) of a UTF8 string. Up to
     numChars characters are read. If numChars is a negative value it is ignored
     and the string is read up to the terminating 0.
 */
-BHAPI_IMPEXP uint32 UTF8CountBytes(const char *bytes, int32 numChars);
+BHAPI_IMPEXP uint32_t UTF8CountBytes(const char *bytes, int32_t numChars);
 /*!	UTF8CountChars gets the length (in characters) of a UTF8 string. Up to
     numBytes bytes are read. If numBytes is a negative value it is ignored
     and the string is read up to the terminating 0.
 */
-BHAPI_IMPEXP uint32 UTF8CountChars(const char *bytes, int32 numBytes);
+BHAPI_IMPEXP uint32_t UTF8CountChars(const char *bytes, int32_t numBytes);
 
 /*!	UTF8ToCharCode converts the input that includes potential multibyte chars
     to UTF-32 char codes that can be used by FreeType. The string pointer is
@@ -93,7 +93,7 @@ BHAPI_IMPEXP uint32 UTF8CountChars(const char *bytes, int32 numBytes);
     returned. This makes it safe to overruns and enables streamed processing
     of UTF8 strings.
 */
-BHAPI_IMPEXP uint32 UTF8ToCharCode(const char **bytes);
+BHAPI_IMPEXP uint32_t UTF8ToCharCode(const char **bytes);
 }
 #endif	/* __cplusplus */
 //-------------------------------------------------------------------------------------------------

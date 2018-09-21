@@ -1,5 +1,5 @@
 INPUT(
-./release/Freetype.o
+./release/freetype.o
 ./release/ftsystem.o
 ./release/ftdebug.o
 ./release/ftinit.o

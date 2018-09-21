@@ -1,4 +1,4 @@
-/* --------------------------------------------------------------------------
+﻿/* --------------------------------------------------------------------------
  *
  * BHAPI++ Copyright (C) 2017, Stanislaw Stasiak, based on Haiku source-code, All Rights Reserved
  *
@@ -33,6 +33,9 @@
  */
 //-----------------------------------------------------------------------------
 #include <kits/support/StringList.h>
+using namespace bhapi;
+//-------------------------------------------------------------------------------------------------
+#include <kits/debug/Debug.h>
 #include <kits/support/List.h>
 #include <kits/support/String.h>
 #include <kits/support/private/StringPrivate.h>
@@ -50,7 +53,7 @@ static int compare_private_data_ignore_case(const void *a, const void *b)
 }
 //-------------------------------------------------------------------------------------------------
 // #pragma mark - BStringList
-BStringList::BStringList(int32 count)
+BStringList::BStringList(int32_t count)
     :
     fStrings(count)
 {
@@ -73,7 +76,7 @@ BStringList::~BStringList(void)
 
 //-----------------------------------------------------------------------------
 
-bool BStringList::Add(const BString &_string, int32 index)
+bool BStringList::Add(const BString &_string, int32_t index)
 {
     BString string(_string);
     char    *privateData = BString::Private(string).Data();
@@ -101,7 +104,7 @@ bool BStringList::Add(const BString &_string)
 }
 //-----------------------------------------------------------------------------
 
-bool BStringList::Add(const BStringList &list, int32 index)
+bool BStringList::Add(const BStringList &list, int32_t index)
 {
     if (!fStrings.AddList(&list.fStrings, index)) return false;
 
@@ -123,13 +126,13 @@ bool BStringList::Add(const BStringList &list)
 bool BStringList::Remove(const BString &string, bool ignoreCase)
 {
     bool    result = false;
-    int32   count = fStrings.CountItems();
+    int32_t   count = fStrings.CountItems();
 
     if (ignoreCase)
     {
-        int32   length = string.Length();
+        int32_t   length = string.Length();
 
-        for (int32 i = count - 1; i >= 0; i--)
+        for (int32_t i = count - 1; i >= 0; i--)
         {
             BString element(StringAt(i));
             if (length == element.Length() && string.ICompare(element) == 0)
@@ -141,7 +144,7 @@ bool BStringList::Remove(const BString &string, bool ignoreCase)
     }
     else
     {
-        for (int32 i = count - 1; i >= 0; i--)
+        for (int32_t i = count - 1; i >= 0; i--)
         {
             if (string == StringAt(i))
             {
@@ -159,15 +162,15 @@ bool BStringList::Remove(const BString &string, bool ignoreCase)
 bool BStringList::Remove(const BStringList &list, bool ignoreCase)
 {
     bool    removedAnything = false;
-    int32   stringCount = list.CountStrings();
-    for (int32 i = 0; i < stringCount; i++) removedAnything |= Remove(list.StringAt(i), ignoreCase);
+    int32_t   stringCount = list.CountStrings();
+    for (int32_t i = 0; i < stringCount; i++) removedAnything |= Remove(list.StringAt(i), ignoreCase);
 
     return removedAnything;
 }
 
 //-----------------------------------------------------------------------------
 
-BString BStringList::Remove(int32 index)
+BString BStringList::Remove(int32_t index)
 {
     char    *privateData = (char *)fStrings.RemoveItem(index);
     BString string(BString::Private::StringFromData(privateData));
@@ -179,12 +182,12 @@ BString BStringList::Remove(int32 index)
 
 //-----------------------------------------------------------------------------
 
-bool BStringList::Remove(int32 index, int32 count)
+bool BStringList::Remove(int32_t index, int32_t count)
 {
-    int32   stringCount = fStrings.CountItems();
-    int32   end = index + min_c(stringCount - index, count);
+    int32_t   stringCount = fStrings.CountItems();
+    int32_t   end = index + min_c(stringCount - index, count);
     if (index < 0 || index > stringCount) return false;
-    for (int32 i = index; i < end; i++) BString::Private::DecrementDataRefCount((char *)fStrings.ItemAt(i));
+    for (int32_t i = index; i < end; i++) BString::Private::DecrementDataRefCount((char *)fStrings.ItemAt(i));
 
     fStrings.RemoveItems(index, end - index);
     return true;
@@ -192,7 +195,7 @@ bool BStringList::Remove(int32 index, int32 count)
 
 //-----------------------------------------------------------------------------
 
-bool BStringList::Replace(int32 index, const BString &string)
+bool BStringList::Replace(int32_t index, const BString &string)
 {
     char    *privateData = BString::Private(string).Data();
     if (index < 0 || index >= fStrings.CountItems()) return false;
@@ -222,21 +225,21 @@ void BStringList::Sort(bool ignoreCase)
 
 //-----------------------------------------------------------------------------
 
-bool BStringList::Swap(int32 indexA, int32 indexB)
+bool BStringList::Swap(int32_t indexA, int32_t indexB)
 {
     return fStrings.SwapItems(indexA, indexB);
 }
 
 //-----------------------------------------------------------------------------
 
-bool BStringList::Move(int32 fromIndex, int32 toIndex)
+bool BStringList::Move(int32_t fromIndex, int32_t toIndex)
 {
     return fStrings.MoveItem(fromIndex, toIndex);
 }
 
 //-----------------------------------------------------------------------------
 
-BString BStringList::StringAt(int32 index) const
+BString BStringList::StringAt(int32_t index) const
 {
     return BString::Private::StringFromData((char *)fStrings.ItemAt(index));
 }
@@ -257,15 +260,15 @@ BString BStringList::Last(void) const
 
 //-----------------------------------------------------------------------------
 
-int32 BStringList::IndexOf(const BString &string, bool ignoreCase) const
+int32_t BStringList::IndexOf(const BString &string, bool ignoreCase) const
 {
-    int32   count = fStrings.CountItems();
+    int32_t   count = fStrings.CountItems();
 
     if (ignoreCase)
     {
-        int32   length = string.Length();
+        int32_t   length = string.Length();
 
-        for (int32 i = 0; i < count; i++)
+        for (int32_t i = 0; i < count; i++)
         {
             BString element(StringAt(i));
             if (length == element.Length() && string.ICompare(element) == 0) return i;
@@ -273,7 +276,7 @@ int32 BStringList::IndexOf(const BString &string, bool ignoreCase) const
     }
     else
     {
-        for (int32 i = 0; i < count; i++)
+        for (int32_t i = 0; i < count; i++)
         {
             if (string == StringAt(i)) return i;
         }
@@ -284,7 +287,7 @@ int32 BStringList::IndexOf(const BString &string, bool ignoreCase) const
 
 //-----------------------------------------------------------------------------
 
-int32 BStringList::CountStrings(void) const
+int32_t BStringList::CountStrings(void) const
 {
     return fStrings.CountItems();
 }
@@ -298,7 +301,7 @@ bool BStringList::IsEmpty(void) const
 
 //-----------------------------------------------------------------------------
 
-BString BStringList::Join(const char *separator, int32 length) const
+BString BStringList::Join(const char *separator, int32_t length) const
 {
     return __Join(separator, length >= 0 ? strnlen(separator, length) : strlen(separator));
 }
@@ -307,16 +310,16 @@ BString BStringList::Join(const char *separator, int32 length) const
 
 void BStringList::DoForEach(bool (*func) (const BString &string))
 {
-    int32   count = fStrings.CountItems();
-    for (int32 i = 0; i < count; i++) func(StringAt(i));
+    int32_t   count = fStrings.CountItems();
+    for (int32_t i = 0; i < count; i++) func(StringAt(i));
 }
 
 //-----------------------------------------------------------------------------
 
 void BStringList::DoForEach(bool (*func) (const BString &string, void *arg2), void *arg2)
 {
-    int32   count = fStrings.CountItems();
-    for (int32 i = 0; i < count; i++) func(StringAt(i), arg2);
+    int32_t   count = fStrings.CountItems();
+    for (int32_t i = 0; i < count; i++) func(StringAt(i), arg2);
 }
 //-----------------------------------------------------------------------------
 
@@ -335,11 +338,11 @@ BStringList &BStringList::operator=(const BStringList &other)
 
 bool BStringList::operator==(const BStringList &other) const
 {
-    int32   count = fStrings.CountItems();
+    int32_t   count = fStrings.CountItems();
     if (this == &other) return true;
     if (count != other.fStrings.CountItems()) return false;
 
-    for (int32 i = 0; i < count; i++)
+    for (int32_t i = 0; i < count; i++)
     {
         if (StringAt(i) != other.StringAt(i)) return false;
     }
@@ -369,8 +372,8 @@ bool BStringList::AllowsTypeCode(type_code code) const
 ssize_t BStringList::FlattenedSize(void) const
 {
     ssize_t size = 0;
-    int32   count = CountStrings();
-    for (int32 i = 0; i < count; i++) size += StringAt(i).Length() + 1;
+    int32_t   count = CountStrings();
+    for (int32_t i = 0; i < count; i++) size += StringAt(i).Length() + 1;
 
     return size;
 }
@@ -380,10 +383,10 @@ status_t BStringList::Flatten(void *buf, ssize_t size) const
 {
     const char  *buffer = (const char *)buf;
 
-    int32       count = CountStrings();
+    int32_t       count = CountStrings();
     if (size < FlattenedSize()) return B_NO_MEMORY;
 
-    for (int32 i = 0; i < count; i++)
+    for (int32_t i = 0; i < count; i++)
     {
         BString item = StringAt(i);
         ssize_t storeSize = item.Length() + 1;
@@ -419,8 +422,8 @@ status_t BStringList::Unflatten(type_code code, const void *buffer, ssize_t size
 
 void BStringList::__IncrementRefCounts(void) const
 {
-    int32   count = fStrings.CountItems();
-    for (int32 i = 0; i < count; i++)
+    int32_t   count = fStrings.CountItems();
+    for (int32_t i = 0; i < count; i++)
     {
         BString::Private::IncrementDataRefCount((char *)fStrings.ItemAt(i));
     }
@@ -429,29 +432,29 @@ void BStringList::__IncrementRefCounts(void) const
 
 void BStringList::__DecrementRefCounts(void) const
 {
-    int32   count = fStrings.CountItems();
-    for (int32 i = 0; i < count; i++) BString::Private::DecrementDataRefCount((char *)fStrings.ItemAt(i));
+    int32_t   count = fStrings.CountItems();
+    for (int32_t i = 0; i < count; i++) BString::Private::DecrementDataRefCount((char *)fStrings.ItemAt(i));
 }
 //-----------------------------------------------------------------------------
 
-BString BStringList::__Join(const char *separator, int32 length) const
+BString BStringList::__Join(const char *separator, int32_t length) const
 {
 
     // handle simple cases (0 or 1 element)
-    int32   count = CountStrings();
-    int32   totalLength = length * (count - 1);
+    int32_t   count = CountStrings();
+    int32_t   totalLength = length * (count - 1);
     BString result;
     char    *buffer = result.LockBuffer(totalLength);
     if (count == 0) return BString();
     if (count == 1) return StringAt(0);
 
     // determine the total length
-    for (int32 i = 0; i < count; i++) totalLength += StringAt(i).Length();
+    for (int32_t i = 0; i < count; i++) totalLength += StringAt(i).Length();
 
     // compose the result string
     if (buffer == NULL) return result;
 
-    for (int32 i = 0; i < count; i++)
+    for (int32_t i = 0; i < count; i++)
     {
         BString string = StringAt(i);
         if (i > 0 && length > 0)

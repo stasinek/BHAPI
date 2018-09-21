@@ -370,90 +370,90 @@ namespace bhapi {
 #endif
 // Key definitions
 struct key_info {
-    uint32	modifiers;
-    uint8	key_states[16];
+    uint32_t	modifiers;
+    uint8_t	key_states[16];
 };
 
 struct key_map {
-    uint32	version;
-    uint32	caps_key;
-    uint32	scroll_key;
-    uint32	num_key;
-    uint32	left_shift_key;
-    uint32	right_shift_key;
-    uint32	left_command_key;
-    uint32	right_command_key;
-    uint32	left_control_key;
-    uint32	right_control_key;
-    uint32	left_option_key;
-    uint32	right_option_key;
-    uint32	menu_key;
-    uint32	lock_settings;
-    int32	control_map[128];
-    int32	option_caps_shift_map[128];
-    int32	option_caps_map[128];
-    int32	option_shift_map[128];
-    int32	option_map[128];
-    int32	caps_shift_map[128];
-    int32	caps_map[128];
-    int32	shift_map[128];
-    int32	normal_map[128];
-    int32	acute_dead_key[32];
-    int32	grave_dead_key[32];
-    int32	circumflex_dead_key[32];
-    int32	dieresis_dead_key[32];
-    int32	tilde_dead_key[32];
-    uint32	acute_tables;
-    uint32	grave_tables;
-    uint32	circumflex_tables;
-    uint32	dieresis_tables;
-    uint32	tilde_tables;
+    uint32_t	version;
+    uint32_t	caps_key;
+    uint32_t	scroll_key;
+    uint32_t	num_key;
+    uint32_t	left_shift_key;
+    uint32_t	right_shift_key;
+    uint32_t	left_command_key;
+    uint32_t	right_command_key;
+    uint32_t	left_control_key;
+    uint32_t	right_control_key;
+    uint32_t	left_option_key;
+    uint32_t	right_option_key;
+    uint32_t	menu_key;
+    uint32_t	lock_settings;
+    int32_t	control_map[128];
+    int32_t	option_caps_shift_map[128];
+    int32_t	option_caps_map[128];
+    int32_t	option_shift_map[128];
+    int32_t	option_map[128];
+    int32_t	caps_shift_map[128];
+    int32_t	caps_map[128];
+    int32_t	shift_map[128];
+    int32_t	normal_map[128];
+    int32_t	acute_dead_key[32];
+    int32_t	grave_dead_key[32];
+    int32_t	circumflex_dead_key[32];
+    int32_t	dieresis_dead_key[32];
+    int32_t	tilde_dead_key[32];
+    uint32_t	acute_tables;
+    uint32_t	grave_tables;
+    uint32_t	circumflex_tables;
+    uint32_t	dieresis_tables;
+    uint32_t	tilde_tables;
 };
 // Mouse definitions
 struct mouse_map {
-    uint32	button[B_MAX_MOUSE_BUTTONS];
+    uint32_t	button[B_MAX_MOUSE_BUTTONS];
 };
 
 struct scroll_bar_info {
     bool	proportional;
     bool	double_arrows;
-    int32	knob;
-    int32	min_knob_size;
+    int32_t	knob;
+    int32_t	min_knob_size;
 };
 
 const color_map* system_colors();
 status_t		get_deskbar_frame(BRect* frame);
-status_t		set_screen_space(int32 index, uint32 resolution,bool save = true);
+status_t		set_screen_space(int32_t index, uint32_t resolution,bool save = true);
 status_t		get_scroll_bar_info(scroll_bar_info* info);
 status_t		set_scroll_bar_info(scroll_bar_info* info);
-status_t		get_mouse_type(int32* type);
-status_t		set_mouse_type(int32 type);
+status_t		get_mouse_type(int32_t* type);
+status_t		set_mouse_type(int32_t type);
 status_t		get_mouse_map(mouse_map* map);
 status_t		set_mouse_map(mouse_map* map);
-status_t		get_mouse_speed(int32* speed);
-status_t		set_mouse_speed(int32 speed);
-status_t		get_mouse_acceleration(int32* speed);
-status_t		set_mouse_acceleration(int32 speed);
+status_t		get_mouse_speed(int32_t* speed);
+status_t		set_mouse_speed(int32_t speed);
+status_t		get_mouse_acceleration(int32_t* speed);
+status_t		set_mouse_acceleration(int32_t speed);
 status_t		get_click_speed(bigtime_t* speed);
 status_t		set_click_speed(bigtime_t speed);
 
-status_t		get_key_repeat_rate(int32* rate);
-status_t		set_key_repeat_rate(int32 rate);
+status_t		get_key_repeat_rate(int32_t* rate);
+status_t		set_key_repeat_rate(int32_t rate);
 status_t		get_key_repeat_delay(bigtime_t* delay);
 status_t		set_key_repeat_delay(bigtime_t delay);
 status_t		get_key_info(key_info* info);
 void			get_key_map(key_map** _map, char** _keyBuffer);
-status_t		get_keyboard_id(uint16* _id);
-void			set_keyboard_locks(uint32 modifiers);
-uint32			modifiers();
-status_t		get_modifier_key(uint32 modifier, uint32 *key);
-void			set_modifier_key(uint32 modifier, uint32 key);
+status_t		get_keyboard_id(uint16_t* _id);
+void			set_keyboard_locks(uint32_t modifiers);
+uint32_t			modifiers();
+status_t		get_modifier_key(uint32_t modifier, uint32_t *key);
+void			set_modifier_key(uint32_t modifier, uint32_t key);
 rgb_color		keyboard_navigation_color();
 
-int32			count_workspaces();
-void			set_workspace_count(int32 count);
-int32			current_workspace();
-void			activate_workspace(int32 workspace);
+int32_t			count_workspaces();
+void			set_workspace_count(int32_t count);
+int32_t			current_workspace();
+void			activate_workspace(int32_t workspace);
 
 bigtime_t		idle_time();
 
@@ -470,7 +470,7 @@ mode_mouse		mouse_mode();
 void			set_focus_follows_mouse_mode(mode_focus_follows_mouse mode);
 mode_focus_follows_mouse	focus_follows_mouse_mode();
 
-status_t		get_mouse(BPoint* screenWhere, uint32* buttons);
+status_t		get_mouse(BPoint* screenWhere, uint32_t* buttons);
 status_t		get_mouse_bitmap(BBitmap** bitmap, BPoint* hotspot);
 
 void			set_accept_first_click(bool acceptFirstClick);

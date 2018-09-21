@@ -1,4 +1,4 @@
-/* --------------------------------------------------------------------------
+﻿/* --------------------------------------------------------------------------
  *
  * BHAPI++ --- The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2007, Anthony Lee, All Rights Reserved
@@ -53,21 +53,21 @@
 extern "C" {
 namespace bhapi {
 #endif // __cplusplus
-extern BHAPI_IMPEXP const  uint8 be_major_version;
-extern BHAPI_IMPEXP const  uint8 be_minor_version;
-extern BHAPI_IMPEXP const  uint8 be_micro_version;
-extern BHAPI_IMPEXP const  uint8 be_interface_age;
-extern BHAPI_IMPEXP const  uint16 be_binary_age;
+extern BHAPI_IMPEXP const  uint8_t be_major_version;
+extern BHAPI_IMPEXP const  uint8_t be_minor_version;
+extern BHAPI_IMPEXP const  uint8_t be_micro_version;
+extern BHAPI_IMPEXP const  uint8_t be_interface_age;
+extern BHAPI_IMPEXP const  uint16_t be_binary_age;
 #ifdef __cplusplus
 } /* namespace */
 }
 #endif // __cplusplus
 #else
-extern const  uint8 be_major_version;
-extern const  uint8 be_minor_version;
-extern const  uint8 be_micro_version;
-extern const  uint8 be_interface_age;
-extern const  uint16 be_binary_age;
+extern const  uint8_t be_major_version;
+extern const  uint8_t be_minor_version;
+extern const  uint8_t be_micro_version;
+extern const  uint8_t be_interface_age;
+extern const  uint16_t be_binary_age;
 #endif
 //-----------------------------------------------------------------------------
 #endif // BHAPI_BE_H

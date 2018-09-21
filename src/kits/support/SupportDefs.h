@@ -338,97 +338,97 @@ namespace bhapi {
 #endif
 //-------------------------------------------------------------------------------------------------
 #if __GNUC__ > 4 || (__GNUC__ == 4 && __GNUC_MINOR__ >= 7) || defined(__clang__)
-static __inline__ void atomic_set(int32* value, int32 newValue)
+static __inline__ void atomic_set(int32_t* value, int32_t newValue)
 {
     __atomic_store_n(value, newValue, __ATOMIC_RELEASE);
 }
 //-------------------------------------------------------------------------------------------------
-static __inline__ int32 atomic_get_and_set(int32* value, int32 newValue)
+static __inline__ int32_t atomic_get_and_set(int32_t* value, int32_t newValue)
 {
     return __atomic_exchange_n(value, newValue, __ATOMIC_SEQ_CST);
 }
 //-------------------------------------------------------------------------------------------------
-static __inline__ int32 atomic_test_and_set(int32* value, int32 newValue, int32 testAgainst)
+static __inline__ int32_t atomic_test_and_set(int32_t* value, int32_t newValue, int32_t testAgainst)
 {
     __atomic_compare_exchange_n(value, &testAgainst, newValue, 1,
         __ATOMIC_SEQ_CST, __ATOMIC_SEQ_CST);
     return testAgainst;
 }
 //-------------------------------------------------------------------------------------------------
-static __inline__ int32 atomic_add(int32* value, int32 addValue)
+static __inline__ int32_t atomic_add(int32_t* value, int32_t addValue)
 {
     return __atomic_fetch_add(value, addValue, __ATOMIC_SEQ_CST);
 }
 //-------------------------------------------------------------------------------------------------
-static __inline__ int32 atomic_and(int32* value, int32 andValue)
+static __inline__ int32_t atomic_and(int32_t* value, int32_t andValue)
 {
     return __atomic_fetch_and(value, andValue, __ATOMIC_SEQ_CST);
 }
 //-------------------------------------------------------------------------------------------------
-static __inline__ int32 atomic_or(int32* value, int32 orValue)
+static __inline__ int32_t atomic_or(int32_t* value, int32_t orValue)
 {
     return __atomic_fetch_or(value, orValue, __ATOMIC_SEQ_CST);
 }
 //-------------------------------------------------------------------------------------------------
-static __inline__ int32 atomic_get(int32* value)
+static __inline__ int32_t atomic_get(int32_t* value)
 {
     return __atomic_load_n(value, __ATOMIC_ACQUIRE);
 }
 //-------------------------------------------------------------------------------------------------
-static __inline__ void atomic_set64(int64* value, int64 newValue)
+static __inline__ void atomic_set64(int64_t* value, int64_t newValue)
 {
     __atomic_store_n(value, newValue, __ATOMIC_RELEASE);
 }
 //-------------------------------------------------------------------------------------------------
-static __inline__ int64 atomic_get_and_set64(int64* value, int64 newValue)
+static __inline__ int64_t atomic_get_and_set64(int64_t* value, int64_t newValue)
 {
     return __atomic_exchange_n(value, newValue, __ATOMIC_SEQ_CST);
 }
 //-------------------------------------------------------------------------------------------------
-static __inline__ int64 atomic_test_and_set64(int64* value, int64 newValue, int64 testAgainst)
+static __inline__ int64_t atomic_test_and_set64(int64_t* value, int64_t newValue, int64_t testAgainst)
 {
     __atomic_compare_exchange_n(value, &testAgainst, newValue, 1,
         __ATOMIC_SEQ_CST, __ATOMIC_SEQ_CST);
     return testAgainst;
 }
 //-------------------------------------------------------------------------------------------------
-static __inline__ int64 atomic_add64(int64* value, int64 addValue)
+static __inline__ int64_t atomic_add64(int64_t* value, int64_t addValue)
 {
     return __atomic_fetch_add(value, addValue, __ATOMIC_SEQ_CST);
 }
 //-------------------------------------------------------------------------------------------------
-static __inline__ int64 atomic_and64(int64* value, int64 andValue)
+static __inline__ int64_t atomic_and64(int64_t* value, int64_t andValue)
 {
     return __atomic_fetch_and(value, andValue, __ATOMIC_SEQ_CST);
 }
 //-------------------------------------------------------------------------------------------------
-static __inline__ int64 atomic_or64(int64* value, int64 orValue)
+static __inline__ int64_t atomic_or64(int64_t* value, int64_t orValue)
 {
     return __atomic_fetch_or(value, orValue, __ATOMIC_SEQ_CST);
 }
 //-------------------------------------------------------------------------------------------------
-static __inline__ int64 atomic_get64(int64* value)
+static __inline__ int64_t atomic_get64(int64_t* value)
 {
     return __atomic_load_n(value, __ATOMIC_ACQUIRE);
 }
 #else	/* __GNUC__ > 4 || (__GNUC__ == 4 && __GNUC_MINOR__ >= 7) */
 //-------------------------------------------------------------------------------------------------
 /* Atomic functions; previous value is returned */
-extern void		atomic_set(int32* value, int32 newValue);
-extern int32	atomic_get_and_set(int32* value, int32 newValue);
-extern int32	atomic_test_and_set(int32 *value, int32 newValue, int32 testAgainst);
-extern int32	atomic_add(int32 *value, int32 addValue);
-extern int32	atomic_and(int32 *value, int32 andValue);
-extern int32	atomic_or(int32 *value, int32 orValue);
-extern int32	atomic_get(int32 *value);
+extern void		atomic_set(int32_t* value, int32_t newValue);
+extern int32_t	atomic_get_and_set(int32_t* value, int32_t newValue);
+extern int32_t	atomic_test_and_set(int32_t *value, int32_t newValue, int32_t testAgainst);
+extern int32_t	atomic_add(int32_t *value, int32_t addValue);
+extern int32_t	atomic_and(int32_t *value, int32_t andValue);
+extern int32_t	atomic_or(int32_t *value, int32_t orValue);
+extern int32_t	atomic_get(int32_t *value);
 
-extern void		atomic_set64(int64* value, int64 newValue);
-extern int64	atomic_get_and_set64(int64* value, int64 newValue);
-extern int64	atomic_test_and_set64(int64 *value, int64 newValue, int64 testAgainst);
-extern int64	atomic_add64(int64 *value, int64 addValue);
-extern int64	atomic_and64(int64 *value, int64 andValue);
-extern int64	atomic_or64(int64 *value, int64 orValue);
-extern int64	atomic_get64(int64 *value);
+extern void		atomic_set64(int64_t* value, int64_t newValue);
+extern int64_t	atomic_get_and_set64(int64_t* value, int64_t newValue);
+extern int64_t	atomic_test_and_set64(int64_t *value, int64_t newValue, int64_t testAgainst);
+extern int64_t	atomic_add64(int64_t *value, int64_t addValue);
+extern int64_t	atomic_and64(int64_t *value, int64_t andValue);
+extern int64_t	atomic_or64(int64_t *value, int64_t orValue);
+extern int64_t	atomic_get64(int64_t *value);
 //-------------------------------------------------------------------------------------------------
 extern void*	get_stack_frame(void);
 //-------------------------------------------------------------------------------------------------

@@ -1230,9 +1230,9 @@ HEADERS +=  \
 #    src/kits/interface/ColorControl.h \
 #    src/kits/interface/Control.h \
 #    src/kits/interface/Font.h \
-#    src/kits/interface/GraphicsDefs.h \
+    src/kits/interface/GraphicsDefs.h \
 #    src/kits/interface/Input.h \
-#    src/kits/interface/InterfaceDefs.h \
+    src/kits/interface/InterfaceDefs.h \
 #    src/kits/interface/LimitedView.h \
 #    src/kits/interface/ListItem.h \
 #    src/kits/interface/ListView.h \
@@ -1948,8 +1948,8 @@ HEADERS +=  \
 #    src/kits/tracker/WidgetAttributeText.h \
 #    src/kits/translation/BitmapStream.h \
 #    src/kits/translation/FuncTranslator.h \
-#    src/kits/translation/TranslationDefs.h \
-#    src/kits/translation/TranslationErrors.h \
+    src/kits/translation/TranslationDefs.h \
+    src/kits/translation/TranslationErrors.h \
 #    src/kits/translation/TranslationUtils.h \
 #    src/kits/translation/Translator.h \
 #    src/kits/translation/TranslatorAddOn.h \

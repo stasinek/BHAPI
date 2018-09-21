@@ -37,7 +37,7 @@ namespace bhapi {
 #endif /* __cplusplus */
 // Pattern
 typedef struct b_pattern {
-    uint8 data[8];
+    uint8_t data[8];
 } pattern;
 #ifdef __cplusplus
 } // namespace
@@ -46,8 +46,8 @@ typedef struct b_pattern {
 #ifdef __cplusplus
 inline bool operator==(const bhapi::pattern& a, const bhapi::pattern& b)
 {
-    uint64* pa = (uint64*)a.data;
-    uint64* pb = (uint64*)b.data;
+    uint64_t* pa = (uint64_t*)a.data;
+    uint64_t* pb = (uint64_t*)b.data;
     return (*pa == *pb);
 }
 
@@ -62,13 +62,13 @@ namespace bhapi {
 #endif /* __cplusplus */
 // rgb_color
 typedef struct rgb_color {
-    uint8		red;
-    uint8		green;
-    uint8		blue;
-    uint8		alpha;
+    uint8_t		red;
+    uint8_t		green;
+    uint8_t		blue;
+    uint8_t		alpha;
 #ifdef __cplusplus
 // some convenient additions
-inline rgb_color& set_to(uint8 r, uint8 g, uint8 b, uint8 a = 255)
+inline rgb_color& set_to(uint8_t r, uint8_t g, uint8_t b, uint8_t a = 255)
 {
     red = r;
     green = g;
@@ -83,32 +83,32 @@ inline rgb_color& set_to(const rgb_color& other)
 
 inline bool operator==(const rgb_color& other) const
 {
-    return *(const uint32 *)this == *(const uint32 *)&other;
+    return *(const uint32_t *)this == *(const uint32_t *)&other;
 }
 
 inline bool operator!=(const rgb_color& other) const
 {
-    return *(const uint32 *)this != *(const uint32 *)&other;
+    return *(const uint32_t *)this != *(const uint32_t *)&other;
 }
 
 inline rgb_color& operator=(const rgb_color& other)
 {
     return set_to(other.red, other.green, other.blue, other.alpha);
 }
-rgb_color& mix(uint8 r,  uint8 g,  uint8 b,  uint8 a);
+rgb_color& mix(uint8_t r,  uint8_t g,  uint8_t b,  uint8_t a);
 rgb_color& mix(const rgb_color &o);
-rgb_color& mix_copy(uint8 r,  uint8 g,  uint8 b,  uint8 a) const;
+rgb_color& mix_copy(uint8_t r,  uint8_t g,  uint8_t b,  uint8_t a) const;
 rgb_color& mix_copy(const rgb_color &o) const;
 
-rgb_color& disable(uint8 r,  uint8 g,  uint8 b,  uint8 a);
+rgb_color& disable(uint8_t r,  uint8_t g,  uint8_t b,  uint8_t a);
 rgb_color& disable(const rgb_color &background);
-rgb_color& disable_copy(uint8 r,  uint8 g,  uint8 b,  uint8 a) const;
+rgb_color& disable_copy(uint8_t r,  uint8_t g,  uint8_t b,  uint8_t a) const;
 rgb_color& disable_copy(const rgb_color &background) const;
 #endif
 } rgb_color;
 
 #ifdef __cplusplus
-inline rgb_color make_color(uint8 red, uint8 green, uint8 blue, uint8 alpha = 255)
+inline rgb_color make_color(uint8_t red, uint8_t green, uint8_t blue, uint8_t alpha = 255)
 {
     rgb_color color = {red, green, blue, alpha};
     return color;
@@ -116,22 +116,22 @@ inline rgb_color make_color(uint8 red, uint8 green, uint8 blue, uint8 alpha = 25
 #endif
 // color map
 typedef struct color_map {
-    int32				id;
+    int32_t				id;
     rgb_color			color_list[256];
-    uint8				inversion_map[256];
-    uint8				index_map[32768];
+    uint8_t				inversion_map[256];
+    uint8_t				index_map[32768];
 } color_map;
 // overlay
 typedef struct overlay_rect_limits {
-    uint16				horizontal_alignment;
-    uint16				vertical_alignment;
-    uint16				width_alignment;
-    uint16				height_alignment;
-    uint16				min_width;
-    uint16				max_width;
-    uint16				min_height;
-    uint16				max_height;
-    uint32				reserved[8];
+    uint16_t				horizontal_alignment;
+    uint16_t				vertical_alignment;
+    uint16_t				width_alignment;
+    uint16_t				height_alignment;
+    uint16_t				min_width;
+    uint16_t				max_width;
+    uint16_t				min_height;
+    uint16_t				max_height;
+    uint32_t				reserved[8];
 } overlay_rect_limits;
 // overlay restrictions
 typedef struct overlay_restrictions {
@@ -141,10 +141,10 @@ typedef struct overlay_restrictions {
     float				max_width_scale;
     float				min_height_scale;
     float				max_height_scale;
-    uint32				reserved[8];
+    uint32_t				reserved[8];
 } overlay_restrictions;
 // Screen ID
-typedef struct screen_id { int32 id; } screen_id;
+typedef struct screen_id { int32_t id; } screen_id;
 // Color spaces
 typedef enum {
     B_NO_COLOR_SPACE	= 0x0000,
@@ -308,18 +308,18 @@ extern const bhapi::pattern B_SOLID_HIGH;
 extern const bhapi::pattern B_MIXED_COLORS;
 extern const bhapi::pattern B_SOLID_LOW;
 extern const bhapi::rgb_color 	B_TRANSPARENT_COLOR;
-extern const uint8		B_TRANSPARENT_MAGIC_CMAP8;
-extern const uint16		B_TRANSPARENT_MAGIC_RGBA15;
-extern const uint16		B_TRANSPARENT_MAGIC_RGBA15_BIG;
-extern const uint32		B_TRANSPARENT_MAGIC_RGBA32;
-extern const uint32		B_TRANSPARENT_MAGIC_RGBA32_BIG;
-extern const uint8 		B_TRANSPARENT_8_BIT;
+extern const uint8_t		B_TRANSPARENT_MAGIC_CMAP8;
+extern const uint16_t		B_TRANSPARENT_MAGIC_RGBA15;
+extern const uint16_t		B_TRANSPARENT_MAGIC_RGBA15_BIG;
+extern const uint32_t		B_TRANSPARENT_MAGIC_RGBA32;
+extern const uint32_t		B_TRANSPARENT_MAGIC_RGBA32_BIG;
+extern const uint8_t 		B_TRANSPARENT_8_BIT;
 extern const bhapi::rgb_color	B_TRANSPARENT_32_BIT;
 extern const screen_id B_MAIN_SCREEN_ID;
-bool bitmaps_support_space(color_space space, uint32* _supportFlags);
+bool bitmaps_support_space(color_space space, uint32_t* _supportFlags);
 status_t get_pixel_size_for(color_space space, size_t* _pixelChunk, size_t* _rowAlignment, size_t* _pixelsPerChunk);
 #ifdef __cplusplus // just for C++
-inline pattern make_pattern(uint8 d1,  uint8 d2,  uint8 d3,  uint8 d4,  uint8 d5,  uint8 d6,  uint8 d7,  uint8 d8)
+inline pattern make_pattern(uint8_t d1,  uint8_t d2,  uint8_t d3,  uint8_t d4,  uint8_t d5,  uint8_t d6,  uint8_t d7,  uint8_t d8)
 {
     bhapi::pattern p;
     p.data[0] = d1;
@@ -332,15 +332,15 @@ inline pattern make_pattern(uint8 d1,  uint8 d2,  uint8 d3,  uint8 d4,  uint8 d5
     p.data[7] = d8;
     return p;
 }
-inline rgb_color make_rgb_color(uint8 r,  uint8 g,  uint8 b,  uint8 a = 0xff)
+inline rgb_color make_rgb_color(uint8_t r,  uint8_t g,  uint8_t b,  uint8_t a = 0xff)
 {
     rgb_color c;
     c.set_to(r, g, b, a);
     return c;
 }
 #endif /* __cplusplus */
-BHAPI_IMPEXP  uint8 find_index_for_color(uint8 r,  uint8 g,  uint8 b);
-BHAPI_IMPEXP bhapi::rgb_color find_color_for_index(uint8 index);
+BHAPI_IMPEXP  uint8_t find_index_for_color(uint8_t r,  uint8_t g,  uint8_t b);
+BHAPI_IMPEXP bhapi::rgb_color find_color_for_index(uint8_t index);
 #ifdef __cplusplus
 } // extern "C"
 #endif /* __cplusplus */

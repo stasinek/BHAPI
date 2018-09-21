@@ -34,6 +34,7 @@
  */
 #ifndef BHAPI_HAIKU_CONSTANTS_H
 #define BHAPI_HAIKU_CONSTANTS_H
+
 #include <HaikuConfig.h>
 
 enum {

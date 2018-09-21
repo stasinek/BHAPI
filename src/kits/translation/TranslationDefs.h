@@ -26,8 +26,8 @@ typedef unsigned long translator_id;
 
 
 struct translation_format {
-	uint32		type;				// type_code
-	uint32		group;
+	uint32_t		type;				// type_code
+	uint32_t		group;
 	float		quality;			// between 0.0 and 1.0
 	float		capability;			// between 0.0 and 1.0
 	char		MIME[251];
@@ -35,9 +35,9 @@ struct translation_format {
 };
 
 struct translator_info {
-	uint32			type;
+	uint32_t			type;
 	translator_id	translator;
-	uint32			group;
+	uint32_t			group;
 	float			quality;
 	float			capability;
 	char			name[251];

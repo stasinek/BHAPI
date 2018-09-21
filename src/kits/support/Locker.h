@@ -46,7 +46,7 @@ public:
     // 	return positive number when locked by current thread,
     // 	return negative number when locked by other thread or invalid,
     // 	return 0 when it isn't locked or valid.
-     int64		CountLocks() const;
+     int64_t		CountLocks() const;
     bool		IsLockedByCurrentThread() const;
 
 private:

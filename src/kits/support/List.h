@@ -1,4 +1,4 @@
-/* --------------------------------------------------------------------------
+﻿/* --------------------------------------------------------------------------
  *
  * BHAPI++ Copyright (C) 2017, Stanislaw Stasiak, based on Haiku & ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2006, Anthony Lee, All Rights Reserved
@@ -34,13 +34,13 @@
 
 class BHAPI_IMPEXP BList {
 public:
-    // BList(int32), BList(int32,  int32):
+    // BList(int32_t), BList(int32_t,  int32_t):
     // 	The argument "initialAllocSize" is the minimum count to hold in memory.
     // 		Valid range: 1 ~ (B_MAXINT32 - 1)
     // 		When you pass invalid value to "initialAllocSize", the minimum count just equal to 0.
     // 	The argument "nullItems" is the count to preallocate NULL items for ReplaceItem().
-    BList(int32 initialAllocSize = 0);
-    BList(int32 initialAllocSize,  int32 nullItems);
+    BList(int32_t initialAllocSize = 0);
+    BList(int32_t initialAllocSize,  int32_t nullItems);
 
     // BList(const BList&),operator=(const BList&):
     // 	The minimum count to hold same as "list" when possible.
@@ -50,32 +50,32 @@ public:
     virtual ~BList();
 
     bool	AddItem(void *item);
-    bool	AddItem(void *item,  int32 atIndex);
+    bool	AddItem(void *item,  int32_t atIndex);
     bool	AddList(const BList *newItems);
-    bool	AddList(const BList *newItems,  int32 atIndex);
+    bool	AddList(const BList *newItems,  int32_t atIndex);
 
     // RemoveItem(),RemoveItems(): the item WOULD NOT be destructed yet.
     bool	RemoveItem(void *item);
-    void	*RemoveItem(int32 index);
-    bool	RemoveItems(int32 index,  int32 count);
+    void	*RemoveItem(int32_t index);
+    bool	RemoveItems(int32_t index,  int32_t count);
 
     // ReplaceItem(): the old item WOULD NOT be destructed yet.
-    bool	ReplaceItem(int32 index, void *newItem, void **oldItem = NULL);
+    bool	ReplaceItem(int32_t index, void *newItem, void **oldItem = NULL);
 
     void	MakeEmpty();
 
-    bool	SwapItems(int32 indexA,  int32 indexB);
-    bool	MoveItem(int32 fromIndex,  int32 toIndex);
+    bool	SwapItems(int32_t indexA,  int32_t indexB);
+    bool	MoveItem(int32_t fromIndex,  int32_t toIndex);
 
     void	SortItems(int (*cmp)(const void *a, const void *b));
 
-    void	*ItemAt(int32 index) const;
+    void	*ItemAt(int32_t index) const;
     void	*FirstItem() const;
     void	*LastItem() const;
 
     bool	HasItem(void *item) const;
-     int32	IndexOf(void *item) const;
-     int32	CountItems() const;
+     int32_t	IndexOf(void *item) const;
+     int32_t	CountItems() const;
     bool	IsEmpty() const;
 
     void	DoForEach(bool (*func)(void *data));
@@ -87,11 +87,11 @@ public:
 private:
     void **fObjects;
 
-     int32 fItemCount;
-     int32 fItemReal;
-     int32 fMinimumCount;
+     int32_t fItemCount;
+     int32_t fItemReal;
+     int32_t fMinimumCount;
 
-    bool _Resize(int32 count);
+    bool _Resize(int32_t count);
 };
 #endif /* __cplusplus */
 #define BLIST_DEF

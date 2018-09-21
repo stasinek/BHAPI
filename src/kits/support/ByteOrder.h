@@ -65,14 +65,14 @@ typedef enum {
 #define B_HOST_TO_LENDIAN_DOUBLE(arg)	(double)(arg)
 #define B_HOST_TO_LENDIAN_FLOAT(arg)	(float)(arg)
 #define B_HOST_TO_LENDIAN_INT64(arg)	(uint64)(arg)
-#define B_HOST_TO_LENDIAN_INT32(arg)	(uint32)(arg)
+#define B_HOST_TO_LENDIAN_INT32(arg)	(uint32_t)(arg)
 #define B_HOST_TO_LENDIAN_INT16(arg)	(uint16)(arg)
 
 /* Little endian to host native */
 #define B_LENDIAN_TO_HOST_DOUBLE(arg)	(double)(arg)
 #define B_LENDIAN_TO_HOST_FLOAT(arg)	(float)(arg)
 #define B_LENDIAN_TO_HOST_INT64(arg)	(uint64)(arg)
-#define B_LENDIAN_TO_HOST_INT32(arg)	(uint32)(arg)
+#define B_LENDIAN_TO_HOST_INT32(arg)	(uint32_t)(arg)
 #define B_LENDIAN_TO_HOST_INT16(arg)	(uint16)(arg)
 
 /* Host native to big endian */
@@ -113,13 +113,13 @@ typedef enum {
 #define B_HOST_TO_BENDIAN_DOUBLE(arg)	(double)(arg)
 #define B_HOST_TO_BENDIAN_FLOAT(arg)	(float)(arg)
 #define B_HOST_TO_BENDIAN_INT64(arg)	(uint64)(arg)
-#define B_HOST_TO_BENDIAN_INT32(arg)	(uint32)(arg)
+#define B_HOST_TO_BENDIAN_INT32(arg)	(uint32_t)(arg)
 #define B_HOST_TO_BENDIAN_INT16(arg)	(uint16)(arg)
 /* Big endian to host native */
 #define B_BENDIAN_TO_HOST_DOUBLE(arg)	(double)(arg)
 #define B_BENDIAN_TO_HOST_FLOAT(arg)	(float)(arg)
 #define B_BENDIAN_TO_HOST_INT64(arg)	(uint64)(arg)
-#define B_BENDIAN_TO_HOST_INT32(arg)	(uint32)(arg)
+#define B_BENDIAN_TO_HOST_INT32(arg)	(uint32_t)(arg)
 #define B_BENDIAN_TO_HOST_INT16(arg)	(uint16)(arg)
 #endif	/* BYTE_ORDER */
 
@@ -133,11 +133,11 @@ BHAPI_IMPEXP float			__swap_float(float value);
 BHAPI_IMPEXP double			__swap_double(double value);
 #if __GNUC__ >= 4
 #define __swap_int64(arg)	(uint64)__builtin_bswap64(arg)
-#define __swap_int32(arg)	(uint32)__builtin_bswap32(arg)
+#define __swap_int32(arg)	(uint32_t)__builtin_bswap32(arg)
 #define __swap_int16(arg)	(uint16)__builtin_bswap16(arg)
 #else
 extern uint64 __swap_int64(uint64 arg);
-extern uint32 __swap_int32(uint32 arg);
+extern uint32_t __swap_int32(uint32_t arg);
 extern uint16 __swap_int16(uint16 arg);
 #endif
 

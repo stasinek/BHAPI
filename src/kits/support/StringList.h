@@ -44,38 +44,38 @@ class BString;
 //-------------------------------------------------------------------------------------------------
 class BHAPI_IMPEXP BStringList : public BFlattenable {
 public:
-                BStringList(int32 count = 20);
+                BStringList(int32_t count = 20);
                 BStringList(const BStringList& other);
     virtual	   ~BStringList();
     // Adding and removing items.
-    bool				Add(const BString& string, int32 index);
+    bool				Add(const BString& string, int32_t index);
     bool				Add(const BString& string);
-    bool				Add(const BStringList& list, int32 index);
+    bool				Add(const BStringList& list, int32_t index);
     bool				Add(const BStringList& list);
 
     bool				Remove(const BString& string, bool ignoreCase = false);
     bool				Remove(const BStringList& list, bool ignoreCase = false);
-    BString				Remove(int32 index);
-    bool				Remove(int32 index, int32 count);
-    bool				Replace(int32 index, const BString& string);
+    BString				Remove(int32_t index);
+    bool				Remove(int32_t index, int32_t count);
+    bool				Replace(int32_t index, const BString& string);
 
     void				MakeEmpty();
     // Reorder items
     void				Sort(bool ignoreCase = false);
             // TODO: Sort() with custom sort function.
-    bool				Swap(int32 indexA, int32 indexB);
-    bool				Move(int32 fromIndex, int32 toIndex);
+    bool				Swap(int32_t indexA, int32_t indexB);
+    bool				Move(int32_t fromIndex, int32_t toIndex);
     // Retrieve items
-    BString				StringAt(int32 index) const;
+    BString				StringAt(int32_t index) const;
     BString				First() const;
     BString				Last() const;
     // Query
     bool				HasString(const BString& string, bool ignoreCase = false) const;
-    int32				IndexOf(const BString& string, bool ignoreCase = false) const;
-    int32				CountStrings() const;
+    int32_t				IndexOf(const BString& string, bool ignoreCase = false) const;
+    int32_t				CountStrings() const;
     bool				IsEmpty() const;
 
-    BString				Join(const char* separator, int32 length = -1) const;
+    BString				Join(const char* separator, int32_t length = -1) const;
     // Iteration
     void				DoForEach(bool (*func)(const BString& string));
     void				DoForEach(bool (*func)(const BString& string, void* arg2), void* arg2);
@@ -94,7 +94,7 @@ private:
     void				__IncrementRefCounts() const;
     void				__DecrementRefCounts() const;
 
-    BString				__Join(const char* separator, int32 length) const;
+    BString				__Join(const char* separator, int32_t length) const;
 private:
     BList				fStrings;
 };

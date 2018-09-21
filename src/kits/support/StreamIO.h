@@ -1,4 +1,4 @@
-/* --------------------------------------------------------------------------
+﻿/* --------------------------------------------------------------------------
  *
  * BHAPI++ Copyright (C) 2017, Stanislaw Stasiak, based on Haiku & ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2007, Anthony Lee, All Rights Reserved
@@ -45,14 +45,14 @@ public:
     virtual  ssize_t		Read(void *buffer, size_t size);
     virtual  ssize_t		Write(const void *buffer, size_t size);
 
-    BStreamIO 		&operator<<(int8 value);
-    BStreamIO 		&operator<<(uint8 value);
-    BStreamIO 		&operator<<(int16 value);
-    BStreamIO 		&operator<<(uint16 value);
-    BStreamIO 		&operator<<(int32 value);
-    BStreamIO 		&operator<<(uint32 value);
-    BStreamIO 		&operator<<(int64 value);
-    BStreamIO 		&operator<<(uint64 value);
+    BStreamIO 		&operator<<(int8_t value);
+    BStreamIO 		&operator<<(uint8_t value);
+    BStreamIO 		&operator<<(int16_t value);
+    BStreamIO 		&operator<<(uint16_t value);
+    BStreamIO 		&operator<<(int32_t value);
+    BStreamIO 		&operator<<(uint32_t value);
+    BStreamIO 		&operator<<(int64_t value);
+    BStreamIO 		&operator<<(uint64_t value);
     BStreamIO 		&operator<<(float value);
     BStreamIO 		&operator<<(double value);
     BStreamIO 		&operator<<(const void *value);
