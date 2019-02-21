@@ -2,7 +2,8 @@ ETK++ The EASY Toolkit for C++ programing
 Copyright (C) 2004-2007 Anthony Lee, All rights reserved.
 Copyright (C) 2017-2019 Stanisław Stasiak, with the name BHAPI - BeOS/Haiku API. 
 It's attempt to make Haiku OS API to be available on other systems as toolkit. 
-To make BeOS specific software available on more popular systems such as Windows/MacOS/Linux
+To make BeOS specific software available on more popular systems such as Windows/MacOS/Linux. 
+Furthermore make Haiku OS more attractive and interoperative as development platform.
 
  * Most ideas of it just from the great BeOS API.
  * ETK++ library is a freeware; it may be used and distributed according to
