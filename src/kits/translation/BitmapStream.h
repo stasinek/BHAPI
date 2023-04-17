@@ -23,7 +23,7 @@ public:
 	virtual	ssize_t				ReadAt(off_t offset, void* buffer, size_t size);
 	virtual	ssize_t				WriteAt(off_t offset, const void* buffer,
 									size_t size);
-	virtual	off_t				Seek(off_t position, uint32 seekMode);
+	virtual	off_t				Seek(off_t position, uint32_t seekMode);
 	virtual	off_t				Position() const;
 	virtual	off_t				Size() const;
 	virtual	status_t			SetSize(off_t size);

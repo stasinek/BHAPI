@@ -40,8 +40,8 @@ debug_uart_from_fdt(const void *fdt)
 	int node;
 	int len;
 	phys_addr_t regs;
-	int32 clock = 0;
-	int32 speed = 0;
+	int32_t clock = 0;
+	int32_t speed = 0;
 	const void *prop;
 	DebugUART *uart = NULL;
 
@@ -76,14 +76,14 @@ debug_uart_from_fdt(const void *fdt)
 	// get the UART clock rate
 	prop = fdt_getprop(fdt, node, "clock-frequency", &len);
 	if (prop && len == 4) {
-		clock = fdt32_to_cpu(*(uint32_t *)prop);
+		clock = fdt32_to_cpu(*(uint32_t_t *)prop);
 		dprintf("serial: clock %ld\n", clock);
 	}
 
 	// get current speed (XXX: not yet passed over)
 	prop = fdt_getprop(fdt, node, "current-speed", &len);
 	if (prop && len == 4) {
-		speed = fdt32_to_cpu(*(uint32_t *)prop);
+		speed = fdt32_to_cpu(*(uint32_t_t *)prop);
 		dprintf("serial: speed %ld\n", speed);
 	}
 

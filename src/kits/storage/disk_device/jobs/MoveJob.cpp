@@ -31,7 +31,7 @@ MoveJob::MoveJob(PartitionReference* partition, PartitionReference* child)
 MoveJob::~MoveJob()
 {
 	if (fContents) {
-		for (int32 i = 0; i < fContentsCount; i++)
+		for (int32_t i = 0; i < fContentsCount; i++)
 			fContents[i]->ReleaseReference();
 		delete[] fContents;
 	}
@@ -39,14 +39,14 @@ MoveJob::~MoveJob()
 
 
 // Init
-status_t MoveJob::Init(off_t offset, PartitionReference** contents, int32 contentsCount)
+status_t MoveJob::Init(off_t offset, PartitionReference** contents, int32_t contentsCount)
 {
 	fContents = new(nothrow) PartitionReference*[contentsCount];
 	if (!fContents)
 		return B_NO_MEMORY;
 
 	fContentsCount = contentsCount;
-	for (int32 i = 0; i < contentsCount; i++) {
+	for (int32_t i = 0; i < contentsCount; i++) {
 		fContents[i] = contents[i];
 		fContents[i]->AcquireReference();
 	}
@@ -60,18 +60,18 @@ status_t MoveJob::Init(off_t offset, PartitionReference** contents, int32 conten
 // Do
 status_t MoveJob::Do()
 {
-	int32 changeCounter = fPartition->ChangeCounter();
-	int32 childChangeCounter = fChild->ChangeCounter();
+	int32_t changeCounter = fPartition->ChangeCounter();
+	int32_t childChangeCounter = fChild->ChangeCounter();
 
 	partition_id* descendantIDs = new(nothrow) partition_id[fContentsCount];
-	int32* descendantChangeCounters = new(nothrow) int32[fContentsCount];
+	int32_t* descendantChangeCounters = new(nothrow) int32_t[fContentsCount];
 	ArrayDeleter<partition_id> _(descendantIDs);
-	ArrayDeleter<int32> _2(descendantChangeCounters);
+	ArrayDeleter<int32_t> _2(descendantChangeCounters);
 
 	if (!descendantIDs || !descendantChangeCounters)
 		return B_NO_MEMORY;
 
-	for (int32 i = 0; i < fContentsCount; i++) {
+	for (int32_t i = 0; i < fContentsCount; i++) {
 		descendantIDs[i] = fContents[i]->PartitionID();
 		descendantChangeCounters[i] = fContents[i]->ChangeCounter();
 	}
@@ -86,7 +86,7 @@ status_t MoveJob::Do()
 	fPartition->SetChangeCounter(changeCounter);
 	fChild->SetChangeCounter(childChangeCounter);
 
-	for (int32 i = 0; i < fContentsCount; i++)
+	for (int32_t i = 0; i < fContentsCount; i++)
 		fContents[i]->SetChangeCounter(descendantChangeCounters[i]);
 
 	return B_OK;

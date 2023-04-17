@@ -49,8 +49,8 @@ public:
     BStreamIO 		&operator<<(uint8_t value);
     BStreamIO 		&operator<<(int16_t value);
     BStreamIO 		&operator<<(uint16_t value);
-    BStreamIO 		&operator<<(int32_t value);
-    BStreamIO 		&operator<<(uint32_t value);
+    BStreamIO 		&operator<<(int32_t_t value);
+    BStreamIO 		&operator<<(uint32_t_t value);
     BStreamIO 		&operator<<(int64_t value);
     BStreamIO 		&operator<<(uint64_t value);
     BStreamIO 		&operator<<(float value);

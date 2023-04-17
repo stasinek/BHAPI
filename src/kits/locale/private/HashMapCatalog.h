@@ -39,48 +39,48 @@ class CatKey {
 			// A comment that can be used to separate strings that
 			// are identical otherwise in the native language, but different in
 			// the translation (useful for the translator)
-		uint32 fHashVal;
+		uint32_t fHashVal;
 			// the hash-value of the key, computed from the three strings
-		uint32 fFlags;
+		uint32_t fFlags;
 			// with respect to the catalog-editor, each translation can be
 			// in different states (empty, unchecked, checked, etc.). This
 			// state (and potential other flags) lives in the fFlags member.
 
 	public:
 		CatKey(const char *str, const char *ctx, const char *cmt);
-		CatKey(uint32 id);
+		CatKey(uint32_t id);
 		CatKey();
 
 		bool operator== (const CatKey& right) const;
 		bool operator!= (const CatKey& right) const;
 		status_t GetStringParts(BString* str, BString* ctx, BString* cmt) const;
-		static uint32 HashFun(const char* s, int startvalue = 0);
+		static uint32_t HashFun(const char* s, int startvalue = 0);
 			// The hash function is called 3 times, cumulating the 3 strings to
 			// calculate the key
-		uint32 GetHashCode() const { return fHashVal; }
+		uint32_t GetHashCode() const { return fHashVal; }
 };
 
 
 class HashMapCatalog: public BCatalogData {
 	protected:
-		uint32 ComputeFingerprint() const;
+		uint32_t ComputeFingerprint() const;
 		typedef HashMap<CatKey, BString> CatMap;
 		CatMap 				fCatMap;
 
 	public:
 		HashMapCatalog(const char* signature, const char* language,
-			uint32 fingerprint);
+			uint32_t fingerprint);
 			// Constructor for normal use
 			//
 		// overrides of BCatalogData:
 		const char *GetString(const char *string, const char *context = NULL,
 						const char *comment = NULL);
-		const char *GetString(uint32 id);
+		const char *GetString(uint32_t id);
 		const char *GetString(const CatKey& key);
 		//
 		status_t SetString(const char *string, const char *translated,
 					const char *context = NULL, const char *comment = NULL);
-		status_t SetString(int32 id, const char *translated);
+		status_t SetString(int32_t id, const char *translated);
 		status_t SetString(const CatKey& key, const char *translated);
 
 		// implementation for editor-interface
@@ -100,7 +100,7 @@ class HashMapCatalog: public BCatalogData {
 		void UpdateFingerprint();
 		//
 		void MakeEmpty();
-		int32 CountItems() const;
+		int32_t CountItems() const;
 
 		/*
 		 * CatWalker allows to walk trough all the strings stored in the
@@ -130,7 +130,7 @@ class HashMapCatalog: public BCatalogData {
 
 
 inline HashMapCatalog::HashMapCatalog(const char* signature,
-	const char* language, uint32 fingerprint)
+	const char* language, uint32_t fingerprint)
 	:
 	BCatalogData(signature, language, fingerprint)
 {

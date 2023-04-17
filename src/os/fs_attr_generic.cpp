@@ -463,7 +463,7 @@ void fs_rewind_attr_dir(DIR *dir)
 
 // fs_fopen_attr
 int
-fs_fopen_attr(int fd, const char *attribute, uint32 type, int openMode)
+fs_fopen_attr(int fd, const char *attribute, uint32_t type, int openMode)
 {
 	if (!attribute) {
 		errno = B_BAD_VALUE;
@@ -528,7 +528,7 @@ fs_close_attr(int fd)
 
 // fs_read_attr
 ssize_t
-fs_read_attr(int fd, const char *attribute, uint32 type, off_t pos,
+fs_read_attr(int fd, const char *attribute, uint32_t type, off_t pos,
 	void *buffer, size_t readBytes)
 {
 	// open the attribute
@@ -553,7 +553,7 @@ fs_read_attr(int fd, const char *attribute, uint32 type, off_t pos,
 
 // fs_write_attr
 ssize_t
-fs_write_attr(int fd, const char *attribute, uint32 type, off_t pos,
+fs_write_attr(int fd, const char *attribute, uint32_t type, off_t pos,
 	const void *buffer, size_t readBytes)
 {
 	// open the attribute

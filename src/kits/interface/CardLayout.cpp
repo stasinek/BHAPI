@@ -52,13 +52,13 @@ BCardLayout::VisibleItem() const
 }
 
 
-int32 BCardLayout::VisibleIndex() const
+int32_t BCardLayout::VisibleIndex() const
 {
 	return IndexOfItem(fVisibleItem);
 }
 
 
-void BCardLayout::SetVisibleItem(int32 index)
+void BCardLayout::SetVisibleItem(int32_t index)
 {
 	SetVisibleItem(ItemAt(index));
 }
@@ -118,8 +118,8 @@ BCardLayout::BaseAlignment()
 
 bool BCardLayout::HasHeightForWidth()
 {
-	int32 count = CountItems();
-	for (int32 i = 0; i < count; i++) {
+	int32_t count = CountItems();
+	for (int32_t i = 0; i < count; i++) {
 		if (ItemAt(i)->HasHeightForWidth())
 			return true;
 	}
@@ -139,8 +139,8 @@ void BCardLayout::GetHeightForWidth(float width, float* min, float* max,
 	float preferredHeight = fPreferred.height;
 
 	// apply the items' constraints
-	int32 count = CountItems();
-	for (int32 i = 0; i < count; i++) {
+	int32_t count = CountItems();
+	for (int32_t i = 0; i < count; i++) {
 		BLayoutItem* item = ItemAt(i);
 		if (item->HasHeightForWidth()) {
 			float itemMinHeight;
@@ -216,7 +216,7 @@ status_t BCardLayout::AllUnarchived(const BMessage* from)
 	if (err != B_OK)
 		return err;
 
-	int32 visibleIndex;
+	int32_t visibleIndex;
 	err = from->FindInt32(kVisibleItemField, &visibleIndex);
 	if (err == B_OK)
 		SetVisibleItem(visibleIndex);
@@ -225,14 +225,14 @@ status_t BCardLayout::AllUnarchived(const BMessage* from)
 }
 
 
-status_t BCardLayout::ItemArchived(BMessage* into, BLayoutItem* item, int32 index) const
+status_t BCardLayout::ItemArchived(BMessage* into, BLayoutItem* item, int32_t index) const
 {
 	return BAbstractLayout::ItemArchived(into, item, index);
 }
 
 
 status_t BCardLayout::ItemUnarchived(const BMessage* from, BLayoutItem* item,
-	int32 index)
+	int32_t index)
 {
 	return BAbstractLayout::ItemUnarchived(from, item, index);
 }
@@ -248,14 +248,14 @@ BCardLayout::Instantiate(BMessage* from)
 }
 
 
-bool BCardLayout::ItemAdded(BLayoutItem* item, int32 atIndex)
+bool BCardLayout::ItemAdded(BLayoutItem* item, int32_t atIndex)
 {
 	item->SetVisible(false);
 	return true;
 }
 
 
-void BCardLayout::ItemRemoved(BLayoutItem* item, int32 fromIndex)
+void BCardLayout::ItemRemoved(BLayoutItem* item, int32_t fromIndex)
 {
 	if (fVisibleItem == item) {
 		BLayoutItem* newVisibleItem = NULL;
@@ -276,8 +276,8 @@ void BCardLayout::_ValidateMinMax()
 	fPreferred.width = 0;
 	fPreferred.height = 0;
 
-	int32 itemCount = CountItems();
-	for (int32 i = 0; i < itemCount; i++) {
+	int32_t itemCount = CountItems();
+	for (int32_t i = 0; i < itemCount; i++) {
 		BLayoutItem* item = ItemAt(i);
 
 		BSize min = item->MinSize();

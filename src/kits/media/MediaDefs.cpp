@@ -41,7 +41,7 @@
 // #pragma mark - media_destination
 
 
-media_destination::media_destination(port_id port, int32 id)
+media_destination::media_destination(port_id port, int32_t id)
 	:
 	port(port),
 	id(id)
@@ -86,7 +86,7 @@ media_destination media_destination::null(-1, -1);
 
 
 media_source::media_source(port_id port,
-						   int32 id)
+						   int32_t id)
 	:
 	port(port),
 	id(id)
@@ -796,7 +796,7 @@ const void*   media_format::MetaData() const
 }
 
 
-int32 media_format::MetaDataSize() const
+int32_t media_format::MetaDataSize() const
 {
 	return meta_data_size;
 }
@@ -1155,7 +1155,7 @@ bool operator<(const media_file_format_id& a, const media_file_format_id& b)
 
 
 //! Use this function to iterate through available file format writers.
-status_t get_next_file_format(int32* cookie, media_file_format* mff)
+status_t get_next_file_format(int32_t* cookie, media_file_format* mff)
 {
 	if (cookie == NULL || mff == NULL)
 		return B_BAD_VALUE;
@@ -1264,7 +1264,7 @@ status_t shutdown_media_server(bigtime_t timeout,
 		if (err != B_OK)
 			return err;
 
-		int32 rv;
+		int32_t rv;
 		if (reply.FindInt32("error", &rv) == B_OK && rv != B_OK)
 			return rv;
 	}
@@ -1277,7 +1277,7 @@ status_t shutdown_media_server(bigtime_t timeout,
 		if (err != B_OK)
 			return err;
 
-		int32 rv;
+		int32_t rv;
 		if (reply.FindInt32("error", &rv) == B_OK && rv != B_OK)
 			return rv;
 	}
@@ -1344,7 +1344,7 @@ void progress_startup(int stage,
 }
 
 
-status_t launch_media_server(uint32 flags)
+status_t launch_media_server(uint32_t flags)
 {
 	return launch_media_server(0, NULL, NULL, flags);
 }
@@ -1352,7 +1352,7 @@ status_t launch_media_server(uint32 flags)
 
 status_t launch_media_server(bigtime_t timeout,
 	bool (*progress)(int stage, const char* message, void* cookie),
-	void* cookie, uint32 flags)
+	void* cookie, uint32_t flags)
 {
 	if (BMediaRoster::IsRunning())
 		return B_ALREADY_RUNNING;
@@ -1408,7 +1408,7 @@ status_t launch_media_server(bigtime_t timeout,
 //	B_MEDIA_REALTIME_DISABLED is returned.
 //	If there are not enough system resources to enable real-time performance,
 //	B_MEDIA_REALTIME_UNAVAILABLE is returned.
-status_t media_realtime_init_image(image_id image, uint32 flags)
+status_t media_realtime_init_image(image_id image, uint32_t flags)
 {
 	UNIMPLEMENTED();
 	return B_OK;
@@ -1421,7 +1421,7 @@ status_t media_realtime_init_image(image_id image, uint32 flags)
 //	256 kB of the stack, so you should pass some smaller value you determine
 //	from profiling the thread; typically in the 32-64kB range.
 //	Return values are the same as for media_prepare_realtime_image().
-status_t media_realtime_init_thread(thread_id thread, size_t stack_used, uint32 flags)
+status_t media_realtime_init_thread(thread_id thread, size_t stack_used, uint32_t flags)
 {
 	UNIMPLEMENTED();
 	return B_OK;

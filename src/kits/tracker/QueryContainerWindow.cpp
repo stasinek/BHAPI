@@ -56,7 +56,7 @@ All rights reserved.
 
 
 BQueryContainerWindow::BQueryContainerWindow(LockingList<BWindow>* windowList,
-	uint32 containerWindowFlags)
+	uint32_t containerWindowFlags)
 	:
 	BContainerWindow(windowList, containerWindowFlags)
 {
@@ -64,7 +64,7 @@ BQueryContainerWindow::BQueryContainerWindow(LockingList<BWindow>* windowList,
 
 
 BPoseView*
-BQueryContainerWindow::NewPoseView(Model* model, uint32)
+BQueryContainerWindow::NewPoseView(Model* model, uint32_t)
 {
 	return new BQueryPoseView(model);
 }
@@ -151,9 +151,9 @@ void BQueryContainerWindow::SetUpDefaultState()
 	BString sanitizedType(PoseView()->SearchForType());
 
 	defaultStatePath += '/';
-	int32 length = sanitizedType.Length();
+	int32_t length = sanitizedType.Length();
 	char* buf = sanitizedType.LockBuffer(length);
-	for (int32 index = length - 1; index >= 0; index--)
+	for (int32_t index = length - 1; index >= 0; index--)
 		if (buf[index] == '/')
 			buf[index] = '_';
 	sanitizedType.UnlockBuffer(length);

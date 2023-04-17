@@ -49,7 +49,7 @@ public:
 			void				WriteUnlock()
 									{ rw_lock_write_unlock(&fLock); }
 
-			int32				RefCount() const
+			int32_t				RefCount() const
 									{ return fRefCount; }
 
 	inline	void				Get()	{ atomic_add(&fRefCount, 1); }
@@ -76,36 +76,36 @@ public:
 	virtual	VMArea*				NextArea(VMArea* area) const = 0;
 
 	virtual	VMArea*				LookupArea(addr_t address) const = 0;
-	virtual	VMArea*				CreateArea(const char* name, uint32 wiring,
-									uint32 protection,
-									uint32 allocationFlags) = 0;
+	virtual	VMArea*				CreateArea(const char* name, uint32_t wiring,
+									uint32_t protection,
+									uint32_t allocationFlags) = 0;
 	virtual	void				DeleteArea(VMArea* area,
-									uint32 allocationFlags) = 0;
+									uint32_t allocationFlags) = 0;
 	virtual	status_t			InsertArea(VMArea* area, size_t size,
 									const virtual_address_restrictions*
 										addressRestrictions,
-									uint32 allocationFlags, void** _address)
+									uint32_t allocationFlags, void** _address)
 										= 0;
 	virtual	void				RemoveArea(VMArea* area,
-									uint32 allocationFlags) = 0;
+									uint32_t allocationFlags) = 0;
 
 	virtual	bool				CanResizeArea(VMArea* area, size_t newSize) = 0;
 	virtual	status_t			ResizeArea(VMArea* area, size_t newSize,
-									uint32 allocationFlags) = 0;
+									uint32_t allocationFlags) = 0;
 	virtual	status_t			ShrinkAreaHead(VMArea* area, size_t newSize,
-									uint32 allocationFlags) = 0;
+									uint32_t allocationFlags) = 0;
 	virtual	status_t			ShrinkAreaTail(VMArea* area, size_t newSize,
-									uint32 allocationFlags) = 0;
+									uint32_t allocationFlags) = 0;
 
 	virtual	status_t			ReserveAddressRange(size_t size,
 									const virtual_address_restrictions*
 										addressRestrictions,
-									uint32 flags, uint32 allocationFlags,
+									uint32_t flags, uint32_t allocationFlags,
 									void** _address) = 0;
 	virtual	status_t			UnreserveAddressRange(addr_t address,
-									size_t size, uint32 allocationFlags) = 0;
+									size_t size, uint32_t allocationFlags) = 0;
 	virtual	void				UnreserveAllAddressRanges(
-									uint32 allocationFlags) = 0;
+									uint32_t allocationFlags) = 0;
 
 	virtual	void				Dump() const;
 
@@ -144,9 +144,9 @@ protected:
 			size_t				fFreeSpace;
 			rw_lock				fLock;
 			team_id				fID;
-			int32				fRefCount;
-			int32				fFaultCount;
-			int32				fChangeCount;
+			int32_t				fRefCount;
+			int32_t				fFaultCount;
+			int32_t				fChangeCount;
 			VMTranslationMap*	fTranslationMap;
 			bool				fRandomizingEnabled;
 			bool				fDeleting;

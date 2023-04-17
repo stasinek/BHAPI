@@ -42,7 +42,7 @@ struct list_link {
 
 struct list {
 	list_link	link;
-	int32		offset;
+	int32_t		offset;
 };
 
 
@@ -51,7 +51,7 @@ extern "C" {
 #endif
 
 extern void list_init(struct list *list);
-extern void list_init_etc(struct list *list, int32 offset);
+extern void list_init_etc(struct list *list, int32_t offset);
 extern void list_add_link_to_head(struct list *list, void *_link);
 extern void list_add_link_to_tail(struct list *list, void *_link);
 extern void list_remove_link(void *_link);

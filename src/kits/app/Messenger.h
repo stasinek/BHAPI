@@ -65,8 +65,8 @@ public:
     bool		LockTarget() const;
     status_t	LockTargetWithTimeout(bigtime_t timeout) const;
 
-    status_t	SendMessage(uint32 command) const;
-    status_t	SendMessage(uint32 command, BHandler *reply_to) const;
+    status_t	SendMessage(uint32_t command) const;
+    status_t	SendMessage(uint32_t command, BHandler *reply_to) const;
     status_t	SendMessage(const BMessage *a_message) const;
     status_t	SendMessage(const BMessage *a_message, BHandler *reply_to, bigtime_t timeout) const;
     status_t	SendMessage(const BMessage *a_message, BMessage *reply_message) const;
@@ -100,8 +100,8 @@ private:
 
     void InitData(const BHandler *handler, const BLooper *looper, status_t *perr);
 
-    static status_t _SendMessageToPort(void *port, const BMessage *msg,  uint32 flags, bigtime_t timeout);
-    static BMessage* _GetMessageFromPort(void *port,  uint32 flags, bigtime_t timeout, status_t *err);
+    static status_t _SendMessageToPort(void *port, const BMessage *msg,  uint32_t flags, bigtime_t timeout);
+    static BMessage* _GetMessageFromPort(void *port,  uint32_t flags, bigtime_t timeout, status_t *err);
 
     status_t _SendMessage(const BMessage *a_message,  uint64 replyToken, bigtime_t timeout) const;
 };

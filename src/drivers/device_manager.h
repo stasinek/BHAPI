@@ -21,16 +21,16 @@ enum {
 
 /* I/O resource description */
 typedef struct {
-	uint32	type;
+	uint32_t	type;
 		/* type of I/O resource */
 
-	uint32	base;
+	uint32_t	base;
 		/* I/O memory: first physical address (32 bit)
 		 * I/O port: first port address (16 bit)
 		 * ISA DMA channel: channel number (0-7)
 		 */
 
-	uint32	length;
+	uint32_t	length;
 		/* I/O memory: size of address range (32 bit)
 		 * I/O port: size of port range (16 bit)
 		 * ISA DMA channel: must be 1
@@ -44,7 +44,7 @@ typedef struct {
 	union {
 		uint8		ui8;			/* B_UINT8_TYPE */
 		uint16		ui16;			/* B_UINT16_TYPE */
-		uint32		ui32;			/* B_UINT32_TYPE */
+		uint32_t		ui32;			/* B_UINT32_TYPE */
 		uint64		ui64;			/* B_UINT64_TYPE */
 		const char	*string;		/* B_STRING_TYPE */
 		struct {					/* B_RAW_TYPE */
@@ -84,15 +84,15 @@ typedef struct device_manager_info {
 					const char *deviceModuleName);
 	status_t (*unpublish_device)(device_node *node, const char *path);
 
-	int32 (*create_id)(const char *generator);
-	status_t (*free_id)(const char *generator, uint32 id);
+	int32_t (*create_id)(const char *generator);
+	status_t (*free_id)(const char *generator, uint32_t id);
 
 	status_t (*get_attr_uint8)(const device_node *node, const char *name,
 					uint8 *value, bool recursive);
 	status_t (*get_attr_uint16)(const device_node *node, const char *name,
 					uint16 *value, bool recursive);
-	status_t (*get_attr_uint32)(const device_node *node, const char *name,
-					uint32 *value, bool recursive);
+	status_t (*get_attr_uint32_t)(const device_node *node, const char *name,
+					uint32_t *value, bool recursive);
 	status_t (*get_attr_uint64)(const device_node *node, const char *name,
 					uint64 *value, bool recursive);
 	status_t (*get_attr_string)(const device_node *node, const char *name,
@@ -121,7 +121,7 @@ struct driver_module_info {
 	status_t (*rescan_child_devices)(void *driverCookie);
 
 	void (*device_removed)(void *driverCookie);
-	status_t (*suspend)(void *driverCookie, int32 state);
+	status_t (*suspend)(void *driverCookie, int32_t state);
 	status_t (*resume)(void *driverCookie);
 };
 
@@ -132,7 +132,7 @@ struct driver_module_info {
 #define B_DEVICE_MAPPING			"device/mapping"			/* string */
 #define B_DEVICE_BUS				"device/bus"				/* string */
 #define B_DEVICE_FIXED_CHILD		"device/fixed child"		/* string */
-#define B_DEVICE_FLAGS				"device/flags"				/* uint32 */
+#define B_DEVICE_FLAGS				"device/flags"				/* uint32_t */
 
 #define B_DEVICE_VENDOR_ID			"device/vendor"				/* uint16 */
 #define B_DEVICE_ID					"device/id"					/* uint16 */
@@ -178,7 +178,7 @@ struct device_module_info {
 	status_t (*write)(void *cookie, off_t pos, const void *buffer,
 					size_t *_length);
 	status_t (*io)(void *cookie, io_request *request);
-	status_t (*control)(void *cookie, uint32 op, void *buffer, size_t length);
+	status_t (*control)(void *cookie, uint32_t op, void *buffer, size_t length);
 	status_t (*select)(void *cookie, uint8 event, selectsync *sync);
 	status_t (*deselect)(void *cookie, uint8 event, selectsync *sync);
 };

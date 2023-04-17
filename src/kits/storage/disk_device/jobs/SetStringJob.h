@@ -18,13 +18,13 @@ public:
 									PartitionReference* child = NULL);
 	virtual						~SetStringJob();
 
-			status_t			Init(const char* string, uint32 jobType);
+			status_t			Init(const char* string, uint32_t jobType);
 
 	virtual	status_t			Do();
 
 protected:
 			char*				fString;
-			uint32				fJobType;
+			uint32_t				fJobType;
 };
 
 

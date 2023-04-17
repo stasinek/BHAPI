@@ -34,25 +34,25 @@ KPartitionListener::ContentSizeChanged(KPartition *partition, off_t size)
 
 // BlockSizeChanged
 void
-KPartitionListener::BlockSizeChanged(KPartition *partition, uint32 blockSize)
+KPartitionListener::BlockSizeChanged(KPartition *partition, uint32_t blockSize)
 {
 }
 
 // IndexChanged
 void
-KPartitionListener::IndexChanged(KPartition *partition, int32 index)
+KPartitionListener::IndexChanged(KPartition *partition, int32_t index)
 {
 }
 
 // StatusChanged
 void
-KPartitionListener::StatusChanged(KPartition *partition, uint32 status)
+KPartitionListener::StatusChanged(KPartition *partition, uint32_t status)
 {
 }
 
 // FlagsChanged
 void
-KPartitionListener::FlagsChanged(KPartition *partition, uint32 flags)
+KPartitionListener::FlagsChanged(KPartition *partition, uint32_t flags)
 {
 }
 
@@ -109,14 +109,14 @@ KPartitionListener::ContentParametersChanged(KPartition *partition,
 // ChildAdded
 void
 KPartitionListener::ChildAdded(KPartition *partition, KPartition *child,
-							   int32 index)
+							   int32_t index)
 {
 }
 
 // ChildRemoved
 void
 KPartitionListener::ChildRemoved(KPartition *partition, KPartition *child,
-								 int32 index)
+								 int32_t index)
 {
 }
 

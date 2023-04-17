@@ -37,7 +37,7 @@ All rights reserved.
 #include <FunctionObject.h>
 
 
-SimpleThread::SimpleThread(int32 priority, const char* name)
+SimpleThread::SimpleThread(int32_t priority, const char* name)
 	:	fScanThread(-1),
 		fPriority(priority),
 		fName(name)
@@ -70,13 +70,13 @@ status_t SimpleThread::RunBinder(void* castToThis)
 }
 
 
-void Thread::Launch(FunctionObject* functor, int32 priority, const char* name)
+void Thread::Launch(FunctionObject* functor, int32_t priority, const char* name)
 {
 	new Thread(functor, priority, name);
 }
 
 
-Thread::Thread(FunctionObject* functor, int32 priority, const char* name)
+Thread::Thread(FunctionObject* functor, int32_t priority, const char* name)
 	:	SimpleThread(priority, name),
 		fFunctor(functor)
 {
@@ -99,7 +99,7 @@ void Thread::Run()
 
 
 void ThreadSequence::Launch(BObjectList<FunctionObject>* list, bool async,
-	int32 priority)
+	int32_t priority)
 {
 	if (!async) {
 		// if not async, don't even create a thread, just do it right away
@@ -110,7 +110,7 @@ void ThreadSequence::Launch(BObjectList<FunctionObject>* list, bool async,
 
 
 ThreadSequence::ThreadSequence(BObjectList<FunctionObject>* list,
-	int32 priority)
+	int32_t priority)
 	:	SimpleThread(priority),
 		fFunctorList(list)
 {
@@ -126,8 +126,8 @@ ThreadSequence::~ThreadSequence()
 
 void ThreadSequence::Run(BObjectList<FunctionObject>* list)
 {
-	int32 count = list->CountItems();
-	for (int32 index = 0; index < count; index++)
+	int32_t count = list->CountItems();
+	for (int32_t index = 0; index < count; index++)
 		(*list->ItemAt(index))();
 }
 

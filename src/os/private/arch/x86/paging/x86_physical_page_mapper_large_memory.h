@@ -63,7 +63,7 @@ protected:
 
 status_t large_memory_physical_page_ops_init(kernel_args* args,
 	X86LargePhysicalPageMapper::PhysicalPageSlotPool* initialPools,
-	int32 initialPoolCount, size_t poolSize,
+	int32_t initialPoolCount, size_t poolSize,
 	X86PhysicalPageMapper*& _pageMapper,
 	TranslationMapPhysicalPageMapper*& _kernelPageMapper);
 

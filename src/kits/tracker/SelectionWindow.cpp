@@ -47,7 +47,7 @@ All rights reserved.
 #include <SelectionWindow.h>
 
 
-const uint32 kSelectButtonPressed = 'sbpr';
+const uint32_t kSelectButtonPressed = 'sbpr';
 
 
 //	#pragma mark - SelectionWindow
@@ -236,10 +236,10 @@ bool SelectionWindow::QuitRequested()
 
 void SelectionWindow::MoveCloseToMouse()
 {
-	uint32 buttons;
+	uint32_t buttons;
 	BPoint mousePosition;
 
-	ChildAt((int32)0)->GetMouse(&mousePosition, &buttons);
+	ChildAt((int32_t)0)->GetMouse(&mousePosition, &buttons);
 	ConvertToScreen(&mousePosition);
 
 	// Position the window centered around the mouse...
@@ -271,7 +271,7 @@ SelectionWindow::ExpressionType() const
 		return kNone;
 	}
 
-	int32 index = fMatchingTypeMenuField->Menu()->IndexOf(item);
+	int32_t index = fMatchingTypeMenuField->Menu()->IndexOf(item);
 
 	fMatchingTypeMenuField->UnlockLooper();
 

@@ -13,10 +13,10 @@ class BDataIO;
 
 struct debug_event_stream_header {
 	char	signature[32];
-	uint32	version;
-	uint32	flags;
-	uint32	event_mask;
-	uint32	reserved;
+	uint32_t	version;
+	uint32_t	flags;
+	uint32_t	event_mask;
+	uint32_t	reserved;
 };
 
 
@@ -46,7 +46,7 @@ public:
 
 			status_t			Seek(off_t streamOffset);
 
-			ssize_t				ReadNextEvent(uint32* _event, uint32* _cpu,
+			ssize_t				ReadNextEvent(uint32_t* _event, uint32_t* _cpu,
 									const void** _buffer,
 									off_t* _streamOffset = NULL);
 
@@ -57,8 +57,8 @@ private:
 
 private:
 			BDataIO*			fStream;
-			uint32				fFlags;
-			uint32				fEventMask;
+			uint32_t				fFlags;
+			uint32_t				fEventMask;
 			uint8*				fBuffer;
 			size_t				fBufferCapacity;
 			size_t				fBufferSize;
@@ -73,8 +73,8 @@ public:
 								BDebugEventOutputStream();
 								~BDebugEventOutputStream();
 
-			status_t			SetTo(BDataIO* stream, uint32 flags,
-									uint32 eventMask);
+			status_t			SetTo(BDataIO* stream, uint32_t flags,
+									uint32_t eventMask);
 			void				Unset();
 
 			status_t 			Write(const void* buffer, size_t size);
@@ -82,7 +82,7 @@ public:
 
 private:
 			BDataIO*			fStream;
-			uint32				fFlags;
+			uint32_t				fFlags;
 };
 
 

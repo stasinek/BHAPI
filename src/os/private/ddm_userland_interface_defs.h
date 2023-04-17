@@ -21,12 +21,12 @@ struct user_partition_data {
 	off_t					offset;
 	off_t					size;
 	off_t					content_size;
-	uint32					block_size;
-	uint32					status;
-	uint32					flags;
+	uint32_t					block_size;
+	uint32_t					status;
+	uint32_t					flags;
 	dev_t					volume;
-	int32					index;
-	int32					change_counter;	// TODO: needed?
+	int32_t					index;
+	int32_t					change_counter;	// TODO: needed?
 	disk_system_id			disk_system;
 	char*					name;
 	char*					content_name;
@@ -35,13 +35,13 @@ struct user_partition_data {
 	char*					parameters;
 	char*					content_parameters;
 	void*					user_data;
-	int32					child_count;
+	int32_t					child_count;
 	user_partition_data*	children[1];
 };
 
 // userland disk device representation
 typedef struct user_disk_device_data {
-	uint32					device_flags;
+	uint32_t					device_flags;
 	char*					path;
 	user_partition_data		device_partition_data;
 } user_disk_device_data;
@@ -53,13 +53,13 @@ typedef struct user_disk_system_info {
 		// TODO: better B_PATH_NAME_LENGTH?
 	char			short_name[B_OS_NAME_LENGTH];
 	char			pretty_name[B_OS_NAME_LENGTH];
-	uint32			flags;
+	uint32_t			flags;
 } user_disk_system_info;
 
 // userland disk device job representation
 typedef struct user_disk_device_job_info {
 	disk_job_id		id;
-	uint32			type;
+	uint32_t			type;
 	partition_id	partition;
 	char			description[256];
 } user_disk_device_job_info;

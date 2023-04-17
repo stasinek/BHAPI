@@ -42,14 +42,14 @@ typedef struct _RGBA {
 
 class BColorQuantizer {
 public:
-							BColorQuantizer(uint32 maxColors,
-								uint32 bitsPerColor);
+							BColorQuantizer(uint32_t maxColors,
+								uint32_t bitsPerColor);
 	virtual					~BColorQuantizer();
 
 			bool			ProcessImage(const uint8* const * rowPtrs, int width,
 								int height);
 
-			uint32			GetColorCount() const;
+			uint32_t			GetColorCount() const;
 			void			GetColorTable(RGBA* table) const;
 
 private:
@@ -57,24 +57,24 @@ private:
 
 private:
 			void			_AddColor(Node** _node, uint8 r, uint8 g, uint8 b,
-								uint8 a, uint32 bitsPerColor, uint32 level,
-								uint32* _leafCount, Node** reducibleNodes);
-			Node*			_CreateNode(uint32 level, uint32 bitsPerColor,
-								uint32* _leafCount, Node** reducibleNodes);
-			void		    _ReduceTree(uint32 bitsPerColor, uint32* _leafCount,
+								uint8 a, uint32_t bitsPerColor, uint32_t level,
+								uint32_t* _leafCount, Node** reducibleNodes);
+			Node*			_CreateNode(uint32_t level, uint32_t bitsPerColor,
+								uint32_t* _leafCount, Node** reducibleNodes);
+			void		    _ReduceTree(uint32_t bitsPerColor, uint32_t* _leafCount,
 								Node** reducibleNodes);
 			void		    _DeleteTree(Node** _node);
 
 			void		    _GetPaletteColors(Node* node, RGBA* table,
-								uint32* pIndex, uint32* pSum) const;
+								uint32_t* pIndex, uint32_t* pSum) const;
 
 private:
 			Node*			fTree;
-			uint32			fLeafCount;
+			uint32_t			fLeafCount;
 			Node*			fReducibleNodes[9];
-			uint32			fMaxColors;
-			uint32			fOutputMaxColors;
-			uint32			fBitsPerColor;
+			uint32_t			fMaxColors;
+			uint32_t			fOutputMaxColors;
+			uint32_t			fBitsPerColor;
 };
 
 }	// namespace BPrivate

@@ -99,9 +99,9 @@ bool ValueLocation::SetTo(const ValueLocation& other, uint64 bitOffset,
 	fBigEndian = other.fBigEndian;
 
 	// compute the total bit size
-	int32 count = other.CountPieces();
+	int32_t count = other.CountPieces();
 	uint64 totalBitSize = 0;
-	for (int32 i = 0; i < count; i++) {
+	for (int32_t i = 0; i < count; i++) {
 		const ValuePieceLocation &piece = other.PieceAt(i);
 		totalBitSize += piece.bitSize;
 	}
@@ -120,7 +120,7 @@ bool ValueLocation::SetTo(const ValueLocation& other, uint64 bitOffset,
 
 		// skip pieces for the most significant bits we don't need anymore
 		uint64 bitsToSkip = bitOffset;
-		int32 i;
+		int32_t i;
 		ValuePieceLocation piece;
 		for (i = 0; i < count; i++) {
 			const ValuePieceLocation& tempPiece = other.PieceAt(i);
@@ -165,7 +165,7 @@ bool ValueLocation::SetTo(const ValueLocation& other, uint64 bitOffset,
 
 		// skip pieces for the least significant bits we don't need anymore
 		uint64 bitsToSkip = totalBitSize - bitOffset - bitSize;
-		int32 i;
+		int32_t i;
 		ValuePieceLocation piece;
 		for (i = 0; i < count; i++) {
 			const ValuePieceLocation& tempPiece = other.PieceAt(i);
@@ -235,25 +235,25 @@ bool ValueLocation::AddPiece(const ValuePieceLocation& piece)
 }
 
 
-int32 ValueLocation::CountPieces() const
+int32_t ValueLocation::CountPieces() const
 {
 	return fPieces.size();
 }
 
 
 ValuePieceLocation
-ValueLocation::PieceAt(int32 index) const
+ValueLocation::PieceAt(int32_t index) const
 {
-	if (index < 0 || index >= (int32)fPieces.size())
+	if (index < 0 || index >= (int32_t)fPieces.size())
 		return ValuePieceLocation();
 
 	return fPieces[index];
 }
 
 
-bool ValueLocation::SetPieceAt(int32 index, const ValuePieceLocation& piece)
+bool ValueLocation::SetPieceAt(int32_t index, const ValuePieceLocation& piece)
 {
-	if (index < 0 || index >= (int32)fPieces.size())
+	if (index < 0 || index >= (int32_t)fPieces.size())
 		return false;
 
 	return fPieces[index].Copy(piece);
@@ -271,11 +271,11 @@ ValueLocation::operator=(const ValueLocation& other)
 
 void ValueLocation::Dump() const
 {
-	int32 count = fPieces.size();
+	int32_t count = fPieces.size();
 	printf("ValueLocation: %s endian, %" B_PRId32 " pieces:\n",
 		fBigEndian ? "big" : "little", count);
 
-	for (int32 i = 0; i < count; i++) {
+	for (int32_t i = 0; i < count; i++) {
 		const ValuePieceLocation& piece = fPieces[i];
 		switch (piece.type) {
 			case VALUE_PIECE_LOCATION_INVALID:
@@ -292,7 +292,7 @@ void ValueLocation::Dump() const
 				break;
 			case VALUE_PIECE_LOCATION_IMPLICIT:
 				printf("  implicit value: ");
-				for (uint32 j = 0; j < piece.size; j++)
+				for (uint32_t j = 0; j < piece.size; j++)
 					printf("%x ", ((char *)piece.value)[j]);
 				break;
 		}

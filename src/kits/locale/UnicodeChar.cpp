@@ -22,7 +22,7 @@ BUnicodeChar::BUnicodeChar()
 
 // Returns the general category value for the code point.
 int8
-BUnicodeChar::Type(uint32 c)
+BUnicodeChar::Type(uint32_t c)
 {
 	BUnicodeChar();
 	return u_charType(c);
@@ -31,7 +31,7 @@ BUnicodeChar::Type(uint32 c)
 
 // Determines whether the specified code point is a letter character.
 // True for general categories "L" (letters).
-bool BUnicodeChar::IsAlpha(uint32 c)
+bool BUnicodeChar::IsAlpha(uint32_t c)
 {
 	BUnicodeChar();
 	return u_isalpha(c);
@@ -42,7 +42,7 @@ bool BUnicodeChar::IsAlpha(uint32 c)
 // (letter or digit).
 // True for characters with general categories
 // "L" (letters) and "Nd" (decimal digit numbers).
-bool BUnicodeChar::IsAlNum(uint32 c)
+bool BUnicodeChar::IsAlNum(uint32_t c)
 {
 	BUnicodeChar();
 	return u_isalnum(c);
@@ -50,7 +50,7 @@ bool BUnicodeChar::IsAlNum(uint32 c)
 
 
 // Check if a code point has the Lowercase Unicode property (UCHAR_LOWERCASE).
-bool BUnicodeChar::IsLower(uint32 c)
+bool BUnicodeChar::IsLower(uint32_t c)
 {
 	BUnicodeChar();
 	return u_isULowercase(c);
@@ -58,7 +58,7 @@ bool BUnicodeChar::IsLower(uint32 c)
 
 
 // Check if a code point has the Uppercase Unicode property (UCHAR_UPPERCASE).
-bool BUnicodeChar::IsUpper(uint32 c)
+bool BUnicodeChar::IsUpper(uint32_t c)
 {
 	BUnicodeChar();
 	return u_isUUppercase(c);
@@ -67,7 +67,7 @@ bool BUnicodeChar::IsUpper(uint32 c)
 
 // Determines whether the specified code point is a titlecase letter.
 // True for general category "Lt" (titlecase letter).
-bool BUnicodeChar::IsTitle(uint32 c)
+bool BUnicodeChar::IsTitle(uint32_t c)
 {
 	BUnicodeChar();
 	return u_istitle(c);
@@ -78,7 +78,7 @@ bool BUnicodeChar::IsTitle(uint32 c)
 // True for characters with general category "Nd" (decimal digit numbers).
 // Beginning with Unicode 4, this is the same as
 // testing for the Numeric_Type of Decimal.
-bool BUnicodeChar::IsDigit(uint32 c)
+bool BUnicodeChar::IsDigit(uint32_t c)
 {
 	BUnicodeChar();
 	return u_isdigit(c);
@@ -91,7 +91,7 @@ bool BUnicodeChar::IsDigit(uint32 c)
 // as well as Latin letters a-f and A-F in both ASCII and Fullwidth ASCII.
 // (That is, for letters with code points
 // 0041..0046, 0061..0066, FF21..FF26, FF41..FF46.)
-bool BUnicodeChar::IsHexDigit(uint32 c)
+bool BUnicodeChar::IsHexDigit(uint32_t c)
 {
 	BUnicodeChar();
 	return u_isxdigit(c);
@@ -102,7 +102,7 @@ bool BUnicodeChar::IsHexDigit(uint32 c)
 // which usually means that it is assigned a character.
 // True for general categories other than "Cn" (other, not assigned),
 // i.e., true for all code points mentioned in UnicodeData.txt.
-bool BUnicodeChar::IsDefined(uint32 c)
+bool BUnicodeChar::IsDefined(uint32_t c)
 {
 	BUnicodeChar();
 	return u_isdefined(c);
@@ -112,7 +112,7 @@ bool BUnicodeChar::IsDefined(uint32 c)
 // Determines whether the specified code point is a base character.
 // True for general categories "L" (letters), "N" (numbers),
 // "Mc" (spacing combining marks), and "Me" (enclosing marks).
-bool BUnicodeChar::IsBase(uint32 c)
+bool BUnicodeChar::IsBase(uint32_t c)
 {
 	BUnicodeChar();
 	return u_isbase(c);
@@ -127,7 +127,7 @@ bool BUnicodeChar::IsBase(uint32 c)
 // - U_FORMAT_CHAR (Cf)
 // - U_LINE_SEPARATOR (Zl)
 // - U_PARAGRAPH_SEPARATOR (Zp)
-bool BUnicodeChar::IsControl(uint32 c)
+bool BUnicodeChar::IsControl(uint32_t c)
 {
 	BUnicodeChar();
 	return u_iscntrl(c);
@@ -136,7 +136,7 @@ bool BUnicodeChar::IsControl(uint32 c)
 
 // Determines whether the specified code point is a punctuation character.
 // True for characters with general categories "P" (punctuation).
-bool BUnicodeChar::IsPunctuation(uint32 c)
+bool BUnicodeChar::IsPunctuation(uint32_t c)
 {
 	BUnicodeChar();
 	return u_ispunct(c);
@@ -146,7 +146,7 @@ bool BUnicodeChar::IsPunctuation(uint32 c)
 // Determine if the specified code point is a space character according to Java.
 // True for characters with general categories "Z" (separators),
 // which does not include control codes (e.g., TAB or Line Feed).
-bool BUnicodeChar::IsSpace(uint32 c)
+bool BUnicodeChar::IsSpace(uint32_t c)
 {
 	BUnicodeChar();
 	return u_isJavaSpaceChar(c);
@@ -168,7 +168,7 @@ bool BUnicodeChar::IsSpace(uint32 c)
 // - It is U+001D GROUP SEPARATOR.
 // - It is U+001E RECORD SEPARATOR.
 // - It is U+001F UNIT SEPARATOR.
-bool BUnicodeChar::IsWhitespace(uint32 c)
+bool BUnicodeChar::IsWhitespace(uint32_t c)
 {
 	BUnicodeChar();
 	return u_isWhitespace(c);
@@ -177,7 +177,7 @@ bool BUnicodeChar::IsWhitespace(uint32 c)
 
 // Determines whether the specified code point is a printable character.
 // True for general categories other than "C" (controls).
-bool BUnicodeChar::IsPrintable(uint32 c)
+bool BUnicodeChar::IsPrintable(uint32_t c)
 {
 	BUnicodeChar();
 	return u_isprint(c);
@@ -186,28 +186,28 @@ bool BUnicodeChar::IsPrintable(uint32 c)
 
 //	#pragma mark -
 
-uint32 BUnicodeChar::ToLower(uint32 c)
+uint32_t BUnicodeChar::ToLower(uint32_t c)
 {
 	BUnicodeChar();
 	return u_tolower(c);
 }
 
 
-uint32 BUnicodeChar::ToUpper(uint32 c)
+uint32_t BUnicodeChar::ToUpper(uint32_t c)
 {
 	BUnicodeChar();
 	return u_toupper(c);
 }
 
 
-uint32 BUnicodeChar::ToTitle(uint32 c)
+uint32_t BUnicodeChar::ToTitle(uint32_t c)
 {
 	BUnicodeChar();
 	return u_totitle(c);
 }
 
 
-int32 BUnicodeChar::DigitValue(uint32 c)
+int32_t BUnicodeChar::DigitValue(uint32_t c)
 {
 	BUnicodeChar();
 	return u_digit(c, 10);
@@ -215,14 +215,14 @@ int32 BUnicodeChar::DigitValue(uint32 c)
 
 
 unicode_east_asian_width
-BUnicodeChar::EastAsianWidth(uint32 c)
+BUnicodeChar::EastAsianWidth(uint32_t c)
 {
 	return (unicode_east_asian_width)u_getIntPropertyValue(c,
 			UCHAR_EAST_ASIAN_WIDTH);
 }
 
 
-void BUnicodeChar::ToUTF8(uint32 c, char** out)
+void BUnicodeChar::ToUTF8(uint32_t c, char** out)
 {
 	int i = 0;
 	U8_APPEND_UNSAFE(*out, i, c);
@@ -230,10 +230,10 @@ void BUnicodeChar::ToUTF8(uint32 c, char** out)
 }
 
 
-uint32 BUnicodeChar::FromUTF8(const char** in)
+uint32_t BUnicodeChar::FromUTF8(const char** in)
 {
 	int i = 0;
-	uint32 c = 0;
+	uint32_t c = 0;
 	U8_NEXT_UNSAFE(*in, i, c);
 	*in += i;
 

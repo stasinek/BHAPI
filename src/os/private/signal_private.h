@@ -15,7 +15,7 @@
 #define MAX_SIGNAL_NUMBER_BEOS		29
 
 
-typedef __haiku_int32 sigset_t_beos;
+typedef __haiku_int32_t sigset_t_beos;
 
 struct sigaction_beos {
 	__sighandler_t	sa_handler;

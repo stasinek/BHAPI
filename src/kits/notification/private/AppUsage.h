@@ -39,8 +39,8 @@ public:
 			const char*					Name();
 			bool						Allowed(const char* title, notification_type type);
 			bool						Allowed();
-			NotificationReceived*		NotificationAt(int32 index);
-			int32						Notifications();
+			NotificationReceived*		NotificationAt(int32_t index);
+			int32_t						Notifications();
 			void						AddNotification(NotificationReceived* notification);
 
 private:

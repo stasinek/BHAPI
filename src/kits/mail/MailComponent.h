@@ -16,7 +16,7 @@ class BMimeType;
 
 extern const char *kHeaderCharsetString;
 extern const char *kHeaderEncodingString;
-// Special field names in the headers which specify the character set (int32)
+// Special field names in the headers which specify the character set (int32_t)
 // and encoding (int8) to use when converting the headers from UTF-8 to the
 // output e-mail format (rfc2047).  For use with SetHeaderField when you pass
 // it a structured header in a BMessage.
@@ -31,11 +31,11 @@ enum component_type {
 
 class BMailComponent {
 	public:
-		BMailComponent(uint32 defaultCharSet = B_MAIL_NULL_CONVERSION);
+		BMailComponent(uint32_t defaultCharSet = B_MAIL_NULL_CONVERSION);
 		virtual ~BMailComponent();
 
 		//------Info on this component
-		uint32 ComponentType();
+		uint32_t ComponentType();
 		BMailComponent *WhatIsThis();
 			// Takes any generic MailComponent, and returns an instance
 			// of a MailComponent subclass that applies to this case,
@@ -47,7 +47,7 @@ class BMailComponent {
 
 		void SetHeaderField(
 			const char *key, const char *value,
-			uint32 charset = B_MAIL_NULL_CONVERSION,
+			uint32_t charset = B_MAIL_NULL_CONVERSION,
 			mail_encoding encoding = null_encoding,
 			bool replace_existing = true);
 			// If you want to delete a header, pass in a zero length or NULL
@@ -56,9 +56,9 @@ class BMailComponent {
 			const char *key, BMessage *structured_header,
 			bool replace_existing = true);
 
-		const char *HeaderAt(int32 index) const;
-		const char *HeaderField(const char *key, int32 index = 0) const;
-		status_t	HeaderField(const char *key, BMessage *structured_header, int32 index = 0) const;
+		const char *HeaderAt(int32_t index) const;
+		const char *HeaderField(const char *key, int32_t index = 0) const;
+		status_t	HeaderField(const char *key, BMessage *structured_header, int32_t index = 0) const;
 
 		status_t	RemoveHeader(const char *key);
 
@@ -71,7 +71,7 @@ class BMailComponent {
 		virtual status_t MIMEType(BMimeType *mime);
 
 	protected:
-		uint32 _charSetForTextDecoding;
+		uint32_t _charSetForTextDecoding;
 			// This is the character set to be used for decoding text
 			// components, or if it is B_MAIL_NULL_CONVERSION then the character
 			// set will be determined automatically.  Since we can't use a
@@ -90,16 +90,16 @@ class BMailComponent {
 
 		BMessage headers;
 
-		uint32 _reserved[5];
+		uint32_t _reserved[5];
 };
 
 
 class BTextMailComponent : public BMailComponent {
 	public:
-		BTextMailComponent(const char *text = NULL, uint32 defaultCharSet = B_MAIL_NULL_CONVERSION);
+		BTextMailComponent(const char *text = NULL, uint32_t defaultCharSet = B_MAIL_NULL_CONVERSION);
 		virtual ~BTextMailComponent();
 
-		void SetEncoding(mail_encoding encoding, int32 charset);
+		void SetEncoding(mail_encoding encoding, int32_t charset);
 			// encoding: you should always use quoted_printable, base64 is strongly not
 			//		recommended, see rfc 2047 for the reasons why
 			// charset: use Conversion flavor constants from UTF8.h
@@ -127,14 +127,14 @@ class BTextMailComponent : public BMailComponent {
 		BString decoded;
 
 		mail_encoding encoding;
-		uint32 charset; // This character set is used for encoding, not decoding.
+		uint32_t charset; // This character set is used for encoding, not decoding.
 
 		status_t ParseRaw();
 		BPositionIO *raw_data;
 		size_t raw_length;
 		off_t raw_offset;
 
-		uint32 _reserved[5];
+		uint32_t _reserved[5];
 };
 
 #endif	/* ZOIDBERG_MAIL_COMPONENT_H */

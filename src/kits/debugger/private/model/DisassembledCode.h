@@ -38,9 +38,9 @@ public:
 			TargetAddressRange	StatementAddressRange() const;
 
 	// LineDataSource
-	virtual	int32				CountLines() const;
-	virtual	const char*			LineAt(int32 index) const;
-	virtual	int32				LineLengthAt(int32 index) const;
+	virtual	int32_t				CountLines() const;
+	virtual	const char*			LineAt(int32_t index) const;
+	virtual	int32_t				LineLengthAt(int32_t index) const;
 
 public:
 			bool				AddCommentLine(const BString& line);

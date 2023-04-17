@@ -80,7 +80,7 @@ public:
 								VMCache();
 	virtual						~VMCache();
 
-			status_t			Init(uint32 cacheType, uint32 allocationFlags);
+			status_t			Init(uint32_t cacheType, uint32_t allocationFlags);
 
 	virtual	void				Delete();
 
@@ -100,9 +100,9 @@ public:
 
 	inline	VMCacheRef*			CacheRef() const	{ return fCacheRef; }
 
-			void				WaitForPageEvents(vm_page* page, uint32 events,
+			void				WaitForPageEvents(vm_page* page, uint32_t events,
 									bool relock);
-			void				NotifyPageEvents(vm_page* page, uint32 events)
+			void				NotifyPageEvents(vm_page* page, uint32_t events)
 									{ if (fPageEventWaiters != NULL)
 										_NotifyPageEvents(page, events); }
 	inline	void				MarkPageUnbusy(vm_page* page);
@@ -117,14 +117,14 @@ public:
 	inline	void				IncrementWiredPagesCount();
 	inline	void				DecrementWiredPagesCount();
 
-	virtual	int32				GuardSize()	{ return 0; }
+	virtual	int32_t				GuardSize()	{ return 0; }
 
 			void				AddConsumer(VMCache* consumer);
 
 			status_t			InsertAreaLocked(VMArea* area);
 			status_t			RemoveArea(VMArea* area);
 			void				TransferAreas(VMCache* fromCache);
-			uint32				CountWritableAreas(VMArea* ignoreArea) const;
+			uint32_t				CountWritableAreas(VMArea* ignoreArea) const;
 
 			status_t			WriteModified();
 			status_t			SetMinimalCommitment(off_t commitment,
@@ -139,7 +139,7 @@ public:
 									// long as the lock is owned.
 
 			// for debugging only
-			int32				RefCount() const
+			int32_t				RefCount() const
 									{ return fRefCount; }
 
 	// backing store operations
@@ -147,20 +147,20 @@ public:
 	virtual	bool				HasPage(off_t offset);
 
 	virtual	status_t			Read(off_t offset, const generic_io_vec *vecs,
-									size_t count,uint32 flags,
+									size_t count,uint32_t flags,
 									generic_size_t *_numBytes);
 	virtual	status_t			Write(off_t offset, const generic_io_vec *vecs,
-									size_t count, uint32 flags,
+									size_t count, uint32_t flags,
 									generic_size_t *_numBytes);
 	virtual	status_t			WriteAsync(off_t offset,
 									const generic_io_vec* vecs, size_t count,
-									generic_size_t numBytes, uint32 flags,
+									generic_size_t numBytes, uint32_t flags,
 									AsyncIOCallback* callback);
 	virtual	bool				CanWritePage(off_t offset);
 
-	virtual	int32				MaxPagesPerWrite() const
+	virtual	int32_t				MaxPagesPerWrite() const
 									{ return -1; } // no restriction
-	virtual	int32				MaxPagesPerAsyncWrite() const
+	virtual	int32_t				MaxPagesPerAsyncWrite() const
 									{ return -1; } // no restriction
 
 	virtual	status_t			Fault(struct VMAddressSpace *aspace,
@@ -190,9 +190,9 @@ public:
 			off_t				virtual_end;
 			off_t				committed_size;
 				// TODO: Remove!
-			uint32				page_count;
-			uint32				temporary : 1;
-			uint32				type : 6;
+			uint32_t				page_count;
+			uint32_t				temporary : 1;
+			uint32_t				type : 6;
 
 #if DEBUG_CACHE_LIST
 			VMCache*			debug_previous;
@@ -204,7 +204,7 @@ private:
 			friend struct VMCacheRef;
 
 private:
-			void				_NotifyPageEvents(vm_page* page, uint32 events);
+			void				_NotifyPageEvents(vm_page* page, uint32_t events);
 
 	inline	bool				_IsMergeable() const;
 
@@ -212,7 +212,7 @@ private:
 			void				_RemoveConsumer(VMCache* consumer);
 
 private:
-			int32				fRefCount;
+			int32_t				fRefCount;
 			mutex				fLock;
 			PageEventWaiter*	fPageEventWaiters;
 			void*				fUserData;
@@ -229,8 +229,8 @@ extern VMCache* gDebugCacheList;
 class VMCacheFactory {
 public:
 	static	status_t		CreateAnonymousCache(VMCache*& cache,
-								bool canOvercommit, int32 numPrecommittedPages,
-								int32 numGuardPages, bool swappable,
+								bool canOvercommit, int32_t numPrecommittedPages,
+								int32_t numGuardPages, bool swappable,
 								int priority);
 	static	status_t		CreateVnodeCache(VMCache*& cache,
 								struct vnode* vnode);

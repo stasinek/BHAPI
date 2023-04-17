@@ -10,8 +10,8 @@
 #include <HaikuConstants.h>
 
 
-Register::Register(int32 index, const char* name, uint32 bitSize,
-	uint32 valueType, register_type type, bool calleePreserved)
+Register::Register(int32_t index, const char* name, uint32_t bitSize,
+	uint32_t valueType, register_type type, bool calleePreserved)
 	:
 	fIndex(index),
 	fName(name),

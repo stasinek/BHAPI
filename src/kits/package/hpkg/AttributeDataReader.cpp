@@ -17,7 +17,7 @@ namespace BHPKG {
 
 
 BAttributeDataReader::BAttributeDataReader(int fd, const char* attribute,
-	uint32 type)
+	uint32_t type)
 	:
 	fFD(fd),
 	fType(type),

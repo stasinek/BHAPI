@@ -26,10 +26,10 @@ using namespace BPrivate;
 // as well, even though we do not use them for anything.
 
 // Not used. For backwards compatibility only.
-int32 midi_debug_level = 0;
+int32_t midi_debug_level = 0;
 
 // Not used. For backwards compatibility only.
-int32 midi_dispatcher_priority = B_REAL_TIME_PRIORITY;
+int32_t midi_dispatcher_priority = B_REAL_TIME_PRIORITY;
 
 //------------------------------------------------------------------------------
 
@@ -60,7 +60,7 @@ namespace BPrivate
 
 
 BMidiEndpoint* 
-BMidiRoster::NextEndpoint(int32* id)
+BMidiRoster::NextEndpoint(int32_t* id)
 {
 	BMidiEndpoint* endp = NULL;
 
@@ -80,7 +80,7 @@ BMidiRoster::NextEndpoint(int32* id)
 
 
 BMidiProducer* 
-BMidiRoster::NextProducer(int32* id)
+BMidiRoster::NextProducer(int32_t* id)
 {
 	BMidiEndpoint* endp;
 
@@ -96,7 +96,7 @@ BMidiRoster::NextProducer(int32* id)
 
 
 BMidiConsumer* 
-BMidiRoster::NextConsumer(int32* id)
+BMidiRoster::NextConsumer(int32_t* id)
 {
 	BMidiEndpoint* endp;
 
@@ -112,7 +112,7 @@ BMidiRoster::NextConsumer(int32* id)
 
 
 BMidiEndpoint* 
-BMidiRoster::FindEndpoint(int32 id, bool localOnly)
+BMidiRoster::FindEndpoint(int32_t id, bool localOnly)
 {
 	BMidiEndpoint* endp = NULL;
 
@@ -138,7 +138,7 @@ BMidiRoster::FindEndpoint(int32 id, bool localOnly)
 
 
 BMidiProducer* 
-BMidiRoster::FindProducer(int32 id, bool localOnly)
+BMidiRoster::FindProducer(int32_t id, bool localOnly)
 {
 	BMidiEndpoint* endp = FindEndpoint(id, localOnly);
 
@@ -152,7 +152,7 @@ BMidiRoster::FindProducer(int32 id, bool localOnly)
 
 
 BMidiConsumer* 
-BMidiRoster::FindConsumer(int32 id, bool localOnly)
+BMidiRoster::FindConsumer(int32_t id, bool localOnly)
 {
 	BMidiEndpoint* endp = FindEndpoint(id, localOnly);
 
@@ -296,7 +296,7 @@ void BMidiRoster::CreateLocal(BMidiEndpoint* endp)
 		status_t res;
 		if (reply.FindInt32("midi:result", &res) == B_OK) {
 			if (res == B_OK) {
-				int32 id;
+				int32_t id;
 				if (reply.FindInt32("midi:id", &id) == B_OK) {
 					endp->fId = id;
 

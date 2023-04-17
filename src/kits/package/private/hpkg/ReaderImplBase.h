@@ -42,7 +42,7 @@ class PackageFileHeapReader;
 
 
 struct PackageFileSection {
-	uint32			uncompressedLength;
+	uint32_t			uncompressedLength;
 	uint8*			data;
 	uint64			offset;
 	uint64			currentOffset;
@@ -120,12 +120,12 @@ protected:
 			typedef SinglyLinkedList<AttributeHandler> AttributeHandlerList;
 
 protected:
-			template<typename Header, uint32 kMagic, uint16 kVersion,
+			template<typename Header, uint32_t kMagic, uint16 kVersion,
 				uint16 kMinorVersion>
 			status_t			Init(BPositionIO* file, bool keepFile,
-									Header& header, uint32 flags);
-			status_t			InitHeapReader(uint32 compression,
-									uint32 chunkSize, off_t offset,
+									Header& header, uint32_t flags);
+			status_t			InitHeapReader(uint32_t compression,
+									uint32_t chunkSize, off_t offset,
 									uint64 compressedSize,
 									uint64 uncompressedSize);
 	virtual	status_t			CreateCachedHeapReader(
@@ -427,8 +427,8 @@ private:
 // #pragma mark - template and inline methods
 
 
-template<typename Header, uint32 kMagic, uint16 kVersion, uint16 kMinorVersion>
-status_t ReaderImplBase::Init(BPositionIO* file, bool keepFile, Header& header, uint32 flags)
+template<typename Header, uint32_t kMagic, uint16 kVersion, uint16 kMinorVersion>
+status_t ReaderImplBase::Init(BPositionIO* file, bool keepFile, Header& header, uint32_t flags)
 {
 	status_t error = _Init(file, keepFile);
 	if (error != B_OK)

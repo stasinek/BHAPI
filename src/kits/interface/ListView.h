@@ -53,15 +53,15 @@ public:
     BListView(BRect frame,
           const char *name,
           bhapi::list_view_type type = B_SINGLE_SELECTION_LIST,
-           uint32 resizingMode = B_FOLLOW_LEFT | B_FOLLOW_TOP,
-           uint32 flags = B_WILL_DRAW | B_NAVIGABLE | B_FRAME_EVENTS);
+           uint32_t resizingMode = B_FOLLOW_LEFT | B_FOLLOW_TOP,
+           uint32_t flags = B_WILL_DRAW | B_NAVIGABLE | B_FRAME_EVENTS);
     virtual ~BListView();
 
     virtual bool		AddItem(BListItem *item);
-    virtual bool		AddItem(BListItem *item,  int32 atIndex);
+    virtual bool		AddItem(BListItem *item,  int32_t atIndex);
     virtual bool		RemoveItem(BListItem *item, bool auto_destruct_item = true);
-    virtual BListItem	*RemoveItem(int32 index);
-    virtual bool		RemoveItems(int32 index,  int32 count, bool auto_destruct_items = true);
+    virtual BListItem	*RemoveItem(int32_t index);
+    virtual bool		RemoveItems(int32_t index,  int32_t count, bool auto_destruct_items = true);
 
     virtual void		SetListType(bhapi::list_view_type type);
     bhapi::list_view_type	ListType() const;
@@ -69,43 +69,43 @@ public:
     virtual void		SetSelectionMessage(BMessage *message);
     virtual void		SetInvocationMessage(BMessage *message);
     BMessage		*SelectionMessage() const;
-     uint32			SelectionCommand() const;
+     uint32_t			SelectionCommand() const;
     BMessage		*InvocationMessage() const;
-     uint32			InvocationCommand() const;
+     uint32_t			InvocationCommand() const;
     virtual status_t	Invoke(const BMessage *message = NULL);
 
     // Empty functions BEGIN --- just for derivative class
     virtual void		SelectionChanged();
     // Empty functions END
 
-    void			Select(int32 index, bool extend = false);
-    void			Select(int32 start,  int32 finish);
-    void			Select(int32 start,  int32 finish, bool extend = false);
-    bool			IsItemSelected(int32 index) const;
-     int32			CurrentSelection(int32 index = 0) const;
+    void			Select(int32_t index, bool extend = false);
+    void			Select(int32_t start,  int32_t finish);
+    void			Select(int32_t start,  int32_t finish, bool extend = false);
+    bool			IsItemSelected(int32_t index) const;
+     int32_t			CurrentSelection(int32_t index = 0) const;
 
-    void			Deselect(int32 index);
+    void			Deselect(int32_t index);
     void			DeselectAll();
-    void			DeselectExcept(int32 start,  int32 finish);
+    void			DeselectExcept(int32_t start,  int32_t finish);
 
-    BRect			ItemFrame(int32 index) const;
-    void			InvalidateItem(int32 index);
+    BRect			ItemFrame(int32_t index) const;
+    void			InvalidateItem(int32_t index);
     void			ScrollToSelection();
 
-    BListItem		*ItemAt(int32 index) const;
+    BListItem		*ItemAt(int32_t index) const;
     BListItem		*FirstItem() const;
     BListItem		*LastItem() const;
-     int32			IndexOf(const BListItem *item) const;
-     int32			IndexOf(BPoint where, bool mustVisible = false) const;
+     int32_t			IndexOf(const BListItem *item) const;
+     int32_t			IndexOf(BPoint where, bool mustVisible = false) const;
     bool			HasItem(const BListItem *item) const;
-     int32			CountItems() const;
+     int32_t			CountItems() const;
     virtual void		MakeEmpty();
     bool			IsEmpty() const;
-    bool			SwapItems(int32 indexA,  int32 indexB);
-    bool			MoveItem(int32 fromIndex,  int32 toIndex);
+    bool			SwapItems(int32_t indexA,  int32_t indexB);
+    bool			MoveItem(int32_t fromIndex,  int32_t toIndex);
 
     // ReplaceItem(): when "oldItem" assigned to NULL, the old item will be destructed automatically.
-    bool			ReplaceItem(int32 index, BListItem *newItem, BListItem **oldItem = NULL);
+    bool			ReplaceItem(int32_t index, BListItem *newItem, BListItem **oldItem = NULL);
 
     void			SortItems(int (*cmp)(const BListItem **a, const BListItem **b));
     void			DoForEach(bool (*func)(BListItem *item));
@@ -117,9 +117,9 @@ public:
     virtual void		Draw(BRect updateRect);
     virtual void		MouseDown(BPoint where);
     virtual void		MouseUp(BPoint where);
-    virtual void		MouseMoved(BPoint where,  uint32 code, const BMessage *a_message);
-    virtual void		KeyDown(const char *bytes,  int32 numBytes);
-    virtual void		KeyUp(const char *bytes,  int32 numBytes);
+    virtual void		MouseMoved(BPoint where,  uint32_t code, const BMessage *a_message);
+    virtual void		KeyDown(const char *bytes,  int32_t numBytes);
+    virtual void		KeyUp(const char *bytes,  int32_t numBytes);
     virtual void		SetFont(const BFont *font,  uint8 mask = B_FONT_ALL);
     virtual void		MakeFocus(bool focusState = true);
     virtual void		WindowActivated(bool state);
@@ -127,16 +127,16 @@ public:
     virtual void		DetachedFromWindow();
 
 protected:
-    void			SetPosition(int32 pos);
-     int32			Position() const;
-    void			ScrollToItem(int32 index);
+    void			SetPosition(int32_t pos);
+     int32_t			Position() const;
+    void			ScrollToItem(int32_t index);
 
 private:
     BList fItems;
     bhapi::list_view_type fListType;
-     int32 fFirstSelected;
-     int32 fLastSelected;
-     int32 fPos;
+     int32_t fFirstSelected;
+     int32_t fLastSelected;
+     int32_t fPos;
 
     BMessage *fSelectionMessage;
 };

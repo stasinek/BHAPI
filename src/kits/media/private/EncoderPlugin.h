@@ -52,17 +52,17 @@ public:
 	// returned in _acceptedInputFormat).
 	virtual	status_t			SetUp(const media_format* inputFormat) = 0;
 
-	virtual	status_t			AddTrackInfo(uint32 code, const void* data,
-									size_t size, uint32 flags = 0);
+	virtual	status_t			AddTrackInfo(uint32_t code, const void* data,
+									size_t size, uint32_t flags = 0);
 
 	// Ownership of the BView and BParameterWeb remain with the Encoder.
 	// A window embedding the view must remove it before it is destroyed.
 	virtual	BView*				ParameterView();
 
 	virtual	BParameterWeb*		ParameterWeb();
-	virtual	status_t			GetParameterValue(int32 id, void* value,
+	virtual	status_t			GetParameterValue(int32_t id, void* value,
 									size_t* size) const;
-	virtual	status_t			SetParameterValue(int32 id, const void* value,
+	virtual	status_t			SetParameterValue(int32_t id, const void* value,
 									size_t size);
 
 	virtual status_t			GetEncodeParameters(
@@ -90,7 +90,7 @@ private:
 
 private:
 	// FBC padding
-			uint32				fReserved[20];
+			uint32_t				fReserved[20];
 
 	virtual void				_ReservedEncoder1();
 	virtual void				_ReservedEncoder2();
@@ -122,7 +122,7 @@ public:
 	virtual	Encoder*			NewEncoder(
 									const media_codec_info& codecInfo) = 0;
 
-	virtual	status_t			RegisterNextEncoder(int32* cookie,
+	virtual	status_t			RegisterNextEncoder(int32_t* cookie,
 									media_codec_info* codecInfo,
 									media_format_family* formatFamily,
 									media_format* inputFormat,

@@ -18,13 +18,13 @@ struct irq_routing_entry {
 	uint8		pin;
 
 	acpi_handle	source;
-	uint32		source_index;
+	uint32_t		source_index;
 	bool		needs_configuration;
 
 	// PCI bus_manager connection
 	uint8		pci_bus;
 	uint8		pci_device;
-	uint32		pci_function_mask;
+	uint32_t		pci_function_mask;
 
 	// Distilled configuration info
 	uint8		irq;			// Global System Interrupt (GSI)
@@ -68,7 +68,7 @@ struct link_device {
 };
 
 
-typedef bool (*interrupt_available_check_function)(int32 globalSystemInterrupt);
+typedef bool (*interrupt_available_check_function)(int32_t globalSystemInterrupt);
 
 
 void print_irq_descriptor(const irq_descriptor& descriptor);

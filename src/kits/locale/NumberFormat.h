@@ -29,8 +29,8 @@ public:
             status_t			Format(BString& string, const double value)
                                     const;
             ssize_t				Format(char* string, size_t maxSize,
-                                    const int32 value) const;
-            status_t			Format(BString& string, const int32 value)
+                                    const int32_t value) const;
+            status_t			Format(BString& string, const int32_t value)
                                     const;
 
                                 // monetary

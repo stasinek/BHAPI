@@ -27,11 +27,11 @@ public:
   // B_OK : No error
   // B_ERROR : No more formats
   // GetNextInputFormat: required for BFileInterface functionality
-  virtual status_t GetNextInputFormat(int32 * cookie,
+  virtual status_t GetNextInputFormat(int32_t * cookie,
                                       media_file_format * outFormat) = 0;
   // Implement per BFileInterface::DisposeFileFormatCookie
   // DisposeInputFormatCookie: required for BFileInterface functionality
-  virtual void DisposeInputFormatCookie(int32 cookie) = 0;
+  virtual void DisposeInputFormatCookie(int32_t cookie) = 0;
 
 /* begin transcoding functions */
   // These are used to enumerate the set of file formats that this
@@ -43,10 +43,10 @@ public:
   // Return codes:
   // B_OK : No error
   // B_ERROR : No more formats
-  virtual status_t GetNextOutputFormat(int32 * cookie,
+  virtual status_t GetNextOutputFormat(int32_t * cookie,
                                        media_file_format * outFormat);
   // Implement per BFileInterface::DisposeFileFormatCookie
-  virtual void DisposeOutputFormatCookie(int32 cookie);
+  virtual void DisposeOutputFormatCookie(int32_t cookie);
 /* end transcoding functions */
 /* end BFileInterface functions */
   
@@ -99,11 +99,11 @@ public:
   // B_NO_MEMORY : Storage for the buffer could not be allocated.
   // B_MEDIA_NO_HANDLER : This extractor doesn't handle that format
   virtual status_t SetSource(const BFile * source);
-  virtual status_t SetSource(const entry_ref * source, int32 flags = 0);
+  virtual status_t SetSource(const entry_ref * source, int32_t flags = 0);
   virtual status_t SetSource(const BDataIO * source);
 /* begin transcoding functions */
   virtual status_t SetDestination(const BFile * source);
-  virtual status_t SetDestination(const entry_ref * source, int32 flags = 0);
+  virtual status_t SetDestination(const entry_ref * source, int32_t flags = 0);
   virtual status_t SetDestination(const BDataIO * source);
 /* end transcoding functions */
 
@@ -145,7 +145,7 @@ public:
   // B_OK        : No error
   // B_NO_INIT   : The BEncoder doesn't reference a valid stream.
   // B_MEDIA_NO_HANDLER : This extractor doesn't handle this format
-  virtual status_t WriteChunk(int32 type,
+  virtual status_t WriteChunk(int32_t type,
                               const void * data,
                               size_t size);
 
@@ -157,7 +157,7 @@ public:
   // B_OK        : No error
   // B_NO_INIT   : The BEncoder doesn't reference a valid stream.
   // B_MEDIA_NO_HANDLER : This extractor doesn't handle this format
-  virtual status_t ReadChunk(int32 * outType,
+  virtual status_t ReadChunk(int32_t * outType,
                              const void * outData,
                              size_t * outSize);
 /* end weird function that is missing but parallels add chunk */
@@ -193,7 +193,7 @@ public:
   // B_OK : No error
   // B_NO_INIT   : The BEncoder doesn't reference a valid stream.
   // B_MEDIA_NO_HANDLER : This extractor doesn't handle this format
-  virtual status_t GetParameterValue(int32 id, const void * value, 
+  virtual status_t GetParameterValue(int32_t id, const void * value, 
                                      size_t * size) = 0;
 
   // the extractor may optionally supply parameters for the
@@ -204,7 +204,7 @@ public:
   // B_OK : No error
   // B_NO_INIT   : The BEncoder doesn't reference a valid stream.
   // B_MEDIA_NO_HANDLER : This extractor doesn't handle this format
-  virtual status_t SetParameterValue(int32 id, const void * value,
+  virtual status_t SetParameterValue(int32_t id, const void * value,
                                      size_t size);
 
   // The extractor may return a BParameterWeb for browsing or
@@ -250,8 +250,8 @@ public:
   // B_NO_INIT   : The BEncoder doesn't reference a valid stream.
   // B_MEDIA_NO_HANDLER : This extractor doesn't handle this format
   virtual status_t SeekToTime(bigtime_t * ioTime,
-                              int32 mediaSeekFlags = 0,
-                              int32 seekMode = 0) = 0;
+                              int32_t mediaSeekFlags = 0,
+                              int32_t seekMode = 0) = 0;
   
   // The extractor will seek first on the seek track, just like
   // BMediaTrack::SeekToFrame.  Like SeekToFrame, it accepts a flag
@@ -276,8 +276,8 @@ public:
   // B_NO_INIT   : The BEncoder doesn't reference a valid stream.
   // B_MEDIA_NO_HANDLER : This extractor doesn't handle this format
   virtual status_t SeekToFrame(int64 * ioFrame,
-                               int32 mediaSeekFlags = 0,
-                               int32 seekMode = 0) = 0;
+                               int32_t mediaSeekFlags = 0,
+                               int32_t seekMode = 0) = 0;
 
 /* begin seek extensions functions */
   // The extractor will seek first on the seek track.  It goes to
@@ -306,8 +306,8 @@ public:
   // B_NO_INIT   : The BEncoder doesn't reference a valid stream.
   // B_MEDIA_NO_HANDLER : This extractor doesn't handle this format
   virtual status_t SeekToChunk(int64 * ioChunk,
-                               int32 mediaSeekFlags = 0,
-                               int32 seekMode = 0) = 0;
+                               int32_t mediaSeekFlags = 0,
+                               int32_t seekMode = 0) = 0;
   
   // The extractor will seek first on the seek track.  It goes to a
   // position defined by numerator/(duration of this file).  For
@@ -346,8 +346,8 @@ public:
   // B_NO_INIT     : The BEncoder doesn't reference a valid stream.
   // B_MEDIA_NO_HANDLER : This extractor doesn't handle this format
   virtual status_t Seek(int64 * numerator,
-                        int32 mediaSeekFlags = 0,
-                        int32 seekMode = 0) = 0;
+                        int32_t mediaSeekFlags = 0,
+                        int32_t seekMode = 0) = 0;
 /* end seek extensions functions */
 
   // Using the location from the seek stream, seeks any other open
@@ -365,7 +365,7 @@ public:
   //                 for this stream.
   // B_NO_INIT   : The BEncoder doesn't reference a valid stream.
   // B_MEDIA_NO_HANDLER : This extractor doesn't handle this format
-  virtual status_t Sync(int32 seekStream = 0) = 0;
+  virtual status_t Sync(int32_t seekStream = 0) = 0;
 /* end seek/sync functions for the extractor */
   
   // Returns a thing that is useful for MediaTrack to do its business.
@@ -374,7 +374,7 @@ public:
   // to this object, and will likely call functions that are defined by
   // subclasses of this extractor.  For example, the subclass may define
   // a function like this:
-  // SeekTrackToFrame(BTrack * track, int64 ioFrame, int32 flags = 0) {
+  // SeekTrackToFrame(BTrack * track, int64 ioFrame, int32_t flags = 0) {
   // ... }
   // and then when SeekToFrame is called on the BTrack object the work
   // would be done by the Extractor.
@@ -404,7 +404,7 @@ public:
   //               track in this stream.
   // B_NO_INIT   : The BEncoder doesn't reference a valid stream.
   // B_MEDIA_NO_HANDLER : This extractor doesn't handle this format
-  virtual BTrack * TrackAt(int32 index, int32 seekMode = 0,
+  virtual BTrack * TrackAt(int32_t index, int32_t seekMode = 0,
                                         bool seek = true) = 0;
   
   // Disclaims interest in a particular track.  After releasing a
@@ -424,9 +424,9 @@ protected:
                                          media_format * ioFormat) = 0;
 
   // get/set information about a particular track
-  virtual status_t GetParameterValue(BTrack * track, int32 id,
+  virtual status_t GetParameterValue(BTrack * track, int32_t id,
                                      const void * value, size_t * size) = 0;
-  virtual status_t SetParameterValue(BTrack * track, int32 id,
+  virtual status_t SetParameterValue(BTrack * track, int32_t id,
                                      const void * value, size_t size);
   virtual BParameterWeb * Web(BTrack * track) { return NULL; }
   virtual BView * GetParameterView(BTrack * track) { return NULL; }
@@ -435,31 +435,31 @@ protected:
   // straight BMediaTrack::SeekToTime behavior
   virtual status_t SeekToTime(BTrack * track,
                               bigtime_t * ioTime,
-                              int32 mediaSeekFlags = 0,
-                              int32 seekMode = 0) = 0;
+                              int32_t mediaSeekFlags = 0,
+                              int32_t seekMode = 0) = 0;
   // seek only this particular track to the given frame
   // straight BMediaTrack::SeekToFrame behavior
   virtual status_t SeekToFrame(BTrack * track,
                                int64 * ioFrame,
-                               int32 mediaSeekFlags = 0,
-                               int32 seekMode = 0) = 0;
+                               int32_t mediaSeekFlags = 0,
+                               int32_t seekMode = 0) = 0;
   // seek only this particular track to the given chunk
   // straight BMediaTrack::SeekToChunk behavior
   virtual status_t SeekToChunk(BTrack * track,
                                int64 * ioChunk,
-                               int32 mediaSeekFlags = 0,
-                               int32 seekMode = 0) = 0;
+                               int32_t mediaSeekFlags = 0,
+                               int32_t seekMode = 0) = 0;
   // seek only this particular track to the given chunk
   // straight BMediaTrack::Seek behavior
   virtual status_t Seek(BTrack * track,
                         int64 * numerator,
-                        int32 mediaSeekFlags = 0,
-                        int32 seekMode = 0) = 0;
+                        int32_t mediaSeekFlags = 0,
+                        int32_t seekMode = 0) = 0;
 
   // read a chunk from this track only
   // straight BMediaTrack::ReadChunk behavior
   virtual status_t ReadChunk(BTrack * track,
-                             char ** outBuffer, int32 * ioSize,
+                             char ** outBuffer, int32_t * ioSize,
                              media_header * outHeader = NULL) = 0;
   // read frames from this track only
   // straight BMediaTrack::ReadChunk behavior
@@ -491,11 +491,11 @@ private:
     }
     
     // access to parameters for this track
-    virtual status_t GetParameterValue(int32 id, const void * value, 
+    virtual status_t GetParameterValue(int32_t id, const void * value, 
                                        size_t * size) {
       return BExtractor::GetParameterValue(this,id,value,size);
     }
-    virtual status_t SetParameterValue(int32 id, const void * value,
+    virtual status_t SetParameterValue(int32_t id, const void * value,
                                        size_t size) {
       return BExtractor::SetParameterValue(this,id,value,size);
     }
@@ -508,28 +508,28 @@ private:
     
     // access to seek functionality on this track
     virtual status_t SeekToTime(bigtime_t * ioTime,
-                              int32 mediaSeekFlags = 0,
-                              int32 seekMode = 0) {
+                              int32_t mediaSeekFlags = 0,
+                              int32_t seekMode = 0) {
       return BExtractor::SeekToTime(this,ioTime,mediaSeekFlags,seekMode);
     }
     virtual status_t SeekToFrame(int64 * ioFrame,
-                                 int32 mediaSeekFlags = 0,
-                                 int32 seekMode = 0) {
+                                 int32_t mediaSeekFlags = 0,
+                                 int32_t seekMode = 0) {
       return BExtractor::SeekToFrame(this,ioFrame,mediaSeekFlags,seekMode);
     }
     virtual status_t SeekToChunk(int64 * ioChunk,
-                                 int32 mediaSeekFlags = 0,
-                                 int32 seekMode = 0) {
+                                 int32_t mediaSeekFlags = 0,
+                                 int32_t seekMode = 0) {
       return BExtractor::SeekToChunk(this,ioChunk,mediaSeekFlags,seekMode);
     }
     virtual status_t Seek(int64 * numerator,
-                          int32 mediaSeekFlags = 0,
-                          int32 seekMode = 0) {
+                          int32_t mediaSeekFlags = 0,
+                          int32_t seekMode = 0) {
       return BExtractor::Seek(this,numerator,mediaSeekFlags,seekMode);
     }
 
     // access to readers for this track
-    virtual status_t ReadChunk(char ** outBuffer, int32 * ioSize,
+    virtual status_t ReadChunk(char ** outBuffer, int32_t * ioSize,
                                media_header * outHeader = NULL) {
       return BExtractor::ReadChunk(this,outBuffer,ioSize,outHeader);
     }

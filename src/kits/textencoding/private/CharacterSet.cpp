@@ -19,7 +19,7 @@ BCharacterSet::BCharacterSet()
 	aliases = NULL;
 }
 
-BCharacterSet::BCharacterSet(uint32 _id, uint32 _MIBenum, const char * _print_name,
+BCharacterSet::BCharacterSet(uint32_t _id, uint32_t _MIBenum, const char * _print_name,
                              const char * _iana_name, const char * _mime_name,
                              const char ** _aliases)
 {
@@ -37,17 +37,17 @@ BCharacterSet::BCharacterSet(uint32 _id, uint32 _MIBenum, const char * _print_na
 	aliases = _aliases;
 }
 
-uint32 BCharacterSet::GetFontID() const
+uint32_t BCharacterSet::GetFontID() const
 {
 	return id;
 }
 
-uint32 BCharacterSet::GetConversionID() const
+uint32_t BCharacterSet::GetConversionID() const
 {
 	return id-1;
 }
 
-uint32 BCharacterSet::GetMIBenum() const
+uint32_t BCharacterSet::GetMIBenum() const
 {
 	return MIBenum;
 }
@@ -70,13 +70,13 @@ BCharacterSet::GetMIMEName() const
 	return mime_name;
 }
 
-int32 BCharacterSet::CountAliases() const
+int32_t BCharacterSet::CountAliases() const
 {
 	return aliases_count;
 }
 
 const char *
-BCharacterSet::AliasAt(uint32 index) const
+BCharacterSet::AliasAt(uint32_t index) const
 {
 	if (index >= aliases_count) {
 		return 0;
@@ -354,7 +354,7 @@ const BCharacterSet * character_sets_by_id[] = {
     &kUTF16,
     &kWindows1250,
 };
-const uint32 character_sets_by_id_count = sizeof(character_sets_by_id)/sizeof(const BCharacterSet*);
+const uint32_t character_sets_by_id_count = sizeof(character_sets_by_id)/sizeof(const BCharacterSet*);
 /**
  * The following code initializes the global MIBenum array.
  * This sparsely populated array exists as an efficient way to access character sets by MIBenum.
@@ -363,7 +363,7 @@ const uint32 character_sets_by_id_count = sizeof(character_sets_by_id)/sizeof(co
  * No changes are required to the following code to add a new character set.
  **/
 const BCharacterSet ** character_sets_by_MIBenum;
-uint32 maximum_valid_MIBenum;
+uint32_t maximum_valid_MIBenum;
 
 static class MIBenumArrayInitializer {
 public:
@@ -371,8 +371,8 @@ public:
         DEBUG_ONLY(static int onlyOneTime = 0;)
         ASSERT_WITH_MESSAGE(onlyOneTime++ == 0,"MIBenumArrayInitializer should be instantiated only one time.");
         // analyzing character_sets_by_id
-        uint32 max_MIBenum = 0;
-        for (uint32 index = 0 ; index < character_sets_by_id_count ; index++ ) {
+        uint32_t max_MIBenum = 0;
+        for (uint32_t index = 0 ; index < character_sets_by_id_count ; index++ ) {
             if (max_MIBenum < character_sets_by_id[index]->GetMIBenum()) {
                 max_MIBenum = character_sets_by_id[index]->GetMIBenum();
             }
@@ -382,7 +382,7 @@ public:
         maximum_valid_MIBenum = max_MIBenum;
         // initializing MIBenum array
         memset(character_sets_by_MIBenum,0,sizeof(BCharacterSet*)*(max_MIBenum+2));
-        for (uint32 index2 = 0 ; index2 < character_sets_by_id_count ; index2++ ) {
+        for (uint32_t index2 = 0 ; index2 < character_sets_by_id_count ; index2++ ) {
             const BCharacterSet * charset = character_sets_by_id[index2];
             character_sets_by_MIBenum[charset->GetMIBenum()] = charset;
         }

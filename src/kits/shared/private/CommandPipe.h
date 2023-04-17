@@ -37,7 +37,7 @@ public:
 
 	// You MUST NOT free/delete the strings in the array, but you MUST free
 	// just the array itself.
-			const char**		Argv(int32& _argc) const;
+			const char**		Argv(int32_t& _argc) const;
 
 	// If you use these, you must explicitly call "close" for the parameters
 	// (stdOut/stdErr) when you are done with them!

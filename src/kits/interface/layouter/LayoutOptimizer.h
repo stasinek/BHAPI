@@ -16,14 +16,14 @@ namespace Layout {
 
 class LayoutOptimizer {
 public:
-								LayoutOptimizer(int32 variableCount);
+								LayoutOptimizer(int32_t variableCount);
 								~LayoutOptimizer();
 
 			status_t			InitCheck() const;
 
 			LayoutOptimizer*	Clone() const;
 
-			bool				AddConstraint(int32 left, int32 right,
+			bool				AddConstraint(int32_t left, int32_t right,
 									double value, bool equality);
 			bool				AddConstraintsFrom(
 									const LayoutOptimizer* solver);
@@ -41,7 +41,7 @@ private:
 
 			struct Constraint;
 
-			int32				fVariableCount;
+			int32_t				fVariableCount;
 			BList				fConstraints;
 			double*				fVariables;
 			double**			fTemp1;

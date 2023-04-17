@@ -143,7 +143,7 @@ SnifferRules::~SnifferRules()
 /*!	\brief Guesses a MIME type for the supplied entry_ref.
 
 	Only the data in the given entry is considered, not the filename or
-	its extension. Please see GuessMimeType(BFile*, const void *, int32,
+	its extension. Please see GuessMimeType(BFile*, const void *, int32_t,
 	BString*) for more details.
 
 	\param ref The entry to sniff
@@ -198,7 +198,7 @@ status_t SnifferRules::GuessMimeType(const entry_ref *ref, BString *type)
 // GuessMimeType
 /*!	\brief Guesses a MIME type for the given chunk of data.
 
-	Please see GuessMimeType(BFile*, const void *, int32, BString*) for more
+	Please see GuessMimeType(BFile*, const void *, int32_t, BString*) for more
 	details.
 
 	\param buffer Pointer to a data buffer to sniff
@@ -210,7 +210,7 @@ status_t SnifferRules::GuessMimeType(const entry_ref *ref, BString *type)
 	- \c Mime::kMimeGuessFailure: no match found (\a type is left unmodified)
 	- error code: failure
 */
-status_t SnifferRules::GuessMimeType(const void *buffer, int32 length, BString *type)
+status_t SnifferRules::GuessMimeType(const void *buffer, int32_t length, BString *type)
 {
 	return GuessMimeType(NULL, buffer, length, type);
 }
@@ -435,7 +435,7 @@ status_t SnifferRules::BuildRuleList()
 	- \c Mime::kMimeGuessFailure: no match found (\a type is left unmodified)
 	- error code: failure
 */
-status_t SnifferRules::GuessMimeType(BFile* file, const void *buffer, int32 length,
+status_t SnifferRules::GuessMimeType(BFile* file, const void *buffer, int32_t length,
 	BString *type)
 {
 	status_t err = buffer && type ? B_OK : B_BAD_VALUE;

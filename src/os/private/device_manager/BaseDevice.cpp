@@ -93,7 +93,7 @@ BaseDevice::IO(void* cookie, io_request* request)
 
 
 status_t
-BaseDevice::Control(void* cookie, int32 op, void* buffer, size_t length)
+BaseDevice::Control(void* cookie, int32_t op, void* buffer, size_t length)
 {
 	return B_UNSUPPORTED;
 }

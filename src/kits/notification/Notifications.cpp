@@ -68,7 +68,7 @@ UserMessagingMessageSender::UserMessagingMessageSender()
 
 void
 UserMessagingMessageSender::SendMessage(const KMessage* message, port_id port,
-	int32 token)
+	int32_t token)
 {
 	if ((message != fMessage && fMessage != NULL)
 		|| fTargetCount == MAX_MESSAGING_TARGET_COUNT) {
@@ -99,7 +99,7 @@ UserMessagingMessageSender::FlushMessage()
 
 
 UserMessagingListener::UserMessagingListener(UserMessagingMessageSender& sender,
-		port_id port, int32 token)
+		port_id port, int32_t token)
 	:
 	fSender(sender),
 	fPort(port),
@@ -171,7 +171,7 @@ DefaultNotificationService::~DefaultNotificationService()
 		common bit with this mask will receive the event.
 */
 void
-DefaultNotificationService::NotifyLocked(const KMessage& event, uint32 eventMask)
+DefaultNotificationService::NotifyLocked(const KMessage& event, uint32_t eventMask)
 {
 	// Note: The following iterations support that the listener removes itself
 	// in the hook method. That's a property of the DoublyLinkedList iterator.
@@ -199,7 +199,7 @@ DefaultNotificationService::AddListener(const KMessage* eventSpecifier,
 	if (eventSpecifier == NULL)
 		return B_BAD_VALUE;
 
-	uint32 eventMask;
+	uint32_t eventMask;
 	status_t status = ToEventMask(*eventSpecifier, eventMask);
 	if (status != B_OK)
 		return status;
@@ -267,9 +267,9 @@ DefaultNotificationService::Unregister()
 
 status_t
 DefaultNotificationService::ToEventMask(const KMessage& eventSpecifier,
-	uint32& eventMask)
+	uint32_t& eventMask)
 {
-	return eventSpecifier.FindInt32("event mask", (int32*)&eventMask);
+	return eventSpecifier.FindInt32("event mask", (int32_t*)&eventMask);
 }
 
 
@@ -308,7 +308,7 @@ DefaultUserNotificationService::AddListener(const KMessage* eventSpecifier,
 	if (eventSpecifier == NULL)
 		return B_BAD_VALUE;
 
-	uint32 eventMask = eventSpecifier->GetInt32(kEventMaskString, 0);
+	uint32_t eventMask = eventSpecifier->GetInt32(kEventMaskString, 0);
 
 	return _AddListener(eventMask, listener);
 }
@@ -321,7 +321,7 @@ DefaultUserNotificationService::UpdateListener(const KMessage* eventSpecifier,
 	if (eventSpecifier == NULL)
 		return B_BAD_VALUE;
 
-	uint32 eventMask = eventSpecifier->GetInt32(kEventMaskString, 0);
+	uint32_t eventMask = eventSpecifier->GetInt32(kEventMaskString, 0);
 	bool addEvents = eventSpecifier->GetBool("add events", false);
 
 	RecursiveLocker _(fLock);
@@ -361,7 +361,7 @@ DefaultUserNotificationService::RemoveListener(const KMessage* eventSpecifier,
 
 
 status_t
-DefaultUserNotificationService::RemoveUserListeners(port_id port, uint32 token)
+DefaultUserNotificationService::RemoveUserListeners(port_id port, uint32_t token)
 {
 	UserMessagingListener userListener(fSender, port, token);
 
@@ -384,8 +384,8 @@ DefaultUserNotificationService::RemoveUserListeners(port_id port, uint32 token)
 
 
 status_t
-DefaultUserNotificationService::UpdateUserListener(uint32 eventMask,
-	port_id port, uint32 token)
+DefaultUserNotificationService::UpdateUserListener(uint32_t eventMask,
+	port_id port, uint32_t token)
 {
 	UserMessagingListener userListener(fSender, port, token);
 
@@ -416,7 +416,7 @@ void
 DefaultUserNotificationService::EventOccurred(NotificationService& service,
 	const KMessage* event)
 {
-	int32 eventCode = event->GetInt32("event", -1);
+	int32_t eventCode = event->GetInt32("event", -1);
 	team_id team = event->GetInt32("team", -1);
 
 	if (eventCode == TEAM_REMOVED && team >= B_OK) {
@@ -442,7 +442,7 @@ DefaultUserNotificationService::AllListenersNotified(
 
 
 status_t
-DefaultUserNotificationService::_AddListener(uint32 eventMask,
+DefaultUserNotificationService::_AddListener(uint32_t eventMask,
 	NotificationListener& notificationListener)
 {
 	default_listener* listener = new(std::nothrow) default_listener;
@@ -533,7 +533,7 @@ NotificationManager::UnregisterService(NotificationService& service)
 
 status_t
 NotificationManager::AddListener(const char* serviceName,
-	uint32 eventMask, NotificationListener& listener)
+	uint32_t eventMask, NotificationListener& listener)
 {
 	char buffer[96];
 	KMessage specifier;
@@ -562,7 +562,7 @@ NotificationManager::AddListener(const char* serviceName,
 
 status_t
 NotificationManager::UpdateListener(const char* serviceName,
-	uint32 eventMask, NotificationListener& listener)
+	uint32_t eventMask, NotificationListener& listener)
 {
 	char buffer[96];
 	KMessage specifier;

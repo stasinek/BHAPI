@@ -93,7 +93,7 @@ struct module_image {
 	module_dependency*	dependencies;
 	char*				path;		// the full path for the module
 	image_id			image;
-	int32				ref_count;	// how many ref's to this file
+	int32_t				ref_count;	// how many ref's to this file
 };
 
 /* Each known module will have this structure which is put in the
@@ -104,24 +104,24 @@ struct module {
 	struct module*		next;
 	::module_image*		module_image;
 	char*				name;
-	int32				ref_count;
+	int32_t				ref_count;
 	module_info*		info;		// will only be valid if ref_count > 0
-	int32				offset;		// this is the offset in the headers
+	int32_t				offset;		// this is the offset in the headers
 	module_state		state;
-	uint32				flags;
+	uint32_t				flags;
 };
 
 #define B_BUILT_IN_MODULE	2
 
 typedef struct module_path {
 	const char*			name;
-	uint32				base_length;
+	uint32_t				base_length;
 } module_path;
 
 typedef struct module_iterator {
 	module_path*		stack;
-	int32				stack_size;
-	int32				stack_current;
+	int32_t				stack_size;
+	int32_t				stack_current;
 
 	char*				prefix;
 	size_t				prefix_length;
@@ -129,13 +129,13 @@ typedef struct module_iterator {
 	size_t				suffix_length;
 	DIR*				current_dir;
 	status_t			status;
-	int32				module_offset;
+	int32_t				module_offset;
 		// This is used to keep track of which module_info
 		// within a module we're addressing.
 	::module_image*		module_image;
 	module_info**		current_header;
 	const char*			current_path;
-	uint32				path_base_length;
+	uint32_t				path_base_length;
 	const char*			current_module_path;
 	bool				builtin_modules;
 	bool				loaded_modules;
@@ -169,7 +169,7 @@ struct NodeHashDefinition {
 
 	size_t HashKey(KeyType key) const
 	{
-		return ((uint32)(key->node >> 32) + (uint32)key->node) ^ key->device;
+		return ((uint32_t)(key->node >> 32) + (uint32_t)key->node) ^ key->device;
 	}
 
 	bool Compare(KeyType key, ValueType* entry) const
@@ -199,7 +199,7 @@ struct module_notification : DoublyLinkedListLinkImpl<module_notification> {
 		free((char*)name);
 	}
 
-	int32		opcode;
+	int32_t		opcode;
 	dev_t		device;
 	ino_t		directory;
 	ino_t		node;
@@ -242,7 +242,7 @@ public:
 
 			bool		HasNode(dev_t device, ino_t node);
 
-			void		Notify(int32 opcode, dev_t device, ino_t directory,
+			void		Notify(int32_t opcode, dev_t device, ino_t directory,
 							ino_t node, const char* name);
 
 	virtual const char*	Name() { return "modules"; }
@@ -252,7 +252,7 @@ public:
 private:
 			status_t	_RemoveNode(dev_t device, ino_t node);
 			status_t	_AddNode(dev_t device, ino_t node, const char* path,
-							uint32 flags, NotificationListener& listener);
+							uint32_t flags, NotificationListener& listener);
 			status_t	_AddDirectoryNode(dev_t device, ino_t node);
 			status_t	_AddModuleNode(dev_t device, ino_t node, int fd,
 							const char* name);
@@ -263,7 +263,7 @@ private:
 			status_t	_ScanDirectory(Stack<DIR*>& stack, DIR* dir,
 							const char* prefix, size_t prefixPosition);
 
-			void		_Notify(int32 opcode, dev_t device, ino_t directory,
+			void		_Notify(int32_t opcode, dev_t device, ino_t directory,
 							ino_t node, const char* name);
 			void		_HandleNotifications();
 
@@ -340,9 +340,9 @@ static const directory_which kModulePaths[] = {
 	B_USER_NONPACKAGED_ADDONS_DIRECTORY,
 };
 
-static const uint32 kNumModulePaths = sizeof(kModulePaths)
+static const uint32_t kNumModulePaths = sizeof(kModulePaths)
 	/ sizeof(kModulePaths[0]);
-static const uint32 kFirstNonSystemModulePath = 1;
+static const uint32_t kFirstNonSystemModulePath = 1;
 
 
 static ModuleNotificationService sModuleNotificationService;
@@ -472,7 +472,7 @@ put_module_image(module_image* image)
 {
 	RecursiveLocker locker(sModulesLock);
 
-	int32 refCount = atomic_add(&image->ref_count, -1);
+	int32_t refCount = atomic_add(&image->ref_count, -1);
 	ASSERT(refCount > 0);
 
 	// Don't unload anything when there is no boot device yet
@@ -620,7 +620,7 @@ static module*
 search_module(const char* name, module_image** _moduleImage)
 {
 	status_t status = B_ENTRY_NOT_FOUND;
-	uint32 i;
+	uint32_t i;
 
 	TRACE(("search_module(%s)\n", name));
 
@@ -667,7 +667,7 @@ put_dependent_modules(struct module* module)
 		|| (dependencies = image->dependencies) == NULL)
 		return B_OK;
 
-	for (int32 i = 0; dependencies[i].name != NULL; i++) {
+	for (int32_t i = 0; dependencies[i].name != NULL; i++) {
 		status_t status = put_module(dependencies[i].name);
 		if (status < B_OK)
 			return status;
@@ -690,7 +690,7 @@ get_dependent_modules(struct module* module)
 
 	TRACE(("resolving module dependencies...\n"));
 
-	for (int32 i = 0; dependencies[i].name != NULL; i++) {
+	for (int32_t i = 0; dependencies[i].name != NULL; i++) {
 		status_t status = get_module(dependencies[i].name,
 			dependencies[i].info);
 		if (status < B_OK) {
@@ -823,7 +823,7 @@ uninit_module(module* module)
 
 
 static const char*
-iterator_pop_path_from_stack(module_iterator* iterator, uint32* _baseLength)
+iterator_pop_path_from_stack(module_iterator* iterator, uint32_t* _baseLength)
 {
 	if (iterator->stack_current <= 0)
 		return NULL;
@@ -837,7 +837,7 @@ iterator_pop_path_from_stack(module_iterator* iterator, uint32* _baseLength)
 
 static status_t
 iterator_push_path_on_stack(module_iterator* iterator, const char* path,
-	uint32 baseLength)
+	uint32_t baseLength)
 {
 	if (iterator->stack_current + 1 > iterator->stack_size) {
 		// allocate new space on the stack
@@ -880,7 +880,7 @@ iterator_get_next_module(module_iterator* iterator, char* buffer,
 	TRACE(("iterator_get_next_module() -- start\n"));
 
 	if (iterator->builtin_modules) {
-		for (int32 i = iterator->module_offset; sBuiltInModules[i] != NULL;
+		for (int32_t i = iterator->module_offset; sBuiltInModules[i] != NULL;
 				i++) {
 			// the module name must fit the prefix
 			if (strncmp(sBuiltInModules[i]->name, iterator->prefix,
@@ -900,7 +900,7 @@ iterator_get_next_module(module_iterator* iterator, char* buffer,
 		recursive_lock_lock(&sModulesLock);
 		ModuleTable::Iterator hashIterator(sModulesHash);
 
-		for (int32 i = 0; hashIterator.HasNext(); i++) {
+		for (int32_t i = 0; hashIterator.HasNext(); i++) {
 			struct module* module = hashIterator.Next();
 
 			if (i >= iterator->module_offset) {
@@ -965,14 +965,14 @@ nextModuleImage:
 		}
 
 		// check if the prefix matches
-		int32 passedOffset, commonLength;
+		int32_t passedOffset, commonLength;
 		passedOffset = strlen(iterator->current_path) + 1;
 		commonLength = iterator->path_base_length + iterator->prefix_length
 			- passedOffset;
 
 		if (commonLength > 0) {
 			// the prefix still reaches into the new path part
-			int32 length = strlen(dirent->d_name);
+			int32_t length = strlen(dirent->d_name);
 			if (commonLength > length)
 				commonLength = length;
 
@@ -1086,7 +1086,7 @@ register_preloaded_module_image(struct preloaded_image* image)
 	module_image* moduleImage;
 	struct module_info** info;
 	status_t status;
-	int32 index = 0;
+	int32_t index = 0;
 
 	TRACE(("register_preloaded_module_image(image = %p, name = \"%s\")\n",
 		image, image->name.Pointer()));
@@ -1196,7 +1196,7 @@ void
 DirectoryWatcher::EventOccurred(NotificationService& service,
 	const KMessage* event)
 {
-	int32 opcode = event->GetInt32("opcode", -1);
+	int32_t opcode = event->GetInt32("opcode", -1);
 	dev_t device = event->GetInt32("device", -1);
 	ino_t directory = event->GetInt64("directory", -1);
 	ino_t node = event->GetInt64("node", -1);
@@ -1341,7 +1341,7 @@ ModuleNotificationService::_RemoveNode(dev_t device, ino_t node)
 
 status_t
 ModuleNotificationService::_AddNode(dev_t device, ino_t node, const char* path,
-	uint32 flags, NotificationListener& listener)
+	uint32_t flags, NotificationListener& listener)
 {
 	RecursiveLocker locker(fLock);
 
@@ -1417,7 +1417,7 @@ ModuleNotificationService::_AddDirectory(const char* prefix)
 {
 	status_t status = B_ERROR;
 
-	for (uint32 i = 0; i < kNumModulePaths; i++) {
+	for (uint32_t i = 0; i < kNumModulePaths; i++) {
 		if (sDisableUserAddOns && i >= kFirstNonSystemModulePath)
 			break;
 
@@ -1560,7 +1560,7 @@ ModuleNotificationService::_ScanDirectory(Stack<DIR*>& stack, DIR* dir,
 
 
 void
-ModuleNotificationService::_Notify(int32 opcode, dev_t device, ino_t directory,
+ModuleNotificationService::_Notify(int32_t opcode, dev_t device, ino_t directory,
 	ino_t node, const char* name)
 {
 	// construct path
@@ -1591,7 +1591,7 @@ ModuleNotificationService::_Notify(int32 opcode, dev_t device, ino_t directory,
 
 	// remove kModulePaths from path
 
-	for (uint32 i = 0; i < kNumModulePaths; i++) {
+	for (uint32_t i = 0; i < kNumModulePaths; i++) {
 		KPath modulePath;
 		if (__find_directory(kModulePaths[i], gBootDevice, true,
 				modulePath.LockBuffer(), modulePath.BufferSize()) != B_OK)
@@ -1662,7 +1662,7 @@ ModuleNotificationService::_HandleNotifications()
 
 
 void
-ModuleNotificationService::Notify(int32 opcode, dev_t device, ino_t directory,
+ModuleNotificationService::Notify(int32_t opcode, dev_t device, ino_t directory,
 	ino_t node, const char* name)
 {
 	module_notification* notification = new(std::nothrow) module_notification;
@@ -1869,7 +1869,7 @@ module_init_post_boot_device(bool bootingFromBootLoaderVolume)
 			KPath pathBuffer;
 			if (image->path[0] != '/') {
 				// relative path
-				for (uint32 i = kNumModulePaths; i-- > 0;) {
+				for (uint32_t i = kNumModulePaths; i-- > 0;) {
 					if (sDisableUserAddOns && i >= kFirstNonSystemModulePath)
 						continue;
 
@@ -1988,7 +1988,7 @@ open_module_list_etc(const char* prefix, const char* suffix)
 		iterator->loaded_modules = false;
 
 		// put all search paths on the stack
-		for (uint32 i = 0; i < kNumModulePaths; i++) {
+		for (uint32_t i = 0; i < kNumModulePaths; i++) {
 			if (sDisableUserAddOns && i >= kFirstNonSystemModulePath)
 				break;
 
@@ -2119,7 +2119,7 @@ read_next_module_name(void* cookie, char* buffer, size_t* _bufferSize)
 		module_image pointer)
 */
 status_t
-get_next_loaded_module_name(uint32* _cookie, char* buffer, size_t* _bufferSize)
+get_next_loaded_module_name(uint32_t* _cookie, char* buffer, size_t* _bufferSize)
 {
 	if (sModulesHash == NULL) {
 		dprintf("get_next_loaded_module_name() called too early!\n");
@@ -2132,13 +2132,13 @@ get_next_loaded_module_name(uint32* _cookie, char* buffer, size_t* _bufferSize)
 		return B_BAD_VALUE;
 
 	status_t status = B_ENTRY_NOT_FOUND;
-	uint32 offset = *_cookie;
+	uint32_t offset = *_cookie;
 
 	RecursiveLocker _(sModulesLock);
 
 	ModuleTable::Iterator iterator(sModulesHash);
 
-	for (uint32 i = 0; iterator.HasNext(); i++) {
+	for (uint32_t i = 0; iterator.HasNext(); i++) {
 		struct module* module = iterator.Next();
 		if (i >= offset) {
 			*_bufferSize = strlcpy(buffer, module->name, *_bufferSize);

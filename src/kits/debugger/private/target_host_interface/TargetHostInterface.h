@@ -31,8 +31,8 @@ public:
 
 			status_t			StartTeamDebugger(const TeamDebuggerOptions& options);
 
-			int32				CountTeamDebuggers() const;
-			TeamDebugger*		TeamDebuggerAt(int32 index) const;
+			int32_t				CountTeamDebuggers() const;
+			TeamDebugger*		TeamDebuggerAt(int32_t index) const;
 			TeamDebugger*		FindTeamDebugger(team_id team) const;
 			status_t			AddTeamDebugger(TeamDebugger* debugger);
 			void				RemoveTeamDebugger(TeamDebugger* debugger);

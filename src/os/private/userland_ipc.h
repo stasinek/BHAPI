@@ -34,11 +34,11 @@ typedef struct {
 } net_area_info;
 
 typedef struct {
-	int32	op;
-//	int32	buffer;
+	int32_t	op;
+//	int32_t	buffer;
 	uint8	*data;
-	int32	length;
-	int32	result;
+	int32_t	length;
+	int32_t	result;
 	net_area_info	area[MAX_NET_AREAS];
 } net_command;
 
@@ -51,7 +51,7 @@ typedef struct {
 	thread_id socket_thread;
 
 	sem_id	commandSemaphore;	// command queue
-	uint32	numCommands,bufferSize;
+	uint32_t	numCommands,bufferSize;
 } net_connection;
 
 

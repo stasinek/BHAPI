@@ -26,7 +26,7 @@ DefragmentJob::~DefragmentJob()
 // Do
 status_t DefragmentJob::Do()
 {
-	int32 changeCounter = fPartition->ChangeCounter();
+	int32_t changeCounter = fPartition->ChangeCounter();
 	status_t error = _kern_defragment_partition(fPartition->PartitionID(),
 		&changeCounter);
 	if (error != B_OK)

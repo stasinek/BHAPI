@@ -48,7 +48,7 @@ static const char kBase64Alphabet[64] = {
 
 ssize_t encode_base64(char *out, const char *in, off_t length, int headerMode)
 {
-    uint32 concat;
+    uint32_t concat;
     int i = 0;
     int k = 0;
     int lineLength = 4;
@@ -93,7 +93,7 @@ ssize_t encode_base64(char *out, const char *in, off_t length, int headerMode)
 
 ssize_t decode_base64(char *out, const char *in, off_t length)
 {
-    uint32 concat, value;
+    uint32_t concat, value;
     int lastOutLine = 0;
     int i, j;
     int outIndex = 0;

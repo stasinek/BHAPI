@@ -25,10 +25,10 @@ public:
 
 			bool				GetPathString(BString& path) const;
 
-	inline	int32				CountIndices() const;
-	inline	int64				IndexAt(int32 index) const;
+	inline	int32_t				CountIndices() const;
+	inline	int64				IndexAt(int32_t index) const;
 	inline	bool				AddIndex(int64 index);
-	inline	void				SetIndexAt(int32 at, int64 newIndex);
+	inline	void				SetIndexAt(int32_t at, int64 newIndex);
 
 			ArrayIndexPath&		operator=(const ArrayIndexPath& other);
 
@@ -40,13 +40,13 @@ private:
 };
 
 
-int32 ArrayIndexPath::CountIndices() const
+int32_t ArrayIndexPath::CountIndices() const
 {
 	return fIndices.Count();
 }
 
 
-int64 ArrayIndexPath::IndexAt(int32 index) const
+int64 ArrayIndexPath::IndexAt(int32_t index) const
 {
 	return index >= 0 && index < fIndices.Count()
 		? fIndices.ElementAt(index) : -1;
@@ -59,7 +59,7 @@ bool ArrayIndexPath::AddIndex(int64 index)
 }
 
 
-void ArrayIndexPath::SetIndexAt(int32 at, int64 newIndex)
+void ArrayIndexPath::SetIndexAt(int32_t at, int64 newIndex)
 {
 	if (at >= 0 && at < fIndices.Count())
 		fIndices[at] = newIndex;

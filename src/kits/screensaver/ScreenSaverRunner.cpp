@@ -108,7 +108,7 @@ void ScreenSaverRunner::_LoadAddOn()
 	};
 	BPath path;
 
-	for (uint32 i = 0; i < sizeof(which) / sizeof(which[0]); i++) {
+	for (uint32_t i = 0; i < sizeof(which) / sizeof(which[0]); i++) {
 		if (find_directory(which[i], &path, false) != B_OK)
 			continue;
 		else if (path.Append("Screen Savers") != B_OK)
@@ -166,13 +166,13 @@ void ScreenSaverRunner::_CleanUp()
 
 status_t ScreenSaverRunner::_Run()
 {
-	static const uint32 kInitialTickRate = 50000;
+	static const uint32_t kInitialTickRate = 50000;
 
 	// TODO: This code is getting awfully complicated and should
 	// probably be refactored.
-	uint32 tickBase = kInitialTickRate;
-	int32 snoozeCount = 0;
-	int32 frame = 0;
+	uint32_t tickBase = kInitialTickRate;
+	int32_t snoozeCount = 0;
+	int32_t frame = 0;
 	bigtime_t lastTickTime = 0;
 	bigtime_t tick = fSaver != NULL ? fSaver->TickSize() : tickBase;
 

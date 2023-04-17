@@ -55,7 +55,7 @@ inline void* buildCommand(uint8 ogf, uint8 ocf, void** param, size_t psize,
 
 // Request that do not need any input parameter
 // Output reply can be fit in 32 bits field without talking status into account
-status_t NonParameterCommandRequest(uint8 ofg, uint8 ocf, int32* result, hci_id hId,
+status_t NonParameterCommandRequest(uint8 ofg, uint8 ocf, int32_t* result, hci_id hId,
 	BMessenger* messenger)
 {
 	CALLED();
@@ -158,7 +158,7 @@ void* buildRemoteNameRequest(bdaddr_t bdaddr, uint8 pscan_rep_mode,
 }
 
 
-void* buildInquiry(uint32 lap, uint8 length, uint8 num_rsp, size_t* outsize)
+void* buildInquiry(uint32_t lap, uint8 length, uint8 num_rsp, size_t* outsize)
 {
 	CALLED();
 	struct hci_cp_inquiry* param;

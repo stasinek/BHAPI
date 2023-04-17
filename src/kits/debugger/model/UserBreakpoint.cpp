@@ -108,21 +108,21 @@ UserBreakpoint::UserBreakpoint(const UserBreakpointLocation& location)
 
 UserBreakpoint::~UserBreakpoint()
 {
-	for (int32 i = 0; UserBreakpointInstance* instance = fInstances.ItemAt(i);
+	for (int32_t i = 0; UserBreakpointInstance* instance = fInstances.ItemAt(i);
 			i++) {
 		delete instance;
 	}
 }
 
 
-int32 UserBreakpoint::CountInstances() const
+int32_t UserBreakpoint::CountInstances() const
 {
 	return fInstances.CountItems();
 }
 
 
 UserBreakpointInstance*
-UserBreakpoint::InstanceAt(int32 index) const
+UserBreakpoint::InstanceAt(int32_t index) const
 {
 	return fInstances.ItemAt(index);
 }
@@ -141,7 +141,7 @@ void UserBreakpoint::RemoveInstance(UserBreakpointInstance* instance)
 
 
 UserBreakpointInstance*
-UserBreakpoint::RemoveInstanceAt(int32 index)
+UserBreakpoint::RemoveInstanceAt(int32_t index)
 {
 	return fInstances.RemoveItemAt(index);
 }

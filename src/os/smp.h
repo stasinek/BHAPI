@@ -38,7 +38,7 @@ enum {
     SMP_MSG_FLAG_FREE_ARG	= 0x2,
 };
 
-typedef void (*smp_call_func)(addr_t data1, int32 currentCPU, addr_t data2, addr_t data3);
+typedef void (*smp_call_func)(addr_t data1, int32_t currentCPU, addr_t data2, addr_t data3);
 
 class CPUSet {
 public:
@@ -47,20 +47,20 @@ public:
     inline	void		ClearAll();
     inline	void		SetAll();
 
-    inline	void		SetBit(int32 cpu);
-    inline	void		ClearBit(int32 cpu);
+    inline	void		SetBit(int32_t cpu);
+    inline	void		ClearBit(int32_t cpu);
 
-    inline	void		SetBitAtomic(int32 cpu);
-    inline	void		ClearBitAtomic(int32 cpu);
+    inline	void		SetBitAtomic(int32_t cpu);
+    inline	void		ClearBitAtomic(int32_t cpu);
 
-    inline	bool		GetBit(int32 cpu) const;
+    inline	bool		GetBit(int32_t cpu) const;
 
     inline	bool		IsEmpty() const;
 
 private:
     static	const int	kArraySize = ROUNDUP(SMP_MAX_CPUS, 32) / 32;
 
-            uint32		fBitmap[kArraySize];
+            uint32_t		fBitmap[kArraySize];
 };
 
 
@@ -71,25 +71,25 @@ extern "C" {
 bool try_acquire_spinlock(spinlock* lock);
 
 status_t smp_init(struct kernel_args *args);
-status_t smp_per_cpu_init(struct kernel_args *args, int32 cpu);
+status_t smp_per_cpu_init(struct kernel_args *args, int32_t cpu);
 status_t smp_init_post_generic_syscalls(void);
-bool smp_trap_non_boot_cpus(int32 cpu, uint32* rendezVous);
+bool smp_trap_non_boot_cpus(int32_t cpu, uint32_t* rendezVous);
 void smp_wake_up_non_boot_cpus(void);
-void smp_cpu_rendezvous(uint32* var);
-void smp_send_ici(int32 targetCPU, int32 message, addr_t data, addr_t data2, addr_t data3,
-        void *data_ptr, uint32 flags);
-void smp_send_multicast_ici(CPUSet& cpuMask, int32 message, addr_t data,
-        addr_t data2, addr_t data3, void *data_ptr, uint32 flags);
-void smp_send_broadcast_ici(int32 message, addr_t data, addr_t data2, addr_t data3,
-        void *data_ptr, uint32 flags);
-void smp_send_broadcast_ici_interrupts_disabled(int32 currentCPU, int32 message,
-        addr_t data, addr_t data2, addr_t data3, void *data_ptr, uint32 flags);
+void smp_cpu_rendezvous(uint32_t* var);
+void smp_send_ici(int32_t targetCPU, int32_t message, addr_t data, addr_t data2, addr_t data3,
+        void *data_ptr, uint32_t flags);
+void smp_send_multicast_ici(CPUSet& cpuMask, int32_t message, addr_t data,
+        addr_t data2, addr_t data3, void *data_ptr, uint32_t flags);
+void smp_send_broadcast_ici(int32_t message, addr_t data, addr_t data2, addr_t data3,
+        void *data_ptr, uint32_t flags);
+void smp_send_broadcast_ici_interrupts_disabled(int32_t currentCPU, int32_t message,
+        addr_t data, addr_t data2, addr_t data3, void *data_ptr, uint32_t flags);
 
-int32 smp_get_num_cpus(void);
-void smp_set_num_cpus(int32 numCPUs);
-int32 smp_get_current_cpu(void);
+int32_t smp_get_num_cpus(void);
+void smp_set_num_cpus(int32_t numCPUs);
+int32_t smp_get_current_cpu(void);
 
-int smp_intercpu_int_handler(int32 cpu);
+int smp_intercpu_int_handler(int32_t cpu);
 
 #ifdef __cplusplus
 }
@@ -115,38 +115,38 @@ inline void CPUSet::SetAll()
 }
 
 
-inline void CPUSet::SetBit(int32 cpu)
+inline void CPUSet::SetBit(int32_t cpu)
 {
-    int32* element = (int32*)&fBitmap[cpu % kArraySize];
+    int32_t* element = (int32_t*)&fBitmap[cpu % kArraySize];
     *element |= 1u << (cpu / kArraySize);
 }
 
 
-inline void CPUSet::ClearBit(int32 cpu)
+inline void CPUSet::ClearBit(int32_t cpu)
 {
-    int32* element = (int32*)&fBitmap[cpu % kArraySize];
-    *element &= ~uint32(1u << (cpu / kArraySize));
+    int32_t* element = (int32_t*)&fBitmap[cpu % kArraySize];
+    *element &= ~uint32_t(1u << (cpu / kArraySize));
 }
 
 
-inline void CPUSet::SetBitAtomic(int32 cpu)
+inline void CPUSet::SetBitAtomic(int32_t cpu)
 {
-    int32* element = (int32*)&fBitmap[cpu % kArraySize];
+    int32_t* element = (int32_t*)&fBitmap[cpu % kArraySize];
     atomic_or(element, 1u << (cpu / kArraySize));
 }
 
 
-inline void CPUSet::ClearBitAtomic(int32 cpu)
+inline void CPUSet::ClearBitAtomic(int32_t cpu)
 {
-    int32* element = (int32*)&fBitmap[cpu % kArraySize];
-    atomic_and(element, ~uint32(1u << (cpu / kArraySize)));
+    int32_t* element = (int32_t*)&fBitmap[cpu % kArraySize];
+    atomic_and(element, ~uint32_t(1u << (cpu / kArraySize)));
 }
 
 
-inline bool CPUSet::GetBit(int32 cpu) const
+inline bool CPUSet::GetBit(int32_t cpu) const
 {
-    int32* element = (int32*)&fBitmap[cpu % kArraySize];
-    return ((uint32)atomic_get(element) & (1u << (cpu / kArraySize))) != 0;
+    int32_t* element = (int32_t*)&fBitmap[cpu % kArraySize];
+    return ((uint32_t)atomic_get(element) & (1u << (cpu / kArraySize))) != 0;
 }
 
 
@@ -168,7 +168,7 @@ inline bool CPUSet::IsEmpty() const
 
 static inline bool try_acquire_spinlock_inline(spinlock* lock)
 {
-    return atomic_get_and_set((int32*)lock, 1) == 0;
+    return atomic_get_and_set((int32_t*)lock, 1) == 0;
 }
 
 
@@ -182,7 +182,7 @@ static inline void acquire_spinlock_inline(spinlock* lock)
 
 static inline void release_spinlock_inline(spinlock* lock)
 {
-    atomic_set((int32*)lock, 0);
+    atomic_set((int32_t*)lock, 0);
 }
 
 
@@ -213,7 +213,7 @@ static inline void release_write_spinlock_inline(rw_spinlock* lock)
 
 static inline bool try_acquire_read_spinlock_inline(rw_spinlock* lock)
 {
-    uint32 previous = atomic_add(&lock->lock, 1);
+    uint32_t previous = atomic_add(&lock->lock, 1);
     return (previous & (1u << 31)) == 0;
 }
 
@@ -244,30 +244,30 @@ static inline void release_read_spinlock_inline(rw_spinlock* lock)
 static inline bool try_acquire_write_seqlock_inline(seqlock* lock) {
     bool succeed = try_acquire_spinlock(&lock->lock);
     if (succeed)
-        atomic_add((int32*)&lock->count, 1);
+        atomic_add((int32_t*)&lock->count, 1);
     return succeed;
 }
 
 
 static inline void acquire_write_seqlock_inline(seqlock* lock) {
     acquire_spinlock(&lock->lock);
-    atomic_add((int32*)&lock->count, 1);
+    atomic_add((int32_t*)&lock->count, 1);
 }
 
 
 static inline void release_write_seqlock_inline(seqlock* lock) {
-    atomic_add((int32*)&lock->count, 1);
+    atomic_add((int32_t*)&lock->count, 1);
     release_spinlock(&lock->lock);
 }
 
 
-static inline uint32 acquire_read_seqlock_inline(seqlock* lock) {
-    return atomic_get((int32*)&lock->count);
+static inline uint32_t acquire_read_seqlock_inline(seqlock* lock) {
+    return atomic_get((int32_t*)&lock->count);
 }
 
 
-static inline bool release_read_seqlock_inline(seqlock* lock, uint32 count) {
-    uint32 current = atomic_get((int32*)&lock->count);
+static inline bool release_read_seqlock_inline(seqlock* lock, uint32_t count) {
+    uint32_t current = atomic_get((int32_t*)&lock->count);
 
     return count % 2 == 0 && current == count;
 }

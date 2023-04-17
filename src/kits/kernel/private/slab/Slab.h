@@ -35,7 +35,7 @@ typedef struct ObjectCache object_cache;
 
 typedef status_t (*object_cache_constructor)(void* cookie, void* object);
 typedef void (*object_cache_destructor)(void* cookie, void* object);
-typedef void (*object_cache_reclaimer)(void* cookie, int32 level);
+typedef void (*object_cache_reclaimer)(void* cookie, int32_t level);
 
 
 #ifdef __cplusplus
@@ -47,7 +47,7 @@ object_cache* create_object_cache(const char* name, size_t objectSize,
 	object_cache_destructor destructor);
 object_cache* create_object_cache_etc(const char* name, size_t objectSize,
 	size_t alignment, size_t maxByteUsage, size_t magazineCapacity,
-	size_t maxMagazineCount, uint32 flags, void* cookie,
+	size_t maxMagazineCount, uint32_t flags, void* cookie,
 	object_cache_constructor constructor, object_cache_destructor destructor,
 	object_cache_reclaimer reclaimer);
 
@@ -56,11 +56,11 @@ void delete_object_cache(object_cache* cache);
 status_t object_cache_set_minimum_reserve(object_cache* cache,
 	size_t objectCount);
 
-void* object_cache_alloc(object_cache* cache, uint32 flags);
-void object_cache_free(object_cache* cache, void* object, uint32 flags);
+void* object_cache_alloc(object_cache* cache, uint32_t flags);
+void object_cache_free(object_cache* cache, void* object, uint32_t flags);
 
 status_t object_cache_reserve(object_cache* cache, size_t object_count,
-	uint32 flags);
+	uint32_t flags);
 
 void object_cache_get_usage(object_cache* cache, size_t* _allocatedMemory);
 
@@ -74,14 +74,14 @@ void object_cache_get_usage(object_cache* cache, size_t* _allocatedMemory);
 #include <new>
 
 
-inline void*   operator new(size_t size, ObjectCache* objectCache, uint32 flags) throw()
+inline void*   operator new(size_t size, ObjectCache* objectCache, uint32_t flags) throw()
 {
 	return object_cache_alloc(objectCache, flags);
 }
 
 
 template<typename Type>
-inline void object_cache_delete(ObjectCache* objectCache, Type* object, uint32 flags = 0)
+inline void object_cache_delete(ObjectCache* objectCache, Type* object, uint32_t flags = 0)
 {
 	if (object != NULL) {
 		object->~Type();

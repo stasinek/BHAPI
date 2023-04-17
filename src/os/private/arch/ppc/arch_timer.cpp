@@ -25,7 +25,7 @@ arch_timer_set_hardware_timer(bigtime_t timeout)
 
 	new_val_64 = (timeout * sTickRate) / 1000000;
 
-	asm("mtdec	%0" :: "r"((uint32)new_val_64));
+	asm("mtdec	%0" :: "r"((uint32_t)new_val_64));
 }
 
 

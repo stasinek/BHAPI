@@ -39,8 +39,8 @@ public:
 	inline	void				SetTo(uint8 value);
 	inline	void				SetTo(int16 value);
 	inline	void				SetTo(uint16 value);
-	inline	void				SetTo(int32 value);
-	inline	void				SetTo(uint32 value);
+	inline	void				SetTo(int32_t value);
+	inline	void				SetTo(uint32_t value);
 	inline	void				SetTo(int64 value);
 	inline	void				SetTo(uint64 value);
 	inline	void				SetTo(const char* value);
@@ -84,14 +84,14 @@ void BPackageAttributeValue::SetTo(uint16 value)
 }
 
 
-void BPackageAttributeValue::SetTo(int32 value)
+void BPackageAttributeValue::SetTo(int32_t value)
 {
 	signedInt = value;
 	type = B_HPKG_ATTRIBUTE_TYPE_INT;
 }
 
 
-void BPackageAttributeValue::SetTo(uint32 value)
+void BPackageAttributeValue::SetTo(uint32_t value)
 {
 	unsignedInt = value;
 	type = B_HPKG_ATTRIBUTE_TYPE_UINT;

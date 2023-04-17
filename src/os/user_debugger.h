@@ -53,7 +53,7 @@ struct team_debug_info {
 		// Guards the remaining fields. Should always be the innermost lock
 		// to be acquired/released, save for thread_debug_info::lock.
 
-	int32		flags;
+	int32_t		flags;
 		// Set atomically. So reading atomically is OK, even when the lock is
 		// not held (at least if it is certain, that the team struct won't go).
 
@@ -68,7 +68,7 @@ struct team_debug_info {
 	thread_id	causing_thread;
 		// thread that caused the debugger to be attached; -1 for manual
 		// debugger attachment (or no debugger installed)
-	int32		image_event;
+	int32_t		image_event;
 		// counter incremented whenever an image is created/deleted
 
 	struct ConditionVariable* debugger_changed_condition;
@@ -107,7 +107,7 @@ struct thread_debug_info {
 		// Guards the remaining fields. Should always be the innermost lock
 		// to be acquired/released.
 
-	int32		flags;
+	int32_t		flags;
 		// Set atomically. So reading atomically is OK, even when the lock is
 		// not held (at least if it is certain, that the thread struct won't
 		// go).
@@ -128,21 +128,21 @@ struct thread_debug_info {
 			// cloned sample buffer area
 		addr_t*			samples;
 			// sample buffer
-		int32			max_samples;
+		int32_t			max_samples;
 			// maximum number of samples the buffer can hold
-		int32			flush_threshold;
+		int32_t			flush_threshold;
 			// number of sample when the buffer is flushed (if possible)
-		int32			sample_count;
+		int32_t			sample_count;
 			// number of samples the buffer currently holds
-		int32			stack_depth;
+		int32_t			stack_depth;
 			// number of return addresses to record per timer interval
-		int32			dropped_ticks;
+		int32_t			dropped_ticks;
 			// number of ticks that had to be dropped when the sample buffer was
 			// full and couldn't be flushed
-		int32			image_event;
+		int32_t			image_event;
 			// number of the image event when the first sample was written into
 			// the buffer
-		int32			last_image_event;
+		int32_t			last_image_event;
 			// number of the image event when the last sample was written into
 			// the buffer
 		bool			variable_stack_depth;
@@ -205,7 +205,7 @@ typedef enum {
 } debugged_thread_message;
 
 typedef struct {
-	uint32	handle_event;
+	uint32_t	handle_event;
 	bool	single_step;
 } debugged_thread_continue;
 
@@ -250,8 +250,8 @@ void init_user_debug();
 
 // debug event callbacks
 
-void user_debug_pre_syscall(uint32 syscall, void *args);
-void user_debug_post_syscall(uint32 syscall, void *args, uint64 returnValue,
+void user_debug_pre_syscall(uint32_t syscall, void *args);
+void user_debug_post_syscall(uint32_t syscall, void *args, uint64 returnValue,
 		bigtime_t startTime);
 bool user_debug_exception_occurred(debug_exception_type exception, int signal);
 bool user_debug_handle_signal(int signal, struct sigaction *handler,
@@ -285,8 +285,8 @@ status_t	_user_remove_team_debugger(team_id team);
 status_t	_user_debug_thread(thread_id thread);
 void		_user_wait_for_debugger(void);
 
-status_t	_user_set_debugger_breakpoint(void *address, uint32 type,
-				int32 length, bool watchpoint);
+status_t	_user_set_debugger_breakpoint(void *address, uint32_t type,
+				int32_t length, bool watchpoint);
 status_t	_user_clear_debugger_breakpoint(void *address, bool watchpoint);
 
 ssize_t		_user_get_stack_trace(size_t addressCount, addr_t* returnAddresses);

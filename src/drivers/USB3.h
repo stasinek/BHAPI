@@ -20,7 +20,7 @@ extern "C" {
 
 typedef struct usb_module_info usb_module_info;
 
-typedef uint32 usb_id;
+typedef uint32_t usb_id;
 typedef usb_id usb_device;
 typedef usb_id usbe_interface;
 typedef usb_id usb_pipe;
@@ -129,7 +129,7 @@ struct usb_module_info {
 
 	/* Get the nth supported configuration of a device*/
 	const usb_configuration_info	*(*get_nth_configuration)(usb_device device,
-										uint32 index);
+										uint32_t index);
 
 	/* Get the current configuration */
 	const usb_configuration_info	*(*get_configuration)(usb_device device);
@@ -190,9 +190,9 @@ struct usb_module_info {
 	status_t						(*queue_isochronous)(usb_pipe pipe,
 										void *data, size_t dataLength,
 										usb_iso_packet_descriptor *packetDesc,
-										uint32 packetCount,
-										uint32 *startingFrameNumber,
-										uint32 flags,
+										uint32_t packetCount,
+										uint32_t *startingFrameNumber,
+										uint32_t flags,
 										usb_callback_func callback,
 										void *callbackCookie);
 
@@ -212,7 +212,7 @@ struct usb_module_info {
 	status_t						(*cancel_queued_transfers)(usb_pipe pipe);
 
 	/* Tuning, configuration of timeouts, etc */
-	status_t						(*usb_ioctl)(uint32 opcode, void *buffer,
+	status_t						(*usb_ioctl)(uint32_t opcode, void *buffer,
 										size_t bufferSize);
 
 	/*
@@ -232,7 +232,7 @@ struct usb_module_info {
 	 * invalid any further use will simply return an error. You should install
 	 * notify hooks to avoid such situations.
 	 */
-	status_t						(*get_nth_roothub)(uint32 index,
+	status_t						(*get_nth_roothub)(uint32_t index,
 										usb_device *rootHub);
 	status_t						(*get_nth_child)(usb_device hub,
 										uint8 index, usb_device *childDevice);

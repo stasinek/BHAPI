@@ -41,7 +41,7 @@ public:
 
 	RemoteDevicesList RetrieveDevices(int option); /* TODO */
 	status_t StartInquiry(int accessCode, DiscoveryListener* listener); /* Throwing */
-	status_t StartInquiry(uint32 accessCode, DiscoveryListener* listener, bigtime_t secs);
+	status_t StartInquiry(uint32_t accessCode, DiscoveryListener* listener, bigtime_t secs);
 	status_t CancelInquiry(DiscoveryListener* listener);
 
 	/*

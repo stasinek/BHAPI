@@ -133,7 +133,7 @@ status_t CpuStateX86::UpdateDebugState(void* state, size_t size) const
 	x86State->user_ss = IntRegisterValue(X86_REGISTER_SS);
 	x86State->vector = fInterruptVector;
 
-	for (int32 i = 0; i < 8; i++) {
+	for (int32_t i = 0; i < 8; i++) {
 		*(long double*)(x86State->extended_registers.fp_registers[i].value)
 			= (long double)FloatRegisterValue(X86_REGISTER_ST0 + i);
 
@@ -165,7 +165,7 @@ CpuStateX86::InstructionPointer() const
 
 void CpuStateX86::SetInstructionPointer(target_addr_t address)
 {
-	SetIntRegister(X86_REGISTER_EIP, (uint32)address);
+	SetIntRegister(X86_REGISTER_EIP, (uint32_t)address);
 }
 
 
@@ -187,7 +187,7 @@ CpuStateX86::StackPointer() const
 
 bool CpuStateX86::GetRegisterValue(const Register* reg, BVariant& _value) const
 {
-	int32 index = reg->Index();
+	int32_t index = reg->Index();
 	if (!IsRegisterSet(index))
 		return false;
 
@@ -221,7 +221,7 @@ bool CpuStateX86::GetRegisterValue(const Register* reg, BVariant& _value) const
 
 bool CpuStateX86::SetRegisterValue(const Register* reg, const BVariant& value)
 {
-	int32 index = reg->Index();
+	int32_t index = reg->Index();
 	if (index >= X86_XMM_REGISTER_END)
 		return false;
 
@@ -252,13 +252,13 @@ bool CpuStateX86::SetRegisterValue(const Register* reg, const BVariant& value)
 }
 
 
-bool CpuStateX86::IsRegisterSet(int32 index) const
+bool CpuStateX86::IsRegisterSet(int32_t index) const
 {
 	return index >= 0 && index < X86_REGISTER_COUNT && fSetRegisters[index];
 }
 
 
-uint32 CpuStateX86::IntRegisterValue(int32 index) const
+uint32_t CpuStateX86::IntRegisterValue(int32_t index) const
 {
 	if (!IsRegisterSet(index) || index >= X86_INT_REGISTER_END)
 		return 0;
@@ -267,7 +267,7 @@ uint32 CpuStateX86::IntRegisterValue(int32 index) const
 }
 
 
-void CpuStateX86::SetIntRegister(int32 index, uint32 value)
+void CpuStateX86::SetIntRegister(int32_t index, uint32_t value)
 {
 	if (index < 0 || index >= X86_INT_REGISTER_END)
 		return;
@@ -278,7 +278,7 @@ void CpuStateX86::SetIntRegister(int32 index, uint32 value)
 
 
 double
-CpuStateX86::FloatRegisterValue(int32 index) const
+CpuStateX86::FloatRegisterValue(int32_t index) const
 {
 	if (index < X86_REGISTER_ST0 || index >= X86_FP_REGISTER_END
 		|| !IsRegisterSet(index)) {
@@ -289,7 +289,7 @@ CpuStateX86::FloatRegisterValue(int32 index) const
 }
 
 
-void CpuStateX86::SetFloatRegister(int32 index, double value)
+void CpuStateX86::SetFloatRegister(int32_t index, double value)
 {
 	if (index < X86_REGISTER_ST0 || index >= X86_FP_REGISTER_END)
 		return;
@@ -299,7 +299,7 @@ void CpuStateX86::SetFloatRegister(int32 index, double value)
 }
 
 
-const void*   CpuStateX86::MMXRegisterValue(int32 index) const
+const void*   CpuStateX86::MMXRegisterValue(int32_t index) const
 {
 	if (index < X86_REGISTER_MM0 || index >= X86_MMX_REGISTER_END
 		|| !IsRegisterSet(index)) {
@@ -310,7 +310,7 @@ const void*   CpuStateX86::MMXRegisterValue(int32 index) const
 }
 
 
-void CpuStateX86::SetMMXRegister(int32 index, const uint8* value)
+void CpuStateX86::SetMMXRegister(int32_t index, const uint8* value)
 {
 	if (index < X86_REGISTER_MM0 || index >= X86_MMX_REGISTER_END)
 		return;
@@ -321,7 +321,7 @@ void CpuStateX86::SetMMXRegister(int32 index, const uint8* value)
 }
 
 
-const void*   CpuStateX86::XMMRegisterValue(int32 index) const
+const void*   CpuStateX86::XMMRegisterValue(int32_t index) const
 {
 	if (index < X86_REGISTER_XMM0 || index >= X86_XMM_REGISTER_END
 		|| !IsRegisterSet(index)) {
@@ -332,7 +332,7 @@ const void*   CpuStateX86::XMMRegisterValue(int32 index) const
 }
 
 
-void CpuStateX86::SetXMMRegister(int32 index, const uint8* value)
+void CpuStateX86::SetXMMRegister(int32_t index, const uint8* value)
 {
 	if (index < X86_REGISTER_XMM0 || index >= X86_XMM_REGISTER_END)
 		return;
@@ -343,7 +343,7 @@ void CpuStateX86::SetXMMRegister(int32 index, const uint8* value)
 }
 
 
-void CpuStateX86::UnsetRegister(int32 index)
+void CpuStateX86::UnsetRegister(int32_t index)
 {
 	if (index < 0 || index >= X86_REGISTER_COUNT)
 		return;

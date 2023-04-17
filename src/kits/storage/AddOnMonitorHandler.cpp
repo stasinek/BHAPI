@@ -115,7 +115,7 @@ status_t AddOnMonitorHandler::AddAddOnDirectories(const char* leafPath)
 {
 	char parameter[32];
 	size_t parameterLength = sizeof(parameter);
-	uint32 start = 0;
+	uint32_t start = 0;
 
 	const directory_which addOnDirectories[] = {
 		B_USER_NONPACKAGED_ADDONS_DIRECTORY,
@@ -144,7 +144,7 @@ status_t AddOnMonitorHandler::AddAddOnDirectories(const char* leafPath)
 		}
 	}
 
-	for (uint32 i = start;
+	for (uint32_t i = start;
 			i < sizeof(addOnDirectories) / sizeof(directory_which); i++) {
 		BDirectory directory;
 		node_ref nodeRef;
@@ -463,7 +463,7 @@ void AddOnMonitorHandler::EntryMoved(const char* name, const char* fromName,
 }
 
 
-void AddOnMonitorHandler::StatChanged(ino_t node, dev_t device, int32 statFields)
+void AddOnMonitorHandler::StatChanged(ino_t node, dev_t device, int32_t statFields)
 {
 	// This notification is received for the add-ons themselves.
 

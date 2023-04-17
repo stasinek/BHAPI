@@ -39,11 +39,11 @@ struct stack_frame {
 
 
 static bool
-already_visited(addr_t* visited, int32* _last, int32* _num, addr_t bp)
+already_visited(addr_t* visited, int32_t* _last, int32_t* _num, addr_t bp)
 {
-	int32 last = *_last;
-	int32 num = *_num;
-	int32 i;
+	int32_t last = *_last;
+	int32_t num = *_num;
+	int32_t i;
 
 	for (i = 0; i < num; i++) {
 		if (visited[(NUM_PREVIOUS_LOCATIONS + last - i) % NUM_PREVIOUS_LOCATIONS] == bp)
@@ -126,7 +126,7 @@ lookup_symbol(Thread* thread, addr_t address, addr_t* _baseAddress,
 
 
 static void
-set_debug_argument_variable(int32 index, uint64 value)
+set_debug_argument_variable(int32_t index, uint64 value)
 {
 	char name[8];
 	snprintf(name, sizeof(name), "_arg%ld", index);
@@ -166,7 +166,7 @@ print_demangled_call(const char* image, const char* symbol, addr_t args,
 		return B_ERROR;
 	}
 
-	uint32* arg = (uint32*)args;
+	uint32_t* arg = (uint32_t*)args;
 
 	if (noObjectMethod)
 		isObjectMethod = false;
@@ -174,7 +174,7 @@ print_demangled_call(const char* image, const char* symbol, addr_t args,
 		const char* lastName = strrchr(name, ':') - 1;
 		int namespaceLength = lastName - name;
 
-		uint32 argValue = 0;
+		uint32_t argValue = 0;
 		if (debug_memcpy(B_CURRENT_TEAM, &argValue, arg, 4) == B_OK) {
 			kprintf("<%s> %.*s<\33[32m%#" B_PRIx32 "\33[0m>%s", image,
 				namespaceLength, name, argValue, lastName);
@@ -190,8 +190,8 @@ print_demangled_call(const char* image, const char* symbol, addr_t args,
 	kprintf("(");
 
 	size_t length;
-	int32 type, i = 0;
-	uint32 cookie = 0;
+	int32_t type, i = 0;
+	uint32_t cookie = 0;
 	while (debug_get_next_demangled_argument(&cookie, symbol, buffer,
 			kBufferSize, &type, &length) == B_OK) {
 		if (i++ > 0)
@@ -209,9 +209,9 @@ print_demangled_call(const char* image, const char* symbol, addr_t args,
 					kprintf("int64: \33[34m%Ld\33[0m", value);
 				break;
 			case B_INT32_TYPE:
-				value = read_function_argument_value<int32>(arg, valueKnown);
+				value = read_function_argument_value<int32_t>(arg, valueKnown);
 				if (valueKnown)
-					kprintf("int32: \33[34m%ld\33[0m", (int32)value);
+					kprintf("int32_t: \33[34m%ld\33[0m", (int32_t)value);
 				break;
 			case B_INT16_TYPE:
 				value = read_function_argument_value<int16>(arg, valueKnown);
@@ -232,11 +232,11 @@ print_demangled_call(const char* image, const char* symbol, addr_t args,
 				}
 				break;
 			case B_UINT32_TYPE:
-				value = read_function_argument_value<uint32>(arg, valueKnown);
+				value = read_function_argument_value<uint32_t>(arg, valueKnown);
 				if (valueKnown) {
-					kprintf("uint32: \33[34m%#lx\33[0m", (uint32)value);
+					kprintf("uint32_t: \33[34m%#lx\33[0m", (uint32_t)value);
 					if (value < 0x100000)
-						kprintf(" (\33[34m%lu\33[0m)", (uint32)value);
+						kprintf(" (\33[34m%lu\33[0m)", (uint32_t)value);
 				}
 				break;
 			case B_UINT16_TYPE:
@@ -263,14 +263,14 @@ print_demangled_call(const char* image, const char* symbol, addr_t args,
 					kprintf("%s: ", buffer);
 
 				if (length == 4) {
-					value = read_function_argument_value<uint32>(arg,
+					value = read_function_argument_value<uint32_t>(arg,
 						valueKnown);
 					if (valueKnown) {
 						if (value == 0
 							&& (type == B_POINTER_TYPE || type == B_REF_TYPE))
 							kprintf("NULL");
 						else
-							kprintf("\33[34m%#lx\33[0m", (uint32)value);
+							kprintf("\33[34m%#lx\33[0m", (uint32_t)value);
 					}
 					break;
 				}
@@ -302,7 +302,7 @@ print_demangled_call(const char* image, const char* symbol, addr_t args,
 
 		if (addDebugVariables)
 			set_debug_argument_variable(i, value);
-		arg = (uint32*)((uint8*)arg + length);
+		arg = (uint32_t*)((uint8*)arg + length);
 	}
 
 	debug_free(buffer);
@@ -340,8 +340,8 @@ print_demangled_call(const char* image, const char* symbol, addr_t args,
 	kprintf("<%s> %s(", image, name);
 
 	size_t length;
-	int32 type, i = 0;
-	uint32 cookie = 0;
+	int32_t type, i = 0;
+	uint32_t cookie = 0;
 	while (debug_get_next_demangled_argument(&cookie, symbol, buffer,
 			kBufferSize, &type, &length) == B_OK) {
 		if (i++ > 0)
@@ -365,7 +365,7 @@ print_demangled_call(const char* image, const char* symbol, addr_t args,
 
 static void
 print_stack_frame(Thread* thread, addr_t ip, addr_t bp, addr_t nextBp,
-	int32 callIndex, bool demangle)
+	int32_t callIndex, bool demangle)
 {
 	const char* symbol;
 	const char* image;
@@ -512,7 +512,7 @@ setup_for_thread(char* arg, Thread** _thread, addr_t* _bp,
 
 
 static bool
-is_double_fault_stack_address(int32 cpu, addr_t address)
+is_double_fault_stack_address(int32_t cpu, addr_t address)
 {
 	size_t size;
 	addr_t bottom = (addr_t)x86_get_double_fault_stack(cpu, &size);
@@ -662,7 +662,7 @@ stack_trace(int argc, char** argv)
 		"  <thread id>  -  The ID of the thread for which to print the stack\n"
 		"                  trace.\n";
 	bool demangle = true;
-	int32 threadIndex = 1;
+	int32_t threadIndex = 1;
 	if (argc > 1 && !strcmp(argv[1], "-d")) {
 		demangle = false;
 		threadIndex++;
@@ -678,7 +678,7 @@ stack_trace(int argc, char** argv)
 	Thread* thread = NULL;
 	phys_addr_t oldPageDirectory = 0;
 	addr_t bp = x86_get_stack_frame();
-	int32 num = 0, last = 0;
+	int32_t num = 0, last = 0;
 
 	if (!setup_for_thread(argc == threadIndex + 1 ? argv[threadIndex] : NULL,
 			&thread, &bp, &oldPageDirectory))
@@ -705,7 +705,7 @@ stack_trace(int argc, char** argv)
 
 	bool onKernelStack = true;
 
-	for (int32 callIndex = 0;; callIndex++) {
+	for (int32_t callIndex = 0;; callIndex++) {
 		onKernelStack = onKernelStack
 			&& is_kernel_stack_address(thread, bp);
 
@@ -752,14 +752,14 @@ stack_trace(int argc, char** argv)
 #ifndef __x86_64__
 static void
 print_call(Thread *thread, addr_t eip, addr_t ebp, addr_t nextEbp,
-	int32 argCount)
+	int32_t argCount)
 {
 	const char *symbol, *image;
 	addr_t baseAddress;
 	bool exactMatch;
 	status_t status;
 	bool demangled = false;
-	int32 *arg = (int32 *)(nextEbp + 8);
+	int32_t *arg = (int32_t *)(nextEbp + 8);
 
 	status = lookup_symbol(thread, eip, &baseAddress, &symbol, &image,
 		&exactMatch);
@@ -795,14 +795,14 @@ print_call(Thread *thread, addr_t eip, addr_t ebp, addr_t nextEbp,
 	if (!demangled) {
 		kprintf("(");
 
-		for (int32 i = 0; i < argCount; i++) {
+		for (int32_t i = 0; i < argCount; i++) {
 			if (i > 0)
 				kprintf(", ");
 			kprintf("%#lx", *arg);
 			if (*arg > -0x10000 && *arg < 0x10000)
 				kprintf(" (%ld)", *arg);
 
-			set_debug_argument_variable(i + 1, *(uint32 *)arg);
+			set_debug_argument_variable(i + 1, *(uint32_t *)arg);
 			arg++;
 		}
 
@@ -834,7 +834,7 @@ show_call(int argc, char **argv)
 	Thread *thread = NULL;
 	phys_addr_t oldPageDirectory = 0;
 	addr_t ebp = x86_get_stack_frame();
-	int32 argCount = 0;
+	int32_t argCount = 0;
 
 	if (argc >= 2 && argv[argc - 1][0] == '-') {
 		if (argv[argc - 1][1] == 'c')
@@ -862,14 +862,14 @@ show_call(int argc, char **argv)
 
 	DebuggedThreadSetter threadSetter(thread);
 
-	int32 callIndex = strtoul(argv[argc == 3 ? 2 : 1], NULL, 0);
+	int32_t callIndex = strtoul(argv[argc == 3 ? 2 : 1], NULL, 0);
 
 	if (thread != NULL)
 		kprintf("thread %ld, %s\n", thread->id, thread->name);
 
 	bool onKernelStack = true;
 
-	for (int32 index = 0; index <= callIndex; index++) {
+	for (int32_t index = 0; index <= callIndex; index++) {
 		onKernelStack = onKernelStack
 			&& is_kernel_stack_address(thread, ebp);
 
@@ -1129,9 +1129,9 @@ arch_debug_get_caller(void)
 		- \c STACK_TRACE_USER: Capture user return addresses.
 	\return The number of return addresses written to the given array.
 */
-int32
-arch_debug_get_stack_trace(addr_t* returnAddresses, int32 maxCount,
-	int32 skipIframes, int32 skipFrames, uint32 flags)
+int32_t
+arch_debug_get_stack_trace(addr_t* returnAddresses, int32_t maxCount,
+	int32_t skipIframes, int32_t skipFrames, uint32_t flags)
 {
 	// Keep skipping normal stack frames until we've skipped the iframes we're
 	// supposed to skip.
@@ -1139,7 +1139,7 @@ arch_debug_get_stack_trace(addr_t* returnAddresses, int32 maxCount,
 		skipFrames = INT_MAX;
 
 	Thread* thread = thread_get_current_thread();
-	int32 count = 0;
+	int32_t count = 0;
 	addr_t bp = x86_get_stack_frame();
 	bool onKernelStack = true;
 
@@ -1256,7 +1256,7 @@ arch_get_debug_variable(const char* variableName, uint64* value)
 
 
 struct gdb_register {
-	int32 type;
+	int32_t type;
 	uint64 value;
 };
 
@@ -1288,7 +1288,7 @@ arch_debug_gdb_get_registers(char* buffer, size_t bufferSize)
 	// Annoyingly, GDB wants all the registers as 64-bit values, but then
 	// RFLAGS and the segment registers as 32-bit values, hence the need for
 	// the type information.
-	static const int32 kRegisterCount = 24;
+	static const int32_t kRegisterCount = 24;
 	gdb_register registers[kRegisterCount] = {
 		{ B_UINT64_TYPE, frame->ax },  { B_UINT64_TYPE, frame->bx },
 		{ B_UINT64_TYPE, frame->cx },  { B_UINT64_TYPE, frame->dx },
@@ -1313,7 +1313,7 @@ arch_debug_gdb_get_registers(char* buffer, size_t bufferSize)
 	//
 	// Note that even though the segment descriptors are actually 16 bits wide,
 	// gdb requires them as 32 bit integers.
-	static const int32 kRegisterCount = 16;
+	static const int32_t kRegisterCount = 16;
 	gdb_register registers[kRegisterCount] = {
 		{ B_UINT32_TYPE, frame->ax }, { B_UINT32_TYPE, frame->cx },
 		{ B_UINT32_TYPE, frame->dx }, { B_UINT32_TYPE, frame->bx },
@@ -1329,7 +1329,7 @@ arch_debug_gdb_get_registers(char* buffer, size_t bufferSize)
 
 	const char* const bufferStart = buffer;
 
-	for (int32 i = 0; i < kRegisterCount; i++) {
+	for (int32_t i = 0; i < kRegisterCount; i++) {
 		// For some reason gdb wants the register dump in *big endian* format.
 		int result = 0;
 		switch (registers[i].type) {
@@ -1339,7 +1339,7 @@ arch_debug_gdb_get_registers(char* buffer, size_t bufferSize)
 				break;
 			case B_UINT32_TYPE:
 				result = snprintf(buffer, bufferSize, "%08" B_PRIx32,
-					(uint32)B_HOST_TO_BENDIAN_INT32((uint32)registers[i].value));
+					(uint32_t)B_HOST_TO_BENDIAN_INT32((uint32_t)registers[i].value));
 				break;
 		}
 		if (result >= (int)bufferSize)

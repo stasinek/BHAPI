@@ -32,16 +32,16 @@ public:
 			};
 
 public:
-								BCopyEngine(uint32 flags = 0);
+								BCopyEngine(uint32_t flags = 0);
 								~BCopyEngine();
 
 			BController*		Controller() const;
 			void				SetController(BController* controller);
 
-			uint32				Flags() const;
-			BCopyEngine&		SetFlags(uint32 flags);
-			BCopyEngine&		AddFlags(uint32 flags);
-			BCopyEngine&		RemoveFlags(uint32 flags);
+			uint32_t				Flags() const;
+			BCopyEngine&		SetFlags(uint32_t flags);
+			BCopyEngine&		AddFlags(uint32_t flags);
+			BCopyEngine&		RemoveFlags(uint32_t flags);
 
 			status_t			CopyEntry(const Entry& sourceEntry,
 									const Entry& destEntry);
@@ -63,12 +63,12 @@ private:
 			status_t			_HandleEntryError(const char* path,
 									status_t error, const char* format, ...);
 			status_t			_HandleAttributeError(const char* path,
-									const char* attribute, uint32 attributeType,
+									const char* attribute, uint32_t attributeType,
 									status_t error, const char* format, ...);
 
 private:
 			BController*		fController;
-			uint32				fFlags;
+			uint32_t				fFlags;
 			char*				fBuffer;
 			size_t				fBufferSize;
 };
@@ -84,10 +84,10 @@ public:
 
 	virtual	bool				AttributeStarted(const char* path,
 									const char* attribute,
-									uint32 attributeType);
+									uint32_t attributeType);
 	virtual	bool				AttributeFinished(const char* path,
 									const char* attribute,
-									uint32 attributeType, status_t error);
+									uint32_t attributeType, status_t error);
 
 	virtual	void				ErrorOccurred(const char* message,
 									status_t error);

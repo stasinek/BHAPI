@@ -15,14 +15,14 @@ extern "C" {
 #endif
 
 
-extern int radeon_log2( uint32 x );
+extern int radeon_log2( uint32_t x );
 
 static inline int RoundDiv( int num, int den )
 {
 	return (num + (den / 2)) / den;
 }
 
-static inline int32 RoundDiv64( int64 num, int32 den )
+static inline int32_t RoundDiv64( int64 num, int32_t den )
 {
 	return (num + (den / 2)) / den;
 }

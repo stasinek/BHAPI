@@ -125,7 +125,7 @@ gdb_regreply()
 
 	// compute check sum
 	int sum = 0;
-	for (int32 i = 1; i < bytesWritten; i++)
+	for (int32_t i = 1; i < bytesWritten; i++)
 		sum += sReply[i];
 	sum %= 256;
 

@@ -49,7 +49,7 @@ struct PackageFSVolumeInfo {
 	// large enough.
 	// The directories are ordered from the most recent state (the actual
 	// "packages" directory) to the oldest one, the one that is actually active.
-	uint32					packagesDirectoryCount;
+	uint32_t					packagesDirectoryCount;
 	PackageFSDirectoryInfo	packagesDirectoryInfos[1];
 };
 
@@ -68,8 +68,8 @@ struct PackageFSPackageInfo {
 struct PackageFSGetPackageInfosRequest {
 	// Filled in by the FS. bufferSize is set to the required buffer size, even
 	// even if the provided buffer is smaller.
-	uint32							bufferSize;
-	uint32							packageCount;
+	uint32_t							bufferSize;
+	uint32_t							packageCount;
 	PackageFSPackageInfo			infos[1];
 };
 
@@ -90,7 +90,7 @@ struct PackageFSActivationChangeItem {
 	ino_t							packageNodeID;
 
 	// entry_ref of the package file
-	uint32							nameLength;
+	uint32_t							nameLength;
 	dev_t							parentDeviceID;
 	ino_t							parentDirectoryID;
 	char*							name;
@@ -99,7 +99,7 @@ struct PackageFSActivationChangeItem {
 };
 
 struct PackageFSActivationChangeRequest {
-	uint32							itemCount;
+	uint32_t							itemCount;
 	PackageFSActivationChangeItem	items[0];
 };
 

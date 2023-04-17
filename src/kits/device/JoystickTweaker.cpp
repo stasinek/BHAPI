@@ -131,7 +131,7 @@ void _BJoystickTweaker::scan_including_disabled()
 
 void _BJoystickTweaker::_EmpyList(BList *list)
 {
-	for (int32 i = 0; i < list->CountItems(); i++)
+	for (int32_t i = 0; i < list->CountItems(); i++)
 		delete (BString *)list->ItemAt(i);
 
 	list->MakeEmpty();
@@ -200,7 +200,7 @@ void _BJoystickTweaker::_BuildFromJoystickDesc(char *string, _joystick_info *inf
 }
 
 
-status_t _BJoystickTweaker::SendIOCT(uint32 op)
+status_t _BJoystickTweaker::SendIOCT(uint32_t op)
 {
 	switch (op) {
 		case B_JOYSTICK_SET_DEVICE_MODULE:

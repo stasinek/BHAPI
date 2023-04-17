@@ -26,11 +26,11 @@ typedef struct	{
 } cmos_time;
 
 
-static uint32
+static uint32_t
 bcd_to_int(uint8 bcd)
 {
-	uint32 numl;
-	uint32 numh;
+	uint32_t numl;
+	uint32_t numh;
 
 	numl = bcd & 0x0f;
 	numh = (bcd & 0xf0) >> 4;
@@ -40,7 +40,7 @@ bcd_to_int(uint8 bcd)
 
 
 static uint8
-int_to_bcd(uint32 number)
+int_to_bcd(uint32_t number)
 {
 	uint8 low;
 	uint8 high;
@@ -123,7 +123,7 @@ write_cmos_clock(cmos_time *cmos)
 }
 
 
-static uint32
+static uint32_t
 cmos_to_secs(const cmos_time *cmos)
 {
 	struct tm t;
@@ -140,7 +140,7 @@ cmos_to_secs(const cmos_time *cmos)
 
 
 static void
-secs_to_cmos(uint32 seconds, cmos_time *cmos)
+secs_to_cmos(uint32_t seconds, cmos_time *cmos)
 {
 	int wholeYear;
 
@@ -179,7 +179,7 @@ arch_rtc_init(kernel_args *args, struct real_time_data *data)
 	// => (tb * cvFactor) >> 32 = (tb * 2^32 * 1000000 / tbFreq) >> 32
 	//    = tb / tbFreq * 1000000 = time in us
 	data->arch_data.system_time_conversion_factor
-		= uint32((uint64(1) << 32) * 1000000
+		= uint32_t((uint64(1) << 32) * 1000000
 			/ args->arch_args.time_base_frequency);
 	data->arch_data.version = 0;
 
@@ -193,7 +193,7 @@ arch_rtc_init(kernel_args *args, struct real_time_data *data)
 }
 
 
-uint32
+uint32_t
 arch_rtc_get_hw_time(void)
 {
 	return M68KPlatform::Default()->GetHardwareRTC();
@@ -201,7 +201,7 @@ arch_rtc_get_hw_time(void)
 
 
 void
-arch_rtc_set_hw_time(uint32 seconds)
+arch_rtc_set_hw_time(uint32_t seconds)
 {
 	M68KPlatform::Default()->SetHardwareRTC(seconds);
 }
@@ -213,7 +213,7 @@ arch_rtc_set_system_time_offset(struct real_time_data *data, bigtime_t offset)
 	cpu_status state = disable_interrupts();
 	acquire_spinlock(&sSetArchDataLock);
 
-	int32 version = data->arch_data.version + 1;
+	int32_t version = data->arch_data.version + 1;
 	data->arch_data.data[version % 2].system_time_offset = offset;
 	data->arch_data.version = version;
 
@@ -225,7 +225,7 @@ arch_rtc_set_system_time_offset(struct real_time_data *data, bigtime_t offset)
 bigtime_t
 arch_rtc_get_system_time_offset(struct real_time_data *data)
 {
-	int32 version;
+	int32_t version;
 	bigtime_t offset;
 	do {
 		version = data->arch_data.version;

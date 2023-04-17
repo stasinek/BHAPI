@@ -110,14 +110,14 @@ void BSplitView::SetSplitterSize(float size)
 }
 
 
-int32 BSplitView::CountItems() const
+int32_t BSplitView::CountItems() const
 {
 	return fSplitLayout->CountItems();
 }
 
 
 float
-BSplitView::ItemWeight(int32 index) const
+BSplitView::ItemWeight(int32_t index) const
 {
 	return fSplitLayout->ItemWeight(index);
 }
@@ -130,7 +130,7 @@ BSplitView::ItemWeight(BLayoutItem* item) const
 }
 
 
-void BSplitView::SetItemWeight(int32 index, float weight, bool invalidateLayout)
+void BSplitView::SetItemWeight(int32_t index, float weight, bool invalidateLayout)
 {
 	fSplitLayout->SetItemWeight(index, weight, invalidateLayout);
 }
@@ -142,7 +142,7 @@ void BSplitView::SetItemWeight(BLayoutItem* item, float weight)
 }
 
 
-bool BSplitView::IsCollapsible(int32 index) const
+bool BSplitView::IsCollapsible(int32_t index) const
 {
 	return fSplitLayout->IsCollapsible(index);
 }
@@ -154,25 +154,25 @@ void BSplitView::SetCollapsible(bool collapsible)
 }
 
 
-void BSplitView::SetCollapsible(int32 index, bool collapsible)
+void BSplitView::SetCollapsible(int32_t index, bool collapsible)
 {
 	fSplitLayout->SetCollapsible(index, collapsible);
 }
 
 
-void BSplitView::SetCollapsible(int32 first, int32 last, bool collapsible)
+void BSplitView::SetCollapsible(int32_t first, int32_t last, bool collapsible)
 {
 	fSplitLayout->SetCollapsible(first, last, collapsible);
 }
 
 
-bool BSplitView::IsItemCollapsed(int32 index) const
+bool BSplitView::IsItemCollapsed(int32_t index) const
 {
 	return fSplitLayout->IsItemCollapsed(index);
 }
 
 
-void BSplitView::SetItemCollapsed(int32 index, bool collapsed)
+void BSplitView::SetItemCollapsed(int32_t index, bool collapsed)
 {
 	fSplitLayout->SetItemCollapsed(index, collapsed);
 }
@@ -190,7 +190,7 @@ bool BSplitView::AddChild(BView* child, float weight)
 }
 
 
-bool BSplitView::AddChild(int32 index, BView* child, float weight)
+bool BSplitView::AddChild(int32_t index, BView* child, float weight)
 {
 	return fSplitLayout->AddView(index, child, weight);
 }
@@ -208,7 +208,7 @@ bool BSplitView::AddChild(BLayoutItem* child, float weight)
 }
 
 
-bool BSplitView::AddChild(int32 index, BLayoutItem* child, float weight)
+bool BSplitView::AddChild(int32_t index, BLayoutItem* child, float weight)
 {
 	return fSplitLayout->AddItem(index, child, weight);
 }
@@ -217,9 +217,9 @@ bool BSplitView::AddChild(int32 index, BLayoutItem* child, float weight)
 void BSplitView::Draw(BRect updateRect)
 {
 	// draw the splitters
-	int32 draggedSplitterIndex = fSplitLayout->DraggedSplitter();
-	int32 count = fSplitLayout->CountItems();
-	for (int32 i = 0; i < count - 1; i++) {
+	int32_t draggedSplitterIndex = fSplitLayout->DraggedSplitter();
+	int32_t count = fSplitLayout->CountItems();
+	for (int32_t i = 0; i < count - 1; i++) {
 		BRect frame = fSplitLayout->SplitterItemFrame(i);
 		DrawSplitter(frame, updateRect, Orientation(),
 			draggedSplitterIndex == i);
@@ -252,11 +252,11 @@ void BSplitView::MouseUp(BPoint where)
 }
 
 
-void BSplitView::MouseMoved(BPoint where, uint32 transit, const BMessage* message)
+void BSplitView::MouseMoved(BPoint where, uint32_t transit, const BMessage* message)
 {
 	BCursor cursor(B_CURSOR_ID_SYSTEM_DEFAULT);
 
-	int32 splitterIndex = fSplitLayout->DraggedSplitter();
+	int32_t splitterIndex = fSplitLayout->DraggedSplitter();
 
 	if (splitterIndex >= 0 || fSplitLayout->IsAboveSplitter(where)) {
 		if (Orientation() == B_VERTICAL)
@@ -334,7 +334,7 @@ void BSplitView::DrawSplitter(BRect frame, const BRect& updateRect,
 void BSplitView::_DrawDefaultSplitter(BView* view, BRect frame,
 	const BRect& updateRect, orientation orientation, bool pressed)
 {
-	uint32 flags = pressed ? BControlLook::B_ACTIVATED : 0;
+	uint32_t flags = pressed ? BControlLook::B_ACTIVATED : 0;
 	be_control_look->DrawSplitter(view, frame, updateRect, view->ViewColor(),
 		orientation, flags, 0);
 }

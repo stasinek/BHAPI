@@ -28,11 +28,11 @@ typedef struct	{
 } cmos_time;
 
 
-static uint32
+static uint32_t
 bcd_to_int(uint8 bcd)
 {
-	uint32 numl;
-	uint32 numh;
+	uint32_t numl;
+	uint32_t numh;
 
 	numl = bcd & 0x0f;
 	numh = (bcd & 0xf0) >> 4;
@@ -42,7 +42,7 @@ bcd_to_int(uint8 bcd)
 
 
 static uint8
-int_to_bcd(uint32 number)
+int_to_bcd(uint32_t number)
 {
 	uint8 low;
 	uint8 high;
@@ -137,7 +137,7 @@ write_cmos_clock(cmos_time *cmos)
 }
 
 
-static uint32
+static uint32_t
 cmos_to_secs(const cmos_time *cmos)
 {
 	struct tm t;
@@ -154,7 +154,7 @@ cmos_to_secs(const cmos_time *cmos)
 
 
 static void
-secs_to_cmos(uint32 seconds, cmos_time *cmos)
+secs_to_cmos(uint32_t seconds, cmos_time *cmos)
 {
 	int wholeYear;
 
@@ -185,7 +185,7 @@ arch_rtc_init(struct kernel_args *args, struct real_time_data *data)
 }
 
 
-uint32
+uint32_t
 arch_rtc_get_hw_time(void)
 {
 	int waitTime;
@@ -209,7 +209,7 @@ arch_rtc_get_hw_time(void)
 
 
 void
-arch_rtc_set_hw_time(uint32 seconds)
+arch_rtc_set_hw_time(uint32_t seconds)
 {
 	cmos_time cmos;
 

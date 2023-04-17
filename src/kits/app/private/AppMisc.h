@@ -23,7 +23,7 @@ team_id current_team();
 void init_team_after_fork();
 thread_id main_thread_for(team_id team);
 bool is_app_showing_modal_window(team_id team);
-status_t create_desktop_connection(ServerLink* link, const char* name,int32 capacity);
+status_t create_desktop_connection(ServerLink* link, const char* name,int32_t capacity);
 
 } // namespace BPrivate
 
@@ -32,6 +32,6 @@ status_t create_desktop_connection(ServerLink* link, const char* name,int32 capa
     \param handler The BHandler.
     \return the token.
 */
-inline int32 _get_object_token_(const BHandler* object)
+inline int32_t _get_object_token_(const BHandler* object)
     { return bhapi::get_handler_token(object); }
 #endif	// _APP_MISC_H

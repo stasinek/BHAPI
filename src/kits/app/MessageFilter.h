@@ -90,10 +90,10 @@ typedef filter_result (*filter_hook)(BMessage *message, BHandler **target, BMess
 class BHAPI_IMPEXP BMessageFilter {
 public:
     BMessageFilter(bhapi::message_delivery delivery, bhapi::message_source source,
-                uint32 command, bhapi::filter_hook filter = NULL);
+                uint32_t command, bhapi::filter_hook filter = NULL);
     BMessageFilter(bhapi::message_delivery delivery, bhapi::message_source source,
                bhapi::filter_hook filter = NULL);
-    BMessageFilter(uint32 command, bhapi::filter_hook filter = NULL);
+    BMessageFilter(uint32_t command, bhapi::filter_hook filter = NULL);
     BMessageFilter(const BMessageFilter &filter);
     BMessageFilter(const BMessageFilter *filter);
     virtual ~BMessageFilter();
@@ -104,7 +104,7 @@ public:
 
     bhapi::message_delivery		MessageDelivery() const;
     bhapi::message_source		MessageSource() const;
-     uint32				Command() const;
+     uint32_t				Command() const;
     bool				FiltersAnyCommand() const;
     BLooper				*Looper() const;
 
@@ -112,7 +112,7 @@ private:
     friend class BLooper;
     friend class BHandler;
 
-     uint32 fCommand;
+     uint32_t fCommand;
     bool fFiltersAny;
     bhapi::message_delivery fDelivery;
     bhapi::message_source fSource;

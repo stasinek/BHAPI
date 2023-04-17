@@ -12,9 +12,9 @@
 #include <ByteOrder.h>
 
 
-static const uint32 kChunkSize = 64;	// 64 bytes == 512 bits
+static const uint32_t kChunkSize = 64;	// 64 bytes == 512 bits
 
-static const uint32 kRounds[64] = {
+static const uint32_t kRounds[64] = {
    0x428a2f98, 0x71374491, 0xb5c0fbcf, 0xe9b5dba5, 0x3956c25b, 0x59f111f1, 0x923f82a4, 0xab1c5ed5,
    0xd807aa98, 0x12835b01, 0x243185be, 0x550c7dc3, 0x72be5d74, 0x80deb1fe, 0x9bdc06a7, 0xc19bf174,
    0xe49b69c1, 0xefbe4786, 0x0fc19dc6, 0x240ca1cc, 0x2de92c6f, 0x4a7484aa, 0x5cb0a9dc, 0x76f988da,
@@ -24,13 +24,13 @@ static const uint32 kRounds[64] = {
    0x19a4c116, 0x1e376c08, 0x2748774c, 0x34b0bcb5, 0x391c0cb3, 0x4ed8aa4a, 0x5b9cca4f, 0x682e6ff3,
    0x748f82ee, 0x78a5636f, 0x84c87814, 0x8cc70208, 0x90befffa, 0xa4506ceb, 0xbef9a3f7, 0xc67178f2
 };
-static const uint32 kHash[8] = {
+static const uint32_t kHash[8] = {
 	0x6a09e667, 0xbb67ae85, 0x3c6ef372, 0xa54ff53a,
 	0x510e527f, 0x9b05688c, 0x1f83d9ab, 0x5be0cd19
 };
 
 
-static inline uint32 rotate_right(uint32 value, int bits)
+static inline uint32_t rotate_right(uint32_t value, int bits)
 {
 	return (value >> bits) | (value << (32 - bits));
 }
@@ -138,32 +138,32 @@ void SHA256::_ProcessChunk()
 
 	// pre-process buffer (extend to 64 elements)
 	for (int i = 16; i < 64; i++) {
-		uint32 v0 = fBuffer[i - 15];
-		uint32 v1 = fBuffer[i - 2];
-		uint32 s0 = rotate_right(v0, 7) ^ rotate_right(v0, 18) ^ (v0 >> 3);
-		uint32 s1 = rotate_right(v1, 17) ^ rotate_right(v1, 19) ^ (v1 >> 10);
+		uint32_t v0 = fBuffer[i - 15];
+		uint32_t v1 = fBuffer[i - 2];
+		uint32_t s0 = rotate_right(v0, 7) ^ rotate_right(v0, 18) ^ (v0 >> 3);
+		uint32_t s1 = rotate_right(v1, 17) ^ rotate_right(v1, 19) ^ (v1 >> 10);
 		fBuffer[i] = fBuffer[i - 16] + s0 + fBuffer[i - 7] + s1;
 	}
 
-	uint32 a = fHash[0];
-	uint32 b = fHash[1];
-	uint32 c = fHash[2];
-	uint32 d = fHash[3];
-	uint32 e = fHash[4];
-	uint32 f = fHash[5];
-	uint32 g = fHash[6];
-	uint32 h = fHash[7];
+	uint32_t a = fHash[0];
+	uint32_t b = fHash[1];
+	uint32_t c = fHash[2];
+	uint32_t d = fHash[3];
+	uint32_t e = fHash[4];
+	uint32_t f = fHash[5];
+	uint32_t g = fHash[6];
+	uint32_t h = fHash[7];
 
 	// process the buffer
 	for (int i = 0; i < 64; i++) {
-		uint32 s0 = rotate_right(a, 2) ^ rotate_right(a, 13)
+		uint32_t s0 = rotate_right(a, 2) ^ rotate_right(a, 13)
 			^ rotate_right(a, 22);
-		uint32 maj = (a & b) ^ (a & c) ^ (b & c);
-		uint32 t2 = s0 + maj;
-		uint32 s1 = rotate_right(e, 6) ^ rotate_right(e, 11)
+		uint32_t maj = (a & b) ^ (a & c) ^ (b & c);
+		uint32_t t2 = s0 + maj;
+		uint32_t s1 = rotate_right(e, 6) ^ rotate_right(e, 11)
 			^ rotate_right(e, 25);
-		uint32 ch = (e & f) ^ (~e & g);
-		uint32 t1 = h + s1 + ch + kRounds[i] + fBuffer[i];
+		uint32_t ch = (e & f) ^ (~e & g);
+		uint32_t t1 = h + s1 + ch + kRounds[i] + fBuffer[i];
 
 		h = g;
 		g = f;

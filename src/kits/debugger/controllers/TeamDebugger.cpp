@@ -471,7 +471,7 @@ status_t TeamDebugger::Init(DebuggerInterface* interface, thread_id threadID, in
 	{
 		BObjectList<ThreadInfo> threadInfos(20, true);
 		status_t error = fDebuggerInterface->GetThreadInfos(threadInfos);
-		for (int32 i = 0; ThreadInfo* info = threadInfos.ItemAt(i); i++) {
+		for (int32_t i = 0; ThreadInfo* info = threadInfos.ItemAt(i); i++) {
 			::Thread* thread;
 			error = fTeam->AddThread(*info, &thread);
 			if (error != B_OK)
@@ -495,7 +495,7 @@ status_t TeamDebugger::Init(DebuggerInterface* interface, thread_id threadID, in
 	{
 		BObjectList<ImageInfo> imageInfos(20, true);
 		status_t error = fDebuggerInterface->GetImageInfos(imageInfos);
-		for (int32 i = 0; ImageInfo* info = imageInfos.ItemAt(i); i++) {
+		for (int32_t i = 0; ImageInfo* info = imageInfos.ItemAt(i); i++) {
 			Image* image;
 			error = _AddImage(*info, &image);
 			if (error != B_OK)
@@ -570,7 +570,7 @@ void TeamDebugger::MessageReceived(BMessage* message)
 		case MSG_THREAD_STEP_INTO:
 		case MSG_THREAD_STEP_OUT:
 		{
-			int32 threadID;
+			int32_t threadID;
 			target_addr_t address;
 			if (message->FindInt32("thread", &threadID) != B_OK)
 				break;
@@ -699,7 +699,7 @@ void TeamDebugger::MessageReceived(BMessage* message)
 
 		case MSG_SET_DEFAULT_SIGNAL_DISPOSITION:
 		{
-			int32 disposition;
+			int32_t disposition;
 			if (message->FindInt32("disposition", &disposition) != B_OK)
 				break;
 
@@ -710,8 +710,8 @@ void TeamDebugger::MessageReceived(BMessage* message)
 
 		case MSG_SET_CUSTOM_SIGNAL_DISPOSITION:
 		{
-			int32 signal;
-			int32 disposition;
+			int32_t signal;
+			int32_t disposition;
 			if (message->FindInt32("signal", &signal) != B_OK
 				|| message->FindInt32("disposition", &disposition) != B_OK) {
 				break;
@@ -724,7 +724,7 @@ void TeamDebugger::MessageReceived(BMessage* message)
 
 		case MSG_REMOVE_CUSTOM_SIGNAL_DISPOSITION:
 		{
-			int32 signal;
+			int32_t signal;
 			if (message->FindInt32("signal", &signal) != B_OK)
 				break;
 
@@ -739,8 +739,8 @@ void TeamDebugger::MessageReceived(BMessage* message)
 			Watchpoint* watchpoint = NULL;
 			BReference<Watchpoint> watchpointReference;
 			uint64 address = 0;
-			uint32 type = 0;
-			int32 length = 0;
+			uint32_t type = 0;
+			int32_t length = 0;
 
 			if (message->FindPointer("watchpoint", (void**)&watchpoint)
 					== B_OK) {
@@ -865,7 +865,7 @@ void TeamDebugger::MessageReceived(BMessage* message)
 
 		case MSG_THREAD_STATE_CHANGED:
 		{
-			int32 threadID;
+			int32_t threadID;
 			if (message->FindInt32("thread", &threadID) != B_OK)
 				break;
 
@@ -877,7 +877,7 @@ void TeamDebugger::MessageReceived(BMessage* message)
 		}
 		case MSG_THREAD_CPU_STATE_CHANGED:
 		{
-			int32 threadID;
+			int32_t threadID;
 			if (message->FindInt32("thread", &threadID) != B_OK)
 				break;
 
@@ -889,7 +889,7 @@ void TeamDebugger::MessageReceived(BMessage* message)
 		}
 		case MSG_THREAD_STACK_TRACE_CHANGED:
 		{
-			int32 threadID;
+			int32_t threadID;
 			if (message->FindInt32("thread", &threadID) != B_OK)
 				break;
 
@@ -902,7 +902,7 @@ void TeamDebugger::MessageReceived(BMessage* message)
 
 		case MSG_IMAGE_DEBUG_INFO_CHANGED:
 		{
-			int32 imageID;
+			int32_t imageID;
 			if (message->FindInt32("image", &imageID) != B_OK)
 				break;
 
@@ -912,7 +912,7 @@ void TeamDebugger::MessageReceived(BMessage* message)
 
 		case MSG_IMAGE_FILE_CHANGED:
 		{
-			int32 imageID;
+			int32_t imageID;
 			if (message->FindInt32("image", &imageID) != B_OK)
 				break;
 
@@ -1075,7 +1075,7 @@ void TeamDebugger::ValueNodeWriteRequested(ValueNode* node, CpuState* state,
 
 
 void TeamDebugger::ThreadActionRequested(thread_id threadID,
-	uint32 action, target_addr_t address)
+	uint32_t action, target_addr_t address)
 {
 	BMessage message(action);
 	message.AddInt32("thread", threadID);
@@ -1165,7 +1165,7 @@ void TeamDebugger::RemoveStopImageNameRequested(const char* name)
 }
 
 
-void TeamDebugger::SetDefaultSignalDispositionRequested(int32 disposition)
+void TeamDebugger::SetDefaultSignalDispositionRequested(int32_t disposition)
 {
 	BMessage message(MSG_SET_DEFAULT_SIGNAL_DISPOSITION);
 	message.AddInt32("disposition", disposition);
@@ -1173,8 +1173,8 @@ void TeamDebugger::SetDefaultSignalDispositionRequested(int32 disposition)
 }
 
 
-void TeamDebugger::SetCustomSignalDispositionRequested(int32 signal,
-	int32 disposition)
+void TeamDebugger::SetCustomSignalDispositionRequested(int32_t signal,
+	int32_t disposition)
 {
 	BMessage message(MSG_SET_CUSTOM_SIGNAL_DISPOSITION);
 	message.AddInt32("signal", signal);
@@ -1183,7 +1183,7 @@ void TeamDebugger::SetCustomSignalDispositionRequested(int32 signal,
 }
 
 
-void TeamDebugger::RemoveCustomSignalDispositionRequested(int32 signal)
+void TeamDebugger::RemoveCustomSignalDispositionRequested(int32_t signal)
 {
 	BMessage message(MSG_REMOVE_CUSTOM_SIGNAL_DISPOSITION);
 	message.AddInt32("signal", signal);
@@ -1202,8 +1202,8 @@ void TeamDebugger::ClearBreakpointRequested(UserBreakpoint* breakpoint)
 }
 
 
-void TeamDebugger::SetWatchpointRequested(target_addr_t address, uint32 type,
-	int32 length, bool enabled)
+void TeamDebugger::SetWatchpointRequested(target_addr_t address, uint32_t type,
+	int32_t length, bool enabled)
 {
 	BMessage message(MSG_SET_WATCHPOINT);
 	message.AddUInt64("address", (uint64)address);
@@ -1343,7 +1343,7 @@ bool TeamDebugger::UserInterfaceQuitRequested(QuitOption quitOption)
 		BString resumeLabel("Resume ");
 		resumeLabel << name;
 
-		int32 choice = fUserInterface->SynchronouslyAskUser("Quit Debugger",
+		int32_t choice = fUserInterface->SynchronouslyAskUser("Quit Debugger",
 			message, killLabel, "Cancel", resumeLabel);
 
 		switch (choice) {
@@ -1676,7 +1676,7 @@ bool TeamDebugger::_HandleTeamDeleted(TeamDeletedEvent* event)
 	snprintf(message, sizeof(message), "Team %" B_PRId32 " has terminated. ",
 		event->Team());
 
-	int32 result = fUserInterface->SynchronouslyAskUser("Team terminated",
+	int32_t result = fUserInterface->SynchronouslyAskUser("Team terminated",
 		message, "Do nothing", "Quit", fCommandLineArgc != 0
 			? "Restart team" : NULL);
 
@@ -1803,7 +1803,7 @@ bool TeamDebugger::_HandlePostSyscall(PostSyscallEvent* event)
 			if ((ssize_t)info.ReturnValue() <= 0)
 				break;
 
-			int32 fd;
+			int32_t fd;
 			target_addr_t address;
 			size_t size;
 			// TODO: decoding the syscall arguments should probably be
@@ -1814,7 +1814,7 @@ bool TeamDebugger::_HandlePostSyscall(PostSyscallEvent* event)
 			// be adapted to handle the aforementioned endian differences.
 			// This works for x86{-64} for now though.
 			if (fTeam->GetArchitecture()->AddressSize() == 4) {
-				const uint32* args = (const uint32*)info.Arguments();
+				const uint32_t* args = (const uint32_t*)info.Arguments();
 				fd = args[0];
 				address = args[3];
 				size = args[4];
@@ -1870,7 +1870,7 @@ void TeamDebugger::_PrepareForTeamExec(TeamExecEvent* event)
 		breakpoint->AcquireReference();
 	}
 
-	for (int32 i = 0; i < breakpointsToRemove.CountItems(); i++) {
+	for (int32_t i = 0; i < breakpointsToRemove.CountItems(); i++) {
 		UserBreakpoint* breakpoint = breakpointsToRemove.ItemAt(i);
 		fTeam->RemoveUserBreakpoint(breakpoint);
 		fTeam->NotifyUserBreakpointChanged(breakpoint);
@@ -2147,8 +2147,8 @@ void TeamDebugger::_HandleClearUserBreakpoint(UserBreakpoint* breakpoint)
 }
 
 
-void TeamDebugger::_HandleSetWatchpoint(target_addr_t address, uint32 type,
-	int32 length, bool enabled)
+void TeamDebugger::_HandleSetWatchpoint(target_addr_t address, uint32_t type,
+	int32_t length, bool enabled)
 {
 	Watchpoint* watchpoint = new(std::nothrow) Watchpoint(address, type,
 		length);
@@ -2365,7 +2365,7 @@ void TeamDebugger::_LoadSettings()
 		return;
 
 	// create the saved breakpoints
-	for (int32 i = 0; const BreakpointSetting* breakpointSetting
+	for (int32_t i = 0; const BreakpointSetting* breakpointSetting
 			= fTeamSettings.BreakpointAt(i); i++) {
 		if (breakpointSetting->GetFunctionID() == NULL)
 			continue;
@@ -2410,9 +2410,9 @@ void TeamDebugger::_LoadSettings()
 		fTeam->SetDefaultSignalDisposition(
 			signalSettings->DefaultSignalDisposition());
 
-		int32 signal;
-		int32 disposition;
-		for (int32 i = 0; i < signalSettings->CountCustomSignalDispositions();
+		int32_t signal;
+		int32_t disposition;
+		for (int32_t i = 0; i < signalSettings->CountCustomSignalDispositions();
 			i++) {
 			if (signalSettings->GetCustomSignalDispositionAt(i, signal,
 				disposition) == B_OK) {
@@ -2438,7 +2438,7 @@ void TeamDebugger::_SaveSettings()
 		settings.AddUiSettings(uiSettings);
 
 	// preserve the UI settings from our cached copy.
-	for (int32 i = 0; i < fTeamSettings.CountUiSettings(); i++) {
+	for (int32_t i = 0; i < fTeamSettings.CountUiSettings(); i++) {
 		const TeamUiSettings* oldUiSettings = fTeamSettings.UiSettingAt(i);
 		if (strcmp(oldUiSettings->ID(), fUserInterface->ID()) != 0) {
 			TeamUiSettings* clonedSettings = oldUiSettings->Clone();

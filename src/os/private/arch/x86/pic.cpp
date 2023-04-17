@@ -69,7 +69,7 @@ static uint16 sLevelTriggeredInterrupts = 0;
 	it must assume it's a spurious interrupt.
 */
 static bool
-pic_is_spurious_interrupt(int32 num)
+pic_is_spurious_interrupt(int32_t num)
 {
 	if (num != 7)
 		return false;
@@ -79,7 +79,7 @@ pic_is_spurious_interrupt(int32 num)
 	// just ignore them
 
 	out8(PIC_CONTROL3 | PIC_CONTROL3_READ_ISR, PIC_MASTER_CONTROL);
-	int32 isr = in8(PIC_MASTER_CONTROL);
+	int32_t isr = in8(PIC_MASTER_CONTROL);
 	out8(PIC_CONTROL3 | PIC_CONTROL3_READ_IRR, PIC_MASTER_CONTROL);
 
 	return (isr & 0x80) == 0;
@@ -87,7 +87,7 @@ pic_is_spurious_interrupt(int32 num)
 
 
 static bool
-pic_is_level_triggered_interrupt(int32 num)
+pic_is_level_triggered_interrupt(int32_t num)
 {
 	if (num < 0 || num > PIC_NUM_INTS)
 		return false;
@@ -101,7 +101,7 @@ pic_is_level_triggered_interrupt(int32 num)
 	This clears the PIC interrupt in-service bit.
 */
 static bool
-pic_end_of_interrupt(int32 num)
+pic_end_of_interrupt(int32_t num)
 {
 	if (num < 0 || num > PIC_NUM_INTS)
 		return false;
@@ -117,7 +117,7 @@ pic_end_of_interrupt(int32 num)
 
 
 static void
-pic_enable_io_interrupt(int32 num)
+pic_enable_io_interrupt(int32_t num)
 {
 	// interrupt is specified "normalized"
 	if (num < 0 || num > PIC_NUM_INTS)
@@ -135,7 +135,7 @@ pic_enable_io_interrupt(int32 num)
 
 
 static void
-pic_disable_io_interrupt(int32 num)
+pic_disable_io_interrupt(int32_t num)
 {
 	// interrupt is specified "normalized"
 	// never disable slave pic line IRQ 2
@@ -154,10 +154,10 @@ pic_disable_io_interrupt(int32 num)
 
 
 static void
-pic_configure_io_interrupt(int32 num, uint32 config)
+pic_configure_io_interrupt(int32_t num, uint32_t config)
 {
 	uint8 value;
-	int32 localBit;
+	int32_t localBit;
 	if (num < 0 || num > PIC_NUM_INTS || num == 2)
 		return;
 

@@ -18,8 +18,8 @@ extern "C" {
 
 typedef struct {
 	uint8		buttons;
-	uint32		xPosition;
-	uint32		yPosition;
+	uint32_t		xPosition;
+	uint32_t		yPosition;
 	uint8		zPressure;
 	uint8		fingers;
 	bool		gesture;

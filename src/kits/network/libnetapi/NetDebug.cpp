@@ -149,7 +149,7 @@ void BNetDebug::Dump(const char* data, size_t size, const char* title)
     if (! data)
     	fprintf(stderr, "NULL data!\n");
     else {
-		uint32	i,j;
+		uint32_t	i,j;
 	  	char text[96];	// only 3*16 + 3 + 16 max by line needed
 		uint8 *byte = (uint8 *) data;
 		char *ptr;

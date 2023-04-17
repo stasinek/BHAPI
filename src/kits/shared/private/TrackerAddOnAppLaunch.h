@@ -34,7 +34,7 @@ void process_refs(entry_ref directory, BMessage* refs, void* reserved)
 
 	// get the path of the Tracker add-on
 	image_info image;
-	int32 cookie = 0;
+	int32_t cookie = 0;
 	status_t status = get_next_image_info(0, &cookie, &image);
 
 	while (status == B_OK) {

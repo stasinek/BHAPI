@@ -8,58 +8,58 @@
 #include <sys/types.h>
 
 
-extern "C" [[gnu::optimize("omit-frame-pointer")]] void atomic_set(int32_t* ptr, int32_t value)
+extern "C" [[gnu::optimize("omit-frame-pointer")]] void atomic_set(int32_t_t* ptr, int32_t_t value)
 {
-	auto& obj = *reinterpret_cast<std::atomic<int32_t>*>(ptr);
+	auto& obj = *reinterpret_cast<std::atomic<int32_t_t>*>(ptr);
 	obj.store(value, std::memory_order_release);
 }
 
 
-extern "C" [[gnu::optimize("omit-frame-pointer")]] int32_t
-atomic_get_and_set(int32_t* ptr, int32_t value)
+extern "C" [[gnu::optimize("omit-frame-pointer")]] int32_t_t
+atomic_get_and_set(int32_t_t* ptr, int32_t_t value)
 {
-	auto& obj = *reinterpret_cast<std::atomic<int32_t>*>(ptr);
+	auto& obj = *reinterpret_cast<std::atomic<int32_t_t>*>(ptr);
 	return obj.exchange(value);
 }
 
 
-extern "C" [[gnu::optimize("omit-frame-pointer")]] int32_t
-atomic_test_and_set(int32_t* ptr, int32_t desired, int32_t expected)
+extern "C" [[gnu::optimize("omit-frame-pointer")]] int32_t_t
+atomic_test_and_set(int32_t_t* ptr, int32_t_t desired, int32_t_t expected)
 {
-	auto& obj = *reinterpret_cast<std::atomic<int32_t>*>(ptr);
+	auto& obj = *reinterpret_cast<std::atomic<int32_t_t>*>(ptr);
 	obj.compare_exchange_strong(expected, desired);
 	return expected;
 }
 
 
-extern "C" [[gnu::optimize("omit-frame-pointer")]] int32_t
-atomic_add(int32_t* ptr, int32_t value)
+extern "C" [[gnu::optimize("omit-frame-pointer")]] int32_t_t
+atomic_add(int32_t_t* ptr, int32_t_t value)
 {
-	auto& obj = *reinterpret_cast<std::atomic<int32_t>*>(ptr);
+	auto& obj = *reinterpret_cast<std::atomic<int32_t_t>*>(ptr);
 	return obj.fetch_add(value);
 }
 
 
-extern "C" [[gnu::optimize("omit-frame-pointer")]] int32_t
-atomic_and(int32_t* ptr, int32_t value)
+extern "C" [[gnu::optimize("omit-frame-pointer")]] int32_t_t
+atomic_and(int32_t_t* ptr, int32_t_t value)
 {
-	auto& obj = *reinterpret_cast<std::atomic<int32_t>*>(ptr);
+	auto& obj = *reinterpret_cast<std::atomic<int32_t_t>*>(ptr);
 	return obj.fetch_and(value);
 }
 
 
-extern "C" [[gnu::optimize("omit-frame-pointer")]] int32_t
-atomic_or(int32_t* ptr, int32_t value)
+extern "C" [[gnu::optimize("omit-frame-pointer")]] int32_t_t
+atomic_or(int32_t_t* ptr, int32_t_t value)
 {
-	auto& obj = *reinterpret_cast<std::atomic<int32_t>*>(ptr);
+	auto& obj = *reinterpret_cast<std::atomic<int32_t_t>*>(ptr);
 	return obj.fetch_or(value);
 }
 
 
-extern "C" [[gnu::optimize("omit-frame-pointer")]] int32_t
-atomic_get(int32_t* ptr)
+extern "C" [[gnu::optimize("omit-frame-pointer")]] int32_t_t
+atomic_get(int32_t_t* ptr)
 {
-	auto& obj = *reinterpret_cast<std::atomic<int32_t>*>(ptr);
+	auto& obj = *reinterpret_cast<std::atomic<int32_t_t>*>(ptr);
 	return obj.load(std::memory_order_acquire);
 }
 

@@ -12,7 +12,7 @@
 class BStringItem : public BListItem {
 public:
 								BStringItem(const char* text,
-									uint32 outlineLevel = 0,
+									uint32_t outlineLevel = 0,
 									bool expanded = true);
 								BStringItem(BMessage* archive);
 	virtual						~BStringItem();
@@ -44,7 +44,7 @@ private:
 private:
 			char*				fText;
 			float				fBaselineOffset;
-			uint32				_reserved[2];
+			uint32_t				_reserved[2];
 };
 
 #endif	// _STRING_ITEM_H

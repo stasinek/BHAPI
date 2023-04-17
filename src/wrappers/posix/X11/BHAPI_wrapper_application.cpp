@@ -304,7 +304,7 @@ static void b_process_x_event(EXGraphicsEngine *x11Engine, XEvent *event)
 							const char *text = NULL;
 							ssize_t textLen = 0;
 							clipMsg->FindData("text/plain", B_MIME_TYPE, (const void**)&text, &textLen);
-							if(textLen > 0) aStr.SetTo(text, (int32)textLen);
+							if(textLen > 0) aStr.SetTo(text, (int32_t)textLen);
 						}
 					}
 					bhapi::__be_clipboard.Unlock();
@@ -425,7 +425,7 @@ static void b_process_x_event(EXGraphicsEngine *x11Engine, XEvent *event)
 						}
 						else if(event->xselection.target == XA_STRING)
 						{
-							aStr = bhapi::strndup((const char*)prop, (int32)len);
+							aStr = bhapi::strndup((const char*)prop, (int32_t)len);
 						}
 					}
 				}
@@ -511,7 +511,7 @@ static void b_process_x_event(EXGraphicsEngine *x11Engine, XEvent *event)
 				handled = true;
 				if(etkWinMsgr.IsValid() == false) break;
 
-				uint32 winWorkspace = 0;
+				uint32_t winWorkspace = 0;
 				Atom type = None;
 				int format;
 				unsigned long nitems;
@@ -536,7 +536,7 @@ static void b_process_x_event(EXGraphicsEngine *x11Engine, XEvent *event)
 				if(winWorkspace != 0)
 				{
 					message.what = B_WORKSPACES_CHANGED;
-					message.AddInt32("new", (int32)winWorkspace);
+					message.AddInt32("new", (int32_t)winWorkspace);
 					etkWinMsgr.SendMessage(&message);
 				}
 			}
@@ -674,7 +674,7 @@ static void b_process_x_event(EXGraphicsEngine *x11Engine, XEvent *event)
 
 				message.what = B_MOUSE_DOWN;
 
-				int32 button = (int32)(event->xbutton.button);
+				int32_t button = (int32_t)(event->xbutton.button);
 				if(button >= 4 && button <= 7)
 				{
 					message.what = B_MOUSE_WHEEL_CHANGED;
@@ -688,8 +688,8 @@ static void b_process_x_event(EXGraphicsEngine *x11Engine, XEvent *event)
 				}
 				else
 				{
-					int32 buttons = button;
-					int32 clicks = 1;
+					int32_t buttons = button;
+					int32_t clicks = 1;
 
 					unsigned int state = event->xbutton.state;
 					if((state & Button1Mask) && button != 1) buttons += 1;
@@ -732,7 +732,7 @@ static void b_process_x_event(EXGraphicsEngine *x11Engine, XEvent *event)
 				handled = true;
 				if(etkWinMsgr.IsValid() == false) break;
 
-				int32 button = (int32)(event->xbutton.button);
+				int32_t button = (int32_t)(event->xbutton.button);
 				if(button >= 4 && button <= 7) break;
 
 				message.what = B_MOUSE_UP;
@@ -740,7 +740,7 @@ static void b_process_x_event(EXGraphicsEngine *x11Engine, XEvent *event)
 				message.AddPoint("where", BPoint((float)event->xbutton.x, (float)event->xbutton.y));
 				message.AddPoint("screen_where", BPoint((float)event->xbutton.x_root, (float)event->xbutton.y_root));
 
-				int32 buttons = 0;
+				int32_t buttons = 0;
 				unsigned int state = event->xbutton.state;
 				if((state & Button1Mask) && button != 1) buttons += 1;
 				if((state & Button2Mask) && button != 2) buttons += 2;
@@ -768,7 +768,7 @@ static void b_process_x_event(EXGraphicsEngine *x11Engine, XEvent *event)
 				message.AddPoint("where", BPoint((float)event->xmotion.x, (float)event->xmotion.y));
 				message.AddPoint("screen_where", BPoint((float)event->xmotion.x_root, (float)event->xmotion.y_root));
 
-				int32 buttons = 0;
+				int32_t buttons = 0;
 				if(event->xmotion.state & Button1Mask) buttons += 1;
 				if(event->xmotion.state & Button2Mask) buttons += 2;
 				if(event->xmotion.state & Button3Mask) buttons += 3;
@@ -826,7 +826,7 @@ static void b_process_x_event(EXGraphicsEngine *x11Engine, XEvent *event)
 
 				message.what = (event->type == KeyPress ? B_KEY_DOWN : B_KEY_UP);
 
-				message.AddInt32("key", (int32)(event->xkey.keycode));
+				message.AddInt32("key", (int32_t)(event->xkey.keycode));
 
 				// TODO: BHAPI:key_repeat, modifiers, states, raw_char
 
@@ -838,7 +838,7 @@ static void b_process_x_event(EXGraphicsEngine *x11Engine, XEvent *event)
 
 				bzero(keybuffer, sizeof(keybuffer));
 
-				int32 modifiers = 0;
+				int32_t modifiers = 0;
 
 				x11Engine->Lock();
 				keynum = XLookupString(&event->xkey, keybuffer, 16, &keysym, &status);
@@ -1437,21 +1437,21 @@ EXGraphicsEngine::CreateContext()
 
 
 BGraphicsDrawable*
-EXGraphicsEngine::CreatePixmap(uint32 w,  uint32 h)
+EXGraphicsEngine::CreatePixmap(uint32_t w,  uint32_t h)
 {
 	return(new EXGraphicsDrawable(this, w, h));
 }
 
 
 BGraphicsWindow*
-EXGraphicsEngine::CreateWindow(int32 x,  int32 y,  uint32 w,  uint32 h)
+EXGraphicsEngine::CreateWindow(int32_t x,  int32_t y,  uint32_t w,  uint32_t h)
 {
 	return(new EXGraphicsWindow(this, x, y, w, h));
 }
 
 
 status_t 
-EXGraphicsEngine::GetDesktopBounds(uint32 *w,  uint32 *h)
+EXGraphicsEngine::GetDesktopBounds(uint32_t *w,  uint32_t *h)
 {
 	BAutolock <EXGraphicsEngine> autolock(this);
 	if(autolock.IsLocked() == false || InitCheck() != B_OK) return B_ERROR;
@@ -1464,7 +1464,7 @@ EXGraphicsEngine::GetDesktopBounds(uint32 *w,  uint32 *h)
 
 
 status_t 
-EXGraphicsEngine::GetCurrentWorkspace(uint32 *workspace)
+EXGraphicsEngine::GetCurrentWorkspace(uint32_t *workspace)
 {
 	if(workspace == NULL) return B_ERROR;
 
@@ -1608,7 +1608,7 @@ EXGraphicsEngine::ConvertRegion(const BRegion *region, Region *xRegion)
 
 	if(region != NULL)
 	{
-		for(int32 i = 0; i < region->CountRects(); i++)
+		for(int32_t i = 0; i < region->CountRects(); i++)
 		{
 			BRect r = region->RectAt(i).FloorCopy();
 
@@ -1641,13 +1641,13 @@ EXGraphicsEngine::ConvertRegion(const BRegion *region, XRectangle **xRects, int 
 {
 	if(xRects == NULL || nrects == NULL) return false;
 
-	int32 nrectsNeeded = max_c((region ? region->CountRects() : 0), 1);
+	int32_t nrectsNeeded = max_c((region ? region->CountRects() : 0), 1);
 	if((*xRects = (XRectangle*)malloc(sizeof(XRectangle) * (size_t)nrectsNeeded)) == NULL) return false;
 	*nrects = 0;
 
 	if(region != NULL)
 	{
-		for(int32 i = 0; i < region->CountRects(); i++)
+		for(int32_t i = 0; i < region->CountRects(); i++)
 		{
 			BRect r = region->RectAt(i).FloorCopy();
 

@@ -30,7 +30,7 @@ enum {
 
 
 typedef struct {
-	uint32		signature;
+	uint32_t		signature;
 	uint8		index;
 	pci_info*	info;
 	status_t	status;
@@ -38,32 +38,32 @@ typedef struct {
 
 
 typedef struct {
-	uint32	signature;
+	uint32_t	signature;
 	uint16	port;
 	uint8	size;		// == index for POKE_PORT_INDEXED_*
-	uint32	value;
+	uint32_t	value;
 } port_io_args;
 
 
 typedef struct {
-	uint32	signature;
+	uint32_t	signature;
 	uint8	bus;
 	uint8	device;
 	uint8	function;
 	uint8	size;
 	uint8	offset;
-	uint32	value;
+	uint32_t	value;
 } pci_io_args;
 
 
 typedef struct {
-	uint32		signature;
+	uint32_t		signature;
 	area_id		area;
 	const char*	name;
 	void*		physical_address;
 	size_t		size;
-	uint32		flags;
-	uint32		protection;
+	uint32_t		flags;
+	uint32_t		protection;
 	void*		address;
 } mem_map_args;
 

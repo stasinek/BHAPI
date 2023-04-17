@@ -46,8 +46,8 @@ namespace BPrivate {
 class MiniMenuField : public BView {
 public:
 	MiniMenuField(BRect frame, const char* name, BPopUpMenu* menu,
-		uint32 resizeFlags = B_FOLLOW_LEFT | B_FOLLOW_TOP,
-		uint32 flags = B_WILL_DRAW | B_NAVIGABLE);
+		uint32_t resizeFlags = B_FOLLOW_LEFT | B_FOLLOW_TOP,
+		uint32_t flags = B_WILL_DRAW | B_NAVIGABLE);
 	// ToDo:
 	// use BMenu instead of BPopUpMenu here
 
@@ -58,7 +58,7 @@ protected:
 	virtual void Draw(BRect);
 	virtual void MouseDown(BPoint );
 	virtual	void MakeFocus(bool);
-	virtual	void KeyDown(const char*, int32);
+	virtual	void KeyDown(const char*, int32_t);
 
 private:
 	BPopUpMenu* fMenu;

@@ -27,13 +27,13 @@ typedef struct net_buffer {
 			uint16			start;
 			uint16			end;
 		}					fragment;
-		uint32				sequence;
-		uint32				offset;
-		uint32				index;
-		int32				type;
+		uint32_t				sequence;
+		uint32_t				offset;
+		uint32_t				index;
+		int32_t				type;
 	};
-	uint32					flags;
-	uint32					size;
+	uint32_t					flags;
+	uint32_t					size;
 	uint8					protocol;
 } net_buffer;
 
@@ -47,7 +47,7 @@ struct net_buffer_module_info {
 
 	net_buffer*		(*duplicate)(net_buffer* from);
 	net_buffer*		(*clone)(net_buffer* from, bool shareFreeSpace);
-	net_buffer*		(*split)(net_buffer* from, uint32 offset);
+	net_buffer*		(*split)(net_buffer* from, uint32_t offset);
 	status_t		(*merge)(net_buffer* buffer, net_buffer* with, bool after);
 
 	status_t		(*prepend_size)(net_buffer* buffer, size_t size,
@@ -58,15 +58,15 @@ struct net_buffer_module_info {
 						void** _contiguousBuffer);
 	status_t		(*append)(net_buffer* buffer, const void* data,
 						size_t bytes);
-	status_t		(*insert)(net_buffer* buffer, uint32 offset,
-						const void* data, size_t bytes, uint32 flags);
-	status_t		(*remove)(net_buffer* buffer, uint32 offset,
+	status_t		(*insert)(net_buffer* buffer, uint32_t offset,
+						const void* data, size_t bytes, uint32_t flags);
+	status_t		(*remove)(net_buffer* buffer, uint32_t offset,
 						size_t bytes);
 	status_t		(*remove_header)(net_buffer* buffer, size_t bytes);
 	status_t		(*remove_trailer)(net_buffer* buffer, size_t bytes);
 	status_t		(*trim)(net_buffer* buffer, size_t newSize);
 	status_t		(*append_cloned)(net_buffer* buffer, net_buffer* source,
-						uint32 offset, size_t bytes);
+						uint32_t offset, size_t bytes);
 
 	status_t		(*associate_data)(net_buffer* buffer, void* data);
 
@@ -78,25 +78,25 @@ struct net_buffer_module_info {
 
 	status_t		(*store_header)(net_buffer* buffer);
 	ssize_t			(*stored_header_length)(net_buffer* buffer);
-	status_t		(*restore_header)(net_buffer* buffer, uint32 offset,
+	status_t		(*restore_header)(net_buffer* buffer, uint32_t offset,
 						void* data, size_t bytes);
 	status_t		(*append_restored_header)(net_buffer* buffer,
-						net_buffer* source, uint32 offset, size_t bytes);
+						net_buffer* source, uint32_t offset, size_t bytes);
 
-	status_t		(*direct_access)(net_buffer* buffer, uint32 offset,
+	status_t		(*direct_access)(net_buffer* buffer, uint32_t offset,
 						size_t bytes, void** _data);
 	status_t 		(*read)(net_buffer* buffer, size_t offset, void* data,
 						size_t bytes);
 	status_t		(*write)(net_buffer* buffer, size_t offset,
 						const void* data, size_t bytes);
 
-	int32			(*checksum)(net_buffer* buffer, uint32 offset, size_t bytes,
+	int32_t			(*checksum)(net_buffer* buffer, uint32_t offset, size_t bytes,
 						bool finalize);
 	status_t		(*get_memory_map)(net_buffer* buffer,
-						struct iovec* iovecs, uint32 vecCount);
-	uint32 			(*get_iovecs)(net_buffer* buffer,
-						struct iovec* iovecs, uint32 vecCount);
-	uint32 			(*count_iovecs)(net_buffer* buffer);
+						struct iovec* iovecs, uint32_t vecCount);
+	uint32_t 			(*get_iovecs)(net_buffer* buffer,
+						struct iovec* iovecs, uint32_t vecCount);
+	uint32_t 			(*count_iovecs)(net_buffer* buffer);
 
 	void			(*swap_addresses)(net_buffer* buffer);
 

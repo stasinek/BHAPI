@@ -100,10 +100,10 @@ enum {
 struct Token {
 	char	string[kMaxTokenLength];
 	uint64	value;
-	int32	type;
-	int32	position;
+	int32_t	type;
+	int32_t	position;
 
-	void SetTo(const char* string, int32 length, int32 position, int32 type)
+	void SetTo(const char* string, int32_t length, int32_t position, int32_t type)
 	{
 		length = min_c((size_t)length, (sizeof(this->string) - 1));
 		strlcpy(this->string, string, length + 1);
@@ -126,7 +126,7 @@ struct Token {
 
 
 static void
-parse_exception(const char* message, int32 position)
+parse_exception(const char* message, int32_t position)
 {
 	if (sNextJumpBufferIndex == 0) {
 		kprintf_unfiltered("parse_exception(): No jump buffer!\n");
@@ -173,7 +173,7 @@ public:
 		fReuseToken = false;
 	}
 
-	void SetPosition(int32 position)
+	void SetPosition(int32_t position)
 	{
 		fCurrentChar = fString + position;
 		fCurrentToken.Unset();
@@ -254,7 +254,7 @@ public:
 					fCurrentChar++;
 			}
 
-			int32 length = fCurrentChar - begin;
+			int32_t length = fCurrentChar - begin;
 			fCurrentToken.SetTo(begin, length, _CurrentPos() - length,
 				TOKEN_CONSTANT);
 			fCurrentToken.value = strtoull(fCurrentToken.string, NULL, 0);
@@ -270,7 +270,7 @@ public:
 				fCurrentChar++;
 			}
 
-			int32 length = fCurrentChar - begin;
+			int32_t length = fCurrentChar - begin;
 			fCurrentToken.SetTo(begin, length, _CurrentPos() - length,
 				TOKEN_IDENTIFIER);
 
@@ -278,7 +278,7 @@ public:
 			const char* begin = fCurrentChar;
 			char c = *fCurrentChar;
 			fCurrentChar++;
-			int32 flags = 0;
+			int32_t flags = 0;
 
 			switch (c) {
 				case '=':
@@ -301,7 +301,7 @@ public:
 				case '}':
 				case ';':
 				{
-					int32 length = fCurrentChar - begin;
+					int32_t length = fCurrentChar - begin;
 					fCurrentToken.SetTo(begin, length, _CurrentPos() - length,
 						c | flags);
 					break;
@@ -350,7 +350,7 @@ public:
 	const Token& _QuotedString()
 	{
 		const char* begin = fCurrentChar++;
-		int32 length = 0;
+		int32_t length = 0;
 
 		while (*fCurrentChar != '\0' && *fCurrentChar != '"') {
 			char c = *fCurrentChar;
@@ -395,7 +395,7 @@ public:
 		while (*fCurrentChar != 0 && !_IsUnquotedDelimitingChar(*fCurrentChar))
 			fCurrentChar++;
 
-		int32 length = fCurrentChar - begin;
+		int32_t length = fCurrentChar - begin;
 		fCurrentToken.SetTo(begin, length, _CurrentPos() - length,
 			TOKEN_UNKNOWN);
 
@@ -434,7 +434,7 @@ public:
 		}
 	}
 
-	int32 _CurrentPos() const
+	int32_t _CurrentPos() const
 	{
 		return fCurrentChar - fString;
 	}
@@ -473,16 +473,16 @@ class ExpressionParser {
 			bool				_ParseArgument(int& argc, char** argv);
 			void				_GetUnparsedArgument(int& argc, char** argv);
 			void				_AddArgument(int& argc, char** argv,
-									const char* argument, int32 length = -1);
+									const char* argument, int32_t length = -1);
 			uint64				_ParseSum(bool useValue, uint64 value);
 			uint64				_ParseProduct();
 			uint64				_ParsePower();
 			uint64				_ParseUnary();
 			uint64				_ParseDereference(void** _address,
-									uint32* _size);
+									uint32_t* _size);
 			uint64				_ParseAtom();
 
-			const Token&		_EatToken(int32 type);
+			const Token&		_EatToken(int32_t type);
 
 			Tokenizer			fTokenizer;
 };
@@ -525,7 +525,7 @@ ExpressionParser::EvaluateCommand(const char* expressionString, int& returnCode)
 	uint64 value = 0;
 
 	while (true) {
-		int32 startPosition = token.position;
+		int32_t startPosition = token.position;
 
 		if (token.type == TOKEN_IDENTIFIER) {
 			fTokenizer.NextToken();
@@ -597,12 +597,12 @@ uint64
 ExpressionParser::_ParseExpression(bool expectAssignment)
 {
 	const Token& token = fTokenizer.NextToken();
-	int32 position = token.position;
+	int32_t position = token.position;
 	if (token.type == TOKEN_IDENTIFIER) {
 		char variable[MAX_DEBUG_VARIABLE_NAME_LEN];
 		strlcpy(variable, token.string, sizeof(variable));
 
-		int32 assignmentType = fTokenizer.NextToken().type;
+		int32_t assignmentType = fTokenizer.NextToken().type;
 		if (assignmentType & TOKEN_ASSIGN_FLAG) {
 			// an assignment
 			uint64 rhs = _ParseExpression();
@@ -665,10 +665,10 @@ ExpressionParser::_ParseExpression(bool expectAssignment)
 		}
 	} else if (token.type == TOKEN_STAR) {
 		void* address;
-		uint32 size;
+		uint32_t size;
 		uint64 value = _ParseDereference(&address, &size);
 
-		int32 assignmentType = fTokenizer.NextToken().type;
+		int32_t assignmentType = fTokenizer.NextToken().type;
 		if (assignmentType & TOKEN_ASSIGN_FLAG) {
 			// an assignment
 			uint64 rhs = _ParseExpression();
@@ -716,7 +716,7 @@ ExpressionParser::_ParseExpression(bool expectAssignment)
 					*(uint16*)&buffer = value;
 					break;
 				case 4:
-					*(uint32*)&buffer = value;
+					*(uint32_t*)&buffer = value;
 					break;
 				case 8:
 					value = buffer;
@@ -889,12 +889,12 @@ ExpressionParser::_ParseArgument(int& argc, char** argv)
 void
 ExpressionParser::_GetUnparsedArgument(int& argc, char** argv)
 {
-	int32 startPosition = fTokenizer.NextToken().position;
+	int32_t startPosition = fTokenizer.NextToken().position;
 	fTokenizer.RewindToken();
 
 	// match parentheses and brackets, but otherwise skip all tokens
-	int32 parentheses = 0;
-	int32 brackets = 0;
+	int32_t parentheses = 0;
+	int32_t brackets = 0;
 	bool done = false;
 	while (!done) {
 		const Token& token = fTokenizer.NextToken();
@@ -928,14 +928,14 @@ ExpressionParser::_GetUnparsedArgument(int& argc, char** argv)
 		}
 	}
 
-	int32 endPosition = fTokenizer.CurrentToken().position;
+	int32_t endPosition = fTokenizer.CurrentToken().position;
 	fTokenizer.RewindToken();
 
 	// add the argument only, if it's not just all spaces
 	const char* arg = fTokenizer.String() + startPosition;
-	int32 argLen = endPosition - startPosition;
+	int32_t argLen = endPosition - startPosition;
 	bool allSpaces = true;
-	for (int32 i = 0; allSpaces && i < argLen; i++)
+	for (int32_t i = 0; allSpaces && i < argLen; i++)
 		allSpaces = isspace(arg[i]);
 
 	if (!allSpaces)
@@ -945,7 +945,7 @@ ExpressionParser::_GetUnparsedArgument(int& argc, char** argv)
 
 void
 ExpressionParser::_AddArgument(int& argc, char** argv, const char* argument,
-	int32 length)
+	int32_t length)
 {
 	if (argc == kMaxArgumentCount)
 		parse_exception("too many arguments for command", 0);
@@ -1038,14 +1038,14 @@ ExpressionParser::_ParseUnary()
 
 
 uint64
-ExpressionParser::_ParseDereference(void** _address, uint32* _size)
+ExpressionParser::_ParseDereference(void** _address, uint32_t* _size)
 {
-	int32 starPosition = fTokenizer.CurrentToken().position;
+	int32_t starPosition = fTokenizer.CurrentToken().position;
 
 	// optional "{ ... }" specifying the size to read
 	uint64 size = 4;
 	if (fTokenizer.NextToken().type == TOKEN_OPENING_BRACE) {
-		int32 position = fTokenizer.CurrentToken().position;
+		int32_t position = fTokenizer.CurrentToken().position;
 		size = _ParseExpression();
 
 		if (size != 1 && size != 2 && size != 4 && size != 8) {
@@ -1078,7 +1078,7 @@ ExpressionParser::_ParseDereference(void** _address, uint32* _size)
 			value = *(uint16*)&buffer;
 			break;
 		case 4:
-			value = *(uint32*)&buffer;
+			value = *(uint32_t*)&buffer;
 			break;
 		case 8:
 			value = buffer;
@@ -1139,7 +1139,7 @@ ExpressionParser::_ParseAtom()
 
 
 const Token&
-ExpressionParser::_EatToken(int32 type)
+ExpressionParser::_EatToken(int32_t type)
 {
 	const Token& token = fTokenizer.NextToken();
 	if (token.type != type) {

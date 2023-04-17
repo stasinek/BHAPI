@@ -44,8 +44,8 @@ status_t ValueLoader::LoadValue(ValueLocation* location, type_code valueType,
 {
 	static const size_t kMaxPieceSize = 16;
 	uint64 totalBitSize = 0;
-	int32 count = location->CountPieces();
-	for (int32 i = 0; i < count; i++) {
+	int32_t count = location->CountPieces();
+	for (int32_t i = 0; i < count; i++) {
 		ValuePieceLocation piece = location->PieceAt(i);
 		switch (piece.type) {
 			case VALUE_PIECE_LOCATION_INVALID:
@@ -96,11 +96,11 @@ status_t ValueLoader::LoadValue(ValueLocation* location, type_code valueType,
 
 	bool bigEndian = fArchitecture->IsBigEndian();
 	const Register* registers = fArchitecture->Registers();
-	for (int32 i = 0; i < count; i++) {
+	for (int32_t i = 0; i < count; i++) {
 		ValuePieceLocation piece = location->PieceAt(
 			bigEndian ? i : count - i - 1);
-		uint32 bytesToRead = piece.size;
-		uint32 bitSize = piece.bitSize;
+		uint32_t bytesToRead = piece.size;
+		uint32_t bitSize = piece.bitSize;
 		uint8 bitOffset = piece.bitOffset;
 			// TODO: the offset's ordinal position and direction aren't
 			// specified by DWARF, and simply follow the target language.
@@ -138,7 +138,7 @@ status_t ValueLoader::LoadValue(ValueLocation* location, type_code valueType,
 
 				if (bytesRead < 0)
 					return bytesRead;
-				if ((uint32)bytesRead != bytesToRead)
+				if ((uint32_t)bytesRead != bytesToRead)
 					return B_BAD_ADDRESS;
 
 				TRACE_LOCALS_ONLY(
@@ -150,7 +150,7 @@ status_t ValueLoader::LoadValue(ValueLocation* location, type_code valueType,
 
 				// convert to big endian
 				if (!bigEndian) {
-					for (int32 k = bytesRead / 2 - 1; k >= 0; k--) {
+					for (int32_t k = bytesRead / 2 - 1; k >= 0; k--) {
 						std::swap(pieceBuffer[k],
 							pieceBuffer[bytesRead - k - 1]);
 					}
@@ -216,7 +216,7 @@ status_t ValueLoader::LoadRawValue(BVariant& location, size_t bytesToRead, void*
 		_value, bytesToRead);
 	if (bytesRead < 0)
 		return bytesRead;
-	if ((uint32)bytesRead != bytesToRead)
+	if ((uint32_t)bytesRead != bytesToRead)
 		return B_BAD_ADDRESS;
 	return B_OK;
 }

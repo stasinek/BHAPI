@@ -22,11 +22,11 @@ public:
 			port_id				ReplyPort() const
 									{ return fContext.reply_port; }
 
-			status_t			SendDebugMessage(int32 messageCode,
+			status_t			SendDebugMessage(int32_t messageCode,
 									const void *message, size_t messageSize,
 									void* reply, size_t replySize);
 
-			status_t			SetTeamDebuggingFlags(int32 flags);
+			status_t			SetTeamDebuggingFlags(int32_t flags);
 
 			ssize_t				ReadMemoryPartial(const void* address,
 									void* buffer, size_t size);
@@ -38,14 +38,14 @@ public:
 			status_t			SetBreakpoint(void* address);
 			status_t			ClearBreakpoint(void* address);
 
-			status_t			SetWatchpoint(void* address, uint32 type,
-									int32 length);
+			status_t			SetWatchpoint(void* address, uint32_t type,
+									int32_t length);
 			status_t			ClearWatchpoint(void* address);
 
 			status_t			ContinueThread(thread_id thread,
 									bool singleStep = false);
 			status_t			SetThreadDebuggingFlags(thread_id thread,
-									int32 flags);
+									int32_t flags);
 			status_t			GetThreadCpuState(thread_id thread,
 									debug_debugger_message* _messageCode,
 									debug_cpu_state* cpuState);

@@ -58,7 +58,7 @@ private:
 
 			void				_ParseStringValue(BString* value,
 									const char** _tokenPos = NULL);
-			uint32				_ParseFlags();
+			uint32_t				_ParseFlags();
 			void				_ParseArchitectureValue(
 									BPackageArchitecture* value);
 			void				_ParseVersionValue(BPackageVersion* value,
@@ -91,16 +91,16 @@ private:
 
 	static	bool				_IsAlphaNumUnderscore(const BString& string,
 									const char* additionalChars,
-									int32* _errorPos);
+									int32_t* _errorPos);
 	static	bool				_IsAlphaNumUnderscore(const char* string,
 									const char* additionalChars,
-									int32* _errorPos);
+									int32_t* _errorPos);
 	static	bool				_IsAlphaNumUnderscore(const char* start,
 									const char* end,
 									const char* additionalChars,
-									int32* _errorPos);
+									int32_t* _errorPos);
 	static	bool				_IsValidResolvableName(const char* string,
-									int32* _errorPos);
+									int32_t* _errorPos);
 
 private:
 			ParseErrorListener*	fListener;

@@ -56,7 +56,7 @@ All rights reserved.
 //	#pragma mark - DesktopPoseView
 
 
-DesktopPoseView::DesktopPoseView(Model* model, uint32 viewMode)
+DesktopPoseView::DesktopPoseView(Model* model, uint32_t viewMode)
 	:
 	BPoseView(model, viewMode)
 {

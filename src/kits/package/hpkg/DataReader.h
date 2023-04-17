@@ -54,14 +54,14 @@ private:
 class BAttributeDataReader : public BDataReader {
 public:
 								BAttributeDataReader(int fd,
-									const char* attribute, uint32 type);
+									const char* attribute, uint32_t type);
 
 	virtual	status_t			ReadData(off_t offset, void* buffer,
 									size_t size);
 
 private:
 			int					fFD;
-			uint32				fType;
+			uint32_t				fType;
 			const char*			fAttribute;
 };
 

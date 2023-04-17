@@ -67,9 +67,9 @@ typedef LockingList<BWindow> WindowList;
 	// this is because MW can't handle nested templates
 
 
-const uint32 kNextSpecifier = 'snxt';
-const uint32 kPreviousSpecifier = 'sprv';
-const uint32 B_ENTRY_SPECIFIER = 'sref';
+const uint32_t kNextSpecifier = 'snxt';
+const uint32_t kPreviousSpecifier = 'sprv';
+const uint32_t B_ENTRY_SPECIFIER = 'sref';
 
 
 #define kPropertyEntry "Entry"
@@ -88,7 +88,7 @@ public:
 	virtual void MessageReceived(BMessage* message);
 	virtual void Pulse();
 	virtual void RefsReceived(BMessage* message);
-	virtual void ArgvReceived(int32 argc, char** argv);
+	virtual void ArgvReceived(int32_t argc, char** argv);
 
 	MimeTypeList* MimeTypes() const;
 		// list of mime types that have a description and do not have
@@ -121,7 +121,7 @@ public:
 	status_t NeedMoreNodeMonitors();
 		// call if ran out of node monitors to allocate more
 		// return false if already using all we can get
-	static status_t WatchNode(const node_ref*, uint32 flags,
+	static status_t WatchNode(const node_ref*, uint32_t flags,
 				BMessenger target);
 		// cover call for watch_node; if first watch_node fails,
 		// tries bumping the node monitor limit and calls watch_node
@@ -140,9 +140,9 @@ public:
 	void ShowSettingsWindow();
 
 	BContainerWindow* FindContainerWindow(const node_ref*,
-		int32 number = 0) const;
+		int32_t number = 0) const;
 	BContainerWindow* FindContainerWindow(const entry_ref*,
-		int32 number = 0) const;
+		int32_t number = 0) const;
 	BContainerWindow* FindParentContainerWindow(const entry_ref*) const;
 		// right now works just on plain windows, not on query windows
 
@@ -150,20 +150,20 @@ public:
 
 protected:
 	// scripting
-	virtual BHandler* ResolveSpecifier(BMessage*, int32, BMessage*,
-		int32, const char*);
+	virtual BHandler* ResolveSpecifier(BMessage*, int32_t, BMessage*,
+		int32_t, const char*);
 	virtual status_t GetSupportedSuites(BMessage*);
 
 	bool HandleScriptingMessage(BMessage*);
 
-	bool ExecuteProperty(BMessage*, int32, const char*, BMessage*);
-	bool CreateProperty(BMessage*, BMessage*, int32, const char*,
+	bool ExecuteProperty(BMessage*, int32_t, const char*, BMessage*);
+	bool CreateProperty(BMessage*, BMessage*, int32_t, const char*,
 			BMessage*);
-	bool DeleteProperty(BMessage*, int32,
+	bool DeleteProperty(BMessage*, int32_t,
 			const char*, BMessage*);
-	bool CountProperty(BMessage*, int32, const char*, BMessage*);
-	bool GetProperty(BMessage*, int32, const char*, BMessage*);
-	bool SetProperty(BMessage*, BMessage*, int32, const char*, BMessage*);
+	bool CountProperty(BMessage*, int32_t, const char*, BMessage*);
+	bool GetProperty(BMessage*, int32_t, const char*, BMessage*);
+	bool SetProperty(BMessage*, BMessage*, int32_t, const char*, BMessage*);
 
 private:
 	class WatchingInterface;
@@ -180,9 +180,9 @@ private:
 	bool CloseParentWindowCommon(BContainerWindow*);
 
 	void InitMimeTypes();
-	bool InstallMimeIfNeeded(const char* type, int32 bitsID,
+	bool InstallMimeIfNeeded(const char* type, int32_t bitsID,
 			const char* shortDescription, const char* longDescription,
-			const char* preferredAppSignature, uint32 forceMask = 0);
+			const char* preferredAppSignature, uint32_t forceMask = 0);
 		// used by InitMimeTypes - checks if a metamime of a given <type>
 		// is installed and if it has all the specified attributes;
 		// if not, the whole mime type is installed and all attributes
@@ -203,7 +203,7 @@ private:
 	void MoveRefsToTrash(const BMessage*);
 	void SelectRefs(const BMessage*);
 	void OpenContainerWindow(Model*, BMessage* refsList = NULL,
-		OpenSelector openSelector = kOpen, uint32 openFlags = 0,
+		OpenSelector openSelector = kOpen, uint32_t openFlags = 0,
 		bool checkAlreadyOpen = true,
 		const BMessage* stateMessage = NULL);
 		// pass either a Model or a list of entries to open
@@ -226,7 +226,7 @@ private:
 	BClipboardRefsWatcher*	fClipboardRefsWatcher;
 	BTrashWatcher*			fTrashWatcher;
 	TaskLoop*				fTaskLoop;
-	int32 					fNodeMonitorCount;
+	int32_t 					fNodeMonitorCount;
 	WatchingInterface*		fWatchingInterface;
 
 	TrackerSettingsWindow*	fSettingsWindow;

@@ -168,9 +168,9 @@ protected:
 
 
 			struct SectionInfo {
-				uint32			compression;
-				uint32			compressedLength;
-				uint32			uncompressedLength;
+				uint32_t			compression;
+				uint32_t			compressedLength;
+				uint32_t			uncompressedLength;
 				uint8*			data;
 				uint64			offset;
 				uint64			currentOffset;

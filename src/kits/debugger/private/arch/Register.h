@@ -28,26 +28,26 @@ enum register_type {
 
 class Register {
 public:
-								Register(int32 index, const char* name,
-									uint32 bitSize, uint32 valueType,
+								Register(int32_t index, const char* name,
+									uint32_t bitSize, uint32_t valueType,
 									register_type type, bool calleePreserved);
 										// name will not be cloned
 								Register(const Register& other);
 
-			int32				Index() const		{ return fIndex; }
+			int32_t				Index() const		{ return fIndex; }
 			const char*			Name() const		{ return fName; }
-			uint32				ValueType() const	{ return fValueType; }
+			uint32_t				ValueType() const	{ return fValueType; }
 			register_format		Format() const		{ return fFormat; }
-			uint32				BitSize() const		{ return fBitSize; }
+			uint32_t				BitSize() const		{ return fBitSize; }
 			register_type		Type() const		{ return fType; }
 			bool				IsCalleePreserved() const
 									{ return fCalleePreserved; }
 
 private:
-			int32				fIndex;
+			int32_t				fIndex;
 			const char*			fName;
-			uint32				fBitSize;
-			uint32				fValueType;
+			uint32_t				fBitSize;
+			uint32_t				fValueType;
 			register_format		fFormat;
 			register_type		fType;
 			bool				fCalleePreserved;

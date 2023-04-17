@@ -33,12 +33,12 @@ BTokenSpace::~BTokenSpace()
 }
 
 
-int32 BTokenSpace::NewToken(int16 type, void* object)
+int32_t BTokenSpace::NewToken(int16 type, void* object)
 {
 	BAutolock locker(this);
 
 	token_info tokenInfo = { type, object, NULL };
-	int32 token = fTokenCount;
+	int32_t token = fTokenCount;
 
 	try {
 		fTokenMap[token] = tokenInfo;
@@ -58,7 +58,7 @@ int32 BTokenSpace::NewToken(int16 type, void* object)
 	Don't mix NewToken() and this method unless you know what you're
 	doing.
 */
-bool BTokenSpace::SetToken(int32 token, int16 type, void* object)
+bool BTokenSpace::SetToken(int32_t token, int16 type, void* object)
 {
 	BAutolock locker(this);
 
@@ -78,7 +78,7 @@ bool BTokenSpace::SetToken(int32 token, int16 type, void* object)
 }
 
 
-bool BTokenSpace::RemoveToken(int32 token)
+bool BTokenSpace::RemoveToken(int32_t token)
 {
 	BAutolock locker(this);
 
@@ -94,7 +94,7 @@ bool BTokenSpace::RemoveToken(int32 token)
 /*!	Checks whether or not the \a token exists with the specified
 	\a type in the token space or not.
 */
-bool BTokenSpace::CheckToken(int32 token, int16 type) const
+bool BTokenSpace::CheckToken(int32_t token, int16 type) const
 {
 	BAutolock locker(const_cast<BTokenSpace&>(*this));
 
@@ -106,7 +106,7 @@ bool BTokenSpace::CheckToken(int32 token, int16 type) const
 }
 
 
-status_t BTokenSpace::GetToken(int32 token, int16 type, void** _object) const
+status_t BTokenSpace::GetToken(int32_t token, int16 type, void** _object) const
 {
 	if (token < 1)
 		return B_ENTRY_NOT_FOUND;
@@ -122,7 +122,7 @@ status_t BTokenSpace::GetToken(int32 token, int16 type, void** _object) const
 }
 
 
-status_t BTokenSpace::SetHandlerTarget(int32 token, BDirectMessageTarget* target)
+status_t BTokenSpace::SetHandlerTarget(int32_t token, BDirectMessageTarget* target)
 {
 	if (token < 1)
 		return B_ENTRY_NOT_FOUND;
@@ -144,7 +144,7 @@ status_t BTokenSpace::SetHandlerTarget(int32 token, BDirectMessageTarget* target
 }
 
 
-status_t BTokenSpace::AcquireHandlerTarget(int32 token, BDirectMessageTarget** _target)
+status_t BTokenSpace::AcquireHandlerTarget(int32_t token, BDirectMessageTarget** _target)
 {
 	if (token < 1)
 		return B_ENTRY_NOT_FOUND;

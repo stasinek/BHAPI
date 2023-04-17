@@ -57,7 +57,7 @@ public:
 	{
 	}
 
-	void Notify(uint32 eventCode, struct image* image)
+	void Notify(uint32_t eventCode, struct image* image)
 	{
 		char eventBuffer[128];
 		KMessage event;
@@ -151,11 +151,11 @@ unregister_image(Team *team, image_id id)
 /*!	Counts the registered images from the specified team.
 	Interrupts must be enabled.
 */
-int32
+int32_t
 count_images(Team *team)
 {
 	struct image *image = NULL;
-	int32 count = 0;
+	int32_t count = 0;
 
 	MutexLocker locker(sImageMutex);
 
@@ -215,7 +215,7 @@ _get_image_info(image_id id, image_info *info, size_t size)
 
 
 status_t
-_get_next_image_info(team_id teamID, int32 *cookie, image_info *info,
+_get_next_image_info(team_id teamID, int32_t *cookie, image_info *info,
 	size_t size)
 {
 	if (size > sizeof(image_info))
@@ -231,7 +231,7 @@ _get_next_image_info(team_id teamID, int32 *cookie, image_info *info,
 	MutexLocker imageLocker(sImageMutex);
 
 	struct image* image = NULL;
-	int32 count = 0;
+	int32_t count = 0;
 
 	while ((image = (struct image*)list_get_next_item(&team->image_list,
 			image)) != NULL) {
@@ -472,7 +472,7 @@ _user_get_image_info(image_id id, image_info *userInfo, size_t size)
 
 
 status_t
-_user_get_next_image_info(team_id team, int32 *_cookie, image_info *userInfo,
+_user_get_next_image_info(team_id team, int32_t *_cookie, image_info *userInfo,
 	size_t size)
 {
 	image_info info;

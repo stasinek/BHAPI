@@ -24,7 +24,7 @@ extern "C" {
 /*! Syscalls entries */
 
 // iterating, retrieving device/partition data
-partition_id _user_get_next_disk_device_id(int32 *cookie, size_t *neededSize);
+partition_id _user_get_next_disk_device_id(int32_t *cookie, size_t *neededSize);
 partition_id _user_find_disk_device(const char *filename, size_t *neededSize);
 partition_id _user_find_partition(const char *filename, size_t *neededSize);
 partition_id _user_find_file_disk_device(const char *filename,
@@ -44,53 +44,53 @@ status_t _user_get_file_disk_device_path(partition_id id, char* buffer,
 // disk systems
 status_t _user_get_disk_system_info(disk_system_id id,
 				user_disk_system_info *info);
-status_t _user_get_next_disk_system_info(int32 *cookie,
+status_t _user_get_next_disk_system_info(int32_t *cookie,
 				user_disk_system_info *info);
 status_t _user_find_disk_system(const char *name, user_disk_system_info *info);
 
 // disk device modification
 status_t _user_defragment_partition(partition_id partitionID,
-				int32* changeCounter);
-status_t _user_repair_partition(partition_id partitionID, int32* changeCounter,
+				int32_t* changeCounter);
+status_t _user_repair_partition(partition_id partitionID, int32_t* changeCounter,
 				bool checkOnly);
-status_t _user_resize_partition(partition_id partitionID, int32* changeCounter,
-				partition_id childID, int32* childChangeCounter, off_t size,
+status_t _user_resize_partition(partition_id partitionID, int32_t* changeCounter,
+				partition_id childID, int32_t* childChangeCounter, off_t size,
 				off_t contentSize);
-status_t _user_move_partition(partition_id partitionID, int32* changeCounter,
-				partition_id childID, int32* childChangeCounter,
+status_t _user_move_partition(partition_id partitionID, int32_t* changeCounter,
+				partition_id childID, int32_t* childChangeCounter,
 				off_t newOffset, partition_id* descendantIDs,
-				int32* descendantChangeCounters, int32 descendantCount);
+				int32_t* descendantChangeCounters, int32_t descendantCount);
 status_t _user_set_partition_name(partition_id partitionID,
-				int32* changeCounter, partition_id childID,
-				int32* childChangeCounter, const char* name);
+				int32_t* changeCounter, partition_id childID,
+				int32_t* childChangeCounter, const char* name);
 status_t _user_set_partition_content_name(partition_id partitionID,
-				int32* changeCounter, const char* name);
+				int32_t* changeCounter, const char* name);
 status_t _user_set_partition_type(partition_id partitionID,
-				int32* changeCounter, partition_id childID,
-				int32* childChangeCounter, const char* type);
+				int32_t* changeCounter, partition_id childID,
+				int32_t* childChangeCounter, const char* type);
 status_t _user_set_partition_parameters(partition_id partitionID,
-				int32* changeCounter, partition_id childID,
-				int32* childChangeCounter, const char* parameters);
+				int32_t* changeCounter, partition_id childID,
+				int32_t* childChangeCounter, const char* parameters);
 status_t _user_set_partition_content_parameters(partition_id partitionID,
-				int32* changeCounter, const char* parameters);
+				int32_t* changeCounter, const char* parameters);
 status_t _user_initialize_partition(partition_id partitionID,
-				int32* changeCounter, const char* diskSystemName,
+				int32_t* changeCounter, const char* diskSystemName,
 				const char* name, const char* parameters);
 status_t _user_uninitialize_partition(partition_id partitionID,
-				int32* changeCounter);
+				int32_t* changeCounter);
 
 status_t _user_create_child_partition(partition_id partitionID,
-				int32* changeCounter, off_t offset, off_t size,
+				int32_t* changeCounter, off_t offset, off_t size,
 				const char* type, const char* name, const char* parameters,
-				partition_id* childID, int32* childChangeCounter);
+				partition_id* childID, int32_t* childChangeCounter);
 status_t _user_delete_child_partition(partition_id partitionID,
-				int32* changeCounter, partition_id childID,
-				int32 childChangeCounter);
+				int32_t* changeCounter, partition_id childID,
+				int32_t childChangeCounter);
 
 // change notification
-status_t _user_start_watching_disks(uint32 eventMask, port_id port,
-				int32 token);
-status_t _user_stop_watching_disks(port_id port, int32 token);
+status_t _user_start_watching_disks(uint32_t eventMask, port_id port,
+				int32_t token);
+status_t _user_stop_watching_disks(port_id port, int32_t token);
 
 #ifdef __cplusplus
 }

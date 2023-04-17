@@ -59,8 +59,8 @@ struct select_sync_pool {
 
 
 struct select_ops {
-	status_t (*select)(int32 object, struct select_info* info, bool kernel);
-	status_t (*deselect)(int32 object, struct select_info* info, bool kernel);
+	status_t (*select)(int32_t object, struct select_info* info, bool kernel);
+	status_t (*deselect)(int32_t object, struct select_info* info, bool kernel);
 };
 
 
@@ -90,7 +90,7 @@ static const select_ops kSelectOps[] = {
 	}
 };
 
-static const uint32 kSelectOpsCount = sizeof(kSelectOps) / sizeof(select_ops);
+static const uint32_t kSelectOpsCount = sizeof(kSelectOps) / sizeof(select_ops);
 
 
 
@@ -113,7 +113,7 @@ class SelectTraceEntry : public AbstractTraceEntry {
 			int sets = (readSet != NULL ? 1 : 0) + (writeSet != NULL ? 1 : 0)
 				+ (errorSet != NULL ? 1 : 0);
 			if (sets > 0 && count > 0) {
-				uint32 bytes = _howmany(count, NFDBITS) * sizeof(fd_mask);
+				uint32_t bytes = _howmany(count, NFDBITS) * sizeof(fd_mask);
 				uint8* allocated = (uint8*)alloc_tracing_buffer(bytes * sets);
 				if (allocated != NULL) {
 					if (readSet != NULL) {
@@ -557,7 +557,7 @@ common_poll(struct pollfd *fds, nfds_t numFDs, bigtime_t timeout, bool kernel)
 	// start polling file descriptors (by selecting them)
 
 	bool invalid = false;
-	for (uint32 i = 0; i < numFDs; i++) {
+	for (uint32_t i = 0; i < numFDs; i++) {
 		int fd = fds[i].fd;
 
 		// initialize events masks
@@ -581,7 +581,7 @@ common_poll(struct pollfd *fds, nfds_t numFDs, bigtime_t timeout, bool kernel)
 
 	// deselect file descriptors
 
-	for (uint32 i = 0; i < numFDs; i++) {
+	for (uint32_t i = 0; i < numFDs; i++) {
 		if (fds[i].fd >= 0 && (fds[i].revents & POLLNVAL) == 0)
 			deselect_fd(fds[i].fd, sync->set + i, kernel);
 	}
@@ -591,7 +591,7 @@ common_poll(struct pollfd *fds, nfds_t numFDs, bigtime_t timeout, bool kernel)
 	int count = 0;
 	switch (status) {
 		case B_OK:
-			for (uint32 i = 0; i < numFDs; i++) {
+			for (uint32_t i = 0; i < numFDs; i++) {
 				if (fds[i].fd < 0)
 					continue;
 
@@ -619,7 +619,7 @@ common_poll(struct pollfd *fds, nfds_t numFDs, bigtime_t timeout, bool kernel)
 
 
 static ssize_t
-common_wait_for_objects(object_wait_info* infos, int numInfos, uint32 flags,
+common_wait_for_objects(object_wait_info* infos, int numInfos, uint32_t flags,
 	bigtime_t timeout, bool kernel)
 {
 	status_t status = B_OK;
@@ -635,7 +635,7 @@ common_wait_for_objects(object_wait_info* infos, int numInfos, uint32 flags,
 	bool invalid = false;
 	for (int i = 0; i < numInfos; i++) {
 		uint16 type = infos[i].type;
-		int32 object = infos[i].object;
+		int32_t object = infos[i].object;
 
 		// initialize events masks
 		sync->set[i].selected_events = infos[i].events
@@ -896,7 +896,7 @@ _kern_poll(struct pollfd *fds, int numFDs, bigtime_t timeout)
 
 
 ssize_t
-_kern_wait_for_objects(object_wait_info* infos, int numInfos, uint32 flags,
+_kern_wait_for_objects(object_wait_info* infos, int numInfos, uint32_t flags,
 	bigtime_t timeout)
 {
 	return common_wait_for_objects(infos, numInfos, flags, timeout, true);
@@ -911,7 +911,7 @@ _user_select(int numFDs, fd_set *userReadSet, fd_set *userWriteSet,
 	fd_set *userErrorSet, bigtime_t timeout, const sigset_t *userSigMask)
 {
 	fd_set *readSet = NULL, *writeSet = NULL, *errorSet = NULL;
-	uint32 bytes = _howmany(numFDs, NFDBITS) * sizeof(fd_mask);
+	uint32_t bytes = _howmany(numFDs, NFDBITS) * sizeof(fd_mask);
 	sigset_t sigMask;
 	int result;
 
@@ -1040,7 +1040,7 @@ err:
 
 
 ssize_t
-_user_wait_for_objects(object_wait_info* userInfos, int numInfos, uint32 flags,
+_user_wait_for_objects(object_wait_info* userInfos, int numInfos, uint32_t flags,
 	bigtime_t timeout)
 {
 	syscall_restart_handle_timeout_pre(flags, timeout);

@@ -55,8 +55,8 @@ public:
 			BSolverPackage*		TargetPackage() const;
 			const BPackageResolvableExpression& Dependency() const;
 
-			int32				CountSolutions() const;
-			const BSolverProblemSolution* SolutionAt(int32 index) const;
+			int32_t				CountSolutions() const;
+			const BSolverProblemSolution* SolutionAt(int32_t index) const;
 
 			bool				AppendSolution(
 									BSolverProblemSolution* solution);

@@ -145,62 +145,62 @@ public:
 	inline	ThisBuilder&		GetLayout(BGridLayout** _layout);
 	inline	ThisBuilder&		GetView(BView** _view);
 
-	inline	ThisBuilder&		Add(BView* view, int32 column, int32 row,
-									int32 columnCount = 1, int32 rowCount = 1);
-	inline	ThisBuilder&		Add(BLayoutItem* item, int32 column, int32 row,
-									int32 columnCount = 1, int32 rowCount = 1);
+	inline	ThisBuilder&		Add(BView* view, int32_t column, int32_t row,
+									int32_t columnCount = 1, int32_t rowCount = 1);
+	inline	ThisBuilder&		Add(BLayoutItem* item, int32_t column, int32_t row,
+									int32_t columnCount = 1, int32_t rowCount = 1);
 	inline	ThisBuilder&		AddMenuField(BMenuField* menuField,
-									int32 column, int32 row,
+									int32_t column, int32_t row,
 									alignment labelAlignment
 										= B_ALIGN_HORIZONTAL_UNSET,
-									int32 labelColumnCount = 1,
-									int32 fieldColumnCount = 1,
-									int32 rowCount = 1);
+									int32_t labelColumnCount = 1,
+									int32_t fieldColumnCount = 1,
+									int32_t rowCount = 1);
 	inline	ThisBuilder&		AddTextControl(BTextControl* textControl,
-									int32 column, int32 row,
+									int32_t column, int32_t row,
 									alignment labelAlignment
 										= B_ALIGN_HORIZONTAL_UNSET,
-									int32 labelColumnCount = 1,
-									int32 textColumnCount = 1,
-									int32 rowCount = 1);
+									int32_t labelColumnCount = 1,
+									int32_t textColumnCount = 1,
+									int32_t rowCount = 1);
 
 	inline	GroupBuilder		AddGroup(orientation orientation,
-									float spacing, int32 column, int32 row,
-									int32 columnCount = 1, int32 rowCount = 1);
-	inline	GroupBuilder		AddGroup(BGroupView* groupView,	int32 column,
-									int32 row, int32 columnCount = 1,
-									int32 rowCount = 1);
+									float spacing, int32_t column, int32_t row,
+									int32_t columnCount = 1, int32_t rowCount = 1);
+	inline	GroupBuilder		AddGroup(BGroupView* groupView,	int32_t column,
+									int32_t row, int32_t columnCount = 1,
+									int32_t rowCount = 1);
 	inline	GroupBuilder		AddGroup(BGroupLayout* groupLayout,
-									int32 column, int32 row,
-									int32 columnCount = 1, int32 rowCount = 1);
+									int32_t column, int32_t row,
+									int32_t columnCount = 1, int32_t rowCount = 1);
 
 	inline	GridBuilder			AddGrid(float horizontalSpacing,
-									float verticalSpacing, int32 column,
-									int32 row, int32 columnCount = 1,
-									int32 rowCount = 1);
+									float verticalSpacing, int32_t column,
+									int32_t row, int32_t columnCount = 1,
+									int32_t rowCount = 1);
 	inline	GridBuilder			AddGrid(BGridLayout* gridLayout,
-									int32 column, int32 row,
-									int32 columnCount = 1, int32 rowCount = 1);
+									int32_t column, int32_t row,
+									int32_t columnCount = 1, int32_t rowCount = 1);
 	inline	GridBuilder			AddGrid(BGridView* gridView,
-									int32 column, int32 row,
-									int32 columnCount = 1, int32 rowCount = 1);
+									int32_t column, int32_t row,
+									int32_t columnCount = 1, int32_t rowCount = 1);
 
 	inline	SplitBuilder		AddSplit(orientation orientation,
-									float spacing, int32 column, int32 row,
-									int32 columnCount = 1, int32 rowCount = 1);
-	inline	SplitBuilder		AddSplit(BSplitView* splitView, int32 column,
-									int32 row, int32 columnCount = 1,
-									int32 rowCount = 1);
+									float spacing, int32_t column, int32_t row,
+									int32_t columnCount = 1, int32_t rowCount = 1);
+	inline	SplitBuilder		AddSplit(BSplitView* splitView, int32_t column,
+									int32_t row, int32_t columnCount = 1,
+									int32_t rowCount = 1);
 
-	inline	ThisBuilder&		AddGlue(int32 column, int32 row,
-									int32 columnCount = 1, int32 rowCount = 1);
+	inline	ThisBuilder&		AddGlue(int32_t column, int32_t row,
+									int32_t columnCount = 1, int32_t rowCount = 1);
 
 	inline	ThisBuilder&		SetHorizontalSpacing(float spacing);
 	inline	ThisBuilder&		SetVerticalSpacing(float spacing);
 	inline	ThisBuilder&		SetSpacing(float horizontal, float vertical);
 
-	inline	ThisBuilder&		SetColumnWeight(int32 column, float weight);
-	inline	ThisBuilder&		SetRowWeight(int32 row, float weight);
+	inline	ThisBuilder&		SetColumnWeight(int32_t column, float weight);
+	inline	ThisBuilder&		SetRowWeight(int32_t row, float weight);
 
 	inline	ThisBuilder&		SetInsets(float left, float top, float right,
 									float bottom);
@@ -265,8 +265,8 @@ public:
 									float weight = 1.0f);
 
 	inline	ThisBuilder&		SetCollapsible(bool collapsible);
-	inline	ThisBuilder&		SetCollapsible(int32 index, bool collapsible);
-	inline	ThisBuilder&		SetCollapsible(int32 first, int32 last,
+	inline	ThisBuilder&		SetCollapsible(int32_t index, bool collapsible);
+	inline	ThisBuilder&		SetCollapsible(int32_t first, int32_t last,
 									bool collapsible);
 
 	inline	ThisBuilder&		SetInsets(float left, float top, float right,
@@ -296,9 +296,9 @@ public:
 	inline	ItemBuilder			AddItem(BMenuItem* item);
 	inline	ItemBuilder			AddItem(BMenu* menu);
 	inline	ItemBuilder			AddItem(const char* label, BMessage* message,
-									char shortcut = 0, uint32 modifiers = 0);
-	inline	ItemBuilder			AddItem(const char* label, uint32 messageWhat,
-									char shortcut = 0, uint32 modifiers = 0);
+									char shortcut = 0, uint32_t modifiers = 0);
+	inline	ItemBuilder			AddItem(const char* label, uint32_t messageWhat,
+									char shortcut = 0, uint32_t modifiers = 0);
 
 	inline	MenuBuilder			AddMenu(BMenu* menu);
 	inline	MenuBuilder			AddMenu(const char* title,
@@ -749,8 +749,8 @@ Grid<ParentBuilder>::GetView(BView** _view)
 
 template<typename ParentBuilder>
 typename Grid<ParentBuilder>::ThisBuilder&
-Grid<ParentBuilder>::Add(BView* view, int32 column, int32 row,
-	int32 columnCount, int32 rowCount)
+Grid<ParentBuilder>::Add(BView* view, int32_t column, int32_t row,
+	int32_t columnCount, int32_t rowCount)
 {
 	fLayout->AddView(view, column, row, columnCount, rowCount);
 	return *this;
@@ -759,8 +759,8 @@ Grid<ParentBuilder>::Add(BView* view, int32 column, int32 row,
 
 template<typename ParentBuilder>
 typename Grid<ParentBuilder>::ThisBuilder&
-Grid<ParentBuilder>::Add(BLayoutItem* item, int32 column, int32 row,
-	int32 columnCount, int32 rowCount)
+Grid<ParentBuilder>::Add(BLayoutItem* item, int32_t column, int32_t row,
+	int32_t columnCount, int32_t rowCount)
 {
 	fLayout->AddItem(item, column, row, columnCount, rowCount);
 	return *this;
@@ -769,9 +769,9 @@ Grid<ParentBuilder>::Add(BLayoutItem* item, int32 column, int32 row,
 
 template<typename ParentBuilder>
 typename Grid<ParentBuilder>::ThisBuilder&
-Grid<ParentBuilder>::AddMenuField(BMenuField* menuField, int32 column,
-	int32 row, alignment labelAlignment, int32 labelColumnCount,
-	int32 fieldColumnCount, int32 rowCount)
+Grid<ParentBuilder>::AddMenuField(BMenuField* menuField, int32_t column,
+	int32_t row, alignment labelAlignment, int32_t labelColumnCount,
+	int32_t fieldColumnCount, int32_t rowCount)
 {
 	BLayoutItem* item = menuField->CreateLabelLayoutItem();
 	item->SetExplicitAlignment(
@@ -785,9 +785,9 @@ Grid<ParentBuilder>::AddMenuField(BMenuField* menuField, int32 column,
 
 template<typename ParentBuilder>
 typename Grid<ParentBuilder>::ThisBuilder&
-Grid<ParentBuilder>::AddTextControl(BTextControl* textControl, int32 column,
-	int32 row, alignment labelAlignment, int32 labelColumnCount,
-	int32 textColumnCount, int32 rowCount)
+Grid<ParentBuilder>::AddTextControl(BTextControl* textControl, int32_t column,
+	int32_t row, alignment labelAlignment, int32_t labelColumnCount,
+	int32_t textColumnCount, int32_t rowCount)
 {
 	BLayoutItem* item = textControl->CreateLabelLayoutItem();
 	item->SetExplicitAlignment(
@@ -802,7 +802,7 @@ Grid<ParentBuilder>::AddTextControl(BTextControl* textControl, int32 column,
 template<typename ParentBuilder>
 typename Grid<ParentBuilder>::GroupBuilder
 Grid<ParentBuilder>::AddGroup(orientation orientation, float spacing,
-		int32 column, int32 row, int32 columnCount, int32 rowCount)
+		int32_t column, int32_t row, int32_t columnCount, int32_t rowCount)
 {
 	GroupBuilder builder(new BGroupLayout(orientation, spacing));
 	builder.SetParent(this);
@@ -813,8 +813,8 @@ Grid<ParentBuilder>::AddGroup(orientation orientation, float spacing,
 
 template<typename ParentBuilder>
 typename Grid<ParentBuilder>::GroupBuilder
-Grid<ParentBuilder>::AddGroup(BGroupView* groupView, int32 column, int32 row,
-	int32 columnCount, int32 rowCount)
+Grid<ParentBuilder>::AddGroup(BGroupView* groupView, int32_t column, int32_t row,
+	int32_t columnCount, int32_t rowCount)
 {
 	GroupBuilder builder(groupView);
 	builder.SetParent(this);
@@ -825,8 +825,8 @@ Grid<ParentBuilder>::AddGroup(BGroupView* groupView, int32 column, int32 row,
 
 template<typename ParentBuilder>
 typename Grid<ParentBuilder>::GroupBuilder
-Grid<ParentBuilder>::AddGroup(BGroupLayout* groupLayout, int32 column,
-	int32 row, int32 columnCount, int32 rowCount)
+Grid<ParentBuilder>::AddGroup(BGroupLayout* groupLayout, int32_t column,
+	int32_t row, int32_t columnCount, int32_t rowCount)
 {
 	GroupBuilder builder(groupLayout);
 	builder.SetParent(this);
@@ -838,7 +838,7 @@ Grid<ParentBuilder>::AddGroup(BGroupLayout* groupLayout, int32 column,
 template<typename ParentBuilder>
 typename Grid<ParentBuilder>::GridBuilder
 Grid<ParentBuilder>::AddGrid(float horizontalSpacing, float verticalSpacing,
-	int32 column, int32 row, int32 columnCount, int32 rowCount)
+	int32_t column, int32_t row, int32_t columnCount, int32_t rowCount)
 {
 	GridBuilder builder(new BGridLayout(horizontalSpacing, verticalSpacing));
 	builder.SetParent(this);
@@ -849,8 +849,8 @@ Grid<ParentBuilder>::AddGrid(float horizontalSpacing, float verticalSpacing,
 
 template<typename ParentBuilder>
 typename Grid<ParentBuilder>::GridBuilder
-Grid<ParentBuilder>::AddGrid(BGridView* gridView, int32 column, int32 row,
-	int32 columnCount, int32 rowCount)
+Grid<ParentBuilder>::AddGrid(BGridView* gridView, int32_t column, int32_t row,
+	int32_t columnCount, int32_t rowCount)
 {
 	GridBuilder builder(gridView);
 	builder.SetParent(this);
@@ -862,7 +862,7 @@ Grid<ParentBuilder>::AddGrid(BGridView* gridView, int32 column, int32 row,
 template<typename ParentBuilder>
 typename Grid<ParentBuilder>::SplitBuilder
 Grid<ParentBuilder>::AddSplit(orientation orientation, float spacing,
-	int32 column, int32 row, int32 columnCount, int32 rowCount)
+	int32_t column, int32_t row, int32_t columnCount, int32_t rowCount)
 {
 	SplitBuilder builder(orientation, spacing);
 	builder.SetParent(this);
@@ -873,8 +873,8 @@ Grid<ParentBuilder>::AddSplit(orientation orientation, float spacing,
 
 template<typename ParentBuilder>
 typename Grid<ParentBuilder>::SplitBuilder
-Grid<ParentBuilder>::AddSplit(BSplitView* splitView, int32 column, int32 row,
-	int32 columnCount, int32 rowCount)
+Grid<ParentBuilder>::AddSplit(BSplitView* splitView, int32_t column, int32_t row,
+	int32_t columnCount, int32_t rowCount)
 {
 	SplitBuilder builder(splitView);
 	builder.SetParent(this);
@@ -885,8 +885,8 @@ Grid<ParentBuilder>::AddSplit(BSplitView* splitView, int32 column, int32 row,
 
 template<typename ParentBuilder>
 typename Grid<ParentBuilder>::ThisBuilder&
-Grid<ParentBuilder>::AddGlue(int32 column, int32 row, int32 columnCount,
-	int32 rowCount)
+Grid<ParentBuilder>::AddGlue(int32_t column, int32_t row, int32_t columnCount,
+	int32_t rowCount)
 {
 	fLayout->AddItem(BSpaceLayoutItem::CreateGlue(), column, row, columnCount,
 		rowCount);
@@ -923,7 +923,7 @@ Grid<ParentBuilder>::SetSpacing(float horizontal, float vertical)
 
 template<typename ParentBuilder>
 typename Grid<ParentBuilder>::ThisBuilder&
-Grid<ParentBuilder>::SetColumnWeight(int32 column, float weight)
+Grid<ParentBuilder>::SetColumnWeight(int32_t column, float weight)
 {
 	fLayout->SetColumnWeight(column, weight);
 	return *this;
@@ -932,7 +932,7 @@ Grid<ParentBuilder>::SetColumnWeight(int32 column, float weight)
 
 template<typename ParentBuilder>
 typename Grid<ParentBuilder>::ThisBuilder&
-Grid<ParentBuilder>::SetRowWeight(int32 row, float weight)
+Grid<ParentBuilder>::SetRowWeight(int32_t row, float weight)
 {
 	fLayout->SetRowWeight(row, weight);
 	return *this;
@@ -1182,7 +1182,7 @@ Split<ParentBuilder>::SetCollapsible(bool collapsible)
 
 template<typename ParentBuilder>
 typename Split<ParentBuilder>::ThisBuilder&
-Split<ParentBuilder>::SetCollapsible(int32 index, bool collapsible)
+Split<ParentBuilder>::SetCollapsible(int32_t index, bool collapsible)
 {
 	fView->SetCollapsible(index, collapsible);
 	return *this;
@@ -1191,7 +1191,7 @@ Split<ParentBuilder>::SetCollapsible(int32 index, bool collapsible)
 
 template<typename ParentBuilder>
 typename Split<ParentBuilder>::ThisBuilder&
-Split<ParentBuilder>::SetCollapsible(int32 first, int32 last, bool collapsible)
+Split<ParentBuilder>::SetCollapsible(int32_t first, int32_t last, bool collapsible)
 {
 	fView->SetCollapsible(first, last, collapsible);
 	return *this;
@@ -1277,7 +1277,7 @@ Menu<ParentBuilder>::AddItem(BMenu* menu)
 template<typename ParentBuilder>
 typename Menu<ParentBuilder>::ItemBuilder
 Menu<ParentBuilder>::AddItem(const char* label, BMessage* message,
-	char shortcut, uint32 modifiers)
+	char shortcut, uint32_t modifiers)
 {
 	BMenuItem* item = new BMenuItem(label, message, shortcut, modifiers);
 	if (!fMenu->AddItem(item))
@@ -1289,8 +1289,8 @@ Menu<ParentBuilder>::AddItem(const char* label, BMessage* message,
 
 template<typename ParentBuilder>
 typename Menu<ParentBuilder>::ItemBuilder
-Menu<ParentBuilder>::AddItem(const char* label, uint32 messageWhat,
-	char shortcut, uint32 modifiers)
+Menu<ParentBuilder>::AddItem(const char* label, uint32_t messageWhat,
+	char shortcut, uint32_t modifiers)
 {
 	BMessage* message = new BMessage(messageWhat);
 	BMenuItem* item;

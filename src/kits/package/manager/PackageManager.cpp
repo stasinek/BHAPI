@@ -77,7 +77,7 @@ BPackageManager::~BPackageManager()
 }
 
 
-void BPackageManager::Init(uint32 flags)
+void BPackageManager::Init(uint32_t flags)
 {
 	if (fSolver != NULL)
 		return;
@@ -123,8 +123,8 @@ void BPackageManager::Init(uint32 flags)
 				"failed to get repository names");
 		}
 
-		int32 repositoryNameCount = repositoryNames.CountStrings();
-		for (int32 i = 0; i < repositoryNameCount; i++) {
+		int32_t repositoryNameCount = repositoryNames.CountStrings();
+		for (int32_t i = 0; i < repositoryNameCount; i++) {
 			_AddRemoteRepository(roster, repositoryNames.StringAt(i),
 				(flags & B_REFRESH_REPOSITORIES) != 0);
 		}
@@ -132,7 +132,7 @@ void BPackageManager::Init(uint32 flags)
 }
 
 
-void BPackageManager::SetDebugLevel(int32 level)
+void BPackageManager::SetDebugLevel(int32_t level)
 {
 	fDebugLevel = level;
 
@@ -206,8 +206,8 @@ void BPackageManager::Uninstall(const BSolverPackageSpecifierList& packages)
 	bool foundAnotherPackage;
 	do {
 		foundAnotherPackage = false;
-		int32 count = installationRepository.CountPackages();
-		for (int32 i = 0; i < count; i++) {
+		int32_t count = installationRepository.CountPackages();
+		for (int32_t i = 0; i < count; i++) {
 			BSolverPackage* package = installationRepository.PackageAt(i);
 			if (foundPackages.HasItem(package))
 				continue;
@@ -220,7 +220,7 @@ void BPackageManager::Uninstall(const BSolverPackageSpecifierList& packages)
 	} while (foundAnotherPackage);
 
 	// remove the packages from the repository
-	for (int32 i = 0; BSolverPackage* package = foundPackages.ItemAt(i); i++)
+	for (int32_t i = 0; BSolverPackage* package = foundPackages.ItemAt(i); i++)
 		installationRepository.DisablePackage(package);
 
 	for (;;) {
@@ -233,7 +233,7 @@ void BPackageManager::Uninstall(const BSolverPackageSpecifierList& packages)
 		// (virtually) apply the result to this repository
 		_AnalyzeResult();
 
-		for (int32 i = foundPackages.CountItems() - 1; i >= 0; i--) {
+		for (int32_t i = foundPackages.CountItems() - 1; i >= 0; i--) {
 			if (!installationRepository.PackagesToDeactivate()
 					.AddItem(foundPackages.ItemAt(i))) {
 				throw std::bad_alloc();
@@ -417,7 +417,7 @@ void BPackageManager::_AnalyzeResult()
 
 	PackageList potentialBasePackages;
 
-	for (int32 i = 0; const BSolverResultElement* element = result.ElementAt(i);
+	for (int32_t i = 0; const BSolverResultElement* element = result.ElementAt(i);
 			i++) {
 		BSolverPackage* package = element->Package();
 
@@ -442,9 +442,9 @@ void BPackageManager::_AnalyzeResult()
 	}
 
 	// Make sure base packages are installed in the same location.
-	for (int32 i = 0; i < packagesToActivate.CountItems(); i++) {
+	for (int32_t i = 0; i < packagesToActivate.CountItems(); i++) {
 		BSolverPackage* package = packagesToActivate.ItemAt(i);
-		int32 index = _FindBasePackage(potentialBasePackages, package->Info());
+		int32_t index = _FindBasePackage(potentialBasePackages, package->Info());
 		if (index < 0)
 			continue;
 
@@ -460,9 +460,9 @@ void BPackageManager::_AnalyzeResult()
 void BPackageManager::_ConfirmChanges(bool fromMostSpecific)
 {
 	// check, if there are any changes at all
-	int32 count = fInstalledRepositories.CountItems();
+	int32_t count = fInstalledRepositories.CountItems();
 	bool hasChanges = false;
-	for (int32 i = 0; i < count; i++) {
+	for (int32_t i = 0; i < count; i++) {
 		if (fInstalledRepositories.ItemAt(i)->HasChanges()) {
 			hasChanges = true;
 			break;
@@ -478,16 +478,16 @@ void BPackageManager::_ConfirmChanges(bool fromMostSpecific)
 
 void BPackageManager::_ApplyPackageChanges(bool fromMostSpecific)
 {
-	int32 count = fInstalledRepositories.CountItems();
+	int32_t count = fInstalledRepositories.CountItems();
 	if (fromMostSpecific) {
-		for (int32 i = count - 1; i >= 0; i--)
+		for (int32_t i = count - 1; i >= 0; i--)
 			_PreparePackageChanges(*fInstalledRepositories.ItemAt(i));
 	} else {
-		for (int32 i = 0; i < count; i++)
+		for (int32_t i = 0; i < count; i++)
 			_PreparePackageChanges(*fInstalledRepositories.ItemAt(i));
 	}
 
-	for (int32 i = 0; Transaction* transaction = fTransactions.ItemAt(i); i++)
+	for (int32_t i = 0; Transaction* transaction = fTransactions.ItemAt(i); i++)
 		_CommitPackageChanges(*transaction);
 
 // TODO: Clean up the transaction directories on error!
@@ -517,7 +517,7 @@ void BPackageManager::_PreparePackageChanges(
 		DIE(error, "failed to create transaction");
 
 	// download the new packages and prepare the transaction
-	for (int32 i = 0; BSolverPackage* package = packagesToActivate.ItemAt(i);
+	for (int32_t i = 0; BSolverPackage* package = packagesToActivate.ItemAt(i);
 		i++) {
 		// get package URL and target entry
 
@@ -559,7 +559,7 @@ void BPackageManager::_PreparePackageChanges(
 		}
 	}
 
-	for (int32 i = 0; BSolverPackage* package = packagesToDeactivate.ItemAt(i);
+	for (int32_t i = 0; BSolverPackage* package = packagesToDeactivate.ItemAt(i);
 		i++) {
 		// add package to transaction
 		if (!transaction->ActivationTransaction().AddPackageToDeactivate(
@@ -624,7 +624,7 @@ void BPackageManager::_ClonePackageFile(LocalRepository* repository,
 }
 
 
-int32 BPackageManager::_FindBasePackage(const PackageList& packages,
+int32_t BPackageManager::_FindBasePackage(const PackageList& packages,
 	const BPackageInfo& info)
 {
 	if (info.BasePackage().IsEmpty())
@@ -632,8 +632,8 @@ int32 BPackageManager::_FindBasePackage(const PackageList& packages,
 
 	// find the requirement matching the base package
 	BPackageResolvableExpression* basePackage = NULL;
-	int32 count = info.RequiresList().CountItems();
-	for (int32 i = 0; i < count; i++) {
+	int32_t count = info.RequiresList().CountItems();
+	for (int32_t i = 0; i < count; i++) {
 		BPackageResolvableExpression* requires = info.RequiresList().ItemAt(i);
 		if (requires->Name() == info.BasePackage()) {
 			basePackage = requires;
@@ -651,7 +651,7 @@ int32 BPackageManager::_FindBasePackage(const PackageList& packages,
 
 	// find the first package matching the base package requires
 	count = packages.CountItems();
-	for (int32 i = 0; i < count; i++) {
+	for (int32_t i = 0; i < count; i++) {
 		BSolverPackage* package = packages.ItemAt(i);
 		if (package->Name() == basePackage->Name()
 			&& package->Info().Matches(*basePackage)) {
@@ -868,7 +868,7 @@ void BPackageManager::MiscLocalRepository::GetPackagePath(BSolverPackage* packag
 
 
 BPackageManager::InstalledRepository::InstalledRepository(const char* name,
-	BPackageInstallationLocation location, int32 priority)
+	BPackageInstallationLocation location, int32_t priority)
 	:
 	LocalRepository(),
 	fDisabledPackages(10, true),
@@ -939,14 +939,14 @@ bool BPackageManager::InstalledRepository::HasChanges() const
 void BPackageManager::InstalledRepository::ApplyChanges()
 {
 	// disable packages to deactivate
-	for (int32 i = 0; BSolverPackage* package = fPackagesToDeactivate.ItemAt(i);
+	for (int32_t i = 0; BSolverPackage* package = fPackagesToDeactivate.ItemAt(i);
 		i++) {
 		if (!fDisabledPackages.HasItem(package))
 			DisablePackage(package);
 	}
 
 	// add packages to activate
-	for (int32 i = 0; BSolverPackage* package = fPackagesToActivate.ItemAt(i);
+	for (int32_t i = 0; BSolverPackage* package = fPackagesToActivate.ItemAt(i);
 		i++) {
 		status_t error = AddPackage(package->Info());
 		if (error != B_OK) {

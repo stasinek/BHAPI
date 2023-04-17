@@ -39,11 +39,11 @@ class BAbstractSpinner : public BControl {
 public:
 								BAbstractSpinner(BRect frame, const char* name,
 									const char* label, BMessage* message,
-									uint32 resizingMode = B_FOLLOW_LEFT | B_FOLLOW_TOP,
-									uint32 flags = B_WILL_DRAW | B_NAVIGABLE);
+									uint32_t resizingMode = B_FOLLOW_LEFT | B_FOLLOW_TOP,
+									uint32_t flags = B_WILL_DRAW | B_NAVIGABLE);
 								BAbstractSpinner(const char* name, const char* label,
 									BMessage* message,
-									uint32 flags = B_WILL_DRAW | B_NAVIGABLE);
+									uint32_t flags = B_WILL_DRAW | B_NAVIGABLE);
 								BAbstractSpinner(BMessage* data);
 	virtual						~BAbstractSpinner();
 
@@ -51,8 +51,8 @@ public:
 	virtual	status_t			Archive(BMessage* data, bool deep = true) const;
 
 	virtual	status_t			GetSupportedSuites(BMessage* message);
-	virtual	BHandler*			ResolveSpecifier(BMessage* message, int32 index,
-									BMessage* specifier, int32 form,
+	virtual	BHandler*			ResolveSpecifier(BMessage* message, int32_t index,
+									BMessage* specifier, int32_t form,
 									const char* property);
 
 	virtual	void				AttachedToWindow();
@@ -64,7 +64,7 @@ public:
 	virtual	void				Increment() = 0;
 	virtual	void				MakeFocus(bool focus = true);
 	virtual	void				ResizeToPreferred();
-	virtual	void				SetFlags(uint32 flags);
+	virtual	void				SetFlags(uint32_t flags);
 	virtual	void				WindowActivated(bool active);
 
 			alignment			Alignment() const { return fAlignment; };
@@ -161,7 +161,7 @@ private:
 			SpinnerButton*		fDecrement;
 
 	// FBC padding
-			uint32				_reserved[20];
+			uint32_t				_reserved[20];
 };
 
 

@@ -29,11 +29,11 @@ extern struct iframe_stack gBootFrameStack;
 
 
 static bool
-already_visited(uint32 *visited, int32 *_last, int32 *_num, uint32 framePointer)
+already_visited(uint32_t *visited, int32_t *_last, int32_t *_num, uint32_t framePointer)
 {
-	int32 last = *_last;
-	int32 num = *_num;
-	int32 i;
+	int32_t last = *_last;
+	int32_t num = *_num;
+	int32_t i;
 
 	for (i = 0; i < num; i++) {
 		if (visited[(NUM_PREVIOUS_LOCATIONS + last - i)
@@ -116,15 +116,15 @@ print_stack_frame(Thread *thread, addr_t ip, addr_t framePointer,
 static int
 stack_trace(int argc, char **argv)
 {
-	uint32 previousLocations[NUM_PREVIOUS_LOCATIONS];
+	uint32_t previousLocations[NUM_PREVIOUS_LOCATIONS];
 	struct iframe_stack *frameStack;
 	Thread *thread;
 	addr_t framePointer;
-	int32 i, num = 0, last = 0;
+	int32_t i, num = 0, last = 0;
 
 	if (argc < 2) {
 		thread = thread_get_current_thread();
-		int32 cpu = smp_get_current_cpu();
+		int32_t cpu = smp_get_current_cpu();
 		framePointer = debug_get_debug_registers(cpu)->r1;
 	} else {
 // TODO: Add support for stack traces of other threads.
@@ -288,9 +288,9 @@ arch_debug_get_caller(void)
 }
 
 
-int32
-arch_debug_get_stack_trace(addr_t* returnAddresses, int32 maxCount,
-	int32 skipIframes, int32 skipFrames, uint32 flags)
+int32_t
+arch_debug_get_stack_trace(addr_t* returnAddresses, int32_t maxCount,
+	int32_t skipIframes, int32_t skipFrames, uint32_t flags)
 {
 	// TODO: Implement!
 	return 0;

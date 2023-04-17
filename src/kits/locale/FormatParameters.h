@@ -31,7 +31,7 @@ class BFormatParameters {
 		const BFormatParameters	*fParent;
 		format_alignment		fAlignment;
 		size_t					fWidth;
-		uint32					fFlags;
+		uint32_t					fFlags;
 };
 
 #endif	// _B_FORMAT_PARAMETERS_H_

@@ -44,10 +44,10 @@ public:
 
 								// acquire and release return
 								// the previous ref count
-			int32				AcquireReference();
-			int32				ReleaseReference();
+			int32_t				AcquireReference();
+			int32_t				ReleaseReference();
 
-			int32				CountReferences() const
+			int32_t				CountReferences() const
 									{ return fReferenceCount; }
 
 protected:
@@ -55,7 +55,7 @@ protected:
 	virtual	void				LastReferenceReleased();
 
 protected:
-			int32				fReferenceCount;
+			int32_t				fReferenceCount;
 };
 
 

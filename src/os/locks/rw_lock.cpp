@@ -83,7 +83,7 @@ void __rw_lock_init(rw_lock *lock, const char *name)
 }
 
 
-void __rw_lock_init_etc(rw_lock *lock, const char *name, uint32 flags)
+void __rw_lock_init_etc(rw_lock *lock, const char *name, uint32_t flags)
 {
 	lock->waiters = NULL;
 	lock->holder = -1;

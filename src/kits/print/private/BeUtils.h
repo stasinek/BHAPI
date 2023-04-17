@@ -53,7 +53,7 @@ status_t TestForAddonExistence(const char* name, directory_which which,
 // Reference counted object
 class Object {
 private:
-	int32 fRefCount;
+	int32_t fRefCount;
 
 public:
 	// After construction reference count is 1
@@ -83,7 +83,7 @@ class AutoReply {
 	BMessage  fReply;
 	
 public:
-	AutoReply(BMessage* sender, uint32 what);
+	AutoReply(BMessage* sender, uint32_t what);
 	~AutoReply();
 	void SetReply(BMessage* m) { fReply = *m; }
 };
@@ -91,7 +91,7 @@ public:
 // mimetype from sender
 bool MimeTypeForSender(BMessage* sender, BString& mime);
 // load bitmap from application resources
-BBitmap* LoadBitmap(const char* name, uint32 type_code = B_TRANSLATOR_BITMAP);
+BBitmap* LoadBitmap(const char* name, uint32_t type_code = B_TRANSLATOR_BITMAP);
 // convert bitmap to picture; view must be attached to a window!
 // returns NULL if bitmap is NULL
 BPicture *BitmapToPicture(BView* view, BBitmap *bitmap);

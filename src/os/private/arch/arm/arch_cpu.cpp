@@ -91,7 +91,7 @@ arch_cpu_shutdown(bool reboot)
 void
 arch_cpu_sync_icache(void *address, size_t len)
 {
-	uint32 Rd = 0;
+	uint32_t Rd = 0;
 	asm volatile ("mcr p15, 0, %[c7format], c7, c5, 0"
 		: : [c7format] "r" (Rd) );
 }
@@ -114,7 +114,7 @@ arch_cpu_memory_write_barrier(void)
 void
 arch_cpu_invalidate_TLB_range(addr_t start, addr_t end)
 {
-	int32 num_pages = end / B_PAGE_SIZE - start / B_PAGE_SIZE;
+	int32_t num_pages = end / B_PAGE_SIZE - start / B_PAGE_SIZE;
 	while (num_pages-- >= 0) {
 		asm volatile ("mcr p15, 0, %[c8format], c8, c6, 1"
 			: : [c8format] "r" (start) );
@@ -136,7 +136,7 @@ arch_cpu_invalidate_TLB_list(addr_t pages[], int num_pages)
 void
 arch_cpu_global_TLB_invalidate(void)
 {
-	uint32 Rd = 0;
+	uint32_t Rd = 0;
 	asm volatile ("mcr p15, 0, %[c8format], c8, c7, 0"
 		: : [c8format] "r" (Rd) );
 }

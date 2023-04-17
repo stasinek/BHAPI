@@ -36,7 +36,7 @@ struct stream_info {
 
 class MediaExtractor {
 public:
-								MediaExtractor(BDataIO* source, int32 flags);
+								MediaExtractor(BDataIO* source, int32_t flags);
 								~MediaExtractor();
 
 			status_t			InitCheck();
@@ -45,33 +45,33 @@ public:
 									media_file_format* fileFormat) const;
 			status_t			GetMetaData(BMessage* _data) const;
 
-			int32				StreamCount();
+			int32_t				StreamCount();
 
 			const char*			Copyright();
 
-			const media_format*	EncodedFormat(int32 stream);
-			int64				CountFrames(int32 stream) const;
-			bigtime_t			Duration(int32 stream) const;
+			const media_format*	EncodedFormat(int32_t stream);
+			int64				CountFrames(int32_t stream) const;
+			bigtime_t			Duration(int32_t stream) const;
 
-			status_t			Seek(int32 stream, uint32 seekTo,
+			status_t			Seek(int32_t stream, uint32_t seekTo,
 									int64* _frame, bigtime_t* _time);
-			status_t			FindKeyFrame(int32 stream, uint32 seekTo,
+			status_t			FindKeyFrame(int32_t stream, uint32_t seekTo,
 									int64* _frame, bigtime_t* _time) const;
 
-			status_t			GetNextChunk(int32 stream,
+			status_t			GetNextChunk(int32_t stream,
 									const void** _chunkBuffer,
 									size_t* _chunkSize,
 									media_header* mediaHeader);
 
-			status_t			CreateDecoder(int32 stream, Decoder** _decoder,
+			status_t			CreateDecoder(int32_t stream, Decoder** _decoder,
 									media_codec_info* codecInfo);
 
-			status_t			GetStreamMetaData(int32 stream,
+			status_t			GetStreamMetaData(int32_t stream,
 									BMessage* _data) const;
 
 private:
 			void				_RecycleLastChunk(stream_info& info);
-	static	int32				_ExtractorEntry(void* arg);
+	static	int32_t				_ExtractorEntry(void* arg);
 			void				_ExtractorThread();
 
 private:
@@ -84,7 +84,7 @@ private:
 			Reader*				fReader;
 
 			stream_info*		fStreamInfo;
-			int32				fStreamCount;
+			int32_t				fStreamCount;
 
 			media_file_format	fFileFormat;
 };

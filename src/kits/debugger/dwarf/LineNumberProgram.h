@@ -45,20 +45,20 @@ private:
 
 struct LineNumberProgram::State {
 	target_addr_t	address;
-	int32			file;
-	int32			line;
-	int32			column;
+	int32_t			file;
+	int32_t			line;
+	int32_t			column;
 	bool			isStatement;
 	bool			isBasicBlock;
 	bool			isSequenceEnd;
 	bool			isPrologueEnd;
 	bool			isEpilogueBegin;
-	uint32			instructionSet;
-	uint32			discriminator;
+	uint32_t			instructionSet;
+	uint32_t			discriminator;
 
 	// when file is set to -1
 	const char*		explicitFile;
-	uint32			explicitFileDirIndex;
+	uint32_t			explicitFileDirIndex;
 
 	DataReader		dataReader;
 };

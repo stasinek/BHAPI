@@ -35,8 +35,8 @@ struct low_resource_handler
 		: public DoublyLinkedListLinkImpl<low_resource_handler> {
 	low_resource_func	function;
 	void*				data;
-	uint32				resources;
-	int32				priority;
+	uint32_t				resources;
+	int32_t				priority;
 };
 
 typedef DoublyLinkedList<low_resource_handler> HandlerList;
@@ -64,11 +64,11 @@ static const size_t kMinWarnSpaceLimit		= 64 * 1024 * 1024;
 static const size_t kMinCriticalSpaceLimit	= 32 * 1024 * 1024;
 
 
-static int32 sLowPagesState = B_NO_LOW_RESOURCE;
-static int32 sLowMemoryState = B_NO_LOW_RESOURCE;
-static int32 sLowSemaphoresState = B_NO_LOW_RESOURCE;
-static int32 sLowSpaceState = B_NO_LOW_RESOURCE;
-static uint32 sLowResources = 0;	// resources that are not B_NO_LOW_RESOURCE
+static int32_t sLowPagesState = B_NO_LOW_RESOURCE;
+static int32_t sLowMemoryState = B_NO_LOW_RESOURCE;
+static int32_t sLowSemaphoresState = B_NO_LOW_RESOURCE;
+static int32_t sLowSpaceState = B_NO_LOW_RESOURCE;
+static uint32_t sLowResources = 0;	// resources that are not B_NO_LOW_RESOURCE
 static bigtime_t sLastMeasurement;
 
 static recursive_lock sLowResourceLock
@@ -80,7 +80,7 @@ static ConditionVariable sLowResourceWaiterCondition;
 
 
 static const char*
-state_to_string(uint32 state)
+state_to_string(uint32_t state)
 {
 	switch (state) {
 		case B_LOW_RESOURCE_CRITICAL:
@@ -96,10 +96,10 @@ state_to_string(uint32 state)
 }
 
 
-static int32
-low_resource_state_no_update(uint32 resources)
+static int32_t
+low_resource_state_no_update(uint32_t resources)
 {
-	int32 state = B_NO_LOW_RESOURCE;
+	int32_t state = B_NO_LOW_RESOURCE;
 
 	if ((resources & B_KERNEL_RESOURCE_PAGES) != 0)
 		state = max_c(state, sLowPagesState);
@@ -118,7 +118,7 @@ low_resource_state_no_update(uint32 resources)
 	sLowResourceLock must be held.
 */
 static void
-call_handlers(uint32 lowResources)
+call_handlers(uint32_t lowResources)
 {
 	if (sLowResourceHandlers.IsEmpty())
 		return;
@@ -134,7 +134,7 @@ call_handlers(uint32 lowResources)
 		sLowResourceHandlers.Swap(&marker, handler);
 		marker.priority = handler->priority;
 
-		int32 resources = handler->resources & lowResources;
+		int32_t resources = handler->resources & lowResources;
 		if (resources != 0) {
 			recursive_lock_unlock(&sLowResourceLock);
 			handler->function(handler->data, resources,
@@ -156,9 +156,9 @@ compute_state(void)
 	sLowResources = B_ALL_KERNEL_RESOURCES;
 
 	// free pages state
-	uint32 freePages = vm_page_num_free_pages();
+	uint32_t freePages = vm_page_num_free_pages();
 
-	int32 oldState = sLowPagesState;
+	int32_t oldState = sLowPagesState;
 	if (freePages < kCriticalPagesLimit) {
 		sLowPagesState = B_LOW_RESOURCE_CRITICAL;
 	} else if (freePages < kWarnPagesLimit) {
@@ -196,8 +196,8 @@ compute_state(void)
 	}
 
 	// free semaphores state
-	uint32 maxSems = sem_max_sems();
-	uint32 freeSems = maxSems - sem_used_sems();
+	uint32_t maxSems = sem_max_sems();
+	uint32_t freeSems = maxSems - sem_used_sems();
 
 	oldState = sLowSemaphoresState;
 	if (freeSems < maxSems >> 16) {
@@ -244,7 +244,7 @@ low_resource_manager(void*)
 {
 	bigtime_t timeout = kLowResourceInterval;
 	while (true) {
-		int32 state = low_resource_state_no_update(B_ALL_KERNEL_RESOURCES);
+		int32_t state = low_resource_state_no_update(B_ALL_KERNEL_RESOURCES);
 		if (state != B_LOW_RESOURCE_CRITICAL) {
 			acquire_sem_etc(sLowResourceWaitSem, 1, B_RELATIVE_TIMEOUT,
 				timeout);
@@ -327,7 +327,7 @@ dump_handlers(int argc, char** argv)
 	handlers, or until the timeout occurs (whichever happens first).
 */
 void
-low_resource(uint32 resource, uint64 requirements, uint32 flags, uint32 timeout)
+low_resource(uint32_t resource, uint64 requirements, uint32_t flags, uint32_t timeout)
 {
 	// TODO: take requirements into account
 
@@ -346,15 +346,15 @@ low_resource(uint32 resource, uint64 requirements, uint32 flags, uint32 timeout)
 }
 
 
-int32
-low_resource_state(uint32 resources)
+int32_t
+low_resource_state(uint32_t resources)
 {
 	recursive_lock_lock(&sLowResourceLock);
 
 	if (system_time() - sLastMeasurement > 500000)
 		compute_state();
 
-	int32 state = low_resource_state_no_update(resources);
+	int32_t state = low_resource_state_no_update(resources);
 
 	recursive_lock_unlock(&sLowResourceLock);
 
@@ -432,7 +432,7 @@ unregister_low_resource_handler(low_resource_func function, void* data)
 */
 status_t
 register_low_resource_handler(low_resource_func function, void* data,
-	uint32 resources, int32 priority)
+	uint32_t resources, int32_t priority)
 {
 	TRACE(("register_low_resource_handler(function = %p, data = %p)\n",
 		function, data));

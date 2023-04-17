@@ -130,7 +130,7 @@ status_t BSoftSynth::SetDefaultInstrumentsFile()
 	if (status != B_OK)
 		return B_ERROR;
 
-	for (int32 i = 0; i < paths.CountStrings(); i++) {
+	for (int32_t i = 0; i < paths.CountStrings(); i++) {
 		BDirectory directory(paths.StringAt(i).String());
 		BEntry entry;
 		if (directory.InitCheck() != B_OK)
@@ -225,7 +225,7 @@ BSoftSynth::Volume(void) const
 }
 
 
-status_t BSoftSynth::SetSamplingRate(int32 rate)
+status_t BSoftSynth::SetSamplingRate(int32_t rate)
 {
 	if (rate == 22050 || rate == 44100 || rate == 48000) {
 		fSampleRate = rate;
@@ -236,7 +236,7 @@ status_t BSoftSynth::SetSamplingRate(int32 rate)
 }
 
 
-int32 
+int32_t 
 BSoftSynth::SamplingRate() const
 {
 	return fSampleRate;
@@ -294,7 +294,7 @@ BSoftSynth::Reverb() const
 }
 
 
-status_t BSoftSynth::SetMaxVoices(int32 max)
+status_t BSoftSynth::SetMaxVoices(int32_t max)
 {
 	if (max > 0 && max <= 4096) {
 		fMaxVoices = max;
@@ -312,7 +312,7 @@ BSoftSynth::MaxVoices(void) const
 }
 
 
-status_t BSoftSynth::SetLimiterThreshold(int32 threshold)
+status_t BSoftSynth::SetLimiterThreshold(int32_t threshold)
 {
 	// not used
 	if (threshold > 0 && threshold <= 32) {
@@ -344,7 +344,7 @@ void BSoftSynth::Resume(void)
 
 
 void BSoftSynth::NoteOff(
-	uchar channel, uchar note, uchar velocity, uint32 time)
+	uchar channel, uchar note, uchar velocity, uint32_t time)
 {
 	if (InitCheck()) {
 		snooze_until(MAKE_BIGTIME(time), B_SYSTEM_TIMEBASE);
@@ -354,7 +354,7 @@ void BSoftSynth::NoteOff(
 
 
 void BSoftSynth::NoteOn(
-	uchar channel, uchar note, uchar velocity, uint32 time)
+	uchar channel, uchar note, uchar velocity, uint32_t time)
 {
 	if (InitCheck()) {
 		snooze_until(MAKE_BIGTIME(time), B_SYSTEM_TIMEBASE);
@@ -364,7 +364,7 @@ void BSoftSynth::NoteOn(
 
 
 void BSoftSynth::KeyPressure(
-	uchar channel, uchar note, uchar pressure, uint32 time)
+	uchar channel, uchar note, uchar pressure, uint32_t time)
 {
 	if (InitCheck()) {
 		snooze_until(MAKE_BIGTIME(time), B_SYSTEM_TIMEBASE);
@@ -374,7 +374,7 @@ void BSoftSynth::KeyPressure(
 
 
 void BSoftSynth::ControlChange(
-	uchar channel, uchar controlNumber, uchar controlValue, uint32 time)
+	uchar channel, uchar controlNumber, uchar controlValue, uint32_t time)
 {
 	if (InitCheck()) {
 		snooze_until(MAKE_BIGTIME(time), B_SYSTEM_TIMEBASE);
@@ -384,7 +384,7 @@ void BSoftSynth::ControlChange(
 
 
 void BSoftSynth::ProgramChange(
-	uchar channel, uchar programNumber, uint32 time)
+	uchar channel, uchar programNumber, uint32_t time)
 {
 	if (InitCheck()) {
 		snooze_until(MAKE_BIGTIME(time), B_SYSTEM_TIMEBASE);
@@ -393,7 +393,7 @@ void BSoftSynth::ProgramChange(
 }
 
 
-void BSoftSynth::ChannelPressure(uchar channel, uchar pressure, uint32 time)
+void BSoftSynth::ChannelPressure(uchar channel, uchar pressure, uint32_t time)
 {
 	if (InitCheck()) {
 		snooze_until(MAKE_BIGTIME(time), B_SYSTEM_TIMEBASE);
@@ -402,18 +402,18 @@ void BSoftSynth::ChannelPressure(uchar channel, uchar pressure, uint32 time)
 }
 
 
-void BSoftSynth::PitchBend(uchar channel, uchar lsb, uchar msb, uint32 time)
+void BSoftSynth::PitchBend(uchar channel, uchar lsb, uchar msb, uint32_t time)
 {
 	if (InitCheck()) {
 		snooze_until(MAKE_BIGTIME(time), B_SYSTEM_TIMEBASE);
 		// fluid_synth only accepts an int
 		fluid_synth_pitch_bend(fSynth, channel - 1,
-			((uint32)(msb & 0x7f) << 7) | (lsb & 0x7f));
+			((uint32_t)(msb & 0x7f) << 7) | (lsb & 0x7f));
 	}
 }
 
 
-void BSoftSynth::SystemExclusive(void* data, size_t length, uint32 time)
+void BSoftSynth::SystemExclusive(void* data, size_t length, uint32_t time)
 {
 	if (InitCheck()) {
 		snooze_until(MAKE_BIGTIME(time), B_SYSTEM_TIMEBASE);
@@ -423,7 +423,7 @@ void BSoftSynth::SystemExclusive(void* data, size_t length, uint32 time)
 
 
 void BSoftSynth::SystemCommon(
-	uchar status, uchar data1, uchar data2, uint32 time)
+	uchar status, uchar data1, uchar data2, uint32_t time)
 {
 	if (InitCheck()) {
 		snooze_until(MAKE_BIGTIME(time), B_SYSTEM_TIMEBASE);
@@ -432,7 +432,7 @@ void BSoftSynth::SystemCommon(
 }
 
 
-void BSoftSynth::SystemRealTime(uchar status, uint32 time)
+void BSoftSynth::SystemRealTime(uchar status, uint32_t time)
 {
 	if (InitCheck()) {
 		snooze_until(MAKE_BIGTIME(time), B_SYSTEM_TIMEBASE);
@@ -441,7 +441,7 @@ void BSoftSynth::SystemRealTime(uchar status, uint32 time)
 }
 
 
-void BSoftSynth::TempoChange(int32 beatsPerMinute, uint32 time)
+void BSoftSynth::TempoChange(int32_t beatsPerMinute, uint32_t time)
 {
 	if (InitCheck()) {
 		snooze_until(MAKE_BIGTIME(time), B_SYSTEM_TIMEBASE);
@@ -450,7 +450,7 @@ void BSoftSynth::TempoChange(int32 beatsPerMinute, uint32 time)
 }
 
 
-void BSoftSynth::AllNotesOff(bool justChannel, uint32 time)
+void BSoftSynth::AllNotesOff(bool justChannel, uint32_t time)
 {
 	if (InitCheck()) {
 		snooze_until(MAKE_BIGTIME(time), B_SYSTEM_TIMEBASE);

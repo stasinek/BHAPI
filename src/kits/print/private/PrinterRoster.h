@@ -27,7 +27,7 @@ public:
 							BPrinterRoster();
 							~BPrinterRoster();
 
-		int32				CountPrinters();
+		int32_t				CountPrinters();
 
 		status_t			GetNextPrinter(BPrinter* printer);
 		status_t			GetDefaultPrinter(BPrinter* printer);

@@ -31,7 +31,7 @@ private:
 	enum { ARP_REPLY_TIMEOUT = 5000 };
 
 	struct MapEntry {
-		int32		age;
+		int32_t		age;
 		ip_addr_t	ip;
 		mac_addr_t	mac;
 	};
@@ -42,7 +42,7 @@ private:
 	void _PutEntry(ip_addr_t ip, const mac_addr_t &mac);
 
 	EthernetService	*fEthernet;
-	int32			fAge;
+	int32_t			fAge;
 	MapEntry		fEntries[MAP_ENTRY_COUNT];
 };
 

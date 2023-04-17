@@ -99,7 +99,7 @@ status_t BGraphicsContext::SetPattern(bhapi::pattern pattern)
 }
 
 
-status_t BGraphicsContext::SetPenSize(uint32 penSize)
+status_t BGraphicsContext::SetPenSize(uint32_t penSize)
 {
     fPenSize = penSize;
     return B_OK;
@@ -140,7 +140,7 @@ bhapi::pattern BGraphicsContext::Pattern() const
     return fPattern;
 }
 
-uint32 BGraphicsContext::PenSize() const
+uint32_t BGraphicsContext::PenSize() const
 {
     return fPenSize;
 }

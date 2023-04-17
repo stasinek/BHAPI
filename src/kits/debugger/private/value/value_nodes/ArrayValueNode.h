@@ -20,12 +20,12 @@ class AbstractArrayValueNode : public ValueNode {
 public:
 								AbstractArrayValueNode(
 									ValueNodeChild* nodeChild, ArrayType* type,
-									int32 dimension);
+									int32_t dimension);
 	virtual						~AbstractArrayValueNode();
 
 			ArrayType*			GetArrayType() const
 									{ return fType; }
-			int32				Dimension() const
+			int32_t				Dimension() const
 									{ return fDimension; }
 
 	virtual	Type*				GetType() const;
@@ -38,25 +38,25 @@ public:
 			// locking required
 
 	virtual	status_t			CreateChildren(TeamTypeInformation* info);
-	virtual	int32				CountChildren() const;
-	virtual	ValueNodeChild*		ChildAt(int32 index) const;
+	virtual	int32_t				CountChildren() const;
+	virtual	ValueNodeChild*		ChildAt(int32_t index) const;
 
 	virtual	bool				IsRangedContainer() const;
 	virtual	void				ClearChildren();
 	virtual	status_t			CreateChildrenInRange(
 									TeamTypeInformation* info,
-									int32 lowIndex, int32 highIndex);
-	virtual	status_t			SupportedChildRange(int32& lowIndex,
-									int32& highIndex) const;
+									int32_t lowIndex, int32_t highIndex);
+	virtual	status_t			SupportedChildRange(int32_t& lowIndex,
+									int32_t& highIndex) const;
 protected:
 			typedef BObjectList<AbstractArrayValueNodeChild> ChildList;
 
 protected:
 			ArrayType*			fType;
 			ChildList			fChildren;
-			int32				fDimension;
-			int32				fLowerBound;
-			int32				fUpperBound;
+			int32_t				fDimension;
+			int32_t				fLowerBound;
+			int32_t				fUpperBound;
 			bool				fBoundsInitialized;
 };
 
@@ -75,7 +75,7 @@ class InternalArrayValueNode : public AbstractArrayValueNode {
 public:
 								InternalArrayValueNode(
 									ValueNodeChild* nodeChild,
-									ArrayType* type, int32 dimension);
+									ArrayType* type, int32_t dimension);
 	virtual						~InternalArrayValueNode();
 };
 
@@ -88,7 +88,7 @@ public:
 	virtual						~AbstractArrayValueNodeChild();
 
 			AbstractArrayValueNode* ArrayParent() const	{ return fParent; }
-			int32				ElementIndex() const { return fElementIndex; }
+			int32_t				ElementIndex() const { return fElementIndex; }
 
 	virtual	const BString&		Name() const;
 	virtual	ValueNode*			Parent() const;

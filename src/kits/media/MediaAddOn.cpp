@@ -263,12 +263,12 @@ dormant_flavor_info::FlattenedSize() const
 {
 	ssize_t size = 0;
 	// magic
-	size += sizeof(int32);
+	size += sizeof(int32_t);
 	// size
-	size += sizeof(int32);
+	size += sizeof(int32_t);
 	// struct flavor_info
-	size += sizeof(int32) + strlen(name);
-	size += sizeof(int32) + strlen(info);
+	size += sizeof(int32_t) + strlen(name);
+	size += sizeof(int32_t) + strlen(info);
 	size += sizeof(kinds);
 	size += sizeof(flavor_flags);
 	size += sizeof(internal_id);
@@ -296,11 +296,11 @@ status_t dormant_flavor_info::Flatten(void *buffer, ssize_t size) const
 		return B_ERROR;
 
 	char *buf = (char *)buffer;
-	int32 nameLength = name ? (int32)strlen(name) : -1;
-	int32 infoLength = info ? (int32)strlen(info) : -1;
-	int32 inFormatCount = 0;
+	int32_t nameLength = name ? (int32_t)strlen(name) : -1;
+	int32_t infoLength = info ? (int32_t)strlen(info) : -1;
+	int32_t inFormatCount = 0;
 	size_t inFormatSize = 0;
-	int32 outFormatCount = 0;
+	int32_t outFormatCount = 0;
 	size_t outFormatSize = 0;
 
 	if ((kinds & B_BUFFER_CONSUMER) != 0 && in_format_count > 0
@@ -328,35 +328,35 @@ status_t dormant_flavor_info::Flatten(void *buffer, ssize_t size) const
 	}
 
 	// magic
-	*(int32*)buf = FLATTEN_MAGIC; buf += sizeof(int32);
+	*(int32_t*)buf = FLATTEN_MAGIC; buf += sizeof(int32_t);
 
 	// size
-	*(int32*)buf = FlattenedSize(); buf += sizeof(int32);
+	*(int32_t*)buf = FlattenedSize(); buf += sizeof(int32_t);
 
 	// struct flavor_info
-	*(int32*)buf = nameLength; buf += sizeof(int32);
+	*(int32_t*)buf = nameLength; buf += sizeof(int32_t);
 	if (nameLength > 0) {
 		memcpy(buf, name, nameLength);
 		buf += nameLength;
 	}
-	*(int32*)buf = infoLength; buf += sizeof(int32);
+	*(int32_t*)buf = infoLength; buf += sizeof(int32_t);
 	if (infoLength > 0) {
 		memcpy(buf, info, infoLength);
 		buf += infoLength;
 	}
 
 	*(uint64*)buf = kinds; buf += sizeof(uint64);
-	*(uint32*)buf = flavor_flags; buf += sizeof(uint32);
-	*(int32*)buf = internal_id; buf += sizeof(int32);
-	*(int32*)buf = possible_count; buf += sizeof(int32);
-	*(int32*)buf = inFormatCount; buf += sizeof(int32);
-	*(uint32*)buf = in_format_flags; buf += sizeof(uint32);
+	*(uint32_t*)buf = flavor_flags; buf += sizeof(uint32_t);
+	*(int32_t*)buf = internal_id; buf += sizeof(int32_t);
+	*(int32_t*)buf = possible_count; buf += sizeof(int32_t);
+	*(int32_t*)buf = inFormatCount; buf += sizeof(int32_t);
+	*(uint32_t*)buf = in_format_flags; buf += sizeof(uint32_t);
 
 	// XXX FIXME! we should not!!! make flat copies	of media_format
 	memcpy(buf, in_formats, inFormatSize); buf += inFormatSize;
 
-	*(int32*)buf = outFormatCount; buf += sizeof(int32);
-	*(uint32*)buf = out_format_flags; buf += sizeof(uint32);
+	*(int32_t*)buf = outFormatCount; buf += sizeof(int32_t);
+	*(uint32_t*)buf = out_format_flags; buf += sizeof(uint32_t);
 
 	// XXX FIXME! we should not!!! make flat copies	of media_format
 	memcpy(buf, out_formats, outFormatSize); buf += outFormatSize;
@@ -375,18 +375,18 @@ status_t dormant_flavor_info::Unflatten(type_code c, const void *buffer, ssize_t
 		return B_ERROR;
 
 	const char *buf = (const char *)buffer;
-	int32 nameLength;
-	int32 infoLength;
+	int32_t nameLength;
+	int32_t infoLength;
 
 	// check magic
-	if (*(int32*)buf != FLATTEN_MAGIC)
+	if (*(int32_t*)buf != FLATTEN_MAGIC)
 		return B_ERROR;
-	buf += sizeof(int32);
+	buf += sizeof(int32_t);
 
 	// check size
-	if (*(uint32*)buf > (uint32)size)
+	if (*(uint32_t*)buf > (uint32_t)size)
 		return B_ERROR;
-	buf += sizeof(int32);
+	buf += sizeof(int32_t);
 
 	delete[] name;
 	name = NULL;
@@ -400,7 +400,7 @@ status_t dormant_flavor_info::Unflatten(type_code c, const void *buffer, ssize_t
 	out_format_count = 0;
 
 	// struct flavor_info
-	nameLength = *(int32*)buf; buf += sizeof(int32);
+	nameLength = *(int32_t*)buf; buf += sizeof(int32_t);
 	if (nameLength >= 0) { // if nameLength is -1, we leave name = 0
 		name = new(std::nothrow) char [nameLength + 1];
 		if (name) {
@@ -410,7 +410,7 @@ status_t dormant_flavor_info::Unflatten(type_code c, const void *buffer, ssize_t
 		}
 	}
 
-	infoLength = *(int32*)buf; buf += sizeof(int32);
+	infoLength = *(int32_t*)buf; buf += sizeof(int32_t);
 	if (infoLength >= 0) { // if infoLength is -1, we leave info = 0
 		info = new(std::nothrow) char [infoLength + 1];
 		if (info) {
@@ -420,14 +420,14 @@ status_t dormant_flavor_info::Unflatten(type_code c, const void *buffer, ssize_t
 		}
 	}
 
-	int32 count;
+	int32_t count;
 
 	kinds = *(uint64*)buf; buf += sizeof(uint64);
-	flavor_flags = *(uint32*)buf; buf += sizeof(uint32);
-	internal_id = *(int32*)buf; buf += sizeof(int32);
-	possible_count = *(int32*)buf; buf += sizeof(int32);
-	count = *(int32*)buf; buf += sizeof(int32);
-	in_format_flags = *(uint32*)buf; buf += sizeof(uint32);
+	flavor_flags = *(uint32_t*)buf; buf += sizeof(uint32_t);
+	internal_id = *(int32_t*)buf; buf += sizeof(int32_t);
+	possible_count = *(int32_t*)buf; buf += sizeof(int32_t);
+	count = *(int32_t*)buf; buf += sizeof(int32_t);
+	in_format_flags = *(uint32_t*)buf; buf += sizeof(uint32_t);
 
 	if (count > 0) {
 		if (count <= MAX_FLAVOR_IN_FORMAT_COUNT) {
@@ -442,8 +442,8 @@ status_t dormant_flavor_info::Unflatten(type_code c, const void *buffer, ssize_t
 		buf += count * sizeof(media_format); // TODO: not save
 	}
 
-	count = *(int32*)buf; buf += sizeof(int32);
-	out_format_flags = *(uint32*)buf; buf += sizeof(uint32);
+	count = *(int32_t*)buf; buf += sizeof(int32_t);
+	out_format_flags = *(uint32_t*)buf; buf += sizeof(uint32_t);
 
 	if (count > 0) {
 		if (count <= MAX_FLAVOR_OUT_FORMAT_COUNT) {
@@ -491,7 +491,7 @@ status_t BMediaAddOn::InitCheck(const char **_failureText)
 }
 
 
-int32 BMediaAddOn::CountFlavors()
+int32_t BMediaAddOn::CountFlavors()
 {
 	CALLED();
 	// only to be implemented by derived classes
@@ -499,7 +499,7 @@ int32 BMediaAddOn::CountFlavors()
 }
 
 
-status_t BMediaAddOn::GetFlavorAt(int32 n, const flavor_info **_info)
+status_t BMediaAddOn::GetFlavorAt(int32_t n, const flavor_info **_info)
 {
 	CALLED();
 	// only to be implemented by derived classes
@@ -533,7 +533,7 @@ bool BMediaAddOn::WantsAutoStart()
 }
 
 
-status_t BMediaAddOn::AutoStart(int count, BMediaNode **_node, int32 *_internalID,
+status_t BMediaAddOn::AutoStart(int count, BMediaNode **_node, int32_t *_internalID,
 	bool *_hasMore)
 {
 	CALLED();
@@ -543,7 +543,7 @@ status_t BMediaAddOn::AutoStart(int count, BMediaNode **_node, int32 *_internalI
 
 
 status_t BMediaAddOn::SniffRef(const entry_ref &file, BMimeType *mimeType,
-	float *_quality, int32 *_internalID)
+	float *_quality, int32_t *_internalID)
 {
 	CALLED();
 	// only to be implemented by BFileInterface derived classes
@@ -552,7 +552,7 @@ status_t BMediaAddOn::SniffRef(const entry_ref &file, BMimeType *mimeType,
 
 
 status_t BMediaAddOn::SniffType(const BMimeType &type, float *_quality,
-	int32 *_internalID)
+	int32_t *_internalID)
 {
 	CALLED();
 	// only to be implemented by BFileInterface derived classes
@@ -560,9 +560,9 @@ status_t BMediaAddOn::SniffType(const BMimeType &type, float *_quality,
 }
 
 
-status_t BMediaAddOn::GetFileFormatList(int32 flavorID,
-	media_file_format *writableFormats, int32 maxWriteItems, int32 *_writeItems,
-	media_file_format *readableFormats, int32 maxReadItems, int32 *_readItems,
+status_t BMediaAddOn::GetFileFormatList(int32_t flavorID,
+	media_file_format *writableFormats, int32_t maxWriteItems, int32_t *_writeItems,
+	media_file_format *readableFormats, int32_t maxReadItems, int32_t *_readItems,
 	void *_reserved)
 {
 	CALLED();
@@ -572,7 +572,7 @@ status_t BMediaAddOn::GetFileFormatList(int32 flavorID,
 
 
 status_t BMediaAddOn::SniffTypeKind(const BMimeType &type, uint64 kinds, float *_quality,
-	int32 *_internalID, void *_reserved)
+	int32_t *_internalID, void *_reserved)
 {
 	CALLED();
 	// only to be implemented by BFileInterface derived classes

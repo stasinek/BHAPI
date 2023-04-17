@@ -88,12 +88,12 @@ public:
 			void			ClearInput();
 			void			ClearOutput();
 
-			void			SetFlowControl(uint32 method);
-			uint32			FlowControl();
+			void			SetFlowControl(uint32_t method);
+			uint32_t			FlowControl();
 
 			status_t		SetDTR(bool asserted);
 			status_t		SetRTS(bool asserted);
-			status_t		NumCharsAvailable(int32* waitThisMany);
+			status_t		NumCharsAvailable(int32_t* waitThisMany);
 
 			bool			IsCTS();
 			bool			IsDSR();
@@ -102,8 +102,8 @@ public:
 			
 			ssize_t			WaitForInput();
 
-			int32			CountDevices();
-			status_t		GetDeviceName(int32 index, char* name, 
+			int32_t			CountDevices();
+			status_t		GetDeviceName(int32_t index, char* name, 
 								size_t bufSize = B_OS_NAME_LENGTH);
 
 private:
@@ -119,11 +119,11 @@ private:
 			data_bits		fDataBits;
 			stop_bits		fStopBits;
 			parity_mode		fParityMode;
-			uint32			fFlow;
+			uint32_t			fFlow;
 			bigtime_t		fTimeout;
 			bool			fBlocking;		
 			BList*			fDevices;
-			uint32			fReserved[3];
+			uint32_t			fReserved[3];
 };
 
 #endif //_SERIAL_PORT_H

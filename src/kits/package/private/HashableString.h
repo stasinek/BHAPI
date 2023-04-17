@@ -22,12 +22,12 @@ public:
 
 	inline						HashableString(const BString& string);
 
-	inline	uint32				GetHashCode() const;
+	inline	uint32_t				GetHashCode() const;
 
 	inline	bool				operator!= (const HashableString& other) const;
 
 private:
-			uint32				fHashCode;
+			uint32_t				fHashCode;
 };
 
 
@@ -48,7 +48,7 @@ HashableString::HashableString(const BString& string)
 }
 
 
-inline uint32 HashableString::GetHashCode() const
+inline uint32_t HashableString::GetHashCode() const
 {
 	return fHashCode;
 }

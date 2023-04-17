@@ -27,11 +27,11 @@ public:
 	virtual status_t			GetNextEntry(BEntry* entry,
 									bool traverse = false) = 0;
 	virtual status_t			GetNextRef(entry_ref* ref) = 0;
-	virtual int32				GetNextDirents(struct dirent* direntBuffer,
+	virtual int32_t				GetNextDirents(struct dirent* direntBuffer,
 									size_t bufferSize,
-									int32 maxEntries = INT_MAX) = 0;
+									int32_t maxEntries = INT_MAX) = 0;
 	virtual status_t			Rewind() = 0;
-	virtual int32				CountEntries() = 0;
+	virtual int32_t				CountEntries() = 0;
 
 private:
 	virtual	void				_ReservedEntryList1();

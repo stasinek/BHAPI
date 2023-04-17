@@ -16,8 +16,8 @@
 
 typedef struct module_info {
 	const char	*name;
-	uint32		flags;
-	status_t	(*std_ops)(int32, ...);
+	uint32_t		flags;
+	status_t	(*std_ops)(int32_t, ...);
 } module_info;
 
 /* module standard operations */
@@ -45,7 +45,7 @@ extern "C" {
 
 extern status_t get_module(const char *path, module_info **_info);
 extern status_t put_module(const char *path);
-extern status_t get_next_loaded_module_name(uint32 *cookie, char *buffer,
+extern status_t get_next_loaded_module_name(uint32_t *cookie, char *buffer,
 	size_t *_bufferSize);
 extern void *open_module_list_etc(const char *prefix, const char *suffix);
 extern void *open_module_list(const char *prefix);

@@ -45,13 +45,13 @@ typedef enum {
 } erase_line_mode;
 
 struct screen_info {
-	int32	columns;
-	int32	rows;
-	int32	x, y;
+	int32_t	columns;
+	int32_t	rows;
+	int32_t	x, y;
 	uint8	attr;
 	bool	bright_attr;
 	bool	reverse_attr;
-	int32	in_command_rows;
+	int32_t	in_command_rows;
 	bool	paging;
 	bool	paging_timeout;
 	bool	boot_debug_output;
@@ -59,8 +59,8 @@ struct screen_info {
 
 	// state machine
 	console_state state;
-	int32	arg_count;
-	int32	args[MAX_ARGS];
+	int32_t	arg_count;
+	int32_t	args[MAX_ARGS];
 } sScreen;
 
 console_module_info *sModule;
@@ -74,14 +74,14 @@ hide_cursor(void)
 
 
 static inline void
-update_cursor(int32 x, int32 y)
+update_cursor(int32_t x, int32_t y)
 {
 	sModule->move_cursor(x, y);
 }
 
 
 static inline void
-move_cursor(int32 x, int32 y)
+move_cursor(int32_t x, int32_t y)
 {
 	sScreen.x = x;
 	sScreen.y = y;
@@ -135,14 +135,14 @@ next_line(void)
 			const char *text = in_command_invocation()
 				? "Press key to continue, Q to quit, S to skip output"
 				: "Press key to continue, S to skip output, P to disable paging";
-			int32 length = strlen(text);
+			int32_t length = strlen(text);
 			if (sScreen.x + length > sScreen.columns) {
 				// make sure we don't overwrite too much
 				text = "P";
 				length = 1;
 			}
 
-			for (int32 i = 0; i < length; i++) {
+			for (int32_t i = 0; i < length; i++) {
 				// yellow on black (or reverse, during boot)
 				sModule->put_glyph(sScreen.columns - length + i, sScreen.y,
 					text[i], sScreen.boot_debug_output ? 0x6f : 0xf6);
@@ -233,7 +233,7 @@ put_character(char c)
 
 
 static void
-set_vt100_attributes(int32 *args, int32 argCount)
+set_vt100_attributes(int32_t *args, int32_t argCount)
 {
 	if (argCount == 0) {
 		// that's the default (attributes off)
@@ -241,7 +241,7 @@ set_vt100_attributes(int32 *args, int32 argCount)
 		args[0] = 0;
 	}
 
-	for (int32 i = 0; i < argCount; i++) {
+	for (int32_t i = 0; i < argCount; i++) {
 		switch (args[i]) {
 			case 0: // reset
 				sScreen.attr = sScreen.boot_debug_output ? 0xf0 : 0x0f;
@@ -302,8 +302,8 @@ set_vt100_attributes(int32 *args, int32 argCount)
 
 
 static bool
-process_vt100_command(const char c, bool seenBracket, int32 *args,
-	int32 argCount)
+process_vt100_command(const char c, bool seenBracket, int32_t *args,
+	int32_t argCount)
 {
 	bool ret = true;
 
@@ -315,8 +315,8 @@ process_vt100_command(const char c, bool seenBracket, int32 *args,
 			case 'H':	// set cursor position
 			case 'f':
 			{
-				int32 row = argCount > 0 ? args[0] : 1;
-				int32 col = argCount > 1 ? args[1] : 1;
+				int32_t row = argCount > 0 ? args[0] : 1;
+				int32_t col = argCount > 1 ? args[1] : 1;
 				if (row > 0)
 					row--;
 				if (col > 0)
@@ -326,7 +326,7 @@ process_vt100_command(const char c, bool seenBracket, int32 *args,
 			}
 			case 'A':	// move up
 			{
-				int32 deltaY = argCount > 0 ? -args[0] : -1;
+				int32_t deltaY = argCount > 0 ? -args[0] : -1;
 				if (deltaY == 0)
 					deltaY = -1;
 				move_cursor(sScreen.x, sScreen.y + deltaY);
@@ -335,7 +335,7 @@ process_vt100_command(const char c, bool seenBracket, int32 *args,
 			case 'e':
 			case 'B':	// move down
 			{
-				int32 deltaY = argCount > 0 ? args[0] : 1;
+				int32_t deltaY = argCount > 0 ? args[0] : 1;
 				if (deltaY == 0)
 					deltaY = 1;
 				move_cursor(sScreen.x, sScreen.y + deltaY);
@@ -343,7 +343,7 @@ process_vt100_command(const char c, bool seenBracket, int32 *args,
 			}
 			case 'D':	// move left
 			{
-				int32 deltaX = argCount > 0 ? -args[0] : -1;
+				int32_t deltaX = argCount > 0 ? -args[0] : -1;
 				if (deltaX == 0)
 					deltaX = -1;
 				move_cursor(sScreen.x + deltaX, sScreen.y);
@@ -352,7 +352,7 @@ process_vt100_command(const char c, bool seenBracket, int32 *args,
 			case 'a':
 			case 'C':	// move right
 			{
-				int32 deltaX = argCount > 0 ? args[0] : 1;
+				int32_t deltaX = argCount > 0 ? args[0] : 1;
 				if (deltaX == 0)
 					deltaX = 1;
 				move_cursor(sScreen.x + deltaX, sScreen.y);
@@ -361,7 +361,7 @@ process_vt100_command(const char c, bool seenBracket, int32 *args,
 			case '`':
 			case 'G':	// set X position
 			{
-				int32 newX = argCount > 0 ? args[0] : 1;
+				int32_t newX = argCount > 0 ? args[0] : 1;
 				if (newX > 0)
 					newX--;
 				move_cursor(newX, sScreen.y);
@@ -369,7 +369,7 @@ process_vt100_command(const char c, bool seenBracket, int32 *args,
 			}
 			case 'd':	// set y position
 			{
-				int32 newY = argCount > 0 ? args[0] : 1;
+				int32_t newY = argCount > 0 ? args[0] : 1;
 				if (newY > 0)
 					newY--;
 				move_cursor(sScreen.x, newY);
@@ -384,15 +384,15 @@ process_vt100_command(const char c, bool seenBracket, int32 *args,
 				break;
 			case 'r':	// set scroll region
 			{
-				int32 low = argCount > 0 ? args[0] : 1;
-				int32 high = argCount > 1 ? args[1] : sScreen.lines;
+				int32_t low = argCount > 0 ? args[0] : 1;
+				int32_t high = argCount > 1 ? args[1] : sScreen.lines;
 				if (low <= high)
 					set_scroll_region(console, low - 1, high - 1);
 				break;
 			}
 			case 'L':	// scroll virtual down at cursor
 			{
-				int32 lines = argCount > 0 ? args[0] : 1;
+				int32_t lines = argCount > 0 ? args[0] : 1;
 				while (lines > 0) {
 					scrdown(console);
 					lines--;
@@ -401,7 +401,7 @@ process_vt100_command(const char c, bool seenBracket, int32 *args,
 			}
 			case 'M':	// scroll virtual up at cursor
 			{
-				int32 lines = argCount > 0 ? args[0] : 1;
+				int32_t lines = argCount > 0 ? args[0] : 1;
 				while (lines > 0) {
 					scrup(console);
 					lines--;

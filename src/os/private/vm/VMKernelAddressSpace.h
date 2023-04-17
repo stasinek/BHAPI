@@ -26,34 +26,34 @@ public:
 	virtual	VMArea*				NextArea(VMArea* area) const;
 
 	virtual	VMArea*				LookupArea(addr_t address) const;
-	virtual	VMArea*				CreateArea(const char* name, uint32 wiring,
-									uint32 protection, uint32 allocationFlags);
+	virtual	VMArea*				CreateArea(const char* name, uint32_t wiring,
+									uint32_t protection, uint32_t allocationFlags);
 	virtual	void				DeleteArea(VMArea* area,
-									uint32 allocationFlags);
+									uint32_t allocationFlags);
 	virtual	status_t			InsertArea(VMArea* area, size_t size,
 									const virtual_address_restrictions*
 										addressRestrictions,
-									uint32 allocationFlags, void** _address);
+									uint32_t allocationFlags, void** _address);
 	virtual	void				RemoveArea(VMArea* area,
-									uint32 allocationFlags);
+									uint32_t allocationFlags);
 
 	virtual	bool				CanResizeArea(VMArea* area, size_t newSize);
 	virtual	status_t			ResizeArea(VMArea* area, size_t newSize,
-									uint32 allocationFlags);
+									uint32_t allocationFlags);
 	virtual	status_t			ShrinkAreaHead(VMArea* area, size_t newSize,
-									uint32 allocationFlags);
+									uint32_t allocationFlags);
 	virtual	status_t			ShrinkAreaTail(VMArea* area, size_t newSize,
-									uint32 allocationFlags);
+									uint32_t allocationFlags);
 
 	virtual	status_t			ReserveAddressRange(size_t size,
 									const virtual_address_restrictions*
 										addressRestrictions,
-									uint32 flags, uint32 allocationFlags,
+									uint32_t flags, uint32_t allocationFlags,
 									void** _address);
 	virtual	status_t			UnreserveAddressRange(addr_t address,
-									size_t size, uint32 allocationFlags);
+									size_t size, uint32_t allocationFlags);
 	virtual	void				UnreserveAllAddressRanges(
-									uint32 allocationFlags);
+									uint32_t allocationFlags);
 
 	virtual	void				Dump() const;
 
@@ -77,13 +77,13 @@ private:
 									const virtual_address_restrictions*
 										addressRestrictions,
 									size_t size, bool allowReservedRange,
-									uint32 allocationFlags, Range*& _range);
+									uint32_t allocationFlags, Range*& _range);
 			Range*				_FindFreeRange(addr_t start, size_t size,
-									size_t alignment, uint32 addressSpec,
+									size_t alignment, uint32_t addressSpec,
 									bool allowReservedRange,
 									addr_t& _foundAddress);
 			void				_FreeRange(Range* range,
-									uint32 allocationFlags);
+									uint32_t allocationFlags);
 
 			void				_CheckStructures() const;
 

@@ -19,11 +19,11 @@ struct wireless_network {
 	BNetworkAddress		address;
 	uint8				noise_level;
 	uint8				signal_strength;
-	uint32				flags;
-	uint32				authentication_mode;
-	uint32				cipher;
-	uint32				group_cipher;
-	uint32				key_mode;
+	uint32_t				flags;
+	uint32_t				authentication_mode;
+	uint32_t				cipher;
+	uint32_t				group_cipher;
+	uint32_t				key_mode;
 };
 
 // flags
@@ -80,16 +80,16 @@ public:
 
 			const char*			Name() const;
 			bool				Exists() const;
-			uint32				Index() const;
+			uint32_t				Index() const;
 
-			uint32				Flags() const;
+			uint32_t				Flags() const;
 			bool				HasLink() const;
 
-			int32				CountMedia() const;
-			int32				GetMediaAt(int32 index) const;
+			int32_t				CountMedia() const;
+			int32_t				GetMediaAt(int32_t index) const;
 
-			int32				Media() const;
-			status_t			SetMedia(int32 media);
+			int32_t				Media() const;
+			status_t			SetMedia(int32_t media);
 
 			status_t			GetHardwareAddress(BNetworkAddress& address);
 
@@ -99,7 +99,7 @@ public:
 			status_t			Scan(bool wait = true,
 									bool forceRescan = true);
 
-			status_t			GetNextNetwork(uint32& cookie,
+			status_t			GetNextNetwork(uint32_t& cookie,
 									wireless_network& network);
 			status_t			GetNetwork(const char* name,
 									wireless_network& network);
@@ -117,9 +117,9 @@ public:
 			status_t			LeaveNetwork(const wireless_network& network);
 			status_t			LeaveNetwork(const BNetworkAddress& address);
 
-			status_t			GetNextAssociatedNetwork(uint32& cookie,
+			status_t			GetNextAssociatedNetwork(uint32_t& cookie,
 									wireless_network& network);
-			status_t			GetNextAssociatedNetwork(uint32& cookie,
+			status_t			GetNextAssociatedNetwork(uint32_t& cookie,
 									BNetworkAddress& address);
 
 private:

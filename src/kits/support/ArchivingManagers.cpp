@@ -76,7 +76,7 @@ struct BArchiveManager::ArchiveInfo {
 	}
 
 
-	int32		token;
+	int32_t		token;
 	BMessage*	archive;
 };
 
@@ -97,7 +97,7 @@ BArchiveManager::~BArchiveManager()
 }
 
 
-status_t BArchiveManager::GetTokenForArchivable(BArchivable* archivable, int32& _token)
+status_t BArchiveManager::GetTokenForArchivable(BArchivable* archivable, int32_t& _token)
 {
 	if (!archivable) {
 		_token = NULL_TOKEN;
@@ -115,7 +115,7 @@ status_t BArchiveManager::GetTokenForArchivable(BArchivable* archivable, int32& 
 
 
 status_t BArchiveManager::ArchiveObject(BArchivable* archivable,
-	bool deep, int32& _token)
+	bool deep, int32_t& _token)
 {
 	if (!archivable) {
 		_token = NULL_TOKEN;
@@ -175,8 +175,8 @@ status_t BArchiveManager::ArchiverLeaving(const BArchiver* archiver, status_t er
 				info.archive = NULL;
 		}
 
-		int32 count = fTokenMap.size();
-		for (int32 i = 0; i < count; i++) {
+		int32_t count = fTokenMap.size();
+		for (int32_t i = 0; i < count; i++) {
 			const ArchivePair& pair = pairs[i];
 			fError = pair.second->AllArchived(pair.first);
 
@@ -253,7 +253,7 @@ BUnarchiveManager::BUnarchiveManager(BMessage* archive)
 
 	// fObjects[0] is a placeholder for the object that started
 	// this unarchiving session.
-	for (int32 i = 0; i < fObjectCount - 1; i++) {
+	for (int32_t i = 0; i < fObjectCount - 1; i++) {
 		BMessage* into = &fObjects[i + 1].archive;
 		status_t err = archive->FindMessage(kArchivableField, i, into);
 		MarkArchive(into);
@@ -270,7 +270,7 @@ BUnarchiveManager::~BUnarchiveManager()
 }
 
 
-status_t BUnarchiveManager::GetArchivableForToken(int32 token,
+status_t BUnarchiveManager::GetArchivableForToken(int32_t token,
 	BUnarchiver::ownership_policy owning, BArchivable*& _archivable)
 {
 	if (token >= fObjectCount)
@@ -303,7 +303,7 @@ status_t BUnarchiveManager::GetArchivableForToken(int32 token,
 }
 
 
-bool BUnarchiveManager::IsInstantiated(int32 token)
+bool BUnarchiveManager::IsInstantiated(int32_t token)
 {
 	if (token < 0 || token >= fObjectCount)
 		return false;
@@ -337,7 +337,7 @@ status_t BUnarchiveManager::UnarchiverLeaving(const BUnarchiver* unarchiver,
 			archivable->fArchivingToken = NULL_TOKEN;
 		}
 
-		for (int32 i = 1; i < fObjectCount && fError == B_OK; i++) {
+		for (int32_t i = 1; i < fObjectCount && fError == B_OK; i++) {
 			archivable = fObjects[i].archivable;
 			if (archivable) {
 				fError = archivable->AllUnarchived(&fObjects[i].archive);
@@ -352,7 +352,7 @@ status_t BUnarchiveManager::UnarchiverLeaving(const BUnarchiver* unarchiver,
 
 	if (fError != B_OK) {
 		syslog(LOG_ERR, "An error occured during unarchival, cleaning up.");
-		for (int32 i = 1; i < fObjectCount; i++) {
+		for (int32_t i = 1; i < fObjectCount; i++) {
 			if (!fObjects[i].adopted)
 				delete fObjects[i].archivable;
 		}
@@ -366,7 +366,7 @@ status_t BUnarchiveManager::UnarchiverLeaving(const BUnarchiver* unarchiver,
 
 void BUnarchiveManager::RelinquishOwnership(BArchivable* archivable)
 {
-	int32 token = NULL_TOKEN;
+	int32_t token = NULL_TOKEN;
 	if (archivable)
 		token = archivable->fArchivingToken;
 
@@ -380,7 +380,7 @@ void BUnarchiveManager::RelinquishOwnership(BArchivable* archivable)
 
 void BUnarchiveManager::AssumeOwnership(BArchivable* archivable)
 {
-	int32 token = NULL_TOKEN;
+	int32_t token = NULL_TOKEN;
 	if (archivable)
 		token = archivable->fArchivingToken;
 

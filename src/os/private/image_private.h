@@ -13,7 +13,7 @@
 __BEGIN_DECLS
 
 status_t get_image_symbol_etc(image_id id, char const* symbolName,
-	int32 symbolType, bool recursive, image_id* _inImage, void** _location);
+	int32_t symbolType, bool recursive, image_id* _inImage, void** _location);
 
 __END_DECLS
 

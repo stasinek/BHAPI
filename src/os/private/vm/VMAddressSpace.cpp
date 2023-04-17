@@ -356,7 +356,7 @@ VMAddressSpace::_DumpListCommand(int argc, char** argv)
 
 	AddressSpaceTable::Iterator it = sAddressSpaceTable.GetIterator();
 	while (VMAddressSpace* space = it.Next()) {
-		int32 areaCount = 0;
+		int32_t areaCount = 0;
 		off_t areaSize = 0;
 		for (VMAddressSpace::AreaIterator areaIt = space->GetAreaIterator();
 				VMArea* area = areaIt.Next();) {

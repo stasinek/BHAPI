@@ -28,7 +28,7 @@ public:
 	virtual	status_t			Perform(perform_code code, void* arg);
 
 			status_t			Play(void** callBackTable,
-									int32 tableEntries,
+									int32_t tableEntries,
 									void* userData);
 
 			status_t			Flatten(BDataIO* stream);
@@ -52,10 +52,10 @@ private:
 			void				_InitData();
 			void				_DisposeData();
 
-			void				_ImportOldData(const void* data, int32 size);
+			void				_ImportOldData(const void* data, int32_t size);
 
-			void				SetToken(int32 token);
-			int32				Token() const;
+			void				SetToken(int32_t token);
+			int32_t				Token() const;
 
 			bool				_AssertLocalCopy();
 			bool				_AssertOldLocalCopy();
@@ -65,19 +65,19 @@ private:
 			status_t			_Download();
 
 	// Deprecated API
-								BPicture(const void* data, int32 size);
+								BPicture(const void* data, int32_t size);
 			const void*			Data() const;
-			int32				DataSize() const;
+			int32_t				DataSize() const;
 
 			void				Usurp(BPicture* lameDuck);
 			BPicture*			StepDown();
 
 private:
-			int32				fToken;
+			int32_t				fToken;
 			_BPictureExtent_*	fExtent;
 			BPicture*			fUsurped;
 
-			uint32				_reserved[3];
+			uint32_t				_reserved[3];
 };
 
 #endif // _PICTURE_H

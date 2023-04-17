@@ -53,7 +53,7 @@ public:
                                     // no-init constructor
                                 ThreadCreationAttributes(
                                     thread_func function, const char* name,
-                                    int32 priority, void* arg,
+                                    int32_t priority, void* arg,
                                     team_id team = -1, Thread* thread = NULL);
 
             status_t			InitFromUserAttributes(
@@ -82,19 +82,19 @@ void thread_at_kernel_exit_no_signals(void);
 void thread_reset_for_exec(void);
 
 status_t thread_init(struct kernel_args *args);
-status_t thread_preboot_init_percpu(struct kernel_args *args, int32 cpuNum);
+status_t thread_preboot_init_percpu(struct kernel_args *args, int32_t cpuNum);
 void thread_yield(void);
 void thread_exit(void);
 
 void thread_map(void (*function)(Thread* thread, void* data), void* data);
 
-int32 thread_max_threads(void);
-int32 thread_used_threads(void);
+int32_t thread_max_threads(void);
+int32_t thread_used_threads(void);
 
-const char* thread_state_to_text(Thread* thread, int32 state);
+const char* thread_state_to_text(Thread* thread, int32_t state);
 
-int32 thread_get_io_priority(thread_id id);
-void thread_set_io_priority(int32 priority);
+int32_t thread_get_io_priority(thread_id id);
+void thread_set_io_priority(int32_t priority);
 
 #define thread_get_current_thread arch_thread_get_current_thread
 
@@ -121,44 +121,44 @@ status_t thread_create_user_stack(Team* team, Thread* thread, void* stackBase,
 thread_id thread_create_thread(const ThreadCreationAttributes& attributes,
     bool kernel);
 
-thread_id spawn_kernel_thread_etc(thread_func, const char *name, int32 priority,
+thread_id spawn_kernel_thread_etc(thread_func, const char *name, int32_t priority,
     void *args, team_id team);
-status_t wait_for_thread_etc(thread_id id, uint32 flags, bigtime_t timeout,
+status_t wait_for_thread_etc(thread_id id, uint32_t flags, bigtime_t timeout,
     status_t *_returnCode);
 
-status_t select_thread(int32 object, struct select_info *info, bool kernel);
-status_t deselect_thread(int32 object, struct select_info *info, bool kernel);
+status_t select_thread(int32_t object, struct select_info *info, bool kernel);
+status_t deselect_thread(int32_t object, struct select_info *info, bool kernel);
 
 #define syscall_64_bit_return_value() arch_syscall_64_bit_return_value()
 
 status_t thread_block();
-status_t thread_block_with_timeout(uint32 timeoutFlags, bigtime_t timeout);
+status_t thread_block_with_timeout(uint32_t timeoutFlags, bigtime_t timeout);
 void thread_unblock(Thread* thread, status_t status);
 
 // used in syscalls.c
-status_t _user_set_thread_priority(thread_id thread, int32 newPriority);
+status_t _user_set_thread_priority(thread_id thread, int32_t newPriority);
 status_t _user_rename_thread(thread_id thread, const char *name);
 status_t _user_suspend_thread(thread_id thread);
 status_t _user_resume_thread(thread_id thread);
 status_t _user_rename_thread(thread_id thread, const char *name);
 thread_id _user_spawn_thread(struct thread_creation_attributes* attributes);
 status_t _user_wait_for_thread(thread_id id, status_t *_returnCode);
-status_t _user_snooze_etc(bigtime_t timeout, int timebase, uint32 flags,
+status_t _user_snooze_etc(bigtime_t timeout, int timebase, uint32_t flags,
     bigtime_t* _remainingTime);
 status_t _user_kill_thread(thread_id thread);
 status_t _user_cancel_thread(thread_id threadID, void (*cancelFunction)(int));
 void _user_thread_yield(void);
 void _user_exit_thread(status_t return_value);
 bool _user_has_data(thread_id thread);
-status_t _user_send_data(thread_id thread, int32 code, const void *buffer, size_t buffer_size);
+status_t _user_send_data(thread_id thread, int32_t code, const void *buffer, size_t buffer_size);
 status_t _user_receive_data(thread_id *_sender, void *buffer, size_t buffer_size);
 thread_id _user_find_thread(const char *name);
 status_t _user_get_thread_info(thread_id id, thread_info *info);
-status_t _user_get_next_thread_info(team_id team, int32 *cookie, thread_info *info);
+status_t _user_get_next_thread_info(team_id team, int32_t *cookie, thread_info *info);
 
-status_t _user_block_thread(uint32 flags, bigtime_t timeout);
+status_t _user_block_thread(uint32_t flags, bigtime_t timeout);
 status_t _user_unblock_thread(thread_id thread, status_t status);
-status_t _user_unblock_threads(thread_id* threads, uint32 count,
+status_t _user_unblock_threads(thread_id* threads, uint32_t count,
     status_t status);
 
 // ToDo: these don't belong here
@@ -184,7 +184,7 @@ int _user_setrlimit(int resource, const struct rlimit * rlp);
             signal.
     \return \c true, if the thread would be interrupted, \c false otherwise.
 */
-static inline bool thread_is_interrupted(Thread* thread, uint32 flags)
+static inline bool thread_is_interrupted(Thread* thread, uint32_t flags)
 {
     sigset_t pendingSignals = thread->AllPendingSignals();
     return ((flags & B_CAN_INTERRUPT) != 0
@@ -315,7 +315,7 @@ static inline bool thread_is_blocked(Thread* thread)
     \param object The object the thread will be blocked at.  Informative/for
         debugging purposes.
 */
-static inline void thread_prepare_to_block(Thread* thread, uint32 flags, uint32 type,
+static inline void thread_prepare_to_block(Thread* thread, uint32_t flags, uint32_t type,
     const void* object)
 {
     thread->wait.flags = flags;

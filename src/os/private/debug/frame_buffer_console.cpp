@@ -41,16 +41,16 @@ struct console_info {
 	area_id	area;
 
 	addr_t	frame_buffer;
-	int32	width;
-	int32	height;
-	int32	depth;
-	int32	bytes_per_pixel;
-	int32	bytes_per_row;
+	int32_t	width;
+	int32_t	height;
+	int32_t	depth;
+	int32_t	bytes_per_pixel;
+	int32_t	bytes_per_row;
 
-	int32	columns;
-	int32	rows;
-	int32	cursor_x;
-	int32	cursor_y;
+	int32_t	columns;
+	int32_t	rows;
+	int32_t	cursor_x;
+	int32_t	cursor_y;
 };
 
 // Palette is (white and black are exchanged):
@@ -69,7 +69,7 @@ static uint16 sPalette16[] = {
 	// bbbbbggggggrrrrr (5-6-5)
 	0xffff, 0x3333, 0x4cc0, 0x04d3, 0xc800, 0x722f, 0xdd40, 0x0000,
 };
-static uint32 sPalette32[] = {
+static uint32_t sPalette32[] = {
 	// is also used by 24 bit modes
 	0xffffff,	// white
 	0x336698,	// blue
@@ -120,7 +120,7 @@ get_palette_entry(uint8 index)
 
 
 static void
-render_glyph(int32 x, int32 y, uint8 glyph, uint8 attr)
+render_glyph(int32_t x, int32_t y, uint8 glyph, uint8 attr)
 {
 	// we're ASCII only
 	if (glyph > 127)
@@ -136,7 +136,7 @@ render_glyph(int32 x, int32 y, uint8 glyph, uint8 attr)
 		for (y = 0; y < CHAR_HEIGHT; y++) {
 			uint8 bits = FONT[CHAR_HEIGHT * glyph + y];
 			for (x = 0; x < CHAR_WIDTH; x++) {
-				for (int32 i = 0; i < sConsole.bytes_per_pixel; i++) {
+				for (int32_t i = 0; i < sConsole.bytes_per_pixel; i++) {
 					if (bits & 1)
 						base[x * sConsole.bytes_per_pixel + i] = color[i];
 					else {
@@ -184,15 +184,15 @@ render_glyph(int32 x, int32 y, uint8 glyph, uint8 attr)
 
 
 static void
-draw_cursor(int32 x, int32 y)
+draw_cursor(int32_t x, int32_t y)
 {
 	if (x < 0 || y < 0)
 		return;
 
 	x *= CHAR_WIDTH * sConsole.bytes_per_pixel;
 	y *= CHAR_HEIGHT;
-	int32 endX = x + CHAR_WIDTH * sConsole.bytes_per_pixel;
-	int32 endY = y + CHAR_HEIGHT;
+	int32_t endX = x + CHAR_WIDTH * sConsole.bytes_per_pixel;
+	int32_t endY = y + CHAR_HEIGHT;
 	uint8* base = (uint8*)(sConsole.frame_buffer + y * sConsole.bytes_per_row);
 
 	if (sConsole.depth < 8) {
@@ -201,7 +201,7 @@ draw_cursor(int32 x, int32 y)
 	}
 
 	for (; y < endY; y++) {
-		for (int32 x2 = x; x2 < endX; x2++)
+		for (int32_t x2 = x; x2 < endX; x2++)
 			base[x2] = ~base[x2];
 
 		base += sConsole.bytes_per_row;
@@ -210,7 +210,7 @@ draw_cursor(int32 x, int32 y)
 
 
 static status_t
-console_get_size(int32* _width, int32* _height)
+console_get_size(int32_t* _width, int32_t* _height)
 {
 	*_width = sConsole.columns;
 	*_height = sConsole.rows;
@@ -220,7 +220,7 @@ console_get_size(int32* _width, int32* _height)
 
 
 static void
-console_move_cursor(int32 x, int32 y)
+console_move_cursor(int32_t x, int32_t y)
 {
 	if (!frame_buffer_console_available())
 		return;
@@ -234,7 +234,7 @@ console_move_cursor(int32 x, int32 y)
 
 
 static void
-console_put_glyph(int32 x, int32 y, uint8 glyph, uint8 attr)
+console_put_glyph(int32_t x, int32_t y, uint8 glyph, uint8 attr)
 {
 	if (x >= sConsole.columns || y >= sConsole.rows
 		|| !frame_buffer_console_available())
@@ -245,23 +245,23 @@ console_put_glyph(int32 x, int32 y, uint8 glyph, uint8 attr)
 
 
 static void
-console_fill_glyph(int32 x, int32 y, int32 width, int32 height, uint8 glyph,
+console_fill_glyph(int32_t x, int32_t y, int32_t width, int32_t height, uint8 glyph,
 	uint8 attr)
 {
 	if (x >= sConsole.columns || y >= sConsole.rows
 		|| !frame_buffer_console_available())
 		return;
 
-	int32 left = x + width;
+	int32_t left = x + width;
 	if (left > sConsole.columns)
 		left = sConsole.columns;
 
-	int32 bottom = y + height;
+	int32_t bottom = y + height;
 	if (bottom > sConsole.rows)
 		bottom = sConsole.rows;
 
 	for (; y < bottom; y++) {
-		for (int32 x2 = x; x2 < left; x2++) {
+		for (int32_t x2 = x; x2 < left; x2++) {
 			render_glyph(x2, y, glyph, attr);
 		}
 	}
@@ -269,8 +269,8 @@ console_fill_glyph(int32 x, int32 y, int32 width, int32 height, uint8 glyph,
 
 
 static void
-console_blit(int32 srcx, int32 srcy, int32 width, int32 height, int32 destx,
-	int32 desty)
+console_blit(int32_t srcx, int32_t srcy, int32_t width, int32_t height, int32_t destx,
+	int32_t desty)
 {
 	if (!frame_buffer_console_available())
 		return;
@@ -290,7 +290,7 @@ console_blit(int32 srcx, int32 srcy, int32 width, int32 height, int32 destx,
 		destx = destx * CHAR_WIDTH / 8;
 	}
 
-	for (int32 y = 0; y < height; y++) {
+	for (int32_t y = 0; y < height; y++) {
 		memmove((void*)(sConsole.frame_buffer + (desty + y)
 				* sConsole.bytes_per_row + destx),
 			(void*)(sConsole.frame_buffer + (srcy + y) * sConsole.bytes_per_row
@@ -322,9 +322,9 @@ console_clear(uint8 attr)
 			uint8* base = (uint8*)sConsole.frame_buffer;
 			uint8* color = get_palette_entry(background_color(attr));
 
-			for (int32 y = 0; y < sConsole.height; y++) {
-				for (int32 x = 0; x < sConsole.width; x++) {
-					for (int32 i = 0; i < sConsole.bytes_per_pixel; i++) {
+			for (int32_t y = 0; y < sConsole.height; y++) {
+				for (int32_t x = 0; x < sConsole.width; x++) {
+					for (int32_t i = 0; i < sConsole.bytes_per_pixel; i++) {
 						base[x * sConsole.bytes_per_pixel + i] = color[i];
 					}
 				}
@@ -340,7 +340,7 @@ console_clear(uint8 attr)
 
 
 static status_t
-console_std_ops(int32 op, ...)
+console_std_ops(int32_t op, ...)
 {
 	switch (op) {
 		case B_MODULE_INIT:
@@ -380,8 +380,8 @@ frame_buffer_console_available(void)
 
 
 status_t
-frame_buffer_update(addr_t baseAddress, int32 width, int32 height, int32 depth,
-	int32 bytesPerRow)
+frame_buffer_update(addr_t baseAddress, int32_t width, int32_t height, int32_t depth,
+	int32_t bytesPerRow)
 {
 	TRACE(("frame_buffer_update(buffer = %p, width = %ld, height = %ld, "
 		"depth = %ld, bytesPerRow = %ld)\n", (void*)baseAddress, width, height,
@@ -478,8 +478,8 @@ frame_buffer_console_init_post_modules(kernel_args* args)
 
 
 status_t
-_user_frame_buffer_update(addr_t baseAddress, int32 width, int32 height,
-	int32 depth, int32 bytesPerRow)
+_user_frame_buffer_update(addr_t baseAddress, int32_t width, int32_t height,
+	int32_t depth, int32_t bytesPerRow)
 {
 	debug_stop_screen_debug_output();
 

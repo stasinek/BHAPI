@@ -134,7 +134,7 @@ public:
 	bool Lock() const       { return fLocker != NULL ? fLocker->Lock() : true; }
 	void Unlock() const     { if (fLocker) fLocker->Unlock(); }
 
-	int32 CountJobs() const { return fJobs.CountItems(); }
+	int32_t CountJobs() const { return fJobs.CountItems(); }
 	Job* JobAt(int i) const { return fJobs.ItemAt(i); }
 
 		// Caller is responsible to set the status of the job appropriately

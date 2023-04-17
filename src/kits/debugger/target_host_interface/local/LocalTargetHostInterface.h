@@ -36,7 +36,7 @@ public:
 
 private:
 	static	status_t			_PortLoop(void* arg);
-			status_t			_HandleTeamEvent(team_id team, int32 opcode,
+			status_t			_HandleTeamEvent(team_id team, int32_t opcode,
 									bool& addToWaiters);
 
 private:

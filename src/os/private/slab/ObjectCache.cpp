@@ -23,7 +23,7 @@ RANGE_MARKER_FUNCTION_BEGIN(SlabObjectCache)
 
 static void
 object_cache_return_object_wrapper(object_depot* depot, void* cookie,
-	void* object, uint32 flags)
+	void* object, uint32_t flags)
 {
 	ObjectCache* cache = (ObjectCache*)cookie;
 
@@ -43,7 +43,7 @@ ObjectCache::~ObjectCache()
 status_t
 ObjectCache::Init(const char* name, size_t objectSize, size_t alignment,
 	size_t maximum, size_t magazineCapacity, size_t maxMagazineCount,
-	uint32 flags, void* cookie, object_cache_constructor constructor,
+	uint32_t flags, void* cookie, object_cache_constructor constructor,
 	object_cache_destructor destructor, object_cache_reclaimer reclaimer)
 {
 	strlcpy(this->name, name, sizeof(this->name));
@@ -117,7 +117,7 @@ ObjectCache::Init(const char* name, size_t objectSize, size_t alignment,
 
 
 slab*
-ObjectCache::InitSlab(slab* slab, void* pages, size_t byteCount, uint32 flags)
+ObjectCache::InitSlab(slab* slab, void* pages, size_t byteCount, uint32_t flags)
 {
 	TRACE_CACHE(this, "construct (%p, %p .. %p, %lu)", slab, pages,
 		((uint8*)pages) + byteCount, byteCount);
@@ -196,7 +196,7 @@ ObjectCache::UninitSlab(slab* slab)
 
 
 void
-ObjectCache::ReturnObjectToSlab(slab* source, void* object, uint32 flags)
+ObjectCache::ReturnObjectToSlab(slab* source, void* object, uint32_t flags)
 {
 	if (source == NULL) {
 		panic("object_cache: free'd object %p has no slab", object);
@@ -246,7 +246,7 @@ ObjectCache::ReturnObjectToSlab(slab* source, void* object, uint32 flags)
 
 
 void*
-ObjectCache::ObjectAtIndex(slab* source, int32 index) const
+ObjectCache::ObjectAtIndex(slab* source, int32_t index) const
 {
 	return (uint8*)source->pages + source->offset + index * object_size;
 }
@@ -285,7 +285,7 @@ ObjectCache::AssertObjectNotFreed(void* object)
 #if SLAB_OBJECT_CACHE_ALLOCATION_TRACKING
 
 status_t
-ObjectCache::AllocateTrackingInfos(slab* slab, size_t byteCount, uint32 flags)
+ObjectCache::AllocateTrackingInfos(slab* slab, size_t byteCount, uint32_t flags)
 {
 	void* pages;
 	size_t objectCount = byteCount / object_size;
@@ -302,7 +302,7 @@ ObjectCache::AllocateTrackingInfos(slab* slab, size_t byteCount, uint32 flags)
 
 
 void
-ObjectCache::FreeTrackingInfos(slab* slab, uint32 flags)
+ObjectCache::FreeTrackingInfos(slab* slab, uint32_t flags)
 {
 	MemoryManager::FreeRawOrReturnCache(slab->tracking, flags);
 }

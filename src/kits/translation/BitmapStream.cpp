@@ -39,7 +39,7 @@ BBitmapStream::BBitmapStream(BBitmap* bitmap)
 		fHeader.bounds = fBitmap->Bounds();
 		fHeader.rowBytes = fBitmap->BytesPerRow();
 		fHeader.colors = fBitmap->ColorSpace();
-		fHeader.dataSize = static_cast<uint32>
+		fHeader.dataSize = static_cast<uint32_t>
 			((fHeader.bounds.Height() + 1) * fHeader.rowBytes);
 		fSize = sizeof(TranslatorBitmap) + fHeader.dataSize;
 
@@ -140,7 +140,7 @@ BBitmapStream::WriteAt(off_t pos, const void* data, size_t size)
 			if (fBitmap != NULL
 				&& (fBitmap->Bounds() != fHeader.bounds
 					|| fBitmap->ColorSpace() != fHeader.colors
-					|| (uint32)fBitmap->BytesPerRow() != fHeader.rowBytes)) {
+					|| (uint32_t)fBitmap->BytesPerRow() != fHeader.rowBytes)) {
 				if (!fDetached)
 					// if someone detached, we don't delete
 					delete fBitmap;
@@ -159,7 +159,7 @@ BBitmapStream::WriteAt(off_t pos, const void* data, size_t size)
 					fBitmap = NULL;
 					return error;
 				}
-				if ((uint32)fBitmap->BytesPerRow() != fHeader.rowBytes) {
+				if ((uint32_t)fBitmap->BytesPerRow() != fHeader.rowBytes) {
 					fprintf(stderr, "BitmapStream %" B_PRId32 " %" B_PRId32 "\n",
 						fBitmap->BytesPerRow(), fHeader.rowBytes);
 					return B_MISMATCHED_VALUES;
@@ -175,7 +175,7 @@ BBitmapStream::WriteAt(off_t pos, const void* data, size_t size)
 
 // Changes the current stream position.
 off_t
-BBitmapStream::Seek(off_t position, uint32 seekMode)
+BBitmapStream::Seek(off_t position, uint32_t seekMode)
 {
 	// When whence == SEEK_SET, it just falls through to
 	// fPosition = position

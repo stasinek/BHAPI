@@ -33,7 +33,7 @@ pit_get_prio(void)
 }
 
 
-static int32
+static int32_t
 pit_timer_interrupt(void *data)
 {
 	return timer_interrupt();

@@ -23,7 +23,7 @@ class Partition : public Node, public partition_data {
 		virtual ssize_t WriteAt(void *cookie, off_t offset, const void *buffer, size_t bufferSize);
 
 		virtual off_t Size() const;
-		virtual int32 Type() const;
+		virtual int32_t Type() const;
 
 		Partition *AddChild();
 

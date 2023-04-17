@@ -32,11 +32,11 @@ public:
 			void				AddListener(Listener* listener);
 			void				RemoveListener(Listener* listener);
 
-			int32				CountTeams() const;
+			int32_t				CountTeams() const;
 			status_t			AddTeam(const team_info& info);
 			void				RemoveTeam(team_id team);
 			void				UpdateTeam(const team_info& info);
-			TeamInfo*			TeamInfoAt(int32 index) const;
+			TeamInfo*			TeamInfoAt(int32_t index) const;
 			TeamInfo*			TeamInfoByID(team_id team) const;
 
 private:

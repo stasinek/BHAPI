@@ -34,7 +34,7 @@
 #include <kits/support/ClassInfo.h>
 
 
-EXGraphicsDrawable::EXGraphicsDrawable(EXGraphicsEngine *x11Engine,  uint32 w,  uint32 h)
+EXGraphicsDrawable::EXGraphicsDrawable(EXGraphicsEngine *x11Engine,  uint32_t w,  uint32_t h)
 	: BGraphicsDrawable(), fEngine(NULL)
 {
 	if(w == B_MAXUINT32 || h == B_MAXUINT32)
@@ -138,7 +138,7 @@ status_t EXGraphicsDrawable::SetBackgroundColor(bhapi::rgb_color bkColor)
 }
 
 
-status_t EXGraphicsDrawable::ResizeTo(uint32 w,  uint32 h)
+status_t EXGraphicsDrawable::ResizeTo(uint32_t w,  uint32_t h)
 {
 	if(w == B_MAXUINT32 || h == B_MAXUINT32)
 	{
@@ -169,8 +169,8 @@ status_t EXGraphicsDrawable::ResizeTo(uint32 w,  uint32 h)
 
 status_t EXGraphicsDrawable::CopyTo(BGraphicsContext *_dc_,
 			   BGraphicsDrawable *dstDrawable,
-			    int32 x,  int32 y,  uint32 w,  uint32 h,
-			    int32 dstX,  int32 dstY,  uint32 dstW,  uint32 dstH)
+			    int32_t x,  int32_t y,  uint32_t w,  uint32_t h,
+			    int32_t dstX,  int32_t dstY,  uint32_t dstW,  uint32_t dstH)
 {
 	if(w != dstW || h != dstH)
 	{

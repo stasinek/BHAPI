@@ -717,7 +717,7 @@ p_option(u_long option) {
  * Return a mnemonic for a time to live.
  */
 const char *
-p_time(u_int32_t value) {
+p_time(u_int32_t_t value) {
 	char *nbuf = p_time_nbuf;
 
 	if (ns_format_ttl((u_long)value, nbuf, sizeof nbuf) < 0)
@@ -771,7 +771,7 @@ static unsigned int poweroften[10] = {1, 10, 100, 1000, 10000, 100000,
 
 /*% takes an XeY precision/size value, returns a string representation. */
 static const char *
-precsize_ntoa(u_int32_t prec)
+precsize_ntoa(u_int32_t_t prec)
 {
 	char *retbuf = precsize_ntoa_retbuf;
 	unsigned long val;
@@ -827,10 +827,10 @@ precsize_aton(const char **strptr) {
 }
 
 /*% converts ascii lat/lon to unsigned encoded 32-bit number.  moves pointer. */
-static u_int32_t
+static u_int32_t_t
 latlon2ul(const char **latlonstrptr, int *which) {
 	const char *cp;
-	u_int32_t retval;
+	u_int32_t_t retval;
 	int deg = 0, min = 0, secs = 0, secsfrac = 0;
 
 	cp = *latlonstrptr;
@@ -929,8 +929,8 @@ loc_aton(const char *ascii, u_char *binary)
 	const char *cp, *maxcp;
 	u_char *bcp;
 
-	u_int32_t latit = 0, longit = 0, alt = 0;
-	u_int32_t lltemp1 = 0, lltemp2 = 0;
+	u_int32_t_t latit = 0, longit = 0, alt = 0;
+	u_int32_t_t lltemp1 = 0, lltemp2 = 0;
 	int altmeters = 0, altfrac = 0, altsign = 1;
 	u_int8_t hp = 0x16;	/*%< default = 1e6 cm = 10000.00m = 10km */
 	u_int8_t vp = 0x13;	/*%< default = 1e3 cm = 10.00m */
@@ -1046,10 +1046,10 @@ loc_ntoa(const u_char *binary, char *ascii)
 	const char *altsign;
 	int altmeters, altfrac;
 
-	const u_int32_t referencealt = 100000 * 100;
+	const u_int32_t_t referencealt = 100000 * 100;
 
-	int32_t latval, longval, altval;
-	u_int32_t templ;
+	int32_t_t latval, longval, altval;
+	u_int32_t_t templ;
 	u_int8_t sizeval, hpval, vpval, versionval;
 
 	char *sizestr, *hpstr, *vpstr;
@@ -1115,9 +1115,9 @@ loc_ntoa(const u_char *binary, char *ascii)
 	altfrac = altval % 100;
 	altmeters = (altval / 100);
 
-	sizestr = strdup(precsize_ntoa((u_int32_t)sizeval));
-	hpstr = strdup(precsize_ntoa((u_int32_t)hpval));
-	vpstr = strdup(precsize_ntoa((u_int32_t)vpval));
+	sizestr = strdup(precsize_ntoa((u_int32_t_t)sizeval));
+	hpstr = strdup(precsize_ntoa((u_int32_t_t)hpval));
+	vpstr = strdup(precsize_ntoa((u_int32_t_t)vpval));
 
 	sprintf(ascii,
 	    "%d %.2d %.2d.%.3d %c %d %.2d %.2d.%.3d %c %s%d.%.2dm %sm %sm %sm",

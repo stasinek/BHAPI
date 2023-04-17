@@ -34,7 +34,7 @@ public:
 	};
 
 	// Handy conversion function for dealing with clip information.
-	static	status_t			ClipDataToRegion(int32 format, int32 size,
+	static	status_t			ClipDataToRegion(int32_t format, int32_t size,
 									const void* data,  BRegion* region);
 
 			media_type			ProducerType();
@@ -52,7 +52,7 @@ protected:
 
 	// BBufferProducer interface
 	virtual	status_t			FormatSuggestionRequested(media_type type,
-									int32 quality, media_format* format) = 0;
+									int32_t quality, media_format* format) = 0;
 	virtual	status_t			FormatProposal(const media_source& output,
 									media_format* ioFormat) = 0;
 
@@ -66,11 +66,11 @@ protected:
 									const media_source& source,
 									const media_destination& destination,
 									media_format* ioFormat,
-									int32* _deprecated_) = 0;
+									int32_t* _deprecated_) = 0;
 	virtual	status_t			GetNextOutput(
-									int32* ioCookie,
+									int32_t* ioCookie,
 									media_output* _output) = 0;
-	virtual	status_t			DisposeOutputCookie(int32 cookie) = 0;
+	virtual	status_t			DisposeOutputCookie(int32_t cookie) = 0;
 
 	// In this function, you should either pass on the group to your upstream
 	// guy, or delete your current group and hang on to this group. Deleting
@@ -94,7 +94,7 @@ protected:
 									int16 numShorts,
 									int16* clipData,
 									const media_video_display_info& display,
-									int32 * _deprecated_);
+									int32_t * _deprecated_);
 
 	// Iterates over all outputs and maxes the latency found
 	virtual	status_t			GetLatency(bigtime_t* _lantency);
@@ -117,12 +117,12 @@ protected:
 									bigtime_t performanceTime) = 0;
 
 	virtual	void				EnableOutput(const media_source& what,
-									bool enabled, int32* _deprecated_) = 0;
+									bool enabled, int32_t* _deprecated_) = 0;
 
-	virtual	status_t			SetPlayRate(int32 numer, int32 denom);
+	virtual	status_t			SetPlayRate(int32_t numer, int32_t denom);
 
 	// NOTE: Call this from the thread that listens to the port!
-	virtual	status_t			HandleMessage(int32 message, const void* data,
+	virtual	status_t			HandleMessage(int32_t message, const void* data,
 									size_t size);
 
 	virtual	void				AdditionalBufferRequested(
@@ -134,14 +134,14 @@ protected:
 
 	virtual	void				LatencyChanged(const media_source& source,
 									const media_destination& destination,
-									bigtime_t newLatency, uint32 flags);
+									bigtime_t newLatency, uint32_t flags);
 
 	// NOTE: Use this function to pass on the buffer on to the BBufferConsumer.
 			status_t			SendBuffer(BBuffer* buffer,
 									const media_source& source, 
 									const media_destination& destination);
 
-			status_t			SendDataStatus(int32 status,
+			status_t			SendDataStatus(int32_t status,
 									const media_destination& destination,
 									bigtime_t atTime);
 
@@ -167,8 +167,8 @@ protected:
 									const media_destination& forDestination,
 									bigtime_t inTargetTime,
 									media_seek_tag* _tag,
-									bigtime_t* _taggedTime, uint32* _flags = 0,
-									uint32 flags = 0);
+									bigtime_t* _taggedTime, uint32_t* _flags = 0,
+									uint32_t flags = 0);
 
 	// Set the initial latency, which is the maximum additional latency
 	// that will be imposed while starting/syncing to a signal (such as
@@ -177,7 +177,7 @@ protected:
 	// because they slave to a low-resolution (59.94 Hz) clock that arrives
 	// from the outside world. Call this from the constructor if you need it.
 			void				SetInitialLatency(bigtime_t inInitialLatency,
-									uint32 flags = 0);
+									uint32_t flags = 0);
 
 	// TODO: Needs a Perform() virtual method!
 
@@ -224,10 +224,10 @@ private:
 private:
 			media_type			fProducerType;
 			bigtime_t			fInitialLatency;
-			uint32				fInitialFlags;
+			uint32_t				fInitialFlags;
 			bigtime_t			fDelay;
 
-			uint32				_reserved_buffer_producer_[12];
+			uint32_t				_reserved_buffer_producer_[12];
 };
 
 #endif // _BUFFER_PRODUCER_H

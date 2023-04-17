@@ -72,7 +72,7 @@ public:
 			status_t			Result() const;
 			const BString&		ErrorString() const;
 
-			uint32				TicketNumber() const;
+			uint32_t				TicketNumber() const;
 
 			status_t			AddStateListener(BJobStateListener* listener);
 			status_t			RemoveStateListener(
@@ -81,9 +81,9 @@ public:
 			bool				IsRunnable() const;
 			status_t			AddDependency(BJob* job);
 			status_t			RemoveDependency(BJob* job);
-			int32				CountDependencies() const;
+			int32_t				CountDependencies() const;
 
-			BJob*				DependantJobAt(int32 index) const;
+			BJob*				DependantJobAt(int32_t index) const;
 
 			class Private;
 
@@ -99,7 +99,7 @@ protected:
 private:
 	friend class Private;
 
-			void				_SetTicketNumber(uint32 ticketNumber);
+			void				_SetTicketNumber(uint32_t ticketNumber);
 			void				_ClearTicketNumber();
 
 private:
@@ -110,7 +110,7 @@ private:
 			status_t			fResult;
 			BString				fErrorString;
 
-			uint32				fTicketNumber;
+			uint32_t				fTicketNumber;
 
 	typedef	BObjectList<BJob>	JobList;
 			JobList				fDependencies;

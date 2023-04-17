@@ -23,16 +23,16 @@ typedef struct {
 	uint8 size_PLL_blocks;
 	uint16 PCLK_ref_freq;
 	uint16 PCLK_ref_divider;
-	uint32 PCLK_min_freq;
-	uint32 PCLK_max_freq;
+	uint32_t PCLK_min_freq;
+	uint32_t PCLK_max_freq;
 	uint16 MCLK_ref_freq;
 	uint16 MCLK_ref_divider;
-	uint32 MCLK_min_freq;
-	uint32 MCLK_max_freq;
+	uint32_t MCLK_min_freq;
+	uint32_t MCLK_max_freq;
 	uint16 XCLK_ref_freq;
 	uint16 XCLK_ref_divider;
-	uint32 XCLK_min_freq;
-	uint32 XCLK_max_freq;
+	uint32_t XCLK_min_freq;
+	uint32_t XCLK_max_freq;
 } __attribute__ ((packed)) PLL_BLOCK;
 
 typedef struct {

@@ -61,7 +61,7 @@ TrackerString::TrackerString(const TrackerString &string)
 }
 
 
-TrackerString::TrackerString(const char* string, int32 maxLength)
+TrackerString::TrackerString(const char* string, int32_t maxLength)
 	:
 	BString(string, maxLength)
 {
@@ -128,7 +128,7 @@ bool TrackerString::EndsWith(const char* string, bool caseSensitivity) const
 {
 	// If "string" is longer than "this",
 	// we should simply return false
-	int32 position = Length() - (int32)strlen(string);
+	int32_t position = Length() - (int32_t)strlen(string);
 	if (position < 0)
 		return false;
 
@@ -234,11 +234,11 @@ bool TrackerString::StringMatchesPattern(const char* string, const char* pattern
 	// One could do this dynamically, counting the number of *'s,
 	// but then you have to free them at every exit of this
 	// function, which is awkward and ugly.
-	const int32 kWildCardMaximum = 100;
+	const int32_t kWildCardMaximum = 100;
 	const char* pStorage[kWildCardMaximum];
 	const char* sStorage[kWildCardMaximum];
 
-	int32 patternLevel = 0;
+	int32_t patternLevel = 0;
 
 	if (string == NULL || pattern == NULL)
 		return false;

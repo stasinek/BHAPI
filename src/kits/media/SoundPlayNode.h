@@ -31,13 +31,13 @@ public:
 
 	// BMediaNode methods
 
-	virtual	BMediaAddOn*		AddOn(int32* _internalID) const;
+	virtual	BMediaAddOn*		AddOn(int32_t* _internalID) const;
 
 protected:
 	virtual	void				Preroll();
 
 public:
-	virtual	status_t			HandleMessage(int32 message, const void* data,
+	virtual	status_t			HandleMessage(int32_t message, const void* data,
 									size_t size);
 
 protected:
@@ -50,7 +50,7 @@ protected:
 	// BBufferProducer methods
 
 	virtual status_t 			FormatSuggestionRequested(media_type type,
-									int32 quality, media_format* format);
+									int32_t quality, media_format* format);
 
 	virtual status_t		 	FormatProposal(const media_source& output,
 									media_format* format);
@@ -58,10 +58,10 @@ protected:
 	virtual status_t 			FormatChangeRequested(
 									const media_source& source,
 									const media_destination& destination,
-									media_format* format, int32* _deprecated_);
-	virtual status_t 			GetNextOutput(int32* cookie,
+									media_format* format, int32_t* _deprecated_);
+	virtual status_t 			GetNextOutput(int32_t* cookie,
 									media_output* _output);
-	virtual status_t		 	DisposeOutputCookie(int32 cookie);
+	virtual status_t		 	DisposeOutputCookie(int32_t cookie);
 
 	virtual	status_t 			SetBufferGroup(const media_source& forSource,
 									BBufferGroup* group);
@@ -86,7 +86,7 @@ protected:
 									bigtime_t performanceTime);
 
 	virtual void 				EnableOutput(const media_source& what,
-									bool enabled, int32* _deprecated_);
+									bool enabled, int32_t* _deprecated_);
 	virtual void 				AdditionalBufferRequested(
 									const media_source& source,
 									media_buffer_id previousBuffer,
@@ -94,7 +94,7 @@ protected:
 									const media_seek_tag* previousTag);
 	virtual void 				LatencyChanged(const media_source& source,
 									const media_destination& destination,
-									bigtime_t newLatency, uint32 flags);
+									bigtime_t newLatency, uint32_t flags);
 
 	// BMediaEventLooper methods
 
@@ -142,7 +142,7 @@ private:
 			bigtime_t 			fInternalLatency;
 			bigtime_t 			fStartTime;
 			uint64 				fFramesSent;
-			int32				fTooEarlyCount;
+			int32_t				fTooEarlyCount;
 };
 
 

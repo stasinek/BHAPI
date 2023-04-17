@@ -151,7 +151,7 @@ private:
 	virtual	void					_ReservedMediaConnection8();
 	virtual	void					_ReservedMediaConnection9();
 	virtual	void					_ReservedMediaConnection10();
-	uint32							fPadding[64];
+	uint32_t							fPadding[64];
 
 	friend class BMediaClient;
 	friend class BMediaClientNode;
@@ -186,7 +186,7 @@ private:
 	virtual	void					_ReservedMediaInput8();
 	virtual	void					_ReservedMediaInput9();
 	virtual	void					_ReservedMediaInput10();
-	uint32							fPadding[32];
+	uint32_t							fPadding[32];
 
 	friend class BMediaClientNode;
 };
@@ -229,7 +229,7 @@ private:
 	virtual	void					_ReservedMediaOutput8();
 	virtual	void					_ReservedMediaOutput9();
 	virtual	void					_ReservedMediaOutput10();
-	uint32							fPadding[32];
+	uint32_t							fPadding[32];
 
 	friend class BMediaClientNode;
 };

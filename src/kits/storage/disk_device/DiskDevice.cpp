@@ -218,7 +218,7 @@ bool BDiskDevice::IsModified() const
 			return Visit(device, 0);
 		}
 
-		virtual bool Visit(BPartition* partition, int32 level)
+		virtual bool Visit(BPartition* partition, int32_t level)
 		{
 			return partition->_IsModified();
 		}
@@ -511,7 +511,7 @@ status_t BDiskDevice::_Update(user_disk_device_data* data, bool* updated)
 
 
 // _AcceptVisitor
-bool BDiskDevice::_AcceptVisitor(BDiskDeviceVisitor* visitor, int32 level)
+bool BDiskDevice::_AcceptVisitor(BDiskDeviceVisitor* visitor, int32_t level)
 {
 	return visitor->Visit(this);
 }

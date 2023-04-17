@@ -13,8 +13,8 @@
 #include <kits/netRoster.h>
 
 
-const int32 kMsgAppServerRestarted = 'ASRe';
-const int32 kMsgRestartAppServer = 'ReAS';
+const int32_t kMsgAppServerRestarted = 'ASRe';
+const int32_t kMsgRestartAppServer = 'ReAS';
 
 
 class BRoster::Private {
@@ -31,7 +31,7 @@ class BRoster::Private {
         status_t Launch(const char* mimeType, const bhapi::entry_ref* ref,
                     const BList* messageList, int argc, const char* const* args,
                     const char** environment, team_id* appTeam,
-                    thread_id* appThread, port_id* appPort, uint32* appToken,
+                    thread_id* appThread, port_id* appPort, uint32_t* appToken,
                     bool launchSuspended)
             { return fRoster->_LaunchApp(mimeType, ref, messageList, argc,
                     args, environment, appTeam, appThread, appPort, appToken,
@@ -43,8 +43,8 @@ class BRoster::Private {
         // needed by BApplication
 
         status_t AddApplication(const char *mimeSig, const bhapi::entry_ref *ref,
-                    uint32 flags, team_id team, thread_id thread,
-                    port_id port, bool fullReg, uint32 *token,
+                    uint32_t flags, team_id team, thread_id thread,
+                    port_id port, bool fullReg, uint32_t *token,
                     team_id *otherTeam) const
             { return fRoster->_AddApplication(mimeSig, ref, flags, team, thread,
                     port, fullReg, token, otherTeam); }
@@ -57,7 +57,7 @@ class BRoster::Private {
             { return fRoster->_CompleteRegistration(team, thread, port); }
 
         status_t IsAppRegistered(const bhapi::entry_ref *ref, team_id team,
-                    uint32 token, bool *preRegistered, app_info *info) const
+                    uint32_t token, bool *preRegistered, app_info *info) const
             { return fRoster->_IsAppRegistered(ref, team, token, preRegistered,
                     info); }
 

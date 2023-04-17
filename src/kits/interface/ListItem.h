@@ -43,7 +43,7 @@ class BPoint;
 #include <kits/support/Archivable.h>
 class BHAPI_IMPEXP BListItem : public BArchivable {
 public:
-	BListItem(uint32 outlineLevel = 0, bool expanded = true,  uint32 flags = 0);
+	BListItem(uint32_t outlineLevel = 0, bool expanded = true,  uint32_t flags = 0);
 	virtual ~BListItem();
 
 	// Archiving
@@ -62,15 +62,15 @@ public:
 	void		SetHeight(float height);
 	void		SetWidth(float width);
 
-	virtual void	SetFlags(uint32 flags);
-	uint32		Flags() const;
+	virtual void	SetFlags(uint32_t flags);
+	uint32_t		Flags() const;
 
 	void		Invalidate();
 
 	// for item of BOutlineListView
 	bool 		IsExpanded() const;
 	void 		SetExpanded(bool expanded);
-	uint32 	OutlineLevel() const;
+	uint32_t 	OutlineLevel() const;
 	bool		IsVisible() const;
 	BListItem	*SuperItem() const;
 	bool		HasSubitems() const;
@@ -87,9 +87,9 @@ private:
 	BListView *fOwner;
 	BOutlineListView *fFullOwner;
 
-	uint32 	fLevel;
+	uint32_t 	fLevel;
 	bool 		fExpanded;
-	uint32		fFlags;
+	uint32_t		fFlags;
 
 	float		fWidth;
 	float		fHeight;
@@ -101,15 +101,15 @@ private:
 
 	virtual void	MouseDown(BView *owner, BPoint where);
 	virtual void	MouseUp(BView *owner, BPoint where);
-	virtual void	MouseMoved(BView *owner, BPoint where,  uint32 code, const BMessage *a_message);
-	virtual void	KeyDown(BView *owner, const char *bytes,  int32 numBytes);
-	virtual void	KeyUp(BView *owner, const char *bytes,  int32 numBytes);
+	virtual void	MouseMoved(BView *owner, BPoint where,  uint32_t code, const BMessage *a_message);
+	virtual void	KeyDown(BView *owner, const char *bytes,  int32_t numBytes);
+	virtual void	KeyUp(BView *owner, const char *bytes,  int32_t numBytes);
 };
 
 
 class BHAPI_IMPEXP StringItem : public BListItem {
 public:
-	StringItem(const char *text,  uint32 outlineLevel = 0, bool expanded = true);
+	StringItem(const char *text,  uint32_t outlineLevel = 0, bool expanded = true);
 	virtual ~StringItem();
 
 	virtual void	SetText(const char *text);

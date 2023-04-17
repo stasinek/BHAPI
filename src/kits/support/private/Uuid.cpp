@@ -24,11 +24,11 @@ static bool init_random_seed()
 	// set a time-based seed
 	timespec time;
 	clock_gettime(CLOCK_REALTIME, &time);
-	uint32 seed = (uint32)time.tv_sec ^ (uint32)time.tv_nsec;
+	uint32_t seed = (uint32_t)time.tv_sec ^ (uint32_t)time.tv_nsec;
 
 	// factor in a stack address -- with address space layout randomization
 	// that adds a bit of additional randomness
-	seed ^= (uint32)(addr_t)&time;
+	seed ^= (uint32_t)(addr_t)&time;
 
 	srandom(seed);
 
@@ -136,8 +136,8 @@ void BUuid::_SetToRandomFallback()
 	static bool sSeedInitialized = init_random_seed();
 	(void)sSeedInitialized;
 
-	for (int32 i = 0; i < 4; i++) {
-		uint32 value = random();
+	for (int32_t i = 0; i < 4; i++) {
+		uint32_t value = random();
 		fValue[4 * i + 0] = uint8(value >> 24);
 		fValue[4 * i + 1] = uint8(value >> 16);
 		fValue[4 * i + 2] = uint8(value >> 8);
@@ -147,7 +147,7 @@ void BUuid::_SetToRandomFallback()
 	// random() returns 31 bit numbers only, so we move a few bits from where
 	// we overwrite them with the version anyway.
 	uint8 bitsToMove = fValue[kVersionByteIndex];
-	for (int32 i = 0; i < 4; i++)
+	for (int32_t i = 0; i < 4; i++)
 		fValue[4 * i] |= (bitsToMove << i) & 0x80;
 }
 

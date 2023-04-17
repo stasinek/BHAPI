@@ -53,7 +53,7 @@ ssize_t BDataPositionIOWrapper::WriteAt(off_t position, const void* buffer,
 	return Write(buffer, size);
 }
 
-off_t BDataPositionIOWrapper::Seek(off_t position, uint32 seekMode)
+off_t BDataPositionIOWrapper::Seek(off_t position, uint32_t seekMode)
 {
 	switch (seekMode) {
 		case SEEK_CUR:

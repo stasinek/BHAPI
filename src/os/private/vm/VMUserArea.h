@@ -14,14 +14,14 @@ struct VMUserAddressSpace;
 
 struct VMUserArea : VMArea {
 								VMUserArea(VMAddressSpace* addressSpace,
-									uint32 wiring, uint32 protection);
+									uint32_t wiring, uint32_t protection);
 								~VMUserArea();
 
 	static	VMUserArea*			Create(VMAddressSpace* addressSpace,
-									const char* name, uint32 wiring,
-									uint32 protection, uint32 allocationFlags);
+									const char* name, uint32_t wiring,
+									uint32_t protection, uint32_t allocationFlags);
 	static	VMUserArea*			CreateReserved(VMAddressSpace* addressSpace,
-									uint32 flags, uint32 allocationFlags);
+									uint32_t flags, uint32_t allocationFlags);
 
 			DoublyLinkedListLink<VMUserArea>& AddressSpaceLink()
 									{ return fAddressSpaceLink; }

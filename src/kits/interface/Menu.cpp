@@ -65,7 +65,7 @@ private:
 };
 
 
-BMenu::BMenu(BRect frame, const char *title,  __be_uint32 resizeMode,  __be_uint32 flags, bhapi::menu_layout layout, bool resizeToFit)
+BMenu::BMenu(BRect frame, const char *title,  __be_uint32_t resizeMode,  __be_uint32_t flags, bhapi::menu_layout layout, bool resizeToFit)
 	: BView(frame, title, resizeMode, flags), fSuperitem(NULL),
 	  fRadioMode(false), fLabelFromMarked(false),
 	  fSelectedIndex(-1), fTrackingIndex(-1), fMarkedIndex(-1), fShowSubmenuByKeyDown(false)
@@ -108,7 +108,7 @@ BMenu::BMenu(const char *title, float width, float height)
 
 BMenu::~BMenu()
 {
-	for(__be_int32 i = 0; i < fMenuItems.CountItems(); i++)
+	for(__be_int32_t i = 0; i < fMenuItems.CountItems(); i++)
 	{
 		BMenuItem *item = (BMenuItem*)fMenuItems.ItemAt(i);
 		item->fMenu = NULL;
@@ -131,7 +131,7 @@ BMenu::AddItem(BMenuItem *item)
 
 
 bool 
-BMenu::AddItem(BMenuItem *item,  __be_int32 index)
+BMenu::AddItem(BMenuItem *item,  __be_int32_t index)
 {
 	if(!item || item->Menu() != NULL || fLayout == B_ITEMS_IN_MATRIX) return false;
 
@@ -172,7 +172,7 @@ BMenu::AddItem(BMenu *menu)
 
 
 bool 
-BMenu::AddItem(BMenu *menu,  __be_int32 index)
+BMenu::AddItem(BMenu *menu,  __be_int32_t index)
 {
 	if(!menu || menu->Superitem() != NULL || fLayout == B_ITEMS_IN_MATRIX) return false;
 
@@ -244,13 +244,13 @@ BMenu::AddSeparatorItem()
 bool 
 BMenu::RemoveItem(BMenuItem *item)
 {
-	__be_int32 index = IndexOf(item);
+	__be_int32_t index = IndexOf(item);
 	return(RemoveItem(index) != NULL);
 }
 
 
 BMenuItem*
-BMenu::RemoveItem(__be_int32 index)
+BMenu::RemoveItem(__be_int32_t index)
 {
 	if(index < 0 || index >= fMenuItems.CountItems()) return NULL;
 
@@ -278,7 +278,7 @@ BMenu::RemoveItem(BMenu *menu)
 {
 	if(!menu || menu->fSuperitem == NULL || menu->fSuperitem->fMenu != this) return false;
 
-	__be_int32 index = IndexOf(menu->fSuperitem);
+	__be_int32_t index = IndexOf(menu->fSuperitem);
 	BMenuItem *item = (BMenuItem*)fMenuItems.RemoveItem(index);
 	if(!item) return false;
 
@@ -303,14 +303,14 @@ BMenu::RemoveItem(BMenu *menu)
 
 
 BMenuItem*
-BMenu::ItemAt(__be_int32 index) const
+BMenu::ItemAt(__be_int32_t index) const
 {
 	return (BMenuItem*)fMenuItems.ItemAt(index);
 }
 
 
 BMenu*
-BMenu::SubmenuAt(__be_int32 index) const
+BMenu::SubmenuAt(__be_int32_t index) const
 {
 	BMenuItem *item = (BMenuItem*)fMenuItems.ItemAt(index);
 	if(!item) return NULL;
@@ -319,14 +319,14 @@ BMenu::SubmenuAt(__be_int32 index) const
 }
 
 
-__be_int32
+__be_int32_t
 BMenu::CountItems() const
 {
 	return fMenuItems.CountItems();
 }
 
 
-__be_int32
+__be_int32_t
 BMenu::IndexOf(const BMenuItem *item) const
 {
 	if(!item || item->fMenu != this) return -1;
@@ -334,7 +334,7 @@ BMenu::IndexOf(const BMenuItem *item) const
 }
 
 
-__be_int32
+__be_int32_t
 BMenu::IndexOf(const BMenu *menu) const
 {
 	if(!menu || menu->Superitem() == NULL) return -1;
@@ -343,9 +343,9 @@ BMenu::IndexOf(const BMenu *menu) const
 
 
 BMenuItem*
-BMenu::FindItem(__be_uint32 command) const
+BMenu::FindItem(__be_uint32_t command) const
 {
-	for(__be_int32 i = 0; i < fMenuItems.CountItems(); i++)
+	for(__be_int32_t i = 0; i < fMenuItems.CountItems(); i++)
 	{
 		BMenuItem *item = (BMenuItem*)fMenuItems.ItemAt(i);
 
@@ -373,7 +373,7 @@ inline bool b_comapre_menuitem_name(const char *name1, const char *name2)
 BMenuItem*
 BMenu::FindItem(const char *name) const
 {
-	for(__be_int32 i = 0; i < fMenuItems.CountItems(); i++)
+	for(__be_int32_t i = 0; i < fMenuItems.CountItems(); i++)
 	{
 		BMenuItem *item = (BMenuItem*)fMenuItems.ItemAt(i);
 
@@ -417,7 +417,7 @@ BMenu::SetTargetForItems(BHandler *target)
 status_t 
 BMenu::SetTargetForItems(BMessenger messenger)
 {
-	for(__be_int32 i = 0; i < fMenuItems.CountItems(); i++)
+	for(__be_int32_t i = 0; i < fMenuItems.CountItems(); i++)
 	{
 		BMenuItem *item = (BMenuItem*)fMenuItems.ItemAt(i);
 		status_t status = item->SetTarget(messenger);
@@ -481,7 +481,7 @@ BMenu::AttachedToWindow()
 	Window()->StartWatching(this, B_WINDOW_MOVED);
 	Window()->StartWatching(this, B_WINDOW_RESIZED);
 
-	for(__be_int32 i = 0; i < fMenuItems.CountItems(); i++)
+	for(__be_int32_t i = 0; i < fMenuItems.CountItems(); i++)
 	{
 		BMenu *menu = ((BMenuItem*)fMenuItems.ItemAt(i))->fSubmenu;
 		if(menu == NULL) continue;
@@ -501,7 +501,7 @@ BMenu::DetachedFromWindow()
 {
 	Window()->StopWatchingAll(this);
 
-	for(__be_int32 i = 0; i < fMenuItems.CountItems(); i++)
+	for(__be_int32_t i = 0; i < fMenuItems.CountItems(); i++)
 	{
 		BMenuItem *item = (BMenuItem*)fMenuItems.ItemAt(i);
 		if(!(item == NULL || item->fSubmenu == NULL)) item->fSubmenu->ClosePopUp();
@@ -522,8 +522,8 @@ BMenu::MessageReceived(BMessage *msg)
 			{
 				if(Window() == NULL) break;
 
-				__be_uint32 what;
-				if(msg->FindInt32(B_OBSERVE_ORIGINAL_WHAT, (__be_int32*)&what) == false ||
+				__be_uint32_t what;
+				if(msg->FindInt32(B_OBSERVE_ORIGINAL_WHAT, (__be_int32_t*)&what) == false ||
 				   !(what == B_WINDOW_MOVED ||
 				     what == B_WINDOW_RESIZED ||
 				     what == B_MINIMIZED ||
@@ -571,8 +571,8 @@ BMenu::MessageReceived(BMessage *msg)
 				}
 				else
 				{
-					__be_uint32 what;
-					if(msg->FindInt32("BHAPI:menu_orig_what", (__be_int32*)&what))
+					__be_uint32_t what;
+					if(msg->FindInt32("BHAPI:menu_orig_what", (__be_int32_t*)&what))
 					{
 						BMessage aMsg = *msg;
 						aMsg.what = what;
@@ -600,7 +600,7 @@ BMenu::MouseDown(BPoint where)
 
 	if(fTrackingIndex >= 0) return;
 
-	__be_int32 newIndex = FindItem(where);
+	__be_int32_t newIndex = FindItem(where);
 	if(newIndex < 0)return;
 
 	if(fSelectedIndex != newIndex)
@@ -608,7 +608,7 @@ BMenu::MouseDown(BPoint where)
 		BMenuItem *oldItem = (BMenuItem*)fMenuItems.ItemAt(fSelectedIndex);
 		BMenuItem *newItem = (BMenuItem*)fMenuItems.ItemAt(newIndex);
 
-		__be_int32 oldSelectedIndex = fSelectedIndex;
+		__be_int32_t oldSelectedIndex = fSelectedIndex;
 		fSelectedIndex = newIndex;
 
 		Window()->DisableUpdates();
@@ -634,7 +634,7 @@ BMenu::MouseUp(BPoint where)
 {
 	if(fTrackingIndex >= 0)
 	{
-		__be_int32 trackingIndex = fTrackingIndex;
+		__be_int32_t trackingIndex = fTrackingIndex;
 		fTrackingIndex = -1;
 
 		if(!IsEnabled() || Window() == NULL || fMenuItems.CountItems() <= 0) return;
@@ -695,11 +695,11 @@ BMenu::MouseUp(BPoint where)
 
 
 void 
-BMenu::MouseMoved(BPoint where,  __be_uint32 code, const BMessage *a_message)
+BMenu::MouseMoved(BPoint where,  __be_uint32_t code, const BMessage *a_message)
 {
 	if(!IsEnabled() || Window() == NULL || fMenuItems.CountItems() <= 0 || !VisibleBounds().Contains(where)) return;
 
-	__be_int32 newIndex = FindItem(where);
+	__be_int32_t newIndex = FindItem(where);
 	if(newIndex < 0) return;
 
 	if(fSelectedIndex != newIndex)
@@ -707,7 +707,7 @@ BMenu::MouseMoved(BPoint where,  __be_uint32 code, const BMessage *a_message)
 		BMenuItem *oldItem = (BMenuItem*)fMenuItems.ItemAt(fSelectedIndex);
 		BMenuItem *newItem = (BMenuItem*)fMenuItems.ItemAt(newIndex);
 
-		__be_int32 oldSelectedIndex = fSelectedIndex;
+		__be_int32_t oldSelectedIndex = fSelectedIndex;
 		fSelectedIndex = newIndex;
 
 		Window()->DisableUpdates();
@@ -727,7 +727,7 @@ BMenu::MouseMoved(BPoint where,  __be_uint32 code, const BMessage *a_message)
 
 
 void 
-BMenu::KeyDown(const char *bytes,  __be_int32 numBytes)
+BMenu::KeyDown(const char *bytes,  __be_int32_t numBytes)
 {
 	if(!IsEnabled() || Window() == NULL || fMenuItems.CountItems() <= 0 || numBytes != 1 || bytes == NULL) return;
 	if(Window()->CurrentMessage() == NULL) return;
@@ -745,7 +745,7 @@ BMenu::KeyDown(const char *bytes,  __be_int32 numBytes)
 	if(!fShowSubmenuByKeyDown)
 		fShowSubmenuByKeyDown = ((selectedItem->fSubmenu == NULL || selectedItem->fSubmenu->Window() == NULL) ? false : true);
 
-	__be_int32 oldIndex = fSelectedIndex;
+	__be_int32_t oldIndex = fSelectedIndex;
 	bool doRewind = false;
 	bool doInvert = false;
 
@@ -836,12 +836,12 @@ BMenu::KeyDown(const char *bytes,  __be_int32 numBytes)
 
 		if(oldItem) oldItem->SelectChanged();
 
-		__be_int32 tmp = fSelectedIndex;
+		__be_int32_t tmp = fSelectedIndex;
 		fSelectedIndex = -1;
 
 		if(!doInvert)
 		{
-			for(__be_int32 i = tmp; i < fMenuItems.CountItems(); i++)
+			for(__be_int32_t i = tmp; i < fMenuItems.CountItems(); i++)
 			{
 				BMenuItem *newItem = (BMenuItem*)fMenuItems.ItemAt(i);
 				fSelectedIndex = i;
@@ -850,7 +850,7 @@ BMenu::KeyDown(const char *bytes,  __be_int32 numBytes)
 			}
 			if(fSelectedIndex < 0 && doRewind)
 			{
-				for(__be_int32 i = 0; i < tmp; i++)
+				for(__be_int32_t i = 0; i < tmp; i++)
 				{
 					BMenuItem *newItem = (BMenuItem*)fMenuItems.ItemAt(i);
 					fSelectedIndex = i;
@@ -861,7 +861,7 @@ BMenu::KeyDown(const char *bytes,  __be_int32 numBytes)
 		}
 		else
 		{
-			for(__be_int32 i = tmp; i >= 0; i--)
+			for(__be_int32_t i = tmp; i >= 0; i--)
 			{
 				BMenuItem *newItem = (BMenuItem*)fMenuItems.ItemAt(i);
 				fSelectedIndex = i;
@@ -870,7 +870,7 @@ BMenu::KeyDown(const char *bytes,  __be_int32 numBytes)
 			}
 			if(fSelectedIndex < 0 && doRewind)
 			{
-				for(__be_int32 i = fMenuItems.CountItems() - 1; i > tmp; i--)
+				for(__be_int32_t i = fMenuItems.CountItems() - 1; i > tmp; i--)
 				{
 					BMenuItem *newItem = (BMenuItem*)fMenuItems.ItemAt(i);
 					fSelectedIndex = i;
@@ -892,7 +892,7 @@ BMenu::KeyDown(const char *bytes,  __be_int32 numBytes)
 
 
 void 
-BMenu::KeyUp(const char *bytes,  __be_int32 numBytes)
+BMenu::KeyUp(const char *bytes,  __be_int32_t numBytes)
 {
 	if(!IsEnabled() || Window() == NULL || fMenuItems.CountItems() <= 0 || numBytes != 1 || bytes == NULL) return;
 	if(Window()->CurrentMessage() == NULL) return;
@@ -1114,7 +1114,7 @@ BMenu::KeyUp(const char *bytes,  __be_int32 numBytes)
 
 
 BRect
-BMenu::ItemFrame(__be_int32 index) const
+BMenu::ItemFrame(__be_int32_t index) const
 {
 	if(index < 0 || index >= fMenuItems.CountItems()) return BRect();
 
@@ -1126,7 +1126,7 @@ BMenu::ItemFrame(__be_int32 index) const
 
 	float left = fMargins.left, top = fMargins.top, w, h;
 
-	for(__be_int32 i = 0; i <= index; i++)
+	for(__be_int32_t i = 0; i <= index; i++)
 	{
 		BMenuItem *item = (BMenuItem*)fMenuItems.ItemAt(i);
 
@@ -1148,14 +1148,14 @@ BMenu::ItemFrame(__be_int32 index) const
 }
 
 
-__be_int32
+__be_int32_t
 BMenu::FindItem(BPoint where)
 {
 	if(!VisibleBounds().Contains(where)) return false;
 
 	if(fLayout == B_ITEMS_IN_MATRIX)
 	{
-		for(__be_int32 i = 0; i < fMenuItems.CountItems(); i++)
+		for(__be_int32_t i = 0; i < fMenuItems.CountItems(); i++)
 		{
 			BMenuItem *item = (BMenuItem*)fMenuItems.ItemAt(i);
 			if(item->fFrame.Contains(where)) return i;
@@ -1166,7 +1166,7 @@ BMenu::FindItem(BPoint where)
 
 	float left = fMargins.left, top = fMargins.top, w, h;
 
-	for(__be_int32 i = 0; i < fMenuItems.CountItems(); i++)
+	for(__be_int32_t i = 0; i < fMenuItems.CountItems(); i++)
 	{
 		BMenuItem *item = (BMenuItem*)fMenuItems.ItemAt(i);
 
@@ -1228,7 +1228,7 @@ BMenu::Draw(BRect updateRect)
 
 	if(fLayout == B_ITEMS_IN_MATRIX)
 	{
-		for(__be_int32 i = 0; i < fMenuItems.CountItems(); i++)
+		for(__be_int32_t i = 0; i < fMenuItems.CountItems(); i++)
 		{
 			BMenuItem *item = (BMenuItem*)fMenuItems.ItemAt(i);
 			BRect r = item->fFrame;
@@ -1242,7 +1242,7 @@ BMenu::Draw(BRect updateRect)
 	{
 		float left = fMargins.left, top = fMargins.top, w, h;
 
-		for(__be_int32 i = 0; i < fMenuItems.CountItems(); i++)
+		for(__be_int32_t i = 0; i < fMenuItems.CountItems(); i++)
 		{
 			BMenuItem *item = (BMenuItem*)fMenuItems.ItemAt(i);
 
@@ -1342,7 +1342,7 @@ BMenu::IsRadioMode() const
 
 
 BMenuItem*
-BMenu::FindMarked(__be_int32 *index) const
+BMenu::FindMarked(__be_int32_t *index) const
 {
 	if(fRadioMode && fMarkedIndex >= 0)
 	{
@@ -1354,7 +1354,7 @@ BMenu::FindMarked(__be_int32 *index) const
 		}
 	}
 
-	for(__be_int32 i = 0; i < fMenuItems.CountItems(); i++)
+	for(__be_int32_t i = 0; i < fMenuItems.CountItems(); i++)
 	{
 		BMenuItem *item = (BMenuItem*)fMenuItems.ItemAt(i);
 
@@ -1417,7 +1417,7 @@ BMenu::GetPreferredSize(float *width, float *height)
 	{
 		BRect rect(0, 0, 0, 0);
 
-		for(__be_int32 i = 0; i < fMenuItems.CountItems(); i++)
+		for(__be_int32_t i = 0; i < fMenuItems.CountItems(); i++)
 		{
 			BMenuItem *item = (BMenuItem*)fMenuItems.ItemAt(i);
 
@@ -1432,7 +1432,7 @@ BMenu::GetPreferredSize(float *width, float *height)
 	{
 		BRect rect(0, 0, 0, 0);
 
-		for(__be_int32 i = 0; i < fMenuItems.CountItems(); i++)
+		for(__be_int32_t i = 0; i < fMenuItems.CountItems(); i++)
 		{
 			BMenuItem *item = (BMenuItem*)fMenuItems.ItemAt(i);
 
@@ -1518,7 +1518,7 @@ ESubmenuWindow::ESubmenuWindow(BPoint where, BMenu *menu)
 
 			fMenu = menu;
 
-			__be_uint32 oldResizingMode = fMenu->ResizingMode();
+			__be_uint32_t oldResizingMode = fMenu->ResizingMode();
 			fMenu->SetResizingMode(B_FOLLOW_NONE);
 			fMenu->ResizeToPreferred();
 			fMenu->MoveTo(BPoint(2, 2));
@@ -1612,7 +1612,7 @@ BMenu::PopUp(BPoint where, bool selectFirstItem)
 	fSelectedIndex = -1;
 	if(selectFirstItem)
 	{
-		for(__be_int32 i = 0; i < fMenuItems.CountItems(); i++)
+		for(__be_int32_t i = 0; i < fMenuItems.CountItems(); i++)
 		{
 			BMenuItem *newItem = (BMenuItem*)fMenuItems.ItemAt(i);
 			fSelectedIndex = i;
@@ -1750,7 +1750,7 @@ void
 BMenu::SelectItem(BMenuItem *item, bool showSubmenu, bool selectFirstItem)
 {
 	if(!(item == NULL || item->fMenu == this)) return;
-	__be_int32 newIndex = (item ? fMenuItems.IndexOf((void*)item) : -1);
+	__be_int32_t newIndex = (item ? fMenuItems.IndexOf((void*)item) : -1);
 
 	if(fSelectedIndex != newIndex && newIndex >= 0)
 	{
@@ -1759,7 +1759,7 @@ BMenu::SelectItem(BMenuItem *item, bool showSubmenu, bool selectFirstItem)
 		BMenuItem *oldItem = (BMenuItem*)fMenuItems.ItemAt(fSelectedIndex);
 		BMenuItem *newItem = (BMenuItem*)fMenuItems.ItemAt(newIndex);
 
-		__be_int32 oldSelectedIndex = fSelectedIndex;
+		__be_int32_t oldSelectedIndex = fSelectedIndex;
 		fSelectedIndex = newIndex;
 
 		if(win) win->DisableUpdates();

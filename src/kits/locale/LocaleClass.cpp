@@ -111,7 +111,7 @@ status_t BLocale::GetFormattingConventions(BFormattingConventions* conventions) 
 
 
 const char *
-BLocale::GetString(uint32 id) const
+BLocale::GetString(uint32_t id) const
 {
 	// Note: this code assumes a certain order of the string bases
 

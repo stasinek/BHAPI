@@ -34,7 +34,7 @@ extern "C" {
 }
 
 
-int32 __gHErrnoTLS = tls_allocate();
+int32_t __gHErrnoTLS = tls_allocate();
 
 
 int *

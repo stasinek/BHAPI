@@ -59,7 +59,7 @@ typedef struct file_system_module_info file_system_module_info;
 struct fs_volume {
 	dev_t						id;
 	partition_id				partition;
-	int32						layer;
+	int32_t						layer;
 	void*						private_volume;
 	fs_volume_ops*				ops;
 	fs_volume*					sub_volume;
@@ -78,33 +78,33 @@ struct fs_volume_ops {
 
 	status_t (*read_fs_info)(fs_volume* volume, struct fs_info* info);
 	status_t (*write_fs_info)(fs_volume* volume, const struct fs_info* info,
-				uint32 mask);
+				uint32_t mask);
 	status_t (*sync)(fs_volume* volume);
 
 	status_t (*get_vnode)(fs_volume* volume, ino_t id, fs_vnode* vnode,
-				int* _type, uint32* _flags, bool reenter);
+				int* _type, uint32_t* _flags, bool reenter);
 
 	/* index directory & index operations */
 	status_t (*open_index_dir)(fs_volume* volume, void** _cookie);
 	status_t (*close_index_dir)(fs_volume* volume, void* cookie);
 	status_t (*free_index_dir_cookie)(fs_volume* volume, void* cookie);
 	status_t (*read_index_dir)(fs_volume* volume, void* cookie,
-				struct dirent* buffer, size_t bufferSize, uint32* _num);
+				struct dirent* buffer, size_t bufferSize, uint32_t* _num);
 	status_t (*rewind_index_dir)(fs_volume* volume, void* cookie);
 
-	status_t (*create_index)(fs_volume* volume, const char* name, uint32 type,
-				uint32 flags);
+	status_t (*create_index)(fs_volume* volume, const char* name, uint32_t type,
+				uint32_t flags);
 	status_t (*remove_index)(fs_volume* volume, const char* name);
 	status_t (*read_index_stat)(fs_volume* volume, const char* name,
 				struct stat* stat);
 
 	/* query operations */
-	status_t (*open_query)(fs_volume* volume, const char* query, uint32 flags,
-				port_id port, uint32 token, void** _cookie);
+	status_t (*open_query)(fs_volume* volume, const char* query, uint32_t flags,
+				port_id port, uint32_t token, void** _cookie);
 	status_t (*close_query)(fs_volume* volume, void* cookie);
 	status_t (*free_query_cookie)(fs_volume* volume, void* cookie);
 	status_t (*read_query)(fs_volume* volume, void* cookie,
-				struct dirent* buffer, size_t bufferSize, uint32* _num);
+				struct dirent* buffer, size_t bufferSize, uint32_t* _num);
 	status_t (*rewind_query)(fs_volume* volume, void* cookie);
 
 	/* support for FS layers */
@@ -143,7 +143,7 @@ struct fs_vnode_ops {
 
 	/* common operations */
 	status_t (*ioctl)(fs_volume* volume, fs_vnode* vnode, void* cookie,
-				uint32 op, void* buffer, size_t length);
+				uint32_t op, void* buffer, size_t length);
 	status_t (*set_flags)(fs_volume* volume, fs_vnode* vnode, void* cookie,
 				int flags);
 	status_t (*select)(fs_volume* volume, fs_vnode* vnode, void* cookie,
@@ -167,7 +167,7 @@ struct fs_vnode_ops {
 	status_t (*read_stat)(fs_volume* volume, fs_vnode* vnode,
 				struct stat* stat);
 	status_t (*write_stat)(fs_volume* volume, fs_vnode* vnode,
-				const struct stat* stat, uint32 statMask);
+				const struct stat* stat, uint32_t statMask);
 	status_t (*preallocate)(fs_volume* volume, fs_vnode* vnode,
 				off_t pos, off_t length);
 
@@ -196,7 +196,7 @@ struct fs_vnode_ops {
 	status_t (*free_dir_cookie)(fs_volume* volume, fs_vnode* vnode,
 				void* cookie);
 	status_t (*read_dir)(fs_volume* volume, fs_vnode* vnode, void* cookie,
-				struct dirent* buffer, size_t bufferSize, uint32* _num);
+				struct dirent* buffer, size_t bufferSize, uint32_t* _num);
 	status_t (*rewind_dir)(fs_volume* volume, fs_vnode* vnode,
 				void* cookie);
 
@@ -209,13 +209,13 @@ struct fs_vnode_ops {
 				void* cookie);
 	status_t (*read_attr_dir)(fs_volume* volume, fs_vnode* vnode,
 				void* cookie, struct dirent* buffer, size_t bufferSize,
-				uint32* _num);
+				uint32_t* _num);
 	status_t (*rewind_attr_dir)(fs_volume* volume, fs_vnode* vnode,
 				void* cookie);
 
 	/* attribute operations */
 	status_t (*create_attr)(fs_volume* volume, fs_vnode* vnode,
-				const char* name, uint32 type, int openMode,
+				const char* name, uint32_t type, int openMode,
 				void** _cookie);
 	status_t (*open_attr)(fs_volume* volume, fs_vnode* vnode, const char* name,
 				int openMode, void** _cookie);
@@ -239,7 +239,7 @@ struct fs_vnode_ops {
 
 	/* support for node and FS layers */
 	status_t (*create_special_node)(fs_volume* volume, fs_vnode* dir,
-				const char* name, fs_vnode* subVnode, mode_t mode, uint32 flags,
+				const char* name, fs_vnode* subVnode, mode_t mode, uint32_t flags,
 				fs_vnode* _superVnode, ino_t* _nodeID);
 	status_t (*get_super_vnode)(fs_volume* volume, fs_vnode* vnode,
 				fs_volume* superVolume, fs_vnode* superVnode);
@@ -257,7 +257,7 @@ struct file_system_module_info {
 	struct module_info	info;
 	const char*			short_name;
 	const char*			pretty_name;
-	uint32				flags;	// DDM flags
+	uint32_t				flags;	// DDM flags
 
 	/* scanning (the device is write locked) */
 	float (*identify_partition)(int fd, partition_data* partition,
@@ -269,11 +269,11 @@ struct file_system_module_info {
 	void (*free_partition_content_cookie)(partition_data* partition);
 
 	/* general operations */
-	status_t (*mount)(fs_volume* volume, const char* device, uint32 flags,
+	status_t (*mount)(fs_volume* volume, const char* device, uint32_t flags,
 				const char* args, ino_t* _rootVnodeID);
 
 	/* capability querying (the device is read locked) */
-	uint32 (*get_supported_operations)(partition_data* partition, uint32 mask);
+	uint32_t (*get_supported_operations)(partition_data* partition, uint32_t mask);
 
 	bool (*validate_resize)(partition_data* partition, off_t* size);
 	bool (*validate_move)(partition_data* partition, off_t* start);
@@ -286,7 +286,7 @@ struct file_system_module_info {
 
 	/* shadow partition modification (device is write locked) */
 	status_t (*shadow_changed)(partition_data* partition,
-				partition_data* child, uint32 operation);
+				partition_data* child, uint32_t operation);
 
 	/* writing (the device is NOT locked) */
 	status_t (*defragment)(int fd, partition_id partition,
@@ -304,7 +304,7 @@ struct file_system_module_info {
 	status_t (*initialize)(int fd, partition_id partition, const char* name,
 				const char* parameters, off_t partitionSize, disk_job_id job);
 	status_t (*uninitialize)(int fd, partition_id partition,
-				off_t partitionSize, uint32 blockSize, disk_job_id job);
+				off_t partitionSize, uint32_t blockSize, disk_job_id job);
 };
 
 
@@ -321,7 +321,7 @@ extern status_t new_vnode(fs_volume* volume, ino_t vnodeID, void* privateNode,
 					fs_vnode_ops* ops);
 extern status_t publish_vnode(fs_volume* volume, ino_t vnodeID,
 					void* privateNode, fs_vnode_ops* ops, int type,
-					uint32 flags);
+					uint32_t flags);
 extern status_t get_vnode(fs_volume* volume, ino_t vnodeID,
 					void** _privateNode);
 extern status_t put_vnode(fs_volume* volume, ino_t vnodeID);
@@ -341,11 +341,11 @@ extern status_t write_pages(int fd, off_t pos, const struct iovec* vecs,
 extern status_t read_file_io_vec_pages(int fd,
 					const struct file_io_vec* fileVecs, size_t fileVecCount,
 					const struct iovec* vecs, size_t vecCount,
-					uint32* _vecIndex, size_t* _vecOffset, size_t* _bytes);
+					uint32_t* _vecIndex, size_t* _vecOffset, size_t* _bytes);
 extern status_t write_file_io_vec_pages(int fd,
 					const struct file_io_vec* fileVecs, size_t fileVecCount,
 					const struct iovec* vecs, size_t vecCount,
-					uint32* _vecIndex, size_t* _vecOffset, size_t* _bytes);
+					uint32_t* _vecIndex, size_t* _vecOffset, size_t* _bytes);
 extern status_t do_fd_io(int fd, io_request* request);
 extern status_t do_iterative_fd_io(int fd, io_request* request,
 					iterative_io_get_vecs getVecs,
@@ -359,17 +359,17 @@ extern status_t notify_entry_moved(dev_t device, ino_t fromDirectory,
 					const char* fromName, ino_t toDirectory,
 					const char* toName, ino_t node);
 extern status_t notify_stat_changed(dev_t device, ino_t node,
-					uint32 statFields);
+					uint32_t statFields);
 extern status_t notify_attribute_changed(dev_t device, ino_t node,
-					const char* attribute, int32 cause);
+					const char* attribute, int32_t cause);
 
-extern status_t notify_query_entry_created(port_id port, int32 token,
+extern status_t notify_query_entry_created(port_id port, int32_t token,
 					dev_t device, ino_t directory, const char* name,
 					ino_t node);
-extern status_t notify_query_entry_removed(port_id port, int32 token,
+extern status_t notify_query_entry_removed(port_id port, int32_t token,
 					dev_t device, ino_t directory, const char* name,
 					ino_t node);
-extern status_t notify_query_attr_changed(port_id port, int32 token,
+extern status_t notify_query_attr_changed(port_id port, int32_t token,
 					dev_t device, ino_t directory, const char* name,
 					ino_t node);
 

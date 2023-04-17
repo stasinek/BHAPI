@@ -24,7 +24,7 @@ extern "C" {
 /*****************************************************************************/
 typedef struct {
     sem_id  sem;
-    int32   ben;
+    int32_t   ben;
 } benaphore;
 
 #define INIT_BEN(x) x.sem = create_sem(0, "ET6000 "#x" benaphore");  x.ben = 0;
@@ -61,13 +61,13 @@ typedef struct {
     void *physFramebuffer; /* Physical address of start of framebuffer */
     void *memory;          /* Start of the mapped adapter onboard memory */
     void *physMemory;      /* Physical address of start of onboard memory */
-    uint32 memSize;        /* Size of available onboard memory, bytes. */
+    uint32_t memSize;        /* Size of available onboard memory, bytes. */
     uint16 pciConfigSpace; /* PCI header base I/O address */
     void *mmRegs; /* memory mapped registers */
     void *emRegs; /* external mapped registers */
     area_id modesArea; /* Contains the list of display modes the driver supports */
-    uint32  modesNum; /* Number of display modes in the list */
-    int32   flags;
+    uint32_t  modesNum; /* Number of display modes in the list */
+    int32_t   flags;
 
     display_mode dm; /* current display mode configuration */
     uint8 bytesPerPixel; /* bytes(!) per pixel at current display mode */
@@ -79,22 +79,22 @@ typedef struct {
         benaphore lock;   /* for serializing access to the acceleration engine */
     } engine;
 
-    uint32 pixelClockMax16; /* The maximum speed the pixel clock should run */
-    uint32 pixelClockMax24; /* at for a given pixel width. Usually a function */
+    uint32_t pixelClockMax16; /* The maximum speed the pixel clock should run */
+    uint32_t pixelClockMax24; /* at for a given pixel width. Usually a function */
                             /* of memory and DAC bandwidths. */
 } ET6000SharedInfo;
 /*****************************************************************************/
 /* Read or write a value in PCI configuration space */
 typedef struct {
-    uint32  magic;      /* magic number to make sure the caller groks us */
-    uint32  offset;     /* Offset to read/write */
-    uint32  size;       /* Number of bytes to transfer */
-    uint32  value;      /* The value read or written */
+    uint32_t  magic;      /* magic number to make sure the caller groks us */
+    uint32_t  offset;     /* Offset to read/write */
+    uint32_t  size;       /* Number of bytes to transfer */
+    uint32_t  value;      /* The value read or written */
 } ET6000GetSetPCI;
 /*****************************************************************************/
 /* Retrieve the area_id of the kernel/accelerant shared info */
 typedef struct {
-    uint32  magic; /* magic number to make sure the caller groks us */
+    uint32_t  magic; /* magic number to make sure the caller groks us */
     area_id sharedInfoArea; /* area_id containing the shared information */
 } ET6000GetPrivateData;
 /*****************************************************************************/
@@ -103,15 +103,15 @@ typedef struct {
  * want to know the device name (like when we are cloning the accelerant).
  */
 typedef struct {
-    uint32  magic;     /* magic number to make sure the caller groks us */
+    uint32_t  magic;     /* magic number to make sure the caller groks us */
     char    *name;     /* The name of the device, less the /dev root */
 } ET6000DeviceName;
 /*****************************************************************************/
 typedef struct {
-    uint32  magic;     /* magic number to make sure the caller groks us */
+    uint32_t  magic;     /* magic number to make sure the caller groks us */
     display_mode mode; /* Proposed mode or mode to set */
     uint16 pciConfigSpace; /* For setting the mode */
-    uint32 memSize; /* For proposing the mode */
+    uint32_t memSize; /* For proposing the mode */
 } ET6000DisplayMode;
 /*****************************************************************************/
 

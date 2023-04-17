@@ -34,13 +34,13 @@ class FreeChunk {
 public:
 			void				SetTo(size_t size, FreeChunk* next);
 
-			uint32				Size() const;
-			uint32				CompleteSize() const { return fSize; }
+			uint32_t				Size() const;
+			uint32_t				CompleteSize() const { return fSize; }
 
 			FreeChunk*			Next() const { return fNext; }
 			void				SetNext(FreeChunk* next) { fNext = next; }
 
-			FreeChunk*			Split(uint32 splitSize);
+			FreeChunk*			Split(uint32_t splitSize);
 			bool				IsTouching(FreeChunk* link);
 			FreeChunk*			Join(FreeChunk* link);
 			void				Remove(rtm_pool* pool,
@@ -72,7 +72,7 @@ struct rtm_pool : DoublyLinkedListLinkImpl<rtm_pool> {
 typedef DoublyLinkedList<rtm_pool> PoolList;
 
 
-const static uint32 kAlignment = 256;
+const static uint32_t kAlignment = 256;
 	// all memory chunks will be a multiple of this
 
 static mutex sPoolsLock = MUTEX_INITIALIZER("rtm pools");
@@ -89,7 +89,7 @@ void FreeChunk::SetTo(size_t size, FreeChunk* next)
 /*!	Returns the amount of bytes that can be allocated
 	in this chunk.
 */
-uint32 FreeChunk::Size() const
+uint32_t FreeChunk::Size() const
 {
 	return fSize - FreeChunk::NextOffset();
 }
@@ -99,7 +99,7 @@ uint32 FreeChunk::Size() const
 	and returns it.
 */
 FreeChunk*
-FreeChunk::Split(uint32 splitSize)
+FreeChunk::Split(uint32_t splitSize)
 {
 	splitSize = (splitSize - 1 + kAlignment) & ~(kAlignment - 1);
 
@@ -216,7 +216,7 @@ void rtm_pool::Free(void* allocated)
 
 	FreeChunk* chunk = free_anchor.Next();
 	FreeChunk* last = &free_anchor;
-	int32 joinCount = 0;
+	int32_t joinCount = 0;
 
 	while (chunk) {
 		if (chunk->IsTouching(freedChunk)) {
@@ -507,8 +507,8 @@ rtm_default_pool()
 extern "C" {
 
 // undocumented symbols that BeOS exports
-status_t rtm_create_pool_etc(rtm_pool ** out_pool, size_t total_size, const char * name, int32 param4, int32 param5, ...);
-void rtm_get_pool(rtm_pool *pool,void *data,int32 param3,int32 param4, ...);
+status_t rtm_create_pool_etc(rtm_pool ** out_pool, size_t total_size, const char * name, int32_t param4, int32_t param5, ...);
+void rtm_get_pool(rtm_pool *pool,void *data,int32_t param3,int32_t param4, ...);
 
 }
 #endif

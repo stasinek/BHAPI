@@ -106,8 +106,8 @@ public:
 
 			void				Unset();
 
-			int32				CountIssues() const;
-			const BTransactionIssue* IssueAt(int32 index) const;
+			int32_t				CountIssues() const;
+			const BTransactionIssue* IssueAt(int32_t index) const;
 			bool				AddIssue(const BTransactionIssue& issue);
 
 			BTransactionError	Error() const;

@@ -333,7 +333,7 @@ void BColorControl::_DrawDescription(BRect r)
 }
 
 
-void BColorControl::SetValue(__be_int32 color)
+void BColorControl::SetValue(__be_int32_t color)
 {
 	if(color != Value())
 	{
@@ -346,14 +346,14 @@ void BColorControl::SetValue(__be_int32 color)
 
 void BColorControl::SetValue(bhapi::rgb_color color)
 {
-	__be_int32 c = ((__be_int32)color.red << 16) | ((__be_int32)color.green << 8) | ((__be_int32)color.blue);
+	__be_int32_t c = ((__be_int32_t)color.red << 16) | ((__be_int32_t)color.green << 8) | ((__be_int32_t)color.blue);
 	SetValue(c);
 }
 
 
 bhapi::rgb_color BColorControl::ValueAsColor()
 {
-	__be_int32 c = Value();
+	__be_int32_t c = Value();
     return bhapi::make_rgb_color((c >> 16) & 0xff, (c >> 8) & 0xff, c & 0xff);
 }
 

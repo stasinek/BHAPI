@@ -23,14 +23,14 @@ typedef struct x86_extended_registers {
 	uint8				tag;
 	uint8				reserved1;
 	uint16				opcode;
-	uint32				instruction_pointer;
+	uint32_t				instruction_pointer;
 	uint16				cs;
 	uint16				reserved2;
-	uint32				data_pointer;
+	uint32_t				data_pointer;
 	uint16				ds;
 	uint16				reserved3;
-	uint32				mxcsr;
-	uint32				mxcsr_mask;
+	uint32_t				mxcsr;
+	uint32_t				mxcsr_mask;
 	union {
 		x86_fp_register	fp_registers[8];	// st0-st7
 		x86_fp_register	mmx_registers[8];	// mm0-mm7
@@ -43,25 +43,25 @@ typedef struct x86_extended_registers {
 struct x86_debug_cpu_state {
 	x86_extended_registers	extended_registers;
 
-	uint32	gs;
-	uint32	fs;
-	uint32	es;
-	uint32	ds;
-	uint32	edi;
-	uint32	esi;
-	uint32	ebp;
-	uint32	esp;
-	uint32	ebx;
-	uint32	edx;
-	uint32	ecx;
-	uint32	eax;
-	uint32	vector;
-	uint32	error_code;
-	uint32	eip;
-	uint32	cs;
-	uint32	eflags;
-	uint32	user_esp;
-	uint32	user_ss;
+	uint32_t	gs;
+	uint32_t	fs;
+	uint32_t	es;
+	uint32_t	ds;
+	uint32_t	edi;
+	uint32_t	esi;
+	uint32_t	ebp;
+	uint32_t	esp;
+	uint32_t	ebx;
+	uint32_t	edx;
+	uint32_t	ecx;
+	uint32_t	eax;
+	uint32_t	vector;
+	uint32_t	error_code;
+	uint32_t	eip;
+	uint32_t	cs;
+	uint32_t	eflags;
+	uint32_t	user_esp;
+	uint32_t	user_ss;
 } __attribute__((aligned(16)));
 
 

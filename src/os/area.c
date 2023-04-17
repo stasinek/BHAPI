@@ -12,8 +12,8 @@
 
 
 area_id
-create_area(const char *name, void **address, uint32 addressSpec, size_t size,
-	uint32 lock, uint32 protection)
+create_area(const char *name, void **address, uint32_t addressSpec, size_t size,
+	uint32_t lock, uint32_t protection)
 {
 	if (__gABIVersion < B_HAIKU_ABI_GCC_2_HAIKU)
 		protection |= B_EXECUTE_AREA;
@@ -22,8 +22,8 @@ create_area(const char *name, void **address, uint32 addressSpec, size_t size,
 
 
 area_id
-clone_area(const char *name, void **address, uint32 addressSpec,
-	uint32 protection, area_id sourceArea)
+clone_area(const char *name, void **address, uint32_t addressSpec,
+	uint32_t protection, area_id sourceArea)
 {
 	if (__gABIVersion < B_HAIKU_ABI_GCC_2_HAIKU)
 		protection |= B_EXECUTE_AREA;
@@ -60,7 +60,7 @@ resize_area(area_id id, size_t newSize)
 
 
 status_t
-set_area_protection(area_id id, uint32 protection)
+set_area_protection(area_id id, uint32_t protection)
 {
 	if (__gABIVersion < B_HAIKU_ABI_GCC_2_HAIKU)
 		protection |= B_EXECUTE_AREA;

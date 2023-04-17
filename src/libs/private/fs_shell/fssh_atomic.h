@@ -15,14 +15,14 @@ extern "C" {
 #endif
 
 
-void	fssh_atomic_set(int32_t* value, int32_t newValue);
-int32_t	fssh_atomic_get_and_set(int32_t* value, int32_t newValue);
-int32_t	fssh_atomic_test_and_set(int32_t *value, int32_t newValue,
-			int32_t testAgainst);
-int32_t	fssh_atomic_add(int32_t *value, int32_t addValue);
-int32_t	fssh_atomic_and(int32_t *value, int32_t andValue);
-int32_t	fssh_atomic_or(int32_t *value, int32_t orValue);	
-int32_t	fssh_atomic_get(int32_t *value);
+void	fssh_atomic_set(int32_t_t* value, int32_t_t newValue);
+int32_t_t	fssh_atomic_get_and_set(int32_t_t* value, int32_t_t newValue);
+int32_t_t	fssh_atomic_test_and_set(int32_t_t *value, int32_t_t newValue,
+			int32_t_t testAgainst);
+int32_t_t	fssh_atomic_add(int32_t_t *value, int32_t_t addValue);
+int32_t_t	fssh_atomic_and(int32_t_t *value, int32_t_t andValue);
+int32_t_t	fssh_atomic_or(int32_t_t *value, int32_t_t orValue);	
+int32_t_t	fssh_atomic_get(int32_t_t *value);
 
 void	fssh_atomic_set64(int64_t* value, int64_t newValue);
 int64_t	fssh_atomic_get_and_set64(int64_t* value, int64_t newValue);

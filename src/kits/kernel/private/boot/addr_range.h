@@ -20,15 +20,15 @@ typedef struct addr_range {
 extern "C" {
 #endif
 
-status_t insert_address_range(addr_range* ranges, uint32* _numRanges,
-	uint32 maxRanges, uint64 start, uint64 size);
-status_t remove_address_range(addr_range* ranges, uint32* _numRanges,
-	uint32 maxRanges, uint64 start, uint64 size);
-bool get_free_address_range(addr_range* ranges, uint32 numRanges, uint64 base,
+status_t insert_address_range(addr_range* ranges, uint32_t* _numRanges,
+	uint32_t maxRanges, uint64 start, uint64 size);
+status_t remove_address_range(addr_range* ranges, uint32_t* _numRanges,
+	uint32_t maxRanges, uint64 start, uint64 size);
+bool get_free_address_range(addr_range* ranges, uint32_t numRanges, uint64 base,
 	uint64 size, uint64* _rangeBase);
-bool is_address_range_covered(addr_range* ranges, uint32 numRanges, uint64 base,
+bool is_address_range_covered(addr_range* ranges, uint32_t numRanges, uint64 base,
 	uint64 size);
-void sort_address_ranges(addr_range* ranges, uint32 numRanges);
+void sort_address_ranges(addr_range* ranges, uint32_t numRanges);
 
 status_t insert_physical_memory_range(uint64 start, uint64 size);
 status_t insert_physical_allocated_range(uint64 start, uint64 size);

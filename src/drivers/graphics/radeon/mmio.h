@@ -15,13 +15,13 @@
 // write 8-bit register
 #define OUTREG8( regs, addr, val ) do { *(regs + (addr)) = (val); } while( 0 )
 // read 32-bit register
-#define INREG( regs, addr ) (*((vuint32 *)(regs + (addr))))
+#define INREG( regs, addr ) (*((vuint32_t *)(regs + (addr))))
 // write 32-bit register
-#define OUTREG( regs, addr, val ) do { *(vuint32 *)(regs + (addr)) = (val); } while( 0 )
+#define OUTREG( regs, addr, val ) do { *(vuint32_t *)(regs + (addr)) = (val); } while( 0 )
 // write partial 32-bit register, keeping bits "mask"
 #define OUTREGP( regs, addr, val, mask )                                  \
 	do {                                                                  \
-		uint32 tmp = INREG( (regs), (addr) );                             \
+		uint32_t tmp = INREG( (regs), (addr) );                             \
 		tmp &= (mask);                                                    \
 		tmp |= (val) & ~(mask);                                           \
 		OUTREG( (regs), (addr), tmp );                                    \

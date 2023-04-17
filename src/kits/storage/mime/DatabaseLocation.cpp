@@ -63,7 +63,7 @@ status_t DatabaseLocation::OpenType(const char* type, BNode& _node) const
 	if (type == NULL)
 		return B_BAD_VALUE;
 
-	int32 index;
+	int32_t index;
 	return _OpenType(type, _node, index);
 }
 
@@ -88,7 +88,7 @@ status_t DatabaseLocation::OpenWritableType(const char* type, BNode& _node, bool
 		*_didCreate = false;
 
 	// See, if the type already exists.
-	int32 index;
+	int32_t index;
 	status_t result = _OpenType(type, _node, index);
 	if (result == B_OK) {
 		if (index == 0)
@@ -717,17 +717,17 @@ bool DatabaseLocation::IsInstalled(const char* type)
 
 
 BString
-DatabaseLocation::_TypeToFilename(const char* type, int32 index) const
+DatabaseLocation::_TypeToFilename(const char* type, int32_t index) const
 {
 	BString path = fDirectories.StringAt(index);
 	return path << '/' << BString(type).ToLower();
 }
 
 
-status_t DatabaseLocation::_OpenType(const char* type, BNode& _node, int32& _index) const
+status_t DatabaseLocation::_OpenType(const char* type, BNode& _node, int32_t& _index) const
 {
-	int32 count = fDirectories.CountStrings();
-	for (int32 i = 0; i < count; i++) {
+	int32_t count = fDirectories.CountStrings();
+	for (int32_t i = 0; i < count; i++) {
 		status_t result = _node.SetTo(_TypeToFilename(type, i));
 		attr_info attrInfo;
 		if (result == B_OK && _node.GetAttrInfo(kTypeAttr, &attrInfo) == B_OK) {

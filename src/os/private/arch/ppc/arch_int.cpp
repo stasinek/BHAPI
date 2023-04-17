@@ -444,7 +444,7 @@ get_interrupt_controller_modules(PICModuleList &list)
 
 	char name[B_PATH_NAME_LENGTH];
 	size_t length;
-	uint32 cookie = 0;
+	uint32_t cookie = 0;
 	while (get_next_loaded_module_name(&cookie, name, &(length = sizeof(name)))
 			== B_OK) {
 		// an interrupt controller module?

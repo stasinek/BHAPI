@@ -58,7 +58,7 @@ status_t BPathFinder::SetTo(const entry_ref& ref, const char* dependency)
 
 
 status_t BPathFinder::FindPath(const char* architecture,
-	path_base_directory baseDirectory, const char* subPath, uint32 flags,
+	path_base_directory baseDirectory, const char* subPath, uint32_t flags,
 	BPath& _path)
 {
 	_path.Unset();
@@ -88,7 +88,7 @@ status_t BPathFinder::FindPath(const char* architecture,
 
 
 status_t BPathFinder::FindPath(path_base_directory baseDirectory, const char* subPath,
-	uint32 flags, BPath& _path)
+	uint32_t flags, BPath& _path)
 {
 	return FindPath(NULL, baseDirectory, subPath, flags, _path);
 }
@@ -108,7 +108,7 @@ status_t BPathFinder::FindPath(path_base_directory baseDirectory, BPath& _path)
 
 
 /*static*/ status_t BPathFinder::FindPaths(const char* architecture,
-	path_base_directory baseDirectory, const char* subPath, uint32 flags,
+	path_base_directory baseDirectory, const char* subPath, uint32_t flags,
 	BStringList& _paths)
 {
 	_paths.MakeEmpty();
@@ -137,7 +137,7 @@ status_t BPathFinder::FindPath(path_base_directory baseDirectory, BPath& _path)
 
 
 /*static*/ status_t BPathFinder::FindPaths(path_base_directory baseDirectory, const char* subPath,
-	uint32 flags, BStringList& _paths)
+	uint32_t flags, BStringList& _paths)
 {
 	return FindPaths(NULL, baseDirectory, subPath, flags, _paths);
 }

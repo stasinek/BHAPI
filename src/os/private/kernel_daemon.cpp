@@ -26,8 +26,8 @@
 struct daemon : DoublyLinkedListLinkImpl<struct daemon> {
 	daemon_hook	function;
 	void*		arg;
-	int32		frequency;
-	int32		offset;
+	int32_t		frequency;
+	int32_t		offset;
 	bool		executing;
 };
 
@@ -56,7 +56,7 @@ private:
 			DaemonList			fDaemons;
 			thread_id			fThread;
 			ConditionVariable	fUnregisterCondition;
-			int32				fUnregisterWaiters;
+			int32_t				fUnregisterWaiters;
 };
 
 
@@ -103,7 +103,7 @@ KernelDaemon::Register(daemon_hook function, void* arg, int frequency)
 		// (beware, it's a very simple algorithm, yet effective)
 
 		DaemonList::Iterator iterator = fDaemons.GetIterator();
-		int32 num = 0;
+		int32_t num = 0;
 
 		while (iterator.HasNext()) {
 			if (iterator.Next()->frequency == frequency)
@@ -218,7 +218,7 @@ status_t
 KernelDaemon::_DaemonThread()
 {
 	struct daemon marker;
-	int32 iteration = 0;
+	int32_t iteration = 0;
 
 	marker.arg = NULL;
 

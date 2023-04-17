@@ -63,7 +63,7 @@ protected:
 
 status_t large_memory_physical_page_ops_init(kernel_args* args,
 	ARMLargePhysicalPageMapper::PhysicalPageSlotPool* initialPools,
-	int32 initialPoolCount, size_t poolSize,
+	int32_t initialPoolCount, size_t poolSize,
 	ARMPhysicalPageMapper*& _pageMapper,
 	TranslationMapPhysicalPageMapper*& _kernelPageMapper);
 

@@ -27,7 +27,7 @@ static void server()
 		euint16 port;
 		connection->RemoteAddr().GetAddr(addr, &port);
 
-		euint32 ip = E_BENDIAN_TO_HOST_INT32(addr.s_addr);
+		euint32_t ip = E_BENDIAN_TO_HOST_INT32(addr.s_addr);
 		ETK_OUTPUT("connection from %d.%d.%d.%d, port: %d\n",
 			   ip >> 24, (ip >> 16) & 0xff, (ip >> 8) & 0xff, ip & 0xff, port);
 
@@ -58,7 +58,7 @@ static void client(const char *address)
 	{
 		ETK_OUTPUT("Receiving ...\n");
 
-		eint32 bytes = endpoint.Receive(buf + pos, BUF_SIZE - pos - 1);
+		eint32_t bytes = endpoint.Receive(buf + pos, BUF_SIZE - pos - 1);
 		if(bytes < 0) break;
 
 		pos += bytes;

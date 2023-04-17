@@ -25,9 +25,9 @@ public:
 	virtual						~BShapeIterator();
 
 	virtual	status_t			IterateMoveTo(BPoint* point);
-	virtual	status_t			IterateLineTo(int32 lineCount,
+	virtual	status_t			IterateLineTo(int32_t lineCount,
 									BPoint* linePoints);
-	virtual	status_t			IterateBezierTo(int32 bezierCount,
+	virtual	status_t			IterateBezierTo(int32_t bezierCount,
 									BPoint* bezierPoints);
 	virtual	status_t			IterateClose();
 
@@ -42,7 +42,7 @@ private:
 	virtual	void				_ReservedShapeIterator3();
 	virtual	void				_ReservedShapeIterator4();
 
-			uint32				reserved[4];
+			uint32_t				reserved[4];
 };
 
 
@@ -96,21 +96,21 @@ private:
 	friend class BPrivate::PicturePlayer;
 	friend class BPrivate::ServerLink;
 
-			void				GetData(int32* opCount, int32* ptCount,
-									uint32** opList, BPoint** ptList);
-			void				SetData(int32 opCount, int32 ptCount,
-									const uint32* opList,
+			void				GetData(int32_t* opCount, int32_t* ptCount,
+									uint32_t** opList, BPoint** ptList);
+			void				SetData(int32_t opCount, int32_t ptCount,
+									const uint32_t* opList,
 									const BPoint* ptList);
 			void				InitData();
-			bool				AllocatePts(int32 count);
-			bool				AllocateOps(int32 count);
+			bool				AllocatePts(int32_t count);
+			bool				AllocateOps(int32_t count);
 
 private:
-			uint32				fState;
-			uint32				fBuildingOp;
+			uint32_t				fState;
+			uint32_t				fBuildingOp;
 			void*				fPrivateData;
 
-			uint32				reserved[4];
+			uint32_t				reserved[4];
 };
 
 

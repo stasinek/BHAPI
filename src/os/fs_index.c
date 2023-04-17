@@ -18,7 +18,7 @@
 
 
 int
-fs_create_index(dev_t device, const char *name, uint32 type, uint32 flags)
+fs_create_index(dev_t device, const char *name, uint32_t type, uint32_t flags)
 {
 	status_t status = _kern_create_index(device, name, type, flags);
 

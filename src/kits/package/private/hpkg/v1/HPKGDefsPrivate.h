@@ -22,20 +22,20 @@ namespace BPrivate {
 
 // header
 struct hpkg_header {
-	uint32	magic;							// "hpkg"
+	uint32_t	magic;							// "hpkg"
 	uint16	header_size;
 	uint16	version;
 	uint64	total_size;
 
 	// package attributes section
-	uint32	attributes_compression;
-	uint32	attributes_length_compressed;
-	uint32	attributes_length_uncompressed;
-	uint32	attributes_strings_length;
-	uint32	attributes_strings_count;
+	uint32_t	attributes_compression;
+	uint32_t	attributes_length_compressed;
+	uint32_t	attributes_length_uncompressed;
+	uint32_t	attributes_strings_length;
+	uint32_t	attributes_strings_count;
 
 	// TOC section
-	uint32	toc_compression;
+	uint32_t	toc_compression;
 	uint64	toc_length_compressed;
 	uint64	toc_length_uncompressed;
 	uint64	toc_strings_length;
@@ -45,18 +45,18 @@ struct hpkg_header {
 
 // header
 struct hpkg_repo_header {
-	uint32	magic;							// "hpkr"
+	uint32_t	magic;							// "hpkr"
 	uint16	header_size;
 	uint16	version;
 	uint64	total_size;
 
 	// repository info section
-	uint32	info_compression;
-	uint32	info_length_compressed;
-	uint32	info_length_uncompressed;
+	uint32_t	info_compression;
+	uint32_t	info_length_compressed;
+	uint32_t	info_length_uncompressed;
 
 	// package attributes section
-	uint32	packages_compression;
+	uint32_t	packages_compression;
 	uint64	packages_length_compressed;
 	uint64	packages_length_uncompressed;
 	uint64	packages_strings_length;

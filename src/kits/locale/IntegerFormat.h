@@ -38,13 +38,13 @@ class BIntegerFormat : public BNumberFormat, public BIntegerFormatParameters {
 		// make them all fit).
 		status_t Format(int64 number, BString *buffer,
 						format_field_position *positions,
-						int32 positionCount = 1,
-						int32 *fieldCount = NULL,
+						int32_t positionCount = 1,
+						int32_t *fieldCount = NULL,
 						bool allFieldPositions = false) const;
 
 		// TODO: Format() versions for (char* buffer, size_t bufferSize)
 		// instead of BString*. And, of course, versions for the other
-		// number types (uint64, uint32,...).
+		// number types (uint64, uint32_t,...).
  
 		// parsing
 		// TODO: ...

@@ -8,12 +8,12 @@
 #include <Haiku.h>
 
 
-const uint32 kMountVolume 			= 'mntv';
-const uint32 kMountAllNow			= 'mntn';
-const uint32 kSetAutomounterParams 	= 'pmst';
-const uint32 kGetAutomounterParams 	= 'gpms';
-const uint32 kVolumeMounted			= 'vmtd';
-const uint32 kUnmountVolume			= 'umnt';
+const uint32_t kMountVolume 			= 'mntv';
+const uint32_t kMountAllNow			= 'mntn';
+const uint32_t kSetAutomounterParams 	= 'pmst';
+const uint32_t kGetAutomounterParams 	= 'gpms';
+const uint32_t kVolumeMounted			= 'vmtd';
+const uint32_t kUnmountVolume			= 'umnt';
 
 #define kMountServerSignature "application/x-vnd.Haiku-mount_server"
 

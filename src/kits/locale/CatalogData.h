@@ -28,13 +28,13 @@ class BCatalogData {
 public:
 								BCatalogData(const char* signature,
 									const char* language,
-									uint32 fingerprint);
+									uint32_t fingerprint);
 	virtual						~BCatalogData();
 
 	virtual	const char*			GetString(const char* string,
 									const char* context = NULL,
 									const char* comment = NULL) = 0;
-	virtual	const char*			GetString(uint32 id) = 0;
+	virtual	const char*			GetString(uint32_t id) = 0;
 
 			status_t			InitCheck() const;
 			BCatalogData*		Next();
@@ -44,18 +44,18 @@ public:
 	// a feature:
 	virtual	bool				CanHaveData() const;
 	virtual	status_t			GetData(const char* name, BMessage* msg);
-	virtual	status_t			GetData(uint32 id, BMessage* msg);
+	virtual	status_t			GetData(uint32_t id, BMessage* msg);
 
 	// interface for catalog-editor-app and testing apps:
 	virtual	status_t			SetString(const char* string,
 									const char* translated,
 									const char* context = NULL,
 									const char* comment = NULL);
-	virtual	status_t			SetString(int32 id, const char* translated);
+	virtual	status_t			SetString(int32_t id, const char* translated);
 
 	virtual	bool				CanWriteData() const;
 	virtual	status_t			SetData(const char* name, BMessage* msg);
-	virtual	status_t			SetData(uint32 id, BMessage* msg);
+	virtual	status_t			SetData(uint32_t id, BMessage* msg);
 
 	virtual	status_t			ReadFromFile(const char* path = NULL);
 	virtual	status_t			ReadFromAttribute(
@@ -69,7 +69,7 @@ public:
 									const entry_ref& appOrAddOnRef);
 
 	virtual	void				MakeEmpty();
-	virtual	int32				CountItems() const;
+	virtual	int32_t				CountItems() const;
 
 			void				SetNext(BCatalogData* next);
 
@@ -83,7 +83,7 @@ protected:
 			status_t 			fInitCheck;
 			BString 			fSignature;
 			BString 			fLanguageName;
-			uint32				fFingerprint;
+			uint32_t				fFingerprint;
 			BCatalogData*		fNext;
 };
 
@@ -100,7 +100,7 @@ BCatalogData::Next()
 // 1. the function that instantiates a catalog for this add-on-type
 extern "C"
 BCatalogData* instantiate_catalog(const entry_ref& signature,
-	const char* language, uint32 fingerprint);
+	const char* language, uint32_t fingerprint);
 
 // 2. the function that creates an empty catalog for this add-on-type
 extern "C"

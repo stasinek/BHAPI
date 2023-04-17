@@ -21,7 +21,7 @@ public:
 
 
 	virtual	status_t			GetMemoryProperties(target_addr_t baseAddress,
-									uint32& protection, uint32& locking) = 0;
+									uint32_t& protection, uint32_t& locking) = 0;
 
 	virtual	ssize_t				ReadMemory(target_addr_t address, void* buffer,
 									size_t size) = 0;

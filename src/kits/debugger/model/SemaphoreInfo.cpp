@@ -30,7 +30,7 @@ SemaphoreInfo::SemaphoreInfo(const SemaphoreInfo &other)
 
 
 SemaphoreInfo::SemaphoreInfo(team_id team, sem_id semaphore,
-	const BString& name, int32 count, thread_id latestHolder)
+	const BString& name, int32_t count, thread_id latestHolder)
 	:
 	fTeam(team),
 	fSemaphore(semaphore),
@@ -42,7 +42,7 @@ SemaphoreInfo::SemaphoreInfo(team_id team, sem_id semaphore,
 
 
 void SemaphoreInfo::SetTo(team_id team, sem_id semaphore, const BString& name,
-	int32 count, thread_id latestHolder)
+	int32_t count, thread_id latestHolder)
 {
 	fTeam = team;
 	fSemaphore = semaphore;

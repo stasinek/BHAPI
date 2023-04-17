@@ -34,16 +34,16 @@ namespace BPrivate {
 
 struct PackageFileHeapWriter::Chunk {
 	uint64	offset;
-	uint32	compressedSize;
-	uint32	uncompressedSize;
+	uint32_t	compressedSize;
+	uint32_t	uncompressedSize;
 	void*	buffer;
 };
 
 
 struct PackageFileHeapWriter::ChunkSegment {
 	ssize_t	chunkIndex;
-	uint32	toKeepOffset;
-	uint32	toKeepSize;
+	uint32_t	toKeepOffset;
+	uint32_t	toKeepSize;
 };
 
 
@@ -64,12 +64,12 @@ struct PackageFileHeapWriter::ChunkBuffer {
 
 	~ChunkBuffer()
 	{
-		for (int32 i = 0; void* buffer = fBuffers.ItemAt(i); i++)
+		for (int32_t i = 0; void* buffer = fBuffers.ItemAt(i); i++)
 			free(buffer);
 	}
 
-	bool PushChunkSegment(uint64 chunkOffset, uint32 compressedSize,
-		uint32 uncompressedSize, uint32 toKeepOffset, uint32 toKeepSize)
+	bool PushChunkSegment(uint64 chunkOffset, uint32_t compressedSize,
+		uint32_t uncompressedSize, uint32_t toKeepOffset, uint32_t toKeepSize)
 	{
 		ChunkSegment segment;
 		segment.toKeepOffset = toKeepOffset;
@@ -598,15 +598,15 @@ void PackageFileHeapWriter::_PushChunks(ChunkBuffer& chunkBuffer, uint64 startOf
 	while (startOffset < endOffset) {
 		bool isLastChunk = fUncompressedHeapSize - uncompressedChunkOffset
 			<= kChunkSize;
-		uint32 inChunkOffset = uint32(startOffset - uncompressedChunkOffset);
-		uint32 uncompressedChunkSize = isLastChunk
+		uint32_t inChunkOffset = uint32_t(startOffset - uncompressedChunkOffset);
+		uint32_t uncompressedChunkSize = isLastChunk
 			? fUncompressedHeapSize - uncompressedChunkOffset
 			: kChunkSize;
 		uint64 compressedChunkOffset = fOffsets[chunkIndex];
-		uint32 compressedChunkSize = isLastChunk
+		uint32_t compressedChunkSize = isLastChunk
 			? fCompressedHeapSize - compressedChunkOffset
 			: fOffsets[chunkIndex + 1] - compressedChunkOffset;
-		uint32 toKeepSize = uint32(std::min(
+		uint32_t toKeepSize = uint32_t(std::min(
 			(uint64)uncompressedChunkSize - inChunkOffset,
 			endOffset - startOffset));
 

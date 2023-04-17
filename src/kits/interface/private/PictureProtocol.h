@@ -61,7 +61,7 @@ enum {
 };
 
 
-const static uint32 kOpsTableSize = 50;
+const static uint32_t kOpsTableSize = 50;
 
 
 #endif

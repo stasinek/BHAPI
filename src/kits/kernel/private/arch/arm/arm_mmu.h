@@ -67,15 +67,15 @@
 
 #define ARM_MMU_L1_TABLE_ENTRY_COUNT	4096
 #define ARM_MMU_L1_TABLE_SIZE			(ARM_MMU_L1_TABLE_ENTRY_COUNT \
-											* sizeof(uint32))
+											* sizeof(uint32_t))
 
 #define ARM_MMU_L2_COARSE_ENTRY_COUNT	256
 #define ARM_MMU_L2_COARSE_TABLE_SIZE	(ARM_MMU_L2_COARSE_ENTRY_COUNT \
-											* sizeof(uint32))
+											* sizeof(uint32_t))
 
 #define ARM_MMU_L2_FINE_ENTRY_COUNT		1024
 #define ARM_MMU_L2_FINE_TABLE_SIZE		(ARM_MMU_L2_FINE_ENTRY_COUNT \
-											* sizeof(uint32))
+											* sizeof(uint32_t))
 
 /*
  * definitions for CP15 r1

@@ -20,7 +20,7 @@ public:
 	{
 	}
 
-	void SetTicketNumber(uint32 ticketNumber)
+	void SetTicketNumber(uint32_t ticketNumber)
 	{
 		fJob._SetTicketNumber(ticketNumber);
 	}

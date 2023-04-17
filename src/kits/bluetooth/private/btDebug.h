@@ -37,16 +37,16 @@
 #pragma mark - Kernel Auxiliary Stuff -
 #endif
 
-static inline uint32 TEST_AND_SET(uint32 *byte, uint32 bit_mask) {
+static inline uint32_t TEST_AND_SET(uint32_t *byte, uint32_t bit_mask) {
 
-	uint32 val = (*byte&bit_mask)!=0;
+	uint32_t val = (*byte&bit_mask)!=0;
 	*byte |= bit_mask;
 	return val;
 }
 
-static inline uint32 TEST_AND_CLEAR(uint32* byte, uint32 bit_mask) {
+static inline uint32_t TEST_AND_CLEAR(uint32_t* byte, uint32_t bit_mask) {
 
-	uint32 val = (*byte&bit_mask)!=0;
+	uint32_t val = (*byte&bit_mask)!=0;
 	*byte &= ~bit_mask;
 	return val;
 }

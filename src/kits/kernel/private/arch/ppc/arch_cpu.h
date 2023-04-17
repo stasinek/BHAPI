@@ -16,48 +16,48 @@
 
 
 struct iframe {
-	uint32 vector;
-	uint32 srr0;
-	uint32 srr1;
-	uint32 dar;
-	uint32 dsisr;
-	uint32 lr;
-	uint32 cr;
-	uint32 xer;
-	uint32 ctr;
-	uint32 fpscr;
-	uint32 r31;
-	uint32 r30;
-	uint32 r29;
-	uint32 r28;
-	uint32 r27;
-	uint32 r26;
-	uint32 r25;
-	uint32 r24;
-	uint32 r23;
-	uint32 r22;
-	uint32 r21;
-	uint32 r20;
-	uint32 r19;
-	uint32 r18;
-	uint32 r17;
-	uint32 r16;
-	uint32 r15;
-	uint32 r14;
-	uint32 r13;
-	uint32 r12;
-	uint32 r11;
-	uint32 r10;
-	uint32 r9;
-	uint32 r8;
-	uint32 r7;
-	uint32 r6;
-	uint32 r5;
-	uint32 r4;
-	uint32 r3;
-	uint32 r2;
-	uint32 r1;
-	uint32 r0;
+	uint32_t vector;
+	uint32_t srr0;
+	uint32_t srr1;
+	uint32_t dar;
+	uint32_t dsisr;
+	uint32_t lr;
+	uint32_t cr;
+	uint32_t xer;
+	uint32_t ctr;
+	uint32_t fpscr;
+	uint32_t r31;
+	uint32_t r30;
+	uint32_t r29;
+	uint32_t r28;
+	uint32_t r27;
+	uint32_t r26;
+	uint32_t r25;
+	uint32_t r24;
+	uint32_t r23;
+	uint32_t r22;
+	uint32_t r21;
+	uint32_t r20;
+	uint32_t r19;
+	uint32_t r18;
+	uint32_t r17;
+	uint32_t r16;
+	uint32_t r15;
+	uint32_t r14;
+	uint32_t r13;
+	uint32_t r12;
+	uint32_t r11;
+	uint32_t r10;
+	uint32_t r9;
+	uint32_t r8;
+	uint32_t r7;
+	uint32_t r6;
+	uint32_t r5;
+	uint32_t r4;
+	uint32_t r3;
+	uint32_t r2;
+	uint32_t r1;
+	uint32_t r0;
 	double f31;
 	double f30;
 	double f29;
@@ -129,13 +129,13 @@ typedef struct arch_cpu_info {
 extern "C" {
 #endif
 
-extern uint32 get_sdr1(void);
-extern void set_sdr1(uint32 value);
-extern uint32 get_sr(void *virtualAddress);
-extern void set_sr(void *virtualAddress, uint32 value);
-extern uint32 get_msr(void);
-extern uint32 set_msr(uint32 value);
-extern uint32 get_pvr(void);
+extern uint32_t get_sdr1(void);
+extern void set_sdr1(uint32_t value);
+extern uint32_t get_sr(void *virtualAddress);
+extern void set_sr(void *virtualAddress, uint32_t value);
+extern uint32_t get_msr(void);
+extern uint32_t set_msr(uint32_t value);
+extern uint32_t get_pvr(void);
 
 extern void set_ibat0(struct block_address_translation *bat);
 extern void set_ibat1(struct block_address_translation *bat);
@@ -163,7 +163,7 @@ extern void reset_dbats(void);
 //extern void setl2cr(unsigned int val);
 extern long long get_time_base(void);
 
-void __ppc_setup_system_time(vint32 *cvFactor);
+void __ppc_setup_system_time(vint32_t *cvFactor);
 	// defined in libroot: os/arch/system_time.c
 int64 __ppc_get_time_base(void);
 	// defined in libroot: os/arch/system_time_asm.S

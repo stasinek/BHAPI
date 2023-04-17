@@ -9,12 +9,12 @@
 #include <kits/kernel/OS.h>
 
 
-const int32 kMaxLoad = 1000;
+const int32_t kMaxLoad = 1000;
 const bigtime_t kLoadMeasureInterval = 1000;
 const bigtime_t kIntervalInaccuracy = kLoadMeasureInterval / 4;
 
 
-static inline int32 compute_load(bigtime_t& measureTime, bigtime_t& measureActiveTime, int32& load,
+static inline int32_t compute_load(bigtime_t& measureTime, bigtime_t& measureActiveTime, int32_t& load,
 	bigtime_t now)
 {
 	if (measureTime == 0) {
@@ -27,10 +27,10 @@ static inline int32 compute_load(bigtime_t& measureTime, bigtime_t& measureActiv
 	if (deltaTime < kLoadMeasureInterval)
 		return -1;
 
-	int32 oldLoad = load;
+	int32_t oldLoad = load;
 	ASSERT(oldLoad >= 0 && oldLoad <= kMaxLoad);
 
-	int32 newLoad = measureActiveTime * kMaxLoad;
+	int32_t newLoad = measureActiveTime * kMaxLoad;
 	newLoad /= max_c(deltaTime, 1);
 	newLoad = max_c(min_c(newLoad, kMaxLoad), 0);
 

@@ -197,7 +197,7 @@ status_t DiskDeviceJobGenerator::_GenerateCleanupJobs(BPartition* partition)
 				return error;
 		} else {
 			// recurse
-			for (int32 i = 0; BPartition* child = partition->_ChildAt(i); i++) {
+			for (int32_t i = 0; BPartition* child = partition->_ChildAt(i); i++) {
 				status_t error = _GenerateCleanupJobs(child);
 				if (error != B_OK)
 					return error;
@@ -262,11 +262,11 @@ status_t DiskDeviceJobGenerator::_GenerateChildPlacementJobs(BPartition* partiti
 	}
 
 	// first resize all children that shall shrink and place their descendants
-	int32 childCount = 0;
-	int32 moveForth = 0;
-	int32 moveBack = 0;
+	int32_t childCount = 0;
+	int32_t moveForth = 0;
+	int32_t moveBack = 0;
 
-	for (int32 i = 0; BPartition* child = partition->_ChildAt(i); i++) {
+	for (int32_t i = 0; BPartition* child = partition->_ChildAt(i); i++) {
 		if (BMutablePartition* childShadow = _GetMutablePartition(child)) {
 			// add a MoveInfo for the child
 			MoveInfo& info = fMoveInfos[childCount];
@@ -299,10 +299,10 @@ status_t DiskDeviceJobGenerator::_GenerateChildPlacementJobs(BPartition* partiti
 
 	// move the children to their final positions
 	while (moveForth + moveBack > 0) {
-		int32 moved = 0;
+		int32_t moved = 0;
 		if (moveForth < moveBack) {
 			// move children back
-			for (int32 i = 0; i < childCount; i++) {
+			for (int32_t i = 0; i < childCount; i++) {
 				MoveInfo& info = fMoveInfos[i];
 				if (info.position > info.target_position) {
 					if (i == 0
@@ -321,7 +321,7 @@ status_t DiskDeviceJobGenerator::_GenerateChildPlacementJobs(BPartition* partiti
 			}
 		} else {
 			// move children forth
-			for (int32 i = childCount - 1; i >= 0; i--) {
+			for (int32_t i = childCount - 1; i >= 0; i--) {
 				MoveInfo &info = fMoveInfos[i];
 				if (info.position > info.target_position) {
 					if (i == childCount - 1
@@ -347,7 +347,7 @@ status_t DiskDeviceJobGenerator::_GenerateChildPlacementJobs(BPartition* partiti
 
 	// now resize all children that shall grow/keep their size and place
 	// their descendants
-	for (int32 i = 0; BPartition* child = partition->_ChildAt(i); i++) {
+	for (int32_t i = 0; BPartition* child = partition->_ChildAt(i); i++) {
 		if (BMutablePartition* childShadow = _GetMutablePartition(child)) {
 			if (childShadow->Size() >= child->Size()) {
 				status_t error = _GeneratePlacementJobs(child);
@@ -367,7 +367,7 @@ status_t DiskDeviceJobGenerator::_GenerateRemainingJobs(BPartition* parent,
 {
 	user_partition_data* partitionData = partition->fPartitionData;
 
-	uint32 changeFlags
+	uint32_t changeFlags
 		= partition->fDelegate->MutablePartition()->ChangeFlags();
 
 	// create the partition, if not existing yet
@@ -462,7 +462,7 @@ status_t DiskDeviceJobGenerator::_GenerateRemainingJobs(BPartition* parent,
 	}
 
 	// recurse
-	for (int32 i = 0; BPartition* child = partition->ChildAt(i); i++) {
+	for (int32_t i = 0; BPartition* child = partition->ChildAt(i); i++) {
 		status_t error = _GenerateRemainingJobs(partition, child);
 		if (error != B_OK)
 			return error;
@@ -799,7 +799,7 @@ status_t DiskDeviceJobGenerator::_CollectContentsToMove(BPartition* partition)
 	}
 
 	// recurse
-	for (int32 i = 0; BPartition* child = partition->ChildAt(i); i++) {
+	for (int32_t i = 0; BPartition* child = partition->ChildAt(i); i++) {
 		status_t error = _CollectContentsToMove(child);
 		if (error != B_OK)
 			return error;
@@ -832,7 +832,7 @@ status_t DiskDeviceJobGenerator::_GetPartitionReference(BPartition* partition,
 	if (!partition)
 		return B_BAD_VALUE;
 
-	for (int32 i = 0; i < fPartitionCount; i++) {
+	for (int32_t i = 0; i < fPartitionCount; i++) {
 		PartitionRefInfo& info = fPartitionRefs[i];
 
 		if (info.partition == partition) {

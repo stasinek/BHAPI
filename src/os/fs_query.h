@@ -25,9 +25,9 @@
 extern "C" {
 #endif
 
-extern DIR		*fs_open_query(dev_t device, const char *query, uint32 flags);
+extern DIR		*fs_open_query(dev_t device, const char *query, uint32_t flags);
 extern DIR		*fs_open_live_query(dev_t device, const char *query,
-					uint32 flags, port_id port, int32 token);
+					uint32_t flags, port_id port, int32_t token);
 extern int		fs_close_query(DIR *d);
 extern struct dirent *fs_read_query(DIR *d);
 

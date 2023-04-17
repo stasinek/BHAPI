@@ -52,7 +52,7 @@ bool ScreenSaverSettings::Load()
 	BRect rect;
 	if (fSettings.FindRect("windowframe", &rect) == B_OK)
 		fWindowFrame = rect;
-	int32 value;
+	int32_t value;
 	if (fSettings.FindInt32("windowtab", &value) == B_OK)
 		fWindowTab = value;
 	if (fSettings.FindInt32("timeflags", &value) == B_OK)

@@ -16,11 +16,11 @@ class BDecimalSpinner : public BAbstractSpinner {
 public:
 								BDecimalSpinner(BRect frame, const char* name,
 									const char* label, BMessage* message,
-									uint32 resizingMode = B_FOLLOW_LEFT | B_FOLLOW_TOP,
-									uint32 flags = B_WILL_DRAW | B_NAVIGABLE);
+									uint32_t resizingMode = B_FOLLOW_LEFT | B_FOLLOW_TOP,
+									uint32_t flags = B_WILL_DRAW | B_NAVIGABLE);
 								BDecimalSpinner(const char* name, const char* label,
 									BMessage* message,
-									uint32 flags = B_WILL_DRAW | B_NAVIGABLE);
+									uint32_t flags = B_WILL_DRAW | B_NAVIGABLE);
 								BDecimalSpinner(BMessage* data);
 	virtual						~BDecimalSpinner();
 
@@ -36,8 +36,8 @@ public:
 
 	virtual	void				SetEnabled(bool enable);
 
-			uint32				Precision() const { return fPrecision; };
-	virtual	void				SetPrecision(uint32 precision) { fPrecision = precision; };
+			uint32_t				Precision() const { return fPrecision; };
+	virtual	void				SetPrecision(uint32_t precision) { fPrecision = precision; };
 
 			double				MaxValue() const { return fMaxValue; }
 	virtual	void				SetMaxValue(double max);
@@ -52,7 +52,7 @@ public:
 	virtual	void				SetStep(double step) { fStep = step; };
 
 			double				Value() const { return fValue; };
-	virtual	void				SetValue(int32 value);
+	virtual	void				SetValue(int32_t value);
 	virtual	void				SetValue(double value);
 	virtual	void				SetValueFromText();
 
@@ -86,10 +86,10 @@ private:
 			double				fMaxValue;
 			double				fStep;
 			double				fValue;
-			uint32				fPrecision;
+			uint32_t				fPrecision;
 
 	// FBC padding
-			uint32				_reserved[20];
+			uint32_t				_reserved[20];
 };
 
 

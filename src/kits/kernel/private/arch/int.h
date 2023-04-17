@@ -32,9 +32,9 @@ int arch_int_disable_interrupts(void);
 void arch_int_restore_interrupts(int oldState);
 void arch_int_enable_io_interrupt(int irq);
 void arch_int_disable_io_interrupt(int irq);
-void arch_int_configure_io_interrupt(int irq, uint32 config);
+void arch_int_configure_io_interrupt(int irq, uint32_t config);
 bool arch_int_are_interrupts_enabled(void);
-void arch_int_assign_to_cpu(int32 irq, int32 cpu);
+void arch_int_assign_to_cpu(int32_t irq, int32_t cpu);
 
 #ifdef __cplusplus
 }

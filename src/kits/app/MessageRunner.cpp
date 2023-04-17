@@ -43,7 +43,7 @@
 
 extern BLocker* bhapi::get_handler_operator_locker();
 
-BMessageRunner::BMessageRunner(const BMessenger &target, const BMessage *msg, bigtime_t interval,  int32 count)
+BMessageRunner::BMessageRunner(const BMessenger &target, const BMessage *msg, bigtime_t interval,  int32_t count)
     : fToken(-1), fTarget(NULL), fReplyTo(NULL), fMessage(NULL), fPrevSendTime(B_INT64_CONSTANT(-1))
 {
     if(!(msg == NULL || (fMessage = new BMessage(*msg)) != NULL)) return;
@@ -58,7 +58,7 @@ BMessageRunner::BMessageRunner(const BMessenger &target, const BMessage *msg, bi
     BLocker *hLocker = bhapi::get_handler_operator_locker();
     BAutolock <BLocker>autolock(hLocker);
 
-    int32 token = BApplication::sRunnerList.IndexOf(NULL);
+    int32_t token = BApplication::sRunnerList.IndexOf(NULL);
     if(token >= 0)
     {
         if(BApplication::sRunnerList.ReplaceItem(token, this) == false) return;
@@ -79,7 +79,7 @@ BMessageRunner::BMessageRunner(const BMessenger &target, const BMessage *msg, bi
 }
 
 
-BMessageRunner::BMessageRunner(const BMessenger &target, const BMessage *msg, bigtime_t interval,  int32 count, const BMessenger &replyTo)
+BMessageRunner::BMessageRunner(const BMessenger &target, const BMessage *msg, bigtime_t interval,  int32_t count, const BMessenger &replyTo)
     : fToken(-1), fTarget(NULL), fReplyTo(NULL), fMessage(NULL), fPrevSendTime(B_INT64_CONSTANT(-1))
 {
     if(!(msg == NULL || (fMessage = new BMessage(*msg)) != NULL)) return;
@@ -99,7 +99,7 @@ BMessageRunner::BMessageRunner(const BMessenger &target, const BMessage *msg, bi
     BLocker *hLocker = bhapi::get_handler_operator_locker();
     BAutolock <BLocker>autolock(hLocker);
 
-    int32 token = BApplication::sRunnerList.IndexOf(NULL);
+    int32_t token = BApplication::sRunnerList.IndexOf(NULL);
     if(token >= 0)
     {
         if(BApplication::sRunnerList.ReplaceItem(token, this) == false) return;
@@ -264,7 +264,7 @@ BMessageRunner::SetInterval(bigtime_t interval)
 
 
 status_t
-BMessageRunner::SetCount(int32 count)
+BMessageRunner::SetCount(int32_t count)
 {
     if(fToken < 0) return B_ERROR;
 
@@ -286,7 +286,7 @@ BMessageRunner::SetCount(int32 count)
 
 
 status_t
-BMessageRunner::GetInfo(bigtime_t *interval,  int32 *count) const
+BMessageRunner::GetInfo(bigtime_t *interval,  int32_t *count) const
 {
     if(fToken < 0 || (!interval && !count)) return B_ERROR;
 
@@ -301,7 +301,7 @@ BMessageRunner::GetInfo(bigtime_t *interval,  int32 *count) const
 
 
 status_t
-BMessageRunner::GetInfo(BMessenger *target, BMessage *msg, bigtime_t *interval,  int32 *count, BMessenger *replyTo) const
+BMessageRunner::GetInfo(BMessenger *target, BMessage *msg, bigtime_t *interval,  int32_t *count, BMessenger *replyTo) const
 {
     if(fToken < 0 || (!target && !msg && interval && !count && !replyTo)) return B_ERROR;
 

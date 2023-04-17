@@ -21,7 +21,7 @@ struct dormant_node_info {
 								~dormant_node_info();
 
 			media_addon_id		addon;
-			int32				flavor_id;
+			int32_t				flavor_id;
 			char				name[B_MEDIA_NAME_LENGTH];
 
 private:
@@ -41,19 +41,19 @@ struct flavor_info {
 	char*				name;
 	char*				info;
 	uint64				kinds;				// node kind
-	uint32				flavor_flags;
-	int32				internal_id;		// For BMediaAddOn internal use
-	int32				possible_count;		// 0 for "any number"
+	uint32_t				flavor_flags;
+	int32_t				internal_id;		// For BMediaAddOn internal use
+	int32_t				possible_count;		// 0 for "any number"
 
-	int32				in_format_count;	// for BufferConsumer kinds
-	uint32				in_format_flags;	// set to 0
+	int32_t				in_format_count;	// for BufferConsumer kinds
+	uint32_t				in_format_flags;	// set to 0
 	const media_format*	in_formats;
 
-	int32				out_format_count;	// for BufferProducer kinds
-	uint32				out_format_flags;	// set to 0
+	int32_t				out_format_count;	// for BufferProducer kinds
+	uint32_t				out_format_flags;	// set to 0
 	const media_format*	out_formats;
 
-	uint32				_reserved_[16];
+	uint32_t				_reserved_[16];
 
 private:
 	flavor_info&		operator=(const flavor_info& other);
@@ -98,8 +98,8 @@ public:
 	virtual						~BMediaAddOn();
 
 	virtual	status_t			InitCheck(const char** _failureText);
-	virtual	int32				CountFlavors();
-	virtual	status_t			GetFlavorAt(int32 index,
+	virtual	int32_t				CountFlavors();
+	virtual	status_t			GetFlavorAt(int32_t index,
 									const flavor_info** _info);
 	virtual	BMediaNode*			InstantiateNodeFor(const flavor_info* info,
 									BMessage* config, status_t* _error);
@@ -107,31 +107,31 @@ public:
 									BMessage* intoMessage);
 	virtual	bool				WantsAutoStart();
 	virtual	status_t			AutoStart(int index, BMediaNode** _node,
-									int32* _internalID, bool* _hasMore);
+									int32_t* _internalID, bool* _hasMore);
 
 	// NOTE: Only implement if you have a B_FILE_INTERFACE node
 	virtual	status_t			SniffRef(const entry_ref& file,
 									BMimeType* ioMimeType, float* _quality,
-									int32* _internalID);
+									int32_t* _internalID);
 	// NOTE: This is broken if you deal with producers and consumers both.
 	// Implement SniffTypeKind instead. If you implement SniffTypeKind, this
 	// doesn't get called.
 	virtual	status_t			SniffType(const BMimeType& type,
-									float* _quality, int32* _internalID);
+									float* _quality, int32_t* _internalID);
 
-	virtual	status_t			GetFileFormatList(int32 forNodeFlavorID,
+	virtual	status_t			GetFileFormatList(int32_t forNodeFlavorID,
 									media_file_format* _writableFormats,
-									int32 writableFormatsCount,
-									int32* _writableFormatsTotalCount,
+									int32_t writableFormatsCount,
+									int32_t* _writableFormatsTotalCount,
 									media_file_format* _readableFormats,
-									int32 readableFormatsCount,
-									int32* _readableFormatsTotalCount,
+									int32_t readableFormatsCount,
+									int32_t* _readableFormatsTotalCount,
 									void* _reserved);
 
 	// NOTE: Like SniffType, but for the specific kind(s)
 	virtual	status_t			SniffTypeKind(const BMimeType& type,
 									uint64 kinds, float* _quality,
-									int32* _internalID, void* _reserved);
+									int32_t* _internalID, void* _reserved);
 
 			image_id			ImageID();
 			media_addon_id		AddonID();
@@ -161,7 +161,7 @@ private:
 			image_id 			fImage;
 			media_addon_id		fAddon;
 
-			uint32				_reserved_media_add_on_[7];
+			uint32_t				_reserved_media_add_on_[7];
 };
 
 

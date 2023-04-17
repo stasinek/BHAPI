@@ -117,7 +117,7 @@ int main(int argc, char **argv)
 		return 1;
 	}
 
-	eint32 counter = 0;
+	eint32_t counter = 0;
 	while(counter < 300)
 	{
 		EMessage message('cust');

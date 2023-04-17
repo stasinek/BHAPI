@@ -73,14 +73,14 @@
 
 struct smp_msg {
 	struct smp_msg	*next;
-	int32			message;
+	int32_t			message;
 	addr_t			data;
 	addr_t			data2;
 	addr_t			data3;
 	void			*data_ptr;
-	uint32			flags;
-	int32			ref_count;
-	int32			done;
+	uint32_t			flags;
+	int32_t			ref_count;
+	int32_t			done;
 	CPUSet			proc_bitmap;
 };
 
@@ -89,27 +89,27 @@ enum mailbox_source {
 	MAILBOX_BCAST,
 };
 
-static int32 sBootCPUSpin = 0;
+static int32_t sBootCPUSpin = 0;
 
-static int32 sEarlyCPUCallCount;
+static int32_t sEarlyCPUCallCount;
 static CPUSet sEarlyCPUCallSet;
 static void (*sEarlyCPUCallFunction)(void*, int);
 void* sEarlyCPUCallCookie;
 
 static struct smp_msg* sFreeMessages = NULL;
-static int32 sFreeMessageCount = 0;
+static int32_t sFreeMessageCount = 0;
 static spinlock sFreeMessageSpinlock = B_SPINLOCK_INITIALIZER;
 
 static struct smp_msg* sCPUMessages[SMP_MAX_CPUS] = { NULL, };
 
 static struct smp_msg* sBroadcastMessages = NULL;
 static spinlock sBroadcastMessageSpinlock = B_SPINLOCK_INITIALIZER;
-static int32 sBroadcastMessageCounter;
+static int32_t sBroadcastMessageCounter;
 
 static bool sICIEnabled = false;
-static int32 sNumCPUs = 1;
+static int32_t sNumCPUs = 1;
 
-static int32 process_pending_ici(int32 currentCPU);
+static int32_t process_pending_ici(int32_t currentCPU);
 
 
 #if DEBUG_SPINLOCKS
@@ -120,9 +120,9 @@ static struct {
 	spinlock	*lock;
 } sLastCaller[NUM_LAST_CALLERS];
 
-static int32 sLastIndex = 0;
+static int32_t sLastIndex = 0;
 	// Is incremented atomically. Must be % NUM_LAST_CALLERS before being used
-	// as index into sLastCaller. Note, that it has to be casted to uint32
+	// as index into sLastCaller. Note, that it has to be casted to uint32_t
 	// before applying the modulo operation, since otherwise after overflowing
 	// that would yield negative indices.
 
@@ -130,7 +130,7 @@ static int32 sLastIndex = 0;
 static void
 push_lock_caller(void* caller, spinlock* lock)
 {
-	int32 index = (uint32)atomic_add(&sLastIndex, 1) % NUM_LAST_CALLERS;
+	int32_t index = (uint32_t)atomic_add(&sLastIndex, 1) % NUM_LAST_CALLERS;
 
 	sLastCaller[index].caller = caller;
 	sLastCaller[index].lock = lock;
@@ -140,10 +140,10 @@ push_lock_caller(void* caller, spinlock* lock)
 static void*
 find_lock_caller(spinlock* lock)
 {
-	int32 lastIndex = (uint32)atomic_get(&sLastIndex) % NUM_LAST_CALLERS;
+	int32_t lastIndex = (uint32_t)atomic_get(&sLastIndex) % NUM_LAST_CALLERS;
 
-	for (int32 i = 0; i < NUM_LAST_CALLERS; i++) {
-		int32 index = (NUM_LAST_CALLERS + lastIndex - 1 - i) % NUM_LAST_CALLERS;
+	for (int32_t i = 0; i < NUM_LAST_CALLERS; i++) {
+		int32_t index = (NUM_LAST_CALLERS + lastIndex - 1 - i) % NUM_LAST_CALLERS;
 		if (sLastCaller[index].lock == lock)
 			return sLastCaller[index].caller;
 	}
@@ -191,7 +191,7 @@ static struct {
 	bigtime_t	timestamp;
 } sLatency[SMP_MAX_CPUS][NUM_LATENCY_LOCKS];
 
-static int32 sLatencyIndex[SMP_MAX_CPUS];
+static int32_t sLatencyIndex[SMP_MAX_CPUS];
 static bool sEnableLatencyCheck;
 
 
@@ -201,8 +201,8 @@ push_latency(spinlock* lock)
 	if (!sEnableLatencyCheck)
 		return;
 
-	int32 cpu = smp_get_current_cpu();
-	int32 index = (++sLatencyIndex[cpu]) % NUM_LATENCY_LOCKS;
+	int32_t cpu = smp_get_current_cpu();
+	int32_t index = (++sLatencyIndex[cpu]) % NUM_LATENCY_LOCKS;
 
 	sLatency[cpu][index].lock = lock;
 	sLatency[cpu][index].timestamp = system_time();
@@ -215,9 +215,9 @@ test_latency(spinlock* lock)
 	if (!sEnableLatencyCheck)
 		return;
 
-	int32 cpu = smp_get_current_cpu();
+	int32_t cpu = smp_get_current_cpu();
 
-	for (int32 i = 0; i < NUM_LATENCY_LOCKS; i++) {
+	for (int32_t i = 0; i < NUM_LATENCY_LOCKS; i++) {
 		if (sLatency[cpu][i].lock == lock) {
 			bigtime_t diff = system_time() - sLatency[cpu][i].timestamp;
 			if (diff > DEBUG_LATENCY && diff < 500000) {
@@ -238,9 +238,9 @@ int
 dump_ici_messages(int argc, char** argv)
 {
 	// count broadcast messages
-	int32 count = 0;
-	int32 doneCount = 0;
-	int32 unreferencedCount = 0;
+	int32_t count = 0;
+	int32_t doneCount = 0;
+	int32_t unreferencedCount = 0;
 	smp_msg* message = sBroadcastMessages;
 	while (message != NULL) {
 		count++;
@@ -257,7 +257,7 @@ dump_ici_messages(int argc, char** argv)
 	kprintf("  unreferenced: %" B_PRId32 "\n", unreferencedCount);
 
 	// count per-CPU messages
-	for (int32 i = 0; i < sNumCPUs; i++) {
+	for (int32_t i = 0; i < sNumCPUs; i++) {
 		count = 0;
 		message = sCPUMessages[i];
 		while (message != NULL) {
@@ -298,7 +298,7 @@ dump_ici_message(int argc, char** argv)
 	kprintf("  done:        %s\n", message->done == 1 ? "true" : "false");
 
 	kprintf("  proc_bitmap: ");
-	for (int32 i = 0; i < sNumCPUs; i++) {
+	for (int32_t i = 0; i < sNumCPUs; i++) {
 		if (message->proc_bitmap.GetBit(i))
 			kprintf("%s%" B_PRId32, i != 0 ? ", " : "", i);
 	}
@@ -309,7 +309,7 @@ dump_ici_message(int argc, char** argv)
 
 
 static inline void
-process_all_pending_ici(int32 currentCPU)
+process_all_pending_ici(int32_t currentCPU)
 {
 	while (process_pending_ici(currentCPU) != B_ENTRY_NOT_FOUND)
 		;
@@ -330,7 +330,7 @@ try_acquire_spinlock(spinlock* lock)
 	if (atomic_add(&lock->lock, 1) != 0)
 		return false;
 #else
-	if (atomic_get_and_set((int32*)lock, 1) != 0)
+	if (atomic_get_and_set((int32_t*)lock, 1) != 0)
 		return false;
 
 #	if DEBUG_SPINLOCKS
@@ -359,7 +359,7 @@ acquire_spinlock(spinlock* lock)
 			process_all_pending_ici(currentCPU);
 #else
 		while (1) {
-			uint32 count = 0;
+			uint32_t count = 0;
 			while (lock->lock != 0) {
 				if (++count == SPINLOCK_DEADLOCK_COUNT) {
 #	if DEBUG_SPINLOCKS
@@ -387,7 +387,7 @@ acquire_spinlock(spinlock* lock)
 #endif
 	} else {
 #if DEBUG_SPINLOCKS
-		int32 oldValue = atomic_get_and_set(&lock->lock, 1);
+		int32_t oldValue = atomic_get_and_set(&lock->lock, 1);
 		if (oldValue != 0) {
 			panic("acquire_spinlock: attempt to acquire lock %p twice on "
 				"non-SMP system (last caller: %p, value %" B_PRIx32 ")", lock,
@@ -419,7 +419,7 @@ acquire_spinlock_nocheck(spinlock *lock)
 		}
 #else
 		while (1) {
-			uint32 count = 0;
+			uint32_t count = 0;
 			while (lock->lock != 0) {
 				if (++count == SPINLOCK_DEADLOCK_COUNT_NO_CHECK) {
 #	if DEBUG_SPINLOCKS
@@ -447,7 +447,7 @@ acquire_spinlock_nocheck(spinlock *lock)
 #endif
 	} else {
 #if DEBUG_SPINLOCKS
-		int32 oldValue = atomic_get_and_set(&lock->lock, 1);
+		int32_t oldValue = atomic_get_and_set(&lock->lock, 1);
 		if (oldValue != 0) {
 			panic("acquire_spinlock_nocheck: attempt to acquire lock %p twice "
 				"on non-SMP system (last caller: %p, value %" B_PRIx32 ")",
@@ -462,7 +462,7 @@ acquire_spinlock_nocheck(spinlock *lock)
 
 /*!	Equivalent to acquire_spinlock(), save for currentCPU parameter. */
 static void
-acquire_spinlock_cpu(int32 currentCPU, spinlock *lock)
+acquire_spinlock_cpu(int32_t currentCPU, spinlock *lock)
 {
 #if DEBUG_SPINLOCKS
 	if (are_interrupts_enabled()) {
@@ -477,7 +477,7 @@ acquire_spinlock_cpu(int32 currentCPU, spinlock *lock)
 			process_all_pending_ici(currentCPU);
 #else
 		while (1) {
-			uint32 count = 0;
+			uint32_t count = 0;
 			while (lock->lock != 0) {
 				if (++count == SPINLOCK_DEADLOCK_COUNT) {
 #	if DEBUG_SPINLOCKS
@@ -505,7 +505,7 @@ acquire_spinlock_cpu(int32 currentCPU, spinlock *lock)
 #endif
 	} else {
 #if DEBUG_SPINLOCKS
-		int32 oldValue = atomic_get_and_set(&lock->lock, 1);
+		int32_t oldValue = atomic_get_and_set(&lock->lock, 1);
 		if (oldValue != 0) {
 			panic("acquire_spinlock_cpu(): attempt to acquire lock %p twice on "
 				"non-SMP system (last caller: %p, value %" B_PRIx32 ")", lock,
@@ -531,13 +531,13 @@ release_spinlock(spinlock *lock)
 				"interrupts enabled\n", lock);
 #if B_DEBUG_SPINLOCK_CONTENTION
 		{
-			int32 count = atomic_and(&lock->lock, 0) - 1;
+			int32_t count = atomic_and(&lock->lock, 0) - 1;
 			if (count < 0) {
 				panic("release_spinlock: lock %p was already released\n", lock);
 			} else {
 				// add to the total count -- deal with carry manually
-				if ((uint32)atomic_add(&lock->count_low, count) + count
-						< (uint32)count) {
+				if ((uint32_t)atomic_add(&lock->count_low, count) + count
+						< (uint32_t)count) {
 					atomic_add(&lock->count_high, 1);
 				}
 			}
@@ -593,7 +593,7 @@ acquire_write_spinlock(rw_spinlock* lock)
 	}
 #endif
 
-	uint32 count = 0;
+	uint32_t count = 0;
 	int currentCPU = smp_get_current_cpu();
 	while (true) {
 		if (try_acquire_write_spinlock(lock))
@@ -617,7 +617,7 @@ void
 release_write_spinlock(rw_spinlock* lock)
 {
 #if DEBUG_SPINLOCKS
-	uint32 previous = atomic_get_and_set(&lock->lock, 0);
+	uint32_t previous = atomic_get_and_set(&lock->lock, 0);
 	if ((previous & 1u << 31) == 0) {
 		panic("release_write_spinlock: lock %p was already released (value: "
 			"%#" B_PRIx32 ")\n", lock, previous);
@@ -643,7 +643,7 @@ try_acquire_read_spinlock(rw_spinlock* lock)
 	}
 #endif
 
-	uint32 previous = atomic_add(&lock->lock, 1);
+	uint32_t previous = atomic_add(&lock->lock, 1);
 	return (previous & (1u << 31)) == 0;
 }
 
@@ -658,7 +658,7 @@ acquire_read_spinlock(rw_spinlock* lock)
 	}
 #endif
 
-	uint32 count = 0;
+	uint32_t count = 0;
 	int currentCPU = smp_get_current_cpu();
 	while (1) {
 		if (try_acquire_read_spinlock(lock))
@@ -682,7 +682,7 @@ void
 release_read_spinlock(rw_spinlock* lock)
 {
 #if DEBUG_SPINLOCKS
-	uint32 previous = atomic_add(&lock->lock, -1);
+	uint32_t previous = atomic_add(&lock->lock, -1);
 	if ((previous & 1u << 31) != 0) {
 		panic("release_read_spinlock: lock %p was already released (value:"
 			" %#" B_PRIx32 ")\n", lock, previous);
@@ -698,7 +698,7 @@ bool
 try_acquire_write_seqlock(seqlock* lock) {
 	bool succeed = try_acquire_spinlock(&lock->lock);
 	if (succeed)
-		atomic_add((int32*)&lock->count, 1);
+		atomic_add((int32_t*)&lock->count, 1);
 	return succeed;
 }
 
@@ -706,28 +706,28 @@ try_acquire_write_seqlock(seqlock* lock) {
 void
 acquire_write_seqlock(seqlock* lock) {
 	acquire_spinlock(&lock->lock);
-	atomic_add((int32*)&lock->count, 1);
+	atomic_add((int32_t*)&lock->count, 1);
 }
 
 
 void
 release_write_seqlock(seqlock* lock) {
-	atomic_add((int32*)&lock->count, 1);
+	atomic_add((int32_t*)&lock->count, 1);
 	release_spinlock(&lock->lock);
 }
 
 
-uint32
+uint32_t
 acquire_read_seqlock(seqlock* lock) {
-	return atomic_get((int32*)&lock->count);
+	return atomic_get((int32_t*)&lock->count);
 }
 
 
 bool
-release_read_seqlock(seqlock* lock, uint32 count) {
+release_read_seqlock(seqlock* lock, uint32_t count) {
 	memory_read_barrier();
 
-	uint32 current = *(volatile int32*)&lock->count;
+	uint32_t current = *(volatile int32_t*)&lock->count;
 
 	if (count % 2 == 1 || current != count) {
 		cpu_pause();
@@ -780,7 +780,7 @@ retry:
 	already.
 */
 static void
-find_free_message_interrupts_disabled(int32 currentCPU,
+find_free_message_interrupts_disabled(int32_t currentCPU,
 	struct smp_msg** _message)
 {
 	TRACE("find_free_message_interrupts_disabled: entry\n");
@@ -925,7 +925,7 @@ finish_message_processing(int currentCPU, struct smp_msg* msg,
 
 
 static status_t
-process_pending_ici(int32 currentCPU)
+process_pending_ici(int32_t currentCPU)
 {
 	mailbox_source sourceMailbox;
 	struct smp_msg* msg = check_for_message(currentCPU, sourceMailbox);
@@ -985,11 +985,11 @@ process_pending_ici(int32 currentCPU)
 static uint64
 get_spinlock_counter(spinlock* lock)
 {
-	uint32 high;
-	uint32 low;
+	uint32_t high;
+	uint32_t low;
 	do {
-		high = (uint32)atomic_get(&lock->count_high);
-		low = (uint32)atomic_get(&lock->count_low);
+		high = (uint32_t)atomic_get(&lock->count_high);
+		low = (uint32_t)atomic_get(&lock->count_low);
 	} while (high != atomic_get(&lock->count_high));
 
 	return ((uint64)high << 32) | low;
@@ -997,7 +997,7 @@ get_spinlock_counter(spinlock* lock)
 
 
 static status_t
-spinlock_contention_syscall(const char* subsystem, uint32 function,
+spinlock_contention_syscall(const char* subsystem, uint32_t function,
 	void* buffer, size_t bufferSize)
 {
 	spinlock_contention_info info;
@@ -1024,7 +1024,7 @@ spinlock_contention_syscall(const char* subsystem, uint32 function,
 
 
 static void
-process_early_cpu_call(int32 cpu)
+process_early_cpu_call(int32_t cpu)
 {
 	sEarlyCPUCallFunction(sEarlyCPUCallCookie, cpu);
 	sEarlyCPUCallSet.ClearBitAtomic(cpu);
@@ -1056,7 +1056,7 @@ call_all_cpus_early(void (*function)(void*, int), void* cookie)
 
 
 int
-smp_intercpu_int_handler(int32 cpu)
+smp_intercpu_int_handler(int32_t cpu)
 {
 	TRACE("smp_intercpu_int_handler: entry on cpu %ld\n", cpu);
 
@@ -1069,8 +1069,8 @@ smp_intercpu_int_handler(int32 cpu)
 
 
 void
-smp_send_ici(int32 targetCPU, int32 message, addr_t data, addr_t data2,
-	addr_t data3, void* dataPointer, uint32 flags)
+smp_send_ici(int32_t targetCPU, int32_t message, addr_t data, addr_t data2,
+	addr_t data3, void* dataPointer, uint32_t flags)
 {
 	struct smp_msg *msg;
 
@@ -1132,8 +1132,8 @@ smp_send_ici(int32 targetCPU, int32 message, addr_t data, addr_t data2,
 
 
 void
-smp_send_multicast_ici(CPUSet& cpuMask, int32 message, addr_t data,
-	addr_t data2, addr_t data3, void *dataPointer, uint32 flags)
+smp_send_multicast_ici(CPUSet& cpuMask, int32_t message, addr_t data,
+	addr_t data2, addr_t data3, void *dataPointer, uint32_t flags)
 {
 	if (!sICIEnabled)
 		return;
@@ -1147,8 +1147,8 @@ smp_send_multicast_ici(CPUSet& cpuMask, int32 message, addr_t data,
 	msg->proc_bitmap = cpuMask;
 	msg->proc_bitmap.ClearBit(currentCPU);
 
-	int32 targetCPUs = 0;
-	for (int32 i = 0; i < sNumCPUs; i++) {
+	int32_t targetCPUs = 0;
+	for (int32_t i = 0; i < sNumCPUs; i++) {
 		if (msg->proc_bitmap.GetBit(i))
 			targetCPUs++;
 	}
@@ -1176,7 +1176,7 @@ smp_send_multicast_ici(CPUSet& cpuMask, int32 message, addr_t data,
 	release_spinlock(&sBroadcastMessageSpinlock);
 
 	atomic_add(&sBroadcastMessageCounter, 1);
-	for (int32 i = 0; i < sNumCPUs; i++) {
+	for (int32_t i = 0; i < sNumCPUs; i++) {
 		if (!cpuMask.GetBit(i))
 			atomic_add(&gCPU[i].ici_counter, 1);
 	}
@@ -1205,8 +1205,8 @@ smp_send_multicast_ici(CPUSet& cpuMask, int32 message, addr_t data,
 
 
 void
-smp_send_broadcast_ici(int32 message, addr_t data, addr_t data2, addr_t data3,
-	void *dataPointer, uint32 flags)
+smp_send_broadcast_ici(int32_t message, addr_t data, addr_t data2, addr_t data3,
+	void *dataPointer, uint32_t flags)
 {
 	struct smp_msg *msg;
 
@@ -1276,8 +1276,8 @@ smp_send_broadcast_ici(int32 message, addr_t data, addr_t data2, addr_t data3,
 
 
 void
-smp_send_broadcast_ici_interrupts_disabled(int32 currentCPU, int32 message,
-	addr_t data, addr_t data2, addr_t data3, void *dataPointer, uint32 flags)
+smp_send_broadcast_ici_interrupts_disabled(int32_t currentCPU, int32_t message,
+	addr_t data, addr_t data2, addr_t data3, void *dataPointer, uint32_t flags)
 {
 	if (!sICIEnabled)
 		return;
@@ -1349,7 +1349,7 @@ smp_send_broadcast_ici_interrupts_disabled(int32 currentCPU, int32 message,
 	\return \c true on the boot CPU, \c false otherwise.
 */
 bool
-smp_trap_non_boot_cpus(int32 cpu, uint32* rendezVous)
+smp_trap_non_boot_cpus(int32_t cpu, uint32_t* rendezVous)
 {
 	if (cpu == 0) {
 		smp_cpu_rendezvous(rendezVous);
@@ -1392,12 +1392,12 @@ smp_wake_up_non_boot_cpus()
 	ensured via another rendez-vous) the variable can be reset.
 */
 void
-smp_cpu_rendezvous(uint32* var)
+smp_cpu_rendezvous(uint32_t* var)
 {
-	atomic_add((int32*)var, 1);
+	atomic_add((int32_t*)var, 1);
 
-	while (*var < (uint32)sNumCPUs)
-		cpu_wait((int32*)var, sNumCPUs);
+	while (*var < (uint32_t)sNumCPUs)
+		cpu_wait((int32_t*)var, sNumCPUs);
 }
 
 
@@ -1450,7 +1450,7 @@ smp_init(kernel_args* args)
 
 
 status_t
-smp_per_cpu_init(kernel_args* args, int32 cpu)
+smp_per_cpu_init(kernel_args* args, int32_t cpu)
 {
 	return arch_smp_per_cpu_init(args, cpu);
 }
@@ -1469,20 +1469,20 @@ smp_init_post_generic_syscalls(void)
 
 
 void
-smp_set_num_cpus(int32 numCPUs)
+smp_set_num_cpus(int32_t numCPUs)
 {
 	sNumCPUs = numCPUs;
 }
 
 
-int32
+int32_t
 smp_get_num_cpus()
 {
 	return sNumCPUs;
 }
 
 
-int32
+int32_t
 smp_get_current_cpu(void)
 {
 	return thread_get_current_thread()->cpu->cpu_num;

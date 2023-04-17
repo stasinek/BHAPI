@@ -120,7 +120,7 @@ bool BSound::ReleaseRef()
 }
 
 
-int32 BSound::RefCount() const
+int32_t BSound::RefCount() const
 {
 	return fRefCount;
 }
@@ -175,7 +175,7 @@ bool BSound::GetDataAt(off_t offset, void* intoBuffer, size_t bufferSize,
 	}
 
 	if (fTrackReader != NULL) {
-		int32 frameSize = fTrackReader->FrameSize();
+		int32_t frameSize = fTrackReader->FrameSize();
 		int64 frameCount = fTrackReader->CountFrames();
 		int64 startFrame = offset / frameSize;
 		if (startFrame > frameCount)
@@ -238,7 +238,7 @@ status_t BSound::UnbindFrom(BSoundPlayer* player)
 }
 
 
-status_t BSound::Perform(int32 code, ...)
+status_t BSound::Perform(int32_t code, ...)
 {
 	UNIMPLEMENTED();
 	return B_ERROR;

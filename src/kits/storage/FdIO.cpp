@@ -87,7 +87,7 @@ BFdIO::WriteAt(off_t position, const void* buffer, size_t size)
 
 
 off_t
-BFdIO::Seek(off_t position, uint32 seekMode)
+BFdIO::Seek(off_t position, uint32_t seekMode)
 {
 	off_t newPosition = lseek(fFd, position, seekMode);
 	return newPosition >= 0 ? newPosition : errno;

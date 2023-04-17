@@ -169,7 +169,7 @@ public:
 
 	virtual	type_kind			Kind() const;
 
-	virtual	uint32				TypeConstant() const = 0;
+	virtual	uint32_t				TypeConstant() const = 0;
 };
 
 
@@ -180,14 +180,14 @@ public:
 	virtual	type_kind			Kind() const;
 	virtual compound_type_kind	CompoundKind() const = 0;
 
-	virtual	int32				CountBaseTypes() const = 0;
-	virtual	BaseType*			BaseTypeAt(int32 index) const = 0;
+	virtual	int32_t				CountBaseTypes() const = 0;
+	virtual	BaseType*			BaseTypeAt(int32_t index) const = 0;
 
-	virtual	int32				CountDataMembers() const = 0;
-	virtual	DataMember*			DataMemberAt(int32 index) const = 0;
+	virtual	int32_t				CountDataMembers() const = 0;
+	virtual	DataMember*			DataMemberAt(int32_t index) const = 0;
 
-	virtual int32				CountTemplateParameters() const = 0;
-	virtual TemplateParameter*	TemplateParameterAt(int32 index) const = 0;
+	virtual int32_t				CountTemplateParameters() const = 0;
+	virtual TemplateParameter*	TemplateParameterAt(int32_t index) const = 0;
 
 
 	virtual	status_t			ResolveBaseTypeLocation(BaseType* baseType,
@@ -207,7 +207,7 @@ public:
 
 	virtual	type_kind			Kind() const;
 
-	virtual	uint32				Modifiers() const = 0;
+	virtual	uint32_t				Modifiers() const = 0;
 	virtual	Type*				BaseType() const = 0;
 	virtual	Type*				ResolveRawType(bool nextOneOnly) const;
 };
@@ -244,8 +244,8 @@ public:
 	virtual	Type*				BaseType() const = 0;
 									// may return NULL
 
-	virtual	int32				CountValues() const = 0;
-	virtual	EnumeratorValue*	ValueAt(int32 index) const = 0;
+	virtual	int32_t				CountValues() const = 0;
+	virtual	EnumeratorValue*	ValueAt(int32_t index) const = 0;
 	virtual	EnumeratorValue*	ValueFor(const BVariant& value) const;
 };
 
@@ -271,8 +271,8 @@ public:
 
 	virtual	Type*				BaseType() const = 0;
 
-	virtual	int32				CountDimensions() const = 0;
-	virtual	ArrayDimension*		DimensionAt(int32 index) const = 0;
+	virtual	int32_t				CountDimensions() const = 0;
+	virtual	ArrayDimension*		DimensionAt(int32_t index) const = 0;
 
 	virtual	status_t			ResolveElementLocation(
 									const ArrayIndexPath& indexPath,
@@ -298,8 +298,8 @@ public:
 
 	virtual	Type*				ReturnType() const = 0;
 
-	virtual	int32				CountParameters() const = 0;
-	virtual	FunctionParameter*	ParameterAt(int32 index) const = 0;
+	virtual	int32_t				CountParameters() const = 0;
+	virtual	FunctionParameter*	ParameterAt(int32_t index) const = 0;
 
 	virtual	bool				HasVariableArguments() const = 0;
 };

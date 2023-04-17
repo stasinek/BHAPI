@@ -47,15 +47,15 @@ template<class T> class Stack {
 			return true;
 		}
 		
-		int32 CountItems() const
+		int32_t CountItems() const
 		{
 			return fUsed;
 		}
 		
 	private:
 		T		*fArray;
-		int32	fUsed;
-		int32	fMax;
+		int32_t	fUsed;
+		int32_t	fMax;
 };
 
 #endif	/* TSTACK_H */

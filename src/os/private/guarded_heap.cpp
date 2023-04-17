@@ -65,7 +65,7 @@ struct guarded_heap {
 	rw_lock				lock;
 	size_t				page_count;
 	size_t				used_pages;
-	int32				area_creation_counter;
+	int32_t				area_creation_counter;
 	guarded_heap_area*	areas;
 };
 
@@ -98,7 +98,7 @@ class GuardedHeapTraceEntry
 
 class Allocate : public GuardedHeapTraceEntry {
 	public:
-		Allocate(guarded_heap* heap, void* pageBase, uint32 flags)
+		Allocate(guarded_heap* heap, void* pageBase, uint32_t flags)
 			:
 			GuardedHeapTraceEntry(heap),
 			fPageBase(pageBase),
@@ -119,7 +119,7 @@ class Allocate : public GuardedHeapTraceEntry {
 
 	private:
 		void*		fPageBase;
-		uint32		fFlags;
+		uint32_t		fFlags;
 };
 
 
@@ -154,7 +154,7 @@ class Free : public GuardedHeapTraceEntry {
 
 static void
 guarded_heap_page_protect(guarded_heap_area& area, size_t pageIndex,
-	uint32 protection)
+	uint32_t protection)
 {
 	if (area.area < 0)
 		return;
@@ -255,7 +255,7 @@ guarded_heap_free_page(guarded_heap_area& area, size_t pageIndex,
 static bool
 guarded_heap_pages_allocated(guarded_heap& heap, size_t pagesAllocated)
 {
-	return (atomic_add((int32*)&heap.used_pages, pagesAllocated)
+	return (atomic_add((int32_t*)&heap.used_pages, pagesAllocated)
 			+ pagesAllocated)
 		>= heap.page_count - HEAP_GROW_SIZE / B_PAGE_SIZE / 2;
 }
@@ -263,7 +263,7 @@ guarded_heap_pages_allocated(guarded_heap& heap, size_t pagesAllocated)
 
 static void*
 guarded_heap_area_allocate(guarded_heap_area& area, size_t size,
-	size_t alignment, uint32 flags, bool& grow)
+	size_t alignment, uint32_t flags, bool& grow)
 {
 	if (alignment > B_PAGE_SIZE) {
 		panic("alignment of %" B_PRIuSIZE " not supported", alignment);
@@ -328,7 +328,7 @@ guarded_heap_area_allocate(guarded_heap_area& area, size_t size,
 
 static bool
 guarded_heap_area_init(guarded_heap& heap, area_id id, void* baseAddress,
-	size_t size, uint32 flags)
+	size_t size, uint32_t flags)
 {
 	guarded_heap_area* area = (guarded_heap_area*)baseAddress;
 	area->heap = &heap;
@@ -368,7 +368,7 @@ guarded_heap_area_init(guarded_heap& heap, area_id id, void* baseAddress,
 
 
 static bool
-guarded_heap_area_create(guarded_heap& heap, uint32 flags)
+guarded_heap_area_create(guarded_heap& heap, uint32_t flags)
 {
 	for (size_t trySize = HEAP_GROW_SIZE; trySize >= 1 * 1024 * 1024;
 		trySize /= 2) {
@@ -393,7 +393,7 @@ guarded_heap_area_create(guarded_heap& heap, uint32 flags)
 
 
 static bool
-guarded_heap_add_area(guarded_heap& heap, int32 counter, uint32 flags)
+guarded_heap_add_area(guarded_heap& heap, int32_t counter, uint32_t flags)
 {
 	if ((flags & (HEAP_DONT_LOCK_KERNEL_SPACE | HEAP_DONT_WAIT_FOR_MEMORY))
 			!= 0) {
@@ -411,7 +411,7 @@ guarded_heap_add_area(guarded_heap& heap, int32 counter, uint32 flags)
 
 static void*
 guarded_heap_allocate(guarded_heap& heap, size_t size, size_t alignment,
-	uint32 flags)
+	uint32_t flags)
 {
 	bool grow = false;
 	void* result = NULL;
@@ -426,7 +426,7 @@ guarded_heap_allocate(guarded_heap& heap, size_t size, size_t alignment,
 			break;
 	}
 
-	int32 counter = atomic_get(&heap.area_creation_counter);
+	int32_t counter = atomic_get(&heap.area_creation_counter);
 	areaListReadLocker.Unlock();
 
 	if (result == NULL || grow) {
@@ -497,7 +497,7 @@ guarded_heap_area_page_index_for(guarded_heap_area& area, void* address)
 
 
 static void
-guarded_heap_area_free(guarded_heap_area& area, void* address, uint32 flags)
+guarded_heap_area_free(guarded_heap_area& area, void* address, uint32_t flags)
 {
 	size_t pageIndex = guarded_heap_area_page_index_for(area, address);
 	if (pageIndex >= area.page_count)
@@ -520,13 +520,13 @@ guarded_heap_area_free(guarded_heap_area& area, void* address, uint32 flags)
 
 #if !DEBUG_GUARDED_HEAP_DISABLE_MEMORY_REUSE
 	area.used_pages -= pagesFreed;
-	atomic_add((int32*)&area.heap->used_pages, -pagesFreed);
+	atomic_add((int32_t*)&area.heap->used_pages, -pagesFreed);
 #endif
 }
 
 
 static void
-guarded_heap_free(void* address, uint32 flags)
+guarded_heap_free(void* address, uint32_t flags)
 {
 	if (address == NULL)
 		return;
@@ -784,7 +784,7 @@ dump_guarded_heap_allocations(int argc, char** argv)
 	addr_t address = 0;
 	bool statsOnly = false;
 
-	for (int32 i = 1; i < argc; i++) {
+	for (int32_t i = 1; i < argc; i++) {
 		if (strcmp(argv[i], "team") == 0)
 			team = parse_expression(argv[++i]);
 		else if (strcmp(argv[i], "thread") == 0)
@@ -800,7 +800,7 @@ dump_guarded_heap_allocations(int argc, char** argv)
 	}
 
 	size_t totalSize = 0;
-	uint32 totalCount = 0;
+	uint32_t totalCount = 0;
 
 	guarded_heap_area* area = sGuardedHeap.areas;
 	while (area != NULL) {
@@ -913,7 +913,7 @@ memalign(size_t alignment, size_t size)
 
 
 void *
-memalign_etc(size_t alignment, size_t size, uint32 flags)
+memalign_etc(size_t alignment, size_t size, uint32_t flags)
 {
 	if (size == 0)
 		size = 1;
@@ -923,7 +923,7 @@ memalign_etc(size_t alignment, size_t size, uint32 flags)
 
 
 void
-free_etc(void *address, uint32 flags)
+free_etc(void *address, uint32_t flags)
 {
 	guarded_heap_free(address, flags);
 }
@@ -980,7 +980,7 @@ create_object_cache(const char*, size_t objectSize, size_t, void*,
 
 object_cache*
 create_object_cache_etc(const char*, size_t objectSize, size_t, size_t, size_t,
-	size_t, uint32, void*, object_cache_constructor, object_cache_destructor,
+	size_t, uint32_t, void*, object_cache_constructor, object_cache_destructor,
 	object_cache_reclaimer)
 {
 	return (object_cache*)objectSize;
@@ -1001,21 +1001,21 @@ object_cache_set_minimum_reserve(object_cache* cache, size_t objectCount)
 
 
 void*
-object_cache_alloc(object_cache* cache, uint32 flags)
+object_cache_alloc(object_cache* cache, uint32_t flags)
 {
 	return memalign_etc(0, (size_t)cache, flags);
 }
 
 
 void
-object_cache_free(object_cache* cache, void* object, uint32 flags)
+object_cache_free(object_cache* cache, void* object, uint32_t flags)
 {
 	return free_etc(object, flags);
 }
 
 
 status_t
-object_cache_reserve(object_cache* cache, size_t objectCount, uint32 flags)
+object_cache_reserve(object_cache* cache, size_t objectCount, uint32_t flags)
 {
 	return B_OK;
 }

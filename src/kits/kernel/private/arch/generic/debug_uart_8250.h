@@ -23,7 +23,7 @@ public:
 
 			void			InitEarly();
 			void			Init();
-			void			InitPort(uint32 baud);
+			void			InitPort(uint32_t baud);
 
 			int				PutChar(char c);
 			int				GetChar(bool wait);

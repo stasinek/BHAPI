@@ -43,7 +43,7 @@ namespace agg
     class scanline_bin
     {
     public:
-        typedef int32 coord_type;
+        typedef int32_t coord_type;
 
         struct span
         {
@@ -148,7 +148,7 @@ namespace agg
     class scanline32_bin
     {
     public:
-        typedef int32 coord_type;
+        typedef int32_t coord_type;
 
         //--------------------------------------------------------------------
         struct span

@@ -35,8 +35,8 @@
 #define V_SEPARATION  10
 #define BD_ADDR_LABEL "BD_ADDR: "
 
-static const uint32 skMessageAcceptButton = 'acCp';
-static const uint32 skMessageCancelButton = 'mVch';
+static const uint32_t skMessageAcceptButton = 'acCp';
+static const uint32_t skMessageCancelButton = 'mVch';
 
 
 namespace Bluetooth {

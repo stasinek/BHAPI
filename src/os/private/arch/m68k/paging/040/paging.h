@@ -119,8 +119,8 @@ static const size_t kPageDirAlignment = B_PAGE_SIZE
 static const size_t kPageTableAlignment = 1024 * B_PAGE_SIZE;
 
 
-typedef uint32 page_table_entry;
-typedef uint32 page_directory_entry;
+typedef uint32_t page_table_entry;
+typedef uint32_t page_directory_entry;
 
 #endif // 0
 

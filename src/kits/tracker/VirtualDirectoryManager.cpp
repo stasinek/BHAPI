@@ -118,7 +118,7 @@ public:
 
 	Info* GetChild(const char* name) const
 	{
-		for (int32 i = 0; Info* child = fChildren.ItemAt(i); i++) {
+		for (int32_t i = 0; Info* child = fChildren.ItemAt(i); i++) {
 			if (strcmp(name, child->Name()) == 0)
 				return child;
 		}
@@ -152,7 +152,7 @@ public:
 		return fChildren.RemoveItem(info, true);
 	}
 
-	void DeleteChildAt(int32 index)
+	void DeleteChildAt(int32_t index)
 	{
 		delete fChildren.RemoveItemAt(index);
 	}
@@ -266,7 +266,7 @@ public:
 			= driverSettings.ParameterIterator("directory");
 		while (it.HasNext()) {
 			BDriverParameter parameter = it.Next();
-			for (int32 i = 0; i < parameter.CountValues(); i++)
+			for (int32_t i = 0; i < parameter.CountValues(); i++)
 				fDirectoryPaths.Add(parameter.ValueAt(i));
 		}
 
@@ -339,8 +339,8 @@ status_t VirtualDirectoryManager::ResolveDirectoryPaths(
 		_directoryPaths = rootDirectoryPaths;
 	} else {
 		_directoryPaths.MakeEmpty();
-		int32 count = rootDirectoryPaths.CountStrings();
-		for (int32 i = 0; i < count; i++) {
+		int32_t count = rootDirectoryPaths.CountStrings();
+		for (int32_t i = 0; i < count; i++) {
 			BString path = rootDirectoryPaths.StringAt(i);
 			_directoryPaths.Add(path << '/' << subDirectory);
 		}
@@ -568,8 +568,8 @@ status_t VirtualDirectoryManager::DirectoryRemoved(const node_ref& definitionFil
 /*static*/ bool VirtualDirectoryManager::GetEntry(const BStringList& directoryPaths,
 	const char* name, entry_ref* _ref, struct stat* _st)
 {
-	int32 count = directoryPaths.CountStrings();
-	for (int32 i = 0; i < count; i++) {
+	int32_t count = directoryPaths.CountStrings();
+	for (int32_t i = 0; i < count; i++) {
 		BPath path;
 		if (path.SetTo(directoryPaths.StringAt(i), name) != B_OK)
 			continue;
@@ -637,8 +637,8 @@ void VirtualDirectoryManager::_UpdateTree(Info* info)
 {
 	const BStringList& directoryPaths = info->Root()->DirectoryPaths();
 
-	int32 childCount = info->Children().CountItems();
-	for (int32 i = childCount -1; i >= 0; i--) {
+	int32_t childCount = info->Children().CountItems();
+	for (int32_t i = childCount -1; i >= 0; i--) {
 		Info* childInfo = info->Children().ItemAt(i);
 		struct stat st;
 		if (GetEntry(directoryPaths, childInfo->Path(), NULL, &st)
@@ -655,7 +655,7 @@ void VirtualDirectoryManager::_UpdateTree(Info* info)
 void VirtualDirectoryManager::_RemoveDirectory(Info* info)
 {
 	// recursively remove the subdirectories
-	for (int32 i = 0; Info* child = info->Children().ItemAt(i); i++)
+	for (int32_t i = 0; Info* child = info->Children().ItemAt(i); i++)
 		_RemoveDirectory(child);
 
 	// remove the directory for the child definition file
@@ -710,9 +710,9 @@ status_t VirtualDirectoryManager::_ResolveUnknownDefinitionFile(
 	const BStringList& rootDirectoryPaths = info->Root()->DirectoryPaths();
 
 	// now we can traverse the subdir path and resolve all infos along the way
-	int32 nextComponentOffset = 0;
+	int32_t nextComponentOffset = 0;
 	while (nextComponentOffset < subDirPath.Length()) {
-		int32 componentEnd = subDirPath.FindFirst('/', nextComponentOffset);
+		int32_t componentEnd = subDirPath.FindFirst('/', nextComponentOffset);
 		if (componentEnd >= 0) {
 			// skip duplicate '/'s
 			if (componentEnd == nextComponentOffset + 1) {

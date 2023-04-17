@@ -32,8 +32,8 @@
 struct arp_control {
 	in_addr_t	address;
 	uint8		ethernet_address[ETHER_ADDRESS_LENGTH];
-	uint32		flags;
-	uint32		cookie;
+	uint32_t		flags;
+	uint32_t		cookie;
 };
 
 #endif	// ARP_CONTROL_H

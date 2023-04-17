@@ -27,17 +27,17 @@ namespace BPrivate {
 
 class MessageAdapter {
 public:
-	static	ssize_t				FlattenedSize(uint32 format,
+	static	ssize_t				FlattenedSize(uint32_t format,
 									const BMessage* from);
 
-	static	status_t			Flatten(uint32 format, const BMessage* from,
+	static	status_t			Flatten(uint32_t format, const BMessage* from,
 									char* buffer, ssize_t* size);
-	static	status_t			Flatten(uint32 format, const BMessage* from,
+	static	status_t			Flatten(uint32_t format, const BMessage* from,
 									BDataIO* stream, ssize_t* size);
 
-	static	status_t			Unflatten(uint32 format, BMessage* into,
+	static	status_t			Unflatten(uint32_t format, BMessage* into,
 									const char* buffer);
-	static	status_t			Unflatten(uint32 format, BMessage* into,
+	static	status_t			Unflatten(uint32_t format, BMessage* into,
 									BDataIO* stream);
 
 	static	status_t			ConvertToKMessage(const BMessage* from,
@@ -49,13 +49,13 @@ private:
 
 	static	ssize_t				_R5FlattenedSize(const BMessage* from);
 
-	static	status_t			_FlattenR5Message(uint32 format,
+	static	status_t			_FlattenR5Message(uint32_t format,
 									const BMessage* from, char* buffer,
 									ssize_t* size);
 
-	static	status_t			_UnflattenR5Message(uint32 format,
+	static	status_t			_UnflattenR5Message(uint32_t format,
 									BMessage* into, BDataIO* stream);
-	static	status_t			_UnflattenDanoMessage(uint32 format,
+	static	status_t			_UnflattenDanoMessage(uint32_t format,
 									BMessage* into, BDataIO* stream);
 };
 

@@ -13,9 +13,9 @@ class LineDataSource : public BReferenceable {
 public:
 	virtual						~LineDataSource();
 
-	virtual	int32				CountLines() const = 0;
-	virtual	const char*			LineAt(int32 index) const = 0;
-	virtual int32				LineLengthAt(int32 index) const = 0;
+	virtual	int32_t				CountLines() const = 0;
+	virtual	const char*			LineAt(int32_t index) const = 0;
+	virtual int32_t				LineLengthAt(int32_t index) const = 0;
 };
 
 

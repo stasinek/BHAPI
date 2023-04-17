@@ -36,7 +36,7 @@ static EButton *button = NULL;
 
 static e_status_t thread_func(void *data)
 {
-	static eint32 count = 0;
+	static eint32_t count = 0;
 
 	while(true)
 	{

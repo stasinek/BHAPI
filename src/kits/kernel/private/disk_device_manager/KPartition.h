@@ -36,7 +36,7 @@ public:
 	// manager must be locked (Unregister() locks itself)
 	void Register();
 	void Unregister();
-	int32 CountReferences() const;
+	int32_t CountReferences() const;
 
 	void MarkObsolete();
 		// called by the manager only
@@ -67,20 +67,20 @@ public:
 	void SetContentSize(off_t size);
 	off_t ContentSize() const;
 
-	void SetBlockSize(uint32 blockSize);
-	uint32 BlockSize() const;
+	void SetBlockSize(uint32_t blockSize);
+	uint32_t BlockSize() const;
 
-	void SetIndex(int32 index);
-	int32 Index() const;		// 0 for devices
+	void SetIndex(int32_t index);
+	int32_t Index() const;		// 0 for devices
 
-	void SetStatus(uint32 status);
-	uint32 Status() const;
+	void SetStatus(uint32_t status);
+	uint32_t Status() const;
 	bool IsUninitialized() const;
 
-	void SetFlags(uint32 flags);	// comprises the ones below
-	void AddFlags(uint32 flags);
-	void ClearFlags(uint32 flags);
-	uint32 Flags() const;
+	void SetFlags(uint32_t flags);	// comprises the ones below
+	void AddFlags(uint32_t flags);
+	void ClearFlags(uint32_t flags);
+	uint32_t Flags() const;
 	bool ContainsFileSystem() const;
 	bool ContainsPartitioningSystem() const;
 	bool IsReadOnly() const;
@@ -118,7 +118,7 @@ public:
 	void SetMountCookie(void *cookie);
 	void *MountCookie() const;
 
-	virtual status_t Mount(uint32 mountFlags, const char *parameters);
+	virtual status_t Mount(uint32_t mountFlags, const char *parameters);
 	virtual status_t Unmount();
 
 	// Parameters
@@ -137,15 +137,15 @@ public:
 	void SetParent(KPartition *parent);
 	KPartition *Parent() const;
 
-	status_t AddChild(KPartition *partition, int32 index = -1);
-	status_t CreateChild(partition_id id, int32 index, off_t offset, off_t size,
+	status_t AddChild(KPartition *partition, int32_t index = -1);
+	status_t CreateChild(partition_id id, int32_t index, off_t offset, off_t size,
 		KPartition **child = NULL);
-	bool RemoveChild(int32 index);
+	bool RemoveChild(int32_t index);
 	bool RemoveChild(KPartition *child);
 	bool RemoveAllChildren();
-	KPartition *ChildAt(int32 index) const;
-	int32 CountChildren() const;
-	int32 CountDescendants() const;
+	KPartition *ChildAt(int32_t index) const;
+	int32_t CountChildren() const;
+	int32_t CountDescendants() const;
 
 	KPartition *VisitEachDescendant(KPartitionVisitor *visitor);
 
@@ -172,29 +172,29 @@ public:
 
 	// Change Tracking
 
-	void Changed(uint32 flags, uint32 clearFlags = 0);
-	void SetChangeFlags(uint32 flags);
-	uint32 ChangeFlags() const;
-	int32 ChangeCounter() const;
+	void Changed(uint32_t flags, uint32_t clearFlags = 0);
+	void SetChangeFlags(uint32_t flags);
+	uint32_t ChangeFlags() const;
+	int32_t ChangeCounter() const;
 	status_t UninitializeContents(bool logChanges = true);
 
-	void SetAlgorithmData(uint32 data);
-	uint32 AlgorithmData() const;
+	void SetAlgorithmData(uint32_t data);
+	uint32_t AlgorithmData() const;
 		// temporary storage freely usable by algorithms
 
 	virtual void WriteUserData(UserDataWriter &writer,
 							   user_partition_data *data);
 
-	virtual void Dump(bool deep, int32 level);
+	virtual void Dump(bool deep, int32_t level);
 
 protected:
 	void FireOffsetChanged(off_t offset);
 	void FireSizeChanged(off_t size);
 	void FireContentSizeChanged(off_t size);
-	void FireBlockSizeChanged(uint32 blockSize);
-	void FireIndexChanged(int32 index);
-	void FireStatusChanged(uint32 status);
-	void FireFlagsChanged(uint32 flags);
+	void FireBlockSizeChanged(uint32_t blockSize);
+	void FireIndexChanged(int32_t index);
+	void FireStatusChanged(uint32_t status);
+	void FireFlagsChanged(uint32_t flags);
 	void FireNameChanged(const char *name);
 	void FireContentNameChanged(const char *name);
 	void FireTypeChanged(const char *type);
@@ -203,15 +203,15 @@ protected:
 	void FireMountCookieChanged(void *cookie);
 	void FireParametersChanged(const char *parameters);
 	void FireContentParametersChanged(const char *parameters);
-	void FireChildAdded(KPartition *child, int32 index);
-	void FireChildRemoved(KPartition *child, int32 index);
+	void FireChildAdded(KPartition *child, int32_t index);
+	void FireChildRemoved(KPartition *child, int32_t index);
 	void FireDiskSystemChanged(KDiskSystem *diskSystem);
 	void FireCookieChanged(void *cookie);
 	void FireContentCookieChanged(void *cookie);
 
 private:
-	void _UpdateChildIndices(int32 start, int32 end);
-	static int32 _NextID();
+	void _UpdateChildIndices(int32_t start, int32_t end);
+	static int32_t _NextID();
 
 protected:
 	typedef Vector<KPartition*> PartitionVector;
@@ -224,13 +224,13 @@ protected:
 	KDiskSystem			*fDiskSystem;
 	float				fDiskSystemPriority;
 	ListenerSet			*fListeners;
-	uint32				fChangeFlags;
-	int32				fChangeCounter;
-	uint32				fAlgorithmData;
-	int32				fReferenceCount;
+	uint32_t				fChangeFlags;
+	int32_t				fChangeCounter;
+	uint32_t				fAlgorithmData;
+	int32_t				fReferenceCount;
 	bool				fObsolete;
 	char				*fPublishedName;
-	static int32		sNextID;
+	static int32_t		sNextID;
 };
 
 } // namespace DiskDevice

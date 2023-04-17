@@ -24,21 +24,21 @@ public:
 // TODO: We don't need the partition ID.
 			partition_id		PartitionID() const;
 
-			status_t			GetPartitionableSpaceAt(int32 index,
+			status_t			GetPartitionableSpaceAt(int32_t index,
 									off_t* offset, off_t*size) const;
-			int32				CountPartitionableSpaces() const;
+			int32_t				CountPartitionableSpaces() const;
 
 			void				PrintToStream() const;
 private:
-			status_t			_InsertSpaces(int32 index, int32 count);
-			void				_RemoveSpaces(int32 index, int32 count);
+			status_t			_InsertSpaces(int32_t index, int32_t count);
+			void				_RemoveSpaces(int32_t index, int32_t count);
 
 	friend class BPartition;
 
 			partition_id		fPartitionID;
 			partitionable_space_data* fSpaces;
-			int32				fCount;
-			int32				fCapacity;
+			int32_t				fCount;
+			int32_t				fCapacity;
 };
 
 #endif	// _PARTITIONING_INFO_H

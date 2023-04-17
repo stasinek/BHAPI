@@ -74,7 +74,7 @@ typedef struct bt_hci_transport_hooks {
 
 typedef struct bt_hci_device_information {
 
-	uint32	flags;
+	uint32_t	flags;
 	uint16	vendorId;
 	uint16	deviceId;
 	char	name[B_OS_NAME_LENGTH];

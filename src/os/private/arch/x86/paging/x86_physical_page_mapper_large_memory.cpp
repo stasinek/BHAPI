@@ -109,8 +109,8 @@ private:
 			};
 
 			page_slot			fSlots[SLOTS_PER_TRANSLATION_MAP];
-			int32				fSlotCount;	// must be a power of 2
-			int32				fNextSlot;
+			int32_t				fSlotCount;	// must be a power of 2
+			int32_t				fNextSlot;
 };
 
 
@@ -120,7 +120,7 @@ public:
 
 			status_t			Init(kernel_args* args,
 									PhysicalPageSlotPool* initialPools,
-									int32 initalPoolCount, size_t poolSize,
+									int32_t initalPoolCount, size_t poolSize,
 									TranslationMapPhysicalPageMapper*&
 										_kernelPageMapper);
 
@@ -157,7 +157,7 @@ public:
 									PhysicalPageSlot*& slot);
 			void				PutSlot(PhysicalPageSlot* slot);
 
-	inline	PhysicalPageSlotQueue* GetSlotQueue(int32 cpu, bool user);
+	inline	PhysicalPageSlotQueue* GetSlotQueue(int32_t cpu, bool user);
 
 private:
 	typedef DoublyLinkedList<PhysicalPageSlotPool> PoolList;
@@ -305,9 +305,9 @@ PhysicalPageSlotQueue::PutSlots(PhysicalPageSlot* slot1,
 void
 PhysicalPageOpsCPUData::Init()
 {
-	for (int32 i = 0; i < USER_SLOTS_PER_CPU; i++)
+	for (int32_t i = 0; i < USER_SLOTS_PER_CPU; i++)
 		user.PutSlot(_GetInitialSlot());
-	for (int32 i = 0; i < KERNEL_SLOTS_PER_CPU; i++)
+	for (int32_t i = 0; i < KERNEL_SLOTS_PER_CPU; i++)
 		kernel.PutSlot(_GetInitialSlot());
 	interruptSlot = _GetInitialSlot();
 }
@@ -345,7 +345,7 @@ LargeMemoryTranslationMapPhysicalPageMapper
 	::~LargeMemoryTranslationMapPhysicalPageMapper()
 {
 	// put our slots back to the global pool
-	for (int32 i = 0; i < fSlotCount; i++) {
+	for (int32_t i = 0; i < fSlotCount; i++) {
 		if (fSlots[i].slot != NULL)
 			sPhysicalPageMapper.PutSlot(fSlots[i].slot);
 	}
@@ -356,7 +356,7 @@ status_t
 LargeMemoryTranslationMapPhysicalPageMapper::Init()
 {
 	// get our slots from the global pool
-	for (int32 i = 0; i < fSlotCount; i++) {
+	for (int32_t i = 0; i < fSlotCount; i++) {
 		status_t error = sPhysicalPageMapper.GetSlot(true, fSlots[i].slot);
 		if (error != B_OK)
 			return error;
@@ -382,10 +382,10 @@ LargeMemoryTranslationMapPhysicalPageMapper::GetPageTableAt(
 {
 	ASSERT(physicalAddress % B_PAGE_SIZE == 0);
 
-	int32 currentCPU = smp_get_current_cpu();
+	int32_t currentCPU = smp_get_current_cpu();
 
 	// maybe the address is already mapped
-	for (int32 i = 0; i < fSlotCount; i++) {
+	for (int32_t i = 0; i < fSlotCount; i++) {
 		page_slot& slot = fSlots[i];
 		if (slot.physicalAddress == physicalAddress) {
 			fNextSlot = (i + 1) & (fSlotCount - 1);
@@ -424,13 +424,13 @@ LargeMemoryPhysicalPageMapper::LargeMemoryPhysicalPageMapper()
 
 status_t
 LargeMemoryPhysicalPageMapper::Init(kernel_args* args,
-	PhysicalPageSlotPool* initialPools, int32 initialPoolCount, size_t poolSize,
+	PhysicalPageSlotPool* initialPools, int32_t initialPoolCount, size_t poolSize,
 	TranslationMapPhysicalPageMapper*& _kernelPageMapper)
 {
 	ASSERT(initialPoolCount >= 1);
 
 	fInitialPool = initialPools;
-	for (int32 i = 0; i < initialPoolCount; i++) {
+	for (int32_t i = 0; i < initialPoolCount; i++) {
 		uint8* pointer = (uint8*)initialPools + i * poolSize;
 		fNonEmptyPools.Add((PhysicalPageSlotPool*)pointer);
 	}
@@ -448,8 +448,8 @@ LargeMemoryPhysicalPageMapper::Init(kernel_args* args,
 	_kernelPageMapper = &fKernelMapper;
 
 	// init the per-CPU data
-	int32 cpuCount = smp_get_num_cpus();
-	for (int32 i = 0; i < cpuCount; i++)
+	int32_t cpuCount = smp_get_num_cpus();
+	for (int32_t i = 0; i < cpuCount; i++)
 		fPerCPUData[i].Init();
 
 	return B_OK;
@@ -745,7 +745,7 @@ LargeMemoryPhysicalPageMapper::PutSlot(PhysicalPageSlot* slot)
 
 
 inline PhysicalPageSlotQueue*
-LargeMemoryPhysicalPageMapper::GetSlotQueue(int32 cpu, bool user)
+LargeMemoryPhysicalPageMapper::GetSlotQueue(int32_t cpu, bool user)
 {
 	return user ? &fPerCPUData[cpu].user : &fPerCPUData[cpu].kernel;
 }
@@ -757,7 +757,7 @@ LargeMemoryPhysicalPageMapper::GetSlotQueue(int32 cpu, bool user)
 status_t
 large_memory_physical_page_ops_init(kernel_args* args,
 	X86LargePhysicalPageMapper::PhysicalPageSlotPool* initialPools,
-	int32 initialPoolCount, size_t poolSize,
+	int32_t initialPoolCount, size_t poolSize,
 	X86PhysicalPageMapper*& _pageMapper,
 	TranslationMapPhysicalPageMapper*& _kernelPageMapper)
 {

@@ -13,14 +13,14 @@ struct _event_queue_imp;
 struct media_timed_event {
 								media_timed_event();
 								media_timed_event(bigtime_t inTime,
-									int32 inType);
+									int32_t inType);
 								media_timed_event(bigtime_t inTime,
-									int32 inType, void*inPointer,
-									uint32 inCleanup);
+									int32_t inType, void*inPointer,
+									uint32_t inCleanup);
 								media_timed_event(
-									bigtime_t inTime, int32 inType,
-									void* inPointer, uint32 inCleanup,
-									int32 inData, int64 inBigdata,
+									bigtime_t inTime, int32_t inType,
+									void* inPointer, uint32_t inCleanup,
+									int32_t inData, int64 inBigdata,
 									char* inUserData, size_t dataSize = 0);
 
 								media_timed_event(
@@ -32,14 +32,14 @@ struct media_timed_event {
 			void				operator=(const media_timed_event& other);
 
 			bigtime_t			event_time;
-			int32				type;
+			int32_t				type;
 			void*				pointer;
-			uint32				cleanup;
-			int32				data;
+			uint32_t				cleanup;
+			int32_t				data;
 			int64				bigdata;
 			char				user_data[64];
 
-			uint32				_reserved_media_timed_event_[8];
+			uint32_t				_reserved_media_timed_event_[8];
 };
 
 
@@ -101,7 +101,7 @@ public:
 									media_timed_event* _event = NULL);
 
 			bool				HasEvents() const;
-			int32				EventCount() const;
+			int32_t				EventCount() const;
 
 
 			const media_timed_event* FirstEvent() const;
@@ -112,7 +112,7 @@ public:
 			const media_timed_event* FindFirstMatch(bigtime_t eventTime,
 								time_direction direction,
 								bool inclusive = true,
-								int32 eventType = B_ANY_EVENT);
+								int32_t eventType = B_ANY_EVENT);
 
 
 	// Queue manipulation
@@ -133,7 +133,7 @@ public:
 									bigtime_t eventTime = 0,
 									time_direction direction = B_ALWAYS,
 									bool inclusive = true,
-									int32 eventType = B_ANY_EVENT);
+									int32_t eventType = B_ANY_EVENT);
 
 
 	// Flushing events
@@ -146,7 +146,7 @@ public:
 			status_t			FlushEvents(bigtime_t eventTime,
 									time_direction direction,
 									bool inclusive = true,
-									int32 eventType = B_ANY_EVENT);
+									int32_t eventType = B_ANY_EVENT);
 
 private:
 	// FBC padding and forbidden methods
@@ -182,7 +182,7 @@ private:
 private:
 			_event_queue_imp* 	fImp;
 
-			uint32 				_reserved_timed_event_queue_[6];
+			uint32_t 				_reserved_timed_event_queue_[6];
 };
 
 #endif

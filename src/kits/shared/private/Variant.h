@@ -32,8 +32,8 @@ public:
 	inline						BVariant(uint8 value);
 	inline						BVariant(int16 value);
 	inline						BVariant(uint16 value);
-	inline						BVariant(int32 value);
-	inline						BVariant(uint32 value);
+	inline						BVariant(int32_t value);
+	inline						BVariant(uint32_t value);
 	inline						BVariant(int64 value);
 	inline						BVariant(uint64 value);
 	inline						BVariant(float value);
@@ -43,7 +43,7 @@ public:
 									float bottom);
 	inline						BVariant(const void* value);
 	inline						BVariant(const char* value,
-									uint32 flags = 0);
+									uint32_t flags = 0);
 	inline						BVariant(BReferenceable* value, type_code type);
 									// type must be a custom type
 	inline						BVariant(const BVariant& other);
@@ -55,8 +55,8 @@ public:
 	inline	void				SetTo(uint8 value);
 	inline	void				SetTo(int16 value);
 	inline	void				SetTo(uint16 value);
-	inline	void				SetTo(int32 value);
-	inline	void				SetTo(uint32 value);
+	inline	void				SetTo(int32_t value);
+	inline	void				SetTo(uint32_t value);
 	inline	void				SetTo(int64 value);
 	inline	void				SetTo(uint64 value);
 	inline	void				SetTo(float value);
@@ -66,7 +66,7 @@ public:
 									float bottom);
 	inline	void				SetTo(const void* value);
 	inline	void				SetTo(const char* value,
-									uint32 flags = 0);
+									uint32_t flags = 0);
 	inline	void				SetTo(BReferenceable* value, type_code type);
 									// type must be a custom type
 			status_t			SetToTypedData(const void* data,
@@ -92,8 +92,8 @@ public:
 			uint8				ToUInt8() const;
 			int16				ToInt16() const;
 			uint16				ToUInt16() const;
-			int32				ToInt32() const;
-			uint32				ToUInt32() const;
+			int32_t				ToInt32() const;
+			uint32_t				ToUInt32() const;
 			int64				ToInt64() const;
 			uint64				ToUInt64() const;
 			float				ToFloat() const;
@@ -125,8 +125,8 @@ private:
 			void				_SetTo(uint8 value);
 			void				_SetTo(int16 value);
 			void				_SetTo(uint16 value);
-			void				_SetTo(int32 value);
-			void				_SetTo(uint32 value);
+			void				_SetTo(int32_t value);
+			void				_SetTo(uint32_t value);
 			void				_SetTo(int64 value);
 			void				_SetTo(uint64 value);
 			void				_SetTo(float value);
@@ -135,7 +135,7 @@ private:
 			void				_SetTo(float left, float top, float right,
 									float bottom);
 			bool				_SetTo(const char* value,
-									uint32 flags);
+									uint32_t flags);
 			void				_SetTo(BReferenceable* value, type_code type);
 
 	template<typename NumberType>
@@ -143,15 +143,15 @@ private:
 
 private:
 			type_code			fType;
-			uint32				fFlags;
+			uint32_t				fFlags;
 			union {
 				bool			fBool;
 				int8			fInt8;
 				uint8			fUInt8;
 				int16			fInt16;
 				uint16			fUInt16;
-				int32			fInt32;
-				uint32			fUInt32;
+				int32_t			fInt32;
+				uint32_t			fUInt32;
 				int64			fInt64;
 				uint64			fUInt64;
 				float			fFloat;
@@ -208,13 +208,13 @@ BVariant::BVariant(uint16 value)
 }
 
 
-BVariant::BVariant(int32 value)
+BVariant::BVariant(int32_t value)
 {
 	_SetTo(value);
 }
 
 
-BVariant::BVariant(uint32 value)
+BVariant::BVariant(uint32_t value)
 {
 	_SetTo(value);
 }
@@ -262,7 +262,7 @@ BVariant::BVariant(const void* value)
 }
 
 
-BVariant::BVariant(const char* value, uint32 flags)
+BVariant::BVariant(const char* value, uint32_t flags)
 {
 	_SetTo(value, flags);
 }
@@ -337,14 +337,14 @@ void BVariant::SetTo(uint16 value)
 }
 
 
-void BVariant::SetTo(int32 value)
+void BVariant::SetTo(int32_t value)
 {
 	Unset();
 	_SetTo(value);
 }
 
 
-void BVariant::SetTo(uint32 value)
+void BVariant::SetTo(uint32_t value)
 {
 	Unset();
 	_SetTo(value);
@@ -400,7 +400,7 @@ void BVariant::SetTo(const void* value)
 }
 
 
-void BVariant::SetTo(const char* value, uint32 flags)
+void BVariant::SetTo(const char* value, uint32_t flags)
 {
 	Unset();
 	_SetTo(value, flags);

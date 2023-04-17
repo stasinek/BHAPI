@@ -98,7 +98,7 @@ private:
 			BAlignment			fAlignment;
 			border_style		fBorder;
 
-			uint32				_reserved[10];
+			uint32_t				_reserved[10];
 };
 
 #endif // _SEPARATOR_VIEW_H

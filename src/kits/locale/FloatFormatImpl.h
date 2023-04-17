@@ -17,8 +17,8 @@ class BFloatFormatImpl {
 		virtual status_t Format(const BFloatFormatParameters *parameters,
 								double number, BString *buffer,
 								format_field_position *positions,
-								int32 positionCount = 1,
-								int32 *fieldCount = NULL,
+								int32_t positionCount = 1,
+								int32_t *fieldCount = NULL,
 								bool allFieldPositions = false) const = 0;
 
 		// TODO: ...

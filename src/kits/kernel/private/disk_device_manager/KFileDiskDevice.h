@@ -24,7 +24,7 @@ public:
 
 	const char *FilePath() const;
 
-//	virtual void Dump(bool deep = true, int32 level = 0);
+//	virtual void Dump(bool deep = true, int32_t level = 0);
 
 protected:
 	virtual status_t GetMediaStatus(status_t *mediaStatus);

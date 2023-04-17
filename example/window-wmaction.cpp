@@ -49,18 +49,18 @@ public:
 	TWindow(ERect frame,
 		const char *title,
 		e_window_type type,
-		euint32 flags,
-		euint32 workspace = E_CURRENT_WORKSPACE);
+		euint32_t flags,
+		euint32_t workspace = E_CURRENT_WORKSPACE);
 	TWindow(ERect frame,
 		const char *title,
 		e_window_look look,
 		e_window_feel feel,
-		euint32 flags,
-		euint32 workspace = E_CURRENT_WORKSPACE);
+		euint32_t flags,
+		euint32_t workspace = E_CURRENT_WORKSPACE);
 	virtual ~TWindow();
 
 	virtual void WindowActivated(bool state);
-	virtual void WorkspacesChanged(euint32 old_ws, euint32 new_ws);
+	virtual void WorkspacesChanged(euint32_t old_ws, euint32_t new_ws);
 	virtual bool QuitRequested();
 
 	virtual void Minimize(bool minimize);
@@ -78,14 +78,14 @@ public:
 };
 
 
-TWindow::TWindow(ERect frame, const char *title, e_window_type type, euint32 flags, euint32 workspace)
+TWindow::TWindow(ERect frame, const char *title, e_window_type type, euint32_t flags, euint32_t workspace)
 	: EWindow(frame, title, type, flags, workspace)
 {
 	SetSizeLimits(10, 800, 10, 600);
 }
 
 
-TWindow::TWindow(ERect frame, const char *title, e_window_look look, e_window_feel feel, euint32 flags, euint32 workspace)
+TWindow::TWindow(ERect frame, const char *title, e_window_look look, e_window_feel feel, euint32_t flags, euint32_t workspace)
 	: EWindow(frame, title, look, feel, flags, workspace)
 {
 }
@@ -148,7 +148,7 @@ TWindow::WindowActivated(bool state)
 
 
 void
-TWindow::WorkspacesChanged(euint32 old_ws, euint32 new_ws)
+TWindow::WorkspacesChanged(euint32_t old_ws, euint32_t new_ws)
 {
 	ETK_OUTPUT("Window workspaces changed: old - %u, new - %u.\n", old_ws, new_ws);
 }

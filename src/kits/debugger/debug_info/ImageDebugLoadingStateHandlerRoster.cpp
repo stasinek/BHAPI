@@ -103,7 +103,7 @@ status_t ImageDebugLoadingStateHandlerRoster::FindStateHandler(
 
 	bool found = false;
 	ImageDebugLoadingStateHandler* handler = NULL;
-	for (int32 i = 0; (handler = fStateHandlers.ItemAt(i)); i++) {
+	for (int32_t i = 0; (handler = fStateHandlers.ItemAt(i)); i++) {
 		if ((found = handler->SupportsState(state)))
 			break;
 	}

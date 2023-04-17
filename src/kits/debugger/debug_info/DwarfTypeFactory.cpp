@@ -179,7 +179,7 @@ struct HasContainingTypePredicate {
 class DwarfTypeFactory::ArtificialIntegerType : public PrimitiveType {
 public:
 	ArtificialIntegerType(const BString& id, const BString& name,
-		target_size_t byteSize, uint32 typeConstant)
+		target_size_t byteSize, uint32_t typeConstant)
 		:
 		fID(id),
 		fName(name),
@@ -191,7 +191,7 @@ public:
 	static status_t Create(target_size_t byteSize, bool isSigned, Type*& _type)
 	{
 		// get the matching type constant
-		uint32 typeConstant;
+		uint32_t typeConstant;
 		switch (byteSize) {
 			case 1:
 				typeConstant = isSigned ? B_INT8_TYPE : B_UINT8_TYPE;
@@ -261,7 +261,7 @@ public:
 		return B_UNSUPPORTED;
 	}
 
-	virtual uint32 TypeConstant() const
+	virtual uint32_t TypeConstant() const
 	{
 		return fTypeConstant;
 	}
@@ -269,8 +269,8 @@ public:
 private:
 	BString	fID;
 	BString	fName;
-	uint32	fByteSize;
-	uint32	fTypeConstant;
+	uint32_t	fByteSize;
+	uint32_t	fTypeConstant;
 };
 
 
@@ -304,7 +304,7 @@ status_t DwarfTypeFactory::CreateType(DIEType* typeEntry, DwarfType*& _type)
 
 	TypeLookupConstraints constraints(
 		dwarf_tag_to_type_kind(typeEntry->Tag()));
-	int32 subtypeKind = dwarf_tag_to_subtype_kind(typeEntry->Tag());
+	int32_t subtypeKind = dwarf_tag_to_subtype_kind(typeEntry->Tag());
 	if (subtypeKind >= 0)
 		constraints.SetSubtypeKind(subtypeKind);
 
@@ -618,7 +618,7 @@ status_t DwarfTypeFactory::_CreatePrimitiveType(const BString& name,
 //	const DynamicAttributeValue* bitOffsetValue = typeEntry->BitOffset();
 	const DynamicAttributeValue* bitSizeValue = typeEntry->BitSize();
 
-	uint32 bitSize = 0;
+	uint32_t bitSize = 0;
 	if (byteSizeValue->IsValid()) {
 		BVariant value;
 		status_t error = fTypeContext->File()->EvaluateDynamicValue(
@@ -642,7 +642,7 @@ status_t DwarfTypeFactory::_CreatePrimitiveType(const BString& name,
 	}
 
 	// determine type constant
-	uint32 typeConstant = 0;
+	uint32_t typeConstant = 0;
 	switch (typeEntry->Encoding()) {
 		case DW_ATE_boolean:
 			typeConstant = B_BOOL_TYPE;
@@ -758,7 +758,7 @@ status_t DwarfTypeFactory::_CreateAddressType(const BString& name,
 
 
 status_t DwarfTypeFactory::_CreateModifiedType(const BString& name,
-	DIEModifiedType* typeEntry, uint32 modifiers, DwarfType*& _type)
+	DIEModifiedType* typeEntry, uint32_t modifiers, DwarfType*& _type)
 {
 	// Get the base type entry. If it is a modified type too or a typedef,
 	// collect all modifiers and iterate until hitting an actual base type.

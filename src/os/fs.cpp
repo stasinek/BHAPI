@@ -637,7 +637,7 @@ _kern_open_parent_dir(int fd, char *name, size_t nameLength)
 // _kern_read_dir
 ssize_t
 _kern_read_dir(int fd, struct dirent *buffer, size_t bufferSize,
-	uint32 maxCount)
+	uint32_t maxCount)
 {
 	if (maxCount <= 0)
 		return B_BAD_VALUE;
@@ -1282,7 +1282,7 @@ _haiku_build_utimensat(int fd, const char* path, const struct timespec times[2],
 
 	struct stat stat;
 	status_t status;
-	uint32 mask = 0;
+	uint32_t mask = 0;
 
 	// Init the stat time fields to the current time, if at least one time is
 	// supposed to be set to it.

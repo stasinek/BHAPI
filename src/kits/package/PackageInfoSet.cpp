@@ -160,13 +160,13 @@ struct BPackageInfoSet::PackageMap : public BReferenceable,
 		}
 	}
 
-	uint32 CountPackageInfos() const
+	uint32_t CountPackageInfos() const
 	{
 		return fCount;
 	}
 
 private:
-	uint32	fCount;
+	uint32_t	fCount;
 };
 
 
@@ -261,7 +261,7 @@ void BPackageInfoSet::MakeEmpty()
 }
 
 
-uint32 BPackageInfoSet::CountInfos() const
+uint32_t BPackageInfoSet::CountInfos() const
 {
 	if (fPackageMap == NULL)
 		return 0;

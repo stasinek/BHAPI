@@ -12,7 +12,7 @@
 namespace bhapi {
 #endif
 //-------------------------------------------------------------------------------------------------
-typedef	int32 image_id;
+typedef	int32_t image_id;
 typedef enum {
     B_APP_IMAGE         = 1,
     B_LIBRARY_IMAGE,
@@ -22,8 +22,8 @@ typedef enum {
 typedef struct {
     image_id	id;
     image_type	type;
-    int32		sequence;
-    int32		init_order;
+    int32_t		sequence;
+    int32_t		init_order;
     void		(*init_routine)();
     void		(*term_routine)();
     dev_t		device;
@@ -31,11 +31,11 @@ typedef struct {
     char		name[MAXPATHLEN];
     void		*text;
     void		*data;
-    int32		text_size;
-    int32		data_size;
+    int32_t		text_size;
+    int32_t		data_size;
     // Haiku R1 extensions
-    int32		api_version;	// the Haiku API version used by the image
-    int32		abi;			// the Haiku ABI used by the image
+    int32_t		api_version;	// the Haiku API version used by the image
+    int32_t		abi;			// the Haiku ABI used by the image
 } image_info;
 #ifdef __cplusplus
 }
@@ -73,17 +73,17 @@ enum {  B_WAIT_TILL_LOADED	= 0x01,
 #ifdef __cplusplus
 namespace bhapi {
 #endif
-BHAPI_IMPEXP thread_id load_image(int32 argc, const char **argv, const char **environ);
+BHAPI_IMPEXP thread_id load_image(int32_t argc, const char **argv, const char **environ);
 BHAPI_IMPEXP image_id load_add_on(const char *path);
 BHAPI_IMPEXP status_t unload_add_on(image_id image);
-BHAPI_IMPEXP status_t get_image_symbol(image_id image, const char *name, int32 symbolType, void **_symbolLocation);
-BHAPI_IMPEXP status_t get_nth_image_symbol(image_id image, int32 n, char *nameBuffer, int32 *_nameLength, int32 *_symbolType, void **_symbolLocation);
-BHAPI_IMPEXP void clear_caches(void *address, size_t length, uint32 flags);
+BHAPI_IMPEXP status_t get_image_symbol(image_id image, const char *name, int32_t symbolType, void **_symbolLocation);
+BHAPI_IMPEXP status_t get_nth_image_symbol(image_id image, int32_t n, char *nameBuffer, int32_t *_nameLength, int32_t *_symbolType, void **_symbolLocation);
+BHAPI_IMPEXP void clear_caches(void *address, size_t length, uint32_t flags);
 #define get_image_info(image, info) __get_image_info((image), (info), sizeof(*(info)))
 #define get_next_image_info(team, cookie, info) __get_next_image_info((team), (cookie), (info), sizeof(*(info)))
 /* private, use the macros above */
 BHAPI_IMPEXP status_t __get_image_info(bhapi::image_id image, image_info *info, size_t size);
-BHAPI_IMPEXP status_t __get_next_image_info(bhapi::team_id team, int32 *cookie, image_info *info, size_t size);
+BHAPI_IMPEXP status_t __get_next_image_info(bhapi::team_id team, int32_t *cookie, image_info *info, size_t size);
 /* private */
 BHAPI_IMPEXP void __haiku_init_before(image_id id);
 #ifdef __cplusplus

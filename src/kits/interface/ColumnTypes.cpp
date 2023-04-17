@@ -184,7 +184,7 @@ const char*  BStringField::ClippedString()
 
 
 BStringColumn::BStringColumn(const char* title, float width, float minWidth,
-	float maxWidth, uint32 truncate, alignment align)
+	float maxWidth, uint32_t truncate, alignment align)
 	:
 	BTitledColumn(title, width, minWidth, maxWidth, align),
 	fTruncate(truncate)
@@ -329,7 +329,7 @@ void BDateColumn::DrawField(BField* _field, BRect rect, BView* parent)
 		parent->GetFont(&font);
 		localtime_r(&currentTime, &time_data);
 
-		for (int32 index = 0; ; index++) {
+		for (int32_t index = 0; ; index++) {
 			if (!kTIME_FORMATS[index])
 				break;
 
@@ -423,7 +423,7 @@ void BSizeColumn::DrawField(BField* _field, BRect rect, BView* parent)
 			float_value = (float)size / kKB_SIZE;
 		}
 
-		for (int32 index = 0; ; index++) {
+		for (int32_t index = 0; ; index++) {
 			if (!kSIZE_FORMATS[index])
 				break;
 
@@ -462,20 +462,20 @@ BSizeColumn::CompareFields(BField* field1, BField* field2)
 // #pragma mark - BIntegerField
 
 
-BIntegerField::BIntegerField(int32 number)
+BIntegerField::BIntegerField(int32_t number)
 	:
 	fInteger(number)
 {
 }
 
 
-void BIntegerField::SetValue(int32 value)
+void BIntegerField::SetValue(int32_t value)
 {
 	fInteger = value;
 }
 
 
-int32 BIntegerField::Value()
+int32_t BIntegerField::Value()
 {
 	return fInteger;
 }

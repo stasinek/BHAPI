@@ -66,13 +66,13 @@ static inline bool arch_int_are_interrupts_enabled_inline(void)
 
 typedef struct interrupt_controller_s {
 	const char *name;
-	void	(*enable_io_interrupt)(int32 num);
-	void	(*disable_io_interrupt)(int32 num);
-	void	(*configure_io_interrupt)(int32 num, uint32 config);
-	bool	(*is_spurious_interrupt)(int32 num);
-	bool	(*is_level_triggered_interrupt)(int32 num);
-	bool	(*end_of_interrupt)(int32 num);
-	void	(*assign_interrupt_to_cpu)(int32 num, int32 cpu);
+	void	(*enable_io_interrupt)(int32_t num);
+	void	(*disable_io_interrupt)(int32_t num);
+	void	(*configure_io_interrupt)(int32_t num, uint32_t config);
+	bool	(*is_spurious_interrupt)(int32_t num);
+	bool	(*is_level_triggered_interrupt)(int32_t num);
+	bool	(*end_of_interrupt)(int32_t num);
+	void	(*assign_interrupt_to_cpu)(int32_t num, int32_t cpu);
 } interrupt_controller;
 
 

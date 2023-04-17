@@ -27,7 +27,7 @@ private:
 	virtual	void			_ReservedA2D3();
 
 			int				fFd;
-			uint32			_fReserved[3];
+			uint32_t			_fReserved[3];
 };
 
 #endif // _A2D_H

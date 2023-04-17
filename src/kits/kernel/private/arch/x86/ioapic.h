@@ -9,7 +9,7 @@
 
 struct kernel_args;
 
-bool ioapic_is_interrupt_available(int32 gsi);
+bool ioapic_is_interrupt_available(int32_t gsi);
 
 void ioapic_init(kernel_args* args);
 

@@ -306,7 +306,7 @@
 /* Macros for convenient accesses to the MGA chips */
 
 #define MGA_REG8(r_)  ((vuint8  *)regs)[(r_)]
-#define MGA_REG32(r_) ((vuint32 *)regs)[(r_) >> 2]
+#define MGA_REG32(r_) ((vuint32_t *)regs)[(r_) >> 2]
 
 /* read and write to PCI config space */
 #define CFGR(A)   (gx00_pci_access.offset=MGACFG_##A, ioctl(fd,GX00_GET_PCI, &gx00_pci_access,sizeof(gx00_pci_access)), gx00_pci_access.value)

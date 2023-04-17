@@ -48,7 +48,7 @@ typedef enum menu_bar_border {
 class BHAPI_IMPEXP BMenuBar : public BMenu {
 public:
     BMenuBar(BRect frame, const char *title,
-          uint32 resizeMode = B_FOLLOW_LEFT_RIGHT | B_FOLLOW_TOP,
+          uint32_t resizeMode = B_FOLLOW_LEFT_RIGHT | B_FOLLOW_TOP,
          bhapi::menu_layout layout = B_ITEMS_IN_ROW,
          bool resizeToFit = true);
     virtual ~BMenuBar();
@@ -61,9 +61,9 @@ public:
     virtual void		MessageReceived(BMessage *msg);
     virtual void		MouseDown(BPoint where);
     virtual void		MouseUp(BPoint where);
-    virtual void		MouseMoved(BPoint where,  uint32 code, const BMessage *a_message);
-    virtual void		KeyDown(const char *bytes,  int32 numBytes);
-    virtual void		KeyUp(const char *bytes,  int32 numBytes);
+    virtual void		MouseMoved(BPoint where,  uint32_t code, const BMessage *a_message);
+    virtual void		KeyDown(const char *bytes,  int32_t numBytes);
+    virtual void		KeyUp(const char *bytes,  int32_t numBytes);
 
     virtual void		MakeFocus(bool focusState = true);
 

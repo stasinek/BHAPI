@@ -25,8 +25,8 @@ public:
 										= B_ZLIB_COMPRESSION_DEFAULT);
 	virtual						~BZlibCompressionParameters();
 
-			int32				CompressionLevel() const;
-			void				SetCompressionLevel(int32 level);
+			int32_t				CompressionLevel() const;
+			void				SetCompressionLevel(int32_t level);
 
 			size_t				BufferSize() const;
 			void				SetBufferSize(size_t size);
@@ -36,7 +36,7 @@ public:
 			void				SetGzipFormat(bool gzipFormat);
 
 private:
-			int32				fCompressionLevel;
+			int32_t				fCompressionLevel;
 			size_t				fBufferSize;
 			bool				fGzipFormat;
 };

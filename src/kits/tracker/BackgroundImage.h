@@ -59,7 +59,7 @@ extern const char* kBackgroundImageInfoMode;
 extern const char* kBackgroundImageInfoWorkspaces;
 extern const char* kBackgroundImageInfoPath;
 
-const uint32 kRestoreBackgroundImage = 'Tbgr';
+const uint32_t kRestoreBackgroundImage = 'Tbgr';
 
 class BackgroundImage {
 	// This class knows everything about which bitmap to use for a given
@@ -78,11 +78,11 @@ public:
 	class BackgroundImageInfo {
 		// element of the per-workspace list
 	public:
-		BackgroundImageInfo(uint32 workspace, BBitmap* bitmap, Mode mode,
+		BackgroundImageInfo(uint32_t workspace, BBitmap* bitmap, Mode mode,
 			BPoint offset, bool textWidgetOutline);
 		~BackgroundImageInfo();
 
-		uint32 fWorkspace;
+		uint32_t fWorkspace;
 		BBitmap* fBitmap;
 		Mode fMode;
 		BPoint fOffset;
@@ -94,12 +94,12 @@ public:
 		// create a BackgroundImage object by reading it from a node
 	virtual ~BackgroundImage();
 
-	void Show(BView* view, int32 workspace);
+	void Show(BView* view, int32_t workspace);
 		// display the right background for a given workspace
 	void Remove();
 		// remove the background from it's current view
 
-	void WorkspaceActivated(BView* view, int32 workspace, bool state);
+	void WorkspaceActivated(BView* view, int32_t workspace, bool state);
 		// respond to a workspace change
 	void ScreenChanged(BRect rect, color_space space);
 		// respond to a screen size change
@@ -108,7 +108,7 @@ public:
 		// respond to a background image setting change
 
 private:
-	BackgroundImageInfo* ImageInfoForWorkspace(int32) const;
+	BackgroundImageInfo* ImageInfoForWorkspace(int32_t) const;
 	void Show(BackgroundImageInfo*, BView* view);
 
 	BackgroundImage(const BNode*, bool);

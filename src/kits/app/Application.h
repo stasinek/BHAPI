@@ -86,14 +86,14 @@ public:
     virtual	void				Pulse();
     virtual	void				ReadyToRun();
     virtual	void				MessageReceived(BMessage* message);
-    virtual	void				ArgvReceived(int32 argc, char** argv);
+    virtual	void				ArgvReceived(int32_t argc, char** argv);
     virtual	void				AppActivated(bool active);
     virtual	void				RefsReceived(BMessage* message);
     virtual	void				AboutRequested();
 
     // Scripting
-    virtual BHandler*			ResolveSpecifier(BMessage* message, int32 index,
-                                    BMessage* specifier, int32 form,
+    virtual BHandler*			ResolveSpecifier(BMessage* message, int32_t index,
+                                    BMessage* specifier, int32_t form,
                                     const char* property);
 
     // Cursor control, window/looper list, and app info
@@ -105,11 +105,11 @@ public:
             void				SetCursor(const BCursor* cursor,
                                     bool sync = true);
 
-            int32				CountWindows() const;
-            BWindow*			WindowAt(int32 index) const;
+            int32_t				CountWindows() const;
+            BWindow*			WindowAt(int32_t index) const;
 
-            int32				CountLoopers() const;
-            BLooper*			LooperAt(int32 index) const;
+            int32_t				CountLoopers() const;
+            BLooper*			LooperAt(int32_t index) const;
             bool				IsLaunching() const;
             const char*			Signature() const;
             status_t			GetAppInfo(app_info* info) const;
@@ -137,7 +137,7 @@ private:
                                 BApplication(const char* signature,
                                     const char* looperName, port_id port,
                                     bool initGUI, status_t* error);
-                                BApplication(uint32 signature);
+                                BApplication(uint32_t signature);
                                 BApplication(const BApplication&);
             BApplication&		operator=(const BApplication&);
 
@@ -150,8 +150,8 @@ private:
     virtual	void				_ReservedApplication7();
     virtual	void				_ReservedApplication8();
 
-    virtual	bool				ScriptReceived(BMessage* msg, int32 index,
-                                    BMessage* specifier, int32 form,
+    virtual	bool				ScriptReceived(BMessage* msg, int32_t index,
+                                    BMessage* specifier, int32_t form,
                                     const char* property);
             void				_InitData(const char* signature, bool initGUI,
                                     status_t* error);
@@ -167,9 +167,9 @@ private:
                                     bool force);
             void				_ArgvReceived(BMessage* message);
 
-            uint32				InitialWorkspace();
-            int32				_CountWindows(bool includeMenus) const;
-            BWindow*			_WindowAt(uint32 index,
+            uint32_t				InitialWorkspace();
+            int32_t				_CountWindows(bool includeMenus) const;
+            BWindow*			_WindowAt(uint32_t index,
                                     bool includeMenus) const;
 
     static	void				_InitAppResources();
@@ -183,11 +183,11 @@ private:
 
             void*				fCursorData;
             bigtime_t			fPulseRate;
-            uint32				fInitialWorkspace;
+            uint32_t				fInitialWorkspace;
             BMessageRunner*		fPulseRunner;
             status_t			fInitError;
             void*				fServerReadOnlyMemory;
-            uint32				_reserved[12];
+            uint32_t				_reserved[12];
 
             bool				fReadyToRunCalled;
 //-----------------------------------------------------------------------------

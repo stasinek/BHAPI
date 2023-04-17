@@ -48,7 +48,7 @@ public:
 
 	virtual status_t	Start(const char* device, void* cookie);
 	virtual	status_t	Stop(const char* device, void* cookie);
-	virtual status_t	Control(const char* device, void* cookie, uint32 code,
+	virtual status_t	Control(const char* device, void* cookie, uint32_t code,
 							BMessage* message);
 
 			status_t	RegisterDevices(input_device_ref** devices);
@@ -67,7 +67,7 @@ private:
 	virtual void		_ReservedInputServerDevice4();
 
 	BPrivate::DeviceAddOn* fOwner;
-	uint32				_reserved[4];
+	uint32_t				_reserved[4];
 };
 
 #endif	// _INPUTSERVERDEVICE_H

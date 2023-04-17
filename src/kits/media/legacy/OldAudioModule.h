@@ -22,30 +22,30 @@ class BSubscriber;
 
 class BAudioEvent : public BMediaEvent {
 public:
-  BAudioEvent(int32 frames, bool stereo, float* samples = NULL);
+  BAudioEvent(int32_t frames, bool stereo, float* samples = NULL);
   ~BAudioEvent();
 
   virtual mk_time		Start();
   virtual void			SetStart(mk_time);
   virtual mk_time		Duration();
-  virtual int32			Frames();
+  virtual int32_t			Frames();
   virtual float*		Samples();
-  virtual int32			ChannelCount();
+  virtual int32_t			ChannelCount();
   virtual float			Gain();
   virtual void			SetGain(float);
-  virtual int32			Destination();
-  virtual void			SetDestination(int32);
-  virtual bool			MixIn (float* dst, int32 frames, mk_time time);
+  virtual int32_t			Destination();
+  virtual void			SetDestination(int32_t);
+  virtual bool			MixIn (float* dst, int32_t frames, mk_time time);
   virtual BMediaEvent*	Clone();
   virtual bigtime_t		CaptureTime();
   virtual void			SetCaptureTime(bigtime_t);
 
 private:
   mk_time	fStart;
-  int32		fFrames;
+  int32_t		fFrames;
   float*	fSamples;
   float		fGain;
-  int32		fDestination;
+  int32_t		fDestination;
   bigtime_t	fCaptureTime;
   bool		fStereo;
   bool		fFreeHuey;
@@ -72,8 +72,8 @@ public:
   virtual BMediaChannel*	Channel();
 
 private:
-  static bool	_WriteDAC(void* arg, char* buf, uint32 bytes, void* header);
-  bool			WriteDAC(short* buf, int32 frames, audio_buffer_header* header);
+  static bool	_WriteDAC(void* arg, char* buf, uint32_t bytes, void* header);
+  bool			WriteDAC(short* buf, int32_t frames, audio_buffer_header* header);
   bool			MixActiveSegments(mk_time start);
   void			MixOutput(short* dst);
 
@@ -81,7 +81,7 @@ private:
   BDACStream*		fDACStream;
   BSubscriber*		fSubscriber;
   float*			fBuffer;
-  int32				fBufferFrames;
+  int32_t				fBufferFrames;
   BList				fActiveSegments;
   mk_time			fLatency;
   mk_time			fNextTime;
@@ -126,8 +126,8 @@ public:
   virtual BMediaChannel*	Channel();
 
 private:
-  static bool	_ReadADC(void* arg, char* buf, uint32 bytes, void* header);
-  void			ReadADC(short* buf, int32 frames, audio_buffer_header* header);
+  static bool	_ReadADC(void* arg, char* buf, uint32_t bytes, void* header);
+  void			ReadADC(short* buf, int32_t frames, audio_buffer_header* header);
 
   BMediaChannel*	fChannel;
   BFile*			fFile;

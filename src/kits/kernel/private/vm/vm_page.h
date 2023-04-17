@@ -15,11 +15,11 @@
 
 struct kernel_args;
 
-extern int32 gMappedPagesCount;
+extern int32_t gMappedPagesCount;
 
 
 struct vm_page_reservation {
-	uint32	count;
+	uint32_t	count;
 };
 
 
@@ -49,23 +49,23 @@ void vm_page_get_stats(system_info *info);
 phys_addr_t vm_page_max_address();
 
 status_t vm_page_write_modified_page_range(struct VMCache *cache,
-	uint32 firstPage, uint32 endPage);
+	uint32_t firstPage, uint32_t endPage);
 status_t vm_page_write_modified_pages(struct VMCache *cache);
 void vm_page_schedule_write_page(struct vm_page *page);
 void vm_page_schedule_write_page_range(struct VMCache *cache,
-	uint32 firstPage, uint32 endPage);
+	uint32_t firstPage, uint32_t endPage);
 
 void vm_page_unreserve_pages(vm_page_reservation* reservation);
-void vm_page_reserve_pages(vm_page_reservation* reservation, uint32 count,
+void vm_page_reserve_pages(vm_page_reservation* reservation, uint32_t count,
 	int priority);
-bool vm_page_try_reserve_pages(vm_page_reservation* reservation, uint32 count,
+bool vm_page_try_reserve_pages(vm_page_reservation* reservation, uint32_t count,
 	int priority);
 
 struct vm_page *vm_page_allocate_page(vm_page_reservation* reservation,
-	uint32 flags);
-struct vm_page *vm_page_allocate_page_run(uint32 flags, page_num_t length,
+	uint32_t flags);
+struct vm_page *vm_page_allocate_page_run(uint32_t flags, page_num_t length,
 	const physical_address_restrictions* restrictions, int priority);
-struct vm_page *vm_page_at_index(int32 index);
+struct vm_page *vm_page_at_index(int32_t index);
 struct vm_page *vm_lookup_page(page_num_t pageNumber);
 bool vm_page_is_dummy(struct vm_page *page);
 

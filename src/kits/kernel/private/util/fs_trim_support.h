@@ -25,7 +25,7 @@ static inline status_t get_trim_data_from_user(void* buffer, size_t size, Memory
 	if (!IS_USER_ADDRESS(buffer))
 		return B_BAD_ADDRESS;
 
-	uint32 count;
+	uint32_t count;
 	if (user_memcpy(&count, buffer, sizeof(count)) != B_OK)
 		return B_BAD_ADDRESS;
 

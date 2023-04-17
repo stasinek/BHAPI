@@ -32,13 +32,13 @@ class BMidiRoster
 {
 public:
 
-	static BMidiEndpoint *NextEndpoint(int32 *id);
-	static BMidiProducer *NextProducer(int32 *id);
-	static BMidiConsumer *NextConsumer(int32 *id);
+	static BMidiEndpoint *NextEndpoint(int32_t *id);
+	static BMidiProducer *NextProducer(int32_t *id);
+	static BMidiConsumer *NextConsumer(int32_t *id);
 	
-	static BMidiEndpoint *FindEndpoint(int32 id, bool localOnly = false);
-	static BMidiProducer *FindProducer(int32 id, bool localOnly = false);
-	static BMidiConsumer *FindConsumer(int32 id, bool localOnly = false);
+	static BMidiEndpoint *FindEndpoint(int32_t id, bool localOnly = false);
+	static BMidiProducer *FindProducer(int32_t id, bool localOnly = false);
+	static BMidiConsumer *FindConsumer(int32_t id, bool localOnly = false);
 	
 	static void StartWatching(const BMessenger *msngr);
 	static void StopWatching();
@@ -78,7 +78,7 @@ private:
 	BPrivate::BMidiRosterLooper* fLooper;
 	BMessenger *fServer;
 
-	uint32 _reserved[16];
+	uint32_t _reserved[16];
 };
 
 #endif // _MIDI_ROSTER_H

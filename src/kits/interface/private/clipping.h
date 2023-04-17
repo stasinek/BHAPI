@@ -71,7 +71,7 @@ sect_rect(const clipping_rect &r1, const clipping_rect &r2)
 
 
 // Adds the given offsets to the given rect.
-static inline void offset_rect(clipping_rect &rect, int32 x, int32 y)
+static inline void offset_rect(clipping_rect &rect, int32_t x, int32_t y)
 {
 	rect.left += x;
 	rect.top += y;
@@ -106,24 +106,24 @@ to_clipping_rect(const BRect &rect)
 
 // NOTE: test fractional coords BRects -> BRegion on R5
 // and compare with this implementation...
-//	clipRect.left = (int32)floorf(rect.left);
-//	clipRect.top = (int32)floorf(rect.top);
-//	clipRect.right = (int32)ceilf(rect.right);
-//	clipRect.bottom = (int32)ceilf(rect.bottom);
+//	clipRect.left = (int32_t)floorf(rect.left);
+//	clipRect.top = (int32_t)floorf(rect.top);
+//	clipRect.right = (int32_t)ceilf(rect.right);
+//	clipRect.bottom = (int32_t)ceilf(rect.bottom);
 
 	// NOTE: clipping_rects are used as "pixel indices"
 	// therefor, it should be ok to convert them like this:
-	clipRect.left = (int32)rect.left;
-	clipRect.top = (int32)rect.top;
-	clipRect.right = (int32)rect.right;
-	clipRect.bottom = (int32)rect.bottom;
+	clipRect.left = (int32_t)rect.left;
+	clipRect.top = (int32_t)rect.top;
+	clipRect.right = (int32_t)rect.right;
+	clipRect.bottom = (int32_t)rect.bottom;
 	
 	return clipRect;
 }
 
 
 // Checks if the given point lies in the given rect's area
-static inline bool point_in(const clipping_rect &rect, int32 px, int32 py)
+static inline bool point_in(const clipping_rect &rect, int32_t px, int32_t py)
 {
 	if (px >= rect.left && px <= rect.right 
 			&& py >= rect.top && py <= rect.bottom)
@@ -176,14 +176,14 @@ static inline bool rects_intersect(const clipping_rect &rectA, const clipping_re
 
 
 // Returns the width of the given rect.
-static inline int32 rect_width(const clipping_rect &rect)
+static inline int32_t rect_width(const clipping_rect &rect)
 {
 	return rect.right - rect.left;
 }
 
 
 // Returns the height of the given rect.
-static inline int32 rect_height(const clipping_rect &rect)
+static inline int32_t rect_height(const clipping_rect &rect)
 {
 	return rect.bottom - rect.top;
 }

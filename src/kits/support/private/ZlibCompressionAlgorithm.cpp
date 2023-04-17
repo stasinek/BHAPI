@@ -55,13 +55,13 @@ BZlibCompressionParameters::~BZlibCompressionParameters()
 }
 
 
-int32 BZlibCompressionParameters::CompressionLevel() const
+int32_t BZlibCompressionParameters::CompressionLevel() const
 {
 	return fCompressionLevel;
 }
 
 
-void BZlibCompressionParameters::SetCompressionLevel(int32 level)
+void BZlibCompressionParameters::SetCompressionLevel(int32_t level)
 {
 	fCompressionLevel = level;
 }
@@ -135,7 +135,7 @@ struct BZlibCompressionAlgorithm::CompressionStrategy {
 	static int Init(z_stream& stream,
 		const BZlibCompressionParameters* parameters)
 	{
-		int32 compressionLevel = B_ZLIB_COMPRESSION_DEFAULT;
+		int32_t compressionLevel = B_ZLIB_COMPRESSION_DEFAULT;
 		bool gzipFormat = false;
 		if (parameters != NULL) {
 			compressionLevel = parameters->CompressionLevel();

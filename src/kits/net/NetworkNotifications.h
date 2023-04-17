@@ -40,8 +40,8 @@ class BHandler;
 class BLooper;
 
 
-extern status_t	start_watching_network(uint32 flags, const BMessenger& target);
-extern status_t	start_watching_network(uint32 flags, const BHandler* handler,
+extern status_t	start_watching_network(uint32_t flags, const BMessenger& target);
+extern status_t	start_watching_network(uint32_t flags, const BHandler* handler,
 				const BLooper* looper = NULL);
 
 extern status_t	stop_watching_network(const BMessenger& target);

@@ -24,8 +24,8 @@ SpecificImageDebugInfo::~SpecificImageDebugInfo()
 	const ImageInfo& imageInfo, SpecificImageDebugInfo* info)
 {
 	// create the function infos
-	int32 functionsAdded = 0;
-	for (int32 i = 0; SymbolInfo* symbol = symbols.ItemAt(i); i++) {
+	int32_t functionsAdded = 0;
+	for (int32_t i = 0; SymbolInfo* symbol = symbols.ItemAt(i); i++) {
 		if (symbol->Type() != B_SYMBOL_TYPE_TEXT)
 			continue;
 
@@ -34,7 +34,7 @@ SpecificImageDebugInfo::~SpecificImageDebugInfo()
 			Demangler::Demangle(symbol->Name()));
 		if (function == NULL || !functions.AddItem(function)) {
 			delete function;
-			int32 index = functions.CountItems() - 1;
+			int32_t index = functions.CountItems() - 1;
 			for (; functionsAdded >= 0; functionsAdded--, index--) {
 				function = functions.RemoveItemAt(index);
 				delete function;

@@ -55,19 +55,19 @@ public:
      * This function executes in constant time.
      * @return the character set with the given font id, or NULL if none exists
      **/
-    static const BCharacterSet * GetCharacterSetByFontID(uint32 id);
+    static const BCharacterSet * GetCharacterSetByFontID(uint32_t id);
     /**
      * @brief return the character set with the given conversion id, or NULL if none exists
      * This function executes in constant time.
      * @return the character set with the given conversion id, or NULL if none exists
      **/
-    static const BCharacterSet * GetCharacterSetByConversionID(uint32 id);
+    static const BCharacterSet * GetCharacterSetByConversionID(uint32_t id);
     /**
      * @brief return the character set with the given MIB enum, or NULL if none exists
      * This function executes in constant time.
      * @return the character set with the given MIB enum, or NULL if none exists
      **/
-    static const BCharacterSet * GetCharacterSetByMIBenum(uint32 MIBenum);
+    static const BCharacterSet * GetCharacterSetByMIBenum(uint32_t MIBenum);
 
     /**
      * @brief return the character set with the given print name, or NULL if none exists
@@ -83,7 +83,7 @@ public:
      **/
     static const BCharacterSet * FindCharacterSetByName(const char * name);
 private:
-    uint32 index; //! the state variable for iteration
+    uint32_t index; //! the state variable for iteration
 };
 
 }

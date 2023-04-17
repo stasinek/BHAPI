@@ -8,6 +8,6 @@
 #ifndef SCREEN_SAVER_SHARED_H
 #define SCREEN_SAVER_SHARED_H
 
-const uint32 kMsgTestSaver = 'TEST';
+const uint32_t kMsgTestSaver = 'TEST';
 
 #endif // SCREEN_SAVER_SHARED_H

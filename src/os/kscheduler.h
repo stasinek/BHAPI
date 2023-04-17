@@ -37,12 +37,12 @@ void scheduler_reschedule_ici(void);
 	indefinitely, the function will eventually return.
 	The caller must hold the current thread \c scheduler_lock.
 */
-void scheduler_reschedule(int32 next_state);
+void scheduler_reschedule(int32_t next_state);
 
 /*!	Sets the given thread's priority.
 	The thread may be running or may be in the ready-to-run queue.
 */
-int32 scheduler_set_thread_priority(Thread* thread, int32 priority);
+int32_t scheduler_set_thread_priority(Thread* thread, int32_t priority);
 
 /*!	Called when the Thread structure is first created.
 	Per-thread housekeeping resources can be allocated.
@@ -79,7 +79,7 @@ void scheduler_dump_thread_data(Thread* thread);
 
 void scheduler_new_thread_entry(Thread* thread);
 
-void scheduler_set_cpu_enabled(int32 cpu, bool enabled);
+void scheduler_set_cpu_enabled(int32_t cpu, bool enabled);
 
 void scheduler_add_listener(struct SchedulerListener* listener);
 void scheduler_remove_listener(struct SchedulerListener* listener);
@@ -91,8 +91,8 @@ bigtime_t _user_estimate_max_scheduling_latency(thread_id thread);
 status_t _user_analyze_scheduling(bigtime_t from, bigtime_t until, void* buffer,
 	size_t size, struct scheduling_analysis* analysis);
 
-status_t _user_set_scheduler_mode(int32 mode);
-int32 _user_get_scheduler_mode(void);
+status_t _user_set_scheduler_mode(int32_t mode);
+int32_t _user_get_scheduler_mode(void);
 
 #ifdef __cplusplus
 }

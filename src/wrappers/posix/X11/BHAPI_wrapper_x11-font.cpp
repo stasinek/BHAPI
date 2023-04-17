@@ -61,9 +61,9 @@ public:
 	virtual void ForceFontAliasing(bool enable);
 #endif
 
-	virtual float StringWidth(const char *string, float size, float spacing, float shear, bool bold,  int32 length) const;
+	virtual float StringWidth(const char *string, float size, float spacing, float shear, bool bold,  int32_t length) const;
 	virtual void GetHeight(bhapi::font_height *height, float size, float shear, bool bold) const;
-	virtual BRect RenderString(BHandler *view, const char *string, float size, float spacing, float shear, bool bold,  int32 length);
+	virtual BRect RenderString(BHandler *view, const char *string, float size, float spacing, float shear, bool bold,  int32_t length);
 
 	virtual bhapi::font_detach_callback* Attach(void (*callback)(void*), void *data);
 	virtual bool Detach(bhapi::font_detach_callback *callback);
@@ -96,14 +96,14 @@ static BFontEngine* _bhapi_get_x_font_engine(EXGraphicsEngine *x11Engine, const 
 	BAutolock <EXGraphicsEngine> autolock(x11Engine);
 	if(autolock.IsLocked() == false || x11Engine->InitCheck() != B_OK) return NULL;
 
-	int32 index = x11Engine->xFontEngines.FindString(family, x11Engine->xFontEngines.CountItems() - 1, true, true);
+	int32_t index = x11Engine->xFontEngines.FindString(family, x11Engine->xFontEngines.CountItems() - 1, true, true);
 	if(index < 0) return NULL;
 
 	BList* engine_list = NULL;
 	x11Engine->xFontEngines.ItemAt(index, (void**)&engine_list);
 	if(!engine_list) return NULL;
 
-	for(int32 i = engine_list->CountItems() - 1; i >= 0; i--)
+	for(int32_t i = engine_list->CountItems() - 1; i >= 0; i--)
 	{
 		BFontX11* engine = (BFontX11*)engine_list->ItemAt(i);
 		if(family != engine->Family() || style != engine->Style()) continue;
@@ -121,7 +121,7 @@ static bool _bhapi_add_x_font_engine(EXGraphicsEngine *x11Engine, BFontX11 *engi
 	BAutolock <EXGraphicsEngine> autolock(x11Engine);
 	if(autolock.IsLocked() == false || x11Engine->InitCheck() != B_OK) return false;
 
-	int32 index = x11Engine->xFontEngines.FindString(engine->Family(), x11Engine->xFontEngines.CountItems() - 1, true, true);
+	int32_t index = x11Engine->xFontEngines.FindString(engine->Family(), x11Engine->xFontEngines.CountItems() - 1, true, true);
 	if(index >= 0)
 	{
 		BList* engine_list = NULL;
@@ -212,8 +212,8 @@ BFontX11::BFontX11(EXGraphicsEngine *x11Engine, const char *xFontname)
 				float *font_sizes = new float[engine->fFonts.CountItems()];
 				if(font_sizes)
 				{
-					int32 nSizes = 0;
-					for(int32 i = 0; i < engine->fFonts.CountItems(); i++)
+					int32_t nSizes = 0;
+					for(int32_t i = 0; i < engine->fFonts.CountItems(); i++)
 					{
 						BFontX11::_font_data_ *_font_data = NULL;
 						engine->fFonts.ItemAt(i, (void**)&_font_data);
@@ -331,8 +331,8 @@ BFontX11::BFontX11(EXGraphicsEngine *x11Engine, const char *xftFontFamily, const
 					float *font_sizes = new float[engine->fFonts.CountItems()];
 					if(font_sizes)
 					{
-						int32 nSizes = 0;
-						for(int32 j = 0; j < engine->fFonts.CountItems(); j++)
+						int32_t nSizes = 0;
+						for(int32_t j = 0; j < engine->fFonts.CountItems(); j++)
 						{
 							BFontX11::_font_data_ *_font_data = NULL;
 							engine->fFonts.ItemAt(j, (void**)&_font_data);
@@ -372,7 +372,7 @@ BFontX11::BFontX11(EXGraphicsEngine *x11Engine, const char *xftFontFamily, const
 	}
 
 	float fontSizes[fs->nfont];
-	int32 nSizes = 0;
+	int32_t nSizes = 0;
 	for(int i = 0; i < fs->nfont; i++)
 	{
 		double fontSize = 0;
@@ -421,7 +421,7 @@ BFontX11::~BFontX11()
 
 		bool xRunning = (fX11Engine->InitCheck() == B_OK);
 
-		for(int32 i = 0; i < fFonts.CountItems(); i++)
+		for(int32_t i = 0; i < fFonts.CountItems(); i++)
 		{
 			BFontX11::_font_data_ *font_data = NULL;
 			fFonts.ItemAt(i, (void**)&font_data);
@@ -472,7 +472,7 @@ BFontX11::Detach(bhapi::font_detach_callback *callback)
 	{
 		bool xRunning = (fX11Engine->InitCheck() == B_OK);
 
-		for(int32 i = 0; i < fFonts.CountItems(); i++)
+		for(int32_t i = 0; i < fFonts.CountItems(); i++)
 		{
 			BFontX11::_font_data_ *font_data = NULL;
 			fFonts.ItemAt(i, (void**)&font_data);
@@ -544,7 +544,7 @@ BFontX11::ForceFontAliasing(bool enable)
 
 
 float
-BFontX11::StringWidth(const char *string, float size, float spacing, float shear, bool bold,  int32 length) const
+BFontX11::StringWidth(const char *string, float size, float spacing, float shear, bool bold,  int32_t length) const
 {
 	if(fX11Engine == NULL) return 0;
 	if((int)size <= 0 || string == NULL || *string == 0 || length == 0 || !IsAttached() || fFonts.CountItems() <= 0) return 0;
@@ -556,8 +556,8 @@ BFontX11::StringWidth(const char *string, float size, float spacing, float shear
 	if(fCurFontData == NULL || fCurFontData->xFontset == NULL ||
 	   !(fCurFontData->xFontsize == (int)size || (fScalable && -(fCurFontData->xFontsize) == (int)size)))
 	{
-		int32 scalable_index = -1;
-		for(int32 i = 0; i < fFonts.CountItems(); i++)
+		int32_t scalable_index = -1;
+		for(int32_t i = 0; i < fFonts.CountItems(); i++)
 		{
 			BFontX11::_font_data_ *font_data = NULL;
 			const BString *str = fFonts.ItemAt(i, (void**)&font_data);
@@ -662,13 +662,13 @@ BFontX11::StringWidth(const char *string, float size, float spacing, float shear
 		if(xfs == NULL) return 0;
 
 		float width = 0;
-		if(length < 0 || (size_t)length > strlen(string)) length = (int32)strlen(string);
+		if(length < 0 || (size_t)length > strlen(string)) length = (int32_t)strlen(string);
 
 		uint8 len = 0;
 		const char *tmp = bhapi::utf8_at(string, 0, &len);
 		float height = (float)(xfs->ascent + xfs->descent);
 		float delta = (float)ceil((double)(spacing * size));
-		while(!(len == 0 || !tmp || *tmp == 0 || tmp - string > length - (int32)len))
+		while(!(len == 0 || !tmp || *tmp == 0 || tmp - string > length - (int32_t)len))
 		{
 			XGlyphInfo glyph;
 			XftTextExtentsUtf8(fX11Engine->xDisplay, xfs, (XftChar8*)tmp, (int)len, &glyph);
@@ -697,14 +697,14 @@ BFontX11::StringWidth(const char *string, float size, float spacing, float shear
 	}
 
 	float width = 0;
-	if(length < 0 || (size_t)length > strlen(string)) length = (int32)strlen(string);
+	if(length < 0 || (size_t)length > strlen(string)) length = (int32_t)strlen(string);
 	float height = (float)(ascent + descent);
 	float delta = (float)ceil((double)(spacing * size));
 
 #ifdef X_HAVE_UTF8_STRING
 	uint8 len = 0;
 	const char *tmp = bhapi::utf8_at(string, 0, &len);
-	while(!(len == 0 || !tmp || *tmp == 0 || tmp - string > length - (int32)len))
+	while(!(len == 0 || !tmp || *tmp == 0 || tmp - string > length - (int32_t)len))
 	{
 		int cWidth = Xutf8TextEscapement(xFontset, (char*)tmp, (int)len);
 		width += (float)(cWidth > 0 ? cWidth : (int)height) + (tmp == string ? 0.f : delta);
@@ -745,8 +745,8 @@ BFontX11::GetHeight(bhapi::font_height *height, float size, float shear, bool bo
 	if(fCurFontData == NULL || fCurFontData->xFontset == NULL ||
 	   !(fCurFontData->xFontsize == (int)size || (fScalable && -(fCurFontData->xFontsize) == (int)size)))
 	{
-		int32 scalable_index = -1;
-		for(int32 i = 0; i < fFonts.CountItems(); i++)
+		int32_t scalable_index = -1;
+		for(int32_t i = 0; i < fFonts.CountItems(); i++)
 		{
 			BFontX11::_font_data_ *font_data = NULL;
 			const BString *str = fFonts.ItemAt(i, (void**)&font_data);
@@ -876,7 +876,7 @@ BFontX11::GetHeight(bhapi::font_height *height, float size, float shear, bool bo
 
 // TODO: print, drawing op when use xft
 BRect
-BFontX11::RenderString(BHandler *_view, const char *string, float size, float spacing, float shear, bool bold,  int32 length)
+BFontX11::RenderString(BHandler *_view, const char *string, float size, float spacing, float shear, bool bold,  int32_t length)
 {
 	if(fX11Engine == NULL || (int)size <= 0 || string == NULL || *string == 0 || length == 0) return BRect();
 
@@ -900,8 +900,8 @@ BFontX11::RenderString(BHandler *_view, const char *string, float size, float sp
 	if(fCurFontData == NULL || fCurFontData->xFontset == NULL ||
 	   !(fCurFontData->xFontsize == (int)size || (fScalable && -(fCurFontData->xFontsize) == (int)size)))
 	{
-		int32 scalable_index = -1;
-		for(int32 i = 0; i < fFonts.CountItems(); i++)
+		int32_t scalable_index = -1;
+		for(int32_t i = 0; i < fFonts.CountItems(); i++)
 		{
 			BFontX11::_font_data_ *font_data = NULL;
 			const BString *str = fFonts.ItemAt(i, (void**)&font_data);
@@ -1020,7 +1020,7 @@ BFontX11::RenderString(BHandler *_view, const char *string, float size, float sp
 		XftFont *xfs = (XftFont*)curFont->xFontset;
 		if(xfs == NULL || pix->xDraw == NULL) return BRect();
 
-		if(length < 0 || (size_t)length > strlen(string)) length = (int32)strlen(string);
+		if(length < 0 || (size_t)length > strlen(string)) length = (int32_t)strlen(string);
 
 		BPoint pt = view->ConvertToWindow(view->PenLocation()).FloorSelf();
 		uint8 len = 0;
@@ -1043,7 +1043,7 @@ BFontX11::RenderString(BHandler *_view, const char *string, float size, float sp
 		xftcolor.color.blue = (unsigned short)color.blue * 257;
 		xftcolor.color.alpha = B_MAXUSHORT;
 
-		while(!(len == 0 || !tmp || *tmp == 0 || tmp - string > length - (int32)len))
+		while(!(len == 0 || !tmp || *tmp == 0 || tmp - string > length - (int32_t)len))
 		{
 			XGlyphInfo glyph;
 			XftTextExtentsUtf8(fX11Engine->xDisplay, xfs, (XftChar8*)tmp, (int)len, &glyph);
@@ -1089,7 +1089,7 @@ BFontX11::RenderString(BHandler *_view, const char *string, float size, float sp
 		descent = max_c(xFontStructs[i]->max_bounds.descent, descent);
 	}
 
-	if(length < 0 || (size_t)length > strlen(string)) length = (int32)strlen(string);
+	if(length < 0 || (size_t)length > strlen(string)) length = (int32_t)strlen(string);
 
 	BPoint pt = view->ConvertToWindow(view->PenLocation()).FloorSelf();
 	int x = (int)pt.x;
@@ -1101,7 +1101,7 @@ BFontX11::RenderString(BHandler *_view, const char *string, float size, float sp
 #ifdef X_HAVE_UTF8_STRING
 	uint8 len = 0;
 	const char *tmp = bhapi::utf8_at(string, 0, &len);
-	while(!(len == 0 || !tmp || *tmp == 0 || tmp - string > length - (int32)len))
+	while(!(len == 0 || !tmp || *tmp == 0 || tmp - string > length - (int32_t)len))
 	{
 		int cWidth = Xutf8TextEscapement(xFontset, (char*)tmp, (int)len);
 		if(cWidth > 0)
@@ -1165,12 +1165,12 @@ EXGraphicsEngine::DestroyFonts()
 	BAutolock <EXGraphicsEngine> autolock(this);
 	if(autolock.IsLocked() == false) return;
 
-	for(int32 i = 0; i < xFontEngines.CountItems(); i++)
+	for(int32_t i = 0; i < xFontEngines.CountItems(); i++)
 	{
 		BList* engine_list = NULL;
 		xFontEngines.ItemAt(i, (void**)&engine_list);
 		if(!engine_list) continue;
-		for(int32 j = 0; j < engine_list->CountItems(); j++)
+		for(int32_t j = 0; j < engine_list->CountItems(); j++)
 		{
 			BFontX11 *engine = (BFontX11*)engine_list->ItemAt(j);
 			if(!engine) continue;

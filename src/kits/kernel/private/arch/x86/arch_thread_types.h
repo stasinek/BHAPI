@@ -29,8 +29,8 @@ namespace BKernel {
 
 #ifndef __x86_64__
 struct farcall {
-	uint32* esp;
-	uint32* ss;
+	uint32_t* esp;
+	uint32_t* ss;
 };
 #endif
 

@@ -46,9 +46,9 @@ public:
 	bool		AddItem(BMessageItem *item);
 	void		RemoveItem(BMessageItem *item);
 
-	__be_int32		CountItems() const;
-	__be_int32		IndexOf(BMessageItem *item) const;
-	BMessageItem	*ItemAt(__be_int32 index) const;
+	__be_int32_t		CountItems() const;
+	__be_int32_t		IndexOf(BMessageItem *item) const;
+	BMessageItem	*ItemAt(__be_int32_t index) const;
 
 private:
 	char *fName;
@@ -104,14 +104,14 @@ BMessageNode::RemoveItem(BMessageItem *item)
 }
 
 
-__be_int32
+__be_int32_t
 BMessageNode::CountItems() const
 {
 	return fItems.CountItems();
 }
 
 
-__be_int32
+__be_int32_t
 BMessageNode::IndexOf(BMessageItem *item) const
 {
 	return fItems.IndexOf(item);
@@ -119,7 +119,7 @@ BMessageNode::IndexOf(BMessageItem *item) const
 
 
 BMessageItem*
-BMessageNode::ItemAt(__be_int32 index) const
+BMessageNode::ItemAt(__be_int32_t index) const
 {
 	return (BMessageItem*)fItems.ItemAt(index);
 }
@@ -199,14 +199,14 @@ BMessageBody::RemoveItem(BMessageItem *item)
 }
 
 
-__be_int32
+__be_int32_t
 BMessageBody::CountNames() const
 {
 	return(fNames == NULL ? 0 : fNames->CountItems());
 }
 
 
-__be_int32
+__be_int32_t
 BMessageBody::CountTypes() const
 {
 	return(fTypes == NULL ? 0 : fTypes->CountItems());

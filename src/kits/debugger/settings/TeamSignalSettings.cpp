@@ -68,23 +68,23 @@ void TeamSignalSettings::Unset()
 }
 
 
-void TeamSignalSettings::SetDefaultSignalDisposition(int32 disposition)
+void TeamSignalSettings::SetDefaultSignalDisposition(int32_t disposition)
 {
 	fValues.SetInt32(skDefaultSignalFieldName, disposition);
 }
 
 
-int32 TeamSignalSettings::DefaultSignalDisposition() const
+int32_t TeamSignalSettings::DefaultSignalDisposition() const
 {
 	return fValues.GetInt32(skDefaultSignalFieldName,
 		SIGNAL_DISPOSITION_IGNORE);
 }
 
 
-int32 TeamSignalSettings::CountCustomSignalDispositions() const
+int32_t TeamSignalSettings::CountCustomSignalDispositions() const
 {
 	type_code type;
-	int32 count = 0;
+	int32_t count = 0;
 
 	if (fValues.GetInfo(skSignalSettingName, &type, &count) == B_OK)
 		return count;
@@ -93,7 +93,7 @@ int32 TeamSignalSettings::CountCustomSignalDispositions() const
 }
 
 
-status_t TeamSignalSettings::AddCustomSignalDisposition(int32 signal, int32 disposition)
+status_t TeamSignalSettings::AddCustomSignalDisposition(int32_t signal, int32_t disposition)
 {
 	BMessage setting;
 	if (setting.AddInt32(skSignalNumberFieldName, signal) != B_OK
@@ -106,14 +106,14 @@ status_t TeamSignalSettings::AddCustomSignalDisposition(int32 signal, int32 disp
 }
 
 
-status_t TeamSignalSettings::RemoveCustomSignalDispositionAt(int32 index)
+status_t TeamSignalSettings::RemoveCustomSignalDispositionAt(int32_t index)
 {
 	return fValues.RemoveData(skSignalSettingName, index);
 }
 
 
-status_t TeamSignalSettings::GetCustomSignalDispositionAt(int32 index, int32& signal,
-	int32& disposition) const
+status_t TeamSignalSettings::GetCustomSignalDispositionAt(int32_t index, int32_t& signal,
+	int32_t& disposition) const
 {
 	BMessage setting;
 	status_t error = fValues.FindMessage(skSignalSettingName, index, &setting);

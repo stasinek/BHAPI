@@ -49,46 +49,46 @@ namespace notifications {
 */
 
 // used for BMediaRoster::StartWatching() parameter validation
-bool		IsValidNotificationRequest(bool node_specific, int32 notification);
+bool		IsValidNotificationRequest(bool node_specific, int32_t notification);
 
 // called by BMediaRoster::StartWatching()
 status_t	Register(const BMessenger& notifyHandler, const media_node& node,
-				int32 notification);
+				int32_t notification);
 
 // called by BMediaRoster::StopWatching()
 status_t	Unregister(const BMessenger& notifyHandler, const media_node& node,
-				int32 notification);
+				int32_t notification);
 
 // called by BMediaNode::ReportError()
 status_t	ReportError(const media_node& node, BMediaNode::node_error what,
 				const BMessage* info);
 
-void		NodesCreated(const media_node_id* ids, int32 count);
-void		NodesDeleted(const media_node_id* ids, int32 count);
+void		NodesCreated(const media_node_id* ids, int32_t count);
+void		NodesDeleted(const media_node_id* ids, int32_t count);
 void		ConnectionMade(const media_input& input, const media_output& output,
 				const media_format& format);
 void		ConnectionBroken(const media_source& source,
 				const media_destination& destination);
-void		BuffersCreated(area_info* areas, int32 count);
-void		BuffersDeleted(const media_buffer_id* ids, int32 count);
+void		BuffersCreated(area_info* areas, int32_t count);
+void		BuffersDeleted(const media_buffer_id* ids, int32_t count);
 
 // called by BMediaNode::NodeStopped()
 void		NodeStopped(const media_node& node, bigtime_t when);
 
 // called by BControllable::BroadcastChangedParameter()
-status_t	ParameterChanged(const media_node& node, int32 parameterID);
+status_t	ParameterChanged(const media_node& node, int32_t parameterID);
 
 // called by BControllable::SetParameterWeb()
 void		WebChanged(const media_node& node);
 
 // called by BControllable::BroadcastNewParameterValue()
-status_t	NewParameterValue(const media_node& node, int32 parameterID,
+status_t	NewParameterValue(const media_node& node, int32_t parameterID,
 				bigtime_t when, const void* parameter, size_t parameterSize);
 
 // called by the media_addon_server AFTER a flavor change has been
 // handled. NOT CALLED by BMediaAddOn::NotifyFlavorChange()
-void		FlavorsChanged(media_addon_id addOnID, int32 newCount,
-				int32 goneCount);
+void		FlavorsChanged(media_addon_id addOnID, int32_t newCount,
+				int32_t goneCount);
 
 void		FormatChanged(const media_source& source,
 				const media_destination& destination,

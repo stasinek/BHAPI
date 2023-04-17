@@ -17,7 +17,7 @@
 struct IORequestOwner : DoublyLinkedListLinkImpl<IORequestOwner> {
 	team_id			team;
 	thread_id		thread;
-	int32			priority;
+	int32_t			priority;
 	IORequestList	requests;
 	IORequestList	completed_requests;
 	IOOperationList	operations;
@@ -40,7 +40,7 @@ public:
 	virtual	status_t			Init(const char* name);
 
 			const char*			Name() const	{ return fName; }
-			int32				ID() const		{ return fID; }
+			int32_t				ID() const		{ return fID; }
 
 	virtual	void				SetCallback(IOCallback& callback);
 	virtual	void				SetCallback(io_callback callback, void* data);
@@ -64,7 +64,7 @@ public:
 protected:
 			DMAResource*		fDMAResource;
 			char*				fName;
-			int32				fID;
+			int32_t				fID;
 			io_callback			fIOCallback;
 			void*				fIOCallbackData;
 			bool				fSchedulerRegistered;

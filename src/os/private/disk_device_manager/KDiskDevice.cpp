@@ -179,13 +179,13 @@ KDiskDevice::RepublishDevice()
 
 
 void
-KDiskDevice::SetDeviceFlags(uint32 flags)
+KDiskDevice::SetDeviceFlags(uint32_t flags)
 {
 	fDeviceData.flags = flags;
 }
 
 
-uint32
+uint32_t
 KDiskDevice::DeviceFlags() const
 {
 	return fDeviceData.flags;
@@ -344,7 +344,7 @@ KDiskDevice::WriteUserData(UserDataWriter& writer)
 
 
 void
-KDiskDevice::Dump(bool deep, int32 level)
+KDiskDevice::Dump(bool deep, int32_t level)
 {
 	OUT("device %" B_PRId32 ": %s\n", ID(), Path());
 	OUT("  media status:      %s\n", strerror(fMediaStatus));

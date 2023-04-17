@@ -43,7 +43,7 @@ namespace BPrivate {
 }
 class BHAPI_IMPEXP BScreen {
 public:
-            BScreen(uint32 id);
+            BScreen(uint32_t id);
             BScreen(bhapi::screen_id id = B_MAIN_SCREEN_ID);
             BScreen(BWindow* window);
            ~BScreen();
@@ -74,35 +74,35 @@ public:
                                     BRect* frame = NULL);
 
             bhapi::rgb_color			DesktopColor();
-            bhapi::rgb_color			DesktopColor(uint32 workspace);
+            bhapi::rgb_color			DesktopColor(uint32_t workspace);
             void				SetDesktopColor(bhapi::rgb_color color,
                                     bool stick = true);
             void				SetDesktopColor(bhapi::rgb_color color,
-                                    uint32 workspace, bool stick = true);
+                                    uint32_t workspace, bool stick = true);
 
             status_t			ProposeMode(bhapi::display_mode* target,
                                     const bhapi::display_mode* low,
                                     const bhapi::display_mode* high);
             status_t			GetModeList(bhapi::display_mode** _modeList,
-                                    uint32* _count);
+                                    uint32_t* _count);
             status_t			GetMode(bhapi::display_mode* mode);
-            status_t			GetMode(uint32 workspace,
+            status_t			GetMode(uint32_t workspace,
                                     bhapi::display_mode* mode);
             status_t			SetMode(bhapi::display_mode* mode,
                                     bool makeDefault = false);
-            status_t			SetMode(uint32 workspace,
+            status_t			SetMode(uint32_t workspace,
                                     bhapi::display_mode* mode,
                                     bool makeDefault = false);
             status_t			GetDeviceInfo(accelerant_device_info* info);
             status_t			GetMonitorInfo(bhapi::monitor_info* info);
             status_t			GetPixelClockLimits(bhapi::display_mode* mode,
-                                    uint32* _low, uint32* _high);
+                                    uint32_t* _low, uint32_t* _high);
             status_t			GetTimingConstraints(
                                     display_timing_constraints*
                                         timingConstraints);
-            status_t			SetDPMS(uint32 state);
-            uint32				DPMSState();
-            uint32				DPMSCapabilites();
+            status_t			SetDPMS(uint32_t state);
+            uint32_t				DPMSState();
+            uint32_t				DPMSCapabilites();
 
 private:
     // Forbidden and deprecated methods
@@ -114,11 +114,11 @@ private:
                                     const bhapi::display_mode* low,
                                     const bhapi::display_mode* high);
             void*				BaseAddress();
-            uint32				BytesPerRow();
+            uint32_t				BytesPerRow();
 
 private:
             BPrivate::BPrivateScreen* fScreen;
-            uint32 fID;
+            uint32_t fID;
 };
 
 inline uint8 BScreen::IndexForColor(bhapi::rgb_color color)

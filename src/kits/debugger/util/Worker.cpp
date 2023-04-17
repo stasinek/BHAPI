@@ -21,7 +21,7 @@ JobKey::~JobKey()
 // pragma mark - SimpleJobKey
 
 
-SimpleJobKey::SimpleJobKey(const void* object, uint32 type)
+SimpleJobKey::SimpleJobKey(const void* object, uint32_t type)
 	:
 	object(object),
 	type(type)
@@ -181,8 +181,8 @@ void Job::RemoveListener(JobListener* listener)
 
 void Job::NotifyListeners()
 {
-	int32 count = fListeners.CountItems();
-	for (int32 i = count - 1; i >= 0; i--) {
+	int32_t count = fListeners.CountItems();
+	for (int32_t i = count - 1; i >= 0; i--) {
 		JobListener* listener = fListeners.ItemAt(i);
 		switch (fState) {
 			case JOB_STATE_ACTIVE:

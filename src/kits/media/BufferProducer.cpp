@@ -27,7 +27,7 @@ BBufferProducer::~BBufferProducer()
 // #pragma mark - public BBufferProducer
 
 
-/*static*/ status_t BBufferProducer::ClipDataToRegion(int32 format, int32 size, const void* data,
+/*static*/ status_t BBufferProducer::ClipDataToRegion(int32_t format, int32_t size, const void* data,
 	BRegion* region)
 {
 	CALLED();
@@ -67,7 +67,7 @@ BBufferProducer::BBufferProducer(media_type producer_type)
 
 status_t BBufferProducer::VideoClippingChanged(const media_source& source,
 	int16 numShorts, int16* clipData, const media_video_display_info& display,
-	int32* /*_deprecated_*/)
+	int32_t* /*_deprecated_*/)
 {
 	CALLED();
 	// may be implemented by derived classes
@@ -82,7 +82,7 @@ status_t BBufferProducer::GetLatency(bigtime_t* _latency)
 	// latency of your currently-available outputs by iterating over
 	// them, and returns that value in outLatency
 
-	int32 cookie;
+	int32_t cookie;
 	bigtime_t latency;
 	media_output output;
 	media_node_id unused;
@@ -116,7 +116,7 @@ status_t BBufferProducer::GetLatency(bigtime_t* _latency)
 }
 
 
-status_t BBufferProducer::SetPlayRate(int32 numer, int32 denom)
+status_t BBufferProducer::SetPlayRate(int32_t numer, int32_t denom)
 {
 	CALLED();
 	// may be implemented by derived classes
@@ -124,7 +124,7 @@ status_t BBufferProducer::SetPlayRate(int32 numer, int32 denom)
 }
 
 
-status_t BBufferProducer::HandleMessage(int32 message, const void* data, size_t size)
+status_t BBufferProducer::HandleMessage(int32_t message, const void* data, size_t size)
 {
 	PRINT(4, "BBufferProducer::HandleMessage %#lx, node %ld\n", message,
 		fNodeID);
@@ -405,7 +405,7 @@ void BBufferProducer::AdditionalBufferRequested(const media_source& source,
 
 
 void BBufferProducer::LatencyChanged(const media_source& source,
-	const media_destination& destination, bigtime_t newLatency, uint32 flags)
+	const media_destination& destination, bigtime_t newLatency, uint32_t flags)
 {
 	CALLED();
 	// may be implemented by derived classes
@@ -441,7 +441,7 @@ status_t BBufferProducer::SendBuffer(BBuffer* buffer, const media_source& source
 }
 
 
-status_t BBufferProducer::SendDataStatus(int32 status,
+status_t BBufferProducer::SendDataStatus(int32_t status,
 	const media_destination& destination, bigtime_t atTime)
 {
 	CALLED();
@@ -527,7 +527,7 @@ status_t BBufferProducer::FindLatencyFor(const media_destination& destination,
 
 status_t BBufferProducer::FindSeekTag(const media_destination& destination,
 	bigtime_t targetTime, media_seek_tag* _tag, bigtime_t* _tagged_time,
-	uint32* _flags, uint32 flags)
+	uint32_t* _flags, uint32_t flags)
 {
 	CALLED();
 	if (IS_INVALID_DESTINATION(destination))
@@ -552,7 +552,7 @@ status_t BBufferProducer::FindSeekTag(const media_destination& destination,
 }
 
 
-void BBufferProducer::SetInitialLatency(bigtime_t initialLatency, uint32 flags)
+void BBufferProducer::SetInitialLatency(bigtime_t initialLatency, uint32_t flags)
 {
 	fInitialLatency = initialLatency;
 	fInitialFlags = flags;
@@ -595,7 +595,7 @@ status_t BBufferProducer::SendBuffer(BBuffer* buffer,
 
 	// Try to find the source - this is the best we can do
 	media_output output;
-	int32 cookie = 0;
+	int32_t cookie = 0;
 	status_t status = GetNextOutput(&cookie, &output);
 	if (status != B_OK)
 		return status;

@@ -47,7 +47,7 @@ BBufferStreamManager::Stream() const
 }
 
 
-int32 BBufferStreamManager::BufferCount() const
+int32_t BBufferStreamManager::BufferCount() const
 {
 	UNIMPLEMENTED();
 
@@ -55,13 +55,13 @@ int32 BBufferStreamManager::BufferCount() const
 }
 
 
-void BBufferStreamManager::SetBufferCount(int32 count)
+void BBufferStreamManager::SetBufferCount(int32_t count)
 {
 	UNIMPLEMENTED();
 }
 
 
-int32 BBufferStreamManager::BufferSize() const
+int32_t BBufferStreamManager::BufferSize() const
 {
 	UNIMPLEMENTED();
 
@@ -69,7 +69,7 @@ int32 BBufferStreamManager::BufferSize() const
 }
 
 
-void BBufferStreamManager::SetBufferSize(int32 bytes)
+void BBufferStreamManager::SetBufferSize(int32_t bytes)
 {
 	UNIMPLEMENTED();
 }

@@ -34,7 +34,7 @@ static const size_t kSmallBufferSize = 64 * 1024;
 // #pragma mark - BCopyEngine
 
 
-BCopyEngine::BCopyEngine(uint32 flags)
+BCopyEngine::BCopyEngine(uint32_t flags)
 	:
 	fController(NULL),
 	fFlags(flags),
@@ -63,14 +63,14 @@ void BCopyEngine::SetController(BController* controller)
 }
 
 
-uint32 BCopyEngine::Flags() const
+uint32_t BCopyEngine::Flags() const
 {
 	return fFlags;
 }
 
 
 BCopyEngine&
-BCopyEngine::SetFlags(uint32 flags)
+BCopyEngine::SetFlags(uint32_t flags)
 {
 	fFlags = flags;
 	return *this;
@@ -78,7 +78,7 @@ BCopyEngine::SetFlags(uint32 flags)
 
 
 BCopyEngine&
-BCopyEngine::AddFlags(uint32 flags)
+BCopyEngine::AddFlags(uint32_t flags)
 {
 	fFlags |= flags;
 	return *this;
@@ -86,7 +86,7 @@ BCopyEngine::AddFlags(uint32 flags)
 
 
 BCopyEngine&
-BCopyEngine::RemoveFlags(uint32 flags)
+BCopyEngine::RemoveFlags(uint32_t flags)
 {
 	fFlags &= ~flags;
 	return *this;
@@ -493,7 +493,7 @@ status_t BCopyEngine::_HandleEntryError(const char* path, status_t error,
 
 
 status_t BCopyEngine::_HandleAttributeError(const char* path, const char* attribute,
-	uint32 attributeType, status_t error, const char* format, ...)
+	uint32_t attributeType, status_t error, const char* format, ...)
 {
 	if (fController == NULL)
 		return error;
@@ -535,14 +535,14 @@ bool BCopyEngine::BController::EntryFinished(const char* path, status_t error)
 
 
 bool BCopyEngine::BController::AttributeStarted(const char* path,
-	const char* attribute, uint32 attributeType)
+	const char* attribute, uint32_t attributeType)
 {
 	return true;
 }
 
 
 bool BCopyEngine::BController::AttributeFinished(const char* path,
-	const char* attribute, uint32 attributeType, status_t error)
+	const char* attribute, uint32_t attributeType, status_t error)
 {
 	return error == B_OK;
 }

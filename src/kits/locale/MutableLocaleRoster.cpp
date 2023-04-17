@@ -96,7 +96,7 @@ status_t MutableLocaleRoster::LoadSystemCatalog(BCatalog* catalog) const
 
 	// figure out libbe-image (shared object) by name
 	image_info info;
-	int32 cookie = 0;
+	int32_t cookie = 0;
 	bool found = false;
 
 	while (get_next_image_info(0, &cookie, &info) == B_OK) {
@@ -139,8 +139,8 @@ MutableLocaleRoster::CreateCatalog(const char* type, const char* signature,
 	if (!lock.IsLocked())
 		return NULL;
 
-	int32 count = fData->fCatalogAddOnInfos.CountItems();
-	for (int32 i = 0; i < count; ++i) {
+	int32_t count = fData->fCatalogAddOnInfos.CountItems();
+	for (int32_t i = 0; i < count; ++i) {
 		CatalogAddOnInfo* info = (CatalogAddOnInfo*)
 			fData->fCatalogAddOnInfos.ItemAt(i);
 		if (info->fName.ICompare(type)!=0 || !info->MakeSureItsLoaded()
@@ -171,14 +171,14 @@ MutableLocaleRoster::CreateCatalog(const char* type, const char* signature,
  */
 BCatalogData*
 MutableLocaleRoster::LoadCatalog(const entry_ref& catalogOwner,
-	const char* language, int32 fingerprint) const
+	const char* language, int32_t fingerprint) const
 {
 	BAutolock lock(fData->fLock);
 	if (!lock.IsLocked())
 		return NULL;
 
-	int32 count = fData->fCatalogAddOnInfos.CountItems();
-	for (int32 i = 0; i < count; ++i) {
+	int32_t count = fData->fCatalogAddOnInfos.CountItems();
+	for (int32_t i = 0; i < count; ++i) {
 		CatalogAddOnInfo* info = (CatalogAddOnInfo*)
 			fData->fCatalogAddOnInfos.ItemAt(i);
 
@@ -194,7 +194,7 @@ MutableLocaleRoster::LoadCatalog(const entry_ref& catalogOwner,
 
 		BCatalogData* catalog = NULL;
 		const char* lang;
-		for (int32 l=0; languages.FindString("language", l, &lang)==B_OK; ++l) {
+		for (int32_t l=0; languages.FindString("language", l, &lang)==B_OK; ++l) {
 			catalog = info->fInstantiateFunc(catalogOwner, lang, fingerprint);
 			if (catalog)
 				info->fLoadedCatalogs.AddItem(catalog);
@@ -204,7 +204,7 @@ MutableLocaleRoster::LoadCatalog(const entry_ref& catalogOwner,
 			// detect dependencies (parenthood) between languages (it
 			// traverses from "english_british_oxford" to "english_british"
 			// to "english"):
-			int32 pos;
+			int32_t pos;
 			BString langName(lang);
 			BCatalogData* currCatalog = catalog;
 			BCatalogData* nextCatalog = NULL;
@@ -252,8 +252,8 @@ status_t MutableLocaleRoster::UnloadCatalog(BCatalogData* catalog)
 
 	while (catalog != NULL) {
 		nextCatalog = catalog->Next();
-		int32 count = fData->fCatalogAddOnInfos.CountItems();
-		for (int32 i = 0; i < count; ++i) {
+		int32_t count = fData->fCatalogAddOnInfos.CountItems();
+		for (int32_t i = 0; i < count; ++i) {
 			CatalogAddOnInfo* info = static_cast<CatalogAddOnInfo*>(
 				fData->fCatalogAddOnInfos.ItemAt(i));
 			if (info->fLoadedCatalogs.HasItem(catalog)) {

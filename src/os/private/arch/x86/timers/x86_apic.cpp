@@ -24,7 +24,7 @@ static status_t apic_timer_set_hardware_timer(bigtime_t relativeTimeout);
 static status_t apic_timer_clear_hardware_timer();
 static status_t apic_timer_init(struct kernel_args *args);
 
-static uint32 sApicTicsPerSec = 0;
+static uint32_t sApicTicsPerSec = 0;
 
 struct timer_info gAPICTimer = {
 	"APIC",
@@ -42,7 +42,7 @@ apic_timer_get_priority()
 }
 
 
-static int32
+static int32_t
 apic_timer_interrupt(void *data)
 {
 	return timer_interrupt();
@@ -58,11 +58,11 @@ apic_timer_set_hardware_timer(bigtime_t relativeTimeout)
 		relativeTimeout = MIN_TIMEOUT;
 
 	// calculation should be ok, since it's going to be 64-bit
-	uint32 ticks = ((relativeTimeout * sApicTicsPerSec) / 1000000);
+	uint32_t ticks = ((relativeTimeout * sApicTicsPerSec) / 1000000);
 
 	cpu_status state = disable_interrupts();
 
-	uint32 config = apic_lvt_timer() | APIC_LVT_MASKED; // mask the timer
+	uint32_t config = apic_lvt_timer() | APIC_LVT_MASKED; // mask the timer
 	apic_set_lvt_timer(config);
 
 	apic_set_lvt_initial_timer_count(0); // zero out the timer
@@ -86,7 +86,7 @@ apic_timer_clear_hardware_timer()
 {
 	cpu_status state = disable_interrupts();
 
-	uint32 config = apic_lvt_timer() | APIC_LVT_MASKED;
+	uint32_t config = apic_lvt_timer() | APIC_LVT_MASKED;
 		// mask the timer
 	apic_set_lvt_timer(config);
 
@@ -115,10 +115,10 @@ apic_timer_init(struct kernel_args *args)
 
 
 status_t
-apic_timer_per_cpu_init(struct kernel_args *args, int32 cpu)
+apic_timer_per_cpu_init(struct kernel_args *args, int32_t cpu)
 {
 	/* setup timer */
-	uint32 config = apic_lvt_timer() & APIC_LVT_TIMER_MASK;
+	uint32_t config = apic_lvt_timer() & APIC_LVT_TIMER_MASK;
 	config |= 0xfb | APIC_LVT_MASKED; // vector 0xfb, timer masked
 	apic_set_lvt_timer(config);
 

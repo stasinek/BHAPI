@@ -46,7 +46,7 @@ public:
 	bool IsEncrypted(); /* Throwing */
 
 	BString GetProperty(const char* property); /* Throwing */
-	status_t GetProperty(const char* property, uint32* value); /* Throwing */
+	status_t GetProperty(const char* property, uint32_t* value); /* Throwing */
 
 	LocalDevice* GetLocalDeviceOwner();
 

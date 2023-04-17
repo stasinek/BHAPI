@@ -99,8 +99,8 @@ void PendingNodeMonitorCache::Add(const BMessage* message)
 
 void PendingNodeMonitorCache::RemoveEntries(const node_ref* nodeRef)
 {
-	int32 count = fList.CountItems();
-	for (int32 index = count - 1; index >= 0; index--)
+	int32_t count = fList.CountItems();
+	for (int32_t index = count - 1; index >= 0; index--)
 		if (fList.ItemAt(index)->Match(nodeRef))
 			delete fList.RemoveItemAt(index);
 }
@@ -109,8 +109,8 @@ void PendingNodeMonitorCache::RemoveEntries(const node_ref* nodeRef)
 void PendingNodeMonitorCache::RemoveOldEntries()
 {
 	bigtime_t now = system_time();
-	int32 count = fList.CountItems();
-	for (int32 index = count - 1; index >= 0; index--)
+	int32_t count = fList.CountItems();
+	for (int32_t index = count - 1; index >= 0; index--)
 		if (fList.ItemAt(index)->TooOld(now)) {
 			PRINT(("removing old entry from pending node monitor cache\n"));
 			delete fList.RemoveItemAt(index);
@@ -122,7 +122,7 @@ void PendingNodeMonitorCache::PoseCreatedOrMoved(BPoseView* poseView,
 	const BPose* pose)
 {
 	bigtime_t now = system_time();
-	for (int32 index = 0; index < fList.CountItems();) {
+	for (int32_t index = 0; index < fList.CountItems();) {
 		PendingNodeMonitorEntry* item = fList.ItemAt(index);
 		if (item->TooOld(now)) {
 			PRINT(("removing old entry from pending node monitor cache\n"));

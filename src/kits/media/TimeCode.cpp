@@ -9,7 +9,7 @@
 
 status_t us_to_timecode(bigtime_t micros, int * hours, int * minutes, int * seconds, int * frames, const timecode_info * code)
 {
-	int32 l_frames;
+	int32_t l_frames;
 
 	CALLED();
 
@@ -18,10 +18,10 @@ status_t us_to_timecode(bigtime_t micros, int * hours, int * minutes, int * seco
 		switch (code->type) {
 			case	B_TIMECODE_DEFAULT:		// NTSC
 			case	B_TIMECODE_30_DROP_2:	// NTSC
-				l_frames = int32((((micros % 1000000) * 29.97) / 1000000) + (micros / 1000000 * 29.97));
+				l_frames = int32_t((((micros % 1000000) * 29.97) / 1000000) + (micros / 1000000 * 29.97));
 				break;
 			case	B_TIMECODE_30_DROP_4:	// Brazil
-				l_frames = int32((((micros % 1000000) * 29.95) / 1000000) + (micros / 1000000 * 29.95));
+				l_frames = int32_t((((micros % 1000000) * 29.95) / 1000000) + (micros / 1000000 * 29.95));
 				break;
 			default:
 				l_frames = (((micros % 1000000) * code->fps_div) / 1000000) + (micros / 1000000 * code->fps_div);
@@ -29,7 +29,7 @@ status_t us_to_timecode(bigtime_t micros, int * hours, int * minutes, int * seco
 		};
 	} else {
 		// Convert us to frames
-		l_frames = int32((((micros % 1000000) * 29.97) / 1000000) + (micros / 1000000 * 29.97));
+		l_frames = int32_t((((micros % 1000000) * 29.97) / 1000000) + (micros / 1000000 * 29.97));
 	}
 
 	return frames_to_timecode(l_frames, hours, minutes, seconds, frames, code);
@@ -37,7 +37,7 @@ status_t us_to_timecode(bigtime_t micros, int * hours, int * minutes, int * seco
 
 status_t timecode_to_us(int hours, int minutes, int seconds, int frames, bigtime_t * micros, const timecode_info * code)
 {
-	int32 l_frames;
+	int32_t l_frames;
 
 	CALLED();
 
@@ -67,12 +67,12 @@ status_t timecode_to_us(int hours, int minutes, int seconds, int frames, bigtime
 	return B_ERROR;
 }
 
-status_t frames_to_timecode(int32 l_frames, int * hours, int * minutes, int * seconds, int * frames, const timecode_info * code)
+status_t frames_to_timecode(int32_t l_frames, int * hours, int * minutes, int * seconds, int * frames, const timecode_info * code)
 {
 	int fps_div;
 	int total_mins;
-	int32 extra_frames;
-	int32 extra_frames2;
+	int32_t extra_frames;
+	int32_t extra_frames2;
 
 	CALLED();
 
@@ -139,11 +139,11 @@ status_t frames_to_timecode(int32 l_frames, int * hours, int * minutes, int * se
 	return B_OK;
 }
 
-status_t timecode_to_frames(int hours, int minutes, int seconds, int frames, int32 * l_frames, const timecode_info * code)
+status_t timecode_to_frames(int hours, int minutes, int seconds, int frames, int32_t * l_frames, const timecode_info * code)
 {
 	int fps_div;
 	int total_mins;
-	int32 extra_frames;
+	int32_t extra_frames;
 
 	CALLED();
 
@@ -320,7 +320,7 @@ void BTimeCode::SetMicroseconds(bigtime_t us)
 }
 
 
-void BTimeCode::SetLinearFrames(int32 linear_frames)
+void BTimeCode::SetLinearFrames(int32_t linear_frames)
 {
 	CALLED();
 
@@ -475,9 +475,9 @@ BTimeCode::Microseconds() const
 }
 
 
-int32 BTimeCode::LinearFrames() const
+int32_t BTimeCode::LinearFrames() const
 {
-	int32 linear_frames;
+	int32_t linear_frames;
 
 	CALLED();
 

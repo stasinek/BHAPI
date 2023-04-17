@@ -71,7 +71,7 @@ HexDumpBufferDataProvider::GetAddressString(char* buffer,
 
 
 void
-print_hex_dump(HexDumpDataProvider& data, size_t maxBytes, uint32 flags)
+print_hex_dump(HexDumpDataProvider& data, size_t maxBytes, uint32_t flags)
 {
 	static const size_t kBytesPerBlock = 4;
 	static const size_t kBytesPerLine = 16;
@@ -123,7 +123,7 @@ print_hex_dump(HexDumpDataProvider& data, size_t maxBytes, uint32 flags)
 
 
 void
-print_hex_dump(const void* data, size_t maxBytes, uint32 flags)
+print_hex_dump(const void* data, size_t maxBytes, uint32_t flags)
 {
 	HexDumpBufferDataProvider dataProvider(data, maxBytes);
 	print_hex_dump(dataProvider, maxBytes, flags);

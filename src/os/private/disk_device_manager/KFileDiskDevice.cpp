@@ -162,13 +162,13 @@ KFileDiskDevice::GetGeometry(device_geometry* geometry)
 
 	// fill in the geometry
 	// default to 512 bytes block size
-	uint32 blockSize = 512;
+	uint32_t blockSize = 512;
 	// Optimally we have only 1 block per sector and only one head.
-	// Since we have only a uint32 for the cylinder count, this won't work
+	// Since we have only a uint32_t for the cylinder count, this won't work
 	// for files > 2TB. So, we set the head count to the minimally possible
 	// value.
 	off_t blocks = st.st_size / blockSize;
-	uint32 heads = (blocks + ULONG_MAX - 1) / ULONG_MAX;
+	uint32_t heads = (blocks + ULONG_MAX - 1) / ULONG_MAX;
 	if (heads == 0)
 		heads = 1;
 	geometry->bytes_per_sector = blockSize;

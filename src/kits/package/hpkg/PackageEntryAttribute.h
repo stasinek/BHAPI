@@ -19,15 +19,15 @@ public:
 								BPackageEntryAttribute(const char* name);
 
 			const char*			Name() const			{ return fName; }
-			uint32				Type() const			{ return fType; }
+			uint32_t				Type() const			{ return fType; }
 
 			BPackageData&		Data()	{ return fData; }
 
-			void				SetType(uint32 type)	{ fType = type; }
+			void				SetType(uint32_t type)	{ fType = type; }
 
 private:
 			const char*			fName;
-			uint32				fType;
+			uint32_t				fType;
 			BPackageData			fData;
 };
 

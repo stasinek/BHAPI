@@ -42,10 +42,10 @@ StackFrame::StackFrame(stack_frame_type type, CpuState* cpuState,
 
 StackFrame::~StackFrame()
 {
-	for (int32 i = 0; Variable* variable = fParameters.ItemAt(i); i++)
+	for (int32_t i = 0; Variable* variable = fParameters.ItemAt(i); i++)
 		variable->ReleaseReference();
 
-	for (int32 i = 0; Variable* variable = fLocalVariables.ItemAt(i); i++)
+	for (int32_t i = 0; Variable* variable = fLocalVariables.ItemAt(i); i++)
 		variable->ReleaseReference();
 
 	SetImage(NULL);
@@ -122,14 +122,14 @@ void StackFrame::SetFunction(FunctionInstance* function)
 }
 
 
-int32 StackFrame::CountParameters() const
+int32_t StackFrame::CountParameters() const
 {
 	return fParameters.CountItems();
 }
 
 
 Variable*
-StackFrame::ParameterAt(int32 index) const
+StackFrame::ParameterAt(int32_t index) const
 {
 	return fParameters.ItemAt(index);
 }
@@ -145,14 +145,14 @@ bool StackFrame::AddParameter(Variable* parameter)
 }
 
 
-int32 StackFrame::CountLocalVariables() const
+int32_t StackFrame::CountLocalVariables() const
 {
 	return fLocalVariables.CountItems();
 }
 
 
 Variable*
-StackFrame::LocalVariableAt(int32 index) const
+StackFrame::LocalVariableAt(int32_t index) const
 {
 	return fLocalVariables.ItemAt(index);
 }

@@ -31,7 +31,7 @@ private:
 
 private:
 			BDirectory			fBaseDirectory;
-			int32				fNextNumber;
+			int32_t				fNextNumber;
 };
 
 

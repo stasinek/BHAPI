@@ -44,7 +44,7 @@ namespace BPrivate {
 template <class T>
 class LockingList : public BObjectList<T> {
 public:
-	LockingList(int32 itemsPerBlock = 20, bool owning = false);
+	LockingList(int32_t itemsPerBlock = 20, bool owning = false);
 	~LockingList()
 	{
 		Lock();
@@ -60,7 +60,7 @@ private:
 
 
 template<class T>
-LockingList<T>::LockingList(int32 itemsPerBlock, bool owning)
+LockingList<T>::LockingList(int32_t itemsPerBlock, bool owning)
 	:
 	BObjectList<T>(itemsPerBlock, owning)
 {

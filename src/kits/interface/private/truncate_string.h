@@ -7,8 +7,8 @@
 
 #include <Haiku.h>
 
-void truncate_string(BString& string, uint32 mode, float width,
+void truncate_string(BString& string, uint32_t mode, float width,
 	const float* escapementArray, float fontSize, float ellipsisWidth,
-	int32 numChars);
+	int32_t numChars);
 
 #endif // TRUNCATE_STRING_H

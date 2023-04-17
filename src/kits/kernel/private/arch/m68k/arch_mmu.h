@@ -64,57 +64,57 @@ enum descriptor_types {
 
 struct short_page_directory_entry {
 	// upper 32 bits
-	uint32 type : 2;
-	uint32 write_protect : 1;
-	uint32 used : 1;
-	uint32 address : 28;
+	uint32_t type : 2;
+	uint32_t write_protect : 1;
+	uint32_t used : 1;
+	uint32_t address : 28;
 };
 
 struct long_page_directory_entry {
 	// upper 32 bits
-	uint32 type : 2;
-	uint32 write_protect : 1;
-	uint32 used : 1;
-	uint32 _zero1 : 4;
-	uint32 supervisor : 1;
-	uint32 _zero2 : 1;
-	uint32 _ones : 6;
-	uint32 limit : 15;
-	uint32 low_up : 1;						// limit is lower(1)/upper(0)
+	uint32_t type : 2;
+	uint32_t write_protect : 1;
+	uint32_t used : 1;
+	uint32_t _zero1 : 4;
+	uint32_t supervisor : 1;
+	uint32_t _zero2 : 1;
+	uint32_t _ones : 6;
+	uint32_t limit : 15;
+	uint32_t low_up : 1;						// limit is lower(1)/upper(0)
 	// lower 32 bits
-	uint32 unused : 4;						// 
-	uint32 address : 28;
+	uint32_t unused : 4;						// 
+	uint32_t address : 28;
 };
 
 struct short_page_table_entry {
-	uint32 type : 2;
-	uint32 write_protect : 1;
-	uint32 used : 1;
-	uint32 modified : 1;
-	uint32 _zero1 : 1;
-	uint32 cache_inhibit : 1;
-	uint32 _zero2 : 1;
-	uint32 address : 24;
+	uint32_t type : 2;
+	uint32_t write_protect : 1;
+	uint32_t used : 1;
+	uint32_t modified : 1;
+	uint32_t _zero1 : 1;
+	uint32_t cache_inhibit : 1;
+	uint32_t _zero2 : 1;
+	uint32_t address : 24;
 };
 
 struct long_page_table_entry {
 	// upper 32 bits
-	uint32 type : 2;
-	uint32 write_protect : 1;
-	uint32 used : 1;
-	uint32 modified : 1;
-	uint32 _zero1 : 1;
-	uint32 cache_inhibit : 1;
-	uint32 _zero2 : 1;
-	uint32 supervisor : 1;
-	uint32 _zero3 : 1;
-	uint32 _ones : 6;
+	uint32_t type : 2;
+	uint32_t write_protect : 1;
+	uint32_t used : 1;
+	uint32_t modified : 1;
+	uint32_t _zero1 : 1;
+	uint32_t cache_inhibit : 1;
+	uint32_t _zero2 : 1;
+	uint32_t supervisor : 1;
+	uint32_t _zero3 : 1;
+	uint32_t _ones : 6;
 	// limit only used on early table terminators, else unused
-	uint32 limit : 15;
-	uint32 low_up : 1;						// limit is lower(1)/upper(0)
+	uint32_t limit : 15;
+	uint32_t low_up : 1;						// limit is lower(1)/upper(0)
 	// lower 32 bits
-	uint32 unused : 8;						// 
-	uint32 address : 24;
+	uint32_t unused : 8;						// 
+	uint32_t address : 24;
 };
 #endif
 

@@ -16,7 +16,7 @@ wait_for_objects(object_wait_info* infos, int numInfos)
 
 
 ssize_t
-wait_for_objects_etc(object_wait_info* infos, int numInfos, uint32 flags,
+wait_for_objects_etc(object_wait_info* infos, int numInfos, uint32_t flags,
 	bigtime_t timeout)
 {
 	return _kern_wait_for_objects(infos, numInfos, flags, timeout);

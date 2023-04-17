@@ -21,7 +21,7 @@ class AppMetaMimeCreator : public MimeEntryProcessor {
 public:
 								AppMetaMimeCreator(Database* database,
 									DatabaseLocker* databaseLocker,
-						   			int32 force);
+						   			int32_t force);
 	virtual						~AppMetaMimeCreator();
 
 	virtual	status_t			Do(const entry_ref& entry, bool* _entryIsDir);

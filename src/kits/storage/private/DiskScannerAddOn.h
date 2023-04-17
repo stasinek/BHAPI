@@ -31,7 +31,7 @@ private:
 	virtual	void _ReservedDiskScannerPartitionAddOn4();
 	virtual	void _ReservedDiskScannerPartitionAddOn5();
 
-	uint32 _reserved[8];
+	uint32_t _reserved[8];
 };
 
 // BDiskScannerFSAddOn
@@ -53,7 +53,7 @@ private:
 	virtual	void _ReservedDiskScannerFSAddOn4();
 	virtual	void _ReservedDiskScannerFSAddOn5();
 
-	uint32 _reserved[8];
+	uint32_t _reserved[8];
 };
 
 // BDiskScannerParameterEditor
@@ -73,7 +73,7 @@ private:
 	virtual	void _ReservedDiskScannerParameterEditor4();
 	virtual	void _ReservedDiskScannerParameterEditor5();
 
-	uint32 _reserved[8];
+	uint32_t _reserved[8];
 };
 
 // partition add-ons

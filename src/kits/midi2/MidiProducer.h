@@ -39,8 +39,8 @@ private:
 	void ConnectionMade(BMidiConsumer *);
 	bool ConnectionBroken(BMidiConsumer *);
 
-	int32 CountConsumers() const;
-	BMidiConsumer *ConsumerAt(int32) const;
+	int32_t CountConsumers() const;
+	BMidiConsumer *ConsumerAt(int32_t) const;
 
 	bool LockProducer() const;
 	void UnlockProducer() const;
@@ -48,7 +48,7 @@ private:
 	BList *fConnections;
 	mutable BLocker fLocker;
 	
-	uint32 _reserved[2];
+	uint32_t _reserved[2];
 };
 
 class BMidiLocalProducer : public BMidiProducer
@@ -99,7 +99,7 @@ public:
 		uchar status, bigtime_t time = 0) const; 
 
 	void SprayTempoChange(
-		int32 beatsPerMinute, bigtime_t time = 0) const;	
+		int32_t beatsPerMinute, bigtime_t time = 0) const;	
 	
 protected:
 
@@ -120,7 +120,7 @@ private:
 	virtual void _Reserved7();
 	virtual void _Reserved8();
 
-	uint32 _reserved[2];		
+	uint32_t _reserved[2];		
 };
 
 #endif // _MIDI_PRODUCER_H

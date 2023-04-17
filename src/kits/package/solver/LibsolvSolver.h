@@ -32,16 +32,16 @@ public:
 
 	virtual	status_t			Init();
 
-	virtual	void				SetDebugLevel(int32 level);
+	virtual	void				SetDebugLevel(int32_t level);
 
 	virtual	status_t			AddRepository(BSolverRepository* repository);
 
 	virtual	status_t			FindPackages(const char* searchString,
-									uint32 flags,
+									uint32_t flags,
 									BObjectList<BSolverPackage>& _packages);
 	virtual	status_t			FindPackages(
 									const BSolverPackageSpecifierList& packages,
-									uint32 flags,
+									uint32_t flags,
 									BObjectList<BSolverPackage>& _packages,
 									const BSolverPackageSpecifier** _unmatched
 										= NULL);
@@ -60,10 +60,10 @@ public:
 									const BSolverPackageSpecifier** _unmatched
 										= NULL);
 	virtual	status_t			FullSync();
-	virtual	status_t			VerifyInstallation(uint32 flags = 0);
+	virtual	status_t			VerifyInstallation(uint32_t flags = 0);
 
-	virtual	int32				CountProblems() const;
-	virtual	BSolverProblem*		ProblemAt(int32 index) const;
+	virtual	int32_t				CountProblems() const;
+	virtual	BSolverProblem*		ProblemAt(int32_t index) const;
 
 	virtual	status_t			SelectProblemSolution(
 									BSolverProblem* problem,
@@ -119,7 +119,7 @@ private:
 									const;
 
 			status_t			_GetFoundPackages(SolvQueue& selection,
-									uint32 flags,
+									uint32_t flags,
 									BObjectList<BSolverPackage>& _packages);
 
 			status_t			_Solve();
@@ -135,7 +135,7 @@ private:
 			SolvableMap			fSolvablePackages;
 			PackageMap			fPackageSolvables;
 			ProblemList			fProblems;
-			int32				fDebugLevel;
+			int32_t				fDebugLevel;
 };
 
 

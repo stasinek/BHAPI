@@ -209,7 +209,7 @@ BPackageInfo::BPackageInfo(BMessage* archive, status_t* _error)
 	fReplacesList(4)
 {
 	status_t error;
-	int32 architecture;
+	int32_t architecture;
 	if ((error = archive->FindString("name", &fName)) == B_OK
 		&& (error = archive->FindString("summary", &fSummary)) == B_OK
 		&& (error = archive->FindString("description", &fDescription)) == B_OK
@@ -340,8 +340,8 @@ status_t BPackageInfo::InitCheck() const
 		return B_NO_INIT;
 
 	// check global writable files
-	int32 globalWritableFileCount = fGlobalWritableFileInfos.CountItems();
-	for (int32 i = 0; i < globalWritableFileCount; i++) {
+	int32_t globalWritableFileCount = fGlobalWritableFileInfos.CountItems();
+	for (int32_t i = 0; i < globalWritableFileCount; i++) {
 		const BGlobalWritableFileInfo* info
 			= fGlobalWritableFileInfos.ItemAt(i);
 		status_t error = info->InitCheck();
@@ -350,8 +350,8 @@ status_t BPackageInfo::InitCheck() const
 	}
 
 	// check user settings files
-	int32 userSettingsFileCount = fUserSettingsFileInfos.CountItems();
-	for (int32 i = 0; i < userSettingsFileCount; i++) {
+	int32_t userSettingsFileCount = fUserSettingsFileInfos.CountItems();
+	for (int32_t i = 0; i < userSettingsFileCount; i++) {
 		const BUserSettingsFileInfo* info = fUserSettingsFileInfos.ItemAt(i);
 		status_t error = info->InitCheck();
 		if (error != B_OK)
@@ -359,8 +359,8 @@ status_t BPackageInfo::InitCheck() const
 	}
 
 	// check users
-	int32 userCount = fUsers.CountItems();
-	for (int32 i = 0; i < userCount; i++) {
+	int32_t userCount = fUsers.CountItems();
+	for (int32_t i = 0; i < userCount; i++) {
 		const BUser* user = fUsers.ItemAt(i);
 		status_t error = user->InitCheck();
 		if (error != B_OK)
@@ -368,8 +368,8 @@ status_t BPackageInfo::InitCheck() const
 
 		// make sure the user's groups are specified as groups
 		const BStringList& userGroups = user->Groups();
-		int32 groupCount = userGroups.CountStrings();
-		for (int32 k = 0; k < groupCount; k++) {
+		int32_t groupCount = userGroups.CountStrings();
+		for (int32_t k = 0; k < groupCount; k++) {
 			const BString& group = userGroups.StringAt(k);
 			if (!fGroups.HasString(group))
 				return B_BAD_VALUE;
@@ -377,8 +377,8 @@ status_t BPackageInfo::InitCheck() const
 	}
 
 	// check groups
-	int32 groupCount = fGroups.CountStrings();
-	for (int32 i = 0; i< groupCount; i++) {
+	int32_t groupCount = fGroups.CountStrings();
+	for (int32_t i = 0; i< groupCount; i++) {
 		if (!BUser::IsValidUserName(fGroups.StringAt(i)))
 			return B_BAD_VALUE;
 	}
@@ -450,7 +450,7 @@ BPackageInfo::FileName() const
 }
 
 
-uint32 BPackageInfo::Flags() const
+uint32_t BPackageInfo::Flags() const
 {
 	return fFlags;
 }
@@ -605,8 +605,8 @@ bool BPackageInfo::Matches(const BPackageResolvableExpression& expression) const
 	}
 
 	// search for a matching provides
-	int32 count = fProvidesList.CountItems();
-	for (int32 i = 0; i < count; i++) {
+	int32_t count = fProvidesList.CountItems();
+	for (int32_t i = 0; i < count; i++) {
 		const BPackageResolvable* provides = fProvidesList.ItemAt(i);
 		if (expression.Matches(*provides))
 			return true;
@@ -677,7 +677,7 @@ void BPackageInfo::SetVersion(const BPackageVersion& version)
 }
 
 
-void BPackageInfo::SetFlags(uint32 flags)
+void BPackageInfo::SetFlags(uint32_t flags)
 {
 	fFlags = flags;
 }
@@ -1170,8 +1170,8 @@ status_t BPackageInfo::_ReadFromPackageFile(const PackageFileLocation& fileLocat
 	}
 
 	// add fields
-	int32 count = resolvables.CountItems();
-	for (int32 i = 0; i < count; i++) {
+	int32_t count = resolvables.CountItems();
+	for (int32_t i = 0; i < count; i++) {
 		const BPackageResolvable* resolvable = resolvables.ItemAt(i);
 		status_t error;
 		if ((error = archive->AddString(nameField, resolvable->Name())) != B_OK
@@ -1201,8 +1201,8 @@ status_t BPackageInfo::_ReadFromPackageFile(const PackageFileLocation& fileLocat
 	}
 
 	// add fields
-	int32 count = expressions.CountItems();
-	for (int32 i = 0; i < count; i++) {
+	int32_t count = expressions.CountItems();
+	for (int32_t i = 0; i < count; i++) {
 		const BPackageResolvableExpression* expression = expressions.ItemAt(i);
 		status_t error;
 		if ((error = archive->AddString(nameField, expression->Name())) != B_OK
@@ -1232,8 +1232,8 @@ status_t BPackageInfo::_ReadFromPackageFile(const PackageFileLocation& fileLocat
 	}
 
 	// add fields
-	int32 count = infos.CountItems();
-	for (int32 i = 0; i < count; i++) {
+	int32_t count = infos.CountItems();
+	for (int32_t i = 0; i < count; i++) {
 		const BGlobalWritableFileInfo* info = infos.ItemAt(i);
 		status_t error;
 		if ((error = archive->AddString(pathField, info->Path())) != B_OK
@@ -1263,8 +1263,8 @@ status_t BPackageInfo::_ReadFromPackageFile(const PackageFileLocation& fileLocat
 	}
 
 	// add fields
-	int32 count = infos.CountItems();
-	for (int32 i = 0; i < count; i++) {
+	int32_t count = infos.CountItems();
+	for (int32_t i = 0; i < count; i++) {
 		const BUserSettingsFileInfo* info = infos.ItemAt(i);
 		status_t error;
 		if ((error = archive->AddString(pathField, info->Path())) != B_OK
@@ -1295,8 +1295,8 @@ status_t BPackageInfo::_ReadFromPackageFile(const PackageFileLocation& fileLocat
 		return B_BAD_VALUE;
 
 	// add fields
-	int32 count = users.CountItems();
-	for (int32 i = 0; i < count; i++) {
+	int32_t count = users.CountItems();
+	for (int32_t i = 0; i < count; i++) {
 		const BUser* user = users.ItemAt(i);
 		BString groups = user->Groups().Join(" ");
 		if (groups.IsEmpty() && !user->Groups().IsEmpty())
@@ -1317,7 +1317,7 @@ status_t BPackageInfo::_ReadFromPackageFile(const PackageFileLocation& fileLocat
 }
 
 
-/*static*/ status_t BPackageInfo::_ExtractVersion(BMessage* archive, const char* field, int32 index,
+/*static*/ status_t BPackageInfo::_ExtractVersion(BMessage* archive, const char* field, int32_t index,
 	BPackageVersion& _version)
 {
 	// major
@@ -1362,7 +1362,7 @@ status_t BPackageInfo::_ReadFromPackageFile(const PackageFileLocation& fileLocat
 	if (!fieldName.ReplaceSuffix(fieldLength, ":revision"))
 		return B_BAD_VALUE;
 
-	uint32 revision;
+	uint32_t revision;
 	error = archive->FindUInt32(fieldName, index, &revision);
 	if (error != B_OK)
 		return error;
@@ -1397,14 +1397,14 @@ status_t BPackageInfo::_ReadFromPackageFile(const PackageFileLocation& fileLocat
 
 	// get the number of items
 	type_code type;
-	int32 count;
+	int32_t count;
 	if (archive->GetInfo(nameField, &type, &count) != B_OK) {
 		// the field is missing
 		return B_OK;
 	}
 
 	// extract fields
-	for (int32 i = 0; i < count; i++) {
+	for (int32_t i = 0; i < count; i++) {
 		BString name;
 		status_t error = archive->FindString(nameField, i, &name);
 		if (error != B_OK)
@@ -1448,20 +1448,20 @@ status_t BPackageInfo::_ReadFromPackageFile(const PackageFileLocation& fileLocat
 
 	// get the number of items
 	type_code type;
-	int32 count;
+	int32_t count;
 	if (archive->GetInfo(nameField, &type, &count) != B_OK) {
 		// the field is missing
 		return B_OK;
 	}
 
 	// extract fields
-	for (int32 i = 0; i < count; i++) {
+	for (int32_t i = 0; i < count; i++) {
 		BString name;
 		status_t error = archive->FindString(nameField, i, &name);
 		if (error != B_OK)
 			return error;
 
-		int32 operatorType;
+		int32_t operatorType;
 		error = archive->FindInt32(operatorField, i, &operatorType);
 		if (error != B_OK)
 			return error;
@@ -1503,20 +1503,20 @@ status_t BPackageInfo::_ReadFromPackageFile(const PackageFileLocation& fileLocat
 
 	// get the number of items
 	type_code type;
-	int32 count;
+	int32_t count;
 	if (archive->GetInfo(pathField, &type, &count) != B_OK) {
 		// the field is missing
 		return B_OK;
 	}
 
 	// extract fields
-	for (int32 i = 0; i < count; i++) {
+	for (int32_t i = 0; i < count; i++) {
 		BString path;
 		status_t error = archive->FindString(pathField, i, &path);
 		if (error != B_OK)
 			return error;
 
-		int32 updateType;
+		int32_t updateType;
 		error = archive->FindInt32(updateTypeField, i, &updateType);
 		if (error != B_OK)
 			return error;
@@ -1558,14 +1558,14 @@ status_t BPackageInfo::_ReadFromPackageFile(const PackageFileLocation& fileLocat
 
 	// get the number of items
 	type_code type;
-	int32 count;
+	int32_t count;
 	if (archive->GetInfo(pathField, &type, &count) != B_OK) {
 		// the field is missing
 		return B_OK;
 	}
 
 	// extract fields
-	for (int32 i = 0; i < count; i++) {
+	for (int32_t i = 0; i < count; i++) {
 		BString path;
 		status_t error = archive->FindString(pathField, i, &path);
 		if (error != B_OK)
@@ -1610,14 +1610,14 @@ status_t BPackageInfo::_ReadFromPackageFile(const PackageFileLocation& fileLocat
 
 	// get the number of items
 	type_code type;
-	int32 count;
+	int32_t count;
 	if (archive->GetInfo(nameField, &type, &count) != B_OK) {
 		// the field is missing
 		return B_OK;
 	}
 
 	// extract fields
-	for (int32 i = 0; i < count; i++) {
+	for (int32_t i = 0; i < count; i++) {
 		BString name;
 		status_t error = archive->FindString(nameField, i, &name);
 		if (error != B_OK)

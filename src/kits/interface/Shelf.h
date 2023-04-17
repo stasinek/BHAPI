@@ -48,8 +48,8 @@ public:
 			bool				IsDirty() const;
 
 	virtual	BHandler*			ResolveSpecifier(BMessage* message,
-									int32 index, BMessage* specifier,
-									int32 form, const char* property);
+									int32_t index, BMessage* specifier,
+									int32_t form, const char* property);
 	virtual	status_t			GetSupportedSuites(BMessage* data);
 
 	virtual	status_t			Perform(perform_code code, void* data);
@@ -71,14 +71,14 @@ public:
 									BPoint location);
 			status_t			DeleteReplicant(BView* replicant);
 			status_t			DeleteReplicant(BMessage* archive);
-			status_t			DeleteReplicant(int32 index);
-			int32				CountReplicants() const;
-			BMessage*			ReplicantAt(int32 index, BView** view = NULL,
-									uint32* uid = NULL,
+			status_t			DeleteReplicant(int32_t index);
+			int32_t				CountReplicants() const;
+			BMessage*			ReplicantAt(int32_t index, BView** view = NULL,
+									uint32_t* uid = NULL,
 									status_t* perr = NULL) const;
-			int32				IndexOf(const BView* replicantView) const;
-			int32				IndexOf(const BMessage* archive) const;
-			int32				IndexOf(uint32 id) const;
+			int32_t				IndexOf(const BView* replicantView) const;
+			int32_t				IndexOf(const BMessage* archive) const;
+			int32_t				IndexOf(uint32_t id) const;
 
 protected:
 	virtual	bool				CanAcceptReplicantMessage(
@@ -87,7 +87,7 @@ protected:
 									BView*, BMessage*) const;
 	virtual	BPoint				AdjustReplicantBy(BRect, BMessage*) const;
 
-	virtual	void				ReplicantDeleted(int32 index,
+	virtual	void				ReplicantDeleted(int32_t index,
 									const BMessage* archive,
 									const BView *replicant);
 
@@ -113,7 +113,7 @@ private:
 			status_t			_DeleteReplicant(
 									BPrivate::replicant_data* replicant);
 			status_t			_AddReplicant(BMessage* data,
-									BPoint* location, uint32 uniqueID);
+									BPoint* location, uint32_t uniqueID);
 			BView*				_GetReplicant(BMessage* data, BView* view,
 									const BPoint& point, BDragger*& dragger,
 									BDragger::relation& relation);		
@@ -135,14 +135,14 @@ private:
 			BEntry*				fEntry;
 			BList				fReplicants;
 			BPrivate::ShelfContainerViewFilter* fFilter;
-			uint32				fGenCount;
+			uint32_t				fGenCount;
 			bool				fAllowDragging;
 			bool				fDirty;
 			bool				fDisplayZombies;
 			bool				fAllowZombies;
 			bool				fTypeEnforced;
 	
-			uint32				_reserved[8];
+			uint32_t				_reserved[8];
 };
 
 #endif	/* _SHELF_H */

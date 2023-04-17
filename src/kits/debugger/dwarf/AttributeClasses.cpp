@@ -147,7 +147,7 @@ static const attribute_name_info_entry kAttributeNameInfos[] = {
 	{}
 };
 
-static const uint32 kAttributeNameInfoCount = DW_AT_linkage_name + 9;
+static const uint32_t kAttributeNameInfoCount = DW_AT_linkage_name + 9;
 static attribute_name_info_entry sAttributeNameInfos[kAttributeNameInfoCount];
 
 
@@ -186,13 +186,13 @@ static const attribute_info_entry kAttributeFormInfos[] = {
 	{}
 };
 
-static const uint32 kAttributeFormInfoCount = DW_FORM_ref_sig8 + 1;
+static const uint32_t kAttributeFormInfoCount = DW_FORM_ref_sig8 + 1;
 static attribute_info_entry sAttributeFormInfos[kAttributeFormInfoCount];
 
 static struct InitAttributeInfos {
 	InitAttributeInfos()
 	{
-		for (uint32 i = 0; kAttributeNameInfos[i].name != NULL; i++) {
+		for (uint32_t i = 0; kAttributeNameInfos[i].name != NULL; i++) {
 			const attribute_name_info_entry& entry = kAttributeNameInfos[i];
 			if (entry.value <= DW_AT_linkage_name)
 				sAttributeNameInfos[entry.value] = entry;
@@ -202,7 +202,7 @@ static struct InitAttributeInfos {
 			}
 		}
 
-		for (uint32 i = 0; kAttributeFormInfos[i].name != NULL; i++) {
+		for (uint32_t i = 0; kAttributeFormInfos[i].name != NULL; i++) {
 			const attribute_info_entry& entry = kAttributeFormInfos[i];
 			sAttributeFormInfos[entry.value] = entry;
 		}
@@ -211,7 +211,7 @@ static struct InitAttributeInfos {
 
 
 uint16
-get_attribute_name_classes(uint32 name)
+get_attribute_name_classes(uint32_t name)
 {
 	if (name < DW_AT_linkage_name)
 		return sAttributeNameInfos[name].classes;
@@ -226,7 +226,7 @@ get_attribute_name_classes(uint32 name)
 
 
 uint16
-get_attribute_form_classes(uint32 form)
+get_attribute_form_classes(uint32_t form)
 {
 	return form < kAttributeFormInfoCount
 		? sAttributeFormInfos[form].classes : 0;
@@ -234,7 +234,7 @@ get_attribute_form_classes(uint32 form)
 
 
 uint8
-get_attribute_class(uint32 name, uint32 form)
+get_attribute_class(uint32_t name, uint32_t form)
 {
 	uint16 classes = get_attribute_name_classes(name)
 		& get_attribute_form_classes(form);
@@ -249,7 +249,7 @@ get_attribute_class(uint32 name, uint32 form)
 }
 
 
-const char*  get_attribute_name_name(uint32 name)
+const char*  get_attribute_name_name(uint32_t name)
 {
 	if (name < DW_AT_linkage_name)
 		return sAttributeNameInfos[name].name;
@@ -263,7 +263,7 @@ const char*  get_attribute_name_name(uint32 name)
 }
 
 
-const char*  get_attribute_form_name(uint32 form)
+const char*  get_attribute_form_name(uint32_t form)
 {
 	return form < kAttributeFormInfoCount
 		? sAttributeFormInfos[form].name : NULL;
@@ -271,7 +271,7 @@ const char*  get_attribute_form_name(uint32 form)
 
 
 DebugInfoEntrySetter
-get_attribute_name_setter(uint32 name)
+get_attribute_name_setter(uint32_t name)
 {
 	return name < kAttributeNameInfoCount
 		? sAttributeNameInfos[name].setter : NULL;

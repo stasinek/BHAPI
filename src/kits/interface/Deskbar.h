@@ -38,24 +38,24 @@ public:
 			status_t			Expand(bool expand);
 
 	// Item querying member functions
-			status_t			GetItemInfo(int32 id,
+			status_t			GetItemInfo(int32_t id,
 									const char** _name) const;
 			status_t			GetItemInfo(const char* name,
-									int32* _id) const;
-			bool				HasItem(int32 id) const;
+									int32_t* _id) const;
+			bool				HasItem(int32_t id) const;
 			bool				HasItem(const char* name) const;
-			uint32				CountItems() const;
+			uint32_t				CountItems() const;
 
 	// Item modification member functions
 			status_t			AddItem(BView* archivableView,
-									int32* _id = NULL);
-			status_t			AddItem(entry_ref* addOn, int32* _id = NULL);
-			status_t			RemoveItem(int32 id);
+									int32_t* _id = NULL);
+			status_t			AddItem(entry_ref* addOn, int32_t* _id = NULL);
+			status_t			RemoveItem(int32_t id);
 			status_t			RemoveItem(const char* name);
 
 private:
 			BMessenger*			fMessenger;
-			uint32				_reserved[12];
+			uint32_t				_reserved[12];
 };
 
 #endif	// _DESKBAR_H

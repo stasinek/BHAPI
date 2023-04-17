@@ -21,7 +21,7 @@ static const float kVMargin = 2.0f;
 
 class _BMCFilter_ : public BMessageFilter {
 public:
-								_BMCFilter_(BMenuField* menuField, uint32 what);
+								_BMCFilter_(BMenuField* menuField, uint32_t what);
 	virtual						~_BMCFilter_();
 
 	virtual	filter_result		Filter(BMessage* message, BHandler** handler);

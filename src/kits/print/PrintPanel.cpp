@@ -31,7 +31,7 @@ BPrintPanel::_BPrintPanelFilter_::_BPrintPanelFilter_(BPrintPanel* panel)
 filter_result
 BPrintPanel::_BPrintPanelFilter_::Filter(BMessage* msg, BHandler** target)
 {
-	int32 key;
+	int32_t key;
 	filter_result result = B_DISPATCH_MESSAGE;
 	if (msg->FindInt32("key", &key) == B_OK && key == 1) {
 		fPrintPanel->PostMessage(B_QUIT_REQUESTED);
@@ -159,8 +159,8 @@ void BPrintPanel::FrameResized(float newWidth, float newHeight)
 
 
 BHandler*
-BPrintPanel::ResolveSpecifier(BMessage* message, int32 index, BMessage* specifier,
-	int32 form, const char* property)
+BPrintPanel::ResolveSpecifier(BMessage* message, int32_t index, BMessage* specifier,
+	int32_t form, const char* property)
 {
 	return BWindow::ResolveSpecifier(message, index, specifier, form, property);
 }
@@ -247,7 +247,7 @@ bool BPrintPanel::RemoveChild(BView* child)
 
 
 BView*
-BPrintPanel::ChildAt(int32 index) const
+BPrintPanel::ChildAt(int32_t index) const
 {
 	return BWindow::ChildAt(index);
 }

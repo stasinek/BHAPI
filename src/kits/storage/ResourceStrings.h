@@ -26,8 +26,8 @@ public:
 	virtual						~BResourceStrings();
 
 			status_t			InitCheck();
-	virtual BString*			NewString(int32 id);
-	virtual const char*			FindString(int32 id);
+	virtual BString*			NewString(int32_t id);
+	virtual const char*			FindString(int32_t id);
 
 	virtual status_t			SetStringFile(const entry_ref* ref);
 			status_t			GetStringFile(entry_ref* outRef);
@@ -44,21 +44,21 @@ protected:
 				void			assign_string(const char* str, bool makeCopy);
 
 				_string_id_hash* next;
-				int32			id;
+				int32_t			id;
 				char*			data;
 				bool 			data_alloced;
 				bool			_reserved1[3];
-				uint32			_reserved2;
+				uint32_t			_reserved2;
 			};
 
 private:
 			void				_Cleanup();
 			void				_MakeEmpty();
-			status_t			_Rehash(int32 newSize);
-			_string_id_hash*	_AddString(char* str, int32 id,
+			status_t			_Rehash(int32_t newSize);
+			_string_id_hash*	_AddString(char* str, int32_t id,
 									bool wasMalloced);
 
-	virtual _string_id_hash*	_FindString(int32 id);
+	virtual _string_id_hash*	_FindString(int32_t id);
 
 	virtual	status_t			_Reserved_ResourceStrings_0(void*);
 	virtual	status_t			_Reserved_ResourceStrings_1(void*);
@@ -75,9 +75,9 @@ private:
 			entry_ref		fFileRef;
 			BResources		*fResources;
 			_string_id_hash	**fHashTable;
-			int32			fHashTableSize;
-			int32			fStringCount;
-			uint32			_reserved[16];	// FBC
+			int32_t			fHashTableSize;
+			int32_t			fStringCount;
+			uint32_t			_reserved[16];	// FBC
 };
 
 

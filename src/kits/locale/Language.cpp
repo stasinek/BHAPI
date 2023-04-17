@@ -117,7 +117,7 @@ status_t BLanguage::GetIcon(BBitmap* result) const
 }
 
 
-const char*  BLanguage::GetString(uint32 id) const
+const char*  BLanguage::GetString(uint32_t id) const
 {
 	if (id < B_LANGUAGE_STRINGS_BASE
 		|| id >= B_LANGUAGE_STRINGS_BASE + B_NUM_LANGUAGE_STRINGS)

@@ -111,7 +111,7 @@ private:
 			};
 
 			bool				_ResizeIfNeeded();
-			int32				_IndexOfAddressSpace(VMAddressSpace* space)
+			int32_t				_IndexOfAddressSpace(VMAddressSpace* space)
 									const;
 			status_t			_AddAddressSpace(VMAddressSpace* space,
 									bool writeLock, VMAddressSpace** _space);
@@ -119,8 +119,8 @@ private:
 	static	int					_CompareItems(const void* _a, const void* _b);
 
 			lock_item*			fItems;
-			int32				fCapacity;
-			int32				fCount;
+			int32_t				fCapacity;
+			int32_t				fCount;
 			bool				fLocked;
 };
 

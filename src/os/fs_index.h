@@ -11,7 +11,7 @@
 
 
 typedef struct index_info {
-	uint32	type;
+	uint32_t	type;
 	off_t	size;
 	time_t	modification_time;
 	time_t	creation_time;
@@ -24,7 +24,7 @@ typedef struct index_info {
 extern "C" {
 #endif
 
-extern int		fs_create_index(dev_t device, const char *name, uint32 type, uint32 flags);
+extern int		fs_create_index(dev_t device, const char *name, uint32_t type, uint32_t flags);
 extern int		fs_remove_index(dev_t device, const char *name);
 extern int		fs_stat_index(dev_t device, const char *name, struct index_info *indexInfo);
 

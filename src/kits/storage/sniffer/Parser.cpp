@@ -84,7 +84,7 @@ Token::String() const {
 	throw new Err("Sniffer scanner error: Token::String() called on non-string token", fPos);
 }
 
-int32 Token::Int() const {
+int32_t Token::Int() const {
 	throw new Err("Sniffer scanner error: Token::Int() called on non-integer token", fPos);
 }
 
@@ -167,7 +167,7 @@ StringToken::String() const {
 // IntToken
 //------------------------------------------------------------------------------
 
-IntToken::IntToken(const int32 value, const ssize_t pos)
+IntToken::IntToken(const int32_t value, const ssize_t pos)
 	: Token(Integer, pos)
 	, fValue(value)
 {
@@ -176,7 +176,7 @@ IntToken::IntToken(const int32 value, const ssize_t pos)
 IntToken::~IntToken() {
 }
 
-int32 IntToken::Int() const {
+int32_t IntToken::Int() const {
 	return fValue;
 }
 
@@ -747,7 +747,7 @@ void TokenStream::AddString(const std::string &str, ssize_t pos) {
 
 void TokenStream::AddInt(const char *str, ssize_t pos) {
 	// Convert the string to an int
-	int32 value = atol(str);	
+	int32_t value = atol(str);	
 	Token *token = new IntToken(value, pos);
 	fTokenList.push_back(token);
 }
@@ -1049,7 +1049,7 @@ Parser::ParseDisjList() {
 
 Range
 Parser::ParseRange() {
-	int32 start, end;
+	int32_t start, end;
 	// LeftBracket
 	stream.Read(LeftBracket);
 	// Integer

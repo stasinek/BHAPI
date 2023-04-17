@@ -40,7 +40,7 @@
 
 class TView : public EView {
 public:
-	TView(ERect frame, const char *name, euint32 resizingMode, euint32 flags);
+	TView(ERect frame, const char *name, euint32_t resizingMode, euint32_t flags);
 	virtual ~TView();
 
 	virtual void	AllAttached();
@@ -54,7 +54,7 @@ private:
 
 class TWindow : public EWindow {
 public:
-	TWindow(ERect frame, const char *title, e_window_type type, euint32 flags, euint32 workspace = E_CURRENT_WORKSPACE);
+	TWindow(ERect frame, const char *title, e_window_type type, euint32_t flags, euint32_t workspace = E_CURRENT_WORKSPACE);
 	virtual ~TWindow();
 
 	virtual bool QuitRequested();
@@ -76,7 +76,7 @@ inline void setMenuTarget(EMenu *menu, EMessenger msgr)
 	if(!menu) return;
 
 	EMenuItem *item;
-	for(eint32 i = 0; (item = menu->ItemAt(i)) != NULL; i++)
+	for(eint32_t i = 0; (item = menu->ItemAt(i)) != NULL; i++)
 	{
 		if(item->Submenu() != NULL) setMenuTarget(item->Submenu(), msgr);
 		else item->SetTarget(msgr);
@@ -84,7 +84,7 @@ inline void setMenuTarget(EMenu *menu, EMessenger msgr)
 }
 
 
-TView::TView(ERect frame, const char *name, euint32 resizingMode, euint32 flags)
+TView::TView(ERect frame, const char *name, euint32_t resizingMode, euint32_t flags)
 	: EView(frame, name, resizingMode, flags), fMenu(NULL), fPopUp(NULL)
 {
 	fMenu = new EMenu("Test Menu", E_ITEMS_IN_COLUMN);
@@ -187,7 +187,7 @@ TView::MouseDown(EPoint where)
 }
 
 
-TWindow::TWindow(ERect frame, const char *title, e_window_type type, euint32 flags, euint32 workspace)
+TWindow::TWindow(ERect frame, const char *title, e_window_type type, euint32_t flags, euint32_t workspace)
 	: EWindow(frame, title, type, flags, workspace)
 {
 	ERect rect = frame;

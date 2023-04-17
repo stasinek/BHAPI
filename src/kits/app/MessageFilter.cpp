@@ -33,7 +33,7 @@
 #include <kits/app/Handler.h>
 #include <kits/netLooper.h>
 
-BMessageFilter::BMessageFilter(bhapi::message_delivery delivery, bhapi::message_source source,  uint32 command, bhapi::filter_hook filter)
+BMessageFilter::BMessageFilter(bhapi::message_delivery delivery, bhapi::message_source source,  uint32_t command, bhapi::filter_hook filter)
 	: fFiltersAny(false), fHandler(NULL)
 {
 	fDelivery = delivery;
@@ -52,7 +52,7 @@ BMessageFilter::BMessageFilter(bhapi::message_delivery delivery, bhapi::message_
 }
 
 
-BMessageFilter::BMessageFilter(uint32 command, bhapi::filter_hook filter)
+BMessageFilter::BMessageFilter(uint32_t command, bhapi::filter_hook filter)
 	: fFiltersAny(false), fDelivery(B_ANY_DELIVERY), fSource(B_ANY_SOURCE), fHandler(NULL)
 {
 	fCommand = command;
@@ -148,7 +148,7 @@ BMessageFilter::MessageSource() const
 }
 
 
-uint32 BMessageFilter::Command() const
+uint32_t BMessageFilter::Command() const
 {
 	return fCommand;
 }

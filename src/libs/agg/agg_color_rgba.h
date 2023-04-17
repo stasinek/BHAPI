@@ -223,8 +223,8 @@ namespace agg
     struct rgba8
     {
         typedef int8u  value_type;
-        typedef int32u calc_type;
-        typedef int32  long_type;
+        typedef int32_tu calc_type;
+        typedef int32_t  long_type;
         enum base_scale_e
         {
             base_shift = 8,
@@ -472,7 +472,7 @@ namespace agg
     struct rgba16
     {
         typedef int16u value_type;
-        typedef int32u calc_type;
+        typedef int32_tu calc_type;
         typedef int64  long_type;
         enum base_scale_e
         {

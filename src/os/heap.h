@@ -38,12 +38,12 @@
 
 typedef struct heap_class_s {
     const char *name;
-    uint32		initial_percentage;
+    uint32_t		initial_percentage;
     size_t		max_allocation_size;
     size_t		page_size;
     size_t		min_bin_size;
     size_t		bin_alignment;
-    uint32		min_count_per_page;
+    uint32_t		min_count_per_page;
     size_t		max_waste_per_page;
 } heap_class;
 
@@ -53,8 +53,8 @@ typedef struct heap_allocator_s heap_allocator;
 extern "C" {
 #endif
 
-void* memalign_etc(size_t alignment, size_t size, uint32 flags);
-void free_etc(void* address, uint32 flags);
+void* memalign_etc(size_t alignment, size_t size, uint32_t flags);
+void free_etc(void* address, uint32_t flags);
 
 void* memalign(size_t alignment, size_t size);
 
@@ -80,7 +80,7 @@ status_t heap_init_post_area();
 status_t heap_init_post_sem();
 status_t heap_init_post_thread();
 
-static inline void*   malloc_etc(size_t size, uint32 flags)
+static inline void*   malloc_etc(size_t size, uint32_t flags)
 {
     return memalign_etc(0, size, flags);
 }
@@ -93,9 +93,9 @@ static inline void*   malloc_etc(size_t size, uint32 flags)
 #include <util/SinglyLinkedList.h>
 
 struct malloc_flags {
-    uint32	flags;
+    uint32_t	flags;
 
-    malloc_flags(uint32 flags)
+    malloc_flags(uint32_t flags)
         :
         flags(flags)
     {

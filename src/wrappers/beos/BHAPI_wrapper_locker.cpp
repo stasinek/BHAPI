@@ -65,7 +65,7 @@ typedef struct b_beos_locker_t {
 
 	bool			created;
 
-	uint32			refCount;
+	uint32_t			refCount;
 } b_beos_locker_t;
 
 
@@ -131,7 +131,7 @@ BHAPI_IMPEXP status_t bhapi::delete_locker(void *data)
 	if(!locker) return B_BAD_VALUE;
 
 	bhapi::lock_locker_inter(locker);
-	uint32 count = --(locker->refCount);
+	uint32_t count = --(locker->refCount);
 #if 0
 	bool showWarning = (locker->HolderThreadIsCurrent() && locker->closed == false && count > 0);
 #endif
@@ -181,7 +181,7 @@ BHAPI_IMPEXP status_t bhapi::close_locker(void *data)
 	locker->closed = true;
 	while(true)
 	{
-		int32 semCount = 0;
+		int32_t semCount = 0;
 		if(get_sem_count(locker->Locker, &semCount) != B_OK) break;
 		if(semCount > 0) break;
 		release_sem(locker->Locker);
@@ -198,7 +198,7 @@ BHAPI_IMPEXP status_t bhapi::lock_locker(void *data)
 }
 
 
-BHAPI_IMPEXP status_t bhapi::lock_locker_etc(void *data,  uint32 flags, bigtime_t microseconds_timeout)
+BHAPI_IMPEXP status_t bhapi::lock_locker_etc(void *data,  uint32_t flags, bigtime_t microseconds_timeout)
 {
 	b_beos_locker_t *locker = (b_beos_locker_t*)data;
 	if(!locker) return B_BAD_VALUE;
@@ -245,7 +245,7 @@ BHAPI_IMPEXP status_t bhapi::lock_locker_etc(void *data,  uint32 flags, bigtime_
 		{
 			while(true)
 			{
-				int32 semCount = 0;
+				int32_t semCount = 0;
 				if(get_sem_count(locker->Locker, &semCount) != B_OK) break;
 				if(semCount > 0) break;
 				release_sem(locker->Locker);
@@ -374,7 +374,7 @@ BHAPI_IMPEXP void bhapi::unlock_simple_locker(void *data)
 
 #ifdef BHAPI_BUILD_WITH_MEMORY_TRACING
 static sem_id __bhapi_win32_memory_tracing_locker = -1;
-static vint32 __bhapi_beos_memory_tracing_locker_atom = 0;
+static vint32_t __bhapi_beos_memory_tracing_locker_atom = 0;
 
 
 BHAPI_IMPEXP bool b_memory_tracing_lock(void)

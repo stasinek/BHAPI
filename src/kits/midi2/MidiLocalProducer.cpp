@@ -223,10 +223,10 @@ void BMidiLocalProducer::SpraySystemRealTime(uchar status,
 }
 
 
-void BMidiLocalProducer::SprayTempoChange(int32 beatsPerMinute,
+void BMidiLocalProducer::SprayTempoChange(int32_t beatsPerMinute,
 	bigtime_t time) const
 {
-	int32 tempo = 60000000 / beatsPerMinute;
+	int32_t tempo = 60000000 / beatsPerMinute;
 
 	uchar data[6];
 	data[0] = 0xFF;
@@ -271,9 +271,9 @@ void BMidiLocalProducer::SprayEvent(const void* data, size_t length,
 
 			uint8* buffer = (uint8*)malloc(buf_size);
 			if (buffer != NULL) {
-				*((uint32*)    (buffer +  0)) = fId;
+				*((uint32_t*)    (buffer +  0)) = fId;
 				*((bigtime_t*) (buffer +  8)) = time;
-				*((uint32*)    (buffer + 16)) = 0;
+				*((uint32_t*)    (buffer + 16)) = 0;
 				*((bool*)      (buffer + 16)) = atomic;
 
 				if (sysex) {
@@ -286,13 +286,13 @@ void BMidiLocalProducer::SprayEvent(const void* data, size_t length,
 					memcpy(buffer + 20, data, length);
 				}
 
-				for (int32 t = 0; t < CountConsumers(); ++t) {
+				for (int32_t t = 0; t < CountConsumers(); ++t) {
 					BMidiConsumer* cons = ConsumerAt(t);
-					*((uint32*) (buffer + 4)) = cons->fId;
+					*((uint32_t*) (buffer + 4)) = cons->fId;
 
 					#ifdef DEBUG
 					printf("*** spraying: ");
-					for (uint32 t = 0; t < buf_size; ++t)
+					for (uint32_t t = 0; t < buf_size; ++t)
 					{
 						printf("%02X, ", buffer[t]);
 					}

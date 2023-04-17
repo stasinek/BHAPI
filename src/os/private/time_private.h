@@ -23,10 +23,10 @@
 
 
 struct __timer_t {
-	int32		id;
+	int32_t		id;
 	thread_id	thread;
 
-	void SetTo(int32 id, thread_id thread)
+	void SetTo(int32_t id, thread_id thread)
 	{
 		this->id = id;
 		this->thread = thread;

@@ -38,11 +38,11 @@ public:
 		status_t				SetSource(const sockaddr& source);
 		void					UnsetSource();
 
-		uint32					Flags() const;
-		void					SetFlags(uint32 flags);
+		uint32_t					Flags() const;
+		void					SetFlags(uint32_t flags);
 
-		uint32					MTU() const;
-		void					SetMTU(uint32 mtu);
+		uint32_t					MTU() const;
+		void					SetMTU(uint32_t mtu);
 
 		int						AddressFamily() const;
 
@@ -58,7 +58,7 @@ static	status_t				GetRoutes(int family,
 static	status_t				GetRoutes(int family, const char* interfaceName,
 									BObjectList<BNetworkRoute>& routes);
 static	status_t				GetRoutes(int family, const char* interfaceName,
-									uint32 filterFlags,
+									uint32_t filterFlags,
 									BObjectList<BNetworkRoute>& routes);
 
 private:

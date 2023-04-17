@@ -37,9 +37,9 @@ enum {
 /* this is the definition of what the audio driver can do for you */
 typedef struct audio_format {
     float       sample_rate;    /* ~4000 - ~48000, maybe more */
-    int32       channels;       /* 1 or 2 */
-    int32       format;         /* 0x11 (uchar), 0x2 (short) or 0x24 (float) */
-    int32       big_endian;    /* 0 for little endian, 1 for big endian */
+    int32_t       channels;       /* 1 or 2 */
+    int32_t       format;         /* 0x11 (uchar), 0x2 (short) or 0x24 (float) */
+    int32_t       big_endian;    /* 0 for little endian, 1 for big endian */
     size_t      buf_header;     /* typically 0 or 16 */
 	size_t      play_buf_size;	/* size of playback buffer (latency) */
 	size_t		rec_buf_size;	/* size of record buffer (latency) */
@@ -48,30 +48,30 @@ typedef struct audio_format {
 /* when buffer header is in effect, this is what gets read before data */
 typedef struct audio_buf_header {
     bigtime_t   capture_time;
-    uint32      capture_size;
+    uint32_t      capture_size;
     float       sample_rate;
 } audio_buf_header;
 
 /* the mux devices use these records */
 typedef struct audio_routing {
-	int32 selector;	/* for GET, these need to be filled in! */
-	int32 value;
+	int32_t selector;	/* for GET, these need to be filled in! */
+	int32_t value;
 } audio_routing;
 
 /* this is the argument for ioctl() */
 typedef struct audio_routing_cmd {
-	int32 count;
+	int32_t count;
 	audio_routing* data;
 } audio_routing_cmd;
 
 typedef struct {
     bigtime_t   wr_time;
 	bigtime_t   rd_time;
-	uint32      wr_skipped;
-	uint32      rd_skipped;
+	uint32_t      wr_skipped;
+	uint32_t      rd_skipped;
 	uint64      wr_total;
 	uint64      rd_total;
-	uint32      _reserved_[6];
+	uint32_t      _reserved_[6];
 } audio_timing;
 
 
@@ -107,14 +107,14 @@ enum {	/* input MUX source values */
 
 /* the mixer devices use these records */
 typedef struct audio_level {
-	int32 selector;	/* for GET, this still needs to be filled in! */
-	uint32 flags;
+	int32_t selector;	/* for GET, this still needs to be filled in! */
+	uint32_t flags;
 	float value;	/* in dB */
 } audio_level;
 
 /* this is the arg to ioctl() */
 typedef struct audio_level_cmd {
-	int32 count;
+	int32_t count;
 	audio_level* data;
 } audio_level_cmd;
 

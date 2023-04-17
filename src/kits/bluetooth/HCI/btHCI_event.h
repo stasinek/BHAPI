@@ -105,10 +105,10 @@ struct hci_ev_rmt_version {
 #define HCI_EVENT_QOS_SETUP_COMPLETE				0x0D
 struct hci_qos {
 	uint8		service_type;
-	uint32		token_rate;
-	uint32		peak_bandwidth;
-	uint32		latency;
-	uint32		delay_variation;
+	uint32_t		token_rate;
+	uint32_t		peak_bandwidth;
+	uint32_t		latency;
+	uint32_t		delay_variation;
 } __attribute__ ((packed));
 struct hci_ev_qos_setup_complete {
 	uint8		status;
@@ -241,10 +241,10 @@ struct hci_ev_flow_specification {
 	uint8		flags;
 	uint8		flow_direction;
 	uint8		service_type;
-	uint32		token_rate;
-	uint32 		token_bucket_size;
-	uint32		peak_bandwidth;
-	uint32		access_latency;
+	uint32_t		token_rate;
+	uint32_t 		token_bucket_size;
+	uint32_t		peak_bandwidth;
+	uint32_t		access_latency;
 } __attribute__ ((packed));
 
 #define HCI_EVENT_INQUIRY_RESULT_WITH_RSSI			0x22

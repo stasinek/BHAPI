@@ -22,7 +22,7 @@ struct _event_queue_imp
 	status_t  	RemoveFirstEvent(media_timed_event * outEvent);
 		
 	bool		HasEvents() const;
-	int32		EventCount() const;
+	int32_t		EventCount() const;
 
 	const media_timed_event *	FirstEvent() const;
 	bigtime_t					FirstEventTime() const;
@@ -33,7 +33,7 @@ struct _event_queue_imp
 									bigtime_t eventTime,
 									BTimedEventQueue::time_direction direction,
 									bool inclusive,
-									int32 eventType);
+									int32_t eventType);
 		
 	status_t	DoForEach(
 					BTimedEventQueue::for_each_hook hook,
@@ -41,14 +41,14 @@ struct _event_queue_imp
 					bigtime_t eventTime,
 					BTimedEventQueue::time_direction direction,
 					bool inclusive,
-					int32 eventType);
+					int32_t eventType);
 		
 	void		SetCleanupHook(BTimedEventQueue::cleanup_hook hook, void *context);
 	status_t	FlushEvents(
 					bigtime_t eventTime,
 					BTimedEventQueue::time_direction direction,
 					bool inclusive,
-					int32 eventType);
+					int32_t eventType);
 
 #if DEBUG > 1
 	void		Dump() const;
@@ -69,7 +69,7 @@ private:
 	event_queue_entry *GetStart_AfterTime(bigtime_t eventTime, bool inclusive);
 
 	BLocker *			fLock;
-	int32				fEventCount;
+	int32_t				fEventCount;
 	event_queue_entry 	*fFirstEntry;
 	event_queue_entry 	*fLastEntry;
 	void * 				fCleanupHookContext;

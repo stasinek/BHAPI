@@ -41,37 +41,37 @@ enum {
 
 
 struct r5_message_header {
-	uint32	magic;
-	uint32	checksum;
-	int32	flattened_size;
-	int32	what;
+	uint32_t	magic;
+	uint32_t	checksum;
+	int32_t	flattened_size;
+	int32_t	what;
 	uint8	flags;
 } _PACKED;
 
 
 struct dano_section_header {
-	uint32		code;
-	int32		size;
+	uint32_t		code;
+	int32_t		size;
 	uint8		data[0];
 } _PACKED;
 
 
 struct dano_message_header {
-	int32		what;
-	int32		padding;
+	int32_t		what;
+	int32_t		padding;
 } _PACKED;
 
 
 typedef struct offset_table_s {
-	int32		indexTable;
-	int32		endOfData;
+	int32_t		indexTable;
+	int32_t		endOfData;
 	int64		padding;
 } OffsetTable;
 
 
 struct dano_single_item {
 	type_code	type;
-	int32		item_size;
+	int32_t		item_size;
 	uint8		name_length;
 	char		name[0];
 } _PACKED;
@@ -79,7 +79,7 @@ struct dano_single_item {
 
 struct dano_fixed_size_array {
 	type_code	type;
-	int32		size_per_item;
+	int32_t		size_per_item;
 	uint8		name_length;
 	char		name[0];
 } _PACKED;
@@ -87,20 +87,20 @@ struct dano_fixed_size_array {
 
 struct dano_variable_size_array {
 	type_code	type;
-	int32		padding;
+	int32_t		padding;
 	uint8		name_length;
 	char		name[0];
 } _PACKED;
 
 
-inline int32 pad_to_8(int32 value)
+inline int32_t pad_to_8(int32_t value)
 {
 	return (value + 7) & ~7;
 }
 
 
 /*static*/ ssize_t
-MessageAdapter::FlattenedSize(uint32 format, const BMessage *from)
+MessageAdapter::FlattenedSize(uint32_t format, const BMessage *from)
 {
 	switch (format) {
 		case MESSAGE_FORMAT_R5:
@@ -112,7 +112,7 @@ MessageAdapter::FlattenedSize(uint32 format, const BMessage *from)
 }
 
 
-/*static*/ status_t MessageAdapter::Flatten(uint32 format, const BMessage *from, char *buffer,
+/*static*/ status_t MessageAdapter::Flatten(uint32_t format, const BMessage *from, char *buffer,
 	ssize_t *size)
 {
 	switch (format) {
@@ -125,7 +125,7 @@ MessageAdapter::FlattenedSize(uint32 format, const BMessage *from)
 }
 
 
-/*static*/ status_t MessageAdapter::Flatten(uint32 format, const BMessage *from, BDataIO *stream,
+/*static*/ status_t MessageAdapter::Flatten(uint32_t format, const BMessage *from, BDataIO *stream,
 	ssize_t *size)
 {
 	switch (format) {
@@ -162,7 +162,7 @@ MessageAdapter::FlattenedSize(uint32 format, const BMessage *from)
 }
 
 
-/*static*/ status_t MessageAdapter::Unflatten(uint32 format, BMessage *into, const char *buffer)
+/*static*/ status_t MessageAdapter::Unflatten(uint32_t format, BMessage *into, const char *buffer)
 {
 	if (format == KMessage::kMessageHeaderMagic) {
 		KMessage message;
@@ -179,16 +179,16 @@ MessageAdapter::FlattenedSize(uint32 format, const BMessage *from)
 			case MESSAGE_FORMAT_R5:
 			{
 				r5_message_header *header = (r5_message_header *)buffer;
-				BMemoryIO stream(buffer + sizeof(uint32),
-					header->flattened_size - sizeof(uint32));
+				BMemoryIO stream(buffer + sizeof(uint32_t),
+					header->flattened_size - sizeof(uint32_t));
 				return _UnflattenR5Message(format, into, &stream);
 			}
 
 			case MESSAGE_FORMAT_R5_SWAPPED:
 			{
 				r5_message_header *header = (r5_message_header *)buffer;
-				BMemoryIO stream(buffer + sizeof(uint32),
-					__swap_int32(header->flattened_size) - sizeof(uint32));
+				BMemoryIO stream(buffer + sizeof(uint32_t),
+					__swap_int32_t(header->flattened_size) - sizeof(uint32_t));
 				return _UnflattenR5Message(format, into, &stream);
 			}
 
@@ -198,9 +198,9 @@ MessageAdapter::FlattenedSize(uint32 format, const BMessage *from)
 				dano_section_header *header = (dano_section_header *)buffer;
 				ssize_t size = header->size;
 				if (header->code == MESSAGE_FORMAT_DANO_SWAPPED)
-					size = __swap_int32(size);
+					size = __swap_int32_t(size);
 
-				BMemoryIO stream(buffer + sizeof(uint32), size - sizeof(uint32));
+				BMemoryIO stream(buffer + sizeof(uint32_t), size - sizeof(uint32_t));
 				return _UnflattenDanoMessage(format, into, &stream);
 			}
 		}
@@ -213,7 +213,7 @@ MessageAdapter::FlattenedSize(uint32 format, const BMessage *from)
 }
 
 
-/*static*/ status_t MessageAdapter::Unflatten(uint32 format, BMessage *into, BDataIO *stream)
+/*static*/ status_t MessageAdapter::Unflatten(uint32_t format, BMessage *into, BDataIO *stream)
 {
 	try {
 		switch (format) {
@@ -245,7 +245,7 @@ MessageAdapter::FlattenedSize(uint32 format, const BMessage *from)
 
 	// Iterate through the fields and import them in the target message
 	BMessage::field_header* field = fromPrivate.GetMessageFields();
-	for (uint32 i = 0; i < header->field_count; i++, field++) {
+	for (uint32_t i = 0; i < header->field_count; i++, field++) {
 		const char* name = (const char*)data + field->offset;
 		const uint8* fieldData = data + field->offset + field->name_length;
 		bool fixedSize = (field->flags & FIELD_FLAG_FIXED_SIZE) != 0;
@@ -256,9 +256,9 @@ MessageAdapter::FlattenedSize(uint32 format, const BMessage *from)
 			if (status != B_OK)
 				return status;
 		} else {
-			for (uint32 i = 0; i < field->count; i++) {
-				uint32 itemSize = *(uint32*)fieldData;
-				fieldData += sizeof(uint32);
+			for (uint32_t i = 0; i < field->count; i++) {
+				uint32_t itemSize = *(uint32_t*)fieldData;
+				fieldData += sizeof(uint32_t);
 				status_t status = to.AddData(name, field->type, fieldData,
 					itemSize, false);
 				if (status != B_OK)
@@ -293,10 +293,10 @@ MessageAdapter::FlattenedSize(uint32 format, const BMessage *from)
 	// Iterate through the fields and import them in the target message
 	KMessageField field;
 	while (fromMessage->GetNextField(&field) == B_OK) {
-		int32 elementCount = field.CountElements();
+		int32_t elementCount = field.CountElements();
 		if (elementCount > 0) {
-			for (int32 i = 0; i < elementCount; i++) {
-				int32 size;
+			for (int32_t i = 0; i < elementCount; i++) {
+				int32_t size;
 				const void *data = field.ElementAt(i, &size);
 				status_t result;
 
@@ -342,19 +342,19 @@ MessageAdapter::_R5FlattenedSize(const BMessage *from)
 	ssize_t flattenedSize = sizeof(r5_message_header);
 
 	if (header->target != B_NULL_TOKEN)
-		flattenedSize += sizeof(int32);
+		flattenedSize += sizeof(int32_t);
 
 	if (header->reply_port >= 0 && header->reply_target != B_NULL_TOKEN
 		&& header->reply_team >= 0) {
 		// reply info + big flags
-		flattenedSize += sizeof(port_id) + sizeof(int32) + sizeof(team_id) + 4;
+		flattenedSize += sizeof(port_id) + sizeof(int32_t) + sizeof(team_id) + 4;
 	}
 
 	// field size
 
 	uint8 *data = messagePrivate.GetMessageData();
 	BMessage::field_header *field = messagePrivate.GetMessageFields();
-	for (uint32 i = 0; i < header->field_count; i++, field++) {
+	for (uint32_t i = 0; i < header->field_count; i++, field++) {
 		// flags and type
 		flattenedSize += 1 + sizeof(type_code);
 
@@ -367,7 +367,7 @@ MessageAdapter::_R5FlattenedSize(const BMessage *from)
 
 		// item count
 		if (field->count > 1)
-			flattenedSize += (miniData ? sizeof(uint8) : sizeof(uint32));
+			flattenedSize += (miniData ? sizeof(uint8) : sizeof(uint32_t));
 
 		// data size
 		flattenedSize += (miniData ? sizeof(uint8) : sizeof(size_t));
@@ -381,7 +381,7 @@ MessageAdapter::_R5FlattenedSize(const BMessage *from)
 		else {
 			uint8 *source = data + field->offset + field->name_length;
 
-			for (uint32 i = 0; i < field->count; i++) {
+			for (uint32_t i = 0; i < field->count; i++) {
 				ssize_t itemSize = *(ssize_t *)source + sizeof(ssize_t);
 				flattenedSize += pad_to_8(itemSize);
 				source += itemSize;
@@ -394,7 +394,7 @@ MessageAdapter::_R5FlattenedSize(const BMessage *from)
 }
 
 
-/*static*/ status_t MessageAdapter::_FlattenR5Message(uint32 format, const BMessage *from,
+/*static*/ status_t MessageAdapter::_FlattenR5Message(uint32_t format, const BMessage *from,
 	char *buffer, ssize_t *size)
 {
 	BMessage::Private messagePrivate((BMessage *)from);
@@ -410,8 +410,8 @@ MessageAdapter::_R5FlattenedSize(const BMessage *from)
 
 	uint8 flags = R5_MESSAGE_FLAG_VALID;
 	if (header->target != B_NULL_TOKEN) {
-		*(int32 *)pointer = header->target;
-		pointer += sizeof(int32);
+		*(int32_t *)pointer = header->target;
+		pointer += sizeof(int32_t);
 		flags |= R5_MESSAGE_FLAG_INCLUDE_TARGET;
 	}
 
@@ -420,8 +420,8 @@ MessageAdapter::_R5FlattenedSize(const BMessage *from)
 		// reply info
 		*(port_id *)pointer = header->reply_port;
 		pointer += sizeof(port_id);
-		*(int32 *)pointer = header->reply_target;
-		pointer += sizeof(int32);
+		*(int32_t *)pointer = header->reply_target;
+		pointer += sizeof(int32_t);
 		*(team_id *)pointer = header->reply_team;
 		pointer += sizeof(team_id);
 
@@ -451,7 +451,7 @@ MessageAdapter::_R5FlattenedSize(const BMessage *from)
 
 	// collect and add the data
 	BMessage::field_header *field = messagePrivate.GetMessageFields();
-	for (uint32 i = 0; i < header->field_count; i++, field++) {
+	for (uint32_t i = 0; i < header->field_count; i++, field++) {
 		flags = R5_FIELD_FLAG_VALID;
 
 		if (field->count == 1)
@@ -473,8 +473,8 @@ MessageAdapter::_R5FlattenedSize(const BMessage *from)
 				*pointer = (uint8)field->count;
 				pointer++;
 			} else {
-				*(int32 *)pointer = field->count;
-				pointer += sizeof(int32);
+				*(int32_t *)pointer = field->count;
+				pointer += sizeof(int32_t);
 			}
 		}
 
@@ -489,7 +489,7 @@ MessageAdapter::_R5FlattenedSize(const BMessage *from)
 		}
 
 		// name
-		int32 nameLength = min_c(field->name_length - 1, 255);
+		int32_t nameLength = min_c(field->name_length - 1, 255);
 		*pointer = (uint8)nameLength;
 		pointer++;
 
@@ -503,7 +503,7 @@ MessageAdapter::_R5FlattenedSize(const BMessage *from)
 			pointer += field->data_size;
 		} else {
 			uint8 *previous = pointer;
-			for (uint32 i = 0; i < field->count; i++) {
+			for (uint32_t i = 0; i < field->count; i++) {
 				ssize_t itemSize = *(ssize_t *)source + sizeof(ssize_t);
 				memcpy(pointer, source, itemSize);
 				ssize_t paddedSize = pad_to_8(itemSize);
@@ -536,7 +536,7 @@ MessageAdapter::_R5FlattenedSize(const BMessage *from)
 }
 
 
-/*static*/ status_t MessageAdapter::_UnflattenR5Message(uint32 format, BMessage *into,
+/*static*/ status_t MessageAdapter::_UnflattenR5Message(uint32_t format, BMessage *into,
 	BDataIO *stream)
 {
 	into->MakeEmpty();
@@ -550,8 +550,8 @@ MessageAdapter::_R5FlattenedSize(const BMessage *from)
 
 	// the stream is already advanced by the size of the "format"
 	r5_message_header r5header;
-	reader(((uint8 *)&r5header) + sizeof(uint32),
-		sizeof(r5header) - sizeof(uint32));
+	reader(((uint8 *)&r5header) + sizeof(uint32_t),
+		sizeof(r5header) - sizeof(uint32_t));
 
 	header->what = into->what = r5header.what;
 	if (r5header.flags & R5_MESSAGE_FLAG_INCLUDE_TARGET)
@@ -595,7 +595,7 @@ MessageAdapter::_R5FlattenedSize(const BMessage *from)
 		type_code type;
 		reader(type);
 
-		int32 itemCount;
+		int32_t itemCount;
 		if (!singleItem) {
 			if (miniData) {
 				uint8 miniCount;
@@ -606,7 +606,7 @@ MessageAdapter::_R5FlattenedSize(const BMessage *from)
 		} else
 			itemCount = 1;
 
-		int32 dataSize;
+		int32_t dataSize;
 		if (miniData) {
 			uint8 miniSize;
 			reader(miniSize);
@@ -630,15 +630,15 @@ MessageAdapter::_R5FlattenedSize(const BMessage *from)
 		reader(buffer, dataSize);
 
 		status_t result = B_OK;
-		int32 itemSize = 0;
+		int32_t itemSize = 0;
 		if (fixedSize)
 			itemSize = dataSize / itemCount;
 
 		if (format == MESSAGE_FORMAT_R5) {
-			for (int32 i = 0; i < itemCount; i++) {
+			for (int32_t i = 0; i < itemCount; i++) {
 				if (!fixedSize) {
-					itemSize = *(int32 *)pointer;
-					pointer += sizeof(int32);
+					itemSize = *(int32_t *)pointer;
+					pointer += sizeof(int32_t);
 				}
 
 				result = into->AddData(nameBuffer, type, pointer, itemSize,
@@ -652,15 +652,15 @@ MessageAdapter::_R5FlattenedSize(const BMessage *from)
 				if (fixedSize)
 					pointer += itemSize;
 				else {
-					pointer += pad_to_8(itemSize + sizeof(int32))
-						- sizeof(int32);
+					pointer += pad_to_8(itemSize + sizeof(int32_t))
+						- sizeof(int32_t);
 				}
 			}
 		} else {
-			for (int32 i = 0; i < itemCount; i++) {
+			for (int32_t i = 0; i < itemCount; i++) {
 				if (!fixedSize) {
-					itemSize = __swap_int32(*(int32 *)pointer);
-					pointer += sizeof(int32);
+					itemSize = __swap_int32_t(*(int32_t *)pointer);
+					pointer += sizeof(int32_t);
 				}
 
 				swap_data(type, pointer, itemSize, B_SWAP_ALWAYS);
@@ -675,8 +675,8 @@ MessageAdapter::_R5FlattenedSize(const BMessage *from)
 				if (fixedSize)
 					pointer += itemSize;
 				else {
-					pointer += pad_to_8(itemSize + sizeof(int32))
-						- sizeof(int32);
+					pointer += pad_to_8(itemSize + sizeof(int32_t))
+						- sizeof(int32_t);
 				}
 			}
 		}
@@ -691,7 +691,7 @@ MessageAdapter::_R5FlattenedSize(const BMessage *from)
 }
 
 
-/*static*/ status_t MessageAdapter::_UnflattenDanoMessage(uint32 format, BMessage *into,
+/*static*/ status_t MessageAdapter::_UnflattenDanoMessage(uint32_t format, BMessage *into,
 	BDataIO *stream)
 {
 	into->MakeEmpty();
@@ -708,7 +708,7 @@ MessageAdapter::_R5FlattenedSize(const BMessage *from)
 	into->what = header.what;
 
 	size -= sizeof(dano_section_header) + sizeof(dano_message_header);
-	int32 offset = 0;
+	int32_t offset = 0;
 
 	while (offset < size) {
 		dano_section_header sectionHeader;
@@ -746,7 +746,7 @@ MessageAdapter::_R5FlattenedSize(const BMessage *from)
 			{
 				dano_single_item *field = (dano_single_item *)fieldBuffer;
 
-				int32 dataOffset = sizeof(dano_single_item)
+				int32_t dataOffset = sizeof(dano_single_item)
 					+ field->name_length + 1;
 				dataOffset = pad_to_8(dataOffset);
 
@@ -787,17 +787,17 @@ MessageAdapter::_R5FlattenedSize(const BMessage *from)
 				dano_fixed_size_array *field
 					= (dano_fixed_size_array *)fieldBuffer;
 
-				int32 dataOffset = sizeof(dano_fixed_size_array)
+				int32_t dataOffset = sizeof(dano_fixed_size_array)
 					+ field->name_length + 1;
 				dataOffset = pad_to_8(dataOffset);
-				int32 count = *(int32 *)(fieldBuffer + dataOffset);
+				int32_t count = *(int32_t *)(fieldBuffer + dataOffset);
 				dataOffset += 8; /* count and padding */
 
 				if (offset + dataOffset + count * field->size_per_item > size)
 					return B_BAD_DATA;
 
 				status_t result = B_OK;
-				for (int32 i = 0; i < count; i++) {
+				for (int32_t i = 0; i < count; i++) {
 					result = into->AddData(field->name, field->type,
 						fieldBuffer + dataOffset, field->size_per_item, true,
 						count);
@@ -816,20 +816,20 @@ MessageAdapter::_R5FlattenedSize(const BMessage *from)
 				dano_variable_size_array *field
 					= (dano_variable_size_array *)fieldBuffer;
 
-				int32 dataOffset = sizeof(dano_variable_size_array)
+				int32_t dataOffset = sizeof(dano_variable_size_array)
 					+ field->name_length + 1;
 				dataOffset = pad_to_8(dataOffset);
-				int32 count = *(int32 *)(fieldBuffer + dataOffset);
-				dataOffset += sizeof(int32);
+				int32_t count = *(int32_t *)(fieldBuffer + dataOffset);
+				dataOffset += sizeof(int32_t);
 				ssize_t totalSize = *(ssize_t *)(fieldBuffer + dataOffset);
 				dataOffset += sizeof(ssize_t);
 
-				int32 *endPoints = (int32 *)(fieldBuffer + dataOffset
+				int32_t *endPoints = (int32_t *)(fieldBuffer + dataOffset
 					+ totalSize);
 
 				status_t result = B_OK;
-				for (int32 i = 0; i < count; i++) {
-					int32 itemOffset = (i > 0 ? pad_to_8(endPoints[i - 1]) : 0);
+				for (int32_t i = 0; i < count; i++) {
+					int32_t itemOffset = (i > 0 ? pad_to_8(endPoints[i - 1]) : 0);
 
 					result = into->AddData(field->name, field->type,
 						fieldBuffer + dataOffset + itemOffset,

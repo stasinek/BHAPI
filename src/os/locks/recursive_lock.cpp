@@ -17,7 +17,7 @@
 // #pragma mark - recursive lock
 
 
-int32 __recursive_lock_get_recursion(recursive_lock *lock)
+int32_t __recursive_lock_get_recursion(recursive_lock *lock)
 {
 	if (lock->holder == find_thread(NULL))
 		return lock->recursion;
@@ -32,7 +32,7 @@ void __recursive_lock_init(recursive_lock *lock, const char *name)
 }
 
 
-void __recursive_lock_init_etc(recursive_lock *lock, const char *name, uint32 flags)
+void __recursive_lock_init_etc(recursive_lock *lock, const char *name, uint32_t flags)
 {
 	lock->holder = -1;
 	lock->recursion = 0;

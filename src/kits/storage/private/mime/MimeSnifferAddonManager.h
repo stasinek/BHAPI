@@ -40,16 +40,16 @@ public:
 	virtual	float				GuessMimeType(const char* fileName,
 									BMimeType* type);
 	virtual	float				GuessMimeType(BFile* file,
-									const void* buffer, int32 length,
+									const void* buffer, int32_t length,
 									BMimeType* type);
 
 private:
 			struct AddonReference;
 
 			status_t			_GetAddons(AddonReference**& references,
-									int32& count);
+									int32_t& count);
 			void				_PutAddons(AddonReference** references,
-									int32 count);
+									int32_t count);
 
 			static MimeSnifferAddonManager*	sManager;
 

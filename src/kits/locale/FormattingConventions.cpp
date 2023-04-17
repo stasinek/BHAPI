@@ -99,7 +99,7 @@ static void CoerceFormatTo24HourClock(BString& format)
 	// and remove the am/pm marker (including leading whitespace)
 	bool inQuote = false;
 	bool lastWasWhitespace = false;
-	uint32 ch;
+	uint32_t ch;
 	const char* amPmStartPos = NULL;
 	const char* amPmEndPos = NULL;
 	const char* lastWhitespaceStart = NULL;

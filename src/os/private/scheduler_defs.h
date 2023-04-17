@@ -38,7 +38,7 @@ struct scheduling_analysis_thread {
 
 
 struct scheduling_analysis_wait_object {
-	uint32		type;
+	uint32_t		type;
 	void*		object;
 	char		name[B_OS_NAME_LENGTH];
 	void*		referenced_object;
@@ -55,7 +55,7 @@ struct scheduling_analysis_thread_wait_object {
 
 
 struct scheduling_analysis {
-	uint32							thread_count;
+	uint32_t							thread_count;
 	scheduling_analysis_thread**	threads;
 	uint64							wait_object_count;
 	uint64							thread_wait_object_count;

@@ -20,13 +20,13 @@ namespace Layout {
  */
 class CollapsingLayouter : public Layouter {
 public:
-								CollapsingLayouter(int32 elementCount,
+								CollapsingLayouter(int32_t elementCount,
 									float spacing);
 	virtual						~CollapsingLayouter();
 
-	virtual	void				AddConstraints(int32 element, int32 length,
+	virtual	void				AddConstraints(int32_t element, int32_t length,
 									float min, float max, float preferred);
-	virtual	void				SetWeight(int32 element, float weight);
+	virtual	void				SetWeight(int32_t element, float weight);
 
 	virtual	float				MinSize();
 	virtual	float				MaxSize();
@@ -48,13 +48,13 @@ private:
 			Layouter*			_CreateLayouter();
 			void				_DoCollapse();
 			void				_AddConstraints();
-			void				_AddConstraints(int32 position,
+			void				_AddConstraints(int32_t position,
 									const Constraint* c);
 			void				_SetWeights();
 
-			int32				fElementCount;
+			int32_t				fElementCount;
 			ElementInfo*		fElements;
-			int32				fValidElementCount;
+			int32_t				fValidElementCount;
 			bool				fHaveMultiElementConstraints;
 			float				fSpacing;
 			Layouter*			fLayouter;

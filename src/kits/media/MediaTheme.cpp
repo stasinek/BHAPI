@@ -47,7 +47,7 @@ BMediaTheme::Info()
 }
 
 
-int32 BMediaTheme::ID()
+int32_t BMediaTheme::ID()
 {
 	return fID;
 }
@@ -159,7 +159,7 @@ BMediaTheme::ForegroundColorFor(fg_kind fg)
 
 //! protected BMediaTheme
 BMediaTheme::BMediaTheme(const char* name, const char* info,
-	const entry_ref* ref, int32 id)
+	const entry_ref* ref, int32_t id)
 	:
 	fID(id)
 {

@@ -104,10 +104,10 @@ public:
 	Value &Get(const Key &key);
 	const Value &Get(const Key &key) const;
 
-	int32 Remove(const Key &key);
+	int32_t Remove(const Key &key);
 	Iterator Erase(const Iterator &iterator);
 
-	inline int32 Count() const;
+	inline int32_t Count() const;
 	inline bool IsEmpty() const;
 	void MakeEmpty();
 
@@ -124,7 +124,7 @@ public:
 	ConstIterator FindClose(const Key &key, bool less) const;
 
 private:
-	int32 _FindInsertionIndex(const Key &key, bool &exists) const;
+	int32_t _FindInsertionIndex(const Key &key, bool &exists) const;
 
 private:
 //	friend class Entry;
@@ -323,7 +323,7 @@ status_t _VECTOR_MAP_CLASS_NAME::Insert(const Key &key, const Value &value)
 	if (!fEntryStrategy.AreCompatible(key, value))
 		return B_BAD_VALUE;
 	bool exists = false;
-	int32 index = _FindInsertionIndex(key, exists);
+	int32_t index = _FindInsertionIndex(key, exists);
 	if (exists) {
 		fElements[index] = fEntryStrategy.MakeEntry(key, value);
 		return B_OK;
@@ -355,7 +355,7 @@ Value &
 _VECTOR_MAP_CLASS_NAME::Get(const Key &key)
 {
 	bool exists = false;
-	int32 index = _FindInsertionIndex(key, exists);
+	int32_t index = _FindInsertionIndex(key, exists);
 	if (!exists)
 		return fEntryStrategy.GetValue(fElements[0]);
 	return fEntryStrategy.GetValue(fElements[index]);
@@ -375,7 +375,7 @@ const Value &
 _VECTOR_MAP_CLASS_NAME::Get(const Key &key) const
 {
 	bool exists = false;
-	int32 index = _FindInsertionIndex(key, exists);
+	int32_t index = _FindInsertionIndex(key, exists);
 	if (!exists)
 		return fEntryStrategy.GetValue(fElements[0]);
 	return fEntryStrategy.GetValue(fElements[index]);
@@ -388,10 +388,10 @@ _VECTOR_MAP_CLASS_NAME::Get(const Key &key) const
 			contained an entry with that key, \c 0 otherwise.
 */
 _VECTOR_MAP_TEMPLATE_LIST
-int32 _VECTOR_MAP_CLASS_NAME::Remove(const Key &key)
+int32_t _VECTOR_MAP_CLASS_NAME::Remove(const Key &key)
 {
 	bool exists = false;
-	int32 index = _FindInsertionIndex(key, exists);
+	int32_t index = _FindInsertionIndex(key, exists);
 	if (!exists)
 		return 0;
 	fElements.Erase(index);
@@ -419,7 +419,7 @@ _VECTOR_MAP_CLASS_NAME::Erase(const Iterator &iterator)
 */
 _VECTOR_MAP_TEMPLATE_LIST
 inline
-int32 _VECTOR_MAP_CLASS_NAME::Count() const
+int32_t _VECTOR_MAP_CLASS_NAME::Count() const
 {
 	return fElements.Count();
 }
@@ -552,7 +552,7 @@ _VECTOR_MAP_CLASS_TYPE::Iterator
 _VECTOR_MAP_CLASS_NAME::Find(const Key &key)
 {
 	bool exists = false;
-	int32 index = _FindInsertionIndex(key, exists);
+	int32_t index = _FindInsertionIndex(key, exists);
 	if (!exists)
 		return End();
 	return Iterator(this, fElements.IteratorForIndex(index));
@@ -570,7 +570,7 @@ _VECTOR_MAP_CLASS_TYPE::ConstIterator
 _VECTOR_MAP_CLASS_NAME::Find(const Key &key) const
 {
 	bool exists = false;
-	int32 index = _FindInsertionIndex(key, exists);
+	int32_t index = _FindInsertionIndex(key, exists);
 	if (!exists)
 		return End();
 	return ConstIterator(this, fElements.IteratorForIndex(index));
@@ -604,7 +604,7 @@ _VECTOR_MAP_CLASS_TYPE::Iterator
 _VECTOR_MAP_CLASS_NAME::FindClose(const Key &key, bool less)
 {
 	bool exists = false;
-	int32 index = _FindInsertionIndex(key, exists);
+	int32_t index = _FindInsertionIndex(key, exists);
 	// If not found, the index _FindInsertionIndex() returns will point to
 	// an element with a greater value or to End(). So, no special handling
 	// is needed for !less.
@@ -645,7 +645,7 @@ _VECTOR_MAP_CLASS_TYPE::ConstIterator
 _VECTOR_MAP_CLASS_NAME::FindClose(const Key &key, bool less) const
 {
 	bool exists = false;
-	int32 index = _FindInsertionIndex(key, exists);
+	int32_t index = _FindInsertionIndex(key, exists);
 	// If not found, the index _FindInsertionIndex() returns will point to
 	// an element with a greater value or to End(). So, no special handling
 	// is needed for !less.
@@ -668,14 +668,14 @@ _VECTOR_MAP_CLASS_NAME::FindClose(const Key &key, bool less) const
 			located or at which it would need to be inserted.
 */
 _VECTOR_MAP_TEMPLATE_LIST
-int32 _VECTOR_MAP_CLASS_NAME::_FindInsertionIndex(const Key &key,
+int32_t _VECTOR_MAP_CLASS_NAME::_FindInsertionIndex(const Key &key,
 											bool &exists) const
 {
 	// binary search
-	int32 lower = 0;
-	int32 upper = Count();
+	int32_t lower = 0;
+	int32_t upper = Count();
 	while (lower < upper) {
-		int32 mid = (lower + upper) / 2;
+		int32_t mid = (lower + upper) / 2;
 		int cmp = fEntryStrategy.Compare(fEntryStrategy.GetKey(fElements[mid]),
 															   key);
 		if (cmp < 0)

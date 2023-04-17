@@ -90,7 +90,7 @@ enum {
 };
 
 
-const int32 kSubExpressionMax = 10;
+const int32_t kSubExpressionMax = 10;
 
 
 struct regexp {
@@ -119,7 +119,7 @@ public:
 	bool Matches(const char* string) const;
 	bool Matches(const BString&) const;
 
-	int32 RunMatcher(regexp*, const char*) const;
+	int32_t RunMatcher(regexp*, const char*) const;
 	regexp* Compile(const char*);
 	regexp* Expression() const;
 	const char* ErrorString() const;
@@ -132,10 +132,10 @@ private:
 	void SetError(status_t error) const;
 
 	// Working functions for Compile():
-	char* Reg(int32, int32*);
-	char* Branch(int32*);
-	char* Piece(int32*);
-	char* Atom(int32*);
+	char* Reg(int32_t, int32_t*);
+	char* Branch(int32_t*);
+	char* Piece(int32_t*);
+	char* Atom(int32_t*);
 	char* Node(char);
 	char* Next(char*);
 	const char* Next(const char*) const;
@@ -145,16 +145,16 @@ private:
 	void OpTail(char*, char*);
 
 	// Working functions for RunMatcher():
-	int32 Try(regexp*, const char*) const;
-	int32 Match(const char*) const;
-	int32 Repeat(const char*) const;
+	int32_t Try(regexp*, const char*) const;
+	int32_t Match(const char*) const;
+	int32_t Repeat(const char*) const;
 
 	// Utility functions:
 #ifdef DEBUG
 	char* Prop(const char*) const;
 	void RegExpError(const char*) const;
 #endif
-	inline int32 UCharAt(const char* p) const;
+	inline int32_t UCharAt(const char* p) const;
 	inline char* Operand(char* p) const;
 	inline const char* Operand(const char* p) const;
 	inline bool	IsMult(char c) const;
@@ -166,7 +166,7 @@ private:
 
 	// Work variables for Compile().
 	const char* fInputScanPointer;
-	int32 fParenthesisCount;
+	int32_t fParenthesisCount;
 	char fDummy;
 	char* fCodeEmitPointer;
 		// &fDummy = don't.

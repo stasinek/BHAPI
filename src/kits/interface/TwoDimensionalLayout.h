@@ -49,19 +49,19 @@ protected:
             };
 
             struct Dimensions {
-                int32	x;
-                int32	y;
-                int32	width;
-                int32	height;
+                int32_t	x;
+                int32_t	y;
+                int32_t	width;
+                int32_t	height;
             };
 
     virtual status_t			AllArchived(BMessage* into) const;
     virtual	status_t			AllUnarchived(const BMessage* from);
 
     virtual status_t			ItemArchived(BMessage* into, BLayoutItem* item,
-                                    int32 index) const;
+                                    int32_t index) const;
     virtual	status_t			ItemUnarchived(const BMessage* from,
-                                    BLayoutItem* item, int32 index);
+                                    BLayoutItem* item, int32_t index);
     virtual	void				LayoutInvalidated(bool children = false);
 
     virtual	void				DoLayout();
@@ -75,11 +75,11 @@ protected:
     virtual	bool				HasMultiColumnItems();
     virtual	bool				HasMultiRowItems();
 
-    virtual	int32				InternalCountColumns() = 0;
-    virtual	int32				InternalCountRows() = 0;
+    virtual	int32_t				InternalCountColumns() = 0;
+    virtual	int32_t				InternalCountRows() = 0;
     virtual	void				GetColumnRowConstraints(
                                     orientation orientation,
-                                    int32 index,
+                                    int32_t index,
                                     ColumnRowConstraints* constraints) = 0;
     virtual	void				GetItemDimensions(BLayoutItem* item,
                                     Dimensions* dimensions) = 0;
@@ -122,7 +122,7 @@ private:
 
             LocalLayouter*		fLocalLayouter;
 
-            uint32				_reserved[5];
+            uint32_t				_reserved[5];
 };
 
 #endif // _TWO_DIMENSIONAL_LAYOUT_H

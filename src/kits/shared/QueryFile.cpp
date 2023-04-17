@@ -81,7 +81,7 @@ status_t BQueryFile::SetTo(const entry_ref& ref)
 		BMessage message;
 		fStatus = message.Unflatten((const char*)buffer);
 		if (fStatus == B_OK) {
-			for (int32 index = 0; index < 100; index++) {
+			for (int32_t index = 0; index < 100; index++) {
 				BVolume volume;
 				status_t status = BPrivate::MatchArchivedVolume(&volume,
 					&message, index);
@@ -188,14 +188,14 @@ const char*  BQueryFile::Predicate() const
 }
 
 
-int32 BQueryFile::CountVolumes() const
+int32_t BQueryFile::CountVolumes() const
 {
 	return fVolumes.CountItems();
 }
 
 
 dev_t
-BQueryFile::VolumeAt(int32 index) const
+BQueryFile::VolumeAt(int32_t index) const
 {
 	if (index < 0 || index >= fVolumes.CountItems())
 		return -1;
@@ -277,7 +277,7 @@ status_t BQueryFile::GetNextRef(entry_ref* ref)
 }
 
 
-int32 BQueryFile::GetNextDirents(struct dirent* buffer, size_t length, int32 count)
+int32_t BQueryFile::GetNextDirents(struct dirent* buffer, size_t length, int32_t count)
 {
 	if (fCurrentVolumeIndex == -1) {
 		// Start with first volume
@@ -310,7 +310,7 @@ status_t BQueryFile::Rewind()
 }
 
 
-int32 BQueryFile::CountEntries()
+int32_t BQueryFile::CountEntries()
 {
 	// not supported
 	return -1;
@@ -323,7 +323,7 @@ int32 BQueryFile::CountEntries()
 }
 
 
-status_t BQueryFile::_SetQuery(int32 index)
+status_t BQueryFile::_SetQuery(int32_t index)
 {
 	if (fCurrentVolumeIndex >= CountVolumes())
 		return B_ENTRY_NOT_FOUND;

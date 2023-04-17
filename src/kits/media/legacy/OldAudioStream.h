@@ -23,8 +23,8 @@ public:
 					BADCStream();
 	virtual			~BADCStream();
 
-	status_t		SetADCInput(int32 device);
-	status_t		ADCInput(int32* device) const;
+	status_t		SetADCInput(int32_t device);
+	status_t		ADCInput(int32_t* device) const;
 
 	status_t		SetSamplingRate(float sRate);
 	status_t		SamplingRate(float* sRate) const;
@@ -32,7 +32,7 @@ public:
 	status_t		BoostMic(bool boost);
 	bool			IsMicBoosted() const;
 
-	status_t		SetStreamBuffers(size_t bufferSize, int32 bufferCount);
+	status_t		SetStreamBuffers(size_t bufferSize, int32_t bufferCount);
 
 protected:
 
@@ -47,7 +47,7 @@ virtual	void		_ReservedADCStream3();
 
 	BMessenger*		fServer;
 	stream_id		fStreamID;
-	uint32			_reserved[4];
+	uint32_t			_reserved[4];
 };
 
 
@@ -61,19 +61,19 @@ public:
 	status_t		SetSamplingRate(float sRate);
 	status_t		SamplingRate(float* sRate) const;
 
-	status_t		SetVolume(int32 device,
+	status_t		SetVolume(int32_t device,
 							  float l_volume,
 							  float r_volume);
 
-	status_t		GetVolume(int32 device,
+	status_t		GetVolume(int32_t device,
 							  float *l_volume,
 							  float *r_volume,
 							  bool *enabled) const;
 
-	status_t		EnableDevice(int32 device, bool enable);
-	bool			IsDeviceEnabled(int32 device) const;
+	status_t		EnableDevice(int32_t device, bool enable);
+	bool			IsDeviceEnabled(int32_t device) const;
 
-	status_t		SetStreamBuffers(size_t bufferSize, int32 bufferCount);
+	status_t		SetStreamBuffers(size_t bufferSize, int32_t bufferCount);
 
 protected:
 
@@ -88,7 +88,7 @@ virtual	void		_ReservedDACStream3();
 
 	BMessenger*		fServer;
 	stream_id		fStreamID;
-	uint32			_reserved[4];
+	uint32_t			_reserved[4];
 };
 
 #endif			// #ifdef _AUDIO_STREAM_H

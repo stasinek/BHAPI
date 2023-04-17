@@ -20,9 +20,9 @@
  * public BAbstractBufferStream
  *************************************************************/
 status_t BAbstractBufferStream::GetStreamParameters(size_t *bufferSize,
-										   int32 *bufferCount,
+										   int32_t *bufferCount,
 										   bool *isRunning,
-										   int32 *subscriberCount) const
+										   int32_t *subscriberCount) const
 {
 	UNIMPLEMENTED();
 
@@ -31,7 +31,7 @@ status_t BAbstractBufferStream::GetStreamParameters(size_t *bufferSize,
 
 
 status_t BAbstractBufferStream::SetStreamBuffers(size_t bufferSize,
-										int32 bufferCount)
+										int32_t bufferCount)
 {
 	UNIMPLEMENTED();
 
@@ -189,9 +189,9 @@ BBufferStream::HeaderSize() const
 
 
 status_t BBufferStream::GetStreamParameters(size_t *bufferSize,
-								   int32 *bufferCount,
+								   int32_t *bufferCount,
 								   bool *isRunning,
-								   int32 *subscriberCount) const
+								   int32_t *subscriberCount) const
 {
 	UNIMPLEMENTED();
 
@@ -200,7 +200,7 @@ status_t BBufferStream::GetStreamParameters(size_t *bufferSize,
 
 
 status_t BBufferStream::SetStreamBuffers(size_t bufferSize,
-								int32 bufferCount)
+								int32_t bufferCount)
 {
 	UNIMPLEMENTED();
 
@@ -232,7 +232,7 @@ BBufferStream::StreamManager() const
 }
 
 
-int32 BBufferStream::CountBuffers() const
+int32_t BBufferStream::CountBuffers() const
 {
 	UNIMPLEMENTED();
 
@@ -295,7 +295,7 @@ bool BBufferStream::IsEntered(subscriber_id subID)
 status_t BBufferStream::SubscriberInfo(subscriber_id subID,
 							  char **name,
 							  stream_id *streamID,
-							  int32 *position)
+							  int32_t *position)
 {
 	UNIMPLEMENTED();
 
@@ -354,7 +354,7 @@ bool BBufferStream::IsFinalBuffer(buffer_id bufID) const
 }
 
 
-int32 BBufferStream::CountBuffersHeld(subscriber_id subID)
+int32_t BBufferStream::CountBuffersHeld(subscriber_id subID)
 {
 	UNIMPLEMENTED();
 
@@ -362,7 +362,7 @@ int32 BBufferStream::CountBuffersHeld(subscriber_id subID)
 }
 
 
-int32 BBufferStream::CountSubscribers() const
+int32_t BBufferStream::CountSubscribers() const
 {
 	UNIMPLEMENTED();
 
@@ -370,7 +370,7 @@ int32 BBufferStream::CountSubscribers() const
 }
 
 
-int32 BBufferStream::CountEnteredSubscribers() const
+int32_t BBufferStream::CountEnteredSubscribers() const
 {
 	UNIMPLEMENTED();
 

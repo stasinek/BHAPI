@@ -14,7 +14,7 @@ namespace BHPKG {
 
 
 BBlockBufferPoolNoLock::BBlockBufferPoolNoLock(size_t blockSize,
-	uint32 maxCachedBlocks)
+	uint32_t maxCachedBlocks)
 	:
 	BBlockBufferPool(blockSize, maxCachedBlocks)
 {

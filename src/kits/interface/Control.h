@@ -53,15 +53,15 @@ public:
          const char *name,
          const char *label,
          BMessage *message,
-          uint32 resizeMode,
-          uint32 flags);
+          uint32_t resizeMode,
+          uint32_t flags);
     virtual ~BControl();
 
     virtual void SetLabel(const char *label);
     const char* Label() const;
 
-    virtual void SetValue(int32 value);
-     int32 Value() const;
+    virtual void SetValue(int32_t value);
+     int32_t Value() const;
 
     virtual status_t Invoke(const BMessage *msg = NULL);
 
@@ -72,11 +72,11 @@ public:
 
 protected:
     bool IsFocusChanging() const;
-    void SetValueNoUpdate(int32 value);
+    void SetValueNoUpdate(int32_t value);
 
 private:
     char *fLabel;
-     int32 fValue;
+     int32_t fValue;
     bool fFocusChanging;
 };
 

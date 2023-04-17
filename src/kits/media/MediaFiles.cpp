@@ -53,7 +53,7 @@ status_t BMediaFiles::RewindTypes()
 	}
 
 	const char* types = (const char*)reply.address;
-	for (int32 i = 0; i < reply.count; i++)
+	for (int32_t i = 0; i < reply.count; i++)
 		fTypes.AddItem(new BString(types + i * B_MEDIA_NAME_LENGTH));
 
 	delete_area(reply.area);
@@ -102,7 +102,7 @@ status_t BMediaFiles::RewindRefs(const char* type)
 	}
 
 	const char* items = (const char*)reply.address;
-	for (int32 i = 0; i < reply.count; i++) {
+	for (int32_t i = 0; i < reply.count; i++) {
 		fItems.AddItem(new BString(items + i * B_MEDIA_NAME_LENGTH,
 			B_MEDIA_NAME_LENGTH));
 	}
@@ -269,7 +269,7 @@ status_t BMediaFiles::RemoveItem(const char* type, const char* item)
 
 void BMediaFiles::_ClearTypes()
 {
-	for (int32 i = 0; i < fTypes.CountItems(); i++)
+	for (int32_t i = 0; i < fTypes.CountItems(); i++)
 		delete (BString*)fTypes.ItemAt(i);
 
 	fTypes.MakeEmpty();
@@ -278,7 +278,7 @@ void BMediaFiles::_ClearTypes()
 
 void BMediaFiles::_ClearItems()
 {
-	for (int32 i = 0; i < fItems.CountItems(); i++)
+	for (int32_t i = 0; i < fItems.CountItems(); i++)
 		delete (BString*)fItems.ItemAt(i);
 
 	fItems.MakeEmpty();

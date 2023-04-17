@@ -24,33 +24,33 @@ class BSoundFile  {
 public:
 								BSoundFile();
 								BSoundFile(const entry_ref* ref,
-									uint32 openMode);
+									uint32_t openMode);
 	virtual						~BSoundFile();
 
 			status_t			InitCheck() const;
 
-			status_t			SetTo(const entry_ref* ref, uint32 openMode);
+			status_t			SetTo(const entry_ref* ref, uint32_t openMode);
 
-			int32				FileFormat() const;
-			int32				SamplingRate() const;
-			int32				CountChannels() const;
-			int32				SampleSize() const;
-			int32				ByteOrder() const;
-			int32				SampleFormat() const;
-			int32				FrameSize() const;
+			int32_t				FileFormat() const;
+			int32_t				SamplingRate() const;
+			int32_t				CountChannels() const;
+			int32_t				SampleSize() const;
+			int32_t				ByteOrder() const;
+			int32_t				SampleFormat() const;
+			int32_t				FrameSize() const;
 			off_t				CountFrames() const;
 
 			bool				IsCompressed() const;
-			int32				CompressionType() const;
+			int32_t				CompressionType() const;
 			char*				CompressionName() const;
 
-	virtual	int32				SetFileFormat(int32 format);
-	virtual	int32				SetSamplingRate(int32 fps);
-	virtual	int32				SetChannelCount(int32 samplesPerFrame);
-	virtual	int32				SetSampleSize(int32 bytesPerSample);
-	virtual	int32				SetByteOrder(int32 byteOrder);
-	virtual	int32				SetSampleFormat(int32 format);
-	virtual	int32				SetCompressionType(int32 type);
+	virtual	int32_t				SetFileFormat(int32_t format);
+	virtual	int32_t				SetSamplingRate(int32_t fps);
+	virtual	int32_t				SetChannelCount(int32_t samplesPerFrame);
+	virtual	int32_t				SetSampleSize(int32_t bytesPerSample);
+	virtual	int32_t				SetByteOrder(int32_t byteOrder);
+	virtual	int32_t				SetSampleFormat(int32_t format);
+	virtual	int32_t				SetCompressionType(int32_t type);
 	virtual	char*				SetCompressionName(char* name);
 	virtual	bool				SetIsCompressed(bool compressed);
 	virtual	off_t				SetDataLocation(off_t offset);
@@ -73,12 +73,12 @@ private:
 			void				_init_raw_stats();
 			status_t			_ref_to_file(const entry_ref* ref);
 
-			int32				fFileFormat;
-			int32				fSamplingRate;
-			int32 				fChannelCount;
-			int32				fSampleSize;
-			int32				fByteOrder;
-			int32				fSampleFormat;
+			int32_t				fFileFormat;
+			int32_t				fSamplingRate;
+			int32_t 				fChannelCount;
+			int32_t				fSampleSize;
+			int32_t				fByteOrder;
+			int32_t				fSampleFormat;
 
 			off_t				fByteOffset;
 									// offset to first sample
@@ -87,13 +87,13 @@ private:
 			off_t				fFrameIndex;
 
 			bool				fIsCompressed;
-			int32				fCompressionType;
+			int32_t				fCompressionType;
 			char*				fCompressionName;
 			status_t			fCStatus;
 			BMediaFile*			fMediaFile;
 			BMediaTrack*		fMediaTrack;
 
-			uint32			_reserved[2];
+			uint32_t			_reserved[2];
 };
 
 #endif	// _SOUND_FILE_H

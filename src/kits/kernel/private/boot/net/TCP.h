@@ -16,20 +16,20 @@ public:
 
 	status_t SetTo(const void* data, size_t size, ip_addr_t sourceAddress,
 		uint16 sourcePort, ip_addr_t destinationAddress,
-		uint16 destinationPort, uint32 sequenceNumber,
-		uint32 acknowledgmentNumber, uint8 flags);
+		uint16 destinationPort, uint32_t sequenceNumber,
+		uint32_t acknowledgmentNumber, uint8 flags);
 
 	ip_addr_t SourceAddress() const;
 	ip_addr_t DestinationAddress() const;
 	uint16 SourcePort() const;
 	uint16 DestinationPort() const;
-	uint32 SequenceNumber() const;
-	uint32 AcknowledgmentNumber() const;
+	uint32_t SequenceNumber() const;
+	uint32_t AcknowledgmentNumber() const;
 	const void* Data() const { return fData; }
 	size_t DataSize() const { return fSize; }
 	uint8 Flags() const { return fFlags; }
 
-	bool ProvidesSequenceNumber(uint32 sequenceNo) const;
+	bool ProvidesSequenceNumber(uint32_t sequenceNo) const;
 
 	TCPPacket* Next() const;
 	void SetNext(TCPPacket* packet);
@@ -39,8 +39,8 @@ private:
 	ip_addr_t	fDestinationAddress;
 	uint16		fSourcePort;
 	uint16		fDestinationPort;
-	uint32		fSequenceNumber;
-	uint32		fAcknowledgmentNumber;
+	uint32_t		fSequenceNumber;
+	uint32_t		fAcknowledgmentNumber;
 	void*		fData;
 	size_t		fSize;
 	uint8		fFlags;
@@ -72,7 +72,7 @@ public:
 	status_t Read(void* buffer, size_t bufferSize, size_t* bytesRead, bigtime_t timeout = 0);
 	status_t Write(const void* buffer, size_t bufferSize);
 
-	void Acknowledge(uint32 number);
+	void Acknowledge(uint32_t number);
 	void ProcessPacket(TCPPacket* packet);
 
 private:
@@ -90,9 +90,9 @@ private:
 	uint16		fPort;
 	ip_addr_t	fRemoteAddress;
 	uint16		fRemotePort;
-	uint32		fSequenceNumber;
-	uint32		fAcknowledgeNumber;
-	uint32		fNextSequence;
+	uint32_t		fSequenceNumber;
+	uint32_t		fAcknowledgeNumber;
+	uint32_t		fNextSequence;
 	TCPPacket*	fFirstPacket;
 	TCPPacket*	fLastPacket;
 	TCPPacket*	fFirstSentPacket;
@@ -114,8 +114,8 @@ public:
 		ip_addr_t destinationIP, const void* data, size_t size);
 
 	status_t Send(uint16 sourcePort, ip_addr_t destinationAddress,
-		uint16 destinationPort, uint32 sequenceNumber,
-		uint32 acknowledgmentNumber, uint8 flags, uint16 windowSize,
+		uint16 destinationPort, uint32_t sequenceNumber,
+		uint32_t acknowledgmentNumber, uint8 flags, uint16 windowSize,
 		ChainBuffer* buffer);
 
 	void ProcessIncomingPackets();

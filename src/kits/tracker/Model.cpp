@@ -442,7 +442,7 @@ status_t Model::OpenNodeCommon(bool writable)
 			// open or reopen
 			delete fNode;
 			fNode = new BFile(&fEntryRef,
-				(uint32)(writable ? O_RDWR : O_RDONLY));
+				(uint32_t)(writable ? O_RDWR : O_RDONLY));
 			break;
 
 		case kDirectoryNode:
@@ -847,7 +847,7 @@ void Model::UpdateEntryRef(const node_ref* dirNode, const char* name)
 }
 
 
-status_t Model::WatchVolumeAndMountPoint(uint32 , BHandler* target)
+status_t Model::WatchVolumeAndMountPoint(uint32_t , BHandler* target)
 {
 	ASSERT(IsVolume());
 
@@ -1027,19 +1027,19 @@ enum {
 };
 
 
-static int32 MatchMimeTypeString(/*const */BString* documentType, const char* handlerType)
+static int32_t MatchMimeTypeString(/*const */BString* documentType, const char* handlerType)
 {
 	// perform a mime type wildcard match
 	// handler types of the form "text"
 	// handle every handled type with same supertype,
 	// for everything else a full string match is used
 
-	int32 supertypeOnlyLength = 0;
+	int32_t supertypeOnlyLength = 0;
 	const char* tmp = strstr(handlerType, "/");
 
 	if (tmp == NULL) {
 		// no subtype - supertype string only
-		supertypeOnlyLength = (int32)strlen(handlerType);
+		supertypeOnlyLength = (int32_t)strlen(handlerType);
 	}
 
 	if (supertypeOnlyLength) {
@@ -1060,13 +1060,13 @@ static int32 MatchMimeTypeString(/*const */BString* documentType, const char* ha
 }
 
 
-int32 Model::SupportsMimeType(const char* type, const BObjectList<BString>* list,
+int32_t Model::SupportsMimeType(const char* type, const BObjectList<BString>* list,
 	bool exactReason) const
 {
 	ASSERT((type == 0) != (list == 0));
 		// pass in one or the other
 
-	int32 result = kDoesNotSupportType;
+	int32_t result = kDoesNotSupportType;
 
 	BFile file(EntryRef(), O_RDONLY);
 	BAppFileInfo handlerInfo(&file);
@@ -1075,7 +1075,7 @@ int32 Model::SupportsMimeType(const char* type, const BObjectList<BString>* list
 	if (handlerInfo.GetSupportedTypes(&message) != B_OK)
 		return kDoesNotSupportType;
 
-	for (int32 index = 0; ; index++) {
+	for (int32_t index = 0; ; index++) {
 		// check if this model lists the type of dropped document as supported
 
 		const char* mimeSignature;
@@ -1094,7 +1094,7 @@ int32 Model::SupportsMimeType(const char* type, const BObjectList<BString>* list
 				result = kSuperhandlerModel;
 		}
 
-		int32 match;
+		int32_t match;
 
 		if (type != NULL || (list != NULL && list->IsEmpty())) {
 			BString typeString(type);
@@ -1150,7 +1150,7 @@ bool Model::IsSuperHandler() const
 	if (handlerInfo.GetSupportedTypes(&message) != B_OK)
 		return false;
 
-	for (int32 index = 0; ; index++) {
+	for (int32_t index = 0; ; index++) {
 		const char* mimeSignature;
 		ssize_t bufferLength;
 
@@ -1269,7 +1269,7 @@ status_t Model::GetVersionString(BString &result, version_kind kind)
 
 #if DEBUG
 
-void Model::PrintToStream(int32 level, bool deep)
+void Model::PrintToStream(int32_t level, bool deep)
 {
 	PRINT(("model name %s, entry name %s, inode %" B_PRIdINO ", dev %"
 		B_PRIdDEV ", directory inode %" B_PRIdINO "\n",
@@ -1492,10 +1492,10 @@ namespace BPrivate {
 void DumpOpenModels(bool extensive)
 {
 	if (readOnlyOpenModelList) {
-		int32 count = readOnlyOpenModelList->CountItems();
+		int32_t count = readOnlyOpenModelList->CountItems();
 		printf("%ld models open read-only:\n", count);
 		printf("==========================\n");
-		for (int32 index = 0; index < count; index++) {
+		for (int32_t index = 0; index < count; index++) {
 			if (extensive) {
 				printf("---------------------------\n");
 				readOnlyOpenModelList->ItemAt(index)->PrintToStream();
@@ -1505,11 +1505,11 @@ void DumpOpenModels(bool extensive)
 	}
 
 	if (writableOpenModelList) {
-		int32 count = writableOpenModelList->CountItems();
+		int32_t count = writableOpenModelList->CountItems();
 		printf("%ld models open writable:\n", count);
 		printf("models open writable:\n");
 		printf("======================\n");
-		for (int32 index = 0; index < count; index++) {
+		for (int32_t index = 0; index < count; index++) {
 			if (extensive) {
 				printf("---------------------------\n");
 				writableOpenModelList->ItemAt(index)->PrintToStream();

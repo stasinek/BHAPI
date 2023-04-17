@@ -18,7 +18,7 @@ LayoutInfo::~LayoutInfo()
 
 // ElementRangeSize
 float
-LayoutInfo::ElementRangeSize(int32 position, int32 length)
+LayoutInfo::ElementRangeSize(int32_t position, int32_t length)
 {
 	if (length == 1)
 		return ElementSize(position);

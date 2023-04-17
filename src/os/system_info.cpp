@@ -27,28 +27,28 @@ typedef struct {
 } legacy_cpu_info;
 
 typedef struct {
-	int32			id[2];				/* unique machine ID */
+	int32_t			id[2];				/* unique machine ID */
 	bigtime_t		boot_time;			/* time of boot (usecs since 1/1/1970) */
 
-	int32			cpu_count;			/* number of cpus */
-	int32			cpu_type;			/* type of cpu */
-	int32			cpu_revision;		/* revision # of cpu */
+	int32_t			cpu_count;			/* number of cpus */
+	int32_t			cpu_type;			/* type of cpu */
+	int32_t			cpu_revision;		/* revision # of cpu */
 	legacy_cpu_info	cpu_infos[8];		/* info about individual cpus */
 	int64			cpu_clock_speed;	/* processor clock speed (Hz) */
 	int64			bus_clock_speed;	/* bus clock speed (Hz) */
-	int32			platform_type;	/* type of machine we're on */
+	int32_t			platform_type;	/* type of machine we're on */
 
-	int32			max_pages;			/* total # of accessible pages */
-	int32			used_pages;			/* # of accessible pages in use */
-	int32			page_faults;		/* # of page faults */
-	int32			max_sems;
-	int32			used_sems;
-	int32			max_ports;
-	int32			used_ports;
-	int32			max_threads;
-	int32			used_threads;
-	int32			max_teams;
-	int32			used_teams;
+	int32_t			max_pages;			/* total # of accessible pages */
+	int32_t			used_pages;			/* # of accessible pages in use */
+	int32_t			page_faults;		/* # of page faults */
+	int32_t			max_sems;
+	int32_t			used_sems;
+	int32_t			max_ports;
+	int32_t			used_ports;
+	int32_t			max_threads;
+	int32_t			used_threads;
+	int32_t			max_teams;
+	int32_t			used_teams;
 
 	char			kernel_name[256];
 	char			kernel_build_date[32];
@@ -57,10 +57,10 @@ typedef struct {
 
 	bigtime_t		_busy_wait_time;	/* reserved for whatever */
 
-	int32			cached_pages;
-	uint32			abi;				/* the system API */
-	int32			ignored_pages;		/* # of ignored/inaccessible pages */
-	int32			pad;
+	int32_t			cached_pages;
+	uint32_t			abi;				/* the system API */
+	int32_t			ignored_pages;		/* # of ignored/inaccessible pages */
+	int32_t			pad;
 } legacy_system_info;
 
 
@@ -76,20 +76,20 @@ extern "C" status_t _get_system_info(legacy_system_info* info, size_t size)
 		return error;
 
 	cpu_info cpuInfos[8];
-	error = _kern_get_cpu_info(0, std::min(systemInfo.cpu_count, uint32(8)),
+	error = _kern_get_cpu_info(0, std::min(systemInfo.cpu_count, uint32_t(8)),
 			cpuInfos);
 	if (error != B_OK)
 		return error;
 
 	info->boot_time = systemInfo.boot_time;
-	info->cpu_count = std::min(systemInfo.cpu_count, uint32(8));
-	for (int32 i = 0; i < info->cpu_count; i++)
+	info->cpu_count = std::min(systemInfo.cpu_count, uint32_t(8));
+	for (int32_t i = 0; i < info->cpu_count; i++)
 		info->cpu_infos[i].active_time = cpuInfos[i].active_time;
 
 	info->platform_type = LEGACY_B_AT_CLONE_PLATFORM;
 	info->cpu_type = LEGACY_B_CPU_X86;
 
-	uint32 topologyNodeCount = 0;
+	uint32_t topologyNodeCount = 0;
 	cpu_topology_node_info* topology = NULL;
 	error = get_cpu_topology_info(NULL, &topologyNodeCount);
 	if (error != B_OK)
@@ -105,7 +105,7 @@ extern "C" status_t _get_system_info(legacy_system_info* info, size_t size)
 		return error;
 	}
 
-	for (uint32 i = 0; i < topologyNodeCount; i++) {
+	for (uint32_t i = 0; i < topologyNodeCount; i++) {
 		if (topology[i].type == B_TOPOLOGY_CORE) {
 			info->cpu_clock_speed = topology[i].data.core.default_frequency;
 			break;
@@ -118,15 +118,15 @@ extern "C" status_t _get_system_info(legacy_system_info* info, size_t size)
 	info->used_pages = std::min(systemInfo.used_pages, uint64(INT32_MAX));
 	info->cached_pages = std::min(systemInfo.cached_pages, uint64(INT32_MAX));
 	info->ignored_pages = std::min(systemInfo.ignored_pages, uint64(INT32_MAX));
-	info->page_faults = std::min(systemInfo.page_faults, uint32(INT32_MAX));
-	info->max_sems = std::min(systemInfo.max_sems, uint32(INT32_MAX));
-	info->used_sems = std::min(systemInfo.used_sems, uint32(INT32_MAX));
-	info->max_ports = std::min(systemInfo.max_ports, uint32(INT32_MAX));
-	info->used_ports = std::min(systemInfo.used_ports, uint32(INT32_MAX));
-	info->max_threads = std::min(systemInfo.max_threads, uint32(INT32_MAX));
-	info->used_threads = std::min(systemInfo.used_threads, uint32(INT32_MAX));
-	info->max_teams = std::min(systemInfo.max_teams, uint32(INT32_MAX));
-	info->used_teams = std::min(systemInfo.used_teams, uint32(INT32_MAX));
+	info->page_faults = std::min(systemInfo.page_faults, uint32_t(INT32_MAX));
+	info->max_sems = std::min(systemInfo.max_sems, uint32_t(INT32_MAX));
+	info->used_sems = std::min(systemInfo.used_sems, uint32_t(INT32_MAX));
+	info->max_ports = std::min(systemInfo.max_ports, uint32_t(INT32_MAX));
+	info->used_ports = std::min(systemInfo.used_ports, uint32_t(INT32_MAX));
+	info->max_threads = std::min(systemInfo.max_threads, uint32_t(INT32_MAX));
+	info->used_threads = std::min(systemInfo.used_threads, uint32_t(INT32_MAX));
+	info->max_teams = std::min(systemInfo.max_teams, uint32_t(INT32_MAX));
+	info->used_teams = std::min(systemInfo.used_teams, uint32_t(INT32_MAX));
 
 	strlcpy(info->kernel_name, systemInfo.kernel_name,
 		sizeof(info->kernel_name));
@@ -151,32 +151,32 @@ status_t __get_system_info(system_info* info)
 }
 
 
-status_t __get_cpu_info(uint32 firstCPU, uint32 cpuCount, cpu_info* info)
+status_t __get_cpu_info(uint32_t firstCPU, uint32_t cpuCount, cpu_info* info)
 {
 	return _kern_get_cpu_info(firstCPU, cpuCount, info);
 }
 
 
 status_t __get_cpu_topology_info(cpu_topology_node_info* topologyInfos,
-	uint32* topologyInfoCount)
+	uint32_t* topologyInfoCount)
 {
 	return _kern_get_cpu_topology_info(topologyInfos, topologyInfoCount);
 }
 
 
-status_t __start_watching_system(int32 object, uint32 flags, port_id port, int32 token)
+status_t __start_watching_system(int32_t object, uint32_t flags, port_id port, int32_t token)
 {
 	return _kern_start_watching_system(object, flags, port, token);
 }
 
 
-status_t __stop_watching_system(int32 object, uint32 flags, port_id port, int32 token)
+status_t __stop_watching_system(int32_t object, uint32_t flags, port_id port, int32_t token)
 {
 	return _kern_stop_watching_system(object, flags, port, token);
 }
 
 
-int32 is_computer_on(void)
+int32_t is_computer_on(void)
 {
 	return _kern_is_computer_on();
 }

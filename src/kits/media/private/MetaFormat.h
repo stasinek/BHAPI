@@ -20,7 +20,7 @@ namespace media {
 struct meta_format {
 	meta_format();
 	meta_format(const media_format_description &description,
-		const media_format &format, int32 id);
+		const media_format &format, int32_t id);
 	meta_format(const media_format_description &description);
 	meta_format(const meta_format &other);
 
@@ -30,12 +30,12 @@ struct meta_format {
 
 	media_format_description description;
 	media_format format;
-	int32 id;
+	int32_t id;
 };
 
 typedef status_t (*_MakeFormatHookFunc)(
-	const media_format_description *descriptions, int32 descriptionsCount,
-	media_format *format, uint32 flags);
+	const media_format_description *descriptions, int32_t descriptionsCount,
+	media_format *format, uint32_t flags);
 
 extern _MakeFormatHookFunc _gMakeFormatHook;
 

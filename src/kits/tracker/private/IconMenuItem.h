@@ -74,7 +74,7 @@ class IconMenuItem : public PositionPassingMenuItem {
 class ModelMenuItem : public BMenuItem {
 	public:
 		ModelMenuItem(const Model*, const char* title, BMessage*,
-			char shortcut = '\0', uint32 modifiers = 0,
+			char shortcut = '\0', uint32_t modifiers = 0,
 			bool drawText = true, bool extraPad = false);
 		ModelMenuItem(const Model*, BMenu*, bool drawText = true,
 			bool extraPad = false);

@@ -15,7 +15,7 @@ enum {
 };
 
 
-status_t __init_once(int32* control, status_t (*initRoutine)(void*), void* data)
+status_t __init_once(int32_t* control, status_t (*initRoutine)(void*), void* data)
 {
 	// Algorithm:
 	// The control variable goes through at most four states:
@@ -30,7 +30,7 @@ status_t __init_once(int32* control, status_t (*initRoutine)(void*), void* data)
 	// STATE_INITIALIZED: Set by the first thread when it returns from
 	// initRoutine. All following threads will return right away.
 
-	int32 value = atomic_test_and_set(control, STATE_INITIALIZING,
+	int32_t value = atomic_test_and_set(control, STATE_INITIALIZING,
 		STATE_UNINITIALIZED);
 
 	if (value == STATE_INITIALIZED)

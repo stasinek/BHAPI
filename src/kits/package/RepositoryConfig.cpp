@@ -69,7 +69,7 @@ status_t BRepositoryConfig::Store(const BEntry& entry) const
 		<< "url=" << fBaseURL << "\n"
 		<< "priority=" << fPriority << "\n";
 
-	int32 size = configString.Length();
+	int32_t size = configString.Length();
 	if ((result = file.Write(configString.String(), size)) < size)
 		return (result >= 0) ? B_ERROR : result;
 

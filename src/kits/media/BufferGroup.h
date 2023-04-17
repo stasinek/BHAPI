@@ -17,11 +17,11 @@ namespace BPrivate {
 
 class BBufferGroup {
 public:
-							BBufferGroup(size_t size, int32 count = 3,
-								uint32 placement = B_ANY_ADDRESS,
-								uint32 lock = B_FULL_LOCK);
+							BBufferGroup(size_t size, int32_t count = 3,
+								uint32_t placement = B_ANY_ADDRESS,
+								uint32_t lock = B_FULL_LOCK);
 	explicit				BBufferGroup();
-							BBufferGroup(int32 count,
+							BBufferGroup(int32_t count,
 								const media_buffer_id* buffers);
 							~BBufferGroup();
 
@@ -37,8 +37,8 @@ public:
 
 			status_t		RequestError();
 
-			status_t		CountBuffers(int32* _count);
-			status_t		GetBufferList(int32 bufferCount,
+			status_t		CountBuffers(int32_t* _count);
+			status_t		GetBufferList(int32_t bufferCount,
 								BBuffer** _buffers);
 
 			status_t		WaitForBuffers();
@@ -59,11 +59,11 @@ private:
 
 			status_t		fInitError;
 			status_t		fRequestError;
-			int32			fBufferCount;
+			int32_t			fBufferCount;
 			BPrivate::SharedBufferList* fBufferList;
 			sem_id			fReclaimSem;
 
-			uint32			_reserved[9];
+			uint32_t			_reserved[9];
 };
 
 

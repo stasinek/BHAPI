@@ -56,7 +56,7 @@ All rights reserved.
 #include <WidgetAttributeText.h>
 
 
-static const uint32 kSpaceBarSwitchColor = 'SBsc';
+static const uint32_t kSpaceBarSwitchColor = 'SBsc';
 
 //TODO: defaults should be set in one place only (TrackerSettings.cpp) while
 //		being accessible from here.
@@ -70,7 +70,7 @@ static const rgb_color kDefaultWarningSpaceColor
 	= { 203, 0, 0, kSpaceBarAlpha };
 
 
-static void send_bool_notices(uint32 what, const char* name, bool value)
+static void send_bool_notices(uint32_t what, const char* name, bool value)
 {
 	TTracker* tracker = dynamic_cast<TTracker*>(__be_app);
 	if (tracker == NULL)

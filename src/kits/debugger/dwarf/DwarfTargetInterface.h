@@ -20,14 +20,14 @@ class DwarfTargetInterface : public BReferenceable {
 public:
 	virtual						~DwarfTargetInterface();
 
-	virtual	uint32				CountRegisters() const = 0;
-	virtual	uint32				RegisterValueType(uint32 index) const = 0;
+	virtual	uint32_t				CountRegisters() const = 0;
+	virtual	uint32_t				RegisterValueType(uint32_t index) const = 0;
 
-	virtual	bool				GetRegisterValue(uint32 index,
+	virtual	bool				GetRegisterValue(uint32_t index,
 									BVariant& _value) const = 0;
-	virtual	bool				SetRegisterValue(uint32 index,
+	virtual	bool				SetRegisterValue(uint32_t index,
 									const BVariant& value) = 0;
-	virtual	bool				IsCalleePreservedRegister(uint32 index) const
+	virtual	bool				IsCalleePreservedRegister(uint32_t index) const
 									= 0;
 	virtual status_t			InitRegisterRules(CfaContext& context) const
 									= 0;
@@ -35,11 +35,11 @@ public:
 	virtual	bool				ReadMemory(target_addr_t address, void* buffer,
 									size_t size) const = 0;
 	virtual	bool				ReadValueFromMemory(target_addr_t address,
-									uint32 valueType, BVariant& _value) const
+									uint32_t valueType, BVariant& _value) const
 										= 0;
 	virtual	bool				ReadValueFromMemory(target_addr_t addressSpace,
 									target_addr_t address,
-									uint32 valueType, BVariant& _value) const
+									uint32_t valueType, BVariant& _value) const
 										= 0;
 };
 

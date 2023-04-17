@@ -301,11 +301,11 @@
 /* primary PCI register area */
 #define NM_REG8(r_)  ((vuint8  *)regs)[(r_)]
 #define NM_REG16(r_) ((vuint16 *)regs)[(r_) >> 1]
-#define NM_REG32(r_) ((vuint32 *)regs)[(r_) >> 2]
+#define NM_REG32(r_) ((vuint32_t *)regs)[(r_) >> 2]
 /* secondary PCI register area */
 #define NM_2REG8(r_)  ((vuint8  *)regs2)[(r_)]
 #define NM_2REG16(r_) ((vuint16 *)regs2)[(r_) >> 1]
-#define NM_2REG32(r_) ((vuint32 *)regs2)[(r_) >> 2]
+#define NM_2REG32(r_) ((vuint32_t *)regs2)[(r_) >> 2]
 
 /* read and write to PCI config space */
 #define CFGR(A)   (nm_pci_access.offset=NMCFG_##A, ioctl(fd,NM_GET_PCI, &nm_pci_access,sizeof(nm_pci_access)), nm_pci_access.value)

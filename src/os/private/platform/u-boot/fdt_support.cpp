@@ -50,7 +50,7 @@ extern void *gFDT;
 
 
 #ifdef FDT_DUMP_PROP_VALUES
-static void dump_hex(const char *data, int32 len, int depth)
+static void dump_hex(const char *data, int32_t len, int depth)
 {
 	char str[128];
 	char astr[32];
@@ -133,7 +133,7 @@ void dump_fdt(const void *fdt)
 
 
 static uint64
-fdt_get_range_offset(const void* fdt, int32 node)
+fdt_get_range_offset(const void* fdt, int32_t node)
 {
 	// Obtain the offset of the device by searching
 	// for the first ranges start in parents.
@@ -142,7 +142,7 @@ fdt_get_range_offset(const void* fdt, int32 node)
 	// offset ranges in several parents + children.
 	// Lets hope that no system designer is that insane.
 	int depth = fdt_node_depth(fdt, node);
-	int32 examineNode = node;
+	int32_t examineNode = node;
 	uint64 pathOffset = 0x0;
 
 	while (depth > 0) {
@@ -150,19 +150,19 @@ fdt_get_range_offset(const void* fdt, int32 node)
 		const void* prop;
 		prop = fdt_getprop(fdt, examineNode, "ranges", &len);
 		if (prop) {
-			int32 regAddressCells = 1;
-			int32 regSizeCells = 1;
+			int32_t regAddressCells = 1;
+			int32_t regSizeCells = 1;
 			fdt_get_cell_count(fdt, examineNode, regAddressCells, regSizeCells);
 
-			const uint32 *p = (const uint32 *)prop;
+			const uint32_t *p = (const uint32_t *)prop;
 			// All we are interested in is the start offset
 			if (regAddressCells == 2)
 				pathOffset = fdt64_to_cpu(*(uint64_t *)p);
 			else
-				pathOffset = fdt32_to_cpu(*(uint32_t *)p);
+				pathOffset = fdt32_to_cpu(*(uint32_t_t *)p);
 			break;
 		}
-		int32 parentNode = fdt_parent_offset(fdt, examineNode);
+		int32_t parentNode = fdt_parent_offset(fdt, examineNode);
 		depth = fdt_node_depth(fdt, parentNode);
 		examineNode = parentNode;
 	}
@@ -175,7 +175,7 @@ fdt_get_range_offset(const void* fdt, int32 node)
 
 status_t
 fdt_get_cell_count(const void* fdt, int node,
-	int32 &addressCells, int32 &sizeCells)
+	int32_t &addressCells, int32_t &sizeCells)
 {
 	// It would be nice if libfdt provided this.
 
@@ -193,11 +193,11 @@ fdt_get_cell_count(const void* fdt, int node,
 
 	const void *prop;
 	prop = fdt_getprop(fdt, node, "#address-cells", &len);
-	if (prop && len == sizeof(uint32))
-		addressCells = fdt32_to_cpu(*(uint32_t *)prop);
+	if (prop && len == sizeof(uint32_t))
+		addressCells = fdt32_to_cpu(*(uint32_t_t *)prop);
 	prop = fdt_getprop(fdt, node, "#size-cells", &len);
-	if (prop && len == sizeof(uint32))
-		sizeCells = fdt32_to_cpu(*(uint32_t *)prop);
+	if (prop && len == sizeof(uint32_t))
+		sizeCells = fdt32_to_cpu(*(uint32_t_t *)prop);
 
 	// NOTE : Cells over 2 is possible in theory... 
 	if (addressCells > 2 || sizeCells > 2) {
@@ -217,8 +217,8 @@ fdt_get_device_reg(const void* fdt, int node)
 	const void *prop;
 	int len;
 
-	int32 regAddressCells = 1;
-	int32 regSizeCells = 1;
+	int32_t regAddressCells = 1;
+	int32_t regSizeCells = 1;
 	fdt_get_cell_count(fdt, node, regAddressCells, regSizeCells);
 
 	// TODO: check for virtual-reg, and don't -= fdt_get_range_offset?
@@ -230,14 +230,14 @@ fdt_get_device_reg(const void* fdt, int node)
 		return 0;
 	}
 
-	const uint32 *p = (const uint32 *)prop;
+	const uint32_t *p = (const uint32_t *)prop;
 	uint64 baseDevice = 0x0;
 
 	// soc base address cells
 	if (regAddressCells == 2)
 		baseDevice = fdt64_to_cpu(*(uint64_t *)p);
 	else
-		baseDevice = fdt32_to_cpu(*(uint32_t *)p);
+		baseDevice = fdt32_to_cpu(*(uint32_t_t *)p);
 	//p += regAddressCells;
 
 	// subtract the range offset (X) on the parent node (ranges = X Y Z)
@@ -253,14 +253,14 @@ fdt_get_device_reg(const void* fdt, int node)
 
 	if (!prop)
 		return baseDevice;
-	p = (const uint32 *)prop;
+	p = (const uint32_t *)prop;
 
 	uint64 parentReg = 0x0;
 	// soc base address cells
 	if (regAddressCells == 2)
 		parentReg = fdt64_to_cpu(*(uint64_t *)p);
 	else
-		parentReg = fdt32_to_cpu(*(uint32_t *)p);
+		parentReg = fdt32_to_cpu(*(uint32_t_t *)p);
 
 	// add parent reg base to property
 	baseDevice += parentReg;

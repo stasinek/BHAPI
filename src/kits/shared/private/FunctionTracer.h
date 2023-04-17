@@ -14,7 +14,7 @@ namespace BPrivate {
 class FunctionTracer {
 public:
 	FunctionTracer(const char* className, const char* functionName,
-			int32& depth)
+			int32_t& depth)
 		: fFunctionName(),
 		  fPrepend(),
 		  fFunctionDepth(depth)
@@ -36,7 +36,7 @@ public:
 private:
 	BString	fFunctionName;
 	BString	fPrepend;
-	int32&	fFunctionDepth;
+	int32_t&	fFunctionDepth;
 };
 
 }	// namespace BPrivate

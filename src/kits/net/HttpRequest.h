@@ -78,7 +78,7 @@ private:
 	// URL result parameters access
 			BPositionIO*		_ResultRawData();
 			BHttpHeaders&		_ResultHeaders();
-			void				_SetResultStatusCode(int32 statusCode);
+			void				_SetResultStatusCode(int32_t statusCode);
 			BString&			_ResultStatusText();
 
 	// SSL failure management
@@ -119,7 +119,7 @@ private:
 			BString				fOptUserAgent;
 			BString				fOptUsername;
 			BString				fOptPassword;
-			uint32				fOptAuthMethods;
+			uint32_t				fOptAuthMethods;
 			BHttpHeaders*		fOptHeaders;
 			BHttpForm*			fOptPostFields;
 			BDataIO*			fOptInputData;

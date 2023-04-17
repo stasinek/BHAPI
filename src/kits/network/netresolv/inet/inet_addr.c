@@ -109,7 +109,7 @@ inet_addr(const char *cp) {
  */
 int
 inet_aton(const char *cp, struct in_addr *addr) {
-	uint32_t val;
+	uint32_t_t val;
 	int base, n;
 	char c;
 	uint8_t parts[4];

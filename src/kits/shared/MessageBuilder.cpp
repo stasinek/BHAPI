@@ -57,7 +57,7 @@ status_t BMessageBuilder::PushObject(const char* name)
 	to a string and calls PushObject(const char*)
 	with it.
 */
-status_t BMessageBuilder::PushObject(uint32 name)
+status_t BMessageBuilder::PushObject(uint32_t name)
 {
 	BString nameString;
 	nameString.SetToFormat("%" B_PRIu32, name);
@@ -88,7 +88,7 @@ status_t BMessageBuilder::PopObject()
 
 /*! Gets the "what" of the current message.
 */
-uint32 BMessageBuilder::What()
+uint32_t BMessageBuilder::What()
 {
 	return fCurrentMessage->what;
 }
@@ -96,7 +96,7 @@ uint32 BMessageBuilder::What()
 
 /*! Sets the "what" of the current message.
 */
-void BMessageBuilder::SetWhat(uint32 what)
+void BMessageBuilder::SetWhat(uint32_t what)
 {
 	fCurrentMessage->what = what;
 }
@@ -104,7 +104,7 @@ void BMessageBuilder::SetWhat(uint32 what)
 
 /*! Gets the value of CountNames() from the current message.
 */
-uint32 BMessageBuilder::CountNames(type_code type)
+uint32_t BMessageBuilder::CountNames(type_code type)
 {
 	return fCurrentMessage->CountNames(type);
 }
@@ -149,13 +149,13 @@ status_t BMessageBuilder::AddUInt16(const char* name, uint16 value)
 }
 
 
-status_t BMessageBuilder::AddInt32(const char* name, int32 value)
+status_t BMessageBuilder::AddInt32(const char* name, int32_t value)
 {
 	return fCurrentMessage->AddInt32(name, value);
 }
 
 
-status_t BMessageBuilder::AddUInt32(const char* name, uint32 value)
+status_t BMessageBuilder::AddUInt32(const char* name, uint32_t value)
 {
 	return fCurrentMessage->AddUInt32(name, value);
 }

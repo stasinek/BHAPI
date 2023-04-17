@@ -36,9 +36,9 @@ public:
 
 	static	BBitmap*			GetBitmap(const char* name,
 									BTranslatorRoster* roster = NULL);
-	static	BBitmap*			GetBitmap(uint32 type, int32 id,
+	static	BBitmap*			GetBitmap(uint32_t type, int32_t id,
 									BTranslatorRoster* roster = NULL);
-	static	BBitmap*			GetBitmap(uint32 type, const char* name,
+	static	BBitmap*			GetBitmap(uint32_t type, const char* name,
 									BTranslatorRoster* roster = NULL);
 	static	BBitmap*			GetBitmapFile(const char* name,
 									BTranslatorRoster* roster = NULL);
@@ -67,10 +67,10 @@ public:
 	static	BMessage*			GetDefaultSettings(translator_id translator,
 									BTranslatorRoster* roster = NULL);
 	static	BMessage*			GetDefaultSettings(const char* name,
-									int32 version);
+									int32_t version);
 
 	static	status_t			AddTranslationItems(BMenu* intoMenu,
-									uint32 fromType,
+									uint32_t fromType,
 									const BMessage* model = NULL,
 									const char* idName = NULL,
 									const char* typeName = NULL,

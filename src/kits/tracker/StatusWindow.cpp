@@ -77,7 +77,7 @@ static const time_t kSecondsPerDay = 24 * 60 * 60;
 
 class TCustomButton : public BButton {
 public:
-								TCustomButton(BRect frame, uint32 command);
+								TCustomButton(BRect frame, uint32_t command);
 	virtual	void				Draw(BRect updateRect);
 private:
 			typedef BButton _inherited;
@@ -128,7 +128,7 @@ BStatusMouseFilter::Filter(BMessage* message, BHandler** target)
 //	#pragma mark - TCustomButton
 
 
-TCustomButton::TCustomButton(BRect frame, uint32 what)
+TCustomButton::TCustomButton(BRect frame, uint32_t what)
 	:
 	BButton(frame, "", "", new BMessage(what), B_FOLLOW_LEFT | B_FOLLOW_TOP,
 		B_WILL_DRAW)
@@ -252,8 +252,8 @@ void BStatusWindow::CreateStatusItem(thread_id thread, StatusWindowState type)
 	bool desktopActive = false;
 	{
 		AutoLock<BLooper> lock(__be_app);
-		int32 count =  __be_app->CountWindows();
-		for (int32 index = 0; index < count; index++) {
+		int32_t count =  __be_app->CountWindows();
+		for (int32_t index = 0; index < count; index++) {
 			BWindow* window =  __be_app->WindowAt(index);
 			if (dynamic_cast<BDeskWindow*>(window) != NULL
 				&& window->IsActive()) {
@@ -272,13 +272,13 @@ void BStatusWindow::CreateStatusItem(thread_id thread, StatusWindowState type)
 }
 
 
-void BStatusWindow::InitStatusItem(thread_id thread, int32 totalItems,
+void BStatusWindow::InitStatusItem(thread_id thread, int32_t totalItems,
 	off_t totalSize, const entry_ref* destDir, bool showCount)
 {
 	AutoLock<BWindow> lock(this);
 
-	int32 numItems = fViewList.CountItems();
-	for (int32 index = 0; index < numItems; index++) {
+	int32_t numItems = fViewList.CountItems();
+	for (int32_t index = 0; index < numItems; index++) {
 		BStatusView* view = fViewList.ItemAt(index);
 		if (view->Thread() == thread) {
 			view->InitStatus(totalItems, totalSize, destDir, showCount);
@@ -294,8 +294,8 @@ void BStatusWindow::UpdateStatus(thread_id thread, const char* curItem,
 {
 	AutoLock<BWindow> lock(this);
 
-	int32 numItems = fViewList.CountItems();
-	for (int32 index = 0; index < numItems; index++) {
+	int32_t numItems = fViewList.CountItems();
+	for (int32_t index = 0; index < numItems; index++) {
 		BStatusView* view = fViewList.ItemAt(index);
 		if (view->Thread() == thread) {
 			view->UpdateStatus(curItem, itemSize, optional);
@@ -310,8 +310,8 @@ void BStatusWindow::RemoveStatusItem(thread_id thread)
 	AutoLock<BWindow> lock(this);
 	BStatusView* winner = NULL;
 
-	int32 numItems = fViewList.CountItems();
-	int32 index;
+	int32_t numItems = fViewList.CountItems();
+	int32_t index;
 	for (index = 0; index < numItems; index++) {
 		BStatusView* view = fViewList.ItemAt(index);
 		if (view->Thread() == thread) {
@@ -332,8 +332,8 @@ void BStatusWindow::RemoveStatusItem(thread_id thread)
 			BDeskWindow* desktop = NULL;
 			if (fRetainDesktopFocus) {
 				AutoLock<BLooper> lock(__be_app);
-				int32 count =  __be_app->CountWindows();
-				for (int32 index = 0; index < count; index++) {
+				int32_t count =  __be_app->CountWindows();
+				for (int32_t index = 0; index < count; index++) {
 					desktop = dynamic_cast<BDeskWindow*>(
 						__be_app->WindowAt(index));
 					if (desktop != NULL)
@@ -365,7 +365,7 @@ bool BStatusWindow::CheckCanceledOrPaused(thread_id thread)
 
 	AutoLock<BWindow> lock(this);
 	// check if cancel or pause hit
-	for (int32 index = fViewList.CountItems() - 1; index >= 0; index--) {
+	for (int32_t index = fViewList.CountItems() - 1; index >= 0; index--) {
 		view = fViewList.ItemAt(index);
 		if (view && view->Thread() == thread) {
 			isPaused = view->IsPaused();
@@ -399,12 +399,12 @@ bool BStatusWindow::AttemptToQuit()
 	// called when tracker is quitting
 	// try to cancel all the move/copy/empty trash threads in a nice way
 	// by issuing cancels
-	int32 count = fViewList.CountItems();
+	int32_t count = fViewList.CountItems();
 
 	if (count == 0)
 		return true;
 
-	for (int32 index = 0; index < count; index++)
+	for (int32_t index = 0; index < count; index++)
 		fViewList.ItemAt(index)->SetWasCanceled();
 
 	// maybe next time everything will have been canceled
@@ -452,7 +452,7 @@ BStatusView::BStatusView(BRect bounds, thread_id thread, StatusWindowState type)
 	rect.bottom = rect.top + 15;
 
 	BString caption;
-	int32 id = 0;
+	int32_t id = 0;
 
 	switch (type) {
 		case kCopyState:
@@ -564,7 +564,7 @@ void BStatusView::Init()
 }
 
 
-void BStatusView::InitStatus(int32 totalItems, off_t totalSize,
+void BStatusView::InitStatus(int32_t totalItems, off_t totalSize,
 	const entry_ref* destDir, bool showCount)
 {
 	Init();

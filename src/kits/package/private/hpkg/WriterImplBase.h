@@ -68,8 +68,8 @@ protected:
 				void SetTo(uint8 value);
 				void SetTo(int16 value);
 				void SetTo(uint16 value);
-				void SetTo(int32 value);
-				void SetTo(uint32 value);
+				void SetTo(int32_t value);
+				void SetTo(uint32_t value);
 				void SetTo(int64 value);
 				void SetTo(uint64 value);
 				void SetTo(CachedString* value);
@@ -106,7 +106,7 @@ protected:
 									const BPackageWriterParameters& parameters);
 			status_t			InitHeapReader(size_t headerSize);
 
-			void				SetCompression(uint32 compression);
+			void				SetCompression(uint32_t compression);
 
 			void				RegisterPackageInfo(
 									PackageAttributeList& attributeList,
@@ -126,12 +126,12 @@ protected:
 									const BString& value,
 									DoublyLinkedList<PackageAttribute>& list);
 
-			int32				WriteCachedStrings(const StringCache& cache,
-									uint32 minUsageCount);
+			int32_t				WriteCachedStrings(const StringCache& cache,
+									uint32_t minUsageCount);
 
-			int32				WritePackageAttributes(
+			int32_t				WritePackageAttributes(
 									const PackageAttributeList& attributes,
-									uint32& _stringsLengthUncompressed);
+									uint32_t& _stringsLengthUncompressed);
 			void				WritePackageVersion(
 									const BPackageVersion& version);
 			void				WritePackageResolvableExpressionList(
@@ -154,7 +154,7 @@ protected:
 									// writes to the file directly
 
 	inline	BPositionIO*		File() const;
-	inline	uint32				Flags() const;
+	inline	uint32_t				Flags() const;
 	inline	const BPackageWriterParameters& Parameters() const;
 
 	inline	const PackageAttributeList&	PackageAttributes() const;
@@ -226,7 +226,7 @@ WriterImplBase::File() const
 }
 
 
-inline uint32 WriterImplBase::Flags() const
+inline uint32_t WriterImplBase::Flags() const
 {
 	return fParameters.Flags();
 }

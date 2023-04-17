@@ -74,7 +74,7 @@ const char* kViewStateIconSizeName = "ViewState:fIconSize";
 const char* kViewStateLastIconSizeName = "ViewState:fLastIconSize";
 
 
-static const int32 kColumnStateMinArchiveVersion = 21;
+static const int32_t kColumnStateMinArchiveVersion = 21;
 	// bump version when layout changes
 
 
@@ -82,7 +82,7 @@ static const int32 kColumnStateMinArchiveVersion = 21;
 
 
 BColumn::BColumn(const char* title, float offset, float width,
-	alignment align, const char* attributeName, uint32 attrType,
+	alignment align, const char* attributeName, uint32_t attrType,
 	const char* displayAs, bool statField, bool editable)
 {
 	_Init(title, offset, width, align, attributeName, attrType, displayAs,
@@ -91,7 +91,7 @@ BColumn::BColumn(const char* title, float offset, float width,
 
 
 BColumn::BColumn(const char* title, float offset, float width,
-	alignment align, const char* attributeName, uint32 attrType,
+	alignment align, const char* attributeName, uint32_t attrType,
 	bool statField, bool editable)
 {
 	_Init(title, offset, width, align, attributeName, attrType, NULL,
@@ -104,15 +104,15 @@ BColumn::~BColumn()
 }
 
 
-BColumn::BColumn(BMallocIO* stream, int32 version, bool endianSwap)
+BColumn::BColumn(BMallocIO* stream, int32_t version, bool endianSwap)
 {
 	StringFromStream(&fTitle, stream, endianSwap);
 	stream->Read(&fOffset, sizeof(float));
 	stream->Read(&fWidth, sizeof(float));
 	stream->Read(&fAlignment, sizeof(alignment));
 	StringFromStream(&fAttrName, stream, endianSwap);
-	stream->Read(&fAttrHash, sizeof(uint32));
-	stream->Read(&fAttrType, sizeof(uint32));
+	stream->Read(&fAttrHash, sizeof(uint32_t));
+	stream->Read(&fAttrType, sizeof(uint32_t));
 	stream->Read(&fStatField, sizeof(bool));
 	stream->Read(&fEditable, sizeof(bool));
 	if (version == kColumnStateArchiveVersion)
@@ -122,7 +122,7 @@ BColumn::BColumn(BMallocIO* stream, int32 version, bool endianSwap)
 		PRINT(("endian swapping column\n"));
 		fOffset = B_SWAP_FLOAT(fOffset);
 		fWidth = B_SWAP_FLOAT(fWidth);
-		STATIC_ASSERT(sizeof(alignment) == sizeof(int32));
+		STATIC_ASSERT(sizeof(alignment) == sizeof(int32_t));
 		fAlignment = (alignment)B_SWAP_INT32(fAlignment);
 		fAttrHash = B_SWAP_INT32(fAttrHash);
 		fAttrType = B_SWAP_INT32(fAttrType);
@@ -130,7 +130,7 @@ BColumn::BColumn(BMallocIO* stream, int32 version, bool endianSwap)
 }
 
 
-BColumn::BColumn(const BMessage &message, int32 index)
+BColumn::BColumn(const BMessage &message, int32_t index)
 {
 	if (message.FindString(kColumnTitleName, index, &fTitle) != B_OK)
 		fTitle.SetTo(B_EMPTY_STRING);
@@ -141,7 +141,7 @@ BColumn::BColumn(const BMessage &message, int32 index)
 	if (message.FindFloat(kColumnWidthName, index, &fWidth) != B_OK)
 		fWidth = -1.0f;
 
-	if (message.FindInt32(kColumnAlignmentName, index, (int32*)&fAlignment)
+	if (message.FindInt32(kColumnAlignmentName, index, (int32_t*)&fAlignment)
 			!= B_OK) {
 		fAlignment = B_ALIGN_LEFT;
 	}
@@ -149,12 +149,12 @@ BColumn::BColumn(const BMessage &message, int32 index)
 	if (message.FindString(kColumnAttrName, index, &fAttrName) != B_OK)
 		fAttrName = BString(B_EMPTY_STRING);
 
-	if (message.FindInt32(kColumnAttrHashName, index, (int32*)&fAttrHash)
+	if (message.FindInt32(kColumnAttrHashName, index, (int32_t*)&fAttrHash)
 			!= B_OK) {
 		fAttrHash = 0;
 	}
 
-	if (message.FindInt32(kColumnAttrTypeName, index, (int32*)&fAttrType)
+	if (message.FindInt32(kColumnAttrTypeName, index, (int32_t*)&fAttrType)
 			!= B_OK) {
 		fAttrType = 0;
 	}
@@ -172,7 +172,7 @@ BColumn::BColumn(const BMessage &message, int32 index)
 
 
 void BColumn::_Init(const char* title, float offset, float width,
-	alignment align, const char* attributeName, uint32 attrType,
+	alignment align, const char* attributeName, uint32_t attrType,
 	const char* displayAs, bool statField, bool editable)
 {
 	fTitle = title;
@@ -194,10 +194,10 @@ BColumn::InstantiateFromStream(BMallocIO* stream, bool endianSwap)
 	// compare stream header in canonical form
 
 	// we can't use ValidateStream(), as we preserve backwards compatibility
-	int32 version;
-	uint32 key;
-	if (stream->Read(&key, sizeof(uint32)) <= 0
-		|| stream->Read(&version, sizeof(int32)) <=0)
+	int32_t version;
+	uint32_t key;
+	if (stream->Read(&key, sizeof(uint32_t)) <= 0
+		|| stream->Read(&version, sizeof(int32_t)) <=0)
 		return 0;
 
 	if (endianSwap) {
@@ -215,10 +215,10 @@ BColumn::InstantiateFromStream(BMallocIO* stream, bool endianSwap)
 
 
 BColumn*
-BColumn::InstantiateFromMessage(const BMessage &message, int32 index)
+BColumn::InstantiateFromMessage(const BMessage &message, int32_t index)
 {
-	int32 version = kColumnStateArchiveVersion;
-	int32 messageVersion;
+	int32_t version = kColumnStateArchiveVersion;
+	int32_t messageVersion;
 
 	if (message.FindInt32(kColumnVersionName, index, &messageVersion) != B_OK)
 		return NULL;
@@ -233,10 +233,10 @@ BColumn::InstantiateFromMessage(const BMessage &message, int32 index)
 void BColumn::ArchiveToStream(BMallocIO* stream) const
 {
 	// write class identifier and version info
-	uint32 key = AttrHashString("BColumn", B_OBJECT_TYPE);
-	stream->Write(&key, sizeof(uint32));
-	int32 version = kColumnStateArchiveVersion;
-	stream->Write(&version, sizeof(int32));
+	uint32_t key = AttrHashString("BColumn", B_OBJECT_TYPE);
+	stream->Write(&key, sizeof(uint32_t));
+	int32_t version = kColumnStateArchiveVersion;
+	stream->Write(&version, sizeof(int32_t));
 
 //	PRINT(("ArchiveToStream column, key %x, version %d\n", key, version));
 
@@ -245,8 +245,8 @@ void BColumn::ArchiveToStream(BMallocIO* stream) const
 	stream->Write(&fWidth, sizeof(float));
 	stream->Write(&fAlignment, sizeof(alignment));
 	StringToStream(&fAttrName, stream);
-	stream->Write(&fAttrHash, sizeof(uint32));
-	stream->Write(&fAttrType, sizeof(uint32));
+	stream->Write(&fAttrHash, sizeof(uint32_t));
+	stream->Write(&fAttrType, sizeof(uint32_t));
 	stream->Write(&fStatField, sizeof(bool));
 	stream->Write(&fEditable, sizeof(bool));
 	StringToStream(&fDisplayAs, stream);
@@ -262,8 +262,8 @@ void BColumn::ArchiveToMessage(BMessage &message) const
 	message.AddFloat(kColumnWidthName, fWidth);
 	message.AddInt32(kColumnAlignmentName, fAlignment);
 	message.AddString(kColumnAttrName, fAttrName);
-	message.AddInt32(kColumnAttrHashName, static_cast<int32>(fAttrHash));
-	message.AddInt32(kColumnAttrTypeName, static_cast<int32>(fAttrType));
+	message.AddInt32(kColumnAttrHashName, static_cast<int32_t>(fAttrHash));
+	message.AddInt32(kColumnAttrTypeName, static_cast<int32_t>(fAttrType));
 	message.AddString(kColumnDisplayAsName, fDisplayAs.String());
 	message.AddBool(kColumnStatFieldName, fStatField);
 	message.AddBool(kColumnEditableName, fEditable);
@@ -282,8 +282,8 @@ BColumn::_Sanitize(BColumn* column)
 		|| column->fOffset > 10000
 		|| column->fWidth < 0
 		|| column->fWidth > 10000
-		|| (int32)column->fAlignment < B_ALIGN_LEFT
-		|| (int32)column->fAlignment > B_ALIGN_CENTER
+		|| (int32_t)column->fAlignment < B_ALIGN_LEFT
+		|| (int32_t)column->fAlignment > B_ALIGN_CENTER
 		|| column->fAttrName.Length() > 500) {
 		PRINT(("column data not valid\n"));
 		delete column;
@@ -312,17 +312,17 @@ BViewState::BViewState()
 BViewState::BViewState(BMallocIO* stream, bool endianSwap)
 {
 	_Init();
-	stream->Read(&fViewMode, sizeof(uint32));
-	stream->Read(&fLastIconMode, sizeof(uint32));
+	stream->Read(&fViewMode, sizeof(uint32_t));
+	stream->Read(&fLastIconMode, sizeof(uint32_t));
 	stream->Read(&fListOrigin, sizeof(BPoint));
 	stream->Read(&fIconOrigin, sizeof(BPoint));
-	stream->Read(&fPrimarySortAttr, sizeof(uint32));
-	stream->Read(&fPrimarySortType, sizeof(uint32));
-	stream->Read(&fSecondarySortAttr, sizeof(uint32));
-	stream->Read(&fSecondarySortType, sizeof(uint32));
+	stream->Read(&fPrimarySortAttr, sizeof(uint32_t));
+	stream->Read(&fPrimarySortType, sizeof(uint32_t));
+	stream->Read(&fSecondarySortAttr, sizeof(uint32_t));
+	stream->Read(&fSecondarySortType, sizeof(uint32_t));
 	stream->Read(&fReverseSort, sizeof(bool));
-	stream->Read(&fIconSize, sizeof(uint32));
-	stream->Read(&fLastIconSize, sizeof(uint32));
+	stream->Read(&fIconSize, sizeof(uint32_t));
+	stream->Read(&fLastIconSize, sizeof(uint32_t));
 
 	if (endianSwap) {
 		PRINT(("endian swapping view state\n"));
@@ -348,20 +348,20 @@ BViewState::BViewState(BMallocIO* stream, bool endianSwap)
 BViewState::BViewState(const BMessage &message)
 {
 	_Init();
-	message.FindInt32(kViewStateViewModeName, (int32*)&fViewMode);
-	message.FindInt32(kViewStateLastIconModeName, (int32*)&fLastIconMode);
-	message.FindInt32(kViewStateLastIconSizeName,(int32*)&fLastIconSize);
-	message.FindInt32(kViewStateIconSizeName, (int32*)&fIconSize);
+	message.FindInt32(kViewStateViewModeName, (int32_t*)&fViewMode);
+	message.FindInt32(kViewStateLastIconModeName, (int32_t*)&fLastIconMode);
+	message.FindInt32(kViewStateLastIconSizeName,(int32_t*)&fLastIconSize);
+	message.FindInt32(kViewStateIconSizeName, (int32_t*)&fIconSize);
 	message.FindPoint(kViewStateListOriginName, &fListOrigin);
 	message.FindPoint(kViewStateIconOriginName, &fIconOrigin);
 	message.FindInt32(kViewStatePrimarySortAttrName,
-		(int32*)&fPrimarySortAttr);
+		(int32_t*)&fPrimarySortAttr);
 	message.FindInt32(kViewStatePrimarySortTypeName,
-		(int32*)&fPrimarySortType);
+		(int32_t*)&fPrimarySortType);
 	message.FindInt32(kViewStateSecondarySortAttrName,
-		(int32*)&fSecondarySortAttr);
+		(int32_t*)&fSecondarySortAttr);
 	message.FindInt32(kViewStateSecondarySortTypeName,
-		(int32*)&fSecondarySortType);
+		(int32_t*)&fSecondarySortType);
 	message.FindBool(kViewStateReverseSortName, &fReverseSort);
 
 	_StorePreviousState();
@@ -372,22 +372,22 @@ BViewState::BViewState(const BMessage &message)
 void BViewState::ArchiveToStream(BMallocIO* stream) const
 {
 	// write class identifier and verison info
-	uint32 key = AttrHashString("BViewState", B_OBJECT_TYPE);
+	uint32_t key = AttrHashString("BViewState", B_OBJECT_TYPE);
 	stream->Write(&key, sizeof(key));
-	int32 version = kViewStateArchiveVersion;
+	int32_t version = kViewStateArchiveVersion;
 	stream->Write(&version, sizeof(version));
 
-	stream->Write(&fViewMode, sizeof(uint32));
-	stream->Write(&fLastIconMode, sizeof(uint32));
+	stream->Write(&fViewMode, sizeof(uint32_t));
+	stream->Write(&fLastIconMode, sizeof(uint32_t));
 	stream->Write(&fListOrigin, sizeof(BPoint));
 	stream->Write(&fIconOrigin, sizeof(BPoint));
-	stream->Write(&fPrimarySortAttr, sizeof(uint32));
-	stream->Write(&fPrimarySortType, sizeof(uint32));
-	stream->Write(&fSecondarySortAttr, sizeof(uint32));
-	stream->Write(&fSecondarySortType, sizeof(uint32));
+	stream->Write(&fPrimarySortAttr, sizeof(uint32_t));
+	stream->Write(&fPrimarySortType, sizeof(uint32_t));
+	stream->Write(&fSecondarySortAttr, sizeof(uint32_t));
+	stream->Write(&fSecondarySortType, sizeof(uint32_t));
 	stream->Write(&fReverseSort, sizeof(bool));
-	stream->Write(&fIconSize, sizeof(uint32));
-	stream->Write(&fLastIconSize, sizeof(uint32));
+	stream->Write(&fIconSize, sizeof(uint32_t));
+	stream->Write(&fLastIconSize, sizeof(uint32_t));
 }
 
 
@@ -395,23 +395,23 @@ void BViewState::ArchiveToMessage(BMessage &message) const
 {
 	message.AddInt32(kViewStateVersionName, kViewStateArchiveVersion);
 
-	message.AddInt32(kViewStateViewModeName, static_cast<int32>(fViewMode));
+	message.AddInt32(kViewStateViewModeName, static_cast<int32_t>(fViewMode));
 	message.AddInt32(kViewStateLastIconModeName,
-		static_cast<int32>(fLastIconMode));
+		static_cast<int32_t>(fLastIconMode));
 	message.AddPoint(kViewStateListOriginName, fListOrigin);
 	message.AddPoint(kViewStateIconOriginName, fIconOrigin);
 	message.AddInt32(kViewStatePrimarySortAttrName,
-		static_cast<int32>(fPrimarySortAttr));
+		static_cast<int32_t>(fPrimarySortAttr));
 	message.AddInt32(kViewStatePrimarySortTypeName,
-		static_cast<int32>(fPrimarySortType));
+		static_cast<int32_t>(fPrimarySortType));
 	message.AddInt32(kViewStateSecondarySortAttrName,
-		static_cast<int32>(fSecondarySortAttr));
+		static_cast<int32_t>(fSecondarySortAttr));
 	message.AddInt32(kViewStateSecondarySortTypeName,
-		static_cast<int32>(fSecondarySortType));
+		static_cast<int32_t>(fSecondarySortType));
 	message.AddBool(kViewStateReverseSortName, fReverseSort);
-	message.AddInt32(kViewStateIconSizeName, static_cast<int32>(fIconSize));
+	message.AddInt32(kViewStateIconSizeName, static_cast<int32_t>(fIconSize));
 	message.AddInt32(kViewStateLastIconSizeName,
-		static_cast<int32>(fLastIconSize));
+		static_cast<int32_t>(fLastIconSize));
 }
 
 
@@ -419,8 +419,8 @@ BViewState*
 BViewState::InstantiateFromStream(BMallocIO* stream, bool endianSwap)
 {
 	// compare stream header in canonical form
-	uint32 key = AttrHashString("BViewState", B_OBJECT_TYPE);
-	int32 version = kViewStateArchiveVersion;
+	uint32_t key = AttrHashString("BViewState", B_OBJECT_TYPE);
+	int32_t version = kViewStateArchiveVersion;
 
 	if (endianSwap) {
 		key = SwapUInt32(key);
@@ -437,9 +437,9 @@ BViewState::InstantiateFromStream(BMallocIO* stream, bool endianSwap)
 BViewState*
 BViewState::InstantiateFromMessage(const BMessage &message)
 {
-	int32 version = kViewStateArchiveVersion;
+	int32_t version = kViewStateArchiveVersion;
 
-	int32 messageVersion;
+	int32_t messageVersion;
 	if (message.FindInt32(kViewStateVersionName, &messageVersion) != B_OK)
 		return NULL;
 

@@ -91,14 +91,14 @@ status_t TargetHostInterface::StartTeamDebugger(const TeamDebuggerOptions& optio
 }
 
 
-int32 TargetHostInterface::CountTeamDebuggers() const
+int32_t TargetHostInterface::CountTeamDebuggers() const
 {
 	return fTeamDebuggers.CountItems();
 }
 
 
 TeamDebugger*
-TargetHostInterface::TeamDebuggerAt(int32 index) const
+TargetHostInterface::TeamDebuggerAt(int32_t index) const
 {
 	return fTeamDebuggers.ItemAt(index);
 }
@@ -107,7 +107,7 @@ TargetHostInterface::TeamDebuggerAt(int32 index) const
 TeamDebugger*
 TargetHostInterface::FindTeamDebugger(team_id team) const
 {
-	for (int32 i = 0; i < fTeamDebuggers.CountItems(); i++) {
+	for (int32_t i = 0; i < fTeamDebuggers.CountItems(); i++) {
 		TeamDebugger* debugger = fTeamDebuggers.ItemAt(i);
 		if (debugger->TeamID() == team && !debugger->IsPostMortem())
 			return debugger;
@@ -128,7 +128,7 @@ status_t TargetHostInterface::AddTeamDebugger(TeamDebugger* debugger)
 
 void TargetHostInterface::RemoveTeamDebugger(TeamDebugger* debugger)
 {
-	for (int32 i = 0; i < fTeamDebuggers.CountItems(); i++) {
+	for (int32_t i = 0; i < fTeamDebuggers.CountItems(); i++) {
 		if (fTeamDebuggers.ItemAt(i) == debugger) {
 			fTeamDebuggers.RemoveItemAt(i);
 			break;
@@ -170,7 +170,7 @@ void TargetHostInterface::MessageReceived(BMessage* message)
 	}
 	case MSG_TEAM_RESTART_REQUESTED:
 	{
-		int32 teamID;
+		int32_t teamID;
 		if (message->FindInt32("team", &teamID) != B_OK)
 			break;
 

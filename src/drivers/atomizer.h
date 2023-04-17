@@ -21,7 +21,7 @@ extern "C" {
 typedef struct atomizer_info {
 	void*		atomizer;
 	char		name[B_OS_NAME_LENGTH];
-	uint32		atom_count;
+	uint32_t		atom_count;
 } atomizer_info;
 
 
@@ -35,7 +35,7 @@ typedef struct atomizer_module_info {
 						(const void* atomizer, const void* atom);
 	status_t		(*get_next_atomizer_info) 
 						(void** cookie, atomizer_info* info);
-	const void*		(*get_next_atom)(const void* atomizer, uint32* cookie);
+	const void*		(*get_next_atom)(const void* atomizer, uint32_t* cookie);
 } atomizer_module_info;
 
 

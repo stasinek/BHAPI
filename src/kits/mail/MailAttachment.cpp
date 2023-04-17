@@ -534,7 +534,7 @@ status_t BAttributedMailAttachment::SetTo(entry_ref *ref)
 	BString boundary;
 	char buffer[512];
 	strcpy(buffer, ref->name);
-	for (int32 i = strlen(buffer); i-- > 0;) {
+	for (int32_t i = strlen(buffer); i-- > 0;) {
 		if (buffer[i] & 0x80)
 			buffer[i] = 'x';
 		else if (buffer[i] == ' ' || buffer[i] == ':')
@@ -656,7 +656,7 @@ status_t BAttributedMailAttachment::SetToRFC822(BPositionIO *data, size_t length
 	// Convert the attribute binary attachment into a convenient easy to use
 	// BMessage.
 
-	int32 len
+	int32_t len
 		= ((BMallocIO *)(_attributes_attach->GetDecodedData()))->BufferLength();
 	char *start = (char *)malloc(len);
 	if (start == NULL)
@@ -667,7 +667,7 @@ status_t BAttributedMailAttachment::SetToRFC822(BPositionIO *data, size_t length
 	if (_attributes_attach->GetDecodedData()->ReadAt(0, start, len) < len)
 		return B_IO_ERROR;
 
-	int32 index = 0;
+	int32_t index = 0;
 	while (index < len) {
 		char *name = &start[index];
 		index += strlen(name) + 1;
@@ -700,7 +700,7 @@ status_t BAttributedMailAttachment::RenderToRFC822(BPositionIO *renderTo)
 #endif
 	char *name;
 	type_code type;
-	for (int32 i = 0; _attributes.GetInfo(B_ANY_TYPE, i, &name, &type) == B_OK;
+	for (int32_t i = 0; _attributes.GetInfo(B_ANY_TYPE, i, &name, &type) == B_OK;
 			i++) {
 		const void *data;
 		ssize_t dataLen;

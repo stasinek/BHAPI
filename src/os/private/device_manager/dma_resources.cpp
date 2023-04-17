@@ -44,7 +44,7 @@ DMABuffer::Create(size_t count)
 
 
 void
-DMABuffer::SetVecCount(uint32 count)
+DMABuffer::SetVecCount(uint32_t count)
 {
 	fVecCount = count;
 }
@@ -60,7 +60,7 @@ DMABuffer::AddVec(generic_addr_t base, generic_size_t size)
 
 
 bool
-DMABuffer::UsesBounceBufferAt(uint32 index)
+DMABuffer::UsesBounceBufferAt(uint32_t index)
 {
 	if (index >= fVecCount || fBounceBuffer == NULL)
 		return false;
@@ -81,7 +81,7 @@ DMABuffer::Dump() const
 	kprintf("  bounce buffer size: %" B_PRIxPHYSADDR "\n", fBounceBuffer->size);
 	kprintf("  vecs:               %" B_PRIu32 "\n", fVecCount);
 
-	for (uint32 i = 0; i < fVecCount; i++) {
+	for (uint32_t i = 0; i < fVecCount; i++) {
 		kprintf("    [%" B_PRIu32 "] %#" B_PRIxGENADDR ", %" B_PRIuGENADDR "\n",
 			i, fVecs[i].base, fVecs[i].length);
 	}
@@ -111,31 +111,31 @@ DMAResource::~DMAResource()
 
 status_t
 DMAResource::Init(device_node* node, generic_size_t blockSize,
-	uint32 bufferCount, uint32 bounceBufferCount)
+	uint32_t bufferCount, uint32_t bounceBufferCount)
 {
 	dma_restrictions restrictions;
 	memset(&restrictions, 0, sizeof(dma_restrictions));
 
 	// TODO: add DMA attributes instead of reusing block_io's
 
-	uint32 value;
-	if (gDeviceManagerModule.get_attr_uint32(node,
+	uint32_t value;
+	if (gDeviceManagerModule.get_attr_uint32_t(node,
 			B_DMA_ALIGNMENT, &value, true) == B_OK)
 		restrictions.alignment = (generic_size_t)value + 1;
 
-	if (gDeviceManagerModule.get_attr_uint32(node,
+	if (gDeviceManagerModule.get_attr_uint32_t(node,
 			B_DMA_BOUNDARY, &value, true) == B_OK)
 		restrictions.boundary = (generic_size_t)value + 1;
 
-	if (gDeviceManagerModule.get_attr_uint32(node,
+	if (gDeviceManagerModule.get_attr_uint32_t(node,
 			B_DMA_MAX_SEGMENT_BLOCKS, &value, true) == B_OK)
 		restrictions.max_segment_size = (generic_size_t)value * blockSize;
 
-	if (gDeviceManagerModule.get_attr_uint32(node,
+	if (gDeviceManagerModule.get_attr_uint32_t(node,
 			B_DMA_MAX_TRANSFER_BLOCKS, &value, true) == B_OK)
 		restrictions.max_transfer_size = (generic_size_t)value * blockSize;
 
-	if (gDeviceManagerModule.get_attr_uint32(node,
+	if (gDeviceManagerModule.get_attr_uint32_t(node,
 			B_DMA_MAX_SEGMENT_COUNT, &value, true) == B_OK)
 		restrictions.max_segment_count = value;
 
@@ -156,7 +156,7 @@ DMAResource::Init(device_node* node, generic_size_t blockSize,
 
 status_t
 DMAResource::Init(const dma_restrictions& restrictions,
-	generic_size_t blockSize, uint32 bufferCount, uint32 bounceBufferCount)
+	generic_size_t blockSize, uint32_t bufferCount, uint32_t bounceBufferCount)
 {
 	fRestrictions = restrictions;
 	fBlockSize = blockSize == 0 ? 1 : blockSize;
@@ -300,8 +300,8 @@ void
 DMAResource::_CutBuffer(DMABuffer& buffer, phys_addr_t& physicalBounceBuffer,
 	phys_size_t& bounceLeft, generic_size_t toCut)
 {
-	int32 vecCount = buffer.VecCount();
-	for (int32 i = vecCount - 1; toCut > 0 && i >= 0; i--) {
+	int32_t vecCount = buffer.VecCount();
+	for (int32_t i = vecCount - 1; toCut > 0 && i >= 0; i--) {
 		generic_io_vec& vec = buffer.VecAt(i);
 		generic_size_t length = vec.length;
 		bool inBounceBuffer = buffer.UsesBounceBufferAt(i);
@@ -353,7 +353,7 @@ DMAResource::_AddBounceBuffer(DMABuffer& buffer,
 
 	phys_size_t bounceUsed = 0;
 
-	uint32 vecCount = buffer.VecCount();
+	uint32_t vecCount = buffer.VecCount();
 	if (vecCount > 0) {
 		// see if we can join the bounce buffer with the previously last vec
 		generic_io_vec& vec = buffer.VecAt(vecCount - 1);
@@ -408,8 +408,8 @@ DMAResource::TranslateNext(IORequest* request, IOOperation* operation,
 	generic_size_t partialBegin = offset & (fBlockSize - 1);
 
 	// current iteration state
-	uint32 vecIndex = request->VecIndex();
-	uint32 vecOffset = request->VecOffset();
+	uint32_t vecIndex = request->VecIndex();
+	uint32_t vecOffset = request->VecOffset();
 	generic_size_t totalLength = min_c(request->RemainingBytes(),
 		fRestrictions.max_transfer_size);
 
@@ -427,7 +427,7 @@ DMAResource::TranslateNext(IORequest* request, IOOperation* operation,
 	dmaBuffer->SetVecCount(0);
 
 	generic_io_vec* vecs = NULL;
-	uint32 segmentCount = 0;
+	uint32_t segmentCount = 0;
 
 	TRACE("  offset %Ld, remaining size: %lu, block size %lu -> partial: %lu\n",
 		offset, request->RemainingBytes(), fBlockSize, partialBegin);
@@ -444,7 +444,7 @@ DMAResource::TranslateNext(IORequest* request, IOOperation* operation,
 			vecs = fScratchVecs;
 
 			TRACE("  create physical map (for %ld vecs)\n", buffer->VecCount());
-			for (uint32 i = vecIndex; i < buffer->VecCount(); i++) {
+			for (uint32_t i = vecIndex; i < buffer->VecCount(); i++) {
 				generic_io_vec& vec = buffer->VecAt(i);
 				generic_addr_t base = vec.base + vecOffset;
 				generic_size_t size = vec.length - vecOffset;
@@ -455,7 +455,7 @@ DMAResource::TranslateNext(IORequest* request, IOOperation* operation,
 				while (size > 0 && segmentCount
 						< fRestrictions.max_segment_count) {
 					physical_entry entry;
-					uint32 count = 1;
+					uint32_t count = 1;
 					get_memory_map_etc(request->TeamID(), (void*)base, size,
 						&entry, &count);
 
@@ -487,7 +487,7 @@ DMAResource::TranslateNext(IORequest* request, IOOperation* operation,
 
 #ifdef TRACE_DMA_RESOURCE
 	TRACE("  physical count %lu\n", segmentCount);
-	for (uint32 i = 0; i < segmentCount; i++) {
+	for (uint32_t i = 0; i < segmentCount; i++) {
 		TRACE("    [%" B_PRIu32 "] %#" B_PRIxGENADDR ", %" B_PRIxGENADDR "\n",
 			i, vecs[vecIndex + i].base, vecs[vecIndex + i].length);
 	}
@@ -543,7 +543,7 @@ DMAResource::TranslateNext(IORequest* request, IOOperation* operation,
 			"%lu\n", offset, length);
 	}
 
-	for (uint32 i = vecIndex;
+	for (uint32_t i = vecIndex;
 			i < vecIndex + segmentCount && transferLeft > 0;) {
 		if (dmaBuffer->VecCount() >= fRestrictions.max_segment_count)
 			break;

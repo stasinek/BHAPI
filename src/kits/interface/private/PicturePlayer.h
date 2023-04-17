@@ -46,13 +46,13 @@ struct picture_player_callbacks {
 	void (*draw_string)(void* userData, const char* string, size_t length,
 		float spaceEscapement, float nonSpaceEscapement);
 	void (*draw_pixels)(void* userData, const BRect& source,
-		const BRect& destination, uint32 width, uint32 height,
-		size_t bytesPerRow, color_space pixelFormat, uint32 flags,
+		const BRect& destination, uint32_t width, uint32_t height,
+		size_t bytesPerRow, color_space pixelFormat, uint32_t flags,
 		const void* data, size_t length);
-	void (*draw_picture)(void* userData, const BPoint& where, int32 token);
+	void (*draw_picture)(void* userData, const BPoint& where, int32_t token);
 	void (*set_clipping_rects)(void* userData, size_t numRects,
 		const BRect rects[]);
-	void (*clip_to_picture)(void* userData, int32 token,
+	void (*clip_to_picture)(void* userData, int32_t token,
 		const BPoint& where, bool clipToInverse);
 	void (*push_state)(void* userData);
 	void (*pop_state)(void* userData);
@@ -78,7 +78,7 @@ struct picture_player_callbacks {
 	void (*set_font_size)(void* userData, float size);
 	void (*set_font_rotation)(void* userData, float rotation);
 	void (*set_font_encoding)(void* userData, uint8 encoding);
-	void (*set_font_flags)(void* userData, uint32 flags);
+	void (*set_font_flags)(void* userData, uint32_t flags);
 	void (*set_font_shear)(void* userData, float shear);
 	void (*set_font_face)(void* userData, uint16 face);
 	void (*set_blending_mode)(void* userData, source_alpha alphaSourceMode,
@@ -89,8 +89,8 @@ struct picture_player_callbacks {
 	void (*rotate_by)(void* userData, double angleRadians);
 	void (*blend_layer)(void* userData, Layer* layer);
 	void (*clip_to_rect)(void* userData, const BRect& rect, bool inverse);
-	void (*clip_to_shape)(void* userData, int32 opCount, const uint32 opList[],
-		int32 ptCount, const BPoint ptList[], bool inverse);
+	void (*clip_to_shape)(void* userData, int32_t opCount, const uint32_t opList[],
+		int32_t ptCount, const BPoint ptList[], bool inverse);
 };
 
 
@@ -100,7 +100,7 @@ public:
 	PicturePlayer(const void* data, size_t size, BList* pictures);
 	virtual	~PicturePlayer();
 
-	status_t	Play(void** callbacks, int32 tableEntries,
+	status_t	Play(void** callbacks, int32_t tableEntries,
 					void* userData);
 	status_t	Play(const picture_player_callbacks& callbacks,
 					size_t callbacksSize, void* userData);

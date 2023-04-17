@@ -37,7 +37,7 @@ status_t EditableCatalog::SetString(const char* string, const char* translated,
 }
 
 
-status_t EditableCatalog::SetString(int32 id, const char* translated)
+status_t EditableCatalog::SetString(int32_t id, const char* translated)
 {
 	if (fCatalogData == NULL)
 		return B_NO_INIT;
@@ -64,7 +64,7 @@ status_t EditableCatalog::SetData(const char* name, BMessage* msg)
 }
 
 
-status_t EditableCatalog::SetData(uint32 id, BMessage* msg)
+status_t EditableCatalog::SetData(uint32_t id, BMessage* msg)
 {
 	if (fCatalogData == NULL)
 		return B_NO_INIT;

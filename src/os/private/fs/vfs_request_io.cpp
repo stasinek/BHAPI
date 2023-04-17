@@ -416,7 +416,7 @@ vfs_synchronous_io(io_request* request,
 status_t
 vfs_asynchronous_read_pages(struct vnode* vnode, void* cookie, off_t pos,
 	const generic_io_vec* vecs, size_t count, generic_size_t numBytes,
-	uint32 flags, AsyncIOCallback* callback)
+	uint32_t flags, AsyncIOCallback* callback)
 {
 	IORequest* request = IORequest::Create((flags & B_VIP_IO_REQUEST) != 0);
 	if (request == NULL) {
@@ -442,7 +442,7 @@ vfs_asynchronous_read_pages(struct vnode* vnode, void* cookie, off_t pos,
 status_t
 vfs_asynchronous_write_pages(struct vnode* vnode, void* cookie, off_t pos,
 	const generic_io_vec* vecs, size_t count, generic_size_t numBytes,
-	uint32 flags, AsyncIOCallback* callback)
+	uint32_t flags, AsyncIOCallback* callback)
 {
 	IORequest* request = IORequest::Create((flags & B_VIP_IO_REQUEST) != 0);
 	if (request == NULL) {

@@ -99,7 +99,7 @@ public:
 public:
 	char*					name;
 	area_id					id;
-	uint32					protection;
+	uint32_t					protection;
 	uint16					wiring;
 
 private:
@@ -107,9 +107,9 @@ private:
 
 public:
 	VMCache*				cache;
-	vint32					no_cache_change;
+	vint32_t					no_cache_change;
 	off_t					cache_offset;
-	uint32					cache_type;
+	uint32_t					cache_type;
 	VMAreaMappings			mappings;
 	uint8*					page_protections;
 
@@ -121,8 +121,8 @@ public:
 			addr_t				Base() const	{ return fBase; }
 			size_t				Size() const	{ return fSize; }
 
-	inline	uint32				MemoryType() const;
-	inline	void				SetMemoryType(uint32 memoryType);
+	inline	uint32_t				MemoryType() const;
+	inline	void				SetMemoryType(uint32_t memoryType);
 
 			bool				ContainsAddress(addr_t address) const
 									{ return address >= fBase
@@ -138,14 +138,14 @@ public:
 
 			bool				AddWaiterIfWired(VMAreaUnwiredWaiter* waiter);
 			bool				AddWaiterIfWired(VMAreaUnwiredWaiter* waiter,
-									addr_t base, size_t size, uint32 flags = 0);
+									addr_t base, size_t size, uint32_t flags = 0);
 
 protected:
 								VMArea(VMAddressSpace* addressSpace,
-									uint32 wiring, uint32 protection);
+									uint32_t wiring, uint32_t protection);
 								~VMArea();
 
-			status_t			Init(const char* name, uint32 allocationFlags);
+			status_t			Init(const char* name, uint32_t allocationFlags);
 
 protected:
 			friend class VMAddressSpace;
@@ -219,13 +219,13 @@ private:
 };
 
 
-uint32 VMArea::MemoryType() const
+uint32_t VMArea::MemoryType() const
 {
-	return (uint32)memory_type << MEMORY_TYPE_SHIFT;
+	return (uint32_t)memory_type << MEMORY_TYPE_SHIFT;
 }
 
 
-void VMArea::SetMemoryType(uint32 memoryType)
+void VMArea::SetMemoryType(uint32_t memoryType)
 {
 	memory_type = memoryType >> MEMORY_TYPE_SHIFT;
 }

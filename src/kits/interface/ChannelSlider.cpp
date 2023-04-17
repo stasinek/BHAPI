@@ -75,7 +75,7 @@ const static float kPadding = 3.0;
 
 
 BChannelSlider::BChannelSlider(BRect area, const char* name, const char* label,
-	BMessage* model, int32 channels, uint32 resizeMode, uint32 flags)
+	BMessage* model, int32_t channels, uint32_t resizeMode, uint32_t flags)
 	: BChannelControl(area, name, label, model, channels, resizeMode, flags)
 {
 	_InitData();
@@ -83,8 +83,8 @@ BChannelSlider::BChannelSlider(BRect area, const char* name, const char* label,
 
 
 BChannelSlider::BChannelSlider(BRect area, const char* name, const char* label,
-	BMessage* model, orientation orientation, int32 channels,
-		uint32 resizeMode, uint32 flags)
+	BMessage* model, orientation orientation, int32_t channels,
+		uint32_t resizeMode, uint32_t flags)
 	: BChannelControl(area, name, label, model, channels, resizeMode, flags)
 
 {
@@ -94,8 +94,8 @@ BChannelSlider::BChannelSlider(BRect area, const char* name, const char* label,
 
 
 BChannelSlider::BChannelSlider(const char* name, const char* label,
-	BMessage* model, orientation orientation, int32 channels,
-		uint32 flags)
+	BMessage* model, orientation orientation, int32_t channels,
+		uint32_t flags)
 	: BChannelControl(name, label, model, channels, flags)
 
 {
@@ -110,7 +110,7 @@ BChannelSlider::BChannelSlider(BMessage* archive)
 	_InitData();
 
 	orientation orient;
-	if (archive->FindInt32("_orient", (int32*)&orient) == B_OK)
+	if (archive->FindInt32("_orient", (int32_t*)&orient) == B_OK)
 		SetOrientation(orient);
 }
 
@@ -139,7 +139,7 @@ status_t BChannelSlider::Archive(BMessage* into, bool deep) const
 {
 	status_t status = BChannelControl::Archive(into, deep);
 	if (status == B_OK)
-		status = into->AddInt32("_orient", (int32)Orientation());
+		status = into->AddInt32("_orient", (int32_t)Orientation());
 
 	return status;
 }
@@ -179,9 +179,9 @@ void BChannelSlider::MessageReceived(BMessage* message)
 		case B_SET_PROPERTY: {
 		case B_GET_PROPERTY:
 			BMessage reply(B_REPLY);
-			int32 index = 0;
+			int32_t index = 0;
 			BMessage specifier;
-			int32 what = 0;
+			int32_t what = 0;
 			const char* property = NULL;
 			bool handled = false;
 			status_t status = message->GetCurrentSpecifier(&index, &specifier,
@@ -193,12 +193,12 @@ void BChannelSlider::MessageReceived(BMessage* message)
 				handled = true;
 				if (message->what == B_SET_PROPERTY) {
 					orientation orient;
-					if (specifier.FindInt32("data", (int32*)&orient) == B_OK) {
+					if (specifier.FindInt32("data", (int32_t*)&orient) == B_OK) {
 						SetOrientation(orient);
 						Invalidate(Bounds());
 					}
 				} else if (message->what == B_GET_PROPERTY)
-					reply.AddInt32("result", (int32)Orientation());
+					reply.AddInt32("result", (int32_t)Orientation());
 				else
 					status = B_BAD_SCRIPT_SYNTAX;
 			}
@@ -272,8 +272,8 @@ void BChannelSlider::MouseDown(BPoint where)
 		fMinPoint = 0;
 
 		// Search the channel on which the mouse was over
-		int32 numChannels = CountChannels();
-		for (int32 channel = 0; channel < numChannels; channel++) {
+		int32_t numChannels = CountChannels();
+		for (int32_t channel = 0; channel < numChannels; channel++) {
 			BRect frame = ThumbFrameFor(channel);
 			frame.OffsetBy(fClickDelta);
 
@@ -299,10 +299,10 @@ void BChannelSlider::MouseDown(BPoint where)
 		if (fCurrentChannel == -1)
 			return;
 
-		uint32 buttons = 0;
+		uint32_t buttons = 0;
 		BMessage* currentMessage = Window()->CurrentMessage();
 		if (currentMessage != NULL)
-			currentMessage->FindInt32("buttons", (int32*)&buttons);
+			currentMessage->FindInt32("buttons", (int32_t*)&buttons);
 
 		fAllChannels = (buttons & B_SECONDARY_MOUSE_BUTTON) == 0;
 
@@ -312,11 +312,11 @@ void BChannelSlider::MouseDown(BPoint where)
 		}
 
 		if (fInitialValues == NULL)
-			fInitialValues = new (std::nothrow) int32[numChannels];
+			fInitialValues = new (std::nothrow) int32_t[numChannels];
 
 		if (fInitialValues) {
 			if (fAllChannels) {
-				for (int32 i = 0; i < numChannels; i++)
+				for (int32_t i = 0; i < numChannels; i++)
 					fInitialValues[i] = ValueFor(i);
 			} else {
 				fInitialValues[fCurrentChannel] = ValueFor(fCurrentChannel);
@@ -361,7 +361,7 @@ void BChannelSlider::MouseUp(BPoint where)
 }
 
 
-void BChannelSlider::MouseMoved(BPoint where, uint32 code, const BMessage* message)
+void BChannelSlider::MouseMoved(BPoint where, uint32_t code, const BMessage* message)
 {
 	if (IsEnabled() && IsTracking())
 		_MouseMovedCommon(where, B_ORIGIN);
@@ -376,13 +376,13 @@ void BChannelSlider::WindowActivated(bool state)
 }
 
 
-void BChannelSlider::KeyDown(const char* bytes, int32 numBytes)
+void BChannelSlider::KeyDown(const char* bytes, int32_t numBytes)
 {
 	BControl::KeyDown(bytes, numBytes);
 }
 
 
-void BChannelSlider::KeyUp(const char* bytes, int32 numBytes)
+void BChannelSlider::KeyUp(const char* bytes, int32_t numBytes)
 {
 	BView::KeyUp(bytes, numBytes);
 }
@@ -399,7 +399,7 @@ void BChannelSlider::FrameResized(float newWidth, float newHeight)
 }
 
 
-void BChannelSlider::SetFont(const BFont* font, uint32 mask)
+void BChannelSlider::SetFont(const BFont* font, uint32_t mask)
 {
 	BChannelControl::SetFont(font, mask);
 }
@@ -438,8 +438,8 @@ void BChannelSlider::GetPreferredSize(float* width, float* height)
 
 
 BHandler*
-BChannelSlider::ResolveSpecifier(BMessage* message, int32 index,
-	BMessage* specifier, int32 form, const char* property)
+BChannelSlider::ResolveSpecifier(BMessage* message, int32_t index,
+	BMessage* specifier, int32_t form, const char* property)
 {
 	BHandler* target = this;
 	BPropertyInfo propertyInfo(sPropertyInfo);
@@ -493,7 +493,7 @@ void BChannelSlider::SetOrientation(orientation orientation)
 }
 
 
-int32 BChannelSlider::MaxChannelCount() const
+int32_t BChannelSlider::MaxChannelCount() const
 {
 	return 32;
 }
@@ -505,7 +505,7 @@ bool BChannelSlider::SupportsIndividualLimits() const
 }
 
 
-void BChannelSlider::DrawChannel(BView* into, int32 channel, BRect area,
+void BChannelSlider::DrawChannel(BView* into, int32_t channel, BRect area,
 	bool pressed)
 {
 	float hCenter = area.Width() / 2;
@@ -533,7 +533,7 @@ void BChannelSlider::DrawChannel(BView* into, int32 channel, BRect area,
 }
 
 
-void BChannelSlider::DrawGroove(BView* into, int32 channel, BPoint leftTop,
+void BChannelSlider::DrawGroove(BView* into, int32_t channel, BPoint leftTop,
 	BPoint bottomRight)
 {
 	ASSERT(into != NULL);
@@ -546,13 +546,13 @@ void BChannelSlider::DrawGroove(BView* into, int32 channel, BPoint leftTop,
 	rect.bottom = floorf(rect.bottom);
 	rgb_color base = ui_color(B_PANEL_BACKGROUND_COLOR);
 	rgb_color barColor =  be_control_look->SliderBarColor(base);
-	uint32 flags = 0;
+	uint32_t flags = 0;
 	be_control_look->DrawSliderBar(into, rect, rect, base,
 		barColor, flags, Orientation());
 }
 
 
-void BChannelSlider::DrawThumb(BView* into, int32 channel, BPoint where,
+void BChannelSlider::DrawThumb(BView* into, int32_t channel, BPoint where,
 	bool pressed)
 {
 	ASSERT(into != NULL);
@@ -572,14 +572,14 @@ void BChannelSlider::DrawThumb(BView* into, int32 channel, BPoint where,
 	rect.right = ceilf(rect.right + 0.5);
 	rect.bottom = ceilf(rect.bottom + 0.5);
 	rgb_color base = ui_color(B_PANEL_BACKGROUND_COLOR);
-	uint32 flags = 0;
+	uint32_t flags = 0;
 	be_control_look->DrawSliderThumb(into, rect, rect, base,
 		flags, Orientation());
 }
 
 
 const BBitmap*
-BChannelSlider::ThumbFor(int32 channel, bool pressed)
+BChannelSlider::ThumbFor(int32_t channel, bool pressed)
 {
 	if (fLeftKnob != NULL)
 		return fLeftKnob;
@@ -605,7 +605,7 @@ BChannelSlider::ThumbFor(int32 channel, bool pressed)
 
 
 BRect
-BChannelSlider::ThumbFrameFor(int32 channel)
+BChannelSlider::ThumbFrameFor(int32_t channel)
 {
 	_UpdateFontDimens();
 
@@ -626,12 +626,12 @@ BChannelSlider::ThumbFrameFor(int32 channel)
 
 
 float
-BChannelSlider::ThumbDeltaFor(int32 channel)
+BChannelSlider::ThumbDeltaFor(int32_t channel)
 {
 	float delta = 0.0;
 	if (channel >= 0 && channel < MaxChannelCount()) {
 		float range = ThumbRangeFor(channel);
-		int32 limitRange = MaxLimitList()[channel] - MinLimitList()[channel];
+		int32_t limitRange = MaxLimitList()[channel] - MinLimitList()[channel];
 		delta = (ValueList()[channel] - MinLimitList()[channel]) * range
 			/ limitRange;
 
@@ -644,7 +644,7 @@ BChannelSlider::ThumbDeltaFor(int32 channel)
 
 
 float
-BChannelSlider::ThumbRangeFor(int32 channel)
+BChannelSlider::ThumbRangeFor(int32_t channel)
 {
 	_UpdateFontDimens();
 
@@ -692,7 +692,7 @@ void BChannelSlider::_FinishChange(bool update)
 {
 	if (fInitialValues != NULL) {
 		bool* inMask = NULL;
-		int32 numChannels = CountChannels();
+		int32_t numChannels = CountChannels();
 		if (!fAllChannels) {
 			inMask = new (std::nothrow) bool[CountChannels()];
 			if (inMask) {
@@ -772,7 +772,7 @@ void BChannelSlider::_DrawThumbs()
 
 			BRect channelArea;
 			// draw the entire control
-			for (int32 channel = 0; channel < CountChannels(); channel++) {
+			for (int32_t channel = 0; channel < CountChannels(); channel++) {
 				channelArea = ThumbFrameFor(channel);
 				bool pressed = IsTracking()
 					&& (channel == fCurrentChannel || fAllChannels);
@@ -853,7 +853,7 @@ void BChannelSlider::_DrawGrooveFrame(BView* into, const BRect& area)
 void BChannelSlider::_MouseMovedCommon(BPoint point, BPoint point2)
 {
 	float floatValue = 0;
-	int32 limitRange = MaxLimitList()[fCurrentChannel] -
+	int32_t limitRange = MaxLimitList()[fCurrentChannel] -
 			MinLimitList()[fCurrentChannel];
 	float range = ThumbRangeFor(fCurrentChannel);
 	if (fIsVertical)
@@ -861,7 +861,7 @@ void BChannelSlider::_MouseMovedCommon(BPoint point, BPoint point2)
 	else
 		floatValue = range + (point.x - fMinPoint);
 
-	int32 value = (int32)(floatValue / range * limitRange) +
+	int32_t value = (int32_t)(floatValue / range * limitRange) +
 		MinLimitList()[fCurrentChannel];
 	if (fAllChannels)
 		SetAllValue(value);

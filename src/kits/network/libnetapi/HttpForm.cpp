@@ -19,7 +19,7 @@
 #include <Url.h>
 
 
-static int32 kBoundaryRandomSize = 16;
+static int32_t kBoundaryRandomSize = 16;
 
 using namespace std;
 
@@ -268,7 +268,7 @@ BHttpForm::~BHttpForm()
 
 void BHttpForm::ParseString(const BString& formString)
 {
-	int32 index = 0;
+	int32_t index = 0;
 
 	while (index < formString.Length())
 		_ExtractNameValuePair(formString, &index);
@@ -373,7 +373,7 @@ status_t BHttpForm::AddString(const BString& fieldName, const BString& value)
 }
 
 
-status_t BHttpForm::AddInt(const BString& fieldName, int32 value)
+status_t BHttpForm::AddInt(const BString& fieldName, int32_t value)
 {
 	BString strValue;
 	strValue << value;
@@ -592,7 +592,7 @@ BHttpForm::operator[](const BString& name)
 }
 
 
-void BHttpForm::_ExtractNameValuePair(const BString& formString, int32* index)
+void BHttpForm::_ExtractNameValuePair(const BString& formString, int32_t* index)
 {
 	// Look for a name=value pair
 	int16 firstAmpersand = formString.FindFirst("&", *index);
@@ -634,7 +634,7 @@ void BHttpForm::_GenerateMultipartBoundary()
 		// TODO: Maybe a more robust way to seed the random number
 		// generator is needed?
 
-	for (int32 i = 0; i < kBoundaryRandomSize; i++)
+	for (int32_t i = 0; i < kBoundaryRandomSize; i++)
 		fMultipartBoundary << (char)(rand() % 10 + '0');
 }
 

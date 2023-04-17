@@ -98,7 +98,7 @@ __set_stack_protection(void)
 
 
 thread_id
-spawn_thread(thread_func entry, const char *name, int32 priority, void *data)
+spawn_thread(thread_func entry, const char *name, int32_t priority, void *data)
 {
     struct thread_creation_attributes attributes;
     pthread_thread* thread;
@@ -158,7 +158,7 @@ rename_thread(thread_id thread, const char *name)
 
 
 status_t
-set_thread_priority(thread_id thread, int32 priority)
+set_thread_priority(thread_id thread, int32_t priority)
 {
     return _kern_set_thread_priority(thread, priority);
 }
@@ -210,7 +210,7 @@ _get_thread_info(thread_id thread, thread_info *info, size_t size)
 
 
 status_t
-_get_next_thread_info(team_id team, int32 *cookie, thread_info *info, size_t size)
+_get_next_thread_info(team_id team, int32_t *cookie, thread_info *info, size_t size)
 {
     if (info == NULL || size != sizeof(thread_info))
         return B_BAD_VALUE;
@@ -220,13 +220,13 @@ _get_next_thread_info(team_id team, int32 *cookie, thread_info *info, size_t siz
 
 
 status_t
-send_data(thread_id thread, int32 code, const void *buffer, size_t bufferSize)
+send_data(thread_id thread, int32_t code, const void *buffer, size_t bufferSize)
 {
     return _kern_send_data(thread, code, buffer, bufferSize);
 }
 
 
-int32 receive_data(thread_id *_sender, void *buffer, size_t bufferSize)
+int32_t receive_data(thread_id *_sender, void *buffer, size_t bufferSize)
 {
     return _kern_receive_data(_sender, buffer, bufferSize);
 }
@@ -240,7 +240,7 @@ has_data(thread_id thread)
 
 
 status_t
-snooze_etc(bigtime_t timeout, int timeBase, uint32 flags)
+snooze_etc(bigtime_t timeout, int timeBase, uint32_t flags)
 {
     return _kern_snooze_etc(timeout, timeBase, flags, NULL);
 }
@@ -303,7 +303,7 @@ _get_thread_info(thread_id id, thread_info* info, size_t size)
 
 // _get_next_thread_info
 // status_t
-// _get_next_thread_info(team_id team, int32 *cookie, thread_info *info,
+// _get_next_thread_info(team_id team, int32_t *cookie, thread_info *info,
 // 	size_t size)
 // {
 // 	return B_ERROR;

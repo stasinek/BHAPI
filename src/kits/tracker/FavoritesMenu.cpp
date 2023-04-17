@@ -108,7 +108,7 @@ bool FavoritesMenu::StartBuildingItemList()
 		fInitialItemCount = CountItems();
 	else {
 		// strip the old items so we can add new fresh ones
-		int32 count = CountItems() - fInitialItemCount;
+		int32_t count = CountItems() - fInitialItemCount;
 		// keep the items that were added by the FavoritesMenu creator
 		while (count--)
 			delete RemoveItem(fInitialItemCount);
@@ -203,7 +203,7 @@ bool FavoritesMenu::AddNextItem()
 		__be_app->GetAppInfo(&info);
 		fItems.MakeEmpty();
 
-		int32 apps, docs, folders;
+		int32_t apps, docs, folders;
 		TrackerSettings().RecentCounts(&apps, &docs, &folders);
 
 		BRoster().GetRecentDocuments(&fItems, docs, NULL, info.signature);
@@ -251,7 +251,7 @@ bool FavoritesMenu::AddNextItem()
 		__be_app->GetAppInfo(&info);
 		fItems.MakeEmpty();
 
-		int32 apps, docs, folders;
+		int32_t apps, docs, folders;
 		TrackerSettings().RecentCounts(&apps, &docs, &folders);
 
 		BRoster().GetRecentFolders(&fItems, folders, info.signature);
@@ -336,7 +336,7 @@ bool FavoritesMenu::ShouldShowModel(const Model* model)
 //	#pragma mark - RecentsMenu
 
 
-RecentsMenu::RecentsMenu(const char* name, int32 which, uint32 what,
+RecentsMenu::RecentsMenu(const char* name, int32_t which, uint32_t what,
 	BHandler* target)
 	:
 	BNavMenu(name, what, target),
@@ -344,9 +344,9 @@ RecentsMenu::RecentsMenu(const char* name, int32 which, uint32 what,
 	fRecentsCount(0),
 	fItemIndex(0)
 {
-	int32 applications;
-	int32 documents;
-	int32 folders;
+	int32_t applications;
+	int32_t documents;
+	int32_t folders;
 	TrackerSettings().RecentCounts(&applications,&documents,&folders);
 
 	if (fWhich == 0)
@@ -369,8 +369,8 @@ void RecentsMenu::DetachedFromWindow()
 
 bool RecentsMenu::StartBuildingItemList()
 {
-	int32 count = CountItems()-1;
-	for (int32 index = count; index >= 0; index--) {
+	int32_t count = CountItems()-1;
+	for (int32_t index = count; index >= 0; index--) {
 		BMenuItem* item = ItemAt(index);
 		ASSERT(item);
 
@@ -398,7 +398,7 @@ bool RecentsMenu::AddNextItem()
 }
 
 
-bool RecentsMenu::AddRecents(int32 count)
+bool RecentsMenu::AddRecents(int32_t count)
 {
 	if (fItemIndex == 0) {
 		fRecentList.MakeEmpty();

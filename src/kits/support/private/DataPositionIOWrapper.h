@@ -22,7 +22,7 @@ public:
 	virtual	ssize_t				WriteAt(off_t position, const void* buffer,
 									size_t size);
 
-	virtual	off_t				Seek(off_t position, uint32 seekMode);
+	virtual	off_t				Seek(off_t position, uint32_t seekMode);
 	virtual	off_t				Position() const;
 
 	virtual	status_t			SetSize(off_t size);

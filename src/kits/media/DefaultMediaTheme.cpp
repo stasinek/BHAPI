@@ -75,11 +75,11 @@ class GroupView : public BView {
 class TabView : public BTabView {
 	public:
 		TabView(BRect frame, const char *name, button_width width = B_WIDTH_FROM_LABEL,
-			uint32 resizingMode = B_FOLLOW_ALL, uint32 flags = B_FULL_UPDATE_ON_RESIZE
+			uint32_t resizingMode = B_FOLLOW_ALL, uint32_t flags = B_FULL_UPDATE_ON_RESIZE
 				| B_WILL_DRAW | B_NAVIGABLE_JUMP | B_FRAME_EVENTS | B_NAVIGABLE);
 
 		virtual void FrameResized(float width, float height);
-		virtual void Select(int32 tab);
+		virtual void Select(int32_t tab);
 };
 
 class SeparatorView : public BView {
@@ -143,7 +143,7 @@ class DiscreteMessageFilter : public MessageFilter {
 }	// namespace BPrivate
 
 
-const uint32 kMsgParameterChanged = '_mPC';
+const uint32_t kMsgParameterChanged = '_mPC';
 
 
 static bool parameter_should_be_hidden(BParameter &parameter)
@@ -155,7 +155,7 @@ static bool parameter_should_be_hidden(BParameter &parameter)
 		|| strcmp(parameter.Kind(), B_WEB_PHYSICAL_INPUT))
 		return false;
 
-	for (int32 i = 0; i < parameter.CountOutputs(); i++) {
+	for (int32_t i = 0; i < parameter.CountOutputs(); i++) {
 		if (!strcmp(parameter.OutputAt(0)->Kind(), B_INPUT_MUX))
 			return true;
 	}
@@ -363,7 +363,7 @@ GroupView::~GroupView()
 
 void GroupView::AttachedToWindow()
 {
-	for (int32 i = CountChildren(); i-- > 0;) {
+	for (int32_t i = CountChildren(); i-- > 0;) {
 		BControl *control = dynamic_cast<BControl *>(ChildAt(i));
 		if (control == NULL)
 			continue;
@@ -428,7 +428,7 @@ void GroupView::SetContentBounds(BRect bounds)
  */
 
 TabView::TabView(BRect frame, const char *name, button_width width,
-	uint32 resizingMode, uint32 flags)
+	uint32_t resizingMode, uint32_t flags)
 	: BTabView(frame, name, width, resizingMode, flags)
 {
 }
@@ -445,7 +445,7 @@ void TabView::FrameResized(float width, float height)
 }
 
 
-void TabView::Select(int32 tab)
+void TabView::Select(int32_t tab)
 {
 	BTabView::Select(tab);
 
@@ -627,7 +627,7 @@ ContinuousMessageFilter::Filter(BMessage *message, BHandler **target)
 			value[0] = (float)(slider->Value() / 1000.0);
 		} else if (BChannelSlider *slider
 				= dynamic_cast<BChannelSlider *>(fControl)) {
-			for (int32 i = 0; i < fParameter.CountChannels(); i++)
+			for (int32_t i = 0; i < fParameter.CountChannels(); i++)
 				value[i] = (float)(slider->ValueFor(i) / 1000.0);
 		}
 
@@ -645,7 +645,7 @@ ContinuousMessageFilter::Filter(BMessage *message, BHandler **target)
 	if (message->what == B_MEDIA_NEW_PARAMETER_VALUE) {
 		// update view from parameter -- if the message concerns us
 		const media_node* node;
-		int32 parameterID;
+		int32_t parameterID;
 		ssize_t size;
 		if (message->FindInt32("parameter", &parameterID) != B_OK
 			|| fParameter.ID() != parameterID
@@ -676,12 +676,12 @@ void ContinuousMessageFilter::_UpdateControl()
 	}
 
 	if (BSlider *slider = dynamic_cast<BSlider *>(fControl)) {
-		slider->SetValue((int32) (1000 * value[0]));
+		slider->SetValue((int32_t) (1000 * value[0]));
 		slider->SetModificationMessage(new BMessage(kMsgParameterChanged));
 	} else if (BChannelSlider *slider
 			= dynamic_cast<BChannelSlider *>(fControl)) {
-		for (int32 i = 0; i < fParameter.CountChannels(); i++) {
-			slider->SetValueFor(i, (int32) (1000 * value[i]));
+		for (int32_t i = 0; i < fParameter.CountChannels(); i++) {
+			slider->SetValueFor(i, (int32_t) (1000 * value[i]));
 		}
 	}
 }
@@ -700,8 +700,8 @@ DiscreteMessageFilter::DiscreteMessageFilter(BControl *control,
 
 	// set initial value
 
-	size_t size = sizeof(int32);
-	int32 value;
+	size_t size = sizeof(int32_t);
+	int32_t value;
 	if (parameter.GetValue((void *)&value, &size, NULL) < B_OK) {
 		ERROR("DiscreteMessageFilter: Could not get value for discrete "
 			"parameter %p (name '%s', node %d)\n", &parameter,
@@ -734,7 +734,7 @@ DiscreteMessageFilter::Filter(BMessage *message, BHandler **target)
 
 	// update view
 
-	int32 value = 0;
+	int32_t value = 0;
 
 	if (BCheckBox *checkBox = dynamic_cast<BCheckBox *>(control)) {
 		value = checkBox->Value();
@@ -797,7 +797,7 @@ DefaultMediaTheme::MakeViewFor(BParameterWeb *web, const BRect *hintRect)
 
 	rect.OffsetTo(B_ORIGIN);
 
-	for (int32 i = 0; i < web->CountGroups(); i++) {
+	for (int32_t i = 0; i < web->CountGroups(); i++) {
 		BParameterGroup *group = web->GroupAt(i);
 		if (group == NULL)
 			continue;
@@ -870,7 +870,7 @@ DefaultMediaTheme::MakeViewFor(BParameterGroup& group, const BRect* hintRect)
 	rect.InsetBySelf(5, 5);
 
 	BList views;
-	for (int32 i = 0; i < group.CountParameters(); i++) {
+	for (int32_t i = 0; i < group.CountParameters(); i++) {
 		BParameter *parameter = group.ParameterAt(i);
 		if (parameter == NULL)
 			continue;
@@ -901,7 +901,7 @@ DefaultMediaTheme::MakeViewFor(BParameterGroup& group, const BRect* hintRect)
 	rect.bottom = rect.top + 20;
 	float lastHeight = 0;
 
-	for (int32 i = 0; i < group.CountGroups(); i++) {
+	for (int32_t i = 0; i < group.CountGroups(); i++) {
 		BParameterGroup *subGroup = group.GroupAt(i);
 		if (subGroup == NULL)
 			continue;
@@ -945,7 +945,7 @@ DefaultMediaTheme::MakeViewFor(BParameterGroup& group, const BRect* hintRect)
 
 	bool center = false;
 
-	for (int32 i = 0; i < views.CountItems(); i++) {
+	for (int32_t i = 0; i < views.CountItems(); i++) {
 		BView *parameterView = static_cast<BView *>(views.ItemAt(i));
 
 		if (parameterView->Bounds().Width() + 5 > rect.Width())
@@ -973,7 +973,7 @@ DefaultMediaTheme::MakeViewFor(BParameterGroup& group, const BRect* hintRect)
 
 	float width = view->Bounds().Width();
 
-	for (int32 i = 0; i < views.CountItems(); i++) {
+	for (int32_t i = 0; i < views.CountItems(); i++) {
 		BView *subView = static_cast<BView *>(views.ItemAt(i));
 		BRect frame = subView->Frame();
 
@@ -1074,7 +1074,7 @@ DefaultMediaTheme::MakeViewFor(BParameter *parameter, const BRect *hintRect)
 
 				BFont font;
 				float width = 0;
-				for (int32 i = 0; i < discrete.CountItems(); i++) {
+				for (int32_t i = 0; i < discrete.CountItems(); i++) {
 					float labelWidth = font.StringWidth(discrete.ItemNameAt(i));
 					if (labelWidth > width)
 						width = labelWidth;
@@ -1085,7 +1085,7 @@ DefaultMediaTheme::MakeViewFor(BParameter *parameter, const BRect *hintRect)
 				BOptionPopUp *popUp = new BOptionPopUp(rect, discrete.Name(),
 					discrete.Name(), NULL);
 
-				for (int32 i = 0; i < discrete.CountItems(); i++) {
+				for (int32_t i = 0; i < discrete.CountItems(); i++) {
 					popUp->AddOption(discrete.ItemNameAt(i), discrete.ItemValueAt(i));
 				}
 
@@ -1123,9 +1123,9 @@ DefaultMediaTheme::MakeViewFor(BParameter *parameter, const BRect *hintRect)
 
 				// ToDo: take BContinuousParameter::GetResponse() & ValueStep() into account!
 
-				for (int32 i = 0; i < continuous.CountChannels(); i++) {
-					slider->SetLimitsFor(i, int32(continuous.MinValue() * 1000),
-						int32(continuous.MaxValue() * 1000));
+				for (int32_t i = 0; i < continuous.CountChannels(); i++) {
+					slider->SetLimitsFor(i, int32_t(continuous.MinValue() * 1000),
+						int32_t(continuous.MaxValue() * 1000));
 				}
 
 				return slider;

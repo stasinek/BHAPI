@@ -189,7 +189,7 @@ struct command_data {
     // yes, it's empty ;)
 
 #if __GNUC__ >= 4
-    int32 _padding;
+    int32_t _padding;
         // GCC 2 and GCC 4 treat empty structures differently
 #endif
 };
@@ -293,7 +293,7 @@ enum {
 
 struct add_on_server_instantiate_dormant_node_request : request_data {
     media_addon_id			add_on_id;
-    int32					flavor_id;
+    int32_t					flavor_id;
     team_id					creator_team;
 };
 
@@ -335,12 +335,12 @@ struct server_get_node_reply : public reply_data {
 
     // for AUDIO_OUTPUT_EX
     char					input_name[B_MEDIA_NAME_LENGTH];
-    int32					input_id;
+    int32_t					input_id;
 };
 
 struct server_publish_inputs_request : request_data {
     media_node				node;
-    int32					count;
+    int32_t					count;
     area_id area;	// if count > MAX_INPUTS, inputs are in the area
                     // area is created in the library, and also deleted
                     // in the library after the reply has been received
@@ -352,7 +352,7 @@ struct server_publish_inputs_reply : reply_data {
 
 struct server_publish_outputs_request : area_request_data {
     media_node				node;
-    int32					count;
+    int32_t					count;
         // if count > MAX_OUTPUTS, outputs are in the area
         // area is created in the library, and also deleted
         // in the library after the reply has been received
@@ -387,8 +387,8 @@ struct server_set_node_creator_reply : reply_data {
 
 struct server_change_flavor_instances_count_request : request_data {
     media_addon_id			add_on_id;
-    int32					flavor_id;
-    int32					delta; // must be +1 or -1
+    int32_t					flavor_id;
+    int32_t					delta; // must be +1 or -1
     team_id					team;
 };
 
@@ -397,7 +397,7 @@ struct server_change_flavor_instances_count_reply : reply_data {
 
 struct server_register_node_request : request_data {
     media_addon_id			add_on_id;
-    int32					flavor_id;
+    int32_t					flavor_id;
     media_node_id			timesource_id;
     char					name[B_MEDIA_NAME_LENGTH];
     uint64					kinds;
@@ -416,7 +416,7 @@ struct server_unregister_node_request : request_data {
 
 struct server_unregister_node_reply : reply_data {
     media_addon_id			add_on_id;
-    int32					flavor_id;
+    int32_t					flavor_id;
 };
 
 struct server_get_live_node_info_request : request_data {
@@ -428,7 +428,7 @@ struct server_get_live_node_info_reply : reply_data {
 };
 
 struct server_get_live_nodes_request : request_area_data {
-    int32					max_count;
+    int32_t					max_count;
     bool					has_input;
     bool					has_output;
     bool					has_name;
@@ -440,7 +440,7 @@ struct server_get_live_nodes_request : request_area_data {
 };
 
 struct server_get_live_nodes_reply : area_reply_data {
-    int32					count;
+    int32_t					count;
         // if count > MAX_LIVE_INFO, live_node_infos are in the area
         // area is created in the server, but deleted in the library
     live_node_info			live_info[MAX_LIVE_INFO];
@@ -481,12 +481,12 @@ struct server_get_dormant_node_for_reply : reply_data {
 
 struct server_get_instances_for_request : request_data {
     media_addon_id			add_on_id;
-    int32					flavor_id;
-    int32					max_count;
+    int32_t					flavor_id;
+    int32_t					max_count;
 };
 
 struct server_get_instances_for_reply : reply_data {
-    int32					count;
+    int32_t					count;
     media_node_id			node_id[MAX_NODE_ID];
         // no area here, MAX_NODE_ID is really large
 };
@@ -539,7 +539,7 @@ struct server_get_media_types_request : request_area_data {
 };
 
 struct server_get_media_types_reply : area_reply_data {
-    int32					count;
+    int32_t					count;
 };
 
 struct server_get_media_items_request : request_area_data {
@@ -547,7 +547,7 @@ struct server_get_media_items_request : request_area_data {
 };
 
 struct server_get_media_items_reply : area_reply_data {
-    int32					count;
+    int32_t					count;
 };
 
 struct server_get_ref_for_request : request_data {
@@ -605,7 +605,7 @@ struct server_set_item_audio_gain_reply : reply_data {
 
 struct server_get_dormant_flavor_info_request : request_data {
     media_addon_id	add_on_id;
-    int32			flavor_id;
+    int32_t			flavor_id;
 };
 
 struct server_get_dormant_flavor_info_reply : reply_data {
@@ -616,7 +616,7 @@ struct server_get_dormant_flavor_info_reply : reply_data {
 };
 
 struct server_get_dormant_nodes_request : request_data {
-    int32			max_count;
+    int32_t			max_count;
     bool			has_input;
     media_format	input_format;
     bool			has_output;
@@ -628,7 +628,7 @@ struct server_get_dormant_nodes_request : request_data {
 };
 
 struct server_get_dormant_nodes_reply : reply_data {
-    int32			count;
+    int32_t			count;
         // if count > 0, a second reply containing count dormant_node_infos
         // is send
 };
@@ -699,7 +699,7 @@ struct producer_disconnect_reply : reply_data {
 
 struct producer_format_suggestion_requested_request : request_data {
     media_type				type;
-    int32					quality;
+    int32_t					quality;
 };
 
 struct producer_format_suggestion_requested_reply : reply_data {
@@ -707,8 +707,8 @@ struct producer_format_suggestion_requested_reply : reply_data {
 };
 
 struct producer_set_play_rate_request : request_data {
-    int32					numer;
-    int32					denom;
+    int32_t					numer;
+    int32_t					denom;
 };
 
 struct producer_set_play_rate_reply : reply_data {
@@ -719,7 +719,7 @@ struct producer_get_initial_latency_request : request_data {
 
 struct producer_get_initial_latency_reply : reply_data {
     bigtime_t				initial_latency;
-    uint32					flags;
+    uint32_t					flags;
 };
 
 struct producer_get_latency_request : request_data {
@@ -733,8 +733,8 @@ struct producer_set_buffer_group_command : command_data {
     media_source			source;
     media_destination		destination;
     void*					user_data;
-    int32					change_tag;
-    int32					buffer_count;
+    int32_t					change_tag;
+    int32_t					buffer_count;
     media_buffer_id			buffers[1];
 };
 
@@ -743,7 +743,7 @@ struct producer_format_change_requested_command : command_data {
     media_destination		destination;
     media_format			format;
     void*					user_data;
-    int32					change_tag;
+    int32_t					change_tag;
 };
 
 struct producer_video_clipping_changed_command : command_data {
@@ -751,8 +751,8 @@ struct producer_video_clipping_changed_command : command_data {
     media_destination		destination;
     media_video_display_info display;
     void*					user_data;
-    int32					change_tag;
-    int32					short_count;
+    int32_t					change_tag;
+    int32_t					short_count;
     int16					shorts[1];
 };
 
@@ -768,7 +768,7 @@ struct producer_latency_changed_command : command_data {
     media_source			source;
     media_destination		destination;
     bigtime_t				latency;
-    uint32					flags;
+    uint32_t					flags;
 };
 
 struct producer_enable_output_command : command_data {
@@ -776,7 +776,7 @@ struct producer_enable_output_command : command_data {
     media_destination		destination;
     bool					enabled;
     void*					user_data;
-    int32					change_tag;
+    int32_t					change_tag;
 };
 
 struct producer_late_notice_received_command : command_data {
@@ -791,18 +791,18 @@ struct producer_set_run_mode_delay_command : command_data {
 };
 
 struct producer_get_next_output_request : request_data {
-    int32					cookie;
+    int32_t					cookie;
 };
 
 struct producer_get_next_output_reply : reply_data
 {
-    int32					cookie;
+    int32_t					cookie;
     media_output			output;
 };
 
 struct producer_dispose_output_cookie_request : request_data
 {
-    int32					cookie;
+    int32_t					cookie;
 };
 
 struct producer_dispose_output_cookie_reply : reply_data {
@@ -830,16 +830,16 @@ struct consumer_connected_reply : reply_data {
 };
 
 struct consumer_get_next_input_request : request_data {
-    int32					cookie;
+    int32_t					cookie;
 };
 
 struct consumer_get_next_input_reply : reply_data {
-    int32					cookie;
+    int32_t					cookie;
     media_input				input;
 };
 
 struct consumer_dispose_input_cookie_request : request_data {
-    int32					cookie;
+    int32_t					cookie;
 };
 
 struct consumer_dispose_input_cookie_reply : reply_data {
@@ -860,7 +860,7 @@ struct consumer_buffer_received_command : command_data {
 
 struct consumer_producer_data_status_command : command_data {
     media_destination		for_whom;
-    int32					status;
+    int32_t					status;
     bigtime_t				at_performance_time;
 };
 
@@ -876,7 +876,7 @@ struct consumer_get_latency_for_reply : reply_data {
 struct consumer_format_changed_request : request_data {
     media_source			producer;
     media_destination		consumer;
-    int32					change_tag;
+    int32_t					change_tag;
     media_format			format;
 };
 
@@ -886,13 +886,13 @@ struct consumer_format_changed_reply : reply_data {
 struct consumer_seek_tag_requested_request : request_data {
     media_destination		destination;
     bigtime_t				target_time;
-    uint32					flags;
+    uint32_t					flags;
 };
 
 struct consumer_seek_tag_requested_reply : reply_data {
     media_seek_tag			seek_tag;
     bigtime_t				tagged_time;
-    uint32					flags;
+    uint32_t					flags;
 };
 
 
@@ -1020,24 +1020,24 @@ struct fileinterface_sniff_ref_reply : reply_data {
 };
 
 struct fileinterface_get_formats_request : request_data {
-    int32					num_formats;
+    int32_t					num_formats;
     area_id					data_area;
 };
 
 struct fileinterface_get_formats_reply : reply_data {
-    int32					filled_slots;
+    int32_t					filled_slots;
 };
 
 // #pragma mark - controllable commands
 
 
 struct controllable_get_parameter_web_request : area_request_data {
-    int32					max_size;
+    int32_t					max_size;
 };
 
 struct controllable_get_parameter_web_reply : reply_data {
     type_code				code;
-    int32					size;
+    int32_t					size;
         // = -1: parameter web data too large,
         // = 0: no p.w., > 0: flattened p.w. data
 };
@@ -1045,7 +1045,7 @@ struct controllable_get_parameter_web_reply : reply_data {
 #define MAX_PARAMETER_DATA (B_MEDIA_MESSAGE_SIZE - 100)
 
 struct controllable_get_parameter_data_request : area_request_data {
-    int32					parameter_id;
+    int32_t					parameter_id;
     size_t					request_size;
 };
 
@@ -1056,7 +1056,7 @@ struct controllable_get_parameter_data_reply : reply_data {
 };
 
 struct controllable_set_parameter_data_request : area_request_data {
-    int32					parameter_id;
+    int32_t					parameter_id;
     bigtime_t				when;
     size_t					size;
     char					raw_data[MAX_PARAMETER_DATA];

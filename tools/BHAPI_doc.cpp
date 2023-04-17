@@ -69,7 +69,7 @@ inline BSimpleXmlNode* find_xml_node_deep(BSimpleXmlNode* node, const char *name
 	if(node == NULL) return NULL;
 	BSimpleXmlNode *aNode = node->NodeAt(node->FindNode(name));
 	if(aNode != NULL) return aNode;
-	for(__be_int32 i = 0; i < node->CountNodes(); i++)
+	for(__be_int32_t i = 0; i < node->CountNodes(); i++)
 	{
 		if((aNode = find_xml_node_deep(node->NodeAt(i), name)) != NULL) return aNode;
 	}
@@ -80,7 +80,7 @@ inline BSimpleXmlNode* find_xml_node_deep(BSimpleXmlNode* node, const char *name
 inline bool foreach_xml_node(BSimpleXmlNode *node, const char *name, bool (*foreachFunc)(BSimpleXmlNode*, void*), void *userData)
 {
 	if(node == NULL || foreachFunc == NULL) return false;
-	for(__be_int32 i = 0; i < node->CountNodes(); i++)
+	for(__be_int32_t i = 0; i < node->CountNodes(); i++)
 	{
 		BSimpleXmlNode *aNode = node->NodeAt(i);
 		if(name == NULL || !(aNode->Name() == NULL || strcmp(name, aNode->Name()) != 0))
@@ -101,7 +101,7 @@ static bool docbook_foreach(BSimpleXmlNode *node, void *userData)
 	{
 		if(node->Content() != NULL || node->FindAttribute("endterm") >= 0) return false;
 
-		__be_int32 index = node->FindAttribute("linkend");
+		__be_int32_t index = node->FindAttribute("linkend");
 		if(index < 0) return false;
 
 		const char *content = NULL;
@@ -113,7 +113,7 @@ static bool docbook_foreach(BSimpleXmlNode *node, void *userData)
 	}
 	else if(strcmp(node->Name(), "section") == 0)
 	{
-		__be_int32 index = node->FindAttribute("id");
+		__be_int32_t index = node->FindAttribute("id");
 		if(index < 0) return false;
 
 		const char *content = NULL;
@@ -169,7 +169,7 @@ inline void convert_document_to_docbook(const BSimpleXmlNode *node, BString *buf
 	{
 		buffer->AppendFormat("<%s", node->Name());
 
-		for(__be_int32 i = 0; i < node->CountAttributes(); i++)
+		for(__be_int32_t i = 0; i < node->CountAttributes(); i++)
 		{
 			const char *attr_content = NULL;
 			const char *attr_name = node->AttributeAt(i, &attr_content);
@@ -186,7 +186,7 @@ inline void convert_document_to_docbook(const BSimpleXmlNode *node, BString *buf
 		buffer->Append(str);
 	}
 
-	for(__be_int32 i = 0; i < node->CountNodes(); i++)
+	for(__be_int32_t i = 0; i < node->CountNodes(); i++)
 		convert_document_to_docbook(node->NodeAt(i), buffer);
 
 	if(strcmp(node->Name(), "legalnotice") == 0)
@@ -247,7 +247,7 @@ inline status_t convert_to_docbook(BSimpleXmlNode *node, BString *buffer, const 
 		aNode = NULL;
 	}
 
-	__be_int32 offset = 0;
+	__be_int32_t offset = 0;
 	while(offset >= 0 && offset < node->CountNodes())
 	{
 		if((offset = node->FindNode("document", offset)) < 0) break;
@@ -340,7 +340,7 @@ int main(int argc, char **argv)
 	BString strDocStart = "<document ";
 	BString strDocEnd = "</document>";
 
-	for(__be_int32 i = 1; i < files.CountItems(); i++)
+	for(__be_int32_t i = 1; i < files.CountItems(); i++)
 	{
 		if(files.ItemAt(i) == NULL) continue;
 		BPath readInPath(files.ItemAt(i)->String(), NULL, true);
@@ -351,7 +351,7 @@ int main(int argc, char **argv)
 			continue;
 		}
 
-		__be_int32 old_length = xml_buffer.Length();
+		__be_int32_t old_length = xml_buffer.Length();
 
 		char buffer[BUFFER_SIZE];
 		bool foundDocEnd = true;
@@ -364,7 +364,7 @@ int main(int argc, char **argv)
 			BString str;
 			str.SetTo(buffer, len + nLeave);
 			str.RemoveAll("\r");
-			__be_int32 offset = 0;
+			__be_int32_t offset = 0;
 			while(offset >= 0 && offset < str.Length())
 			{
 				nLeave = 0;
@@ -391,7 +391,7 @@ int main(int argc, char **argv)
 
 					if(strDocStart.Compare(str.String() + offset, strDocStart.Length()) != 0)
 					{
-						__be_int32 tmp = str.FindLast("<");
+						__be_int32_t tmp = str.FindLast("<");
 						if(tmp >= 0 && str.Length() - tmp < strDocStart.Length())
 						{
 							nLeave = str.Length() - tmp;
@@ -406,7 +406,7 @@ int main(int argc, char **argv)
 					foundDocEnd = false;
 				}
 
-				__be_int32 endOffset = str.FindFirst(strDocEnd, offset);
+				__be_int32_t endOffset = str.FindFirst(strDocEnd, offset);
 				if(endOffset >= 0)
 				{
 					endOffset += strDocEnd.Length();
@@ -415,7 +415,7 @@ int main(int argc, char **argv)
 				}
 				else
 				{
-					__be_int32 tmp = str.FindLast("<");
+					__be_int32_t tmp = str.FindLast("<");
 					if(tmp >= 0 && str.Length() - tmp < strDocEnd.Length())
 					{
 						nLeave = str.Length() - tmp;
@@ -456,11 +456,11 @@ int main(int argc, char **argv)
 		xml_buffer.ReplaceAll("®", "&reg;");
 		xml_buffer.ReplaceAll("\n", "&br;");
 
-		__be_int32 offset = 0;
+		__be_int32_t offset = 0;
 		while(offset >= 0 && offset < xml_buffer.Length())
 		{
 			if((offset = xml_buffer.FindFirst(">", offset)) < 0) break;
-			__be_int32 tmp = xml_buffer.FindFirst("<", offset);
+			__be_int32_t tmp = xml_buffer.FindFirst("<", offset);
 			if(tmp < 0 || tmp - offset <= 1) {offset = tmp; continue;}
 			BString str;
 			xml_buffer.MoveInto(str, offset + 1, tmp - offset);
@@ -483,7 +483,7 @@ int main(int argc, char **argv)
 			if((offset = node.FindNode("document", offset)) < 0) break;
 			if((aNode = node.NodeAt(offset)) == NULL) break;
 
-			__be_int32 index = aNode->FindAttribute("lang");
+			__be_int32_t index = aNode->FindAttribute("lang");
 			const char *tmp = NULL;
 			if(index < 0 || aNode->AttributeAt(index, &tmp) == NULL || tmp == NULL || strcmp(tmp, lang) != 0)
 			{
@@ -528,7 +528,7 @@ int main(int argc, char **argv)
 
 	if(files.ItemAt(0) == NULL || files.ItemAt(0)->String() == NULL)
 	{
-		for(__be_int32 offset = 0; offset < output_buffer.Length(); offset += BUFFER_SIZE)
+		for(__be_int32_t offset = 0; offset < output_buffer.Length(); offset += BUFFER_SIZE)
 		{
 			BString str(output_buffer.String() + offset, BUFFER_SIZE);
 			fprintf(stdout, "%s", str.String());
@@ -544,7 +544,7 @@ int main(int argc, char **argv)
 		}
 		else
 		{
-			for(__be_int32 offset = 0; offset < output_buffer.Length(); offset += BUFFER_SIZE)
+			for(__be_int32_t offset = 0; offset < output_buffer.Length(); offset += BUFFER_SIZE)
 				writeOut.Write(output_buffer.String() + offset, min_c(BUFFER_SIZE, output_buffer.Length() - offset));
 		}
 	}

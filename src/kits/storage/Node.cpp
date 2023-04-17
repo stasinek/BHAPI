@@ -330,7 +330,7 @@ status_t BNode::WriteAttrString(const char* name, const BString* data)
 {
 	status_t error = (!name || !data)  ? B_BAD_VALUE : B_OK;
 	if (error == B_OK) {
-		int32 length = data->Length() + 1;
+		int32_t length = data->Length() + 1;
 		ssize_t sizeWritten = WriteAttr(name, B_STRING_TYPE, 0, data->String(),
 			length);
 		if (sizeWritten != length)
@@ -592,7 +592,7 @@ status_t BNode::_SetTo(const entry_ref* ref, bool traverse)
 
 	\returns \c B_OK if everything went fine, or an error code otherwise.
 */
-status_t BNode::set_stat(struct stat& stat, uint32 what)
+status_t BNode::set_stat(struct stat& stat, uint32_t what)
 {
 	if (fCStatus != B_OK)
 		return B_FILE_ERROR;

@@ -227,11 +227,11 @@ bool IconCacheEntry::IconHitTest(BPoint where, IconDrawMode mode,
 	switch (bitmap->ColorSpace()) {
 		case B_RGBA32:
 			// test alpha channel
-			return *(bits + (int32)(floorf(where.y) * bitmap->BytesPerRow()
+			return *(bits + (int32_t)(floorf(where.y) * bitmap->BytesPerRow()
 				+ floorf(where.x) * 4 + 3)) > 20;
 
 		case B_CMAP8:
-			return *(bits + (int32)(floorf(where.y) * size + where.x))
+			return *(bits + (int32_t)(floorf(where.y) * size + where.x))
 				!= B_TRANSPARENT_8_BIT;
 
 		default:
@@ -673,8 +673,8 @@ IconCache::GetWellKnownIcon(AutoLock<SimpleIconCache>*,
 	if (entry == NULL || !entry->HaveIconBitmap(NORMAL_ICON_ONLY, size)) {
 		// match up well known entries in the file system with specialized
 		// icons stored in Tracker's resources
-		int32 resourceId = -1;
-		switch ((uint32)wellKnownEntry->which) {
+		int32_t resourceId = -1;
+		switch ((uint32_t)wellKnownEntry->which) {
 			case B_BOOT_DISK:
 				resourceId = R_BootVolumeIcon;
 				break;
@@ -1211,7 +1211,7 @@ void IconCache::IconChanged(const char* mimeType, const char* appSignature)
 
 	entry = (SharedCacheEntry*)fSharedCache.ResolveIfAlias(entry);
 	ASSERT(entry != NULL);
-	int32 index = fSharedCache.EntryIndex(entry);
+	int32_t index = fSharedCache.EntryIndex(entry);
 
 	fNodeCache.RemoveAliasesTo(index);
 	fSharedCache.RemoveAliasesTo(index);
@@ -1235,14 +1235,14 @@ static void DumpBitmap(const BBitmap* bitmap)
 		printf("NULL bitmap passed to DumpBitmap\n");
 		return;
 	}
-	int32 length = bitmap->BitsLength();
+	int32_t length = bitmap->BitsLength();
 
 	printf("data length %ld \n", length);
 
-	int32 columns = (int32)bitmap->Bounds().Width() + 1;
+	int32_t columns = (int32_t)bitmap->Bounds().Width() + 1;
 	const unsigned char* bitPtr = (const unsigned char*)bitmap->Bits();
 	for (; length >= 0; length--) {
-		for (int32 columnIndex = 0; columnIndex < columns;
+		for (int32_t columnIndex = 0; columnIndex < columns;
 			columnIndex++, length--)
 			printf("%c%c", "0123456789ABCDEF"[(*bitPtr)/0x10],
 				"0123456789ABCDEF"[(*bitPtr++)%0x10]);
@@ -1259,7 +1259,7 @@ void IconCache::InitHighlightTable()
 	// build the color transform tables for different icon modes
 	BScreen screen(B_MAIN_SCREEN_ID);
 	rgb_color color;
-	for (int32 index = 0; index < kColorTransformTableSize; index++) {
+	for (int32_t index = 0; index < kColorTransformTableSize; index++) {
 		color = screen.ColorForIndex((uchar)index);
 		fHighlightTable[index] = screen.IndexForColor(tint_color(color, 1.3f));
 	}
@@ -1271,7 +1271,7 @@ void IconCache::InitHighlightTable()
 
 BBitmap*
 IconCache::MakeTransformedIcon(const BBitmap* source, icon_size /*size*/,
-	int32 colorTransformTable[], LazyBitmapAllocator* lazyBitmap)
+	int32_t colorTransformTable[], LazyBitmapAllocator* lazyBitmap)
 {
 	if (fInitHighlightTable)
 		InitHighlightTable();
@@ -1292,14 +1292,14 @@ IconCache::MakeTransformedIcon(const BBitmap* source, icon_size /*size*/,
 	switch (result->ColorSpace()) {
 		case B_RGB32:
 		case B_RGBA32: {
-			uint32 width = source->Bounds().IntegerWidth() + 1;
-			uint32 height = source->Bounds().IntegerHeight() + 1;
-			uint32 srcBPR = source->BytesPerRow();
-			uint32 dstBPR = result->BytesPerRow();
-			for (uint32 y = 0; y < height; y++) {
+			uint32_t width = source->Bounds().IntegerWidth() + 1;
+			uint32_t height = source->Bounds().IntegerHeight() + 1;
+			uint32_t srcBPR = source->BytesPerRow();
+			uint32_t dstBPR = result->BytesPerRow();
+			for (uint32_t y = 0; y < height; y++) {
 				uint8* d = dst;
 				uint8* s = src;
-				for (uint32 x = 0; x < width; x++) {
+				for (uint32_t x = 0; x < width; x++) {
 					// 66% brightness
 					d[0] = (int)s[0] * 168 >> 8;
 					d[1] = (int)s[1] * 168 >> 8;
@@ -1315,8 +1315,8 @@ IconCache::MakeTransformedIcon(const BBitmap* source, icon_size /*size*/,
 		}
 
 		case B_CMAP8: {
-			int32 bitsLength = result->BitsLength();
-			for (int32 i = 0; i < bitsLength; i++)
+			int32_t bitsLength = result->BitsLength();
+			for (int32_t i = 0; i < bitsLength; i++)
 				*dst++ = (uint8)colorTransformTable[*src++];
 			break;
 		}
@@ -1370,7 +1370,7 @@ void IconCacheEntry::RetireIcons(BObjectList<BBitmap>* retiredBitmapList)
 		fHighlightedMiniIcon = NULL;
 	}
 
-	int32 count = retiredBitmapList->CountItems();
+	int32_t count = retiredBitmapList->CountItems();
 	if (count > 10 * 1024) {
 		PRINT(("nuking old icons from the retired bitmap list\n"));
 		for (count = 512; count > 0; count--)
@@ -1470,7 +1470,7 @@ SharedCacheEntry*
 SharedIconCache::AddItem(SharedCacheEntry** outstandingEntry,
 	const char* fileType, const char* appSignature)
 {
-	int32 entryToken = fHashTable.ElementIndex(*outstandingEntry);
+	int32_t entryToken = fHashTable.ElementIndex(*outstandingEntry);
 	ASSERT(entryToken >= 0);
 
 	ASSERT(fileType != NULL);
@@ -1496,10 +1496,10 @@ void SharedIconCache::IconChanged(SharedCacheEntry* entry)
 }
 
 
-void SharedIconCache::RemoveAliasesTo(int32 aliasIndex)
+void SharedIconCache::RemoveAliasesTo(int32_t aliasIndex)
 {
-	int32 count = fHashTable.VectorSize();
-	for (int32 index = 0; index < count; index++) {
+	int32_t count = fHashTable.VectorSize();
+	for (int32_t index = 0; index < count; index++) {
 		SharedCacheEntry* entry = fHashTable.ElementAt(index);
 		if (entry->fAliasForIndex == aliasIndex)
 			fHashTable.Remove(entry);
@@ -1568,9 +1568,9 @@ void SharedCacheEntry::Draw(BView* view, BPoint where, IconDrawMode mode,
 }
 
 
-uint32 SharedCacheEntry::Hash(const char* fileType, const char* appSignature)
+uint32_t SharedCacheEntry::Hash(const char* fileType, const char* appSignature)
 {
-	uint32 hash = HashString(fileType, 0);
+	uint32_t hash = HashString(fileType, 0);
 	if (appSignature != NULL && *appSignature != '\0')
 		hash = HashString(appSignature, hash);
 
@@ -1578,9 +1578,9 @@ uint32 SharedCacheEntry::Hash(const char* fileType, const char* appSignature)
 }
 
 
-uint32 SharedCacheEntry::Hash() const
+uint32_t SharedCacheEntry::Hash() const
 {
-	uint32 hash = HashString(fFileType.String(), 0);
+	uint32_t hash = HashString(fFileType.String(), 0);
 	if (fAppSignature.Length() > 0)
 		hash = HashString(fAppSignature.String(), hash);
 
@@ -1602,7 +1602,7 @@ void SharedCacheEntry::SetTo(const char* fileType, const char* appSignature)
 }
 
 
-SharedCacheEntryArray::SharedCacheEntryArray(int32 initialSize)
+SharedCacheEntryArray::SharedCacheEntryArray(int32_t initialSize)
 	:
 	OpenHashElementArray<SharedCacheEntry>(initialSize)
 {
@@ -1683,16 +1683,16 @@ NodeCacheEntry::Node() const
 }
 
 
-uint32 NodeCacheEntry::Hash() const
+uint32_t NodeCacheEntry::Hash() const
 {
 	return Hash(&fRef);
 }
 
 
-uint32 NodeCacheEntry::Hash(const node_ref* node)
+uint32_t NodeCacheEntry::Hash(const node_ref* node)
 {
-	return node->device ^ ((uint32*)&node->node)[0]
-		^ ((uint32*)&node->node)[1];
+	return node->device ^ ((uint32_t*)&node->node)[0]
+		^ ((uint32_t*)&node->node)[1];
 }
 
 
@@ -1792,7 +1792,7 @@ NodeCacheEntry*
 NodeIconCache::AddItem(NodeCacheEntry** outstandingEntry,
 	const node_ref* node)
 {
-	int32 entryToken = fHashTable.ElementIndex(*outstandingEntry);
+	int32_t entryToken = fHashTable.ElementIndex(*outstandingEntry);
 
 	NodeCacheEntry* entry = fHashTable.Add(NodeCacheEntry::Hash(node));
 	entry->SetTo(node);
@@ -1838,10 +1838,10 @@ void NodeIconCache::IconChanged(const Model* model)
 }
 
 
-void NodeIconCache::RemoveAliasesTo(int32 aliasIndex)
+void NodeIconCache::RemoveAliasesTo(int32_t aliasIndex)
 {
-	int32 count = fHashTable.VectorSize();
-	for (int32 index = 0; index < count; index++) {
+	int32_t count = fHashTable.VectorSize();
+	for (int32_t index = 0; index < count; index++) {
 		NodeCacheEntry* entry = fHashTable.ElementAt(index);
 		if (entry->fAliasForIndex == aliasIndex)
 			fHashTable.Remove(entry);
@@ -1852,7 +1852,7 @@ void NodeIconCache::RemoveAliasesTo(int32 aliasIndex)
 //	#pragma mark - NodeCacheEntryArray
 
 
-NodeCacheEntryArray::NodeCacheEntryArray(int32 initialSize)
+NodeCacheEntryArray::NodeCacheEntryArray(int32_t initialSize)
 	:
 	OpenHashElementArray<NodeCacheEntry>(initialSize)
 {

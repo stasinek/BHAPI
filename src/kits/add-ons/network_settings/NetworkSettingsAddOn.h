@@ -40,7 +40,7 @@ public:
 
 class BNetworkSettingsListener {
 public:
-	virtual void				SettingsUpdated(uint32 type) = 0;
+	virtual void				SettingsUpdated(uint32_t type) = 0;
 };
 
 
@@ -63,7 +63,7 @@ public:
 	virtual	status_t			Revert() = 0;
 	virtual bool				IsRevertable() = 0;
 
-	virtual void				SettingsUpdated(uint32 type);
+	virtual void				SettingsUpdated(uint32_t type);
 	virtual void				ConfigurationUpdated(const BMessage& message);
 
 	virtual	void				NotifySettingsUpdated();
@@ -128,10 +128,10 @@ public:
 	virtual						~BNetworkSettingsAddOn();
 
 	virtual	BNetworkSettingsInterfaceItem*
-								CreateNextInterfaceItem(uint32& cookie,
+								CreateNextInterfaceItem(uint32_t& cookie,
 									const char* interface);
 	virtual	BNetworkSettingsItem*
-								CreateNextItem(uint32& cookie);
+								CreateNextItem(uint32_t& cookie);
 
 			image_id			Image();
 			BResources*			Resources();

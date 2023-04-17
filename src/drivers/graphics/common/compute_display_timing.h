@@ -14,7 +14,7 @@
 extern "C" {
 #endif
 
-status_t compute_display_timing(uint32 width, uint32 height, float refresh,
+status_t compute_display_timing(uint32_t width, uint32_t height, float refresh,
 	bool interlaced, display_timing* timing);
 
 #ifdef __cplusplus

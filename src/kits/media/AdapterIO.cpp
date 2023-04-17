@@ -112,7 +112,7 @@ public:
 			_PositionToRelative(position), buffer, size);
 	}
 
-	virtual	off_t Seek(off_t position, uint32 seekMode)
+	virtual	off_t Seek(off_t position, uint32_t seekMode)
 	{
 		AutoWriteLocker _(fLock);
 
@@ -161,21 +161,21 @@ public:
 
 	bool IsStreaming() const
 	{
-		int32 flags = 0;
+		int32_t flags = 0;
 		fOwner->GetFlags(&flags);
 		return (flags & B_MEDIA_STREAMING) == true;
 	}
 
 	bool IsMutable() const
 	{
-		int32 flags = 0;
+		int32_t flags = 0;
 		fOwner->GetFlags(&flags);
 		return (flags & B_MEDIA_MUTABLE_SIZE) == true;
 	}
 
 	bool IsSeekable() const
 	{
-		int32 flags = 0;
+		int32_t flags = 0;
 		fOwner->GetFlags(&flags);
 		return (flags & B_MEDIA_SEEKABLE) == true;
 	}
@@ -204,7 +204,7 @@ private:
 };
 
 
-BAdapterIO::BAdapterIO(int32 flags, bigtime_t timeout)
+BAdapterIO::BAdapterIO(int32_t flags, bigtime_t timeout)
 	:
 	fFlags(flags),
 	fBuffer(NULL),
@@ -234,7 +234,7 @@ BAdapterIO::~BAdapterIO()
 }
 
 
-void BAdapterIO::GetFlags(int32* flags) const
+void BAdapterIO::GetFlags(int32_t* flags) const
 {
 	CALLED();
 
@@ -265,7 +265,7 @@ BAdapterIO::WriteAt(off_t position, const void* buffer, size_t size)
 
 
 off_t
-BAdapterIO::Seek(off_t position, uint32 seekMode)
+BAdapterIO::Seek(off_t position, uint32_t seekMode)
 {
 	CALLED();
 

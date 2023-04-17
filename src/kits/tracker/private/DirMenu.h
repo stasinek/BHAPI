@@ -45,7 +45,7 @@ namespace BPrivate {
 
 class BDirMenu : public BPopUpMenu {
 public:
-	BDirMenu(BMenuBar*, BMessenger target, uint32 command,
+	BDirMenu(BMenuBar*, BMessenger target, uint32_t command,
 		const char* entryName = 0);
 	virtual ~BDirMenu();
 
@@ -62,7 +62,7 @@ public:
 private:
 	BMessenger fTarget;
 	BMenuBar* fMenuBar;
-	uint32 fCommand;
+	uint32_t fCommand;
 	BString fEntryName;
 };
 

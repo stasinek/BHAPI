@@ -58,7 +58,7 @@ IORequestChunk::~IORequestChunk()
 
 
 struct virtual_vec_cookie {
-	uint32			vec_index;
+	uint32_t			vec_index;
 	generic_size_t	vec_offset;
 	area_id			mapped_area;
 	void*			physical_page_handle;
@@ -67,7 +67,7 @@ struct virtual_vec_cookie {
 
 
 IOBuffer*
-IOBuffer::Create(uint32 count, bool vip)
+IOBuffer::Create(uint32_t count, bool vip)
 {
 	size_t size = sizeof(IOBuffer) + sizeof(generic_io_vec) * (count - 1);
 	IOBuffer* buffer
@@ -98,7 +98,7 @@ IOBuffer::Delete()
 
 void
 IOBuffer::SetVecs(generic_size_t firstVecOffset, const generic_io_vec* vecs,
-	uint32 count, generic_size_t length, uint32 flags)
+	uint32_t count, generic_size_t length, uint32_t flags)
 {
 	memcpy(fVecs, vecs, sizeof(generic_io_vec) * count);
 
@@ -217,7 +217,7 @@ IOBuffer::LockMemory(team_id team, bool isWrite)
 		return B_BAD_VALUE;
 	}
 
-	for (uint32 i = 0; i < fVecCount; i++) {
+	for (uint32_t i = 0; i < fVecCount; i++) {
 		status_t status = lock_memory_etc(team, (void*)(addr_t)fVecs[i].base,
 			fVecs[i].length, isWrite ? 0 : B_READ_DEVICE);
 		if (status != B_OK) {
@@ -234,7 +234,7 @@ IOBuffer::LockMemory(team_id team, bool isWrite)
 void
 IOBuffer::_UnlockMemory(team_id team, size_t count, bool isWrite)
 {
-	for (uint32 i = 0; i < count; i++) {
+	for (uint32_t i = 0; i < count; i++) {
 		unlock_memory_etc(team, (void*)(addr_t)fVecs[i].base, fVecs[i].length,
 			isWrite ? 0 : B_READ_DEVICE);
 	}
@@ -265,7 +265,7 @@ IOBuffer::Dump() const
 	kprintf("  capacity:   %" B_PRIuSIZE "\n", fCapacity);
 	kprintf("  vecs:       %" B_PRIuSIZE "\n", fVecCount);
 
-	for (uint32 i = 0; i < fVecCount; i++) {
+	for (uint32_t i = 0; i < fVecCount; i++) {
 		kprintf("    [%" B_PRIu32 "] %#" B_PRIxGENADDR ", %" B_PRIuGENADDR "\n",
 			i, fVecs[i].base, fVecs[i].length);
 	}
@@ -337,7 +337,7 @@ IOOperation::Finish()
 			+ fDMABuffer->BounceBufferSize();
 
 		const generic_io_vec* vecs = fDMABuffer->Vecs();
-		uint32 vecCount = fDMABuffer->VecCount();
+		uint32_t vecCount = fDMABuffer->VecCount();
 
 		status_t error = B_OK;
 
@@ -348,7 +348,7 @@ IOOperation::Finish()
 		const off_t startOffset = fOriginalOffset;
 		const off_t endOffset = fOriginalOffset + fOriginalLength;
 
-		for (uint32 i = 0; error == B_OK && i < vecCount; i++) {
+		for (uint32_t i = 0; error == B_OK && i < vecCount; i++) {
 			const generic_io_vec& vec = vecs[i];
 			generic_addr_t base = vec.base;
 			generic_size_t length = vec.length;
@@ -419,9 +419,9 @@ IOOperation::Prepare(IORequest* request)
 				+ fDMABuffer->BounceBufferSize();
 
 			const generic_io_vec* vecs = fDMABuffer->Vecs();
-			uint32 vecCount = fDMABuffer->VecCount();
+			uint32_t vecCount = fDMABuffer->VecCount();
 			generic_size_t vecOffset = 0;
-			uint32 i = 0;
+			uint32_t i = 0;
 
 			off_t offset = fOffset;
 			off_t endOffset = fOffset + fLength;
@@ -536,7 +536,7 @@ IOOperation::Vecs() const
 }
 
 
-uint32
+uint32_t
 IOOperation::VecCount() const
 {
 	switch (fPhase) {
@@ -580,9 +580,9 @@ IOOperation::_PrepareVecs()
 	// we need to prepare the vecs for consumption by the drivers
 	if (fPhase == PHASE_READ_BEGIN) {
 		generic_io_vec* vecs = fDMABuffer->Vecs();
-		uint32 vecCount = fDMABuffer->VecCount();
+		uint32_t vecCount = fDMABuffer->VecCount();
 		generic_size_t vecLength = fBlockSize;
-		for (uint32 i = 0; i < vecCount; i++) {
+		for (uint32_t i = 0; i < vecCount; i++) {
 			generic_io_vec& vec = vecs[i];
 			if (vec.length >= vecLength) {
 				fSavedVecIndex = i;
@@ -594,9 +594,9 @@ IOOperation::_PrepareVecs()
 		}
 	} else if (fPhase == PHASE_READ_END) {
 		generic_io_vec* vecs = fDMABuffer->Vecs();
-		uint32 vecCount = fDMABuffer->VecCount();
+		uint32_t vecCount = fDMABuffer->VecCount();
 		generic_size_t vecLength = fBlockSize;
-		for (int32 i = vecCount - 1; i >= 0; i--) {
+		for (int32_t i = vecCount - 1; i >= 0; i--) {
 			generic_io_vec& vec = vecs[i];
 			if (vec.length >= vecLength) {
 				fSavedVecIndex = i;
@@ -722,7 +722,7 @@ IORequest::Create(bool vip)
 
 status_t
 IORequest::Init(off_t offset, generic_addr_t buffer, generic_size_t length,
-	bool write, uint32 flags)
+	bool write, uint32_t flags)
 {
 	ASSERT(offset >= 0);
 
@@ -736,7 +736,7 @@ IORequest::Init(off_t offset, generic_addr_t buffer, generic_size_t length,
 status_t
 IORequest::Init(off_t offset, generic_size_t firstVecOffset,
 	const generic_io_vec* vecs, size_t count, generic_size_t length, bool write,
-	uint32 flags)
+	uint32_t flags)
 {
 	ASSERT(offset >= 0);
 
@@ -782,8 +782,8 @@ IORequest::CreateSubRequest(off_t parentOffset, off_t offset,
 	// find start vec
 	generic_size_t vecOffset = parentOffset - fOffset;
 	generic_io_vec* vecs = fBuffer->Vecs();
-	int32 vecCount = fBuffer->VecCount();
-	int32 startVec = 0;
+	int32_t vecCount = fBuffer->VecCount();
+	int32_t startVec = 0;
 	for (; startVec < vecCount; startVec++) {
 		const generic_io_vec& vec = vecs[startVec];
 		if (vecOffset < vec.length)
@@ -794,7 +794,7 @@ IORequest::CreateSubRequest(off_t parentOffset, off_t offset,
 
 	// count vecs
 	generic_size_t currentVecOffset = vecOffset;
-	int32 endVec = startVec;
+	int32_t endVec = startVec;
 	generic_size_t remainingLength = length;
 	for (; endVec < vecCount; endVec++) {
 		const generic_io_vec& vec = vecs[endVec];
@@ -872,7 +872,7 @@ IORequest::FinishedCallback(void** _cookie) const
 
 
 status_t
-IORequest::Wait(uint32 flags, bigtime_t timeout)
+IORequest::Wait(uint32_t flags, bigtime_t timeout)
 {
 	MutexLocker locker(fLock);
 
@@ -1097,7 +1097,7 @@ IORequest::Advance(generic_size_t bySize)
 	fTransferSize += bySize;
 
 	generic_io_vec* vecs = fBuffer->Vecs();
-	uint32 vecCount = fBuffer->VecCount();
+	uint32_t vecCount = fBuffer->VecCount();
 	while (fVecIndex < vecCount
 			&& vecs[fVecIndex].length - fVecOffset <= bySize) {
 		bySize -= vecs[fVecIndex].length - fVecOffset;
@@ -1301,10 +1301,10 @@ IORequest::_CopyUser(void* _bounceBuffer, generic_addr_t _external, size_t size,
 	uint8* external = (uint8*)(addr_t)_external;
 
 	while (size > 0) {
-		static const int32 kEntryCount = 8;
+		static const int32_t kEntryCount = 8;
 		physical_entry entries[kEntryCount];
 
-		uint32 count = kEntryCount;
+		uint32_t count = kEntryCount;
 		status_t error = get_memory_map_etc(team, external, size, entries,
 			&count);
 		if (error != B_OK && error != B_BUFFER_OVERFLOW) {
@@ -1313,7 +1313,7 @@ IORequest::_CopyUser(void* _bounceBuffer, generic_addr_t _external, size_t size,
 			return B_BAD_ADDRESS;
 		}
 
-		for (uint32 i = 0; i < count; i++) {
+		for (uint32_t i = 0; i < count; i++) {
 			const physical_entry& entry = entries[i];
 			error = _CopyPhysical(bounceBuffer, entry.address, entry.size, team,
 				copyIn);
@@ -1354,10 +1354,10 @@ IORequest::_ClearDataUser(generic_addr_t _external, generic_size_t size,
 	uint8* external = (uint8*)(addr_t)_external;
 
 	while (size > 0) {
-		static const int32 kEntryCount = 8;
+		static const int32_t kEntryCount = 8;
 		physical_entry entries[kEntryCount];
 
-		uint32 count = kEntryCount;
+		uint32_t count = kEntryCount;
 		status_t error = get_memory_map_etc(team, external, size, entries,
 			&count);
 		if (error != B_OK && error != B_BUFFER_OVERFLOW) {
@@ -1366,7 +1366,7 @@ IORequest::_ClearDataUser(generic_addr_t _external, generic_size_t size,
 			return B_BAD_ADDRESS;
 		}
 
-		for (uint32 i = 0; i < count; i++) {
+		for (uint32_t i = 0; i < count; i++) {
 			const physical_entry& entry = entries[i];
 			error = _ClearDataPhysical(entry.address, entry.size, team);
 			if (error != B_OK)

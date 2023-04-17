@@ -56,7 +56,7 @@ public:
 		return fSize > 0;
 	}
 
-	uint32 AddressSize() const
+	uint32_t AddressSize() const
 	{
 		return fAddressSize;
 	}
@@ -118,7 +118,7 @@ public:
 	target_addr_t ReadAddress(target_addr_t defaultValue)
 	{
 		return fAddressSize == 4
-			? (target_addr_t)Read<uint32>(defaultValue)
+			? (target_addr_t)Read<uint32_t>(defaultValue)
 			: (target_addr_t)Read<uint64>(defaultValue);
 	}
 
@@ -174,7 +174,7 @@ public:
 
 	uint64 ReadInitialLength(bool& _dwarf64)
 	{
-		uint64 length = Read<uint32>(0);
+		uint64 length = Read<uint32_t>(0);
 		_dwarf64 = (length == 0xffffffff);
 		if (_dwarf64)
 			length = Read<uint64>(0);

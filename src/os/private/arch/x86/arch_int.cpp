@@ -72,7 +72,7 @@ static const interrupt_controller* sCurrentPIC = NULL;
 
 
 static const char*
-exception_name(int number, char* buffer, int32 bufferSize)
+exception_name(int number, char* buffer, int32_t bufferSize)
 {
 	if (number >= 0 && number < kInterruptNameCount)
 		return kInterruptNames[number];
@@ -106,10 +106,10 @@ void
 x86_unexpected_exception(iframe* frame)
 {
 	debug_exception_type type;
-	uint32 signalNumber;
-	int32 signalCode;
+	uint32_t signalNumber;
+	int32_t signalCode;
 	addr_t signalAddress = 0;
-	int32 signalError = B_ERROR;
+	int32_t signalError = B_ERROR;
 
 	switch (frame->vector) {
 		case 0:		// Divide Error Exception (#DE)
@@ -207,7 +207,7 @@ x86_unexpected_exception(iframe* frame)
 void
 x86_hardware_interrupt(struct iframe* frame)
 {
-	int32 vector = frame->vector - ARCH_INTERRUPT_BASE;
+	int32_t vector = frame->vector - ARCH_INTERRUPT_BASE;
 	bool levelTriggered = false;
 	Thread* thread = thread_get_current_thread();
 
@@ -360,7 +360,7 @@ arch_int_disable_io_interrupt(int irq)
 
 
 void
-arch_int_configure_io_interrupt(int irq, uint32 config)
+arch_int_configure_io_interrupt(int irq, uint32_t config)
 {
 	sCurrentPIC->configure_io_interrupt(irq, config);
 }
@@ -401,7 +401,7 @@ arch_int_are_interrupts_enabled(void)
 
 
 void
-arch_int_assign_to_cpu(int32 irq, int32 cpu)
+arch_int_assign_to_cpu(int32_t irq, int32_t cpu)
 {
 	switch (sVectorSources[irq]) {
 		case IRQ_SOURCE_IOAPIC:

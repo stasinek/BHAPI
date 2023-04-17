@@ -1289,7 +1289,7 @@
         break;
 
       case BDF_INTEGER:
-        fp->value.int32 = _bdf_atol( value, 0, 10 );
+        fp->value.int32_t = _bdf_atol( value, 0, 10 );
         break;
 
       case BDF_CARDINAL:
@@ -1359,7 +1359,7 @@
       break;
 
     case BDF_INTEGER:
-      fp->value.int32 = _bdf_atol( value, 0, 10 );
+      fp->value.int32_t = _bdf_atol( value, 0, 10 );
       break;
 
     case BDF_CARDINAL:
@@ -1387,11 +1387,11 @@
     /* present, and the SPACING property should override the default       */
     /* spacing.                                                            */
     if ( ft_memcmp( name, "DEFAULT_CHAR", 12 ) == 0 )
-      font->default_char = fp->value.int32;
+      font->default_char = fp->value.int32_t;
     else if ( ft_memcmp( name, "FONT_ASCENT", 11 ) == 0 )
-      font->font_ascent = fp->value.int32;
+      font->font_ascent = fp->value.int32_t;
     else if ( ft_memcmp( name, "FONT_DESCENT", 12 ) == 0 )
-      font->font_descent = fp->value.int32;
+      font->font_descent = fp->value.int32_t;
     else if ( ft_memcmp( name, "SPACING", 7 ) == 0 )
     {
       if ( fp->value.atom[0] == 'p' || fp->value.atom[0] == 'P' )

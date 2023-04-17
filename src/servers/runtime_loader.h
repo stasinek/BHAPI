@@ -26,24 +26,24 @@ struct SymbolLookupInfo;
 
 struct rld_export {
 	// runtime loader API export
-	image_id (*load_add_on)(char const *path, uint32 flags);
+	image_id (*load_add_on)(char const *path, uint32_t flags);
 	status_t (*unload_add_on)(image_id imageID);
-	image_id (*load_library)(char const *path, uint32 flags, void **_handle);
+	image_id (*load_library)(char const *path, uint32_t flags, void **_handle);
 	status_t (*unload_library)(void* handle);
 	status_t (*get_image_symbol)(image_id imageID, char const *symbolName,
-		int32 symbolType, bool recursive, image_id *_inImage, void **_location);
+		int32_t symbolType, bool recursive, image_id *_inImage, void **_location);
 	status_t (*get_library_symbol)(void* handle, void* caller,
 		const char* symbolName, void **_location);
-	status_t (*get_nth_image_symbol)(image_id imageID, int32 num,
-		char *symbolName, int32 *nameLength, int32 *symbolType,
+	status_t (*get_nth_image_symbol)(image_id imageID, int32_t num,
+		char *symbolName, int32_t *nameLength, int32_t *symbolType,
 		void **_location);
 	status_t (*get_nearest_symbol_at_address)(void* address,
 		image_id* _imageID,	char** _imagePath, char** _imageName,
-		char** _symbolName, int32* _type, void** _location, bool* _exactMatch);
+		char** _symbolName, int32_t* _type, void** _location, bool* _exactMatch);
 	status_t (*test_executable)(const char *path, char *interpreter);
 	status_t (*get_executable_architecture)(const char *path,
 		const char** _architecture);
-	status_t (*get_next_image_dependency)(image_id id, uint32 *cookie,
+	status_t (*get_next_image_dependency)(image_id id, uint32_t *cookie,
 		const char **_name);
 	void* (*get_tls_address)(unsigned dso, addr_t offset);
 	void (*destroy_thread_tls)();
@@ -76,11 +76,11 @@ typedef struct elf_region_t {
 	addr_t		fdstart;
 	addr_t		fdsize;
 	long		delta;
-	uint32		flags;
+	uint32_t		flags;
 } elf_region_t;
 
 typedef struct elf_version_info {
-	uint32		hash;			// version name hash
+	uint32_t		hash;			// version name hash
 	const char	*name;			// version name
 	const char	*file_name;		// dependency file name (needed versions only)
 } elf_version_info;
@@ -94,11 +94,11 @@ typedef struct image_t {
 
 	struct image_t		*next;
 	struct image_t		*prev;
-	int32				ref_count;
-	uint32				flags;
+	int32_t				ref_count;
+	uint32_t				flags;
 
-	uint32				api_version;
-	uint32				abi;
+	uint32_t				api_version;
+	uint32_t				abi;
 
 	addr_t 				entry_point;
 	addr_t				init_routine;
@@ -106,7 +106,7 @@ typedef struct image_t {
 	addr_t 				dynamic_ptr; 	// pointer to the dynamic section
 
 	// pointer to symbol participation data structures
-	uint32				*symhash;
+	uint32_t				*symhash;
 	elf_sym				*syms;
 	char				*strtab;
 	elf_rel				*rel;
@@ -118,17 +118,17 @@ typedef struct image_t {
 
 	unsigned			dso_tls_id;
 
-	uint32				num_needed;
+	uint32_t				num_needed;
 	struct image_t		**needed;
 
 	// versioning related structures
-	uint32				num_version_definitions;
+	uint32_t				num_version_definitions;
 	elf_verdef			*version_definitions;
-	uint32				num_needed_versions;
+	uint32_t				num_needed_versions;
 	elf_verneed			*needed_versions;
 	elf_versym			*symbol_versions;
 	elf_version_info	*versions;
-	uint32				num_versions;
+	uint32_t				num_versions;
 
 #ifdef __cplusplus
 	elf_sym*			(*find_undefined_symbol)(struct image_t* rootImage,
@@ -148,7 +148,7 @@ typedef struct image_t {
 	struct RuntimeLoaderSymbolPatcher	*undefined_symbol_patchers;
 
 	// describes the text and data regions
-	uint32				num_regions;
+	uint32_t				num_regions;
 	elf_region_t		regions[1];
 } image_t;
 
@@ -184,7 +184,7 @@ typedef struct runtime_loader_debug_area {
 // symbol patcher callback
 typedef void runtime_loader_symbol_patcher(void* cookie,
 	struct image_t* rootImage, struct image_t* image, const char* name,
-	struct image_t** foundInImage, void** symbol, int32* type);
+	struct image_t** foundInImage, void** symbol, int32_t* type);
 
 // interface provided to add-ons
 struct runtime_loader_add_on_export {
@@ -202,8 +202,8 @@ struct runtime_loader_add_on_export {
 #define RUNTIME_LOADER_ADD_ON_VERSION	1
 
 typedef struct runtime_loader_add_on {
-	uint32	version;
-	uint32	flags;
+	uint32_t	version;
+	uint32_t	flags;
 
 	// called after the add-on image has been loaded
 	void	(*init)(struct rld_export* standardInterface,

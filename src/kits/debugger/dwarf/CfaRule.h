@@ -40,14 +40,14 @@ public:
 			cfa_rule_type		Type() const	{ return fType; }
 
 			int64				Offset() const		{ return fOffset; }
-			uint32				Register() const	{ return fRegister; }
+			uint32_t				Register() const	{ return fRegister; }
 			const CfaExpression& Expression() const	{ return fExpression; }
 
 	inline	void				SetToUndefined();
 	inline	void				SetToSameValue();
 	inline	void				SetToLocationOffset(int64 offset);
 	inline	void				SetToValueOffset(int64 offset);
-	inline	void				SetToRegister(uint32 reg);
+	inline	void				SetToRegister(uint32_t reg);
 	inline	void				SetToLocationExpression(const void* block,
 									size_t size);
 	inline	void				SetToValueExpression(const void* block,
@@ -57,7 +57,7 @@ private:
 			cfa_rule_type		fType;
 			union {
 				int64			fOffset;
-				uint32			fRegister;
+				uint32_t			fRegister;
 				CfaExpression	fExpression;
 			};
 };
@@ -71,15 +71,15 @@ public:
 
 			uint64				Offset() const
 									{ return fRegisterOffset.offset; }
-			uint32				Register() const
+			uint32_t				Register() const
 									{ return fRegisterOffset.reg; }
 			const CfaExpression& Expression() const	{ return fExpression; }
 
 	inline	void				SetToUndefined();
-	inline	void				SetToRegisterOffset(uint32 reg, uint64 offset);
+	inline	void				SetToRegisterOffset(uint32_t reg, uint64 offset);
 	inline	void				SetToExpression(const void* block, size_t size);
 
-	inline	void				SetRegister(uint32 reg);
+	inline	void				SetRegister(uint32_t reg);
 	inline	void				SetOffset(uint64 offset);
 
 private:
@@ -87,7 +87,7 @@ private:
 			union {
 				struct {
 					uint64		offset;
-					uint32		reg;
+					uint32_t		reg;
 				} 				fRegisterOffset;
 				CfaExpression	fExpression;
 			};
@@ -130,7 +130,7 @@ void CfaRule::SetToValueOffset(int64 offset)
 }
 
 
-void CfaRule::SetToRegister(uint32 reg)
+void CfaRule::SetToRegister(uint32_t reg)
 {
 	fType = CFA_RULE_REGISTER;
 	fRegister = reg;
@@ -169,7 +169,7 @@ void CfaCfaRule::SetToUndefined()
 }
 
 
-void CfaCfaRule::SetToRegisterOffset(uint32 reg, uint64 offset)
+void CfaCfaRule::SetToRegisterOffset(uint32_t reg, uint64 offset)
 {
 	fType = CFA_CFA_RULE_REGISTER_OFFSET;
 	fRegisterOffset.reg = reg;
@@ -185,7 +185,7 @@ void CfaCfaRule::SetToExpression(const void* block, size_t size)
 }
 
 
-void CfaCfaRule::SetRegister(uint32 reg)
+void CfaCfaRule::SetRegister(uint32_t reg)
 {
 	fRegisterOffset.reg = reg;
 }

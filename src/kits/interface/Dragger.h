@@ -24,10 +24,10 @@ namespace BPrivate {
 class BDragger : public BView {
 public:
 								BDragger(BRect frame, BView* target,
-									uint32 resizingMode = B_FOLLOW_NONE,
-									uint32 flags = B_WILL_DRAW);
+									uint32_t resizingMode = B_FOLLOW_NONE,
+									uint32_t flags = B_WILL_DRAW);
 								BDragger(BView* target,
-									uint32 flags = B_WILL_DRAW);
+									uint32_t flags = B_WILL_DRAW);
 								BDragger(BMessage* data);
 	virtual						~BDragger();
 
@@ -41,7 +41,7 @@ public:
 	virtual void				Draw(BRect updateRect);
 	virtual void				MouseDown(BPoint where);
 	virtual	void				MouseUp(BPoint where);
-	virtual	void				MouseMoved(BPoint where, uint32 transit,
+	virtual	void				MouseMoved(BPoint where, uint32_t transit,
 									const BMessage* dragMessage);
 	virtual void				MessageReceived(BMessage* message);
 	virtual	void				FrameMoved(BPoint newPosition);
@@ -52,8 +52,8 @@ public:
 	static	bool				AreDraggersDrawn();
 
 	virtual BHandler*			ResolveSpecifier(BMessage* message,
-									int32 index, BMessage* specifier,
-									int32 form, const char* property);
+									int32_t index, BMessage* specifier,
+									int32_t form, const char* property);
 	virtual status_t			GetSupportedSuites(BMessage* data);
 	virtual status_t			Perform(perform_code code, void* data);
 
@@ -117,7 +117,7 @@ private:
 			bool				fPopUpIsCustom;
 			BBitmap*			fBitmap;
 			BPopUpMenu*			fPopUp;
-			uint32				_reserved[3];
+			uint32_t				_reserved[3];
 };
 
 #endif /* _DRAGGER_H */

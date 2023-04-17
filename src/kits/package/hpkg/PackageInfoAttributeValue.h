@@ -26,7 +26,7 @@ struct BPackageVersionData {
 			const char*			minor;
 			const char*			micro;
 			const char*			preRelease;
-			uint32				revision;
+			uint32_t				revision;
 };
 
 

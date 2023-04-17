@@ -106,7 +106,7 @@ public:
 	// Form add
 			status_t			AddString(const BString& name,
 									const BString& value);
-			status_t			AddInt(const BString& name, int32 value);
+			status_t			AddInt(const BString& name, int32_t value);
 			status_t			AddFile(const BString& fieldName,
 									const BPath& file);
 			status_t			AddBuffer(const BString& fieldName,
@@ -148,7 +148,7 @@ public:
 			BHttpFormData&		operator[](const BString& name);
 
 private:
-			void				_ExtractNameValuePair(const BString& string, int32* index);
+			void				_ExtractNameValuePair(const BString& string, int32_t* index);
 			void				_GenerateMultipartBoundary();
 			BString				_GetMultipartHeader(const BHttpFormData* element) const;
 			form_content_type	_GetType(FormStorage::const_iterator it) const;

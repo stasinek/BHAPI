@@ -45,7 +45,7 @@ public:
 	ssize_t ReadAt(off_t pos, void *buffer, size_t size);
 	ssize_t WriteAt(off_t pos, const void *buffer,
 								size_t size);
-	off_t Seek(off_t position, uint32 seekMode);
+	off_t Seek(off_t position, uint32_t seekMode);
 	off_t Position() const;
 
 	status_t SetSize(off_t size);

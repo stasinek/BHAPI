@@ -32,7 +32,7 @@ BPackageReader::~BPackageReader()
 }
 
 
-status_t BPackageReader::Init(const char* fileName, uint32 flags)
+status_t BPackageReader::Init(const char* fileName, uint32_t flags)
 {
 	if (fImpl == NULL)
 		return B_NO_INIT;
@@ -41,7 +41,7 @@ status_t BPackageReader::Init(const char* fileName, uint32 flags)
 }
 
 
-status_t BPackageReader::Init(int fd, bool keepFD, uint32 flags)
+status_t BPackageReader::Init(int fd, bool keepFD, uint32_t flags)
 {
 	if (fImpl == NULL)
 		return B_NO_INIT;
@@ -50,7 +50,7 @@ status_t BPackageReader::Init(int fd, bool keepFD, uint32 flags)
 }
 
 
-status_t BPackageReader::Init(BPositionIO* file, bool keepFile, uint32 flags)
+status_t BPackageReader::Init(BPositionIO* file, bool keepFile, uint32_t flags)
 {
 	if (fImpl == NULL)
 		return B_NO_INIT;

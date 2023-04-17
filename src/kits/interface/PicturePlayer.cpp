@@ -104,7 +104,7 @@ static void draw_polygon(void* _context, size_t numPoints, const BPoint _points[
 
     memcpy(points, _points, numPoints * sizeof(BPoint));
 
-    ((void (*)(void*, int32, BPoint*, bool))
+    ((void (*)(void*, int32_t, BPoint*, bool))
         context->function_table[fill ? 14 : 13])(context->user_data, numPoints,
             points, isClosed);
 
@@ -134,8 +134,8 @@ static void draw_string(void* _context, const char* _string, size_t length,
 }
 
 
-static void draw_pixels(void* _context, const BRect& src, const BRect& dest, uint32 width,
-    uint32 height, size_t bytesPerRow, color_space pixelFormat, uint32 options,
+static void draw_pixels(void* _context, const BRect& src, const BRect& dest, uint32_t width,
+    uint32_t height, size_t bytesPerRow, color_space pixelFormat, uint32_t options,
     const void* _data, size_t length)
 {
     adapter_context* context = reinterpret_cast<adapter_context*>(_context);
@@ -145,7 +145,7 @@ static void draw_pixels(void* _context, const BRect& src, const BRect& dest, uin
 
     memcpy(data, _data, length);
 
-    ((void (*)(void*, BRect, BRect, int32, int32, int32, int32, int32, void*))
+    ((void (*)(void*, BRect, BRect, int32_t, int32_t, int32_t, int32_t, int32_t, void*))
         context->function_table[18])(context->user_data, src, dest, width,
             height, bytesPerRow, pixelFormat, options, data);
 
@@ -153,10 +153,10 @@ static void draw_pixels(void* _context, const BRect& src, const BRect& dest, uin
 }
 
 
-static void draw_picture(void* _context, const BPoint& where, int32 token)
+static void draw_picture(void* _context, const BPoint& where, int32_t token)
 {
     adapter_context* context = reinterpret_cast<adapter_context*>(_context);
-    ((void (*)(void*, BPoint, int32))context->function_table[19])(
+    ((void (*)(void*, BPoint, int32_t))context->function_table[19])(
         context->user_data, where, token);
 }
 
@@ -177,7 +177,7 @@ static void set_clipping_rects(void* _context, size_t numRects, const BRect _rec
 
     memcpy(rects, _rects, numRects * sizeof(BRect));
 
-    ((void (*)(void*, BRect*, uint32))context->function_table[20])(
+    ((void (*)(void*, BRect*, uint32_t))context->function_table[20])(
         context->user_data, rects, numRects);
 
     if (numRects > kMaxStackCount)
@@ -185,11 +185,11 @@ static void set_clipping_rects(void* _context, size_t numRects, const BRect _rec
 }
 
 
-static void clip_to_picture(void* _context, int32 token, const BPoint& origin,
+static void clip_to_picture(void* _context, int32_t token, const BPoint& origin,
     bool clipToInverse)
 {
     adapter_context* context = reinterpret_cast<adapter_context*>(_context);
-    ((void (*)(void*, int32, BPoint, bool))context->function_table[21])(
+    ((void (*)(void*, int32_t, BPoint, bool))context->function_table[21])(
             context->user_data, token, origin, clipToInverse);
 }
 
@@ -336,7 +336,7 @@ static void set_font_style(void* _context, const char* _style, size_t length)
 static void set_font_spacing(void* _context, uint8 spacing)
 {
     adapter_context* context = reinterpret_cast<adapter_context*>(_context);
-    ((void (*)(void*, int32))context->function_table[39])(context->user_data,
+    ((void (*)(void*, int32_t))context->function_table[39])(context->user_data,
         spacing);
 }
 
@@ -360,15 +360,15 @@ static void set_font_rotation(void* _context, float rotation)
 static void set_font_encoding(void* _context, uint8 encoding)
 {
     adapter_context* context = reinterpret_cast<adapter_context*>(_context);
-    ((void (*)(void*, int32))context->function_table[42])(context->user_data,
+    ((void (*)(void*, int32_t))context->function_table[42])(context->user_data,
         encoding);
 }
 
 
-static void set_font_flags(void* _context, uint32 flags)
+static void set_font_flags(void* _context, uint32_t flags)
 {
     adapter_context* context = reinterpret_cast<adapter_context*>(_context);
-    ((void (*)(void*, int32))context->function_table[43])(context->user_data,
+    ((void (*)(void*, int32_t))context->function_table[43])(context->user_data,
         flags);
 }
 
@@ -384,7 +384,7 @@ static void set_font_shear(void* _context, float shear)
 static void set_font_face(void* _context, uint16 face)
 {
     adapter_context* context = reinterpret_cast<adapter_context*>(_context);
-    ((void (*)(void*, int32))context->function_table[46])(context->user_data,
+    ((void (*)(void*, int32_t))context->function_table[46])(context->user_data,
         face);
 }
 
@@ -475,7 +475,7 @@ PicturePlayer::~PicturePlayer()
 }
 
 
-status_t PicturePlayer::Play(void** callBackTable, int32 tableEntries, void* userData)
+status_t PicturePlayer::Play(void** callBackTable, int32_t tableEntries, void* userData)
 {
     const BPrivate::picture_player_callbacks kAdapterCallbacks = {
         move_pen_by,
@@ -598,7 +598,7 @@ private:
 
 struct picture_data_entry_header {
     uint16 op;
-    uint32 size;
+    uint32_t size;
 } _PACKED;
 
 
@@ -608,7 +608,7 @@ status_t PicturePlayer::_Play(const picture_player_callbacks& callbacks, void* u
 #if DEBUG
     printf("Start rendering %sBPicture...\n", parentOp != 0 ? "sub " : "");
     bigtime_t startTime = system_time();
-    int32 numOps = 0;
+    int32_t numOps = 0;
 #endif
 
     DataReader pictureReader(buffer, length);
@@ -750,7 +750,7 @@ status_t PicturePlayer::_Play(const picture_player_callbacks& callbacks, void* u
             case B_PIC_STROKE_POLYGON:
             case B_PIC_FILL_POLYGON:
             {
-                const uint32* numPoints;
+                const uint32_t* numPoints;
                 const BPoint* points;
                 if (callbacks.draw_polygon == NULL || !reader.Get(numPoints)
                     || !reader.Get(points, *numPoints)) {
@@ -774,9 +774,9 @@ status_t PicturePlayer::_Play(const picture_player_callbacks& callbacks, void* u
             case B_PIC_STROKE_SHAPE:
             case B_PIC_FILL_SHAPE:
             {
-                const uint32* opCount;
-                const uint32* pointCount;
-                const uint32* opList;
+                const uint32_t* opCount;
+                const uint32_t* pointCount;
+                const uint32_t* opList;
                 const BPoint* pointList;
                 if (callbacks.draw_shape == NULL || !reader.Get(opCount)
                     || !reader.Get(pointCount) || !reader.Get(opList, *opCount)
@@ -815,11 +815,11 @@ status_t PicturePlayer::_Play(const picture_player_callbacks& callbacks, void* u
             {
                 const BRect* sourceRect;
                 const BRect* destinationRect;
-                const uint32* width;
-                const uint32* height;
-                const uint32* bytesPerRow;
-                const uint32* colorSpace;
-                const uint32* flags;
+                const uint32_t* width;
+                const uint32_t* height;
+                const uint32_t* bytesPerRow;
+                const uint32_t* colorSpace;
+                const uint32_t* flags;
                 const void* data;
                 size_t length;
                 if (callbacks.draw_pixels == NULL || !reader.Get(sourceRect)
@@ -839,7 +839,7 @@ status_t PicturePlayer::_Play(const picture_player_callbacks& callbacks, void* u
             case B_PIC_DRAW_PICTURE:
             {
                 const BPoint* where;
-                const int32* token;
+                const int32_t* token;
                 if (callbacks.draw_picture == NULL || !reader.Get(where)
                     || !reader.Get(token)) {
                     break;
@@ -851,7 +851,7 @@ status_t PicturePlayer::_Play(const picture_player_callbacks& callbacks, void* u
 
             case B_PIC_SET_CLIPPING_RECTS:
             {
-                const uint32* numRects;
+                const uint32_t* numRects;
                 const BRect* rects;
                 if (callbacks.set_clipping_rects == NULL
                     || !reader.Get(numRects) || !reader.Get(rects, *numRects)) {
@@ -873,7 +873,7 @@ status_t PicturePlayer::_Play(const picture_player_callbacks& callbacks, void* u
 
             case B_PIC_CLIP_TO_PICTURE:
             {
-                const int32* token;
+                const int32_t* token;
                 const BPoint* where;
                 const bool* inverse;
                 if (callbacks.clip_to_picture == NULL || !reader.Get(token)
@@ -1055,7 +1055,7 @@ status_t PicturePlayer::_Play(const picture_player_callbacks& callbacks, void* u
 
             case B_PIC_SET_FONT_SPACING:
             {
-                const uint32* spacing;
+                const uint32_t* spacing;
                 if (callbacks.set_font_spacing == NULL || !reader.Get(spacing))
                     break;
 
@@ -1087,7 +1087,7 @@ status_t PicturePlayer::_Play(const picture_player_callbacks& callbacks, void* u
 
             case B_PIC_SET_FONT_ENCODING:
             {
-                const uint32* encoding;
+                const uint32_t* encoding;
                 if (callbacks.set_font_encoding == NULL
                     || !reader.Get(encoding)) {
                     break;
@@ -1099,7 +1099,7 @@ status_t PicturePlayer::_Play(const picture_player_callbacks& callbacks, void* u
 
             case B_PIC_SET_FONT_FLAGS:
             {
-                const uint32* flags;
+                const uint32_t* flags;
                 if (callbacks.set_font_flags == NULL || !reader.Get(flags))
                     break;
 
@@ -1119,7 +1119,7 @@ status_t PicturePlayer::_Play(const picture_player_callbacks& callbacks, void* u
 
             case B_PIC_SET_FONT_FACE:
             {
-                const uint32* face;
+                const uint32_t* face;
                 if (callbacks.set_font_face == NULL || !reader.Get(face))
                     break;
 
@@ -1216,9 +1216,9 @@ status_t PicturePlayer::_Play(const picture_player_callbacks& callbacks, void* u
             case B_PIC_CLIP_TO_SHAPE:
             {
                 const bool* inverse;
-                const uint32* opCount;
-                const uint32* pointCount;
-                const uint32* opList;
+                const uint32_t* opCount;
+                const uint32_t* pointCount;
+                const uint32_t* opList;
                 const BPoint* pointList;
                 if (callbacks.clip_to_shape == NULL || !reader.Get(inverse)
                     || !reader.Get(opCount) || !reader.Get(pointCount)

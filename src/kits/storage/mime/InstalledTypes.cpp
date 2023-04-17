@@ -419,7 +419,7 @@ status_t InstalledTypes::_BuildInstalledTypesList()
 								// We need to preserve the case of the type name for
 								// queries, so we can't use the file name directly
 								BString type;
-								int32 subStart;
+								int32_t subStart;
 								BNode node(&subEntry);
 								if (node.InitCheck() == B_OK
 									&& node.ReadAttrString(kTypeAttr, &type) >= B_OK

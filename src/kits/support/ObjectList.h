@@ -98,7 +98,7 @@ int UnaryPredicate<T>::_unary_predicate_glue(const void *item, void *context)
 class _PointerList_ : public BList {
 public:
     _PointerList_(const _PointerList_ &list);
-    _PointerList_(int32_t itemsPerBlock = 20, bool owning = false);
+    _PointerList_(int32_t_t itemsPerBlock = 20, bool owning = false);
     ~_PointerList_(void);
 
     typedef void *(* GenericEachFunction)(void *, void *);
@@ -117,14 +117,14 @@ public:
     void *BinarySearch(const void *, GenericCompareFunctionWithState,
         void *state) const;
 
-    int32_t BinarySearchIndex(const void *, GenericCompareFunction) const;
-    int32_t BinarySearchIndex(const void *, GenericCompareFunctionWithState,
+    int32_t_t BinarySearchIndex(const void *, GenericCompareFunction) const;
+    int32_t_t BinarySearchIndex(const void *, GenericCompareFunctionWithState,
         void *state) const;
-    int32_t BinarySearchIndexByPredicate(const void *, UnaryPredicateGlue) const;
+    int32_t_t BinarySearchIndexByPredicate(const void *, UnaryPredicateGlue) const;
 
     bool Owning() const;
-    bool ReplaceItem(int32_t, void *);
-    bool MoveItem(int32_t from, int32_t to);
+    bool ReplaceItem(int32_t_t, void *);
+    bool MoveItem(int32_t_t from, int32_t_t to);
 
 protected:
     bool owning;
@@ -141,7 +141,7 @@ public:
     typedef	int 				(*CompareFunctionWithState)(const T*, const T*,
                                     void* state);
 
-                                BObjectList(int32_t itemsPerBlock = 20,
+                                BObjectList(int32_t_t itemsPerBlock = 20,
                                     bool owning = false);
                                 BObjectList(const BObjectList& list);
                                     // clones list; if list is owning, makes
@@ -155,37 +155,37 @@ public:
 
                                 // adding and removing
             bool				AddItem(T*);
-            bool				AddItem(T*, int32_t);
+            bool				AddItem(T*, int32_t_t);
             bool				AddList(BObjectList*);
-            bool				AddList(BObjectList*, int32_t);
+            bool				AddList(BObjectList*, int32_t_t);
 
             bool				RemoveItem(T*, bool deleteIfOwning = true);
                                     // if owning, deletes the removed item
-            T*					RemoveItemAt(int32_t);
+            T*					RemoveItemAt(int32_t_t);
                                     // returns the removed item
 
             void				MakeEmpty(bool deleteIfOwning = true);
 
                                 // item access
-            T*					ItemAt(int32_t) const;
+            T*					ItemAt(int32_t_t) const;
 
-            bool				ReplaceItem(int32_t index, T*);
+            bool				ReplaceItem(int32_t_t index, T*);
                                     // if list is owning, deletes the item
                                     // at <index> first
-            T*					SwapWithItem(int32_t index, T* newItem);
+            T*					SwapWithItem(int32_t_t index, T* newItem);
                                     // same as ReplaceItem, except does not
                                     // delete old item at <index>, returns it
                                     // instead
-            bool				MoveItem(int32_t from, int32_t to);
+            bool				MoveItem(int32_t_t from, int32_t_t to);
 
             T*					FirstItem() const;
             T*					LastItem() const;
 
                                 // misc. getters
-            int32_t				IndexOf(const T*) const;
+            int32_t_t				IndexOf(const T*) const;
             bool				HasItem(const T*) const;
             bool				IsEmpty() const;
-            int32_t				CountItems() const;
+            int32_t_t				CountItems() const;
 
             T*					EachElement(EachFunction, void*);
             const T*			EachElement(ConstEachFunction, void*) const;
@@ -217,14 +217,14 @@ public:
                                     int (*compare)(const Key*, const T*, void*),
                                     void* state) const;
 
-            int32_t				BinarySearchIndex(const T&item,
+            int32_t_t				BinarySearchIndex(const T&item,
                                     CompareFunction compare) const;
-            int32_t				BinarySearchIndex(const T&item,
+            int32_t_t				BinarySearchIndex(const T&item,
                                     CompareFunctionWithState compare,
                                     void* state) const;
 
             template<typename Key>
-            int32_t				BinarySearchIndexByKey(const Key& key,
+            int32_t_t				BinarySearchIndexByKey(const Key& key,
                                     int (*compare)(const Key*, const T*)) const;
 
                                 // Binary insertion - list must be sorted with
@@ -259,7 +259,7 @@ public:
             T*					BinaryInsertCopyUnique(const T& copyThis,
                                     CompareFunctionWithState, void* state);
 
-            int32_t				FindBinaryInsertionIndex(
+            int32_t_t				FindBinaryInsertionIndex(
                                     const UnaryPredicate<T>&,
                                     bool* alreadyInList = 0) const;
                                     // returns either the index into which a new
@@ -270,7 +270,7 @@ public:
 private:
     friend	class Private;
 
-            void				_SetItem(int32_t, T*);
+            void				_SetItem(int32_t_t, T*);
 };
 
 
@@ -279,9 +279,9 @@ Result WhileEachListItem(BObjectList<Item>* list, Result (Item::*func)(Param1),
     Param1 p1)
 {
     Result result = 0;
-    int32_t count = list->CountItems();
+    int32_t_t count = list->CountItems();
 
-    for (int32_t index = 0; index < count; index++) {
+    for (int32_t_t index = 0; index < count; index++) {
         if ((result = (list->ItemAt(index)->*func)(p1)) != 0)
             break;
     }
@@ -296,9 +296,9 @@ WhileEachListItem(BObjectList<Item>* list, Result (*func)(Item*, Param1),
     Param1 p1)
 {
     Result result = 0;
-    int32_t count = list->CountItems();
+    int32_t_t count = list->CountItems();
 
-    for (int32_t index = 0; index < count; index++) {
+    for (int32_t_t index = 0; index < count; index++) {
         if ((result = (*func)(list->ItemAt(index), p1)) != 0)
             break;
     }
@@ -313,9 +313,9 @@ WhileEachListItem(BObjectList<Item>* list, Result (Item::*func)(Param1, Param2),
     Param1 p1, Param2 p2)
 {
     Result result = 0;
-    int32_t count = list->CountItems();
+    int32_t_t count = list->CountItems();
 
-    for (int32_t index = 0; index < count; index++) {
+    for (int32_t_t index = 0; index < count; index++) {
         if ((result = (list->ItemAt(index)->*func)(p1, p2)) != 0)
             break;
     }
@@ -330,9 +330,9 @@ WhileEachListItem(BObjectList<Item>* list,
     Result (*func)(Item*, Param1, Param2), Param1 p1, Param2 p2)
 {
     Result result = 0;
-    int32_t count = list->CountItems();
+    int32_t_t count = list->CountItems();
 
-    for (int32_t index = 0; index < count; index++) {
+    for (int32_t_t index = 0; index < count; index++) {
         if ((result = (*func)(list->ItemAt(index), p1, p2)) != 0)
             break;
     }
@@ -349,9 +349,9 @@ WhileEachListItem(BObjectList<Item>* list,
     Param3 p3, Param4 p4)
 {
     Result result = 0;
-    int32_t count = list->CountItems();
+    int32_t_t count = list->CountItems();
 
-    for (int32_t index = 0; index < count; index++) {
+    for (int32_t_t index = 0; index < count; index++) {
         if ((result = (*func)(list->ItemAt(index), p1, p2, p3, p4)) != 0)
             break;
     }
@@ -363,8 +363,8 @@ WhileEachListItem(BObjectList<Item>* list,
 template<class Item, class Result>
 void EachListItemIgnoreResult(BObjectList<Item>* list, Result (Item::*func)())
 {
-    int32_t count = list->CountItems();
-    for (int32_t index = 0; index < count; index++)
+    int32_t_t count = list->CountItems();
+    for (int32_t_t index = 0; index < count; index++)
         (list->ItemAt(index)->*func)();
 }
 
@@ -372,8 +372,8 @@ void EachListItemIgnoreResult(BObjectList<Item>* list, Result (Item::*func)())
 template<class Item, class Param1>
 void EachListItem(BObjectList<Item>* list, void (*func)(Item*, Param1), Param1 p1)
 {
-    int32_t count = list->CountItems();
-    for (int32_t index = 0; index < count; index++)
+    int32_t_t count = list->CountItems();
+    for (int32_t_t index = 0; index < count; index++)
         (func)(list->ItemAt(index), p1);
 }
 
@@ -382,8 +382,8 @@ template<class Item, class Param1, class Param2>
 void EachListItem(BObjectList<Item>* list, void (Item::*func)(Param1, Param2),
     Param1 p1, Param2 p2)
 {
-    int32_t count = list->CountItems();
-    for (int32_t index = 0; index < count; index++)
+    int32_t_t count = list->CountItems();
+    for (int32_t_t index = 0; index < count; index++)
         (list->ItemAt(index)->*func)(p1, p2);
 }
 
@@ -392,8 +392,8 @@ template<class Item, class Param1, class Param2>
 void EachListItem(BObjectList<Item>* list, void (*func)(Item*,Param1, Param2),
     Param1 p1, Param2 p2)
 {
-    int32_t count = list->CountItems();
-    for (int32_t index = 0; index < count; index++)
+    int32_t_t count = list->CountItems();
+    for (int32_t_t index = 0; index < count; index++)
         (func)(list->ItemAt(index), p1, p2);
 }
 
@@ -402,8 +402,8 @@ template<class Item, class Param1, class Param2, class Param3>
 void EachListItem(BObjectList<Item>* list,
     void (*func)(Item*,Param1, Param2, Param3), Param1 p1, Param2 p2, Param3 p3)
 {
-    int32_t count = list->CountItems();
-    for (int32_t index = 0; index < count; index++)
+    int32_t_t count = list->CountItems();
+    for (int32_t_t index = 0; index < count; index++)
         (func)(list->ItemAt(index), p1, p2, p3);
 }
 
@@ -413,8 +413,8 @@ void EachListItem(BObjectList<Item>* list,
     void (*func)(Item*,Param1, Param2, Param3, Param4), Param1 p1, Param2 p2,
     Param3 p3, Param4 p4)
 {
-    int32_t count = list->CountItems();
-    for (int32_t index = 0; index < count; index++)
+    int32_t_t count = list->CountItems();
+    for (int32_t_t index = 0; index < count; index++)
         (func)(list->ItemAt(index), p1, p2, p3, p4);
 }
 
@@ -429,7 +429,7 @@ inline bool _PointerList_::Owning() const
 
 
 template<class T>
-BObjectList<T>::BObjectList(int32_t itemsPerBlock, bool owning)
+BObjectList<T>::BObjectList(int32_t_t itemsPerBlock, bool owning)
     :
     _PointerList_(itemsPerBlock, owning)
 {
@@ -444,8 +444,8 @@ BObjectList<T>::BObjectList(const BObjectList<T>& list)
     owning = list.owning;
     if (owning) {
         // make our own copies in an owning list
-        int32_t count = list.CountItems();
-        for	(int32_t index = 0; index < count; index++) {
+        int32_t_t count = list.CountItems();
+        for	(int32_t_t index = 0; index < count; index++) {
             T* item = list.ItemAt(index);
             if (item)
                 item = new (std::nothrow) T(*item);
@@ -473,8 +473,8 @@ BObjectList<T>::operator=(const BObjectList<T>& list)
     BObjectList<T> &result = (BObjectList<T>&)_PointerList_::operator=(list);
     if (owning) {
         // make our own copies in an owning list
-        int32_t count = list.CountItems();
-        for	(int32_t index = 0; index < count; index++) {
+        int32_t_t count = list.CountItems();
+        for	(int32_t_t index = 0; index < count; index++) {
             T* item = list.ItemAt(index);
             if (item)
                 item = new (std::nothrow) T(*item);
@@ -494,7 +494,7 @@ bool BObjectList<T>::AddItem(T* item)
 
 
 template<class T>
-bool BObjectList<T>::AddItem(T* item, int32_t index)
+bool BObjectList<T>::AddItem(T* item, int32_t_t index)
 {
     return _PointerList_::AddItem((void*)item, index);
 }
@@ -508,7 +508,7 @@ bool BObjectList<T>::AddList(BObjectList<T>* list)
 
 
 template<class T>
-bool BObjectList<T>::AddList(BObjectList<T>* list, int32_t index)
+bool BObjectList<T>::AddList(BObjectList<T>* list, int32_t_t index)
 {
     return _PointerList_::AddList(list, index);
 }
@@ -528,7 +528,7 @@ bool BObjectList<T>::RemoveItem(T* item, bool deleteIfOwning)
 
 template<class T>
 T*
-BObjectList<T>::RemoveItemAt(int32_t index)
+BObjectList<T>::RemoveItemAt(int32_t_t index)
 {
     return (T*)_PointerList_::RemoveItem(index);
 }
@@ -536,14 +536,14 @@ BObjectList<T>::RemoveItemAt(int32_t index)
 
 template<class T>
 inline T*
-BObjectList<T>::ItemAt(int32_t index) const
+BObjectList<T>::ItemAt(int32_t_t index) const
 {
     return (T*)_PointerList_::ItemAt(index);
 }
 
 
 template<class T>
-bool BObjectList<T>::ReplaceItem(int32_t index, T* item)
+bool BObjectList<T>::ReplaceItem(int32_t_t index, T* item)
 {
     if (owning)
         delete ItemAt(index);
@@ -554,7 +554,7 @@ bool BObjectList<T>::ReplaceItem(int32_t index, T* item)
 
 template<class T>
 T*
-BObjectList<T>::SwapWithItem(int32_t index, T* item)
+BObjectList<T>::SwapWithItem(int32_t_t index, T* item)
 {
     T* result = ItemAt(index);
     _PointerList_::ReplaceItem(index, (void*)item);
@@ -564,21 +564,21 @@ BObjectList<T>::SwapWithItem(int32_t index, T* item)
 
 
 template<class T>
-bool BObjectList<T>::MoveItem(int32_t from, int32_t to)
+bool BObjectList<T>::MoveItem(int32_t_t from, int32_t_t to)
 {
     return _PointerList_::MoveItem(from, to);
 }
 
 
 template<class T>
-void BObjectList<T>::_SetItem(int32_t index, T* newItem)
+void BObjectList<T>::_SetItem(int32_t_t index, T* newItem)
 {
     _PointerList_::ReplaceItem(index, (void*)newItem);
 }
 
 
 template<class T>
-int32_t BObjectList<T>::IndexOf(const T* item) const
+int32_t_t BObjectList<T>::IndexOf(const T* item) const
 {
     return _PointerList_::IndexOf((void*)item);
 }
@@ -615,7 +615,7 @@ bool BObjectList<T>::IsEmpty() const
 
 
 template<class T>
-int32_t BObjectList<T>::CountItems() const
+int32_t_t BObjectList<T>::CountItems() const
 {
     return _PointerList_::CountItems();
 }
@@ -625,8 +625,8 @@ template<class T>
 void BObjectList<T>::MakeEmpty(bool deleteIfOwning)
 {
     if (owning && deleteIfOwning) {
-        int32_t count = CountItems();
-        for (int32_t index = 0; index < count; index++)
+        int32_t_t count = CountItems();
+        for (int32_t_t index = 0; index < count; index++)
             delete ItemAt(index);
     }
     _PointerList_::MakeEmpty();
@@ -654,8 +654,8 @@ template<class T>
 const T*
 BObjectList<T>::FindIf(const UnaryPredicate<T>& predicate) const
 {
-    int32_t count = CountItems();
-    for (int32_t index = 0; index < count; index++) {
+    int32_t_t count = CountItems();
+    for (int32_t_t index = 0; index < count; index++) {
         if (predicate.operator()(ItemAt(index)) == 0)
             return ItemAt(index);
     }
@@ -666,8 +666,8 @@ template<class T>
 T*
 BObjectList<T>::FindIf(const UnaryPredicate<T>& predicate)
 {
-    int32_t count = CountItems();
-    for (int32_t index = 0; index < count; index++) {
+    int32_t_t count = CountItems();
+    for (int32_t_t index = 0; index < count; index++) {
         if (predicate.operator()(ItemAt(index)) == 0)
             return ItemAt(index);
     }
@@ -744,7 +744,7 @@ BObjectList<T>::BinarySearchByKey(const Key &key,
 
 
 template<class T>
-int32_t BObjectList<T>::BinarySearchIndex(const T& item, CompareFunction compare) const
+int32_t_t BObjectList<T>::BinarySearchIndex(const T& item, CompareFunction compare) const
 {
     return _PointerList_::BinarySearchIndex(&item,
         (GenericCompareFunction)compare);
@@ -752,7 +752,7 @@ int32_t BObjectList<T>::BinarySearchIndex(const T& item, CompareFunction compare
 
 
 template<class T>
-int32_t BObjectList<T>::BinarySearchIndex(const T& item,
+int32_t_t BObjectList<T>::BinarySearchIndex(const T& item,
     CompareFunctionWithState compare, void* state) const
 {
     return _PointerList_::BinarySearchIndex(&item,
@@ -762,7 +762,7 @@ int32_t BObjectList<T>::BinarySearchIndex(const T& item,
 
 template<class T>
 template<typename Key>
-int32_t BObjectList<T>::BinarySearchIndexByKey(const Key& key,
+int32_t_t BObjectList<T>::BinarySearchIndexByKey(const Key& key,
     int (*compare)(const Key*, const T*)) const
 {
     return _PointerList_::BinarySearchIndex(&key,
@@ -773,7 +773,7 @@ int32_t BObjectList<T>::BinarySearchIndexByKey(const Key& key,
 template<class T>
 bool BObjectList<T>::BinaryInsert(T* item, CompareFunction func)
 {
-    int32_t index = _PointerList_::BinarySearchIndex(item,
+    int32_t_t index = _PointerList_::BinarySearchIndex(item,
         (GenericCompareFunction)func);
     if (index >= 0) {
         // already in list, add after existing
@@ -788,7 +788,7 @@ template<class T>
 bool BObjectList<T>::BinaryInsert(T* item, CompareFunctionWithState func,
     void* state)
 {
-    int32_t index = _PointerList_::BinarySearchIndex(item,
+    int32_t_t index = _PointerList_::BinarySearchIndex(item,
         (GenericCompareFunctionWithState)func, state);
     if (index >= 0) {
         // already in list, add after existing
@@ -802,7 +802,7 @@ bool BObjectList<T>::BinaryInsert(T* item, CompareFunctionWithState func,
 template<class T>
 bool BObjectList<T>::BinaryInsertUnique(T* item, CompareFunction func)
 {
-    int32_t index = _PointerList_::BinarySearchIndex(item,
+    int32_t_t index = _PointerList_::BinarySearchIndex(item,
         (GenericCompareFunction)func);
     if (index >= 0)
         return false;
@@ -815,7 +815,7 @@ template<class T>
 bool BObjectList<T>::BinaryInsertUnique(T* item, CompareFunctionWithState func,
     void* state)
 {
-    int32_t index = _PointerList_::BinarySearchIndex(item,
+    int32_t_t index = _PointerList_::BinarySearchIndex(item,
         (GenericCompareFunctionWithState)func, state);
     if (index >= 0)
         return false;
@@ -828,7 +828,7 @@ template<class T>
 T*
 BObjectList<T>::BinaryInsertCopy(const T& copyThis, CompareFunction func)
 {
-    int32_t index = _PointerList_::BinarySearchIndex(&copyThis,
+    int32_t_t index = _PointerList_::BinarySearchIndex(&copyThis,
         (GenericCompareFunction)func);
 
     if (index >= 0)
@@ -847,7 +847,7 @@ T*
 BObjectList<T>::BinaryInsertCopy(const T& copyThis,
     CompareFunctionWithState func, void* state)
 {
-    int32_t index = _PointerList_::BinarySearchIndex(&copyThis,
+    int32_t_t index = _PointerList_::BinarySearchIndex(&copyThis,
         (GenericCompareFunctionWithState)func, state);
 
     if (index >= 0)
@@ -865,7 +865,7 @@ template<class T>
 T*
 BObjectList<T>::BinaryInsertCopyUnique(const T& copyThis, CompareFunction func)
 {
-    int32_t index = _PointerList_::BinarySearchIndex(&copyThis,
+    int32_t_t index = _PointerList_::BinarySearchIndex(&copyThis,
         (GenericCompareFunction)func);
     if (index >= 0)
         return ItemAt(index);
@@ -882,7 +882,7 @@ T*
 BObjectList<T>::BinaryInsertCopyUnique(const T& copyThis,
     CompareFunctionWithState func, void* state)
 {
-    int32_t index = _PointerList_::BinarySearchIndex(&copyThis,
+    int32_t_t index = _PointerList_::BinarySearchIndex(&copyThis,
         (GenericCompareFunctionWithState)func, state);
     if (index >= 0)
         return ItemAt(index);
@@ -895,10 +895,10 @@ BObjectList<T>::BinaryInsertCopyUnique(const T& copyThis,
 
 
 template<class T>
-int32_t BObjectList<T>::FindBinaryInsertionIndex(const UnaryPredicate<T>& pred,
+int32_t_t BObjectList<T>::FindBinaryInsertionIndex(const UnaryPredicate<T>& pred,
     bool* alreadyInList) const
 {
-    int32_t index = _PointerList_::BinarySearchIndexByPredicate(&pred,
+    int32_t_t index = _PointerList_::BinarySearchIndexByPredicate(&pred,
         (UnaryPredicateGlue)&UnaryPredicate<T>::_unary_predicate_glue);
 
     if (alreadyInList)
@@ -922,7 +922,7 @@ template<class T>
 bool BObjectList<T>::BinaryInsertUnique(T* item, const UnaryPredicate<T>& pred)
 {
     bool alreadyInList;
-    int32_t index = FindBinaryInsertionIndex(pred, &alreadyInList);
+    int32_t_t index = FindBinaryInsertionIndex(pred, &alreadyInList);
     if (alreadyInList)
         return false;
 

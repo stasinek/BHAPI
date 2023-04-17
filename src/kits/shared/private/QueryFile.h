@@ -33,8 +33,8 @@ public:
 			status_t			AddVolume(dev_t device);
 
 			const char*			Predicate() const;
-			int32				CountVolumes() const;
-			dev_t				VolumeAt(int32 index) const;
+			int32_t				CountVolumes() const;
+			dev_t				VolumeAt(int32_t index) const;
 
 			status_t			WriteTo(const entry_ref& ref);
 			status_t			WriteTo(const char* path);
@@ -44,22 +44,22 @@ public:
 	virtual	status_t			GetNextEntry(BEntry* entry,
 									bool traverse = false);
 	virtual	status_t			GetNextRef(entry_ref* ref);
-	virtual	int32				GetNextDirents(struct dirent* buffer,
-									size_t length, int32 count = INT_MAX);
+	virtual	int32_t				GetNextDirents(struct dirent* buffer,
+									size_t length, int32_t count = INT_MAX);
 	virtual	status_t			Rewind();
-	virtual	int32				CountEntries();
+	virtual	int32_t				CountEntries();
 
 	static	const char*			MimeType();
 
 private:
-			status_t			_SetQuery(int32 index);
+			status_t			_SetQuery(int32_t index);
 
 private:
 			status_t			fStatus;
 			BString				fPredicate;
 			BQuery				fQuery;
 			BList				fVolumes;
-			int32				fCurrentVolumeIndex;
+			int32_t				fCurrentVolumeIndex;
 };
 
 

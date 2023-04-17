@@ -17,14 +17,14 @@ namespace BPrivate {
 
 class LowPassFilter {
 public:
-						LowPassFilter(uint32 size);
+						LowPassFilter(uint32_t size);
 						~LowPassFilter();
 
 			void	    Input(const BPoint& p);
 			BPoint		Output() const;
 private:
 	BPoint* fPoints;
-	uint32	fSize;
+	uint32_t	fSize;
 	BPoint	fSum;
 };
 
@@ -33,8 +33,8 @@ class ShakeTrackingFilter : public BMessageFilter {
 public:
 								ShakeTrackingFilter(
 									BView* targetView,
-									uint32 messageWhat,
-									uint32 countThreshold = 2,
+									uint32_t messageWhat,
+									uint32_t countThreshold = 2,
 									bigtime_t timeTreshold = 400000);
 
 								~ShakeTrackingFilter();
@@ -43,14 +43,14 @@ public:
 
 private:
 			BView*				fTargetView;
-			uint32				fMessageWhat;
+			uint32_t				fMessageWhat;
 
 			BMessageRunner*		fCancelRunner;
 			LowPassFilter		fLowPass;
 			BPoint				fLastDelta;
 			BPoint				fLastPosition;
-			uint32				fCounter;
-			uint32				fCountThreshold;
+			uint32_t				fCounter;
+			uint32_t				fCountThreshold;
 			bigtime_t			fTimeThreshold;
 };
 

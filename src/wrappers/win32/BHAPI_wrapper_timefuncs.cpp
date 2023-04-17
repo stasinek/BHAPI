@@ -55,9 +55,9 @@ BHAPI_EXPORT bigtime_t b_real_time_clock_usecs(void)
 
 
 // return the number of seconds elapsed since 00:00 01 January 1970 UTC (Unix epoch)
-BHAPI_EXPORT  uint32 b_real_time_clock(void)
+BHAPI_EXPORT  uint32_t b_real_time_clock(void)
 {
-	return((uint32)(b_real_time_clock_usecs() / SECS_TO_US));
+	return((uint32_t)(b_real_time_clock_usecs() / SECS_TO_US));
 }
 
 

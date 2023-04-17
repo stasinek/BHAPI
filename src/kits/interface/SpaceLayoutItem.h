@@ -62,7 +62,7 @@ private:
 			BAlignment			fAlignment;
 			bool				fVisible;
 
-			uint32				_reserved[2];
+			uint32_t				_reserved[2];
 };
 
 #endif	//	_SPACE_LAYOUT_ITEM_H

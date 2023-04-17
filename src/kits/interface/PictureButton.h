@@ -21,10 +21,10 @@ public:
 								BPictureButton(BRect frame, const char* name,
 									BPicture* off, BPicture* on,
 									BMessage* message,
-									uint32 behavior = B_ONE_STATE_BUTTON,
-									uint32 resizingMode = B_FOLLOW_LEFT
+									uint32_t behavior = B_ONE_STATE_BUTTON,
+									uint32_t resizingMode = B_FOLLOW_LEFT
 										| B_FOLLOW_TOP,
-									uint32 flgs = B_WILL_DRAW | B_NAVIGABLE);
+									uint32_t flgs = B_WILL_DRAW | B_NAVIGABLE);
 								BPictureButton(BMessage* archive);
 
 	virtual						~BPictureButton();
@@ -50,10 +50,10 @@ public:
 	virtual	void				Draw(BRect updateRect);
 
 	virtual	void				MessageReceived(BMessage* message);
-	virtual	void				KeyDown(const char* bytes, int32 numBytes);
+	virtual	void				KeyDown(const char* bytes, int32_t numBytes);
 	virtual	void				MouseDown(BPoint where);
 	virtual	void				MouseUp(BPoint where);
-	virtual	void				MouseMoved(BPoint where, uint32 code,
+	virtual	void				MouseMoved(BPoint where, uint32_t code,
 									const BMessage* dragMessage);
 
 	virtual	void				SetEnabledOn(BPicture* picture);
@@ -66,20 +66,20 @@ public:
 			BPicture*			DisabledOn() const;
 			BPicture*			DisabledOff() const;
 
-	virtual	void				SetBehavior(uint32 behavior);
-	uint32						Behavior() const;
+	virtual	void				SetBehavior(uint32_t behavior);
+	uint32_t						Behavior() const;
 
-	virtual	void				SetValue(int32 value);
+	virtual	void				SetValue(int32_t value);
 	virtual	status_t			Invoke(BMessage* message = NULL);
 
 	virtual	BHandler*			ResolveSpecifier(BMessage* message,
-									int32 index, BMessage* specifier,
-									int32 what, const char* property);
+									int32_t index, BMessage* specifier,
+									int32_t what, const char* property);
 	virtual	status_t			GetSupportedSuites(BMessage* data);
 
 	virtual	status_t			Perform(perform_code code, void* data);
 
-	virtual	status_t			SetIcon(const BBitmap* icon, uint32 flags = 0);
+	virtual	status_t			SetIcon(const BBitmap* icon, uint32_t flags = 0);
 
 private:
 	// FBC padding and forbidden methods
@@ -97,9 +97,9 @@ private:
 
 			bool				unused;
 
-			uint32				fBehavior;
+			uint32_t				fBehavior;
 
-			uint32				_reserved[4];
+			uint32_t				_reserved[4];
 };
 
 #endif // _PICTURE_BUTTON_H

@@ -168,7 +168,7 @@ public:
 	virtual	void				Draw(BRect updateRect);
 	virtual	void				MouseDown(BPoint where);
 	virtual	void				MouseUp(BPoint where);
-	virtual	void				MouseMoved(BPoint where, uint32 transit,
+	virtual	void				MouseMoved(BPoint where, uint32_t transit,
 									const BMessage* message);
 
 			bool				IsEnabled() const { return fIsEnabled; }
@@ -176,7 +176,7 @@ public:
 
 private:
 			void				_DoneTracking(BPoint where);
-			void				_Track(BPoint where, uint32);
+			void				_Track(BPoint where, uint32_t);
 
 			spinner_direction	fSpinnerDirection;
 			BAbstractSpinner*	fParent;
@@ -194,7 +194,7 @@ public:
 
 	virtual	void				AttachedToWindow();
 	virtual	void				DetachedFromWindow();
-	virtual	void				KeyDown(const char* bytes, int32 numBytes);
+	virtual	void				KeyDown(const char* bytes, int32_t numBytes);
 	virtual	void				MakeFocus(bool focus);
 
 private:
@@ -370,7 +370,7 @@ void SpinnerButton::Draw(BRect updateRect)
 		bgTint = 2.0f - bgTint;
 	}
 
-	uint32 borders =  be_control_look->B_TOP_BORDER
+	uint32_t borders =  be_control_look->B_TOP_BORDER
 		|  be_control_look->B_BOTTOM_BORDER;
 
 	if (fSpinnerDirection == SPINNER_INCREMENT)
@@ -387,7 +387,7 @@ void SpinnerButton::Draw(BRect updateRect)
 	switch (fParent->ButtonStyle()) {
 		case SPINNER_BUTTON_HORIZONTAL_ARROWS:
 		{
-			int32 arrowDirection = fSpinnerDirection == SPINNER_INCREMENT
+			int32_t arrowDirection = fSpinnerDirection == SPINNER_INCREMENT
 				?  be_control_look->B_RIGHT_ARROW
 				:  be_control_look->B_LEFT_ARROW;
 
@@ -399,7 +399,7 @@ void SpinnerButton::Draw(BRect updateRect)
 
 		case SPINNER_BUTTON_VERTICAL_ARROWS:
 		{
-			int32 arrowDirection = fSpinnerDirection == SPINNER_INCREMENT
+			int32_t arrowDirection = fSpinnerDirection == SPINNER_INCREMENT
 				?  be_control_look->B_UP_ARROW
 				:  be_control_look->B_DOWN_ARROW;
 
@@ -453,7 +453,7 @@ void SpinnerButton::MouseDown(BPoint where)
 }
 
 
-void SpinnerButton::MouseMoved(BPoint where, uint32 transit,
+void SpinnerButton::MouseMoved(BPoint where, uint32_t transit,
 	const BMessage* message)
 {
 	switch (transit) {
@@ -461,7 +461,7 @@ void SpinnerButton::MouseMoved(BPoint where, uint32 transit,
 		case B_INSIDE_VIEW:
 		{
 			BPoint where;
-			uint32 buttons;
+			uint32_t buttons;
 			GetMouse(&where, &buttons);
 			fIsMouseOver = Bounds().Contains(where) && buttons == 0;
 			if (!fIsMouseDown)
@@ -500,7 +500,7 @@ void SpinnerButton::_DoneTracking(BPoint where)
 }
 
 
-void SpinnerButton::_Track(BPoint where, uint32)
+void SpinnerButton::_Track(BPoint where, uint32_t)
 {
 	if (fParent == NULL || !Bounds().Contains(where)) {
 		fIsMouseDown = false;
@@ -553,7 +553,7 @@ void SpinnerTextView::DetachedFromWindow()
 }
 
 
-void SpinnerTextView::KeyDown(const char* bytes, int32 numBytes)
+void SpinnerTextView::KeyDown(const char* bytes, int32_t numBytes)
 {
 	if (fParent == NULL) {
 		BTextView::KeyDown(bytes, numBytes);
@@ -875,7 +875,7 @@ BAbstractSpinner::TextViewLayoutItem::Instantiate(BMessage* from)
 
 
 BAbstractSpinner::BAbstractSpinner(BRect frame, const char* name, const char* label,
-	BMessage* message, uint32 resizingMode, uint32 flags)
+	BMessage* message, uint32_t resizingMode, uint32_t flags)
 	:
 	BControl(frame, name, label, message, resizingMode,
 		flags | B_WILL_DRAW | B_FRAME_EVENTS)
@@ -885,7 +885,7 @@ BAbstractSpinner::BAbstractSpinner(BRect frame, const char* name, const char* la
 
 
 BAbstractSpinner::BAbstractSpinner(const char* name, const char* label, BMessage* message,
-	uint32 flags)
+	uint32_t flags)
 	:
 	BControl(name, label, message, flags | B_WILL_DRAW | B_FRAME_EVENTS)
 {
@@ -956,8 +956,8 @@ status_t BAbstractSpinner::GetSupportedSuites(BMessage* message)
 
 
 BHandler*
-BAbstractSpinner::ResolveSpecifier(BMessage* message, int32 index, BMessage* specifier,
-	int32 form, const char* property)
+BAbstractSpinner::ResolveSpecifier(BMessage* message, int32_t index, BMessage* specifier,
+	int32_t form, const char* property)
 {
 	return BView::ResolveSpecifier(message, index, specifier, form,
 		property);
@@ -1066,7 +1066,7 @@ void BAbstractSpinner::ResizeToPreferred()
 }
 
 
-void BAbstractSpinner::SetFlags(uint32 flags)
+void BAbstractSpinner::SetFlags(uint32_t flags)
 {
 	// If the textview is navigable, set it to not navigable if needed,
 	// else if it is not navigable, set it to navigable if needed
@@ -1402,7 +1402,7 @@ void BAbstractSpinner::_DrawLabel(BRect updateRect)
 			- fontHeight.descent) / 2.0f)
 		+ fontHeight.ascent + kFrameMargin * 2;
 
-	uint32 flags = 0;
+	uint32_t flags = 0;
 	if (!IsEnabled())
 		flags |= BControlLook::B_DISABLED;
 
@@ -1418,7 +1418,7 @@ void BAbstractSpinner::_DrawTextView(BRect updateRect)
 		return;
 
 	rgb_color base = ui_color(B_PANEL_BACKGROUND_COLOR);
-	uint32 flags = 0;
+	uint32_t flags = 0;
 	if (!IsEnabled())
 		flags |= BControlLook::B_DISABLED;
 
@@ -1473,7 +1473,7 @@ void BAbstractSpinner::_InitObject()
 	fIncrement = new SpinnerButton(rect, "increment", SPINNER_INCREMENT);
 	AddChild(fIncrement);
 
-	uint32 navigableFlags = Flags() & B_NAVIGABLE;
+	uint32_t navigableFlags = Flags() & B_NAVIGABLE;
 	if (navigableFlags != 0)
 		BControl::SetFlags(Flags() & ~B_NAVIGABLE);
 }

@@ -78,10 +78,10 @@ struct fw_device{
 #define CSRROMOFF 0x400
 #define CSRROMSIZE 0x400
 	int rommax;	/* offset from 0xffff f000 0000 */
-	uint32_t csrrom[CSRROMSIZE/4];
+	uint32_t_t csrrom[CSRROMSIZE/4];
 	int rcnt;
 	struct firewire_comm *fc;
-	uint32_t status;
+	uint32_t_t status;
 #define FWDEVINIT	1
 #define FWDEVATTACHED	2
 #define FWDEVINVAL	3
@@ -155,7 +155,7 @@ struct firewire_comm{
 	u_int max_node;
 	u_int max_hop;
 #define FWPHYASYST (1 << 0)
-	uint32_t status;
+	uint32_t_t status;
 #define	FWBUSDETACH	(-2)
 #define	FWBUSNOTREADY	(-1)
 #define	FWBUSRESET	0
@@ -182,9 +182,9 @@ struct firewire_comm{
 	STAILQ_HEAD(, fw_device) devices;
 	u_int  sid_cnt;
 #define CSRSIZE 0x4000
-	uint32_t csr_arc[CSRSIZE/4];
+	uint32_t_t csr_arc[CSRSIZE/4];
 #define CROMSIZE 0x400
-	uint32_t *config_rom;
+	uint32_t_t *config_rom;
 	struct crom_src_buf *crom_src_buf;
 	struct crom_src *crom_src;
 	struct crom_chunk *crom_root;
@@ -200,13 +200,13 @@ struct firewire_comm{
 	timer_id bmr_callout;
 	timer_id timeout_callout;
 #endif
-	uint32_t (*cyctimer) (struct  firewire_comm *);
+	uint32_t_t (*cyctimer) (struct  firewire_comm *);
 	void (*ibr) (struct firewire_comm *);
-	uint32_t (*set_bmr) (struct firewire_comm *, uint32_t);
+	uint32_t_t (*set_bmr) (struct firewire_comm *, uint32_t_t);
 #ifndef __HAIKU__
 	int (*ioctl) (struct cdev *, u_long, caddr_t, int, fw_proc *);
 #else
-	int (*ioctl) (void *cookie, uint32 cmd, void *arg, size_t len);
+	int (*ioctl) (void *cookie, uint32_t cmd, void *arg, size_t len);
 #endif
 	int (*irx_enable) (struct firewire_comm *, int);
 	int (*irx_disable) (struct firewire_comm *, int);
@@ -215,8 +215,8 @@ struct firewire_comm{
 	void (*timeout) (void *);
 	void (*poll) (struct firewire_comm *, int, int);
 	void (*set_intr) (struct firewire_comm *, int);
-	void (*irx_post) (struct firewire_comm *, uint32_t *);
-	void (*itx_post) (struct firewire_comm *, uint32_t *);
+	void (*irx_post) (struct firewire_comm *, uint32_t_t *);
+	void (*itx_post) (struct firewire_comm *, uint32_t_t *);
 	struct tcode_info *tcode;
 #ifndef __HAIKU__
 	bus_dma_tag_t dmat;
@@ -305,7 +305,7 @@ struct fw_xfer{
 //	struct timeval tv;
 	bigtime_t tv;
 
-	int32_t resp;
+	int32_t_t resp;
 #define FWXF_INIT	0x00
 #define FWXF_INQ	0x01
 #define FWXF_START	0x02
@@ -320,7 +320,7 @@ struct fw_xfer{
 	void (*hand) (struct fw_xfer *);
 	struct send_recv{
 		struct fw_pkt hdr;
-		uint32_t *payload;
+		uint32_t_t *payload;
 		area_id payArea;
 		bus_addr_t bus_addr;
 		uint16_t pay_len;
@@ -341,7 +341,7 @@ struct fw_rcv_buf {
 	uint8_t spd;
 };
 
-void fw_sidrcv (struct firewire_comm *, uint32_t *, u_int);
+void fw_sidrcv (struct firewire_comm *, uint32_t_t *, u_int);
 void fw_rcv (struct fw_rcv_buf *);
 void fw_xfer_unload ( struct fw_xfer*);
 void fw_xfer_free_buf ( struct fw_xfer*);
@@ -357,8 +357,8 @@ int fw_xferlist_add (struct fw_xferlist *,  int, int, int,
     struct firewire_comm *, void *, void (*)(struct fw_xfer *));
 void fw_xferlist_remove (struct fw_xferlist *);
 int fw_asyreq (struct firewire_comm *, int, struct fw_xfer*);
-void fw_busreset (struct firewire_comm *, uint32_t);
-uint16_t fw_crc16 (uint32_t *, uint32_t);
+void fw_busreset (struct firewire_comm *, uint32_t_t);
+uint16_t fw_crc16 (uint32_t_t *, uint32_t_t);
 void fw_xfer_timeout (void *);
 void fw_xfer_done (struct fw_xfer *);
 void fw_xferwake (struct fw_xfer *);
@@ -366,7 +366,7 @@ int fw_xferwait (struct fw_xfer *);
 void fw_asy_callback_free (struct fw_xfer *);
 struct fw_device *fw_noderesolve_nodeid (struct firewire_comm *, int);
 struct fw_device *fw_noderesolve_eui64 (struct firewire_comm *, struct fw_eui64 *);
-struct fw_bind *fw_bindlookup (struct firewire_comm *, uint16_t, uint32_t);
+struct fw_bind *fw_bindlookup (struct firewire_comm *, uint16_t, uint32_t_t);
 void fw_drain_txq (struct firewire_comm *);
 //int fwdev_makedev (struct firewire_softc *);
 //int fwdev_destroydev (struct firewire_softc *);

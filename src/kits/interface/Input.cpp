@@ -41,7 +41,7 @@ find_input_device(const char *name)
 		return NULL;
 
 	const char *device;
-	int32 type;
+	int32_t type;
 
 	reply.FindString("device", &device);
 	reply.FindInt32("type", &type);
@@ -65,8 +65,8 @@ status_t get_input_devices(BList *list)
 		return err;
 
 	const char *name;
-	int32 type;
-	int32 i = 0;
+	int32_t type;
+	int32_t i = 0;
 
 	while (reply.FindString("device", i, &name) == B_OK) {
 		reply.FindInt32("type", i++, &type);
@@ -156,7 +156,7 @@ status_t BInputDevice::Stop()
 }
 
 
-status_t BInputDevice::Control(uint32 code, BMessage *message)
+status_t BInputDevice::Control(uint32_t code, BMessage *message)
 {
 	if (!fName)
 		return B_ERROR;
@@ -201,7 +201,7 @@ status_t BInputDevice::Stop(input_device_type type)
 }
 
 
-status_t BInputDevice::Control(input_device_type type, uint32 code, BMessage *message)
+status_t BInputDevice::Control(input_device_type type, uint32_t code, BMessage *message)
 {
 	BMessage command(IS_CONTROL_DEVICES);
 	BMessage reply;

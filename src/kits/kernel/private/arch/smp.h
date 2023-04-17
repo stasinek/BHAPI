@@ -15,9 +15,9 @@ class CPUSet;
 
 
 status_t arch_smp_init(kernel_args* args);
-status_t arch_smp_per_cpu_init(kernel_args* args, int32 cpu);
+status_t arch_smp_per_cpu_init(kernel_args* args, int32_t cpu);
 
-void arch_smp_send_ici(int32 target_cpu);
+void arch_smp_send_ici(int32_t target_cpu);
 void arch_smp_send_broadcast_ici();
 void arch_smp_send_multicast_ici(CPUSet& cpuSet);
 

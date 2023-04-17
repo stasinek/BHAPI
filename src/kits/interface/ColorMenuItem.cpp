@@ -30,7 +30,7 @@
 
 
 BColorMenuItem::BColorMenuItem(const char* label, BMessage* message,
-	rgb_color color, char shortcut, uint32 modifiers)
+	rgb_color color, char shortcut, uint32_t modifiers)
 	:
 	BMenuItem(label, message, shortcut, modifiers),
 	fColor(color)
@@ -156,7 +156,7 @@ void BColorMenuItem::SetMarked(bool mark)
 
 	// our topmost menu's parent is a BMenuField
 
-	BMenuItem* topLevelItem = menu->ItemAt((int32)0);
+	BMenuItem* topLevelItem = menu->ItemAt((int32_t)0);
 
 	if (topLevelItem == NULL)
 		return;

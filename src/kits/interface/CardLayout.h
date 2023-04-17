@@ -15,8 +15,8 @@ public:
 	virtual						~BCardLayout();
 
 			BLayoutItem*		VisibleItem() const;
-			int32				VisibleIndex() const;
-			void				SetVisibleItem(int32 index);
+			int32_t				VisibleIndex() const;
+			void				SetVisibleItem(int32_t index);
 			void				SetVisibleItem(BLayoutItem* item);
 
 	virtual	BSize				BaseMinSize();
@@ -38,14 +38,14 @@ protected:
 	virtual status_t			AllUnarchived(const BMessage* from);
 
 	virtual status_t			ItemArchived(BMessage* into, BLayoutItem* item,
-									int32 index) const;
+									int32_t index) const;
 	virtual	status_t			ItemUnarchived(const BMessage* from,
-									BLayoutItem* item, int32 index);
+									BLayoutItem* item, int32_t index);
 
 	virtual	void				LayoutInvalidated(bool children = false);
 	virtual	void				DoLayout();
-	virtual	bool				ItemAdded(BLayoutItem* item, int32 atIndex);
-	virtual	void				ItemRemoved(BLayoutItem* item, int32 fromIndex);
+	virtual	bool				ItemAdded(BLayoutItem* item, int32_t atIndex);
+	virtual	void				ItemRemoved(BLayoutItem* item, int32_t fromIndex);
 
 private:
 
@@ -73,7 +73,7 @@ private:
 			BLayoutItem*		fVisibleItem;
 			bool				fMinMaxValid;
 
-			uint32				_reserved[5];
+			uint32_t				_reserved[5];
 };
 
 #endif	// _CARD_LAYOUT_H

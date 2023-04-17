@@ -57,7 +57,7 @@ bool ChangeRamp(_gs_ramp* ramp)
 
 
 size_t
-get_sample_size(int32 format)
+get_sample_size(int32_t format)
 {
 	size_t sample;
 
@@ -75,7 +75,7 @@ get_sample_size(int32 format)
 			break;
 
 		case gs_audio_format::B_GS_S32:
-			sample = sizeof(int32);
+			sample = sizeof(int32_t);
 			break;
 
 		case gs_audio_format::B_GS_F:

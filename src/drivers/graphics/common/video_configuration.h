@@ -45,8 +45,8 @@ extern "C" {
 
 
 // mostly for debugging detected monitors
-const char* get_connector_name(uint32 connector);
-const char* get_encoder_name(uint32 encoder);
+const char* get_connector_name(uint32_t connector);
+const char* get_encoder_name(uint32_t encoder);
 
 
 #ifdef __cplusplus

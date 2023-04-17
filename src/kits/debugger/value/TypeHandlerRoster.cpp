@@ -164,7 +164,7 @@ status_t TypeHandlerRoster::FindTypeHandler(ValueNodeChild* nodeChild, Type* typ
 	TypeHandler* bestHandler = NULL;
 	float bestSupport = 0;
 
-	for (int32 i = 0; TypeHandler* handler = fTypeHandlers.ItemAt(i); i++) {
+	for (int32_t i = 0; TypeHandler* handler = fTypeHandlers.ItemAt(i); i++) {
 		float support = handler->SupportsType(type);
 		if (support > 0 && support > bestSupport) {
 			bestHandler = handler;

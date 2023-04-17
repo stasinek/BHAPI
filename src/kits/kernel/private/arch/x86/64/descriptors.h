@@ -27,22 +27,22 @@
 
 // Structure of a segment descriptor.
 struct segment_descriptor {
-	uint32 limit0 : 16;
-	uint32 base0 : 24;
-	uint32 type : 4;
-	uint32 desc_type : 1;
-	uint32 dpl : 2;
-	uint32 present : 1;
-	uint32 limit1 : 4;
-	uint32 available : 1;
-	uint32 long_mode : 1;
-	uint32 d_b : 1;
-	uint32 granularity : 1;
-	uint32 base1 : 8;
+	uint32_t limit0 : 16;
+	uint32_t base0 : 24;
+	uint32_t type : 4;
+	uint32_t desc_type : 1;
+	uint32_t dpl : 2;
+	uint32_t present : 1;
+	uint32_t limit1 : 4;
+	uint32_t available : 1;
+	uint32_t long_mode : 1;
+	uint32_t d_b : 1;
+	uint32_t granularity : 1;
+	uint32_t base1 : 8;
 } _PACKED;
 
 struct tss {
-	uint32 _reserved1;
+	uint32_t _reserved1;
 	uint64 sp0;
 	uint64 sp1;
 	uint64 sp2;

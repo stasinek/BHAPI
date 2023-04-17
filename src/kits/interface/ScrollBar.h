@@ -68,7 +68,7 @@ public:
     virtual void	Draw(BRect updateRect);
     virtual void	MouseDown(BPoint where);
     virtual void	MouseUp(BPoint where);
-    virtual void	MouseMoved(BPoint where,  uint32 code, const BMessage *a_message);
+    virtual void	MouseMoved(BPoint where,  uint32_t code, const BMessage *a_message);
     virtual void	DetachedFromWindow();
 
 private:

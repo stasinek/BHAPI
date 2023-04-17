@@ -26,7 +26,7 @@
 
 /*static*/ BArchivable*
 ArchivingUtils::UnarchiveChild(const BMessage& parentArchive,
-	const char* fieldName, int32 index)
+	const char* fieldName, int32_t index)
 {
 	BMessage archive;
 	if (parentArchive.FindMessage(fieldName, index, &archive) != B_OK)

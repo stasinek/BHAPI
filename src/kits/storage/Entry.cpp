@@ -1009,7 +1009,7 @@ void BEntry::_PennyEntry6(){}
     \retval B_FILE_ERROR There was an error writing to the BEntry object.
 */
 status_t
-BEntry::set_stat(struct stat& st, uint32 what)
+BEntry::set_stat(struct stat& st, uint32_t what)
 {
     if (fCStatus != B_OK)
         return B_FILE_ERROR;
@@ -1050,7 +1050,7 @@ BEntry::_SetTo(int dirFD, const char* path, bool traverse)
     FDCloser fdCloser(dirFD);
     char tmpPath[B_PATH_NAME_LENGTH];
     char leafName[B_FILE_NAME_LENGTH];
-    int32 linkLimit = B_MAX_SYMLINKS;
+    int32_t linkLimit = B_MAX_SYMLINKS;
     while (true) {
         if (!path || strcmp(path, ".") == 0) {
             // "."

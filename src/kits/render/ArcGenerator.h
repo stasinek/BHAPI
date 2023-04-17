@@ -39,8 +39,8 @@ class BHAPI_IMPEXP BArcGenerator {
 public:
     BArcGenerator(BPoint center, float xRadius, float yRadius, BPoint start, BPoint end);
 
-    bool Start(int32 &x,  int32 &y,  int32 &step,  int32 &pixels, bool &both, bool isLoopX = true, float pixel_size = 1);
-    bool Next(int32 &next,  int32 &pixels, bool &both);
+    bool Start(int32_t &x,  int32_t &y,  int32_t &step,  int32_t &pixels, bool &both, bool isLoopX = true, float pixel_size = 1);
+    bool Next(int32_t &next,  int32_t &pixels, bool &both);
 
 private:
     BPoint fCenter;
@@ -48,7 +48,7 @@ private:
     BPoint fStart;
     BPoint fEnd;
 
-     int32 fStep;
+     int32_t fStep;
 	bool fIsLoopX;
 
     BPoint fRadius2;
@@ -57,15 +57,15 @@ private:
     BPoint _fEnd;
 	float fDeltaNext;
 
-     int32 _fCenterX;
-     int32 _fCenterY;
-     int32 _fRadiusX;
-     int32 _fStartX;
-     int32 _fStartY;
-     int32 _fEndX;
-     int32 _fEndY;
-     int32 _X;
-     int32 _Y;
+     int32_t _fCenterX;
+     int32_t _fCenterY;
+     int32_t _fRadiusX;
+     int32_t _fStartX;
+     int32_t _fStartY;
+     int32_t _fEndX;
+     int32_t _fEndY;
+     int32_t _X;
+     int32_t _Y;
 };
 
 #endif /* __cplusplus */

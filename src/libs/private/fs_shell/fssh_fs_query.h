@@ -26,10 +26,10 @@ extern "C" {
 #endif
 
 extern fssh_DIR*			fssh_fs_open_query(fssh_dev_t device,
-									const char *query, uint32_t flags);
+									const char *query, uint32_t_t flags);
 extern fssh_DIR*			fssh_fs_open_live_query(fssh_dev_t device,
-									const char *query, uint32_t flags,
-									fssh_port_id port, int32_t token);
+									const char *query, uint32_t_t flags,
+									fssh_port_id port, int32_t_t token);
 extern int					fssh_fs_close_query(fssh_DIR *d);
 extern struct fssh_dirent*	fssh_fs_read_query(fssh_DIR *d);
 

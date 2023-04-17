@@ -85,8 +85,8 @@ struct X86PagingMethodPAE::ToPAESwitcher {
 		pae_page_table_entry*& _freeVirtualSlotPTE)
 	{
 		// count the page tables we have to translate
-		uint32 pageTableCount = 0;
-		for (uint32 i = FIRST_KERNEL_PGDIR_ENT;
+		uint32_t pageTableCount = 0;
+		for (uint32_t i = FIRST_KERNEL_PGDIR_ENT;
 			i < FIRST_KERNEL_PGDIR_ENT + NUM_KERNEL_PGDIR_ENTS; i++) {
 			page_directory_entry entry = fPageHolePageDir[i];
 			if ((entry & X86_PDE_PRESENT) != 0)
@@ -100,7 +100,7 @@ struct X86PagingMethodPAE::ToPAESwitcher {
 		// + 4 page dirs
 		// + 2 * page tables (each has 512 instead of 1024 entries)
 		// + 1 page for the free virtual slot (no physical page needed)
-		uint32 pagesNeeded = 1 + 4 + pageTableCount * 2 + 1;
+		uint32_t pagesNeeded = 1 + 4 + pageTableCount * 2 + 1;
 
 		// We need additional PAE page tables for the new pages we're going to
 		// allocate: Two tables for every 1024 pages to map, i.e. 2 additional
@@ -120,7 +120,7 @@ struct X86PagingMethodPAE::ToPAESwitcher {
 			= (pae_page_directory_pointer_table_entry*)_NextPage(true,
 				physicalPDPT);
 
-		for (int32 i = 0; i < 4; i++) {
+		for (int32_t i = 0; i < 4; i++) {
 			fPageDirs[i] = (pae_page_directory_entry*)_NextPage(true,
 				fPhysicalPageDirs[i]);
 
@@ -137,7 +137,7 @@ struct X86PagingMethodPAE::ToPAESwitcher {
 			<= FIRST_KERNEL_PGDIR_ENT * sizeof(page_directory_entry));
 
 		// translate the page tables
-		for (uint32 i = FIRST_KERNEL_PGDIR_ENT;
+		for (uint32_t i = FIRST_KERNEL_PGDIR_ENT;
 			i < FIRST_KERNEL_PGDIR_ENT + NUM_KERNEL_PGDIR_ENTS; i++) {
 			if ((fPageHolePageDir[i] & X86_PDE_PRESENT) != 0) {
 				// two PAE page tables per 32 bit page table
@@ -200,7 +200,7 @@ private:
 			B_KERNEL_READ_AREA | B_KERNEL_WRITE_AREA);
 
 		pae_page_table_entry* paeEntry = paeTable;
-		for (uint32 i = 0; i < kPAEPageTableEntryCount;
+		for (uint32_t i = 0; i < kPAEPageTableEntryCount;
 				i++, entry++, paeEntry++) {
 			if ((*entry & X86_PTE_PRESENT) != 0
 				&& _IsVirtualAddressAllocated(virtualBase + i * B_PAGE_SIZE)) {
@@ -224,7 +224,7 @@ private:
 		}
 	}
 
-	void _AllocateNeededPages(uint32 pagesNeeded)
+	void _AllocateNeededPages(uint32_t pagesNeeded)
 	{
 		size_t virtualSize = ROUNDUP(pagesNeeded, 1024) * B_PAGE_SIZE;
 		addr_t virtualBase = vm_allocate_early(fKernelArgs, virtualSize, 0, 0,
@@ -238,8 +238,8 @@ private:
 			virtualBase, virtualSize);
 
 		// allocate pages for the 32 bit page tables and prepare the tables
-		uint32 oldPageTableCount = virtualSize / B_PAGE_SIZE / 1024;
-		for (uint32 i = 0; i < oldPageTableCount; i++) {
+		uint32_t oldPageTableCount = virtualSize / B_PAGE_SIZE / 1024;
+		for (uint32_t i = 0; i < oldPageTableCount; i++) {
 			// allocate a page
 			phys_addr_t physicalTable =_AllocatePage32Bit();
 
@@ -259,7 +259,7 @@ private:
 		pagesNeeded--;
 
 		// allocate and map the pages we need
-		for (uint32 i = 0; i < pagesNeeded; i++) {
+		for (uint32_t i = 0; i < pagesNeeded; i++) {
 			// allocate a page
 			phys_addr_t physicalAddress =_AllocatePage32Bit();
 
@@ -321,7 +321,7 @@ private:
 
 	bool _IsVirtualAddressAllocated(addr_t address) const
 	{
-		for (uint32 i = 0; i < fKernelArgs->num_virtual_allocated_ranges; i++) {
+		for (uint32_t i = 0; i < fKernelArgs->num_virtual_allocated_ranges; i++) {
 			addr_t start = fKernelArgs->virtual_allocated_range[i].start;
 			addr_t end = start + fKernelArgs->virtual_allocated_range[i].size;
 			if (address < start)
@@ -339,8 +339,8 @@ private:
 	page_directory_entry*		fPageHolePageDir;
 	phys_addr_t					fPhysicalPageDir;
 	uint8*						fAllocatedPages;
-	uint32						fAllocatedPagesCount;
-	uint32						fUsedPagesCount;
+	uint32_t						fAllocatedPagesCount;
+	uint32_t						fUsedPagesCount;
 	addr_t						fFreeVirtualSlot;
 	pae_page_table_entry*		fFreeVirtualSlotPTE;
 	pae_page_directory_entry*	fPageDirs[4];
@@ -479,7 +479,7 @@ X86PagingMethodPAE::PhysicalPageSlotPool::Init(area_id dataArea,
 	// init slot list
 	fSlots = (PhysicalPageSlot*)(fPageTable + kPAEPageTableEntryCount);
 	addr_t slotAddress = virtualBase;
-	for (uint32 i = 0; i < kPAEPageTableEntryCount;
+	for (uint32_t i = 0; i < kPAEPageTableEntryCount;
 			i++, slotAddress += B_PAGE_SIZE) {
 		PhysicalPageSlot* slot = &fSlots[i];
 		slot->next = slot + 1;
@@ -548,7 +548,7 @@ X86PagingMethodPAE::PhysicalPageSlotPool::AllocatePool(
 	phys_addr_t physicalTable;
 	X86VMTranslationMapPAE* map = static_cast<X86VMTranslationMapPAE*>(
 		VMAddressSpace::Kernel()->TranslationMap());
-	uint32 dummyFlags;
+	uint32_t dummyFlags;
 	cpu_status state = disable_interrupts();
 	map->QueryInterrupt((addr_t)data, &physicalTable, &dummyFlags);
 	restore_interrupts(state);
@@ -599,10 +599,10 @@ X86PagingMethodPAE::Init(kernel_args* args,
 		fKernelPhysicalPageDirs, fFreeVirtualSlot, fFreeVirtualSlotPTE);
 
 	// create the initial pools for the physical page mapper
-	int32 poolCount = _GetInitialPoolCount();
+	int32_t poolCount = _GetInitialPoolCount();
 	PhysicalPageSlotPool* pool = PhysicalPageSlotPool::sInitialPhysicalPagePool;
 
-	for (int32 i = 0; i < poolCount; i++) {
+	for (int32_t i = 0; i < poolCount; i++) {
 		new(&pool[i]) PhysicalPageSlotPool;
 		status_t error = pool[i].InitInitial(this, args);
 		if (error != B_OK) {
@@ -632,8 +632,8 @@ X86PagingMethodPAE::InitPostArea(kernel_args* args)
 		return area;
 
 	// let the initial page pools create areas for its structures
-	int32 poolCount = _GetInitialPoolCount();
-	for (int32 i = 0; i < poolCount; i++) {
+	int32_t poolCount = _GetInitialPoolCount();
+	for (int32_t i = 0; i < poolCount; i++) {
 		status_t error = PhysicalPageSlotPool::sInitialPhysicalPagePool[i]
 			.InitInitialPostArea(args);
 		if (error != B_OK)
@@ -716,7 +716,7 @@ X86PagingMethodPAE::MapEarly(kernel_args* args, addr_t virtualAddress,
 
 bool
 X86PagingMethodPAE::IsKernelPageAccessible(addr_t virtualAddress,
-	uint32 protection)
+	uint32_t protection)
 {
 	// we can't check much without the physical page mapper
 	if (fPhysicalPageMapper == NULL)
@@ -725,7 +725,7 @@ X86PagingMethodPAE::IsKernelPageAccessible(addr_t virtualAddress,
 	// We only trust the kernel team's page directories. So switch to the
 	// kernel PDPT first. Always set it to make sure the TLBs don't contain
 	// obsolete data.
-	uint32 physicalPDPT = x86_read_cr3();
+	uint32_t physicalPDPT = x86_read_cr3();
 	x86_write_cr3(fKernelPhysicalPageDirPointerTable);
 
 	// get the PDPT entry for the address
@@ -790,7 +790,7 @@ X86PagingMethodPAE::IsKernelPageAccessible(addr_t virtualAddress,
 
 /*static*/ void
 X86PagingMethodPAE::PutPageTableInPageDir(pae_page_directory_entry* entry,
-	phys_addr_t physicalTable, uint32 attributes)
+	phys_addr_t physicalTable, uint32_t attributes)
 {
 	*entry = (physicalTable & X86_PAE_PDE_ADDRESS_MASK)
 		| X86_PAE_PDE_PRESENT
@@ -808,7 +808,7 @@ X86PagingMethodPAE::PutPageTableInPageDir(pae_page_directory_entry* entry,
 
 /*static*/ void
 X86PagingMethodPAE::PutPageTableEntryInTable(pae_page_table_entry* entry,
-	phys_addr_t physicalAddress, uint32 attributes, uint32 memoryType,
+	phys_addr_t physicalAddress, uint32_t attributes, uint32_t memoryType,
 	bool globalPage)
 {
 	pae_page_table_entry page = (physicalAddress & X86_PAE_PTE_ADDRESS_MASK)
@@ -903,10 +903,10 @@ X86PagingMethodPAE::Free32BitPage(void* address, phys_addr_t physicalAddress,
 }
 
 
-inline int32
+inline int32_t
 X86PagingMethodPAE::_GetInitialPoolCount()
 {
-	int32 requiredSlots = smp_get_num_cpus() * TOTAL_SLOTS_PER_CPU
+	int32_t requiredSlots = smp_get_num_cpus() * TOTAL_SLOTS_PER_CPU
 			+ EXTRA_SLOTS;
 	return (requiredSlots + kPAEPageTableEntryCount - 1)
 		/ kPAEPageTableEntryCount;

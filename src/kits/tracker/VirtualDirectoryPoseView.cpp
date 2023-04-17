@@ -101,7 +101,7 @@ void VirtualDirectoryPoseView::SavePoseLocations(BRect* frameIfDesktop)
 }
 
 
-void VirtualDirectoryPoseView::SetViewMode(uint32 newMode)
+void VirtualDirectoryPoseView::SetViewMode(uint32_t newMode)
 {
 }
 
@@ -131,8 +131,8 @@ VirtualDirectoryPoseView::InitDirentIterator(const entry_ref* ref)
 void VirtualDirectoryPoseView::StartWatching()
 {
 	// watch the directories
-	int32 count = fDirectoryPaths.CountStrings();
-	for (int32 i = 0; i < count; i++) {
+	int32_t count = fDirectoryPaths.CountStrings();
+	for (int32_t i = 0; i < count; i++) {
 		BString path = fDirectoryPaths.StringAt(i);
 		BPathMonitor::StartWatching(path, B_WATCH_DIRECTORY, this);
 	}
@@ -290,13 +290,13 @@ bool VirtualDirectoryPoseView::_EntryRemoved(const BMessage* message)
 		// Find all poses that stem from that directory and generate an
 		// entry-removed message for each.
 		PoseList poses;
-		for (int32 i = 0; BPose* pose = fPoseList->ItemAt(i); i++) {
+		for (int32_t i = 0; BPose* pose = fPoseList->ItemAt(i); i++) {
 			NotOwningEntryRef poseEntryRef = *pose->TargetModel()->EntryRef();
 			if (poseEntryRef.DirectoryNodeRef() == nodeRef)
 				poses.AddItem(pose);
 		}
 
-		for (int32 i = 0; BPose* pose = poses.ItemAt(i); i++) {
+		for (int32_t i = 0; BPose* pose = poses.ItemAt(i); i++) {
 			_DispatchEntryCreatedOrRemovedMessage(B_ENTRY_REMOVED,
 				*pose->TargetModel()->node_ref(),
 				*pose->TargetModel()->EntryRef(), NULL, false);
@@ -443,7 +443,7 @@ bool VirtualDirectoryPoseView::_NodeStatChanged(const BMessage* message)
 }
 
 
-void VirtualDirectoryPoseView::_DispatchEntryCreatedOrRemovedMessage(int32 opcode,
+void VirtualDirectoryPoseView::_DispatchEntryCreatedOrRemovedMessage(int32_t opcode,
 	const node_ref& nodeRef, const entry_ref& entryRef, const char* path,
 	bool dispatchToSuperClass)
 {

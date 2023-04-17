@@ -100,7 +100,7 @@ const int64 kKBSize = 1024;
 const int64 kMBSize = 1048576;
 const int64 kGBSize = 1073741824;
 const int64 kTBSize = kGBSize * kKBSize;
-const int32 kMiniIconSeparator = 3;
+const int32_t kMiniIconSeparator = 3;
 const color_space kDefaultIconDepth = B_RGBA32;
 
 
@@ -164,7 +164,7 @@ class ExtendedPoseInfo {
     // poses only
 public:
     size_t Size() const;
-    static size_t Size(int32);
+    static size_t Size(int32_t);
     size_t SizeWithHeadroom() const;
     static size_t SizeWithHeadroom(size_t);
     bool HasLocationForFrame(BRect) const;
@@ -174,22 +174,22 @@ public:
     static void EndianSwap(void* castToThis);
     void PrintToStream();
 
-    uint32 fWorkspaces;
+    uint32_t fWorkspaces;
     bool fInvisible;
     bool fShowFromBootOnly;
     bool fReservedBool1;
     bool fReservedBool2;
-    int32 fReservedInt1;
-    int32 fReservedInt2;
-    int32 fReservedInt3;
-    int32 fReservedInt4;
-    int32 fReservedInt5;
+    int32_t fReservedInt1;
+    int32_t fReservedInt2;
+    int32_t fReservedInt3;
+    int32_t fReservedInt4;
+    int32_t fReservedInt5;
 
-    int32 fNumFrames;
+    int32_t fNumFrames;
     struct FrameLocation {
         BPoint fLocation;
         BRect fFrame;
-        uint32 fWorkspaces;
+        uint32_t fWorkspaces;
     };
 
     FrameLocation fLocations[0];
@@ -200,12 +200,12 @@ void DisallowMetaKeys(BTextView*);
 void DisallowFilenameKeys(BTextView*);
 
 
-bool ValidateStream(BMallocIO*, uint32, int32 version);
+bool ValidateStream(BMallocIO*, uint32_t, int32_t version);
 
 
-bool SecondaryMouseButtonDown(int32 modifiers, int32 buttons);
-uint32 HashString(const char* string, uint32 seed);
-uint32 AttrHashString(const char* string, uint32 type);
+bool SecondaryMouseButtonDown(int32_t modifiers, int32_t buttons);
+uint32_t HashString(const char* string, uint32_t seed);
+uint32_t AttrHashString(const char* string, uint32_t type);
 
 
 class OffscreenBitmap {
@@ -229,10 +229,10 @@ class OffscreenBitmap {
 
 
 // bitmap functions
-extern void FadeRGBA32Horizontal(uint32* bits, int32 width, int32 height,
-    int32 from, int32 to);
-extern void FadeRGBA32Vertical(uint32* bits, int32 width, int32 height,
-    int32 from, int32 to);
+extern void FadeRGBA32Horizontal(uint32_t* bits, int32_t width, int32_t height,
+    int32_t from, int32_t to);
+extern void FadeRGBA32Vertical(uint32_t* bits, int32_t width, int32_t height,
+    int32_t from, int32_t to);
 
 
 class FlickerFreeStringView : public BStringView {
@@ -240,12 +240,12 @@ class FlickerFreeStringView : public BStringView {
     // often this would be better implemented as an option of BStringView
 public:
     FlickerFreeStringView(BRect bounds, const char* name,
-        const char* text, uint32 resizingMode = B_FOLLOW_LEFT | B_FOLLOW_TOP,
-        uint32 flags = B_WILL_DRAW);
+        const char* text, uint32_t resizingMode = B_FOLLOW_LEFT | B_FOLLOW_TOP,
+        uint32_t flags = B_WILL_DRAW);
     FlickerFreeStringView(BRect bounds, const char* name,
         const char* text, BBitmap* existingOffscreen,
-        uint32 resizingMode = B_FOLLOW_LEFT | B_FOLLOW_TOP,
-        uint32 flags = B_WILL_DRAW);
+        uint32_t resizingMode = B_FOLLOW_LEFT | B_FOLLOW_TOP,
+        uint32_t flags = B_WILL_DRAW);
     virtual ~FlickerFreeStringView();
     virtual void Draw(BRect);
     virtual void AttachedToWindow();
@@ -267,8 +267,8 @@ class DraggableIcon : public BView {
 public:
     DraggableIcon(BRect rect, const char* name, const char* mimeType,
         icon_size which, const BMessage* message, BMessenger target,
-        uint32 resizingMode = B_FOLLOW_LEFT | B_FOLLOW_TOP,
-        uint32 flags = B_WILL_DRAW);
+        uint32_t resizingMode = B_FOLLOW_LEFT | B_FOLLOW_TOP,
+        uint32_t flags = B_WILL_DRAW);
     virtual ~DraggableIcon();
 
     static BRect PreferredRect(BPoint offset, icon_size which);
@@ -291,7 +291,7 @@ protected:
 class PositionPassingMenuItem : public BMenuItem {
 public:
     PositionPassingMenuItem(const char* title, BMessage*,
-        char shortcut = 0, uint32 modifiers = 0);
+        char shortcut = 0, uint32_t modifiers = 0);
 
     PositionPassingMenuItem(BMenu*, BMessage*);
 
@@ -339,7 +339,7 @@ public:
 
 private:
     sem_id fSemaphore;
-    int32 fCount;
+    int32_t fCount;
 };
 
 
@@ -398,16 +398,16 @@ private:
 
 class ShortcutFilter : public BMessageFilter {
 public:
-    ShortcutFilter(uint32 shortcutKey, uint32 shortcutModifier,
-        uint32 shortcutWhat, BHandler* target);
+    ShortcutFilter(uint32_t shortcutKey, uint32_t shortcutModifier,
+        uint32_t shortcutWhat, BHandler* target);
 
 protected:
     filter_result Filter(BMessage*, BHandler**);
 
 private:
-    uint32 fShortcutKey;
-    uint32 fShortcutModifier;
-    uint32 fShortcutWhat;
+    uint32_t fShortcutKey;
+    uint32_t fShortcutModifier;
+    uint32_t fShortcutWhat;
     BHandler* fTarget;
 };
 
@@ -419,14 +419,14 @@ const entry_ref* EachEntryRef(const BMessage*,
     const entry_ref* (*)(const entry_ref*, void*), void* passThru = 0);
 
 entry_ref* EachEntryRef(BMessage*, entry_ref* (*)(entry_ref*, void*),
-    void* passThru, int32 maxCount);
+    void* passThru, int32_t maxCount);
 const entry_ref* EachEntryRef(const BMessage*,
     const entry_ref* (*)(const entry_ref*, void*), void* passThru,
-    int32 maxCount);
+    int32_t maxCount);
 
 
 bool ContainsEntryRef(const BMessage*, const entry_ref*);
-int32 CountRefs(const BMessage*);
+int32_t CountRefs(const BMessage*);
 
 BMenuItem* EachMenuItem(BMenu* menu, bool recursive,
     BMenuItem* (*func)(BMenuItem*));
@@ -439,24 +439,24 @@ int64 StringToScalar(const char* text);
 // misc calls
 void EmbedUniqueVolumeInfo(BMessage* message, const BVolume* volume);
 status_t MatchArchivedVolume(BVolume* volume, const BMessage* message,
-    int32 index = 0);
+    int32_t index = 0);
 void TruncateLeaf(BString* string);
 
 void StringFromStream(BString*, BMallocIO*, bool endianSwap = false);
 void StringToStream(const BString*, BMallocIO*);
-int32 ArchiveSize(const BString*);
+int32_t ArchiveSize(const BString*);
 
 extern void EnableNamedMenuItem(BMenu* menu, const char* itemName, bool on);
 extern void MarkNamedMenuItem(BMenu* menu, const char* itemName, bool on);
-extern void EnableNamedMenuItem(BMenu* menu, uint32 commandName, bool on);
-extern void MarkNamedMenuItem(BMenu* menu, uint32 commandName, bool on);
+extern void EnableNamedMenuItem(BMenu* menu, uint32_t commandName, bool on);
+extern void MarkNamedMenuItem(BMenu* menu, uint32_t commandName, bool on);
 extern void DeleteSubmenu(BMenuItem* submenuItem);
 
 extern bool BootedInSafeMode();
 
 
 inline rgb_color
-Color(int32 r, int32 g, int32 b, int32 alpha = 255)
+Color(int32_t r, int32_t g, int32_t b, int32_t alpha = 255)
 {
     rgb_color result;
     result.red = (uchar)r;
@@ -490,9 +490,9 @@ void ThrowOnInitCheckError(InitCheckable* item)
 #	define ThrowOnAssert(x) _ThrowOnAssert(x, NULL, 0)
 #endif
 
-void _ThrowOnError(status_t, const char*, int32);
-void _ThrowIfNotSize(ssize_t, const char*, int32);
-void _ThrowOnAssert(bool, const char*, int32);
+void _ThrowOnError(status_t, const char*, int32_t);
+void _ThrowIfNotSize(ssize_t, const char*, int32_t);
+void _ThrowOnAssert(bool, const char*, int32_t);
 
 // stub calls that work around BAppFile info inefficiency
 status_t GetAppSignatureFromAttr(BFile*, char*);
@@ -500,7 +500,7 @@ status_t GetAppIconFromAttr(BFile* file, BBitmap* icon, icon_size which);
 status_t GetFileIconFromAttr(BNode* node, BBitmap* icon, icon_size which);
 
 // debugging
-void HexDump(const void* buffer, int32 length);
+void HexDump(const void* buffer, int32_t length);
 
 #if xDEBUG
 
@@ -596,9 +596,9 @@ inline NewType assert_cast(OldType castedPointer) {
 // B_SWAP_INT32 have broken signedness, simple cover calls to fix that
 // should fix up in ByteOrder.h
 
-inline int32 SwapInt32(int32 value)
-    { return (int32)B_SWAP_INT32((uint32)value); }
-inline uint32 SwapUInt32(uint32 value) { return B_SWAP_INT32(value); }
+inline int32_t SwapInt32(int32_t value)
+    { return (int32_t)B_SWAP_INT32((uint32_t)value); }
+inline uint32_t SwapUInt32(uint32_t value) { return B_SWAP_INT32(value); }
 inline int64 SwapInt64(int64 value)
     { return (int64)B_SWAP_INT64((uint64)value); }
 inline uint64 SwapUInt64(uint64 value) { return B_SWAP_INT64(value); }

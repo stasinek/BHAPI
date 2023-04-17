@@ -13,7 +13,7 @@ StackTrace::StackTrace()
 
 StackTrace::~StackTrace()
 {
-	for (int32 i = 0; StackFrame* frame = FrameAt(i); i++)
+	for (int32_t i = 0; StackFrame* frame = FrameAt(i); i++)
 		frame->ReleaseReference();
 }
 
@@ -28,14 +28,14 @@ bool StackTrace::AddFrame(StackFrame* frame)
 }
 
 
-int32 StackTrace::CountFrames() const
+int32_t StackTrace::CountFrames() const
 {
 	return fStackFrames.CountItems();
 }
 
 
 StackFrame*
-StackTrace::FrameAt(int32 index) const
+StackTrace::FrameAt(int32_t index) const
 {
 	return fStackFrames.ItemAt(index);
 }

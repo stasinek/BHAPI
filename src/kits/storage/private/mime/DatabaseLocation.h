@@ -97,10 +97,10 @@ public:
 			bool				IsInstalled(const char* type);
 
 private:
-			BString				_TypeToFilename(const char* type, int32 index)
+			BString				_TypeToFilename(const char* type, int32_t index)
 									const;
 			status_t			_OpenType(const char* type, BNode& _node,
-									int32& _index) const;
+									int32_t& _index) const;
 			status_t			_CreateTypeNode(const char* type, BNode& _node)
 									const;
 			status_t			_CopyTypeNode(BNode& source, const char* type,

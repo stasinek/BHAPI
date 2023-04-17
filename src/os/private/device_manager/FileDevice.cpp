@@ -17,7 +17,7 @@
 #include <vfs.h>
 
 
-static const uint32 kBlockSize = 512;
+static const uint32_t kBlockSize = 512;
 
 static const uint8 kDeviceIcon[] = {
 	0x6e, 0x63, 0x69, 0x66, 0x08, 0x05, 0x00, 0x04, 0x00, 0x54, 0x02, 0x00,
@@ -262,7 +262,7 @@ set_ioctl_result(const ResultType& result, void* buffer, size_t length)
 
 
 status_t
-FileDevice::Control(void* _cookie, int32 op, void* buffer, size_t length)
+FileDevice::Control(void* _cookie, int32_t op, void* buffer, size_t length)
 {
 	Cookie* cookie = (Cookie*)_cookie;
 
@@ -301,7 +301,7 @@ FileDevice::Control(void* _cookie, int32 op, void* buffer, size_t length)
 				return B_BAD_ADDRESS;
 			}
 
-			if (iconData.icon_size >= (int32)sizeof(kDeviceIcon)) {
+			if (iconData.icon_size >= (int32_t)sizeof(kDeviceIcon)) {
 				if (user_memcpy(iconData.icon_data, kDeviceIcon,
 						sizeof(kDeviceIcon)) != B_OK) {
 					return B_BAD_ADDRESS;
@@ -317,11 +317,11 @@ FileDevice::Control(void* _cookie, int32 op, void* buffer, size_t length)
 		{
 			// fill in the geometry
 			// Optimally we have only 1 block per sector and only one head.
-			// Since we have only a uint32 for the cylinder count, this won't
+			// Since we have only a uint32_t for the cylinder count, this won't
 			// work for files > 2TB. So, we set the head count to the minimally
 			// possible value.
 			off_t blocks = fFileSize / kBlockSize;
-			uint32 heads = (blocks + 0xfffffffe) / 0xffffffff;
+			uint32_t heads = (blocks + 0xfffffffe) / 0xffffffff;
 			if (heads == 0)
 				heads = 1;
 

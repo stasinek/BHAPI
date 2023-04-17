@@ -74,7 +74,7 @@ struct SymlinkDescriptor : Descriptor {
 // AttributeDescriptor
 struct AttributeDescriptor : Descriptor {
                                 AttributeDescriptor(int fileFD,
-                                    const char* attribute, uint32 type,
+                                    const char* attribute, uint32_t type,
                                     int openMode);
     virtual						~AttributeDescriptor();
 
@@ -84,7 +84,7 @@ struct AttributeDescriptor : Descriptor {
 
             int					FileFD() const		{ return fFileFD; }
             const char*			Attribute() const	{ return fAttribute; }
-            uint32				Type() const		{ return fType; }
+            uint32_t				Type() const		{ return fType; }
             int					OpenMode() const	{ return fOpenMode; }
 
     virtual	status_t			Close();
@@ -94,7 +94,7 @@ struct AttributeDescriptor : Descriptor {
 private:
             int					fFileFD;
             char				fAttribute[B_ATTR_NAME_LENGTH];
-            uint32				fType;
+            uint32_t				fType;
             int					fOpenMode;
             uint8*				fData;
             size_t				fDataSize;

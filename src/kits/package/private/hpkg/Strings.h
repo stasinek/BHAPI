@@ -18,13 +18,13 @@ namespace BHPKG {
 namespace BPrivate {
 
 
-uint32	hash_string(const char* string);
+uint32_t	hash_string(const char* string);
 
 
 struct CachedString {
 	char*			string;
-	int32			index;
-	uint32			usageCount;
+	int32_t			index;
+	uint32_t			usageCount;
 	CachedString*	next;	// hash table link
 
 	CachedString()

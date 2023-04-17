@@ -74,10 +74,10 @@ status_t BVariant::SetToTypedData(const void* data, type_code type)
 			fUInt16 = *(uint16*)data;
 			break;
 		case B_INT32_TYPE:
-			fInt32 = *(int32*)data;
+			fInt32 = *(int32_t*)data;
 			break;
 		case B_UINT32_TYPE:
-			fUInt32 = *(uint32*)data;
+			fUInt32 = *(uint32_t*)data;
 			break;
 		case B_INT64_TYPE:
 			fInt64 = *(int64*)data;
@@ -268,15 +268,15 @@ BVariant::ToUInt16() const
 }
 
 
-int32 BVariant::ToInt32() const
+int32_t BVariant::ToInt32() const
 {
-	return _ToNumber<int32>();
+	return _ToNumber<int32_t>();
 }
 
 
-uint32 BVariant::ToUInt32() const
+uint32_t BVariant::ToUInt32() const
 {
-	return _ToNumber<uint32>();
+	return _ToNumber<uint32_t>();
 }
 
 
@@ -405,7 +405,7 @@ status_t BVariant::SetFromMessage(const BMessage& message, const char* fieldName
 {
 	// get the message field info
 	type_code type;
-	int32 count;
+	int32_t count;
 	status_t error = message.GetInfo(fieldName, &type, &count);
 	if (error != B_OK)
 		return error;
@@ -553,7 +553,7 @@ void BVariant::_SetTo(uint16 value)
 }
 
 
-void BVariant::_SetTo(int32 value)
+void BVariant::_SetTo(int32_t value)
 {
 	fType = B_INT32_TYPE;
 	fFlags = 0;
@@ -561,7 +561,7 @@ void BVariant::_SetTo(int32 value)
 }
 
 
-void BVariant::_SetTo(uint32 value)
+void BVariant::_SetTo(uint32_t value)
 {
 	fType = B_UINT32_TYPE;
 	fFlags = 0;
@@ -620,7 +620,7 @@ void BVariant::_SetTo(const void* value)
 }
 
 
-bool BVariant::_SetTo(const char* value, uint32 flags)
+bool BVariant::_SetTo(const char* value, uint32_t flags)
 {
 	fType = B_STRING_TYPE;
 	fFlags = 0;

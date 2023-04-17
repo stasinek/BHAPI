@@ -100,7 +100,7 @@ M68KPagingStructures040::Delete()
 #if 0
 	// this sanity check can be enabled when corruption due to
 	// overwriting an active page directory is suspected
-	uint32 activePageDirectory;
+	uint32_t activePageDirectory;
 	read_cr3(activePageDirectory);
 	if (activePageDirectory == pgdir_phys)
 		panic("deleting a still active page directory\n");

@@ -16,14 +16,14 @@
 
 // BMediaRoster
 
-status_t BMediaRoster::SetRealtimeFlags(uint32 enabled)
+status_t BMediaRoster::SetRealtimeFlags(uint32_t enabled)
 {
 	UNIMPLEMENTED();
 	return B_ERROR;
 }
 
 
-status_t BMediaRoster::GetRealtimeFlags(uint32* _enabled)
+status_t BMediaRoster::GetRealtimeFlags(uint32_t* _enabled)
 {
 	UNIMPLEMENTED();
 	return B_ERROR;
@@ -63,15 +63,15 @@ status_t BMediaRoster::SetOutputBuffersFor(const media_source& output,
 
 // MediaDefs.h
 
-status_t launch_media_server(uint32 flags);
+status_t launch_media_server(uint32_t flags);
 
-status_t media_realtime_init_image(image_id image, uint32 flags);
+status_t media_realtime_init_image(image_id image, uint32_t flags);
 
 status_t media_realtime_init_thread(thread_id thread, size_t stack_used,
-	uint32 flags);
+	uint32_t flags);
 
 
-status_t launch_media_server(uint32 flags)
+status_t launch_media_server(uint32_t flags)
 {
 	return launch_media_server(0, NULL, NULL, flags);
 }
@@ -82,7 +82,7 @@ status_t launch_media_server(uint32 flags)
 //	B_MEDIA_REALTIME_DISABLED is returned.
 //	If there are not enough system resources to enable real-time performance,
 //	B_MEDIA_REALTIME_UNAVAILABLE is returned.
-status_t media_realtime_init_image(image_id image, uint32 flags)
+status_t media_realtime_init_image(image_id image, uint32_t flags)
 {
 	UNIMPLEMENTED();
 	return B_OK;
@@ -96,7 +96,7 @@ status_t media_realtime_init_image(image_id image, uint32 flags)
 //	256 kB of the stack, so you should pass some smaller value you determine
 //	from profiling the thread; typically in the 32-64kB range.
 //	Return values are the same as for media_prepare_realtime_image().
-status_t media_realtime_init_thread(thread_id thread, size_t stack_used, uint32 flags)
+status_t media_realtime_init_thread(thread_id thread, size_t stack_used, uint32_t flags)
 {
 	UNIMPLEMENTED();
 	return B_OK;

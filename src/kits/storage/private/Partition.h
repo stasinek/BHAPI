@@ -37,9 +37,9 @@ public:
 			off_t				Offset() const;		// 0 for devices
 			off_t				Size() const;
 			off_t				ContentSize() const;	// 0 if uninitialized
-			uint32				BlockSize() const;
-			int32				Index() const;		// 0 for devices
-			uint32				Status() const;
+			uint32_t				BlockSize() const;
+			int32_t				Index() const;		// 0 for devices
+			uint32_t				Status() const;
 
 			bool				ContainsFileSystem() const;
 			bool				ContainsPartitioningSystem() const;
@@ -49,7 +49,7 @@ public:
 			bool				IsMounted() const;
 			bool				IsBusy() const;
 
-			uint32				Flags() const;
+			uint32_t				Flags() const;
 
 			const char*			Name() const;
 			const char*			ContentName() const;
@@ -69,17 +69,17 @@ public:
 			status_t			GetMountPoint(BPath* mountPoint) const;
 
 			status_t			Mount(const char* mountPoint = NULL,
-									uint32 mountFlags = 0,
+									uint32_t mountFlags = 0,
 									const char* parameters = NULL);
-			status_t			Unmount(uint32 unmountFlags = 0);
+			status_t			Unmount(uint32_t unmountFlags = 0);
 
 	// Hierarchy Info
 
 			BDiskDevice*		Device() const;
 			BPartition*			Parent() const;
-			BPartition*			ChildAt(int32 index) const;
-			int32				CountChildren() const;
-			int32				CountDescendants() const;
+			BPartition*			ChildAt(int32_t index) const;
+			int32_t				CountChildren() const;
+			int32_t				CountDescendants() const;
 			BPartition*			FindDescendant(partition_id id) const;
 
 			status_t			GetPartitioningInfo(
@@ -138,12 +138,12 @@ public:
 									bool* whileMounted = NULL) const;
 			status_t			SetContentParameters(const char* parameters);
 
-			status_t			GetNextSupportedType(int32 *cookie,
+			status_t			GetNextSupportedType(int32_t *cookie,
 									BString* type) const;
 									// Returns all partition types for this
 									// partition supported by the parent disk
 									// system.
-			status_t			GetNextSupportedChildType(int32 *cookie,
+			status_t			GetNextSupportedChildType(int32_t *cookie,
 									BString* type) const;
 									// Returns all partition types for a child
 									// of this partition supported by its disk
@@ -168,8 +168,8 @@ public:
 									const char* parameters,
 									BPartition** child = NULL);
 
-			bool				CanDeleteChild(int32 index) const;
-			status_t			DeleteChild(int32 index);
+			bool				CanDeleteChild(int32_t index) const;
+			status_t			DeleteChild(int32_t index);
 
 			bool				SupportsChildName() const;
 
@@ -189,27 +189,27 @@ private:
 									user_partition_data* data, bool* updated);
 			status_t			_Update(user_partition_data* data,
 									bool* updated);
-			void				_RemoveChild(int32 index);
+			void				_RemoveChild(int32_t index);
 
-			BPartition*			_ChildAt(int32 index) const;
-			int32				_CountChildren() const;
-			int32				_CountDescendants() const;
+			BPartition*			_ChildAt(int32_t index) const;
+			int32_t				_CountChildren() const;
+			int32_t				_CountDescendants() const;
 
-			int32				_Level() const;
+			int32_t				_Level() const;
 			virtual	bool		_AcceptVisitor(BDiskDeviceVisitor* visitor,
-									int32 level);
+									int32_t level);
 			BPartition*			_VisitEachDescendant(
 									BDiskDeviceVisitor* visitor,
-									int32 level = -1);
+									int32_t level = -1);
 
 			const user_partition_data* _PartitionData() const;
 
 			bool				_HasContent() const;
-			bool				_SupportsOperation(uint32 flag,
-									uint32 whileMountedFlag,
+			bool				_SupportsOperation(uint32_t flag,
+									uint32_t whileMountedFlag,
 									bool* whileMounted) const;
 			bool				_SupportsChildOperation(const BPartition* child,
-									uint32 flag) const;
+									uint32_t flag) const;
 
 			status_t			_CreateDelegates();
 			status_t			_InitDelegates();

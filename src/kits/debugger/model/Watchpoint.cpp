@@ -6,7 +6,7 @@
 #include <Watchpoint.h>
 
 
-Watchpoint::Watchpoint(target_addr_t address, uint32 type, int32 length)
+Watchpoint::Watchpoint(target_addr_t address, uint32_t type, int32_t length)
 	:
 	fAddress(address),
 	fType(type),

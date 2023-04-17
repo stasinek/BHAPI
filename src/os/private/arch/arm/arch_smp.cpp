@@ -26,7 +26,7 @@ arch_smp_init(kernel_args *args)
 
 
 status_t
-arch_smp_per_cpu_init(kernel_args *args, int32 cpu)
+arch_smp_per_cpu_init(kernel_args *args, int32_t cpu)
 {
 	return B_OK;
 }
@@ -43,7 +43,7 @@ arch_smp_send_multicast_ici(CPUSet& cpuSet)
 
 
 void
-arch_smp_send_ici(int32 target_cpu)
+arch_smp_send_ici(int32_t target_cpu)
 {
 	panic("called arch_smp_send_ici!\n");
 }

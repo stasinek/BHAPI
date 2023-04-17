@@ -29,7 +29,7 @@ family_from_interface_address(const BNetworkInterfaceAddress& address)
 }
 
 
-static status_t do_ifaliasreq(const char* name, int32 option, BNetworkInterfaceAddress& address,
+static status_t do_ifaliasreq(const char* name, int32_t option, BNetworkInterfaceAddress& address,
 	bool readBack = false)
 {
 	int family = AF_INET;
@@ -68,7 +68,7 @@ static status_t do_ifaliasreq(const char* name, int32 option, BNetworkInterfaceA
 }
 
 
-static status_t do_ifaliasreq(const char* name, int32 option,
+static status_t do_ifaliasreq(const char* name, int32_t option,
 	const BNetworkInterfaceAddress& address)
 {
 	return do_ifaliasreq(name, option,
@@ -109,7 +109,7 @@ BNetworkInterfaceAddress::~BNetworkInterfaceAddress()
 }
 
 
-status_t BNetworkInterfaceAddress::SetTo(const BNetworkInterface& interface, int32 index)
+status_t BNetworkInterfaceAddress::SetTo(const BNetworkInterface& interface, int32_t index)
 {
 	fIndex = index;
 	return do_ifaliasreq(interface.Name(), B_SOCKET_GET_ALIAS, *this, true);
@@ -140,7 +140,7 @@ void BNetworkInterfaceAddress::SetDestination(const BNetworkAddress& destination
 }
 
 
-void BNetworkInterfaceAddress::SetFlags(uint32 flags)
+void BNetworkInterfaceAddress::SetFlags(uint32_t flags)
 {
 	fFlags = flags;
 }
@@ -161,7 +161,7 @@ BNetworkInterface::BNetworkInterface(const char* name)
 }
 
 
-BNetworkInterface::BNetworkInterface(uint32 index)
+BNetworkInterface::BNetworkInterface(uint32_t index)
 {
 	SetTo(index);
 }
@@ -184,7 +184,7 @@ void BNetworkInterface::SetTo(const char* name)
 }
 
 
-status_t BNetworkInterface::SetTo(uint32 index)
+status_t BNetworkInterface::SetTo(uint32_t index)
 {
 	ifreq request;
 	request.ifr_index = index;
@@ -211,7 +211,7 @@ const char*  BNetworkInterface::Name() const
 }
 
 
-uint32 BNetworkInterface::Index() const
+uint32_t BNetworkInterface::Index() const
 {
 	ifreq request;
 	if (do_request(AF_INET, request, Name(), SIOCGIFINDEX) != B_OK)
@@ -221,7 +221,7 @@ uint32 BNetworkInterface::Index() const
 }
 
 
-uint32 BNetworkInterface::Flags() const
+uint32_t BNetworkInterface::Flags() const
 {
 	ifreq request;
 	if (do_request(AF_INET, request, Name(), SIOCGIFFLAGS) != B_OK)
@@ -231,7 +231,7 @@ uint32 BNetworkInterface::Flags() const
 }
 
 
-uint32 BNetworkInterface::MTU() const
+uint32_t BNetworkInterface::MTU() const
 {
 	ifreq request;
 	if (do_request(AF_INET, request, Name(), SIOCGIFMTU) != B_OK)
@@ -241,7 +241,7 @@ uint32 BNetworkInterface::MTU() const
 }
 
 
-int32 BNetworkInterface::Media() const
+int32_t BNetworkInterface::Media() const
 {
 	ifmediareq request;
 	request.ifm_count = 0;
@@ -254,7 +254,7 @@ int32 BNetworkInterface::Media() const
 }
 
 
-uint32 BNetworkInterface::Metric() const
+uint32_t BNetworkInterface::Metric() const
 {
 	ifreq request;
 	if (do_request(AF_INET, request, Name(), SIOCGIFMETRIC) != B_OK)
@@ -264,7 +264,7 @@ uint32 BNetworkInterface::Metric() const
 }
 
 
-uint32 BNetworkInterface::Type() const
+uint32_t BNetworkInterface::Type() const
 {
 	ifreq request;
 	if (do_request(AF_INET, request, Name(), SIOCGIFTYPE) != B_OK)
@@ -292,7 +292,7 @@ bool BNetworkInterface::HasLink() const
 }
 
 
-status_t BNetworkInterface::SetFlags(uint32 flags)
+status_t BNetworkInterface::SetFlags(uint32_t flags)
 {
 	ifreq request;
 	request.ifr_flags = flags;
@@ -300,7 +300,7 @@ status_t BNetworkInterface::SetFlags(uint32 flags)
 }
 
 
-status_t BNetworkInterface::SetMTU(uint32 mtu)
+status_t BNetworkInterface::SetMTU(uint32_t mtu)
 {
 	ifreq request;
 	request.ifr_mtu = mtu;
@@ -308,7 +308,7 @@ status_t BNetworkInterface::SetMTU(uint32 mtu)
 }
 
 
-status_t BNetworkInterface::SetMedia(int32 media)
+status_t BNetworkInterface::SetMedia(int32_t media)
 {
 	ifreq request;
 	request.ifr_media = media;
@@ -316,7 +316,7 @@ status_t BNetworkInterface::SetMedia(int32 media)
 }
 
 
-status_t BNetworkInterface::SetMetric(uint32 metric)
+status_t BNetworkInterface::SetMetric(uint32_t metric)
 {
 	ifreq request;
 	request.ifr_metric = metric;
@@ -324,7 +324,7 @@ status_t BNetworkInterface::SetMetric(uint32 metric)
 }
 
 
-int32 BNetworkInterface::CountAddresses() const
+int32_t BNetworkInterface::CountAddresses() const
 {
 	ifreq request;
 	if (do_request(AF_INET, request, Name(), B_SOCKET_COUNT_ALIASES) != B_OK)
@@ -334,13 +334,13 @@ int32 BNetworkInterface::CountAddresses() const
 }
 
 
-status_t BNetworkInterface::GetAddressAt(int32 index, BNetworkInterfaceAddress& address)
+status_t BNetworkInterface::GetAddressAt(int32_t index, BNetworkInterfaceAddress& address)
 {
 	return address.SetTo(*this, index);
 }
 
 
-int32 BNetworkInterface::FindAddress(const BNetworkAddress& address)
+int32_t BNetworkInterface::FindAddress(const BNetworkAddress& address)
 {
 	int socket = ::socket(address.Family(), SOCK_DGRAM, 0);
 	if (socket < 0)
@@ -364,7 +364,7 @@ int32 BNetworkInterface::FindAddress(const BNetworkAddress& address)
 }
 
 
-int32 BNetworkInterface::FindFirstAddress(int family)
+int32_t BNetworkInterface::FindFirstAddress(int family)
 {
 	int socket = ::socket(family, SOCK_DGRAM, 0);
 	if (socket < 0)
@@ -429,7 +429,7 @@ status_t BNetworkInterface::RemoveAddress(const BNetworkAddress& address)
 }
 
 
-status_t BNetworkInterface::RemoveAddressAt(int32 index)
+status_t BNetworkInterface::RemoveAddressAt(int32_t index)
 {
 	BNetworkInterfaceAddress address;
 	status_t status = GetAddressAt(index, address);

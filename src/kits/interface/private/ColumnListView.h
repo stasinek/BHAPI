@@ -126,11 +126,11 @@ public:
 	virtual 					~BRow();
 	virtual bool		 		HasLatch() const;
 
-			int32				CountFields() const;
-			BField*				GetField(int32 logicalFieldIndex);
-	const	BField*				GetField(int32 logicalFieldIndex) const;
+			int32_t				CountFields() const;
+			BField*				GetField(int32_t logicalFieldIndex);
+	const	BField*				GetField(int32_t logicalFieldIndex) const;
 			void				SetField(BField* field,
-									int32 logicalFieldIndex);
+									int32_t logicalFieldIndex);
 
 			float 				Height() const;
 			bool 				IsExpanded() const;
@@ -142,7 +142,7 @@ private:
 	// Blows up into the debugger if the validation fails.
 			void				ValidateFields() const;
 			void				ValidateField(const BField* field,
-									int32 logicalFieldIndex) const;
+									int32_t logicalFieldIndex) const;
 private:
 			BList				fFields;
 			BPrivate::
@@ -183,10 +183,10 @@ public:
 
 	virtual void				MouseMoved(BColumnListView* parent, BRow* row,
 									BField* field, BRect fieldRect,
-									BPoint point, uint32 buttons, int32 code);
+									BPoint point, uint32_t buttons, int32_t code);
 	virtual void				MouseDown(BColumnListView* parent, BRow* row,
 									BField* field, BRect fieldRect,
-									BPoint point, uint32 buttons);
+									BPoint point, uint32_t buttons);
 	virtual	void				MouseUp(BColumnListView* parent, BRow* row,
 									BField* field);
 
@@ -206,7 +206,7 @@ public:
 			alignment			Alignment() const;
 			void				SetAlignment(alignment);
 
-			int32				LogicalFieldNum() const;
+			int32_t				LogicalFieldNum() const;
 
 	/*!
 		\param field The BField derivative to validate.
@@ -232,7 +232,7 @@ private:
 			float 				fMinWidth;
 			float				fMaxWidth;
 			bool				fVisible;
-			int32				fFieldID;
+			int32_t				fFieldID;
 			BColumnListView*	fList;
 			bool				fSortAscending;
 			bool				fWantsEvents;
@@ -248,11 +248,11 @@ private:
 class BColumnListView : public BView, public BInvoker {
 public:
 								BColumnListView(BRect rect,
-									const char* name, uint32 resizingMode,
-									uint32 flags, border_style = B_NO_BORDER,
+									const char* name, uint32_t resizingMode,
+									uint32_t flags, border_style = B_NO_BORDER,
 									bool showHorizontalScrollbar = true);
 								BColumnListView(const char* name,
-									uint32 flags, border_style = B_NO_BORDER,
+									uint32_t flags, border_style = B_NO_BORDER,
 									bool showHorizontalScrollbar = true);
 	virtual						~BColumnListView();
 
@@ -264,9 +264,9 @@ public:
 	virtual	void				ItemInvoked();
 	virtual	void				SetInvocationMessage(BMessage* message);
 			BMessage* 			InvocationMessage() const;
-			uint32 				InvocationCommand() const;
+			uint32_t 				InvocationCommand() const;
 			BRow* 				FocusRow() const;
-			void 				SetFocusRow(int32 index, bool select = false);
+			void 				SetFocusRow(int32_t index, bool select = false);
 			void 				SetFocusRow(BRow* row, bool select = false);
 			void 				SetMouseTrackingEnabled(bool);
 
@@ -279,7 +279,7 @@ public:
 	virtual	void				SelectionChanged();
 	virtual	void				SetSelectionMessage(BMessage* message);
 			BMessage*			SelectionMessage();
-			uint32				SelectionCommand() const;
+			uint32_t				SelectionCommand() const;
 			void				SetSelectionMode(list_view_type type);
 				// list_view_type is defined in ListView.h.
 
@@ -296,32 +296,32 @@ public:
 
 	// Column Manipulation
 			void				AddColumn(BColumn* column,
-									int32 logicalFieldIndex);
-			void				MoveColumn(BColumn* column, int32 index);
+									int32_t logicalFieldIndex);
+			void				MoveColumn(BColumn* column, int32_t index);
 			void				RemoveColumn(BColumn* column);
-			int32				CountColumns() const;
-			BColumn*			ColumnAt(int32 index) const;
+			int32_t				CountColumns() const;
+			BColumn*			ColumnAt(int32_t index) const;
 			BColumn*			ColumnAt(BPoint point) const;
 			void				SetColumnVisible(BColumn* column,
 									bool isVisible);
-			void				SetColumnVisible(int32, bool);
-			bool				IsColumnVisible(int32) const;
+			void				SetColumnVisible(int32_t, bool);
+			bool				IsColumnVisible(int32_t) const;
 			void				SetColumnFlags(column_flags flags);
-			void				ResizeColumnToPreferred(int32 index);
+			void				ResizeColumnToPreferred(int32_t index);
 			void				ResizeAllColumnsToPreferred();
 
 	// Row manipulation
-			const BRow*			RowAt(int32 index, BRow *parent = 0) const;
-			BRow*				RowAt(int32 index, BRow *parent = 0);
+			const BRow*			RowAt(int32_t index, BRow *parent = 0) const;
+			BRow*				RowAt(int32_t index, BRow *parent = 0);
 			const BRow*			RowAt(BPoint) const;
 			BRow*				RowAt(BPoint);
 			bool				GetRowRect(const BRow* row, BRect* _rect) const;
 			bool				FindParent(BRow* row, BRow** _parent,
 									bool *_isVisible) const;
-			int32				IndexOf(BRow* row);
-			int32				CountRows(BRow* parent = 0) const;
+			int32_t				IndexOf(BRow* row);
+			int32_t				CountRows(BRow* parent = 0) const;
 			void				AddRow(BRow* row, BRow* parent = NULL);
-			void				AddRow(BRow* row, int32 index,
+			void				AddRow(BRow* row, int32_t index,
 									BRow* parent = NULL);
 
 			void				ScrollTo(const BRow* Row);
@@ -331,7 +331,7 @@ public:
 	// todo: Make delete row and children
 			void				RemoveRow(BRow* row);
 			void				UpdateRow(BRow* row);
-			bool				SwapRows(int32 index1, int32 index2, BRow*
+			bool				SwapRows(int32_t index1, int32_t index2, BRow*
 									parentRow1 = NULL, BRow* parentRow2 = NULL);
 			void				Clear();
 
@@ -341,7 +341,7 @@ public:
 			void				GetFont(BFont* font) const
 									{ BView::GetFont(font); }
 	virtual	void				SetFont(const BFont* font,
-									uint32 mask = B_FONT_ALL);
+									uint32_t mask = B_FONT_ALL);
 	virtual	void				SetHighColor(rgb_color);
 			void				SetSelectionColor(rgb_color);
 			void				SetBackgroundColor(rgb_color);
@@ -355,7 +355,7 @@ public:
 									rgb_color color);
 			void				SetFont(ColumnListViewFont fontIndex,
 									const BFont* font,
-									uint32 mask = B_FONT_ALL);
+									uint32_t mask = B_FONT_ALL);
 			rgb_color			Color(ColumnListViewColor colorIndex) const;
 			void				GetFont(ColumnListViewFont fontIndex,
 									BFont* font) const;
@@ -386,7 +386,7 @@ public:
 
 protected:
 	virtual	void 				MessageReceived(BMessage* message);
-	virtual	void 				KeyDown(const char* bytes, int32 numBytes);
+	virtual	void 				KeyDown(const char* bytes, int32_t numBytes);
 	virtual	void 				AttachedToWindow();
 	virtual	void 				WindowActivated(bool active);
 	virtual	void 				Draw(BRect updateRect);

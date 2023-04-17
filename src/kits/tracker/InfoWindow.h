@@ -55,7 +55,7 @@ class AttributeView;
 
 class BInfoWindow : public BWindow {
 public:
-	BInfoWindow(Model*, int32 groupIndex,
+	BInfoWindow(Model*, int32_t groupIndex,
 		LockingList<BWindow>* list = NULL);
 	~BInfoWindow();
 
@@ -66,7 +66,7 @@ public:
 	void OpenFilePanel(const entry_ref*);
 
 	static void GetSizeString(BString &result, off_t size,
-		int32 fileCount);
+		int32_t fileCount);
 
 protected:
 	virtual void Quit();
@@ -75,11 +75,11 @@ protected:
 
 private:
 	static BRect InfoWindowRect(bool displayingSymlink);
-	static int32 CalcSize(void*);
+	static int32_t CalcSize(void*);
 
 	Model* fModel;
 	volatile bool fStopCalc;
-	int32 fIndex;
+	int32_t fIndex;
 		// tells where it lives with respect to other
 	thread_id fCalcThreadID;
 	LockingList<BWindow>* fWindowList;

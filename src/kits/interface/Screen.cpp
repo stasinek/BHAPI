@@ -44,7 +44,7 @@
 #include <kits/app/Application.h>
 #include <kits/debug/Errors.h>
 
-BScreen::BScreen(__be_uint32 id)
+BScreen::BScreen(__be_uint32_t id)
     : fID(id)
 {
     // TODO
@@ -86,14 +86,14 @@ BRect BScreen::Frame() const
     BRect r;
     if(fID == 0 && !(bhapi::app == NULL || bhapi::app->fGraphicsEngine == NULL))
     {
-        __be_uint32 scrW = 0, scrH = 0;
+        __be_uint32_t scrW = 0, scrH = 0;
         bhapi::app->fGraphicsEngine->GetDesktopBounds(&scrW, &scrH);
         if(scrW > 0 && scrH > 0) r.Set(0, 0, (float)(scrW - 1), (float)(scrH - 1));
     }
     return r;
 }
 
-__be_uint32 BScreen::ID() const
+__be_uint32_t BScreen::ID() const
 {
     return fID;
 }
@@ -264,7 +264,7 @@ BScreen::DesktopColor()
 
 
 rgb_color
-BScreen::DesktopColor(uint32 workspace)
+BScreen::DesktopColor(uint32_t workspace)
 {
     if (fScreen != NULL)
         return fScreen->DesktopColor(workspace);
@@ -282,7 +282,7 @@ BScreen::SetDesktopColor(rgb_color color, bool stick)
 
 
 void
-BScreen::SetDesktopColor(rgb_color color, uint32 workspace, bool stick)
+BScreen::SetDesktopColor(rgb_color color, uint32_t workspace, bool stick)
 {
     if (fScreen != NULL)
         fScreen->SetDesktopColor(color, workspace, stick);
@@ -301,7 +301,7 @@ BScreen::ProposeMode(display_mode* target, const display_mode* low,
 
 
 status_t
-BScreen::GetModeList(display_mode** _modeList, uint32* _count)
+BScreen::GetModeList(display_mode** _modeList, uint32_t* _count)
 {
     if (fScreen != NULL)
         return fScreen->GetModeList(_modeList, _count);
@@ -321,7 +321,7 @@ BScreen::GetMode(display_mode* mode)
 
 
 status_t
-BScreen::GetMode(uint32 workspace, display_mode* mode)
+BScreen::GetMode(uint32_t workspace, display_mode* mode)
 {
     if (fScreen != NULL)
         return fScreen->GetMode(workspace, mode);
@@ -341,7 +341,7 @@ BScreen::SetMode(display_mode* mode, bool makeDefault)
 
 
 status_t
-BScreen::SetMode(uint32 workspace, display_mode* mode, bool makeDefault)
+BScreen::SetMode(uint32_t workspace, display_mode* mode, bool makeDefault)
 {
     if (fScreen != NULL)
         return fScreen->SetMode(workspace, mode, makeDefault);
@@ -371,7 +371,7 @@ BScreen::GetMonitorInfo(monitor_info* info)
 
 
 status_t
-BScreen::GetPixelClockLimits(display_mode* mode, uint32* _low, uint32* _high)
+BScreen::GetPixelClockLimits(display_mode* mode, uint32_t* _low, uint32_t* _high)
 {
     if (fScreen != NULL)
         return fScreen->GetPixelClockLimits(mode, _low, _high);
@@ -391,7 +391,7 @@ BScreen::GetTimingConstraints(display_timing_constraints* constraints)
 
 
 status_t
-BScreen::SetDPMS(uint32 dpmsState)
+BScreen::SetDPMS(uint32_t dpmsState)
 {
     if (fScreen != NULL)
         return fScreen->SetDPMS(dpmsState);
@@ -400,7 +400,7 @@ BScreen::SetDPMS(uint32 dpmsState)
 }
 
 
-uint32
+uint32_t
 BScreen::DPMSState()
 {
     if (fScreen != NULL)
@@ -410,7 +410,7 @@ BScreen::DPMSState()
 }
 
 
-uint32
+uint32_t
 BScreen::DPMSCapabilites()
 {
     if (fScreen != NULL)
@@ -446,7 +446,7 @@ void* BScreen::BaseAddress()
 }
 
 
-uint32 BScreen::BytesPerRow()
+uint32_t BScreen::BytesPerRow()
 {
     if (fScreen != NULL)
         return fScreen->BytesPerRow();

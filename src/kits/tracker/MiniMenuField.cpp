@@ -43,7 +43,7 @@ All rights reserved.
 
 
 MiniMenuField::MiniMenuField(BRect frame, const char* name, BPopUpMenu* menu,
-	uint32 resizeFlags, uint32 flags)
+	uint32_t resizeFlags, uint32_t flags)
 	:
 	BView(frame, name, resizeFlags, flags),
 	fMenu(menu)
@@ -76,7 +76,7 @@ void MiniMenuField::MakeFocus(bool on)
 }
 
 
-void MiniMenuField::KeyDown(const char* bytes, int32 numBytes)
+void MiniMenuField::KeyDown(const char* bytes, int32_t numBytes)
 {
 	switch (bytes[0]) {
 		case B_SPACE:

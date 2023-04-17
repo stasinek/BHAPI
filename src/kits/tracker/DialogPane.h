@@ -58,39 +58,39 @@ class DialogPane : public BView {
 	// dialog with collapsible panes
 public:
 								DialogPane(BRect mode1Frame, BRect mode2Frame,
-									int32 initialMode, const char* name,
-									uint32 followFlags
+									int32_t initialMode, const char* name,
+									uint32_t followFlags
 										= B_FOLLOW_LEFT | B_FOLLOW_TOP,
-									uint32 flags = B_WILL_DRAW);
+									uint32_t flags = B_WILL_DRAW);
 								DialogPane(BRect mode1Frame, BRect mode2Frame,
-									BRect mode3Frame, int32 initialMode,
-									const char* name, uint32 followFlags
+									BRect mode3Frame, int32_t initialMode,
+									const char* name, uint32_t followFlags
 										= B_FOLLOW_LEFT | B_FOLLOW_TOP,
-									uint32 flags = B_WILL_DRAW);
+									uint32_t flags = B_WILL_DRAW);
 
 	virtual						~DialogPane();
 
-			BRect				FrameForMode(int32);
-			BRect				BoundsForMode(int32);
+			BRect				FrameForMode(int32_t);
+			BRect				BoundsForMode(int32_t);
 
-			int32				Mode() const;
-	virtual	void				SetMode(int32, bool initialSetup = false);
+			int32_t				Mode() const;
+	virtual	void				SetMode(int32_t, bool initialSetup = false);
 
-			void				AddItem(BView*, int32 toMode);
+			void				AddItem(BView*, int32_t toMode);
 
 			void				SetSwitch(BControl*);
 
 	virtual	void				AttachedToWindow();
 
 protected:
-			void				ResizeParentWindow(int32 from, int32 to);
-	static	BRect				FrameForMode(int32, BRect, BRect, BRect);
+			void				ResizeParentWindow(int32_t from, int32_t to);
+	static	BRect				FrameForMode(int32_t, BRect, BRect, BRect);
 		// called only by the constructor
 
 	virtual	void				MessageReceived(BMessage* message);
 
 private:
-			int32				fMode;
+			int32_t				fMode;
 
 			BRect				fMode1Frame;
 			BRect				fMode2Frame;
@@ -104,7 +104,7 @@ private:
 };
 
 
-inline int32 DialogPane::Mode() const
+inline int32_t DialogPane::Mode() const
 {
 	return fMode;
 }
@@ -114,13 +114,13 @@ class PaneSwitch : public BControl {
 public:
 								PaneSwitch(BRect frame, const char* name,
 									bool leftAligned = true,
-									uint32 resizeMask
+									uint32_t resizeMask
 										= B_FOLLOW_LEFT | B_FOLLOW_TOP,
-									uint32 flags = B_WILL_DRAW | B_NAVIGABLE);
+									uint32_t flags = B_WILL_DRAW | B_NAVIGABLE);
 
 								PaneSwitch(const char* name,
 									bool leftAligned = true,
-									uint32 flags = B_WILL_DRAW | B_NAVIGABLE);
+									uint32_t flags = B_WILL_DRAW | B_NAVIGABLE);
 
 	virtual						~PaneSwitch();
 
@@ -139,7 +139,7 @@ public:
 
 protected:
 			void				DoneTracking(BPoint where);
-			void				Track(BPoint where, uint32);
+			void				Track(BPoint where, uint32_t);
 
 			enum State {
 				kCollapsed,
@@ -156,7 +156,7 @@ private:
 			char*				fLabelOn;
 			char*				fLabelOff;
 
-	static	const int32			sLatchSize = 11;
+	static	const int32_t			sLatchSize = 11;
 };
 
 } // namespace BPrivate

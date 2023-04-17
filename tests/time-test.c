@@ -31,7 +31,7 @@
 
 int main(int argc, char **argv)
 {
-	eint32 i = 0;
+	eint32_t i = 0;
 
 	ETK_OUTPUT("real_time() = %I64i\n", e_real_time_clock_usecs());
 

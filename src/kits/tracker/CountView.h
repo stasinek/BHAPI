@@ -43,7 +43,7 @@ namespace BPrivate {
 
 class BPoseView;
 
-const int32 kCountViewWidth = 76;
+const int32_t kCountViewWidth = 76;
 
 
 class BCountView : public BView {
@@ -79,7 +79,7 @@ private:
 	BRect TextAndBarberPoleRect() const;
 	void TrySpinningBarberPole();
 
-	int32 fLastCount;
+	int32_t fLastCount;
 	BPoseView* fPoseView;
 	bool fShowingBarberPole : 1;
 	BBitmap* fBarberPoleMap;

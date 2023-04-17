@@ -54,7 +54,7 @@ private:
 			void				_RemoveDependantJobsOf(BJob* job);
 
 	mutable	BLocker				fLock;
-			uint32				fNextTicketNumber;
+			uint32_t				fNextTicketNumber;
 			JobPriorityQueue*	fQueuedJobs;
 			sem_id				fHaveRunnableJobSem;
 

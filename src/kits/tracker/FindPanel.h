@@ -63,13 +63,13 @@ class Model;
 class DraggableIcon;
 class TAttrView;
 
-const uint32 kVolumeItem = 'Fvol';
-const uint32 kAttributeItemMain = 'Fatr';
-const uint32 kByNameItem = 'Fbyn';
-const uint32 kByAttributeItem = 'Fbya';
-const uint32 kByFormulaItem = 'Fbyq';
-const uint32 kAddItem = 'Fadd';
-const uint32 kRemoveItem = 'Frem';
+const uint32_t kVolumeItem = 'Fvol';
+const uint32_t kAttributeItemMain = 'Fatr';
+const uint32_t kByNameItem = 'Fbyn';
+const uint32_t kByAttributeItem = 'Fbya';
+const uint32_t kByFormulaItem = 'Fbyq';
+const uint32_t kAddItem = 'Fadd';
+const uint32_t kRemoveItem = 'Frem';
 
 #ifdef _IMPEXP_TRACKER
 _IMPEXP_TRACKER
@@ -79,17 +79,17 @@ BMenu* TrackerBuildRecentFindItemsMenu(const char* title);
 struct MoreOptionsStruct {
 	bool showMoreOptions;
 	bool searchTrash;
-	int32 reserved1;
+	int32_t reserved1;
 	bool temporary;
 	bool reserved9;
 	bool reserved10;
 	bool reserved11;
-	int32 reserved3;
-	int32 reserved4;
-	int32 reserved5;
-	int32 reserved6;
-	int32 reserved7;
-	int32 reserved8;
+	int32_t reserved3;
+	int32_t reserved4;
+	int32_t reserved5;
+	int32_t reserved6;
+	int32_t reserved7;
+	int32_t reserved8;
 	// reserve a bunch of fields so that we can add stuff later but not
 	// make old queries incompatible. Reserved fields are set to 0 when
 	// saved
@@ -193,10 +193,10 @@ public:
 
 	BPopUpMenu* VolMenu() const
 		{ return fVolMenu; }
-	uint32 Mode() const
+	uint32_t Mode() const
 		{ return fMode; }
 
-	static uint32 InitialMode(const BNode* entry);
+	static uint32_t InitialMode(const BNode* entry);
 	void SaveWindowState(BNode*, bool editTemplate);
 
 	void SwitchToTemplate(const BNode*);
@@ -207,12 +207,12 @@ public:
 		// build up a simple query from the name we are searching for
 
 	void GetDefaultName(BString&) const;
-	void GetDefaultAttrName(BString&, int32) const;
+	void GetDefaultAttrName(BString&, int32_t) const;
 	const char* UserSpecifiedName() const;
 		// name filled out in the query name text field
 
 	static void AddRecentQueries(BMenu*, bool addSaveAsItem,
-		const BMessenger* target, uint32 what);
+		const BMessenger* target, uint32_t what);
 		// populate the recent query menu with query templates and recent
 		// queries
 
@@ -241,17 +241,17 @@ private:
 		// MimeTypeWindow is only shown in kByNameItem and
 		// kByAttributeItem modes
 
-	void AddAttributeControls(int32);
+	void AddAttributeControls(int32_t);
 
 	void ShowOrHideMoreOptions(bool show);
 		// fMode gets set by this and the call relies on it being
 		// up-to-date
-	static int32 InitialAttrCount(const BNode*);
+	static int32_t InitialAttrCount(const BNode*);
 	void FillCurrentQueryName(BTextControl*, FindWindow*);
 	void AddByNameOrFormulaItems();
 	void SetUpAddRemoveButtons();
 
-	void SwitchMode(uint32);
+	void SwitchMode(uint32_t);
 		// go from search by name to search by attribute, etc.
 
 	void PushMimeType(BQuery* query) const;
@@ -262,14 +262,14 @@ private:
 
 	void AddAttributes(BMenu* menu, const BMimeType &type);
 	void AddMimeTypeAttrs(BMenu* menu);
-	void RestoreAttrState(const BMessage &, int32);
-	void SaveAttrState(BMessage*, int32);
-	void AddLogicMenu(int32, bool selectAnd = true);
-	void RemoveLogicMenu(int32);
+	void RestoreAttrState(const BMessage &, int32_t);
+	void SaveAttrState(BMessage*, int32_t);
+	void AddLogicMenu(int32_t, bool selectAnd = true);
+	void RemoveLogicMenu(int32_t);
 
 	void ResizeMenuField(BMenuField*);
 
-	uint32 fMode;
+	uint32_t fMode;
 	BGridLayout* fAttrGrid;
 	BPopUpMenu* fMimeTypeMenu;
 	BMenuField* fMimeTypeField;
@@ -327,14 +327,14 @@ private:
 class RecentFindItemsMenu : public BMenu {
 public:
 	RecentFindItemsMenu(const char* title, const BMessenger* target,
-		uint32 what);
+		uint32_t what);
 
 protected:
 	virtual void AttachedToWindow();
 
 private:
 	BMessenger fTarget;
-	uint32 fWhat;
+	uint32_t fWhat;
 };
 
 
@@ -343,8 +343,8 @@ class DraggableQueryIcon : public DraggableIcon {
 public:
 	DraggableQueryIcon(BRect frame, const char* name,
 		const BMessage* message, BMessenger target,
-		uint32 resizeFlags = B_FOLLOW_LEFT | B_FOLLOW_TOP,
-		uint32 flags = B_WILL_DRAW);
+		uint32_t resizeFlags = B_FOLLOW_LEFT | B_FOLLOW_TOP,
+		uint32_t flags = B_WILL_DRAW);
 
 protected:
 	virtual bool DragStarted(BMessage*);

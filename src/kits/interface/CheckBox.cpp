@@ -32,7 +32,7 @@
 #include <kits/interface/Window.h>
 
 BCheckBox::BCheckBox(BRect frame, const char *name, const char *label,
-		     BMessage *message,  __be_uint32 resizeMode,  __be_uint32 flags)
+		     BMessage *message,  __be_uint32_t resizeMode,  __be_uint32_t flags)
 	: BControl(frame, name, label, message, resizeMode, flags)
 {
 }
@@ -156,7 +156,7 @@ void BCheckBox::MouseDown(BPoint where)
 }
 
 
-void BCheckBox::KeyDown(const char *bytes,  __be_int32 numBytes)
+void BCheckBox::KeyDown(const char *bytes,  __be_int32_t numBytes)
 {
 	if(!IsEnabled() || !IsFocus() || numBytes != 1) return;
 	if(!(bytes[0] == B_ENTER || bytes[0] == B_SPACE)) return;

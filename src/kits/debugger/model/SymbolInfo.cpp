@@ -16,7 +16,7 @@ SymbolInfo::SymbolInfo()
 }
 
 
-SymbolInfo::SymbolInfo(target_addr_t address, target_size_t size, uint32 type,
+SymbolInfo::SymbolInfo(target_addr_t address, target_size_t size, uint32_t type,
 	const BString& name)
 	:
 	fAddress(address),
@@ -32,7 +32,7 @@ SymbolInfo::~SymbolInfo()
 }
 
 
-void SymbolInfo::SetTo(target_addr_t address, target_size_t size, uint32 type,
+void SymbolInfo::SetTo(target_addr_t address, target_size_t size, uint32_t type,
 	const BString& name)
 {
 	fAddress = address;

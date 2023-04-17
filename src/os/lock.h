@@ -25,7 +25,7 @@ typedef struct mutex {
 #if KDEBUG
     thread_id				holder;
 #else
-    int32					count;
+    int32_t					count;
     uint16					ignore_unlock_count;
 #endif
     uint8					flags;
@@ -50,8 +50,8 @@ typedef struct rw_lock {
     struct rw_lock_waiter*	waiters;
     spinlock				lock;
     thread_id				holder;
-    int32					count;
-    int32					owner_count;
+    int32_t					count;
+    int32_t					owner_count;
     int16					active_readers;
                                 // Only > 0 while a writer is waiting: number
                                 // of active readers when the first waiting
@@ -60,7 +60,7 @@ typedef struct rw_lock {
                                 // Number of readers that have already
                                 // incremented "count", but have not yet started
                                 // to wait at the time the last writer unlocked.
-    uint32					flags;
+    uint32_t					flags;
 } rw_lock;
 
 #define RW_LOCK_WRITER_COUNT_BASE	0x10000
@@ -124,22 +124,22 @@ namespace bhapi {
 extern void	recursive_lock_init(recursive_lock *lock, const char *name);
     // name is *not* cloned nor freed in recursive_lock_destroy()
 extern void recursive_lock_init_etc(recursive_lock *lock, const char *name,
-    uint32 flags);
+    uint32_t flags);
 extern void recursive_lock_destroy(recursive_lock *lock);
 extern status_t recursive_lock_lock(recursive_lock *lock);
 extern status_t recursive_lock_trylock(recursive_lock *lock);
 extern void recursive_lock_unlock(recursive_lock *lock);
-extern int32 recursive_lock_get_recursion(recursive_lock *lock);
+extern int32_t recursive_lock_get_recursion(recursive_lock *lock);
 
 extern void rw_lock_init(rw_lock* lock, const char* name);
     // name is *not* cloned nor freed in rw_lock_destroy()
-extern void rw_lock_init_etc(rw_lock* lock, const char* name, uint32 flags);
+extern void rw_lock_init_etc(rw_lock* lock, const char* name, uint32_t flags);
 extern void rw_lock_destroy(rw_lock* lock);
 extern status_t rw_lock_write_lock(rw_lock* lock);
 
 extern void mutex_init(mutex* lock, const char* name);
     // name is *not* cloned nor freed in mutex_destroy()
-extern void mutex_init_etc(mutex* lock, const char* name, uint32 flags);
+extern void mutex_init_etc(mutex* lock, const char* name, uint32_t flags);
 extern void mutex_destroy(mutex* lock);
 extern status_t mutex_switch_lock(mutex* from, mutex* to);
     // Unlocks "from" and locks "to" such that unlocking and starting to wait
@@ -155,14 +155,14 @@ extern status_t mutex_switch_from_read_lock(rw_lock* from, mutex* to);
 
 extern status_t _rw_lock_read_lock(rw_lock* lock);
 extern status_t _rw_lock_read_lock_with_timeout(rw_lock* lock,
-    uint32 timeoutFlags, bigtime_t timeout);
+    uint32_t timeoutFlags, bigtime_t timeout);
 extern void _rw_lock_read_unlock(rw_lock* lock);
 extern void _rw_lock_write_unlock(rw_lock* lock);
 
 extern status_t _mutex_lock(mutex* lock, void* locker);
 extern void _mutex_unlock(mutex* lock);
 extern status_t _mutex_trylock(mutex* lock);
-extern status_t _mutex_lock_with_timeout(mutex* lock, uint32 timeoutFlags,
+extern status_t _mutex_lock_with_timeout(mutex* lock, uint32_t timeoutFlags,
     bigtime_t timeout);
 
 
@@ -171,7 +171,7 @@ static inline status_t rw_lock_read_lock(rw_lock* lock)
 #if KDEBUG_RW_LOCK_DEBUG
     return rw_lock_write_lock(lock);
 #else
-    int32 oldCount = atomic_add(&lock->count, 1);
+    int32_t oldCount = atomic_add(&lock->count, 1);
     if (oldCount >= RW_LOCK_WRITER_COUNT_BASE)
         return _rw_lock_read_lock(lock);
     return B_OK;
@@ -179,13 +179,13 @@ static inline status_t rw_lock_read_lock(rw_lock* lock)
 }
 
 
-static inline status_t rw_lock_read_lock_with_timeout(rw_lock* lock, uint32 timeoutFlags,
+static inline status_t rw_lock_read_lock_with_timeout(rw_lock* lock, uint32_t timeoutFlags,
     bigtime_t timeout)
 {
 #if KDEBUG_RW_LOCK_DEBUG
     return mutex_lock_with_timeout(lock, timeoutFlags, timeout);
 #else
-    int32 oldCount = atomic_add(&lock->count, 1);
+    int32_t oldCount = atomic_add(&lock->count, 1);
     if (oldCount >= RW_LOCK_WRITER_COUNT_BASE)
         return _rw_lock_read_lock_with_timeout(lock, timeoutFlags, timeout);
     return B_OK;
@@ -198,7 +198,7 @@ static inline void rw_lock_read_unlock(rw_lock* lock)
 #if KDEBUG_RW_LOCK_DEBUG
     rw_lock_write_unlock(lock);
 #else
-    int32 oldCount = atomic_add(&lock->count, -1);
+    int32_t oldCount = atomic_add(&lock->count, -1);
     if (oldCount >= RW_LOCK_WRITER_COUNT_BASE)
         _rw_lock_read_unlock(lock);
 #endif
@@ -235,7 +235,7 @@ static inline status_t mutex_trylock(mutex* lock)
 }
 
 
-static inline status_t mutex_lock_with_timeout(mutex* lock, uint32 timeoutFlags, bigtime_t timeout)
+static inline status_t mutex_lock_with_timeout(mutex* lock, uint32_t timeoutFlags, bigtime_t timeout)
 {
 #if KDEBUG
     return _mutex_lock_with_timeout(lock, timeoutFlags, timeout);

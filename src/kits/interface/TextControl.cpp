@@ -38,7 +38,7 @@
 
 BTextControl::BTextControl(BRect frame, const char *name,
 			   const char *label, const char *text, BMessage *message,
-			    __be_uint32 resizeMode,  __be_uint32 flags)
+			    __be_uint32_t resizeMode,  __be_uint32_t flags)
 	: BTextEditable(frame, name, text, message, resizeMode, flags),
 	  fLabelAlignment(B_ALIGN_LEFT), fDivider(-1), fModificationMessage(NULL)
 {
@@ -243,18 +243,18 @@ BTextControl::GetAlignment(bhapi::alignment *forLabel, bhapi::alignment *forText
 
 
 void 
-BTextControl::KeyDown(const char *bytes,  __be_int32 numBytes)
+BTextControl::KeyDown(const char *bytes,  __be_int32_t numBytes)
 {
 	BMessage *msg = (Window() == NULL ? NULL : Window()->CurrentMessage());
 
-	__be_int32 modifiers = 0;
+	__be_int32_t modifiers = 0;
 	if(msg != NULL) msg->FindInt32("modifiers", &modifiers);
 
 	if(!(numBytes != 1 || msg == NULL || msg->what != B_KEY_DOWN || !IsEnabled() || !IsEditable() || !(modifiers & B_CONTROL_KEY)))
 	{
 		if(*bytes == 'c' || *bytes == 'C' || *bytes == 'x' || *bytes == 'X')
 		{
-			__be_int32 startPos, endPos;
+			__be_int32_t startPos, endPos;
 			char *selText = NULL;
 			BMessage *clipMsg = NULL;
 
@@ -292,14 +292,14 @@ BTextControl::KeyDown(const char *bytes,  __be_int32 numBytes)
 			{
 				const char *text = NULL;
 				ssize_t len = 0;
-				if(clipMsg->FindData("text/plain", B_MIME_TYPE, (const void**)&text, &len)) str.SetTo(text, (__be_int32)len);
+				if(clipMsg->FindData("text/plain", B_MIME_TYPE, (const void**)&text, &len)) str.SetTo(text, (__be_int32_t)len);
 			}
 			bhapi::__be_clipboard.Unlock();
 
 			if(str.Length() <= 0) return;
 
-			__be_int32 curPos = Position();
-			__be_int32 startPos, endPos;
+			__be_int32_t curPos = Position();
+			__be_int32_t startPos, endPos;
 			if(GetSelection(&startPos, &endPos)) {RemoveText(startPos, endPos); curPos = startPos;}
 			InsertText(str.String(), -1, curPos);
 			SetPosition(curPos + str.CountChars());

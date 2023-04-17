@@ -97,37 +97,37 @@ class M68KAtari : public M68KPlatform {
 public:
 	class MFP {
 	public:
-		MFP(uint32 base, int vector);
+		MFP(uint32_t base, int vector);
 		~MFP();
 
-		uint32 Base() const { return fBase; };
+		uint32_t Base() const { return fBase; };
 		int Vector() const { return fVector; };
 
-		uint8 ReadReg(uint32 reg) { return in8(fBase + reg); };
-		void WriteReg(uint32 reg, uint8 v) { out8(v, fBase + reg); };
+		uint8 ReadReg(uint32_t reg) { return in8(fBase + reg); };
+		void WriteReg(uint32_t reg, uint8 v) { out8(v, fBase + reg); };
 
 		void EnableIOInterrupt(int irq);
 		void DisableIOInterrupt(int irq);
 		bool AcknowledgeIOInterrupt(int irq);
 
 	private:
-		uint32 fBase;
+		uint32_t fBase;
 		int fVector;
 	};
 
 	class RTC {
 	public:
-		RTC(uint32 base, int vector);
+		RTC(uint32_t base, int vector);
 		~RTC();
 
-		uint32 Base() const { return fBase; };
+		uint32_t Base() const { return fBase; };
 		int Vector() const { return fVector; };
 
-		uint8 ReadReg(uint32 reg);
-		void WriteReg(uint32 reg, uint8 v) { out8((uint8)reg,fBase+1); out8(v,fBase+3); };
+		uint8 ReadReg(uint32_t reg);
+		void WriteReg(uint32_t reg, uint8 v) { out8((uint8)reg,fBase+1); out8(v,fBase+3); };
 
 	private:
-		uint32 fBase;
+		uint32_t fBase;
 		int fVector;
 	};
 
@@ -155,8 +155,8 @@ public:
 
 	virtual	uint8 ReadRTCReg(uint8 reg);
 	virtual	void WriteRTCReg(uint8 reg, uint8 val);
-	virtual	void SetHardwareRTC(uint32 seconds);
-	virtual	uint32 GetHardwareRTC();
+	virtual	void SetHardwareRTC(uint32_t seconds);
+	virtual	uint32_t GetHardwareRTC();
 
 	virtual void SetHardwareTimer(bigtime_t timeout);
 	virtual void ClearHardwareTimer(void);
@@ -165,17 +165,17 @@ public:
 
 private:
 	MFP	*MFPForIrq(int irq);
-	static int32	MFPTimerInterrupt(void *data);
+	static int32_t	MFPTimerInterrupt(void *data);
 
 	MFP	*fMFP[2];
 
 	RTC	*fRTC;
 
 	// native features (ARAnyM emulator)
-	uint32 (*nfGetID)(const char *name);
-	int32 (*nfCall)(uint32 ID, ...);
+	uint32_t (*nfGetID)(const char *name);
+	int32_t (*nfCall)(uint32_t ID, ...);
 	char *nfPage;
-	uint32 nfDebugPrintfID;
+	uint32_t nfDebugPrintfID;
 	
 };
 
@@ -192,7 +192,7 @@ static char sMFP0Buffer[sizeof(M68KAtari::MFP)];
 static char sMFP1Buffer[sizeof(M68KAtari::MFP)];
 
 // constructor
-M68KAtari::MFP::MFP(uint32 base, int vector)
+M68KAtari::MFP::MFP(uint32_t base, int vector)
 {
 	fBase = base;
 	fVector = vector;
@@ -210,7 +210,7 @@ M68KAtari::MFP::EnableIOInterrupt(int irq)
 {
 	uint8 bit = 1 << (irq % 8);
 	// I*B[0] is vector+0, I*A[0] is vector+8
-	uint32 reg = Base() + ((irq > 8) ? (MFP_IERA) : (MFP_IERB));
+	uint32_t reg = Base() + ((irq > 8) ? (MFP_IERA) : (MFP_IERB));
 	uint8 val = in8(reg);
 	if (val & bit == 0) {
 		val |= bit;
@@ -224,7 +224,7 @@ M68KAtari::MFP::DisableIOInterrupt(int irq)
 {
 	uint8 bit = 1 << (irq % 8);
 	// I*B[0] is vector+0, I*A[0] is vector+8
-	uint32 reg = Base() + ((irq > 8) ? (MFP_IERA) : (MFP_IERB));
+	uint32_t reg = Base() + ((irq > 8) ? (MFP_IERA) : (MFP_IERB));
 	uint8 val = in8(reg);
 	if (val & bit) {
 		val &= ~bit;
@@ -238,7 +238,7 @@ M68KAtari::MFP::AcknowledgeIOInterrupt(int irq)
 {
 	uint8 bit = 1 << (irq % 8);
 	// I*B[0] is vector+0, I*A[0] is vector+8
-	uint32 reg = Base() + ((irq > 8) ? (MFP_ISRA) : (MFP_ISRB));
+	uint32_t reg = Base() + ((irq > 8) ? (MFP_ISRA) : (MFP_ISRB));
 	uint8 val = in8(reg);
 	if (val & bit) {
 		val &= ~bit;
@@ -255,7 +255,7 @@ M68KAtari::MFP::AcknowledgeIOInterrupt(int irq)
 static char sRTCBuffer[sizeof(M68KAtari::RTC)];
 
 // constructor
-M68KAtari::RTC::RTC(uint32 base, int vector)
+M68KAtari::RTC::RTC(uint32_t base, int vector)
 {
 	fBase = base;
 	fVector = vector;
@@ -268,7 +268,7 @@ M68KAtari::RTC::~RTC()
 
 
 uint8
-M68KAtari::RTC::ReadReg(uint32 reg)
+M68KAtari::RTC::ReadReg(uint32_t reg)
 {
 	int waitTime = 10000;
 
@@ -617,13 +617,13 @@ M68KAtari::WriteRTCReg(uint8 reg, uint8 val)
 }
 
 void
-M68KAtari::SetHardwareRTC(uint32 seconds)
+M68KAtari::SetHardwareRTC(uint32_t seconds)
 {
 #warning M68K: WRITEME
 }
 
 
-uint32
+uint32_t
 M68KAtari::GetHardwareRTC()
 {
 #warning M68K: WRITEME
@@ -682,7 +682,7 @@ M68KAtari::MFPForIrq(int irq)
 	return NULL;
 }
 
-int32
+int32_t
 M68KAtari::MFPTimerInterrupt(void *data)
 {
 	M68KAtari *_this = (M68KAtari *)data;

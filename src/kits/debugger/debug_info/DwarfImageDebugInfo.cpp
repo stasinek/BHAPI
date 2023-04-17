@@ -84,7 +84,7 @@ struct HasTypePredicate {
 
 
 struct DwarfImageDebugInfo::BasicTargetInterface : DwarfTargetInterface {
-	BasicTargetInterface(const Register* registers, int32 registerCount,
+	BasicTargetInterface(const Register* registers, int32_t registerCount,
 		RegisterMap* fromDwarfMap, Architecture* architecture,
 		TeamMemory* teamMemory)
 		:
@@ -102,28 +102,28 @@ struct DwarfImageDebugInfo::BasicTargetInterface : DwarfTargetInterface {
 		fFromDwarfMap->ReleaseReference();
 	}
 
-	virtual uint32 CountRegisters() const
+	virtual uint32_t CountRegisters() const
 	{
 		return fRegisterCount;
 	}
 
-	virtual uint32 RegisterValueType(uint32 index) const
+	virtual uint32_t RegisterValueType(uint32_t index) const
 	{
 		const Register* reg = _RegisterAt(index);
 		return reg != NULL ? reg->ValueType() : 0;
 	}
 
-	virtual bool GetRegisterValue(uint32 index, BVariant& _value) const
+	virtual bool GetRegisterValue(uint32_t index, BVariant& _value) const
 	{
 		return false;
 	}
 
-	virtual bool SetRegisterValue(uint32 index, const BVariant& value)
+	virtual bool SetRegisterValue(uint32_t index, const BVariant& value)
 	{
 		return false;
 	}
 
-	virtual bool IsCalleePreservedRegister(uint32 index) const
+	virtual bool IsCalleePreservedRegister(uint32_t index) const
 	{
 		const Register* reg = _RegisterAt(index);
 		return reg != NULL && reg->IsCalleePreserved();
@@ -142,29 +142,29 @@ struct DwarfImageDebugInfo::BasicTargetInterface : DwarfTargetInterface {
 	}
 
 	virtual bool ReadValueFromMemory(target_addr_t address,
-		uint32 valueType, BVariant& _value) const
+		uint32_t valueType, BVariant& _value) const
 	{
 		return fArchitecture->ReadValueFromMemory(address, valueType, _value)
 			== B_OK;
 	}
 
 	virtual bool ReadValueFromMemory(target_addr_t addressSpace,
-		target_addr_t address, uint32 valueType, BVariant& _value) const
+		target_addr_t address, uint32_t valueType, BVariant& _value) const
 	{
 		return fArchitecture->ReadValueFromMemory(addressSpace, address,
 			valueType, _value) == B_OK;
 	}
 
 protected:
-	const Register* _RegisterAt(uint32 dwarfIndex) const
+	const Register* _RegisterAt(uint32_t dwarfIndex) const
 	{
-		int32 index = fFromDwarfMap->MapRegisterIndex(dwarfIndex);
+		int32_t index = fFromDwarfMap->MapRegisterIndex(dwarfIndex);
 		return index >= 0 && index < fRegisterCount ? fRegisters + index : NULL;
 	}
 
 protected:
 	const Register*	fRegisters;
-	int32			fRegisterCount;
+	int32_t			fRegisterCount;
 	RegisterMap*	fFromDwarfMap;
 	Architecture*	fArchitecture;
 	TeamMemory*		fTeamMemory;
@@ -175,7 +175,7 @@ protected:
 
 
 struct DwarfImageDebugInfo::UnwindTargetInterface : BasicTargetInterface {
-	UnwindTargetInterface(const Register* registers, int32 registerCount,
+	UnwindTargetInterface(const Register* registers, int32_t registerCount,
 		RegisterMap* fromDwarfMap, RegisterMap* toDwarfMap, CpuState* cpuState,
 		Architecture* architecture, TeamMemory* teamMemory)
 		:
@@ -194,7 +194,7 @@ struct DwarfImageDebugInfo::UnwindTargetInterface : BasicTargetInterface {
 		fCpuState->ReleaseReference();
 	}
 
-	virtual bool GetRegisterValue(uint32 index, BVariant& _value) const
+	virtual bool GetRegisterValue(uint32_t index, BVariant& _value) const
 	{
 		const Register* reg = _RegisterAt(index);
 		if (reg == NULL)
@@ -202,7 +202,7 @@ struct DwarfImageDebugInfo::UnwindTargetInterface : BasicTargetInterface {
 		return fCpuState->GetRegisterValue(reg, _value);
 	}
 
-	virtual bool SetRegisterValue(uint32 index, const BVariant& value)
+	virtual bool SetRegisterValue(uint32_t index, const BVariant& value)
 	{
 		const Register* reg = _RegisterAt(index);
 		if (reg == NULL)
@@ -245,7 +245,7 @@ struct DwarfImageDebugInfo::TypeNameKey {
 	{
 	}
 
-	uint32 HashValue() const
+	uint32_t HashValue() const
 	{
 		return StringUtils::HashValue(typeName);
 	}
@@ -401,15 +401,15 @@ status_t DwarfImageDebugInfo::GetFunctions(const BObjectList<SymbolInfo>& symbol
 	TRACE_IMAGES("  %" B_PRId32 " compilation units\n",
 		fFile->CountCompilationUnits());
 
-	for (int32 i = 0; CompilationUnit* unit = fFile->CompilationUnitAt(i);
+	for (int32_t i = 0; CompilationUnit* unit = fFile->CompilationUnitAt(i);
 			i++) {
 		DIECompileUnitBase* unitEntry = unit->UnitEntry();
 //		printf("  %s:\n", unitEntry->Name());
 //		printf("    address ranges:\n");
 //		TargetAddressRangeList* rangeList = unitEntry->AddressRanges();
 //		if (rangeList != NULL) {
-//			int32 count = rangeList->CountRanges();
-//			for (int32 i = 0; i < count; i++) {
+//			int32_t count = rangeList->CountRanges();
+//			for (int32_t i = 0; i < count; i++) {
 //				TargetAddressRange range = rangeList->RangeAt(i);
 //				printf("      %#llx - %#llx\n", range.Start(), range.End());
 //			}
@@ -461,8 +461,8 @@ status_t DwarfImageDebugInfo::GetFunctions(const BObjectList<SymbolInfo>& symbol
 			// get the source location
 			const char* directoryPath = NULL;
 			const char* fileName = NULL;
-			int32 line = -1;
-			int32 column = -1;
+			int32_t line = -1;
+			int32_t column = -1;
 			DwarfUtils::GetDeclarationLocation(fFile, subprogramEntry,
 				directoryPath, fileName, line, column);
 
@@ -477,7 +477,7 @@ status_t DwarfImageDebugInfo::GetFunctions(const BObjectList<SymbolInfo>& symbol
 			DwarfFunctionDebugInfo* function
 				= new(std::nothrow) DwarfFunctionDebugInfo(this, unit,
 					subprogramEntry, rangeList, name, file,
-					SourceLocation(line, std::max(column, (int32)0)));
+					SourceLocation(line, std::max(column, (int32_t)0)));
 			if (function == NULL || !functions.AddItem(function)) {
 				delete function;
 				return B_NO_MEMORY;
@@ -492,8 +492,8 @@ status_t DwarfImageDebugInfo::GetFunctions(const BObjectList<SymbolInfo>& symbol
 //
 //			rangeList = subprogramEntry->AddressRanges();
 //			if (rangeList != NULL) {
-//				int32 count = rangeList->CountRanges();
-//				for (int32 i = 0; i < count; i++) {
+//				int32_t count = rangeList->CountRanges();
+//				for (int32_t i = 0; i < count; i++) {
 //					TargetAddressRange range = rangeList->RangeAt(i);
 //					printf("        %#llx - %#llx\n", range.Start(), range.End());
 //				}
@@ -527,7 +527,7 @@ status_t DwarfImageDebugInfo::GetType(GlobalTypeCache* cache, const BString& nam
 	if (entry == NULL)
 		return B_ENTRY_NOT_FOUND;
 
-	for (int32 i = 0; TypeEntryInfo* info = entry->types.ItemAt(i); i++) {
+	for (int32_t i = 0; TypeEntryInfo* info = entry->types.ItemAt(i); i++) {
 		DIEType* typeEntry = info->type;
 		if (constraints.HasTypeKind()) {
 			if (dwarf_tag_to_type_kind(typeEntry->Tag())
@@ -574,7 +574,7 @@ bool DwarfImageDebugInfo::HasType(const BString& name,
 	if (entry == NULL)
 		return false;
 
-	for (int32 i = 0; TypeEntryInfo* info = entry->types.ItemAt(i); i++) {
+	for (int32_t i = 0; TypeEntryInfo* info = entry->types.ItemAt(i); i++) {
 		DIEType* typeEntry = info->type;
 		if (constraints.HasTypeKind()) {
 			if (dwarf_tag_to_type_kind(typeEntry->Tag())
@@ -632,7 +632,7 @@ status_t DwarfImageDebugInfo::CreateFrame(Image* image,
 		"function: %s\n", entry,
 		functionID->FunctionName().String());
 
-	int32 registerCount = fArchitecture->CountRegisters();
+	int32_t registerCount = fArchitecture->CountRegisters();
 	const Register* registers = fArchitecture->Registers();
 
 	// get the DWARF <-> architecture register maps
@@ -687,7 +687,7 @@ status_t DwarfImageDebugInfo::CreateFrame(Image* image,
 
 	TRACE_CFI_ONLY(
 		TRACE_CFI("unwound registers:\n");
-		for (int32 i = 0; i < registerCount; i++) {
+		for (int32_t i = 0; i < registerCount; i++) {
 			const Register* reg = registers + i;
 			BVariant value;
 			if (previousCpuState->GetRegisterValue(reg, value)) {
@@ -819,7 +819,7 @@ status_t DwarfImageDebugInfo::GetStatement(FunctionDebugInfo* _function,
 
 	// get the index of the source file in the compilation unit for cheaper
 	// comparison below
-	int32 fileIndex = _GetSourceFileIndex(unit, file);
+	int32_t fileIndex = _GetSourceFileIndex(unit, file);
 
 	// Get the statement by executing the line number program for the
 	// compilation unit.
@@ -836,8 +836,8 @@ status_t DwarfImageDebugInfo::GetStatement(FunctionDebugInfo* _function,
 	program.GetInitialState(state);
 
 	target_addr_t statementAddress = 0;
-	int32 statementLine = -1;
-	int32 statementColumn = -1;
+	int32_t statementLine = -1;
+	int32_t statementColumn = -1;
 	while (program.GetNextRow(state)) {
 		// skip statements of other files
 		if (state.file != fileIndex)
@@ -865,7 +865,7 @@ status_t DwarfImageDebugInfo::GetStatement(FunctionDebugInfo* _function,
 		if (state.isStatement) {
 			statementAddress = state.address;
 			statementLine = state.line - 1;
-			statementColumn = std::max(state.column - 1, (int32)0);
+			statementColumn = std::max(state.column - 1, (int32_t)0);
 		}
 	}
 
@@ -901,7 +901,7 @@ status_t DwarfImageDebugInfo::GetStatementAtSourceLocation(FunctionDebugInfo* _f
 
 	// get the index of the source file in the compilation unit for cheaper
 	// comparison below
-	int32 fileIndex = _GetSourceFileIndex(unit, file);
+	int32_t fileIndex = _GetSourceFileIndex(unit, file);
 
 	// Get the statement by executing the line number program for the
 	// compilation unit.
@@ -913,8 +913,8 @@ status_t DwarfImageDebugInfo::GetStatementAtSourceLocation(FunctionDebugInfo* _f
 	program.GetInitialState(state);
 
 	target_addr_t statementAddress = 0;
-	int32 statementLine = -1;
-	int32 statementColumn = -1;
+	int32_t statementLine = -1;
+	int32_t statementColumn = -1;
 	while (program.GetNextRow(state)) {
 		bool isOurFile = state.file == fileIndex;
 
@@ -932,8 +932,8 @@ status_t DwarfImageDebugInfo::GetStatementAtSourceLocation(FunctionDebugInfo* _f
 			if (statementAddress < endAddress
 				&& statementAddress >= functionStartAddress
 				&& statementAddress < functionEndAddress
-				&& statementLine == (int32)sourceLocation.Line()
-				&& statementColumn == (int32)sourceLocation.Column()) {
+				&& statementLine == (int32_t)sourceLocation.Line()
+				&& statementColumn == (int32_t)sourceLocation.Column()) {
 				TRACE_LINES2("  -> found statement!\n");
 
 				ContiguousStatement* statement = new(std::nothrow)
@@ -958,7 +958,7 @@ status_t DwarfImageDebugInfo::GetStatementAtSourceLocation(FunctionDebugInfo* _f
 		if (state.isStatement) {
 			statementAddress = state.address;
 			statementLine = state.line - 1;
-			statementColumn = std::max(state.column - 1, (int32)0);
+			statementColumn = std::max(state.column - 1, (int32_t)0);
 		}
 	}
 
@@ -1013,9 +1013,9 @@ status_t DwarfImageDebugInfo::AddSourceCodeInfo(LocatableFile* file,
 	FileSourceCode* sourceCode)
 {
 	bool addedAny = false;
-	for (int32 i = 0; CompilationUnit* unit = fFile->CompilationUnitAt(i);
+	for (int32_t i = 0; CompilationUnit* unit = fFile->CompilationUnitAt(i);
 			i++) {
-		int32 fileIndex = _GetSourceFileIndex(unit, file);
+		int32_t fileIndex = _GetSourceFileIndex(unit, file);
 		if (fileIndex < 0)
 			continue;
 
@@ -1030,7 +1030,7 @@ status_t DwarfImageDebugInfo::AddSourceCodeInfo(LocatableFile* file,
 
 
 status_t DwarfImageDebugInfo::_AddSourceCodeInfo(CompilationUnit* unit,
-	FileSourceCode* sourceCode, int32 fileIndex)
+	FileSourceCode* sourceCode, int32_t fileIndex)
 {
 	// Get the statements by executing the line number program for the
 	// compilation unit and filtering the rows for our source file.
@@ -1042,8 +1042,8 @@ status_t DwarfImageDebugInfo::_AddSourceCodeInfo(CompilationUnit* unit,
 	program.GetInitialState(state);
 
 	target_addr_t statementAddress = 0;
-	int32 statementLine = -1;
-	int32 statementColumn = -1;
+	int32_t statementLine = -1;
+	int32_t statementColumn = -1;
 	while (program.GetNextRow(state)) {
 		TRACE_LINES2("  %#" B_PRIx64 "  (%" B_PRId32 ", %" B_PRId32 ", %"
 			B_PRId32 ")  %d\n", state.address, state.file, state.line,
@@ -1077,7 +1077,7 @@ status_t DwarfImageDebugInfo::_AddSourceCodeInfo(CompilationUnit* unit,
 		if (state.isStatement) {
 			statementAddress = state.address;
 			statementLine = state.line - 1;
-			statementColumn = std::max(state.column - 1, (int32)0);
+			statementColumn = std::max(state.column - 1, (int32_t)0);
 		}
 	}
 
@@ -1085,13 +1085,13 @@ status_t DwarfImageDebugInfo::_AddSourceCodeInfo(CompilationUnit* unit,
 }
 
 
-int32 DwarfImageDebugInfo::_GetSourceFileIndex(CompilationUnit* unit,
+int32_t DwarfImageDebugInfo::_GetSourceFileIndex(CompilationUnit* unit,
 	LocatableFile* sourceFile) const
 {
 	// get the index of the source file in the compilation unit for cheaper
 	// comparison below
 	const char* directory;
-	for (int32 i = 0; const char* fileName = unit->FileAt(i, &directory); i++) {
+	for (int32_t i = 0; const char* fileName = unit->FileAt(i, &directory); i++) {
 		LocatableFile* file = fFileManager->GetSourceFile(directory, fileName);
 		if (file != NULL) {
 			file->ReleaseReference();
@@ -1185,7 +1185,7 @@ status_t DwarfImageDebugInfo::_CreateLocalVariables(CompilationUnit* unit,
 status_t DwarfImageDebugInfo::_CreateReturnValues(ReturnValueInfoList* returnValueInfos,
 	Image* image, StackFrame* frame, DwarfStackFrameDebugInfo& factory)
 {
-	for (int32 i = 0; i < returnValueInfos->CountItems(); i++) {
+	for (int32_t i = 0; i < returnValueInfos->CountItems(); i++) {
 		Image* targetImage = image;
 		ReturnValueInfo* valueInfo = returnValueInfos->ItemAt(i);
 		target_addr_t subroutineAddress = valueInfo->SubroutineAddress();
@@ -1256,7 +1256,7 @@ status_t DwarfImageDebugInfo::_CreateReturnValues(ReturnValueInfoList* returnVal
 						return B_OK;
 				}
 
-				uint32 byteSize = 0;
+				uint32_t byteSize = 0;
 				if (returnType->ByteSize() == NULL) {
 					if (dynamic_cast<DIEAddressingType*>(returnType) != NULL)
 						byteSize = fArchitecture->AddressSize();
@@ -1350,7 +1350,7 @@ status_t DwarfImageDebugInfo::_BuildTypeNameTable()
 		return error;
 
 	// iterate through all compilation units
-	for (int32 i = 0; CompilationUnit* unit = fFile->CompilationUnitAt(i);
+	for (int32_t i = 0; CompilationUnit* unit = fFile->CompilationUnitAt(i);
 		i++) {
 
 		// iterate through all types of the compilation unit

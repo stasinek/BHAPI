@@ -21,24 +21,24 @@ BTextView::LineBuffer::~LineBuffer()
 }
 
 
-void BTextView::LineBuffer::InsertLine(STELine* inLine, int32 index)
+void BTextView::LineBuffer::InsertLine(STELine* inLine, int32_t index)
 {
 	InsertItemsAt(1, index, inLine);
 }
 
 
-void BTextView::LineBuffer::RemoveLines(int32 index, int32 count)
+void BTextView::LineBuffer::RemoveLines(int32_t index, int32_t count)
 {
 	RemoveItemsAt(count, index);
 }
 
 
-void BTextView::LineBuffer::RemoveLineRange(int32 fromOffset, int32 toOffset)
+void BTextView::LineBuffer::RemoveLineRange(int32_t fromOffset, int32_t toOffset)
 {
-	int32 fromLine = OffsetToLine(fromOffset);
-	int32 toLine = OffsetToLine(toOffset);
+	int32_t fromLine = OffsetToLine(fromOffset);
+	int32_t toLine = OffsetToLine(toOffset);
 
-	int32 count = toLine - fromLine;
+	int32_t count = toLine - fromLine;
 	if (count > 0)
 		RemoveLines(fromLine + 1, count);
 
@@ -46,11 +46,11 @@ void BTextView::LineBuffer::RemoveLineRange(int32 fromOffset, int32 toOffset)
 }
 
 
-int32 BTextView::LineBuffer::OffsetToLine(int32 offset) const
+int32_t BTextView::LineBuffer::OffsetToLine(int32_t offset) const
 {
-	int32 minIndex = 0;
-	int32 maxIndex = fItemCount - 1;
-	int32 index = 0;
+	int32_t minIndex = 0;
+	int32_t maxIndex = fItemCount - 1;
+	int32_t index = 0;
 
 	while (minIndex < maxIndex) {
 		index = (minIndex + maxIndex) >> 1;
@@ -67,11 +67,11 @@ int32 BTextView::LineBuffer::OffsetToLine(int32 offset) const
 }
 
 
-int32 BTextView::LineBuffer::PixelToLine(float pixel) const
+int32_t BTextView::LineBuffer::PixelToLine(float pixel) const
 {
-	int32 minIndex = 0;
-	int32 maxIndex = fItemCount - 1;
-	int32 index = 0;
+	int32_t minIndex = 0;
+	int32_t maxIndex = fItemCount - 1;
+	int32_t index = 0;
 
 	while (minIndex < maxIndex) {
 		index = (minIndex + maxIndex) >> 1;
@@ -88,14 +88,14 @@ int32 BTextView::LineBuffer::PixelToLine(float pixel) const
 }
 
 
-void BTextView::LineBuffer::BumpOrigin(float delta, int32 index)
+void BTextView::LineBuffer::BumpOrigin(float delta, int32_t index)
 {
 	for (long i = index; i < fItemCount; i++)
 		fBuffer[i].origin += delta;
 }
 
 
-void BTextView::LineBuffer::BumpOffset(int32 delta, int32 index)
+void BTextView::LineBuffer::BumpOffset(int32_t delta, int32_t index)
 {
 	for (long i = index; i < fItemCount; i++)
 		fBuffer[i].offset += delta;
@@ -110,7 +110,7 @@ BTextView::LineBuffer::MaxWidth() const
 
 	float maxWidth = 0;
 	STELine* line = &fBuffer[0];
-	for (int32 i = 0; i < fItemCount; i++) {
+	for (int32_t i = 0; i < fItemCount; i++) {
 		if (maxWidth < line->width)
 			maxWidth = line->width;
 		line++;

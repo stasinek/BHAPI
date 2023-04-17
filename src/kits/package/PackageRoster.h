@@ -43,7 +43,7 @@ enum {
 // notification message "event" field values
 enum {
 	B_INSTALLATION_LOCATION_PACKAGES_CHANGED,
-		// "location": int32 		//		the installation location
+		// "location": int32_t 		//		the installation location
 		//		(B_PACKAGE_INSTALLATION_LOCATION_{SYSTEM,HOME}
 		// "change count": int64 		//		the installation location change count
 };
@@ -84,7 +84,7 @@ public:
 									BPackageInfoSet& packageInfos);
 
 			status_t			StartWatching(const BMessenger& target,
-									uint32 eventMask);
+									uint32_t eventMask);
 			status_t			StopWatching(const BMessenger& target);
 
 private:

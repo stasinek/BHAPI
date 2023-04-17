@@ -19,15 +19,15 @@ namespace BPrivate {
 // message codes for requests to and replies from the daemon
 enum {
 	B_MESSAGE_GET_INSTALLATION_LOCATION_INFO		= 'PKLI',
-		// "location": int32 		//		the respective installation location constant
+		// "location": int32_t 		//		the respective installation location constant
 	B_MESSAGE_GET_INSTALLATION_LOCATION_INFO_REPLY	= 'PKLR',
-		// "base directory device": int32 		// "base directory node": int64 		// "packages directory device": int32 		// "packages directory node": int64 		// "change count": int64 		// "active packages": message[]
+		// "base directory device": int32_t 		// "base directory node": int64 		// "packages directory device": int32_t 		// "packages directory node": int64 		// "change count": int64 		// "active packages": message[]
 		//		archived BPackageInfos of the active packages
 		// "inactive packages": message[]
 		//		archived BPackageInfos of the inactive packages
 
 	B_MESSAGE_COMMIT_TRANSACTION		= 'PKTC',
-		// "location": int32 		//		the respective installation location constant
+		// "location": int32_t 		//		the respective installation location constant
 		// "change count": int64 		//		the expected change count of the installation location; fail,
 		//		if something has changed in the meantime
 		// "transaction": string
@@ -40,9 +40,9 @@ enum {
 		//		file names of the packages to activate; must be in the
 		//		transaction directory
 	B_MESSAGE_COMMIT_TRANSACTION_REPLY	= 'PKTR'
-		// "error": int32 		//		a BTransactionError describing how committing the transaction
+		// "error": int32_t 		//		a BTransactionError describing how committing the transaction
 		//		went
-		// "system error": int32 		//		a status_t for the operation that failed; B_ERROR, if n/a
+		// "system error": int32_t 		//		a status_t for the operation that failed; B_ERROR, if n/a
 		// "error package": string
 		//		[error case only] file name of the package causing the error,
 		//		if any in particarly; optional
@@ -61,15 +61,15 @@ enum {
 		//		A list of non-critical issues that occurred while performing the
 		//		package activation. On success the user should be notified about
 		//		these. Each contains:
-		//		"type": int32 		//			a BTransactionIssue::BType specifying the kind of issue
+		//		"type": int32_t 		//			a BTransactionIssue::BType specifying the kind of issue
 		//		"package": string
 		//			file name of the package which the issue is related to
 		//		"path1": string
 		//			first path specific to the issue
 		//		"path2": string
 		//			second path specific to the issue
-		//		"system error": int32 		//			a status_t for the operation that failed; B_OK, if n/a
-		//		"exit code": int32 		//			a exit code of the program that failed; 0, if n/a
+		//		"system error": int32_t 		//			a status_t for the operation that failed; B_OK, if n/a
+		//		"exit code": int32_t 		//			a exit code of the program that failed; 0, if n/a
 };
 
 

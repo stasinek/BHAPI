@@ -74,7 +74,7 @@ x86_signal_frame_function(signal_frame_data* frameData)
 
 
 static void
-register_signal_handler_function(const char* functionName, int32 commpageIndex,
+register_signal_handler_function(const char* functionName, int32_t commpageIndex,
 	const char* commpageSymbolName, addr_t expectedAddress)
 {
 	// look up the x86_signal_frame_function() symbol -- we have its address,
@@ -117,7 +117,7 @@ x86_initialize_commpage_signal_handler()
 addr_t
 x86_get_user_signal_handler_wrapper(bool beosHandler, void* commPageAdddress)
 {
-	int32 index = beosHandler
+	int32_t index = beosHandler
 		? COMMPAGE_ENTRY_X86_SIGNAL_HANDLER_BEOS
 		: COMMPAGE_ENTRY_X86_SIGNAL_HANDLER;
 	return ((addr_t*)commPageAdddress)[index] + (addr_t)commPageAdddress;

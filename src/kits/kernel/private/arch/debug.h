@@ -36,8 +36,8 @@ extern "C" {
 status_t arch_debug_init(kernel_args *args);
 void arch_debug_stack_trace(void);
 void *arch_debug_get_caller(void);
-int32 arch_debug_get_stack_trace(addr_t* returnAddresses, int32 maxCount,
-		int32 skipIframes, int32 skipFrames, uint32 flags);
+int32_t arch_debug_get_stack_trace(addr_t* returnAddresses, int32_t maxCount,
+		int32_t skipIframes, int32_t skipFrames, uint32_t flags);
 void* arch_debug_get_interrupt_pc(bool* _isSyscall);
 bool arch_debug_contains_call(Thread *thread, const char *symbol,
 		addr_t start, addr_t end);

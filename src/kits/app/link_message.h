@@ -13,18 +13,18 @@
 namespace bhapi {
 #endif // __cplusplus
 
-static const int32 kLinkCode = '_PTL';
+static const int32_t kLinkCode = '_PTL';
 static const size_t kInitialBufferSize = 2048;
 static const size_t kMaxBufferSize = 65536;
     // anything beyond that should be sent with a different mechanism
 
 struct message_header {
-    int32	size;
-    uint32	code;
-    uint32	flags;
+    int32_t	size;
+    uint32_t	code;
+    uint32_t	flags;
 };
 
-static const uint32 kNeedsReply = 0x01;
+static const uint32_t kNeedsReply = 0x01;
 #ifdef __cplusplus // C++
 }
 #endif // __cplusplus

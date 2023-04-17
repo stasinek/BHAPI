@@ -100,7 +100,7 @@ status_t CoreFileDebuggerInterface::GetNextDebugEvent(DebugEvent*& _event)
 }
 
 
-status_t CoreFileDebuggerInterface::SetTeamDebuggingFlags(uint32 flags)
+status_t CoreFileDebuggerInterface::SetTeamDebuggingFlags(uint32_t flags)
 {
 	return B_UNSUPPORTED;
 }
@@ -136,8 +136,8 @@ status_t CoreFileDebuggerInterface::UninstallBreakpoint(target_addr_t address)
 }
 
 
-status_t CoreFileDebuggerInterface::InstallWatchpoint(target_addr_t address, uint32 type,
-	int32 length)
+status_t CoreFileDebuggerInterface::InstallWatchpoint(target_addr_t address, uint32_t type,
+	int32_t length)
 {
 	return B_UNSUPPORTED;
 }
@@ -165,8 +165,8 @@ status_t CoreFileDebuggerInterface::GetTeamInfo(TeamInfo& info)
 
 status_t CoreFileDebuggerInterface::GetThreadInfos(BObjectList<ThreadInfo>& infos)
 {
-	int32 count = fCoreFile->CountThreadInfos();
-	for (int32 i = 0; i < count; i++) {
+	int32_t count = fCoreFile->CountThreadInfos();
+	for (int32_t i = 0; i < count; i++) {
 		const CoreFileThreadInfo* coreInfo = fCoreFile->ThreadInfoAt(i);
 		ThreadInfo* info = new(std::nothrow) ThreadInfo;
 		if (info == NULL || !infos.AddItem(info)) {
@@ -183,8 +183,8 @@ status_t CoreFileDebuggerInterface::GetThreadInfos(BObjectList<ThreadInfo>& info
 
 status_t CoreFileDebuggerInterface::GetImageInfos(BObjectList<ImageInfo>& infos)
 {
-	int32 count = fCoreFile->CountImageInfos();
-	for (int32 i = 0; i < count; i++) {
+	int32_t count = fCoreFile->CountImageInfos();
+	for (int32_t i = 0; i < count; i++) {
 		const CoreFileImageInfo* coreInfo = fCoreFile->ImageInfoAt(i);
 		ImageInfo* info = new(std::nothrow) ImageInfo;
 		if (info == NULL || !infos.AddItem(info)) {
@@ -252,7 +252,7 @@ status_t CoreFileDebuggerInterface::GetSymbolInfos(team_id team, image_id image,
 
 
 status_t CoreFileDebuggerInterface::GetSymbolInfo(team_id team, image_id image,
-	const char* name, int32 symbolType, SymbolInfo& info)
+	const char* name, int32_t symbolType, SymbolInfo& info)
 {
 	// TODO:...
 	return B_UNSUPPORTED;
@@ -287,7 +287,7 @@ status_t CoreFileDebuggerInterface::SetCpuState(thread_id thread, const CpuState
 }
 
 
-status_t CoreFileDebuggerInterface::GetCpuFeatures(uint32& flags)
+status_t CoreFileDebuggerInterface::GetCpuFeatures(uint32_t& flags)
 {
 	return fArchitecture->GetCpuFeatures(flags);
 }
@@ -300,13 +300,13 @@ status_t CoreFileDebuggerInterface::WriteCoreFile(const char* path)
 
 
 status_t CoreFileDebuggerInterface::GetMemoryProperties(target_addr_t address,
-	uint32& protection, uint32& locking)
+	uint32_t& protection, uint32_t& locking)
 {
 	const CoreFileAreaInfo* info = fCoreFile->AreaInfoForAddress(address);
 	if (info == NULL)
 		return B_BAD_ADDRESS;
 
-	protection = info->Protection() & ~(uint32)B_WRITE_AREA;
+	protection = info->Protection() & ~(uint32_t)B_WRITE_AREA;
 		// Filter out write protection, since we don't support writing memory.
 	locking = info->Locking();
 	return B_OK;

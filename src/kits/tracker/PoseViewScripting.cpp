@@ -221,8 +221,8 @@ bool BPoseView::HandleScriptingMessage(BMessage* message)
 	const char* property = 0;
 	bool handled = false;
 
-	int32 index = 0;
-	int32 form = 0;
+	int32_t index = 0;
+	int32_t form = 0;
 	BMessage specifier;
 	status_t result = message->GetCurrentSpecifier(&index, &specifier,
 		&form, &property);
@@ -269,7 +269,7 @@ bool BPoseView::HandleScriptingMessage(BMessage* message)
 }
 
 
-bool BPoseView::ExecuteProperty(BMessage* specifier, int32 form,
+bool BPoseView::ExecuteProperty(BMessage* specifier, int32_t form,
 	const char* property, BMessage* reply)
 {
 	status_t result = B_OK;
@@ -277,16 +277,16 @@ bool BPoseView::ExecuteProperty(BMessage* specifier, int32 form,
 	if (strcmp(property, kPropertyEntry) == 0) {
 		BMessage launchMessage(B_REFS_RECEIVED);
 
-		if (form == (int32)B_ENTRY_SPECIFIER) {
+		if (form == (int32_t)B_ENTRY_SPECIFIER) {
 			// move all poses specified by entry_ref to Trash
 			entry_ref ref;
-			for (int32 index = 0; specifier->FindRef("refs", index, &ref)
+			for (int32_t index = 0; specifier->FindRef("refs", index, &ref)
 				== B_OK; index++)
 				launchMessage.AddRef("refs", &ref);
-		} else if (form == (int32)B_INDEX_SPECIFIER) {
+		} else if (form == (int32_t)B_INDEX_SPECIFIER) {
 			// move all poses specified by index to Trash
-			int32 specifyingIndex;
-			for (int32 index = 0; specifier->FindInt32("index", index,
+			int32_t specifyingIndex;
+			for (int32_t index = 0; specifier->FindInt32("index", index,
 				&specifyingIndex) == B_OK; index++) {
 				BPose* pose = PoseAtIndex(specifyingIndex);
 
@@ -318,7 +318,7 @@ bool BPoseView::ExecuteProperty(BMessage* specifier, int32 form,
 }
 
 
-bool BPoseView::CreateProperty(BMessage* specifier, BMessage*, int32 form,
+bool BPoseView::CreateProperty(BMessage* specifier, BMessage*, int32_t form,
 	const char* property, BMessage* reply)
 {
 	status_t result = B_OK;
@@ -334,9 +334,9 @@ bool BPoseView::CreateProperty(BMessage* specifier, BMessage*, int32 form,
 		if (specifier->HasRef("data")) {
 			entry_ref ref;
 			// select poses specified by entries
-			for (int32 index = 0; specifier->FindRef("data", index, &ref)
+			for (int32_t index = 0; specifier->FindRef("data", index, &ref)
 					== B_OK; index++) {
-				int32 poseIndex;
+				int32_t poseIndex;
 				BPose* pose = FindPose(&ref, form, &poseIndex);
 
 				if (pose == NULL) {
@@ -350,8 +350,8 @@ bool BPoseView::CreateProperty(BMessage* specifier, BMessage*, int32 form,
 			handled = true;
 		} else {
 			// select poses specified by indices
-			int32 specifyingIndex;
-			for (int32 index = 0; specifier->FindInt32("data", index,
+			int32_t specifyingIndex;
+			for (int32_t index = 0; specifier->FindInt32("data", index,
 					&specifyingIndex) == B_OK; index++) {
 				BPose* pose = PoseAtIndex(specifyingIndex);
 				if (pose == NULL) {
@@ -373,7 +373,7 @@ bool BPoseView::CreateProperty(BMessage* specifier, BMessage*, int32 form,
 }
 
 
-bool BPoseView::DeleteProperty(BMessage* specifier, int32 form,
+bool BPoseView::DeleteProperty(BMessage* specifier, int32_t form,
 	const char* property, BMessage* reply)
 {
 	status_t result = B_OK;
@@ -383,12 +383,12 @@ bool BPoseView::DeleteProperty(BMessage* specifier, int32 form,
 		// deleting on a selection is handled as removing a part of the
 		// selection not to be confused with deleting a selected item
 
-		if (form == (int32)B_ENTRY_SPECIFIER) {
+		if (form == (int32_t)B_ENTRY_SPECIFIER) {
 			entry_ref ref;
 			// select poses specified by entries
-			for (int32 index = 0; specifier->FindRef("refs", index, &ref)
+			for (int32_t index = 0; specifier->FindRef("refs", index, &ref)
 					== B_OK; index++) {
-				int32 poseIndex;
+				int32_t poseIndex;
 				BPose* pose = FindPose(&ref, form, &poseIndex);
 
 				if (pose == NULL) {
@@ -402,8 +402,8 @@ bool BPoseView::DeleteProperty(BMessage* specifier, int32 form,
 
 		} else if (form == B_INDEX_SPECIFIER) {
 			// move all poses specified by index to Trash
-			int32 specifyingIndex;
-			for (int32 index = 0; specifier->FindInt32("index", index,
+			int32_t specifyingIndex;
+			for (int32_t index = 0; specifier->FindInt32("index", index,
 					&specifyingIndex) == B_OK; index++) {
 				BPose* pose = PoseAtIndex(specifyingIndex);
 
@@ -425,17 +425,17 @@ bool BPoseView::DeleteProperty(BMessage* specifier, int32 form,
 		BObjectList<entry_ref>* entryList = new BObjectList<entry_ref>();
 			// list will be deleted for us by the trashing thread
 
-		if (form == (int32)B_ENTRY_SPECIFIER) {
+		if (form == (int32_t)B_ENTRY_SPECIFIER) {
 			// move all poses specified by entry_ref to Trash
 			entry_ref ref;
-			for (int32 index = 0; specifier->FindRef("refs", index, &ref)
+			for (int32_t index = 0; specifier->FindRef("refs", index, &ref)
 					== B_OK; index++) {
 				entryList->AddItem(new entry_ref(ref));
 			}
-		} else if (form == (int32)B_INDEX_SPECIFIER) {
+		} else if (form == (int32_t)B_INDEX_SPECIFIER) {
 			// move all poses specified by index to Trash
-			int32 specifyingIndex;
-			for (int32 index = 0; specifier->FindInt32("index", index,
+			int32_t specifyingIndex;
+			for (int32_t index = 0; specifier->FindInt32("index", index,
 					&specifyingIndex) == B_OK; index++) {
 				BPose* pose = PoseAtIndex(specifyingIndex);
 
@@ -476,7 +476,7 @@ bool BPoseView::DeleteProperty(BMessage* specifier, int32 form,
 }
 
 
-bool BPoseView::CountProperty(BMessage*, int32, const char* property,
+bool BPoseView::CountProperty(BMessage*, int32_t, const char* property,
 	BMessage* reply)
 {
 	bool handled = false;
@@ -495,7 +495,7 @@ bool BPoseView::CountProperty(BMessage*, int32, const char* property,
 }
 
 
-bool BPoseView::GetProperty(BMessage* specifier, int32 form,
+bool BPoseView::GetProperty(BMessage* specifier, int32_t form,
 	const char* property, BMessage* reply)
 {
 //	PRINT(("GetProperty %s\n", property));
@@ -511,11 +511,11 @@ bool BPoseView::GetProperty(BMessage* specifier, int32 form,
 				reply->AddRef("result", TargetModel()->EntryRef());
 		}
 	} else if (strcmp(property, kPropertySelection) == 0) {
-		int32 count = fSelectionList->CountItems();
+		int32_t count = fSelectionList->CountItems();
 		switch (form) {
 			case B_DIRECT_SPECIFIER:
 				// return entries of all poses in selection
-				for (int32 index = 0; index < count; index++) {
+				for (int32_t index = 0; index < count; index++) {
 					reply->AddRef("result", fSelectionList->ItemAt(index)->
 						TargetModel()->EntryRef());
 				}
@@ -532,13 +532,13 @@ bool BPoseView::GetProperty(BMessage* specifier, int32 form,
 					if (specifier->FindRef("data", &ref) != B_OK)
 						break;
 
-					int32 poseIndex;
+					int32_t poseIndex;
 					BPose* pose = FindPose(&ref, &poseIndex);
 
 					for (;;) {
-						if (form == (int32)kPreviousSpecifier)
+						if (form == (int32_t)kPreviousSpecifier)
 							pose = PoseAtIndex(--poseIndex);
-						else if (form == (int32)kNextSpecifier)
+						else if (form == (int32_t)kNextSpecifier)
 							pose = PoseAtIndex(++poseIndex);
 
 						if (pose == NULL) {
@@ -559,12 +559,12 @@ bool BPoseView::GetProperty(BMessage* specifier, int32 form,
 				}
 		}
 	} else if (strcmp(property, kPropertyEntry) == 0) {
-		int32 count = fPoseList->CountItems();
+		int32_t count = fPoseList->CountItems();
 		switch (form) {
 			case B_DIRECT_SPECIFIER:
 			{
 				// return all entries of all poses in PoseView
-				for (int32 index = 0; index < count; index++) {
+				for (int32_t index = 0; index < count; index++) {
 					reply->AddRef("result",
 						PoseAtIndex(index)->TargetModel()->EntryRef());
 				}
@@ -576,7 +576,7 @@ bool BPoseView::GetProperty(BMessage* specifier, int32 form,
 			case B_INDEX_SPECIFIER:
 			{
 				// return entry at index
-				int32 index;
+				int32_t index;
 				if (specifier->FindInt32("index", &index) != B_OK)
 					break;
 
@@ -601,7 +601,7 @@ bool BPoseView::GetProperty(BMessage* specifier, int32 form,
 				if (specifier->FindRef("data", &ref) != B_OK)
 					break;
 
-				int32 tmp;
+				int32_t tmp;
 				BPose* pose = FindPose(&ref, form, &tmp);
 
 				if (pose == NULL) {
@@ -626,7 +626,7 @@ bool BPoseView::GetProperty(BMessage* specifier, int32 form,
 }
 
 
-bool BPoseView::SetProperty(BMessage* message, BMessage*, int32 form,
+bool BPoseView::SetProperty(BMessage* message, BMessage*, int32_t form,
 	const char* property, BMessage* reply)
 {
 	status_t result = B_OK;
@@ -638,8 +638,8 @@ bool BPoseView::SetProperty(BMessage* message, BMessage*, int32 form,
 		switch (form) {
 			case B_DIRECT_SPECIFIER:
 			{
-				int32 selStart;
-				int32 selEnd;
+				int32_t selStart;
+				int32_t selEnd;
 				if (message->FindInt32("data", 0, &selStart) == B_OK
 					&& message->FindInt32("data", 1, &selEnd) == B_OK) {
 					if (selStart < 0 || selStart >= fPoseList->CountItems()
@@ -660,9 +660,9 @@ bool BPoseView::SetProperty(BMessage* message, BMessage*, int32 form,
 				// PRINT(("SetProperty direct/previous/next %s\n", property));
 				// select/unselect poses specified by entries
 				bool clearSelection = true;
-				for (int32 index = 0; message->FindRef("data", index, &ref)
+				for (int32_t index = 0; message->FindRef("data", index, &ref)
 						== B_OK; index++) {
-					int32 poseIndex;
+					int32_t poseIndex;
 					BPose* pose = FindPose(&ref, form, &poseIndex);
 
 					if (pose == NULL) {
@@ -694,13 +694,13 @@ bool BPoseView::SetProperty(BMessage* message, BMessage*, int32 form,
 
 
 BHandler*
-BPoseView::ResolveSpecifier(BMessage* message, int32 index,
-	BMessage* specifier, int32 form, const char* property)
+BPoseView::ResolveSpecifier(BMessage* message, int32_t index,
+	BMessage* specifier, int32_t form, const char* property)
 {
 	BPropertyInfo propertyInfo(
 		const_cast<property_info*>(kPosesPropertyList));
 
-	int32 result = propertyInfo.FindMatch(message, index, specifier, form,
+	int32_t result = propertyInfo.FindMatch(message, index, specifier, form,
 		property);
 	if (result < 0) {
 		//PRINT(("FindMatch result %d \n"));
@@ -713,16 +713,16 @@ BPoseView::ResolveSpecifier(BMessage* message, int32 index,
 
 
 BPose*
-BPoseView::FindPose(const entry_ref* ref, int32 specifierForm,
-	int32* index) const
+BPoseView::FindPose(const entry_ref* ref, int32_t specifierForm,
+	int32_t* index) const
 {
 	// flavor of FindPose, used by previous/next specifiers
 
 	BPose* pose = FindPose(ref, index);
 
-	if (specifierForm == (int32)kPreviousSpecifier)
+	if (specifierForm == (int32_t)kPreviousSpecifier)
 		return PoseAtIndex(--*index);
-	else if (specifierForm == (int32)kNextSpecifier)
+	else if (specifierForm == (int32_t)kNextSpecifier)
 		return PoseAtIndex(++*index);
 	else
 		return pose;

@@ -42,7 +42,7 @@ typedef struct timer_info timer_info;
 status_t timer_init(struct kernel_args *);
 void timer_init_post_rtc(void);
 void timer_real_time_clock_changed();
-int32 timer_interrupt(void);
+int32_t timer_interrupt(void);
 
 #ifdef __cplusplus
 }

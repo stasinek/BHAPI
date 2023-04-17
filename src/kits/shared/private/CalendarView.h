@@ -26,13 +26,13 @@ namespace BPrivate {
 class BCalendarView : public BView, public BInvoker {
 public:
 								BCalendarView(BRect frame, const char* name,
-									uint32 resizeMask = B_FOLLOW_LEFT
+									uint32_t resizeMask = B_FOLLOW_LEFT
 										| B_FOLLOW_TOP,
-									uint32 flags = B_WILL_DRAW | B_FRAME_EVENTS
+									uint32_t flags = B_WILL_DRAW | B_FRAME_EVENTS
 										| B_NAVIGABLE);
 
 								BCalendarView(const char* name,
-									uint32 flags = B_WILL_DRAW | B_FRAME_EVENTS
+									uint32_t flags = B_WILL_DRAW | B_FRAME_EVENTS
 										| B_NAVIGABLE);
 
 	virtual						~BCalendarView();
@@ -56,11 +56,11 @@ public:
 	virtual void				DrawWeekNumber(BView* owner, BRect frame,
 									const char* text);
 
-			uint32				SelectionCommand() const;
+			uint32_t				SelectionCommand() const;
 			BMessage*			SelectionMessage() const;
 	virtual void				SetSelectionMessage(BMessage* message);
 
-			uint32				InvocationCommand() const;
+			uint32_t				InvocationCommand() const;
 			BMessage*			InvocationMessage() const;
 	virtual void				SetInvocationMessage(BMessage* message);
 
@@ -69,7 +69,7 @@ public:
 
 	virtual void				MouseDown(BPoint where);
 
-	virtual void				KeyDown(const char* bytes, int32 numBytes);
+	virtual void				KeyDown(const char* bytes, int32_t numBytes);
 
 	virtual void				ResizeToPreferred();
 	virtual void				GetPreferredSize(float* width, float* height);
@@ -78,17 +78,17 @@ public:
 	virtual	BSize				MinSize();
 	virtual	BSize				PreferredSize();
 
-			int32				Day() const;
-			int32				Month() const;
-			int32				Year() const;
+			int32_t				Day() const;
+			int32_t				Month() const;
+			int32_t				Year() const;
 
-			bool				SetDay(int32 day);
-			bool				SetMonth(int32 month);
-			bool				SetYear(int32 year);
+			bool				SetDay(int32_t day);
+			bool				SetMonth(int32_t month);
+			bool				SetYear(int32_t year);
 
 			BDate				Date() const;
 			bool				SetDate(const BDate& date);
-			bool				SetDate(int32 year, int32 month, int32 day);
+			bool				SetDate(int32_t year, int32_t month, int32_t day);
 
 			BWeekday			StartOfWeek() const;
 			void				SetStartOfWeek(BWeekday startOfWeek);
@@ -106,14 +106,14 @@ private:
 									{
 									}
 
-									void 									SetTo(int32 _row, int32 _column)
+									void 									SetTo(int32_t _row, int32_t _column)
 									{
 										row = _row;
 										column = _column;
 									}
 
-									int32 row;
-									int32 column;
+									int32_t row;
+									int32_t column;
 
 									Selection& operator=(const Selection& s)
 									{
@@ -139,8 +139,8 @@ private:
 
 			void				_SetToDay();
 			void				_GetYearMonthForSelection(
-									const Selection& selection, int32* year,
-									int32* month) const;
+									const Selection& selection, int32_t* year,
+									int32_t* month) const;
 			void				_GetPreferredSize(float* width, float* height);
 
 			void				_SetupDayNames();
@@ -151,8 +151,8 @@ private:
 			void				_DrawFocusRect();
 			void				_DrawDayHeader();
 			void				_DrawWeekHeader();
-			void				_DrawDay(int32 curRow, int32 curColumn,
-									int32 row, int32 column, int32 counter,
+			void				_DrawDay(int32_t curRow, int32_t curColumn,
+									int32_t row, int32_t column, int32_t counter,
 									BRect frame, const char* text,
 									bool focus = false);
 			void				_DrawItem(BView* owner, BRect frame,
@@ -178,7 +178,7 @@ private:
 			Selection			fNewSelectedDay;
 			bool				fSelectionChanged;
 
-			int32				fStartOfWeek;
+			int32_t				fStartOfWeek;
 			bool				fDayNameHeaderVisible;
 			bool				fWeekNumberHeaderVisible;
 

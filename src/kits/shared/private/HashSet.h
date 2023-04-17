@@ -48,7 +48,7 @@ public:
 		fNext = -1;
 	}
 
-	inline uint32 Hash() const
+	inline uint32_t Hash() const
 	{
 		return fKey.GetHashCode();
 	}
@@ -134,7 +134,7 @@ public:
 				return;
 			}
 			fElement = NULL;
-			int32 arraySize = fSet->fTable.ArraySize();
+			int32_t arraySize = fSet->fTable.ArraySize();
 			for (; !fElement && fIndex < arraySize; fIndex++)
 				fElement = fSet->fTable.FindFirst(fIndex);
 		}
@@ -143,7 +143,7 @@ public:
 		friend class HashSet<Key>;
 
 		HashSet<Key>*	fSet;
-		int32			fIndex;
+		int32_t			fIndex;
 		Element*		fElement;
 		Element*		fLastElement;
 	};
@@ -158,7 +158,7 @@ public:
 	void Clear();
 	bool Contains(const Key& key) const;
 
-	int32 Size() const;
+	int32_t Size() const;
 	bool IsEmpty() const	{ return Size() == 0; }
 
 	Iterator GetIterator();
@@ -214,7 +214,7 @@ public:
 		return fSet.Contains(key);
 	}
 
-	int32 Size() const
+	int32_t Size() const
 	{
 		const BLocker* lock = this;
 		MapLocker locker(const_cast<BLocker*>(lock));
@@ -300,7 +300,7 @@ bool HashSet<Key>::Contains(const Key& key) const
 
 // Size
 template<typename Key>
-int32 HashSet<Key>::Size() const
+int32_t HashSet<Key>::Size() const
 {
 	return fTable.CountElements();
 }

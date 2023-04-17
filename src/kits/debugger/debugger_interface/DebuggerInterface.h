@@ -49,7 +49,7 @@ public:
 
 	virtual	status_t			GetNextDebugEvent(DebugEvent*& _event) = 0;
 
-	virtual	status_t			SetTeamDebuggingFlags(uint32 flags) = 0;
+	virtual	status_t			SetTeamDebuggingFlags(uint32_t flags) = 0;
 
 	virtual	status_t			ContinueThread(thread_id thread) = 0;
 	virtual	status_t			StopThread(thread_id thread) = 0;
@@ -59,7 +59,7 @@ public:
 	virtual	status_t			UninstallBreakpoint(target_addr_t address) = 0;
 
 	virtual status_t			InstallWatchpoint(target_addr_t address,
-									uint32 type, int32 length) = 0;
+									uint32_t type, int32_t length) = 0;
 	virtual status_t			UninstallWatchpoint(target_addr_t address) = 0;
 
 	virtual	status_t			GetSystemInfo(SystemInfo& info) = 0;
@@ -77,7 +77,7 @@ public:
 	virtual	status_t			GetSymbolInfos(team_id team, image_id image,
 									BObjectList<SymbolInfo>& infos) = 0;
 	virtual	status_t			GetSymbolInfo(team_id team, image_id image,
-									const char* name, int32 symbolType,
+									const char* name, int32_t symbolType,
 									SymbolInfo& info) = 0;
 
 	virtual	status_t			GetThreadInfo(thread_id thread,
@@ -88,13 +88,13 @@ public:
 	virtual	status_t			SetCpuState(thread_id thread,
 									const CpuState* state) = 0;
 
-	virtual	status_t			GetCpuFeatures(uint32& flags) = 0;
+	virtual	status_t			GetCpuFeatures(uint32_t& flags) = 0;
 
 	virtual	status_t			WriteCoreFile(const char* path) = 0;
 
 	// TeamMemory
 	virtual	status_t			GetMemoryProperties(target_addr_t address,
-									uint32& protection, uint32& locking) = 0;
+									uint32_t& protection, uint32_t& locking) = 0;
 
 	virtual	ssize_t				ReadMemory(target_addr_t address, void* buffer,
 									size_t size) = 0;
@@ -106,10 +106,10 @@ protected:
 									int64 textDelta,
 									BObjectList<SymbolInfo>& infos);
 			status_t			GetElfSymbols(const void* symbolTable,
-									uint32 symbolCount,
-									uint32 symbolTableEntrySize,
+									uint32_t symbolCount,
+									uint32_t symbolTableEntrySize,
 									const char* stringTable,
-									uint32 stringTableSize, bool is64Bit,
+									uint32_t stringTableSize, bool is64Bit,
 									bool swappedByteOrder, int64 textDelta,
 									BObjectList<SymbolInfo>& infos);
 			status_t			GetElfSymbols(ElfSymbolLookup* symbolLookup,

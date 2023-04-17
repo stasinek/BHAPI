@@ -85,7 +85,7 @@ void BNetworkRequest::_ProtocolSetup()
 status_t BNetworkRequest::_GetLine(BString& destString)
 {
 	// Find a complete line in inputBuffer
-	uint32 characterIndex = 0;
+	uint32_t characterIndex = 0;
 
 	while ((characterIndex < fInputBuffer.Size())
 		&& ((fInputBuffer.Data())[characterIndex] != '\n'))

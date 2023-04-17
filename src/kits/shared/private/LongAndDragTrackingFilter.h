@@ -19,8 +19,8 @@ namespace BPrivate {
 class LongAndDragTrackingFilter : public BMessageFilter {
 public:
 								LongAndDragTrackingFilter(
-									uint32 longMessageWhat,
-									uint32 dragMessageWhat,
+									uint32_t longMessageWhat,
+									uint32_t dragMessageWhat,
 									float radiusThreshold = 4.0f,
 									bigtime_t durationThreshold = 0);
 								~LongAndDragTrackingFilter();
@@ -30,11 +30,11 @@ public:
 private:
 			void				_StopTracking();
 
-			uint32				fLongMessageWhat;
-			uint32				fDragMessageWhat;
+			uint32_t				fLongMessageWhat;
+			uint32_t				fDragMessageWhat;
 			BMessageRunner*		fMessageRunner;
 			BPoint				fClickPoint;
-			uint32				fClickButtons;
+			uint32_t				fClickButtons;
 			float				fSquaredRadiusThreshold;
 			bigtime_t			fDurationThreshold;
 };

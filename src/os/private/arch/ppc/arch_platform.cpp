@@ -61,8 +61,8 @@ public:
 	virtual char SerialDebugGetChar();
 	virtual void SerialDebugPutChar(char c);
 
-	virtual	void SetHardwareRTC(uint32 seconds);
-	virtual	uint32 GetHardwareRTC();
+	virtual	void SetHardwareRTC(uint32_t seconds);
+	virtual	uint32_t GetHardwareRTC();
 
 	virtual	void ShutDown(bool reboot);
 
@@ -186,7 +186,7 @@ PPCOpenFirmware::SerialDebugPutChar(char c)
 
 // SetHardwareRTC
 void
-PPCOpenFirmware::SetHardwareRTC(uint32 seconds)
+PPCOpenFirmware::SetHardwareRTC(uint32_t seconds)
 {
 	struct tm t;
 	rtc_secs_to_tm(seconds, &t);
@@ -201,7 +201,7 @@ PPCOpenFirmware::SetHardwareRTC(uint32 seconds)
 }
 
 // GetHardwareRTC
-uint32
+uint32_t
 PPCOpenFirmware::GetHardwareRTC()
 {
 	struct tm t;
@@ -249,8 +249,8 @@ public:
 	virtual char SerialDebugGetChar();
 	virtual void SerialDebugPutChar(char c);
 
-	virtual	void SetHardwareRTC(uint32 seconds);
-	virtual	uint32 GetHardwareRTC();
+	virtual	void SetHardwareRTC(uint32_t seconds);
+	virtual	uint32_t GetHardwareRTC();
 
 	virtual	void ShutDown(bool reboot);
 
@@ -334,12 +334,12 @@ PPCUBoot::SerialDebugPutChar(char c)
 
 // SetHardwareRTC
 void
-PPCUBoot::SetHardwareRTC(uint32 seconds)
+PPCUBoot::SetHardwareRTC(uint32_t seconds)
 {
 }
 
 // GetHardwareRTC
-uint32
+uint32_t
 PPCUBoot::GetHardwareRTC()
 {
 	return 0;

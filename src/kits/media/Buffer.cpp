@@ -98,7 +98,7 @@ void BBuffer::SetSizeUsed(size_t size_used)
 }
 
 
-uint32 BBuffer::Flags()
+uint32_t BBuffer::Flags()
 {
 	CALLED();
 	return fFlags;

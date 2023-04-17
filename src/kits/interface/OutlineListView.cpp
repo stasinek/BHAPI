@@ -35,7 +35,7 @@
 #include <os/debug.h>
 
 BOutlineListView::BOutlineListView(BRect frame, const char *name, bhapi::list_view_type type,
-				    __be_uint32 resizingMode,  __be_uint32 flags)
+				    __be_uint32_t resizingMode,  __be_uint32_t flags)
 	: BListView(frame, name, type, resizingMode, flags)
 {
 }
@@ -52,10 +52,10 @@ bool BOutlineListView::AddUnder(BListItem *item, BListItem *superitem)
 	if(item == NULL || item->fOwner != NULL || item->fFullOwner != NULL ||
 	   superitem == NULL || superitem->fFullOwner != this || superitem->fLevel == B_MAXUINT32) return false;
 
-	__be_int32 index = fFullItems.IndexOf(superitem);
+	__be_int32_t index = fFullItems.IndexOf(superitem);
 	if(index < 0) return false;
 
-	__be_uint32 tmp = item->fLevel;
+	__be_uint32_t tmp = item->fLevel;
 	item->fLevel = superitem->fLevel + 1;
 
 	bool retVal = BOutlineListView::AddItem(item, index + 1);
@@ -71,7 +71,7 @@ bool BOutlineListView::AddItem(BListItem *item)
 }
 
 
-bool BOutlineListView::AddItem(BListItem *item,  __be_int32 fullListIndex)
+bool BOutlineListView::AddItem(BListItem *item,  __be_int32_t fullListIndex)
 {
 	if(item == NULL || item->fOwner != NULL || item->fFullOwner != NULL) return false;
 	if(fFullItems.AddItem(item, fullListIndex) == false) return false;
@@ -80,7 +80,7 @@ bool BOutlineListView::AddItem(BListItem *item,  __be_int32 fullListIndex)
 
 	if(item->IsVisible())
 	{
-		__be_int32 index = fullListIndex;
+		__be_int32_t index = fullListIndex;
 
 		if(index == 0) BListView::AddItem(item, 0);
 		else while(index > 0)
@@ -93,7 +93,7 @@ bool BOutlineListView::AddItem(BListItem *item,  __be_int32 fullListIndex)
 			break;
 		}
 
-		__be_int32 tIndex = fullListIndex;
+		__be_int32_t tIndex = fullListIndex;
 		while(tIndex < fFullItems.CountItems() - 1)
 		{
 			BListItem *aItem = (BListItem*)fFullItems.ItemAt(++tIndex);
@@ -103,7 +103,7 @@ bool BOutlineListView::AddItem(BListItem *item,  __be_int32 fullListIndex)
 			{
 				if(aItem->fOwner != NULL)
 				{
-					__be_int32 aIndex = IndexOf(aItem);
+					__be_int32_t aIndex = IndexOf(aItem);
 					BListView::RemoveItem(aItem, false);
 					if(aIndex < index) index--;
 				}
@@ -134,7 +134,7 @@ bool BOutlineListView::RemoveItem(BListItem *item, bool auto_destruct_item_and_s
 
 
 BListItem*
-BOutlineListView::RemoveItem(__be_int32 fullListIndex, bool auto_destruct_subitems,  __be_int32 *count)
+BOutlineListView::RemoveItem(__be_int32_t fullListIndex, bool auto_destruct_subitems,  __be_int32_t *count)
 {
 	BListItem *item = (BListItem*)fFullItems.RemoveItem(fullListIndex);
 	if(item == NULL) return NULL;
@@ -144,7 +144,7 @@ BOutlineListView::RemoveItem(__be_int32 fullListIndex, bool auto_destruct_subite
 
 	if(count) *count = 0;
 
-	__be_int32 tIndex = fullListIndex;
+	__be_int32_t tIndex = fullListIndex;
 	while(tIndex >= 0 && tIndex <= fFullItems.CountItems() - 1)
 	{
 		BListItem *aItem = (BListItem*)fFullItems.ItemAt(tIndex);
@@ -163,13 +163,13 @@ BOutlineListView::RemoveItem(__be_int32 fullListIndex, bool auto_destruct_subite
 
 
 BListItem*
-BOutlineListView::RemoveItem(__be_int32 fullListIndex)
+BOutlineListView::RemoveItem(__be_int32_t fullListIndex)
 {
 	return RemoveItem(fullListIndex, true, NULL);
 }
 
 
-bool BOutlineListView::RemoveItems(__be_int32 fullListIndex,  __be_int32 count, bool auto_destruct_items)
+bool BOutlineListView::RemoveItems(__be_int32_t fullListIndex,  __be_int32_t count, bool auto_destruct_items)
 {
 	if(fullListIndex < 0 || fullListIndex >= fFullItems.CountItems()) return false;
 
@@ -179,7 +179,7 @@ bool BOutlineListView::RemoveItems(__be_int32 fullListIndex,  __be_int32 count, 
 	// TODO: remove at once
 	while(count-- > 0)
 	{
-		__be_int32 tmp = 0;
+		__be_int32_t tmp = 0;
 
 		BListItem *item = BOutlineListView::RemoveItem(fullListIndex, auto_destruct_items, &tmp);
 		if(item == NULL) return false;
@@ -193,13 +193,13 @@ bool BOutlineListView::RemoveItems(__be_int32 fullListIndex,  __be_int32 count, 
 
 
 BListItem*
-BOutlineListView::FullListItemAt(__be_int32 fullListIndex) const
+BOutlineListView::FullListItemAt(__be_int32_t fullListIndex) const
 {
 	return (BListItem*)fFullItems.ItemAt(fullListIndex);
 }
 
 
-__be_int32 BOutlineListView::FullListIndexOf(const BListItem *item) const
+__be_int32_t BOutlineListView::FullListIndexOf(const BListItem *item) const
 {
 	if(item == NULL || item->fFullOwner != this) return -1;
 	return fFullItems.IndexOf((void*)item);
@@ -226,15 +226,15 @@ bool BOutlineListView::FullListHasItem(const BListItem *item) const
 }
 
 
-__be_int32 BOutlineListView::FullListCountItems() const
+__be_int32_t BOutlineListView::FullListCountItems() const
 {
 	return fFullItems.CountItems();
 }
 
 
-__be_int32 BOutlineListView::FullListCurrentSelection(__be_int32 index) const
+__be_int32_t BOutlineListView::FullListCurrentSelection(__be_int32_t index) const
 {
-	__be_int32 tIndex = CurrentSelection(index);
+	__be_int32_t tIndex = CurrentSelection(index);
 	BListItem *item = ItemAt(tIndex);
 	return(item == NULL ? -1 : fFullItems.IndexOf(item));
 }
@@ -244,7 +244,7 @@ void BOutlineListView::MakeEmpty()
 {
 	while(fFullItems.CountItems() > 0)
 	{
-		BListItem *item = (BListItem*)fFullItems.RemoveItem((__be_int32)0);
+		BListItem *item = (BListItem*)fFullItems.RemoveItem((__be_int32_t)0);
 		item->fFullOwner = NULL;
 		delete item;
 	}
@@ -274,7 +274,7 @@ BOutlineListView::Superitem(const BListItem *item) const
 {
 	if(item == NULL || item->fFullOwner != this) return NULL;
 
-	__be_int32 index = fFullItems.IndexOf((void*)item);
+	__be_int32_t index = fFullItems.IndexOf((void*)item);
 	if(index < 0) return NULL;
 
 	while(index > 0)
@@ -291,7 +291,7 @@ bool BOutlineListView::HasSubitems(const BListItem *item) const
 {
 	if(item == NULL || item->fFullOwner != this) return false;
 
-	__be_int32 index = fFullItems.IndexOf((void*)item);
+	__be_int32_t index = fFullItems.IndexOf((void*)item);
 	if(index < 0 || index == fFullItems.CountItems() - 1) return false;
 
 	BListItem *aItem = (BListItem*)fFullItems.ItemAt(index + 1);
@@ -299,12 +299,12 @@ bool BOutlineListView::HasSubitems(const BListItem *item) const
 }
 
 
-__be_int32 BOutlineListView::CountItemsUnder(BListItem *item, bool oneLevelOnly) const
+__be_int32_t BOutlineListView::CountItemsUnder(BListItem *item, bool oneLevelOnly) const
 {
 	if(item == NULL || item->fFullOwner != this) return 0;
 
-	__be_int32 retVal = 0;
-	__be_int32 tIndex = fFullItems.IndexOf((void*)item);
+	__be_int32_t retVal = 0;
+	__be_int32_t tIndex = fFullItems.IndexOf((void*)item);
 
 	while(tIndex >= 0 && tIndex < fFullItems.CountItems() - 1)
 	{
@@ -318,11 +318,11 @@ __be_int32 BOutlineListView::CountItemsUnder(BListItem *item, bool oneLevelOnly)
 
 
 BListItem*
-BOutlineListView::ItemUnderAt(BListItem *item, bool oneLevelOnly,  __be_int32 index) const
+BOutlineListView::ItemUnderAt(BListItem *item, bool oneLevelOnly,  __be_int32_t index) const
 {
 	if(item == NULL || item->fFullOwner != this || index < 0) return NULL;
 
-	__be_int32 tIndex = fFullItems.IndexOf((void*)item);
+	__be_int32_t tIndex = fFullItems.IndexOf((void*)item);
 
 	while(tIndex >= 0 && tIndex < fFullItems.CountItems() - 1)
 	{
@@ -346,7 +346,7 @@ BOutlineListView::EachItemUnder(BListItem *item, bool oneLevelOnly,
 	if(item == NULL || item->fFullOwner != this || eachFunc == NULL) return NULL;
 
 	BListItem *retVal = NULL;
-	__be_int32 tIndex = fFullItems.IndexOf((void*)item);
+	__be_int32_t tIndex = fFullItems.IndexOf((void*)item);
 
 	while(retVal == NULL && tIndex >= 0 && tIndex < fFullItems.CountItems() - 1)
 	{
@@ -372,8 +372,8 @@ void BOutlineListView::Expand(BListItem *item)
 	item->fExpanded = true;
 	if(item->IsVisible())
 	{
-		__be_int32 tIndex = fFullItems.IndexOf(item);
-		__be_int32 index = IndexOf(item);
+		__be_int32_t tIndex = fFullItems.IndexOf(item);
+		__be_int32_t index = IndexOf(item);
 		while(tIndex < fFullItems.CountItems() - 1)
 		{
 			BListItem *aItem = (BListItem*)fFullItems.ItemAt(++tIndex);
@@ -381,7 +381,7 @@ void BOutlineListView::Expand(BListItem *item)
 
 			if(aItem->fOwner != NULL)
 			{
-				__be_int32 aIndex = IndexOf(aItem);
+				__be_int32_t aIndex = IndexOf(aItem);
 				BListView::RemoveItem(aItem, false);
 				if(aIndex < index) index--;
 			}
@@ -401,7 +401,7 @@ void BOutlineListView::Collapse(BListItem *item)
 	item->fExpanded = false;
 	if(item->IsVisible())
 	{
-		__be_int32 tIndex = fFullItems.IndexOf(item);
+		__be_int32_t tIndex = fFullItems.IndexOf(item);
 		while(tIndex < fFullItems.CountItems() - 1)
 		{
 			BListItem *aItem = (BListItem*)fFullItems.ItemAt(++tIndex);
@@ -413,7 +413,7 @@ void BOutlineListView::Collapse(BListItem *item)
 }
 
 
-bool BOutlineListView::IsExpanded(__be_int32 fullListIndex) const
+bool BOutlineListView::IsExpanded(__be_int32_t fullListIndex) const
 {
 	BListItem *item = (BListItem*)fFullItems.ItemAt(fullListIndex);
 	return(item == NULL ? false : item->fExpanded);
@@ -429,14 +429,14 @@ BOutlineListView::FullListItems() const
 
 void BOutlineListView::MouseDown(BPoint where)
 {
-	__be_int32 btnClicks = 1;
+	__be_int32_t btnClicks = 1;
 	if(!IsEnabled() || !QueryCurrentMouse(true, B_PRIMARY_MOUSE_BUTTON, true, &btnClicks) || btnClicks > 1)
 	{
 		BListView::MouseDown(where);
 		return;
 	}
 
-	__be_int32 index = IndexOf(where, true);
+	__be_int32_t index = IndexOf(where, true);
 	BListItem *item = ItemAt(index);
 	if(item == NULL || item->fEnabled == false || item->HasSubitems() == false)
 	{
@@ -464,13 +464,13 @@ void BOutlineListView::MouseUp(BPoint where)
 }
 
 
-void BOutlineListView::MouseMoved(BPoint where,  __be_uint32 code, const BMessage *a_message)
+void BOutlineListView::MouseMoved(BPoint where,  __be_uint32_t code, const BMessage *a_message)
 {
 	BListView::MouseMoved(where, code, a_message);
 }
 
 
-void BOutlineListView::KeyDown(const char *bytes,  __be_int32 numBytes)
+void BOutlineListView::KeyDown(const char *bytes,  __be_int32_t numBytes)
 {
 	BListItem *item = ItemAt(Position());
 
@@ -489,7 +489,7 @@ void BOutlineListView::KeyDown(const char *bytes,  __be_int32 numBytes)
 }
 
 
-void BOutlineListView::KeyUp(const char *bytes,  __be_int32 numBytes)
+void BOutlineListView::KeyUp(const char *bytes,  __be_int32_t numBytes)
 {
 	BListView::KeyUp(bytes, numBytes);
 }

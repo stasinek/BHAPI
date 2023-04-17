@@ -10,7 +10,7 @@
 #define kNotificationServerSignature "application/x-vnd.Haiku-notification_server"
 
 // Messages
-const uint32 kNotificationMessage = 'nssm';
+const uint32_t kNotificationMessage = 'nssm';
 
 // Settings constants
 extern const char* kSettingsFile;
@@ -21,7 +21,7 @@ extern const char* kTimeoutName;
 
 // General default settings
 const bool kDefaultAutoStart = true;
-const int32 kDefaultTimeout = 10;
+const int32_t kDefaultTimeout = 10;
 
 // Display settings
 extern const char* kWidthName;

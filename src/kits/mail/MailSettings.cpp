@@ -113,22 +113,22 @@ status_t BMailSettings::Reload()
 //	# pragma mark - Global settings
 
 
-int32 BMailSettings::WindowFollowsCorner()
+int32_t BMailSettings::WindowFollowsCorner()
 {
 	return fData.FindInt32("WindowFollowsCorner");
 }
 
 
-void BMailSettings::SetWindowFollowsCorner(int32 whichCorner)
+void BMailSettings::SetWindowFollowsCorner(int32_t whichCorner)
 {
 	if (fData.ReplaceInt32("WindowFollowsCorner", whichCorner) != B_OK)
 		fData.AddInt32("WindowFollowsCorner", whichCorner);
 }
 
 
-uint32 BMailSettings::ShowStatusWindow()
+uint32_t BMailSettings::ShowStatusWindow()
 {
-	int32 showStatusWindow;
+	int32_t showStatusWindow;
 	if (fData.FindInt32("ShowStatusWindow", &showStatusWindow) != B_OK) {
 		// show during send and receive
 		return 2;
@@ -138,7 +138,7 @@ uint32 BMailSettings::ShowStatusWindow()
 }
 
 
-void BMailSettings::SetShowStatusWindow(uint32 mode)
+void BMailSettings::SetShowStatusWindow(uint32_t mode)
 {
 	if (fData.ReplaceInt32("ShowStatusWindow", mode) != B_OK)
 		fData.AddInt32("ShowStatusWindow", mode);
@@ -190,17 +190,17 @@ void BMailSettings::SetStatusWindowFrame(BRect frame)
 }
 
 
-int32 BMailSettings::StatusWindowWorkspaces()
+int32_t BMailSettings::StatusWindowWorkspaces()
 {
-	uint32 workspaces;
-	if (fData.FindInt32("StatusWindowWorkSpace", (int32*)&workspaces) != B_OK)
+	uint32_t workspaces;
+	if (fData.FindInt32("StatusWindowWorkSpace", (int32_t*)&workspaces) != B_OK)
 		return B_ALL_WORKSPACES;
 
 	return workspaces;
 }
 
 
-void BMailSettings::SetStatusWindowWorkspaces(int32 workspace)
+void BMailSettings::SetStatusWindowWorkspaces(int32_t workspace)
 {
 	if (fData.ReplaceInt32("StatusWindowWorkSpace", workspace) != B_OK)
 		fData.AddInt32("StatusWindowWorkSpace", workspace);
@@ -211,13 +211,13 @@ void BMailSettings::SetStatusWindowWorkspaces(int32 workspace)
 }
 
 
-int32 BMailSettings::StatusWindowLook()
+int32_t BMailSettings::StatusWindowLook()
 {
 	return fData.FindInt32("StatusWindowLook");
 }
 
 
-void BMailSettings::SetStatusWindowLook(int32 look)
+void BMailSettings::SetStatusWindowLook(int32_t look)
 {
 	if (fData.ReplaceInt32("StatusWindowLook", look) != B_OK)
 		fData.AddInt32("StatusWindowLook", look);
@@ -273,13 +273,13 @@ void BMailSettings::SetSendOnlyIfPPPUp(bool yes)
 }
 
 
-int32 BMailSettings::DefaultOutboundAccount()
+int32_t BMailSettings::DefaultOutboundAccount()
 {
 	return fData.FindInt32("DefaultOutboundAccount");
 }
 
 
-void BMailSettings::SetDefaultOutboundAccount(int32 to)
+void BMailSettings::SetDefaultOutboundAccount(int32_t to)
 {
 	if (fData.ReplaceInt32("DefaultOutboundAccount", to) != B_OK)
 		fData.AddInt32("DefaultOutboundAccount", to);
@@ -350,21 +350,21 @@ BMailAccounts::~BMailAccounts()
 }
 
 
-int32 BMailAccounts::CountAccounts()
+int32_t BMailAccounts::CountAccounts()
 {
 	return fAccounts.CountItems();
 }
 
 
 BMailAccountSettings*
-BMailAccounts::AccountAt(int32 index)
+BMailAccounts::AccountAt(int32_t index)
 {
 	return fAccounts.ItemAt(index);
 }
 
 
 BMailAccountSettings*
-BMailAccounts::AccountByID(int32 id)
+BMailAccounts::AccountByID(int32_t id)
 {
 	for (int i = 0; i < fAccounts.CountItems(); i++) {
 		BMailAccountSettings* account = fAccounts.ItemAt(i);
@@ -415,7 +415,7 @@ status_t BMailAddOnSettings::Load(const BMessage& message)
 
 		status_t status = B_ENTRY_NOT_FOUND;
 
-		for (int32 i = 0; i < paths.CountStrings(); i++) {
+		for (int32_t i = 0; i < paths.CountStrings(); i++) {
 			path.SetTo(paths.StringAt(i), pathString);
 			BEntry entry(path.Path());
 			if (entry.Exists()) {
@@ -515,13 +515,13 @@ status_t BMailProtocolSettings::Load(const BMessage& message)
 		return status;
 
 	type_code typeFound;
-	int32 countFound;
+	int32_t countFound;
 	message.GetInfo("filters", &typeFound, &countFound);
 	if (typeFound != B_MESSAGE_TYPE)
 		return B_BAD_VALUE;
 
 	for (int i = 0; i < countFound; i++) {
-		int32 index = AddFilterSettings();
+		int32_t index = AddFilterSettings();
 		if (index < 0)
 			return B_NO_MEMORY;
 
@@ -552,13 +552,13 @@ status_t BMailProtocolSettings::Save(BMessage& message)
 }
 
 
-int32 BMailProtocolSettings::CountFilterSettings() const
+int32_t BMailProtocolSettings::CountFilterSettings() const
 {
 	return fFiltersSettings.CountItems();
 }
 
 
-int32 BMailProtocolSettings::AddFilterSettings(const entry_ref* ref)
+int32_t BMailProtocolSettings::AddFilterSettings(const entry_ref* ref)
 {
 	BMailAddOnSettings* filterSettings = new BMailAddOnSettings();
 	if (ref != NULL)
@@ -572,16 +572,16 @@ int32 BMailProtocolSettings::AddFilterSettings(const entry_ref* ref)
 }
 
 
-void BMailProtocolSettings::RemoveFilterSettings(int32 index)
+void BMailProtocolSettings::RemoveFilterSettings(int32_t index)
 {
 	fFiltersSettings.RemoveItemAt(index);
 }
 
 
-bool BMailProtocolSettings::MoveFilterSettings(int32 from, int32 to)
+bool BMailProtocolSettings::MoveFilterSettings(int32_t from, int32_t to)
 {
-	if (from < 0 || from >= (int32)CountFilterSettings() || to < 0
-		|| to >= (int32)CountFilterSettings())
+	if (from < 0 || from >= (int32_t)CountFilterSettings() || to < 0
+		|| to >= (int32_t)CountFilterSettings())
 		return false;
 	if (from == to)
 		return true;
@@ -593,7 +593,7 @@ bool BMailProtocolSettings::MoveFilterSettings(int32 from, int32 to)
 
 
 BMailAddOnSettings*
-BMailProtocolSettings::FilterSettingsAt(int32 index) const
+BMailProtocolSettings::FilterSettingsAt(int32_t index) const
 {
 	return fFiltersSettings.ItemAt(index);
 }
@@ -603,7 +603,7 @@ bool BMailProtocolSettings::HasBeenModified() const
 {
 	if (BMailAddOnSettings::HasBeenModified())
 		return true;
-	for (int32 i = 0; i < CountFilterSettings(); i++) {
+	for (int32_t i = 0; i < CountFilterSettings(); i++) {
 		if (FilterSettingsAt(i)->HasBeenModified())
 			return true;
 	}
@@ -640,14 +640,14 @@ BMailAccountSettings::~BMailAccountSettings()
 }
 
 
-void BMailAccountSettings::SetAccountID(int32 id)
+void BMailAccountSettings::SetAccountID(int32_t id)
 {
 	fModified = true;
 	fAccountID = id;
 }
 
 
-int32 BMailAccountSettings::AccountID() const
+int32_t BMailAccountSettings::AccountID() const
 {
 	return fAccountID;
 }
@@ -803,7 +803,7 @@ status_t BMailAccountSettings::Reload()
 	BMessage settings;
 	settings.Unflatten(&file);
 
-	int32 id;
+	int32_t id;
 	if (settings.FindInt32("id", &id) == B_OK)
 		fAccountID = id;
 	settings.FindString("name", &fAccountName);
@@ -921,7 +921,7 @@ status_t BMailAccountSettings::_GetAddOnRef(const char* subPath, const char* nam
 	BStringList paths;
 	BPathFinder().FindPaths(B_FIND_PATH_ADD_ONS_DIRECTORY, subPath, paths);
 
-	for (int32 i = 0; i < paths.CountStrings(); i++) {
+	for (int32_t i = 0; i < paths.CountStrings(); i++) {
 		BPath path(paths.StringAt(i), name);
 		BEntry entry(path.Path());
 		if (entry.Exists()) {

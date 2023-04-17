@@ -20,18 +20,18 @@ class Err;
 //! A range of byte offsets from which to check a pattern against a data stream.
 class Range {
 public:
-	Range(int32 start, int32 end);
+	Range(int32_t start, int32_t end);
 	
 	status_t InitCheck() const;
 	Err* GetErr() const;
 
-	int32 Start() const;
-	int32 End() const;
+	int32_t Start() const;
+	int32_t End() const;
 	
-	void SetTo(int32 start, int32 end);
+	void SetTo(int32_t start, int32_t end);
 private:
-	int32 fStart;
-	int32 fEnd;
+	int32_t fStart;
+	int32_t fEnd;
 	status_t fCStatus;
 };
 

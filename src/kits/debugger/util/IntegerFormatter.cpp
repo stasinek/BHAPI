@@ -130,7 +130,7 @@ GetFormatForTypeAndFormat(type_code type, integer_format format,
 			break;
 		case INTEGER_FORMAT_HEX_32:
 			snprintf(buffer, bufferSize, "%#" B_PRIx32,
-				(uint32)value.ToUInt64());
+				(uint32_t)value.ToUInt64());
 			break;
 		case INTEGER_FORMAT_HEX_64:
 		default:

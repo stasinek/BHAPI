@@ -40,7 +40,7 @@
 namespace bhapi {
 status_t beep();
 status_t system_beep(const char* eventName);
-status_t add_system_beep_event(const char* eventName, uint32 flags = 0);
+status_t add_system_beep_event(const char* eventName, uint32_t flags = 0);
 }
 #endif	// __cplusplus
 #endif	// BHAPI_BEEP_H

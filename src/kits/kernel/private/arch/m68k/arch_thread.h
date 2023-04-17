@@ -20,7 +20,7 @@ void m68k_push_iframe(struct iframe_stack *stack, struct iframe *frame);
 void m68k_pop_iframe(struct iframe_stack *stack);
 struct iframe *m68k_get_user_iframe(void);
 
-uint32 m68k_next_page_directory(Thread *from, Thread *to);
+uint32_t m68k_next_page_directory(Thread *from, Thread *to);
 
 /* as we won't support SMP on m68k (yet?) we can use a global here */
 extern Thread *gCurrentThread;
@@ -45,7 +45,7 @@ arch_thread_get_current_thread(void)
 {
 	uint64 v = 0;
 	asm volatile("pmove %%srp,(%0)" : : "a"(&v));
-	return (Thread *)(uint32)(v & 0xffffffff);
+	return (Thread *)(uint32_t)(v & 0xffffffff);
 }
 
 

@@ -55,8 +55,8 @@ class BTime {
 public:
 								BTime();
 								BTime(const BTime& other);
-								BTime(int32 hour, int32 minute, int32 second,
-									int32 microsecond = 0);
+								BTime(int32_t hour, int32_t minute, int32_t second,
+									int32_t microsecond = 0);
 								BTime(const BMessage* archive);
 								~BTime();
 
@@ -64,27 +64,27 @@ public:
 
 			bool				IsValid() const;
 	static	bool				IsValid(const BTime& time);
-	static	bool				IsValid(int32 hour, int32 minute, int32 second,
-									int32 microsecond = 0);
+	static	bool				IsValid(int32_t hour, int32_t minute, int32_t second,
+									int32_t microsecond = 0);
 
 	static	BTime				CurrentTime(time_type type);
 
 			BTime				Time() const;
 			bool				SetTime(const BTime& time);
-			bool				SetTime(int32 hour, int32 minute, int32 second,
-									int32 microsecond = 0);
+			bool				SetTime(int32_t hour, int32_t minute, int32_t second,
+									int32_t microsecond = 0);
 
-			BTime&				AddHours(int32 hours);
-			BTime&				AddMinutes(int32 minutes);
-			BTime&				AddSeconds(int32 seconds);
-			BTime&				AddMilliseconds(int32 milliseconds);
-			BTime&				AddMicroseconds(int32 microseconds);
+			BTime&				AddHours(int32_t hours);
+			BTime&				AddMinutes(int32_t minutes);
+			BTime&				AddSeconds(int32_t seconds);
+			BTime&				AddMilliseconds(int32_t milliseconds);
+			BTime&				AddMicroseconds(int32_t microseconds);
 
-			int32				Hour() const;
-			int32				Minute() const;
-			int32				Second() const;
-			int32				Millisecond() const;
-			int32				Microsecond() const;
+			int32_t				Hour() const;
+			int32_t				Minute() const;
+			int32_t				Second() const;
+			int32_t				Millisecond() const;
+			int32_t				Microsecond() const;
 			bigtime_t			Difference(const BTime& time,
 									diff_type type) const;
 
@@ -111,7 +111,7 @@ class BDate {
 public:
 								BDate();
 								BDate(const BDate& other);
-								BDate(int32 year, int32 month, int32 day);
+								BDate(int32_t year, int32_t month, int32_t day);
 								BDate(time_t time,
 									time_type type = B_LOCAL_TIME);
 								BDate(const BMessage* archive);
@@ -121,55 +121,55 @@ public:
 
 			bool				IsValid() const;
 	static	bool				IsValid(const BDate& date);
-	static	bool				IsValid(int32 year, int32 month,
-									int32 day);
+	static	bool				IsValid(int32_t year, int32_t month,
+									int32_t day);
 
 	static	BDate				CurrentDate(time_type type);
 
 			BDate				Date() const;
 			bool				SetDate(const BDate& date);
 
-			bool				SetDate(int32 year, int32 month, int32 day);
-			void				GetDate(int32* year, int32* month,
-									int32* day) const;
+			bool				SetDate(int32_t year, int32_t month, int32_t day);
+			void				GetDate(int32_t* year, int32_t* month,
+									int32_t* day) const;
 
-			void				AddDays(int32 days);
-			void				AddYears(int32 years);
-			void				AddMonths(int32 months);
+			void				AddDays(int32_t days);
+			void				AddYears(int32_t years);
+			void				AddMonths(int32_t months);
 
-			int32				Day() const;
-			int32				Year() const;
-			int32				Month() const;
-			int32				Difference(const BDate& date) const;
+			int32_t				Day() const;
+			int32_t				Year() const;
+			int32_t				Month() const;
+			int32_t				Difference(const BDate& date) const;
 
-			void				SetDay(int32 day);
-			void				SetMonth(int32 month);
-			void				SetYear(int32 year);
+			void				SetDay(int32_t day);
+			void				SetMonth(int32_t month);
+			void				SetYear(int32_t year);
 
-			int32				DayOfWeek() const;
-			int32				DayOfYear() const;
+			int32_t				DayOfWeek() const;
+			int32_t				DayOfYear() const;
 
-			int32				WeekNumber() const;
+			int32_t				WeekNumber() const;
 			bool				IsLeapYear() const;
-	static	bool				IsLeapYear(int32 year);
+	static	bool				IsLeapYear(int32_t year);
 
-			int32				DaysInYear() const;
-			int32				DaysInMonth() const;
+			int32_t				DaysInYear() const;
+			int32_t				DaysInMonth() const;
 
 			BString				ShortDayName() const;
-	static	BString				ShortDayName(int32 day);
+	static	BString				ShortDayName(int32_t day);
 
 			BString				ShortMonthName() const;
-	static	BString				ShortMonthName(int32 month);
+	static	BString				ShortMonthName(int32_t month);
 
 			BString				LongDayName() const;
-	static	BString				LongDayName(int32 day);
+	static	BString				LongDayName(int32_t day);
 
 			BString				LongMonthName() const;
-	static	BString				LongMonthName(int32 month);
+	static	BString				LongMonthName(int32_t month);
 
-			int32				DateToJulianDay() const;
-	static	BDate				JulianDayToDate(int32 julianDay);
+			int32_t				DateToJulianDay() const;
+	static	BDate				JulianDayToDate(int32_t julianDay);
 
 			bool				operator!=(const BDate& date) const;
 			bool				operator==(const BDate& date) const;
@@ -181,15 +181,15 @@ public:
 			bool				operator>=(const BDate& date) const;
 
 private:
-	static	int32				_DaysInMonth(int32 year, int32 month);
-			bool				_SetDate(int32 year, int32 month, int32 day);
-	static	int32				_DateToJulianDay(int32 year, int32 month,
-									int32 day);
+	static	int32_t				_DaysInMonth(int32_t year, int32_t month);
+			bool				_SetDate(int32_t year, int32_t month, int32_t day);
+	static	int32_t				_DateToJulianDay(int32_t year, int32_t month,
+									int32_t day);
 
 private:
-			int32				fDay;
-			int32				fYear;
-			int32				fMonth;
+			int32_t				fDay;
+			int32_t				fYear;
+			int32_t				fMonth;
 };
 
 class BDateTime {

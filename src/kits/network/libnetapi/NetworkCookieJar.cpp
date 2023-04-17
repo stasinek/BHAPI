@@ -59,7 +59,7 @@ BNetworkCookieJar::BNetworkCookieJar(BMessage* archive)
 {
 	BMessage extractedCookie;
 
-	for (int32 i = 0; archive->FindMessage(kArchivedCookieMessageName, i,
+	for (int32_t i = 0; archive->FindMessage(kArchivedCookieMessageName, i,
 			&extractedCookie) == B_OK; i++) {
 		BNetworkCookie* heapCookie
 			= new(std::nothrow) BNetworkCookie(&extractedCookie);
@@ -169,7 +169,7 @@ status_t BNetworkCookieJar::AddCookie(BNetworkCookie* cookie)
 
 	// Remove any cookie with the same key as the one we're trying to add (it
 	// replaces/updates them)
-	for (int32 i = 0; i < list->CountItems(); i++) {
+	for (int32_t i = 0; i < list->CountItems(); i++) {
 		const BNetworkCookie* c = list->ItemAt(i);
 
 		if (c->Name() == cookie->Name() && c->Path() == cookie->Path()) {
@@ -195,7 +195,7 @@ status_t BNetworkCookieJar::AddCookie(BNetworkCookie* cookie)
 		// Keep the list sorted by path length (longest first). This makes sure
 		// that cookies for most specific paths are returned first when
 		// iterating the cookie jar.
-		int32 i;
+		int32_t i;
 		for (i = 0; i < list->CountItems(); i++) {
 			const BNetworkCookie* current = list->ItemAt(i);
 			if (current->Path().Length() < cookie->Path().Length())
@@ -212,7 +212,7 @@ status_t BNetworkCookieJar::AddCookie(BNetworkCookie* cookie)
 
 status_t BNetworkCookieJar::AddCookies(const BNetworkCookieList& cookies)
 {
-	for (int32 i = 0; i < cookies.CountItems(); i++) {
+	for (int32_t i = 0; i < cookies.CountItems(); i++) {
 		const BNetworkCookie* cookiePtr = cookies.ItemAt(i);
 
 		// Using AddCookie by reference in order to avoid multiple
@@ -229,9 +229,9 @@ status_t BNetworkCookieJar::AddCookies(const BNetworkCookieList& cookies)
 // #pragma mark Purge useless cookies
 
 
-uint32 BNetworkCookieJar::DeleteOutdatedCookies()
+uint32_t BNetworkCookieJar::DeleteOutdatedCookies()
 {
-	int32 deleteCount = 0;
+	int32_t deleteCount = 0;
 	const BNetworkCookie* cookiePtr;
 
 	for (Iterator it = GetIterator(); (cookiePtr = it.Next()) != NULL;) {
@@ -245,9 +245,9 @@ uint32 BNetworkCookieJar::DeleteOutdatedCookies()
 }
 
 
-uint32 BNetworkCookieJar::PurgeForExit()
+uint32_t BNetworkCookieJar::PurgeForExit()
 {
-	int32 deleteCount = 0;
+	int32_t deleteCount = 0;
 	const BNetworkCookie* cookiePtr;
 
 	for (Iterator it = GetIterator(); (cookiePtr = it.Next()) != NULL;) {
@@ -353,7 +353,7 @@ status_t BNetworkCookieJar::Unflatten(type_code, const void* buffer, ssize_t siz
 		BNetworkCookie tempCookie;
 		BString tempCookieLine;
 
-		int32 endOfLine = flattenedCookies.FindFirst('\n', 0);
+		int32_t endOfLine = flattenedCookies.FindFirst('\n', 0);
 		if (endOfLine == -1)
 			tempCookieLine = flattenedCookies;
 		else {
@@ -362,10 +362,10 @@ status_t BNetworkCookieJar::Unflatten(type_code, const void* buffer, ssize_t siz
 		}
 
 		if (tempCookieLine.Length() != 0 && tempCookieLine[0] != '#') {
-			for (int32 field = 0; field < 7; field++) {
+			for (int32_t field = 0; field < 7; field++) {
 				BString tempString;
 
-				int32 endOfField = tempCookieLine.FindFirst('\t', 0);
+				int32_t endOfField = tempCookieLine.FindFirst('\t', 0);
 				if (endOfField == -1)
 					tempString = tempCookieLine;
 				else {
@@ -470,7 +470,7 @@ void BNetworkCookieJar::_DoFlatten() const
 		fFlattened 	<< cookiePtr->Domain() << '\t' << "TRUE" << '\t'
 			<< cookiePtr->Path() << '\t'
 			<< (cookiePtr->Secure()?"TRUE":"FALSE") << '\t'
-			<< (int32)cookiePtr->ExpirationDate() << '\t'
+			<< (int32_t)cookiePtr->ExpirationDate() << '\t'
 			<< cookiePtr->Name() << '\t' << cookiePtr->Value() << '\n';
 	}
 }
@@ -835,7 +835,7 @@ bool BNetworkCookieJar::UrlIterator::_SuperDomain()
 		// Makes a copy of the characters from the key. This is important,
 		// because HashString doesn't like SetTo to be called with a substring
 		// of its original string (use-after-free + memcpy overwrite).
-	int32 firstDot = domain.FindFirst('.');
+	int32_t firstDot = domain.FindFirst('.');
 	if (firstDot < 0)
 		return false;
 

@@ -78,7 +78,7 @@ private:
 
 class BMediaRenderer {
 public:
-  BMediaRenderer(const char* name = NULL, int32 priority = B_NORMAL_PRIORITY);
+  BMediaRenderer(const char* name = NULL, int32_t priority = B_NORMAL_PRIORITY);
   virtual ~BMediaRenderer();
 
   virtual char*			Name();
@@ -104,12 +104,12 @@ public:
   virtual void			StreamChangedReceived();
 
 private:
-  static int32			_LoopThread(void* arg);
+  static int32_t			_LoopThread(void* arg);
   void					LoopThread();
 
   thread_id				fLoopThread;
   sem_id				fLoopSem;
-  int32					fFlags;
+  int32_t					fFlags;
   mk_time				fTCTime;
   mk_rate				fTCRate;
   transport_status		fTCStatus;
@@ -145,7 +145,7 @@ public:
   virtual void				TimeSkipped();
   virtual void				RequestWakeUp(mk_time, BMediaRenderer*);
   virtual void				SeekToTime(mk_time);
-  virtual BMediaChannel*	GetChannel(int32 selector);
+  virtual BMediaChannel*	GetChannel(int32_t selector);
 
 private:
   BTimeBase*		fTimeBase;
@@ -175,7 +175,7 @@ public:
   virtual bool		IsAbsolute();
 
 private:
-  static int32	_SnoozeThread(void* arg);
+  static int32_t	_SnoozeThread(void* arg);
   void			SnoozeThread();
 
   BList			fTransports;

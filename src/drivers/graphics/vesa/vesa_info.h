@@ -24,23 +24,23 @@ struct vesa_mode {
 };
 
 struct vesa_shared_info {
-	int32			type;
+	int32_t			type;
 	area_id			mode_list_area;		// area containing display mode list
-	uint32			mode_count;
+	uint32_t			mode_count;
 	display_mode	current_mode;
-	uint32			bytes_per_row;
+	uint32_t			bytes_per_row;
 
 	area_id			frame_buffer_area;	// area of frame buffer
 	uint8*			frame_buffer;
 		// pointer to frame buffer (visible by all apps!)
 	uint8*			physical_frame_buffer;
 
-	uint32			vesa_mode_offset;
-	uint32			vesa_mode_count;
+	uint32_t			vesa_mode_offset;
+	uint32_t			vesa_mode_count;
 
 	edid1_info		edid_info;
 	bool			has_edid;
-	uint32			dpms_capabilities;
+	uint32_t			dpms_capabilities;
 };
 
 //----------------- ioctl() interface ----------------
@@ -65,11 +65,11 @@ struct vesa_set_indexed_colors_args {
 
 struct vga_planar_blit_args {
 	uint8*			source;
-	int32			source_bytes_per_row;
-	int32			left;
-	int32			top;
-	int32			right;
-	int32			bottom;
+	int32_t			source_bytes_per_row;
+	int32_t			left;
+	int32_t			top;
+	int32_t			right;
+	int32_t			bottom;
 };
 
 #endif	/* VESA_INFO_H */

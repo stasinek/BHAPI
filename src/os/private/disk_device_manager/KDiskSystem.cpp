@@ -95,7 +95,7 @@ KDiskSystem::PrettyName() const
 
 
 // Flags
-uint32
+uint32_t
 KDiskSystem::Flags() const
 {
 	return fFlags;
@@ -385,14 +385,14 @@ KDiskSystem::SetPrettyName(const char *name)
 
 // SetFlags
 void
-KDiskSystem::SetFlags(uint32 flags)
+KDiskSystem::SetFlags(uint32_t flags)
 {
 	fFlags = flags;
 }
 
 
 // _NextID
-int32
+int32_t
 KDiskSystem::_NextID()
 {
 	return atomic_add(&fNextID, 1);
@@ -400,5 +400,5 @@ KDiskSystem::_NextID()
 
 
 // fNextID
-int32 KDiskSystem::fNextID = 0;
+int32_t KDiskSystem::fNextID = 0;
 

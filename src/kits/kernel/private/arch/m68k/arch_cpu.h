@@ -60,30 +60,30 @@ struct mc68040_ssw {
 } _PACKED;
 
 struct mc68060_fslw {
-	uint32 :4;
-	uint32 ma:1;
-	uint32 :1;
-	uint32 lk:1;
-	uint32 rw:2; //XXX ??
-	uint32 size:2;
-	uint32 tt:2;
-	uint32 tm:2;
-	uint32 io:1;
-	uint32 pbe:1;
-	uint32 sbe:1;
-	uint32 pta:1;
-	uint32 ptb:1;
-	uint32 il:1;
-	uint32 pf:1;
-	uint32 sb:1;
-	uint32 wp:1;
-	uint32 twe:1;
-	uint32 re:1;
-	uint32 we:1;
-	uint32 ttr:1;
-	uint32 bpe:1;
-	uint32 :1;
-	uint32 see:1;
+	uint32_t :4;
+	uint32_t ma:1;
+	uint32_t :1;
+	uint32_t lk:1;
+	uint32_t rw:2; //XXX ??
+	uint32_t size:2;
+	uint32_t tt:2;
+	uint32_t tm:2;
+	uint32_t io:1;
+	uint32_t pbe:1;
+	uint32_t sbe:1;
+	uint32_t pta:1;
+	uint32_t ptb:1;
+	uint32_t il:1;
+	uint32_t pf:1;
+	uint32_t sb:1;
+	uint32_t wp:1;
+	uint32_t twe:1;
+	uint32_t re:1;
+	uint32_t we:1;
+	uint32_t ttr:1;
+	uint32_t bpe:1;
+	uint32_t :1;
+	uint32_t see:1;
 } _PACKED;
 
 /* raw exception frames */
@@ -131,14 +131,14 @@ struct mc68040_type_7_frame {
 	uint16 wb1s;
 	addr_t fault_address;
 	addr_t wb3a;
-	uint32 wb3d;
+	uint32_t wb3d;
 	addr_t wb2a;
-	uint32 wb2d;
+	uint32_t wb2d;
 	addr_t wb1a;
-	uint32 wb1d; // also pd0
-	uint32 pd1;
-	uint32 pd2;
-	uint32 pd3;
+	uint32_t wb1d; // also pd0
+	uint32_t pd1;
+	uint32_t pd2;
+	uint32_t pd3;
 };
 
 struct mc680x0_type_9_frame {
@@ -161,7 +161,7 @@ struct mc68030_type_a_frame {
 	uint16 instpipe_b;
 	addr_t fault_address;
 	uint16 intregs2[2];
-	uint32 dataout;
+	uint32_t dataout;
 	uint16 intregs3[2];
 };
 
@@ -176,11 +176,11 @@ struct mc68030_type_b_frame {
 	uint16 instpipe_b;
 	addr_t fault_address;
 	uint16 intregs2[2];
-	uint32 dataout;
+	uint32_t dataout;
 	uint16 intregs3[4];
-	uint32 stbaddr;
+	uint32_t stbaddr;
 	uint16 intregs4[2];
-	uint32 datain;
+	uint32_t datain;
 	uint16 intregs5[3];
 	uint16 intinfo;
 	uint16 intregs6[18];
@@ -225,7 +225,7 @@ struct mc680x0_type_28_fpu_state {
 	uint8 type; // 0x28
 	uint16 dummy;
 	// XXX: replace dummies
-	uint32 dummies[0x28/4];
+	uint32_t dummies[0x28/4];
 };
 
 struct mc680x0_type_60_fpu_state {
@@ -233,7 +233,7 @@ struct mc680x0_type_60_fpu_state {
 	uint8 type; // 0x60
 	uint16 dummy;
 	// XXX: replace dummies
-	uint32 dummies[0x60/4];
+	uint32_t dummies[0x60/4];
 };
 
 //XXX: those are 040, add others
@@ -243,7 +243,7 @@ struct mc68882_type_d4_fpu_state {
 	uint8 type; // 0xd4
 	uint16 dummy;
 	// XXX: replace dummies
-	uint32 dummies[0xd4/4];
+	uint32_t dummies[0xd4/4];
 };
 
 struct mc680x0_fpu_state {
@@ -267,9 +267,9 @@ struct mc680x0_fp_data_reg {
 };
 
 struct mc680x0_fp_control_regs {
-	uint32 fpcr;
-	uint32 fpsr;
-	uint32 fpiar;
+	uint32_t fpcr;
+	uint32_t fpsr;
+	uint32_t fpiar;
 };
 
 
@@ -285,53 +285,53 @@ struct iframe {
 	struct mc680x0_fpu_state fpu;
 
 	/* data and address registers */
-	uint32 d[8];
-	uint32 a[7];
+	uint32_t d[8];
+	uint32_t a[7];
 	/* cpu exception frame, including sr, pc, format and vector */
 	struct mc680x0_frame cpu;
 
-/*	uint32 vector;
-	uint32 srr0;
-	uint32 srr1;
-	uint32 dar;
-	uint32 dsisr;
-	uint32 lr;
-	uint32 cr;
-	uint32 xer;
-	uint32 ctr;
-	uint32 fpscr;
-	uint32 r31;
-	uint32 r30;
-	uint32 r29;
-	uint32 r28;
-	uint32 r27;
-	uint32 r26;
-	uint32 r25;
-	uint32 r24;
-	uint32 r23;
-	uint32 r22;
-	uint32 r21;
-	uint32 r20;
-	uint32 r19;
-	uint32 r18;
-	uint32 r17;
-	uint32 r16;
-	uint32 r15;
-	uint32 r14;
-	uint32 r13;
-	uint32 r12;
-	uint32 r11;
-	uint32 r10;
-	uint32 r9;
-	uint32 r8;
-	uint32 r7;
-	uint32 r6;
-	uint32 r5;
-	uint32 r4;
-	uint32 r3;
-	uint32 r2;
-	uint32 r1;
-	uint32 r0;
+/*	uint32_t vector;
+	uint32_t srr0;
+	uint32_t srr1;
+	uint32_t dar;
+	uint32_t dsisr;
+	uint32_t lr;
+	uint32_t cr;
+	uint32_t xer;
+	uint32_t ctr;
+	uint32_t fpscr;
+	uint32_t r31;
+	uint32_t r30;
+	uint32_t r29;
+	uint32_t r28;
+	uint32_t r27;
+	uint32_t r26;
+	uint32_t r25;
+	uint32_t r24;
+	uint32_t r23;
+	uint32_t r22;
+	uint32_t r21;
+	uint32_t r20;
+	uint32_t r19;
+	uint32_t r18;
+	uint32_t r17;
+	uint32_t r16;
+	uint32_t r15;
+	uint32_t r14;
+	uint32_t r13;
+	uint32_t r12;
+	uint32_t r11;
+	uint32_t r10;
+	uint32_t r9;
+	uint32_t r8;
+	uint32_t r7;
+	uint32_t r6;
+	uint32_t r5;
+	uint32_t r4;
+	uint32_t r3;
+	uint32_t r2;
+	uint32_t r1;
+	uint32_t r0;
 	double f31;
 	double f30;
 	double f29;
@@ -391,13 +391,13 @@ extern "C" {
 
 #if 0
 //PPC stuff
-extern uint32 get_sdr1(void);
-extern void set_sdr1(uint32 value);
-extern uint32 get_sr(void *virtualAddress);
-extern void set_sr(void *virtualAddress, uint32 value);
-extern uint32 get_msr(void);
-extern uint32 set_msr(uint32 value);
-extern uint32 get_pvr(void);
+extern uint32_t get_sdr1(void);
+extern void set_sdr1(uint32_t value);
+extern uint32_t get_sr(void *virtualAddress);
+extern void set_sr(void *virtualAddress, uint32_t value);
+extern uint32_t get_msr(void);
+extern uint32_t set_msr(uint32_t value);
+extern uint32_t get_pvr(void);
 
 extern void set_ibat0(struct block_address_translation *bat);
 extern void set_ibat1(struct block_address_translation *bat);
@@ -426,7 +426,7 @@ extern void reset_dbats(void);
 //extern void setl2cr(unsigned int val);
 extern long long get_time_base(void);
 
-void __m68k_setup_system_time(vint32 *cvFactor);
+void __m68k_setup_system_time(vint32_t *cvFactor);
 	// defined in libroot: os/arch/system_time.c
 int64 __m68k_get_time_base(void);
 	// defined in libroot: os/arch/system_time_asm.S

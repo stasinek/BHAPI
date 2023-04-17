@@ -38,7 +38,7 @@ namespace {
 
 // Queue for holding blocked threads
 struct queued_thread : DoublyLinkedListLinkImpl<queued_thread> {
-	queued_thread(Thread *_thread, int32 _message_length)
+	queued_thread(Thread *_thread, int32_t _message_length)
 		:
 		thread(_thread),
 		message_length(_message_length),
@@ -47,7 +47,7 @@ struct queued_thread : DoublyLinkedListLinkImpl<queued_thread> {
 	}
 
 	Thread	*thread;
-	int32	message_length;
+	int32_t	message_length;
 	bool	queued;
 };
 
@@ -226,7 +226,7 @@ public:
 	// Implemented after sXsiMessageCount is declared
 	queued_message *Remove(long typeRequested);
 
-	uint32 SequenceNumber() const
+	uint32_t SequenceNumber() const
 	{
 		return fSequenceNumber;
 	}
@@ -278,9 +278,9 @@ private:
 	mutex				fLock;
 	MessageQueue		fMessage;
 	struct msqid_ds		fMessageQueue;
-	uint32				fSequenceNumber;
-	uint32				fThreadsWaitingToReceive;
-	uint32				fThreadsWaitingToSend;
+	uint32_t				fSequenceNumber;
+	uint32_t				fThreadsWaitingToReceive;
+	uint32_t				fThreadsWaitingToSend;
 
 	ThreadQueue			fWaitingToReceive;
 	ThreadQueue			fWaitingToSend;
@@ -389,9 +389,9 @@ static BOpenHashTable<MessageQueueHashTableDefinition> sMessageQueueHashTable;
 static mutex sIpcLock;
 static mutex sXsiMessageQueueLock;
 
-static uint32 sGlobalSequenceNumber = 1;
-static int32 sXsiMessageCount = 0;
-static int32 sXsiMessageQueueCount = 0;
+static uint32_t sGlobalSequenceNumber = 1;
+static int32_t sXsiMessageCount = 0;
+static int32_t sXsiMessageQueueCount = 0;
 
 
 //	#pragma mark -
@@ -432,7 +432,7 @@ XsiMessageQueue::Insert(queued_message *message)
 		return true;
 
 	while (true) {
-		int32 oldCount = atomic_get(&sXsiMessageCount);
+		int32_t oldCount = atomic_get(&sXsiMessageCount);
 		if (oldCount >= MAX_XSI_MESSAGE)
 			return true;
 		// If another thread updates the counter we keep
@@ -765,7 +765,7 @@ _user_xsi_msgrcv(int messageQueueID, void *messagePointer,
 			queued_thread queueEntry(thread, messageSize);
 			messageQueue->Enqueue(&queueEntry, /* waitForMessage */ true);
 
-			uint32 sequenceNumber = messageQueue->SequenceNumber();
+			uint32_t sequenceNumber = messageQueue->SequenceNumber();
 
 			TRACE(("xsi_msgrcv: thread %d going to sleep\n", (int)thread->id));
 			status_t result
@@ -873,7 +873,7 @@ _user_xsi_msgsnd(int messageQueueID, const void *messagePointer,
 			queued_thread queueEntry(thread, messageSize);
 			messageQueue->Enqueue(&queueEntry, /* waitForMessage */ false);
 
-			uint32 sequenceNumber = messageQueue->SequenceNumber();
+			uint32_t sequenceNumber = messageQueue->SequenceNumber();
 
 			TRACE(("xsi_msgsnd: thread %d going to sleep\n", (int)thread->id));
 			result = messageQueue->BlockAndUnlock(thread, &messageQueueLocker);

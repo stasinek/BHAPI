@@ -212,22 +212,22 @@ status_t BMediaDecoder::AttachToDecoder()
 }
 
 
-status_t BMediaDecoder::_Reserved_BMediaDecoder_0(int32 arg, ...) { return B_ERROR; }
-status_t BMediaDecoder::_Reserved_BMediaDecoder_1(int32 arg, ...) { return B_ERROR; }
-status_t BMediaDecoder::_Reserved_BMediaDecoder_2(int32 arg, ...) { return B_ERROR; }
-status_t BMediaDecoder::_Reserved_BMediaDecoder_3(int32 arg, ...) { return B_ERROR; }
-status_t BMediaDecoder::_Reserved_BMediaDecoder_4(int32 arg, ...) { return B_ERROR; }
-status_t BMediaDecoder::_Reserved_BMediaDecoder_5(int32 arg, ...) { return B_ERROR; }
-status_t BMediaDecoder::_Reserved_BMediaDecoder_6(int32 arg, ...) { return B_ERROR; }
-status_t BMediaDecoder::_Reserved_BMediaDecoder_7(int32 arg, ...) { return B_ERROR; }
-status_t BMediaDecoder::_Reserved_BMediaDecoder_8(int32 arg, ...) { return B_ERROR; }
-status_t BMediaDecoder::_Reserved_BMediaDecoder_9(int32 arg, ...) { return B_ERROR; }
-status_t BMediaDecoder::_Reserved_BMediaDecoder_10(int32 arg, ...) { return B_ERROR; }
-status_t BMediaDecoder::_Reserved_BMediaDecoder_11(int32 arg, ...) { return B_ERROR; }
-status_t BMediaDecoder::_Reserved_BMediaDecoder_12(int32 arg, ...) { return B_ERROR; }
-status_t BMediaDecoder::_Reserved_BMediaDecoder_13(int32 arg, ...) { return B_ERROR; }
-status_t BMediaDecoder::_Reserved_BMediaDecoder_14(int32 arg, ...) { return B_ERROR; }
-status_t BMediaDecoder::_Reserved_BMediaDecoder_15(int32 arg, ...) { return B_ERROR; }
+status_t BMediaDecoder::_Reserved_BMediaDecoder_0(int32_t arg, ...) { return B_ERROR; }
+status_t BMediaDecoder::_Reserved_BMediaDecoder_1(int32_t arg, ...) { return B_ERROR; }
+status_t BMediaDecoder::_Reserved_BMediaDecoder_2(int32_t arg, ...) { return B_ERROR; }
+status_t BMediaDecoder::_Reserved_BMediaDecoder_3(int32_t arg, ...) { return B_ERROR; }
+status_t BMediaDecoder::_Reserved_BMediaDecoder_4(int32_t arg, ...) { return B_ERROR; }
+status_t BMediaDecoder::_Reserved_BMediaDecoder_5(int32_t arg, ...) { return B_ERROR; }
+status_t BMediaDecoder::_Reserved_BMediaDecoder_6(int32_t arg, ...) { return B_ERROR; }
+status_t BMediaDecoder::_Reserved_BMediaDecoder_7(int32_t arg, ...) { return B_ERROR; }
+status_t BMediaDecoder::_Reserved_BMediaDecoder_8(int32_t arg, ...) { return B_ERROR; }
+status_t BMediaDecoder::_Reserved_BMediaDecoder_9(int32_t arg, ...) { return B_ERROR; }
+status_t BMediaDecoder::_Reserved_BMediaDecoder_10(int32_t arg, ...) { return B_ERROR; }
+status_t BMediaDecoder::_Reserved_BMediaDecoder_11(int32_t arg, ...) { return B_ERROR; }
+status_t BMediaDecoder::_Reserved_BMediaDecoder_12(int32_t arg, ...) { return B_ERROR; }
+status_t BMediaDecoder::_Reserved_BMediaDecoder_13(int32_t arg, ...) { return B_ERROR; }
+status_t BMediaDecoder::_Reserved_BMediaDecoder_14(int32_t arg, ...) { return B_ERROR; }
+status_t BMediaDecoder::_Reserved_BMediaDecoder_15(int32_t arg, ...) { return B_ERROR; }
 
 /*************************************************************
  * public BMediaBufferDecoder

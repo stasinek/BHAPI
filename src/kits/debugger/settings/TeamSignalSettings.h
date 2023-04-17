@@ -25,15 +25,15 @@ public:
 			status_t			WriteTo(BMessage& archive) const;
 			void				Unset();
 
-			void				SetDefaultSignalDisposition(int32 disposition);
-			int32				DefaultSignalDisposition() const;
+			void				SetDefaultSignalDisposition(int32_t disposition);
+			int32_t				DefaultSignalDisposition() const;
 
-			int32				CountCustomSignalDispositions() const;
-			status_t			AddCustomSignalDisposition(int32 signal,
-									int32 disposition);
-			status_t			RemoveCustomSignalDispositionAt(int32 index);
-			status_t			GetCustomSignalDispositionAt(int32 index,
-									int32& signal, int32& disposition) const;
+			int32_t				CountCustomSignalDispositions() const;
+			status_t			AddCustomSignalDisposition(int32_t signal,
+									int32_t disposition);
+			status_t			RemoveCustomSignalDispositionAt(int32_t index);
+			status_t			GetCustomSignalDispositionAt(int32_t index,
+									int32_t& signal, int32_t& disposition) const;
 
 	virtual	TeamSignalSettings*
 								Clone() const;

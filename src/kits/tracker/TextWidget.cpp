@@ -443,7 +443,7 @@ void BTextWidget::StartEdit(BRect bounds, BPoseView* view, BPose* pose)
 
 
 void BTextWidget::StopEdit(bool saveChanges, BPoint poseLoc, BPoseView* view,
-	BPose* pose, int32 poseIndex)
+	BPose* pose, int32_t poseIndex)
 {
 	// find the text editing view
 	BView* scrollView = view->FindView("BorderView");
@@ -510,7 +510,7 @@ void BTextWidget::SelectAll(BPoseView* view)
 
 
 void BTextWidget::Draw(BRect eraseRect, BRect textRect, float, BPoseView* view,
-	BView* drawView, bool selected, uint32 clipboardMode, BPoint offset,
+	BView* drawView, bool selected, uint32_t clipboardMode, BPoint offset,
 	bool direct)
 {
 	textRect.OffsetBy(offset);

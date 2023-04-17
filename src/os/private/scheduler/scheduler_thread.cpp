@@ -11,7 +11,7 @@ using namespace Scheduler;
 
 static bigtime_t sQuantumLengths[THREAD_MAX_SET_PRIORITY + 1];
 
-const int32 kMaximumQuantumLengthsCount	= 20;
+const int32_t kMaximumQuantumLengthsCount	= 20;
 static bigtime_t sMaximumQuantumLengths[kMaximumQuantumLengthsCount];
 
 
@@ -53,7 +53,7 @@ ThreadData::_ChooseCPU(CoreEntry* core, bool& rescheduleNeeded) const
 {
 	SCHEDULER_ENTER_FUNCTION();
 
-	int32 threadPriority = GetEffectivePriority();
+	int32_t threadPriority = GetEffectivePriority();
 
 	if (fThread->previous_cpu != NULL) {
 		CPUEntry* previousCPU
@@ -101,7 +101,7 @@ ThreadData::Init()
 
 	if (!IsRealTime()) {
 		fPriorityPenalty = std::min(currentThreadData->fPriorityPenalty,
-				std::max(GetPriority() - _GetMinimalPriority(), int32(0)));
+				std::max(GetPriority() - _GetMinimalPriority(), int32_t(0)));
 		fAdditionalPenalty = currentThreadData->fAdditionalPenalty;
 
 		_ComputeEffectivePriority();
@@ -125,8 +125,8 @@ ThreadData::Dump() const
 {
 	kprintf("\tpriority_penalty:\t%" B_PRId32 "\n", fPriorityPenalty);
 
-	int32 priority = GetPriority() - _GetPenalty();
-	priority = std::max(priority, int32(1));
+	int32_t priority = GetPriority() - _GetPenalty();
+	priority = std::max(priority, int32_t(1));
 	kprintf("\tadditional_penalty:\t%" B_PRId32 " (%" B_PRId32 ")\n",
 		fAdditionalPenalty % priority, fAdditionalPenalty);
 	kprintf("\teffective_priority:\t%" B_PRId32 "\n", GetEffectivePriority());
@@ -186,7 +186,7 @@ ThreadData::ComputeQuantum() const
 	if (IsRealTime())
 		return fBaseQuantum;
 
-	int32 threadCount = fCore->ThreadCount();
+	int32_t threadCount = fCore->ThreadCount();
 	if (fCore->CPUCount() > 0)
 		threadCount /= fCore->CPUCount();
 
@@ -215,7 +215,7 @@ ThreadData::ComputeQuantumLengths()
 {
 	SCHEDULER_ENTER_FUNCTION();
 
-	for (int32 priority = 0; priority <= THREAD_MAX_SET_PRIORITY; priority++) {
+	for (int32_t priority = 0; priority <= THREAD_MAX_SET_PRIORITY; priority++) {
 		const bigtime_t kQuantum0 = gCurrentMode->base_quantum;
 		if (priority >= B_URGENT_DISPLAY_PRIORITY) {
 			sQuantumLengths[priority] = kQuantum0;
@@ -236,7 +236,7 @@ ThreadData::ComputeQuantumLengths()
 			B_NORMAL_PRIORITY, B_IDLE_PRIORITY, priority);
 	}
 
-	for (int32 threadCount = 0; threadCount < kMaximumQuantumLengthsCount;
+	for (int32_t threadCount = 0; threadCount < kMaximumQuantumLengthsCount;
 		threadCount++) {
 
 		bigtime_t quantum = gCurrentMode->maximum_latency;
@@ -248,7 +248,7 @@ ThreadData::ComputeQuantumLengths()
 }
 
 
-inline int32
+inline int32_t
 ThreadData::_GetPenalty() const
 {
 	SCHEDULER_ENTER_FUNCTION();
@@ -262,7 +262,7 @@ ThreadData::_ComputeNeededLoad()
 	SCHEDULER_ENTER_FUNCTION();
 	ASSERT(!IsIdle());
 
-	int32 oldLoad = compute_load(fLastMeasureAvailableTime,
+	int32_t oldLoad = compute_load(fLastMeasureAvailableTime,
 		fMeasureAvailableActiveTime, fNeededLoad, fMeasureAvailableTime);
 	if (oldLoad < 0 || oldLoad == fNeededLoad)
 		return;
@@ -296,7 +296,7 @@ ThreadData::_ComputeEffectivePriority() const
 
 /* static */ bigtime_t
 ThreadData::_ScaleQuantum(bigtime_t maxQuantum, bigtime_t minQuantum,
-	int32 maxPriority, int32 minPriority, int32 priority)
+	int32_t maxPriority, int32_t minPriority, int32_t priority)
 {
 	SCHEDULER_ENTER_FUNCTION();
 

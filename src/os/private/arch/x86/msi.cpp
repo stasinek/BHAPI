@@ -20,7 +20,7 @@ struct MSIConfiguration {
 static MSIConfiguration sMSIConfigurations[NUM_IO_VECTORS];
 
 static bool sMSISupported = false;
-static uint32 sBootCPUAPICId = 0;
+static uint32_t sBootCPUAPICId = 0;
 
 
 void
@@ -94,9 +94,9 @@ msi_free_vectors(uint8 count, uint8 startVector)
 
 
 void
-msi_assign_interrupt_to_cpu(uint8 irq, int32 cpu)
+msi_assign_interrupt_to_cpu(uint8 irq, int32_t cpu)
 {
-	uint32 apic_id = x86_get_cpu_apic_id(cpu);
+	uint32_t apic_id = x86_get_cpu_apic_id(cpu);
 
 	uint64* address = sMSIConfigurations[irq].fAddress;
 	*address = MSI_ADDRESS_BASE | (apic_id << MSI_DESTINATION_ID_SHIFT)

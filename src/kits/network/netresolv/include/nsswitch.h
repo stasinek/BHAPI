@@ -47,7 +47,7 @@
 
 /*
  * Layout of:
- *	uint32_t ns_src.flags
+ *	uint32_t_t ns_src.flags
  */ 
 	/* nsswitch.conf status codes and nsdispatch(3) return values */
 #define	NS_SUCCESS	(1<<0)		/* entry was found */
@@ -140,7 +140,7 @@ typedef struct {
  */
 typedef struct {
 	const char	*name;
-	uint32_t	 flags;
+	uint32_t_t	 flags;
 } ns_src;
 
 

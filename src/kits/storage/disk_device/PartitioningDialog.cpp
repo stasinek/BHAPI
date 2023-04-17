@@ -145,17 +145,17 @@ status_t PartitioningDialog::_Init(BDiskScannerParameterEditor *editor)
 			cancelButton->GetPreferredSize(&buttonWidth, &buttonHeight);
 			cancelButton->ResizeTo(buttonWidth, buttonHeight);
 			// setup their positions and sizes
-			int32 hSpacing = 10;
-			int32 vSpacing = 10;
+			int32_t hSpacing = 10;
+			int32_t vSpacing = 10;
 			BRect editorRect = fEditorView->Bounds();
 			BRect okRect = okButton->Bounds();
 			BRect cancelRect = cancelButton->Bounds();
 			// compute width and size of the main view
-			int32 width = max(editorRect.IntegerWidth() + 1,
+			int32_t width = max(editorRect.IntegerWidth() + 1,
 							  okRect.IntegerWidth() + 1 + hSpacing
 							  + cancelRect.IntegerWidth() + 1)
 						  + 2 * hSpacing;
-			int32 height = editorRect.IntegerHeight() + 1
+			int32_t height = editorRect.IntegerHeight() + 1
 						   + max(okRect.IntegerHeight(),
 						   		 cancelRect.IntegerHeight()) + 1
 						   + 3 * vSpacing;

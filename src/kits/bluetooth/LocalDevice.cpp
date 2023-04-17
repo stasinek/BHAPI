@@ -85,10 +85,10 @@ LocalDevice::GetLocalDevice(const bdaddr_t bdaddr)
 }
 
 
-uint32 LocalDevice::GetLocalDeviceCount()
+uint32_t LocalDevice::GetLocalDeviceCount()
 {
 	BMessenger* messenger = _RetrieveBluetoothMessenger();
-	uint32 count = 0;
+	uint32_t count = 0;
 
 	if (messenger != NULL) {
 
@@ -122,7 +122,7 @@ LocalDevice::GetProperty(const char* property)
 }
 
 
-status_t LocalDevice::GetProperty(const char* property, uint32* value)
+status_t LocalDevice::GetProperty(const char* property, uint32_t* value)
 {
 	if (fMessenger == NULL)
 		return B_ERROR;
@@ -134,7 +134,7 @@ status_t LocalDevice::GetProperty(const char* property, uint32* value)
 	request.AddString("property", property);
 
 	if (fMessenger->SendMessage(&request, &reply) == B_OK) {
-		if (reply.FindInt32("result", (int32*)value ) == B_OK ) {
+		if (reply.FindInt32("result", (int32_t*)value ) == B_OK ) {
 			return B_OK;
 
 		}
@@ -563,7 +563,7 @@ LocalDevice::LocalDevice(hci_id hid)
 	// SetFriendlyName(name);
 
 
-	uint32 value;
+	uint32_t value;
 
 	// HARDCODE -> move this to addons
 	if (GetProperty("manufacturer", &value) == B_OK

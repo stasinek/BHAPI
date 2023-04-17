@@ -31,25 +31,25 @@ private:
 	virtual	void					_ReservedInputAdapter1();
 	virtual void					_ReservedInputAdapter2();
 
-			uint32					_reserved[2];
+			uint32_t					_reserved[2];
 };
 
 
 class BAdapterIO : public BMediaIO {
 public:
 									BAdapterIO(
-										int32 flags,
+										int32_t flags,
 										bigtime_t timeout);
 	virtual							~BAdapterIO();
 
-	virtual void					GetFlags(int32* flags) const;
+	virtual void					GetFlags(int32_t* flags) const;
 
 	virtual	ssize_t					ReadAt(off_t position, void* buffer,
 										size_t size);
 	virtual	ssize_t					WriteAt(off_t position,
 										const void* buffer, size_t size);
 
-	virtual	off_t					Seek(off_t position, uint32 seekMode);
+	virtual	off_t					Seek(off_t position, uint32_t seekMode);
 	virtual off_t					Position() const;
 
 	virtual	status_t				SetSize(off_t size);
@@ -74,7 +74,7 @@ protected:
 private:
 			status_t				_EvaluateWait(off_t pos, off_t size);
 
-			int32					fFlags;
+			int32_t					fFlags;
 
 			RelativePositionIO*		fBuffer;
 			off_t					fTotalSize;
@@ -92,7 +92,7 @@ private:
 	virtual void					_ReservedAdapterIO4();
 	virtual void					_ReservedAdapterIO5();
 
-			uint32					_reserved[5];
+			uint32_t					_reserved[5];
 };
 
 #endif	// _ADAPTER_IO_H

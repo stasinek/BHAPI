@@ -26,7 +26,7 @@
 
 struct Benaphore {
 	sem_id	sem;
-	int32	count;
+	int32_t	count;
 
 	status_t Init(const char* name)
 	{
@@ -77,8 +77,8 @@ enum ChipType {
 
 
 struct PIORegInfo {
-	uint32	magic;	// magic number
-	uint32	offset;	// offset of register in PIO register area
+	uint32_t	magic;	// magic number
+	uint32_t	offset;	// offset of register in PIO register area
 	int16	index;	// index of value to read/write; < 0 if not indexed reg
 	uint8	value;	// value to write or value that was read
 };
@@ -93,7 +93,7 @@ struct DisplayModeEx : display_mode {
 
 struct OverlayBuffer : overlay_buffer {
 	OverlayBuffer*	nextBuffer;	// pointer to next buffer in chain, NULL = none
-	uint32			size;		// size of overlay buffer
+	uint32_t			size;		// size of overlay buffer
 };
 
 
@@ -113,21 +113,21 @@ struct SharedInfo {
 	area_id videoMemArea;		// video memory area_id.  The addresses are shared with all teams.
 	addr_t	videoMemAddr;		// video memory addr as viewed from virtual memory
 	phys_addr_t	videoMemPCI;	// video memory addr as viewed from the PCI bus (for DMA)
-	uint32	videoMemSize; 		// video memory size in bytes.
+	uint32_t	videoMemSize; 		// video memory size in bytes.
 
-	uint32	cursorOffset;		// offset of cursor in video memory
-	uint32	frameBufferOffset;	// offset of frame buffer in video memory
-	uint32	maxFrameBufferSize;	// max available video memory for frame buffer
+	uint32_t	cursorOffset;		// offset of cursor in video memory
+	uint32_t	frameBufferOffset;	// offset of frame buffer in video memory
+	uint32_t	maxFrameBufferSize;	// max available video memory for frame buffer
 
 	// Color spaces supported by current video chip/driver.
 	color_space	colorSpaces[6];
-	uint32	colorSpaceCount;	// number of color spaces in array colorSpaces
+	uint32_t	colorSpaceCount;	// number of color spaces in array colorSpaces
 
-	uint32 maxPixelClock;		// max pixel clock of current chip in KHz
+	uint32_t maxPixelClock;		// max pixel clock of current chip in KHz
 
 	// List of screen modes.
 	area_id modeArea;			// area containing list of display modes the driver supports
-	uint32	modeCount;			// number of display modes in the list
+	uint32_t	modeCount;			// number of display modes in the list
 
 	DisplayModeEx displayMode;	// current display mode configuration
 
@@ -140,8 +140,8 @@ struct SharedInfo {
 	Benaphore	engineLock;		// for access to the acceleration engine
 	Benaphore	overlayLock;	// for overlay operations
 
-	int32		overlayAllocated;	// non-zero if overlay is allocated
-	uint32		overlayToken;
+	int32_t		overlayAllocated;	// non-zero if overlay is allocated
+	uint32_t		overlayToken;
 	OverlayBuffer* overlayBuffer;	// pointer to linked list of buffers; NULL = none
 };
 

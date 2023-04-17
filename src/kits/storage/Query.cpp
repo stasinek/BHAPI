@@ -113,15 +113,15 @@ status_t BQuery::PushOp(query_op op)
 }
 
 
-// Pushes a uint32 onto the predicate stack.
-status_t BQuery::PushUInt32(uint32 value)
+// Pushes a uint32_t onto the predicate stack.
+status_t BQuery::PushUInt32(uint32_t value)
 {
 	return _PushNode(new(nothrow) UInt32ValueNode(value), true);
 }
 
 
-// Pushes an int32 onto the predicate stack.
-status_t BQuery::PushInt32(int32 value)
+// Pushes an int32_t onto the predicate stack.
+status_t BQuery::PushInt32(int32_t value)
 {
 	return _PushNode(new(nothrow) Int32ValueNode(value), true);
 }
@@ -350,7 +350,7 @@ status_t BQuery::GetNextRef(entry_ref* ref)
 
 // Fill out up to count entries into the array of dirent structs pointed
 // to by buffer.
-int32 BQuery::GetNextDirents(struct dirent* buffer, size_t length, int32 count)
+int32_t BQuery::GetNextDirents(struct dirent* buffer, size_t length, int32_t count)
 {
 	if (!buffer)
 		return B_BAD_VALUE;
@@ -370,7 +370,7 @@ status_t BQuery::Rewind()
 
 
 // Unimplemented method of the BEntryList interface.
-int32 BQuery::CountEntries()
+int32_t BQuery::CountEntries()
 {
 	return B_ERROR;
 }

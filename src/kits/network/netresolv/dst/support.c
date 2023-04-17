@@ -97,7 +97,7 @@ dst_s_calculate_bits(const u_char *str, const int max_bits)
 u_int16_t
 dst_s_id_calc(const u_char *key, const int keysize)
 {
-	u_int32_t ac;
+	u_int32_t_t ac;
 	const u_char *kp = key;
 	int size = keysize;
 
@@ -161,7 +161,7 @@ dst_s_get_int16(const u_char *buf)
 }
 
 /*%
- * dst_s_get_int32  *     This routine extracts a 32 bit integer from a four byte character
+ * dst_s_get_int32_t  *     This routine extracts a 32 bit integer from a four byte character
  *     string.  The character string is assumed to be in network byte
  *     order and may be unaligned.  The number returned is in host order.
  * Parameter
@@ -170,12 +170,12 @@ dst_s_get_int16(const u_char *buf)
  *     The converted integer value.
  */
 
-u_int32_t
-dst_s_get_int32(const u_char *buf)
+u_int32_t_t
+dst_s_get_int32_t(const u_char *buf)
 {
-	register u_int32_t a = 0;
-	a = ((u_int32_t)(buf[0] << 24)) | ((u_int32_t)(buf[1] << 16)) |
-		((u_int32_t)(buf[2] << 8)) | ((u_int32_t)(buf[3]));
+	register u_int32_t_t a = 0;
+	a = ((u_int32_t_t)(buf[0] << 24)) | ((u_int32_t_t)(buf[1] << 16)) |
+		((u_int32_t_t)(buf[2] << 8)) | ((u_int32_t_t)(buf[3]));
 	return (a);
 }
 
@@ -198,7 +198,7 @@ dst_s_put_int16(u_int8_t *buf, const u_int16_t val)
 }
 
 /*%
- * dst_s_put_int32  *     Take a 32 bit integer and store the value in a four byte
+ * dst_s_put_int32_t  *     Take a 32 bit integer and store the value in a four byte
  *     character string.  The integer is assumed to be in network
  *     order and the string is returned in host order.
  *
@@ -208,7 +208,7 @@ dst_s_put_int16(u_int8_t *buf, const u_int16_t val)
  */
 
 void
-dst_s_put_int32(u_int8_t *buf, const u_int32_t val)
+dst_s_put_int32_t(u_int8_t *buf, const u_int32_t_t val)
 {
 	buf[0] = (u_int8_t)(val >> 24);
 	buf[1] = (u_int8_t)(val >> 16);
@@ -264,7 +264,7 @@ int
 dst_s_build_filename(char *filename, const char *name, u_int16_t id,
 		     int alg, const char *suffix, size_t filename_length)
 {
-	u_int32_t my_id;
+	u_int32_t_t my_id;
 	if (filename == NULL)
 		return (-1);
 	memset(filename, 0, filename_length);

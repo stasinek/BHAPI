@@ -97,9 +97,9 @@ public:
                                     // TODO: Would a call-back mechanism be
                                     // worthwhile here?
 
-            int32				CountDecorators();
+            int32_t				CountDecorators();
 
-            DecorInfo*			DecoratorAt(int32);
+            DecorInfo*			DecoratorAt(int32_t);
 
             DecorInfo*			FindDecorator(const BString& string);
                                     // Checks for ref.name, path, fName, and
@@ -112,7 +112,7 @@ public:
             bool				IsCurrentDecorator(DecorInfo* decor);
 
             status_t			SetDecorator(DecorInfo* decor);
-            status_t			SetDecorator(int32);
+            status_t			SetDecorator(int32_t);
 
             status_t			Preview(DecorInfo* decor, BWindow* window);
 

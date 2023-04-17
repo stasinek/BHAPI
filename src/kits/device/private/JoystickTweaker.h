@@ -38,7 +38,7 @@ public:
 						_BJoystickTweaker();
 						_BJoystickTweaker(BJoystick &stick);
 	virtual				~_BJoystickTweaker();
-			status_t	SendIOCT(uint32 op);
+			status_t	SendIOCT(uint32_t op);
 			status_t	GetInfo(_joystick_info* info, const char *ref);
 
 			// BeOS R5's joystick pref need these

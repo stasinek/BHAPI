@@ -35,9 +35,9 @@ public:
 	virtual	void				ShowError(const char* error) = 0;
 	virtual	void				ShowMessage(const char* message) = 0;
 
-	virtual void				SetTotalItems(uint32 items) = 0;
+	virtual void				SetTotalItems(uint32_t items) = 0;
 	virtual void				SetTotalItemsSize(uint64 size) = 0;
-	virtual	void				ReportProgress(uint32 items, uint64 bytes,
+	virtual	void				ReportProgress(uint32_t items, uint64 bytes,
 									const char* message = NULL) = 0;
 	virtual void				ResetProgress(const char* message = NULL) = 0;
 };
@@ -63,9 +63,9 @@ public:
 
 			//! We take ownership of the filters
 			bool				AddFilter(BMailFilter* filter);
-			int32				CountFilter() const;
-			BMailFilter*		FilterAt(int32 index) const;
-			BMailFilter*		RemoveFilter(int32 index);
+			int32_t				CountFilter() const;
+			BMailFilter*		FilterAt(int32_t index) const;
+			BMailFilter*		RemoveFilter(int32_t index);
 			bool				RemoveFilter(BMailFilter* filter);
 
 	virtual void				MessageReceived(BMessage* message);
@@ -86,12 +86,12 @@ public:
 #endif
 
 protected:
-		 	void				SetTotalItems(uint32 items);
+		 	void				SetTotalItems(uint32_t items);
 			void				SetTotalItemsSize(uint64 size);
-			void				ReportProgress(uint32 items, uint64 bytes,
+			void				ReportProgress(uint32_t items, uint64 bytes,
 									const char* message = NULL);
 			void				ResetProgress(const char* message = NULL);
-			void				NotifyNewMessagesToFetch(int32 nMessages);
+			void				NotifyNewMessagesToFetch(int32_t nMessages);
 
 			// Filter notifications
 			BMailFilterAction	ProcessHeaderFetched(entry_ref& ref,

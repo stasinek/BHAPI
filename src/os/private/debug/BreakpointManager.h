@@ -22,8 +22,8 @@ public:
 			status_t			InstallBreakpoint(void* address);
 			status_t			UninstallBreakpoint(void* address);
 
-			status_t			InstallWatchpoint(void* address, uint32 type,
-									int32 length);
+			status_t			InstallWatchpoint(void* address, uint32_t type,
+									int32_t length);
 			status_t			UninstallWatchpoint(void* address);
 
 			void				RemoveAllBreakpoints();
@@ -120,7 +120,7 @@ private:
 			InstalledWatchpoint* _FindWatchpoint(addr_t address) const;
 			status_t			_InstallWatchpoint(
 									InstalledWatchpoint* watchpoint,
-									addr_t address, uint32 type, int32 length);
+									addr_t address, uint32_t type, int32_t length);
 			status_t			_UninstallWatchpoint(
 									InstalledWatchpoint* watchpoint);
 
@@ -136,8 +136,8 @@ private:
 			BreakpointList		fHardwareBreakpoints;
 			BreakpointTree		fBreakpoints;
 			InstalledWatchpointList fWatchpoints;
-			int32				fBreakpointCount;
-			int32				fWatchpointCount;
+			int32_t				fBreakpointCount;
+			int32_t				fWatchpointCount;
 };
 
 

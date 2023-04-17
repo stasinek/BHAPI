@@ -42,7 +42,7 @@ void BDebugContext::Uninit()
 }
 
 
-status_t BDebugContext::SendDebugMessage(int32 messageCode, const void *message,
+status_t BDebugContext::SendDebugMessage(int32_t messageCode, const void *message,
 	size_t messageSize, void* reply, size_t replySize)
 {
 	return send_debug_message(&fContext, messageCode, message, messageSize,
@@ -50,7 +50,7 @@ status_t BDebugContext::SendDebugMessage(int32 messageCode, const void *message,
 }
 
 
-status_t BDebugContext::SetTeamDebuggingFlags(int32 flags)
+status_t BDebugContext::SetTeamDebuggingFlags(int32_t flags)
 {
 	debug_nub_set_team_flags message;
 	message.flags = flags;
@@ -105,7 +105,7 @@ status_t BDebugContext::ClearBreakpoint(void* address)
 }
 
 
-status_t BDebugContext::SetWatchpoint(void* address, uint32 type, int32 length)
+status_t BDebugContext::SetWatchpoint(void* address, uint32_t type, int32_t length)
 {
 	debug_nub_set_watchpoint message;
 	message.reply_port = fContext.reply_port;
@@ -143,7 +143,7 @@ status_t BDebugContext::ContinueThread(thread_id thread, bool singleStep)
 }
 
 
-status_t BDebugContext::SetThreadDebuggingFlags(thread_id thread, int32 flags)
+status_t BDebugContext::SetThreadDebuggingFlags(thread_id thread, int32_t flags)
 {
 	debug_nub_set_thread_flags message;
 	message.thread = thread;

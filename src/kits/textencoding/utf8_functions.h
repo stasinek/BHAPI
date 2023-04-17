@@ -36,29 +36,29 @@
 #ifdef __cplusplus
 namespace bhapi {
 #endif	/* __cplusplus */
-status_t convert_to_utf8(uint32 sourceEncoding, const char* source, int32* sourceLength, char* dest, int32* destLength, int32* state, char substitute = B_SUBSTITUTE);
-status_t convert_from_utf8(uint32 destEncoding, const char* source, int32* sourceLength, char* dest, int32* destLength, int32* state, char substitute = B_SUBSTITUTE);
-BHAPI_IMPEXP unichar16*	utf8_convert_to_unicode(const char *str,  int32 length);
-BHAPI_IMPEXP unichar32* utf8_convert_to_utf32(const char *str,  int32 length);
+status_t convert_to_utf8(uint32_t sourceEncoding, const char* source, int32_t* sourceLength, char* dest, int32_t* destLength, int32_t* state, char substitute = B_SUBSTITUTE);
+status_t convert_from_utf8(uint32_t destEncoding, const char* source, int32_t* sourceLength, char* dest, int32_t* destLength, int32_t* state, char substitute = B_SUBSTITUTE);
+BHAPI_IMPEXP unichar16*	utf8_convert_to_unicode(const char *str,  int32_t length);
+BHAPI_IMPEXP unichar32* utf8_convert_to_utf32(const char *str,  int32_t length);
 BHAPI_IMPEXP bool utf8_is_token(const char *str);
-BHAPI_IMPEXP  int32 utf8_strlen(const char *str);
-BHAPI_IMPEXP  int32 utf8_strlen_etc(const char *str,  int32 nbytes);
-BHAPI_IMPEXP  int32  utf8_strlen_fast(const char *str,  int32 nbytes); /* none checking */
-BHAPI_IMPEXP const char* utf8_at(const char *str,  int32 index,  uint8 *nbytes);
+BHAPI_IMPEXP  int32_t utf8_strlen(const char *str);
+BHAPI_IMPEXP  int32_t utf8_strlen_etc(const char *str,  int32_t nbytes);
+BHAPI_IMPEXP  int32_t  utf8_strlen_fast(const char *str,  int32_t nbytes); /* none checking */
+BHAPI_IMPEXP const char* utf8_at(const char *str,  int32_t index,  uint8 *nbytes);
 BHAPI_IMPEXP const char* utf8_next(const char *str,  uint8 *length);
 
-BHAPI_IMPEXP char* utf32_convert_to_utf8(const unichar32 *str,  int32 ulength);
-BHAPI_IMPEXP unichar16* utf32_convert_to_unicode(const unichar32 *str,  int32 ulength);
-BHAPI_IMPEXP  int32 utf32_strlen(const unichar32 *ustr);
-BHAPI_IMPEXP  int32 utf32_strlen_etc(const unichar32 *ustr,  int32 nchars);
-BHAPI_IMPEXP const unichar32* utf32_at(const unichar32* ustr,  int32 index);
+BHAPI_IMPEXP char* utf32_convert_to_utf8(const unichar32 *str,  int32_t ulength);
+BHAPI_IMPEXP unichar16* utf32_convert_to_unicode(const unichar32 *str,  int32_t ulength);
+BHAPI_IMPEXP  int32_t utf32_strlen(const unichar32 *ustr);
+BHAPI_IMPEXP  int32_t utf32_strlen_etc(const unichar32 *ustr,  int32_t nchars);
+BHAPI_IMPEXP const unichar32* utf32_at(const unichar32* ustr,  int32_t index);
 BHAPI_IMPEXP const unichar32* utf32_next(const unichar32* ustr);
 
-BHAPI_IMPEXP char* unicode_convert_to_utf8(const unichar16*str,  int32 ulength);
-BHAPI_IMPEXP unichar32* unicode_convert_to_utf32(const unichar16*str,  int32 ulength);
-BHAPI_IMPEXP  int32 unicode_strlen(const unichar16*ustr);
-BHAPI_IMPEXP  int32 unicode_strlen_etc(const unichar16*ustr,  int32 nchars, bool utf16_style);
-BHAPI_IMPEXP const unichar16* unicode_at(const unichar16* ustr,  int32 index, bool *utf16);
+BHAPI_IMPEXP char* unicode_convert_to_utf8(const unichar16*str,  int32_t ulength);
+BHAPI_IMPEXP unichar32* unicode_convert_to_utf32(const unichar16*str,  int32_t ulength);
+BHAPI_IMPEXP  int32_t unicode_strlen(const unichar16*ustr);
+BHAPI_IMPEXP  int32_t unicode_strlen_etc(const unichar16*ustr,  int32_t nchars, bool utf16_style);
+BHAPI_IMPEXP const unichar16* unicode_at(const unichar16* ustr,  int32_t index, bool *utf16);
 BHAPI_IMPEXP const unichar16* unicode_next(const unichar16* ustr, bool *utf16);
 #ifdef __cplusplus
 }

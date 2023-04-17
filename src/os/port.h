@@ -32,42 +32,42 @@ extern "C" {
 
 status_t port_init(struct kernel_args *args);
 void delete_owned_ports(Team* team);
-int32 port_max_ports(void);
-int32 port_used_ports(void);
+int32_t port_max_ports(void);
+int32_t port_used_ports(void);
 
 size_t port_team_link_offset();
 
-status_t select_port(int32 object, struct select_info *info, bool kernel);
-status_t deselect_port(int32 object, struct select_info *info, bool kernel);
+status_t select_port(int32_t object, struct select_info *info, bool kernel);
+status_t deselect_port(int32_t object, struct select_info *info, bool kernel);
 
 // currently private API
-status_t writev_port_etc(port_id id, int32 msgCode, const iovec *msgVecs,
-                size_t vecCount, size_t bufferSize, uint32 flags,
+status_t writev_port_etc(port_id id, int32_t msgCode, const iovec *msgVecs,
+                size_t vecCount, size_t bufferSize, uint32_t flags,
                 bigtime_t timeout);
 
 // user syscalls
-port_id		_user_create_port(int32 queueLength, const char *name);
+port_id		_user_create_port(int32_t queueLength, const char *name);
 status_t	_user_close_port(port_id id);
 status_t	_user_delete_port(port_id id);
 port_id		_user_find_port(const char *portName);
 status_t	_user_get_port_info(port_id id, struct port_info *info);
-status_t 	_user_get_next_port_info(team_id team, int32 *cookie,
+status_t 	_user_get_next_port_info(team_id team, int32_t *cookie,
                 struct port_info *info);
-ssize_t		_user_port_buffer_size_etc(port_id port, uint32 flags,
+ssize_t		_user_port_buffer_size_etc(port_id port, uint32_t flags,
                 bigtime_t timeout);
 ssize_t		_user_port_count(port_id port);
-ssize_t		_user_read_port_etc(port_id port, int32 *msgCode,
-                void *msgBuffer, size_t bufferSize, uint32 flags,
+ssize_t		_user_read_port_etc(port_id port, int32_t *msgCode,
+                void *msgBuffer, size_t bufferSize, uint32_t flags,
                 bigtime_t timeout);
 status_t	_user_set_port_owner(port_id port, team_id team);
-status_t	_user_write_port_etc(port_id port, int32 msgCode,
+status_t	_user_write_port_etc(port_id port, int32_t msgCode,
                 const void *msgBuffer, size_t bufferSize,
-                uint32 flags, bigtime_t timeout);
-status_t	_user_writev_port_etc(port_id id, int32 msgCode,
+                uint32_t flags, bigtime_t timeout);
+status_t	_user_writev_port_etc(port_id id, int32_t msgCode,
                 const iovec *msgVecs, size_t vecCount,
-                size_t bufferSize, uint32 flags, bigtime_t timeout);
+                size_t bufferSize, uint32_t flags, bigtime_t timeout);
 status_t	_user_get_port_message_info_etc(port_id port,
-                port_message_info *info, size_t infoSize, uint32 flags,
+                port_message_info *info, size_t infoSize, uint32_t flags,
                 bigtime_t timeout);
 
 #ifdef __cplusplus

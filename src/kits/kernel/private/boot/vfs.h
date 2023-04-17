@@ -39,8 +39,8 @@ class Node : public DoublyLinkedListLinkImpl<Node> {
 		virtual status_t ReadLink(char* buffer, size_t bufferSize);
 
 		virtual status_t GetName(char *nameBuffer, size_t bufferSize) const;
-		virtual status_t GetFileMap(struct file_map_run *runs, int32 *count);
-		virtual int32 Type() const;
+		virtual status_t GetFileMap(struct file_map_run *runs, int32_t *count);
+		virtual int32_t Type() const;
 		virtual off_t Size() const;
 		virtual ino_t Inode() const;
 
@@ -50,7 +50,7 @@ class Node : public DoublyLinkedListLinkImpl<Node> {
 		status_t Release();
 
 	protected:
-		int32		fRefCount;
+		int32_t		fRefCount;
 };
 
 typedef DoublyLinkedList<Node> NodeList;
@@ -64,7 +64,7 @@ class Directory : public Node {
 		virtual ssize_t ReadAt(void *cookie, off_t pos, void *buffer, size_t bufferSize);
 		virtual ssize_t WriteAt(void *cookie, off_t pos, const void *buffer, size_t bufferSize);
 
-		virtual int32 Type() const;
+		virtual int32_t Type() const;
 
 		virtual Node* Lookup(const char* name, bool traverseLinks);
 		virtual Node* LookupDontTraverse(const char* name) = 0;

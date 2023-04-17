@@ -38,21 +38,21 @@ x2apic_available()
 }
 
 
-uint32
-apic_read(uint32 offset)
+uint32_t
+apic_read(uint32_t offset)
 {
-	return *(volatile uint32 *)((char *)sLocalAPIC + offset);
+	return *(volatile uint32_t *)((char *)sLocalAPIC + offset);
 }
 
 
 void
-apic_write(uint32 offset, uint32 data)
+apic_write(uint32_t offset, uint32_t data)
 {
-	*(volatile uint32 *)((char *)sLocalAPIC + offset) = data;
+	*(volatile uint32_t *)((char *)sLocalAPIC + offset) = data;
 }
 
 
-uint32
+uint32_t
 apic_local_id()
 {
 	if (sX2APIC)
@@ -62,7 +62,7 @@ apic_local_id()
 }
 
 
-uint32
+uint32_t
 apic_version()
 {
 	if (sX2APIC)
@@ -72,7 +72,7 @@ apic_version()
 }
 
 
-uint32
+uint32_t
 apic_task_priority()
 {
 	if (sX2APIC)
@@ -83,7 +83,7 @@ apic_task_priority()
 
 
 void
-apic_set_task_priority(uint32 config)
+apic_set_task_priority(uint32_t config)
 {
 	if (sX2APIC)
 		x86_write_msr(IA32_MSR_APIC_TASK_PRIORITY, config);
@@ -102,7 +102,7 @@ apic_end_of_interrupt()
 }
 
 
-uint32
+uint32_t
 apic_logical_apic_id()
 {
 	if (sX2APIC)
@@ -126,7 +126,7 @@ apic_disable_local_ints()
 }
 
 
-uint32
+uint32_t
 apic_spurious_intr_vector()
 {
 	if (sX2APIC)
@@ -137,7 +137,7 @@ apic_spurious_intr_vector()
 
 
 void
-apic_set_spurious_intr_vector(uint32 config)
+apic_set_spurious_intr_vector(uint32_t config)
 {
 	if (sX2APIC)
 		x86_write_msr(IA32_MSR_APIC_SPURIOUS_INTR_VECTOR, config);
@@ -147,7 +147,7 @@ apic_set_spurious_intr_vector(uint32 config)
 
 
 void
-apic_set_interrupt_command(uint32 destination, uint32 mode)
+apic_set_interrupt_command(uint32_t destination, uint32_t mode)
 {
 	if (sX2APIC) {
 		uint64 command = x86_read_msr(IA32_MSR_APIC_INTR_COMMAND);
@@ -156,12 +156,12 @@ apic_set_interrupt_command(uint32 destination, uint32 mode)
 		command |= mode;
 		x86_write_msr(IA32_MSR_APIC_INTR_COMMAND, command);
 	} else {
-		uint32 command2 = apic_read(APIC_INTR_COMMAND_2)
+		uint32_t command2 = apic_read(APIC_INTR_COMMAND_2)
 				& APIC_INTR_COMMAND_2_MASK;
 		command2 |= destination << 24;
 		apic_write(APIC_INTR_COMMAND_2, command2);
 
-		uint32 command1 = apic_read(APIC_INTR_COMMAND_1)
+		uint32_t command1 = apic_read(APIC_INTR_COMMAND_1)
 				& APIC_INTR_COMMAND_1_MASK;
 		command1 |= mode;
 		apic_write(APIC_INTR_COMMAND_1, command1);
@@ -179,7 +179,7 @@ apic_interrupt_delivered(void)
 }
 
 
-uint32
+uint32_t
 apic_lvt_timer()
 {
 	if (sX2APIC)
@@ -190,7 +190,7 @@ apic_lvt_timer()
 
 
 void
-apic_set_lvt_timer(uint32 config)
+apic_set_lvt_timer(uint32_t config)
 {
 	if (sX2APIC)
 		x86_write_msr(IA32_MSR_APIC_LVT_TIMER, config);
@@ -199,7 +199,7 @@ apic_set_lvt_timer(uint32 config)
 }
 
 
-uint32
+uint32_t
 apic_lvt_error()
 {
 	if (sX2APIC)
@@ -210,7 +210,7 @@ apic_lvt_error()
 
 
 void
-apic_set_lvt_error(uint32 config)
+apic_set_lvt_error(uint32_t config)
 {
 	if (sX2APIC)
 		x86_write_msr(IA32_MSR_APIC_LVT_ERROR, config);
@@ -219,7 +219,7 @@ apic_set_lvt_error(uint32 config)
 }
 
 
-uint32
+uint32_t
 apic_lvt_initial_timer_count()
 {
 	if (sX2APIC)
@@ -230,7 +230,7 @@ apic_lvt_initial_timer_count()
 
 
 void
-apic_set_lvt_initial_timer_count(uint32 config)
+apic_set_lvt_initial_timer_count(uint32_t config)
 {
 	if (sX2APIC)
 		x86_write_msr(IA32_MSR_APIC_INITIAL_TIMER_COUNT, config);
@@ -239,7 +239,7 @@ apic_set_lvt_initial_timer_count(uint32 config)
 }
 
 
-uint32
+uint32_t
 apic_lvt_timer_divide_config()
 {
 	if (sX2APIC)
@@ -250,7 +250,7 @@ apic_lvt_timer_divide_config()
 
 
 void
-apic_set_lvt_timer_divide_config(uint32 config)
+apic_set_lvt_timer_divide_config(uint32_t config)
 {
 	if (sX2APIC)
 		x86_write_msr(IA32_MSR_APIC_TIMER_DIVIDE_CONFIG, config);
@@ -299,7 +299,7 @@ apic_init(kernel_args *args)
 
 
 status_t
-apic_per_cpu_init(kernel_args *args, int32 cpu)
+apic_per_cpu_init(kernel_args *args, int32_t cpu)
 {
 	if (sX2APIC) {
 		uint64 apic_base = x86_read_msr(IA32_MSR_APIC_BASE);
@@ -314,10 +314,10 @@ apic_per_cpu_init(kernel_args *args, int32 cpu)
 		apic_version());
 
 	if (!sX2APIC && cpu < 8) {
-		apic_write(APIC_DEST_FORMAT, uint32(-1));
+		apic_write(APIC_DEST_FORMAT, uint32_t(-1));
 
 		uint8 logical_apic_id = 1 << cpu;
-		uint32 value = apic_read(APIC_LOGICAL_DEST);
+		uint32_t value = apic_read(APIC_LOGICAL_DEST);
 		value &= 0xffffff;
 		apic_write(APIC_LOGICAL_DEST, value | (logical_apic_id << 24));
 	}
@@ -330,7 +330,7 @@ apic_per_cpu_init(kernel_args *args, int32 cpu)
 		gCPU[cpu].arch.logical_apic_id);
 
 	/* set spurious interrupt vector to 0xff */
-	uint32 config = apic_spurious_intr_vector() & 0xffffff00;
+	uint32_t config = apic_spurious_intr_vector() & 0xffffff00;
 	config |= APIC_ENABLE | 0xff;
 	apic_set_spurious_intr_vector(config);
 

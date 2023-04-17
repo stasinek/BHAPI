@@ -244,8 +244,8 @@ bool ThreadHandler::HandleSignalReceived(SignalReceivedEvent* event)
 	AutoLocker<Team> locker(team);
 
 	const SignalInfo& info = event->GetSignalInfo();
-	int32 signal = info.Signal();
-	int32 disposition = team->SignalDispositionFor(signal);
+	int32_t signal = info.Signal();
+	int32_t disposition = team->SignalDispositionFor(signal);
 
 	switch (disposition) {
 		case SIGNAL_DISPOSITION_IGNORE:
@@ -290,7 +290,7 @@ bool ThreadHandler::HandleSignalReceived(SignalReceivedEvent* event)
 }
 
 
-void ThreadHandler::HandleThreadAction(uint32 action, target_addr_t address)
+void ThreadHandler::HandleThreadAction(uint32_t action, target_addr_t address)
 {
 	AutoLocker<Team> locker(fThread->GetTeam());
 
@@ -491,7 +491,7 @@ status_t ThreadHandler::GetImageDebugInfo(Image* image, ImageDebugInfo*& _info)
 }
 
 
-bool ThreadHandler::_HandleThreadStopped(CpuState* cpuState, uint32 stoppedReason,
+bool ThreadHandler::_HandleThreadStopped(CpuState* cpuState, uint32_t stoppedReason,
 	const BString& stoppedReasonInfo)
 {
 	_ClearContinuationState();
@@ -524,8 +524,8 @@ bool ThreadHandler::_HandleSetAddress(CpuState* state, target_addr_t address)
 }
 
 
-void ThreadHandler::_SetThreadState(uint32 state, CpuState* cpuState,
-	uint32 stoppedReason, const BString& stoppedReasonInfo)
+void ThreadHandler::_SetThreadState(uint32_t state, CpuState* cpuState,
+	uint32_t stoppedReason, const BString& stoppedReasonInfo)
 {
 	fThread->SetState(state, stoppedReason, stoppedReasonInfo);
 	fThread->SetCpuState(cpuState);

@@ -63,7 +63,7 @@ struct app_info {
     thread_id	thread;
     team_id		team;
     port_id		port;
-    uint32		flags;
+    uint32_t		flags;
     entry_ref	ref;
     char		signature[B_MIME_TYPE_LENGTH];
 };
@@ -109,7 +109,7 @@ public:
 
     // watching
             status_t			StartWatching(BMessenger target,
-                                    uint32 eventMask
+                                    uint32_t eventMask
                                         = B_REQUEST_LAUNCHED
                                             | B_REQUEST_QUIT) const;
             status_t			StopWatching(BMessenger target) const;
@@ -132,10 +132,10 @@ public:
             status_t			Launch(const bhapi::entry_ref* ref, int argc, const char* const* args, team_id* _appTeam = NULL) const;
 
     // recent documents, folders, apps
-            void				GetRecentDocuments(BMessage* refList, int32 maxCount, const char* fileType = NULL, const char* signature = NULL) const;
-            void				GetRecentDocuments(BMessage* refList, int32 maxCount, const char* fileTypes[], int32 fileTypesCount, const char* signature = NULL) const;
-            void				GetRecentFolders(BMessage* refList, int32 maxCount, const char* signature = NULL) const;
-            void				GetRecentApps(BMessage* refList,int32 maxCount) const;
+            void				GetRecentDocuments(BMessage* refList, int32_t maxCount, const char* fileType = NULL, const char* signature = NULL) const;
+            void				GetRecentDocuments(BMessage* refList, int32_t maxCount, const char* fileTypes[], int32_t fileTypesCount, const char* signature = NULL) const;
+            void				GetRecentFolders(BMessage* refList, int32_t maxCount, const char* signature = NULL) const;
+            void				GetRecentApps(BMessage* refList,int32_t maxCount) const;
 
             void				AddToRecentDocuments(const bhapi::entry_ref* document, const char* signature = NULL) const;
             void				AddToRecentFolders(const bhapi::entry_ref* folder, const char* signature = NULL) const;
@@ -149,18 +149,18 @@ private:
 
             status_t			_ShutDown(bool reboot, bool confirm, bool synchronous);
 
-            status_t			_AddApplication(const char* signature, const bhapi::entry_ref* ref, uint32 flags,bhapi::team_id team, bhapi::thread_id thread, bhapi::port_id port, bool fullRegistration, uint32* pToken, team_id* otherTeam) const;
+            status_t			_AddApplication(const char* signature, const bhapi::entry_ref* ref, uint32_t flags,bhapi::team_id team, bhapi::thread_id thread, bhapi::port_id port, bool fullRegistration, uint32_t* pToken, team_id* otherTeam) const;
             status_t			_SetSignature(bhapi::team_id team,const char* signature) const;
             void				_SetThread(bhapi::team_id team, bhapi::thread_id thread) const;
-            status_t			_SetThreadAndTeam(uint32 entryToken, bhapi::thread_id thread, team_id team, bhapi::port_id* _port) const;
+            status_t			_SetThreadAndTeam(uint32_t entryToken, bhapi::thread_id thread, team_id team, bhapi::port_id* _port) const;
 
             status_t			_CompleteRegistration(team_id team, thread_id thread, port_id port) const;
 
             bool				_IsAppPreRegistered(const bhapi::entry_ref* ref, team_id team, app_info* info) const;
 
-            status_t			_IsAppRegistered(const bhapi::entry_ref* ref, team_id team, uint32 token, bool* preRegistered, app_info* info) const;
+            status_t			_IsAppRegistered(const bhapi::entry_ref* ref, team_id team, uint32_t token, bool* preRegistered, app_info* info) const;
 
-            status_t			_RemovePreRegApp(uint32 entryToken) const;
+            status_t			_RemovePreRegApp(uint32_t entryToken) const;
             status_t			_RemoveApp(team_id team) const;
 
             void				_ApplicationCrashed(team_id team);
@@ -171,19 +171,19 @@ private:
                                     const char* const* args,
                                     const char** environment,
                                     team_id* _appTeam, thread_id* _appThread,
-                                    port_id* _appPort, uint32* _appToken,
+                                    port_id* _appPort, uint32_t* _appToken,
                                     bool launchSuspended) const;
 
             status_t			_UpdateActiveApp(team_id team) const;
 
-            void				_SetAppFlags(team_id team, uint32 flags) const;
+            void				_SetAppFlags(team_id team, uint32_t flags) const;
 
             void				_DumpRoster() const;
 
             status_t			_ResolveApp(const char* inType, bhapi::entry_ref* ref,
                                     bhapi::entry_ref* appRef,
                                     char* signature,
-                                    uint32* appFlags,
+                                    uint32_t* appFlags,
                                     bool* wasDocument) const;
 
             status_t			_TranslateRef(bhapi::entry_ref* ref,
@@ -220,9 +220,9 @@ private:
 
             BMessenger			fMessenger;
             BMessenger			fMimeMessenger;
-            int32				fMimeMessengerInitOnce;
+            int32_t				fMimeMessengerInitOnce;
             bool				fNoRegistrar;
-            uint32				_reserved[1];
+            uint32_t				_reserved[1];
 };
 // global BRoster instance
 extern const BRoster *__be_roster, *be_roster;

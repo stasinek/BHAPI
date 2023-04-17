@@ -173,7 +173,7 @@ static const char *kStyleSheet = "\n"
 "	margin-left:auto;\n"
 "	margin-right:auto; }\n";
 
-static const int32 kGopherBufferSize = 4096;
+static const int32_t kGopherBufferSize = 4096;
 
 static const bool kInlineImages = true;
 

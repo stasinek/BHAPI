@@ -33,10 +33,10 @@ class SyntaxHighlightInfo {
 public:
 	virtual						~SyntaxHighlightInfo();
 
-	virtual	int32				GetLineHighlightRanges(int32 line,
-									int32* _columns,
+	virtual	int32_t				GetLineHighlightRanges(int32_t line,
+									int32_t* _columns,
 									syntax_highlight_type* _types,
-									int32 maxCount) = 0;
+									int32_t maxCount) = 0;
 										// Returns number of filled in
 										// (column, type) pairs.
 										// Default is (0, SYNTAX_HIGHLIGHT_NONE)

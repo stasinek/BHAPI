@@ -16,7 +16,7 @@
  */
 
 void
-list_init_etc(struct list *list, int32 offset)
+list_init_etc(struct list *list, int32_t offset)
 {
 	list->link.next = list->link.prev = &list->link;
 	list->offset = offset;

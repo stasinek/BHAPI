@@ -84,15 +84,15 @@ public:
 
 			const UserBreakpointLocation& Location() const { return fLocation; }
 
-			int32				CountInstances() const;
-			UserBreakpointInstance* InstanceAt(int32 index) const;
+			int32_t				CountInstances() const;
+			UserBreakpointInstance* InstanceAt(int32_t index) const;
 
 			// Note: After known to the BreakpointManager, those can only be
 			// invoked with the breakpoint manager lock held.
 			bool				AddInstance(UserBreakpointInstance* instance);
 			void				RemoveInstance(
 									UserBreakpointInstance* instance);
-			UserBreakpointInstance* RemoveInstanceAt(int32 index);
+			UserBreakpointInstance* RemoveInstanceAt(int32_t index);
 
 			bool				IsValid() const		{ return fValid; }
 			void				SetValid(bool valid);

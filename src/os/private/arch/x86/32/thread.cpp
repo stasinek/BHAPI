@@ -75,7 +75,7 @@ static struct arch_thread sInitialState _ALIGNED(16);
 
 
 static inline void
-set_fs_register(uint32 segment)
+set_fs_register(uint32_t segment)
 {
 	asm("movl %0,%%fs" :: "r" (segment));
 }
@@ -223,7 +223,7 @@ arch_thread_enter_userspace(Thread* thread, addr_t entry, void* args1,
 	void* args2)
 {
 	addr_t stackTop = thread->user_stack_base + thread->user_stack_size;
-	uint32 args[3];
+	uint32_t args[3];
 
 	TRACE(("arch_thread_enter_userspace: entry 0x%lx, args %p %p, "
 		"ustack_top 0x%lx\n", entry, args1, args2, stackTop));
@@ -236,8 +236,8 @@ arch_thread_enter_userspace(Thread* thread, addr_t entry, void* args1,
 	addr_t commPageAddress = (addr_t)thread->team->commpage_address;
 	args[0] = ((addr_t*)commPageAddress)[COMMPAGE_ENTRY_X86_THREAD_EXIT]
 		+ commPageAddress;
-	args[1] = (uint32)args1;
-	args[2] = (uint32)args2;
+	args[1] = (uint32_t)args1;
+	args[2] = (uint32_t)args2;
 
 	if (user_memcpy((void *)stackTop, args, sizeof(args)) < B_OK)
 		return B_BAD_ADDRESS;
@@ -329,7 +329,7 @@ arch_setup_signal_frame(Thread* thread, struct sigaction* action,
 
 	// get the stack to use -- that's either the current one or a special signal
 	// stack
-	uint32 stackFrame[2];
+	uint32_t stackFrame[2];
 	uint8* userStack = get_signal_stack(thread, frame, action,
 		sizeof(*signalFrameData) + sizeof(stackFrame));
 
@@ -372,12 +372,12 @@ arch_restore_signal_frame(struct signal_frame_data* signalFrameData)
 
 	TRACE(("### arch_restore_signal_frame: entry\n"));
 
-	frame->orig_eax = (uint32)signalFrameData->syscall_restart_return_value;
+	frame->orig_eax = (uint32_t)signalFrameData->syscall_restart_return_value;
 	frame->orig_edx
-		= (uint32)(signalFrameData->syscall_restart_return_value >> 32);
+		= (uint32_t)(signalFrameData->syscall_restart_return_value >> 32);
 
 	frame->ip = signalFrameData->context.uc_mcontext.eip;
-	frame->flags = (frame->flags & ~(uint32)X86_EFLAGS_USER_FLAGS)
+	frame->flags = (frame->flags & ~(uint32_t)X86_EFLAGS_USER_FLAGS)
 		| (signalFrameData->context.uc_mcontext.eflags & X86_EFLAGS_USER_FLAGS);
 	frame->ax = signalFrameData->context.uc_mcontext.eax;
 	frame->cx = signalFrameData->context.uc_mcontext.ecx;

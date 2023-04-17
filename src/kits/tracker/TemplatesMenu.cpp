@@ -120,9 +120,9 @@ bool TemplatesMenu::BuildMenu(bool addItems)
 {
 	// clear everything...
 	fOpenItem = NULL;
-	int32 count = CountItems();
+	int32_t count = CountItems();
 	while (count--)
-		delete RemoveItem((int32)0);
+		delete RemoveItem((int32_t)0);
 
 	// add the folder
 	IconMenuItem* menuItem = new IconMenuItem(B_TRANSLATE("New folder"),

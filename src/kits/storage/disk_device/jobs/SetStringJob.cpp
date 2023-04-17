@@ -30,7 +30,7 @@ SetStringJob::~SetStringJob()
 
 
 // Init
-status_t SetStringJob::Init(const char* string, uint32 jobType)
+status_t SetStringJob::Init(const char* string, uint32_t jobType)
 {
 	switch (jobType) {
 		case B_DISK_DEVICE_JOB_SET_NAME:
@@ -53,8 +53,8 @@ status_t SetStringJob::Init(const char* string, uint32 jobType)
 // Do
 status_t SetStringJob::Do()
 {
-	int32 changeCounter = fPartition->ChangeCounter();
-	int32 childChangeCounter = (fChild ? fChild->ChangeCounter() : 0);
+	int32_t changeCounter = fPartition->ChangeCounter();
+	int32_t childChangeCounter = (fChild ? fChild->ChangeCounter() : 0);
 	status_t error;
 	bool updateChildChangeCounter = false;
 

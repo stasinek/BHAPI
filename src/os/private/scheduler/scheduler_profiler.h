@@ -28,14 +28,14 @@ class Profiler {
 public:
 							Profiler();
 
-			void			EnterFunction(int32 cpu, const char* function);
-			void			ExitFunction(int32 cpu, const char* function);
+			void			EnterFunction(int32_t cpu, const char* function);
+			void			ExitFunction(int32_t cpu, const char* function);
 
-			void			DumpCalled(uint32 count);
-			void			DumpTimeInclusive(uint32 count);
-			void			DumpTimeExclusive(uint32 count);
-			void			DumpTimeInclusivePerCall(uint32 count);
-			void			DumpTimeExclusivePerCall(uint32 count);
+			void			DumpCalled(uint32_t count);
+			void			DumpTimeInclusive(uint32_t count);
+			void			DumpTimeExclusive(uint32_t count);
+			void			DumpTimeInclusivePerCall(uint32_t count);
+			void			DumpTimeExclusivePerCall(uint32_t count);
 
 			status_t		GetStatus() const	{ return fStatus; }
 
@@ -46,7 +46,7 @@ private:
 	struct FunctionData {
 			const char*		fFunction;
 
-			uint32			fCalled;
+			uint32_t			fCalled;
 
 			bigtime_t		fTimeInclusive;
 			bigtime_t		fTimeExclusive;
@@ -60,8 +60,8 @@ private:
 			nanotime_t		fProfilerTime;
 	};
 
-			uint32			_FunctionCount() const;
-			void			_Dump(uint32 count);
+			uint32_t			_FunctionCount() const;
+			void			_Dump(uint32_t count);
 
 			FunctionData*	_FindFunction(const char* function);
 
@@ -72,11 +72,11 @@ private:
 	static	int				_CompareFunctionsPerCall(const void* a,
 								const void* b);
 
-			const uint32	kMaxFunctionEntries;
-			const uint32	kMaxFunctionStackEntries;
+			const uint32_t	kMaxFunctionEntries;
+			const uint32_t	kMaxFunctionStackEntries;
 
 			FunctionEntry*	fFunctionStacks[SMP_MAX_CPUS];
-			uint32			fFunctionStackPointers[SMP_MAX_CPUS];
+			uint32_t			fFunctionStackPointers[SMP_MAX_CPUS];
 
 			FunctionData*	fFunctionData;
 			spinlock		fFunctionLock;

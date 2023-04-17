@@ -27,7 +27,7 @@
 
 /* low level macros for accessing memory mapped hardware registers */
 #define REG64(addr) ((volatile uint64 *)(addr))
-#define REG32(addr) ((volatile uint32 *)(addr))
+#define REG32(addr) ((volatile uint32_t *)(addr))
 #define REG16(addr) ((volatile uint16 *)(addr))
 #define REG8(addr) ((volatile uint8 *)(addr))
 

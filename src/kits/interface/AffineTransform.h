@@ -74,9 +74,9 @@ public:
 			void					Apply(BPoint* point) const;
 			void					ApplyInverse(BPoint* point) const;
 
-			void					Apply(BPoint* points, uint32 count) const;
+			void					Apply(BPoint* points, uint32_t count) const;
 			void					ApplyInverse(BPoint* points,
-										uint32 count) const;
+										uint32_t count) const;
 
 	// Translation
 	inline	const BAffineTransform&	TranslateBy(double x, double y);

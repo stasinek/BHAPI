@@ -16,13 +16,13 @@ extern "C" {
 
 typedef struct messaging_target {
 	port_id	port;
-	int32	token;
+	int32_t	token;
 } messaging_target;
 
 status_t init_messaging_service();
 
-status_t send_message(const void *message, int32 messageSize,
-	const messaging_target *targets, int32 targetCount);
+status_t send_message(const void *message, int32_t messageSize,
+	const messaging_target *targets, int32_t targetCount);
 
 // syscalls
 area_id _user_register_messaging_service(sem_id lockingSem, sem_id counterSem);
@@ -43,7 +43,7 @@ namespace BPrivate {
 
 status_t send_message(const BPrivate::KMessage *message,
 	const messaging_target *targets,
-	int32 targetCount);
+	int32_t targetCount);
 
 #endif	// __cplusplus
 

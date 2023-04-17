@@ -299,7 +299,7 @@ status_t BDateFormat::GetMonthName(int month, BString& outName)
 
 	const DateFormatSymbols* symbols = simpleFormat->getDateFormatSymbols();
 
-	int32_t count;
+	int32_t_t count;
 	const UnicodeString* names = symbols->getMonths(count);
 
 	if (month > count || month <= 0) {

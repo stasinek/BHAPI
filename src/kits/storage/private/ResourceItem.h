@@ -47,11 +47,11 @@ public:
 	virtual ssize_t WriteAt(off_t pos, const void *buffer, size_t size);
 	virtual status_t SetSize(off_t size);
 
-	void SetLocation(int32 offset, size_t initialSize);
-	void SetIdentity(type_code type, int32 id, const char *name);
+	void SetLocation(int32_t offset, size_t initialSize);
+	void SetIdentity(type_code type, int32_t id, const char *name);
 
-	void SetOffset(int32 offset);
-	int32 Offset() const;
+	void SetOffset(int32_t offset);
+	int32_t Offset() const;
 
 	size_t InitialSize() const;
 	size_t DataSize() const;
@@ -59,8 +59,8 @@ public:
 	void SetType(type_code type);
 	type_code Type() const;
 
-	void SetID(int32 id);
-	int32 ID() const;
+	void SetID(int32_t id);
+	int32_t ID() const;
 
 	void SetName(const char *name);
 	const char *Name() const;
@@ -74,10 +74,10 @@ public:
 	bool IsModified() const;
 
 private:
-	int32		fOffset;
+	int32_t		fOffset;
 	size_t		fInitialSize;
 	type_code	fType;
-	int32		fID;
+	int32_t		fID;
 	BString		fName;
 	bool		fIsLoaded;
 	bool		fIsModified;

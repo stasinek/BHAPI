@@ -47,7 +47,7 @@ TimeSourceObjectManager::~TimeSourceObjectManager()
 		BTimeSource* timeSource = iterator->second;
 
 		PRINT(1, "Forcing release of TimeSource id %ld...\n", timeSource->ID());
-		int32 debugCount = 0;
+		int32_t debugCount = 0;
 		while (timeSource->Release() != NULL)
 			debugCount++;
 

@@ -20,7 +20,7 @@ namespace BPrivate {
 
 typedef struct benaphore {
 	sem_id	sem;
-	int32	count;
+	int32_t	count;
 } benaphore;
 
 
@@ -38,7 +38,7 @@ static inline status_t benaphore_init(benaphore *ben, const char *name)
 }
 
 
-static inline status_t benaphore_lock_etc(benaphore *ben, uint32 flags, bigtime_t timeout)
+static inline status_t benaphore_lock_etc(benaphore *ben, uint32_t flags, bigtime_t timeout)
 {
 // TODO: This function really shouldn't be used, since timeouts screw the
 // benaphore behavior.

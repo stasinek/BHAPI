@@ -37,8 +37,8 @@ public:
 			bool			button1;
 			bool			button2;
 
-			int32			CountDevices();
-			status_t		GetDeviceName(int32 index, char* name,
+			int32_t			CountDevices();
+			status_t		GetDeviceName(int32_t index, char* name,
 								size_t bufSize = B_OS_NAME_LENGTH);
 
 			status_t		RescanDevices();
@@ -49,32 +49,32 @@ public:
 
 			bool			EnterEnhancedMode(const entry_ref* ref = NULL);
 
-			int32			CountSticks();
+			int32_t			CountSticks();
 
-			int32			CountAxes();
+			int32_t			CountAxes();
 			status_t		GetAxisValues(int16* outValues,
-								int32 forStick = 0);
-			status_t		GetAxisNameAt(int32 index,
+								int32_t forStick = 0);
+			status_t		GetAxisNameAt(int32_t index,
 								BString* outName);
 
-			int32			CountHats();
+			int32_t			CountHats();
 			status_t		GetHatValues(uint8* outHats,
-								int32 forStick = 0);
-			status_t		GetHatNameAt(int32 index, BString* outName);
+								int32_t forStick = 0);
+			status_t		GetHatNameAt(int32_t index, BString* outName);
 
-			int32			CountButtons();
-			uint32			ButtonValues(int32 forStick = 0);
+			int32_t			CountButtons();
+			uint32_t			ButtonValues(int32_t forStick = 0);
 								// Allows access to the first 32 buttons where
 								// each set bit indicates a pressed button.
 			status_t		GetButtonValues(bool* outButtons,
-								int32 forStick = 0);
+								int32_t forStick = 0);
 								// Haiku extension. Allows to retrieve the state
 								// of an arbitrary count of buttons. The
 								// outButtons argument is an array of boolean
 								// values with at least CountButtons() elements.
 								// True means the button is pressed and false
 								// means it is released.
-			status_t		GetButtonNameAt(int32 index,
+			status_t		GetButtonNameAt(int32_t index,
 								BString* outName);
 
 			status_t		GetControllerModule(BString* outName);
@@ -105,7 +105,7 @@ friend class _BJoystickTweaker;
 			_joystick_info*	fJoystickInfo;
 			BList*			fJoystickData;
 
-			uint32          _reserved_Joystick_[10];
+			uint32_t          _reserved_Joystick_[10];
 };
 
 #endif // _JOYSTICK_H

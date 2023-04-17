@@ -87,13 +87,13 @@ BSubscriber::BSubscriber(char const *)
 
 struct _sub_info
 {
-	uint32 dummy;
+	uint32_t dummy;
 };
 
 namespace BPrivate
 {
 
-int32 media_debug; /* is this a function, or a bool, or an int32 ???  */
+int32_t media_debug; /* is this a function, or a bool, or an int32_t ???  */
 
 //BPrivate::BTrackReader move to TrackReader.h & TrackReader.cpp
 
@@ -139,17 +139,17 @@ int MIDIisInitializingWorkaroundForDoom;
 these two moved to RealtimeAlloc.cpp
 
 void rtm_create_pool_etc(void);
-int32 rtm_get_pool(int32,int32 **P);
+int32_t rtm_get_pool(int32_t,int32_t **P);
 
 void rtm_create_pool_etc(void)
 {
 	UNIMPLEMENTED();
 }
 
-int32 rtm_get_pool(int32,int32 **p)
+int32_t rtm_get_pool(int32_t,int32_t **p)
 {
 	UNIMPLEMENTED();
-	*p = (int32*)0x1199;
+	*p = (int32_t*)0x1199;
 	return B_OK;
 }
 

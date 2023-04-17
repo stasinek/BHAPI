@@ -24,7 +24,7 @@ struct arm_debug_cpu_state {
         ulong r15;      /* program counter */
         ulong cpsr;
 	// TODO missing members!
-	uint32	dummy;
+	uint32_t	dummy;
 } __attribute__((aligned(8)));
 
 #endif	// _ARCH_ARM_DEBUGGER_H

@@ -109,7 +109,7 @@
 // (effective) segment number, which leaves us with a 21 bit space of
 // VSID bases (= 2 * 1024 * 1024).
 #define MAX_VSID_BASES (PAGE_SIZE * 8)
-static uint32 sVSIDBaseBitmap[MAX_VSID_BASES / (sizeof(uint32) * 8)];
+static uint32_t sVSIDBaseBitmap[MAX_VSID_BASES / (sizeof(uint32_t) * 8)];
 static spinlock sVSIDBaseBitmapLock;
 
 #define VSID_BASE_SHIFT 3
@@ -143,13 +143,13 @@ PPCVMTranslationMapClassic::~PPCVMTranslationMapClassic()
 
 	// mark the vsid base not in use
 	int baseBit = fVSIDBase >> VSID_BASE_SHIFT;
-	atomic_and((int32 *)&sVSIDBaseBitmap[baseBit / 32],
+	atomic_and((int32_t *)&sVSIDBaseBitmap[baseBit / 32],
 			~(1 << (baseBit % 32)));
 
 #if 0//X86
 	if (fPagingStructures->pgdir_virt != NULL) {
 		// cycle through and free all of the user space pgtables
-		for (uint32 i = VADDR_TO_PDENT(USER_BASE);
+		for (uint32_t i = VADDR_TO_PDENT(USER_BASE);
 				i <= VADDR_TO_PDENT(USER_BASE + (USER_SIZE - 1)); i++) {
 			if ((fPagingStructures->pgdir_virt[i] & PPC_PDE_PRESENT) != 0) {
 				addr_t address = fPagingStructures->pgdir_virt[i]
@@ -282,7 +282,7 @@ page_table_entry *
 PPCVMTranslationMapClassic::LookupPageTableEntry(addr_t virtualAddress)
 {
 	// lookup the vsid based off the va
-	uint32 virtualSegmentID = VADDR_TO_VSID(fVSIDBase, virtualAddress);
+	uint32_t virtualSegmentID = VADDR_TO_VSID(fVSIDBase, virtualAddress);
 
 //	dprintf("vm_translation_map.lookup_page_table_entry: vsid %ld, va 0x%lx\n", virtualSegmentID, virtualAddress);
 
@@ -290,7 +290,7 @@ PPCVMTranslationMapClassic::LookupPageTableEntry(addr_t virtualAddress)
 
 	// Search for the page table entry using the primary hash value
 
-	uint32 hash = page_table_entry::PrimaryHash(virtualSegmentID, virtualAddress);
+	uint32_t hash = page_table_entry::PrimaryHash(virtualSegmentID, virtualAddress);
 	page_table_entry_group *group = &(m->PageTable())[hash & m->PageTableHashMask()];
 
 	for (int i = 0; i < 8; i++) {
@@ -347,14 +347,14 @@ PPCVMTranslationMapClassic::MaxPagesNeededToMap(addr_t start, addr_t end) const
 
 status_t
 PPCVMTranslationMapClassic::Map(addr_t virtualAddress,
-	phys_addr_t physicalAddress, uint32 attributes,
-	uint32 memoryType, vm_page_reservation* reservation)
+	phys_addr_t physicalAddress, uint32_t attributes,
+	uint32_t memoryType, vm_page_reservation* reservation)
 {
 	TRACE("map_tmap: entry pa 0x%lx va 0x%lx\n", pa, va);
 
 	// lookup the vsid based off the va
-	uint32 virtualSegmentID = VADDR_TO_VSID(fVSIDBase, virtualAddress);
-	uint32 protection = 0;
+	uint32_t virtualSegmentID = VADDR_TO_VSID(fVSIDBase, virtualAddress);
+	uint32_t protection = 0;
 
 	// ToDo: check this
 	// all kernel mappings are R/W to supervisor code
@@ -366,7 +366,7 @@ PPCVMTranslationMapClassic::Map(addr_t virtualAddress,
 	PPCPagingMethodClassic* m = PPCPagingMethodClassic::Method();
 
 	// Search for a free page table slot using the primary hash value
-	uint32 hash = page_table_entry::PrimaryHash(virtualSegmentID, virtualAddress);
+	uint32_t hash = page_table_entry::PrimaryHash(virtualSegmentID, virtualAddress);
 	page_table_entry_group *group = &(m->PageTable())[hash & m->PageTableHashMask()];
 
 	for (int i = 0; i < 8; i++) {
@@ -413,7 +413,7 @@ PPCVMTranslationMapClassic::Map(addr_t virtualAddress,
 	page_directory_entry* pd = fPagingStructures->pgdir_virt;
 
 	// check to see if a page table exists for this range
-	uint32 index = VADDR_TO_PDENT(va);
+	uint32_t index = VADDR_TO_PDENT(va);
 	if ((pd[index] & PPC_PDE_PRESENT) == 0) {
 		phys_addr_t pgtable;
 		vm_page *page;
@@ -859,7 +859,7 @@ PPCVMTranslationMapClassic::UnmapPages(VMArea* area, addr_t base, size_t size,
 
 	// free removed mappings
 	bool isKernelSpace = area->address_space == VMAddressSpace::Kernel();
-	uint32 freeFlags = CACHE_DONT_WAIT_FOR_MEMORY
+	uint32_t freeFlags = CACHE_DONT_WAIT_FOR_MEMORY
 		| (isKernelSpace ? CACHE_DONT_LOCK_KERNEL_SPACE : 0);
 	while (vm_page_mapping* mapping = queue.RemoveHead())
 		object_cache_free(gPageMappingsObjectCache, mapping, freeFlags);
@@ -964,7 +964,7 @@ PPCVMTranslationMapClassic::UnmapArea(VMArea* area, bool deletingAddressSpace,
 	locker.Unlock();
 
 	bool isKernelSpace = area->address_space == VMAddressSpace::Kernel();
-	uint32 freeFlags = CACHE_DONT_WAIT_FOR_MEMORY
+	uint32_t freeFlags = CACHE_DONT_WAIT_FOR_MEMORY
 		| (isKernelSpace ? CACHE_DONT_LOCK_KERNEL_SPACE : 0);
 	while (vm_page_mapping* mapping = mappings.RemoveHead())
 		object_cache_free(gPageMappingsObjectCache, mapping, freeFlags);
@@ -974,7 +974,7 @@ PPCVMTranslationMapClassic::UnmapArea(VMArea* area, bool deletingAddressSpace,
 
 status_t
 PPCVMTranslationMapClassic::Query(addr_t va, phys_addr_t *_outPhysical,
-	uint32 *_outFlags)
+	uint32_t *_outFlags)
 {
 	page_table_entry *entry;
 
@@ -1044,7 +1044,7 @@ PPCVMTranslationMapClassic::Query(addr_t va, phys_addr_t *_outPhysical,
 
 status_t
 PPCVMTranslationMapClassic::QueryInterrupt(addr_t virtualAddress,
-	phys_addr_t *_physicalAddress, uint32 *_flags)
+	phys_addr_t *_physicalAddress, uint32_t *_flags)
 {
 	return PPCVMTranslationMapClassic::Query(virtualAddress, _physicalAddress, _flags);
 
@@ -1085,8 +1085,8 @@ PPCVMTranslationMapClassic::QueryInterrupt(addr_t virtualAddress,
 
 
 status_t
-PPCVMTranslationMapClassic::Protect(addr_t start, addr_t end, uint32 attributes,
-	uint32 memoryType)
+PPCVMTranslationMapClassic::Protect(addr_t start, addr_t end, uint32_t attributes,
+	uint32_t memoryType)
 {
 	// XXX finish
 	return B_ERROR;
@@ -1099,7 +1099,7 @@ PPCVMTranslationMapClassic::Protect(addr_t start, addr_t end, uint32 attributes,
 		attributes);
 
 	// compute protection flags
-	uint32 newProtectionFlags = 0;
+	uint32_t newProtectionFlags = 0;
 	if ((attributes & B_USER_PROTECTION) != 0) {
 		newProtectionFlags = PPC_PTE_USER;
 		if ((attributes & B_WRITE_AREA) != 0)
@@ -1166,7 +1166,7 @@ PPCVMTranslationMapClassic::Protect(addr_t start, addr_t end, uint32 attributes,
 
 
 status_t
-PPCVMTranslationMapClassic::ClearFlags(addr_t virtualAddress, uint32 flags)
+PPCVMTranslationMapClassic::ClearFlags(addr_t virtualAddress, uint32_t flags)
 {
 	page_table_entry *entry = LookupPageTableEntry(virtualAddress);
 	if (entry == NULL)
@@ -1202,7 +1202,7 @@ PPCVMTranslationMapClassic::ClearFlags(addr_t virtualAddress, uint32 flags)
 		return B_OK;
 	}
 
-	uint32 flagsToClear = ((flags & PAGE_MODIFIED) ? PPC_PTE_DIRTY : 0)
+	uint32_t flagsToClear = ((flags & PAGE_MODIFIED) ? PPC_PTE_DIRTY : 0)
 		| ((flags & PAGE_ACCESSED) ? PPC_PTE_ACCESSED : 0);
 
 	Thread* thread = thread_get_current_thread();
@@ -1238,7 +1238,7 @@ PPCVMTranslationMapClassic::ClearAccessedAndModified(VMArea* area,
 
 	RecursiveLocker locker(fLock);
 
-	uint32 flags;
+	uint32_t flags;
 	phys_addr_t physicalAddress;
 	if (Query(address, &physicalAddress, &flags) != B_OK
 		|| (flags & PAGE_PRESENT) == 0) {

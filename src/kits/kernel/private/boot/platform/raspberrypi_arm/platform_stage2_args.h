@@ -11,7 +11,7 @@
 
 struct platform_stage2_args {
 	void *boot_tgz_data;
-	uint32 boot_tgz_size;
+	uint32_t boot_tgz_size;
 };
 
 #endif	/* KERNEL_BOOT_PLATFORM_PI_STAGE2_H */

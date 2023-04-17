@@ -60,7 +60,7 @@ BFileDescriptorIO::WriteAt(off_t position, const void* buffer, size_t size)
 
 
 off_t
-BFileDescriptorIO::Seek(off_t position, uint32 seekMode)
+BFileDescriptorIO::Seek(off_t position, uint32_t seekMode)
 {
 	off_t result = lseek(fFD, position, seekMode);
 	return result >= 0 ? result : errno;

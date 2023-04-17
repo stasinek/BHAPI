@@ -24,7 +24,7 @@ UserEvent::~UserEvent()
 
 
 struct SignalEvent::EventSignal : Signal {
-	EventSignal(uint32 number, int32 signalCode, int32 errorCode,
+	EventSignal(uint32_t number, int32_t signalCode, int32_t errorCode,
 		pid_t sendingProcess)
 		:
 		Signal(number, signalCode, errorCode, sendingProcess),
@@ -51,7 +51,7 @@ struct SignalEvent::EventSignal : Signal {
 	}
 
 private:
-	int32				fInUse;
+	int32_t				fInUse;
 };
 
 
@@ -107,8 +107,8 @@ TeamSignalEvent::TeamSignalEvent(Team* team, EventSignal* signal)
 
 
 /*static*/ TeamSignalEvent*
-TeamSignalEvent::Create(Team* team, uint32 signalNumber, int32 signalCode,
-	int32 errorCode)
+TeamSignalEvent::Create(Team* team, uint32_t signalNumber, int32_t signalCode,
+	int32_t errorCode)
 {
 	// create the signal
 	EventSignal* signal = new(std::nothrow) EventSignal(signalNumber,
@@ -177,8 +177,8 @@ ThreadSignalEvent::ThreadSignalEvent(Thread* thread, EventSignal* signal)
 
 
 /*static*/ ThreadSignalEvent*
-ThreadSignalEvent::Create(Thread* thread, uint32 signalNumber, int32 signalCode,
-	int32 errorCode, pid_t sendingTeam)
+ThreadSignalEvent::Create(Thread* thread, uint32_t signalNumber, int32_t signalCode,
+	int32_t errorCode, pid_t sendingTeam)
 {
 	// create the signal
 	EventSignal* signal = new(std::nothrow) EventSignal(signalNumber,

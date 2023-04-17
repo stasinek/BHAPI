@@ -161,11 +161,11 @@ public:
 			uint64				operator[](size_t index) const;
 
 private:
-	static	uint32*				_AllocateOffsetArray(size_t totalChunkCount,
+	static	uint32_t*				_AllocateOffsetArray(size_t totalChunkCount,
 									size_t offset32BitChunkCount);
 
 private:
-			uint32*				fOffsets;
+			uint32_t*				fOffsets;
 									// - NULL, if chunkCount <= 1
 									// - element 0 contains the number of 32 bit
 									//   offsets that follow, or is 0, when all

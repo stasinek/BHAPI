@@ -28,9 +28,9 @@ struct net_notifications_module_info {
 #define NET_NOTIFICATIONS_CONTROL_WATCHING	1
 
 struct net_notifications_control {
-	uint32		flags;
+	uint32_t		flags;
 	port_id		port;
-	uint32		token;
+	uint32_t		token;
 };
 
 

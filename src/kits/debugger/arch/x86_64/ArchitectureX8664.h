@@ -24,16 +24,16 @@ public:
 
 	virtual	status_t			Init();
 
-	virtual int32				StackGrowthDirection() const;
+	virtual int32_t				StackGrowthDirection() const;
 
-	virtual	int32				CountRegisters() const;
+	virtual	int32_t				CountRegisters() const;
 	virtual	const Register*		Registers() const;
 	virtual status_t			InitRegisterRules(CfaContext& context) const;
 
 	virtual	status_t			GetDwarfRegisterMaps(RegisterMap** _toDwarf,
 									RegisterMap** _fromDwarf) const;
 
-	virtual	status_t			GetCpuFeatures(uint32& flags);
+	virtual	status_t			GetCpuFeatures(uint32_t& flags);
 
 	virtual	status_t			CreateCpuState(CpuState*& _state);
 	virtual	status_t			CreateCpuState(const void* cpuStateData,
@@ -50,9 +50,9 @@ public:
 									CpuState* previousCpuState);
 
 	virtual	status_t			ReadValueFromMemory(target_addr_t address,
-									uint32 valueType, BVariant& _value) const;
+									uint32_t valueType, BVariant& _value) const;
 	virtual	status_t			ReadValueFromMemory(target_addr_t addressSpace,
-									target_addr_t address, uint32 valueType,
+									target_addr_t address, uint32_t valueType,
 									BVariant& _value) const;
 
 	virtual	status_t			DisassembleCode(FunctionDebugInfo* function,
@@ -69,8 +69,8 @@ public:
 									target_addr_t& _targetAddress);
 
 	virtual	status_t			GetWatchpointDebugCapabilities(
-									int32& _maxRegisterCount,
-									int32& _maxBytesPerRegister,
+									int32_t& _maxRegisterCount,
+									int32_t& _maxBytesPerRegister,
 									uint8& _watchpointCapabilityFlags);
 
 	virtual	status_t			GetReturnAddressLocation(
@@ -82,16 +82,16 @@ private:
 			struct FromDwarfRegisterMap;
 
 private:
-			void				_AddRegister(int32 index, const char* name,
-									uint32 bitSize, uint32 valueType,
+			void				_AddRegister(int32_t index, const char* name,
+									uint32_t bitSize, uint32_t valueType,
 									register_type type, bool calleePreserved);
-			void				_AddIntegerRegister(int32 index,
-									const char* name, uint32 valueType,
+			void				_AddIntegerRegister(int32_t index,
+									const char* name, uint32_t valueType,
 									register_type type, bool calleePreserved);
-			void				_AddFPRegister(int32 index,
+			void				_AddFPRegister(int32_t index,
 									const char* name);
-			void				_AddSIMDRegister(int32 index,
-									const char* name, uint32 byteSize);
+			void				_AddSIMDRegister(int32_t index,
+									const char* name, uint32_t byteSize);
 			bool				_HasFunctionPrologue(
 									FunctionDebugInfo* function) const;
 private:

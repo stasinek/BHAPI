@@ -16,7 +16,7 @@
 #include <Vnode.h>
 
 
-const static uint32 kMaxUnusedVnodes = 8192;
+const static uint32_t kMaxUnusedVnodes = 8192;
 	// This is the maximum number of unused vnodes that the system
 	// will keep around (weak limit, if there is enough memory left,
 	// they won't get flushed even when hitting that limit).
@@ -30,15 +30,15 @@ const static uint32 kMaxUnusedVnodes = 8192;
 */
 static mutex sUnusedVnodesLock = MUTEX_INITIALIZER("unused vnodes");
 static list sUnusedVnodeList;
-static uint32 sUnusedVnodes = 0;
+static uint32_t sUnusedVnodes = 0;
 
-static const int32 kMaxHotVnodes = 1024;
+static const int32_t kMaxHotVnodes = 1024;
 static rw_lock sHotVnodesLock = RW_LOCK_INITIALIZER("hot vnodes");
 static Vnode* sHotVnodes[kMaxHotVnodes];
-static int32 sNextHotVnodeIndex = 0;
+static int32_t sNextHotVnodeIndex = 0;
 
-static const int32 kUnusedVnodesCheckInterval = 64;
-static int32 sUnusedVnodesCheckCount = 0;
+static const int32_t kUnusedVnodesCheckInterval = 64;
+static int32_t sUnusedVnodesCheckCount = 0;
 
 
 /*!	Must be called with sHotVnodesLock write-locked.
@@ -48,8 +48,8 @@ flush_hot_vnodes_locked()
 {
 	MutexLocker unusedLocker(sUnusedVnodesLock);
 
-	int32 count = std::min(sNextHotVnodeIndex, kMaxHotVnodes);
-	for (int32 i = 0; i < count; i++) {
+	int32_t count = std::min(sNextHotVnodeIndex, kMaxHotVnodes);
+	for (int32_t i = 0; i < count; i++) {
 		Vnode* vnode = sHotVnodes[i];
 		if (vnode == NULL)
 			continue;
@@ -85,9 +85,9 @@ vnode_unused(Vnode* vnode)
 	vnode->SetUnused(true);
 
 	bool result = false;
-	int32 checkCount = atomic_add(&sUnusedVnodesCheckCount, 1);
+	int32_t checkCount = atomic_add(&sUnusedVnodesCheckCount, 1);
 	if (checkCount == kUnusedVnodesCheckInterval) {
-		uint32 unusedCount = atomic_get((int32*)&sUnusedVnodes);
+		uint32_t unusedCount = atomic_get((int32_t*)&sUnusedVnodes);
 		if (unusedCount > kMaxUnusedVnodes
 			&& low_resource_state(
 				B_KERNEL_RESOURCE_PAGES | B_KERNEL_RESOURCE_MEMORY)
@@ -106,7 +106,7 @@ vnode_unused(Vnode* vnode)
 		return result;
 
 	// no -- enter it
-	int32 index = atomic_add(&sNextHotVnodeIndex, 1);
+	int32_t index = atomic_add(&sNextHotVnodeIndex, 1);
 	if (index < kMaxHotVnodes) {
 		vnode->SetHot(true);
 		sHotVnodes[index] = vnode;
@@ -164,9 +164,9 @@ vnode_to_be_freed(Vnode* vnode)
 	if (vnode->IsHot()) {
 		// node is hot -- remove it from the array
 // TODO: Maybe better completely flush the array while at it?
-		int32 count = atomic_get(&sNextHotVnodeIndex);
+		int32_t count = atomic_get(&sNextHotVnodeIndex);
 		count = std::min(count, kMaxHotVnodes);
-		for (int32 i = 0; i < count; i++) {
+		for (int32_t i = 0; i < count; i++) {
 			if (sHotVnodes[i] == vnode) {
 				sHotVnodes[i] = NULL;
 				break;

@@ -129,8 +129,8 @@ status_t AddOnManager::GetDecoderForFormat(entry_ref* _decoderRef,
 }
 
 
-status_t AddOnManager::GetReaders(entry_ref* outRefs, int32* outCount,
-	int32 maxCount)
+status_t AddOnManager::GetReaders(entry_ref* outRefs, int32_t* outCount,
+	int32_t maxCount)
 {
 	BAutolock locker(fLock);
 	RegisterAddOns();
@@ -161,7 +161,7 @@ status_t AddOnManager::GetReaders(entry_ref* outRefs, int32* outCount,
 }
 
 
-status_t AddOnManager::GetEncoder(entry_ref* _encoderRef, int32 id)
+status_t AddOnManager::GetEncoder(entry_ref* _encoderRef, int32_t id)
 {
 	BAutolock locker(fLock);
 	RegisterAddOns();
@@ -169,7 +169,7 @@ status_t AddOnManager::GetEncoder(entry_ref* _encoderRef, int32 id)
 	encoder_info* info;
 	for (fEncoderList.Rewind(); fEncoderList.GetNext(&info);) {
 		// check if the encoder matches the supplied format
-		if (info->internalID == (uint32)id) {
+		if (info->internalID == (uint32_t)id) {
 			*_encoderRef = info->ref;
 			return B_OK;
 		}
@@ -179,7 +179,7 @@ status_t AddOnManager::GetEncoder(entry_ref* _encoderRef, int32 id)
 }
 
 
-status_t AddOnManager::GetWriter(entry_ref* _ref, uint32 internalID)
+status_t AddOnManager::GetWriter(entry_ref* _ref, uint32_t internalID)
 {
 	BAutolock locker(fLock);
 	RegisterAddOns();
@@ -196,7 +196,7 @@ status_t AddOnManager::GetWriter(entry_ref* _ref, uint32 internalID)
 }
 
 
-status_t AddOnManager::GetFileFormat(media_file_format* _fileFormat, int32 cookie)
+status_t AddOnManager::GetFileFormat(media_file_format* _fileFormat, int32_t cookie)
 {
 	BAutolock locker(fLock);
 	RegisterAddOns();
@@ -213,7 +213,7 @@ status_t AddOnManager::GetFileFormat(media_file_format* _fileFormat, int32 cooki
 
 status_t AddOnManager::GetCodecInfo(media_codec_info* _codecInfo,
 	media_format_family* _formatFamily,
-	media_format* _inputFormat, media_format* _outputFormat, int32 cookie)
+	media_format* _inputFormat, media_format* _outputFormat, int32_t cookie)
 {
 	BAutolock locker(fLock);
 	RegisterAddOns();
@@ -474,7 +474,7 @@ void AddOnManager::_RegisterEncoder(EncoderPlugin* plugin, const entry_ref& ref)
 	info.ref = ref;
 	info.internalID = fNextEncoderCodecInfoID++;
 
-	int32 cookie = 0;
+	int32_t cookie = 0;
 
 	while (true) {
 		memset(&info.codecInfo, 0, sizeof(media_codec_info));
@@ -526,7 +526,7 @@ bool AddOnManager::_FindDecoder(const media_format& format, const BPath& path,
 
 
 void AddOnManager::_GetReaders(const BPath& path, entry_ref* outRefs,
-	int32* outCount, int32 maxCount)
+	int32_t* outCount, int32_t maxCount)
 {
 	node_ref nref;
 	BDirectory directory;

@@ -63,7 +63,7 @@ struct ObjectCache : DoublyLinkedListLinkImpl<ObjectCache> {
 			size_t				slab_size;
 			size_t				usage;
 			size_t				maximum;
-			uint32				flags;
+			uint32_t				flags;
 
 			ResizeRequest*		resize_request;
 
@@ -89,31 +89,31 @@ public:
 			status_t			Init(const char* name, size_t objectSize,
 									size_t alignment, size_t maximum,
 									size_t magazineCapacity,
-									size_t maxMagazineCount, uint32 flags,
+									size_t maxMagazineCount, uint32_t flags,
 									void* cookie,
 									object_cache_constructor constructor,
 									object_cache_destructor destructor,
 									object_cache_reclaimer reclaimer);
 	virtual	void				Delete() = 0;
 
-	virtual	slab*				CreateSlab(uint32 flags) = 0;
-	virtual	void				ReturnSlab(slab* slab, uint32 flags) = 0;
+	virtual	slab*				CreateSlab(uint32_t flags) = 0;
+	virtual	void				ReturnSlab(slab* slab, uint32_t flags) = 0;
 	virtual slab*				ObjectSlab(void* object) const = 0;
 
 			slab*				InitSlab(slab* slab, void* pages,
-									size_t byteCount, uint32 flags);
+									size_t byteCount, uint32_t flags);
 			void				UninitSlab(slab* slab);
 
 			void				ReturnObjectToSlab(slab* source, void* object,
-									uint32 flags);
-			void*				ObjectAtIndex(slab* source, int32 index) const;
+									uint32_t flags);
+			void*				ObjectAtIndex(slab* source, int32_t index) const;
 
 			bool				Lock()	{ return mutex_lock(&lock) == B_OK; }
 			void				Unlock()	{ mutex_unlock(&lock); }
 
-			status_t			AllocatePages(void** pages, uint32 flags);
+			status_t			AllocatePages(void** pages, uint32_t flags);
 			void				FreePages(void* pages);
-			status_t			EarlyAllocatePages(void** pages, uint32 flags);
+			status_t			EarlyAllocatePages(void** pages, uint32_t flags);
 			void				EarlyFreePages(void* pages);
 
 #if PARANOID_KERNEL_FREE
@@ -121,8 +121,8 @@ public:
 #endif
 
 			status_t			AllocateTrackingInfos(slab* slab,
-									size_t byteCount, uint32 flags);
-			void				FreeTrackingInfos(slab* slab, uint32 flags);
+									size_t byteCount, uint32_t flags);
+			void				FreeTrackingInfos(slab* slab, uint32_t flags);
 
 #if SLAB_OBJECT_CACHE_ALLOCATION_TRACKING
 			AllocationTrackingInfo*
@@ -166,14 +166,14 @@ check_cache_quota(ObjectCache* cache)
 #if !SLAB_OBJECT_CACHE_ALLOCATION_TRACKING
 
 inline status_t
-ObjectCache::AllocateTrackingInfos(slab* slab, size_t byteCount, uint32 flags)
+ObjectCache::AllocateTrackingInfos(slab* slab, size_t byteCount, uint32_t flags)
 {
 	return B_OK;
 }
 
 
 inline void
-ObjectCache::FreeTrackingInfos(slab* slab, uint32 flags)
+ObjectCache::FreeTrackingInfos(slab* slab, uint32_t flags)
 {
 }
 

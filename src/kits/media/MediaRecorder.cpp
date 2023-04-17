@@ -348,7 +348,7 @@ status_t BMediaRecorder::_Connect(const media_node& node,
 		ourOutput = *output;
 	} else if (err == B_OK) {
 		media_output outputs[10];
-		int32 count = 10;
+		int32_t count = 10;
 
 		err = BMediaRoster::Roster()->GetFreeOutputsFor(fOutputNode,
 			outputs, count, &count, ourFormat.type);

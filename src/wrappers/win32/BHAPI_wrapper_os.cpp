@@ -84,11 +84,11 @@ BOOL WINAPI DllMain(HINSTANCE hinstDLL, DWORD fdwReason, LPVOID lpvReserved)
 }
 
 
-char* bhapi::win32_convert_active_to_utf8(const char *str,  int32 length)
+char* bhapi::win32_convert_active_to_utf8(const char *str,  int32_t length)
 {
 	if(str == NULL || *str == 0 || length == 0) return NULL;
 
-	int32 nChars = (int32)strlen(str);
+	int32_t nChars = (int32_t)strlen(str);
 	if(length < 0 || length > nChars) length = nChars;
 
 	WCHAR *wStr = (WCHAR*)malloc(sizeof(WCHAR) * (size_t)(length + 1));
@@ -103,12 +103,12 @@ char* bhapi::win32_convert_active_to_utf8(const char *str,  int32 length)
 }
 
 
-char* bhapi::win32_convert_utf8_to_active(const char *str,  int32 length)
+char* bhapi::win32_convert_utf8_to_active(const char *str,  int32_t length)
 {
 	unichar16*wStr = bhapi::utf8_convert_to_unicode(str, length);
 	if(wStr == NULL) return NULL;
 
-	int32 len = bhapi::unicode_strlen(wStr);
+	int32_t len = bhapi::unicode_strlen(wStr);
 	char *aStr = (char*)malloc((size_t)len * 3 + 1);
 	if(aStr == NULL)
 	{

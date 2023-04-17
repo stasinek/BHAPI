@@ -25,7 +25,7 @@
 
 // Scans a directory and adds the entries it founds as strings to the
 // given list
-static int32 scan_directory(const char *directory, BList *list)
+static int32_t scan_directory(const char *directory, BList *list)
 {
 	BEntry entry;
 	BDirectory dir(SERIAL_DIR);
@@ -79,7 +79,7 @@ BSerialPort::~BSerialPort()
 		close(ffd);
 	
 	if (fDevices != NULL) {
-		for (int32 count = fDevices->CountItems() - 1; count >= 0; count--)
+		for (int32_t count = fDevices->CountItems() - 1; count >= 0; count--)
 			free(fDevices->RemoveItem(count));
 		delete fDevices;
 	}	
@@ -332,7 +332,7 @@ void BSerialPort::ClearOutput(void)
 	- \c B_SOFTWARE_CONTROL
 	- \c B_NOFLOW_CONTROL
 */
-void BSerialPort::SetFlowControl(uint32 method)
+void BSerialPort::SetFlowControl(uint32_t method)
 {
 	fFlow = method;
 	_DriverControl();
@@ -342,7 +342,7 @@ void BSerialPort::SetFlowControl(uint32 method)
 /*! \brief Returns the selected flow control.
 	\return The flow control for the current open port.	
 */
-uint32 BSerialPort::FlowControl(void)
+uint32_t BSerialPort::FlowControl(void)
 {
 	return fFlow;
 }
@@ -367,11 +367,11 @@ status_t BSerialPort::SetRTS(bool asserted)
 
 
 /*! \brief See how many chars are queued on the serial port.
-	\param numChars A pointer to an int32 where you want
+	\param numChars A pointer to an int32_t where you want
 		that value stored.
 	\return ?
 */
-status_t BSerialPort::NumCharsAvailable(int32 *numChars)
+status_t BSerialPort::NumCharsAvailable(int32_t *numChars)
 {
 	//No help from the BeBook...
 	if (ffd < 0)
@@ -460,9 +460,9 @@ BSerialPort::WaitForInput(void)
 	\return An integer which represents the number of available
 		serial ports.
 */
-int32 BSerialPort::CountDevices()
+int32_t BSerialPort::CountDevices()
 {
-	int32 count = 0;
+	int32_t count = 0;
 	
 	// Refresh devices list
 	_ScanDevices();
@@ -482,7 +482,7 @@ int32 BSerialPort::CountDevices()
 	- \c B_ERROR if something goes wrong
 	- \c B_OK if all goes fine.
 */
-status_t BSerialPort::GetDeviceName(int32 n, char *name, size_t bufSize)
+status_t BSerialPort::GetDeviceName(int32_t n, char *name, size_t bufSize)
 {
 	status_t result = B_ERROR;
 	const char *dev = NULL;
@@ -509,7 +509,7 @@ void BSerialPort::_ScanDevices()
 {
 	// First, we empty the list
 	if (fDevices != NULL) {
-		for (int32 count = fDevices->CountItems() - 1; count >= 0; count--)
+		for (int32_t count = fDevices->CountItems() - 1; count >= 0; count--)
 			free(fDevices->RemoveItem(count));
 		
 		// Add devices to the list

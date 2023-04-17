@@ -26,7 +26,7 @@ public:
 								BMediaIO();
 	virtual						~BMediaIO();
 
-	virtual void				GetFlags(int32* flags) const = 0;
+	virtual void				GetFlags(int32_t* flags) const = 0;
 
 private:
 								BMediaIO(const BMediaIO&);
@@ -38,7 +38,7 @@ private:
 	virtual void				_ReservedMediaIO4();
 	virtual void				_ReservedMediaIO5();
 
-			uint32				_reserved[5];
+			uint32_t				_reserved[5];
 };
 
 #endif	// _MEDIA_IO_H

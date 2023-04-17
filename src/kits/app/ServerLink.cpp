@@ -61,7 +61,7 @@ void ServerLink::SetTo(port_id sender, port_id receiver)
 
 status_t ServerLink::ReadRegion(BRegion* region)
 {
-	fReceiver->Read(&region->fCount, sizeof(int32));
+	fReceiver->Read(&region->fCount, sizeof(int32_t));
 	if (region->fCount > 0) {
 		fReceiver->Read(&region->fBounds, sizeof(clipping_rect));
 		if (!region->_SetSize(region->fCount))
@@ -76,7 +76,7 @@ status_t ServerLink::ReadRegion(BRegion* region)
 
 status_t ServerLink::AttachRegion(const BRegion& region)
 {
-	fSender->Attach(&region.fCount, sizeof(int32));
+	fSender->Attach(&region.fCount, sizeof(int32_t));
 	if (region.fCount > 0) {
 		fSender->Attach(&region.fBounds, sizeof(clipping_rect));
 		return fSender->Attach(region.fData,
@@ -89,13 +89,13 @@ status_t ServerLink::AttachRegion(const BRegion& region)
 
 status_t ServerLink::ReadShape(BShape* shape)
 {
-	int32 opCount, ptCount;
-	fReceiver->Read(&opCount, sizeof(int32));
-	fReceiver->Read(&ptCount, sizeof(int32));
+	int32_t opCount, ptCount;
+	fReceiver->Read(&opCount, sizeof(int32_t));
+	fReceiver->Read(&ptCount, sizeof(int32_t));
 
-	BStackOrHeapArray<uint32, 64> opList(opCount);
+	BStackOrHeapArray<uint32_t, 64> opList(opCount);
 	if (opCount > 0)
-		fReceiver->Read(opList, opCount * sizeof(uint32));
+		fReceiver->Read(opList, opCount * sizeof(uint32_t));
 
 	BStackOrHeapArray<BPoint, 64> ptList(ptCount);
 	if (ptCount > 0)
@@ -108,16 +108,16 @@ status_t ServerLink::ReadShape(BShape* shape)
 
 status_t ServerLink::AttachShape(BShape& shape)
 {
-	int32 opCount, ptCount;
-	uint32* opList;
+	int32_t opCount, ptCount;
+	uint32_t* opList;
 	BPoint* ptList;
 
 	shape.GetData(&opCount, &ptCount, &opList, &ptList);
 
-	fSender->Attach(&opCount, sizeof(int32));
-	fSender->Attach(&ptCount, sizeof(int32));
+	fSender->Attach(&opCount, sizeof(int32_t));
+	fSender->Attach(&ptCount, sizeof(int32_t));
 	if (opCount > 0)
-		fSender->Attach(opList, opCount * sizeof(uint32));
+		fSender->Attach(opList, opCount * sizeof(uint32_t));
 	if (ptCount > 0)
 		fSender->Attach(ptList, ptCount * sizeof(BPoint));
 	return B_OK;
@@ -135,11 +135,11 @@ status_t ServerLink::AttachGradient(const BGradient& gradient)
 {
 	GTRACE(("ServerLink::AttachGradient\n"));
 	BGradient::Type gradientType = gradient.GetType();
-	int32 stopCount = gradient.CountColorStops();
+	int32_t stopCount = gradient.CountColorStops();
 	GTRACE(("ServerLink::AttachGradient> color stop count == %d\n",
 		(int)stopCount));
 	fSender->Attach(&gradientType, sizeof(BGradient::Type));
-	fSender->Attach(&stopCount, sizeof(int32));
+	fSender->Attach(&stopCount, sizeof(int32_t));
 	if (stopCount > 0) {
 		for (int i = 0; i < stopCount; i++) {
 			fSender->Attach(gradient.ColorStopAtFast(i),
@@ -207,7 +207,7 @@ status_t ServerLink::AttachGradient(const BGradient& gradient)
 }
 
 
-status_t ServerLink::FlushWithReply(int32& code)
+status_t ServerLink::FlushWithReply(int32_t& code)
 {
 	status_t status = Flush(B_INFINITE_TIMEOUT, true);
 	if (status < B_OK)

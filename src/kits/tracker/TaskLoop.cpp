@@ -57,7 +57,7 @@ ActivityLevel()
 	cpu_info* cpuInfos = new cpu_info[sinfo.cpu_count];
 	get_cpu_info(0, sinfo.cpu_count, cpuInfos);
 
-	for (uint32 index = 0; index < sinfo.cpu_count; index++)
+	for (uint32_t index = 0; index < sinfo.cpu_count; index++)
 		time += cpuInfos[index].active_time;
 
 	delete[] cpuInfos;
@@ -70,7 +70,7 @@ class AccumulatedOneShotDelayedTask : public OneShotDelayedTask {
 public:
 	AccumulatedOneShotDelayedTask(AccumulatingFunctionObject* functor,
 		bigtime_t delay, bigtime_t maxAccumulatingTime = 0,
-		int32 maxAccumulateCount = 0)
+		int32_t maxAccumulateCount = 0)
 		:
 		OneShotDelayedTask(functor, delay),
 		maxAccumulateCount(maxAccumulateCount),
@@ -107,8 +107,8 @@ public:
 	}
 
 private:
-	int32 maxAccumulateCount;
-	int32 accumulateCount;
+	int32_t maxAccumulateCount;
+	int32_t accumulateCount;
 	bigtime_t maxAccumulatingTime;
 	bigtime_t initialTime;
 };
@@ -368,14 +368,14 @@ void TaskLoop::RunWhenIdle(FunctionObjectWithResult<bool>* functor,
 
 
 void TaskLoop::AccumulatedRunLater(AccumulatingFunctionObject* functor,
-	bigtime_t delay, bigtime_t maxAccumulatingTime, int32 maxAccumulateCount)
+	bigtime_t delay, bigtime_t maxAccumulatingTime, int32_t maxAccumulateCount)
 {
 	AutoLock<BLocker> autoLock(&fLock);
 	if (!autoLock.IsLocked())
 		return;
 
-	int32 count = fTaskList.CountItems();
-	for (int32 index = 0; index < count; index++) {
+	int32_t count = fTaskList.CountItems();
+	for (int32_t index = 0; index < count; index++) {
 		AccumulatedOneShotDelayedTask* task
 			= dynamic_cast<AccumulatedOneShotDelayedTask*>(
 				fTaskList.ItemAt(index));
@@ -396,10 +396,10 @@ bool TaskLoop::Pulse()
 {
 	ASSERT(fLock.IsLocked());
 
-	int32 count = fTaskList.CountItems();
+	int32_t count = fTaskList.CountItems();
 	if (count > 0) {
 		bigtime_t currentTime = system_time();
-		for (int32 index = 0; index < count; ) {
+		for (int32_t index = 0; index < count; ) {
 			DelayedTask* task = fTaskList.ItemAt(index);
 			// give every task a try
 			if (task->RunIfNeeded(currentTime)) {
@@ -423,8 +423,8 @@ TaskLoop::LatestRunTime() const
 #if xDEBUG
 	DelayedTask* nextTask = 0;
 #endif
-	int32 count = fTaskList.CountItems();
-	for (int32 index = 0; index < count; index++) {
+	int32_t count = fTaskList.CountItems();
+	for (int32_t index = 0; index < count; index++) {
 		bigtime_t runAfter = fTaskList.ItemAt(index)->RunAfterTime();
 		if (runAfter < result) {
 			result = runAfter;
@@ -488,7 +488,7 @@ StandAloneTaskLoop::~StandAloneTaskLoop()
 	fLock.Unlock();
 
 	if (!easyOut)
-		for (int32 timeout = 10000; ; timeout--) {
+		for (int32_t timeout = 10000; ; timeout--) {
 			// use a 10 sec timeout value in case the spawned
 			// thread is stuck somewhere
 

@@ -32,8 +32,8 @@ public:
 	virtual bool					ChildCreationNeedsValue() const
 										{ return true; }
 	virtual status_t				CreateChildren(TeamTypeInformation* info);
-	virtual int32					CountChildren() const;
-	virtual ValueNodeChild*			ChildAt(int32 index) const;
+	virtual int32_t					CountChildren() const;
+	virtual ValueNodeChild*			ChildAt(int32_t index) const;
 
 private:
 
@@ -44,9 +44,9 @@ private:
 			status_t				_FindField(const char* name,
 										type_code type,
 										BMessage::field_header** result) const;
-			uint32					_HashName(const char* name) const;
+			uint32_t					_HashName(const char* name) const;
 			status_t				_FindDataLocation(const char* name,
-										type_code type, int32 index,
+										type_code type, int32_t index,
 										ValueLocation& location) const;
 
 private:
@@ -79,7 +79,7 @@ public:
 										BMessageFieldNodeChild *child,
 										BMessageValueNode* parent,
 										const BString& name,
-										type_code type, int32 count);
+										type_code type, int32_t count);
 
 	virtual 						~BMessageFieldNode();
 
@@ -91,15 +91,15 @@ public:
 										Value*& _value);
 
 	virtual	status_t 				CreateChildren(TeamTypeInformation* info);
-	virtual	int32 					CountChildren() const;
-	virtual	ValueNodeChild* 		ChildAt(int32 index) const;
+	virtual	int32_t 					CountChildren() const;
+	virtual	ValueNodeChild* 		ChildAt(int32_t index) const;
 
 private:
 			BString 				fName;
 			Type*					fType;
 			BMessageValueNode* 		fParent;
 			type_code				fFieldType;
-			int32					fFieldCount;
+			int32_t					fFieldCount;
 			ChildNodeList			fChildren;
 };
 
@@ -110,8 +110,8 @@ public:
 										BMessageValueNode* parent,
 										Type* nodeType,
 										const BString &name,
-										type_code type, int32 count,
-										int32 index = -1);
+										type_code type, int32_t count,
+										int32_t index = -1);
 
 	virtual 						~BMessageFieldNodeChild();
 
@@ -132,8 +132,8 @@ private:
 			Type*					fType;
 			BMessageValueNode* 		fParent;
 			type_code				fFieldType;
-			int32					fFieldCount;
-			int32					fFieldIndex;
+			int32_t					fFieldCount;
+			int32_t					fFieldIndex;
 };
 
 #endif	// BMESSAGE_VALUE_NODE_H

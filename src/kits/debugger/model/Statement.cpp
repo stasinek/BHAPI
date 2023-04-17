@@ -50,14 +50,14 @@ ContiguousStatement::CoveringAddressRange() const
 }
 
 
-int32 ContiguousStatement::CountAddressRanges() const
+int32_t ContiguousStatement::CountAddressRanges() const
 {
 	return 1;
 }
 
 
 TargetAddressRange
-ContiguousStatement::AddressRangeAt(int32 index) const
+ContiguousStatement::AddressRangeAt(int32_t index) const
 {
 	return index == 0 ? fRange : TargetAddressRange();
 }

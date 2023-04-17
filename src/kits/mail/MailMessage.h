@@ -34,10 +34,10 @@ class BEmailMessage : public BMailContainer {
 public:
 								BEmailMessage(BPositionIO* stream = NULL,
 									bool ownStream = false,
-									uint32 defaultCharSet
+									uint32_t defaultCharSet
 										= B_MAIL_NULL_CONVERSION);
 								BEmailMessage(const entry_ref* ref,
-									uint32 defaultCharSet
+									uint32_t defaultCharSet
 										= B_MAIL_NULL_CONVERSION);
 	virtual						~BEmailMessage();
 
@@ -64,43 +64,43 @@ public:
 			int					Priority() const;
 
 			void				SetSubject(const char* to,
-									uint32 charset = B_MAIL_NULL_CONVERSION,
+									uint32_t charset = B_MAIL_NULL_CONVERSION,
 									mail_encoding encoding = null_encoding);
 			void				SetReplyTo(const char* to,
-									uint32 charset = B_MAIL_NULL_CONVERSION,
+									uint32_t charset = B_MAIL_NULL_CONVERSION,
 									mail_encoding encoding = null_encoding);
 			void				SetFrom(const char* to,
-									uint32 charset = B_MAIL_NULL_CONVERSION,
+									uint32_t charset = B_MAIL_NULL_CONVERSION,
 									mail_encoding encoding = null_encoding);
 			void				SetTo(const char* to,
-									uint32 charset = B_MAIL_NULL_CONVERSION,
+									uint32_t charset = B_MAIL_NULL_CONVERSION,
 									mail_encoding encoding = null_encoding);
 			void				SetCC(const char* to,
-									uint32 charset = B_MAIL_NULL_CONVERSION,
+									uint32_t charset = B_MAIL_NULL_CONVERSION,
 									mail_encoding encoding = null_encoding);
 			void				SetBCC(const char* to);
 			void				SetPriority(int to);
 
-			status_t			GetName(char* name, int32 maxLength) const;
+			status_t			GetName(char* name, int32_t maxLength) const;
 			status_t			GetName(BString* name) const;
 
 			void				SendViaAccountFrom(BEmailMessage* message);
 			void				SendViaAccount(const char* accountName);
-			void				SendViaAccount(int32 account);
-			int32				Account() const;
+			void				SendViaAccount(int32_t account);
+			int32_t				Account() const;
 			status_t			GetAccountName(BString& accountName) const;
 
 	virtual	status_t			AddComponent(BMailComponent *component);
 	virtual	status_t			RemoveComponent(BMailComponent *component);
-	virtual	status_t			RemoveComponent(int32 index);
+	virtual	status_t			RemoveComponent(int32_t index);
 
-	virtual	BMailComponent*		GetComponent(int32 index,
+	virtual	BMailComponent*		GetComponent(int32_t index,
 									bool parseNow = false);
-	virtual	int32				CountComponents() const;
+	virtual	int32_t				CountComponents() const;
 
 			void				Attach(entry_ref* ref,
 									bool includeAttributes = true);
-			bool				IsComponentAttachment(int32 index);
+			bool				IsComponentAttachment(int32_t index);
 
 			void				SetBodyTextTo(const char* text);
 			const char*			BodyText();
@@ -129,14 +129,14 @@ private:
 			BPositionIO*		fData;
 
 			status_t			fStatus;
-			int32				fAccountID;
+			int32_t				fAccountID;
 			char*				fBCC;
 
-			int32				fComponentCount;
+			int32_t				fComponentCount;
 			BMailComponent*		fBody;
 			BTextMailComponent*	fTextBody;
 
-			uint32				_reserved[5];
+			uint32_t				_reserved[5];
 };
 
 

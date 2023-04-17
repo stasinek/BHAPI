@@ -41,7 +41,7 @@ BNotification::BNotification(BMessage* archive)
 	fFile(NULL),
 	fBitmap(NULL)
 {
-	int32 type;
+	int32_t type;
 	if (archive->FindInt32("_type", &type) == B_OK)
 		fType = (notification_type)type;
 	else
@@ -77,7 +77,7 @@ BNotification::BNotification(BMessage* archive)
 		SetOnClickFile(&onClickFile);
 
 	entry_ref onClickRef;
-	int32 index = 0;
+	int32_t index = 0;
 	while (archive->FindRef("_onClickRef", index++, &onClickRef) == B_OK)
 		AddOnClickRef(&onClickRef);
 
@@ -102,10 +102,10 @@ BNotification::~BNotification()
 	delete fFile;
 	delete fBitmap;
 
-	for (int32 i = fRefs.CountItems() - 1; i >= 0; i--)
+	for (int32_t i = fRefs.CountItems() - 1; i >= 0; i--)
 		delete (entry_ref*)fRefs.ItemAtFast(i);
 
-	for (int32 i = fArgv.CountItems() - 1; i >= 0; i--)
+	for (int32_t i = fArgv.CountItems() - 1; i >= 0; i--)
 		free(fArgv.ItemAtFast(i));
 }
 
@@ -150,7 +150,7 @@ status_t BNotification::Archive(BMessage* archive, bool deep) const
 	status_t status = BArchivable::Archive(archive, deep);
 
 	if (status == B_OK)
-		status = archive->AddInt32("_type", (int32)fType);
+		status = archive->AddInt32("_type", (int32_t)fType);
 
 	if (status == B_OK && Group() != NULL)
 		status = archive->AddString("_group", Group());
@@ -174,7 +174,7 @@ status_t BNotification::Archive(BMessage* archive, bool deep) const
 		status = archive->AddRef("_onClickFile", OnClickFile());
 
 	if (status == B_OK) {
-		for (int32 i = 0; i < CountOnClickRefs(); i++) {
+		for (int32_t i = 0; i < CountOnClickRefs(); i++) {
 			status = archive->AddRef("_onClickRef", OnClickRefAt(i));
 			if (status != B_OK)
 				break;
@@ -182,7 +182,7 @@ status_t BNotification::Archive(BMessage* archive, bool deep) const
 	}
 
 	if (status == B_OK) {
-		for (int32 i = 0; i < CountOnClickArgs(); i++) {
+		for (int32_t i = 0; i < CountOnClickArgs(); i++) {
 			status = archive->AddString("_onClickArgv", OnClickArgAt(i));
 			if (status != B_OK)
 				break;
@@ -383,14 +383,14 @@ status_t BNotification::AddOnClickRef(const entry_ref* ref)
 }
 
 
-int32 BNotification::CountOnClickRefs() const
+int32_t BNotification::CountOnClickRefs() const
 {
 	return fRefs.CountItems();
 }
 
 
 const entry_ref*
-BNotification::OnClickRefAt(int32 index) const
+BNotification::OnClickRefAt(int32_t index) const
 {
 	return (entry_ref*)fArgv.ItemAt(index);
 }
@@ -406,13 +406,13 @@ status_t BNotification::AddOnClickArg(const BString& arg)
 }
 
 
-int32 BNotification::CountOnClickArgs() const
+int32_t BNotification::CountOnClickArgs() const
 {
 	return fArgv.CountItems();
 }
 
 
-const char*  BNotification::OnClickArgAt(int32 index) const
+const char*  BNotification::OnClickArgAt(int32_t index) const
 {
 	return (char*)fArgv.ItemAt(index);
 }

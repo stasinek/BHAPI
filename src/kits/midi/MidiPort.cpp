@@ -69,7 +69,7 @@ status_t BMidiPort::Open(const char* name)
 	if (name != NULL) {
 		Close();
 
-		for (int32 t = 0; t < fDevices->CountItems(); ++t) {
+		for (int32_t t = 0; t < fDevices->CountItems(); ++t) {
 			BMidiEndpoint* endp = (BMidiEndpoint*)fDevices->ItemAt(t);
 			if (strcmp(name, endp->Name()) != 0)
 				continue;
@@ -126,21 +126,21 @@ BMidiPort::PortName() const
 
 
 void BMidiPort::NoteOff(
-	uchar channel, uchar note, uchar velocity, uint32 time)
+	uchar channel, uchar note, uchar velocity, uint32_t time)
 {
 	fLocalSource->SprayNoteOff(channel - 1, note, velocity, MAKE_BIGTIME(time));
 }
 
 
 void BMidiPort::NoteOn(
-	uchar channel, uchar note, uchar velocity, uint32 time)
+	uchar channel, uchar note, uchar velocity, uint32_t time)
 {
 	fLocalSource->SprayNoteOn(channel - 1, note, velocity, MAKE_BIGTIME(time));
 }
 
 
 void BMidiPort::KeyPressure(
-	uchar channel, uchar note, uchar pressure, uint32 time)
+	uchar channel, uchar note, uchar pressure, uint32_t time)
 {
 	fLocalSource->SprayKeyPressure(
 		channel - 1, note, pressure, MAKE_BIGTIME(time));
@@ -148,7 +148,7 @@ void BMidiPort::KeyPressure(
 
 
 void BMidiPort::ControlChange(
-	uchar channel, uchar controlNumber, uchar controlValue, uint32 time)
+	uchar channel, uchar controlNumber, uchar controlValue, uint32_t time)
 {
 	fLocalSource->SprayControlChange(
 		channel - 1, controlNumber, controlValue, MAKE_BIGTIME(time));
@@ -156,40 +156,40 @@ void BMidiPort::ControlChange(
 
 
 void BMidiPort::ProgramChange(
-	uchar channel, uchar programNumber, uint32 time)
+	uchar channel, uchar programNumber, uint32_t time)
 {
 	fLocalSource->SprayProgramChange(
 		channel - 1, programNumber, MAKE_BIGTIME(time));
 }
 
 
-void BMidiPort::ChannelPressure(uchar channel, uchar pressure, uint32 time)
+void BMidiPort::ChannelPressure(uchar channel, uchar pressure, uint32_t time)
 {
 	fLocalSource->SprayChannelPressure(
 		channel - 1, pressure, MAKE_BIGTIME(time));
 }
 
 
-void BMidiPort::PitchBend(uchar channel, uchar lsb, uchar msb, uint32 time)
+void BMidiPort::PitchBend(uchar channel, uchar lsb, uchar msb, uint32_t time)
 {
 	fLocalSource->SprayPitchBend(channel - 1, lsb, msb, MAKE_BIGTIME(time));
 }
 
 
-void BMidiPort::SystemExclusive(void* data, size_t length, uint32 time)
+void BMidiPort::SystemExclusive(void* data, size_t length, uint32_t time)
 {
 	fLocalSource->SpraySystemExclusive(data, length, MAKE_BIGTIME(time));
 }
 
 
 void BMidiPort::SystemCommon(
-	uchar status, uchar data1, uchar data2, uint32 time)
+	uchar status, uchar data1, uchar data2, uint32_t time)
 {
 	fLocalSource->SpraySystemCommon(status, data1, data2, MAKE_BIGTIME(time));
 }
 
 
-void BMidiPort::SystemRealTime(uchar status, uint32 time)
+void BMidiPort::SystemRealTime(uchar status, uint32_t time)
 {
 	fLocalSource->SpraySystemRealTime(status, MAKE_BIGTIME(time));
 }
@@ -217,14 +217,14 @@ void BMidiPort::Stop()
 }
 
 
-int32 
+int32_t 
 BMidiPort::CountDevices()
 {
 	return fDevices->CountItems();
 }
 
 
-status_t BMidiPort::GetDeviceName(int32 n, char* name, size_t bufSize)
+status_t BMidiPort::GetDeviceName(int32_t n, char* name, size_t bufSize)
 {
 	BMidiEndpoint* endp = (BMidiEndpoint*)fDevices->ItemAt(n);
 	if (endp == NULL)
@@ -255,7 +255,7 @@ void BMidiPort::ScanDevices()
 {
 	EmptyDeviceList();
 
-	int32 id = 0;
+	int32_t id = 0;
 	BMidiEndpoint* endp;
 
 	while ((endp = BMidiRoster::NextEndpoint(&id)) != NULL) {
@@ -263,7 +263,7 @@ void BMidiPort::ScanDevices()
 		// and a producer. Both have the same name, so we add only one of them.
 
 		bool addItem = true;
-		for (int32 t = 0; t < fDevices->CountItems(); ++t) {
+		for (int32_t t = 0; t < fDevices->CountItems(); ++t) {
 			BMidiEndpoint* other = (BMidiEndpoint*)fDevices->ItemAt(t);
 			if (strcmp(endp->Name(), other->Name()) == 0) {
 				addItem = false;
@@ -282,7 +282,7 @@ void BMidiPort::ScanDevices()
 
 void BMidiPort::EmptyDeviceList()
 {
-	for (int32 t = 0; t < fDevices->CountItems(); ++t) 
+	for (int32_t t = 0; t < fDevices->CountItems(); ++t) 
 		((BMidiEndpoint*)fDevices->ItemAt(t))->Release();
 
 	fDevices->MakeEmpty();

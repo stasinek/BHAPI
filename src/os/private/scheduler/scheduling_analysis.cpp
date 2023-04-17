@@ -31,7 +31,7 @@ struct HashObjectKey {
 	{
 	}
 
-	virtual uint32 HashKey() const = 0;
+	virtual uint32_t HashKey() const = 0;
 };
 
 
@@ -42,7 +42,7 @@ struct HashObject {
 	{
 	}
 
-	virtual uint32 HashKey() const = 0;
+	virtual uint32_t HashKey() const = 0;
 	virtual bool Equals(const HashObjectKey* key) const = 0;
 };
 
@@ -56,7 +56,7 @@ struct ThreadKey : HashObjectKey {
 	{
 	}
 
-	virtual uint32 HashKey() const
+	virtual uint32_t HashKey() const
 	{
 		return id;
 	}
@@ -101,7 +101,7 @@ struct Thread : HashObject, scheduling_analysis_thread {
 		wait_objects = NULL;
 	}
 
-	virtual uint32 HashKey() const
+	virtual uint32_t HashKey() const
 	{
 		return id;
 	}
@@ -117,25 +117,25 @@ struct Thread : HashObject, scheduling_analysis_thread {
 
 
 struct WaitObjectKey : HashObjectKey {
-	uint32	type;
+	uint32_t	type;
 	void*	object;
 
-	WaitObjectKey(uint32 type, void* object)
+	WaitObjectKey(uint32_t type, void* object)
 		:
 		type(type),
 		object(object)
 	{
 	}
 
-	virtual uint32 HashKey() const
+	virtual uint32_t HashKey() const
 	{
-		return type ^ (uint32)(addr_t)object;
+		return type ^ (uint32_t)(addr_t)object;
 	}
 };
 
 
 struct WaitObject : HashObject, scheduling_analysis_wait_object {
-	WaitObject(uint32 type, void* object)
+	WaitObject(uint32_t type, void* object)
 	{
 		this->type = type;
 		this->object = object;
@@ -143,9 +143,9 @@ struct WaitObject : HashObject, scheduling_analysis_wait_object {
 		referenced_object = NULL;
 	}
 
-	virtual uint32 HashKey() const
+	virtual uint32_t HashKey() const
 	{
-		return type ^ (uint32)(addr_t)object;
+		return type ^ (uint32_t)(addr_t)object;
 	}
 
 	virtual bool Equals(const HashObjectKey* _key) const
@@ -160,10 +160,10 @@ struct WaitObject : HashObject, scheduling_analysis_wait_object {
 
 struct ThreadWaitObjectKey : HashObjectKey {
 	thread_id				thread;
-	uint32					type;
+	uint32_t					type;
 	void*					object;
 
-	ThreadWaitObjectKey(thread_id thread, uint32 type, void* object)
+	ThreadWaitObjectKey(thread_id thread, uint32_t type, void* object)
 		:
 		thread(thread),
 		type(type),
@@ -171,9 +171,9 @@ struct ThreadWaitObjectKey : HashObjectKey {
 	{
 	}
 
-	virtual uint32 HashKey() const
+	virtual uint32_t HashKey() const
 	{
-		return thread ^ type ^ (uint32)(addr_t)object;
+		return thread ^ type ^ (uint32_t)(addr_t)object;
 	}
 };
 
@@ -188,9 +188,9 @@ struct ThreadWaitObject : HashObject, scheduling_analysis_thread_wait_object {
 		next_in_list = NULL;
 	}
 
-	virtual uint32 HashKey() const
+	virtual uint32_t HashKey() const
 	{
-		return thread ^ wait_object->type ^ (uint32)(addr_t)wait_object->object;
+		return thread ^ wait_object->type ^ (uint32_t)(addr_t)wait_object->object;
 	}
 
 	virtual bool Equals(const HashObjectKey* _key) const
@@ -257,14 +257,14 @@ public:
 
 	void Insert(HashObject* object)
 	{
-		uint32 index = object->HashKey() % fHashTableSize;
+		uint32_t index = object->HashKey() % fHashTableSize;
 		object->next = fHashTable[index];
 		fHashTable[index] = object;
 	}
 
 	void Remove(HashObject* object)
 	{
-		uint32 index = object->HashKey() % fHashTableSize;
+		uint32_t index = object->HashKey() % fHashTableSize;
 		HashObject** slot = &fHashTable[index];
 		while (*slot != object)
 			slot = &(*slot)->next;
@@ -274,7 +274,7 @@ public:
 
 	HashObject* Lookup(const HashObjectKey& key) const
 	{
-		uint32 index = key.HashKey() % fHashTableSize;
+		uint32_t index = key.HashKey() % fHashTableSize;
 		HashObject* object = fHashTable[index];
 		while (object != NULL && !object->Equals(&key))
 			object = object->next;
@@ -286,12 +286,12 @@ public:
 		return dynamic_cast<Thread*>(Lookup(ThreadKey(id)));
 	}
 
-	WaitObject* WaitObjectFor(uint32 type, void* object) const
+	WaitObject* WaitObjectFor(uint32_t type, void* object) const
 	{
 		return dynamic_cast<WaitObject*>(Lookup(WaitObjectKey(type, object)));
 	}
 
-	ThreadWaitObject* ThreadWaitObjectFor(thread_id thread, uint32 type,
+	ThreadWaitObject* ThreadWaitObjectFor(thread_id thread, uint32_t type,
 		void* object) const
 	{
 		return dynamic_cast<ThreadWaitObject*>(
@@ -317,7 +317,7 @@ public:
 		return B_OK;
 	}
 
-	status_t AddWaitObject(uint32 type, void* object,
+	status_t AddWaitObject(uint32_t type, void* object,
 		WaitObject** _waitObject = NULL)
 	{
 		if (WaitObjectFor(type, object) != NULL)
@@ -344,7 +344,7 @@ public:
 		return B_OK;
 	}
 
-	status_t UpdateWaitObject(uint32 type, void* object, const char* name,
+	status_t UpdateWaitObject(uint32_t type, void* object, const char* name,
 		void* referencedObject)
 	{
 		WaitObject* waitObject = WaitObjectFor(type, object);
@@ -368,7 +368,7 @@ public:
 		return B_OK;
 	}
 
-	bool UpdateWaitObjectDontAdd(uint32 type, void* object, const char* name,
+	bool UpdateWaitObjectDontAdd(uint32_t type, void* object, const char* name,
 		void* referencedObject)
 	{
 		WaitObject* waitObject = WaitObjectFor(type, object);
@@ -384,7 +384,7 @@ public:
 		return B_OK;
 	}
 
-	status_t AddThreadWaitObject(Thread* thread, uint32 type, void* object)
+	status_t AddThreadWaitObject(Thread* thread, uint32_t type, void* object)
 	{
 		WaitObject* waitObject = WaitObjectFor(type, object);
 		if (waitObject == NULL) {
@@ -417,12 +417,12 @@ public:
 		return B_OK;
 	}
 
-	int32 MissingWaitObjects() const
+	int32_t MissingWaitObjects() const
 	{
 		// Iterate through the hash table and count the wait objects that don't
 		// have a name yet.
-		int32 count = 0;
-		for (uint32 i = 0; i < fHashTableSize; i++) {
+		int32_t count = 0;
+		for (uint32_t i = 0; i < fHashTableSize; i++) {
 			HashObject* object = fHashTable[i];
 			while (object != NULL) {
 				WaitObject* waitObject = dynamic_cast<WaitObject*>(object);
@@ -447,8 +447,8 @@ public:
 
 		// Iterate through the hash table and collect all threads. Also polish
 		// all wait objects that haven't been update yet.
-		int32 index = 0;
-		for (uint32 i = 0; i < fHashTableSize; i++) {
+		int32_t index = 0;
+		for (uint32_t i = 0; i < fHashTableSize; i++) {
 			HashObject* object = fHashTable[i];
 			while (object != NULL) {
 				Thread* thread = dynamic_cast<Thread*>(object);
@@ -556,7 +556,7 @@ private:
 	void*				fBuffer;
 	size_t				fSize;
 	HashObject**		fHashTable;
-	uint32				fHashTableSize;
+	uint32_t				fHashTableSize;
 	uint8*				fNextAllocation;
 	size_t				fRemainingBytes;
 	addr_t				fKernelStart;
@@ -614,7 +614,7 @@ analyze_scheduling(bigtime_t from, bigtime_t until,
 	}
 
 #if SCHEDULING_ANALYSIS_TRACING
-	int32 startEntryIndex = iterator.Index();
+	int32_t startEntryIndex = iterator.Index();
 #endif
 
 	while (TraceEntry* _entry = iterator.Next()) {
@@ -730,7 +730,7 @@ analyze_scheduling(bigtime_t from, bigtime_t until,
 				thread->lastTime = entry->Time();
 				thread->state = WAITING;
 			} else if (thread->state == UNKNOWN) {
-				uint32 threadState = entry->PreviousState();
+				uint32_t threadState = entry->PreviousState();
 				if (threadState == B_THREAD_WAITING
 					|| threadState == B_THREAD_SUSPENDED) {
 					thread->lastTime = entry->Time();
@@ -793,7 +793,7 @@ analyze_scheduling(bigtime_t from, bigtime_t until,
 
 
 #if SCHEDULING_ANALYSIS_TRACING
-	int32 missingWaitObjects = manager.MissingWaitObjects();
+	int32_t missingWaitObjects = manager.MissingWaitObjects();
 	if (missingWaitObjects > 0) {
 		iterator.MoveTo(startEntryIndex + 1);
 		while (TraceEntry* _entry = iterator.Previous()) {

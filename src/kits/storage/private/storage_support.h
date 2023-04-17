@@ -41,12 +41,12 @@ status_t split_path(const char *fullPath, char *&path, char *&leaf);
 status_t split_path(const char *fullPath, char **path, char **leaf);
 
 //! Parses the first component of a path name.
-status_t parse_first_path_component(const char *path, int32& length,
-									int32& nextComponent);
+status_t parse_first_path_component(const char *path, int32_t& length,
+									int32_t& nextComponent);
 
 //! Parses the first component of a path name.
 status_t parse_first_path_component(const char *path, char *&component,
-									int32& nextComponent);
+									int32_t& nextComponent);
 
 //! Checks whether an entry name is a valid entry name.
 status_t check_entry_name(const char *entry);

@@ -190,7 +190,7 @@ status_t BControllable::SetParameterWeb(BParameterWeb* web)
 }
 
 
-status_t BControllable::HandleMessage(int32 message, const void* data, size_t size)
+status_t BControllable::HandleMessage(int32_t message, const void* data, size_t size)
 {
 	PRINT(4, "BControllable::HandleMessage %#lx, node %ld\n", message, ID());
 
@@ -268,7 +268,7 @@ status_t BControllable::HandleMessage(int32 message, const void* data, size_t si
 #if 0
 						} else {
 							printf("BControllable::HandleMessage CONTROLLABLE_GET_PARAMETER_WEB %ld bytes, 0x%08lx, 0x%08lx, 0x%08lx, 0x%08lx\n",
-								reply.size, ((uint32*)buffer)[0], ((uint32*)buffer)[1], ((uint32*)buffer)[2], ((uint32*)buffer)[3]);
+								reply.size, ((uint32_t*)buffer)[0], ((uint32_t*)buffer)[1], ((uint32_t*)buffer)[2], ((uint32_t*)buffer)[3]);
 #endif
 						}
 					}
@@ -311,14 +311,14 @@ status_t BControllable::HandleMessage(int32 message, const void* data, size_t si
 }
 
 
-status_t BControllable::BroadcastChangedParameter(int32 id)
+status_t BControllable::BroadcastChangedParameter(int32_t id)
 {
 	CALLED();
 	return BPrivate::media::notifications::ParameterChanged(Node(), id);
 }
 
 
-status_t BControllable::BroadcastNewParameterValue(bigtime_t when, int32 id,
+status_t BControllable::BroadcastNewParameterValue(bigtime_t when, int32_t id,
 	void* newValue, size_t valueSize)
 {
 	CALLED();
@@ -331,7 +331,7 @@ status_t BControllable::StartControlPanel(BMessenger* _messenger)
 {
 	CALLED();
 
-	int32 internalId;
+	int32_t internalId;
 	BMediaAddOn* addon = AddOn(&internalId);
 	if (!addon) {
 		ERROR("BControllable::StartControlPanel not instantiated per AddOn\n");
@@ -378,7 +378,7 @@ status_t BControllable::ApplyParameterData(const void* value, size_t size)
 }
 
 
-status_t BControllable::MakeParameterData(const int32* controls, int32 count,
+status_t BControllable::MakeParameterData(const int32_t* controls, int32_t count,
 	void* buffer, size_t* ioSize)
 {
 	UNIMPLEMENTED();

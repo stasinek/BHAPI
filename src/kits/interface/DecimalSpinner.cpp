@@ -17,7 +17,7 @@
 
 
 static double
-roundTo(double value, uint32 n)
+roundTo(double value, uint32_t n)
 {
 	return floor(value * pow(10.0, n) + 0.5) / pow(10.0, n);
 }
@@ -117,7 +117,7 @@ static property_info sProperties[] = {
 
 
 BDecimalSpinner::BDecimalSpinner(BRect frame, const char* name,
-	const char* label, BMessage* message, uint32 resizingMode, uint32 flags)
+	const char* label, BMessage* message, uint32_t resizingMode, uint32_t flags)
 	:
 	BAbstractSpinner(frame, name, label, message, resizingMode, flags)
 {
@@ -126,7 +126,7 @@ BDecimalSpinner::BDecimalSpinner(BRect frame, const char* name,
 
 
 BDecimalSpinner::BDecimalSpinner(const char* name, const char* label,
-	BMessage* message, uint32 flags)
+	BMessage* message, uint32_t flags)
 	:
 	BAbstractSpinner(name, label, message, flags)
 {
@@ -269,7 +269,7 @@ void BDecimalSpinner::SetRange(double min, double max)
 }
 
 
-void BDecimalSpinner::SetValue(int32 value)
+void BDecimalSpinner::SetValue(int32_t value)
 {
 	SetValue((double)value);
 }
@@ -325,11 +325,11 @@ void BDecimalSpinner::_InitObject()
 	fValue = 0.0;
 
 	TextView()->SetAlignment(B_ALIGN_RIGHT);
-	for (uint32 c = 0; c <= 42; c++)
+	for (uint32_t c = 0; c <= 42; c++)
 		TextView()->DisallowChar(c);
 
 	TextView()->DisallowChar('/');
-	for (uint32 c = 58; c <= 127; c++)
+	for (uint32_t c = 58; c <= 127; c++)
 		TextView()->DisallowChar(c);
 }
 

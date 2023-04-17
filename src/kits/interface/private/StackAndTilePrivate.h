@@ -12,7 +12,7 @@
 namespace BPrivate {
 
 
-const int32 kMagicSATIdentifier = 'SATI';
+const int32_t kMagicSATIdentifier = 'SATI';
 
 
 enum sat_target {

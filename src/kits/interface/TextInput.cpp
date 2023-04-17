@@ -27,8 +27,8 @@
 namespace BPrivate {
 
 
-_BTextInput_::_BTextInput_(BRect frame, BRect textRect, uint32 resizeMask,
-	uint32 flags)
+_BTextInput_::_BTextInput_(BRect frame, BRect textRect, uint32_t resizeMask,
+	uint32_t flags)
 	:
 	BTextView(frame, "_input_", textRect, resizeMask, flags),
 	fPreviousText(NULL)
@@ -88,7 +88,7 @@ void _BTextInput_::FrameResized(float width, float height)
 }
 
 
-void _BTextInput_::KeyDown(const char* bytes, int32 numBytes)
+void _BTextInput_::KeyDown(const char* bytes, int32_t numBytes)
 {
 	switch (*bytes) {
 		case B_ENTER:
@@ -212,8 +212,8 @@ void _BTextInput_::Paste(BClipboard* clipboard)
 }
 
 
-void _BTextInput_::InsertText(const char* inText, int32 inLength,
-	int32 inOffset, const text_run_array* inRuns)
+void _BTextInput_::InsertText(const char* inText, int32_t inLength,
+	int32_t inOffset, const text_run_array* inRuns)
 {
 	// Filter all line breaks, note that inText is not terminated.
 	if (inLength == 1) {
@@ -234,7 +234,7 @@ void _BTextInput_::InsertText(const char* inText, int32 inLength,
 }
 
 
-void _BTextInput_::DeleteText(int32 fromOffset, int32 toOffset)
+void _BTextInput_::DeleteText(int32_t fromOffset, int32_t toOffset)
 {
 	BTextView::DeleteText(fromOffset, toOffset);
 

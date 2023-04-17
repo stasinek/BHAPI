@@ -15,14 +15,14 @@ extern "C" {
 
 void		user_mutex_init();
 
-status_t	_user_mutex_lock(int32* mutex, const char* name, uint32 flags,
+status_t	_user_mutex_lock(int32_t* mutex, const char* name, uint32_t flags,
 				bigtime_t timeout);
-status_t	_user_mutex_unlock(int32* mutex, uint32 flags);
-status_t	_user_mutex_switch_lock(int32* fromMutex, int32* toMutex,
-				const char* name, uint32 flags, bigtime_t timeout);
-status_t	_user_mutex_sem_acquire(int32* sem, const char* name, uint32 flags,
+status_t	_user_mutex_unlock(int32_t* mutex, uint32_t flags);
+status_t	_user_mutex_switch_lock(int32_t* fromMutex, int32_t* toMutex,
+				const char* name, uint32_t flags, bigtime_t timeout);
+status_t	_user_mutex_sem_acquire(int32_t* sem, const char* name, uint32_t flags,
 				bigtime_t timeout);
-status_t	_user_mutex_sem_release(int32* sem);
+status_t	_user_mutex_sem_release(int32_t* sem);
 
 #ifdef __cplusplus
 }

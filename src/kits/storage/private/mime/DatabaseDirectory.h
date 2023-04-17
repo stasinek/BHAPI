@@ -30,8 +30,8 @@ public:
 
 protected:
 	virtual	bool				ShallPreferFirstEntry(const entry_ref& entry1,
-									int32 index1, const entry_ref& entry2,
-									int32 index2);
+									int32_t index1, const entry_ref& entry2,
+									int32_t index2);
 
 private:
 			bool				_IsValidMimeTypeEntry(const entry_ref& entry);

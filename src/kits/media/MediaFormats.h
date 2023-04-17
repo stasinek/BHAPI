@@ -19,11 +19,11 @@ struct media_codec_info {
     char	pretty_name[96];   /* eg: "SuperSqueeze Encoder by Foo Inc" */
     char	short_name[32];    /* eg: "SuperSqueeze" */
 
-    int32	id;                /* opaque id passed to
+    int32_t	id;                /* opaque id passed to
                                   BMediaFile::CreateTrack() */
-    int32	sub_id;
+    int32_t	sub_id;
 
-    int32	pad[63];
+    int32_t	pad[63];
 };
 
 /*!	\brief	Use this to iterate through the available encoders for a given file
@@ -42,7 +42,7 @@ struct media_codec_info {
     - \c B_OK: Everything went fine.
     - \c B_BAD_INDEX: There are no more encoders.
  */
-status_t get_next_encoder(int32* cookie, const media_file_format* fileFormat,
+status_t get_next_encoder(int32_t* cookie, const media_file_format* fileFormat,
     const media_format* inputFormat, media_format* _outputFormat,
     media_codec_info* _codecInfo);
 
@@ -73,7 +73,7 @@ status_t get_next_encoder(int32* cookie, const media_file_format* fileFormat,
     - \c B_OK: Everything went fine.
     - \c B_BAD_INDEX: There are no more encoders.
 */
-status_t get_next_encoder(int32* cookie, const media_file_format* fileFormat,
+status_t get_next_encoder(int32_t* cookie, const media_file_format* fileFormat,
     const media_format* inputFormat, const media_format* outputFormat,
     media_codec_info* _codecInfo, media_format* _acceptedInputFormat,
     media_format* _acceptedOutputFormat);
@@ -91,14 +91,14 @@ status_t get_next_encoder(int32* cookie, const media_file_format* fileFormat,
     - \c B_OK: Everything went fine.
     - \c B_BAD_INDEX: There are no more encoders.
 */
-status_t get_next_encoder(int32* cookie, media_codec_info* _codecInfo);
+status_t get_next_encoder(int32_t* cookie, media_codec_info* _codecInfo);
 
 enum media_file_accept_format_flags {
     B_MEDIA_REJECT_WILDCARDS = 0x1
 };
 
 bool does_file_accept_format(const media_file_format* fileFormat,
-    media_format* format, uint32 flags = 0);
+    media_format* format, uint32_t flags = 0);
 
 typedef struct {
     uint8 data[16];
@@ -110,20 +110,20 @@ enum beos_format {
 };
 
 typedef struct {
-    int32 format;
+    int32_t format;
 } media_beos_description;
 
 typedef struct {
-    uint32 codec;
-    uint32 vendor;
+    uint32_t codec;
+    uint32_t vendor;
 } media_quicktime_description;
 
 typedef struct {
-    uint32 codec;
+    uint32_t codec;
 } media_avi_description;
 
 typedef struct {
-    uint32 id;
+    uint32_t id;
 } media_avr_description;
 
 typedef struct {
@@ -146,20 +146,20 @@ enum mpeg_id {
 };
 
 typedef struct {
-    uint32 id;
+    uint32_t id;
 } media_mpeg_description;
 
 typedef struct {
-    uint32 codec;
+    uint32_t codec;
 } media_wav_description;
 
 typedef struct {
-    uint32 codec;
+    uint32_t codec;
 } media_aiff_description;
 
 typedef struct {
-    uint32 file_format;
-    uint32 codec;
+    uint32_t file_format;
+    uint32_t codec;
 } media_misc_description;
 
 typedef struct _media_format_description {
@@ -171,7 +171,7 @@ typedef struct _media_format_description {
                                     const _media_format_description& other);
 
     media_format_family family;
-    uint32 _reserved_[3];
+    uint32_t _reserved_[3];
     union {
         media_beos_description beos;
         media_quicktime_description quicktime;
@@ -182,7 +182,7 @@ typedef struct _media_format_description {
         media_aiff_description aiff;
         media_misc_description misc;
         media_avr_description avr;
-        uint32 _reserved_[12];
+        uint32_t _reserved_[12];
     } u;
 } media_format_description;
 
@@ -214,9 +214,9 @@ public:
     };
 
             status_t			MakeFormatFor(const media_format_description*
-                                    descriptions, int32 descriptionCount,
+                                    descriptions, int32_t descriptionCount,
                                     media_format* _inOutFormat,
-                                    uint32 flags = 0, void* _reserved = 0);
+                                    uint32_t flags = 0, void* _reserved = 0);
 
             status_t			GetFormatFor(const media_format_description&
                                     description, media_format* _outFormat);
@@ -235,14 +235,14 @@ public:
             void				Unlock();
 
     //	convenience functions
-    static	status_t			GetBeOSFormatFor(uint32 fourcc,
+    static	status_t			GetBeOSFormatFor(uint32_t fourcc,
                                     media_format* _outFormat,
                                     media_type type = B_MEDIA_UNKNOWN_TYPE);
-    static	status_t			GetAVIFormatFor(uint32 fourcc,
+    static	status_t			GetAVIFormatFor(uint32_t fourcc,
                                     media_format* _outFormat,
                                     media_type type = B_MEDIA_UNKNOWN_TYPE);
-    static	status_t			GetQuicktimeFormatFor(uint32 vendor,
-                                    uint32 fourcc, media_format* _outFormat,
+    static	status_t			GetQuicktimeFormatFor(uint32_t vendor,
+                                    uint32_t fourcc, media_format* _outFormat,
                                     media_type type = B_MEDIA_UNKNOWN_TYPE);
 
     // Deprecated:
@@ -251,9 +251,9 @@ public:
                                     media_format* _outFormat);
 
 private:
-            int32				fIteratorIndex;
+            int32_t				fIteratorIndex;
 
-            uint32				_reserved[30];
+            uint32_t				_reserved[30];
 };
 
 bool operator==(const media_format_description& a,

@@ -13,7 +13,7 @@
 
 struct iframe_stack {
 	struct iframe *frames[IFRAME_TRACE_DEPTH];
-	int32	index;
+	int32_t	index;
 };
 
 // architecture specific thread info

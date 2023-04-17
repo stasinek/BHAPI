@@ -32,7 +32,7 @@ typedef struct IOOperation io_operation;
 
 class IOBuffer : public DoublyLinkedListLinkImpl<IOBuffer> {
 public:
-	static	IOBuffer*			Create(uint32 count, bool vip);
+	static	IOBuffer*			Create(uint32_t count, bool vip);
 			void				Delete();
 
 			bool				IsVirtual() const { return !fPhysical; }
@@ -40,15 +40,15 @@ public:
 			bool				IsUser() const { return fUser; }
 
 			void				SetVecs(generic_size_t firstVecOffset,
-									const generic_io_vec* vecs, uint32 count,
-									generic_size_t length, uint32 flags);
+									const generic_io_vec* vecs, uint32_t count,
+									generic_size_t length, uint32_t flags);
 
 			void				SetPhysical(bool physical)
 									{ fPhysical = physical; }
 			void				SetUser(bool user) { fUser = user; }
 			void				SetLength(generic_size_t length)
 									{ fLength = length; }
-			void				SetVecCount(uint32 count) { fVecCount = count; }
+			void				SetVecCount(uint32_t count) { fVecCount = count; }
 
 			generic_size_t		Length() const { return fLength; }
 
@@ -149,7 +149,7 @@ public:
 									{ fTransferredBytes = bytes; }
 
 			generic_io_vec*		Vecs() const;
-			uint32				VecCount() const;
+			uint32_t				VecCount() const;
 
 			void				SetPartial(bool partialBegin, bool partialEnd);
 			bool				HasPartialBegin() const
@@ -215,17 +215,17 @@ struct IORequest : IORequestChunk, DoublyLinkedListLinkImpl<IORequest> {
 
 			status_t			Init(off_t offset, generic_addr_t buffer,
 									generic_size_t length, bool write,
-									uint32 flags);
+									uint32_t flags);
 			status_t			Init(off_t offset, const generic_io_vec* vecs,
 									size_t count, generic_size_t length,
-									bool write, uint32 flags)
+									bool write, uint32_t flags)
 									{ return Init(offset, 0, vecs, count,
 										length, write, flags); }
 			status_t			Init(off_t offset,
 									generic_size_t firstVecOffset,
 									const generic_io_vec* vecs, size_t count,
 									generic_size_t length, bool write,
-									uint32 flags);
+									uint32_t flags);
 
 			void				SetOwner(IORequestOwner* owner)
 									{ fOwner = owner; }
@@ -245,7 +245,7 @@ struct IORequest : IORequestChunk, DoublyLinkedListLinkImpl<IORequest> {
 			io_request_finished_callback FinishedCallback(
 									void** _cookie = NULL) const;
 
-			status_t			Wait(uint32 flags = 0, bigtime_t timeout = 0);
+			status_t			Wait(uint32_t flags = 0, bigtime_t timeout = 0);
 
 			bool				IsFinished() const
 									{ return fStatus != 1
@@ -279,7 +279,7 @@ struct IORequest : IORequestChunk, DoublyLinkedListLinkImpl<IORequest> {
 			bool				IsRead() const	{ return !fIsWrite; }
 			team_id				TeamID() const		{ return fTeam; }
 			thread_id			ThreadID() const	{ return fThread; }
-			uint32				Flags() const	{ return fFlags; }
+			uint32_t				Flags() const	{ return fFlags; }
 
 			IOBuffer*			Buffer() const	{ return fBuffer; }
 			off_t				Offset() const	{ return fOffset; }
@@ -287,7 +287,7 @@ struct IORequest : IORequestChunk, DoublyLinkedListLinkImpl<IORequest> {
 
 			void				SetOffset(off_t offset)	{ fOffset = offset; }
 
-			uint32				VecIndex() const	{ return fVecIndex; }
+			uint32_t				VecIndex() const	{ return fVecIndex; }
 			generic_size_t		VecOffset() const	{ return fVecOffset; }
 
 			void				Advance(generic_size_t bySize);
@@ -339,8 +339,8 @@ private:
 									// offset of this request relative to its
 									// parent
 			IORequestChunkList	fChildren;
-			int32				fPendingChildren;
-			uint32				fFlags;
+			int32_t				fPendingChildren;
+			uint32_t				fFlags;
 			team_id				fTeam;
 			thread_id			fThread;
 			bool				fIsWrite;
@@ -355,7 +355,7 @@ private:
 			ConditionVariable	fFinishedCondition;
 
 			// these are for iteration
-			uint32				fVecIndex;
+			uint32_t				fVecIndex;
 			generic_size_t		fVecOffset;
 			generic_size_t		fRemainingBytes;
 };

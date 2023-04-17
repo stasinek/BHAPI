@@ -65,7 +65,7 @@ bool BDiskDeviceVisitor::Visit(BDiskDevice *device)
 	\return \c true, if the iteration shall be terminated at this point,
 			\c false otherwise.
 */
-bool BDiskDeviceVisitor::Visit(BPartition *partition, int32 level)
+bool BDiskDeviceVisitor::Visit(BPartition *partition, int32_t level)
 {
 	return false;
 }

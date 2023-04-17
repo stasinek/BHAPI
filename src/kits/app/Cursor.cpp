@@ -165,8 +165,8 @@ static  uint8 cursor_i_beam[] = {
 };
 
 namespace bhapi {
-static  uint32 get_cursor_data_bits_length(const  uint8 *data);
-static  uint32 get_cursor_data_length(const  uint8 *data);
+static  uint32_t get_cursor_data_bits_length(const  uint8 *data);
+static  uint32_t get_cursor_data_length(const  uint8 *data);
 static void* duplicate_cursor_data(const  uint8 *data);
 } /* namespace */
 
@@ -178,16 +178,16 @@ BHAPI_EXPORT const BCursor *B_CURSOR_HAND = &__B_CURSOR_HAND;
 BHAPI_EXPORT const BCursor *B_CURSOR_HAND_MOVE = &__B_CURSOR_HAND_MOVE;
 BHAPI_EXPORT const BCursor *B_CURSOR_I_BEAM = &__B_CURSOR_I_BEAM;
 
-static  uint32 bhapi::get_cursor_data_bits_length(const  uint8 *data)
+static  uint32_t bhapi::get_cursor_data_bits_length(const  uint8 *data)
 {
     if(data == NULL || data[0] == 0 || data[1] > 32) return 0;
-    uint32 rowBytes = (((uint32)data[0] * (uint32)data[1] + 0x00000007) & 0xfffffff8) >> 3;
-    return((uint32)data[0] * (uint32)rowBytes);
+    uint32_t rowBytes = (((uint32_t)data[0] * (uint32_t)data[1] + 0x00000007) & 0xfffffff8) >> 3;
+    return((uint32_t)data[0] * (uint32_t)rowBytes);
 }
 
-static  uint32 bhapi::get_cursor_data_length(const  uint8 *data)
+static  uint32_t bhapi::get_cursor_data_length(const  uint8 *data)
 {
-    uint32 bits_length = bhapi::get_cursor_data_bits_length(data);
+    uint32_t bits_length = bhapi::get_cursor_data_bits_length(data);
     return(bits_length > 0 ? (4 + 2 * bits_length) : 0);
 }
 
@@ -250,7 +250,7 @@ const void* BCursor::Data() const
     return fData;
 }
 
-uint32 BCursor::DataLength() const
+uint32_t BCursor::DataLength() const
 {
     return(bhapi::get_cursor_data_length((const  uint8*)fData));
 }
@@ -287,7 +287,7 @@ uint16 BCursor::Spot() const
 const void* BCursor::Bits() const
 {
     if(fData == NULL) return NULL;
-    return((const void*)((const  uint32*)fData + 1));
+    return((const void*)((const  uint32_t*)fData + 1));
 }
 
 

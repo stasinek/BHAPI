@@ -110,7 +110,7 @@ mount(const char *filesystem, const char *where, const char *device, ulong flags
 	void *parms, int len)
 {
 	status_t err;
-	uint32 mountFlags = 0;
+	uint32_t mountFlags = 0;
 
 	if (flags & 1)
 		mountFlags |= B_MOUNT_READ_ONLY;

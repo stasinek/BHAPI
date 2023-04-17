@@ -20,12 +20,12 @@ public:
 
 	virtual	const char*			Copyright() = 0;
 
-	virtual	status_t			Sniff(int32* streamCount) = 0;
+	virtual	status_t			Sniff(int32_t* streamCount) = 0;
 
 	virtual	void				GetFileFormatInfo(media_file_format* mff) = 0;
 	virtual	status_t			GetMetaData(BMessage* _data);
 
-	virtual	status_t			AllocateCookie(int32 streamNumber,
+	virtual	status_t			AllocateCookie(int32_t streamNumber,
 									void** cookie) = 0;
 	virtual	status_t			FreeCookie(void* cookie) = 0;
 
@@ -34,9 +34,9 @@ public:
 									const void** infoBuffer,
 									size_t* infoSize) = 0;
 
-	virtual	status_t			Seek(void* cookie, uint32 flags, int64* frame,
+	virtual	status_t			Seek(void* cookie, uint32_t flags, int64* frame,
 									bigtime_t* time);
-	virtual	status_t			FindKeyFrame(void* cookie, uint32 flags,
+	virtual	status_t			FindKeyFrame(void* cookie, uint32_t flags,
 									int64* frame, bigtime_t* time);
 
 	virtual	status_t			GetNextChunk(void* cookie,
@@ -66,7 +66,7 @@ public: // XXX for test programs only
 	friend class PluginManager;
 			MediaPlugin*		fMediaPlugin;
 
-			uint32				fReserved[5];
+			uint32_t				fReserved[5];
 };
 
 

@@ -33,7 +33,7 @@ struct BDecisionProvider {
 //	virtual	bool				ActionsAcceptanceDecisionNeeded(
 //									const BString& description,
 //									const BString& question) = 0;
-//	virtual	int32				ChoiceDecisionNeeded(
+//	virtual	int32_t				ChoiceDecisionNeeded(
 //									const BString& question) = 0;
 };
 

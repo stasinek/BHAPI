@@ -63,7 +63,7 @@ BMidiProducer::Connections() const
 	BList* list = new BList();
 
 	if (LockProducer()) {
-		for (int32 t = 0; t < CountConsumers(); ++t) {
+		for (int32_t t = 0; t < CountConsumers(); ++t) {
 			BMidiConsumer* cons = ConsumerAt(t);
 			cons->Acquire();
 			list->AddItem(cons);
@@ -180,7 +180,7 @@ bool BMidiProducer::ConnectionBroken(BMidiConsumer* consumer)
 }
 
 
-int32 
+int32_t 
 BMidiProducer::CountConsumers() const
 {
 	return fConnections->CountItems();
@@ -188,7 +188,7 @@ BMidiProducer::CountConsumers() const
 
 
 BMidiConsumer* 
-BMidiProducer::ConsumerAt(int32 index) const
+BMidiProducer::ConsumerAt(int32_t index) const
 {
 	ASSERT(index >= 0 && index < CountConsumers())
 

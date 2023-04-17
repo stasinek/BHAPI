@@ -291,7 +291,7 @@ namespace agg
         typedef rgba16 color_type;
         typedef color_type::value_type value_type;
         typedef color_type::calc_type calc_type;
-        typedef int32u pixel_type;
+        typedef int32_tu pixel_type;
 
         static AGG_INLINE void blend_pix(pixel_type* p, 
                                          unsigned cr, unsigned cg, unsigned cb,
@@ -331,7 +331,7 @@ namespace agg
         typedef rgba16 color_type;
         typedef color_type::value_type value_type;
         typedef color_type::calc_type calc_type;
-        typedef int32u pixel_type;
+        typedef int32_tu pixel_type;
 
         static AGG_INLINE void blend_pix(pixel_type* p, 
                                          unsigned cr, unsigned cg, unsigned cb,
@@ -374,7 +374,7 @@ namespace agg
         typedef rgba16 color_type;
         typedef color_type::value_type value_type;
         typedef color_type::calc_type calc_type;
-        typedef int32u pixel_type;
+        typedef int32_tu pixel_type;
         typedef Gamma gamma_type;
 
         blender_rgbAAA_gamma() : m_gamma(0) {}
@@ -419,7 +419,7 @@ namespace agg
         typedef rgba16 color_type;
         typedef color_type::value_type value_type;
         typedef color_type::calc_type calc_type;
-        typedef int32u pixel_type;
+        typedef int32_tu pixel_type;
 
         static AGG_INLINE void blend_pix(pixel_type* p, 
                                          unsigned cr, unsigned cg, unsigned cb,
@@ -459,7 +459,7 @@ namespace agg
         typedef rgba16 color_type;
         typedef color_type::value_type value_type;
         typedef color_type::calc_type calc_type;
-        typedef int32u pixel_type;
+        typedef int32_tu pixel_type;
 
         static AGG_INLINE void blend_pix(pixel_type* p, 
                                          unsigned cr, unsigned cg, unsigned cb,
@@ -502,7 +502,7 @@ namespace agg
         typedef rgba16 color_type;
         typedef color_type::value_type value_type;
         typedef color_type::calc_type calc_type;
-        typedef int32u pixel_type;
+        typedef int32_tu pixel_type;
         typedef Gamma gamma_type;
 
         blender_bgrAAA_gamma() : m_gamma(0) {}
@@ -549,7 +549,7 @@ namespace agg
         typedef rgba16 color_type;
         typedef color_type::value_type value_type;
         typedef color_type::calc_type calc_type;
-        typedef int32u pixel_type;
+        typedef int32_tu pixel_type;
 
         static AGG_INLINE void blend_pix(pixel_type* p, 
                                          unsigned cr, unsigned cg, unsigned cb,
@@ -586,7 +586,7 @@ namespace agg
         typedef rgba16 color_type;
         typedef color_type::value_type value_type;
         typedef color_type::calc_type calc_type;
-        typedef int32u pixel_type;
+        typedef int32_tu pixel_type;
 
         static AGG_INLINE void blend_pix(pixel_type* p, 
                                          unsigned cr, unsigned cg, unsigned cb,
@@ -627,7 +627,7 @@ namespace agg
         typedef rgba16 color_type;
         typedef color_type::value_type value_type;
         typedef color_type::calc_type calc_type;
-        typedef int32u pixel_type;
+        typedef int32_tu pixel_type;
         typedef Gamma gamma_type;
 
         blender_rgbBBA_gamma() : m_gamma(0) {}
@@ -671,7 +671,7 @@ namespace agg
         typedef rgba16 color_type;
         typedef color_type::value_type value_type;
         typedef color_type::calc_type calc_type;
-        typedef int32u pixel_type;
+        typedef int32_tu pixel_type;
 
         static AGG_INLINE void blend_pix(pixel_type* p, 
                                          unsigned cr, unsigned cg, unsigned cb,
@@ -708,7 +708,7 @@ namespace agg
         typedef rgba16 color_type;
         typedef color_type::value_type value_type;
         typedef color_type::calc_type calc_type;
-        typedef int32u pixel_type;
+        typedef int32_tu pixel_type;
 
         static AGG_INLINE void blend_pix(pixel_type* p, 
                                          unsigned cr, unsigned cg, unsigned cb,
@@ -749,7 +749,7 @@ namespace agg
         typedef rgba16 color_type;
         typedef color_type::value_type value_type;
         typedef color_type::calc_type calc_type;
-        typedef int32u pixel_type;
+        typedef int32_tu pixel_type;
         typedef Gamma gamma_type;
 
         blender_bgrABB_gamma() : m_gamma(0) {}

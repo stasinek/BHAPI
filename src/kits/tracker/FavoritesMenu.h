@@ -85,8 +85,8 @@ class FavoritesMenu : public BSlowMenu {
 
 		State fState;
 
-		int32 fIndex;
-		int32 fSectionItemCount;
+		int32_t fIndex;
+		int32_t fSectionItemCount;
 		bool fAddedSeparatorForSection;
 			// keeps track whether a separator will be needed before the
 			// next inserted item
@@ -94,7 +94,7 @@ class FavoritesMenu : public BSlowMenu {
 
 		EntryListBase* fContainer;
 		BObjectList<BMenuItem>* fItemList;
-		int32 fInitialItemCount;
+		int32_t fInitialItemCount;
 		std::vector<entry_ref> fUniqueRefCheck;
 		bool fIsSavePanel;
 		BRefFilter* fRefFilter;
@@ -112,25 +112,25 @@ enum recent_type {
 
 class RecentsMenu : public BNavMenu {
 	public:
-		RecentsMenu(const char* name, int32 which, uint32 what,
+		RecentsMenu(const char* name, int32_t which, uint32_t what,
 			BHandler* target);
 
 		void			DetachedFromWindow();
 
-		int32			RecentsCount();
+		int32_t			RecentsCount();
 
 	private:
 		virtual	bool	StartBuildingItemList();
 		virtual	bool	AddNextItem();
-				bool	AddRecents(int32 count);
+				bool	AddRecents(int32_t count);
 		virtual	void	DoneBuildingItemList();
 		virtual	void	ClearMenuBuildingState();
 
 	private:
-		int32			fWhich;
-		int32			fRecentsCount;
+		int32_t			fWhich;
+		int32_t			fRecentsCount;
 
-		int32 			fItemIndex;
+		int32_t 			fItemIndex;
 		BMessage		fRecentList;
 };
 

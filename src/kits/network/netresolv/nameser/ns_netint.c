@@ -44,9 +44,9 @@ ns_get16(const u_char *src) {
 	return dst;
 }
 
-uint32_t
+uint32_t_t
 ns_get32(const u_char *src) {
-	u_int32_t dst;
+	u_int32_t_t dst;
 
 	NS_GET32(dst, src);
 	return dst;
@@ -58,7 +58,7 @@ ns_put16(uint16_t src, u_char *dst) {
 }
 
 void
-ns_put32(uint32_t src, u_char *dst) {
+ns_put32(uint32_t_t src, u_char *dst) {
 	NS_PUT32(src, dst);
 }
 

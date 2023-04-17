@@ -16,8 +16,8 @@ struct arm_real_time_data {
 
 struct arch_real_time_data {
 	struct arm_real_time_data	data[2];
-	vint32						system_time_conversion_factor;
-	vint32						version;
+	vint32_t						system_time_conversion_factor;
+	vint32_t						version;
 };
 
 #endif	/* _KERNEL_ARCH_REAL_TIME_DATA_H */

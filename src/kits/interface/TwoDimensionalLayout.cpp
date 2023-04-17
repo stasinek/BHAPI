@@ -92,7 +92,7 @@ protected:
 
 			void				_PrepareItems();
 
-			int32				_CountElements();
+			int32_t				_CountElements();
 			bool				_HasMultiElementItems();
 
 			void				_AddConstraints(Layouter* layouter);
@@ -180,7 +180,7 @@ public:
 
 			void				PrepareItems(
 									CompoundLayouter* compoundLayouter);
-			int32				CountElements(
+			int32_t				CountElements(
 									CompoundLayouter* compoundLayouter);
 			bool				HasMultiElementItems(
 									CompoundLayouter* compoundLayouter);
@@ -444,14 +444,14 @@ status_t BTwoDimensionalLayout::AllUnarchived(const BMessage* from)
 
 
 status_t BTwoDimensionalLayout::ItemArchived(BMessage* into, BLayoutItem* item,
-	int32 index) const
+	int32_t index) const
 {
 	return BAbstractLayout::ItemArchived(into, item, index);
 }
 
 
 status_t BTwoDimensionalLayout::ItemUnarchived(const BMessage* from, BLayoutItem* item,
-	int32 index)
+	int32_t index)
 {
 	return BAbstractLayout::ItemUnarchived(from, item, index);
 }
@@ -650,7 +650,7 @@ status_t BTwoDimensionalLayout::CompoundLayouter::AddAlignedLayoutsToArchive(
 		return B_OK;
 
 	status_t err;
-	for (int32 i = fLocalLayouters.CountItems() - 1; i > 0; i--) {
+	for (int32_t i = fLocalLayouters.CountItems() - 1; i > 0; i--) {
 		LocalLayouter* layouter = (LocalLayouter*)fLocalLayouters.ItemAt(i);
 
 		bool wasAvailable;
@@ -668,8 +668,8 @@ void BTwoDimensionalLayout::CompoundLayouter::AbsorbCompoundLayouter(
 	if (other == this)
 		return;
 
-	int32 count = other->fLocalLayouters.CountItems();
-	for (int32 i = count - 1; i >= 0; i--) {
+	int32_t count = other->fLocalLayouters.CountItems();
+	for (int32_t i = count - 1; i >= 0; i--) {
 		LocalLayouter* layouter
 			= (LocalLayouter*)other->fLocalLayouters.ItemAt(i);
 		AddLocalLayouter(layouter);
@@ -693,8 +693,8 @@ void BTwoDimensionalLayout::CompoundLayouter::InvalidateLayout()
 	fLayoutContext = NULL;
 
 	// notify all local layouters to invalidate the respective views
-	int32 count = fLocalLayouters.CountItems();
-	for (int32 i = 0; i < count; i++) {
+	int32_t count = fLocalLayouters.CountItems();
+	for (int32_t i = 0; i < count; i++) {
 		LocalLayouter* layouter = (LocalLayouter*)fLocalLayouters.ItemAt(i);
 		layouter->InternalInvalidateLayout(this);
 	}
@@ -754,21 +754,21 @@ void BTwoDimensionalLayout::CompoundLayouter::DoLayout(float size,
 
 void BTwoDimensionalLayout::CompoundLayouter::_PrepareItems()
 {
-	int32 count = fLocalLayouters.CountItems();
-	for (int32 i = 0; i < count; i++) {
+	int32_t count = fLocalLayouters.CountItems();
+	for (int32_t i = 0; i < count; i++) {
 		LocalLayouter* layouter = (LocalLayouter*)fLocalLayouters.ItemAt(i);
 		layouter->PrepareItems(this);
 	}
 }
 
 
-int32 BTwoDimensionalLayout::CompoundLayouter::_CountElements()
+int32_t BTwoDimensionalLayout::CompoundLayouter::_CountElements()
 {
-	int32 elementCount = 0;
-	int32 count = fLocalLayouters.CountItems();
-	for (int32 i = 0; i < count; i++) {
+	int32_t elementCount = 0;
+	int32_t count = fLocalLayouters.CountItems();
+	for (int32_t i = 0; i < count; i++) {
 		LocalLayouter* layouter = (LocalLayouter*)fLocalLayouters.ItemAt(i);
-		int32 layouterCount = layouter->CountElements(this);
+		int32_t layouterCount = layouter->CountElements(this);
 		elementCount = max_c(elementCount, layouterCount);
 	}
 
@@ -778,8 +778,8 @@ int32 BTwoDimensionalLayout::CompoundLayouter::_CountElements()
 
 bool BTwoDimensionalLayout::CompoundLayouter::_HasMultiElementItems()
 {
-	int32 count = fLocalLayouters.CountItems();
-	for (int32 i = 0; i < count; i++) {
+	int32_t count = fLocalLayouters.CountItems();
+	for (int32_t i = 0; i < count; i++) {
 		LocalLayouter* layouter = (LocalLayouter*)fLocalLayouters.ItemAt(i);
 		if (layouter->HasMultiElementItems(this))
 			return true;
@@ -791,8 +791,8 @@ bool BTwoDimensionalLayout::CompoundLayouter::_HasMultiElementItems()
 
 void BTwoDimensionalLayout::CompoundLayouter::_AddConstraints(Layouter* layouter)
 {
-	int32 count = fLocalLayouters.CountItems();
-	for (int32 i = 0; i < count; i++) {
+	int32_t count = fLocalLayouters.CountItems();
+	for (int32_t i = 0; i < count; i++) {
 		LocalLayouter* localLayouter = (LocalLayouter*)fLocalLayouters.ItemAt(i);
 		localLayouter->AddConstraints(this, layouter);
 	}
@@ -848,8 +848,8 @@ void BTwoDimensionalLayout::VerticalCompoundLayouter::InvalidateHeightForWidth()
 		// also make sure we're not reusing the old layout info
 		fLastLayoutSize = -1;
 
-		int32 count = fLocalLayouters.CountItems();
-		for (int32 i = 0; i < count; i++) {
+		int32_t count = fLocalLayouters.CountItems();
+		for (int32_t i = 0; i < count; i++) {
 			LocalLayouter* layouter = (LocalLayouter*)fLocalLayouters.ItemAt(i);
 			layouter->SetHeightForWidthConstraintsAdded(false);
 		}
@@ -875,8 +875,8 @@ void BTwoDimensionalLayout::VerticalCompoundLayouter::InternalGetHeightForWidth(
 		fLayoutInfo = fHeightForWidthLayouter->CreateLayoutInfo();
 
 		// add the children's height for width constraints
-		int32 count = fLocalLayouters.CountItems();
-		for (int32 i = 0; i < count; i++) {
+		int32_t count = fLocalLayouters.CountItems();
+		for (int32_t i = 0; i < count; i++) {
 			LocalLayouter* layouter = (LocalLayouter*)fLocalLayouters.ItemAt(i);
 			if (layouter->HasHeightForWidth()) {
 				layouter->AddHeightForWidthConstraints(this,
@@ -931,8 +931,8 @@ void BTwoDimensionalLayout::VerticalCompoundLayouter::DoLayout(float size,
 
 bool BTwoDimensionalLayout::VerticalCompoundLayouter::_HasHeightForWidth()
 {
-	int32 count = fLocalLayouters.CountItems();
-	for (int32 i = 0; i < count; i++) {
+	int32_t count = fLocalLayouters.CountItems();
+	for (int32_t i = 0; i < count; i++) {
 		LocalLayouter* layouter = (LocalLayouter*)fLocalLayouters.ItemAt(i);
 		if (layouter->HasHeightForWidth())
 			return true;
@@ -1143,13 +1143,13 @@ status_t BTwoDimensionalLayout::LocalLayouter::AlignLayoutsFromArchive(
 	if (posture == B_VERTICAL)
 		field = kVAlignedLayoutField;
 
-	int32 count;
+	int32_t count;
 	status_t err = unarchiver->ArchiveMessage()->GetInfo(field, NULL, &count);
 	if (err == B_NAME_NOT_FOUND)
 		return B_OK;
 
 	BTwoDimensionalLayout* retriever;
-	for (int32 i = 0; i < count && err == B_OK; i++) {
+	for (int32_t i = 0; i < count && err == B_OK; i++) {
 		err = unarchiver->FindObject(field, i,
 			BUnarchiver::B_DONT_ASSUME_OWNERSHIP, retriever);
 
@@ -1168,7 +1168,7 @@ void BTwoDimensionalLayout::LocalLayouter::PrepareItems(
 }
 
 
-int32 BTwoDimensionalLayout::LocalLayouter::CountElements(
+int32_t BTwoDimensionalLayout::LocalLayouter::CountElements(
 	CompoundLayouter* compoundLayouter)
 {
 	if (compoundLayouter->Orientation() == B_HORIZONTAL)
@@ -1268,8 +1268,8 @@ bool BTwoDimensionalLayout::LocalLayouter::AddHeightForWidthConstraints(
 	LayoutInfo* hLayoutInfo = fHLayouter->GetLayoutInfo();
 
 	// add the children's height for width constraints
-	int32 itemCount = fHeightForWidthItems.CountItems();
-	for (int32 i = 0; i < itemCount; i++) {
+	int32_t itemCount = fHeightForWidthItems.CountItems();
+	for (int32_t i = 0; i < itemCount; i++) {
 		BLayoutItem* item = (BLayoutItem*)fHeightForWidthItems.ItemAt(i);
 		Dimensions itemDimensions;
 		fLayout->GetItemDimensions(item, &itemDimensions);

@@ -26,7 +26,7 @@
 
 struct Benaphore {
 	sem_id	sem;
-	int32	count;
+	int32_t	count;
 
 	status_t Init(const char* name)
 	{
@@ -111,7 +111,7 @@ enum MonitorType {
 struct M64_Params {
 	// Clock parameters
 	uint8	clockNumberToProgram;	// obtained from video BIOS
-	uint32	maxPixelClock;			// obtained from video BIOS
+	uint32_t	maxPixelClock;			// obtained from video BIOS
 	int		refFreq;				// obtained from video BIOS
 	int		refDivider;				// obtained from video BIOS
 	uint8	xClkPostDivider;
@@ -128,8 +128,8 @@ struct M64_Params {
 struct R128_PLLParams {
 	uint16	reference_freq;
 	uint16	reference_div;
-	uint32	min_pll_freq;
-	uint32	max_pll_freq;
+	uint32_t	min_pll_freq;
+	uint32_t	max_pll_freq;
 	uint16	xclk;
 };
 
@@ -164,7 +164,7 @@ struct DisplayModeEx : display_mode {
 
 struct OverlayBuffer : overlay_buffer {
 	OverlayBuffer*	nextBuffer;	// pointer to next buffer in chain, NULL = none
-	uint32			size;		// size of overlay buffer
+	uint32_t			size;		// size of overlay buffer
 };
 
 
@@ -187,25 +187,25 @@ struct SharedInfo {
 	area_id videoMemArea;		// video memory area_id.  The addresses are shared with all teams.
 	addr_t	videoMemAddr;		// video memory addr as viewed from virtual memory
 	phys_addr_t	videoMemPCI;	// video memory addr as viewed from the PCI bus (for DMA)
-	uint32	videoMemSize; 		// video memory size in bytes.
+	uint32_t	videoMemSize; 		// video memory size in bytes.
 
-	uint32	cursorOffset;		// offset of cursor in video memory
-	uint32	frameBufferOffset;	// offset of frame buffer in video memory
-	uint32	maxFrameBufferSize;	// max available video memory for frame buffer
+	uint32_t	cursorOffset;		// offset of cursor in video memory
+	uint32_t	frameBufferOffset;	// offset of frame buffer in video memory
+	uint32_t	maxFrameBufferSize;	// max available video memory for frame buffer
 
 	// Color spaces supported by current video chip/driver.
 	color_space	colorSpaces[6];
-	uint32	colorSpaceCount;	// number of color spaces in array colorSpaces
+	uint32_t	colorSpaceCount;	// number of color spaces in array colorSpaces
 
 	// List of screen modes.
 	area_id modeArea;			// area containing list of display modes the driver supports
-	uint32	modeCount;			// number of display modes in the list
+	uint32_t	modeCount;			// number of display modes in the list
 
 	DisplayModeEx displayMode;	// current display mode configuration
 
 	// List of VESA modes supported by current chip.
-	uint32		vesaModeTableOffset;	// offset of table in shared info
-	uint32		vesaModeCount;
+	uint32_t		vesaModeTableOffset;	// offset of table in shared info
+	uint32_t		vesaModeCount;
 
 	uint16		cursorHotX;		// Cursor hot spot. Top left corner of the cursor
 	uint16		cursorHotY;		// is 0,0
@@ -216,8 +216,8 @@ struct SharedInfo {
 	Benaphore	engineLock;		// for serializing access to the acceleration engine
 	Benaphore	overlayLock;	// for overlay operations
 
-	int32		overlayAllocated;	// non-zero if overlay is allocated
-	uint32		overlayToken;
+	int32_t		overlayAllocated;	// non-zero if overlay is allocated
+	uint32_t		overlayToken;
 	OverlayBuffer* overlayBuffer;	// pointer to linked list of buffers; NULL = none
 
 	MonitorType	displayType;
@@ -237,7 +237,7 @@ struct SharedInfo {
 	R128_RAMSpec	r128MemSpec;	// Rage128 memory timing spec's
 	R128_PLLParams	r128PLLParams;	// Rage128 PLL parameters from video BIOS ROM
 
-	uint32		r128_dpGuiMasterCntl;	// flags for accelerated drawing
+	uint32_t		r128_dpGuiMasterCntl;	// flags for accelerated drawing
 };
 
 

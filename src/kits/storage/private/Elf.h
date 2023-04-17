@@ -10,19 +10,19 @@
 
 
 // types
-typedef uint32		Elf32_Addr;
-typedef uint32		Elf32_Off;
+typedef uint32_t		Elf32_Addr;
+typedef uint32_t		Elf32_Off;
 typedef uint16		Elf32_Half;
-typedef int32		Elf32_Sword;
-typedef uint32		Elf32_Word;
-typedef uint32		Elf32_Xword;
-typedef int32		Elf32_Sxword;
+typedef int32_t		Elf32_Sword;
+typedef uint32_t		Elf32_Word;
+typedef uint32_t		Elf32_Xword;
+typedef int32_t		Elf32_Sxword;
 
 typedef uint64		Elf64_Addr;
 typedef uint64		Elf64_Off;
 typedef uint16		Elf64_Half;
-typedef int32		Elf64_Sword;
-typedef uint32		Elf64_Word;
+typedef int32_t		Elf64_Sword;
+typedef uint32_t		Elf64_Word;
 typedef uint64		Elf64_Xword;
 typedef int64		Elf64_Sxword;
 

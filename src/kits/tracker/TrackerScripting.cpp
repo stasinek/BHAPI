@@ -118,13 +118,13 @@ status_t TTracker::GetSupportedSuites(BMessage* data)
 
 
 BHandler*
-TTracker::ResolveSpecifier(BMessage* message, int32 index, BMessage* specifier,
-	int32 form, const char* property)
+TTracker::ResolveSpecifier(BMessage* message, int32_t index, BMessage* specifier,
+	int32_t form, const char* property)
 {
 	BPropertyInfo propertyInfo(const_cast<property_info*>(
 		kTrackerPropertyList));
 
-	int32 result = propertyInfo.FindMatch(message, index, specifier, form,
+	int32_t result = propertyInfo.FindMatch(message, index, specifier, form,
 		property);
 	if (result < 0) {
 		//PRINT(("FindMatch result %d %s\n", result, strerror(result)));
@@ -152,8 +152,8 @@ bool TTracker::HandleScriptingMessage(BMessage* message)
 	const char* property = NULL;
 	bool handled = false;
 
-	int32 index = 0;
-	int32 form = 0;
+	int32_t index = 0;
+	int32_t form = 0;
 	BMessage specifier;
 
 	status_t result = message->GetCurrentSpecifier(&index, &specifier,
@@ -200,7 +200,7 @@ bool TTracker::HandleScriptingMessage(BMessage* message)
 }
 
 
-bool TTracker::CreateProperty(BMessage* message, BMessage*, int32 form,
+bool TTracker::CreateProperty(BMessage* message, BMessage*, int32_t form,
 	const char* property, BMessage* reply)
 {
 	bool handled = false;
@@ -212,7 +212,7 @@ bool TTracker::CreateProperty(BMessage* message, BMessage*, int32 form,
 
 		// create new empty folders
 		entry_ref ref;
-		for (int32 index = 0;
+		for (int32_t index = 0;
 			message->FindRef("data", index, &ref) == B_OK; index++) {
 
 			BEntry entry(&ref);
@@ -233,7 +233,7 @@ bool TTracker::CreateProperty(BMessage* message, BMessage*, int32 form,
 }
 
 
-bool TTracker::DeleteProperty(BMessage*, int32 form, const char* property, BMessage*)
+bool TTracker::DeleteProperty(BMessage*, int32_t form, const char* property, BMessage*)
 {
 	if (strcmp(property, kPropertyTrash) == 0) {
 		// deleting on a selection is handled as removing a part of the
@@ -255,7 +255,7 @@ bool TTracker::DeleteProperty(BMessage*, int32 form, const char* property, BMess
 }
 
 
-bool TTracker::ExecuteProperty(BMessage* message, int32 form, const char* property,
+bool TTracker::ExecuteProperty(BMessage* message, int32_t form, const char* property,
 	BMessage* reply)
 {
 	if (strcmp(property, kPropertyPreferences) == 0) {
@@ -275,7 +275,7 @@ bool TTracker::ExecuteProperty(BMessage* message, int32 form, const char* proper
 
 		// create new empty folders
 		entry_ref ref;
-		for (int32 index = 0;
+		for (int32_t index = 0;
 			message->FindRef("data", index, &ref) == B_OK; index++) {
 			status_t error = OpenRef(&ref, NULL, NULL, kOpen, NULL);
 
@@ -295,13 +295,13 @@ bool TTracker::ExecuteProperty(BMessage* message, int32 form, const char* proper
 }
 
 
-bool TTracker::CountProperty(BMessage*, int32, const char*, BMessage*)
+bool TTracker::CountProperty(BMessage*, int32_t, const char*, BMessage*)
 {
 	return false;
 }
 
 
-bool TTracker::GetProperty(BMessage* message, int32 form, const char* property,
+bool TTracker::GetProperty(BMessage* message, int32_t form, const char* property,
 		BMessage* reply)
 {
 	if (strcmp(property, kPropertyFolder) == 0) {
@@ -311,7 +311,7 @@ bool TTracker::GetProperty(BMessage* message, int32 form, const char* property,
 
 		// create new empty folders
 		entry_ref ref;
-		for (int32 index = 0;
+		for (int32_t index = 0;
 			message->FindRef("data", index, &ref) == B_OK; index++) {
 			BHandler* window = FindContainerWindow(&ref);
 
@@ -330,7 +330,7 @@ bool TTracker::GetProperty(BMessage* message, int32 form, const char* property,
 }
 
 
-bool TTracker::SetProperty(BMessage*, BMessage*, int32, const char*, BMessage*)
+bool TTracker::SetProperty(BMessage*, BMessage*, int32_t, const char*, BMessage*)
 {
 	return false;
 }

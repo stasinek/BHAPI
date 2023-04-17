@@ -25,12 +25,12 @@ public:
 			BWeakReferenceable*	Get();
 			bool				Put();
 
-			int32				UseCount() const;
+			int32_t				UseCount() const;
 
 			void				GetUnchecked();
 
 private:
-			int32				fUseCount;
+			int32_t				fUseCount;
 			BWeakReferenceable*	fObject;
 };
 
@@ -48,7 +48,7 @@ public:
 			bool				ReleaseReference()
 									{ return fPointer->Put(); }
 
-			int32				CountReferences() const
+			int32_t				CountReferences() const
 									{ return fPointer->UseCount(); }
 
 			WeakPointer*		GetWeakPointer();
@@ -251,7 +251,7 @@ WeakPointer::~WeakPointer()
 inline BWeakReferenceable*
 WeakPointer::Get()
 {
-	int32 count = -11;
+	int32_t count = -11;
 
 	do {
 		count = atomic_get(&fUseCount);
@@ -274,7 +274,7 @@ inline bool WeakPointer::Put()
 }
 
 
-inline int32 WeakPointer::UseCount() const
+inline int32_t WeakPointer::UseCount() const
 {
 	return fUseCount;
 }

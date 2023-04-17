@@ -33,7 +33,7 @@ private:
 									const char* mimeType);
 
 private:
-			int32				fAccountID;
+			int32_t				fAccountID;
 			BString				fAccountName;
 			BString				fOutboundDirectory;
 };

@@ -175,7 +175,7 @@ bool _event_queue_imp::HasEvents() const
 }
 
 
-int32 _event_queue_imp::EventCount() const
+int32_t _event_queue_imp::EventCount() const
 {
 	#if DEBUG > 1
 		Dump();
@@ -216,7 +216,7 @@ const media_timed_event *
 _event_queue_imp::FindFirstMatch(bigtime_t eventTime,
 								 BTimedEventQueue::time_direction direction,
 								 bool inclusive,
-								 int32 eventType)
+								 int32_t eventType)
 {
 	event_queue_entry *end;
 	event_queue_entry *entry;
@@ -275,7 +275,7 @@ status_t _event_queue_imp::DoForEach(BTimedEventQueue::for_each_hook hook,
 							bigtime_t eventTime,
 							BTimedEventQueue::time_direction direction,
 							bool inclusive,
-							int32 eventType)
+							int32_t eventType)
 {
 	event_queue_entry *end;
 	event_queue_entry *entry;
@@ -407,7 +407,7 @@ status_t _event_queue_imp::DoForEach(BTimedEventQueue::for_each_hook hook,
 status_t _event_queue_imp::FlushEvents(bigtime_t eventTime,
 							  BTimedEventQueue::time_direction direction,
 							  bool inclusive,
-							  int32 eventType)
+							  int32_t eventType)
 {
 	event_queue_entry *end;
 	event_queue_entry *entry;

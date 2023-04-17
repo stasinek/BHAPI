@@ -47,7 +47,7 @@ extern const extended_syscall_info kExtendedSyscallInfos[];
 extern "C" {
 #endif
 
-int32 syscall_dispatcher(uint32 function, void *argBuffer, uint64 *_returnValue);
+int32_t syscall_dispatcher(uint32_t function, void *argBuffer, uint64 *_returnValue);
 status_t generic_syscall_init(void);
 
 #ifdef __cplusplus

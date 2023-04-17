@@ -37,8 +37,8 @@
 #include <SharedBufferList.h>
 
 
-BBufferGroup::BBufferGroup(size_t size, int32 count, uint32 placement,
-	uint32 lock)
+BBufferGroup::BBufferGroup(size_t size, int32_t count, uint32_t placement,
+	uint32_t lock)
 {
 	CALLED();
 	fInitError = _Init();
@@ -78,7 +78,7 @@ BBufferGroup::BBufferGroup(size_t size, int32 count, uint32 placement,
 
 	buffer_clone_info info;
 
-	for (int32 i = 0; i < count; i++) {
+	for (int32_t i = 0; i < count; i++) {
 		info.area = bufferArea;
 		info.offset = i * allocSize;
 		info.size = size;
@@ -103,7 +103,7 @@ BBufferGroup::BBufferGroup()
 }
 
 
-BBufferGroup::BBufferGroup(int32 count, const media_buffer_id* buffers)
+BBufferGroup::BBufferGroup(int32_t count, const media_buffer_id* buffers)
 {
 	CALLED();
 	fInitError = _Init();
@@ -115,7 +115,7 @@ BBufferGroup::BBufferGroup(int32 count, const media_buffer_id* buffers)
 
 	buffer_clone_info info;
 
-	for (int32 i = 0; i < count; i++) {
+	for (int32_t i = 0; i < count; i++) {
 		info.buffer = buffers[i];
 
 		fInitError = AddBuffer(info);
@@ -202,7 +202,7 @@ status_t BBufferGroup::RequestError()
 }
 
 
-status_t BBufferGroup::CountBuffers(int32* _count)
+status_t BBufferGroup::CountBuffers(int32_t* _count)
 {
 	CALLED();
 	if (fInitError != B_OK)
@@ -213,7 +213,7 @@ status_t BBufferGroup::CountBuffers(int32* _count)
 }
 
 
-status_t BBufferGroup::GetBufferList(int32 bufferCount, BBuffer** _buffers)
+status_t BBufferGroup::GetBufferList(int32_t bufferCount, BBuffer** _buffers)
 {
 	CALLED();
 	if (fInitError != B_OK)
@@ -265,7 +265,7 @@ status_t BBufferGroup::ReclaimAllBuffers()
 
 	// because additional BBuffers might get added to this group betweeen
 	// acquire and release
-	int32 count = fBufferCount;
+	int32_t count = fBufferCount;
 
 	if (count < 0)
 		return B_BAD_VALUE;
@@ -314,8 +314,8 @@ status_t BBufferGroup::AddBuffersTo(BMessage* message, const char* name, bool ne
 	if (status != B_OK)
 		return status;
 
-	for (int32 i = 0; i < fBufferCount; i++) {
-		status = message->AddInt32(name, int32(buffers[i]->ID()));
+	for (int32_t i = 0; i < fBufferCount; i++) {
+		status = message->AddInt32(name, int32_t(buffers[i]->ID()));
 		if (status != B_OK)
 			return status;
 	}

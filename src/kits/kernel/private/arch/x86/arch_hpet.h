@@ -60,7 +60,7 @@ struct hpet_timer {
 					/* If interrupt 16 is allowed, bit 16 will be 1. */
 	union {	
 		volatile uint64 comparator64;	/* R/W: Comparator value */
-		volatile uint32 comparator32;	
+		volatile uint32_t comparator32;	
 	} u0;				/* non-periodic mode: fires once when main counter = this comparator */
 					/* periodic mode: fires when timer reaches this value, is increased by the original value */
 	
@@ -86,7 +86,7 @@ struct hpet_regs {
 
 	union {
 		volatile uint64 counter64;	/* R/W */
-		volatile uint32 counter32;
+		volatile uint32_t counter32;
 	} u0;
 
 	volatile uint64 reserved4;

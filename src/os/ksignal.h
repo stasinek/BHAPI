@@ -45,7 +45,7 @@ struct signal_frame_data {
     void*		user_data;
     void*		handler;
     bool		siginfo_handler;
-    int32		thread_flags;
+    int32_t		thread_flags;
     uint64		syscall_restart_return_value;
     uint8		syscall_restart_parameters[SYSCALL_RESTART_PARAMETER_SIZE];
     void*		commpage_address;
@@ -56,13 +56,13 @@ namespace BKernel {
 
 
 struct QueuedSignalsCounter : BReferenceable {
-                                QueuedSignalsCounter(int32 limit);
+                                QueuedSignalsCounter(int32_t limit);
 
             bool				Increment();
             void				Decrement()		{ ReleaseReference(); }
 
 private:
-            int32				fLimit;
+            int32_t				fLimit;
 };
 
 
@@ -71,25 +71,25 @@ public:
                                 Signal();
                                     // cheap no-init constructor
                                 Signal(const Signal& other);
-                                Signal(uint32 number, int32 signalCode,
-                                    int32 errorCode, pid_t sendingProcess);
+                                Signal(uint32_t number, int32_t signalCode,
+                                    int32_t errorCode, pid_t sendingProcess);
     virtual						~Signal();
 
     static	status_t			CreateQueuable(const Signal& signal,
                                     bool queuingRequired,
                                     Signal*& _signalToQueue);
 
-            void				SetTo(uint32 number);
+            void				SetTo(uint32_t number);
 
-            uint32				Number() const { return fNumber; }
-            void				SetNumber(uint32 number)
+            uint32_t				Number() const { return fNumber; }
+            void				SetNumber(uint32_t number)
                                     { fNumber = number; }
 
-            int32				Priority() const;
+            int32_t				Priority() const;
 
-            int32				SignalCode() const
+            int32_t				SignalCode() const
                                     { return fSignalCode; }
-            int32				ErrorCode() const
+            int32_t				ErrorCode() const
                                     { return fErrorCode; }
             pid_t				SendingProcess() const
                                     { return fSendingProcess; }
@@ -99,14 +99,14 @@ public:
             void				SetSendingUser(uid_t user)
                                     { fSendingUser = user; }
 
-            int32				Status() const
+            int32_t				Status() const
                                     { return fStatus; }
-            void				SetStatus(int32 status)
+            void				SetStatus(int32_t status)
                                     { fStatus = status; }
 
-            int32				PollBand() const
+            int32_t				PollBand() const
                                     { return fPollBand; }
-            void				SetPollBand(int32 pollBand)
+            void				SetPollBand(int32_t pollBand)
                                     { fPollBand = pollBand; }
 
             void*				Address() const
@@ -131,14 +131,14 @@ protected:
 
 private:
             QueuedSignalsCounter* fCounter;
-            uint32				fNumber;
-            int32				fSignalCode;
-            int32				fErrorCode;	// error code associated with the
+            uint32_t				fNumber;
+            int32_t				fSignalCode;
+            int32_t				fErrorCode;	// error code associated with the
                                             // signal
             pid_t				fSendingProcess;
             uid_t				fSendingUser;
-            int32				fStatus;	// exit value
-            int32				fPollBand;	// for SIGPOLL
+            int32_t				fStatus;	// exit value
+            int32_t				fPollBand;	// for SIGPOLL
             void*				fAddress;
             union sigval		fUserValue;
             bool				fPending;
@@ -153,15 +153,15 @@ struct PendingSignals {
                                     { return fQueuedSignalsMask
                                         | fUnqueuedSignalsMask; }
 
-            int32				HighestSignalPriority(sigset_t nonBlocked)
+            int32_t				HighestSignalPriority(sigset_t nonBlocked)
                                     const;
 
             void				Clear();
-            void				AddSignal(int32 signal)
+            void				AddSignal(int32_t signal)
                                     { fUnqueuedSignalsMask
                                         |= SIGNAL_TO_MASK(signal); }
             void				AddSignal(Signal* signal);
-            void				RemoveSignal(int32 signal)
+            void				RemoveSignal(int32_t signal)
                                     { RemoveSignals(SIGNAL_TO_MASK(signal)); }
             void				RemoveSignal(Signal* signal);
             void				RemoveSignals(sigset_t mask);
@@ -173,9 +173,9 @@ private:
             typedef DoublyLinkedList<Signal> SignalList;
 
 private:
-            int32				_GetHighestPrioritySignal(sigset_t nonBlocked,
+            int32_t				_GetHighestPrioritySignal(sigset_t nonBlocked,
                                     Signal*& _queuedSignal,
-                                    int32& _unqueuedSignal) const;
+                                    int32_t& _unqueuedSignal) const;
             void				_UpdateQueuedSignalMask();
 
 private:
@@ -201,31 +201,31 @@ void handle_signals(Thread* thread);
 bool is_team_signal_blocked(Team* team, int signal);
 void signal_get_user_stack(addr_t address, stack_t* stack);
 
-status_t send_signal_to_thread_locked(Thread* thread, uint32 signalNumber,
-    Signal* signal, uint32 flags);
+status_t send_signal_to_thread_locked(Thread* thread, uint32_t signalNumber,
+    Signal* signal, uint32_t flags);
 status_t send_signal_to_thread(Thread* thread, const Signal& signal,
-    uint32 flags);
+    uint32_t flags);
 status_t send_signal_to_thread_id(thread_id threadID, const Signal& signal,
-    uint32 flags);
+    uint32_t flags);
 
-status_t send_signal_to_team_locked(Team* team, uint32 signalNumber,
-    Signal* signal, uint32 flags);
-status_t send_signal_to_team(Team* team, const Signal& signal, uint32 flags);
+status_t send_signal_to_team_locked(Team* team, uint32_t signalNumber,
+    Signal* signal, uint32_t flags);
+status_t send_signal_to_team(Team* team, const Signal& signal, uint32_t flags);
 status_t send_signal_to_team_id(team_id teamID, const Signal& signal,
-    uint32 flags);
+    uint32_t flags);
 
 status_t send_signal_to_process_group_locked(ProcessGroup* group,
-    const Signal& signal, uint32 flags);
+    const Signal& signal, uint32_t flags);
 status_t send_signal_to_process_group(pid_t groupID, const Signal& signal,
-    uint32 flags);
+    uint32_t flags);
 
-status_t _user_send_signal(int32 id, uint32 signal,
-    const union sigval* userValue, uint32 flags);
+status_t _user_send_signal(int32_t id, uint32_t signal,
+    const union sigval* userValue, uint32_t flags);
 status_t _user_set_signal_mask(int how, const sigset_t *set, sigset_t *oldSet);
 status_t _user_sigaction(int sig, const struct sigaction *newAction,
     struct sigaction *oldAction);
-bigtime_t _user_set_alarm(bigtime_t time, uint32 mode);
-status_t _user_sigwait(const sigset_t *set, siginfo_t *info, uint32 flags,
+bigtime_t _user_set_alarm(bigtime_t time, uint32_t mode);
+status_t _user_sigwait(const sigset_t *set, siginfo_t *info, uint32_t flags,
     bigtime_t timeout);
 status_t _user_sigsuspend(const sigset_t *mask);
 status_t _user_sigpending(sigset_t *set);

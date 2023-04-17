@@ -13,14 +13,14 @@ typedef uint64_t SectorType;
 
 
 struct SparseExtentHeader {
-	uint32_t		magicNumber;
-	uint32_t		version;
-	uint32_t		flags;
+	uint32_t_t		magicNumber;
+	uint32_t_t		version;
+	uint32_t_t		flags;
 	SectorType		capacity;
 	SectorType		grainSize;
 	SectorType		descriptorOffset;
 	SectorType		descriptorSize;
-	uint32_t		numGTEsPerGT;
+	uint32_t_t		numGTEsPerGT;
 	SectorType		rgdOffset;
 	SectorType		gdOffset;
 	SectorType		overHead;

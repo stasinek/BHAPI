@@ -30,7 +30,7 @@ private:
 	virtual	void				_ReservedInputServerFilter3();
 	virtual	void				_ReservedInputServerFilter4();
 
-	uint32						_reserved[4];
+	uint32_t						_reserved[4];
 };
 
 #endif // _INPUTSERVERFILTER_H

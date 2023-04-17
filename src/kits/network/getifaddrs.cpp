@@ -102,7 +102,7 @@ getifaddrs(struct ifaddrs** _ifaddrs)
 	ifreq* end = (ifreq*)(buffer + config.ifc_len);
 	struct ifaddrs* previous = NULL;
 
-	for (uint32_t i = 0; interfaces < end; i++) {
+	for (uint32_t_t i = 0; interfaces < end; i++) {
 		struct ifaddrs* current = new(std::nothrow) ifaddrs();
 		if (current == NULL) {
 			freeifaddrs(previous);

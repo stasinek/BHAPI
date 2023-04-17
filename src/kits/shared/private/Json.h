@@ -23,9 +23,9 @@ public:
 
 private:
 	static	void				_Parse(BMessage& message, BString& JSON);
-	static	BString				_ParseString(BString& JSON, int32& pos);
-	static	double				_ParseNumber(BString& JSON, int32& pos);
-	static	bool				_ParseConstant(BString& JSON, int32& pos,
+	static	BString				_ParseString(BString& JSON, int32_t& pos);
+	static	double				_ParseNumber(BString& JSON, int32_t& pos);
+	static	bool				_ParseConstant(BString& JSON, int32_t& pos,
 									 const char* constant);
 };
 

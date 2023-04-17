@@ -64,7 +64,7 @@ public:
 		return (fRecord & 0x000000FF) >> 2;
 	}
 	
-	uint32 Record()
+	uint32_t Record()
 	{
 		return fRecord;
 	}
@@ -83,7 +83,7 @@ public:
 	void Draw(BView* view, const BPoint& point);
 
 private:
-	uint32 fRecord;
+	uint32_t fRecord;
 
 };
 

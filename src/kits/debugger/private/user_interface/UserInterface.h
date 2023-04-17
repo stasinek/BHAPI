@@ -82,7 +82,7 @@ public:
 									// to indicate that debug information is
 									// being parsed.
 
-	virtual	int32				SynchronouslyAskUser(const char* title,
+	virtual	int32_t				SynchronouslyAskUser(const char* title,
 									const char* message, const char* choice1,
 									const char* choice2, const char* choice3)
 									= 0;
@@ -120,7 +120,7 @@ public:
 	virtual	void				ValueNodeWriteRequested(ValueNode* node,
 									CpuState* state, Value* newValue) = 0;
 	virtual	void				ThreadActionRequested(thread_id threadID,
-									uint32 action,
+									uint32_t action,
 									target_addr_t address = 0) = 0;
 
 	virtual	void				SetBreakpointRequested(target_addr_t address,
@@ -147,14 +147,14 @@ public:
 									const char* name) = 0;
 
 	virtual	void				SetDefaultSignalDispositionRequested(
-									int32 disposition) = 0;
+									int32_t disposition) = 0;
 	virtual	void				SetCustomSignalDispositionRequested(
-									int32 signal, int32 disposition) = 0;
+									int32_t signal, int32_t disposition) = 0;
 	virtual	void				RemoveCustomSignalDispositionRequested(
-									int32 signal) = 0;
+									int32_t signal) = 0;
 
 	virtual	void				SetWatchpointRequested(target_addr_t address,
-									uint32 type, int32 length,
+									uint32_t type, int32_t length,
 									bool enabled) = 0;
 	virtual	void				SetWatchpointEnabledRequested(
 									Watchpoint* watchpoint,

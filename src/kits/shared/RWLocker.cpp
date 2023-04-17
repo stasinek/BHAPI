@@ -13,7 +13,7 @@
 // info about a read lock owner
 struct RWLocker::ReadLockInfo {
 	thread_id	reader;
-	int32		count;
+	int32_t		count;
 };
 
 
@@ -53,7 +53,7 @@ RWLocker::~RWLocker()
 	fLock.Lock();
 	delete_sem(fMutex.semaphore);
 	delete_sem(fQueue.semaphore);
-	for (int32 i = 0; ReadLockInfo* info = _ReadLockInfoAt(i); i++)
+	for (int32_t i = 0; ReadLockInfo* info = _ReadLockInfoAt(i); i++)
 		delete info;
 }
 
@@ -85,7 +85,7 @@ void RWLocker::ReadUnlock()
 				fWriterReaderCount--;
 			// else: error: unmatched ReadUnlock()
 		} else {
-			int32 index = _IndexOf(thread);
+			int32_t index = _IndexOf(thread);
 			if (ReadLockInfo* info = _ReadLockInfoAt(index)) {
 				fReaderCount--;
 				if (--info->count == 0) {
@@ -268,9 +268,9 @@ status_t RWLocker::_WriteLock(bigtime_t timeout)
 	if (fLock.Lock()) {
 		bool infiniteTimeout = (timeout == B_INFINITE_TIMEOUT);
 		bool locked = false;
-		int32 readerCount = 0;
+		int32_t readerCount = 0;
 		thread_id thread = find_thread(NULL);
-		int32 index = _IndexOf(thread);
+		int32_t index = _IndexOf(thread);
 		if (ReadLockInfo* info = _ReadLockInfoAt(index)) {
 			// We already own a read lock.
 			if (fWriterCount > 0) {
@@ -390,9 +390,9 @@ status_t RWLocker::_WriteLock(bigtime_t timeout)
 }
 
 // _AddReadLockInfo
-int32 RWLocker::_AddReadLockInfo(ReadLockInfo* info)
+int32_t RWLocker::_AddReadLockInfo(ReadLockInfo* info)
 {
-	int32 index = fReadLockInfos.CountItems();
+	int32_t index = fReadLockInfos.CountItems();
 	fReadLockInfos.AddItem(info, index);
 	return index;
 }
@@ -401,7 +401,7 @@ int32 RWLocker::_AddReadLockInfo(ReadLockInfo* info)
 //
 // Create a new read lock info for the supplied thread and add it to the
 // list. Returns the index of the info.
-int32 RWLocker::_NewReadLockInfo(thread_id thread, int32 count)
+int32_t RWLocker::_NewReadLockInfo(thread_id thread, int32_t count)
 {
 	ReadLockInfo* info = new ReadLockInfo;
 	info->reader = thread;
@@ -410,7 +410,7 @@ int32 RWLocker::_NewReadLockInfo(thread_id thread, int32 count)
 }
 
 // _DeleteReadLockInfo
-void RWLocker::_DeleteReadLockInfo(int32 index)
+void RWLocker::_DeleteReadLockInfo(int32_t index)
 {
 	if (ReadLockInfo* info = (ReadLockInfo*)fReadLockInfos.RemoveItem(index))
 		delete info;
@@ -418,16 +418,16 @@ void RWLocker::_DeleteReadLockInfo(int32 index)
 
 // _ReadLockInfoAt
 RWLocker::ReadLockInfo*
-RWLocker::_ReadLockInfoAt(int32 index) const
+RWLocker::_ReadLockInfoAt(int32_t index) const
 {
 	return (ReadLockInfo*)fReadLockInfos.ItemAt(index);
 }
 
 // _IndexOf
-int32 RWLocker::_IndexOf(thread_id thread) const
+int32_t RWLocker::_IndexOf(thread_id thread) const
 {
-	int32 count = fReadLockInfos.CountItems();
-	for (int32 i = 0; i < count; i++) {
+	int32_t count = fReadLockInfos.CountItems();
+	for (int32_t i = 0; i < count; i++) {
 		if (_ReadLockInfoAt(i)->reader == thread)
 			return i;
 	}

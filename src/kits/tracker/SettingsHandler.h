@@ -54,7 +54,7 @@ typedef const char* (*ArgvHandler)(int argc, const char* const *argv,
 	void* params);
 	// return 0 or error string if parsing failed
 
-const int32 kBufferSize = 1024;
+const int32_t kBufferSize = 1024;
 
 
 class ArgvParser {
@@ -85,12 +85,12 @@ private:
 
 	FILE* fFile;
 	char* fBuffer;
-	int32 fPos;
+	int32_t fPos;
 
 	int fArgc;
 	char** fCurrentArgv;
 
-	int32 fCurrentArgsPos;
+	int32_t fCurrentArgsPos;
 	char fCurrentArgs[1024];
 
 	bool fSawBackslash;
@@ -98,7 +98,7 @@ private:
 	bool fInDoubleQuote;
 	bool fInSingleQuote;
 
-	int32 fLineNo;
+	int32_t fLineNo;
 	const char* fFileName;
 };
 
@@ -165,8 +165,8 @@ private:
 	const char* fSettingsDir;
 		// currently unused
 	SettingsArgvDispatcher** fList;
-	int32 fCount;
-	int32 fListSize;
+	int32_t fCount;
+	int32_t fListSize;
 	BFile* fCurrentSettings;
 };
 

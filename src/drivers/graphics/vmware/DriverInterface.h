@@ -30,7 +30,7 @@
 
 typedef struct {
 	sem_id	sem;
-	int32	ben;
+	int32_t	ben;
 } Benaphore;
 #define INIT_BEN(x)		x.sem = create_sem(0, "VMware "#x); x.ben = 0;
 #define ACQUIRE_BEN(x)	if((atomic_add(&(x.ben), 1)) >= 1) acquire_sem(x.sem);
@@ -86,16 +86,16 @@ typedef struct {
 	uint16			vendorId;
 	uint16			deviceId;
 	uint8			revision;
-	uint32			maxWidth;
-	uint32			maxHeight;
+	uint32_t			maxWidth;
+	uint32_t			maxHeight;
 	void			*fbDma;
-	uint32			fbSize;
+	uint32_t			fbSize;
 	void			*fifoDma;
-	uint32			fifoSize;
-	uint32			fifoMin;
-	uint32			capabilities;
-	uint32			fifoCapabilities;
-	uint32			fifoFlags;
+	uint32_t			fifoSize;
+	uint32_t			fifoMin;
+	uint32_t			capabilities;
+	uint32_t			fifoCapabilities;
+	uint32_t			fifoFlags;
 
 	/* For registers access */
 	uint16			indexPort;
@@ -108,15 +108,15 @@ typedef struct {
 	void			*fifo;
 
 	/* This changes when we switch to another mode */
-	uint32			fbOffset;
-	uint32			bytesPerRow;
+	uint32_t			fbOffset;
+	uint32_t			bytesPerRow;
 
 	/* Current display mode */
 	display_mode	dm;
 
 	Benaphore		engineLock;
 	Benaphore		fifoLock;
-	uint32			fifoNext;
+	uint32_t			fifoNext;
 	
 	/* Cursor state */
 	bool			cursorShow;

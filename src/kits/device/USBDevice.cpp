@@ -73,7 +73,7 @@ status_t BUSBDevice::SetTo(const char *path)
 	if (fConfigurations == NULL)
 		return B_NO_MEMORY;
 
-	for (uint32 i = 0; i < fDescriptor.num_configurations; i++) {
+	for (uint32_t i = 0; i < fDescriptor.num_configurations; i++) {
 		fConfigurations[i] = new(std::nothrow) BUSBConfiguration(this, i,
 			fRawFD);
 	}
@@ -97,7 +97,7 @@ void BUSBDevice::Unset()
 	fManufacturerString = fProductString = fSerialNumberString = NULL;
 
 	if (fConfigurations != NULL) {
-		for (int32 i = 0; i < fDescriptor.num_configurations; i++)
+		for (int32_t i = 0; i < fDescriptor.num_configurations; i++)
 			delete fConfigurations[i];
 
 		delete[] fConfigurations;
@@ -239,7 +239,7 @@ BUSBDevice::Descriptor() const
 
 
 size_t
-BUSBDevice::GetStringDescriptor(uint32 index,
+BUSBDevice::GetStringDescriptor(uint32_t index,
 	usb_string_descriptor *descriptor, size_t length) const
 {
 	if (!descriptor)
@@ -259,7 +259,7 @@ BUSBDevice::GetStringDescriptor(uint32 index,
 
 
 char *
-BUSBDevice::DecodeStringDescriptor(uint32 index) const
+BUSBDevice::DecodeStringDescriptor(uint32_t index) const
 {
 	char buffer[300];
 	usb_string_descriptor *stringDescriptor;
@@ -306,14 +306,14 @@ BUSBDevice::GetDescriptor(uint8 type, uint8 index, uint16 languageID,
 }
 
 
-uint32 BUSBDevice::CountConfigurations() const
+uint32_t BUSBDevice::CountConfigurations() const
 {
 	return fDescriptor.num_configurations;
 }
 
 
 const BUSBConfiguration *
-BUSBDevice::ConfigurationAt(uint32 index) const
+BUSBDevice::ConfigurationAt(uint32_t index) const
 {
 	if (index >= fDescriptor.num_configurations || fConfigurations == NULL)
 		return NULL;

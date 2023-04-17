@@ -79,7 +79,7 @@ status_t BTeamDebugger::Uninstall()
 }
 
 
-status_t BTeamDebugger::LoadProgram(const char* const* args, int32 argCount,
+status_t BTeamDebugger::LoadProgram(const char* const* args, int32_t argCount,
 	bool traceLoading)
 {
 	// load the program
@@ -98,7 +98,7 @@ status_t BTeamDebugger::LoadProgram(const char* const* args, int32 argCount,
 }
 
 
-status_t BTeamDebugger::ReadDebugMessage(int32& _messageCode,
+status_t BTeamDebugger::ReadDebugMessage(int32_t& _messageCode,
 	debug_debugger_message_data& messageBuffer)
 {
 	ssize_t bytesRead = read_port(fDebuggerPort, &_messageCode, &messageBuffer,
@@ -112,7 +112,7 @@ status_t BTeamDebugger::ReadDebugMessage(int32& _messageCode,
 
 
 /*static*/ thread_id
-BTeamDebugger::_LoadProgram(const char* const* args, int32 argCount,
+BTeamDebugger::_LoadProgram(const char* const* args, int32_t argCount,
 	bool traceLoading)
 {
 	// clone the argument vector so that we can change it
@@ -130,7 +130,7 @@ BTeamDebugger::_LoadProgram(const char* const* args, int32 argCount,
 	mutableArgs[0] = programPath.Path();
 
 	// count environment variables
-	int32 envCount = 0;
+	int32_t envCount = 0;
 	while (environ[envCount] != NULL)
 		envCount++;
 

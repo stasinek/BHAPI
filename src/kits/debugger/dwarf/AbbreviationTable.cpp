@@ -56,7 +56,7 @@ status_t AbbreviationTable::Init(const void* section, off_t sectionSize)
 }
 
 
-bool AbbreviationTable::GetAbbreviationEntry(uint32 code, AbbreviationEntry& entry)
+bool AbbreviationTable::GetAbbreviationEntry(uint32_t code, AbbreviationEntry& entry)
 {
 	AbbreviationTableEntry* tableEntry = fEntryTable.Lookup(code);
 	if (tableEntry == NULL)
@@ -70,7 +70,7 @@ bool AbbreviationTable::GetAbbreviationEntry(uint32 code, AbbreviationEntry& ent
 status_t AbbreviationTable::_ParseAbbreviationEntry(DataReader& abbrevReader,
 	bool& _nullEntry)
 {
-	uint32 code = abbrevReader.ReadUnsignedLEB128(0);
+	uint32_t code = abbrevReader.ReadUnsignedLEB128(0);
 	if (code == 0) {
 		if (abbrevReader.HasOverflow()) {
 			fprintf(stderr, "Invalid abbreviation table 1!\n");
@@ -82,7 +82,7 @@ status_t AbbreviationTable::_ParseAbbreviationEntry(DataReader& abbrevReader,
 
 	off_t remaining = abbrevReader.BytesRemaining();
 
-/*	uint32 tag =*/ abbrevReader.ReadUnsignedLEB128(0);
+/*	uint32_t tag =*/ abbrevReader.ReadUnsignedLEB128(0);
 /*	uint8 hasChildren =*/ abbrevReader.Read<uint8>(DW_CHILDREN_no);
 
 //	printf("entry: %lu, tag: %lu, children: %d\n", code, tag,
@@ -90,8 +90,8 @@ status_t AbbreviationTable::_ParseAbbreviationEntry(DataReader& abbrevReader,
 
 	// parse attribute specifications
 	while (true) {
-		uint32 attributeName = abbrevReader.ReadUnsignedLEB128(0);
-		uint32 attributeForm = abbrevReader.ReadUnsignedLEB128(0);
+		uint32_t attributeName = abbrevReader.ReadUnsignedLEB128(0);
+		uint32_t attributeForm = abbrevReader.ReadUnsignedLEB128(0);
 		if (abbrevReader.HasOverflow()) {
 			fprintf(stderr, "Invalid abbreviation table 2!\n");
 			return B_BAD_DATA;

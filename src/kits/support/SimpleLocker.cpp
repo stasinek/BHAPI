@@ -28,7 +28,7 @@
  *
  * --------------------------------------------------------------------------*/
 
-#include <SimpleLocker.h>
+#include <kits/support/SimpleLocker.h>
 
 #include <os/kernel.h>
 #include <os/debug.h>

@@ -25,8 +25,8 @@ public:
 	inline	bool				AddRange(target_addr_t start,
 									target_size_t size);
 
-			int32				CountRanges() const;
-			TargetAddressRange	RangeAt(int32 index) const;
+			int32_t				CountRanges() const;
+			TargetAddressRange	RangeAt(int32_t index) const;
 
 			target_addr_t		LowestAddress() const;
 			TargetAddressRange	CoveringRange() const;

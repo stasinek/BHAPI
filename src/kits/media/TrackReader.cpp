@@ -200,7 +200,7 @@ BTrackReader::Format(void) const
 }
 
 
-int32 
+int32_t 
 BTrackReader::FrameSize(void)
 {
 	CALLED();
@@ -208,16 +208,16 @@ BTrackReader::FrameSize(void)
 }
 
 
-status_t BTrackReader::ReadFrames(void* in_buffer, int32 frame_count)
+status_t BTrackReader::ReadFrames(void* in_buffer, int32_t frame_count)
 {
 	CALLED();
 
 	uint8* buffer = static_cast<uint8*>(in_buffer);
-	int32 bytes_to_read = frame_count * fFrameSize;
+	int32_t bytes_to_read = frame_count * fFrameSize;
 
 	status_t last_status = B_OK;
 	while (bytes_to_read > 0) {
-		int32 bytes_to_copy = min_c(fBufferUsedSize, bytes_to_read);
+		int32_t bytes_to_copy = min_c(fBufferUsedSize, bytes_to_read);
 		if (bytes_to_copy > 0) {
 			memcpy(buffer, fBuffer + fBufferOffset, bytes_to_copy);
 			buffer += bytes_to_copy;

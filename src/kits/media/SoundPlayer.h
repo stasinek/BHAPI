@@ -89,7 +89,7 @@ public:
 										eventNotifierFunction = NULL,
 									void* cookie = NULL);
 
-	typedef int32 play_id;
+	typedef int32_t play_id;
 
 			bigtime_t			CurrentTime();
 			bigtime_t			PerformanceTime();
@@ -114,7 +114,7 @@ public:
 			float				VolumeDB(bool forcePoll = false);
 			void				SetVolumeDB(float dB);
 			status_t			GetVolumeInfo(media_node* _node,
-									int32* _parameterID, float* _minDB,
+									int32_t* _parameterID, float* _minDB,
 									float* _maxDB);
 			bigtime_t			Latency();
 
@@ -165,8 +165,8 @@ private:
 		off_t			current_offset;
 		BSound*			sound;
 		play_id			id;
-		int32			delta;
-		int32			rate;
+		int32_t			delta;
+		int32_t			rate;
 		sem_id			wait_sem;
 		float			volume;
 	};
@@ -176,7 +176,7 @@ private:
 		bigtime_t		start_time;
 		BSound*			sound;
 		play_id			id;
-		int32			rate;
+		int32_t			rate;
 		float			volume;
 	};
 
@@ -196,14 +196,14 @@ private:
 				// The playback node
 			void*				fCookie;
 				// Opaque handle passed to hooks
-			int32				fFlags;
+			int32_t				fFlags;
 
 			status_t			fInitStatus;
 			BContinuousParameter* fVolumeSlider;
 			bigtime_t			fLastVolumeUpdate;
 			BParameterWeb*		fParameterWeb;
 
-			uint32				_reserved[15];
+			uint32_t				_reserved[15];
 };
 
 #endif // _SOUND_PLAYER_H

@@ -15,16 +15,16 @@
 
 namespace BPrivate {
 
-uint32 CalculateChecksum(const uint8 *buffer, int32 size)
+uint32_t CalculateChecksum(const uint8 *buffer, int32_t size)
 {
-	uint32 sum = 0;
-	uint32 temp = 0;
+	uint32_t sum = 0;
+	uint32_t temp = 0;
 
 	while (size > 3) {
 #if defined(__INTEL__)
-		sum += B_SWAP_INT32(*(int32 *)buffer);
+		sum += B_SWAP_INT32(*(int32_t *)buffer);
 #else
-		sum += *(int32 *)buffer;
+		sum += *(int32_t *)buffer;
 #endif
 		buffer += 4;
 		size -= 4;

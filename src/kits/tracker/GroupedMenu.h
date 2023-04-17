@@ -50,16 +50,16 @@ class TMenuItemGroup {
 		~TMenuItemGroup();
 
 		bool AddItem(BMenuItem* item);
-		bool AddItem(BMenuItem* item, int32 atIndex);
+		bool AddItem(BMenuItem* item, int32_t atIndex);
 		bool AddItem(BMenu* menu);
-		bool AddItem(BMenu* menu, int32 atIndex);
+		bool AddItem(BMenu* menu, int32_t atIndex);
 
 		bool RemoveItem(BMenuItem* item);
 		bool RemoveItem(BMenu* menu);
-		BMenuItem* RemoveItem(int32 index);
+		BMenuItem* RemoveItem(int32_t index);
 
-		BMenuItem* ItemAt(int32 index);
-		int32 CountItems();
+		BMenuItem* ItemAt(int32_t index);
+		int32_t CountItems();
 
 	private:
 		friend class TGroupedMenu;
@@ -70,8 +70,8 @@ class TMenuItemGroup {
 		const char*		fName;
 		BList			fList;
 		TGroupedMenu*	fMenu;
-		int32			fFirstItemIndex;
-		int32			fItemsTotal;
+		int32_t			fFirstItemIndex;
+		int32_t			fItemsTotal;
 		bool			fHasSeparator;
 };
 
@@ -82,17 +82,17 @@ class TGroupedMenu : public BMenu {
 		~TGroupedMenu();
 
 		bool AddGroup(TMenuItemGroup* group);
-		bool AddGroup(TMenuItemGroup* group, int32 atIndex);
+		bool AddGroup(TMenuItemGroup* group, int32_t atIndex);
 
 		bool RemoveGroup(TMenuItemGroup* group);
 
-		TMenuItemGroup* GroupAt(int32 index);
-		int32 CountGroups();
+		TMenuItemGroup* GroupAt(int32_t index);
+		int32_t CountGroups();
 
 	private:
 		friend class TMenuItemGroup;
 		void AddGroupItem(TMenuItemGroup* group, BMenuItem* item,
-			int32 atIndex);
+			int32_t atIndex);
 		void RemoveGroupItem(TMenuItemGroup* group, BMenuItem* item);
 
 	private:

@@ -99,7 +99,7 @@ const char* kPeopleSignature = "application/x-vnd.Be-PEPL";
 // the correct machine has to be used here
 
 const BRect kDefaultFrame(40, 40, 695, 350);
-const int32 kDefaultQueryTemplateCount = 3;
+const int32_t kDefaultQueryTemplateCount = 3;
 
 const AttributeTemplate kDefaultQueryTemplate[] =
 	/* /boot/home/config/settings/Tracker/DefaultQueryTemplates/
@@ -259,8 +259,8 @@ public:
 	~ExtraAttributeLazyInstaller();
 
 	bool AddExtraAttribute(const char* publicName, const char* name,
-		uint32 type, bool viewable, bool editable, float width,
-		int32 alignment, bool extra);
+		uint32_t type, bool viewable, bool editable, float width,
+		int32_t alignment, bool extra);
 
 	status_t InitCheck() const;
 
@@ -298,10 +298,10 @@ ExtraAttributeLazyInstaller::~ExtraAttributeLazyInstaller()
 
 
 bool ExtraAttributeLazyInstaller::AddExtraAttribute(const char* publicName,
-	const char* name, uint32 type, bool viewable, bool editable, float width,
-	int32 alignment, bool extra)
+	const char* name, uint32_t type, bool viewable, bool editable, float width,
+	int32_t alignment, bool extra)
 {
-	for (int32 index = 0; ; index++) {
+	for (int32_t index = 0; ; index++) {
 		const char* oldPublicName;
 		if (fExtraAttrs.FindString("attr:public_name", index, &oldPublicName)
 				!= B_OK) {
@@ -315,10 +315,10 @@ bool ExtraAttributeLazyInstaller::AddExtraAttribute(const char* publicName,
 
 	fExtraAttrs.AddString("attr:public_name", publicName);
 	fExtraAttrs.AddString("attr:name", name);
-	fExtraAttrs.AddInt32("attr:type", (int32)type);
+	fExtraAttrs.AddInt32("attr:type", (int32_t)type);
 	fExtraAttrs.AddBool("attr:viewable", viewable);
 	fExtraAttrs.AddBool("attr:editable", editable);
-	fExtraAttrs.AddInt32("attr:width", (int32)width);
+	fExtraAttrs.AddInt32("attr:width", (int32_t)width);
 	fExtraAttrs.AddInt32("attr:alignment", alignment);
 	fExtraAttrs.AddBool("attr:extra", extra);
 
@@ -347,11 +347,11 @@ static void InstallTemporaryBackgroundImages(BNode* node, BMessage* message)
 
 
 static void AddTemporaryBackgroundImages(BMessage* message, const char* imagePath,
-	BackgroundImage::Mode mode, BPoint offset, uint32 workspaces,
+	BackgroundImage::Mode mode, BPoint offset, uint32_t workspaces,
 	bool textWidgetOutlines)
 {
 	message->AddString(kBackgroundImageInfoPath, imagePath);
-	message->AddInt32(kBackgroundImageInfoWorkspaces, (int32)workspaces);
+	message->AddInt32(kBackgroundImageInfoWorkspaces, (int32_t)workspaces);
 	message->AddInt32(kBackgroundImageInfoMode, mode);
 	message->AddBool(kBackgroundImageInfoTextOutline, textWidgetOutlines);
 	message->AddPoint(kBackgroundImageInfoOffset, offset);
@@ -365,9 +365,9 @@ static void AddTemporaryBackgroundImages(BMessage* message, const char* imagePat
 #define B_TRANSLATION_CONTEXT "TrackerInitialState"
 
 
-bool TTracker::InstallMimeIfNeeded(const char* type, int32 bitsID,
+bool TTracker::InstallMimeIfNeeded(const char* type, int32_t bitsID,
 	const char* shortDescription, const char* longDescription,
-	const char* preferredAppSignature, uint32 forceMask)
+	const char* preferredAppSignature, uint32_t forceMask)
 {
 	// used by InitMimeTypes - checks if a metamime of a given <type> is
 	// installed and if it has all the specified attributes; if not, the

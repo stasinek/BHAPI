@@ -47,9 +47,9 @@ namespace BPrivate {
 
 typedef struct {
 	node_ref node;
-	uint32 moveMode;
+	uint32_t moveMode;
 } TClipboardNodeRef;
-const int32 T_CLIPBOARD_NODE = 'TCNR';
+const int32_t T_CLIPBOARD_NODE = 'TCNR';
 
 
 class BClipboardRefsWatcher : public BLooper {
@@ -88,12 +88,12 @@ void FSClipboardStartWatch(BMessenger target);
 void FSClipboardStopWatch(BMessenger target);
 
 void FSClipboardClear();
-uint32 FSClipboardAddPoses(const node_ref* directory, PoseList* list,
-	uint32 moveMode, bool clearClipboard);
-uint32 FSClipboardRemovePoses(const node_ref* directory, PoseList* list);
-bool FSClipboardPaste(Model* model, uint32 linksMode = 0);
+uint32_t FSClipboardAddPoses(const node_ref* directory, PoseList* list,
+	uint32_t moveMode, bool clearClipboard);
+uint32_t FSClipboardRemovePoses(const node_ref* directory, PoseList* list);
+bool FSClipboardPaste(Model* model, uint32_t linksMode = 0);
 void FSClipboardRemove(Model* model);
-uint32 FSClipboardFindNodeMode(Model* model, bool autoLock,
+uint32_t FSClipboardFindNodeMode(Model* model, bool autoLock,
 	bool updateRefIfNeeded);
 
 #endif	// FS_CLIPBOARD_H

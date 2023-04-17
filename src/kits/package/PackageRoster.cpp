@@ -112,7 +112,7 @@ status_t BPackageRoster::GetRepositoryNames(BStringList& names)
 			status_t result = entry.GetName(name);
 			if (result != B_OK)
 				return result;
-			int32 count = names.CountStrings();
+			int32_t count = names.CountStrings();
 			for (int i = 0; i < count; ++i) {
 				if (names.StringAt(i).Compare(name) == 0)
 					return B_OK;
@@ -216,7 +216,7 @@ status_t BPackageRoster::GetActivePackages(BPackageInstallationLocation location
 }
 
 
-status_t BPackageRoster::StartWatching(const BMessenger& target, uint32 eventMask)
+status_t BPackageRoster::StartWatching(const BMessenger& target, uint32_t eventMask)
 {
 // This method makes sense only on an installed Haiku, but not for the build
 // tools.
@@ -237,7 +237,7 @@ status_t BPackageRoster::StartWatching(const BMessenger& target, uint32 eventMas
 
 	// get result
 	if (reply.what != ::BPrivate::B_REG_SUCCESS) {
-		int32 result;
+		int32_t result;
 		if (reply.FindInt32("error", &result) != B_OK)
 			result = B_ERROR;
 		return (status_t)error;
@@ -269,7 +269,7 @@ status_t BPackageRoster::StopWatching(const BMessenger& target)
 
 	// get result
 	if (reply.what != ::BPrivate::B_REG_SUCCESS) {
-		int32 result;
+		int32_t result;
 		if (reply.FindInt32("error", &result) != B_OK)
 			result = B_ERROR;
 		return (status_t)error;

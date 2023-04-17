@@ -93,7 +93,7 @@ ArgvParser::~ArgvParser()
 void ArgvParser::MakeArgvEmpty()
 {
 	// done with current argv, free it up
-	for (int32 index = 0; index < fArgc; index++)
+	for (int32_t index = 0; index < fArgc; index++)
 		delete[] fCurrentArgv[index];
 
 	fArgc = 0;
@@ -315,8 +315,8 @@ bool SettingsArgvDispatcher::HandleRectValue(BRect &result,
 
 void SettingsArgvDispatcher::WriteRectValue(Settings* setting, BRect rect)
 {
-	setting->Write("%d %d %d %d", (int32)rect.left, (int32)rect.top,
-		(int32)rect.right, (int32)rect.bottom);
+	setting->Write("%d %d %d %d", (int32_t)rect.left, (int32_t)rect.top,
+		(int32_t)rect.right, (int32_t)rect.bottom);
 }
 
 
@@ -336,7 +336,7 @@ Settings::Settings(const char* filename, const char* settingsDirName)
 
 Settings::~Settings()
 {
-	for (int32 index = 0; index < fCount; index++)
+	for (int32_t index = 0; index < fCount; index++)
 		delete fList[index];
 
 	free(fList);
@@ -375,7 +375,7 @@ bool Settings::Add(SettingsArgvDispatcher* setting)
 SettingsArgvDispatcher*
 Settings::Find(const char* name)
 {
-	for (int32 index = 0; index < fCount; index++)
+	for (int32_t index = 0; index < fCount; index++)
 		if (strcmp(name, fList[index]->Name()) == 0)
 			return fList[index];
 
@@ -445,7 +445,7 @@ void Settings::SaveCurrentSettings(bool onlyIfNonDefault)
 		return;
 
 	fCurrentSettings = &prefs;
-	for (int32 index = 0; index < fCount; index++)
+	for (int32_t index = 0; index < fCount; index++)
 		fList[index]->SaveSettings(this, onlyIfNonDefault);
 
 	fCurrentSettings = NULL;

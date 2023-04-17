@@ -23,8 +23,8 @@ struct file_map_run {
 };
 
 struct file_map_boot_item {
-	int32 block_size;
-	int32 num_runs;
+	int32_t block_size;
+	int32_t num_runs;
 	struct file_map_run runs[FMAP_MAX_RUNS];
 };
 
@@ -57,7 +57,7 @@ class FileMapDisk : public Node {
 			size_t bufferSize);
 
 		virtual status_t GetName(char *nameBuffer, size_t bufferSize) const;
-		virtual status_t GetFileMap(struct file_map_run *runs, int32 *count);
+		virtual status_t GetFileMap(struct file_map_run *runs, int32_t *count);
 		virtual off_t Size() const;
 
 		static FileMapDisk *FindAnyFileMapDisk(Directory *volume);

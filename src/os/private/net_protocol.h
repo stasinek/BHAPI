@@ -39,8 +39,8 @@ enum net_error {
 
 typedef union net_error_data {
 	struct sockaddr_storage				gateway;
-	uint32								mtu;
-	uint32								error_offset;
+	uint32_t								mtu;
+	uint32_t								error_offset;
 } net_error_data;
 
 typedef struct net_protocol {
@@ -56,7 +56,7 @@ typedef struct net_protocol {
 
 struct net_protocol_module_info {
 	module_info info;
-	uint32		flags;
+	uint32_t		flags;
 
 	net_protocol* (*init_protocol)(net_socket* socket);
 	status_t	(*uninit_protocol)(net_protocol* self);
@@ -84,7 +84,7 @@ struct net_protocol_module_info {
 					net_buffer* buffer);
 	ssize_t		(*send_avail)(net_protocol* self);
 
-	status_t	(*read_data)(net_protocol* self, size_t numBytes, uint32 flags,
+	status_t	(*read_data)(net_protocol* self, size_t numBytes, uint32_t flags,
 					net_buffer** _buffer);
 	ssize_t		(*read_avail)(net_protocol* self);
 

@@ -69,7 +69,7 @@ private:
 			BSize				fPreferredSize;
 			BAlignment			fAlignment;
 
-			uint32				_reserved[5];
+			uint32_t				_reserved[5];
 };
 
 #endif	//	_ABSTRACT_LAYOUT_ITEM_H

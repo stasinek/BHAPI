@@ -18,25 +18,25 @@ template <class T>
 class _BTextViewSupportBuffer_ {
 
 public:
-				_BTextViewSupportBuffer_(int32 inExtraCount = 0, int32 inCount = 0);
+				_BTextViewSupportBuffer_(int32_t inExtraCount = 0, int32_t inCount = 0);
 virtual			~_BTextViewSupportBuffer_();
 
-		void	InsertItemsAt(int32 inNumItems, int32 inAtIndex, const T* inItem);
-		void	RemoveItemsAt(int32 inNumItems, int32 inAtIndex);
+		void	InsertItemsAt(int32_t inNumItems, int32_t inAtIndex, const T* inItem);
+		void	RemoveItemsAt(int32_t inNumItems, int32_t inAtIndex);
 
-		int32	ItemCount() const;
+		int32_t	ItemCount() const;
 
 protected:
-		int32	fExtraCount;	
-		int32	fItemCount;				
-		int32	fBufferCount;
+		int32_t	fExtraCount;	
+		int32_t	fItemCount;				
+		int32_t	fBufferCount;
 		T*		fBuffer;
 };
 
 
 template <class T>
-_BTextViewSupportBuffer_<T>::_BTextViewSupportBuffer_(int32 inExtraCount,
-													  int32 inCount)
+_BTextViewSupportBuffer_<T>::_BTextViewSupportBuffer_(int32_t inExtraCount,
+													  int32_t inCount)
 	:	fExtraCount(inExtraCount),
 		fItemCount(inCount),
 		fBufferCount(fExtraCount + fItemCount),
@@ -54,8 +54,8 @@ _BTextViewSupportBuffer_<T>::~_BTextViewSupportBuffer_()
 
 
 template <class T>
-void _BTextViewSupportBuffer_<T>::InsertItemsAt(int32 inNumItems,
-												int32 inAtIndex,
+void _BTextViewSupportBuffer_<T>::InsertItemsAt(int32_t inNumItems,
+												int32_t inAtIndex,
 												const T* inItem)
 {
 	if (inNumItems < 1)
@@ -64,8 +64,8 @@ void _BTextViewSupportBuffer_<T>::InsertItemsAt(int32 inNumItems,
 	inAtIndex = (inAtIndex > fItemCount) ? fItemCount : inAtIndex;
 	inAtIndex = (inAtIndex < 0) ? 0 : inAtIndex;
 
-	int32 delta = inNumItems * sizeof(T);
-	int32 logSize = fItemCount * sizeof(T);
+	int32_t delta = inNumItems * sizeof(T);
+	int32_t logSize = fItemCount * sizeof(T);
 	if ((logSize + delta) >= fBufferCount) {
 		fBufferCount = logSize + delta + (fExtraCount * sizeof(T));
 		fBuffer = (T*)realloc(fBuffer, fBufferCount);
@@ -82,8 +82,8 @@ void _BTextViewSupportBuffer_<T>::InsertItemsAt(int32 inNumItems,
 
 
 template <class T>
-void _BTextViewSupportBuffer_<T>::RemoveItemsAt(int32 inNumItems,
-												int32 inAtIndex)
+void _BTextViewSupportBuffer_<T>::RemoveItemsAt(int32_t inNumItems,
+												int32_t inAtIndex)
 {
 	if (inNumItems < 1)
 		return;
@@ -95,9 +95,9 @@ void _BTextViewSupportBuffer_<T>::RemoveItemsAt(int32 inNumItems,
 	memmove(loc, loc + inNumItems, 
 			(fItemCount - (inNumItems + inAtIndex)) * sizeof(T));
 	
-	int32 delta = inNumItems * sizeof(T);
-	int32 logSize = fItemCount * sizeof(T);
-	uint32 extraSize = fBufferCount - (logSize - delta);
+	int32_t delta = inNumItems * sizeof(T);
+	int32_t logSize = fItemCount * sizeof(T);
+	uint32_t extraSize = fBufferCount - (logSize - delta);
 	if (extraSize > (fExtraCount * sizeof(T))) {
 		fBufferCount = (logSize - delta) + (fExtraCount * sizeof(T));
 		fBuffer = (T*)realloc(fBuffer, fBufferCount);
@@ -110,7 +110,7 @@ void _BTextViewSupportBuffer_<T>::RemoveItemsAt(int32 inNumItems,
 
 
 template<class T>
-inline int32 _BTextViewSupportBuffer_<T>::ItemCount() const
+inline int32_t _BTextViewSupportBuffer_<T>::ItemCount() const
 {
 	return fItemCount;
 }

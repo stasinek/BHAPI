@@ -18,17 +18,17 @@ extern "C" {
 #endif
 
 /* These hooks are how the kernel accesses legacy devices */
-typedef status_t (*device_open_hook)(const char *name, uint32 flags,
+typedef status_t (*device_open_hook)(const char *name, uint32_t flags,
     void **cookie);
 typedef status_t (*device_close_hook)(void *cookie);
 typedef status_t (*device_free_hook)(void *cookie);
-typedef status_t (*device_control_hook)(void *cookie, uint32 op, void *data,
+typedef status_t (*device_control_hook)(void *cookie, uint32_t op, void *data,
     size_t len);
 typedef status_t  (*device_read_hook)(void *cookie, off_t position, void *data,
     size_t *numBytes);
 typedef status_t  (*device_write_hook)(void *cookie, off_t position,
     const void *data, size_t *numBytes);
-typedef status_t (*device_select_hook)(void *cookie, uint8 event, uint32 ref,
+typedef status_t (*device_select_hook)(void *cookie, uint8 event, uint32_t ref,
     selectsync *sync);
 typedef status_t (*device_deselect_hook)(void *cookie, uint8 event,
     selectsync *sync);
@@ -62,7 +62,7 @@ device_hooks*	find_device(const char* name);
 status_t		init_driver(void);
 void			uninit_driver(void);
 
-extern int32	api_version;
+extern int32_t	api_version;
 
 enum {
     B_GET_DEVICE_SIZE = 1,			/* get # bytes - returns size_t in *data */
@@ -121,10 +121,10 @@ enum {
 
 /* B_GET_GEOMETRY data structure */
 typedef struct {
-    uint32	bytes_per_sector;		/* sector size in bytes */
-    uint32	sectors_per_track;		/* # sectors per track */
-    uint32	cylinder_count;			/* # cylinders */
-    uint32	head_count;				/* # heads */
+    uint32_t	bytes_per_sector;		/* sector size in bytes */
+    uint32_t	sectors_per_track;		/* # sectors per track */
+    uint32_t	cylinder_count;			/* # cylinders */
+    uint32_t	head_count;				/* # heads */
     uchar	device_type;			/* type */
     bool	removable;				/* non-zero if removable */
     bool	read_only;				/* non-zero if read only */
@@ -149,9 +149,9 @@ enum {
 typedef struct {
     off_t	offset;					/* offset (in bytes) */
     off_t	size;					/* size (in bytes) */
-    int32	logical_block_size;		/* logical block size of partition */
-    int32	session;				/* id of session */
-    int32	partition;				/* id of partition */
+    int32_t	logical_block_size;		/* logical block size of partition */
+    int32_t	session;				/* id of session */
+    int32_t	partition;				/* id of partition */
     char	device[256];			/* path to the physical device */
 } partition_info;
 
@@ -162,7 +162,7 @@ typedef char	driver_path[256];
 
 /* B_GET_ICON, and B_GET_VECTOR_ICON data structure */
 typedef struct {
-    int32	icon_size;
+    int32_t	icon_size;
         /* B_GET_VECTOR_ICON: size of the data buffer in icon_data */
         /* B_GET_ICON: size of the icon in pixels */
     void	*icon_data;
@@ -171,7 +171,7 @@ typedef struct {
 
 /* B_TRIM_DEVICE data structure */
 typedef struct {
-    uint32	range_count;
+    uint32_t	range_count;
     uint64	trimmed_size;			/* filled on return */
     struct range {
         uint64	offset;				/* offset (in bytes) */

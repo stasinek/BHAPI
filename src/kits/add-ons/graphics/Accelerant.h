@@ -17,9 +17,9 @@
 #define B_ACCELERANT_VERSION		1
 
 
-typedef void* (*GetAccelerantHook)(uint32, void*);
+typedef void* (*GetAccelerantHook)(uint32_t, void*);
 
-void* get_accelerant_hook(uint32 feature, void* data);
+void* get_accelerant_hook(uint32_t feature, void* data);
 
 
 enum {
@@ -80,19 +80,19 @@ enum {
 
 
 typedef struct {
-    uint32	version;					/* structure version number */
+    uint32_t	version;					/* structure version number */
     char 	name[32];					/* a name the user will recognize */
                                         /* the device by */
     char	chipset[32];				/* the chipset used by the device */
     char	serial_no[32];				/* serial number for the device */
-    uint32	memory;						/* amount of memory on the device, */
+    uint32_t	memory;						/* amount of memory on the device, */
                                         /* in bytes */
-    uint32	dac_speed;					/* nominal DAC speed, in MHz */
+    uint32_t	dac_speed;					/* nominal DAC speed, in MHz */
 } accelerant_device_info;
 
 
 typedef struct {
-    uint32	pixel_clock;				/* kHz */
+    uint32_t	pixel_clock;				/* kHz */
     uint16	h_display;					/* in pixels (not character clocks) */
     uint16	h_sync_start;
     uint16	h_sync_end;
@@ -101,18 +101,18 @@ typedef struct {
     uint16	v_sync_start;
     uint16	v_sync_end;
     uint16	v_total;
-    uint32	flags;						/* sync polarity, etc. */
+    uint32_t	flags;						/* sync polarity, etc. */
 } display_timing;
 
 
 typedef struct {
     display_timing	timing;				/* CTRC info */
-    uint32			space;				/* pixel configuration */
+    uint32_t			space;				/* pixel configuration */
     uint16			virtual_width;		/* in pixels */
     uint16			virtual_height;		/* in lines */
     uint16			h_display_start;	/* first displayed pixel in line */
     uint16			v_display_start;	/* first displayed line */
-    uint32			flags;				/* mode flags (Some drivers use this */
+    uint32_t			flags;				/* mode flags (Some drivers use this */
                                         /* for dual head related options.) */
 } display_mode;
 
@@ -123,7 +123,7 @@ typedef struct {
     void*	frame_buffer_dma;			/* pointer to first byte of frame */
                                         /* buffer in physical memory for DMA */
 
-    uint32	bytes_per_row;				/* number of bytes in one */
+    uint32_t	bytes_per_row;				/* number of bytes in one */
                                         /* virtual_width line */
                                         /* not neccesarily the same as */
                                         /* virtual_width * byte_per_pixel */
@@ -158,22 +158,22 @@ typedef struct {
 
 // WARNING: This is experimental new Haiku API
 typedef struct {
-    uint32	version;
+    uint32_t	version;
     char	vendor[128];
     char	name[128];
     char	serial_number[128];
-    uint32	product_id;
+    uint32_t	product_id;
     struct {
         uint16	week;
         uint16	year;
     }		produced;
     float	width;
     float	height;
-    uint32	min_horizontal_frequency;	/* in kHz */
-    uint32	max_horizontal_frequency;
-    uint32	min_vertical_frequency;		/* in Hz */
-    uint32	max_vertical_frequency;
-    uint32	max_pixel_clock;			/* in kHz */
+    uint32_t	min_horizontal_frequency;	/* in kHz */
+    uint32_t	max_horizontal_frequency;
+    uint32_t	min_vertical_frequency;		/* in Hz */
+    uint32_t	max_vertical_frequency;
+    uint32_t	max_pixel_clock;			/* in kHz */
 } monitor_info;
 
 
@@ -249,9 +249,9 @@ typedef struct {
 
 
 typedef struct {
-    uint32	engine_id;					/* 0 == no engine, 1,2,3 etc */
+    uint32_t	engine_id;					/* 0 == no engine, 1,2,3 etc */
                                         /* individual engines */
-    uint32	capability_mask;			/* features this engine supports */
+    uint32_t	capability_mask;			/* features this engine supports */
     void*	opaque;						/* optional pointer to engine */
                                         /* private storage */
 } engine_token;
@@ -265,7 +265,7 @@ enum {	/* engine capabilities */
 
 typedef struct {
     uint64	counter;					/* counts issued primatives */
-    uint32	engine_id;					/* what engine the counter is for */
+    uint32_t	engine_id;					/* what engine the counter is for */
     char	opaque[12];					/* 12 bytes of private storage */
 } sync_token;
 
@@ -283,26 +283,26 @@ typedef status_t (*clone_accelerant)(void* data);
 typedef void (*uninit_accelerant)(void);
 typedef status_t (*get_accelerant_device_info)(accelerant_device_info* adi);
 
-typedef uint32 (*accelerant_mode_count)(void);
+typedef uint32_t (*accelerant_mode_count)(void);
 typedef status_t (*get_mode_list)(display_mode*);
 typedef status_t (*propose_display_mode)(display_mode* target,
     display_mode* low, display_mode* high);
 typedef status_t (*set_display_mode)(display_mode* modeToSet);
 typedef status_t (*get_display_mode)(display_mode* currentMode);
 typedef status_t (*get_frame_buffer_config)(frame_buffer_config* frameBuffer);
-typedef status_t (*get_pixel_clock_limits)(display_mode* dm, uint32* low,
-    uint32* high);
+typedef status_t (*get_pixel_clock_limits)(display_mode* dm, uint32_t* low,
+    uint32_t* high);
 typedef status_t (*move_display_area)(uint16 hDisplayStart,
     uint16 vDisplayStart);
 typedef status_t (*get_timing_constraints)(display_timing_constraints* dtc);
 typedef void (*set_indexed_colors)(uint count, uint8 first,
-    const uint8* colorData, uint32 flags);
-typedef uint32 (*dpms_capabilities)(void);
-typedef uint32 (*dpms_mode)(void);
-typedef status_t (*set_dpms_mode)(uint32 dpms_flags);
+    const uint8* colorData, uint32_t flags);
+typedef uint32_t (*dpms_capabilities)(void);
+typedef uint32_t (*dpms_mode)(void);
+typedef status_t (*set_dpms_mode)(uint32_t dpms_flags);
 typedef status_t (*get_preferred_display_mode)(display_mode* preferredMode);
 typedef status_t (*get_monitor_info)(monitor_info* info);
-typedef status_t (*get_edid_info)(void* info, uint32 size, uint32* _version);
+typedef status_t (*get_edid_info)(void* info, uint32_t size, uint32_t* _version);
 typedef sem_id (*accelerant_retrace_semaphore)(void);
 
 typedef status_t (*set_cursor_shape)(uint16 width, uint16 height,
@@ -313,8 +313,8 @@ typedef status_t (*set_cursor_bitmap)(uint16 width, uint16 height,
 typedef void (*move_cursor)(uint16 x, uint16 y);
 typedef void (*show_cursor)(bool isVisible);
 
-typedef uint32 (*accelerant_engine_count)(void);
-typedef status_t (*acquire_engine)(uint32 capabilities, uint32 maxWait,
+typedef uint32_t (*accelerant_engine_count)(void);
+typedef status_t (*acquire_engine)(uint32_t capabilities, uint32_t maxWait,
     sync_token* st, engine_token** et);
 typedef status_t (*release_engine)(engine_token* et, sync_token* st);
 typedef void (*wait_engine_idle)(void);
@@ -322,18 +322,18 @@ typedef status_t (*get_sync_token)(engine_token* et, sync_token* st);
 typedef status_t (*sync_to_token)(sync_token* st);
 
 typedef void (*screen_to_screen_blit)(engine_token* et, blit_params* list,
-    uint32 count);
-typedef void (*fill_rectangle)(engine_token* et, uint32 color,
-    fill_rect_params* list, uint32 count);
+    uint32_t count);
+typedef void (*fill_rectangle)(engine_token* et, uint32_t color,
+    fill_rect_params* list, uint32_t count);
 typedef void (*invert_rectangle)(engine_token* et, fill_rect_params* list,
-    uint32 count);
+    uint32_t count);
 typedef void (*screen_to_screen_transparent_blit)(engine_token* et,
-    uint32 transparent_color, blit_params* list, uint32 count);
+    uint32_t transparent_color, blit_params* list, uint32_t count);
 typedef void (*screen_to_screen_scaled_filtered_blit)(engine_token* et,
-    scaled_blit_params* list, uint32 count);
+    scaled_blit_params* list, uint32_t count);
 
-typedef void (*fill_span)(engine_token* et, uint32 color, uint16* list,
-    uint32 count);
+typedef void (*fill_span)(engine_token* et, uint32_t color, uint16* list,
+    uint32_t count);
 /*
     The uint16* list points to a list of tripples:
         list[N+0]  Y co-ordinate of span

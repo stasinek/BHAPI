@@ -21,7 +21,7 @@ namespace BPrivate {
 
 class ParseException {
 public:
-	ParseException(int32 position, BString error)
+	ParseException(int32_t position, BString error)
 		:
 		fPosition(position),
 		fError(error),
@@ -29,7 +29,7 @@ public:
 	{
 	}
 
-	ParseException(int32 position, status_t returnCode)
+	ParseException(int32_t position, status_t returnCode)
 		:
 		fPosition(position),
 		fError(""),
@@ -52,7 +52,7 @@ public:
 	}
 
 private:
-	int32		fPosition;
+	int32_t		fPosition;
 	BString		fError;
 	status_t	fReturnCode;
 };
@@ -84,8 +84,8 @@ status_t BJson::Parse(BMessage& message, BString& JSON)
 void BJson::_Parse(BMessage& message, BString& JSON)
 {
 	BMessageBuilder builder(message);
-	int32 pos = 0;
-	int32 length = JSON.Length();
+	int32_t pos = 0;
+	int32_t length = JSON.Length();
 	
 	/* Locals used by the parser. */
 	// Keeps track of the hierarchy (e.g. "{[{{") that has
@@ -266,7 +266,7 @@ void BJson::_Parse(BMessage& message, BString& JSON)
 
 
 BString
-BJson::_ParseString(BString& JSON, int32& pos)
+BJson::_ParseString(BString& JSON, int32_t& pos)
 {
 	if (JSON[pos] != '"') // Verify we're at the start of a string.
 		return BString("");
@@ -330,7 +330,7 @@ BJson::_ParseString(BString& JSON, int32& pos)
 
 
 double
-BJson::_ParseNumber(BString& JSON, int32& pos)
+BJson::_ParseNumber(BString& JSON, int32_t& pos)
 {
 	BString value;
 
@@ -368,7 +368,7 @@ BJson::_ParseNumber(BString& JSON, int32& pos)
 }
 
 
-bool BJson::_ParseConstant(BString& JSON, int32& pos, const char* constant)
+bool BJson::_ParseConstant(BString& JSON, int32_t& pos, const char* constant)
 {
 	BString value;
 	JSON.CopyInto(value, pos, strlen(constant));

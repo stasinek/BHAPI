@@ -29,14 +29,14 @@ __fls0(size_t value)
 
 
 static HashedSlab*
-allocate_slab(uint32 flags)
+allocate_slab(uint32_t flags)
 {
 	return (HashedSlab*)slab_internal_alloc(sizeof(HashedSlab), flags);
 }
 
 
 static void
-free_slab(HashedSlab* slab, uint32 flags)
+free_slab(HashedSlab* slab, uint32_t flags)
 {
 	slab_internal_free(slab, flags);
 }
@@ -55,7 +55,7 @@ HashedObjectCache::HashedObjectCache()
 /*static*/ HashedObjectCache*
 HashedObjectCache::Create(const char* name, size_t object_size,
 	size_t alignment, size_t maximum, size_t magazineCapacity,
-	size_t maxMagazineCount, uint32 flags, void* cookie,
+	size_t maxMagazineCount, uint32_t flags, void* cookie,
 	object_cache_constructor constructor, object_cache_destructor destructor,
 	object_cache_reclaimer reclaimer)
 {
@@ -103,7 +103,7 @@ HashedObjectCache::Delete()
 
 
 slab*
-HashedObjectCache::CreateSlab(uint32 flags)
+HashedObjectCache::CreateSlab(uint32_t flags)
 {
 	if (!check_cache_quota(this))
 		return NULL;
@@ -137,7 +137,7 @@ HashedObjectCache::CreateSlab(uint32 flags)
 
 
 void
-HashedObjectCache::ReturnSlab(slab* _slab, uint32 flags)
+HashedObjectCache::ReturnSlab(slab* _slab, uint32_t flags)
 {
 	HashedSlab* slab = static_cast<HashedSlab*>(_slab);
 
@@ -170,7 +170,7 @@ HashedObjectCache::ObjectSlab(void* object) const
 
 
 void
-HashedObjectCache::_ResizeHashTableIfNeeded(uint32 flags)
+HashedObjectCache::_ResizeHashTableIfNeeded(uint32_t flags)
 {
 	size_t hashSize = hash_table.ResizeNeeded();
 	if (hashSize != 0) {

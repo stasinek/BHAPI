@@ -95,7 +95,7 @@ void NodePreloader::Run()
 Model*
 NodePreloader::FindModel(node_ref itemNode) const
 {
-	for (int32 count = fModelList.CountItems() - 1; count >= 0; count--) {
+	for (int32_t count = fModelList.CountItems() - 1; count >= 0; count--) {
 		Model* model = fModelList.ItemAt(count);
 		if (*model->node_ref() == itemNode)
 			return model;
@@ -198,7 +198,7 @@ void NodePreloader::PreloadOne(const char* dirPath)
 
 void NodePreloader::Preload()
 {
-	for (int32 count = 100; count >= 0; count--) {
+	for (int32_t count = 100; count >= 0; count--) {
 		// wait for a little bit before going ahead to reduce disk access
 		// contention
 		snooze(100000);

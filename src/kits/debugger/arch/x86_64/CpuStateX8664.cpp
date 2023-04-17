@@ -157,7 +157,7 @@ status_t CpuStateX8664::UpdateDebugState(void* state, size_t size) const
 	x64State->gs = IntRegisterValue(X86_64_REGISTER_GS);
 	x64State->ss = IntRegisterValue(X86_64_REGISTER_SS);
 
-	for (int32 i = 0; i < 8; i++) {
+	for (int32_t i = 0; i < 8; i++) {
 		*(long double*)(x64State->extended_registers.fp_registers[i].value)
 			= (long double)FloatRegisterValue(X86_64_REGISTER_ST0 + i);
 
@@ -167,7 +167,7 @@ status_t CpuStateX8664::UpdateDebugState(void* state, size_t size) const
 		}
 	}
 
-	for (int32 i = 0; i < 16; i++) {
+	for (int32_t i = 0; i < 16; i++) {
 		if (IsRegisterSet(X86_64_REGISTER_XMM0 + i)) {
 			memcpy(&x64State->extended_registers.xmm_registers[i],
 				&fXMMRegisters[i], sizeof(x86_64_xmm_register));
@@ -213,7 +213,7 @@ CpuStateX8664::StackPointer() const
 
 bool CpuStateX8664::GetRegisterValue(const Register* reg, BVariant& _value) const
 {
-	int32 index = reg->Index();
+	int32_t index = reg->Index();
 	if (!IsRegisterSet(index))
 		return false;
 
@@ -247,7 +247,7 @@ bool CpuStateX8664::GetRegisterValue(const Register* reg, BVariant& _value) cons
 
 bool CpuStateX8664::SetRegisterValue(const Register* reg, const BVariant& value)
 {
-	int32 index = reg->Index();
+	int32_t index = reg->Index();
 	if (index >= X86_64_XMM_REGISTER_END)
 		return false;
 
@@ -279,13 +279,13 @@ bool CpuStateX8664::SetRegisterValue(const Register* reg, const BVariant& value)
 }
 
 
-bool CpuStateX8664::IsRegisterSet(int32 index) const
+bool CpuStateX8664::IsRegisterSet(int32_t index) const
 {
 	return index >= 0 && index < X86_64_REGISTER_COUNT && fSetRegisters[index];
 }
 
 
-uint64 CpuStateX8664::IntRegisterValue(int32 index) const
+uint64 CpuStateX8664::IntRegisterValue(int32_t index) const
 {
 	if (!IsRegisterSet(index) || index >= X86_64_INT_REGISTER_END)
 		return 0;
@@ -294,7 +294,7 @@ uint64 CpuStateX8664::IntRegisterValue(int32 index) const
 }
 
 
-void CpuStateX8664::SetIntRegister(int32 index, uint64 value)
+void CpuStateX8664::SetIntRegister(int32_t index, uint64 value)
 {
 	if (index < 0 || index >= X86_64_INT_REGISTER_END)
 		return;
@@ -305,7 +305,7 @@ void CpuStateX8664::SetIntRegister(int32 index, uint64 value)
 
 
 double
-CpuStateX8664::FloatRegisterValue(int32 index) const
+CpuStateX8664::FloatRegisterValue(int32_t index) const
 {
 	if (index < X86_64_REGISTER_ST0 || index >= X86_64_FP_REGISTER_END
 		|| !IsRegisterSet(index)) {
@@ -316,7 +316,7 @@ CpuStateX8664::FloatRegisterValue(int32 index) const
 }
 
 
-void CpuStateX8664::SetFloatRegister(int32 index, double value)
+void CpuStateX8664::SetFloatRegister(int32_t index, double value)
 {
 	if (index < X86_64_REGISTER_ST0 || index >= X86_64_FP_REGISTER_END)
 		return;
@@ -326,7 +326,7 @@ void CpuStateX8664::SetFloatRegister(int32 index, double value)
 }
 
 
-const void*   CpuStateX8664::MMXRegisterValue(int32 index) const
+const void*   CpuStateX8664::MMXRegisterValue(int32_t index) const
 {
 	if (index < X86_64_REGISTER_MM0 || index >= X86_64_MMX_REGISTER_END
 		|| !IsRegisterSet(index)) {
@@ -337,7 +337,7 @@ const void*   CpuStateX8664::MMXRegisterValue(int32 index) const
 }
 
 
-void CpuStateX8664::SetMMXRegister(int32 index, const uint8* value)
+void CpuStateX8664::SetMMXRegister(int32_t index, const uint8* value)
 {
 	if (index < X86_64_REGISTER_MM0 || index >= X86_64_MMX_REGISTER_END)
 		return;
@@ -348,7 +348,7 @@ void CpuStateX8664::SetMMXRegister(int32 index, const uint8* value)
 }
 
 
-const void*   CpuStateX8664::XMMRegisterValue(int32 index) const
+const void*   CpuStateX8664::XMMRegisterValue(int32_t index) const
 {
 	if (index < X86_64_REGISTER_XMM0 || index >= X86_64_XMM_REGISTER_END
 		|| !IsRegisterSet(index)) {
@@ -359,7 +359,7 @@ const void*   CpuStateX8664::XMMRegisterValue(int32 index) const
 }
 
 
-void CpuStateX8664::SetXMMRegister(int32 index, const uint8* value)
+void CpuStateX8664::SetXMMRegister(int32_t index, const uint8* value)
 {
 	if (index < X86_64_REGISTER_XMM0 || index >= X86_64_XMM_REGISTER_END)
 		return;
@@ -370,7 +370,7 @@ void CpuStateX8664::SetXMMRegister(int32 index, const uint8* value)
 }
 
 
-void CpuStateX8664::UnsetRegister(int32 index)
+void CpuStateX8664::UnsetRegister(int32_t index)
 {
 	if (index < 0 || index >= X86_64_REGISTER_COUNT)
 		return;

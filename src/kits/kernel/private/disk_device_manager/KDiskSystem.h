@@ -36,7 +36,7 @@ public:
 			const char*			Name() const;
 			const char*			ShortName() const;
 			const char*			PrettyName() const;
-			uint32				Flags() const;
+			uint32_t				Flags() const;
 
 			bool				IsFileSystem() const;
 			bool				IsPartitioningSystem() const;
@@ -103,19 +103,19 @@ protected:
 
 			status_t			SetShortName(const char* name);
 			status_t			SetPrettyName(const char* name);
-			void				SetFlags(uint32 flags);
+			void				SetFlags(uint32_t flags);
 
-	static	int32				_NextID();
+	static	int32_t				_NextID();
 
 private:
 			disk_system_id		fID;
 			char*				fName;
 			char*				fShortName;
 			char*				fPrettyName;
-			uint32				fFlags;
-			int32				fLoadCounter;
+			uint32_t				fFlags;
+			int32_t				fLoadCounter;
 
-	static	int32				fNextID;
+	static	int32_t				fNextID;
 };
 
 

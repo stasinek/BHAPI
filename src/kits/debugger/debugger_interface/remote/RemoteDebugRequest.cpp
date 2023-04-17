@@ -292,7 +292,7 @@ RemoteDebugSetTeamFlagsRequest::~RemoteDebugSetTeamFlagsRequest()
 }
 
 
-void RemoteDebugSetTeamFlagsRequest::SetTo(int32 flags)
+void RemoteDebugSetTeamFlagsRequest::SetTo(int32_t flags)
 {
 	fFlags = flags;
 }
@@ -339,7 +339,7 @@ RemoteDebugSetThreadFlagsRequest::~RemoteDebugSetThreadFlagsRequest()
 }
 
 
-void RemoteDebugSetThreadFlagsRequest::SetTo(thread_id thread, int32 flags)
+void RemoteDebugSetThreadFlagsRequest::SetTo(thread_id thread, int32_t flags)
 {
 	fThread = thread;
 	fFlags = flags;

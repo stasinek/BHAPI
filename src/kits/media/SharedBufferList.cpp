@@ -27,7 +27,7 @@
 
 static BPrivate::SharedBufferList* sList = NULL;
 static area_id sArea = -1;
-static int32 sRefCount = 0;
+static int32_t sRefCount = 0;
 static BLocker sLocker("shared buffer list");
 
 
@@ -114,7 +114,7 @@ void SharedBufferList::DeleteGroupAndPut(sem_id groupReclaimSem)
 	CALLED();
 
 	if (Lock() == B_OK) {
-		for (int32 i = 0; i < fCount; i++) {
+		for (int32_t i = 0; i < fCount; i++) {
 			if (fInfos[i].reclaim_sem == groupReclaimSem) {
 				// delete the associated buffer
 				delete fInfos[i].buffer;
@@ -226,7 +226,7 @@ status_t SharedBufferList::CheckID(sem_id groupSem, media_buffer_id id) const
 	if (id < 0)
 		return B_BAD_VALUE;
 
-	for (int32 i = 0; i < fCount; i++) {
+	for (int32_t i = 0; i < fCount; i++) {
 		if (fInfos[i].id == id
 			&& fInfos[i].reclaim_sem == groupSem) {
 			return B_ERROR;
@@ -236,7 +236,7 @@ status_t SharedBufferList::CheckID(sem_id groupSem, media_buffer_id id) const
 }
 
 
-status_t SharedBufferList::RequestBuffer(sem_id groupReclaimSem, int32 buffersInGroup,
+status_t SharedBufferList::RequestBuffer(sem_id groupReclaimSem, int32_t buffersInGroup,
 	size_t size, media_buffer_id wantID, BBuffer** _buffer, bigtime_t timeout)
 {
 	CALLED();
@@ -250,7 +250,7 @@ status_t SharedBufferList::RequestBuffer(sem_id groupReclaimSem, int32 buffersIn
 	// requested and also once need to acquire the reclaim_sem of the other
 	// groups
 
-	uint32 acquireFlags;
+	uint32_t acquireFlags;
 
 	if (timeout <= 0) {
 		timeout = 0;
@@ -264,7 +264,7 @@ status_t SharedBufferList::RequestBuffer(sem_id groupReclaimSem, int32 buffersIn
 
 	// With each itaration we request one more buffer, since we need to skip
 	// the buffers that don't fit the request
-	int32 count = 1;
+	int32_t count = 1;
 
 	do {
 		status_t status;
@@ -285,7 +285,7 @@ status_t SharedBufferList::RequestBuffer(sem_id groupReclaimSem, int32 buffersIn
 			return B_ERROR;
 		}
 
-		for (int32 i = 0; i < fCount; i++) {
+		for (int32_t i = 0; i < fCount; i++) {
 			// We need a BBuffer from the group, and it must be marked as
 			// reclaimed
 			if (fInfos[i].reclaim_sem == groupReclaimSem
@@ -337,9 +337,9 @@ status_t SharedBufferList::RecycleBuffer(BBuffer* buffer)
 	if (Lock() != B_OK)
 		return B_ERROR;
 
-	int32 reclaimedCount = 0;
+	int32_t reclaimedCount = 0;
 
-	for (int32 i = 0; i < fCount; i++) {
+	for (int32_t i = 0; i < fCount; i++) {
 		// find the buffer id, and reclaim it in all groups it belongs to
 		if (fInfos[i].id == id) {
 			reclaimedCount++;
@@ -370,7 +370,7 @@ status_t SharedBufferList::RecycleBuffer(BBuffer* buffer)
 /*!	Returns exactly \a bufferCount buffers from the group specified via its
 	\a groupReclaimSem if successful.
 */
-status_t SharedBufferList::GetBufferList(sem_id groupReclaimSem, int32 bufferCount,
+status_t SharedBufferList::GetBufferList(sem_id groupReclaimSem, int32_t bufferCount,
 	BBuffer** buffers)
 {
 	CALLED();
@@ -378,9 +378,9 @@ status_t SharedBufferList::GetBufferList(sem_id groupReclaimSem, int32 bufferCou
 	if (Lock() != B_OK)
 		return B_ERROR;
 
-	int32 found = 0;
+	int32_t found = 0;
 
-	for (int32 i = 0; i < fCount; i++)
+	for (int32_t i = 0; i < fCount; i++)
 		if (fInfos[i].reclaim_sem == groupReclaimSem) {
 			buffers[found++] = fInfos[i].buffer;
 			if (found == bufferCount)
@@ -404,7 +404,7 @@ status_t SharedBufferList::_Init()
 
 	fAtom = 0;
 
-	for (int32 i = 0; i < kMaxBuffers; i++) {
+	for (int32_t i = 0; i < kMaxBuffers; i++) {
 		fInfos[i].id = -1;
 	}
 	fCount = 0;
@@ -418,7 +418,7 @@ status_t SharedBufferList::_Init()
 void SharedBufferList::_RequestBufferInOtherGroups(sem_id groupReclaimSem,
 	media_buffer_id id)
 {
-	for (int32 i = 0; i < fCount; i++) {
+	for (int32_t i = 0; i < fCount; i++) {
 		// find buffers with same id, but belonging to other groups
 		if (fInfos[i].id == id && fInfos[i].reclaim_sem != groupReclaimSem) {
 			// and mark them as requested

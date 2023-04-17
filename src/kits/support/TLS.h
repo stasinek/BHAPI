@@ -46,11 +46,11 @@ extern "C" {
 namespace bhapi {
 #endif	/* __cplusplus */
 
-extern int32 tls_allocate(void);
+extern int32_t tls_allocate(void);
 
 #if !_NO_INLINE_ASM && __INTEL__ && __GNUC__
 
-static inline void *tls_get(int32 index)
+static inline void *tls_get(int32_t index)
 {
     void *ret;
     __asm__ __volatile__ (
@@ -59,7 +59,7 @@ static inline void *tls_get(int32 index)
     return ret;
 }
 
-static inline void **tls_address(int32 index)
+static inline void **tls_address(int32_t index)
 {
     void **ret;
     __asm__ __volatile__ (
@@ -69,7 +69,7 @@ static inline void **tls_address(int32 index)
     return ret;
 }
 
-static inline void tls_set(int32 index, void *value)
+static inline void tls_set(int32_t index, void *value)
 {
     __asm__ __volatile__ (
         "movl	%1, %%fs:(, %0, 4)"
@@ -78,9 +78,9 @@ static inline void tls_set(int32 index, void *value)
 
 #else	/* !_NO_INLINE_ASM && __INTEL__ && __GNUC__ */
 
-extern void *tls_get(int32 index);
-extern void **tls_address(int32 index);
-extern void tls_set(int32 index, void *value);
+extern void *tls_get(int32_t index);
+extern void **tls_address(int32_t index);
+extern void tls_set(int32_t index, void *value);
 
 #endif	/* !_NO_INLINE_ASM && __INTEL__ && __GNUC__ */
 

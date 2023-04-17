@@ -10,7 +10,7 @@
 
 
 static inline uint64_t
-x86_read_msr(uint32_t msr)
+x86_read_msr(uint32_t_t msr)
 {
 	uint64_t high, low;
 	asm volatile("rdmsr" : "=a" (low), "=d" (high) : "c" (msr));
@@ -18,7 +18,7 @@ x86_read_msr(uint32_t msr)
 }
 
 
-static inline void x86_write_msr(uint32_t msr, uint64_t value)
+static inline void x86_write_msr(uint32_t_t msr, uint64_t value)
 {
 	asm volatile("wrmsr" : : "a" (value) , "d" (value >> 32), "c" (msr));
 }
@@ -28,7 +28,7 @@ static inline void x86_context_switch(arch_thread* oldState, arch_thread* newSta
 {
 	uint16_t fpuControl;
 	asm volatile("fnstcw %0" : "=m" (fpuControl));
-	uint32_t sseControl;
+	uint32_t_t sseControl;
 	asm volatile("stmxcsr %0" : "=m" (sseControl));
 	asm volatile(
 		"pushq	%%rbp;"

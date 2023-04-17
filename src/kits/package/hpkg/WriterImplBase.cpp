@@ -78,14 +78,14 @@ void WriterImplBase::AttributeValue::SetTo(uint16 value)
 }
 
 
-void WriterImplBase::AttributeValue::SetTo(int32 value)
+void WriterImplBase::AttributeValue::SetTo(int32_t value)
 {
 	signedInt = value;
 	type = B_HPKG_ATTRIBUTE_TYPE_INT;
 }
 
 
-void WriterImplBase::AttributeValue::SetTo(uint32 value)
+void WriterImplBase::AttributeValue::SetTo(uint32_t value)
 {
 	unsignedInt = value;
 	type = B_HPKG_ATTRIBUTE_TYPE_UINT;
@@ -325,7 +325,7 @@ status_t WriterImplBase::InitHeapReader(size_t headerSize)
 }
 
 
-void WriterImplBase::SetCompression(uint32 compression)
+void WriterImplBase::SetCompression(uint32_t compression)
 {
 	fParameters.SetCompression(compression);
 }
@@ -437,7 +437,7 @@ void WriterImplBase::RegisterPackageInfo(PackageAttributeList& attributeList,
 	// global writable file info list
 	const BObjectList<BGlobalWritableFileInfo>& globalWritableFileInfos
 		= packageInfo.GlobalWritableFileInfos();
-	for (int32 i = 0; i < globalWritableFileInfos.CountItems(); ++i) {
+	for (int32_t i = 0; i < globalWritableFileInfos.CountItems(); ++i) {
 		BGlobalWritableFileInfo* info = globalWritableFileInfos.ItemAt(i);
 		PackageAttribute* attribute = AddStringAttribute(
 			B_HPKG_ATTRIBUTE_ID_PACKAGE_GLOBAL_WRITABLE_FILE, info->Path(),
@@ -465,7 +465,7 @@ void WriterImplBase::RegisterPackageInfo(PackageAttributeList& attributeList,
 	// user settings file info list
 	const BObjectList<BUserSettingsFileInfo>& userSettingsFileInfos
 		= packageInfo.UserSettingsFileInfos();
-	for (int32 i = 0; i < userSettingsFileInfos.CountItems(); ++i) {
+	for (int32_t i = 0; i < userSettingsFileInfos.CountItems(); ++i) {
 		BUserSettingsFileInfo* info = userSettingsFileInfos.ItemAt(i);
 		PackageAttribute* attribute = AddStringAttribute(
 			B_HPKG_ATTRIBUTE_ID_PACKAGE_USER_SETTINGS_FILE, info->Path(),
@@ -487,7 +487,7 @@ void WriterImplBase::RegisterPackageInfo(PackageAttributeList& attributeList,
 
 	// user list
 	const BObjectList<BUser>& users = packageInfo.Users();
-	for (int32 i = 0; i < users.CountItems(); ++i) {
+	for (int32_t i = 0; i < users.CountItems(); ++i) {
 		const BUser* user = users.ItemAt(i);
 		PackageAttribute* attribute = AddStringAttribute(
 			B_HPKG_ATTRIBUTE_ID_PACKAGE_USER, user->Name(), attributeList);
@@ -502,7 +502,7 @@ void WriterImplBase::RegisterPackageInfo(PackageAttributeList& attributeList,
 			B_HPKG_ATTRIBUTE_ID_PACKAGE_USER_SHELL, user->Shell(),
 			attribute->children);
 
-		for (int32 k = 0; k < user->Groups().CountStrings(); k++) {
+		for (int32_t k = 0; k < user->Groups().CountStrings(); k++) {
 			AddStringAttribute(B_HPKG_ATTRIBUTE_ID_PACKAGE_USER_GROUP,
 				user->Groups().StringAt(k), attribute->children);
 		}
@@ -588,15 +588,15 @@ WriterImplBase::AddStringAttribute(BHPKGAttributeID id, const BString& value,
 }
 
 
-int32 WriterImplBase::WriteCachedStrings(const StringCache& cache,
-	uint32 minUsageCount)
+int32_t WriterImplBase::WriteCachedStrings(const StringCache& cache,
+	uint32_t minUsageCount)
 {
 	// create an array of the cached strings
-	int32 count = cache.CountElements();
+	int32_t count = cache.CountElements();
 	CachedString** cachedStrings = new CachedString*[count];
 	ArrayDeleter<CachedString*> cachedStringsDeleter(cachedStrings);
 
-	int32 index = 0;
+	int32_t index = 0;
 	for (CachedStringTable::Iterator it = cache.GetIterator();
 			CachedString* string = it.Next();) {
 		cachedStrings[index++] = string;
@@ -606,8 +606,8 @@ int32 WriterImplBase::WriteCachedStrings(const StringCache& cache,
 	std::sort(cachedStrings, cachedStrings + count, CachedStringUsageGreater());
 
 	// assign the indices and write entries to disk
-	int32 stringsWritten = 0;
-	for (int32 i = 0; i < count; i++) {
+	int32_t stringsWritten = 0;
+	for (int32_t i = 0; i < count; i++) {
 		CachedString* cachedString = cachedStrings[i];
 
 		// empty strings must be stored inline, as they can't be distinguished
@@ -631,13 +631,13 @@ int32 WriterImplBase::WriteCachedStrings(const StringCache& cache,
 }
 
 
-int32 WriterImplBase::WritePackageAttributes(
+int32_t WriterImplBase::WritePackageAttributes(
 	const PackageAttributeList& packageAttributes,
-	uint32& _stringsLengthUncompressed)
+	uint32_t& _stringsLengthUncompressed)
 {
 	// write the cached strings
 	uint64 startOffset = fHeapWriter->UncompressedHeapSize();
-	uint32 stringsCount = WriteCachedStrings(fPackageStringCache, 2);
+	uint32_t stringsCount = WriteCachedStrings(fPackageStringCache, 2);
 	_stringsLengthUncompressed
 		= fHeapWriter->UncompressedHeapSize() - startOffset;
 
@@ -665,8 +665,8 @@ void WriterImplBase::WriteAttributeValue(const AttributeValue& value, uint8 enco
 						B_HOST_TO_BENDIAN_INT16((uint16)intValue));
 					break;
 				case B_HPKG_ATTRIBUTE_ENCODING_INT_32_BIT:
-					Write<uint32>(
-						B_HOST_TO_BENDIAN_INT32((uint32)intValue));
+					Write<uint32_t>(
+						B_HOST_TO_BENDIAN_INT32((uint32_t)intValue));
 					break;
 				case B_HPKG_ATTRIBUTE_ENCODING_INT_64_BIT:
 					Write<uint64>(
@@ -714,7 +714,7 @@ void WriterImplBase::WriteAttributeValue(const AttributeValue& value, uint8 enco
 void WriterImplBase::WriteUnsignedLEB128(uint64 value)
 {
 	uint8 bytes[10];
-	int32 count = 0;
+	int32_t count = 0;
 	do {
 		uint8 byte = value & 0x7f;
 		value >>= 7;
@@ -740,7 +740,7 @@ void WriterImplBase::RawWriteBuffer(const void* buffer, size_t size, off_t offse
 void WriterImplBase::_AddStringAttributeList(BHPKGAttributeID id,
 	const BStringList& value, DoublyLinkedList<PackageAttribute>& list)
 {
-	for (int32 i = 0; i < value.CountStrings(); i++)
+	for (int32_t i = 0; i < value.CountStrings(); i++)
 		AddStringAttribute(id, value.StringAt(i), list);
 }
 

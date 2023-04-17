@@ -25,7 +25,7 @@
 // a new timer has been created. The timers are executed in thread
 // context, and are passed a cookie.
 
-typedef int32 timer_id;
+typedef int32_t timer_id;
 
 typedef void (*timer_function)(void *cookie);
 
@@ -34,7 +34,7 @@ typedef void (*timer_function)(void *cookie);
 // Flags can be one of B_ONE_SHOT_ABSOLUTE_TIMER,
 // B_ONE_SHOT_RELATIVE_TIMER or B_PERIODIC_TIMER.
 
-timer_id	create_timer(timer_function func, void *cookie, bigtime_t interval, uint32 flags);
+timer_id	create_timer(timer_function func, void *cookie, bigtime_t interval, uint32_t flags);
 status_t	delete_timer(timer_id id);
 
 

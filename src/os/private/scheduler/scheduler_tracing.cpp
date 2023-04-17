@@ -136,13 +136,13 @@ cmd_scheduler(int argc, char** argv)
 	bigtime_t totalLatency = 0;
 	bigtime_t minLatency = -1;
 	bigtime_t maxLatency = -1;
-	int32 maxLatencyEntry = -1;
+	int32_t maxLatencyEntry = -1;
 
 	int64 reruns = 0;
 	bigtime_t totalRerunTime = 0;
 	bigtime_t minRerunTime = -1;
 	bigtime_t maxRerunTime = -1;
-	int32 maxRerunEntry = -1;
+	int32_t maxRerunEntry = -1;
 
 	int64 preemptions = 0;
 

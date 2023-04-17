@@ -40,7 +40,7 @@ static interrupt_descriptor_table sIDTs[SMP_MAX_CPUS];
 // table with functions handling respective interrupts
 typedef void interrupt_handler_function(struct iframe* frame);
 
-static const uint32 kInterruptHandlerTableSize = IDT_GATES_COUNT;
+static const uint32_t kInterruptHandlerTableSize = IDT_GATES_COUNT;
 interrupt_handler_function* gInterruptHandlerTable[kInterruptHandlerTableSize];
 
 
@@ -67,7 +67,7 @@ set_gate(interrupt_descriptor *gate_addr, addr_t addr, int type, int dpl)
 	arch_int_init_post_vm().
 */
 static void
-set_interrupt_gate(int32 cpu, int n, void (*addr)())
+set_interrupt_gate(int32_t cpu, int n, void (*addr)())
 {
 	set_gate(&sIDTs[cpu][n], (addr_t)addr, 14, DPL_KERNEL);
 }
@@ -79,7 +79,7 @@ set_interrupt_gate(int32 cpu, int n, void (*addr)())
 	arch_int_init_post_vm().
 */
 static void
-set_trap_gate(int32 cpu, int n, void (*addr)())
+set_trap_gate(int32_t cpu, int n, void (*addr)())
 {
 	set_gate(&sIDTs[cpu][n], (unsigned int)addr, 15, DPL_USER);
 }
@@ -92,7 +92,7 @@ set_trap_gate(int32 cpu, int n, void (*addr)())
 	arch_int_init_post_vm() (arch_cpu_init_post_vm() is fine).
 */
 static void
-set_task_gate(int32 cpu, int32 n, int32 segment)
+set_task_gate(int32_t cpu, int32_t n, int32_t segment)
 {
 	sIDTs[cpu][n].a = (segment << 16);
 	sIDTs[cpu][n].b = 0x8000 | (0 << 13) | (0x5 << 8); // present, dpl 0, type 5
@@ -217,7 +217,7 @@ init_double_fault(int cpuNum)
 	tss->ss0 = KERNEL_DATA_SELECTOR;
 	tss->cr3 = x86_read_cr3();
 		// copy the current cr3 to the double fault cr3
-	tss->eip = (uint32)&double_fault;
+	tss->eip = (uint32_t)&double_fault;
 	tss->es = KERNEL_DATA_SELECTOR;
 	tss->cs = KERNEL_CODE_SELECTOR;
 	tss->ss = KERNEL_DATA_SELECTOR;
@@ -566,7 +566,7 @@ x86_descriptors_init(kernel_args* args)
 	interrupt_handler_function** table = gInterruptHandlerTable;
 
 	// defaults
-	uint32 i;
+	uint32_t i;
 	for (i = 0; i < ARCH_INTERRUPT_BASE; i++)
 		table[i] = x86_invalid_exception;
 	for (i = ARCH_INTERRUPT_BASE; i < kInterruptHandlerTableSize; i++)

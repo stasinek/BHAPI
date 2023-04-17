@@ -20,8 +20,8 @@ public:
 
 	virtual	TargetAddressRange	CoveringAddressRange() const = 0;
 
-	virtual	int32				CountAddressRanges() const = 0;
-	virtual	TargetAddressRange	AddressRangeAt(int32 index) const = 0;
+	virtual	int32_t				CountAddressRanges() const = 0;
+	virtual	TargetAddressRange	AddressRangeAt(int32_t index) const = 0;
 
 	virtual	bool				ContainsAddress(target_addr_t address)
 									const = 0;
@@ -49,8 +49,8 @@ public:
 
 	virtual	TargetAddressRange	CoveringAddressRange() const;
 
-	virtual	int32				CountAddressRanges() const;
-	virtual	TargetAddressRange	AddressRangeAt(int32 index) const;
+	virtual	int32_t				CountAddressRanges() const;
+	virtual	TargetAddressRange	AddressRangeAt(int32_t index) const;
 
 	virtual	bool				ContainsAddress(target_addr_t address) const;
 

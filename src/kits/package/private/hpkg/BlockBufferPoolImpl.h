@@ -27,7 +27,7 @@ class PoolBuffer;
 class BlockBufferPoolImpl : public BBufferPool {
 public:
 								BlockBufferPoolImpl(size_t blockSize,
-									uint32 maxCachedBlocks,
+									uint32_t maxCachedBlocks,
 									BBufferPoolLockable* lockable);
 								~BlockBufferPoolImpl();
 
@@ -49,8 +49,8 @@ private:
 
 private:
 			size_t				fBlockSize;
-			uint32				fMaxCachedBlocks;
-			uint32				fAllocatedBlocks;
+			uint32_t				fMaxCachedBlocks;
+			uint32_t				fAllocatedBlocks;
 			BufferList			fUnusedBuffers;
 			BufferList			fCachedBuffers;
 			BBufferPoolLockable*	fLockable;

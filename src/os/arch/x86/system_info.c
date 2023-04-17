@@ -9,7 +9,7 @@
 
 
 status_t
-get_cpuid(cpuid_info *info, uint32 eaxRegister, uint32 cpuNum)
+get_cpuid(cpuid_info *info, uint32_t eaxRegister, uint32_t cpuNum)
 {
 	return _kern_get_cpuid(info, eaxRegister, cpuNum);
 }

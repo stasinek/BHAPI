@@ -202,8 +202,8 @@ private:
 	team_id				fTeam;
 	port_id				fNubPort;
 	sem_id				fBlockSem;
-	int32				fContextCount;
-	int32				fWaiterCount;
+	int32_t				fContextCount;
+	int32_t				fWaiterCount;
 	DebugContextList	fFreeContexts;
 	DebugContextList	fUsedContexts;
 	bool				fClosed;
@@ -348,7 +348,7 @@ status_t LocalDebuggerInterface::GetNextDebugEvent(DebugEvent*& _event)
 {
 	while (true) {
 		char buffer[2048];
-		int32 messageCode;
+		int32_t messageCode;
 		ssize_t size = read_port(fDebuggerPort, &messageCode, buffer,
 			sizeof(buffer));
 		if (size < 0) {
@@ -393,7 +393,7 @@ status_t LocalDebuggerInterface::GetNextDebugEvent(DebugEvent*& _event)
 }
 
 
-status_t LocalDebuggerInterface::SetTeamDebuggingFlags(uint32 flags)
+status_t LocalDebuggerInterface::SetTeamDebuggingFlags(uint32_t flags)
 {
 	return set_team_debugging_flags(fNubPort, flags);
 }
@@ -450,8 +450,8 @@ status_t LocalDebuggerInterface::UninstallBreakpoint(target_addr_t address)
 }
 
 
-status_t LocalDebuggerInterface::InstallWatchpoint(target_addr_t address, uint32 type,
-	int32 length)
+status_t LocalDebuggerInterface::InstallWatchpoint(target_addr_t address, uint32_t type,
+	int32_t length)
 {
 	DebugContextGetter contextGetter(fDebugContextPool);
 
@@ -514,7 +514,7 @@ status_t LocalDebuggerInterface::GetTeamInfo(TeamInfo& info)
 status_t LocalDebuggerInterface::GetThreadInfos(BObjectList<ThreadInfo>& infos)
 {
 	thread_info threadInfo;
-	int32 cookie = 0;
+	int32_t cookie = 0;
 	while (get_next_thread_info(fTeamID, &cookie, &threadInfo) == B_OK) {
 		ThreadInfo* info = new(std::nothrow) ThreadInfo(threadInfo.team,
 			threadInfo.thread, threadInfo.name);
@@ -532,7 +532,7 @@ status_t LocalDebuggerInterface::GetImageInfos(BObjectList<ImageInfo>& infos)
 {
 	// get the team's images
 	image_info imageInfo;
-	int32 cookie = 0;
+	int32_t cookie = 0;
 	while (get_next_image_info(fTeamID, &cookie, &imageInfo) == B_OK) {
 		ImageInfo* info = new(std::nothrow) ImageInfo(fTeamID, imageInfo.id,
 			imageInfo.name, imageInfo.type, (addr_t)imageInfo.text,
@@ -570,7 +570,7 @@ status_t LocalDebuggerInterface::GetSemaphoreInfos(BObjectList<SemaphoreInfo>& i
 {
 	// get the team's semaphores
 	sem_info semInfo;
-	int32 cookie = 0;
+	int32_t cookie = 0;
 	while (get_next_sem_info(fTeamID, &cookie, &semInfo) == B_OK) {
 		SemaphoreInfo* info = new(std::nothrow) SemaphoreInfo(fTeamID,
 			semInfo.sem, semInfo.name, semInfo.count, semInfo.latest_holder);
@@ -605,7 +605,7 @@ status_t LocalDebuggerInterface::GetSymbolInfos(team_id team, image_id image,
 
 	// get the symbols
 	char name[1024];
-	int32 type;
+	int32_t type;
 	void* address;
 	size_t size;
 	while (debug_next_image_symbol(iterator, name, sizeof(name), &type,
@@ -629,7 +629,7 @@ status_t LocalDebuggerInterface::GetSymbolInfos(team_id team, image_id image,
 
 
 status_t LocalDebuggerInterface::GetSymbolInfo(team_id team, image_id image, const char* name,
-	int32 symbolType, SymbolInfo& info)
+	int32_t symbolType, SymbolInfo& info)
 {
 	// create a lookup context
 	debug_symbol_lookup_context* lookupContext;
@@ -641,7 +641,7 @@ status_t LocalDebuggerInterface::GetSymbolInfo(team_id team, image_id image, con
 	// try to get the symbol
 	void* foundAddress;
 	size_t foundSize;
-	int32 foundType;
+	int32_t foundType;
 	error = debug_get_symbol(lookupContext, image, name, symbolType,
 		&foundAddress, &foundSize, &foundType);
 	if (error == B_OK) {
@@ -703,7 +703,7 @@ status_t LocalDebuggerInterface::SetCpuState(thread_id thread, const CpuState* s
 }
 
 
-status_t LocalDebuggerInterface::GetCpuFeatures(uint32& flags)
+status_t LocalDebuggerInterface::GetCpuFeatures(uint32_t& flags)
 {
 	return fArchitecture->GetCpuFeatures(flags);
 }
@@ -730,7 +730,7 @@ status_t LocalDebuggerInterface::WriteCoreFile(const char* path)
 
 
 status_t LocalDebuggerInterface::GetMemoryProperties(target_addr_t address,
-	uint32& protection, uint32& locking)
+	uint32_t& protection, uint32_t& locking)
 {
 	return get_memory_properties(fTeamID, (const void *)address,
 		&protection, &locking);
@@ -758,7 +758,7 @@ LocalDebuggerInterface::WriteMemory(target_addr_t address, void* buffer,
 }
 
 
-status_t LocalDebuggerInterface::_CreateDebugEvent(int32 messageCode,
+status_t LocalDebuggerInterface::_CreateDebugEvent(int32_t messageCode,
 	const debug_debugger_message_data& message, bool& _ignore,
 	DebugEvent*& _event)
 {
@@ -916,7 +916,7 @@ status_t LocalDebuggerInterface::_GetNextSystemWatchEvent(DebugEvent*& _event,
 	if (message.What() != B_SYSTEM_OBJECT_UPDATE)
 		return B_BAD_DATA;
 
-	int32 opcode = 0;
+	int32_t opcode = 0;
 	if (message.FindInt32("opcode", &opcode) != B_OK)
 		return B_BAD_DATA;
 
@@ -925,7 +925,7 @@ status_t LocalDebuggerInterface::_GetNextSystemWatchEvent(DebugEvent*& _event,
 	{
 		case B_THREAD_NAME_CHANGED:
 		{
-			int32 threadID = -1;
+			int32_t threadID = -1;
 			if (message.FindInt32("thread", &threadID) != B_OK)
 				break;
 

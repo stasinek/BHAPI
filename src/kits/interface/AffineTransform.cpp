@@ -216,19 +216,19 @@ void BAffineTransform::ApplyInverse(BPoint* point) const
 }
 
 
-void BAffineTransform::Apply(BPoint* points, uint32 count) const
+void BAffineTransform::Apply(BPoint* points, uint32_t count) const
 {
 	if (points != NULL) {
-		for (uint32 i = 0; i < count; ++i)
+		for (uint32_t i = 0; i < count; ++i)
 			Apply(&points[i]);
 	}
 }
 
 
-void BAffineTransform::ApplyInverse(BPoint* points, uint32 count) const
+void BAffineTransform::ApplyInverse(BPoint* points, uint32_t count) const
 {
 	if (points != NULL) {
-		for (uint32 i = 0; i < count; ++i)
+		for (uint32_t i = 0; i < count; ++i)
 			ApplyInverse(&points[i]);
 	}
 }

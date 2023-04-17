@@ -76,12 +76,12 @@ struct team_arg {
 	char	*path;
 	char	**flat_args;
 	size_t	flat_args_size;
-	uint32	arg_count;
-	uint32	env_count;
+	uint32_t	arg_count;
+	uint32_t	env_count;
 	mode_t	umask;
-	uint32	flags;
+	uint32_t	flags;
 	port_id	error_port;
-	uint32	error_token;
+	uint32_t	error_token;
 };
 
 #define TEAM_ARGS_FLAG_NO_ASLR	0x01
@@ -94,7 +94,7 @@ class TeamNotificationService : public DefaultNotificationService {
 public:
 							TeamNotificationService();
 
-			void			Notify(uint32 eventCode, Team* team);
+			void			Notify(uint32_t eventCode, Team* team);
 };
 
 
@@ -159,8 +159,8 @@ static mutex sOrphanedCheckLock
 
 // some arbitrarily chosen limits -- should probably depend on the available
 // memory (the limit is not yet enforced)
-static int32 sMaxTeams = 2048;
-static int32 sUsedTeams = 1;
+static int32_t sMaxTeams = 2048;
+static int32_t sUsedTeams = 1;
 
 static TeamNotificationService sNotificationService;
 
@@ -227,8 +227,8 @@ private:
 
 class ExecTeam : public AbstractTraceEntry {
 public:
-	ExecTeam(const char* path, int32 argCount, const char* const* args,
-			int32 envCount, const char* const* env)
+	ExecTeam(const char* path, int32_t argCount, const char* const* args,
+			int32_t envCount, const char* const* env)
 		:
 		fArgCount(argCount),
 		fArgs(NULL)
@@ -238,14 +238,14 @@ public:
 
 		// determine the buffer size we need for the args
 		size_t argBufferSize = 0;
-		for (int32 i = 0; i < argCount; i++)
+		for (int32_t i = 0; i < argCount; i++)
 			argBufferSize += strlen(args[i]) + 1;
 
 		// allocate a buffer
 		fArgs = (char*)alloc_tracing_buffer(argBufferSize);
 		if (fArgs) {
 			char* buffer = fArgs;
-			for (int32 i = 0; i < argCount; i++) {
+			for (int32_t i = 0; i < argCount; i++) {
 				size_t argSize = strlen(args[i]) + 1;
 				memcpy(buffer, args[i], argSize);
 				buffer += argSize;
@@ -265,7 +265,7 @@ public:
 
 		if (fArgs != NULL) {
 			char* args = fArgs;
-			for (int32 i = 0; !out.IsFull() && i < fArgCount; i++) {
+			for (int32_t i = 0; !out.IsFull() && i < fArgCount; i++) {
 				out.Print(" \"%s\"", args);
 				args += strlen(args) + 1;
 			}
@@ -275,7 +275,7 @@ public:
 
 private:
 	char*	fPath;
-	int32	fArgCount;
+	int32_t	fArgCount;
 	char*	fArgs;
 };
 
@@ -325,7 +325,7 @@ private:
 
 class WaitForChild : public AbstractTraceEntry {
 public:
-	WaitForChild(pid_t child, uint32 flags)
+	WaitForChild(pid_t child, uint32_t flags)
 		:
 		fChild(child),
 		fFlags(flags)
@@ -341,7 +341,7 @@ public:
 
 private:
 	pid_t	fChild;
-	uint32	fFlags;
+	uint32_t	fFlags;
 };
 
 
@@ -404,7 +404,7 @@ TeamNotificationService::TeamNotificationService()
 
 
 void
-TeamNotificationService::Notify(uint32 eventCode, Team* team)
+TeamNotificationService::Notify(uint32_t eventCode, Team* team)
 {
 	char eventBuffer[128];
 	KMessage event;
@@ -795,7 +795,7 @@ Team::ResetSignalsOnExec()
 	// flags, but since there aren't any handlers, they make little sense, so
 	// we clear them.
 
-	for (uint32 i = 1; i <= MAX_SIGNAL_NUMBER; i++) {
+	for (uint32_t i = 1; i <= MAX_SIGNAL_NUMBER; i++) {
 		struct sigaction& action = SignalActionFor(i);
 		if (action.sa_handler != SIG_IGN && action.sa_handler != SIG_DFL)
 			action.sa_handler = SIG_DFL;
@@ -870,7 +870,7 @@ Team::RemoveUserTimer(UserTimer* timer)
 void
 Team::DeleteUserTimers(bool userDefinedOnly)
 {
-	int32 count = fUserTimers.DeleteTimers(userDefinedOnly);
+	int32_t count = fUserTimers.DeleteTimers(userDefinedOnly);
 	UserDefinedTimersRemoved(count);
 }
 
@@ -881,7 +881,7 @@ Team::DeleteUserTimers(bool userDefinedOnly)
 bool
 Team::CheckAddUserDefinedTimer()
 {
-	int32 oldCount = atomic_add(&fUserDefinedTimerCount, 1);
+	int32_t oldCount = atomic_add(&fUserDefinedTimerCount, 1);
 	if (oldCount >= MAX_USER_TIMERS_PER_TEAM) {
 		atomic_add(&fUserDefinedTimerCount, -1);
 		return false;
@@ -895,7 +895,7 @@ Team::CheckAddUserDefinedTimer()
 	\param count The count to subtract.
 */
 void
-Team::UserDefinedTimersRemoved(int32 count)
+Team::UserDefinedTimersRemoved(int32_t count)
 {
 	atomic_add(&fUserDefinedTimerCount, -count);
 }
@@ -1346,7 +1346,7 @@ static status_t
 create_team_user_data(Team* team, void* exactAddress = NULL)
 {
 	void* address;
-	uint32 addressSpec;
+	uint32_t addressSpec;
 
 	if (exactAddress != NULL) {
 		address = exactAddress;
@@ -1409,7 +1409,7 @@ delete_team_user_data(Team* team)
 
 static status_t
 copy_user_process_args(const char* const* userFlatArgs, size_t flatArgsSize,
-	int32 argCount, int32 envCount, char**& _flatArgs)
+	int32_t argCount, int32_t envCount, char**& _flatArgs)
 {
 	if (argCount < 0 || envCount < 0)
 		return B_BAD_VALUE;
@@ -1436,7 +1436,7 @@ copy_user_process_args(const char* const* userFlatArgs, size_t flatArgsSize,
 	status_t error = B_OK;
 	const char* stringBase = (char*)flatArgs + argCount + envCount + 2;
 	const char* stringEnd = (char*)flatArgs + flatArgsSize;
-	for (int32 i = 0; i < argCount + envCount + 2; i++) {
+	for (int32_t i = 0; i < argCount + envCount + 2; i++) {
 		if (i == argCount || i == argCount + envCount + 1) {
 			// check array null termination
 			if (flatArgs[i] != NULL) {
@@ -1479,8 +1479,8 @@ free_team_arg(struct team_arg* teamArg)
 
 static status_t
 create_team_arg(struct team_arg** _teamArg, const char* path, char** flatArgs,
-	size_t flatArgsSize, int32 argCount, int32 envCount, mode_t umask,
-	port_id port, uint32 token)
+	size_t flatArgsSize, int32_t argCount, int32_t envCount, mode_t umask,
+	port_id port, uint32_t token)
 {
 	struct team_arg* teamArg = (struct team_arg*)malloc(sizeof(team_arg));
 	if (teamArg == NULL)
@@ -1504,7 +1504,7 @@ create_team_arg(struct team_arg** _teamArg, const char* path, char** flatArgs,
 
 	// determine the flags from the environment
 	const char* const* env = flatArgs + argCount + 1;
-	for (int32 i = 0; i < envCount; i++) {
+	for (int32_t i = 0; i < envCount; i++) {
 		if (strcmp(env[i], "DISABLE_ASLR=1") == 0) {
 			teamArg->flags |= TEAM_ARGS_FLAG_NO_ASLR;
 			break;
@@ -1528,7 +1528,7 @@ team_create_thread_start_internal(void* args)
 	char** userArgs;
 	char** userEnv;
 	struct user_space_program_args* programArgs;
-	uint32 argCount, envCount;
+	uint32_t argCount, envCount;
 
 	thread = thread_get_current_thread();
 	team = thread->team;
@@ -1563,14 +1563,14 @@ team_create_thread_start_internal(void* args)
 
 	if (user_strlcpy(programArgs->program_path, path,
 				sizeof(programArgs->program_path)) < B_OK
-		|| user_memcpy(&programArgs->arg_count, &argCount, sizeof(int32)) < B_OK
+		|| user_memcpy(&programArgs->arg_count, &argCount, sizeof(int32_t)) < B_OK
 		|| user_memcpy(&programArgs->args, &userArgs, sizeof(char**)) < B_OK
-		|| user_memcpy(&programArgs->env_count, &envCount, sizeof(int32)) < B_OK
+		|| user_memcpy(&programArgs->env_count, &envCount, sizeof(int32_t)) < B_OK
 		|| user_memcpy(&programArgs->env, &userEnv, sizeof(char**)) < B_OK
 		|| user_memcpy(&programArgs->error_port, &teamArgs->error_port,
 				sizeof(port_id)) < B_OK
 		|| user_memcpy(&programArgs->error_token, &teamArgs->error_token,
-				sizeof(uint32)) < B_OK
+				sizeof(uint32_t)) < B_OK
 		|| user_memcpy(&programArgs->umask, &teamArgs->umask, sizeof(mode_t)) < B_OK
 		|| user_memcpy(userArgs, teamArgs->flat_args,
 				teamArgs->flat_args_size) < B_OK) {
@@ -1666,9 +1666,9 @@ team_create_thread_start(void* args)
 
 
 static thread_id
-load_image_internal(char**& _flatArgs, size_t flatArgsSize, int32 argCount,
-	int32 envCount, int32 priority, team_id parentID, uint32 flags,
-	port_id errorPort, uint32 errorToken)
+load_image_internal(char**& _flatArgs, size_t flatArgsSize, int32_t argCount,
+	int32_t envCount, int32_t priority, team_id parentID, uint32_t flags,
+	port_id errorPort, uint32_t errorToken)
 {
 	char** flatArgs = _flatArgs;
 	thread_id thread;
@@ -1878,7 +1878,7 @@ err1:
 */
 static status_t
 exec_team(const char* path, char**& _flatArgs, size_t flatArgsSize,
-	int32 argCount, int32 envCount, mode_t umask)
+	int32_t argCount, int32_t envCount, mode_t umask)
 {
 	// NOTE: Since this function normally doesn't return, don't use automatic
 	// variables that need destruction in the function scope.
@@ -2029,7 +2029,7 @@ fork_team(void)
 	thread_id threadID;
 	status_t status;
 	ssize_t areaCookie;
-	int32 imageCookie;
+	int32_t imageCookie;
 
 	TRACE(("fork_team(): team %" B_PRId32 "\n", parentTeam->id));
 
@@ -2309,7 +2309,7 @@ get_job_control_entry(team_job_control_children& children, pid_t id)
 	\return The first matching entry or \c NULL, if none matches.
 */
 static job_control_entry*
-get_job_control_entry(Team* team, pid_t id, uint32 flags)
+get_job_control_entry(Team* team, pid_t id, uint32_t flags)
 {
 	job_control_entry* entry = get_job_control_entry(team->dead_children, id);
 
@@ -2395,7 +2395,7 @@ job_control_entry::operator=(const job_control_entry& other)
 /*! This is the kernel backend for waitid().
 */
 static thread_id
-wait_for_child(pid_t child, uint32 flags, siginfo_t& _info)
+wait_for_child(pid_t child, uint32_t flags, siginfo_t& _info)
 {
 	Thread* thread = thread_get_current_thread();
 	Team* team = thread->team;
@@ -2673,8 +2673,8 @@ orphaned_process_group_check()
 
 
 static status_t
-common_get_team_usage_info(team_id id, int32 who, team_usage_info* info,
-	uint32 flags)
+common_get_team_usage_info(team_id id, int32_t who, team_usage_info* info,
+	uint32_t flags)
 {
 	if (who != B_TEAM_USAGE_SELF && who != B_TEAM_USAGE_CHILDREN)
 		return B_BAD_VALUE;
@@ -2819,14 +2819,14 @@ team_init(kernel_args* args)
 }
 
 
-int32
+int32_t
 team_max_teams(void)
 {
 	return sMaxTeams;
 }
 
 
-int32
+int32_t
 team_used_teams(void)
 {
 	InterruptsSpinLocker teamsLocker(sTeamHashLock);
@@ -2888,7 +2888,7 @@ team_get_team_struct_locked(team_id id)
 
 
 void
-team_set_controlling_tty(int32 ttyIndex)
+team_set_controlling_tty(int32_t ttyIndex)
 {
 	// lock the team, so its session won't change while we're playing with it
 	Team* team = thread_get_current_thread()->team;
@@ -2904,7 +2904,7 @@ team_set_controlling_tty(int32 ttyIndex)
 }
 
 
-int32
+int32_t
 team_get_controlling_tty()
 {
 	// lock the team, so its session won't change while we're playing with it
@@ -2921,7 +2921,7 @@ team_get_controlling_tty()
 
 
 status_t
-team_set_foreground_process_group(int32 ttyIndex, pid_t processGroupID)
+team_set_foreground_process_group(int32_t ttyIndex, pid_t processGroupID)
 {
 	// lock the team, so its session won't change while we're playing with it
 	Thread* thread = thread_get_current_thread();
@@ -3634,7 +3634,7 @@ team_dissociate_data(AssociatedData* data)
 
 
 thread_id
-load_image(int32 argCount, const char** args, const char** env)
+load_image(int32_t argCount, const char** args, const char** env)
 {
 	return load_image_etc(argCount, args, env, B_NORMAL_PRIORITY,
 		B_CURRENT_TEAM, B_WAIT_TILL_LOADED);
@@ -3642,8 +3642,8 @@ load_image(int32 argCount, const char** args, const char** env)
 
 
 thread_id
-load_image_etc(int32 argCount, const char* const* args,
-	const char* const* env, int32 priority, team_id parentID, uint32 flags)
+load_image_etc(int32_t argCount, const char* const* args,
+	const char* const* env, int32_t priority, team_id parentID, uint32_t flags)
 {
 	// we need to flatten the args and environment
 
@@ -3651,16 +3651,16 @@ load_image_etc(int32 argCount, const char* const* args,
 		return B_BAD_VALUE;
 
 	// determine total needed size
-	int32 argSize = 0;
-	for (int32 i = 0; i < argCount; i++)
+	int32_t argSize = 0;
+	for (int32_t i = 0; i < argCount; i++)
 		argSize += strlen(args[i]) + 1;
 
-	int32 envCount = 0;
-	int32 envSize = 0;
+	int32_t envCount = 0;
+	int32_t envSize = 0;
 	while (env != NULL && env[envCount] != NULL)
 		envSize += strlen(env[envCount++]) + 1;
 
-	int32 size = (argCount + envCount + 2) * sizeof(char*) + argSize + envSize;
+	int32_t size = (argCount + envCount + 2) * sizeof(char*) + argSize + envSize;
 	if (size > MAX_PROCESS_ARGS_SIZE)
 		return B_TOO_MANY_ARGS;
 
@@ -3673,8 +3673,8 @@ load_image_etc(int32 argCount, const char* const* args,
 	char* stringSpace = (char*)(flatArgs + argCount + envCount + 2);
 
 	// copy arguments and environment
-	for (int32 i = 0; i < argCount; i++) {
-		int32 argSize = strlen(args[i]) + 1;
+	for (int32_t i = 0; i < argCount; i++) {
+		int32_t argSize = strlen(args[i]) + 1;
 		memcpy(stringSpace, args[i], argSize);
 		*slot++ = stringSpace;
 		stringSpace += argSize;
@@ -3682,8 +3682,8 @@ load_image_etc(int32 argCount, const char* const* args,
 
 	*slot++ = NULL;
 
-	for (int32 i = 0; i < envCount; i++) {
-		int32 envSize = strlen(env[i]) + 1;
+	for (int32_t i = 0; i < envCount; i++) {
+		int32_t envSize = strlen(env[i]) + 1;
 		memcpy(stringSpace, env[i], envSize);
 		*slot++ = stringSpace;
 		stringSpace += envSize;
@@ -3757,9 +3757,9 @@ _get_team_info(team_id id, team_info* info, size_t size)
 
 
 status_t
-_get_next_team_info(int32* cookie, team_info* info, size_t size)
+_get_next_team_info(int32_t* cookie, team_info* info, size_t size)
 {
-	int32 slot = *cookie;
+	int32_t slot = *cookie;
 	if (slot < 1)
 		slot = 1;
 
@@ -3787,7 +3787,7 @@ _get_next_team_info(int32* cookie, team_info* info, size_t size)
 
 
 status_t
-_get_team_usage_info(team_id id, int32 who, team_usage_info* info, size_t size)
+_get_team_usage_info(team_id id, int32_t who, team_usage_info* info, size_t size)
 {
 	if (size != sizeof(team_usage_info))
 		return B_BAD_VALUE;
@@ -3881,7 +3881,7 @@ getsid(pid_t id)
 
 status_t
 _user_exec(const char* userPath, const char* const* userFlatArgs,
-	size_t flatArgsSize, int32 argCount, int32 envCount, mode_t umask)
+	size_t flatArgsSize, int32_t argCount, int32_t envCount, mode_t umask)
 {
 	// NOTE: Since this function normally doesn't return, don't use automatic
 	// variables that need destruction in the function scope.
@@ -3915,7 +3915,7 @@ _user_fork(void)
 
 
 pid_t
-_user_wait_for_child(thread_id child, uint32 flags, siginfo_t* userInfo)
+_user_wait_for_child(thread_id child, uint32_t flags, siginfo_t* userInfo)
 {
 	if (userInfo != NULL && !IS_USER_ADDRESS(userInfo))
 		return B_BAD_ADDRESS;
@@ -3934,7 +3934,7 @@ _user_wait_for_child(thread_id child, uint32 flags, siginfo_t* userInfo)
 
 
 pid_t
-_user_process_info(pid_t process, int32 which)
+_user_process_info(pid_t process, int32_t which)
 {
 	// we only allow to return the parent of the current process
 	if (which == PARENT_ID
@@ -4177,8 +4177,8 @@ _user_wait_for_team(team_id id, status_t* _userReturnCode)
 
 thread_id
 _user_load_image(const char* const* userFlatArgs, size_t flatArgsSize,
-	int32 argCount, int32 envCount, int32 priority, uint32 flags,
-	port_id errorPort, uint32 errorToken)
+	int32_t argCount, int32_t envCount, int32_t priority, uint32_t flags,
+	port_id errorPort, uint32_t errorToken)
 {
 	TRACE(("_user_load_image: argc = %" B_PRId32 "\n", argCount));
 
@@ -4265,22 +4265,22 @@ _user_get_team_info(team_id id, team_info* userInfo)
 
 
 status_t
-_user_get_next_team_info(int32* userCookie, team_info* userInfo)
+_user_get_next_team_info(int32_t* userCookie, team_info* userInfo)
 {
 	status_t status;
 	team_info info;
-	int32 cookie;
+	int32_t cookie;
 
 	if (!IS_USER_ADDRESS(userCookie)
 		|| !IS_USER_ADDRESS(userInfo)
-		|| user_memcpy(&cookie, userCookie, sizeof(int32)) < B_OK)
+		|| user_memcpy(&cookie, userCookie, sizeof(int32_t)) < B_OK)
 		return B_BAD_ADDRESS;
 
 	status = _get_next_team_info(&cookie, &info, sizeof(team_info));
 	if (status != B_OK)
 		return status;
 
-	if (user_memcpy(userCookie, &cookie, sizeof(int32)) < B_OK
+	if (user_memcpy(userCookie, &cookie, sizeof(int32_t)) < B_OK
 		|| user_memcpy(userInfo, &info, sizeof(team_info)) < B_OK)
 		return B_BAD_ADDRESS;
 
@@ -4296,7 +4296,7 @@ _user_get_current_team(void)
 
 
 status_t
-_user_get_team_usage_info(team_id team, int32 who, team_usage_info* userInfo,
+_user_get_team_usage_info(team_id team, int32_t who, team_usage_info* userInfo,
 	size_t size)
 {
 	if (size != sizeof(team_usage_info))
@@ -4316,7 +4316,7 @@ _user_get_team_usage_info(team_id team, int32 who, team_usage_info* userInfo,
 
 
 status_t
-_user_get_extended_team_info(team_id teamID, uint32 flags, void* buffer,
+_user_get_extended_team_info(team_id teamID, uint32_t flags, void* buffer,
 	size_t size, size_t* _sizeNeeded)
 {
 	// check parameters

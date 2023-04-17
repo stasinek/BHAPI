@@ -30,7 +30,7 @@ MimeEntryProcessor::DatabaseLocker::~DatabaseLocker()
 
 
 MimeEntryProcessor::MimeEntryProcessor(Database* database,
-	DatabaseLocker* databaseLocker, int32 force)
+	DatabaseLocker* databaseLocker, int32_t force)
 	:
 	fDatabase(database),
 	fDatabaseLocker(databaseLocker),

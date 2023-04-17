@@ -52,7 +52,7 @@ TextSnifferAddon::GuessMimeType(const char* fileName, BMimeType* type)
 
 // GuessMimeType
 float
-TextSnifferAddon::GuessMimeType(BFile* file, const void* buffer, int32 length,
+TextSnifferAddon::GuessMimeType(BFile* file, const void* buffer, int32_t length,
 	BMimeType* type)
 {
 	if (file_ascmagic(fDatabaseLocation, (const unsigned char*)buffer, length,

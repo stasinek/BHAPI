@@ -264,7 +264,7 @@ struct VnodeHash {
 	typedef	struct vnode	ValueType;
 
 #define VHASH(mountid, vnodeid) \
-	(((uint32)((vnodeid) >> 32) + (uint32)(vnodeid)) ^ (uint32)(mountid))
+	(((uint32_t)((vnodeid) >> 32) + (uint32_t)(vnodeid)) ^ (uint32_t)(mountid))
 
 	size_t HashKey(KeyType key) const
 	{
@@ -353,15 +353,15 @@ static status_t file_deselect(struct file_descriptor* descriptor, uint8 event,
 	struct selectsync* sync);
 static status_t dir_read(struct io_context* context,
 	struct file_descriptor* descriptor, struct dirent* buffer,
-	size_t bufferSize, uint32* _count);
+	size_t bufferSize, uint32_t* _count);
 static status_t dir_read(struct io_context* ioContext, struct vnode* vnode,
-	void* cookie, struct dirent* buffer, size_t bufferSize, uint32* _count);
+	void* cookie, struct dirent* buffer, size_t bufferSize, uint32_t* _count);
 static status_t dir_rewind(struct file_descriptor* descriptor);
 static void dir_free_fd(struct file_descriptor* descriptor);
 static status_t dir_close(struct file_descriptor* descriptor);
 static status_t attr_dir_read(struct io_context* context,
 	struct file_descriptor* descriptor, struct dirent* buffer,
-	size_t bufferSize, uint32* _count);
+	size_t bufferSize, uint32_t* _count);
 static status_t attr_dir_rewind(struct file_descriptor* descriptor);
 static void attr_dir_free_fd(struct file_descriptor* descriptor);
 static status_t attr_dir_close(struct file_descriptor* descriptor);
@@ -379,13 +379,13 @@ static status_t attr_write_stat(struct file_descriptor* descriptor,
 	const struct stat* stat, int statMask);
 static status_t index_dir_read(struct io_context* context,
 	struct file_descriptor* descriptor, struct dirent* buffer,
-	size_t bufferSize, uint32* _count);
+	size_t bufferSize, uint32_t* _count);
 static status_t index_dir_rewind(struct file_descriptor* descriptor);
 static void index_dir_free_fd(struct file_descriptor* descriptor);
 static status_t index_dir_close(struct file_descriptor* descriptor);
 static status_t query_read(struct io_context* context,
 	struct file_descriptor* descriptor, struct dirent* buffer,
-	size_t bufferSize, uint32* _count);
+	size_t bufferSize, uint32_t* _count);
 static status_t query_rewind(struct file_descriptor* descriptor);
 static void query_free_fd(struct file_descriptor* descriptor);
 static status_t query_close(struct file_descriptor* descriptor);
@@ -410,7 +410,7 @@ static void inc_vnode_ref_count(struct vnode* vnode);
 static status_t dec_vnode_ref_count(struct vnode* vnode, bool alwaysFree,
 	bool reenter);
 static inline void put_vnode(struct vnode* vnode);
-static status_t fs_unmount(char* path, dev_t mountID, uint32 flags,
+static status_t fs_unmount(char* path, dev_t mountID, uint32_t flags,
 	bool kernel);
 static int open_vnode(struct vnode* vnode, int openMode, bool kernel);
 
@@ -618,7 +618,7 @@ namespace VFSPagesIOTracing {
 class PagesIOTraceEntry : public AbstractTraceEntry {
 protected:
 	PagesIOTraceEntry(struct vnode* vnode, void* cookie, off_t pos,
-		const generic_io_vec* vecs, uint32 count, uint32 flags,
+		const generic_io_vec* vecs, uint32_t count, uint32_t flags,
 		generic_size_t bytesRequested, status_t status,
 		generic_size_t bytesTransferred)
 		:
@@ -645,7 +645,7 @@ protected:
 			(uint64)fBytesRequested);
 
 		if (fVecs != NULL) {
-			for (uint32 i = 0; i < fCount; i++) {
+			for (uint32_t i = 0; i < fCount; i++) {
 				if (i > 0)
 					out.Print(", ");
 				out.Print("(%" B_PRIx64 ", %" B_PRIu64 ")", (uint64)fVecs[i].base,
@@ -665,8 +665,8 @@ protected:
 	void*			fCookie;
 	off_t			fPos;
 	generic_io_vec*	fVecs;
-	uint32			fCount;
-	uint32			fFlags;
+	uint32_t			fCount;
+	uint32_t			fFlags;
 	generic_size_t	fBytesRequested;
 	status_t		fStatus;
 	generic_size_t	fBytesTransferred;
@@ -676,7 +676,7 @@ protected:
 class ReadPages : public PagesIOTraceEntry {
 public:
 	ReadPages(struct vnode* vnode, void* cookie, off_t pos,
-		const generic_io_vec* vecs, uint32 count, uint32 flags,
+		const generic_io_vec* vecs, uint32_t count, uint32_t flags,
 		generic_size_t bytesRequested, status_t status,
 		generic_size_t bytesTransferred)
 		:
@@ -696,7 +696,7 @@ public:
 class WritePages : public PagesIOTraceEntry {
 public:
 	WritePages(struct vnode* vnode, void* cookie, off_t pos,
-		const generic_io_vec* vecs, uint32 count, uint32 flags,
+		const generic_io_vec* vecs, uint32_t count, uint32_t flags,
 		generic_size_t bytesRequested, status_t status,
 		generic_size_t bytesTransferred)
 		:
@@ -831,7 +831,7 @@ get_file_system_name(const char* fsName)
 	name for the specified layer.
 */
 static char*
-get_file_system_name_for_layer(const char* fsNames, int32 layer)
+get_file_system_name_for_layer(const char* fsNames, int32_t layer)
 {
 	while (layer >= 0) {
 		const char* end = strchr(fsNames, ':');
@@ -1044,7 +1044,7 @@ dec_vnode_ref_count(struct vnode* vnode, bool alwaysFree, bool reenter)
 	ReadLocker locker(sVnodeLock);
 	AutoLocker<Vnode> nodeLocker(vnode);
 
-	int32 oldRefCount = atomic_add(&vnode->ref_count, -1);
+	int32_t oldRefCount = atomic_add(&vnode->ref_count, -1);
 
 	ASSERT_PRINT(oldRefCount > 0, "vnode %p\n", vnode);
 
@@ -1115,7 +1115,7 @@ is_special_node_type(int type)
 
 
 static status_t
-create_special_sub_node(struct vnode* vnode, uint32 flags)
+create_special_sub_node(struct vnode* vnode, uint32_t flags)
 {
 	if (S_ISFIFO(vnode->Type()))
 		return create_fifo_vnode(vnode->mount->volume, vnode);
@@ -1147,7 +1147,7 @@ get_vnode(dev_t mountID, ino_t vnodeID, struct vnode** _vnode, bool canWait,
 
 	rw_lock_read_lock(&sVnodeLock);
 
-	int32 tries = 2000;
+	int32_t tries = 2000;
 		// try for 10 secs
 restart:
 	struct vnode* vnode = lookup_vnode(mountID, vnodeID);
@@ -1199,7 +1199,7 @@ restart:
 		rw_lock_write_unlock(&sVnodeLock);
 
 		int type;
-		uint32 flags;
+		uint32_t flags;
 		status = FS_MOUNT_CALL(vnode->mount, get_vnode, vnodeID, vnode, &type,
 			&flags, reenter);
 		if (status == B_OK && vnode->private_node == NULL)
@@ -1263,7 +1263,7 @@ put_vnode(struct vnode* vnode)
 
 
 static void
-free_unused_vnodes(int32 level)
+free_unused_vnodes(int32_t level)
 {
 	unused_vnodes_check_started();
 
@@ -1275,7 +1275,7 @@ free_unused_vnodes(int32 level)
 	flush_hot_vnodes();
 
 	// determine how many nodes to free
-	uint32 count = 1;
+	uint32_t count = 1;
 	{
 		MutexLocker unusedVnodesLocker(sUnusedVnodesLock);
 
@@ -1297,7 +1297,7 @@ free_unused_vnodes(int32 level)
 
 	// Write back the modified pages of some unused vnodes and free them.
 
-	for (uint32 i = 0; i < count; i++) {
+	for (uint32_t i = 0; i < count; i++) {
 		ReadLocker vnodesReadLocker(sVnodeLock);
 
 		// get the first node
@@ -1452,7 +1452,7 @@ free_unused_vnodes()
 
 
 static void
-vnode_low_resource_handler(void* /*data*/, uint32 resources, int32 level)
+vnode_low_resource_handler(void* /*data*/, uint32_t resources, int32_t level)
 {
 	TRACE(("vnode_low_resource_handler(level = %" B_PRId32 ")\n", level));
 
@@ -1915,7 +1915,7 @@ disconnect_mount_or_vnode_fds(struct fs_mount* mount,
 		replace_vnode_if_disconnected(mount, vnodeToDisconnect, context->cwd,
 			sRoot, false);
 
-		for (uint32 i = 0; i < context->table_size; i++) {
+		for (uint32_t i = 0; i < context->table_size; i++) {
 			if (struct file_descriptor* descriptor = context->fds[i]) {
 				inc_fd_ref_count(descriptor);
 
@@ -2477,7 +2477,7 @@ get_vnode_name(struct vnode* vnode, struct vnode* parent, struct dirent* buffer,
 	status_t status = FS_CALL(parent, open_dir, &cookie);
 	if (status >= B_OK) {
 		while (true) {
-			uint32 num = 1;
+			uint32_t num = 1;
 			// We use the FS hook directly instead of dir_read(), since we don't
 			// want the entries to be fixed. We have already resolved vnode to
 			// the covered node.
@@ -2550,9 +2550,9 @@ dir_vnode_to_path(struct vnode* vnode, char* buffer, size_t bufferSize,
 		return B_NOT_A_DIRECTORY;
 
 	char* path = buffer;
-	int32 insert = bufferSize;
-	int32 maxLevel = 256;
-	int32 length;
+	int32_t insert = bufferSize;
+	int32_t maxLevel = 256;
+	int32_t length;
 	status_t status = B_OK;
 	struct io_context* ioContext = get_current_io_context(kernel);
 
@@ -2646,7 +2646,7 @@ out:
 static status_t
 check_path(char* to)
 {
-	int32 length = 0;
+	int32_t length = 0;
 
 	// check length of every path component
 
@@ -2926,7 +2926,7 @@ _dump_advisory_locking(advisory_locking* locking)
 	kprintf("   lock:        %" B_PRId32, locking->lock);
 	kprintf("   wait_sem:    %" B_PRId32, locking->wait_sem);
 
-	int32 index = 0;
+	int32_t index = 0;
 	LockList::Iterator iterator = locking->locks.GetIterator();
 	while (iterator.HasNext()) {
 		struct advisory_lock* lock = iterator.Next();
@@ -3121,7 +3121,7 @@ dump_mount(int argc, char** argv)
 	}
 
 	ulong val = parse_expression(argv[1]);
-	uint32 id = val;
+	uint32_t id = val;
 
 	struct fs_mount* mount = sMountsTable->Lookup(id);
 	if (mount == NULL) {
@@ -3319,7 +3319,7 @@ dump_io_context(int argc, char** argv)
 			B_PRINTF_POINTER_WIDTH, "ops", B_PRINTF_POINTER_WIDTH, "cookie");
 	}
 
-	for (uint32 i = 0; i < context->table_size; i++) {
+	for (uint32_t i = 0; i < context->table_size; i++) {
 		struct file_descriptor* fd = context->fds[i];
 		if (fd == NULL)
 			continue;
@@ -3353,7 +3353,7 @@ dump_vnode_usage(int argc, char** argv)
 	kprintf("Unused vnodes: %" B_PRIu32 " (max unused %" B_PRIu32 ")\n",
 		sUnusedVnodes, kMaxUnusedVnodes);
 
-	uint32 count = sVnodeTable->CountElements();
+	uint32_t count = sVnodeTable->CountElements();
 
 	kprintf("%" B_PRIu32 " vnodes total (%" B_PRIu32 " in use).\n", count,
 		count - sUnusedVnodes);
@@ -3382,7 +3382,7 @@ zero_iovecs(const iovec* vecs, size_t vecCount, size_t bytes)
 static status_t
 common_file_io_vec_pages(struct vnode* vnode, void* cookie,
 	const file_io_vec* fileVecs, size_t fileVecCount, const iovec* vecs,
-	size_t vecCount, uint32* _vecIndex, size_t* _vecOffset, size_t* _numBytes,
+	size_t vecCount, uint32_t* _vecIndex, size_t* _vecOffset, size_t* _numBytes,
 	bool doWrite)
 {
 	if (fileVecCount == 0) {
@@ -3392,9 +3392,9 @@ common_file_io_vec_pages(struct vnode* vnode, void* cookie,
 	}
 
 	size_t numBytes = *_numBytes;
-	uint32 fileVecIndex;
+	uint32_t fileVecIndex;
 	size_t vecOffset = *_vecOffset;
-	uint32 vecIndex = *_vecIndex;
+	uint32_t vecIndex = *_vecIndex;
 	status_t status;
 	size_t size;
 
@@ -3473,7 +3473,7 @@ common_file_io_vec_pages(struct vnode* vnode, void* cookie,
 		// process the complete fileVec
 		while (fileLeft > 0) {
 			iovec tempVecs[MAX_TEMP_IO_VECS];
-			uint32 tempCount = 0;
+			uint32_t tempCount = 0;
 
 			// size tracks how much of what is left of the current fileVec
 			// (fileLeft) has been assigned to tempVecs
@@ -3571,7 +3571,7 @@ is_user_in_group(gid_t gid)
 static status_t
 free_io_context(io_context* context)
 {
-	uint32 i;
+	uint32_t i;
 
 	TIOC(FreeIOContext(context));
 
@@ -3667,7 +3667,7 @@ new_vnode(fs_volume* volume, ino_t vnodeID, void* privateNode,
 
 extern "C" status_t
 publish_vnode(fs_volume* volume, ino_t vnodeID, void* privateNode,
-	fs_vnode_ops* ops, int type, uint32 flags)
+	fs_vnode_ops* ops, int type, uint32_t flags)
 {
 	FUNCTION(("publish_vnode()\n"));
 
@@ -3985,7 +3985,7 @@ write_pages(int fd, off_t pos, const iovec* vecs, size_t count,
 
 extern "C" status_t
 read_file_io_vec_pages(int fd, const file_io_vec* fileVecs, size_t fileVecCount,
-	const iovec* vecs, size_t vecCount, uint32* _vecIndex, size_t* _vecOffset,
+	const iovec* vecs, size_t vecCount, uint32_t* _vecIndex, size_t* _vecOffset,
 	size_t* _bytes)
 {
 	struct file_descriptor* descriptor;
@@ -4006,7 +4006,7 @@ read_file_io_vec_pages(int fd, const file_io_vec* fileVecs, size_t fileVecCount,
 
 extern "C" status_t
 write_file_io_vec_pages(int fd, const file_io_vec* fileVecs, size_t fileVecCount,
-	const iovec* vecs, size_t vecCount, uint32* _vecIndex, size_t* _vecOffset,
+	const iovec* vecs, size_t vecCount, uint32_t* _vecIndex, size_t* _vecOffset,
 	size_t* _bytes)
 {
 	struct file_descriptor* descriptor;
@@ -4450,7 +4450,7 @@ vfs_normalize_path(const char* path, char* buffer, size_t bufferSize,
 */
 status_t
 vfs_create_special_node(const char* path, fs_vnode* subVnode, mode_t mode,
-	uint32 flags, bool kernel, fs_vnode* _superVnode,
+	uint32_t flags, bool kernel, fs_vnode* _superVnode,
 	struct vnode** _createdVnode)
 {
 	struct vnode* dirNode;
@@ -4534,7 +4534,7 @@ vfs_get_cwd(dev_t* _mountID, ino_t* _vnodeID)
 
 
 status_t
-vfs_unmount(dev_t mountID, uint32 flags)
+vfs_unmount(dev_t mountID, uint32_t flags)
 {
 	return fs_unmount(NULL, mountID, flags, true);
 }
@@ -4556,7 +4556,7 @@ vfs_disconnect_vnode(dev_t mountID, ino_t vnodeID)
 
 
 extern "C" void
-vfs_free_unused_vnodes(int32 level)
+vfs_free_unused_vnodes(int32_t level)
 {
 	vnode_low_resource_handler(NULL,
 		B_KERNEL_RESOURCE_PAGES | B_KERNEL_RESOURCE_MEMORY
@@ -4578,7 +4578,7 @@ vfs_can_page(struct vnode* vnode, void* cookie)
 
 extern "C" status_t
 vfs_read_pages(struct vnode* vnode, void* cookie, off_t pos,
-	const generic_io_vec* vecs, size_t count, uint32 flags,
+	const generic_io_vec* vecs, size_t count, uint32_t flags,
 	generic_size_t* _numBytes)
 {
 	FUNCTION(("vfs_read_pages: vnode %p, vecs %p, pos %" B_PRIdOFF "\n", vnode,
@@ -4606,7 +4606,7 @@ vfs_read_pages(struct vnode* vnode, void* cookie, off_t pos,
 
 extern "C" status_t
 vfs_write_pages(struct vnode* vnode, void* cookie, off_t pos,
-	const generic_io_vec* vecs, size_t count, uint32 flags,
+	const generic_io_vec* vecs, size_t count, uint32_t flags,
 	generic_size_t* _numBytes)
 {
 	FUNCTION(("vfs_write_pages: vnode %p, vecs %p, pos %" B_PRIdOFF "\n", vnode,
@@ -4794,7 +4794,7 @@ vfs_unlock_vnode_if_locked(struct file_descriptor* descriptor)
 void
 vfs_exec_io_context(io_context* context)
 {
-	uint32 i;
+	uint32_t i;
 
 	for (i = 0; i < context->table_size; i++) {
 		mutex_lock(&context->io_mutex);
@@ -4938,7 +4938,7 @@ vfs_put_io_context(io_context* context)
 
 
 status_t
-vfs_resize_fd_table(struct io_context* context, uint32 newSize)
+vfs_resize_fd_table(struct io_context* context, uint32_t newSize)
 {
 	if (newSize == 0 || newSize > MAX_FD_TABLE_SIZE)
 		return B_BAD_VALUE;
@@ -4947,13 +4947,13 @@ vfs_resize_fd_table(struct io_context* context, uint32 newSize)
 
 	MutexLocker _(context->io_mutex);
 
-	uint32 oldSize = context->table_size;
+	uint32_t oldSize = context->table_size;
 	int oldCloseOnExitBitmapSize = (oldSize + 7) / 8;
 	int newCloseOnExitBitmapSize = (newSize + 7) / 8;
 
 	// If the tables shrink, make sure none of the fds being dropped are in use.
 	if (newSize < oldSize) {
-		for (uint32 i = oldSize; i-- > newSize;) {
+		for (uint32_t i = oldSize; i-- > newSize;) {
 			if (context->fds[i])
 				return B_BUSY;
 		}
@@ -4978,7 +4978,7 @@ vfs_resize_fd_table(struct io_context* context, uint32 newSize)
 	context->table_size = newSize;
 
 	// copy entries from old tables
-	uint32 toCopy = min_c(oldSize, newSize);
+	uint32_t toCopy = min_c(oldSize, newSize);
 
 	memcpy(context->fds, oldFDs, sizeof(void*) * toCopy);
 	memcpy(context->select_infos, oldSelectInfos, sizeof(void*) * toCopy);
@@ -5845,7 +5845,7 @@ dir_free_fd(struct file_descriptor* descriptor)
 
 static status_t
 dir_read(struct io_context* ioContext, struct file_descriptor* descriptor,
-	struct dirent* buffer, size_t bufferSize, uint32* _count)
+	struct dirent* buffer, size_t bufferSize, uint32_t* _count)
 {
 	return dir_read(ioContext, descriptor->u.vnode, descriptor->cookie, buffer,
 		bufferSize, _count);
@@ -5903,7 +5903,7 @@ fix_dirent(struct vnode* parent, struct dirent* entry,
 
 static status_t
 dir_read(struct io_context* ioContext, struct vnode* vnode, void* cookie,
-	struct dirent* buffer, size_t bufferSize, uint32* _count)
+	struct dirent* buffer, size_t bufferSize, uint32_t* _count)
 {
 	if (!HAS_FS_CALL(vnode, read_dir))
 		return B_UNSUPPORTED;
@@ -5914,8 +5914,8 @@ dir_read(struct io_context* ioContext, struct vnode* vnode, void* cookie,
 		return error;
 
 	// we need to adjust the read dirents
-	uint32 count = *_count;
-	for (uint32 i = 0; i < count; i++) {
+	uint32_t count = *_count;
+	for (uint32_t i = 0; i < count; i++) {
 		error = fix_dirent(vnode, buffer, ioContext);
 		if (error != B_OK)
 			return error;
@@ -6555,7 +6555,7 @@ attr_dir_free_fd(struct file_descriptor* descriptor)
 
 static status_t
 attr_dir_read(struct io_context* ioContext, struct file_descriptor* descriptor,
-	struct dirent* buffer, size_t bufferSize, uint32* _count)
+	struct dirent* buffer, size_t bufferSize, uint32_t* _count)
 {
 	struct vnode* vnode = descriptor->u.vnode;
 
@@ -6584,7 +6584,7 @@ attr_dir_rewind(struct file_descriptor* descriptor)
 
 
 static int
-attr_create(int fd, char* path, const char* name, uint32 type,
+attr_create(int fd, char* path, const char* name, uint32_t type,
 	int openMode, bool kernel)
 {
 	if (name == NULL || *name == '\0')
@@ -6948,7 +6948,7 @@ index_dir_free_fd(struct file_descriptor* descriptor)
 
 static status_t
 index_dir_read(struct io_context* ioContext, struct file_descriptor* descriptor,
-	struct dirent* buffer, size_t bufferSize, uint32* _count)
+	struct dirent* buffer, size_t bufferSize, uint32_t* _count)
 {
 	struct fs_mount* mount = descriptor->u.mount;
 
@@ -6974,7 +6974,7 @@ index_dir_rewind(struct file_descriptor* descriptor)
 
 
 static status_t
-index_create(dev_t mountID, const char* name, uint32 type, uint32 flags,
+index_create(dev_t mountID, const char* name, uint32_t type, uint32_t flags,
 	bool kernel)
 {
 	FUNCTION(("index_create(mountID = %" B_PRId32 ", name = %s, kernel = %d)\n",
@@ -7082,8 +7082,8 @@ out:
 		For example, query parsing should be moved into the kernel.
 */
 static int
-query_open(dev_t device, const char* query, uint32 flags, port_id port,
-	int32 token, bool kernel)
+query_open(dev_t device, const char* query, uint32_t flags, port_id port,
+	int32_t token, bool kernel)
 {
 	struct fs_mount* mount;
 	void* cookie;
@@ -7151,7 +7151,7 @@ query_free_fd(struct file_descriptor* descriptor)
 
 static status_t
 query_read(struct io_context* ioContext, struct file_descriptor* descriptor,
-	struct dirent* buffer, size_t bufferSize, uint32* _count)
+	struct dirent* buffer, size_t bufferSize, uint32_t* _count)
 {
 	struct fs_mount* mount = descriptor->u.mount;
 
@@ -7180,13 +7180,13 @@ query_rewind(struct file_descriptor* descriptor)
 
 
 static dev_t
-fs_mount(char* path, const char* device, const char* fsName, uint32 flags,
+fs_mount(char* path, const char* device, const char* fsName, uint32_t flags,
 	const char* args, bool kernel)
 {
 	struct ::fs_mount* mount;
 	status_t status = B_OK;
 	fs_volume* volume = NULL;
-	int32 layer = 0;
+	int32_t layer = 0;
 	Vnode* coveredNode = NULL;
 
 	FUNCTION(("fs_mount: path = '%s', device = '%s', fs_name = '%s', flags = %#"
@@ -7504,7 +7504,7 @@ err1:
 
 
 static status_t
-fs_unmount(char* path, dev_t mountID, uint32 flags, bool kernel)
+fs_unmount(char* path, dev_t mountID, uint32_t flags, bool kernel)
 {
 	struct fs_mount* mount;
 	status_t err;
@@ -7586,7 +7586,7 @@ fs_unmount(char* path, dev_t mountID, uint32 flags, bool kernel)
 
 			// check the vnode's ref count -- subtract additional references for
 			// covering
-			int32 refCount = vnode->ref_count;
+			int32_t refCount = vnode->ref_count;
 			if (vnode->covers != NULL)
 				refCount--;
 			if (vnode->covered_by != NULL)
@@ -7863,7 +7863,7 @@ fs_write_info(dev_t device, const struct fs_info* info, int mask)
 
 
 static dev_t
-fs_next_device(int32* _cookie)
+fs_next_device(int32_t* _cookie)
 {
 	struct fs_mount* mount = NULL;
 	dev_t device = *_cookie;
@@ -7895,7 +7895,7 @@ fs_next_device(int32* _cookie)
 
 
 ssize_t
-fs_read_attr(int fd, const char *attribute, uint32 type, off_t pos,
+fs_read_attr(int fd, const char *attribute, uint32_t type, off_t pos,
 	void *buffer, size_t readBytes)
 {
 	int attrFD = attr_open(fd, NULL, attribute, O_RDONLY, true);
@@ -7991,7 +7991,7 @@ err:
 
 dev_t
 _kern_mount(const char* path, const char* device, const char* fsName,
-	uint32 flags, const char* args, size_t argsLength)
+	uint32_t flags, const char* args, size_t argsLength)
 {
 	KPath pathBuffer(path, false, B_PATH_NAME_LENGTH + 1);
 	if (pathBuffer.InitCheck() != B_OK)
@@ -8002,7 +8002,7 @@ _kern_mount(const char* path, const char* device, const char* fsName,
 
 
 status_t
-_kern_unmount(const char* path, uint32 flags)
+_kern_unmount(const char* path, uint32_t flags)
 {
 	KPath pathBuffer(path, false, B_PATH_NAME_LENGTH + 1);
 	if (pathBuffer.InitCheck() != B_OK)
@@ -8036,7 +8036,7 @@ status_t
 _kern_sync(void)
 {
 	// Note: _kern_sync() is also called from _user_sync()
-	int32 cookie = 0;
+	int32_t cookie = 0;
 	dev_t device;
 	while ((device = next_dev(&cookie)) >= 0) {
 		status_t status = fs_sync(device);
@@ -8051,14 +8051,14 @@ _kern_sync(void)
 
 
 dev_t
-_kern_next_device(int32* _cookie)
+_kern_next_device(int32_t* _cookie)
 {
 	return fs_next_device(_cookie);
 }
 
 
 status_t
-_kern_get_next_fd_info(team_id teamID, uint32* _cookie, fd_info* info,
+_kern_get_next_fd_info(team_id teamID, uint32_t* _cookie, fd_info* info,
 	size_t infoSize)
 {
 	if (infoSize != sizeof(fd_info))
@@ -8074,7 +8074,7 @@ _kern_get_next_fd_info(team_id teamID, uint32* _cookie, fd_info* info,
 	io_context* context = team->io_context;
 	MutexLocker contextLocker(context->io_mutex);
 
-	uint32 slot = *_cookie;
+	uint32_t slot = *_cookie;
 
 	struct file_descriptor* descriptor;
 	while (slot < context->table_size
@@ -8540,7 +8540,7 @@ _kern_open_attr_dir(int fd, const char* path, bool traverseLeafLink)
 
 
 int
-_kern_open_attr(int fd, const char* path, const char* name, uint32 type,
+_kern_open_attr(int fd, const char* path, const char* name, uint32_t type,
 	int openMode)
 {
 	KPath pathBuffer(path, false, B_PATH_NAME_LENGTH + 1);
@@ -8579,7 +8579,7 @@ _kern_open_index_dir(dev_t device)
 
 
 status_t
-_kern_create_index(dev_t device, const char* name, uint32 type, uint32 flags)
+_kern_create_index(dev_t device, const char* name, uint32_t type, uint32_t flags)
 {
 	return index_create(device, name, type, flags, true);
 }
@@ -8628,7 +8628,7 @@ _kern_setcwd(int fd, const char* path)
 
 dev_t
 _user_mount(const char* userPath, const char* userDevice,
-	const char* userFileSystem, uint32 flags, const char* userArgs,
+	const char* userFileSystem, uint32_t flags, const char* userArgs,
 	size_t argsLength)
 {
 	char fileSystem[B_FILE_NAME_LENGTH];
@@ -8683,7 +8683,7 @@ _user_mount(const char* userPath, const char* userDevice,
 
 
 status_t
-_user_unmount(const char* userPath, uint32 flags)
+_user_unmount(const char* userPath, uint32_t flags)
 {
 	KPath pathBuffer(B_PATH_NAME_LENGTH + 1);
 	if (pathBuffer.InitCheck() != B_OK)
@@ -8738,20 +8738,20 @@ _user_write_fs_info(dev_t device, const struct fs_info* userInfo, int mask)
 
 
 dev_t
-_user_next_device(int32* _userCookie)
+_user_next_device(int32_t* _userCookie)
 {
-	int32 cookie;
+	int32_t cookie;
 	dev_t device;
 
 	if (!IS_USER_ADDRESS(_userCookie)
-		|| user_memcpy(&cookie, _userCookie, sizeof(int32)) != B_OK)
+		|| user_memcpy(&cookie, _userCookie, sizeof(int32_t)) != B_OK)
 		return B_BAD_ADDRESS;
 
 	device = fs_next_device(&cookie);
 
 	if (device >= B_OK) {
 		// update user cookie
-		if (user_memcpy(_userCookie, &cookie, sizeof(int32)) != B_OK)
+		if (user_memcpy(_userCookie, &cookie, sizeof(int32_t)) != B_OK)
 			return B_BAD_ADDRESS;
 	}
 
@@ -8767,11 +8767,11 @@ _user_sync(void)
 
 
 status_t
-_user_get_next_fd_info(team_id team, uint32* userCookie, fd_info* userInfo,
+_user_get_next_fd_info(team_id team, uint32_t* userCookie, fd_info* userInfo,
 	size_t infoSize)
 {
 	struct fd_info info;
-	uint32 cookie;
+	uint32_t cookie;
 
 	// only root can do this (or should root's group be enough?)
 	if (geteuid() != 0)
@@ -8781,14 +8781,14 @@ _user_get_next_fd_info(team_id team, uint32* userCookie, fd_info* userInfo,
 		return B_BAD_VALUE;
 
 	if (!IS_USER_ADDRESS(userCookie) || !IS_USER_ADDRESS(userInfo)
-		|| user_memcpy(&cookie, userCookie, sizeof(uint32)) != B_OK)
+		|| user_memcpy(&cookie, userCookie, sizeof(uint32_t)) != B_OK)
 		return B_BAD_ADDRESS;
 
 	status_t status = _kern_get_next_fd_info(team, &cookie, &info, infoSize);
 	if (status != B_OK)
 		return status;
 
-	if (user_memcpy(userCookie, &cookie, sizeof(uint32)) != B_OK
+	if (user_memcpy(userCookie, &cookie, sizeof(uint32_t)) != B_OK
 		|| user_memcpy(userInfo, &info, infoSize) != B_OK)
 		return B_BAD_ADDRESS;
 
@@ -9533,7 +9533,7 @@ _user_read_attr(int fd, const char* attribute, off_t pos, void* userBuffer,
 
 
 ssize_t
-_user_write_attr(int fd, const char* attribute, uint32 type, off_t pos,
+_user_write_attr(int fd, const char* attribute, uint32_t type, off_t pos,
 	const void* buffer, size_t writeBytes)
 {
 	// Try to support the BeOS typical truncation as well as the position
@@ -9589,7 +9589,7 @@ _user_stat_attr(int fd, const char* attribute, struct attr_info* userAttrInfo)
 
 int
 _user_open_attr(int fd, const char* userPath, const char* userName,
-	uint32 type, int openMode)
+	uint32_t type, int openMode)
 {
 	char name[B_FILE_NAME_LENGTH];
 
@@ -9663,8 +9663,8 @@ _user_open_index_dir(dev_t device)
 
 
 status_t
-_user_create_index(dev_t device, const char* userName, uint32 type,
-	uint32 flags)
+_user_create_index(dev_t device, const char* userName, uint32_t type,
+	uint32_t flags)
 {
 	char name[B_FILE_NAME_LENGTH];
 
@@ -9804,7 +9804,7 @@ _user_change_root(const char* userPath)
 
 int
 _user_open_query(dev_t device, const char* userQuery, size_t queryLength,
-	uint32 flags, port_id port, int32 token)
+	uint32_t flags, port_id port, int32_t token)
 {
 	char* query;
 

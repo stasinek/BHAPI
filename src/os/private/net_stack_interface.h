@@ -66,14 +66,14 @@ struct net_stack_interface_module_info {
 	status_t (*socketpair)(int family, int type, int protocol,
 					net_socket* _sockets[2]);
 
-	status_t (*ioctl)(net_socket* socket, uint32 op, void *buffer,
+	status_t (*ioctl)(net_socket* socket, uint32_t op, void *buffer,
 					size_t length);
 	status_t (*select)(net_socket* socket, uint8 event,
 					struct selectsync *sync);
 	status_t (*deselect)(net_socket* socket, uint8 event,
 					struct selectsync *sync);
 
-	status_t (*get_next_socket_stat)(int family, uint32 *cookie,
+	status_t (*get_next_socket_stat)(int family, uint32_t *cookie,
 					struct net_stat *stat);
 };
 

@@ -1075,7 +1075,7 @@ void PackageWriterImpl::_UpdateCheckEntryCollisions(Attribute* parentAttribute,
 	}
 
 	// get the pre-existing node's file type
-	uint32 preExistingFileType = B_HPKG_DEFAULT_FILE_TYPE;
+	uint32_t preExistingFileType = B_HPKG_DEFAULT_FILE_TYPE;
 	if (Attribute* fileTypeAttribute
 			= entryAttribute->ChildWithID(B_HPKG_ATTRIBUTE_ID_FILE_TYPE)) {
 		if (fileTypeAttribute->value.type == B_HPKG_ATTRIBUTE_TYPE_UINT)
@@ -1187,14 +1187,14 @@ void PackageWriterImpl::_UpdateCheckEntryCollisions(Attribute* parentAttribute,
 
 void PackageWriterImpl::_CompactHeap()
 {
-	int32 count = fHeapRangesToRemove->CountRanges();
+	int32_t count = fHeapRangesToRemove->CountRanges();
 	if (count == 0)
 		return;
 
 	// compute the move deltas for the ranges
 	Array<uint64> deltas;
 	uint64 delta = 0;
-	for (int32 i = 0; i < count; i++) {
+	for (int32_t i = 0; i < count; i++) {
 		if (!deltas.Add(delta))
 			throw std::bad_alloc();
 
@@ -1311,7 +1311,7 @@ void PackageWriterImpl::_WriteTOC(hpkg_header& header, uint64& _length)
 
 	// cached strings
 	uint64 cachedStringsOffset = fHeapWriter->UncompressedHeapSize();
-	int32 cachedStringsWritten = WriteCachedStrings(fStringCache, 2);
+	int32_t cachedStringsWritten = WriteCachedStrings(fStringCache, 2);
 
 	// main TOC section
 	uint64 mainOffset = fHeapWriter->UncompressedHeapSize();
@@ -1359,12 +1359,12 @@ void PackageWriterImpl::_WritePackageAttributes(hpkg_header& header, uint64& _le
 	// write cached strings and package attributes tree
 	off_t startOffset = fHeapWriter->UncompressedHeapSize();
 
-	uint32 stringsLength;
-	uint32 stringsCount = WritePackageAttributes(PackageAttributes(),
+	uint32_t stringsLength;
+	uint32_t stringsCount = WritePackageAttributes(PackageAttributes(),
 		stringsLength);
 
 	// notify listener
-	uint32 attributesLength = fHeapWriter->UncompressedHeapSize() - startOffset;
+	uint32_t attributesLength = fHeapWriter->UncompressedHeapSize() - startOffset;
 	fListener->OnPackageAttributesSizeInfo(stringsCount, attributesLength);
 
 	// update the header
@@ -1433,7 +1433,7 @@ void PackageWriterImpl::_AddEntry(int dirFD, Entry* entry, const char* fileName,
 
 	// check/translate the node type
 	uint8 fileType;
-	uint32 defaultPermissions;
+	uint32_t defaultPermissions;
 	if (S_ISREG(st.st_mode)) {
 		fileType = B_HPKG_FILE_TYPE_FILE;
 		defaultPermissions = B_HPKG_DEFAULT_FILE_PERMISSIONS;
@@ -1463,16 +1463,16 @@ void PackageWriterImpl::_AddEntry(int dirFD, Entry* entry, const char* fileName,
 		// add stat data
 		if (fileType != B_HPKG_DEFAULT_FILE_TYPE)
 			_AddAttribute(B_HPKG_ATTRIBUTE_ID_FILE_TYPE, fileType);
-		if (defaultPermissions != uint32(st.st_mode & ALLPERMS)) {
+		if (defaultPermissions != uint32_t(st.st_mode & ALLPERMS)) {
 			_AddAttribute(B_HPKG_ATTRIBUTE_ID_FILE_PERMISSIONS,
-				uint32(st.st_mode & ALLPERMS));
+				uint32_t(st.st_mode & ALLPERMS));
 		}
-		_AddAttribute(B_HPKG_ATTRIBUTE_ID_FILE_ATIME, uint32(st.st_atime));
-		_AddAttribute(B_HPKG_ATTRIBUTE_ID_FILE_MTIME, uint32(st.st_mtime));
+		_AddAttribute(B_HPKG_ATTRIBUTE_ID_FILE_ATIME, uint32_t(st.st_atime));
+		_AddAttribute(B_HPKG_ATTRIBUTE_ID_FILE_MTIME, uint32_t(st.st_mtime));
 #ifdef __HAIKU__
-		_AddAttribute(B_HPKG_ATTRIBUTE_ID_FILE_CRTIME, uint32(st.st_crtime));
+		_AddAttribute(B_HPKG_ATTRIBUTE_ID_FILE_CRTIME, uint32_t(st.st_crtime));
 #else
-		_AddAttribute(B_HPKG_ATTRIBUTE_ID_FILE_CRTIME, uint32(st.st_mtime));
+		_AddAttribute(B_HPKG_ATTRIBUTE_ID_FILE_CRTIME, uint32_t(st.st_mtime));
 #endif
 		// TODO: File user/group!
 
@@ -1522,7 +1522,7 @@ void PackageWriterImpl::_AddEntry(int dirFD, Entry* entry, const char* fileName,
 
 			// add type
 			_AddAttribute(B_HPKG_ATTRIBUTE_ID_FILE_ATTRIBUTE_TYPE,
-				(uint32)attrInfo.type);
+				(uint32_t)attrInfo.type);
 
 			// add data
 			BAttributeDataReader dataReader(fd, entry->d_name, attrInfo.type);

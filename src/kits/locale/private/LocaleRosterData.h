@@ -97,7 +97,7 @@ private:
 
 
 typedef BCatalogData* (*InstantiateCatalogFunc)(const entry_ref& catalogOwner,
-	const char* language, uint32 fingerprint);
+	const char* language, uint32_t fingerprint);
 
 typedef BCatalogData* (*CreateCatalogFunc)(const char* name,
 	const char* language);
@@ -106,7 +106,7 @@ typedef BCatalogData* (*InstantiateEmbeddedCatalogFunc)(
 	entry_ref* appOrAddOnRef);
 
 typedef status_t (*GetAvailableLanguagesFunc)(BMessage*, const char*,
-	const char*, int32);
+	const char*, int32_t);
 
 
 /*

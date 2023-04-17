@@ -35,7 +35,7 @@ public:
 
 	virtual	status_t			Map(addr_t virtualAddress,
 									phys_addr_t physicalAddress,
-									uint32 attributes, uint32 memoryType,
+									uint32_t attributes, uint32_t memoryType,
 									vm_page_reservation* reservation) = 0;
 	virtual	status_t			Unmap(addr_t start, addr_t end) = 0;
 
@@ -53,20 +53,20 @@ public:
 
 	virtual	status_t			Query(addr_t virtualAddress,
 									phys_addr_t* _physicalAddress,
-									uint32* _flags) = 0;
+									uint32_t* _flags) = 0;
 	virtual	status_t			QueryInterrupt(addr_t virtualAddress,
 									phys_addr_t* _physicalAddress,
-									uint32* _flags) = 0;
+									uint32_t* _flags) = 0;
 
 	virtual	status_t			Protect(addr_t base, addr_t top,
-									uint32 attributes, uint32 memoryType) = 0;
+									uint32_t attributes, uint32_t memoryType) = 0;
 			status_t			ProtectPage(VMArea* area, addr_t address,
-									uint32 attributes);
+									uint32_t attributes);
 			status_t			ProtectArea(VMArea* area,
-									uint32 attributes);
+									uint32_t attributes);
 
 	virtual	status_t			ClearFlags(addr_t virtualAddress,
-									uint32 flags) = 0;
+									uint32_t flags) = 0;
 
 	virtual	bool				ClearAccessedAndModified(
 									VMArea* area, addr_t address,
@@ -90,7 +90,7 @@ protected:
 
 protected:
 			recursive_lock		fLock;
-			int32				fMapCount;
+			int32_t				fMapCount;
 };
 
 
@@ -143,7 +143,7 @@ struct VMPhysicalPageMapper {
 
 
 
-inline status_t VMTranslationMap::ProtectPage(VMArea* area, addr_t address, uint32 attributes)
+inline status_t VMTranslationMap::ProtectPage(VMArea* area, addr_t address, uint32_t attributes)
 {
 	return Protect(address, address + B_PAGE_SIZE - 1, attributes,
 		area->MemoryType());
@@ -151,7 +151,7 @@ inline status_t VMTranslationMap::ProtectPage(VMArea* area, addr_t address, uint
 
 
 #include <vm/VMArea.h>
-inline status_t VMTranslationMap::ProtectArea(VMArea* area, uint32 attributes)
+inline status_t VMTranslationMap::ProtectArea(VMArea* area, uint32_t attributes)
 {
 	return Protect(area->Base(), area->Base() + area->Size() - 1, attributes,
 		area->MemoryType());

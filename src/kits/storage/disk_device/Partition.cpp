@@ -134,7 +134,7 @@ BPartition::ContentSize() const
 /*!	\brief Returns the block size of the device.
 	\return The block size of the device in bytes.
 */
-uint32 BPartition::BlockSize() const
+uint32_t BPartition::BlockSize() const
 {
 	return _PartitionData()->block_size;
 }
@@ -144,13 +144,13 @@ uint32 BPartition::BlockSize() const
 		   partitions.
 	\return The index of the partition in its session's list of partitions.
 */
-int32 BPartition::Index() const
+int32_t BPartition::Index() const
 {
 	return _PartitionData()->index;
 }
 
 
-uint32 BPartition::Status() const
+uint32_t BPartition::Status() const
 {
 	return _PartitionData()->status;
 }
@@ -216,7 +216,7 @@ bool BPartition::SupportsChildName() const
 
 	\return The flags for this partition.
 */
-uint32 BPartition::Flags() const
+uint32_t BPartition::Flags() const
 {
 	return _PartitionData()->flags;
 }
@@ -266,7 +266,7 @@ const char*  BPartition::ContentType() const
 
 	\return A unique identifier for this partition.
 */
-int32 BPartition::ID() const
+int32_t BPartition::ID() const
 {
 	return _PartitionData()->id;
 }
@@ -496,7 +496,7 @@ status_t BPartition::GetMountPoint(BPath* mountPoint) const
 	\param parameters File system specific mount parameters.
 	\return \c B_OK, if everything went fine, another error code otherwise.
 */
-status_t BPartition::Mount(const char* mountPoint, uint32 mountFlags,
+status_t BPartition::Mount(const char* mountPoint, uint32_t mountFlags,
 	const char* parameters)
 {
 	if (IsMounted() || !ContainsFileSystem())
@@ -561,7 +561,7 @@ status_t BPartition::Mount(const char* mountPoint, uint32 mountFlags,
 
 	\return \c B_OK, if everything went fine, another error code otherwise.
 */
-status_t BPartition::Unmount(uint32 unmountFlags)
+status_t BPartition::Unmount(uint32_t unmountFlags)
 {
 	if (!IsMounted())
 		return B_BAD_VALUE;
@@ -612,7 +612,7 @@ BPartition::Parent() const
 
 
 BPartition*
-BPartition::ChildAt(int32 index) const
+BPartition::ChildAt(int32_t index) const
 {
 	if (fDelegate != NULL) {
 		Delegate* child = fDelegate->ChildAt(index);
@@ -623,7 +623,7 @@ BPartition::ChildAt(int32 index) const
 }
 
 
-int32 BPartition::CountChildren() const
+int32_t BPartition::CountChildren() const
 {
 	if (fDelegate != NULL)
 		return fDelegate->CountChildren();
@@ -632,10 +632,10 @@ int32 BPartition::CountChildren() const
 }
 
 
-int32 BPartition::CountDescendants() const
+int32_t BPartition::CountDescendants() const
 {
-	int32 count = 1;
-	for (int32 i = 0; BPartition* child = ChildAt(i); i++)
+	int32_t count = 1;
+	for (int32_t i = 0; BPartition* child = ChildAt(i); i++)
 		count += child->CountDescendants();
 	return count;
 }
@@ -664,8 +664,8 @@ BPartition*
 BPartition::VisitEachChild(BDiskDeviceVisitor* visitor) const
 {
 	if (visitor != NULL) {
-		int32 level = _Level();
-		for (int32 i = 0; BPartition* child = ChildAt(i); i++) {
+		int32_t level = _Level();
+		for (int32_t i = 0; BPartition* child = ChildAt(i); i++) {
 			if (child->_AcceptVisitor(visitor, level))
 				return child;
 		}
@@ -701,8 +701,8 @@ status_t BPartition::Defragment() const
 
 bool BPartition::CanRepair(bool checkOnly, bool* whileMounted) const
 {
-	uint32 flag;
-	uint32 whileMountedFlag;
+	uint32_t flag;
+	uint32_t whileMountedFlag;
 	if (checkOnly) {
 		flag = B_DISK_SYSTEM_SUPPORTS_CHECKING;
 		whileMountedFlag = B_DISK_SYSTEM_SUPPORTS_CHECKING_WHILE_MOUNTED;
@@ -1019,7 +1019,7 @@ status_t BPartition::SetContentParameters(const char* parameters)
 }
 
 
-status_t BPartition::GetNextSupportedType(int32* cookie, BString* type) const
+status_t BPartition::GetNextSupportedType(int32_t* cookie, BString* type) const
 {
 	TRACE("%p->BPartition::GetNextSupportedType(%ld)\n", this, *cookie);
 
@@ -1035,7 +1035,7 @@ status_t BPartition::GetNextSupportedType(int32* cookie, BString* type) const
 }
 
 
-status_t BPartition::GetNextSupportedChildType(int32* cookie, BString* type) const
+status_t BPartition::GetNextSupportedChildType(int32_t* cookie, BString* type) const
 {
 	TRACE("%p->BPartition::GetNextSupportedChildType(%ld)\n", this, *cookie);
 
@@ -1120,7 +1120,7 @@ status_t BPartition::CreateChild(off_t offset, off_t size, const char* type,
 }
 
 
-bool BPartition::CanDeleteChild(int32 index) const
+bool BPartition::CanDeleteChild(int32_t index) const
 {
 	BPartition* child = ChildAt(index);
 	if (fDelegate == NULL || child == NULL)
@@ -1131,7 +1131,7 @@ bool BPartition::CanDeleteChild(int32 index) const
 }
 
 
-status_t BPartition::DeleteChild(int32 index)
+status_t BPartition::DeleteChild(int32_t index)
 {
 	if (fDelegate == NULL)
 		return B_NO_INIT;
@@ -1174,7 +1174,7 @@ status_t BPartition::_SetTo(BDiskDevice* device, BPartition* parent,
 
 	// create and init children
 	status_t error = B_OK;
-	for (int32 i = 0; error == B_OK && i < fPartitionData->child_count; i++) {
+	for (int32_t i = 0; error == B_OK && i < fPartitionData->child_count; i++) {
 		BPartition* child = new(nothrow) BPartition;
 		if (child) {
 			error = child->_SetTo(fDevice, this, fPartitionData->children[i]);
@@ -1195,7 +1195,7 @@ void BPartition::_Unset()
 {
 	// delete children
 	if (fPartitionData != NULL) {
-		for (int32 i = 0; i < fPartitionData->child_count; i++) {
+		for (int32_t i = 0; i < fPartitionData->child_count; i++) {
 			if (BPartition* child = ChildAt(i))
 				delete child;
 		}
@@ -1216,11 +1216,11 @@ status_t BPartition::_RemoveObsoleteDescendants(user_partition_data* data, bool*
 	// O(1). We could do better (O(n*log(n))), when sorting the arrays before,
 	// but then the list access is more random and we had to find the
 	// BPartition to remove, which makes the list operation definitely O(n).
-	int32 count = CountChildren();
-	for (int32 i = count - 1; i >= 0; i--) {
+	int32_t count = CountChildren();
+	for (int32_t i = count - 1; i >= 0; i--) {
 		BPartition* child = ChildAt(i);
 		bool found = false;
-		for (int32 k = data->child_count - 1; k >= 0; k--) {
+		for (int32_t k = data->child_count - 1; k >= 0; k--) {
 			if (data->children[k]->id == child->ID()) {
 				// found partition: ask it to remove its obsolete descendants
 				found = true;
@@ -1270,7 +1270,7 @@ status_t BPartition::_Update(user_partition_data* data, bool* updated)
 
 	// add new children and update existing ones
 	status_t error = B_OK;
-	for (int32 i = 0; i < data->child_count; i++) {
+	for (int32_t i = 0; i < data->child_count; i++) {
 		user_partition_data* childData = data->children[i];
 		BPartition* child = (BPartition*)childData->user_data;
 		if (child) {
@@ -1298,9 +1298,9 @@ status_t BPartition::_Update(user_partition_data* data, bool* updated)
 }
 
 
-void BPartition::_RemoveChild(int32 index)
+void BPartition::_RemoveChild(int32_t index)
 {
-	int32 count = CountChildren();
+	int32_t count = CountChildren();
 	if (!fPartitionData || index < 0 || index >= count)
 		return;
 
@@ -1308,14 +1308,14 @@ void BPartition::_RemoveChild(int32 index)
 	delete ChildAt(index);
 
 	// compact the children array
-	for (int32 i = index + 1; i < count; i++)
+	for (int32_t i = index + 1; i < count; i++)
 		fPartitionData->children[i - 1] = fPartitionData->children[i];
 	fPartitionData->child_count--;
 }
 
 
 BPartition*
-BPartition::_ChildAt(int32 index) const
+BPartition::_ChildAt(int32_t index) const
 {
 	if (index < 0 || index >= fPartitionData->child_count)
 		return NULL;
@@ -1323,24 +1323,24 @@ BPartition::_ChildAt(int32 index) const
 }
 
 
-int32 BPartition::_CountChildren() const
+int32_t BPartition::_CountChildren() const
 {
 	return fPartitionData->child_count;
 }
 
 
-int32 BPartition::_CountDescendants() const
+int32_t BPartition::_CountDescendants() const
 {
-	int32 count = 1;
-	for (int32 i = 0; BPartition* child = _ChildAt(i); i++)
+	int32_t count = 1;
+	for (int32_t i = 0; BPartition* child = _ChildAt(i); i++)
 		count += child->_CountDescendants();
 	return count;
 }
 
 
-int32 BPartition::_Level() const
+int32_t BPartition::_Level() const
 {
-	int32 level = 0;
+	int32_t level = 0;
 	const BPartition* ancestor = this;
 	while ((ancestor = ancestor->Parent()))
 		level++;
@@ -1348,20 +1348,20 @@ int32 BPartition::_Level() const
 }
 
 
-bool BPartition::_AcceptVisitor(BDiskDeviceVisitor* visitor, int32 level)
+bool BPartition::_AcceptVisitor(BDiskDeviceVisitor* visitor, int32_t level)
 {
 	return visitor->Visit(this, level);
 }
 
 
 BPartition*
-BPartition::_VisitEachDescendant(BDiskDeviceVisitor* visitor, int32 level)
+BPartition::_VisitEachDescendant(BDiskDeviceVisitor* visitor, int32_t level)
 {
 	if (level < 0)
 		level = _Level();
 	if (_AcceptVisitor(visitor, level))
 		return this;
-	for (int32 i = 0; BPartition* child = ChildAt(i); i++) {
+	for (int32_t i = 0; BPartition* child = ChildAt(i); i++) {
 		if (BPartition* result = child->_VisitEachDescendant(visitor,
 				level + 1)) {
 			return result;
@@ -1384,13 +1384,13 @@ bool BPartition::_HasContent() const
 }
 
 
-bool BPartition::_SupportsOperation(uint32 flag, uint32 whileMountedFlag,
+bool BPartition::_SupportsOperation(uint32_t flag, uint32_t whileMountedFlag,
 	bool* whileMounted) const
 {
 	if (fDelegate == NULL)
 		return false;
 
-	uint32 supported = fDelegate->SupportedOperations(flag | whileMountedFlag);
+	uint32_t supported = fDelegate->SupportedOperations(flag | whileMountedFlag);
 
 	if (whileMounted)
 		*whileMounted = supported & whileMountedFlag;
@@ -1399,12 +1399,12 @@ bool BPartition::_SupportsOperation(uint32 flag, uint32 whileMountedFlag,
 }
 
 
-bool BPartition::_SupportsChildOperation(const BPartition* child, uint32 flag) const
+bool BPartition::_SupportsChildOperation(const BPartition* child, uint32_t flag) const
 {
 	if (fDelegate == NULL || (child != NULL && child->fDelegate == NULL))
 		return false;
 
-	uint32 supported = fDelegate->SupportedChildOperations(
+	uint32_t supported = fDelegate->SupportedChildOperations(
 		child != NULL ? child->fDelegate : NULL, flag);
 
 	return (supported & flag) != 0;
@@ -1427,8 +1427,8 @@ status_t BPartition::_CreateDelegates()
 		return error;
 
 	// create child delegates
-	int32 count = _CountChildren();
-	for (int32 i = 0; i < count; i++) {
+	int32_t count = _CountChildren();
+	for (int32_t i = 0; i < count; i++) {
 		BPartition* child = _ChildAt(i);
 		error = child->_CreateDelegates();
 		if (error != B_OK)
@@ -1447,8 +1447,8 @@ status_t BPartition::_InitDelegates()
 		return error;
 
 	// recursively init child delegates
-	int32 count = CountChildren();
-	for (int32 i = 0; i < count; i++) {
+	int32_t count = CountChildren();
+	for (int32_t i = 0; i < count; i++) {
 		error = ChildAt(i)->_InitDelegates();
 		if (error != B_OK)
 			return error;
@@ -1461,8 +1461,8 @@ status_t BPartition::_InitDelegates()
 void BPartition::_DeleteDelegates()
 {
 	// recursively delete child delegates
-	int32 count = CountChildren();
-	for (int32 i = count - 1; i >= 0; i--)
+	int32_t count = CountChildren();
+	for (int32_t i = count - 1; i >= 0; i--)
 		ChildAt(i)->_DeleteDelegates();
 
 	// delete delegate

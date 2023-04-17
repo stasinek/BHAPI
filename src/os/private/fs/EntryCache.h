@@ -19,7 +19,7 @@ struct EntryCacheKey {
 		dir_id(dirID),
 		name(name)
 	{
-		hash = (uint32)dir_id ^ (uint32)(dir_id >> 32) ^ hash_hash_string(name);
+		hash = (uint32_t)dir_id ^ (uint32_t)(dir_id >> 32) ^ hash_hash_string(name);
 			// We cache the hash value, so we can easily compute it before
 			// holding any locks.
 	}
@@ -34,15 +34,15 @@ struct EntryCacheEntry {
 			EntryCacheEntry*	hash_link;
 			ino_t				node_id;
 			ino_t				dir_id;
-			int32				generation;
-			int32				index;
+			int32_t				generation;
+			int32_t				index;
 			bool				missing;
 			char				name[1];
 };
 
 
 struct EntryCacheGeneration {
-			int32				next_index;
+			int32_t				next_index;
 			EntryCacheEntry**	entries;
 
 								EntryCacheGeneration();
@@ -56,14 +56,14 @@ struct EntryCacheHashDefinition {
 	typedef EntryCacheKey	KeyType;
 	typedef EntryCacheEntry	ValueType;
 
-	uint32 HashKey(const EntryCacheKey& key) const
+	uint32_t HashKey(const EntryCacheKey& key) const
 	{
 		return key.hash;
 	}
 
 	size_t Hash(const EntryCacheEntry* value) const
 	{
-		return (uint32)value->dir_id ^ (uint32)(value->dir_id >> 32)
+		return (uint32_t)value->dir_id ^ (uint32_t)(value->dir_id >> 32)
 			^ hash_hash_string(value->name);
 	}
 
@@ -98,7 +98,7 @@ public:
 			const char*			DebugReverseLookup(ino_t nodeID, ino_t& _dirID);
 
 private:
-	static	const int32			kGenerationCount = 8;
+	static	const int32_t			kGenerationCount = 8;
 
 			typedef BOpenHashTable<EntryCacheHashDefinition> EntryTable;
 			typedef DoublyLinkedList<EntryCacheEntry> EntryList;
@@ -111,7 +111,7 @@ private:
 			rw_lock				fLock;
 			EntryTable			fEntries;
 			EntryCacheGeneration fGenerations[kGenerationCount];
-			int32				fCurrentGeneration;
+			int32_t				fCurrentGeneration;
 };
 
 

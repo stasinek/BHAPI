@@ -31,8 +31,8 @@ ResizeJob::~ResizeJob()
 // Do
 status_t ResizeJob::Do()
 {
-	int32 changeCounter = fPartition->ChangeCounter();
-	int32 childChangeCounter = fChild->ChangeCounter();
+	int32_t changeCounter = fPartition->ChangeCounter();
+	int32_t childChangeCounter = fChild->ChangeCounter();
 	status_t error = _kern_resize_partition(fPartition->PartitionID(),
 		&changeCounter, fChild->PartitionID(), &childChangeCounter, fSize,
 		fContentSize);

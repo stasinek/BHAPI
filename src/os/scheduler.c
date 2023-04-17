@@ -14,8 +14,8 @@
 
 
 static struct {
-	uint32 what;
-	int32 priority;
+	uint32_t what;
+	int32_t priority;
 } sWhatPriorityArray[] = {
 	// highest priority first
 	{B_MIDI_PROCESSING, 0x78},
@@ -29,23 +29,23 @@ static struct {
 	{B_STATUS_RENDERING, 0xa},
 	{B_OFFLINE_PROCESSING, 0x06},
 	{B_NUMBER_CRUNCHING, 0x05},
-	{(uint32)-1, -1}
+	{(uint32_t)-1, -1}
 };
 
-status_t __set_scheduler_mode(int32 mode);
-int32 __get_scheduler_mode(void);
+status_t __set_scheduler_mode(int32_t mode);
+int32_t __get_scheduler_mode(void);
 
 
-int32 suggest_thread_priority(uint32 what, int32 period, bigtime_t jitter,
+int32_t suggest_thread_priority(uint32_t what, int32_t period, bigtime_t jitter,
 	bigtime_t length)
 {
 	int i;
-	int32 priority = what == B_DEFAULT_MEDIA_PRIORITY ? 0x0a : 0;
+	int32_t priority = what == B_DEFAULT_MEDIA_PRIORITY ? 0x0a : 0;
 		// default priority
 
 	// TODO: this needs kernel support, and is a pretty simplistic solution
 
-	for (i = 0; sWhatPriorityArray[i].what != (uint32)-1; i ++) {
+	for (i = 0; sWhatPriorityArray[i].what != (uint32_t)-1; i ++) {
 		if ((what & sWhatPriorityArray[i].what) != 0) {
 			priority = sWhatPriorityArray[i].priority;
 			break;
@@ -64,13 +64,13 @@ estimate_max_scheduling_latency(thread_id thread)
 
 
 status_t
-__set_scheduler_mode(int32 mode)
+__set_scheduler_mode(int32_t mode)
 {
 	return _kern_set_scheduler_mode(mode);
 }
 
 
-int32 __get_scheduler_mode(void)
+int32_t __get_scheduler_mode(void)
 {
 	return _kern_get_scheduler_mode();
 }

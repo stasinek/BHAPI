@@ -34,38 +34,38 @@ public:
 			float				SplitterSize() const;
 			void				SetSplitterSize(float size);
 
-			int32				CountItems() const;
-			float				ItemWeight(int32 index) const;
+			int32_t				CountItems() const;
+			float				ItemWeight(int32_t index) const;
 			float				ItemWeight(BLayoutItem* item) const;
-			void				SetItemWeight(int32 index, float weight,
+			void				SetItemWeight(int32_t index, float weight,
 									bool invalidateLayout);
 			void				SetItemWeight(BLayoutItem* item, float weight);
 
-			bool				IsCollapsible(int32 index) const;
+			bool				IsCollapsible(int32_t index) const;
 			void				SetCollapsible(bool collapsible);
-			void				SetCollapsible(int32 index, bool collapsible);
-			void				SetCollapsible(int32 first, int32 last,
+			void				SetCollapsible(int32_t index, bool collapsible);
+			void				SetCollapsible(int32_t first, int32_t last,
 									bool collapsible);
 
-			bool				IsItemCollapsed(int32 index) const;
-			void				SetItemCollapsed(int32 index, bool collapsed);
+			bool				IsItemCollapsed(int32_t index) const;
+			void				SetItemCollapsed(int32_t index, bool collapsed);
 
 //			void				AddChild(BView* child);
 			void				AddChild(BView* child, BView* sibling = NULL);
 			bool				AddChild(BView* child, float weight);
-			bool				AddChild(int32 index, BView* child,
+			bool				AddChild(int32_t index, BView* child,
 									float weight);
 
 			bool				AddChild(BLayoutItem* child);
 			bool				AddChild(BLayoutItem* child, float weight);
-			bool				AddChild(int32 index, BLayoutItem* child,
+			bool				AddChild(int32_t index, BLayoutItem* child,
 									float weight);
 
 	virtual	void				Draw(BRect updateRect);
 	virtual	void				DrawAfterChildren(BRect updateRect);
 	virtual	void				MouseDown(BPoint where);
 	virtual	void				MouseUp(BPoint where);
-	virtual	void				MouseMoved(BPoint where, uint32 transit,
+	virtual	void				MouseMoved(BPoint where, uint32_t transit,
 									const BMessage* message);
 
 	virtual	void				MessageReceived(BMessage* message);
@@ -113,7 +113,7 @@ private:
 
 private:
 			BSplitLayout*		fSplitLayout;
-			uint32				_reserved[3];
+			uint32_t				_reserved[3];
 };
 
 

@@ -88,19 +88,19 @@ BSeparatorView::BSeparatorView(BMessage* archive)
 		fLabel.SetTo(label);
 	}
 
-	int32 orientation;
+	int32_t orientation;
 	if (archive->FindInt32("_orientation", &orientation) == B_OK)
 		fOrientation = (enum orientation)orientation;
 
-	int32 hAlignment;
-	int32 vAlignment;
+	int32_t hAlignment;
+	int32_t vAlignment;
 	if (archive->FindInt32("_halignment", &hAlignment) == B_OK
 		&& archive->FindInt32("_valignment", &vAlignment) == B_OK) {
 		fAlignment.horizontal = (alignment)hAlignment;
 		fAlignment.vertical = (vertical_alignment)vAlignment;
 	}
 
-	int32 borderStyle;
+	int32_t borderStyle;
 	if (archive->FindInt32("_border", &borderStyle) != B_OK)
 		fBorder = (border_style)borderStyle;
 }

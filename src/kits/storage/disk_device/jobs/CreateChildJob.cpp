@@ -53,9 +53,9 @@ status_t CreateChildJob::Init(off_t offset, off_t size, const char* type,
 // Do
 status_t CreateChildJob::Do()
 {
-	int32 changeCounter = fPartition->ChangeCounter();
+	int32_t changeCounter = fPartition->ChangeCounter();
 	partition_id childID;
-	int32 childChangeCounter;
+	int32_t childChangeCounter;
 	status_t error = _kern_create_child_partition(fPartition->PartitionID(),
 		&changeCounter, fOffset, fSize, fType, fName, fParameters, &childID,
 		&childChangeCounter);

@@ -36,7 +36,7 @@ public:
 	// HTTP-Specific stuff
 			const BHttpHeaders&			Headers() const;
 			const BString&				StatusText() const;
-			int32						StatusCode() const;
+			int32_t						StatusCode() const;
 	
 	// Result tests
 			bool						HasHeaders() const;
@@ -48,7 +48,7 @@ private:
 			BUrl						fUrl;
 			
 			BHttpHeaders 				fHeaders;
-			int32						fStatusCode;
+			int32_t						fStatusCode;
 			BString						fStatusString;
 };
 

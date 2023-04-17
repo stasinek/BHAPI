@@ -231,7 +231,7 @@ M68KPagingMethod040::PhysicalPageSlotPool::Init(area_id dataArea, void* data,
 	// init slot list
 	fSlots = (PhysicalPageSlot*)(fPageTable + SLOTS_PER_POOL);
 	addr_t slotAddress = virtualBase;
-	for (int32 i = 0; i < SLOTS_PER_POOL; i++, slotAddress += B_PAGE_SIZE) {
+	for (int32_t i = 0; i < SLOTS_PER_POOL; i++, slotAddress += B_PAGE_SIZE) {
 		PhysicalPageSlot* slot = &fSlots[i];
 		slot->next = slot + 1;
 		slot->pool = this;
@@ -298,7 +298,7 @@ M68KPagingMethod040::PhysicalPageSlotPool::AllocatePool(
 	phys_addr_t physicalTable;
 	M68KVMTranslationMap040* map = static_cast<M68KVMTranslationMap040*>(
 		VMAddressSpace::Kernel()->TranslationMap());
-	uint32 dummyFlags;
+	uint32_t dummyFlags;
 	cpu_status state = disable_interrupts();
 	map->QueryInterrupt((addr_t)data, &physicalTable, &dummyFlags);
 	restore_interrupts(state);
@@ -307,7 +307,7 @@ M68KPagingMethod040::PhysicalPageSlotPool::AllocatePool(
 	panic("I'm lazy");
 #if 0
 	// put the page table into the page directory
-	int32 index = (addr_t)virtualBase / (B_PAGE_SIZE * SLOTS_PER_POOL);
+	int32_t index = (addr_t)virtualBase / (B_PAGE_SIZE * SLOTS_PER_POOL);
 	page_directory_entry* entry
 		= &map->PagingStructures040()->pgdir_virt[index];
 	PutPageTableInPageDir(entry, physicalTable,
@@ -361,7 +361,7 @@ M68KPagingMethod040::Init(kernel_args* args,
 		sizeof(page_directory_entry) * NUM_USER_PGDIR_ENTS);
 #endif
 
-	fKernelPhysicalPageRoot = (uint32)args->arch_args.phys_pgroot;
+	fKernelPhysicalPageRoot = (uint32_t)args->arch_args.phys_pgroot;
 	fKernelVirtualPageRoot = (page_root_entry *)args->arch_args.vir_pgroot;
 
 #ifdef TRACE_M68K_PAGING_METHOD_32_BIT
@@ -483,8 +483,8 @@ M68KPagingMethod040::MapEarly(kernel_args* args, addr_t virtualAddress,
 	page_directory_entry *pd;
 	page_table_entry *pt;
 	addr_t tbl;
-	uint32 index;
-	uint32 i;
+	uint32_t index;
+	uint32_t i;
 	TRACE("040::MapEarly: entry pa 0x%lx va 0x%lx\n", pa, va);
 
 	// everything much simpler here because pa = va
@@ -503,11 +503,11 @@ M68KPagingMethod040::MapEarly(kernel_args* args, addr_t virtualAddress,
 		// for each pgdir on the allocated page:
 		for (i = 0; i < NUM_DIRTBL_PER_PAGE; i++) {
 			PutPageDirInPageRoot(&pr[aindex + i], tbl, attributes);
-			//TRACE("inserting tbl @ %p as %08x pr[%d] %08x\n", tbl, TA_TO_PREA(tbl), aindex + i, *(uint32 *)apr);
+			//TRACE("inserting tbl @ %p as %08x pr[%d] %08x\n", tbl, TA_TO_PREA(tbl), aindex + i, *(uint32_t *)apr);
 			// clear the table
 			//TRACE("clearing table[%d]\n", i);
 			pd = (page_directory_entry *)tbl;
-			for (int32 j = 0; j < NUM_DIRENT_PER_TBL; j++)
+			for (int32_t j = 0; j < NUM_DIRENT_PER_TBL; j++)
 				pd[j] = DFL_DIRENT_VAL;
 			tbl += SIZ_DIRTBL;
 		}
@@ -530,7 +530,7 @@ M68KPagingMethod040::MapEarly(kernel_args* args, addr_t virtualAddress,
 			// clear the table
 			//TRACE("clearing table[%d]\n", i);
 			pt = (page_table_entry *)tbl;
-			for (int32 j = 0; j < NUM_PAGEENT_PER_TBL; j++)
+			for (int32_t j = 0; j < NUM_PAGEENT_PER_TBL; j++)
 				pt[j] = DFL_PAGEENT_VAL;
 			tbl += SIZ_PAGETBL;
 		}
@@ -586,7 +586,7 @@ M68KPagingMethod040::MapEarly(kernel_args* args, addr_t virtualAddress,
 
 bool
 M68KPagingMethod040::IsKernelPageAccessible(addr_t virtualAddress,
-	uint32 protection)
+	uint32_t protection)
 {
 #warning M68K: WRITEME
 	return false;
@@ -594,10 +594,10 @@ M68KPagingMethod040::IsKernelPageAccessible(addr_t virtualAddress,
 
 
 void
-M68KPagingMethod040::SetPageRoot(uint32 pageRoot)
+M68KPagingMethod040::SetPageRoot(uint32_t pageRoot)
 {
 #warning M68K:TODO:override this for 060
-	uint32 rp;
+	uint32_t rp;
 	rp = pageRoot & ~((1 << 9) - 1);
 
 	asm volatile(          \
@@ -609,7 +609,7 @@ M68KPagingMethod040::SetPageRoot(uint32 pageRoot)
 
 /*static*/ void
 M68KPagingMethod040::PutPageDirInPageRoot(page_root_entry* entry,
-	phys_addr_t pgdirPhysical, uint32 attributes)
+	phys_addr_t pgdirPhysical, uint32_t attributes)
 {
 	*entry = TA_TO_PREA(pgdirPhysical)
 		| DT_DIR;	// it's a page directory entry
@@ -628,7 +628,7 @@ M68KPagingMethod040::PutPageDirInPageRoot(page_root_entry* entry,
 
 /*static*/ void
 M68KPagingMethod040::PutPageTableInPageDir(page_directory_entry* entry,
-	phys_addr_t pgtablePhysical, uint32 attributes)
+	phys_addr_t pgtablePhysical, uint32_t attributes)
 {
 	*entry = TA_TO_PDEA(pgtablePhysical)
 		| DT_DIR;	// it's a page directory entry
@@ -638,7 +638,7 @@ M68KPagingMethod040::PutPageTableInPageDir(page_directory_entry* entry,
 
 /*static*/ void
 M68KPagingMethod040::PutPageTableEntryInTable(page_table_entry* entry,
-	phys_addr_t physicalAddress, uint32 attributes, uint32 memoryType,
+	phys_addr_t physicalAddress, uint32_t attributes, uint32_t memoryType,
 	bool globalPage)
 {
 	page_table_entry page = TA_TO_PTEA(physicalAddress)
@@ -712,7 +712,7 @@ M68KPagingMethod040::_EarlyQuery(addr_t virtualAddress,
 	page_indirect_entry *pi;
 	page_table_entry *pt;
 	addr_t pa;
-	int32 index;
+	int32_t index;
 	status_t err = B_ERROR;	// no pagetable here
 	TRACE("%s(%p,)\n", __FUNCTION__, virtualAddress);
 

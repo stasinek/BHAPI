@@ -49,8 +49,8 @@ status_t RetrieveMemoryBlockJob::Do()
 		return result;
 	}
 
-	uint32 protection = 0;
-	uint32 locking = 0;
+	uint32_t protection = 0;
+	uint32_t locking = 0;
 	status_t error = fTeamMemory->GetMemoryProperties(
 		fMemoryBlock->BaseAddress(), protection, locking);
 	if (error != B_OK) {

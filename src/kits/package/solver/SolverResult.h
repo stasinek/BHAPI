@@ -46,8 +46,8 @@ public:
 								~BSolverResult();
 
 			bool				IsEmpty() const;
-			int32				CountElements() const;
-			const BSolverResultElement* ElementAt(int32 index) const;
+			int32_t				CountElements() const;
+			const BSolverResultElement* ElementAt(int32_t index) const;
 
 			void				MakeEmpty();
 			bool				AppendElement(

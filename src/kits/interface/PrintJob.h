@@ -13,11 +13,11 @@ class BFile;
 class BView;
 
 struct print_file_header {
-	int32	version;
-	int32	page_count;
+	int32_t	version;
+	int32_t	page_count;
 	off_t	first_page;
 
-	int32	_reserved[3];
+	int32_t	_reserved[3];
 };
 
 struct _page_header_;
@@ -55,11 +55,11 @@ public:
 
 			BRect				PaperRect();
 			BRect				PrintableRect();
-			void				GetResolution(int32* xDPI, int32* yDPI);
+			void				GetResolution(int32_t* xDPI, int32_t* yDPI);
 
-			int32				FirstPage(); // TODO: const
-			int32				LastPage(); // TODO: const
-			int32				PrinterType(void* type = NULL) const;
+			int32_t				FirstPage(); // TODO: const
+			int32_t				LastPage(); // TODO: const
+			int32_t				PrinterType(void* type = NULL) const;
 
 
 private:
@@ -93,7 +93,7 @@ private:
 private:
 			char*				fPrintJobName;
 
-			int32				_unused;
+			int32_t				_unused;
 
 			BFile*				fSpoolFile;
 			print_file_header	fSpoolFileHeader;
@@ -104,14 +104,14 @@ private:
 			BMessage*			fSetupMessage;
 			BMessage*			fDefaultSetupMessage;
 			char				fAbort;
-			int32				fFirstPage;
-			int32				fLastPage;
+			int32_t				fFirstPage;
+			int32_t				fLastPage;
 			short				fXResolution;
 			short				fYResolution;
 			_page_header_*		fCurrentPageHeader;
 			off_t				fCurrentPageHeaderOffset;
 
-			uint32				_reserved[2];
+			uint32_t				_reserved[2];
 };
 
 #endif // _PRINTSESSION_H

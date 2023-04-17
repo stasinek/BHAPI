@@ -22,10 +22,10 @@
 static pthread_once_t sManagerInitOnce = PTHREAD_ONCE_INIT;
 BToolTipManager* BToolTipManager::sDefaultInstance;
 
-static const uint32 kMsgHideToolTip = 'hide';
-static const uint32 kMsgShowToolTip = 'show';
-static const uint32 kMsgCurrentToolTip = 'curr';
-static const uint32 kMsgCloseToolTip = 'clos';
+static const uint32_t kMsgHideToolTip = 'hide';
+static const uint32_t kMsgShowToolTip = 'show';
+static const uint32_t kMsgCurrentToolTip = 'curr';
+static const uint32_t kMsgCloseToolTip = 'clos';
 
 
 namespace BPrivate {
@@ -40,9 +40,9 @@ public:
 	virtual	void				DetachedFromWindow();
 
 	virtual	void				FrameResized(float width, float height);
-	virtual	void				MouseMoved(BPoint where, uint32 transit,
+	virtual	void				MouseMoved(BPoint where, uint32_t transit,
 									const BMessage* dragMessage);
-	virtual	void				KeyDown(const char* bytes, int32 numBytes);
+	virtual	void				KeyDown(const char* bytes, int32_t numBytes);
 
 			void				HideTip();
 			void				ShowTip();
@@ -108,7 +108,7 @@ void ToolTipView::FrameResized(float width, float height)
 }
 
 
-void ToolTipView::MouseMoved(BPoint where, uint32 transit,
+void ToolTipView::MouseMoved(BPoint where, uint32_t transit,
 	const BMessage* dragMessage)
 {
 	if (fToolTip->IsSticky()) {
@@ -123,7 +123,7 @@ void ToolTipView::MouseMoved(BPoint where, uint32 transit,
 }
 
 
-void ToolTipView::KeyDown(const char* bytes, int32 numBytes)
+void ToolTipView::KeyDown(const char* bytes, int32_t numBytes)
 {
 	if (!fToolTip->IsSticky())
 		HideTip();

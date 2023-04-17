@@ -21,8 +21,8 @@ status_t BIntegerFormat::Format(int64 number, BString *buffer) const
 
 // Format
 status_t BIntegerFormat::Format(int64 number, BString *buffer,
-					   format_field_position *positions, int32 positionCount,
-					   int32 *fieldCount, bool allFieldPositions) const
+					   format_field_position *positions, int32_t positionCount,
+					   int32_t *fieldCount, bool allFieldPositions) const
 {
 	return B_ERROR;
 }

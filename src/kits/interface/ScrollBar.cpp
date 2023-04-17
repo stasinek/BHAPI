@@ -315,7 +315,7 @@ BScrollBar::MouseUp(BPoint where)
 
 
 void 
-BScrollBar::MouseMoved(BPoint where,  __be_uint32 code, const BMessage *a_message)
+BScrollBar::MouseMoved(BPoint where,  __be_uint32_t code, const BMessage *a_message)
 {
 	if(fRangeMin == fRangeMax || IsEnabled() == false) return;
 

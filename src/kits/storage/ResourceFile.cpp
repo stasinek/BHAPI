@@ -32,13 +32,13 @@ namespace Storage {
 
 
 // ELF defs
-static const uint32	kMaxELFHeaderSize
+static const uint32_t	kMaxELFHeaderSize
 	= std::max(sizeof(Elf32_Ehdr), sizeof(Elf64_Ehdr)) + 32;
 static const char	kELFFileMagic[4]			= { 0x7f, 'E', 'L', 'F' };
 
 // sanity bounds
-static const uint32	kMaxResourceCount			= 10000;
-static const uint32	kELFMaxResourceAlignment	= 1024 * 1024 * 10;	// 10 MB
+static const uint32_t	kMaxResourceCount			= 10000;
+static const uint32_t	kELFMaxResourceAlignment	= 1024 * 1024 * 10;	// 10 MB
 
 
 // recognized file types (indices into kFileTypeNames)
@@ -111,16 +111,16 @@ align_value(const TV& value, const TA& alignment)
 }
 
 
-static uint32 calculate_checksum(const void* data, uint32 size)
+static uint32_t calculate_checksum(const void* data, uint32_t size)
 {
-	uint32 checkSum = 0;
+	uint32_t checkSum = 0;
 	const uint8* csData = (const uint8*)data;
 	const uint8* dataEnd = csData + size;
 	const uint8* current = csData;
 	for (; current < dataEnd; current += 4) {
-		uint32 word = 0;
-		int32 bytes = std::min((int32)4, (int32)(dataEnd - current));
-		for (int32 i = 0; i < bytes; i++)
+		uint32_t word = 0;
+		int32_t bytes = std::min((int32_t)4, (int32_t)(dataEnd - current));
+		for (int32_t i = 0; i < bytes; i++)
 			word = (word << 8) + current[i];
 		checkSum += word;
 	}
@@ -128,27 +128,27 @@ static uint32 calculate_checksum(const void* data, uint32 size)
 }
 
 
-static inline const void*   skip_bytes(const void* buffer, int32 offset)
+static inline const void*   skip_bytes(const void* buffer, int32_t offset)
 {
 	return (const char*)buffer + offset;
 }
 
 
-static inline void*   skip_bytes(void* buffer, int32 offset)
+static inline void*   skip_bytes(void* buffer, int32_t offset)
 {
 	return (char*)buffer + offset;
 }
 
 
-static void fill_pattern(uint32 byteOffset, void* _buffer, uint32 count)
+static void fill_pattern(uint32_t byteOffset, void* _buffer, uint32_t count)
 {
-	uint32* buffer = (uint32*)_buffer;
-	for (uint32 i = 0; i < count; i++)
+	uint32_t* buffer = (uint32_t*)_buffer;
+	for (uint32_t i = 0; i < count; i++)
 		buffer[i] = kUnusedResourceDataPattern[(byteOffset / 4 + i) % 3];
 }
 
 
-static void fill_pattern(const void* dataBegin, void* buffer, uint32 count)
+static void fill_pattern(const void* dataBegin, void* buffer, uint32_t count)
 {
 	fill_pattern((char*)buffer - (const char*)dataBegin, buffer, count);
 }
@@ -161,13 +161,13 @@ static void fill_pattern(const void* dataBegin, void* buffer, const void* buffer
 }
 
 
-static bool check_pattern(uint32 byteOffset, void* _buffer, uint32 count,
+static bool check_pattern(uint32_t byteOffset, void* _buffer, uint32_t count,
 	bool hostEndianess)
 {
 	bool result = true;
-	uint32* buffer = (uint32*)_buffer;
-	for (uint32 i = 0; result && i < count; i++) {
-		uint32 value = buffer[i];
+	uint32_t* buffer = (uint32_t*)_buffer;
+	for (uint32_t i = 0; result && i < count; i++) {
+		uint32_t value = buffer[i];
 		if (!hostEndianess)
 			value = B_SWAP_INT32(value);
 		result
@@ -181,9 +181,9 @@ static bool check_pattern(uint32 byteOffset, void* _buffer, uint32 count,
 
 
 struct MemArea {
-	MemArea(const void* data, uint32 size) : data(data), size(size) {}
+	MemArea(const void* data, uint32_t size) : data(data), size(size) {}
 
-	inline bool check(const void* _current, uint32 skip = 0) const
+	inline bool check(const void* _current, uint32_t skip = 0) const
 	{
 		const char* start = (const char*)data;
 		const char* current = (const char*)_current;
@@ -191,17 +191,17 @@ struct MemArea {
 	}
 
 	const void*	data;
-	uint32		size;
+	uint32_t		size;
 };
 
 
 struct resource_parse_info {
 	off_t				file_size;
-	int32				resource_count;
+	int32_t				resource_count;
 	ResourcesContainer*	container;
 	char*				info_table;
-	uint32				info_table_offset;
-	uint32				info_table_size;
+	uint32_t				info_table_offset;
+	uint32_t				info_table_size;
 };
 
 
@@ -322,8 +322,8 @@ status_t ResourceFile::ReadResource(ResourceItem& resource, bool force)
 status_t ResourceFile::ReadResources(ResourcesContainer& container, bool force)
 {
 	status_t error = InitCheck();
-	int32 count = container.CountResources();
-	for (int32 i = 0; error == B_OK && i < count; i++) {
+	int32_t count = container.CountResources();
+	for (int32_t i = 0; error == B_OK && i < count; i++) {
 		if (ResourceItem* resource = container.ResourceAt(i))
 			error = ReadResource(*resource, force);
 		else
@@ -399,8 +399,8 @@ void ResourceFile::_InitFile(BFile& file, bool clobber)
 		// x86 resource file with screwed magic?
 //		Warnings::AddCurrentWarning("File magic is 0x%08lx. Should be 0x%08lx "
 //									"for x86 resource file. Try anyway.",
-//									ntohl(*(uint32*)magic),
-//									ntohl(*(uint32*)kX86ResourceFileMagic));
+//									ntohl(*(uint32_t*)magic),
+//									ntohl(*(uint32_t*)kX86ResourceFileMagic));
 		fHostEndianess = B_HOST_IS_LENDIAN;
 		fFileType = FILE_TYPE_X86_RESOURCE;
 		fFile.SetTo(&file, kX86ResourcesOffset);
@@ -482,13 +482,13 @@ void ResourceFile::_InitELFXFile(BFile& file, uint64 fileSize)
 		"Failed to read ELF header.");
 
 	// get the header values
-	uint32 headerSize				= _GetInt(fileHeader.e_ehsize);
+	uint32_t headerSize				= _GetInt(fileHeader.e_ehsize);
 	uint64 programHeaderTableOffset	= _GetInt(fileHeader.e_phoff);
-	uint32 programHeaderSize		= _GetInt(fileHeader.e_phentsize);
-	uint32 programHeaderCount		= _GetInt(fileHeader.e_phnum);
+	uint32_t programHeaderSize		= _GetInt(fileHeader.e_phentsize);
+	uint32_t programHeaderCount		= _GetInt(fileHeader.e_phnum);
 	uint64 sectionHeaderTableOffset	= _GetInt(fileHeader.e_shoff);
-	uint32 sectionHeaderSize		= _GetInt(fileHeader.e_shentsize);
-	uint32 sectionHeaderCount		= _GetInt(fileHeader.e_shnum);
+	uint32_t sectionHeaderSize		= _GetInt(fileHeader.e_shentsize);
+	uint32_t sectionHeaderCount		= _GetInt(fileHeader.e_shnum);
 	bool hasProgramHeaderTable = (programHeaderTableOffset != 0);
 	bool hasSectionHeaderTable = (sectionHeaderTableOffset != 0);
 
@@ -531,12 +531,12 @@ void ResourceFile::_InitELFXFile(BFile& file, uint64 fileSize)
 			"Failed to read ELF program headers.");
 
 		// iterate through the program headers
-		for (uint32 i = 0; i < programHeaderCount; i++) {
+		for (uint32_t i = 0; i < programHeaderCount; i++) {
 			ElfProgramHeader& programHeader
 				= *(ElfProgramHeader*)(programHeaders + i * programHeaderSize);
 
 			// get the header values
-			uint32 type			= _GetInt(programHeader.p_type);
+			uint32_t type			= _GetInt(programHeader.p_type);
 			uint64 offset		= _GetInt(programHeader.p_offset);
 			uint64 size			= _GetInt(programHeader.p_filesz);
 			uint64 alignment	= _GetInt(programHeader.p_align);
@@ -589,12 +589,12 @@ void ResourceFile::_InitELFXFile(BFile& file, uint64 fileSize)
 			"Failed to read ELF section headers.");
 
 		// iterate through the section headers
-		for (uint32 i = 0; i < sectionHeaderCount; i++) {
+		for (uint32_t i = 0; i < sectionHeaderCount; i++) {
 			ElfSectionHeader& sectionHeader
 				= *(ElfSectionHeader*)(sectionHeaders + i * sectionHeaderSize);
 
 			// get the header values
-			uint32 type		= _GetInt(sectionHeader.sh_type);
+			uint32_t type		= _GetInt(sectionHeader.sh_type);
 			uint64 offset	= _GetInt(sectionHeader.sh_offset);
 			uint64 size		= _GetInt(sectionHeader.sh_size);
 
@@ -662,24 +662,24 @@ void ResourceFile::_InitPEFFile(BFile& file, const PEFContainerHeader& pefHeader
 	// get the section count
 	uint16 sectionCount = _GetInt(pefHeader.sectionCount);
 	// iterate through the PEF sections headers
-	uint32 sectionHeaderTableOffset = kPEFContainerHeaderSize;
-	uint32 sectionHeaderTableEnd
+	uint32_t sectionHeaderTableOffset = kPEFContainerHeaderSize;
+	uint32_t sectionHeaderTableEnd
 		= sectionHeaderTableOffset + sectionCount * kPEFSectionHeaderSize;
-	uint32 resourceOffset = sectionHeaderTableEnd;
-	for (int32 i = 0; i < (int32)sectionCount; i++) {
-		uint32 shOffset = sectionHeaderTableOffset + i * kPEFSectionHeaderSize;
+	uint32_t resourceOffset = sectionHeaderTableEnd;
+	for (int32_t i = 0; i < (int32_t)sectionCount; i++) {
+		uint32_t shOffset = sectionHeaderTableOffset + i * kPEFSectionHeaderSize;
 		PEFSectionHeader sectionHeader;
 		read_exactly(file, shOffset, &sectionHeader, kPEFSectionHeaderSize,
 			"Failed to read PEF section header.");
 		// get the header values
-		uint32 offset	= _GetInt(sectionHeader.containerOffset);
-		uint32 size		= _GetInt(sectionHeader.packedSize);
+		uint32_t offset	= _GetInt(sectionHeader.containerOffset);
+		uint32_t size		= _GetInt(sectionHeader.packedSize);
 		// check the values
 		if (offset < sectionHeaderTableEnd || offset > fileSize) {
 			throw Exception(B_IO_ERROR, "Invalid PEF section header: invalid "
 				"section offset: %lu.", offset);
 		}
-		uint32 sectionEnd = offset + size;
+		uint32_t sectionEnd = offset + size;
 		if (sectionEnd > fileSize) {
 			throw Exception(B_IO_ERROR, "Invalid PEF section header: section "
 				"exceeds file: %lu.", sectionEnd);
@@ -704,12 +704,12 @@ void ResourceFile::_ReadHeader(resource_parse_info& parseInfo)
 		"Failed to read the header.");
 	// check the header
 	// magic
-	uint32 magic = _GetInt(header.rh_resources_magic);
+	uint32_t magic = _GetInt(header.rh_resources_magic);
 	if (magic == kResourcesHeaderMagic) {
 		// everything is fine
 	} else if (B_SWAP_INT32(magic) == kResourcesHeaderMagic) {
 //		const char* endianessStr[2] = { "little", "big" };
-//		int32 endianess
+//		int32_t endianess
 //			= (fHostEndianess == ((bool)B_HOST_IS_LENDIAN ? 0 : 1));
 //		Warnings::AddCurrentWarning("Endianess seems to be %s, although %s "
 //									"was expected.",
@@ -719,22 +719,22 @@ void ResourceFile::_ReadHeader(resource_parse_info& parseInfo)
 	} else
 		throw Exception(B_IO_ERROR, "Invalid resources header magic.");
 	// resource count
-	uint32 resourceCount = _GetInt(header.rh_resource_count);
+	uint32_t resourceCount = _GetInt(header.rh_resource_count);
 	if (resourceCount > kMaxResourceCount)
 		throw Exception(B_IO_ERROR, "Bad number of resources.");
 	// index section offset
-	uint32 indexSectionOffset = _GetInt(header.rh_index_section_offset);
+	uint32_t indexSectionOffset = _GetInt(header.rh_index_section_offset);
 	if (indexSectionOffset != kResourceIndexSectionOffset) {
 		throw Exception(B_IO_ERROR, "Unexpected resource index section "
 			"offset. Is: %lu, should be: %lu.", indexSectionOffset,
 			kResourceIndexSectionOffset);
 	}
 	// admin section size
-	uint32 indexSectionSize = kResourceIndexSectionHeaderSize
+	uint32_t indexSectionSize = kResourceIndexSectionHeaderSize
 							  + kResourceIndexEntrySize * resourceCount;
 	indexSectionSize = align_value(indexSectionSize,
 								   kResourceIndexSectionAlignment);
-	uint32 adminSectionSize = _GetInt(header.rh_admin_section_size);
+	uint32_t adminSectionSize = _GetInt(header.rh_admin_section_size);
 	if (adminSectionSize != indexSectionOffset + indexSectionSize) {
 		throw Exception(B_IO_ERROR, "Unexpected resource admin section size. "
 			"Is: %lu, should be: %lu.", adminSectionSize,
@@ -747,7 +747,7 @@ void ResourceFile::_ReadHeader(resource_parse_info& parseInfo)
 
 void ResourceFile::_ReadIndex(resource_parse_info& parseInfo)
 {
-	int32& resourceCount = parseInfo.resource_count;
+	int32_t& resourceCount = parseInfo.resource_count;
 	off_t& fileSize = parseInfo.file_size;
 	// read the header
 	resource_index_section_header header;
@@ -756,25 +756,25 @@ void ResourceFile::_ReadIndex(resource_parse_info& parseInfo)
 		"Failed to read the resource index section header.");
 	// check the header
 	// index section offset
-	uint32 indexSectionOffset = _GetInt(header.rish_index_section_offset);
+	uint32_t indexSectionOffset = _GetInt(header.rish_index_section_offset);
 	if (indexSectionOffset != kResourceIndexSectionOffset) {
 		throw Exception(B_IO_ERROR, "Unexpected resource index section "
 			"offset. Is: %lu, should be: %lu.", indexSectionOffset,
 			kResourceIndexSectionOffset);
 	}
 	// index section size
-	uint32 expectedIndexSectionSize = kResourceIndexSectionHeaderSize
+	uint32_t expectedIndexSectionSize = kResourceIndexSectionHeaderSize
 		+ kResourceIndexEntrySize * resourceCount;
 	expectedIndexSectionSize = align_value(expectedIndexSectionSize,
 										   kResourceIndexSectionAlignment);
-	uint32 indexSectionSize = _GetInt(header.rish_index_section_size);
+	uint32_t indexSectionSize = _GetInt(header.rish_index_section_size);
 	if (indexSectionSize != expectedIndexSectionSize) {
 		throw Exception(B_IO_ERROR, "Unexpected resource index section size. "
 			"Is: %lu, should be: %lu.", indexSectionSize,
 			expectedIndexSectionSize);
 	}
 	// unknown section offset
-	uint32 unknownSectionOffset
+	uint32_t unknownSectionOffset
 		= _GetInt(header.rish_unknown_section_offset);
 	if (unknownSectionOffset != indexSectionOffset + indexSectionSize) {
 		throw Exception(B_IO_ERROR, "Unexpected resource index section size. "
@@ -782,27 +782,27 @@ void ResourceFile::_ReadIndex(resource_parse_info& parseInfo)
 			indexSectionOffset + indexSectionSize);
 	}
 	// unknown section size
-	uint32 unknownSectionSize = _GetInt(header.rish_unknown_section_size);
+	uint32_t unknownSectionSize = _GetInt(header.rish_unknown_section_size);
 	if (unknownSectionSize != kUnknownResourceSectionSize) {
 		throw Exception(B_IO_ERROR, "Unexpected resource index section "
 			"offset. Is: %lu, should be: %lu.",
 			unknownSectionOffset, kUnknownResourceSectionSize);
 	}
 	// info table offset and size
-	uint32 infoTableOffset = _GetInt(header.rish_info_table_offset);
-	uint32 infoTableSize = _GetInt(header.rish_info_table_size);
+	uint32_t infoTableOffset = _GetInt(header.rish_info_table_offset);
+	uint32_t infoTableSize = _GetInt(header.rish_info_table_size);
 	if (infoTableOffset + infoTableSize > fileSize)
 		throw Exception(B_IO_ERROR, "Invalid info table location.");
 	parseInfo.info_table_offset = infoTableOffset;
 	parseInfo.info_table_size = infoTableSize;
 	// read the index entries
-	uint32 indexTableOffset = indexSectionOffset
+	uint32_t indexTableOffset = indexSectionOffset
 		+ kResourceIndexSectionHeaderSize;
-	int32 maxResourceCount = (unknownSectionOffset - indexTableOffset)
+	int32_t maxResourceCount = (unknownSectionOffset - indexTableOffset)
 		/ kResourceIndexEntrySize;
-	int32 actualResourceCount = 0;
+	int32_t actualResourceCount = 0;
 	bool tableEndReached = false;
-	for (int32 i = 0; !tableEndReached && i < maxResourceCount; i++) {
+	for (int32_t i = 0; !tableEndReached && i < maxResourceCount; i++) {
 		// read one entry
 		tableEndReached = !_ReadIndexEntry(parseInfo, i, indexTableOffset,
 			(i >= resourceCount));
@@ -822,8 +822,8 @@ void ResourceFile::_ReadIndex(resource_parse_info& parseInfo)
 }
 
 
-bool ResourceFile::_ReadIndexEntry(resource_parse_info& parseInfo, int32 index,
-	uint32 tableOffset, bool peekAhead)
+bool ResourceFile::_ReadIndexEntry(resource_parse_info& parseInfo, int32_t index,
+	uint32_t tableOffset, bool peekAhead)
 {
 	off_t& fileSize = parseInfo.file_size;
 	//
@@ -843,8 +843,8 @@ bool ResourceFile::_ReadIndexEntry(resource_parse_info& parseInfo, int32 index,
 		}
 		result = false;
 	}
-	uint32 offset = _GetInt(entry.rie_offset);
-	uint32 size = _GetInt(entry.rie_size);
+	uint32_t offset = _GetInt(entry.rie_offset);
+	uint32_t size = _GetInt(entry.rie_size);
 	// check the location
 	if (result && offset + size > fileSize) {
 		if (peekAhead) {
@@ -874,13 +874,13 @@ bool ResourceFile::_ReadIndexEntry(resource_parse_info& parseInfo, int32 index,
 
 void ResourceFile::_ReadInfoTable(resource_parse_info& parseInfo)
 {
-	int32& resourceCount = parseInfo.resource_count;
+	int32_t& resourceCount = parseInfo.resource_count;
 	// read the info table
 	// alloc memory for the table
 	char* tableData = new(std::nothrow) char[parseInfo.info_table_size];
 	if (!tableData)
 		throw Exception(B_NO_MEMORY);
-	int32 dataSize = parseInfo.info_table_size;
+	int32_t dataSize = parseInfo.info_table_size;
 	parseInfo.info_table = tableData;	// freed by the info owner
 	read_exactly(fFile, parseInfo.info_table_offset, tableData, dataSize,
 		"Failed to read resource info table.");
@@ -890,7 +890,7 @@ void ResourceFile::_ReadInfoTable(resource_parse_info& parseInfo)
 	if (!readIndices)
 		throw Exception(B_NO_MEMORY);
 	ArrayDeleter<bool> readIndicesDeleter(readIndices);
-	for (int32 i = 0; i < resourceCount; i++)
+	for (int32_t i = 0; i < resourceCount; i++)
 		readIndices[i] = false;
 	MemArea area(tableData, dataSize);
 	const void* data = tableData;
@@ -898,8 +898,8 @@ void ResourceFile::_ReadInfoTable(resource_parse_info& parseInfo)
 	if (_ReadInfoTableEnd(data, dataSize))
 		dataSize -= kResourceInfoTableEndSize;
 	// read the infos
-	int32 resourceIndex = 1;
-	uint32 minRemainderSize
+	int32_t resourceIndex = 1;
+	uint32_t minRemainderSize
 		= kMinResourceInfoBlockSize + kResourceInfoSeparatorSize;
 	while (area.check(data, minRemainderSize)) {
 		// read a resource block
@@ -950,13 +950,13 @@ void ResourceFile::_ReadInfoTable(resource_parse_info& parseInfo)
 		data = skip_bytes(data, kResourceInfoSeparatorSize);
 	}
 	// Check, if the correct number of bytes are remaining.
-	uint32 bytesLeft = (const char*)tableData + dataSize - (const char*)data;
+	uint32_t bytesLeft = (const char*)tableData + dataSize - (const char*)data;
 	if (bytesLeft != 0) {
 		throw Exception(B_IO_ERROR, "Error at the end of the resource info "
 			"table: %lu bytes are remaining.", bytesLeft);
 	}
 	// check, if all items have been initialized
-	for (int32 i = resourceCount - 1; i >= 0; i--) {
+	for (int32_t i = resourceCount - 1; i >= 0; i--) {
 		if (!readIndices[i]) {
 //			Warnings::AddCurrentWarning("Resource item at index %ld "
 //										"has no info. Item removed.", i + 1);
@@ -968,12 +968,12 @@ void ResourceFile::_ReadInfoTable(resource_parse_info& parseInfo)
 }
 
 
-bool ResourceFile::_ReadInfoTableEnd(const void* data, int32 dataSize)
+bool ResourceFile::_ReadInfoTableEnd(const void* data, int32_t dataSize)
 {
 	bool hasTableEnd = true;
-	if ((uint32)dataSize < kResourceInfoSeparatorSize)
+	if ((uint32_t)dataSize < kResourceInfoSeparatorSize)
 		throw Exception(B_IO_ERROR, "Info table is too short.");
-	if ((uint32)dataSize < kResourceInfoTableEndSize)
+	if ((uint32_t)dataSize < kResourceInfoTableEndSize)
 		hasTableEnd = false;
 	if (hasTableEnd) {
 		const resource_info_table_end* tableEnd
@@ -984,8 +984,8 @@ bool ResourceFile::_ReadInfoTableEnd(const void* data, int32 dataSize)
 		if (hasTableEnd) {
 			dataSize -= kResourceInfoTableEndSize;
 			// checksum
-			uint32 checkSum = calculate_checksum(data, dataSize);
-			uint32 fileCheckSum = _GetInt(tableEnd->rite_check_sum);
+			uint32_t checkSum = calculate_checksum(data, dataSize);
+			uint32_t fileCheckSum = _GetInt(tableEnd->rite_check_sum);
 			if (checkSum != fileCheckSum) {
 				throw Exception(B_IO_ERROR, "Invalid resource info table check"
 					" sum: In file: %lx, calculated: %lx.", fileCheckSum,
@@ -1003,9 +1003,9 @@ const void*   ResourceFile::_ReadResourceInfo(resource_parse_info& parseInfo,
 	const MemArea& area, const resource_info* info, type_code type,
 	bool* readIndices)
 {
-	int32& resourceCount = parseInfo.resource_count;
-	int32 id = _GetInt(info->ri_id);
-	int32 index = _GetInt(info->ri_index);
+	int32_t& resourceCount = parseInfo.resource_count;
+	int32_t id = _GetInt(info->ri_id);
+	int32_t index = _GetInt(info->ri_index);
 	uint16 nameSize = _GetInt(info->ri_name_size);
 	const char* name = info->ri_name;
 	// check the values
@@ -1051,30 +1051,30 @@ const void*   ResourceFile::_ReadResourceInfo(resource_parse_info& parseInfo,
 status_t ResourceFile::_WriteResources(ResourcesContainer& container)
 {
 	status_t error = B_OK;
-	int32 resourceCount = container.CountResources();
+	int32_t resourceCount = container.CountResources();
 	char* buffer = NULL;
 	try {
 		// calculate sizes and offsets
 		// header
-		uint32 size = kResourcesHeaderSize;
+		uint32_t size = kResourcesHeaderSize;
 		size_t bufferSize = size;
 		// index section
-		uint32 indexSectionOffset = size;
-		uint32 indexSectionSize = kResourceIndexSectionHeaderSize
+		uint32_t indexSectionOffset = size;
+		uint32_t indexSectionSize = kResourceIndexSectionHeaderSize
 			+ resourceCount * kResourceIndexEntrySize;
 		indexSectionSize = align_value(indexSectionSize,
 			kResourceIndexSectionAlignment);
 		size += indexSectionSize;
-		bufferSize = std::max((uint32)bufferSize, indexSectionSize);
+		bufferSize = std::max((uint32_t)bufferSize, indexSectionSize);
 		// unknown section
-		uint32 unknownSectionOffset = size;
-		uint32 unknownSectionSize = kUnknownResourceSectionSize;
+		uint32_t unknownSectionOffset = size;
+		uint32_t unknownSectionSize = kUnknownResourceSectionSize;
 		size += unknownSectionSize;
-		bufferSize = std::max((uint32)bufferSize, unknownSectionSize);
+		bufferSize = std::max((uint32_t)bufferSize, unknownSectionSize);
 		// data
-		uint32 dataOffset = size;
-		uint32 dataSize = 0;
-		for (int32 i = 0; i < resourceCount; i++) {
+		uint32_t dataOffset = size;
+		uint32_t dataSize = 0;
+		for (int32_t i = 0; i < resourceCount; i++) {
 			ResourceItem* item = container.ResourceAt(i);
 			if (!item->IsLoaded())
 				throw Exception(B_IO_ERROR, "Resource is not loaded.");
@@ -1083,10 +1083,10 @@ status_t ResourceFile::_WriteResources(ResourcesContainer& container)
 		}
 		size += dataSize;
 		// info table
-		uint32 infoTableOffset = size;
-		uint32 infoTableSize = 0;
+		uint32_t infoTableOffset = size;
+		uint32_t infoTableSize = 0;
 		type_code type = 0;
-		for (int32 i = 0; i < resourceCount; i++) {
+		for (int32_t i = 0; i < resourceCount; i++) {
 			ResourceItem* item = container.ResourceAt(i);
 			if (i == 0 || type != item->Type()) {
 				if (i != 0)
@@ -1103,7 +1103,7 @@ status_t ResourceFile::_WriteResources(ResourcesContainer& container)
 		infoTableSize += kResourceInfoSeparatorSize
 			+ kResourceInfoTableEndSize;
 		size += infoTableSize;
-		bufferSize = std::max((uint32)bufferSize, infoTableSize);
+		bufferSize = std::max((uint32_t)bufferSize, infoTableSize);
 
 		// write...
 		// set the file size
@@ -1119,7 +1119,7 @@ status_t ResourceFile::_WriteResources(ResourcesContainer& container)
 		resourcesHeader->rh_index_section_offset = indexSectionOffset;
 		resourcesHeader->rh_admin_section_size = indexSectionOffset
 												 + indexSectionSize;
-		for (int32 i = 0; i < 13; i++)
+		for (int32_t i = 0; i < 13; i++)
 			resourcesHeader->rh_pad[i] = 0;
 		write_exactly(fFile, 0, buffer, kResourcesHeaderSize,
 			"Failed to write resources header.");
@@ -1143,10 +1143,10 @@ status_t ResourceFile::_WriteResources(ResourcesContainer& container)
 		// index table
 		data = skip_bytes(data, kResourceIndexSectionHeaderSize);
 		resource_index_entry* entry = (resource_index_entry*)data;
-		uint32 entryOffset = dataOffset;
-		for (int32 i = 0; i < resourceCount; i++, entry++) {
+		uint32_t entryOffset = dataOffset;
+		for (int32_t i = 0; i < resourceCount; i++, entry++) {
 			ResourceItem* item = container.ResourceAt(i);
-			uint32 entrySize = item->DataSize();
+			uint32_t entrySize = item->DataSize();
 			entry->rie_offset = entryOffset;
 			entry->rie_size = entrySize;
 			entry->rie_pad = 0;
@@ -1161,12 +1161,12 @@ status_t ResourceFile::_WriteResources(ResourcesContainer& container)
 		write_exactly(fFile, unknownSectionOffset, buffer, unknownSectionSize,
 			"Failed to write unknown section.");
 		// data
-		uint32 itemOffset = dataOffset;
-		for (int32 i = 0; i < resourceCount; i++) {
+		uint32_t itemOffset = dataOffset;
+		for (int32_t i = 0; i < resourceCount; i++) {
 			data = buffer;
 			ResourceItem* item = container.ResourceAt(i);
 			const void* itemData = item->Data();
-			uint32 itemSize = item->DataSize();
+			uint32_t itemSize = item->DataSize();
 			if (!itemData && itemSize > 0)
 				throw Exception(error, "Invalid resource item data.");
 			if (itemData) {
@@ -1185,7 +1185,7 @@ status_t ResourceFile::_WriteResources(ResourcesContainer& container)
 		// info table
 		data = buffer;
 		type = 0;
-		for (int32 i = 0; i < resourceCount; i++) {
+		for (int32_t i = 0; i < resourceCount; i++) {
 			ResourceItem* item = container.ResourceAt(i);
 			resource_info* info = NULL;
 			if (i == 0 || type != item->Type()) {
@@ -1210,7 +1210,7 @@ status_t ResourceFile::_WriteResources(ResourcesContainer& container)
 
 			const char* name = item->Name();
 			if (name && name[0] != '\0') {
-				uint32 nameLen = strlen(name);
+				uint32_t nameLen = strlen(name);
 				memcpy(info->ri_name, name, nameLen + 1);
 				data = skip_bytes(data, nameLen + 1);
 				info->ri_name_size = nameLen + 1;

@@ -34,7 +34,7 @@ static const size_t kMinSaneZlibChunkSize = 1024;
 static const size_t kMaxSaneZlibChunkSize = 10 * 1024 * 1024;
 
 // maximum number of entries in the zlib offset table buffer
-static const uint32 kMaxZlibOffsetTableBufferSize = 512;
+static const uint32_t kMaxZlibOffsetTableBufferSize = 512;
 
 static const size_t kUncompressedReaderBufferSize
 	= B_HPKG_DEFAULT_DATA_CHUNK_SIZE_ZLIB;
@@ -266,13 +266,13 @@ private:
 
 		// get the chunk offset and size
 		uint64 offset = 0;
-		uint32 compressedSize = 0;
+		uint32_t compressedSize = 0;
 		status_t error = _GetCompressedChunkOffsetAndSize(chunkIndex, offset,
 			compressedSize);
 		if (error != B_OK)
 			return error;
 
-		uint32 uncompressedSize = (uint64)chunkIndex + 1 < fChunkCount
+		uint32_t uncompressedSize = (uint64)chunkIndex + 1 < fChunkCount
 			? fChunkSize : fUncompressedSize - chunkIndex * fChunkSize;
 
 		// read the chunk
@@ -313,7 +313,7 @@ private:
 	}
 
 	status_t _GetCompressedChunkOffsetAndSize(int64 chunkIndex, uint64& _offset,
-		uint32& _size)
+		uint32_t& _size)
 	{
 		// get the offset
 		uint64 offset;
@@ -356,7 +356,7 @@ private:
 			// read the table at the given index, or, if we can, the whole table
 			int64 readAtIndex = fChunkCount - 1 > fOffsetTableBufferEntryCount
 				? chunkIndex : 1;
-			uint32 entriesToRead = std::min(
+			uint32_t entriesToRead = std::min(
 				(uint64)fOffsetTableBufferEntryCount,
 				fChunkCount - readAtIndex);
 
@@ -389,10 +389,10 @@ private:
 	uint64			fCompressedSize;
 	uint64			fOffsetTableSize;
 	uint64			fChunkCount;
-	uint32			fChunkSize;
-	uint32			fOffsetTableBufferEntryCount;
+	uint32_t			fChunkSize;
+	uint32_t			fOffsetTableBufferEntryCount;
 	uint64*			fOffsetTable;
-	int32			fOffsetTableIndex;
+	int32_t			fOffsetTableIndex;
 };
 
 

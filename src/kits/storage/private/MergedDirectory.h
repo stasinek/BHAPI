@@ -42,16 +42,16 @@ public:
 	virtual status_t			GetNextEntry(BEntry* entry,
 									bool traverse = false);
 	virtual status_t			GetNextRef(entry_ref* ref);
-	virtual int32				GetNextDirents(struct dirent* direntBuffer,
+	virtual int32_t				GetNextDirents(struct dirent* direntBuffer,
 									size_t bufferSize,
-									int32 maxEntries = INT_MAX);
+									int32_t maxEntries = INT_MAX);
 	virtual status_t			Rewind();
-	virtual int32				CountEntries();
+	virtual int32_t				CountEntries();
 
 protected:
 	virtual	bool				ShallPreferFirstEntry(const entry_ref& entry1,
-									int32 index1, const entry_ref& entry2,
-									int32 index2);
+									int32_t index1, const entry_ref& entry2,
+									int32_t index2);
 									// always invoked with index1 < index2
 
 private:
@@ -64,7 +64,7 @@ private:
 private:
 			DirectoryList		fDirectories;
 			BPolicy				fPolicy;
-			int32				fDirectoryIndex;
+			int32_t				fDirectoryIndex;
 			EntryNameSet*		fVisitedEntries;
 };
 

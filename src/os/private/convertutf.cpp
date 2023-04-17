@@ -19,7 +19,7 @@
 
 
 static inline size_t
-glyph_length(uint32 glyph)
+glyph_length(uint32_t glyph)
 {
 	if (glyph < 0x80)
 		return 1;
@@ -35,7 +35,7 @@ glyph_length(uint32 glyph)
 
 
 void
-encode_glyph(uint32 glyph, size_t glyphLength, char* buffer)
+encode_glyph(uint32_t glyph, size_t glyphLength, char* buffer)
 {
 	if (glyphLength == 1) {
 		*buffer = glyph;
@@ -67,7 +67,7 @@ utf16_to_utf8(const uint16* source, size_t sourceCodeUnitCount, char* target,
 	ssize_t outLength = 0;
 
 	for (size_t i = 0; i < sourceCodeUnitCount; i++) {
-		uint32 glyph = isLittleEndian
+		uint32_t glyph = isLittleEndian
 			? B_LENDIAN_TO_HOST_INT32(source[i])
 			: B_BENDIAN_TO_HOST_INT32(source[i]);
 
@@ -82,7 +82,7 @@ utf16_to_utf8(const uint16* source, size_t sourceCodeUnitCount, char* target,
 				return B_BAD_VALUE;
 			}
 
-			uint32 low = isLittleEndian
+			uint32_t low = isLittleEndian
 				? B_LENDIAN_TO_HOST_INT32(source[i + 1])
 				: B_BENDIAN_TO_HOST_INT32(source[i + 1]);
 			if ((low & 0xFC00) != 0xDC00) {

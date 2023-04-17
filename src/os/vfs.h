@@ -49,15 +49,15 @@ typedef struct io_context {
 	struct vnode *root;
 	struct vnode *cwd;
 	mutex		io_mutex;
-	int32		ref_count;
-	uint32		table_size;
-	uint32		num_used_fds;
+	int32_t		ref_count;
+	uint32_t		table_size;
+	uint32_t		num_used_fds;
 	struct file_descriptor **fds;
 	struct select_info **select_infos;
 	uint8		*fds_close_on_exec;
 	struct list node_monitors;
-	uint32		num_monitors;
-	uint32		max_monitors;
+	uint32_t		num_monitors;
+	uint32_t		max_monitors;
 	bool		inherit_fds;
 } io_context;
 
@@ -74,7 +74,7 @@ io_context*	vfs_new_io_context(io_context* parentContext,
 				bool purgeCloseOnExec);
 void		vfs_get_io_context(io_context *context);
 void		vfs_put_io_context(io_context *context);
-status_t	vfs_resize_fd_table(struct io_context* context, uint32 newSize);
+status_t	vfs_resize_fd_table(struct io_context* context, uint32_t newSize);
 
 int			vfs_getrlimit(int resource, struct rlimit *rlp);
 int			vfs_setrlimit(int resource, const struct rlimit *rlp);
@@ -99,10 +99,10 @@ void		vfs_acquire_vnode(struct vnode *vnode);
 status_t	vfs_get_cookie_from_fd(int fd, void **_cookie);
 bool		vfs_can_page(struct vnode *vnode, void *cookie);
 status_t	vfs_read_pages(struct vnode *vnode, void *cookie, off_t pos,
-				const struct generic_io_vec *vecs, size_t count, uint32 flags,
+				const struct generic_io_vec *vecs, size_t count, uint32_t flags,
 				generic_size_t *_numBytes);
 status_t	vfs_write_pages(struct vnode *vnode, void *cookie, off_t pos,
-				const struct generic_io_vec *vecs, size_t count, uint32 flags,
+				const struct generic_io_vec *vecs, size_t count, uint32_t flags,
 				generic_size_t *_numBytes);
 status_t	vfs_vnode_io(struct vnode* vnode, void* cookie,
 				io_request* request);
@@ -124,9 +124,9 @@ status_t	vfs_entry_ref_to_path(dev_t device, ino_t inode, const char *leaf,
 				bool kernel, char *path, size_t pathLength);
 status_t	vfs_get_cwd(dev_t *_mountID, ino_t *_vnodeID);
 void		vfs_unlock_vnode_if_locked(struct file_descriptor *descriptor);
-status_t	vfs_unmount(dev_t mountID, uint32 flags);
+status_t	vfs_unmount(dev_t mountID, uint32_t flags);
 status_t	vfs_disconnect_vnode(dev_t mountID, ino_t vnodeID);
-void		vfs_free_unused_vnodes(int32 level);
+void		vfs_free_unused_vnodes(int32_t level);
 
 status_t	vfs_read_stat(int fd, const char *path, bool traverseLeafLink,
 				struct stat *stat, bool kernel);
@@ -141,7 +141,7 @@ status_t	vfs_normalize_path(const char *path, char *buffer,
 
 /* service call for whoever wants to create a special node */
 status_t	vfs_create_special_node(const char *path, fs_vnode *subVnode,
-				mode_t mode, uint32 flags, bool kernel, fs_vnode *_superVnode,
+				mode_t mode, uint32_t flags, bool kernel, fs_vnode *_superVnode,
 				struct vnode **_createdVnode);
 
 /* service call for the node monitor */
@@ -156,15 +156,15 @@ status_t	vfs_bind_mount_directory(dev_t mountID, ino_t nodeID,
 
 /* calls the syscall dispatcher should use for user file I/O */
 dev_t		_user_mount(const char *path, const char *device,
-				const char *fs_name, uint32 flags, const char *args,
+				const char *fs_name, uint32_t flags, const char *args,
 				size_t argsLength);
-status_t	_user_unmount(const char *path, uint32 flags);
+status_t	_user_unmount(const char *path, uint32_t flags);
 status_t	_user_read_fs_info(dev_t device, struct fs_info *info);
 status_t	_user_write_fs_info(dev_t device, const struct fs_info *info,
 				int mask);
-dev_t		_user_next_device(int32 *_cookie);
+dev_t		_user_next_device(int32_t *_cookie);
 status_t	_user_sync(void);
-status_t	_user_get_next_fd_info(team_id team, uint32 *cookie,
+status_t	_user_get_next_fd_info(team_id team, uint32_t *cookie,
 				struct fd_info *info, size_t infoSize);
 status_t	_user_entry_ref_to_path(dev_t device, ino_t inode, const char *leaf,
 				char *userPath, size_t pathLength);
@@ -211,18 +211,18 @@ int			_user_open_attr_dir(int fd, const char *path,
 				bool traverseLeafLink);
 ssize_t		_user_read_attr(int fd, const char *attribute, off_t pos,
 				void *buffer, size_t readBytes);
-ssize_t		_user_write_attr(int fd, const char *attribute, uint32 type,
+ssize_t		_user_write_attr(int fd, const char *attribute, uint32_t type,
 				off_t pos, const void *buffer, size_t readBytes);
 status_t	_user_stat_attr(int fd, const char *attribute,
 				struct attr_info *attrInfo);
 int			_user_open_attr(int fd, const char* path, const char *name,
-				uint32 type, int openMode);
+				uint32_t type, int openMode);
 status_t	_user_remove_attr(int fd, const char *name);
 status_t	_user_rename_attr(int fromFile, const char *fromName, int toFile,
 				const char *toName);
 int			_user_open_index_dir(dev_t device);
-status_t	_user_create_index(dev_t device, const char *name, uint32 type,
-				uint32 flags);
+status_t	_user_create_index(dev_t device, const char *name, uint32_t type,
+				uint32_t flags);
 status_t	_user_read_index_stat(dev_t device, const char *name,
 				struct stat *stat);
 status_t	_user_remove_index(dev_t device, const char *name);
@@ -230,7 +230,7 @@ status_t	_user_getcwd(char *buffer, size_t size);
 status_t	_user_setcwd(int fd, const char *path);
 status_t	_user_change_root(const char *path);
 int			_user_open_query(dev_t device, const char *query,
-				size_t queryLength, uint32 flags, port_id port, int32 token);
+				size_t queryLength, uint32_t flags, port_id port, int32_t token);
 
 /* fd user prototypes (implementation located in fd.cpp)  */
 ssize_t		_user_read(int fd, off_t pos, void *buffer, size_t bufferSize);
@@ -238,9 +238,9 @@ ssize_t		_user_readv(int fd, off_t pos, const iovec *vecs, size_t count);
 ssize_t		_user_write(int fd, off_t pos, const void *buffer,
 				size_t bufferSize);
 ssize_t		_user_writev(int fd, off_t pos, const iovec *vecs, size_t count);
-status_t	_user_ioctl(int fd, uint32 cmd, void *data, size_t length);
+status_t	_user_ioctl(int fd, uint32_t cmd, void *data, size_t length);
 ssize_t		_user_read_dir(int fd, struct dirent *buffer, size_t bufferSize,
-				uint32 maxCount);
+				uint32_t maxCount);
 status_t	_user_rewind_dir(int fd);
 status_t	_user_close(int fd);
 int			_user_dup(int fd);
@@ -277,7 +277,7 @@ status_t	_user_getsockname(int socket, struct sockaddr *address,
 int			_user_sockatmark(int socket);
 status_t	_user_socketpair(int family, int type, int protocol,
 				int *socketVector);
-status_t	_user_get_next_socket_stat(int family, uint32 *cookie,
+status_t	_user_get_next_socket_stat(int family, uint32_t *cookie,
 				struct net_stat *stat);
 
 #ifdef __cplusplus
@@ -313,12 +313,12 @@ protected:
 
 status_t	vfs_asynchronous_read_pages(struct vnode* vnode, void* cookie,
 				off_t pos, const struct generic_io_vec* vecs, size_t count,
-				generic_size_t numBytes, uint32 flags,
+				generic_size_t numBytes, uint32_t flags,
 				AsyncIOCallback* callback);
 
 status_t	vfs_asynchronous_write_pages(struct vnode* vnode, void* cookie,
 				off_t pos, const struct generic_io_vec* vecs, size_t count,
-				generic_size_t numBytes, uint32 flags,
+				generic_size_t numBytes, uint32_t flags,
 				AsyncIOCallback* callback);
 
 #endif	// __cplusplus

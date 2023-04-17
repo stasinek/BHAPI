@@ -33,7 +33,7 @@ struct fd_ops {
 						struct selectsync *sync);
 	status_t	(*fd_read_dir)(struct io_context* ioContext,
 						struct file_descriptor *, struct dirent *buffer,
-						size_t bufferSize, uint32 *_count);
+						size_t bufferSize, uint32_t *_count);
 	status_t	(*fd_rewind_dir)(struct file_descriptor *);
 	status_t	(*fd_read_stat)(struct file_descriptor *, struct stat *);
 	status_t	(*fd_write_stat)(struct file_descriptor *, const struct stat *, int statMask);
@@ -42,9 +42,9 @@ struct fd_ops {
 };
 
 struct file_descriptor {
-	int32	type;               /* descriptor type */
-	int32	ref_count;
-	int32	open_count;
+	int32_t	type;               /* descriptor type */
+	int32_t	ref_count;
+	int32_t	open_count;
 	struct fd_ops *ops;
 	union {
 		struct vnode *vnode;
@@ -52,7 +52,7 @@ struct file_descriptor {
 		struct net_socket *socket;
 	} u;
 	void	*cookie;
-	int32	open_mode;
+	int32_t	open_mode;
 	off_t	pos;
 };
 
@@ -86,8 +86,8 @@ extern void put_fd(struct file_descriptor *descriptor);
 extern void disconnect_fd(struct file_descriptor *descriptor);
 extern void inc_fd_ref_count(struct file_descriptor *descriptor);
 extern int dup_foreign_fd(team_id fromTeam, int fd, bool kernel);
-extern status_t select_fd(int32 fd, struct select_info *info, bool kernel);
-extern status_t deselect_fd(int32 fd, struct select_info *info, bool kernel);
+extern status_t select_fd(int32_t fd, struct select_info *info, bool kernel);
+extern status_t deselect_fd(int32_t fd, struct select_info *info, bool kernel);
 extern bool fd_is_valid(int fd, bool kernel);
 extern struct vnode *fd_vnode(struct file_descriptor *descriptor);
 

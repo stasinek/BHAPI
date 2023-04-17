@@ -318,8 +318,8 @@ enum {
 /*
  *  Increment from one scanline to the next of a bitmap or pixmap
  */
-#define SVGA_BITMAP_INCREMENT(w) ((( (w)+31 ) >> 5) * sizeof (uint32))
-#define SVGA_PIXMAP_INCREMENT(w,bpp) ((( ((w)*(bpp))+31 ) >> 5) * sizeof (uint32))
+#define SVGA_BITMAP_INCREMENT(w) ((( (w)+31 ) >> 5) * sizeof (uint32_t))
+#define SVGA_PIXMAP_INCREMENT(w,bpp) ((( ((w)*(bpp))+31 ) >> 5) * sizeof (uint32_t))
 
 /*
  *  Transparent color for DRAW_GLYPH_CLIPPED

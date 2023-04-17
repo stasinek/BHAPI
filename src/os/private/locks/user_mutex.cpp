@@ -100,8 +100,8 @@ remove_user_mutex_entry(UserMutexEntry* entry)
 
 
 static status_t
-user_mutex_wait_locked(int32* mutex, addr_t physicalAddress, const char* name,
-	uint32 flags, bigtime_t timeout, MutexLocker& locker, bool& lastWaiter)
+user_mutex_wait_locked(int32_t* mutex, addr_t physicalAddress, const char* name,
+	uint32_t flags, bigtime_t timeout, MutexLocker& locker, bool& lastWaiter)
 {
 	// add the entry to the table
 	UserMutexEntry entry;
@@ -135,17 +135,17 @@ user_mutex_wait_locked(int32* mutex, addr_t physicalAddress, const char* name,
 
 
 static status_t
-user_mutex_lock_locked(int32* mutex, addr_t physicalAddress,
-	const char* name, uint32 flags, bigtime_t timeout, MutexLocker& locker)
+user_mutex_lock_locked(int32_t* mutex, addr_t physicalAddress,
+	const char* name, uint32_t flags, bigtime_t timeout, MutexLocker& locker)
 {
 	// mark the mutex locked + waiting
-	int32 oldValue = atomic_or(mutex,
+	int32_t oldValue = atomic_or(mutex,
 		B_USER_MUTEX_LOCKED | B_USER_MUTEX_WAITING);
 
 	if ((oldValue & (B_USER_MUTEX_LOCKED | B_USER_MUTEX_WAITING)) == 0
 			|| (oldValue & B_USER_MUTEX_DISABLED) != 0) {
 		// clear the waiting flag and be done
-		atomic_and(mutex, ~(int32)B_USER_MUTEX_WAITING);
+		atomic_and(mutex, ~(int32_t)B_USER_MUTEX_WAITING);
 		return B_OK;
 	}
 
@@ -154,26 +154,26 @@ user_mutex_lock_locked(int32* mutex, addr_t physicalAddress,
 		flags, timeout, locker, lastWaiter);
 
 	if (lastWaiter)
-		atomic_and(mutex, ~(int32)B_USER_MUTEX_WAITING);
+		atomic_and(mutex, ~(int32_t)B_USER_MUTEX_WAITING);
 
 	return error;
 }
 
 
 static void
-user_mutex_unlock_locked(int32* mutex, addr_t physicalAddress, uint32 flags)
+user_mutex_unlock_locked(int32_t* mutex, addr_t physicalAddress, uint32_t flags)
 {
 	UserMutexEntry* entry = sUserMutexTable.Lookup(physicalAddress);
 	if (entry == NULL) {
 		// no one is waiting -- clear locked flag
-		atomic_and(mutex, ~(int32)B_USER_MUTEX_LOCKED);
+		atomic_and(mutex, ~(int32_t)B_USER_MUTEX_LOCKED);
 		return;
 	}
 
 	// Someone is waiting -- set the locked flag. It might still be set,
 	// but when using userland atomic operations, the caller will usually
 	// have cleared it already.
-	int32 oldValue = atomic_or(mutex, B_USER_MUTEX_LOCKED);
+	int32_t oldValue = atomic_or(mutex, B_USER_MUTEX_LOCKED);
 
 	// unblock the first thread
 	entry->locked = true;
@@ -189,24 +189,24 @@ user_mutex_unlock_locked(int32* mutex, addr_t physicalAddress, uint32 flags)
 
 		// dequeue the first thread and mark the mutex uncontended
 		sUserMutexTable.Remove(entry);
-		atomic_and(mutex, ~(int32)B_USER_MUTEX_WAITING);
+		atomic_and(mutex, ~(int32_t)B_USER_MUTEX_WAITING);
 	} else {
 		bool otherWaiters = remove_user_mutex_entry(entry);
 		if (!otherWaiters)
-			atomic_and(mutex, ~(int32)B_USER_MUTEX_WAITING);
+			atomic_and(mutex, ~(int32_t)B_USER_MUTEX_WAITING);
 	}
 }
 
 
 static status_t
-user_mutex_sem_acquire_locked(int32* sem, addr_t physicalAddress,
-	const char* name, uint32 flags, bigtime_t timeout, MutexLocker& locker)
+user_mutex_sem_acquire_locked(int32_t* sem, addr_t physicalAddress,
+	const char* name, uint32_t flags, bigtime_t timeout, MutexLocker& locker)
 {
 	// The semaphore may have been released in the meantime, and we also
 	// need to mark it as contended if it isn't already.
-	int32 oldValue = atomic_get(sem);
+	int32_t oldValue = atomic_get(sem);
 	while (oldValue > -1) {
-		int32 value = atomic_test_and_set(sem, oldValue - 1, oldValue);
+		int32_t value = atomic_test_and_set(sem, oldValue - 1, oldValue);
 		if (value == oldValue && value > 0)
 			return B_OK;
 		oldValue = value;
@@ -224,15 +224,15 @@ user_mutex_sem_acquire_locked(int32* sem, addr_t physicalAddress,
 
 
 static void
-user_mutex_sem_release_locked(int32* sem, addr_t physicalAddress)
+user_mutex_sem_release_locked(int32_t* sem, addr_t physicalAddress)
 {
 	UserMutexEntry* entry = sUserMutexTable.Lookup(physicalAddress);
 	if (!entry) {
 		// no waiters - mark as uncontended and release
-		int32 oldValue = atomic_get(sem);
+		int32_t oldValue = atomic_get(sem);
 		while (true) {
-			int32 inc = oldValue < 0 ? 2 : 1;
-			int32 value = atomic_test_and_set(sem, oldValue + inc, oldValue);
+			int32_t inc = oldValue < 0 ? 2 : 1;
+			int32_t value = atomic_test_and_set(sem, oldValue + inc, oldValue);
 			if (value == oldValue)
 				return;
 			oldValue = value;
@@ -252,7 +252,7 @@ user_mutex_sem_release_locked(int32* sem, addr_t physicalAddress)
 
 
 static status_t
-user_mutex_lock(int32* mutex, const char* name, uint32 flags, bigtime_t timeout)
+user_mutex_lock(int32_t* mutex, const char* name, uint32_t flags, bigtime_t timeout)
 {
 	// wire the page and get the physical address
 	VMPageWiringInfo wiringInfo;
@@ -276,8 +276,8 @@ user_mutex_lock(int32* mutex, const char* name, uint32 flags, bigtime_t timeout)
 
 
 static status_t
-user_mutex_switch_lock(int32* fromMutex, int32* toMutex, const char* name,
-	uint32 flags, bigtime_t timeout)
+user_mutex_switch_lock(int32_t* fromMutex, int32_t* toMutex, const char* name,
+	uint32_t flags, bigtime_t timeout)
 {
 	// wire the pages and get the physical addresses
 	VMPageWiringInfo fromWiringInfo;
@@ -326,7 +326,7 @@ user_mutex_init()
 
 
 status_t
-_user_mutex_lock(int32* mutex, const char* name, uint32 flags,
+_user_mutex_lock(int32_t* mutex, const char* name, uint32_t flags,
 	bigtime_t timeout)
 {
 	if (mutex == NULL || !IS_USER_ADDRESS(mutex) || (addr_t)mutex % 4 != 0)
@@ -342,7 +342,7 @@ _user_mutex_lock(int32* mutex, const char* name, uint32 flags,
 
 
 status_t
-_user_mutex_unlock(int32* mutex, uint32 flags)
+_user_mutex_unlock(int32_t* mutex, uint32_t flags)
 {
 	if (mutex == NULL || !IS_USER_ADDRESS(mutex) || (addr_t)mutex % 4 != 0)
 		return B_BAD_ADDRESS;
@@ -366,8 +366,8 @@ _user_mutex_unlock(int32* mutex, uint32 flags)
 
 
 status_t
-_user_mutex_switch_lock(int32* fromMutex, int32* toMutex, const char* name,
-	uint32 flags, bigtime_t timeout)
+_user_mutex_switch_lock(int32_t* fromMutex, int32_t* toMutex, const char* name,
+	uint32_t flags, bigtime_t timeout)
 {
 	if (fromMutex == NULL || !IS_USER_ADDRESS(fromMutex)
 			|| (addr_t)fromMutex % 4 != 0 || toMutex == NULL
@@ -381,7 +381,7 @@ _user_mutex_switch_lock(int32* fromMutex, int32* toMutex, const char* name,
 
 
 status_t
-_user_mutex_sem_acquire(int32* sem, const char* name, uint32 flags,
+_user_mutex_sem_acquire(int32_t* sem, const char* name, uint32_t flags,
 	bigtime_t timeout)
 {
 	if (sem == NULL || !IS_USER_ADDRESS(sem) || (addr_t)sem % 4 != 0)
@@ -408,7 +408,7 @@ _user_mutex_sem_acquire(int32* sem, const char* name, uint32 flags,
 
 
 status_t
-_user_mutex_sem_release(int32* sem)
+_user_mutex_sem_release(int32_t* sem)
 {
 	if (sem == NULL || !IS_USER_ADDRESS(sem) || (addr_t)sem % 4 != 0)
 		return B_BAD_ADDRESS;

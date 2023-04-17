@@ -65,7 +65,7 @@ static void b_dfbhapi::be_clipboard_changed(EDFBGraphicsEngine *dfbEngine)
 		return;
 	}
 
-	aStr.Append((char*)data, (int32)dataLen);
+	aStr.Append((char*)data, (int32_t)dataLen);
 	free(mimetype);
 	free(data);
 
@@ -77,7 +77,7 @@ static void b_dfbhapi::be_clipboard_changed(EDFBGraphicsEngine *dfbEngine)
 			const char *text = NULL;
 			ssize_t textLen = 0;
 			if(clipMsg->FindData("text/plain", B_MIME_TYPE, (const void**)&text, &textLen) == false ||
-			   text == NULL || textLen != (ssize_t)aStr.Length() || aStr.Compare(text, (int32)textLen) != 0)
+			   text == NULL || textLen != (ssize_t)aStr.Length() || aStr.Compare(text, (int32_t)textLen) != 0)
 			{
 				bhapi::__be_clipboard.Clear();
 				clipMsg->AddBool("BHAPI:msg_from_gui", true);
@@ -224,7 +224,7 @@ static void b_process_dfb_event(EDFBGraphicsEngine *dfbEngine, DFBEvent *evt)
 					int originX, originY;
 					BRect margins = win->fMargins;
 					dfbWindow->GetPosition(dfbWindow, &originX, &originY);
-					if(win->fWidth != (uint32)event->w || win->fHeight != (uint32)event->h)
+					if(win->fWidth != (uint32_t)event->w || win->fHeight != (uint32_t)event->h)
 					{
 						win->fWidth = event->w;
 						win->fHeight = event->h;
@@ -277,7 +277,7 @@ static void b_process_dfb_event(EDFBGraphicsEngine *dfbEngine, DFBEvent *evt)
 			case DWET_POSITION_SIZE:
 				{
 					BRect margins = win->fMargins;
-					if(win->fWidth != (uint32)event->w || win->fHeight != (uint32)event->h)
+					if(win->fWidth != (uint32_t)event->w || win->fHeight != (uint32_t)event->h)
 					{
 						win->fWidth = event->w;
 						win->fHeight = event->h;
@@ -391,12 +391,12 @@ static void b_process_dfb_event(EDFBGraphicsEngine *dfbEngine, DFBEvent *evt)
 
 					message.what = (event->type == DWET_BUTTONDOWN ? B_MOUSE_DOWN : B_MOUSE_UP);
 
-					int32 button = 0;
+					int32_t button = 0;
 					if(event->button == DIBI_LEFT) button = 1;
 					else if(event->button == DIBI_MIDDLE) button = 2;
 					else if(event->button == DIBI_RIGHT) button = 3;
 
-					int32 buttons = button;
+					int32_t buttons = button;
 					DFBInputDeviceButtonMask state = event->buttons;
 					if((state & DIBM_LEFT) && button != 1) buttons += 1;
 					if((state & DIBM_MIDDLE) && button != 2) buttons += 2;
@@ -428,7 +428,7 @@ static void b_process_dfb_event(EDFBGraphicsEngine *dfbEngine, DFBEvent *evt)
 
 					message.what = B_MOUSE_MOVED;
 
-					int32 buttons = 0;
+					int32_t buttons = 0;
 					DFBInputDeviceButtonMask state = event->buttons;
 					if(state & DIBM_LEFT) buttons += 1;
 					if(state & DIBM_MIDDLE) buttons += 2;
@@ -452,7 +452,7 @@ static void b_process_dfb_event(EDFBGraphicsEngine *dfbEngine, DFBEvent *evt)
 				{
 					dfbEngine->Unlock();
 
-					message.AddInt32("key", (int32)(event->key_code));
+					message.AddInt32("key", (int32_t)(event->key_code));
 
 					// TODO: BHAPI:key_repeat, modifiers, states, raw_char
 					if(DFB_KEY_TYPE(event->key_symbol) == DIKT_UNICODE)
@@ -460,11 +460,11 @@ static void b_process_dfb_event(EDFBGraphicsEngine *dfbEngine, DFBEvent *evt)
 						uint16 symbol = (uint16)event->key_symbol;
 						if(symbol == DIKS_ENTER) symbol = B_ENTER;
 						char *keybuffer = bhapi::unicode_convert_to_utf8((const unichar16*)&symbol, 1);
-						int32 keynum = (keybuffer ? (int32)strlen(keybuffer) : 0);
+						int32_t keynum = (keybuffer ? (int32_t)strlen(keybuffer) : 0);
 
 						if(keybuffer)
 						{
-							for(int32 i = 0; i < keynum; i++) message.AddInt8("byte", (int8)keybuffer[i]);
+							for(int32_t i = 0; i < keynum; i++) message.AddInt8("byte", (int8)keybuffer[i]);
 							message.AddString("bytes", keybuffer);
 							free(keybuffer);
 						}
@@ -496,7 +496,7 @@ static void b_process_dfb_event(EDFBGraphicsEngine *dfbEngine, DFBEvent *evt)
 					else
 						message.what = (event->type == DWET_KEYDOWN ? B_UNMAPPED_KEY_DOWN : B_UNMAPPED_KEY_UP);
 
-					int32 modifiers = 0;
+					int32_t modifiers = 0;
 
 					if(event->modifiers & DIMM_SHIFT) modifiers |= B_SHIFT_KEY;
 					if(event->modifiers & DIMM_CONTROL) modifiers |= B_CONTROL_KEY;
@@ -685,7 +685,7 @@ EDFBGraphicsEngine::Initalize()
 
 		eArgc = (int)progArgv.CountItems();
 		eArgv = new char*[progArgv.CountItems() + 1];
-		for(int32 i = 0; i < progArgv.CountItems(); i++)
+		for(int32_t i = 0; i < progArgv.CountItems(); i++)
 			eArgv[i] = (char*)progArgv.ItemAt(i)->String();
 		eArgv[progArgv.CountItems()] = NULL;
 	}
@@ -827,7 +827,7 @@ EDFBGraphicsEngine::Cancel()
 			fDFBThread = NULL;
 
 			struct b_dfb_data *item;
-			while((item = (struct b_dfb_data*)fDFBDataList.RemoveItem((int32)0)) != NULL) free(item);
+			while((item = (struct b_dfb_data*)fDFBDataList.RemoveItem((int32_t)0)) != NULL) free(item);
 		}
 
 		bhapi::delete_thread(dfbThread);
@@ -856,21 +856,21 @@ EDFBGraphicsEngine::CreateContext()
 
 
 BGraphicsDrawable*
-EDFBGraphicsEngine::CreatePixmap(uint32 w,  uint32 h)
+EDFBGraphicsEngine::CreatePixmap(uint32_t w,  uint32_t h)
 {
 	return(new EDFBGraphicsDrawable(this, w, h));
 }
 
 
 BGraphicsWindow*
-EDFBGraphicsEngine::CreateWindow(int32 x,  int32 y,  uint32 w,  uint32 h)
+EDFBGraphicsEngine::CreateWindow(int32_t x,  int32_t y,  uint32_t w,  uint32_t h)
 {
 	return(new EDFBGraphicsWindow(this, x, y, w, h));
 }
 
 
 status_t 
-EDFBGraphicsEngine::GetDesktopBounds(uint32 *w,  uint32 *h)
+EDFBGraphicsEngine::GetDesktopBounds(uint32_t *w,  uint32_t *h)
 {
 	BAutolock <EDFBGraphicsEngine> autolock(this);
 	if(autolock.IsLocked() == false || InitCheck() != B_OK) return B_ERROR;
@@ -883,7 +883,7 @@ EDFBGraphicsEngine::GetDesktopBounds(uint32 *w,  uint32 *h)
 
 
 status_t 
-EDFBGraphicsEngine::GetCurrentWorkspace(uint32 *workspace)
+EDFBGraphicsEngine::GetCurrentWorkspace(uint32_t *workspace)
 {
 	// don't support workspace
 	if(workspace != NULL) *workspace = 0;
@@ -961,7 +961,7 @@ EDFBGraphicsEngine::SetDFBWindowData(IDirectFBWindow *dfbWin, void *data, void *
 	if(autolock.IsLocked() == false || InitCheck() != B_OK) return false;
 
 	bool found = false;
-	for(int32 i = 0; i < fDFBDataList.CountItems(); i++)
+	for(int32_t i = 0; i < fDFBDataList.CountItems(); i++)
 	{
 		struct b_dfb_data *item = (struct b_dfb_data*)fDFBDataList.ItemAt(i);
 		if(item->win == dfbWin)
@@ -1008,7 +1008,7 @@ EDFBGraphicsEngine::GetDFBWindowData(IDirectFBWindow *dfbWin)
 	BAutolock <EDFBGraphicsEngine> autolock(this);
 	if(autolock.IsLocked() == false || InitCheck() != B_OK) return NULL;
 
-	for(int32 i = 0; i < fDFBDataList.CountItems(); i++)
+	for(int32_t i = 0; i < fDFBDataList.CountItems(); i++)
 	{
 		struct b_dfb_data *item = (struct b_dfb_data*)fDFBDataList.ItemAt(i);
 		if(item->win == dfbWin) return item->data;
@@ -1026,7 +1026,7 @@ EDFBGraphicsEngine::GetDFBWindowData(DFBWindowID dfbWinID)
 	BAutolock <EDFBGraphicsEngine> autolock(this);
 	if(autolock.IsLocked() == false || InitCheck() != B_OK) return NULL;
 
-	for(int32 i = 0; i < fDFBDataList.CountItems(); i++)
+	for(int32_t i = 0; i < fDFBDataList.CountItems(); i++)
 	{
 		struct b_dfb_data *item = (struct b_dfb_data*)fDFBDataList.ItemAt(i);
 		DFBWindowID id;
@@ -1043,13 +1043,13 @@ EDFBGraphicsEngine::ConvertRegion(const BRegion *region, DFBRegion **dfbRegions,
 {
 	if(dfbRegions == NULL || nRegions == NULL) return false;
 
-	int32 nrectsNeeded = max_c((region ? region->CountRects() : 0), 1);
+	int32_t nrectsNeeded = max_c((region ? region->CountRects() : 0), 1);
 	if((*dfbRegions = (DFBRegion*)malloc(sizeof(DFBRegion) * (size_t)nrectsNeeded)) == NULL) return false;
 	*nRegions = 0;
 
 	if(region != NULL)
 	{
-		for(int32 i = 0; i < region->CountRects(); i++)
+		for(int32_t i = 0; i < region->CountRects(); i++)
 		{
 			BRect r = region->RectAt(i).FloorCopy();
 

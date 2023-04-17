@@ -35,13 +35,13 @@ public:
 									page_num_t (*get_free_page)(kernel_args*));
 
 	virtual	bool				IsKernelPageAccessible(addr_t virtualAddress,
-									uint32 protection);
+									uint32_t protection);
 #if 0//X86
 	inline	page_table_entry*	PageHole() const
 									{ return fPageHole; }
 	inline	page_directory_entry* PageHolePageDir() const
 									{ return fPageHolePageDir; }
-	inline	uint32				KernelPhysicalPageDirectory() const
+	inline	uint32_t				KernelPhysicalPageDirectory() const
 									{ return fKernelPhysicalPageDirectory; }
 	inline	page_directory_entry* KernelVirtualPageDirectory() const
 									{ return fKernelVirtualPageDirectory; }
@@ -55,16 +55,16 @@ public:
 									{ return fPageTable; }
 	inline	size_t				PageTableSize() const
 									{ return fPageTableSize; }
-	inline	uint32				PageTableHashMask() const
+	inline	uint32_t				PageTableHashMask() const
 									{ return fPageTableHashMask; }
 
 	static	PPCPagingMethod460* Method();
 
 	void						FillPageTableEntry(page_table_entry *entry,
-									uint32 virtualSegmentID,
+									uint32_t virtualSegmentID,
 									addr_t virtualAddress,
 									phys_addr_t physicalAddress,
-									uint8 protection, uint32 memoryType,
+									uint8 protection, uint32_t memoryType,
 									bool secondaryHash);
 
 
@@ -72,26 +72,26 @@ public:
 	static	void				PutPageTableInPageDir(
 									page_directory_entry* entry,
 									phys_addr_t pgtablePhysical,
-									uint32 attributes);
+									uint32_t attributes);
 	static	void				PutPageTableEntryInTable(
 									page_table_entry* entry,
 									phys_addr_t physicalAddress,
-									uint32 attributes, uint32 memoryType,
+									uint32_t attributes, uint32_t memoryType,
 									bool globalPage);
 	static	page_table_entry	SetPageTableEntry(page_table_entry* entry,
 									page_table_entry newEntry);
 	static	page_table_entry	SetPageTableEntryFlags(page_table_entry* entry,
-									uint32 flags);
+									uint32_t flags);
 	static	page_table_entry	TestAndSetPageTableEntry(
 									page_table_entry* entry,
 									page_table_entry newEntry,
 									page_table_entry oldEntry);
 	static	page_table_entry	ClearPageTableEntry(page_table_entry* entry);
 	static	page_table_entry	ClearPageTableEntryFlags(
-									page_table_entry* entry, uint32 flags);
+									page_table_entry* entry, uint32_t flags);
 
-	static	uint32				MemoryTypeToPageTableEntryFlags(
-									uint32 memoryType);
+	static	uint32_t				MemoryTypeToPageTableEntryFlags(
+									uint32_t memoryType);
 #endif
 
 private:
@@ -111,7 +111,7 @@ private:
 private:
 			struct page_table_entry_group *fPageTable;
 			size_t				fPageTableSize;
-			uint32				fPageTableHashMask;
+			uint32_t				fPageTableHashMask;
 			area_id				fPageTableArea;
 
 			GenericVMPhysicalPageMapper	fPhysicalPageMapper;
@@ -120,7 +120,7 @@ private:
 #if 0			//XXX:x86
 			page_table_entry*	fPageHole;
 			page_directory_entry* fPageHolePageDir;
-			uint32				fKernelPhysicalPageDirectory;
+			uint32_t				fKernelPhysicalPageDirectory;
 			page_directory_entry* fKernelVirtualPageDirectory;
 			PPCPhysicalPageMapper* fPhysicalPageMapper;
 			TranslationMapPhysicalPageMapper* fKernelPhysicalPageMapper;
@@ -140,15 +140,15 @@ PPCPagingMethod460::Method()
 PPCPagingMethod460::SetPageTableEntry(page_table_entry* entry,
 	page_table_entry newEntry)
 {
-	return atomic_set((int32*)entry, newEntry);
+	return atomic_set((int32_t*)entry, newEntry);
 }
 
 
 /*static*/ inline page_table_entry
 PPCPagingMethod460::SetPageTableEntryFlags(page_table_entry* entry,
-	uint32 flags)
+	uint32_t flags)
 {
-	return atomic_or((int32*)entry, flags);
+	return atomic_or((int32_t*)entry, flags);
 }
 
 
@@ -156,7 +156,7 @@ PPCPagingMethod460::SetPageTableEntryFlags(page_table_entry* entry,
 PPCPagingMethod460::TestAndSetPageTableEntry(page_table_entry* entry,
 	page_table_entry newEntry, page_table_entry oldEntry)
 {
-	return atomic_test_and_set((int32*)entry, newEntry, oldEntry);
+	return atomic_test_and_set((int32_t*)entry, newEntry, oldEntry);
 }
 
 
@@ -168,14 +168,14 @@ PPCPagingMethod460::ClearPageTableEntry(page_table_entry* entry)
 
 
 /*static*/ inline page_table_entry
-PPCPagingMethod460::ClearPageTableEntryFlags(page_table_entry* entry, uint32 flags)
+PPCPagingMethod460::ClearPageTableEntryFlags(page_table_entry* entry, uint32_t flags)
 {
-	return atomic_and((int32*)entry, ~flags);
+	return atomic_and((int32_t*)entry, ~flags);
 }
 
 
-/*static*/ inline uint32
-PPCPagingMethod460::MemoryTypeToPageTableEntryFlags(uint32 memoryType)
+/*static*/ inline uint32_t
+PPCPagingMethod460::MemoryTypeToPageTableEntryFlags(uint32_t memoryType)
 {
 	// ATM we only handle the uncacheable and write-through type explicitly. For
 	// all other types we rely on the MTRRs to be set up correctly. Since we set

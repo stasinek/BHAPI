@@ -38,7 +38,7 @@
 #include <Haiku.h>
 class BHAPI_LOCAL BViewLayout : public BLayoutItem {
 public:
-    BViewLayout(BView *view, BRect frame,  uint32 resizingMode);
+    BViewLayout(BView *view, BRect frame,  uint32_t resizingMode);
     virtual ~BViewLayout();
 
     void		SetEnabled(bool state);
@@ -60,7 +60,7 @@ private:
 
 #ifdef BHAPI_BUILD_LIBRARY
 
-inline BViewLayout::BViewLayout(BView *view, BRect frame,  uint32 resizingMode)
+inline BViewLayout::BViewLayout(BView *view, BRect frame,  uint32_t resizingMode)
     : BLayoutItem(frame, resizingMode), fEnabled(true)
 {
     SetPrivateData(view);

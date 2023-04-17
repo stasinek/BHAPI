@@ -41,7 +41,7 @@
 
 
 static net_stack_interface_module_info* sStackInterface = NULL;
-static vint32 sStackInterfaceInitialized = 0;
+static vint32_t sStackInterfaceInitialized = 0;
 static mutex sLock = MUTEX_INITIALIZER("stack interface");
 
 
@@ -254,7 +254,7 @@ static status_t
 socket_set_flags(struct file_descriptor *descriptor, int flags)
 {
 	// we ignore O_APPEND, but O_NONBLOCK we need to translate
-	uint32 op = (flags & O_NONBLOCK) != 0
+	uint32_t op = (flags & O_NONBLOCK) != 0
 		? B_SET_NONBLOCKING_IO : B_SET_BLOCKING_IO;
 
 	return sStackInterface->ioctl(descriptor->u.socket, op, NULL, 0);
@@ -341,8 +341,8 @@ create_socket_fd(net_socket* socket, bool kernel)
 {
 	// Get the socket's non-blocking flag, so we can set the respective
 	// open mode flag.
-	int32 nonBlock;
-	socklen_t nonBlockLen = sizeof(int32);
+	int32_t nonBlock;
+	socklen_t nonBlockLen = sizeof(int32_t);
 	status_t error = sStackInterface->getsockopt(socket, SOL_SOCKET,
 		SO_NONBLOCK, &nonBlock, &nonBlockLen);
 	if (error != B_OK)
@@ -637,7 +637,7 @@ common_socketpair(int family, int type, int protocol, int fds[2], bool kernel)
 
 
 static status_t
-common_get_next_socket_stat(int family, uint32 *cookie, struct net_stat *stat)
+common_get_next_socket_stat(int family, uint32_t *cookie, struct net_stat *stat)
 {
 	if (!get_stack_interface_module())
 		return B_UNSUPPORTED;
@@ -1259,13 +1259,13 @@ _user_socketpair(int family, int type, int protocol, int *userSocketVector)
 
 
 status_t
-_user_get_next_socket_stat(int family, uint32 *_cookie, struct net_stat *_stat)
+_user_get_next_socket_stat(int family, uint32_t *_cookie, struct net_stat *_stat)
 {
 	// check parameters and copy cookie from userland
 	if (_cookie == NULL || _stat == NULL)
 		return B_BAD_VALUE;
 
-	uint32 cookie;
+	uint32_t cookie;
 	if (!IS_USER_ADDRESS(_stat) || !IS_USER_ADDRESS(_cookie)
 		|| user_memcpy(&cookie, _cookie, sizeof(cookie)) != B_OK) {
 		return B_BAD_ADDRESS;

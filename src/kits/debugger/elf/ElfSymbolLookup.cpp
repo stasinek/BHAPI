@@ -136,8 +136,8 @@ public:
 	typedef typename ElfClass::Sym ElfSym;
 
 	ElfSymbolLookupImpl(ElfSymbolLookupSource* source, uint64 symbolTable,
-		uint64 symbolHash, uint64 stringTable, uint32 symbolCount,
-		uint32 symbolTableEntrySize, uint64 textDelta, bool swappedByteOrder)
+		uint64 symbolHash, uint64 stringTable, uint32_t symbolCount,
+		uint32_t symbolTableEntrySize, uint64 textDelta, bool swappedByteOrder)
 		:
 		fSource(NULL),
 		fSymbolTable(symbolTable),
@@ -198,7 +198,7 @@ public:
 		if (fSymbolCount == kGetSymbolCountFromHash) {
 			// Read the number of symbols in the symbol table from the hash
 			// table entry 1.
-			uint32 symbolCount;
+			uint32_t symbolCount;
 			ssize_t bytesRead = fSource->Read(fSymbolHash + 4, &symbolCount, 4);
 			if (bytesRead < 0)
 				return bytesRead;
@@ -211,7 +211,7 @@ public:
 		return B_OK;
 	}
 
-	virtual status_t NextSymbolInfo(uint32& index, SymbolInfo& _info)
+	virtual status_t NextSymbolInfo(uint32_t& index, SymbolInfo& _info)
 	{
 		uint64 symbolAddress = fSymbolTable + index * fSymbolTableEntrySize;
 		for (; index < fSymbolCount;
@@ -235,7 +235,7 @@ public:
 			// get the values
 			target_addr_t address = Get(symbol.st_value) + fTextDelta;
 			target_size_t size = Get(symbol.st_size);
-			uint32 type = symbol.Type() == STT_FUNC
+			uint32_t type = symbol.Type() == STT_FUNC
 				? B_SYMBOL_TYPE_TEXT : B_SYMBOL_TYPE_DATA;
 
 			// get the symbol name
@@ -254,11 +254,11 @@ public:
 		return B_ENTRY_NOT_FOUND;
 	}
 
-	virtual status_t GetSymbolInfo(const char* name, uint32 symbolType,
+	virtual status_t GetSymbolInfo(const char* name, uint32_t symbolType,
 		SymbolInfo& _info)
 	{
 		// TODO: Optimize this by using the hash table.
-		uint32 index = 0;
+		uint32_t index = 0;
 		SymbolInfo info;
 		while (NextSymbolInfo(index, info) == B_OK) {
 			if (strcmp(name, info.Name()) == 0) {
@@ -285,7 +285,7 @@ private:
 				return B_IO_ERROR;
 
 			size_t chunkSize = strnlen(buffer, bytesRead);
-			int32 oldLength = _string.Length();
+			int32_t oldLength = _string.Length();
 			_string.Append(buffer, chunkSize);
 			if (_string.Length() <= oldLength)
 				return B_NO_MEMORY;
@@ -307,8 +307,8 @@ private:
 	uint64					fSymbolTable;
 	uint64					fSymbolHash;
 	uint64					fStringTable;
-	uint32					fSymbolCount;
-	uint32					fSymbolTableEntrySize;
+	uint32_t					fSymbolCount;
+	uint32_t					fSymbolTableEntrySize;
 	uint64					fTextDelta;
 	bool					fSwappedByteOrder;
 };
@@ -323,8 +323,8 @@ ElfSymbolLookup::~ElfSymbolLookup()
 
 
 /*static*/ status_t ElfSymbolLookup::Create(ElfSymbolLookupSource* source, uint64 symbolTable,
-	uint64 symbolHash, uint64 stringTable, uint32 symbolCount,
-	uint32 symbolTableEntrySize, uint64 textDelta, bool is64Bit,
+	uint64 symbolHash, uint64 stringTable, uint32_t symbolCount,
+	uint32_t symbolTableEntrySize, uint64 textDelta, bool is64Bit,
 	bool swappedByteOrder, bool cacheSource, ElfSymbolLookup*& _lookup)
 {
 	// create

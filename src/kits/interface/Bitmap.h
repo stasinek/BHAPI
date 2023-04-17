@@ -81,8 +81,8 @@ public:
 
     virtual	void	AddChild(BView *view);
     virtual	bool	RemoveChild(BView *view);
-     int32		CountChildren() const;
-    BView		*ChildAt(int32 index) const;
+     int32_t		CountChildren() const;
+    BView		*ChildAt(int32_t index) const;
     BView		*FindView(const char *name) const;
     BView		*FindView(BPoint where) const;
     bool		Lock();
@@ -93,8 +93,8 @@ public:
 private:
     friend class BView;
 
-     uint32 fRows;
-     uint32 fColumns;
+     uint32_t fRows;
+     uint32_t fColumns;
 
     BGraphicsDrawable *fPixmap;
     BWindow *fWindow;

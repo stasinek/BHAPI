@@ -21,7 +21,7 @@
 */
 
 struct mp_config_table {
-	uint32	signature;			/* "PCMP" */
+	uint32_t	signature;			/* "PCMP" */
 	uint16	base_table_length;	/* length of the base table entries and this structure */
 	uint8	spec_revision;		/* spec supported, 1 for 1.1 or 4 for 1.4 */
 	uint8	checksum;			/* checksum, all bytes add up to zero */
@@ -30,14 +30,14 @@ struct mp_config_table {
 	void	*oem_table;			/* addr of oem-defined table, zero if none */
 	uint16	oem_length;			/* length of oem table */
 	uint16	num_base_entries;	/* number of entries in base table */
-	uint32	apic;				/* address of apic */
+	uint32_t	apic;				/* address of apic */
 	uint16	ext_length;			/* length of extended section */
 	uint8	ext_checksum;		/* checksum of extended table entries */
 	uint8	reserved;
 };
 
 struct mp_floating_struct {
-	uint32	signature;			/* "_MP_" */
+	uint32_t	signature;			/* "_MP_" */
 	struct mp_config_table *config_table; /* address of mp configuration table */
 	uint8	config_length;		/* length of the table in 16-byte units */
 	uint8	spec_revision;		/* spec supported, 1 for 1.1 or 4 for 1.4 */
@@ -61,9 +61,9 @@ struct mp_base_processor {
 	uint8	apic_id;
 	uint8	apic_version;
 	uint8	cpu_flags;
-	uint32	signature;			/* stepping, model, family, each four bits */
-	uint32	feature_flags;
-	uint32	res1, res2;
+	uint32_t	signature;			/* stepping, model, family, each four bits */
+	uint32_t	feature_flags;
+	uint32_t	res1, res2;
 };
 
 struct mp_base_ioapic {
@@ -71,7 +71,7 @@ struct mp_base_ioapic {
 	uint8	ioapic_id;
 	uint8	ioapic_version;
 	uint8	ioapic_flags;
-	uint32	*addr;
+	uint32_t	*addr;
 };
 
 struct mp_base_bus {
@@ -105,7 +105,7 @@ extern "C" {
 #endif
 
 
-uint32 x86_get_cpu_apic_id(int32 cpu);
+uint32_t x86_get_cpu_apic_id(int32_t cpu);
 
 
 #ifdef __cplusplus

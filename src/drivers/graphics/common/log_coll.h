@@ -28,7 +28,7 @@
 //#define ENABLE_LOGGING
 
 
-// add log entry with 0..3 (uint32) data
+// add log entry with 0..3 (uint32_t) data
 #define LOG( li, what ) log( li, what, 0 )
 #define LOG1( li, what, arg1 ) log( li, what, 1, arg1 );
 #define LOG2( li, what, arg1, arg2 ) log( li, what, 2, arg1, arg2 );
@@ -40,7 +40,7 @@ typedef struct log_entry_t {
 	uint64 tsc;
 	uint16 what;
 	uint8 num_args;
-	uint32 args[1];
+	uint32_t args[1];
 } log_entry;
 
 struct log_info_t;
@@ -60,12 +60,12 @@ void log( struct log_info_t *li, uint16 what, const uint8 num_args, ... );
 // define LOG_INCLUDE_STARTUP in your device driver
 #ifdef LOG_INCLUDE_STARTUP
 
-uint32 log_getsize( struct log_info_t *li );
-void log_getcopy( struct log_info_t *li, void *dest, uint32 max_size );
+uint32_t log_getsize( struct log_info_t *li );
+void log_getcopy( struct log_info_t *li, void *dest, uint32_t max_size );
 
 #ifdef ENABLE_LOGGING
 
-struct log_info_t *log_init( uint32 size );
+struct log_info_t *log_init( uint32_t size );
 void log_exit( struct log_info_t *li );
 
 #else

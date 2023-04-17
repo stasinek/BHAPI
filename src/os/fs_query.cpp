@@ -20,7 +20,7 @@
 
 static DIR *
 open_query_etc(dev_t device, const char *query,
-	uint32 flags, port_id port, int32 token)
+	uint32_t flags, port_id port, int32_t token)
 {
 	if (device < 0 || query == NULL || query[0] == '\0') {
 		__set_errno(B_BAD_VALUE);
@@ -46,7 +46,7 @@ open_query_etc(dev_t device, const char *query,
 
 
 DIR *
-fs_open_query(dev_t device, const char *query, uint32 flags)
+fs_open_query(dev_t device, const char *query, uint32_t flags)
 {
 	return open_query_etc(device, query, flags, -1, -1);
 }
@@ -54,7 +54,7 @@ fs_open_query(dev_t device, const char *query, uint32 flags)
 
 DIR *
 fs_open_live_query(dev_t device, const char *query,
-	uint32 flags, port_id port, int32 token)
+	uint32_t flags, port_id port, int32_t token)
 {
 	// check parameters
 	if (port < 0) {

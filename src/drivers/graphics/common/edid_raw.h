@@ -48,7 +48,7 @@ typedef struct _PACKED {
 		c3 : 5
 	);
 	uint16 prod_id;
-	uint32 serial;
+	uint32_t serial;
 	uint8 week;
 	uint8 year;			// x+1990
 } edid1_vendor_raw;

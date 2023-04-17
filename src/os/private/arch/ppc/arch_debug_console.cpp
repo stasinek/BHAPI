@@ -17,7 +17,7 @@
 
 
 void
-arch_debug_remove_interrupt_handler(uint32 line)
+arch_debug_remove_interrupt_handler(uint32_t line)
 {
 }
 

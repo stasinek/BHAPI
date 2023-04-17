@@ -28,7 +28,7 @@ HashString::HashString(const HashString &string)
 }
 
 // constructor
-HashString::HashString(const char *string, int32 length)
+HashString::HashString(const char *string, int32_t length)
 	: fLength(0),
 	  fString(NULL)
 {
@@ -42,7 +42,7 @@ HashString::~HashString()
 }
 
 // SetTo
-bool HashString::SetTo(const char *string, int32 maxLength)
+bool HashString::SetTo(const char *string, int32_t maxLength)
 {
 	if (string) {
 		if (maxLength > 0)
@@ -64,7 +64,7 @@ void HashString::Unset()
 }
 
 // Truncate
-void HashString::Truncate(int32 newLength)
+void HashString::Truncate(int32_t newLength)
 {
 	if (newLength < 0)
 		newLength = 0;
@@ -106,7 +106,7 @@ bool HashString::operator==(const HashString &string) const
 }
 
 // _SetTo
-bool HashString::_SetTo(const char *string, int32 length)
+bool HashString::_SetTo(const char *string, int32_t length)
 {
 	bool result = true;
 	Unset();

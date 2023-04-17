@@ -29,7 +29,7 @@ using namespace std;
 
 static MessagingService *sMessagingService = NULL;
 
-static const int32 kMessagingAreaSize = B_PAGE_SIZE * 4;
+static const int32_t kMessagingAreaSize = B_PAGE_SIZE * 4;
 
 
 // #pragma mark - MessagingArea
@@ -89,12 +89,12 @@ MessagingArea::InitHeader()
 
 
 bool
-MessagingArea::CheckCommandSize(int32 dataSize)
+MessagingArea::CheckCommandSize(int32_t dataSize)
 {
-	int32 size = sizeof(messaging_command) + dataSize;
+	int32_t size = sizeof(messaging_command) + dataSize;
 
 	return (dataSize >= 0
-		&& size <= kMessagingAreaSize - (int32)sizeof(messaging_area_header));
+		&& size <= kMessagingAreaSize - (int32_t)sizeof(messaging_area_header));
 }
 
 
@@ -124,7 +124,7 @@ MessagingArea::ID() const
 }
 
 
-int32
+int32_t
 MessagingArea::Size() const
 {
 	return fSize;
@@ -139,19 +139,19 @@ MessagingArea::IsEmpty() const
 
 
 void *
-MessagingArea::AllocateCommand(uint32 commandWhat, int32 dataSize,
+MessagingArea::AllocateCommand(uint32_t commandWhat, int32_t dataSize,
 	bool &wasEmpty)
 {
-	int32 size = sizeof(messaging_command) + dataSize;
+	int32_t size = sizeof(messaging_command) + dataSize;
 
-	if (dataSize < 0 || size > fSize - (int32)sizeof(messaging_area_header))
+	if (dataSize < 0 || size > fSize - (int32_t)sizeof(messaging_area_header))
 		return NULL;
 
 	// the area is used as a ring buffer
-	int32 startOffset = sizeof(messaging_area_header);
+	int32_t startOffset = sizeof(messaging_area_header);
 
 	// the simple case first: the area is empty
-	int32 commandOffset;
+	int32_t commandOffset;
 	wasEmpty = (fHeader->command_count == 0);
 	if (wasEmpty) {
 		commandOffset = startOffset;
@@ -160,10 +160,10 @@ MessagingArea::AllocateCommand(uint32 commandWhat, int32 dataSize,
 		fHeader->command_count++;
 		fHeader->first_command = fHeader->last_command = commandOffset;
 	} else {
-		int32 firstCommandOffset = fHeader->first_command;
-		int32 lastCommandOffset = fHeader->last_command;
-		int32 firstCommandSize;
-		int32 lastCommandSize;
+		int32_t firstCommandOffset = fHeader->first_command;
+		int32_t lastCommandOffset = fHeader->last_command;
+		int32_t firstCommandSize;
+		int32_t lastCommandSize;
 		messaging_command *firstCommand = _CheckCommand(firstCommandOffset,
 			firstCommandSize);
 		messaging_command *lastCommand = _CheckCommand(lastCommandOffset,
@@ -233,11 +233,11 @@ MessagingArea::NextArea() const
 
 
 messaging_command *
-MessagingArea::_CheckCommand(int32 offset, int32 &size)
+MessagingArea::_CheckCommand(int32_t offset, int32_t &size)
 {
 	// check offset
-	if (offset < (int32)sizeof(messaging_area_header)
-		|| offset + (int32)sizeof(messaging_command) > fSize
+	if (offset < (int32_t)sizeof(messaging_area_header)
+		|| offset + (int32_t)sizeof(messaging_command) > fSize
 		|| (offset & 0x3)) {
 		return NULL;
 	}
@@ -245,7 +245,7 @@ MessagingArea::_CheckCommand(int32 offset, int32 &size)
 	// get and check size
 	messaging_command *command = (messaging_command*)((char*)fHeader + offset);
 	size = command->size;
-	if (size < (int32)sizeof(messaging_command))
+	if (size < (int32_t)sizeof(messaging_command))
 		return NULL;
 	size = (size + 3) & ~0x3;	// align
 	if (offset + size > fSize)
@@ -372,15 +372,15 @@ MessagingService::UnregisterService()
 
 
 status_t
-MessagingService::SendMessage(const void *message, int32 messageSize,
-	const messaging_target *targets, int32 targetCount)
+MessagingService::SendMessage(const void *message, int32_t messageSize,
+	const messaging_target *targets, int32_t targetCount)
 {
 PRINT(("MessagingService::SendMessage(%p, %ld, %p, %ld)\n", message,
 messageSize, targets, targetCount));
 	if (!message || messageSize <= 0 || !targets || targetCount <= 0)
 		return B_BAD_VALUE;
 
-	int32 dataSize = sizeof(messaging_command_send_message)
+	int32_t dataSize = sizeof(messaging_command_send_message)
 		+ targetCount * sizeof(messaging_target) + messageSize;
 
 	// allocate space for the command
@@ -415,7 +415,7 @@ PRINT(("  Allocated space for send message command: area: %p, data: %p, "
 
 
 status_t
-MessagingService::_AllocateCommand(int32 commandWhat, int32 size,
+MessagingService::_AllocateCommand(int32_t commandWhat, int32_t size,
 	MessagingArea *&area, void *&data, bool &wasEmpty)
 {
 	if (!fFirstArea)
@@ -491,8 +491,8 @@ MessagingService::_AllocateCommand(int32 commandWhat, int32 size,
 
 
 status_t
-send_message(const void *message, int32 messageSize,
-	const messaging_target *targets, int32 targetCount)
+send_message(const void *message, int32_t messageSize,
+	const messaging_target *targets, int32_t targetCount)
 {
 	// check, if init_messaging_service() has been called yet
 	if (!sMessagingService)
@@ -512,7 +512,7 @@ send_message(const void *message, int32 messageSize,
 
 status_t
 send_message(const KMessage *message, const messaging_target *targets,
-	int32 targetCount)
+	int32_t targetCount)
 {
 	if (!message)
 		return B_BAD_VALUE;

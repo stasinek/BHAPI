@@ -19,7 +19,7 @@
 #include <View.h>
 
 
-BStringItem::BStringItem(const char* text, uint32 level, bool expanded)
+BStringItem::BStringItem(const char* text, uint32_t level, bool expanded)
 	:
 	BListItem(level, expanded),
 	fText(NULL),

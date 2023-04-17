@@ -59,7 +59,7 @@ BNetEndpoint::BNetEndpoint(BMessage* archive)
 	unsigned short addrPort = 0, peerPort = 0;
 
 	fStatus = archive->FindInt32("_BNetEndpoint_addr_addr",
-		(int32 *)&addr.s_addr);
+		(int32_t *)&addr.s_addr);
 	if (fStatus == B_OK) {
 		fStatus = archive->FindInt16("_BNetEndpoint_addr_port",
 			(int16 *)&addrPort);
@@ -68,7 +68,7 @@ BNetEndpoint::BNetEndpoint(BMessage* archive)
 	}
 
 	fStatus = archive->FindInt32("_BNetEndpoint_peer_addr",
-		(int32 *)&peer.s_addr);
+		(int32_t *)&peer.s_addr);
 	if (fStatus == B_OK) {
 		fStatus = archive->FindInt16("_BNetEndpoint_peer_port",
 			(int16 *)&peerPort);
@@ -78,7 +78,7 @@ BNetEndpoint::BNetEndpoint(BMessage* archive)
 
 	fStatus = archive->FindInt64("_BNetEndpoint_timeout", (int64 *)&fTimeout);
 	if (fStatus == B_OK)
-		fStatus = archive->FindInt32("_BNetEndpoint_proto", (int32 *)&fType);
+		fStatus = archive->FindInt32("_BNetEndpoint_proto", (int32_t *)&fType);
 
 	if (fStatus == B_OK)
 		_SetupSocket();
@@ -253,7 +253,7 @@ status_t BNetEndpoint::SetProtocol(int protocol)
 
 
 int
-BNetEndpoint::SetOption(int32 option, int32 level,
+BNetEndpoint::SetOption(int32_t option, int32_t level,
 	const void* data, unsigned int length)
 {
 	if (fSocket < 0 && _SetupSocket() != B_OK)
@@ -421,7 +421,7 @@ status_t BNetEndpoint::Listen(int backlog)
 
 
 BNetEndpoint*
-BNetEndpoint::Accept(int32 timeout)
+BNetEndpoint::Accept(int32_t timeout)
 {
 	// TODO: IsDataPending() expects 0 as special value for infinite timeout,
 	// hence the following call is broken for timeout < 0 and timeout == 0.
@@ -486,7 +486,7 @@ bool BNetEndpoint::IsDataPending(bigtime_t timeout)
 }
 
 
-int32 BNetEndpoint::Receive(void* buffer, size_t length, int flags)
+int32_t BNetEndpoint::Receive(void* buffer, size_t length, int flags)
 {
 	if (fSocket < 0 && _SetupSocket() != B_OK)
 		return fStatus;
@@ -504,7 +504,7 @@ int32 BNetEndpoint::Receive(void* buffer, size_t length, int flags)
 }
 
 
-int32 BNetEndpoint::Receive(BNetBuffer& buffer, size_t length, int flags)
+int32_t BNetEndpoint::Receive(BNetBuffer& buffer, size_t length, int flags)
 {
 	BNetBuffer chunk(length);
 	ssize_t bytesReceived = Receive(chunk.Data(), length, flags);
@@ -514,7 +514,7 @@ int32 BNetEndpoint::Receive(BNetBuffer& buffer, size_t length, int flags)
 }
 
 
-int32 BNetEndpoint::ReceiveFrom(void* buffer, size_t length,
+int32_t BNetEndpoint::ReceiveFrom(void* buffer, size_t length,
 	BNetAddress& address, int flags)
 {
 	if (fSocket < 0 && _SetupSocket() != B_OK)
@@ -539,7 +539,7 @@ int32 BNetEndpoint::ReceiveFrom(void* buffer, size_t length,
 }
 
 
-int32 BNetEndpoint::ReceiveFrom(BNetBuffer& buffer, size_t length,
+int32_t BNetEndpoint::ReceiveFrom(BNetBuffer& buffer, size_t length,
 	BNetAddress& address, int flags)
 {
 	BNetBuffer chunk(length);
@@ -550,7 +550,7 @@ int32 BNetEndpoint::ReceiveFrom(BNetBuffer& buffer, size_t length,
 }
 
 
-int32 BNetEndpoint::Send(const void* buffer, size_t length, int flags)
+int32_t BNetEndpoint::Send(const void* buffer, size_t length, int flags)
 {
 	if (fSocket < 0 && _SetupSocket() != B_OK)
 		return fStatus;
@@ -563,13 +563,13 @@ int32 BNetEndpoint::Send(const void* buffer, size_t length, int flags)
 }
 
 
-int32 BNetEndpoint::Send(BNetBuffer& buffer, int flags)
+int32_t BNetEndpoint::Send(BNetBuffer& buffer, int flags)
 {
 	return Send(buffer.Data(), buffer.Size(), flags);
 }
 
 
-int32 BNetEndpoint::SendTo(const void* buffer, size_t length,
+int32_t BNetEndpoint::SendTo(const void* buffer, size_t length,
 	const BNetAddress& address, int flags)
 {
 	if (fSocket < 0 && _SetupSocket() != B_OK)
@@ -588,7 +588,7 @@ int32 BNetEndpoint::SendTo(const void* buffer, size_t length,
 }
 
 
-int32 BNetEndpoint::SendTo(BNetBuffer& buffer,
+int32_t BNetEndpoint::SendTo(BNetBuffer& buffer,
 	const BNetAddress& address, int flags)
 {
 	return SendTo(buffer.Data(), buffer.Size(), address, flags);

@@ -23,7 +23,7 @@ public:
 
 	static MessagingArea *Create(sem_id lockSem, sem_id counterSem);
 
-	static bool CheckCommandSize(int32 dataSize);
+	static bool CheckCommandSize(int32_t dataSize);
 
 	void InitHeader();
 
@@ -31,10 +31,10 @@ public:
 	void Unlock();
 
 	area_id ID() const;
-	int32 Size() const;
+	int32_t Size() const;
 	bool IsEmpty() const;
 
-	void *AllocateCommand(uint32 commandWhat, int32 dataSize, bool &wasEmpty);
+	void *AllocateCommand(uint32_t commandWhat, int32_t dataSize, bool &wasEmpty);
 	void CommitCommand();
 
 	void SetNextArea(MessagingArea *area);
@@ -43,11 +43,11 @@ public:
 private:
 	MessagingArea();
 
-	messaging_command *_CheckCommand(int32 offset, int32 &size);
+	messaging_command *_CheckCommand(int32_t offset, int32_t &size);
 
 	messaging_area_header	*fHeader;
 	area_id					fID;
-	int32					fSize;
+	int32_t					fSize;
 	sem_id					fLockSem;
 	sem_id					fCounterSem;
 	MessagingArea			*fNextArea;
@@ -68,11 +68,11 @@ public:
 		area_id &areaID);
 	status_t UnregisterService();
 
-	status_t SendMessage(const void *message, int32 messageSize,
-		const messaging_target *targets, int32 targetCount);
+	status_t SendMessage(const void *message, int32_t messageSize,
+		const messaging_target *targets, int32_t targetCount);
 
 private:
-	status_t _AllocateCommand(int32 commandWhat, int32 size,
+	status_t _AllocateCommand(int32_t commandWhat, int32_t size,
 		MessagingArea *&area, void *&data, bool &wasEmpty);
 
 	recursive_lock	fLock;

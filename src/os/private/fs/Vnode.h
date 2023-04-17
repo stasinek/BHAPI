@@ -34,7 +34,7 @@ struct vnode : fs_vnode, DoublyLinkedListLinkImpl<vnode> {
 			list_link			unused_link;
 			ino_t				id;
 			dev_t				device;
-			int32				ref_count;
+			int32_t				ref_count;
 
 public:
 	inline	bool				IsBusy() const;
@@ -60,8 +60,8 @@ public:
 	inline	bool				IsCovering() const;
 	inline	void				SetCovering(bool covering);
 
-	inline	uint32				Type() const;
-	inline	void				SetType(uint32 type);
+	inline	uint32_t				Type() const;
+	inline	void				SetType(uint32_t type);
 
 	inline	bool				Lock();
 	inline	void				Unlock();
@@ -69,18 +69,18 @@ public:
 	static	void				StaticInit();
 
 private:
-	static	const uint32		kFlagsLocked		= 0x00000001;
-	static	const uint32		kFlagsWaitingLocker	= 0x00000002;
-	static	const uint32		kFlagsBusy			= 0x00000004;
-	static	const uint32		kFlagsRemoved		= 0x00000008;
-	static	const uint32		kFlagsUnpublished	= 0x00000010;
-	static	const uint32		kFlagsUnused		= 0x00000020;
-	static	const uint32		kFlagsHot			= 0x00000040;
-	static	const uint32		kFlagsCovered		= 0x00000080;
-	static	const uint32		kFlagsCovering		= 0x00000100;
-	static	const uint32		kFlagsType			= 0xfffff000;
+	static	const uint32_t		kFlagsLocked		= 0x00000001;
+	static	const uint32_t		kFlagsWaitingLocker	= 0x00000002;
+	static	const uint32_t		kFlagsBusy			= 0x00000004;
+	static	const uint32_t		kFlagsRemoved		= 0x00000008;
+	static	const uint32_t		kFlagsUnpublished	= 0x00000010;
+	static	const uint32_t		kFlagsUnused		= 0x00000020;
+	static	const uint32_t		kFlagsHot			= 0x00000040;
+	static	const uint32_t		kFlagsCovered		= 0x00000080;
+	static	const uint32_t		kFlagsCovering		= 0x00000100;
+	static	const uint32_t		kFlagsType			= 0xfffff000;
 
-	static	const uint32		kBucketCount		= 32;
+	static	const uint32_t		kBucketCount		= 32;
 
 			struct LockWaiter : DoublyLinkedListLinkImpl<LockWaiter> {
 				LockWaiter*		next;
@@ -104,7 +104,7 @@ private:
 			void				_WakeUpLocker();
 
 private:
-			int32				fFlags;
+			int32_t				fFlags;
 
 	static	Bucket				sBuckets[kBucketCount];
 };
@@ -229,15 +229,15 @@ vnode::SetCovering(bool covering)
 }
 
 
-uint32
+uint32_t
 vnode::Type() const
 {
-	return (uint32)fFlags & kFlagsType;
+	return (uint32_t)fFlags & kFlagsType;
 }
 
 
 void
-vnode::SetType(uint32 type)
+vnode::SetType(uint32_t type)
 {
 	atomic_and(&fFlags, ~kFlagsType);
 	atomic_or(&fFlags, type & kFlagsType);

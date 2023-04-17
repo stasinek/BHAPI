@@ -21,7 +21,7 @@ BDebugMessageHandler::~BDebugMessageHandler()
 	\return \c true, if the caller is supposed to continue the thread, \c false
 		otherwise.
 */
-bool BDebugMessageHandler::HandleDebugMessage(int32 messageCode,
+bool BDebugMessageHandler::HandleDebugMessage(int32_t messageCode,
 	const debug_debugger_message_data& message)
 {
 	switch (messageCode) {
@@ -197,7 +197,7 @@ bool BDebugMessageHandler::HandleHandedOver(const debug_handed_over& message)
 /*!	Called by the base class versions of the specific Handle*() methods.
 	Can be overridded to handle any message not handled otherwise.
 */
-bool BDebugMessageHandler::UnhandledDebugMessage(int32 messageCode,
+bool BDebugMessageHandler::UnhandledDebugMessage(int32_t messageCode,
 	const debug_debugger_message_data& message)
 {
 	return true;

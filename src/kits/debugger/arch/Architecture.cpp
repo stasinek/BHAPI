@@ -65,8 +65,8 @@ status_t Architecture::InitRegisterRules(CfaContext& context) const
 		return result;
 
 	BReference<RegisterMap> toDwarfMapReference(toDwarf, true);
-	for (int32 i = 0; i < CountRegisters(); i++) {
-		int32 dwarfReg = toDwarf->MapRegisterIndex(i);
+	for (int32_t i = 0; i < CountRegisters(); i++) {
+		int32_t dwarfReg = toDwarf->MapRegisterIndex(i);
 		if (dwarfReg < 0 || dwarfReg > CountRegisters() - 1)
 			continue;
 
@@ -94,7 +94,7 @@ status_t Architecture::InitRegisterRules(CfaContext& context) const
 status_t Architecture::CreateStackTrace(Team* team,
 	ImageDebugInfoProvider* imageInfoProvider, CpuState* cpuState,
 	StackTrace*& _stackTrace, ReturnValueInfoList* returnValueInfos,
-	int32 maxStackDepth, bool useExistingTrace, bool getFullFrameInfo)
+	int32_t maxStackDepth, bool useExistingTrace, bool getFullFrameInfo)
 {
 	BReference<CpuState> cpuStateReference(cpuState);
 

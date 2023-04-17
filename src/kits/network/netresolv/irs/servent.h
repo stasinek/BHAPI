@@ -42,7 +42,7 @@ struct servent_data {
 #define	_SV_CDB		2
 #define	_SV_PLAINFILE	4
 #define	_SV_FIRST	8
-	uint32_t cdb_index;
+	uint32_t_t cdb_index;
 	uint8_t *cdb_buf;
 	size_t cdb_buf_len;
 	char *line;

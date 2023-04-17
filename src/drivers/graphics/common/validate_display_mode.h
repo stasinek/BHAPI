@@ -27,8 +27,8 @@ struct display_constraints {
 	uint16	min_v_display;
 	uint16	max_v_display;
 
-	uint32	min_pixel_clock;
-	uint32	max_pixel_clock;
+	uint32_t	min_pixel_clock;
+	uint32_t	max_pixel_clock;
 
 	timing_constraints	horizontal_timing;
 	timing_constraints	vertical_timing;

@@ -60,7 +60,7 @@ class BNumberFormatParameters : public BFormatParameters {
 		bool							fUseBasePrefix;
 		size_t							fMinimalIntegerDigits;
 		bool							fUseZeroPadding;
-		uint32							fFlags;
+		uint32_t							fFlags;
 };
 
 #endif	// _B_NUMBER_FORMAT_PARAMETERS_H_

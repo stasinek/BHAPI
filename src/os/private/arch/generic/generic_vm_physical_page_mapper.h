@@ -19,9 +19,9 @@ extern "C" {
 #endif
 
 typedef status_t (*generic_map_iospace_chunk_func)(addr_t virtualAddress,
-	phys_addr_t physicalAddress, uint32 flags);
+	phys_addr_t physicalAddress, uint32_t flags);
 
-status_t generic_get_physical_page(phys_addr_t pa, addr_t *va, uint32 flags);
+status_t generic_get_physical_page(phys_addr_t pa, addr_t *va, uint32_t flags);
 status_t generic_put_physical_page(addr_t va);
 status_t generic_vm_physical_page_mapper_init(kernel_args *args,
 	generic_map_iospace_chunk_func mapIOSpaceChunk, addr_t *ioSpaceBase,

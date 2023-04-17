@@ -67,7 +67,7 @@ public:
             status_t			GetAvailableCatalogs(BMessage* message,
                                     const char* sigPattern = NULL,
                                     const char* langPattern = NULL,
-                                    int32 fingerprint = 0) const;
+                                    int32_t fingerprint = 0) const;
                                     // the message contains...
 
             status_t			Refresh();
@@ -91,7 +91,7 @@ public:
     static	const char*			kCatFingerprintAttr;
 
     static	const char*			kEmbeddedCatAttr;
-    static	int32				kEmbeddedCatResId;
+    static	int32_t				kEmbeddedCatResId;
 
 protected:
                                 BLocaleRoster();
@@ -101,7 +101,7 @@ protected:
 
 private:
     static	BCatalog*			_GetCatalog(BCatalog* catalog,
-                                    int32* catalogInitStatus);
+                                    int32_t* catalogInitStatus);
 
             status_t			_PrepareCatalogEntry(const bhapi::entry_ref& ref,
                                     BString& signature, BString& context,

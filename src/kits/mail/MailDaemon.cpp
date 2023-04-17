@@ -38,7 +38,7 @@ bool BMailDaemon::IsRunning()
 }
 
 
-status_t BMailDaemon::CheckMail(int32 accountID)
+status_t BMailDaemon::CheckMail(int32_t accountID)
 {
 	if (!fDaemon.IsValid())
 		return B_MAIL_NO_DAEMON;
@@ -49,7 +49,7 @@ status_t BMailDaemon::CheckMail(int32 accountID)
 }
 
 
-status_t BMailDaemon::CheckAndSendQueuedMail(int32 accountID)
+status_t BMailDaemon::CheckAndSendQueuedMail(int32_t accountID)
 {
 	if (!fDaemon.IsValid())
 		return B_MAIL_NO_DAEMON;
@@ -69,7 +69,7 @@ status_t BMailDaemon::SendQueuedMail()
 }
 
 
-int32 BMailDaemon::CountNewMessages(bool waitForFetchCompletion)
+int32_t BMailDaemon::CountNewMessages(bool waitForFetchCompletion)
 {
 	if (!fDaemon.IsValid())
 		return B_MAIL_NO_DAEMON;
@@ -86,7 +86,7 @@ int32 BMailDaemon::CountNewMessages(bool waitForFetchCompletion)
 }
 
 
-status_t BMailDaemon::MarkAsRead(int32 account, const entry_ref& ref, read_flags flag)
+status_t BMailDaemon::MarkAsRead(int32_t account, const entry_ref& ref, read_flags flag)
 {
 	if (!fDaemon.IsValid())
 		return B_MAIL_NO_DAEMON;

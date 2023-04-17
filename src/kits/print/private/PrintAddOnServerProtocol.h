@@ -25,7 +25,7 @@ enum {
 		// 		BString kPrinterDriverAttribute
 		// 		BString kPrinterNameAttribute
 		// Reply:
-		// 		int32 kPrintAddOnServerStatusAttribute
+		// 		int32_t kPrintAddOnServerStatusAttribute
 
 	kMessageConfigPage = 'PScp',
 		// Request:
@@ -33,7 +33,7 @@ enum {
 		// 		BString kPrinterFolderAttribute
 		// 		BMessage kPrintSettingsAttribute
 		// Reply:
-		// 		int32 kPrintAddOnServerStatusAttribute
+		// 		int32_t kPrintAddOnServerStatusAttribute
 		// 		BMessage kPrintSettingsAttribute (if status is B_OK)
 
 	kMessageConfigJob = 'PScj',
@@ -42,7 +42,7 @@ enum {
 		// 		BString kPrinterFolderAttribute
 		// 		BMessage kPrintSettingsAttribute
 		// Reply:
-		// 		int32 kPrintAddOnServerStatusAttribute
+		// 		int32_t kPrintAddOnServerStatusAttribute
 		// 		BMessage kPrintSettingsAttribute (if status is B_OK)
 
 	kMessageDefaultSettings = 'PSds',
@@ -50,7 +50,7 @@ enum {
 		// 		BString kPrinterDriverAttribute
 		// 		BString kPrinterFolderAttribute
 		// Reply:
-		// 		int32 kPrintAddOnServerStatusAttribute
+		// 		int32_t kPrintAddOnServerStatusAttribute
 		// 		BMessage kPrintSettingsAttribute (if status is B_OK)
 
 	kMessageTakeJob = 'PStj',
@@ -59,7 +59,7 @@ enum {
 		// 		BString kPrintJobFileAttribute
 		// 		BString kPrinterFolderAttribute
 		// Reply:
-		// 		int32 kPrintAddOnServerStatusAttribute
+		// 		int32_t kPrintAddOnServerStatusAttribute
 };
 
 #endif

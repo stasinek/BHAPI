@@ -33,7 +33,7 @@ public:
 
 protected:
 
-	virtual	BMediaAddOn*	AddOn(int32* id) const;
+	virtual	BMediaAddOn*	AddOn(int32_t* id) const;
 
 	virtual void			NodeRegistered();
 
@@ -50,7 +50,7 @@ protected:
 	virtual	void			TimeWarp(bigtime_t realTime,
 								bigtime_t performanceTime);
 
-	virtual	status_t		HandleMessage(int32 message,
+	virtual	status_t		HandleMessage(int32_t message,
 								const void* data,
 								size_t size);
 
@@ -59,10 +59,10 @@ protected:
 	virtual	status_t		AcceptFormat(const media_destination& dest,
 								media_format* format);
 
-	virtual	status_t		GetNextInput(int32* cookie,
+	virtual	status_t		GetNextInput(int32_t* cookie,
 								media_input* input);
 
-	virtual	void			DisposeInputCookie(int32 cookie);
+	virtual	void			DisposeInputCookie(int32_t cookie);
 
 	virtual	void			BufferReceived(BBuffer* buffer);
 
@@ -80,23 +80,23 @@ protected:
 
 	virtual	status_t		FormatChanged(const media_source& source,
 								const media_destination& consumer,
-								int32 tag,
+								int32_t tag,
 								const media_format& format);
 
 	// BBufferProducer
 
 	virtual 	status_t 	FormatSuggestionRequested(media_type type,
-									int32 quality, media_format* format);
+									int32_t quality, media_format* format);
 	virtual 	status_t 	FormatProposal(const media_source& source,
 									media_format *format);
 	virtual 	status_t 	FormatChangeRequested(const media_source& source,
 									const media_destination& dest,
 									media_format *format,
-									int32* _deprecated_);
+									int32_t* _deprecated_);
 	virtual 	void 		LateNoticeReceived(const media_source& source,
 									bigtime_t late,	bigtime_t when);
-	virtual 	status_t	GetNextOutput(int32 *cookie, media_output *output);
-	virtual 	status_t 	DisposeOutputCookie(int32 cookie);
+	virtual 	status_t	GetNextOutput(int32_t *cookie, media_output *output);
+	virtual 	status_t 	DisposeOutputCookie(int32_t cookie);
 	virtual 	status_t	SetBufferGroup(const media_source& source,
 									BBufferGroup *group);
 	virtual 	status_t 	PrepareToConnect(const media_source& source,
@@ -112,14 +112,14 @@ protected:
 	virtual		void 		Disconnect(const media_source& source,
 									const media_destination& dest);
 	virtual 	void 		EnableOutput(const media_source& source,
-									bool enabled, int32* _deprecated_);
+									bool enabled, int32_t* _deprecated_);
 	virtual 	status_t 	GetLatency(bigtime_t *outLatency);
 	virtual 	void 		LatencyChanged(	const media_source& source,
 									const media_destination& dest,
-									bigtime_t latency, uint32 flags);
+									bigtime_t latency, uint32_t flags);
 
 				void 		ProducerDataStatus(const media_destination& dest,
-								int32 status, bigtime_t when);
+								int32_t status, bigtime_t when);
 protected:
 	virtual 	void 		HandleEvent(const media_timed_event *event,
 									bigtime_t late,

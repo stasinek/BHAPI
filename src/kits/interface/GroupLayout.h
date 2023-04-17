@@ -20,19 +20,19 @@ public:
 			orientation			Orientation() const;
 			void				SetOrientation(orientation orientation);
 
-			float				ItemWeight(int32 index) const;
-			void				SetItemWeight(int32 index, float weight);
+			float				ItemWeight(int32_t index) const;
+			void				SetItemWeight(int32_t index, float weight);
 
 	virtual	BLayoutItem*		AddView(BView* child);
-	virtual	BLayoutItem*		AddView(int32 index, BView* child);
+	virtual	BLayoutItem*		AddView(int32_t index, BView* child);
 	virtual	BLayoutItem*		AddView(BView* child, float weight);
-	virtual	BLayoutItem*		AddView(int32 index, BView* child,
+	virtual	BLayoutItem*		AddView(int32_t index, BView* child,
 									float weight);
 
 	virtual	bool				AddItem(BLayoutItem* item);
-	virtual	bool				AddItem(int32 index, BLayoutItem* item);
+	virtual	bool				AddItem(int32_t index, BLayoutItem* item);
 	virtual	bool				AddItem(BLayoutItem* item, float weight);
-	virtual	bool				AddItem(int32 index, BLayoutItem* item,
+	virtual	bool				AddItem(int32_t index, BLayoutItem* item,
 									float weight);
 
 	virtual status_t			Archive(BMessage* into, bool deep = true) const;
@@ -44,20 +44,20 @@ protected:
 	virtual status_t			AllArchived(BMessage* into) const;
 	virtual	status_t			AllUnarchived(const BMessage* from);
 	virtual status_t			ItemArchived(BMessage* into, BLayoutItem* item,
-									int32 index) const;
+									int32_t index) const;
 	virtual	status_t			ItemUnarchived(const BMessage* from,
-									BLayoutItem* item, int32 index);
+									BLayoutItem* item, int32_t index);
 
-	virtual	bool				ItemAdded(BLayoutItem* item, int32 atIndex);
-	virtual	void				ItemRemoved(BLayoutItem* item, int32 fromIndex);
+	virtual	bool				ItemAdded(BLayoutItem* item, int32_t atIndex);
+	virtual	void				ItemRemoved(BLayoutItem* item, int32_t fromIndex);
 
 	virtual	void				PrepareItems(orientation orientation);
 
-	virtual	int32				InternalCountColumns();
-	virtual	int32				InternalCountRows();
+	virtual	int32_t				InternalCountColumns();
+	virtual	int32_t				InternalCountRows();
 	virtual	void				GetColumnRowConstraints(
 									orientation orientation,
-									int32 index,
+									int32_t index,
 									ColumnRowConstraints* constraints);
 	virtual	void				GetItemDimensions(BLayoutItem* item,
 									Dimensions* dimensions);
@@ -87,7 +87,7 @@ private:
 			orientation			fOrientation;
 			BList				fVisibleItems;
 
-			uint32				_reserved[5];
+			uint32_t				_reserved[5];
 };
 
 #endif	// _GROUP_LAYOUT_H

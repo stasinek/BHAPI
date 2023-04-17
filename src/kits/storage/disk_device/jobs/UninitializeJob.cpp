@@ -26,7 +26,7 @@ UninitializeJob::~UninitializeJob()
 // Do
 status_t UninitializeJob::Do()
 {
-	int32 changeCounter = fPartition->ChangeCounter();
+	int32_t changeCounter = fPartition->ChangeCounter();
 	status_t error = _kern_uninitialize_partition(fPartition->PartitionID(),
 		&changeCounter);
 

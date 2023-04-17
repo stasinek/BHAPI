@@ -22,25 +22,25 @@ public:
 								BIcon();
 								~BIcon();
 
-			status_t			SetTo(const BBitmap* bitmap, uint32 flags = 0);
+			status_t			SetTo(const BBitmap* bitmap, uint32_t flags = 0);
 
-			bool				SetBitmap(BBitmap* bitmap, uint32 which);
-			BBitmap*			Bitmap(uint32 which) const;
+			bool				SetBitmap(BBitmap* bitmap, uint32_t which);
+			BBitmap*			Bitmap(uint32_t which) const;
 
 			status_t			SetExternalBitmap(const BBitmap* bitmap,
-									uint32 which, uint32 flags);
+									uint32_t which, uint32_t flags);
 
 			BBitmap*			CreateBitmap(const BRect& bounds,
-									color_space colorSpace, uint32 which);
+									color_space colorSpace, uint32_t which);
 			BBitmap*			CopyBitmap(const BBitmap& bitmapToClone,
-									uint32 which);
+									uint32_t which);
 			void				DeleteBitmaps();
 
 	// convenience methods for icon owners
-	static	status_t			UpdateIcon(const BBitmap* bitmap, uint32 flags,
+	static	status_t			UpdateIcon(const BBitmap* bitmap, uint32_t flags,
 									BIcon*& _icon);
 	static	status_t			SetIconBitmap(const BBitmap* bitmap,
-									uint32 which, uint32 flags, BIcon*& _icon);
+									uint32_t which, uint32_t flags, BIcon*& _icon);
 
 private:
 			typedef BObjectList<BBitmap> BitmapList;
@@ -51,7 +51,7 @@ private:
 	static	status_t			_TrimBitmap(const BBitmap* bitmap,
 									bool keepAspect, BBitmap*& _trimmedBitmap);
 			status_t			_MakeBitmaps(const BBitmap* bitmap,
-									uint32 flags);
+									uint32_t flags);
 
 private:
 			BitmapList			fEnabledBitmaps;

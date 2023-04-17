@@ -29,18 +29,18 @@
 
 #define ISCSI_BHS_LENGTHS 			\
 	uint8 totalAHSLength; 			\
-	uint32 dataSegmentLength : 24;
+	uint32_t dataSegmentLength : 24;
 
 #define ISCSI_BHS_TASK_TAG 			\
-	uint32 initiatorTaskTag;
+	uint32_t initiatorTaskTag;
 
 #define ISCSI_BHS_TAGS				\
 	ISCSI_BHS_TASK_TAG				\
-	uint32 targetTransferTag;
+	uint32_t targetTransferTag;
 
 struct iscsi_basic_header_segment {
 	ISCSI_BHS_START
-	uint32 opcodeSpecific : 23;
+	uint32_t opcodeSpecific : 23;
 	ISCSI_BHS_LENGTHS
 	uint64 lun;
 	ISCSI_BHS_TASK_TAG
@@ -80,9 +80,9 @@ struct iscsi_scsi_command {
 	ISCSI_BHS_LENGTHS
 	uint64 lun;
 	ISCSI_BHS_TASK_TAG
-	uint32 expectedDataTransferLength;
-	uint32 cmdSN;
-	uint32 expStatSN;
+	uint32_t expectedDataTransferLength;
+	uint32_t cmdSN;
+	uint32_t expStatSN;
 	uint8 cdb[16];
 } _PACKED;
 
@@ -98,15 +98,15 @@ struct iscsi_scsi_response {
 	uint8 response;
 	uint8 status;
 	ISCSI_BHS_LENGTHS
-	uint32 reserved4[2];
+	uint32_t reserved4[2];
 	ISCSI_BHS_TASK_TAG
-	uint32 snackTag;
-	uint32 statSN;
-	uint32 expCmdSN;
-	uint32 maxCmdSN;
-	uint32 expDataSN;
-	uint32 bidirectionalReadResidualCount;
-	uint32 residualCount;
+	uint32_t snackTag;
+	uint32_t statSN;
+	uint32_t expCmdSN;
+	uint32_t maxCmdSN;
+	uint32_t expDataSN;
+	uint32_t bidirectionalReadResidualCount;
+	uint32_t residualCount;
 } _PACKED;
 
 // SCSI Data-In (RFC 3270 10.7)
@@ -122,12 +122,12 @@ struct iscsi_scsi_data_in {
 	ISCSI_BHS_LENGTHS
 	uint64 lun;
 	ISCSI_BHS_TAGS
-	uint32 statSN;
-	uint32 expCmdSN;
-	uint32 maxCmdSN;
-	uint32 dataSN;
-	uint32 bufferOffset;
-	uint32 residualCount;
+	uint32_t statSN;
+	uint32_t expCmdSN;
+	uint32_t maxCmdSN;
+	uint32_t dataSN;
+	uint32_t bufferOffset;
+	uint32_t residualCount;
 } _PACKED;
 
 // Text Request (RFC 3720 10.10)
@@ -145,27 +145,27 @@ struct iscsi_text_request {
 	}
 	ISCSI_BHS_START
 	bool c : 1;				// continue
-	uint32 reserved2 : 22;
+	uint32_t reserved2 : 22;
 	ISCSI_BHS_LENGTHS
 	uint64 lun;
 	ISCSI_BHS_TAGS
-	uint32 cmdSN;
-	uint32 expStatSN;
-	uint32 reserved3[4];
+	uint32_t cmdSN;
+	uint32_t expStatSN;
+	uint32_t reserved3[4];
 } _PACKED;
 
 // Text Response (RFC 3720 10.11)
 struct iscsi_text_response {
 	ISCSI_BHS_START
 	bool c : 1; // continue
-	uint32 reserved2 : 22;
+	uint32_t reserved2 : 22;
 	ISCSI_BHS_LENGTHS
 	uint64 lun;
 	ISCSI_BHS_TAGS
-	uint32 statSN;
-	uint32 expCmdSN;
-	uint32 maxCmdSN;
-	uint32 reserved3[3];
+	uint32_t statSN;
+	uint32_t expCmdSN;
+	uint32_t maxCmdSN;
+	uint32_t reserved3[3];
 } _PACKED;
 
 struct iscsi_isid {
@@ -203,9 +203,9 @@ struct iscsi_login_request {
 	ISCSI_BHS_TASK_TAG
 	uint16 cid;
 	uint16 reserved3;
-	uint32 cmdSN;
-	uint32 expStatSN;
-	uint32 reserved4[4];
+	uint32_t cmdSN;
+	uint32_t expStatSN;
+	uint32_t reserved4[4];
 } _PACKED;
 
 #define ISCSI_SESSION_STAGE_SECURITY_NEGOTIATION			0
@@ -232,14 +232,14 @@ struct iscsi_login_response {
 	iscsi_isid isid;
 	uint16 tsih;
 	ISCSI_BHS_TASK_TAG
-	uint32 reserved3;
-	uint32 statSN;
-	uint32 expCmdSN;
-	uint32 maxCmdSN;
+	uint32_t reserved3;
+	uint32_t statSN;
+	uint32_t expCmdSN;
+	uint32_t maxCmdSN;
 	uint8 statusClass;
 	uint8 statusDetail;
 	uint16 reserved4;
-	uint32 reserved5[2];
+	uint32_t reserved5[2];
 } _PACKED;
 
 // Logout Request (RFC 3720 10.14)
@@ -263,13 +263,13 @@ struct iscsi_logout_request {
 	uint8 reasonCode : 7;
 	uint16 reserved2;
 	ISCSI_BHS_LENGTHS
-	uint32 reserved3[2];
+	uint32_t reserved3[2];
 	ISCSI_BHS_TASK_TAG
 	uint16 cid;
 	uint16 reserved4;
-	uint32 cmdSN;
-	uint32 expStatSN;
-	uint32 reserved5[4];
+	uint32_t cmdSN;
+	uint32_t expStatSN;
+	uint32_t reserved5[4];
 } _PACKED;
 
 #define ISCSI_LOGOUT_REASON_CLOSE_SESSION		0
@@ -283,16 +283,16 @@ struct iscsi_logout_response {
 	uint8 response;
 	uint8 reserved3;
 	ISCSI_BHS_LENGTHS
-	uint32 reserved4[2];
+	uint32_t reserved4[2];
 	ISCSI_BHS_TASK_TAG
-	uint32 reserved5;
-	uint32 statSN;
-	uint32 expCmdSN;
-	uint32 maxCmdSN;
-	uint32 reserved6;
+	uint32_t reserved5;
+	uint32_t statSN;
+	uint32_t expCmdSN;
+	uint32_t maxCmdSN;
+	uint32_t reserved6;
 	uint16 time2Wait;
 	uint16 time2Remain;
-	uint32 reserved7;
+	uint32_t reserved7;
 } _PACKED;
 
 // NOP-Out (RFC 3270, 10.18)
@@ -310,26 +310,26 @@ struct iscsi_nop_out {
 		reserved3[3] = 0;
 	}
 	ISCSI_BHS_START
-	uint32 reserved2 : 23;
+	uint32_t reserved2 : 23;
 	ISCSI_BHS_LENGTHS
 	uint64 lun;
 	ISCSI_BHS_TAGS
-	uint32 cmdSN;
-	uint32 expStatSN;
-	uint32 reserved3[4];
+	uint32_t cmdSN;
+	uint32_t expStatSN;
+	uint32_t reserved3[4];
 } _PACKED;
 
 // NOP-In (RFC 3270, 10.19)
 struct iscsi_nop_in {
 	ISCSI_BHS_START
-	uint32 reserved2 : 23;
+	uint32_t reserved2 : 23;
 	ISCSI_BHS_LENGTHS
 	uint64 lun;
 	ISCSI_BHS_TAGS
-	uint32 statSN;
-	uint32 expCmdSN;
-	uint32 maxCmdSN;
-	uint32 reserved3[3];
+	uint32_t statSN;
+	uint32_t expCmdSN;
+	uint32_t maxCmdSN;
+	uint32_t reserved3[3];
 } _PACKED;
 
 

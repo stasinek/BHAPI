@@ -14,7 +14,7 @@
 typedef struct {
 	char manufacturer[4];
 	uint16 prod_id;
-	uint32 serial;
+	uint32_t serial;
 	uint8 week;
 	uint16 year;
 } edid1_vendor;

@@ -30,13 +30,13 @@ status_t Reader::GetMetaData(BMessage* _data)
 }
 
 
-status_t Reader::Seek(void* cookie, uint32 flags, int64* frame, bigtime_t* time)
+status_t Reader::Seek(void* cookie, uint32_t flags, int64* frame, bigtime_t* time)
 {
 	return B_NOT_SUPPORTED;
 }
 
 
-status_t Reader::FindKeyFrame(void* cookie, uint32 flags, int64* frame, bigtime_t* time)
+status_t Reader::FindKeyFrame(void* cookie, uint32_t flags, int64* frame, bigtime_t* time)
 {
 	return B_NOT_SUPPORTED;
 }

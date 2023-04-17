@@ -40,15 +40,15 @@ public:
 	virtual	void				DrawBorder(BRect& frame,
 									const BRect& updateRect,
 									const rgb_color& backgroundColor,
-									uint32 controlLookFlags);
+									uint32_t controlLookFlags);
 	virtual	void				DrawBackground(BRect& frame,
 									const BRect& updateRect,
 									const rgb_color& backgroundColor,
-									uint32 controlLookFlags);
+									uint32_t controlLookFlags);
 
 	virtual	void				MouseDown(BPoint where);
 	virtual	void				MouseUp(BPoint where);
-	virtual	void				MouseMoved(BPoint where, uint32 transit,
+	virtual	void				MouseMoved(BPoint where, uint32_t transit,
 										   const BMessage* message);
 	virtual	void				GetPreferredSize(float* width,
 												 float* height);
@@ -60,7 +60,7 @@ public:
 	virtual	status_t			Invoke(BMessage* message = NULL);
 
 	// BControl interface
-	virtual	void				SetValue(int32 value);
+	virtual	void				SetValue(int32_t value);
 	virtual	void				SetEnabled(bool enable);
 
 	// BIconButton
@@ -69,14 +69,14 @@ public:
 			void				SetPressed(bool pressed);
 			bool				IsPressed() const;
 
-			status_t			SetIcon(int32 resourceID);
+			status_t			SetIcon(int32_t resourceID);
 			status_t			SetIcon(const char* pathToBitmap);
 	virtual	status_t			SetIcon(const BBitmap* bitmap,
-									uint32 flags = 0);
+									uint32_t flags = 0);
 			status_t			SetIcon(const BMimeType* fileType,
 									bool small = true);
 			status_t			SetIcon(const unsigned char* bitsFromQuickRes,
-									uint32 width, uint32 height,
+									uint32_t width, uint32_t height,
 									color_space format,
 									bool convertToBW = false);
 			void				ClearIcon();
@@ -96,11 +96,11 @@ private:
 			void				_SendMessage() const;
 			void				_Update();
 			void				_SetTracking(bool state);
-			void				_SetFlags(uint32 flags, bool set);
-			bool				_HasFlags(uint32 flags) const;
+			void				_SetFlags(uint32_t flags, bool set);
+			bool				_HasFlags(uint32_t flags) const;
 
 private:
-			uint32				fButtonState;
+			uint32_t				fButtonState;
 			BBitmap*			fNormalBitmap;
 			BBitmap*			fDisabledBitmap;
 			BBitmap*			fClickedBitmap;

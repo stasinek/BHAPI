@@ -23,13 +23,13 @@
 #define IH_NMLEN 32
 
 typedef struct image_header {
-	uint32 ih_magic;
-	uint32 ih_hcrc;
-	uint32 ih_time;
-	uint32 ih_size;
-	uint32 ih_load;
-	uint32 ih_ep;
-	uint32 ih_dcrc;
+	uint32_t ih_magic;
+	uint32_t ih_hcrc;
+	uint32_t ih_time;
+	uint32_t ih_size;
+	uint32_t ih_load;
+	uint32_t ih_ep;
+	uint32_t ih_dcrc;
 	uint8 ih_os;
 	uint8 ih_arch;
 	uint8 ih_type;
@@ -43,8 +43,8 @@ extern "C" {
 #endif
 
 void dump_uimage(struct image_header *image);
-bool image_multi_getimg(struct image_header *image, uint32 idx, 
-	uint32 *data, uint32 *size);
+bool image_multi_getimg(struct image_header *image, uint32_t idx, 
+	uint32_t *data, uint32_t *size);
 
 #ifdef __cplusplus
 }

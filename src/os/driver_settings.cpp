@@ -76,11 +76,11 @@ typedef struct settings_handle {
 #ifdef _KERNEL_MODE
 	list_link	link;
 	char		name[B_OS_NAME_LENGTH];
-	int32		ref_count;
+	int32_t		ref_count;
 		// A negative ref_count means the node is not reference counted and not
 		// stored in the list.
 #endif
-	int32		magic;
+	int32_t		magic;
 	struct		driver_settings settings;
 	char		*text;
 } settings_handle;
@@ -135,7 +135,7 @@ static inline bool check_handle(settings_handle *handle)
 static driver_parameter *
 get_parameter(settings_handle *handle, const char *name)
 {
-	int32 i;
+	int32_t i;
 	for (i = handle->settings.parameter_count; i-- > 0;) {
 		if (!strcmp(handle->settings.parameters[i].name, name))
 			return &handle->settings.parameters[i];
@@ -158,7 +158,7 @@ get_parameter(settings_handle *handle, const char *name)
 	If the word is followed by a newline it will return B_OK, if white
 	spaces follows, it will return CONTINUE_PARAMETER.
 */
-static status_t get_word(char **_pos, char **_word, int32 assignmentMode, bool allowNewLine)
+static status_t get_word(char **_pos, char **_word, int32_t assignmentMode, bool allowNewLine)
 {
 	char *pos = *_pos;
 	char quoted = 0;
@@ -266,7 +266,7 @@ static status_t get_word(char **_pos, char **_word, int32 assignmentMode, bool a
 }
 
 
-static status_t parse_parameter(struct driver_parameter *parameter, char **_pos, int32 level)
+static status_t parse_parameter(struct driver_parameter *parameter, char **_pos, int32_t level)
 {
 	char *pos = *_pos;
 	status_t status;
@@ -301,7 +301,7 @@ static status_t parse_parameter(struct driver_parameter *parameter, char **_pos,
 
 
 static status_t parse_parameters(struct driver_parameter **_parameters, int *_count,
-	char **_pos, int32 level)
+	char **_pos, int32_t level)
 {
 	if (level > MAX_SETTINGS_LEVEL)
 		return B_LINK_LIMIT;
@@ -371,7 +371,7 @@ static status_t parse_settings(settings_handle *handle)
 
 static void free_parameter(struct driver_parameter *parameter)
 {
-	int32 i;
+	int32_t i;
 	for (i = parameter->parameter_count; i-- > 0;)
 		free_parameter(&parameter->parameters[i]);
 
@@ -382,7 +382,7 @@ static void free_parameter(struct driver_parameter *parameter)
 
 static void free_settings(settings_handle *handle)
 {
-	int32 i;
+	int32_t i;
 	for (i = handle->settings.parameter_count; i-- > 0;)
 		free_parameter(&handle->settings.parameters[i]);
 
@@ -550,7 +550,7 @@ static bool put_char(char **_buffer, ssize_t *_bufferSize, char c)
 }
 
 
-static void put_level_space(char **_buffer, ssize_t *_bufferSize, int32 level)
+static void put_level_space(char **_buffer, ssize_t *_bufferSize, int32_t level)
 {
 	while (level-- > 0)
 		put_char(_buffer, _bufferSize, '\t');
@@ -558,9 +558,9 @@ static void put_level_space(char **_buffer, ssize_t *_bufferSize, int32 level)
 
 
 static void put_parameter(char **_buffer, ssize_t *_bufferSize,
-	struct driver_parameter *parameter, int32 level, bool flat)
+	struct driver_parameter *parameter, int32_t level, bool flat)
 {
-	int32 i;
+	int32_t i;
 
 	if (!flat)
 		put_level_space(_buffer, _bufferSize, level);
@@ -842,7 +842,7 @@ status_t get_driver_settings_string(void *_handle, char *buffer, ssize_t *_buffe
 {
 	settings_handle *handle = (settings_handle *)_handle;
 	ssize_t bufferSize = *_bufferSize;
-	int32 i;
+	int32_t i;
 
 	if (!check_handle(handle) || !buffer || *_bufferSize == 0)
 		return B_BAD_VALUE;

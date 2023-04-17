@@ -101,7 +101,7 @@ public:
 	TrackingView(BRect, const char* str, BMessage* message);
 
 	virtual void MouseDown(BPoint);
-	virtual void MouseMoved(BPoint where, uint32 transit, const BMessage*);
+	virtual void MouseMoved(BPoint where, uint32_t transit, const BMessage*);
 	virtual void MouseUp(BPoint);
 	virtual void Draw(BRect);
 
@@ -134,11 +134,11 @@ public:
 
 	status_t BuildContextMenu(BMenu* parent);
 
-	void SetPermissionsSwitchState(int32 state);
+	void SetPermissionsSwitchState(int32_t state);
 
 protected:
 	virtual void MouseDown(BPoint where);
-	virtual void MouseMoved(BPoint where, uint32, const BMessage* dragMessage);
+	virtual void MouseMoved(BPoint where, uint32_t, const BMessage* dragMessage);
 	virtual void MouseUp(BPoint where);
 	virtual void MessageReceived(BMessage* message);
 	virtual void AttachedToWindow();
@@ -214,17 +214,17 @@ const rgb_color kAttrValueColor = {0, 0, 0, 255};
 const rgb_color kLinkColor = {0, 0, 220, 255};
 const rgb_color kDarkBorderColor = {184, 184, 184, 255};
 
-const uint32 kSetPreferredApp = 'setp';
-const uint32 kSelectNewSymTarget = 'snew';
-const uint32 kNewTargetSelected = 'selc';
-const uint32 kRecalculateSize = 'resz';
-const uint32 kSetLinkTarget = 'link';
-const uint32 kPermissionsSelected = 'sepe';
-const uint32 kOpenLinkSource = 'opls';
-const uint32 kOpenLinkTarget = 'oplt';
+const uint32_t kSetPreferredApp = 'setp';
+const uint32_t kSelectNewSymTarget = 'snew';
+const uint32_t kNewTargetSelected = 'selc';
+const uint32_t kRecalculateSize = 'resz';
+const uint32_t kSetLinkTarget = 'link';
+const uint32_t kPermissionsSelected = 'sepe';
+const uint32_t kOpenLinkSource = 'opls';
+const uint32_t kOpenLinkTarget = 'oplt';
 
-const uint32 kPaneSwitchClosed = 0;
-const uint32 kPaneSwitchOpen = 2;
+const uint32_t kPaneSwitchClosed = 0;
+const uint32_t kPaneSwitchOpen = 2;
 
 
 static void OpenParentAndSelectOriginal(const entry_ref* ref)
@@ -283,7 +283,7 @@ OpenToolTipWindow(BScreen& screen, BRect rect, const char* name,
 //	#pragma mark - BInfoWindow
 
 
-BInfoWindow::BInfoWindow(Model* model, int32 group_index,
+BInfoWindow::BInfoWindow(Model* model, int32_t group_index,
 	LockingList<BWindow>* list)
 	:
 	BWindow(BInfoWindow::InfoWindowRect(false),
@@ -667,7 +667,7 @@ void BInfoWindow::MessageReceived(BMessage* message)
 }
 
 
-void BInfoWindow::GetSizeString(BString& result, off_t size, int32 fileCount)
+void BInfoWindow::GetSizeString(BString& result, off_t size, int32_t fileCount)
 {
 	static BMessageFormat sizeFormat(B_TRANSLATE(
 		"{0, plural, one{(# byte)} other{(# bytes)}}"));
@@ -692,7 +692,7 @@ void BInfoWindow::GetSizeString(BString& result, off_t size, int32 fileCount)
 }
 
 
-int32 BInfoWindow::CalcSize(void* castToWindow)
+int32_t BInfoWindow::CalcSize(void* castToWindow)
 {
 	BInfoWindow* window = static_cast<BInfoWindow*>(castToWindow);
 	BDirectory dir(window->TargetModel()->EntryRef());
@@ -720,8 +720,8 @@ int32 BInfoWindow::CalcSize(void* castToWindow)
 	if (dirEntry != trashEntry) {
 		// if not, perform normal info calculations
 		off_t size = 0;
-		int32 fileCount = 0;
-		int32 dirCount = 0;
+		int32_t fileCount = 0;
+		int32_t dirCount = 0;
 		CopyLoopControl loopControl;
 		FSRecursiveCalcSize(window, &loopControl, &dir, &size, &fileCount,
 			&dirCount);
@@ -732,8 +732,8 @@ int32 BInfoWindow::CalcSize(void* castToWindow)
 		// in the trash case, iterate through and sum up
 		// size/counts for all present trash dirs
 		off_t totalSize = 0, currentSize;
-		int32 totalFileCount = 0, currentFileCount;
-		int32 totalDirCount = 0, currentDirCount;
+		int32_t totalFileCount = 0, currentFileCount;
+		int32_t totalDirCount = 0, currentDirCount;
 		BVolumeRoster volRoster;
 		volRoster.Rewind();
 		BVolume volume;
@@ -923,7 +923,7 @@ AttributeView::AttributeView(BRect rect, Model* model)
 			fPreferredAppMenu->Menu()->AddItem(result);
 			result->SetMarked(true);
 
-			for (int32 index = 0; ; index++) {
+			for (int32_t index = 0; ; index++) {
 				const char* signature;
 				if (supportingAppList.FindString("applications", index,
 						&signature) != B_OK) {
@@ -1250,8 +1250,8 @@ void AttributeView::MouseDown(BPoint where)
 		} else
 			fTrackingState = no_track;
 	} else if (fIconRect.Contains(where)) {
-		uint32 buttons;
-		Window()->CurrentMessage()->FindInt32("buttons", (int32*)&buttons);
+		uint32_t buttons;
+		Window()->CurrentMessage()->FindInt32("buttons", (int32_t*)&buttons);
 		if (SecondaryMouseButtonDown(modifiers(), buttons)) {
 			// Show contextual menu
 			BPopUpMenu* contextMenu
@@ -1276,9 +1276,9 @@ void AttributeView::MouseDown(BPoint where)
 					? open_only_track : icon_track;
 
 				// Check for possible double click
-				if (abs((int32)(fClickPoint.x - where.x)) < kDragSlop
-					&& abs((int32)(fClickPoint.y - where.y)) < kDragSlop) {
-					int32 clickCount;
+				if (abs((int32_t)(fClickPoint.x - where.x)) < kDragSlop
+					&& abs((int32_t)(fClickPoint.y - where.y)) < kDragSlop) {
+					int32_t clickCount;
 					Window()->CurrentMessage()->FindInt32("clicks",
 						&clickCount);
 
@@ -1301,7 +1301,7 @@ void AttributeView::MouseDown(BPoint where)
 }
 
 
-void AttributeView::MouseMoved(BPoint where, uint32, const BMessage* dragMessage)
+void AttributeView::MouseMoved(BPoint where, uint32_t, const BMessage* dragMessage)
 {
 	if (dragMessage != NULL && dragMessage->ReturnAddress() != BMessenger(this)
 		&& dragMessage->what == B_SIMPLE_DATA
@@ -1341,8 +1341,8 @@ void AttributeView::MouseMoved(BPoint where, uint32, const BMessage* dragMessage
 
 		case icon_track:
 			if (fMouseDown && !fDragging
-				&& (abs((int32)(where.x - fClickPoint.x)) > kDragSlop
-					|| abs((int32)(where.y - fClickPoint.y)) > kDragSlop)) {
+				&& (abs((int32_t)(where.x - fClickPoint.x)) > kDragSlop
+					|| abs((int32_t)(where.y - fClickPoint.y)) > kDragSlop)) {
 				// Find the required height
 				BFont font;
 				GetFont(&font);
@@ -1399,10 +1399,10 @@ void AttributeView::MouseMoved(BPoint where, uint32, const BMessage* dragMessage
 				BMessage dragMessage(B_REFS_RECEIVED);
 				dragMessage.AddPoint("click_pt", fClickPoint);
 				BPoint tmpLoc;
-				uint32 button;
+				uint32_t button;
 				GetMouse(&tmpLoc, &button);
 				if (button)
-					dragMessage.AddInt32("buttons", (int32)button);
+					dragMessage.AddInt32("buttons", (int32_t)button);
 
 				dragMessage.AddInt32("be:actions",
 					(modifiers() & B_OPTION_KEY) != 0
@@ -1425,7 +1425,7 @@ void AttributeView::MouseMoved(BPoint where, uint32, const BMessage* dragMessage
 			// Only consider this if the window is the active window.
 			// We have to manually get the mouse here in the event that the
 			// mouse is over a pop-up window
-			uint32 buttons;
+			uint32_t buttons;
 			BPoint point;
 			GetMouse(&point, &buttons);
 			if (Window()->IsActive() && !buttons) {
@@ -1944,7 +1944,7 @@ void AttributeView::FinishEditingTitle(bool commit)
 	bool reopen = false;
 
 	const char* text = fTitleEditView->Text();
-	uint32 length = strlen(text);
+	uint32_t length = strlen(text);
 	if (commit && strcmp(text, fModel->Name()) != 0
 		&& length < B_FILE_NAME_LENGTH) {
 		BEntry entry(fModel->EntryRef());
@@ -2151,7 +2151,7 @@ status_t AttributeView::BuildContextMenu(BMenu* parent)
 }
 
 
-void AttributeView::SetPermissionsSwitchState(int32 state)
+void AttributeView::SetPermissionsSwitchState(int32_t state)
 {
 	fPermissionsSwitch->SetValue(state);
 	fPermissionsSwitch->Invalidate();
@@ -2234,7 +2234,7 @@ void TrackingView::MouseDown(BPoint)
 }
 
 
-void TrackingView::MouseMoved(BPoint, uint32 transit, const BMessage*)
+void TrackingView::MouseMoved(BPoint, uint32_t transit, const BMessage*)
 {
 	if ((transit == B_ENTERED_VIEW || transit == B_EXITED_VIEW) && fMouseDown)
 		InvertRect(Bounds());

@@ -31,7 +31,7 @@
 typedef struct paddr_chunk_descriptor {
 	struct paddr_chunk_descriptor *next_q;
 		// must remain first in structure, queue code uses it
-	int32	ref_count;
+	int32_t	ref_count;
 	addr_t	va;
 #ifdef DEBUG_IO_SPACE
 	thread_id last_ref;
@@ -45,7 +45,7 @@ static int num_virtual_chunks;
 static queue mapped_paddr_lru;
 static mutex sMutex = MUTEX_INITIALIZER("iospace_mutex");
 static sem_id sChunkAvailableSem;
-static int32 sChunkAvailableWaitingCounter;
+static int32_t sChunkAvailableWaitingCounter;
 
 static generic_map_iospace_chunk_func sMapIOSpaceChunk;
 static addr_t sIOSpaceBase;
@@ -54,7 +54,7 @@ static size_t sIOSpaceChunkSize;
 
 
 status_t
-generic_get_physical_page(phys_addr_t pa, addr_t *va, uint32 flags)
+generic_get_physical_page(phys_addr_t pa, addr_t *va, uint32_t flags)
 {
 	int index;
 	paddr_chunk_desc *replaced_pchunk;
@@ -174,13 +174,13 @@ dump_iospace(int argc, char** argv)
 		return 0;
 	}
 
-	int32 i;
+	int32_t i;
 
 	if (strchr(argv[1], 'p')) {
 		// physical address descriptors
 		kprintf("I/O space physical descriptors (%p)\n", paddr_desc);
 
-		int32 max = vm_page_num_pages() / (sIOSpaceChunkSize / B_PAGE_SIZE);
+		int32_t max = vm_page_num_pages() / (sIOSpaceChunkSize / B_PAGE_SIZE);
 		if (argc == 3)
 			max = strtol(argv[2], NULL, 0);
 

@@ -38,7 +38,7 @@ CatKey::CatKey(const char *str, const char *ctx, const char *cmt)
 }
 
 
-CatKey::CatKey(uint32 id)
+CatKey::CatKey(uint32_t id)
 	:
 	fHashVal(id),
 	fFlags(0)
@@ -86,7 +86,7 @@ status_t CatKey::GetStringParts(BString* str, BString* ctx, BString* cmt) const
 }
 
 
-uint32 CatKey::HashFun(const char* s, int startValue) {
+uint32_t CatKey::HashFun(const char* s, int startValue) {
 	unsigned long h = startValue;
 	for ( ; *s; ++s)
 		h = 5 * h + *s;
@@ -107,7 +107,7 @@ void HashMapCatalog::MakeEmpty()
 }
 
 
-int32 HashMapCatalog::CountItems() const
+int32_t HashMapCatalog::CountItems() const
 {
 	return fCatMap.Size();
 }
@@ -123,7 +123,7 @@ HashMapCatalog::GetString(const char *string, const char *context,
 
 
 const char *
-HashMapCatalog::GetString(uint32 id)
+HashMapCatalog::GetString(uint32_t id)
 {
 	CatKey key(id);
 	return GetString(key);
@@ -216,7 +216,7 @@ status_t HashMapCatalog::SetString(const char *string, const char *translated,
 }
 
 
-status_t HashMapCatalog::SetString(int32 id, const char *translated)
+status_t HashMapCatalog::SetString(int32_t id, const char *translated)
 {
 	BString translatedCopy(translated);
 	status_t result = parseQuotedChars(translatedCopy);
@@ -247,11 +247,11 @@ status_t HashMapCatalog::SetString(const CatKey& key, const char *translated)
  * checksum algorithm that gives the same result if the string are sorted in the
  * wrong order, and this does happen, as an hash map is an unsorted container.
  */
-uint32 HashMapCatalog::ComputeFingerprint() const
+uint32_t HashMapCatalog::ComputeFingerprint() const
 {
-	uint32 checksum = 0;
+	uint32_t checksum = 0;
 
-	int32 hash;
+	int32_t hash;
 	CatMap::Iterator iter = fCatMap.GetIterator();
 	CatMap::Entry entry;
 	while (iter.HasNext())

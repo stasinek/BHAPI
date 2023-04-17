@@ -49,7 +49,7 @@ BTranslator *BTranslator::Acquire()
 */
 BTranslator *BTranslator::Release()
 {
-	int32 oldValue = atomic_add(&fRefCount, -1);
+	int32_t oldValue = atomic_add(&fRefCount, -1);
 	if (oldValue > 1)
 		return this;
 
@@ -72,7 +72,7 @@ BTranslator *BTranslator::Release()
 }
 
 
-int32 BTranslator::ReferenceCount()
+int32_t BTranslator::ReferenceCount()
 {
 	return fRefCount;
 }
@@ -100,11 +100,11 @@ status_t BTranslator::GetConfigurationMessage(BMessage* ioExtension)
 }
 
 
-status_t BTranslator::_Reserved_Translator_0(int32 n, void *p) { return B_ERROR; }
-status_t BTranslator::_Reserved_Translator_1(int32 n, void *p) { return B_ERROR; }
-status_t BTranslator::_Reserved_Translator_2(int32 n, void *p) { return B_ERROR; }
-status_t BTranslator::_Reserved_Translator_3(int32 n, void *p) { return B_ERROR; }
-status_t BTranslator::_Reserved_Translator_4(int32 n, void *p) { return B_ERROR; }
-status_t BTranslator::_Reserved_Translator_5(int32 n, void *p) { return B_ERROR; }
-status_t BTranslator::_Reserved_Translator_6(int32 n, void *p) { return B_ERROR; }
-status_t BTranslator::_Reserved_Translator_7(int32 n, void *p) { return B_ERROR; }
+status_t BTranslator::_Reserved_Translator_0(int32_t n, void *p) { return B_ERROR; }
+status_t BTranslator::_Reserved_Translator_1(int32_t n, void *p) { return B_ERROR; }
+status_t BTranslator::_Reserved_Translator_2(int32_t n, void *p) { return B_ERROR; }
+status_t BTranslator::_Reserved_Translator_3(int32_t n, void *p) { return B_ERROR; }
+status_t BTranslator::_Reserved_Translator_4(int32_t n, void *p) { return B_ERROR; }
+status_t BTranslator::_Reserved_Translator_5(int32_t n, void *p) { return B_ERROR; }
+status_t BTranslator::_Reserved_Translator_6(int32_t n, void *p) { return B_ERROR; }
+status_t BTranslator::_Reserved_Translator_7(int32_t n, void *p) { return B_ERROR; }

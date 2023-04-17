@@ -21,9 +21,9 @@ virtual	~BMediaAddOn();
 
 virtual	status_t InitCheck(
 				const char ** out_failure_text);
-virtual	int32 CountFlavors();
+virtual	int32_t CountFlavors();
 virtual	status_t GetFlavorAt(
-				int32 n,
+				int32_t n,
 				const flavor_info ** out_info);
 virtual	BMediaNode * InstantiateNodeFor(
 				const flavor_info * info,
@@ -36,32 +36,32 @@ virtual	bool WantsAutoStart();
 virtual	status_t AutoStart(
 				int in_count,
 				BMediaNode ** out_node,
-				int32 * out_internal_id,
+				int32_t * out_internal_id,
 				bool * out_has_more);
 /* only implement if you have a B_FILE_INTERFACE node */
 virtual	status_t SniffRef(
 				const entry_ref & file,
 				BMimeType * io_mime_type,
 				float * out_quality,
-				int32 * out_internal_id);
+				int32_t * out_internal_id);
 virtual	status_t SniffType(					//	This is broken if you deal with producers 
 				const BMimeType & type,		//	and consumers both. Use SniffTypeKind instead.
 				float * out_quality,		//	If you implement SniffTypeKind, this doesn't
-				int32 * out_internal_id);	//	get called.
+				int32_t * out_internal_id);	//	get called.
 virtual	status_t GetFileFormatList(
-				int32 flavor_id,			//	for this node flavor (if it matters)
+				int32_t flavor_id,			//	for this node flavor (if it matters)
 				media_file_format * out_writable_formats, 	//	don't write here if NULL
-				int32 in_write_items,		//	this many slots in out_writable_formats
-				int32 * out_write_items,	//	set this to actual # available, even if bigger than in count
+				int32_t in_write_items,		//	this many slots in out_writable_formats
+				int32_t * out_write_items,	//	set this to actual # available, even if bigger than in count
 				media_file_format * out_readable_formats, 	//	don't write here if NULL
-				int32 in_read_items,		//	this many slots in out_readable_formats
-				int32 * out_read_items,		//	set this to actual # available, even if bigger than in count
+				int32_t in_read_items,		//	this many slots in out_readable_formats
+				int32_t * out_read_items,		//	set this to actual # available, even if bigger than in count
 				void * _reserved);			//	ignore until further notice
 virtual	status_t SniffTypeKind(				//	Like SniffType, but for the specific kind(s)
 				const BMimeType & type,
 				uint64 in_kinds,
 				float * out_quality,
-				int32 * out_internal_id,
+				int32_t * out_internal_id,
 				void * _reserved);
 
 
@@ -93,7 +93,7 @@ virtual		status_t _Reserved_MediaFileProducerAddOn_13(void *);
 virtual		status_t _Reserved_MediaFileProducerAddOn_14(void *);
 virtual		status_t _Reserved_MediaFileProducerAddOn_15(void *);
 
-		uint32 _reserved_media_file_node_[16];
+		uint32_t _reserved_media_file_node_[16];
 
 };
 

@@ -42,7 +42,7 @@ cmd_help(int argc, char **argv)
 {
 	debugger_command *command, *specified = NULL;
 	const char *start = NULL;
-	int32 startLength = 0;
+	int32_t startLength = 0;
 	bool ambiguous;
 
 	if (argc > 1) {
@@ -108,7 +108,7 @@ cmd_error(int argc, char **argv)
 		return 0;
 	}
 
-	int32 error = parse_expression(argv[1]);
+	int32_t error = parse_expression(argv[1]);
 	kprintf("error 0x%" B_PRIx32 ": %s\n", error, strerror(error));
 
 	return 0;
@@ -216,7 +216,7 @@ cmd_grep(int argc, char** argv)
 		if (arg[0] != '-')
 			break;
 
-		for (int32 i = 1; arg[i] != '\0'; i++) {
+		for (int32_t i = 1; arg[i] != '\0'; i++) {
 			if (arg[i] == 'i') {
 				caseSensitive = false;
 			} else if (arg[i] == 'v') {
@@ -241,9 +241,9 @@ cmd_grep(int argc, char** argv)
 		match = strstr(line, pattern) != NULL;
 	} else {
 		match = false;
-		int32 lineLen = strlen(line);
-		int32 patternLen = strlen(pattern);
-		for (int32 i = 0; i <= lineLen - patternLen; i++) {
+		int32_t lineLen = strlen(line);
+		int32_t patternLen = strlen(pattern);
+		for (int32_t i = 0; i <= lineLen - patternLen; i++) {
 			// This is rather slow, but should be OK for our purposes.
 			if (strncasecmp(line + i, pattern, patternLen) == 0) {
 				match = true;

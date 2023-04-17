@@ -44,13 +44,13 @@ protected:
 
 protected:
 			EventSignal*		fSignal;
-			int32				fPendingDPC;
+			int32_t				fPendingDPC;
 };
 
 
 struct TeamSignalEvent : SignalEvent {
-	static	TeamSignalEvent*	Create(Team* team, uint32 signalNumber,
-									int32 signalCode, int32 errorCode);
+	static	TeamSignalEvent*	Create(Team* team, uint32_t signalNumber,
+									int32_t signalCode, int32_t errorCode);
 
 	virtual	status_t			Fire();
 
@@ -67,8 +67,8 @@ private:
 
 
 struct ThreadSignalEvent : SignalEvent {
-	static	ThreadSignalEvent*	Create(Thread* thread, uint32 signalNumber,
-									int32 signalCode, int32 errorCode,
+	static	ThreadSignalEvent*	Create(Thread* thread, uint32_t signalNumber,
+									int32_t signalCode, int32_t errorCode,
 									pid_t sendingTeam);
 
 	virtual	status_t			Fire();
@@ -100,7 +100,7 @@ private:
 private:
 			ThreadCreationAttributes fCreationAttributes;
 			char				fThreadName[B_OS_NAME_LENGTH];
-			int32				fPendingDPC;
+			int32_t				fPendingDPC;
 };
 
 

@@ -43,7 +43,7 @@ BJobSetupPanel::BJobSetupPanel(BPrinter* printer)
 }
 
 
-BJobSetupPanel::BJobSetupPanel(BPrinter* printer, uint32 flags)
+BJobSetupPanel::BJobSetupPanel(BPrinter* printer, uint32_t flags)
 	: BPrintPanel("Print document")
 	, fPrinter(printer)
 	, fPrinterRoster(NULL)
@@ -149,7 +149,7 @@ void BJobSetupPanel::SetPrintRange(print_range range)
 }
 
 
-int32 BJobSetupPanel::FirstPage() const
+int32_t BJobSetupPanel::FirstPage() const
 {
 	BString text(fFirstPage->Text());
 	if (text.Length() <= 0)
@@ -159,7 +159,7 @@ int32 BJobSetupPanel::FirstPage() const
 }
 
 
-int32 BJobSetupPanel::LastPage() const
+int32_t BJobSetupPanel::LastPage() const
 {
 	BString text(fLastPage->Text());
 	if (text.Length() <= 0)
@@ -169,7 +169,7 @@ int32 BJobSetupPanel::LastPage() const
 }
 
 
-void BJobSetupPanel::SetPageRange(int32 firstPage, int32 lastPage)
+void BJobSetupPanel::SetPageRange(int32_t firstPage, int32_t lastPage)
 {
 	BString text;
 	SetPrintRange(B_PAGE_RANGE);
@@ -182,13 +182,13 @@ void BJobSetupPanel::SetPageRange(int32 firstPage, int32 lastPage)
 }
 
 
-uint32 BJobSetupPanel::OptionFlags() const
+uint32_t BJobSetupPanel::OptionFlags() const
 {
 	return fJobPanelFlags;
 }
 
 
-void BJobSetupPanel::SetOptionFlags(uint32 flags)
+void BJobSetupPanel::SetOptionFlags(uint32_t flags)
 {
 	bool value = false;
 	if (flags & B_PRINT_TO_FILE)
@@ -350,10 +350,10 @@ void BJobSetupPanel::_SetupInterface()
 
 void BJobSetupPanel::_DisallowChar(BTextView* textView)
 {
-	for (uint32 i = 0; i < '0'; ++i)
+	for (uint32_t i = 0; i < '0'; ++i)
 		textView->DisallowChar(i);
 
-	for (uint32 i = '9' + 1; i < 255; ++i)
+	for (uint32_t i = '9' + 1; i < 255; ++i)
 		textView->DisallowChar(i);
 }
 

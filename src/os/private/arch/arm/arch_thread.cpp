@@ -115,7 +115,7 @@ arch_thread_init_kthread_stack(Thread* thread, void* _stack, void* _stackTop,
 status_t
 arch_thread_init_tls(Thread *thread)
 {
-	uint32 tls[TLS_USER_THREAD_SLOT + 1];
+	uint32_t tls[TLS_USER_THREAD_SLOT + 1];
 
 	thread->user_local_storage = thread->user_stack_base
 		+ thread->user_stack_size;

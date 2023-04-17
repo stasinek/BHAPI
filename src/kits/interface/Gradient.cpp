@@ -101,13 +101,13 @@ BGradient::BGradient(BMessage* archive)
 
 	// color stops
 	ColorStop stop;
-	for (int32 i = 0; archive->FindFloat("offset", i, &stop.offset) >= B_OK; i++) {
-		if (archive->FindInt32("color", i, (int32*)&stop.color) >= B_OK)
+	for (int32_t i = 0; archive->FindFloat("offset", i, &stop.offset) >= B_OK; i++) {
+		if (archive->FindInt32("color", i, (int32_t*)&stop.color) >= B_OK)
 			AddColorStop(stop, i);
 		else
 			break;
 	}
-	if (archive->FindInt32("type", (int32*)&fType) < B_OK)
+	if (archive->FindInt32("type", (int32_t*)&fType) < B_OK)
 		fType = TYPE_LINEAR;
 
 	// linear
@@ -170,8 +170,8 @@ status_t BGradient::Archive(BMessage* into, bool deep) const
 
 	// color steps
 	if (ret >= B_OK) {
-		for (int32 i = 0; ColorStop* stop = ColorStopAt(i); i++) {
-			ret = into->AddInt32("color", (const uint32&)stop->color);
+		for (int32_t i = 0; ColorStop* stop = ColorStopAt(i); i++) {
+			ret = into->AddInt32("color", (const uint32_t&)stop->color);
 			if (ret < B_OK)
 				break;
 			ret = into->AddFloat("offset", stop->offset);
@@ -181,7 +181,7 @@ status_t BGradient::Archive(BMessage* into, bool deep) const
 	}
 	// gradient type
 	if (ret >= B_OK)
-		ret = into->AddInt32("type", (int32)fType);
+		ret = into->AddInt32("type", (int32_t)fType);
 
 	// linear
 	if (ret >= B_OK)
@@ -262,12 +262,12 @@ bool BGradient::operator!=(const BGradient& other) const
 // ColorStopsAreEqual
 bool BGradient::ColorStopsAreEqual(const BGradient& other) const
 {
-	int32 count = CountColorStops();
+	int32_t count = CountColorStops();
 	if (count == other.CountColorStops() &&
 		fType == other.fType) {
 		
 		bool equal = true;
-		for (int32 i = 0; i < count; i++) {
+		for (int32_t i = 0; i < count; i++) {
 			ColorStop* ourStop = ColorStopAtFast(i);
 			ColorStop* otherStop = other.ColorStopAtFast(i);
 			if (*ourStop != *otherStop) {
@@ -285,13 +285,13 @@ bool BGradient::ColorStopsAreEqual(const BGradient& other) const
 void BGradient::SetColorStops(const BGradient& other)
 {
 	MakeEmpty();
-	for (int32 i = 0; ColorStop* stop = other.ColorStopAt(i); i++)
+	for (int32_t i = 0; ColorStop* stop = other.ColorStopAt(i); i++)
 		AddColorStop(*stop, i);
 }
 
 
 // AddColor
-int32 BGradient::AddColor(const rgb_color& color, float offset)
+int32_t BGradient::AddColor(const rgb_color& color, float offset)
 {
 	// Out of bounds stops would crash the app_server
 	if (offset < 0.f || offset > 255.f)
@@ -299,8 +299,8 @@ int32 BGradient::AddColor(const rgb_color& color, float offset)
 
 	// find the correct index (sorted by offset)
 	ColorStop* stop = new ColorStop(color, offset);
-	int32 index = 0;
-	int32 count = CountColorStops();
+	int32_t index = 0;
+	int32_t count = CountColorStops();
 	for (; index < count; index++) {
 		ColorStop* s = ColorStopAtFast(index);
 		if (s->offset > stop->offset)
@@ -315,7 +315,7 @@ int32 BGradient::AddColor(const rgb_color& color, float offset)
 
 
 // AddColorStop
-bool BGradient::AddColorStop(const ColorStop& colorStop, int32 index)
+bool BGradient::AddColorStop(const ColorStop& colorStop, int32_t index)
 {
 	ColorStop* stop = new ColorStop(colorStop);
 	if (!fColorStops.AddItem((void*)stop, index)) {
@@ -327,7 +327,7 @@ bool BGradient::AddColorStop(const ColorStop& colorStop, int32 index)
 
 
 // RemoveColor
-bool BGradient::RemoveColor(int32 index)
+bool BGradient::RemoveColor(int32_t index)
 {
 	ColorStop* stop = (ColorStop*)fColorStops.RemoveItem(index);
 	if (!stop) {
@@ -339,7 +339,7 @@ bool BGradient::RemoveColor(int32 index)
 
 
 // SetColorStop
-bool BGradient::SetColorStop(int32 index, const ColorStop& color)
+bool BGradient::SetColorStop(int32_t index, const ColorStop& color)
 {
 	if (ColorStop* stop = ColorStopAt(index)) {
 		if (*stop != color) {
@@ -353,7 +353,7 @@ bool BGradient::SetColorStop(int32 index, const ColorStop& color)
 
 
 // SetColor
-bool BGradient::SetColor(int32 index, const rgb_color& color)
+bool BGradient::SetColor(int32_t index, const rgb_color& color)
 {
 	ColorStop* stop = ColorStopAt(index);
 	if (stop && stop->color != color) {
@@ -365,7 +365,7 @@ bool BGradient::SetColor(int32 index, const rgb_color& color)
 
 
 // SetOffset
-bool BGradient::SetOffset(int32 index, float offset)
+bool BGradient::SetOffset(int32_t index, float offset)
 {
 	ColorStop* stop = ColorStopAt(index);
 	if (stop && stop->offset != offset) {
@@ -377,7 +377,7 @@ bool BGradient::SetOffset(int32 index, float offset)
 
 
 // CountColorStops
-int32 BGradient::CountColorStops() const
+int32_t BGradient::CountColorStops() const
 {
 	return fColorStops.CountItems();
 }
@@ -385,7 +385,7 @@ int32 BGradient::CountColorStops() const
 
 // ColorStopAt
 BGradient::ColorStop*
-BGradient::ColorStopAt(int32 index) const
+BGradient::ColorStopAt(int32_t index) const
 {
 	return (ColorStop*)fColorStops.ItemAt(index);
 }
@@ -393,7 +393,7 @@ BGradient::ColorStopAt(int32 index) const
 
 // ColorStopAtFast
 BGradient::ColorStop*
-BGradient::ColorStopAtFast(int32 index) const
+BGradient::ColorStopAtFast(int32_t index) const
 {
 	return (ColorStop*)fColorStops.ItemAtFast(index);
 }
@@ -426,8 +426,8 @@ void BGradient::SortColorStopsByOffset()
 // MakeEmpty
 void BGradient::MakeEmpty()
 {
-	int32 count = CountColorStops();
-	for (int32 i = 0; i < count; i++)
+	int32_t count = CountColorStops();
+	for (int32_t i = 0; i < count; i++)
 		delete ColorStopAtFast(i);
 	fColorStops.MakeEmpty();
 }

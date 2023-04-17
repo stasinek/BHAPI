@@ -147,7 +147,7 @@
 }
 
 
-/*static*/ const char*  UiUtils::AreaLockingFlagsToString(uint32 flags, char* buffer,
+/*static*/ const char*  UiUtils::AreaLockingFlagsToString(uint32_t flags, char* buffer,
 	size_t bufferSize)
 {
 	switch (flags) {
@@ -182,7 +182,7 @@
 
 
 /*static*/ const BString&
-UiUtils::AreaProtectionFlagsToString(uint32 protection, BString& _output)
+UiUtils::AreaProtectionFlagsToString(uint32_t protection, BString& _output)
 {
 	#undef ADD_AREA_FLAG_IF_PRESENT
 	#define ADD_AREA_FLAG_IF_PRESENT(flag, protection, name, output, missing)\
@@ -193,7 +193,7 @@ UiUtils::AreaProtectionFlagsToString(uint32 protection, BString& _output)
 			_output += missing; \
 
 	_output.Truncate(0);
-	uint32 userFlags = protection & B_USER_PROTECTION;
+	uint32_t userFlags = protection & B_USER_PROTECTION;
 	bool userProtectionPresent = userFlags != 0;
 	ADD_AREA_FLAG_IF_PRESENT(B_READ_AREA, protection, "r", _output,
 		userProtectionPresent ? "-" : " ");
@@ -272,7 +272,7 @@ UiUtils::AreaProtectionFlagsToString(uint32 protection, BString& _output)
 
 
 /*static*/ void UiUtils::PrintValueNodeGraph(BString& _output, ValueNodeChild* child,
-	int32 indentLevel, int32 maxDepth)
+	int32_t indentLevel, int32_t maxDepth)
 {
 	_output.Append('\t', indentLevel);
 	_output << child->Name();
@@ -318,7 +318,7 @@ UiUtils::AreaProtectionFlagsToString(uint32 protection, BString& _output)
 	if (node != NULL) {
 		_output << " {\n";
 
-		for (int32 i = 0; i < node->CountChildren(); i++) {
+		for (int32_t i = 0; i < node->CountChildren(); i++) {
 			// don't dump compound nodes if our depth limit won't allow
 			// us to traverse into their children anyways, and the top
 			// level node contains no data of intereest.
@@ -337,22 +337,22 @@ UiUtils::AreaProtectionFlagsToString(uint32 protection, BString& _output)
 }
 
 
-/*static*/ void UiUtils::DumpMemory(BString& _output, int32 indentLevel,
-	TeamMemoryBlock* block, target_addr_t address, int32 itemSize,
-	int32 displayWidth, int32 count)
+/*static*/ void UiUtils::DumpMemory(BString& _output, int32_t indentLevel,
+	TeamMemoryBlock* block, target_addr_t address, int32_t itemSize,
+	int32_t displayWidth, int32_t count)
 {
 	BString data;
 
-	int32 j;
+	int32_t j;
 	_output.Append('\t', indentLevel);
-	for (int32 i = 0; i < count; i++) {
+	for (int32_t i = 0; i < count; i++) {
 		if (!block->Contains(address + i * itemSize))
 			break;
 
 		uint8* value;
 
 		if ((i % displayWidth) == 0) {
-			int32 displayed = min_c(displayWidth, (count-i)) * itemSize;
+			int32_t displayed = min_c(displayWidth, (count-i)) * itemSize;
 			if (i != 0) {
 				_output.Append("\n");
 				_output.Append('\t', indentLevel);
@@ -388,7 +388,7 @@ UiUtils::AreaProtectionFlagsToString(uint32 protection, BString& _output)
 				data.SetToFormat(" %04" B_PRIx16, *(uint16*)value);
 				break;
 			case 4:
-				data.SetToFormat(" %08" B_PRIx32, *(uint32*)value);
+				data.SetToFormat(" %08" B_PRIx32, *(uint32_t*)value);
 				break;
 			case 8:
 				data.SetToFormat(" %016" B_PRIx64, *(uint64*)value);
@@ -402,11 +402,11 @@ UiUtils::AreaProtectionFlagsToString(uint32 protection, BString& _output)
 }
 
 
-static status_t ParseRangeString(BString& rangeString, int32& lowerBound,
-	int32& upperBound)
+static status_t ParseRangeString(BString& rangeString, int32_t& lowerBound,
+	int32_t& upperBound)
 {
 	lowerBound = atoi(rangeString.String());
-	int32 index = rangeString.FindFirst('-');
+	int32_t index = rangeString.FindFirst('-');
 	if (index >= 0) {
 		rangeString.Remove(0, index + 1);
 		upperBound = atoi(rangeString.String());
@@ -420,8 +420,8 @@ static status_t ParseRangeString(BString& rangeString, int32& lowerBound,
 }
 
 
-/*static*/ status_t UiUtils::ParseRangeExpression(const BString& rangeExpression, int32 lowerBound,
-	int32 upperBound, bool fixedRange, RangeList& _output)
+/*static*/ status_t UiUtils::ParseRangeExpression(const BString& rangeExpression, int32_t lowerBound,
+	int32_t upperBound, bool fixedRange, RangeList& _output)
 {
 	if (rangeExpression.IsEmpty())
 		return B_BAD_DATA;
@@ -430,9 +430,9 @@ static status_t ParseRangeString(BString& rangeString, int32& lowerBound,
 	dataString.RemoveAll(" ");
 
 	// first, tokenize the range list to its constituent child ranges.
-	int32 index;
-	int32 lowValue;
-	int32 highValue;
+	int32_t index;
+	int32_t lowValue;
+	int32_t highValue;
 	BString tempRange;
 	while (!dataString.IsEmpty()) {
 		index = dataString.FindFirst(',');
@@ -477,9 +477,9 @@ static status_t ParseRangeString(BString& rangeString, int32& lowerBound,
 		case B_UINT16_TYPE:
 			return "uint16";
 		case B_INT32_TYPE:
-			return "int32";
+			return "int32_t";
 		case B_UINT32_TYPE:
-			return "uint32";
+			return "uint32_t";
 		case B_INT64_TYPE:
 			return "int64";
 		case B_UINT64_TYPE:
@@ -497,13 +497,13 @@ static status_t ParseRangeString(BString& rangeString, int32& lowerBound,
 
 
 template<typename T>
-T GetSIMDValueAtOffset(char* data, int32 index)
+T GetSIMDValueAtOffset(char* data, int32_t index)
 {
 	return ((T*)data)[index];
 }
 
 
-static int32 GetSIMDFormatByteSize(uint32 format)
+static int32_t GetSIMDFormatByteSize(uint32_t format)
 {
 	switch (format) {
 		case SIMD_RENDER_FORMAT_INT8:
@@ -511,7 +511,7 @@ static int32 GetSIMDFormatByteSize(uint32 format)
 		case SIMD_RENDER_FORMAT_INT16:
 			return sizeof(int16);
 		case SIMD_RENDER_FORMAT_INT32:
-			return sizeof(int32);
+			return sizeof(int32_t);
 		case SIMD_RENDER_FORMAT_INT64:
 			return sizeof(int64);
 		case SIMD_RENDER_FORMAT_FLOAT:
@@ -526,13 +526,13 @@ static int32 GetSIMDFormatByteSize(uint32 format)
 
 /*static*/
 const BString&
-UiUtils::FormatSIMDValue(const BVariant& value, uint32 bitSize,
-	uint32 format, BString& _output)
+UiUtils::FormatSIMDValue(const BVariant& value, uint32_t bitSize,
+	uint32_t format, BString& _output)
 {
 	_output.SetTo("{");
 	char* data = (char*)value.ToPointer();
-	uint32 count = bitSize / (GetSIMDFormatByteSize(format) * 8);
-	for (uint32 i = 0; i < count; i ++) {
+	uint32_t count = bitSize / (GetSIMDFormatByteSize(format) * 8);
+	for (uint32_t i = 0; i < count; i ++) {
 		BString temp;
 		switch (format) {
 			case SIMD_RENDER_FORMAT_INT8:
@@ -545,7 +545,7 @@ UiUtils::FormatSIMDValue(const BVariant& value, uint32 bitSize,
 				break;
 			case SIMD_RENDER_FORMAT_INT32:
 				temp.SetToFormat("%#" B_PRIx32,
-					GetSIMDValueAtOffset<uint32>(data, i));
+					GetSIMDValueAtOffset<uint32_t>(data, i));
 				break;
 			case SIMD_RENDER_FORMAT_INT64:
 				temp.SetToFormat("%#" B_PRIx64,
@@ -570,7 +570,7 @@ UiUtils::FormatSIMDValue(const BVariant& value, uint32 bitSize,
 }
 
 
-const char*  UiUtils::SignalNameToString(int32 signal, BString& _output)
+const char*  UiUtils::SignalNameToString(int32_t signal, BString& _output)
 {
 	#undef DEFINE_SIGNAL_STRING
 	#define DEFINE_SIGNAL_STRING(x)										\

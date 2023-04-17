@@ -99,7 +99,7 @@ bool bhapi::win32_window_convert_window_to_client(HWND hWnd, RECT *wr)
 }
 
 
-EWin32GraphicsWindow::EWin32GraphicsWindow(EWin32GraphicsEngine *win32Engine,  int32 x,  int32 y,  uint32 w,  uint32 h)
+EWin32GraphicsWindow::EWin32GraphicsWindow(EWin32GraphicsEngine *win32Engine,  int32_t x,  int32_t y,  uint32_t w,  uint32_t h)
 	: BGraphicsWindow(), win32Window(NULL),
 	  fLook((bhapi::window_look)0), fFeel((bhapi::window_feel)0), fActivateWhenShown(false), hbrBackground(NULL),
 	  fEngine(NULL), fRequestWin(NULL), fRequestAsyncWin(NULL), WMBHAPI_MESSAGE(0)
@@ -423,7 +423,7 @@ EWin32GraphicsWindow::SetTitle(const char *title)
 
 
 status_t 
-EWin32GraphicsWindow::SetWorkspaces(uint32 workspaces)
+EWin32GraphicsWindow::SetWorkspaces(uint32_t workspaces)
 {
 	// don't support workspace
 	return B_ERROR;
@@ -431,7 +431,7 @@ EWin32GraphicsWindow::SetWorkspaces(uint32 workspaces)
 
 
 status_t 
-EWin32GraphicsWindow::GetWorkspaces(uint32 *workspaces)
+EWin32GraphicsWindow::GetWorkspaces(uint32_t *workspaces)
 {
 	// don't support workspace
 	if(workspaces) *workspaces = 0;
@@ -699,7 +699,7 @@ LRESULT _bhapi_get_window_activate_state(EWin32GraphicsEngine *win32Engine, bhap
 
 
 status_t 
-EWin32GraphicsWindow::MoveTo(int32 x,  int32 y)
+EWin32GraphicsWindow::MoveTo(int32_t x,  int32_t y)
 {
 	if(fRequestAsyncWin == NULL) return B_ERROR;
 
@@ -718,7 +718,7 @@ EWin32GraphicsWindow::MoveTo(int32 x,  int32 y)
 
 
 status_t 
-EWin32GraphicsWindow::ResizeTo(uint32 w,  uint32 h)
+EWin32GraphicsWindow::ResizeTo(uint32_t w,  uint32_t h)
 {
 	if(fRequestAsyncWin == NULL) return B_ERROR;
 
@@ -741,7 +741,7 @@ EWin32GraphicsWindow::ResizeTo(uint32 w,  uint32 h)
 
 
 status_t 
-EWin32GraphicsWindow::MoveAndResizeTo(int32 x,  int32 y,  uint32 w,  uint32 h)
+EWin32GraphicsWindow::MoveAndResizeTo(int32_t x,  int32_t y,  uint32_t w,  uint32_t h)
 {
 	if(fRequestAsyncWin == NULL) return B_ERROR;
 
@@ -901,7 +901,7 @@ LRESULT _bhapi_grab_window(EWin32GraphicsEngine *win32Engine, bhapi::win32_gdi_c
 
 
 status_t 
-EWin32GraphicsWindow::SetFlags(uint32 flags)
+EWin32GraphicsWindow::SetFlags(uint32_t flags)
 {
 	// TODO
 	return B_ERROR;
@@ -941,7 +941,7 @@ EWin32GraphicsWindow::SetFeel(bhapi::window_feel feel)
 
 
 status_t 
-EWin32GraphicsWindow::SetSizeLimits(uint32 min_w,  uint32 max_w,  uint32 min_h,  uint32 max_h)
+EWin32GraphicsWindow::SetSizeLimits(uint32_t min_w,  uint32_t max_w,  uint32_t min_h,  uint32_t max_h)
 {
 	// TODO
 	return B_ERROR;
@@ -971,7 +971,7 @@ LRESULT _bhapi_set_window_usize(EWin32GraphicsEngine *win32Engine, bhapi::win32_
 
 
 status_t 
-EWin32GraphicsWindow::GetSizeLimits(uint32 *min_w,  uint32 *max_w,  uint32 *min_h,  uint32 *max_h)
+EWin32GraphicsWindow::GetSizeLimits(uint32_t *min_w,  uint32_t *max_w,  uint32_t *min_h,  uint32_t *max_h)
 {
 	// TODO
 	return B_ERROR;
@@ -1006,7 +1006,7 @@ LRESULT _bhapi_get_window_usize(EWin32GraphicsEngine *win32Engine, bhapi::win32_
 
 
 status_t 
-EWin32GraphicsWindow::QueryMouse(int32 *x,  int32 *y,  int32 *buttons)
+EWin32GraphicsWindow::QueryMouse(int32_t *x,  int32_t *y,  int32_t *buttons)
 {
 	// TODO
 	return B_ERROR;
@@ -1016,8 +1016,8 @@ EWin32GraphicsWindow::QueryMouse(int32 *x,  int32 *y,  int32 *buttons)
 status_t 
 EWin32GraphicsWindow::CopyTo(BGraphicsContext *dc,
 			     BGraphicsDrawable *dstDrawable,
-			      int32 x,  int32 y,  uint32 w,  uint32 h,
-			      int32 dstX,  int32 dstY,  uint32 dstW,  uint32 dstH)
+			      int32_t x,  int32_t y,  uint32_t w,  uint32_t h,
+			      int32_t dstX,  int32_t dstY,  uint32_t dstW,  uint32_t dstH)
 {
 	// TODO
 	return B_ERROR;
@@ -1026,8 +1026,8 @@ EWin32GraphicsWindow::CopyTo(BGraphicsContext *dc,
 
 status_t 
 EWin32GraphicsWindow::DrawPixmap(BGraphicsContext *dc, const BPixmap *pix,
-				  int32 x,  int32 y,  uint32 w,  uint32 h,
-				  int32 dstX,  int32 dstY,  uint32 dstW,  uint32 dstH)
+				  int32_t x,  int32_t y,  uint32_t w,  uint32_t h,
+				  int32_t dstX,  int32_t dstY,  uint32_t dstW,  uint32_t dstH)
 {
 	// TODO
 	return B_ERROR;
@@ -1036,7 +1036,7 @@ EWin32GraphicsWindow::DrawPixmap(BGraphicsContext *dc, const BPixmap *pix,
 
 status_t 
 EWin32GraphicsWindow::StrokePoint(BGraphicsContext *dc,
-				   int32 x,  int32 y)
+				   int32_t x,  int32_t y)
 {
 	// TODO
 	return B_ERROR;
@@ -1045,7 +1045,7 @@ EWin32GraphicsWindow::StrokePoint(BGraphicsContext *dc,
 
 status_t 
 EWin32GraphicsWindow::StrokePoints(BGraphicsContext *dc,
-				   const  int32 *pts,  int32 count)
+				   const  int32_t *pts,  int32_t count)
 {
 	// TODO
 	return B_ERROR;
@@ -1054,7 +1054,7 @@ EWin32GraphicsWindow::StrokePoints(BGraphicsContext *dc,
 
 status_t 
 EWin32GraphicsWindow::StrokePoints_Colors(BGraphicsContext *dc,
-					  const BList *ptsArrayLists,  int32 arrayCount,
+					  const BList *ptsArrayLists,  int32_t arrayCount,
 					  const bhapi::rgb_color *highColors)
 {
 	// TODO
@@ -1064,7 +1064,7 @@ EWin32GraphicsWindow::StrokePoints_Colors(BGraphicsContext *dc,
 
 status_t 
 EWin32GraphicsWindow::StrokePoints_Alphas(BGraphicsContext *dc,
-					  const  int32 *pts, const  uint8 *alpha,  int32 count)
+					  const  int32_t *pts, const  uint8 *alpha,  int32_t count)
 {
 	// TODO
 	return B_ERROR;
@@ -1073,7 +1073,7 @@ EWin32GraphicsWindow::StrokePoints_Alphas(BGraphicsContext *dc,
 
 status_t 
 EWin32GraphicsWindow::StrokeLine(BGraphicsContext *dc,
-			          int32 x0,  int32 y0,  int32 x1,  int32 y1)
+			          int32_t x0,  int32_t y0,  int32_t x1,  int32_t y1)
 {
 	// TODO
 	return B_ERROR;
@@ -1082,7 +1082,7 @@ EWin32GraphicsWindow::StrokeLine(BGraphicsContext *dc,
 
 status_t 
 EWin32GraphicsWindow::StrokePolygon(BGraphicsContext *dc,
-				    const  int32 *pts,  int32 count, bool closed)
+				    const  int32_t *pts,  int32_t count, bool closed)
 {
 	// TODO
 	return B_ERROR;
@@ -1091,7 +1091,7 @@ EWin32GraphicsWindow::StrokePolygon(BGraphicsContext *dc,
 
 status_t 
 EWin32GraphicsWindow::FillPolygon(BGraphicsContext *dc,
-				  const  int32 *pts,  int32 count)
+				  const  int32_t *pts,  int32_t count)
 {
 	// TODO
 	return B_ERROR;
@@ -1100,7 +1100,7 @@ EWin32GraphicsWindow::FillPolygon(BGraphicsContext *dc,
 
 status_t 
 EWin32GraphicsWindow::StrokeRect(BGraphicsContext *dc,
-			          int32 x,  int32 y,  uint32 w,  uint32 h)
+			          int32_t x,  int32_t y,  uint32_t w,  uint32_t h)
 {
 	// TODO
 	return B_ERROR;
@@ -1109,7 +1109,7 @@ EWin32GraphicsWindow::StrokeRect(BGraphicsContext *dc,
 
 status_t 
 EWin32GraphicsWindow::FillRect(BGraphicsContext *dc,
-			        int32 x,  int32 y,  uint32 w,  uint32 h)
+			        int32_t x,  int32_t y,  uint32_t w,  uint32_t h)
 {
 	// TODO
 	return B_ERROR;
@@ -1118,7 +1118,7 @@ EWin32GraphicsWindow::FillRect(BGraphicsContext *dc,
 
 status_t 
 EWin32GraphicsWindow::StrokeRects(BGraphicsContext *dc,
-				  const  int32 *rects,  int32 count)
+				  const  int32_t *rects,  int32_t count)
 {
 	// TODO
 	return B_ERROR;
@@ -1127,7 +1127,7 @@ EWin32GraphicsWindow::StrokeRects(BGraphicsContext *dc,
 
 status_t 
 EWin32GraphicsWindow::FillRects(BGraphicsContext *dc,
-			        const  int32 *rects,  int32 count)
+			        const  int32_t *rects,  int32_t count)
 {
 	// TODO
 	return B_ERROR;
@@ -1145,7 +1145,7 @@ EWin32GraphicsWindow::FillRegion(BGraphicsContext *dc,
 
 status_t 
 EWin32GraphicsWindow::StrokeRoundRect(BGraphicsContext *dc,
-				       int32 x,  int32 y,  uint32 w,  uint32 h,  uint32 xRadius,  uint32 yRadius)
+				       int32_t x,  int32_t y,  uint32_t w,  uint32_t h,  uint32_t xRadius,  uint32_t yRadius)
 {
 	// TODO
 	return B_ERROR;
@@ -1154,7 +1154,7 @@ EWin32GraphicsWindow::StrokeRoundRect(BGraphicsContext *dc,
 
 status_t 
 EWin32GraphicsWindow::FillRoundRect(BGraphicsContext *dc,
-				     int32 x,  int32 y,  uint32 w,  uint32 h,  uint32 xRadius,  uint32 yRadius)
+				     int32_t x,  int32_t y,  uint32_t w,  uint32_t h,  uint32_t xRadius,  uint32_t yRadius)
 {
 	// TODO
 	return B_ERROR;
@@ -1163,7 +1163,7 @@ EWin32GraphicsWindow::FillRoundRect(BGraphicsContext *dc,
 
 status_t 
 EWin32GraphicsWindow::StrokeArc(BGraphicsContext *dc,
-			         int32 x,  int32 y,  uint32 w,  uint32 h, float startAngle, float endAngle)
+			         int32_t x,  int32_t y,  uint32_t w,  uint32_t h, float startAngle, float endAngle)
 {
 	// TODO
 	return B_ERROR;
@@ -1172,7 +1172,7 @@ EWin32GraphicsWindow::StrokeArc(BGraphicsContext *dc,
 
 status_t 
 EWin32GraphicsWindow::FillArc(BGraphicsContext *dc,
-			       int32 x,  int32 y,  uint32 w,  uint32 h, float startAngle, float endAngle)
+			       int32_t x,  int32_t y,  uint32_t w,  uint32_t h, float startAngle, float endAngle)
 {
 	// TODO
 	return B_ERROR;

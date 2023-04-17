@@ -46,7 +46,7 @@ status_t FileSourceCode::AddSourceLocation(const SourceLocation& location)
 {
 	// Find the insertion index; don't insert twice.
 	bool foundMatch;
-	int32 index = _FindSourceLocationIndex(location, foundMatch);
+	int32_t index = _FindSourceLocationIndex(location, foundMatch);
 	if (foundMatch)
 		return B_OK;
 
@@ -73,19 +73,19 @@ FileSourceCode::GetSourceLanguage() const
 }
 
 
-int32 FileSourceCode::CountLines() const
+int32_t FileSourceCode::CountLines() const
 {
 	return fSourceFile->CountLines();
 }
 
 
-const char*  FileSourceCode::LineAt(int32 index) const
+const char*  FileSourceCode::LineAt(int32_t index) const
 {
 	return fSourceFile->LineAt(index);
 }
 
 
-int32 FileSourceCode::LineLengthAt(int32 index) const
+int32_t FileSourceCode::LineLengthAt(int32_t index) const
 {
 	return fSourceFile->LineLengthAt(index);
 }
@@ -94,12 +94,12 @@ int32 FileSourceCode::LineLengthAt(int32 index) const
 bool FileSourceCode::GetStatementLocationRange(const SourceLocation& location,
 	SourceLocation& _start, SourceLocation& _end) const
 {
-	int32 lineCount = CountLines();
+	int32_t lineCount = CountLines();
 	if (location.Line() >= lineCount)
 		return false;
 
 	bool foundMatch;
-	int32 index = _FindSourceLocationIndex(location, foundMatch);
+	int32_t index = _FindSourceLocationIndex(location, foundMatch);
 
 	if (!foundMatch) {
 		if (index == 0)
@@ -121,13 +121,13 @@ FileSourceCode::GetSourceFile() const
 }
 
 
-int32 FileSourceCode::_FindSourceLocationIndex(const SourceLocation& location,
+int32_t FileSourceCode::_FindSourceLocationIndex(const SourceLocation& location,
 	bool& _foundMatch) const
 {
-	int32 lower = 0;
-	int32 upper = fSourceLocations.Size();
+	int32_t lower = 0;
+	int32_t upper = fSourceLocations.Size();
 	while (lower < upper) {
-		int32 mid = (lower + upper) / 2;
+		int32_t mid = (lower + upper) / 2;
 		if (location <= fSourceLocations[mid])
 			upper = mid;
 		else

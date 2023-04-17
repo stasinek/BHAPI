@@ -17,13 +17,13 @@
 
 
 struct trace_entry {
-	uint32	size			: 13;		// actual size is *4
-	uint32	previous_size	: 13;		// actual size is *4
-	uint32	flags			: 6;
+	uint32_t	size			: 13;		// actual size is *4
+	uint32_t	previous_size	: 13;		// actual size is *4
+	uint32_t	flags			: 6;
 };
 
 struct tracing_stack_trace {
-	int32	depth;
+	int32_t	depth;
 	addr_t	return_addresses[0];
 };
 
@@ -43,7 +43,7 @@ struct tracing_stack_trace {
 
 class TraceOutput {
 public:
-	TraceOutput(char* buffer, size_t bufferSize, uint32 flags);
+	TraceOutput(char* buffer, size_t bufferSize, uint32_t flags);
 
 	void Clear();
 	void Print(const char* format,...)
@@ -56,7 +56,7 @@ public:
 	size_t Capacity() const	{ return fCapacity; }
 	size_t Size() const		{ return fSize; }
 
-	uint32 Flags() const	{ return fFlags; }
+	uint32_t Flags() const	{ return fFlags; }
 
 	void SetLastEntryTime(bigtime_t time);
 	bigtime_t LastEntryTime() const;
@@ -65,7 +65,7 @@ private:
 	char*		fBuffer;
 	size_t		fCapacity;
 	size_t		fSize;
-	uint32		fFlags;
+	uint32_t		fFlags;
 	bigtime_t	fLastEntryTime;
 };
 
@@ -171,7 +171,7 @@ struct AbstractTraceEntrySelector<0> {
 
 class LazyTraceOutput : public TraceOutput {
 public:
-	LazyTraceOutput(char* buffer, size_t bufferSize, uint32 flags)
+	LazyTraceOutput(char* buffer, size_t bufferSize, uint32_t flags)
 		: TraceOutput(buffer, bufferSize, flags)
 	{
 	}
@@ -229,7 +229,7 @@ public:
 		fIndex = 0;
 	}
 
-	int32 Index() const
+	int32_t Index() const
 	{
 		return fIndex;
 	}
@@ -241,7 +241,7 @@ public:
 
 	TraceEntry* Next();
 	TraceEntry* Previous();
-	TraceEntry* MoveTo(int32 index);
+	TraceEntry* MoveTo(int32_t index);
 
 private:
 	trace_entry* _NextNonBufferEntry(trace_entry* entry);
@@ -249,7 +249,7 @@ private:
 
 private:
 	trace_entry*	fEntry;
-	int32			fIndex;
+	int32_t			fIndex;
 };
 
 
@@ -279,11 +279,11 @@ uint8* alloc_tracing_buffer_memcpy(const void* source, size_t size, bool user);
 char* alloc_tracing_buffer_strcpy(const char* source, size_t maxSize,
 			bool user);
 
-struct tracing_stack_trace* capture_tracing_stack_trace(int32 maxCount,
-			int32 skipFrames, bool kernelOnly);
+struct tracing_stack_trace* capture_tracing_stack_trace(int32_t maxCount,
+			int32_t skipFrames, bool kernelOnly);
 addr_t tracing_find_caller_in_stack_trace(
 	struct tracing_stack_trace* stackTrace, const addr_t excludeRanges[],
-	uint32 excludeRangeCount);
+	uint32_t excludeRangeCount);
 void tracing_print_stack_trace(struct tracing_stack_trace* stackTrace);
 
 void lock_tracing_buffer();

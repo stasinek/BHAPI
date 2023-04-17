@@ -40,7 +40,7 @@ struct ie_data {
 };
 
 
-static status_t get_80211(const char* name, int32 type, void* data, int32& length)
+static status_t get_80211(const char* name, int32_t type, void* data, int32_t& length)
 {
 	int socket = ::socket(AF_INET, SOCK_DGRAM, 0);
 	if (socket < 0)
@@ -82,7 +82,7 @@ template<typename T> status_t do_request(T& request, const char* name, int optio
 
 //! Read a 16 bit little endian value
 static uint16
-read_le16(uint8*& data, int32& length)
+read_le16(uint8*& data, int32_t& length)
 {
 	uint16 value = B_LENDIAN_TO_HOST_INT16(*(uint16*)data);
 	data += 2;
@@ -92,16 +92,16 @@ read_le16(uint8*& data, int32& length)
 
 
 //! Read a 32 bit little endian value
-static uint32 read_le32(uint8*& data, int32& length)
+static uint32_t read_le32(uint8*& data, int32_t& length)
 {
-	uint32 value = B_LENDIAN_TO_HOST_INT32(*(uint32*)data);
+	uint32_t value = B_LENDIAN_TO_HOST_INT32(*(uint32_t*)data);
 	data += 4;
 	length -= 4;
 	return value;
 }
 
 
-static uint32 from_rsn_cipher(uint32 cipher)
+static uint32_t from_rsn_cipher(uint32_t cipher)
 {
 	if ((cipher & 0xffffff) != RSN_OUI)
 		return B_NETWORK_CIPHER_CCMP;
@@ -124,7 +124,7 @@ static uint32 from_rsn_cipher(uint32 cipher)
 }
 
 
-static uint32 from_rsn_key_mode(uint32 mode)
+static uint32_t from_rsn_key_mode(uint32_t mode)
 {
 	if ((mode & 0xffffff) != RSN_OUI)
 		return B_KEY_MODE_IEEE802_1X;
@@ -149,7 +149,7 @@ static uint32 from_rsn_key_mode(uint32 mode)
 
 
 //! Parse RSN/WPA information elements common data
-static void parse_ie_rsn_wpa(wireless_network& network, uint8*& data, int32& length)
+static void parse_ie_rsn_wpa(wireless_network& network, uint8*& data, int32_t& length)
 {
 	if (length >= 4) {
 		// parse group cipher
@@ -195,7 +195,7 @@ static void parse_ie_rsn(wireless_network& network, ie_data* ie)
 	network.group_cipher = B_NETWORK_CIPHER_CCMP;
 	network.key_mode = B_KEY_MODE_IEEE802_1X;
 
-	int32 length = ie->length;
+	int32_t length = ie->length;
 	if (length < 2)
 		return;
 
@@ -212,13 +212,13 @@ static void parse_ie_rsn(wireless_network& network, ie_data* ie)
 //! Parse WPA information element.
 static bool parse_ie_wpa(wireless_network& network, ie_data* ie)
 {
-	int32 length = ie->length;
+	int32_t length = ie->length;
 	if (length < 6)
 		return false;
 
 	uint8* data = ie->data;
 
-	uint32 oui = read_le32(data, length);
+	uint32_t oui = read_le32(data, length);
 	TRACE("  oui: %" B_PRIx32 "\n", oui);
 	if (oui != ((WPA_OUI_TYPE << 24) | WPA_OUI))
 		return false;
@@ -238,7 +238,7 @@ static bool parse_ie_wpa(wireless_network& network, ie_data* ie)
 
 
 //! Parse information elements.
-static void parse_ie(wireless_network& network, uint8* _ie, int32 ieLength)
+static void parse_ie(wireless_network& network, uint8* _ie, int32_t ieLength)
 {
 	struct ie_data* ie = (ie_data*)_ie;
 	bool hadRSN = false;
@@ -300,7 +300,7 @@ static void parse_ie(wireless_network& network, struct ieee80211req_scan_result&
 }
 
 
-static bool get_ssid_from_ie(char* name, uint8* _ie, int32 ieLength)
+static bool get_ssid_from_ie(char* name, uint8* _ie, int32_t ieLength)
 {
 	struct ie_data* ie = (ie_data*)_ie;
 
@@ -365,7 +365,7 @@ static void fill_wireless_network(wireless_network& network, const char* network
 }
 
 
-static status_t get_scan_result(const char* device, wireless_network& network, uint32 index,
+static status_t get_scan_result(const char* device, wireless_network& network, uint32_t index,
 	const BNetworkAddress* address, const char* name)
 {
 	if (address != NULL && address->Family() != AF_LINK)
@@ -378,17 +378,17 @@ static status_t get_scan_result(const char* device, wireless_network& network, u
 
 	MemoryDeleter deleter(buffer);
 
-	int32 length = kBufferSize;
+	int32_t length = kBufferSize;
 	status_t status = get_80211(device, IEEE80211_IOC_SCAN_RESULTS, buffer,
 		length);
 	if (status != B_OK)
 		return status;
 
-	int32 bytesLeft = length;
+	int32_t bytesLeft = length;
 	uint8* entry = buffer;
-	uint32 count = 0;
+	uint32_t count = 0;
 
-	while (bytesLeft > (int32)sizeof(struct ieee80211req_scan_result)) {
+	while (bytesLeft > (int32_t)sizeof(struct ieee80211req_scan_result)) {
 		ieee80211req_scan_result* result
 			= (ieee80211req_scan_result*)entry;
 
@@ -414,7 +414,7 @@ static status_t get_scan_result(const char* device, wireless_network& network, u
 }
 
 
-static status_t get_station(const char* device, wireless_network& network, uint32 index,
+static status_t get_station(const char* device, wireless_network& network, uint32_t index,
 	const BNetworkAddress* address, const char* name)
 {
 	if (address != NULL && address->Family() != AF_LINK)
@@ -434,17 +434,17 @@ static status_t get_station(const char* device, wireless_network& network, uint3
 	} else
 		memset(request.is_u.macaddr, 0xff, IEEE80211_ADDR_LEN);
 
-	int32 length = kBufferSize;
+	int32_t length = kBufferSize;
 	status_t status = get_80211(device, IEEE80211_IOC_STA_INFO, &request,
 		length);
 	if (status != B_OK)
 		return status;
 
-	int32 bytesLeft = length;
+	int32_t bytesLeft = length;
 	uint8* entry = (uint8*)&request.info[0];
-	uint32 count = 0;
+	uint32_t count = 0;
 
-	while (bytesLeft > (int32)sizeof(struct ieee80211req_sta_info)) {
+	while (bytesLeft > (int32_t)sizeof(struct ieee80211req_sta_info)) {
 		ieee80211req_sta_info* info = (ieee80211req_sta_info*)entry;
 
 		char networkName[32];
@@ -464,7 +464,7 @@ static status_t get_station(const char* device, wireless_network& network, uint3
 }
 
 
-static status_t get_network(const char* device, wireless_network& network, uint32 index,
+static status_t get_network(const char* device, wireless_network& network, uint32_t index,
 	const BNetworkAddress* address, const char* name)
 {
 	status_t status = get_station(device, network, index, address, name);
@@ -523,7 +523,7 @@ bool BNetworkDevice::Exists() const
 }
 
 
-uint32 BNetworkDevice::Index() const
+uint32_t BNetworkDevice::Index() const
 {
 	ifreq request;
 	if (do_request(request, Name(), SIOCGIFINDEX) != B_OK)
@@ -533,7 +533,7 @@ uint32 BNetworkDevice::Index() const
 }
 
 
-uint32 BNetworkDevice::Flags() const
+uint32_t BNetworkDevice::Flags() const
 {
 	ifreq request;
 	if (do_request(request, Name(), SIOCGIFFLAGS) != B_OK)
@@ -549,7 +549,7 @@ bool BNetworkDevice::HasLink() const
 }
 
 
-int32 BNetworkDevice::CountMedia() const
+int32_t BNetworkDevice::CountMedia() const
 {
 	ifmediareq request;
 	request.ifm_count = 0;
@@ -562,7 +562,7 @@ int32 BNetworkDevice::CountMedia() const
 }
 
 
-int32 BNetworkDevice::Media() const
+int32_t BNetworkDevice::Media() const
 {
 	ifmediareq request;
 	request.ifm_count = 0;
@@ -575,14 +575,14 @@ int32 BNetworkDevice::Media() const
 }
 
 
-int32 BNetworkDevice::GetMediaAt(int32 index) const
+int32_t BNetworkDevice::GetMediaAt(int32_t index) const
 {
 	// TODO: this could do some caching
 	return 0;
 }
 
 
-status_t BNetworkDevice::SetMedia(int32 media)
+status_t BNetworkDevice::SetMedia(int32_t media)
 {
 	ifreq request;
 	request.ifr_media = media;
@@ -630,7 +630,7 @@ status_t BNetworkDevice::Scan(bool wait, bool forceRescan)
 }
 
 
-status_t BNetworkDevice::GetNextNetwork(uint32& cookie, wireless_network& network)
+status_t BNetworkDevice::GetNextNetwork(uint32_t& cookie, wireless_network& network)
 {
 	status_t status = get_scan_result(Name(), network, cookie, NULL, NULL);
 	if (status != B_OK)
@@ -774,7 +774,7 @@ status_t BNetworkDevice::LeaveNetwork(const BNetworkAddress& address)
 }
 
 
-status_t BNetworkDevice::GetNextAssociatedNetwork(uint32& cookie,
+status_t BNetworkDevice::GetNextAssociatedNetwork(uint32_t& cookie,
 	wireless_network& network)
 {
 	BNetworkAddress address;
@@ -786,7 +786,7 @@ status_t BNetworkDevice::GetNextAssociatedNetwork(uint32& cookie,
 }
 
 
-status_t BNetworkDevice::GetNextAssociatedNetwork(uint32& cookie,
+status_t BNetworkDevice::GetNextAssociatedNetwork(uint32_t& cookie,
 	BNetworkAddress& address)
 {
 	// We currently support only a single associated network
@@ -794,7 +794,7 @@ status_t BNetworkDevice::GetNextAssociatedNetwork(uint32& cookie,
 		return B_ENTRY_NOT_FOUND;
 
 	uint8 mac[IEEE80211_ADDR_LEN];
-	int32 length = IEEE80211_ADDR_LEN;
+	int32_t length = IEEE80211_ADDR_LEN;
 	status_t status = get_80211(Name(), IEEE80211_IOC_BSSID, mac, length);
 	if (status != B_OK)
 		return status;

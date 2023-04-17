@@ -84,7 +84,7 @@ arch_int_disable_io_interrupt(int irq)
 /* arch_int_*_interrupts() and friends are in arch_asm.S */
 
 void
-arch_int_assign_to_cpu(int32 irq, int32 cpu)
+arch_int_assign_to_cpu(int32_t irq, int32_t cpu)
 {
 	// intentionally left blank; no SMP support (yet)
 }

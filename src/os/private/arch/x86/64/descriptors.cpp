@@ -40,7 +40,7 @@ enum class DescriptorType : unsigned {
 class Descriptor {
 public:
 	constexpr				Descriptor();
-	inline					Descriptor(uint32_t first, uint32_t second);
+	inline					Descriptor(uint32_t_t first, uint32_t_t second);
 	constexpr				Descriptor(DescriptorType type, bool kernelOnly);
 
 protected:
@@ -60,7 +60,7 @@ protected:
 			uint8_t			fBase1;
 		};
 
-		uint32_t			fDescriptor[2];
+		uint32_t_t			fDescriptor[2];
 	};
 };
 
@@ -116,8 +116,8 @@ private:
 						unsigned	fDPL		:2;
 						unsigned	fPresent	:1;
 						uint16_t	fBase1;
-						uint32_t	fBase2;
-						uint32_t	fReserved2;
+						uint32_t_t	fBase2;
+						uint32_t_t	fReserved2;
 };
 
 class InterruptDescriptorTable {
@@ -164,7 +164,7 @@ Descriptor::Descriptor()
 }
 
 
-Descriptor::Descriptor(uint32_t first, uint32_t second)
+Descriptor::Descriptor(uint32_t_t first, uint32_t_t second)
 	:
 	fDescriptor { first, second }
 {
@@ -362,9 +362,9 @@ x86_descriptors_init(kernel_args* args)
 {
 	// Initialize the interrupt handler table.
 	interrupt_handler_function** table = gInterruptHandlerTable;
-	for (uint32 i = 0; i < ARCH_INTERRUPT_BASE; i++)
+	for (uint32_t i = 0; i < ARCH_INTERRUPT_BASE; i++)
 		table[i] = x86_invalid_exception;
-	for (uint32 i = ARCH_INTERRUPT_BASE;
+	for (uint32_t i = ARCH_INTERRUPT_BASE;
 		i < InterruptDescriptorTable::kDescriptorCount; i++) {
 		table[i] = x86_hardware_interrupt;
 	}

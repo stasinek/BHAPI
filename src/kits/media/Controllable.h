@@ -23,11 +23,11 @@ public:
 	// to be a BBufferConsumer and/or a BBufferProducer).
 	// The format of these buffers is:
 	// 		media_node(node),
-	//		int32(count)
+	//		int32_t(count)
 	// 		repeat(count) {
 	//			int64(when),
-	//			int32(control_id),
-	//			int32(value_size),
+	//			int32_t(control_id),
+	//			int32_t(value_size),
 	//			<value>
 	//		}
 
@@ -42,13 +42,13 @@ protected:
 	// NOTE: Call SetParameterWeb() from your constructor!
 			status_t			SetParameterWeb(BParameterWeb* web);
 
-	virtual	status_t			HandleMessage(int32 message, const void* data,
+	virtual	status_t			HandleMessage(int32_t message, const void* data,
 									size_t size);
 
 	// Call when the actual control changes, NOT when the value changes.
 	// A typical case would be a CD with a Selector for Track when a new
 	// CD is inserted.
-			status_t			BroadcastChangedParameter(int32 id);
+			status_t			BroadcastChangedParameter(int32_t id);
 
 	// Call this function when a value change takes effect, and
 	// you want people who are interested to stay in sync with you.
@@ -56,16 +56,16 @@ protected:
 	// with messages.
 			status_t			BroadcastNewParameterValue(
 									bigtime_t performanceTime,
-									int32 parameterID, void* newValue,
+									int32_t parameterID, void* newValue,
 									size_t valueSize);
 
 	// These are alternate methods of accomplishing the same thing as
 	// connecting to control information source/destinations would.
-	virtual	status_t			GetParameterValue(int32 id,
+	virtual	status_t			GetParameterValue(int32_t id,
 									bigtime_t* lastChange,
 									void* value, size_t* ioSize) = 0;
 
-	virtual	void				SetParameterValue(int32 id, bigtime_t when,
+	virtual	void				SetParameterValue(int32_t id, bigtime_t when,
 									const void* value, size_t size) = 0;
 
 	// The default implementation of StartControlPanel launches the add-on
@@ -82,8 +82,8 @@ protected:
 									size_t size);
 	// If you want to generate control information for a set of controls, you
 	// can use this utility function.
-			status_t			MakeParameterData(const int32* controls,
-									int32 count, void* buffer, size_t* ioSize);
+			status_t			MakeParameterData(const int32_t* controls,
+									int32_t count, void* buffer, size_t* ioSize);
 
 	// TODO: Needs a Perform() virtual method!
 
@@ -114,9 +114,9 @@ private:
 
 			BParameterWeb*		fWeb;
 			sem_id				fSem;
-			int32				fBen;
+			int32_t				fBen;
 
-			uint32				_reserved_controllable_[14];
+			uint32_t				_reserved_controllable_[14];
 };
 
 

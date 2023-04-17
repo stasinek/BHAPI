@@ -23,13 +23,13 @@ typedef struct net_device {
 	struct net_device_module_info* module;
 
 	char	name[IF_NAMESIZE];
-	uint32	index;
-	uint32	flags;		// IFF_LOOPBACK, ...
-	uint32	type;		// IFT_ETHER, ...
+	uint32_t	index;
+	uint32_t	flags;		// IFF_LOOPBACK, ...
+	uint32_t	type;		// IFT_ETHER, ...
 	size_t	mtu;
-	uint32	media;
+	uint32_t	media;
 	uint64	link_speed;
-	uint32	link_quality;
+	uint32_t	link_quality;
 	size_t	header_length;
 
 	struct net_hardware_address address;
@@ -47,7 +47,7 @@ struct net_device_module_info {
 	status_t	(*up)(net_device* device);
 	void		(*down)(net_device* device);
 
-	status_t	(*control)(net_device* device, int32 op, void* argument,
+	status_t	(*control)(net_device* device, int32_t op, void* argument,
 					size_t length);
 
 	status_t	(*send_data)(net_device* device, net_buffer* buffer);
@@ -55,7 +55,7 @@ struct net_device_module_info {
 
 	status_t	(*set_mtu)(net_device* device, size_t mtu);
 	status_t	(*set_promiscuous)(net_device* device, bool promiscuous);
-	status_t	(*set_media)(net_device* device, uint32 media);
+	status_t	(*set_media)(net_device* device, uint32_t media);
 
 	status_t	(*add_multicast)(net_device* device,
 					const struct sockaddr* address);

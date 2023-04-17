@@ -80,7 +80,7 @@ public:
 									const BLanguage* displayLanguage = NULL
 									) const;
 
-			const char*			GetString(uint32 id) const;
+			const char*			GetString(uint32_t id) const;
 
 			status_t			GetDateFormat(BDateFormatStyle style,
 									BString& outFormat) const;

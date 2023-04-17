@@ -220,7 +220,7 @@ EnumeratorValue*
 EnumerationType::ValueFor(const BVariant& value) const
 {
 	// TODO: Optimize?
-	for (int32 i = 0; EnumeratorValue* enumValue = ValueAt(i); i++) {
+	for (int32_t i = 0; EnumeratorValue* enumValue = ValueAt(i); i++) {
 		if (enumValue->Value() == value)
 			return enumValue;
 	}

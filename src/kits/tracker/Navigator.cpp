@@ -47,7 +47,7 @@ All rights reserved.
 
 namespace BPrivate {
 
-static const int32 kMaxHistory = 32;
+static const int32_t kMaxHistory = 32;
 
 }
 
@@ -123,7 +123,7 @@ void BNavigator::Draw(BRect updateRect)
 	// Draw a 1px bottom border, like BMenuBar
 	BRect rect(Bounds());
 	rgb_color base = LowColor();
-	uint32 flags = 0;
+	uint32_t flags = 0;
 
 	be_control_look->DrawBorder(this, rect, updateRect, base,
 		B_PLAIN_BORDER, flags, BControlLook::B_BOTTOM_BORDER);
@@ -179,7 +179,7 @@ void BNavigator::MessageReceived(BMessage* message)
 
 void BNavigator::GoBackward(bool option)
 {
-	int32 itemCount = fBackHistory.CountItems();
+	int32_t itemCount = fBackHistory.CountItems();
 	if (itemCount >= 2 && fBackHistory.ItemAt(itemCount - 2)) {
 		BEntry entry;
 		if (entry.SetTo(fBackHistory.ItemAt(itemCount - 2)->Path()) == B_OK)
@@ -293,7 +293,7 @@ void BNavigator::GoTo()
 }
 
 
-void BNavigator::UpdateLocation(const Model* newmodel, int32 action)
+void BNavigator::UpdateLocation(const Model* newmodel, int32_t action)
 {
 	if (newmodel)
 		newmodel->GetPath(&fPath);

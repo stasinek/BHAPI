@@ -61,21 +61,21 @@ BHAPI_EXPORT BList BLooper::sLooperList;
 }
 */
 
-/*BLooper::BLooper(int32 priority)
+/*BLooper::BLooper(int32_t priority)
     : BHandler(""), fDeconstructing(false), fProxy(NULL), fHandlersCount(1), fPreferredHandler(NULL), fLocker(NULL), fLocksCount(B_INT64_CONSTANT(0)), fThread(NULL), fSem(NULL), fMessageQueue(NULL), fCurrentMessage(NULL), fThreadExited(NULL)
 {
     this->Init(NULL,priority);
 }
 */
 
-/*BLooper::BLooper(const char *name,  int32 priority)
+/*BLooper::BLooper(const char *name,  int32_t priority)
     : BHandler(name), fDeconstructing(false), fProxy(NULL), fHandlersCount(1), fPreferredHandler(NULL), fLocker(NULL), fLocksCount(B_INT64_CONSTANT(0)), fThread(NULL), fSem(NULL), fMessageQueue(NULL), fCurrentMessage(NULL), fThreadExited(NULL)
 {
     this->Init(name,priority);
 }
 */
 
-void BLooper::Init(const char *name,  int32 priority)
+void BLooper::Init(const char *name,  int32_t priority)
 {
     BLocker *hLocker = bhapi::get_handler_operator_locker();
     BAutolock <BLocker>autolock(hLocker);
@@ -210,7 +210,7 @@ BLooper::RemoveHandler(BHandler *handler)
 }
 
 
-int32
+int32_t
 BLooper::CountHandlers() const
 {
     return fHandlersCount;
@@ -218,7 +218,7 @@ BLooper::CountHandlers() const
 
 
 BHandler*
-BLooper::HandlerAt(int32 index) const
+BLooper::HandlerAt(int32_t index) const
 {
     if(index >= fHandlersCount) return NULL;
 
@@ -232,12 +232,12 @@ BLooper::HandlerAt(int32 index) const
 }
 
 
-int32
+int32_t
 BLooper::IndexOf(BHandler *handler) const
 {
     if(handler == NULL || handler->fLooper != this) return -1;
 
-     int32 index = 0;
+     int32_t index = 0;
 
     const BHandler *found = this;
     while(found != handler)
@@ -315,7 +315,7 @@ BLooper::IsLockedByCurrentThread() const
 
 
 status_t
-BLooper::PostMessage(uint32 command)
+BLooper::PostMessage(uint32_t command)
 {
     BMessage msg(command);
     return PostMessage(&msg, this, NULL);
@@ -330,7 +330,7 @@ BLooper::PostMessage(const BMessage *message)
 
 
 status_t
-BLooper::PostMessage(uint32 command, BHandler *handler, BHandler *reply_to)
+BLooper::PostMessage(uint32_t command, BHandler *handler, BHandler *reply_to)
 {
     BMessage msg(command);
     return PostMessage(&msg, handler, reply_to);
@@ -671,7 +671,7 @@ BLooper::_taskLooper(BLooper *self, void *sem)
             queue->Lock();
             if(queue->IsEmpty() == false)
             {
-                aMsg = queue->FindMessage((int32)0);
+                aMsg = queue->FindMessage((int32_t)0);
                 if(aMsg->what == _QUIT_)
                 {
                     queue->Unlock();
@@ -774,7 +774,7 @@ BMessage* BLooper::NextLooperMessage(bigtime_t timeout = B_INFINITE_TIMEOUT)
             queue->Lock();
             if(queue->IsEmpty() == false)
             {
-                aMsg = queue->FindMessage((int32)0);
+                aMsg = queue->FindMessage((int32_t)0);
                 if(aMsg->what == _QUIT_)
                 {
                     queue->Unlock();
@@ -917,7 +917,7 @@ BLooper::_FilterAndDispatchMessage(BMessage *msg, BHandler *_target)
 
     if(msg->what != _QUIT_) // (!(msg->what == B_QUIT_REQUESTED || msg->what == _QUIT_))
     {
-        for(int32 i = 0; i < fCommonFilters->CountItems(); i++)
+        for(int32_t i = 0; i < fCommonFilters->CountItems(); i++)
         {
             BMessageFilter *filter = (BMessageFilter*)fCommonFilters->ItemAt(i);
             if((status = filter->doFilter(msg, &handler)) == B_SKIP_MESSAGE) break;
@@ -926,7 +926,7 @@ BLooper::_FilterAndDispatchMessage(BMessage *msg, BHandler *_target)
         BHandler *target = (handler == NULL ? fPreferredHandler : handler);
         if(!(status == B_SKIP_MESSAGE || target == NULL || target->fFilters == NULL))
         {
-            for(int32 i = 0; i < target->fFilters->CountItems(); i++)
+            for(int32_t i = 0; i < target->fFilters->CountItems(); i++)
             {
                 BMessageFilter *filter = (BMessageFilter*)target->fFilters->ItemAt(i);
                 if((status = filter->doFilter(msg, &handler)) == B_SKIP_MESSAGE) break;
@@ -1071,7 +1071,7 @@ BLooper::_ProxyBy(BLooper *proxy)
         void *oldLocker = fLocker;
         fLocker = newLocker;
 
-        for(int32 i = 0; i < fClients.CountItems(); i++)
+        for(int32_t i = 0; i < fClients.CountItems(); i++)
         {
             BLooper *looper = (BLooper*)fClients.ItemAt(i);
             looper->_ProxyBy(this);
@@ -1098,7 +1098,7 @@ BLooper::_ProxyBy(BLooper *proxy)
         void *oldLocker = fLocker;
         fLocker = newLocker;
 
-        for(int32 i = 0; i < fClients.CountItems(); i++)
+        for(int32_t i = 0; i < fClients.CountItems(); i++)
         {
             BLooper *looper = (BLooper*)fClients.ItemAt(i);
             looper->_ProxyBy(this);
@@ -1124,7 +1124,7 @@ BLooper::LooperForThread(thread_id tid)
 
     bhapi::delete_thread(thread);
 
-    for(int32 i = 0; i < sLooperList.CountItems(); i++)
+    for(int32_t i = 0; i < sLooperList.CountItems(); i++)
     {
         BLooper *looper = (BLooper*)sLooperList.ItemAt(i);
         if(bhapi::get_thread_id(looper->fThread) == tid) return looper;
@@ -1171,7 +1171,7 @@ BLooper::SetCommonFilterList(const BList *filterList)
 
     if(filterList != NULL)
     {
-        for(int32 i = 0; i < filterList->CountItems(); i++) AddCommonFilter((BMessageFilter*)filterList->ItemAt(i));
+        for(int32_t i = 0; i < filterList->CountItems(); i++) AddCommonFilter((BMessageFilter*)filterList->ItemAt(i));
     }
 
     return true;

@@ -20,12 +20,12 @@ RangeList::~RangeList()
 }
 
 
-status_t RangeList::AddRange(int32 lowValue, int32 highValue)
+status_t RangeList::AddRange(int32_t lowValue, int32_t highValue)
 {
 	if (lowValue > highValue)
 		return B_BAD_VALUE;
 
-	int32 i = 0;
+	int32_t i = 0;
 	if (CountItems() != 0) {
 		for (; i < CountItems(); i++) {
 			Range* range = ItemAt(i);
@@ -81,7 +81,7 @@ status_t RangeList::AddRange(const Range& range)
 }
 
 
-void RangeList::RemoveRangeAt(int32 index)
+void RangeList::RemoveRangeAt(int32_t index)
 {
 	if (index < 0 || index >= CountItems())
 		return;
@@ -90,9 +90,9 @@ void RangeList::RemoveRangeAt(int32 index)
 }
 
 
-bool RangeList::Contains(int32 value) const
+bool RangeList::Contains(int32_t value) const
 {
-	for (int32 i = 0; i < CountItems(); i++) {
+	for (int32_t i = 0; i < CountItems(); i++) {
 		const Range* range = ItemAt(i);
 		if (value < range->lowerBound || value > range->upperBound)
 			break;
@@ -104,22 +104,22 @@ bool RangeList::Contains(int32 value) const
 }
 
 
-int32 RangeList::CountRanges() const
+int32_t RangeList::CountRanges() const
 {
 	return CountItems();
 }
 
 
 const Range*
-RangeList::RangeAt(int32 index) const
+RangeList::RangeAt(int32_t index) const
 {
 	return ItemAt(index);
 }
 
 
-void RangeList::_CollapseOverlappingRanges(int32 startIndex, int32 highValue)
+void RangeList::_CollapseOverlappingRanges(int32_t startIndex, int32_t highValue)
 {
-	for (int32 i = startIndex; i < CountItems();) {
+	for (int32_t i = startIndex; i < CountItems();) {
 		// check if it also overlaps any of the following
 		// ranges.
 		Range* nextRange = ItemAt(i);

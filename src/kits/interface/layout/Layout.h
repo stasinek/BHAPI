@@ -45,13 +45,13 @@ public:
 	BLayoutContainer();
 	virtual ~BLayoutContainer();
 
-	virtual bool		AddItem(BLayoutItem *item,  __be_int32 index = -1);
+	virtual bool		AddItem(BLayoutItem *item,  __be_int32_t index = -1);
 	virtual bool		RemoveItem(BLayoutItem *item);
-	BLayoutItem		*RemoveItem(__be_int32 index);
+	BLayoutItem		*RemoveItem(__be_int32_t index);
 
-	BLayoutItem		*ItemAt(__be_int32 index) const;
-	__be_int32			IndexOf(const BLayoutItem *item) const;
-	__be_int32			CountItems() const;
+	BLayoutItem		*ItemAt(__be_int32_t index) const;
+	__be_int32_t			IndexOf(const BLayoutItem *item) const;
+	__be_int32_t			CountItems() const;
 
 	float			UnitsPerPixel() const;
 	void			SetUnitsPerPixel(float value, bool deep = true);
@@ -72,7 +72,7 @@ private:
 
 class BHAPI_IMPEXP BLayoutItem : public BLayoutContainer {
 public:
-	BLayoutItem(BRect frame,  __be_uint32 resizingMode);
+	BLayoutItem(BRect frame,  __be_uint32_t resizingMode);
 	virtual ~BLayoutItem();
 
 	BLayoutContainer	*Container() const;
@@ -83,8 +83,8 @@ public:
 	BLayoutItem		*PreviousSibling() const;
 	BLayoutItem		*NextSibling() const;
 
-	virtual void		SetResizingMode(__be_uint32 mode);
-	__be_uint32			ResizingMode() const;
+	virtual void		SetResizingMode(__be_uint32_t mode);
+	__be_uint32_t			ResizingMode() const;
 
 	virtual void		Show();
 	virtual void		Hide();
@@ -122,13 +122,13 @@ private:
 	friend class BLayoutForm;
 
 	BLayoutContainer *fContainer;
-	__be_int32 fIndex;
+	__be_int32_t fIndex;
 
 	BPoint fLocalOrigin;
 	BRegion fVisibleRegion;
 
 	BRect fFrame;
-	__be_uint32 fResizingMode;
+	__be_uint32_t fResizingMode;
 	bool fHidden;
 	bool fUpdating;
 };
@@ -136,7 +136,7 @@ private:
 
 class BHAPI_IMPEXP BLayoutForm : public BLayoutItem {
 public:
-	BLayoutForm(BRect frame,  __be_uint32 resizingMode,  __be_int32 rows,  __be_int32 columns);
+	BLayoutForm(BRect frame,  __be_uint32_t resizingMode,  __be_int32_t rows,  __be_int32_t columns);
 	virtual ~BLayoutForm();
 
 private:

@@ -20,11 +20,11 @@ class ICUMonetaryData : public ICULocaleconvData {
 	typedef	ICULocaleconvData	inherited;
 
 public:
-	static	const int32			kParenthesesAroundCurrencyAndValue = 0;
-	static	const int32			kSignPrecedesCurrencyAndValue      = 1;
-	static	const int32			kSignSucceedsCurrencyAndValue      = 2;
-	static	const int32			kSignImmediatelyPrecedesCurrency   = 3;
-	static	const int32			kSignImmediatelySucceedsCurrency   = 4;
+	static	const int32_t			kParenthesesAroundCurrencyAndValue = 0;
+	static	const int32_t			kSignPrecedesCurrencyAndValue      = 1;
+	static	const int32_t			kSignSucceedsCurrencyAndValue      = 2;
+	static	const int32_t			kSignImmediatelyPrecedesCurrency   = 3;
+	static	const int32_t			kSignImmediatelySucceedsCurrency   = 4;
 
 								ICUMonetaryData(pthread_key_t tlsKey,
 									struct lconv& localeConv);
@@ -39,16 +39,16 @@ public:
 			const char*			GetLanginfo(int index);
 
 private:
-	static	const int32			kCsPrecedesFlag = 1 << 0;
-	static	const int32			kSepBySpaceFlag = 1 << 1;
+	static	const int32_t			kCsPrecedesFlag = 1 << 0;
+	static	const int32_t			kSepBySpaceFlag = 1 << 1;
 
-			int32				_DetermineCurrencyPosAndSeparator(
+			int32_t				_DetermineCurrencyPosAndSeparator(
 									const UnicodeString& prefix,
 									const UnicodeString& suffix,
 									const UnicodeString& signSymbol,
 									const UnicodeString& currencySymbol,
 									UChar& currencySeparatorChar);
-			int32				_DetermineSignPos(const UnicodeString& prefix,
+			int32_t				_DetermineSignPos(const UnicodeString& prefix,
 									const UnicodeString& suffix,
 									const UnicodeString& signSymbol,
 									const UnicodeString& currencySymbol);

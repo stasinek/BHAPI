@@ -35,7 +35,7 @@ BIcon::~BIcon()
 }
 
 
-status_t BIcon::SetTo(const BBitmap* bitmap, uint32 flags)
+status_t BIcon::SetTo(const BBitmap* bitmap, uint32_t flags)
 {
 	if (!bitmap->IsValid())
 		return B_BAD_VALUE;
@@ -116,19 +116,19 @@ status_t BIcon::SetTo(const BBitmap* bitmap, uint32 flags)
 }
 
 
-bool BIcon::SetBitmap(BBitmap* bitmap, uint32 which)
+bool BIcon::SetBitmap(BBitmap* bitmap, uint32_t which)
 {
 	BitmapList& list = (which & B_DISABLED_ICON_BITMAP) == 0
 		? fEnabledBitmaps : fDisabledBitmaps;
-	which &= ~uint32(B_DISABLED_ICON_BITMAP);
+	which &= ~uint32_t(B_DISABLED_ICON_BITMAP);
 
-	int32 count = list.CountItems();
-	if ((int32)which < count) {
+	int32_t count = list.CountItems();
+	if ((int32_t)which < count) {
 		list.ReplaceItem(which, bitmap);
 		return true;
 	}
 
-	while (list.CountItems() < (int32)which) {
+	while (list.CountItems() < (int32_t)which) {
 		if (!list.AddItem((BBitmap*)NULL))
 			return false;
 	}
@@ -138,16 +138,16 @@ bool BIcon::SetBitmap(BBitmap* bitmap, uint32 which)
 
 
 BBitmap*
-BIcon::Bitmap(uint32 which) const
+BIcon::Bitmap(uint32_t which) const
 {
 	const BitmapList& list = (which & B_DISABLED_ICON_BITMAP) == 0
 		? fEnabledBitmaps : fDisabledBitmaps;
-	return list.ItemAt(which & ~uint32(B_DISABLED_ICON_BITMAP));
+	return list.ItemAt(which & ~uint32_t(B_DISABLED_ICON_BITMAP));
 }
 
 
 BBitmap*
-BIcon::CreateBitmap(const BRect& bounds, color_space colorSpace, uint32 which)
+BIcon::CreateBitmap(const BRect& bounds, color_space colorSpace, uint32_t which)
 {
 	BBitmap* bitmap = new(std::nothrow) BBitmap(bounds, colorSpace);
 	if (bitmap == NULL || !bitmap->IsValid() || !SetBitmap(bitmap, which)) {
@@ -159,7 +159,7 @@ BIcon::CreateBitmap(const BRect& bounds, color_space colorSpace, uint32 which)
 }
 
 
-status_t BIcon::SetExternalBitmap(const BBitmap* bitmap, uint32 which, uint32 flags)
+status_t BIcon::SetExternalBitmap(const BBitmap* bitmap, uint32_t which, uint32_t flags)
 {
 	BBitmap* ourBitmap = NULL;
 	if (bitmap != NULL) {
@@ -186,7 +186,7 @@ status_t BIcon::SetExternalBitmap(const BBitmap* bitmap, uint32 which, uint32 fl
 
 
 BBitmap*
-BIcon::CopyBitmap(const BBitmap& bitmapToClone, uint32 which)
+BIcon::CopyBitmap(const BBitmap& bitmapToClone, uint32_t which)
 {
 	BBitmap* bitmap = new(std::nothrow) BBitmap(bitmapToClone);
 	if (bitmap == NULL || !bitmap->IsValid() || !SetBitmap(bitmap, which)) {
@@ -205,7 +205,7 @@ void BIcon::DeleteBitmaps()
 }
 
 
-/*static*/ status_t BIcon::UpdateIcon(const BBitmap* bitmap, uint32 flags, BIcon*& _icon)
+/*static*/ status_t BIcon::UpdateIcon(const BBitmap* bitmap, uint32_t flags, BIcon*& _icon)
 {
 	if (bitmap == NULL) {
 		delete _icon;
@@ -228,7 +228,7 @@ void BIcon::DeleteBitmaps()
 }
 
 
-/*static*/ status_t BIcon::SetIconBitmap(const BBitmap* bitmap, uint32 which, uint32 flags,
+/*static*/ status_t BIcon::SetIconBitmap(const BBitmap* bitmap, uint32_t which, uint32_t flags,
 	BIcon*& _icon)
 {
 	bool newIcon = false;
@@ -281,15 +281,15 @@ BIcon::_ConvertToRGB32(const BBitmap* bitmap, bool noAppServerLink)
 	}
 
 	uint8* bits = (uint8*)bitmap->Bits();
-	uint32 bpr = bitmap->BytesPerRow();
-	uint32 width = bitmap->Bounds().IntegerWidth() + 1;
-	uint32 height = bitmap->Bounds().IntegerHeight() + 1;
+	uint32_t bpr = bitmap->BytesPerRow();
+	uint32_t width = bitmap->Bounds().IntegerWidth() + 1;
+	uint32_t height = bitmap->Bounds().IntegerHeight() + 1;
 	BRect trimmed(INT32_MAX, INT32_MAX, INT32_MIN, INT32_MIN);
 
-	for (uint32 y = 0; y < height; y++) {
+	for (uint32_t y = 0; y < height; y++) {
 		uint8* b = bits + 3;
 		bool rowHasAlpha = false;
-		for (uint32 x = 0; x < width; x++) {
+		for (uint32_t x = 0; x < width; x++) {
 			if (*b) {
 				rowHasAlpha = true;
 				if (x < trimmed.left)
@@ -326,12 +326,12 @@ BIcon::_ConvertToRGB32(const BBitmap* bitmap, bool noAppServerLink)
 		return B_NO_MEMORY;
 
 	bits = (uint8*)bitmap->Bits();
-	bits += 4 * (int32)trimmed.left + bpr * (int32)trimmed.top;
+	bits += 4 * (int32_t)trimmed.left + bpr * (int32_t)trimmed.top;
 	uint8* dst = (uint8*)trimmedBitmap->Bits();
-	uint32 trimmedWidth = trimmedBitmap->Bounds().IntegerWidth() + 1;
-	uint32 trimmedHeight = trimmedBitmap->Bounds().IntegerHeight() + 1;
-	uint32 trimmedBPR = trimmedBitmap->BytesPerRow();
-	for (uint32 y = 0; y < trimmedHeight; y++) {
+	uint32_t trimmedWidth = trimmedBitmap->Bounds().IntegerWidth() + 1;
+	uint32_t trimmedHeight = trimmedBitmap->Bounds().IntegerHeight() + 1;
+	uint32_t trimmedBPR = trimmedBitmap->BytesPerRow();
+	for (uint32_t y = 0; y < trimmedHeight; y++) {
 		memcpy(dst, bits, trimmedWidth * 4);
 		dst += trimmedBPR;
 		bits += bpr;
@@ -342,7 +342,7 @@ BIcon::_ConvertToRGB32(const BBitmap* bitmap, bool noAppServerLink)
 }
 
 
-status_t BIcon::_MakeBitmaps(const BBitmap* bitmap, uint32 flags)
+status_t BIcon::_MakeBitmaps(const BBitmap* bitmap, uint32_t flags)
 {
 	// make our own versions of the bitmap
 	BRect b(bitmap->Bounds());
@@ -384,18 +384,18 @@ status_t BIcon::_MakeBitmaps(const BBitmap* bitmap, uint32 flags)
 	uint8* dcBits = disabledClickedBitmap != NULL
 		? (uint8*)disabledClickedBitmap->Bits() : NULL;
 	uint8* fBits = (uint8*)bitmap->Bits();
-	int32 nbpr = normalBitmap->BytesPerRow();
-	int32 fbpr = bitmap->BytesPerRow();
-	int32 pixels = b.IntegerWidth() + 1;
-	int32 lines = b.IntegerHeight() + 1;
+	int32_t nbpr = normalBitmap->BytesPerRow();
+	int32_t fbpr = bitmap->BytesPerRow();
+	int32_t pixels = b.IntegerWidth() + 1;
+	int32_t lines = b.IntegerHeight() + 1;
 	if (format == B_RGB32 || format == B_RGB32_BIG) {
 		// nontransparent version
 
 		// iterate over color components
-		for (int32 y = 0; y < lines; y++) {
-			for (int32 x = 0; x < pixels; x++) {
-				int32 nOffset = 4 * x;
-				int32 fOffset = 4 * x;
+		for (int32_t y = 0; y < lines; y++) {
+			for (int32_t x = 0; x < pixels; x++) {
+				int32_t nOffset = 4 * x;
+				int32_t fOffset = 4 * x;
 				nBits[nOffset + 0] = fBits[fOffset + 0];
 				nBits[nOffset + 1] = fBits[fOffset + 1];
 				nBits[nOffset + 2] = fBits[fOffset + 2];
@@ -446,10 +446,10 @@ status_t BIcon::_MakeBitmaps(const BBitmap* bitmap, uint32 flags)
 		// transparent version
 
 		// iterate over color components
-		for (int32 y = 0; y < lines; y++) {
-			for (int32 x = 0; x < pixels; x++) {
-				int32 nOffset = 4 * x;
-				int32 fOffset = 4 * x;
+		for (int32_t y = 0; y < lines; y++) {
+			for (int32_t x = 0; x < pixels; x++) {
+				int32_t nOffset = 4 * x;
+				int32_t fOffset = 4 * x;
 				nBits[nOffset + 0] = fBits[fOffset + 0];
 				nBits[nOffset + 1] = fBits[fOffset + 1];
 				nBits[nOffset + 2] = fBits[fOffset + 2];

@@ -73,7 +73,7 @@ public:
 	virtual ~Token();
 	TokenType Type() const;
 	virtual const std::string& String() const;
-	virtual int32 Int() const;
+	virtual int32_t Int() const;
 	virtual double Float() const;
 	ssize_t Pos() const;
 	bool operator==(Token &ref) const;
@@ -103,12 +103,12 @@ protected:
 */
 class IntToken : public Token {
 public:
-	IntToken(const int32 value, const ssize_t pos);
+	IntToken(const int32_t value, const ssize_t pos);
 	virtual ~IntToken();
-	virtual int32 Int() const;
+	virtual int32_t Int() const;
 	virtual double Float() const;
 protected:
-	int32 fValue;
+	int32_t fValue;
 };
 
 //! Floating point token class

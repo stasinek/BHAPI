@@ -326,10 +326,10 @@ struct hci_command_header {
 		uint8		flags;
 		uint8		flow_direction;
 		uint8		service_type;
-		uint32		token_rate;
-		uint32		token_bucket;
-		uint32		peak;
-		uint32		latency;
+		uint32_t		token_rate;
+		uint32_t		token_bucket;
+		uint32_t		peak;
+		uint32_t		latency;
 	} __attribute__ ((packed));
 	/* Quality of service types */
 	#define HCI_SERVICE_TYPE_NO_TRAFFIC		0x00

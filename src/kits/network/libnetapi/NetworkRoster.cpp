@@ -52,7 +52,7 @@ BNetworkRoster::CountInterfaces() const
 }
 
 
-status_t BNetworkRoster::GetNextInterface(uint32* cookie,
+status_t BNetworkRoster::GetNextInterface(uint32_t* cookie,
 	BNetworkInterface& interface) const
 {
 	// TODO: think about caching the interfaces!
@@ -91,7 +91,7 @@ status_t BNetworkRoster::GetNextInterface(uint32* cookie,
 	ifreq* interfaces = (ifreq*)buffer;
 	ifreq* end = (ifreq*)(buffer + config.ifc_len);
 
-	for (uint32 i = 0; interfaces < end; i++) {
+	for (uint32_t i = 0; interfaces < end; i++) {
 		interface.SetTo(interfaces[0].ifr_name);
 		if (i == *cookie) {
 			(*cookie)++;
@@ -157,7 +157,7 @@ status_t BNetworkRoster::RemoveInterface(const BNetworkInterface& interface)
 }
 
 
-int32 BNetworkRoster::CountPersistentNetworks() const
+int32_t BNetworkRoster::CountPersistentNetworks() const
 {
 	BMessenger networkServer(kNetServerSignature);
 	BMessage message(kMsgCountPersistentNetworks);
@@ -165,7 +165,7 @@ int32 BNetworkRoster::CountPersistentNetworks() const
 	if (networkServer.SendMessage(&message, &reply) != B_OK)
 		return 0;
 
-	int32 count = 0;
+	int32_t count = 0;
 	if (reply.FindInt32("count", &count) != B_OK)
 		return 0;
 
@@ -173,12 +173,12 @@ int32 BNetworkRoster::CountPersistentNetworks() const
 }
 
 
-status_t BNetworkRoster::GetNextPersistentNetwork(uint32* cookie,
+status_t BNetworkRoster::GetNextPersistentNetwork(uint32_t* cookie,
 	wireless_network& network) const
 {
 	BMessenger networkServer(kNetServerSignature);
 	BMessage message(kMsgGetPersistentNetwork);
-	message.AddInt32("index", (int32)*cookie);
+	message.AddInt32("index", (int32_t)*cookie);
 
 	BMessage reply;
 	status_t result = networkServer.SendMessage(&message, &reply);
@@ -283,7 +283,7 @@ status_t BNetworkRoster::RemovePersistentNetwork(const char* name)
 }
 
 
-status_t BNetworkRoster::StartWatching(const BMessenger& target, uint32 eventMask)
+status_t BNetworkRoster::StartWatching(const BMessenger& target, uint32_t eventMask)
 {
 	return start_watching_network(eventMask, target);
 }

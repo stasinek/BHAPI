@@ -29,15 +29,15 @@ DriverSettingsConverter::~DriverSettingsConverter()
 
 
 status_t DriverSettingsConverter::ConvertFromDriverSettings(
-	const driver_parameter& parameter, const char* name, int32 index,
-	uint32 type, BMessage& target)
+	const driver_parameter& parameter, const char* name, int32_t index,
+	uint32_t type, BMessage& target)
 {
 	return B_NOT_SUPPORTED;
 }
 
 
 status_t DriverSettingsConverter::ConvertEmptyFromDriverSettings(
-	const driver_parameter& parameter, const char* name, uint32 type,
+	const driver_parameter& parameter, const char* name, uint32_t type,
 	BMessage& target)
 {
 	return B_NOT_SUPPORTED;
@@ -45,7 +45,7 @@ status_t DriverSettingsConverter::ConvertEmptyFromDriverSettings(
 
 
 status_t DriverSettingsConverter::ConvertToDriverSettings(const BMessage& source,
-	const char* name, int32 index, uint32 type, BString& value)
+	const char* name, int32_t index, uint32_t type, BString& value)
 {
 	return B_NOT_SUPPORTED;
 }
@@ -70,7 +70,7 @@ status_t DriverSettingsMessageAdapter::ConvertFromDriverSettings(
 {
 	message.MakeEmpty();
 
-	for (int32 i = 0; i < settings.parameter_count; i++) {
+	for (int32_t i = 0; i < settings.parameter_count; i++) {
 		status_t status = _ConvertFromDriverParameter(settings.parameters[i],
 			settingsTemplate, message);
 		if (status == B_BAD_VALUE) {
@@ -109,10 +109,10 @@ status_t DriverSettingsMessageAdapter::ConvertToDriverSettings(
 	const settings_template* settingsTemplate, BString& settings,
 	const BMessage& message)
 {
-	int32 index = 0;
+	int32_t index = 0;
 	char *name = NULL;
 	type_code type;
-	int32 count = 0;
+	int32_t count = 0;
 
 	while (message.GetInfo(B_ANY_TYPE, index++, &name, &type, &count) == B_OK) {
 		status_t result = _AppendSettings(settingsTemplate, settings, message,
@@ -194,7 +194,7 @@ status_t DriverSettingsMessageAdapter::_AddParameter(const driver_parameter& par
 	if (name == NULL)
 		name = parameter.name;
 
-	for (int32 i = 0; i < parameter.value_count; i++) {
+	for (int32_t i = 0; i < parameter.value_count; i++) {
 		if (settingsTemplate.converter != NULL) {
 			status_t status
 				= settingsTemplate.converter->ConvertFromDriverSettings(
@@ -269,7 +269,7 @@ status_t DriverSettingsMessageAdapter::_ConvertFromDriverParameter(
 
 	if (settingsTemplate->type == B_MESSAGE_TYPE) {
 		BMessage subMessage;
-		for (int32 j = 0; j < parameter.parameter_count; j++) {
+		for (int32_t j = 0; j < parameter.parameter_count; j++) {
 			status = _ConvertFromDriverParameter(parameter.parameters[j],
 				settingsTemplate->sub_template, subMessage);
 			if (status != B_OK)
@@ -290,7 +290,7 @@ status_t DriverSettingsMessageAdapter::_ConvertFromDriverParameter(
 
 status_t DriverSettingsMessageAdapter::_AppendSettings(
 	const settings_template* settingsTemplate, BString& settings,
-	const BMessage& message, const char* name, type_code type, int32 count,
+	const BMessage& message, const char* name, type_code type, int32_t count,
 	const char* settingName)
 {
 	const settings_template* valueTemplate
@@ -314,7 +314,7 @@ status_t DriverSettingsMessageAdapter::_AppendSettings(
 		settings.Append("\t");
 	}
 
-	for (int32 valueIndex = 0; valueIndex < count; valueIndex++) {
+	for (int32_t valueIndex = 0; valueIndex < count; valueIndex++) {
 		if (valueIndex > 0 && type != B_MESSAGE_TYPE)
 			settings.Append(" ");
 
@@ -352,7 +352,7 @@ status_t DriverSettingsMessageAdapter::_AppendSettings(
 
 			case B_INT32_TYPE:
 			{
-				int32 value;
+				int32_t value;
 				status_t result = message.FindInt32(name, valueIndex, &value);
 				if (result != B_OK)
 					return result;

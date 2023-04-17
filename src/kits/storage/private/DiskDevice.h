@@ -61,7 +61,7 @@ private:
 	static	void				_ClearUserData(user_partition_data* data);
 
 	virtual	bool				_AcceptVisitor(BDiskDeviceVisitor* visitor,
-									int32 level);
+									int32_t level);
 
 			user_disk_device_data* fDeviceData;
 };

@@ -15,9 +15,9 @@
 
 typedef struct elf32_region {
     area_id		id;
-    uint32		start;
-    uint32		size;
-    int32		delta;
+    uint32_t		start;
+    uint32_t		size;
+    int32_t		delta;
 } _PACKED elf32_region;
 
 typedef struct elf64_region {
@@ -34,8 +34,8 @@ struct preloaded_image {
     addr_range	dynamic_section;
 
     FixedWidthPointer<char> debug_string_table;
-    uint32		num_debug_symbols;
-    uint32		debug_string_table_size;
+    uint32_t		num_debug_symbols;
+    uint32_t		debug_string_table_size;
 
     ino_t		inode;
     image_id	id;
@@ -51,12 +51,12 @@ struct preloaded_elf32_image : public preloaded_image {
 
     FixedWidthPointer<Elf32_Sym> syms;
     FixedWidthPointer<Elf32_Rel> rel;
-    int32		rel_len;
+    int32_t		rel_len;
     FixedWidthPointer<Elf32_Rela> rela;
-    int32		rela_len;
+    int32_t		rela_len;
     FixedWidthPointer<Elf32_Rel> pltrel;
-    int32		pltrel_len;
-    int32		pltrel_type;
+    int32_t		pltrel_len;
+    int32_t		pltrel_type;
 
     FixedWidthPointer<Elf32_Sym> debug_symbols;
 } _PACKED;

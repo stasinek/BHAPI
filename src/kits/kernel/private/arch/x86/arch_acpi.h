@@ -18,7 +18,7 @@ typedef struct acpi_rsdp_legacy {
 	uint8	checksum;				/* checksum of bytes 0-19 (per ACPI 1.0) */
 	char	oem_id[6];				/* not null terminated */
 	uint8	revision;				/* 0 = ACPI 1.0, 2 = ACPI 3.0 */
-	uint32	rsdt_address;			/* physical memory address of RSDT */
+	uint32_t	rsdt_address;			/* physical memory address of RSDT */
 } _PACKED acpi_rsdp_legacy;
 
 typedef struct acpi_rsdp_extended {
@@ -26,8 +26,8 @@ typedef struct acpi_rsdp_extended {
 	uint8	checksum;				/* checksum of bytes 0-19 (per ACPI 1.0) */
 	char	oem_id[6];				/* not null terminated */
 	uint8	revision;				/* 0 = ACPI 1.0, 2 = ACPI 3.0 */
-	uint32	rsdt_address;			/* physical memory address of RSDT */
-	uint32	xsdt_length;			/* length in bytes including header */
+	uint32_t	rsdt_address;			/* physical memory address of RSDT */
+	uint32_t	xsdt_length;			/* length in bytes including header */
 	uint64	xsdt_address;			/* 64bit physical memory address of XSDT */
 	uint8	extended_checksum;		/* including entire table */
 	uint8	reserved[3];
@@ -37,20 +37,20 @@ typedef acpi_rsdp_extended acpi_rsdp;
 
 typedef struct acpi_descriptor_header {
 	char	signature[4];			/* table identifier as ASCII string */
-	uint32	length;					/* length in bytes of the entire table */
+	uint32_t	length;					/* length in bytes of the entire table */
 	uint8	revision;
 	uint8	checksum;				/* checksum of entire table */
 	char	oem_id[6];				/* not null terminated */
 	char	oem_table_id[8];		/* oem supplied table identifier */
-	uint32	oem_revision;			/* oem supplied revision number */
+	uint32_t	oem_revision;			/* oem supplied revision number */
 	char	creator_id[4];			/* creator / asl compiler id */
-	uint32	creator_revision;		/* compiler revision */
+	uint32_t	creator_revision;		/* compiler revision */
 } _PACKED acpi_descriptor_header;
 
 typedef struct acpi_madt {
 	acpi_descriptor_header	header;		/* "APIC" signature */
-	uint32	local_apic_address;		/* physical address for local CPUs APICs */
-	uint32	flags;
+	uint32_t	local_apic_address;		/* physical address for local CPUs APICs */
+	uint32_t	flags;
 } _PACKED acpi_madt;
 
 enum {
@@ -77,7 +77,7 @@ typedef struct acpi_local_apic {
 	uint8	length;					/* 8 bytes */
 	uint8	acpi_processor_id;
 	uint8	apic_id;				/* the id of this APIC */
-	uint32	flags;					/* 1 = enabled */
+	uint32_t	flags;					/* 1 = enabled */
 } _PACKED acpi_local_apic;
 
 typedef struct acpi_io_apic {
@@ -85,8 +85,8 @@ typedef struct acpi_io_apic {
 	uint8	length;					/* 12 bytes */
 	uint8	io_apic_id;				/* the id of this APIC */
 	uint8	reserved;
-	uint32	io_apic_address;		/* physical address of I/O APIC */
-	uint32	interrupt_base;			/* global system interrupt base */
+	uint32_t	io_apic_address;		/* physical address of I/O APIC */
+	uint32_t	interrupt_base;			/* global system interrupt base */
 } _PACKED acpi_io_apic;
 
 typedef struct acpi_int_source_override {
@@ -94,7 +94,7 @@ typedef struct acpi_int_source_override {
 	uint8	length;					/* 10 bytes */
 	uint8	bus;					/* 0 = ISA  */
 	uint8	source;					/* Bus-relative interrupt source (IRQ) */
-	uint32	interrupt;				/* global system interrupt this
+	uint32_t	interrupt;				/* global system interrupt this
 									   bus-relative source int will signal */
 	uint16	flags;					/* MPS INTI flags. See Table 5-25 in
 									   ACPI Spec 4.0a or similar */
@@ -105,7 +105,7 @@ typedef struct acpi_nmi_source {
 	uint8	length;					/* 8 bytes */
 	uint16	flags;					/* Same as MPS INTI flags. See Table 5-25 in
 									   ACPI Spec 4.0a or similar */
-	uint32  interrupt;				/* global system interrupt this
+	uint32_t  interrupt;				/* global system interrupt this
 									   non-maskable interrupt will trigger */
 } _PACKED acpi_nmi_source;
 
@@ -136,7 +136,7 @@ typedef struct acpi_io_sapic {
 	uint8	length;					/* 16 bytes */
 	uint8	io_apic_id;				/* the id of this SAPIC */
 	uint8	reserved;				/* reserved (must be set to zero) */
-	uint32	interrupt_base;			/* global system interrupt base */
+	uint32_t	interrupt_base;			/* global system interrupt base */
 	uint64	sapic_address;			/* The physical address to access this I/0
 									   SAPIC. Each SAPIC resides at a unique
 									   address */
@@ -151,9 +151,9 @@ typedef struct acpi_local_sapic {
 	uint8	reserved1;				/* reserved (must be set to zero) */
 	uint8	reserved2;				/* reserved (must be set to zero) */
 	uint8	reserved3;				/* reserved (must be set to zero) */
-	uint32	flags;					/* Local SAPIC flags, see table 5-22 in
+	uint32_t	flags;					/* Local SAPIC flags, see table 5-22 in
 									   ACPI Spec 4.0a */
-	uint32	processor_uid_nr;		/* Matches _UID of a processor when it is a
+	uint32_t	processor_uid_nr;		/* Matches _UID of a processor when it is a
 									   number */
 	char	processor_uid_str[];	/* Matches _UID of a processor when it is a
 									   string. Null-terminated */
@@ -171,9 +171,9 @@ typedef struct acpi_platform_interrupt_source {
 	uint8	io_sapic_vector;		/* value that must be used to program the
 									   vector field of the I/O SAPIC redirection
 									   entry for entries with PMI type. */
-	uint32	interrupt;				/* global system interrupt this
+	uint32_t	interrupt;				/* global system interrupt this
 									   platform interrupt will trigger */
-	uint32	platform_int_flags;		/* Platform Interrupt Source Flags. See
+	uint32_t	platform_int_flags;		/* Platform Interrupt Source Flags. See
 									   Table 5-32 of ACPI Spec 4.0a for desc */
 } _PACKED acpi_platform_interrupt_source;
 
@@ -181,9 +181,9 @@ typedef struct acpi_local_x2_apic {
 	uint8	type;					/* 9 = processor local x2APIC */
 	uint8	length;					/* 16 bytes */
 	uint16	reserved;				/* reserved (must be zero) */
-	uint32	x2apic_id;				/* processor's local x2APIC ID */
-	uint32	flags;					/* 1 = enabled. */
-	uint32	processor_uid_nr;		/* Matches _UID of a processor when it is a
+	uint32_t	x2apic_id;				/* processor's local x2APIC ID */
+	uint32_t	flags;					/* 1 = enabled. */
+	uint32_t	processor_uid_nr;		/* Matches _UID of a processor when it is a
 									   number */
 } _PACKED acpi_local_x2_apic;
 
@@ -192,7 +192,7 @@ typedef struct acpi_local_x2_apic_nmi {
 	uint8	length;					/* 12 bytes */
 	uint16	flags;					/* Same as MPS INTI flags. See Table 5-25 in
 									   ACPI Spec 4.0a or similar */
-	uint32	acpi_processor_uid;		/* UID corresponding to ID in processor
+	uint32_t	acpi_processor_uid;		/* UID corresponding to ID in processor
 									   device object. 0xFFFFFFFF means
 									   it applies to all processors */
 	uint8   local_interrupt;		/* Local x2APIC interrupt input LINTn to

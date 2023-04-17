@@ -25,7 +25,7 @@
 typedef struct fssh_fs_info {
 	fssh_dev_t	dev;								/* volume dev_t */
 	fssh_ino_t	root;								/* root ino_t */
-	uint32_t	flags;								/* flags (see above) */
+	uint32_t_t	flags;								/* flags (see above) */
 	fssh_off_t	block_size;							/* fundamental block size */
 	fssh_off_t	io_size;							/* optimal i/o size */
 	fssh_off_t	total_blocks;						/* total number of blocks */
@@ -43,7 +43,7 @@ extern "C" {
 #endif
 
 extern fssh_dev_t	dev_for_path(const char *path);
-extern fssh_dev_t	next_dev(int32_t *pos);
+extern fssh_dev_t	next_dev(int32_t_t *pos);
 extern int			fs_stat_dev(fssh_dev_t dev, fssh_fs_info *info);
 
 #ifdef  __cplusplus

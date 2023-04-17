@@ -42,13 +42,13 @@ public:
 						void			Dump() const;
 };
 
-class CPUEntry : public HeapLinkImpl<CPUEntry, int32> {
+class CPUEntry : public HeapLinkImpl<CPUEntry, int32_t> {
 public:
 										CPUEntry();
 
-						void			Init(int32 id, CoreEntry* core);
+						void			Init(int32_t id, CoreEntry* core);
 
-	inline				int32			ID() const	{ return fCPUNumber; }
+	inline				int32_t			ID() const	{ return fCPUNumber; }
 	inline				CoreEntry*		Core() const	{ return fCore; }
 
 						void			Start();
@@ -64,16 +64,16 @@ public:
 	inline				void			UnlockRunQueue();
 
 						void			PushFront(ThreadData* thread,
-											int32 priority);
+											int32_t priority);
 						void			PushBack(ThreadData* thread,
-											int32 priority);
+											int32_t priority);
 						void			Remove(ThreadData* thread);
 	inline				ThreadData*		PeekThread() const;
 						ThreadData*		PeekIdleThread() const;
 
-						void			UpdatePriority(int32 priority);
+						void			UpdatePriority(int32_t priority);
 
-	inline				int32			GetLoad() const	{ return fLoad; }
+	inline				int32_t			GetLoad() const	{ return fLoad; }
 						void			ComputeLoad();
 
 						ThreadData*		ChooseNextThread(ThreadData* oldThread,
@@ -85,16 +85,16 @@ public:
 						void			StartQuantumTimer(ThreadData* thread,
 											bool wasPreempted);
 
-	static inline		CPUEntry*		GetCPU(int32 cpu);
+	static inline		CPUEntry*		GetCPU(int32_t cpu);
 
 private:
 						void			_RequestPerformanceLevel(
 											ThreadData* threadData);
 
-	static				int32			_RescheduleEvent(timer* /* unused */);
-	static				int32			_UpdateLoadEvent(timer* /* unused */);
+	static				int32_t			_RescheduleEvent(timer* /* unused */);
+	static				int32_t			_UpdateLoadEvent(timer* /* unused */);
 
-						int32			fCPUNumber;
+						int32_t			fCPUNumber;
 						CoreEntry*		fCore;
 
 						rw_spinlock 	fSchedulerModeLock;
@@ -102,7 +102,7 @@ private:
 						ThreadRunQueue	fRunQueue;
 						spinlock		fQueueLock;
 
-						int32			fLoad;
+						int32_t			fLoad;
 
 						bigtime_t		fMeasureActiveTime;
 						bigtime_t		fMeasureTime;
@@ -112,24 +112,24 @@ private:
 						friend class DebugDumper;
 } CACHE_LINE_ALIGN;
 
-class CPUPriorityHeap : public Heap<CPUEntry, int32> {
+class CPUPriorityHeap : public Heap<CPUEntry, int32_t> {
 public:
 										CPUPriorityHeap() { }
-										CPUPriorityHeap(int32 cpuCount);
+										CPUPriorityHeap(int32_t cpuCount);
 
 						void			Dump();
 };
 
-class CoreEntry : public MinMaxHeapLinkImpl<CoreEntry, int32>,
+class CoreEntry : public MinMaxHeapLinkImpl<CoreEntry, int32_t>,
 	public DoublyLinkedListLinkImpl<CoreEntry> {
 public:
 										CoreEntry();
 
-						void			Init(int32 id, PackageEntry* package);
+						void			Init(int32_t id, PackageEntry* package);
 
-	inline				int32			ID() const	{ return fCoreID; }
+	inline				int32_t			ID() const	{ return fCoreID; }
 	inline				PackageEntry*	Package() const	{ return fPackage; }
-	inline				int32			CPUCount() const
+	inline				int32_t			CPUCount() const
 											{ return fCPUCount; }
 
 	inline				void			LockCPUHeap();
@@ -137,15 +137,15 @@ public:
 
 	inline				CPUPriorityHeap*	CPUHeap();
 
-	inline				int32			ThreadCount() const;
+	inline				int32_t			ThreadCount() const;
 
 	inline				void			LockRunQueue();
 	inline				void			UnlockRunQueue();
 
 						void			PushFront(ThreadData* thread,
-											int32 priority);
+											int32_t priority);
 						void			PushBack(ThreadData* thread,
-											int32 priority);
+											int32_t priority);
 						void			Remove(ThreadData* thread);
 	inline				ThreadData*		PeekThread() const;
 
@@ -153,14 +153,14 @@ public:
 	inline				void			IncreaseActiveTime(
 											bigtime_t activeTime);
 
-	inline				int32			GetLoad() const;
-	inline				uint32			LoadMeasurementEpoch() const
+	inline				int32_t			GetLoad() const;
+	inline				uint32_t			LoadMeasurementEpoch() const
 											{ return fLoadMeasurementEpoch; }
 
-	inline				void			AddLoad(int32 load, uint32 epoch,
+	inline				void			AddLoad(int32_t load, uint32_t epoch,
 											bool updateLoad);
-	inline				uint32			RemoveLoad(int32 load, bool force);
-	inline				void			ChangeLoad(int32 delta);
+	inline				uint32_t			RemoveLoad(int32_t load, bool force);
+	inline				void			ChangeLoad(int32_t delta);
 
 	inline				void			CPUGoesIdle(CPUEntry* cpu);
 	inline				void			CPUWakesUp(CPUEntry* cpu);
@@ -170,7 +170,7 @@ public:
 											ThreadProcessing&
 												threadPostProcessing);
 
-	static inline		CoreEntry*		GetCore(int32 cpu);
+	static inline		CoreEntry*		GetCore(int32_t cpu);
 
 private:
 						void			_UpdateLoad(bool forceUpdate = false);
@@ -178,24 +178,24 @@ private:
 	static				void			_UnassignThread(Thread* thread,
 											void* core);
 
-						int32			fCoreID;
+						int32_t			fCoreID;
 						PackageEntry*	fPackage;
 
-						int32			fCPUCount;
-						int32			fIdleCPUCount;
+						int32_t			fCPUCount;
+						int32_t			fIdleCPUCount;
 						CPUPriorityHeap	fCPUHeap;
 						spinlock		fCPULock;
 
-						int32			fThreadCount;
+						int32_t			fThreadCount;
 						ThreadRunQueue	fRunQueue;
 						spinlock		fQueueLock;
 
 						bigtime_t		fActiveTime;
 	mutable				seqlock			fActiveTimeLock;
 
-						int32			fLoad;
-						int32			fCurrentLoad;
-						uint32			fLoadMeasurementEpoch;
+						int32_t			fLoad;
+						int32_t			fCurrentLoad;
+						uint32_t			fLoadMeasurementEpoch;
 						bool			fHighLoad;
 						bigtime_t		fLastLoadUpdate;
 						rw_spinlock		fLoadLock;
@@ -203,10 +203,10 @@ private:
 						friend class DebugDumper;
 } CACHE_LINE_ALIGN;
 
-class CoreLoadHeap : public MinMaxHeap<CoreEntry, int32> {
+class CoreLoadHeap : public MinMaxHeap<CoreEntry, int32_t> {
 public:
 										CoreLoadHeap() { }
-										CoreLoadHeap(int32 coreCount);
+										CoreLoadHeap(int32_t coreCount);
 
 						void			Dump();
 };
@@ -224,7 +224,7 @@ class PackageEntry : public DoublyLinkedListLinkImpl<PackageEntry> {
 public:
 											PackageEntry();
 
-						void				Init(int32 id);
+						void				Init(int32_t id);
 
 	inline				void				CoreGoesIdle(CoreEntry* core);
 	inline				void				CoreWakesUp(CoreEntry* core);
@@ -238,11 +238,11 @@ public:
 	static inline		PackageEntry*		GetLeastIdlePackage();
 
 private:
-						int32				fPackageID;
+						int32_t				fPackageID;
 
 						DoublyLinkedList<CoreEntry>	fIdleCores;
-						int32				fIdleCoreCount;
-						int32				fCoreCount;
+						int32_t				fIdleCoreCount;
+						int32_t				fCoreCount;
 						rw_spinlock			fCoreLock;
 
 						friend class DebugDumper;
@@ -255,12 +255,12 @@ extern CoreEntry* gCoreEntries;
 extern CoreLoadHeap gCoreLoadHeap;
 extern CoreLoadHeap gCoreHighLoadHeap;
 extern rw_spinlock gCoreHeapsLock;
-extern int32 gCoreCount;
+extern int32_t gCoreCount;
 
 extern PackageEntry* gPackageEntries;
 extern IdlePackageList gIdlePackageList;
 extern rw_spinlock gIdlePackageLock;
-extern int32 gPackageCount;
+extern int32_t gPackageCount;
 
 
 inline void
@@ -312,7 +312,7 @@ CPUEntry::UnlockRunQueue()
 
 
 /* static */ inline CPUEntry*
-CPUEntry::GetCPU(int32 cpu)
+CPUEntry::GetCPU(int32_t cpu)
 {
 	SCHEDULER_ENTER_FUNCTION();
 	return &gCPUEntries[cpu];
@@ -343,7 +343,7 @@ CoreEntry::CPUHeap()
 }
 
 
-inline int32
+inline int32_t
 CoreEntry::ThreadCount() const
 {
 	SCHEDULER_ENTER_FUNCTION();
@@ -382,7 +382,7 @@ CoreEntry::GetActiveTime() const
 	SCHEDULER_ENTER_FUNCTION();
 
 	bigtime_t activeTime;
-	uint32 count;
+	uint32_t count;
 	do {
 		count = acquire_read_seqlock(&fActiveTimeLock);
 		activeTime = fActiveTime;
@@ -391,7 +391,7 @@ CoreEntry::GetActiveTime() const
 }
 
 
-inline int32
+inline int32_t
 CoreEntry::GetLoad() const
 {
 	SCHEDULER_ENTER_FUNCTION();
@@ -402,7 +402,7 @@ CoreEntry::GetLoad() const
 
 
 inline void
-CoreEntry::AddLoad(int32 load, uint32 epoch, bool updateLoad)
+CoreEntry::AddLoad(int32_t load, uint32_t epoch, bool updateLoad)
 {
 	SCHEDULER_ENTER_FUNCTION();
 
@@ -420,8 +420,8 @@ CoreEntry::AddLoad(int32 load, uint32 epoch, bool updateLoad)
 }
 
 
-inline uint32
-CoreEntry::RemoveLoad(int32 load, bool force)
+inline uint32_t
+CoreEntry::RemoveLoad(int32_t load, bool force)
 {
 	SCHEDULER_ENTER_FUNCTION();
 
@@ -441,7 +441,7 @@ CoreEntry::RemoveLoad(int32 load, bool force)
 
 
 inline void
-CoreEntry::ChangeLoad(int32 delta)
+CoreEntry::ChangeLoad(int32_t delta)
 {
 	SCHEDULER_ENTER_FUNCTION();
 
@@ -530,7 +530,7 @@ CoreEntry::CPUWakesUp(CPUEntry* /* cpu */)
 
 
 /* static */ inline CoreEntry*
-CoreEntry::GetCore(int32 cpu)
+CoreEntry::GetCore(int32_t cpu)
 {
 	SCHEDULER_ENTER_FUNCTION();
 	return gCPUEntries[cpu].Core();
@@ -551,7 +551,7 @@ PackageEntry::GetMostIdlePackage()
 	SCHEDULER_ENTER_FUNCTION();
 
 	PackageEntry* current = &gPackageEntries[0];
-	for (int32 i = 1; i < gPackageCount; i++) {
+	for (int32_t i = 1; i < gPackageCount; i++) {
 		if (gPackageEntries[i].fIdleCoreCount > current->fIdleCoreCount)
 			current = &gPackageEntries[i];
 	}
@@ -570,10 +570,10 @@ PackageEntry::GetLeastIdlePackage()
 
 	PackageEntry* package = NULL;
 
-	for (int32 i = 0; i < gPackageCount; i++) {
+	for (int32_t i = 0; i < gPackageCount; i++) {
 		PackageEntry* current = &gPackageEntries[i];
 
-		int32 currentIdleCoreCount = current->fIdleCoreCount;
+		int32_t currentIdleCoreCount = current->fIdleCoreCount;
 		if (currentIdleCoreCount != 0 && (package == NULL
 				|| currentIdleCoreCount < package->fIdleCoreCount)) {
 			package = current;

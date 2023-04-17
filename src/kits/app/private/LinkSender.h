@@ -27,14 +27,14 @@ class LinkSender {
 		team_id TargetTeam() const;
 		void SetTargetTeam(team_id team);
 
-		status_t StartMessage(int32 code, size_t minSize = 0);
+		status_t StartMessage(int32_t code, size_t minSize = 0);
 		void CancelMessage(void);
 		status_t EndMessage(bool needsReply = false);
 
 		status_t Flush(bigtime_t timeout = B_INFINITE_TIMEOUT, bool needsReply = false);
 
 		status_t Attach(const void *data, size_t size);
-		status_t AttachString(const char *string, int32 maxLength = -1);
+		status_t AttachString(const char *string, int32_t maxLength = -1);
 		template <class Type> status_t Attach(const Type& data)
 		{
 			return Attach(&data, sizeof(Type));
@@ -53,8 +53,8 @@ class LinkSender {
 		char	*fBuffer;
 		size_t	fBufferSize;
 
-		uint32	fCurrentEnd;		// current append position
-		uint32	fCurrentStart;		// start of current message
+		uint32_t	fCurrentEnd;		// current append position
+		uint32_t	fCurrentStart;		// start of current message
 
 		status_t fCurrentStatus;
 };

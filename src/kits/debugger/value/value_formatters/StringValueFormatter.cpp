@@ -31,7 +31,7 @@ status_t StringValueFormatter::FormatValue(Value* value, BString& _output)
 	if (!value->ToString(tempString))
 		return B_BAD_VALUE;
 
-	for (int32 i = 0; i < tempString.Length(); i++) {
+	for (int32_t i = 0; i < tempString.Length(); i++) {
 		if (tempString[i] < 31) {
 			switch (tempString[i]) {
 				case '\0':

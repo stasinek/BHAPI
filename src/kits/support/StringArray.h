@@ -56,37 +56,37 @@ public:
     BStringArray&	operator+=(const BStringArray &array);
 
     bool            AddItem(const char *item, void *attach_data = NULL);
-    bool            AddItem(const char *item,  int32_t atIndex, void *attach_data = NULL);
+    bool            AddItem(const char *item,  int32_t_t atIndex, void *attach_data = NULL);
     bool            AddItem(const BString &item, void *attach_data = NULL);
-    bool            AddItem(const BString &item,  int32_t atIndex, void *attach_data = NULL);
+    bool            AddItem(const BString &item,  int32_t_t atIndex, void *attach_data = NULL);
     bool            AddArray(const BStringArray &array);
-    bool            AddArray(const BStringArray &array,  int32_t atIndex);
+    bool            AddArray(const BStringArray &array,  int32_t_t atIndex);
     inline bool     Add(const char *item, void *attach_data = NULL) { return AddItem(item); }
 
-    bool            RemoveItem(int32_t index);
-    bool            RemoveItems(int32_t index,  int32_t count);
+    bool            RemoveItem(int32_t_t index);
+    bool            RemoveItems(int32_t_t index,  int32_t_t count);
 
-    bool            ReplaceItem(int32_t index, const char *string, void *attach_data = NULL);
-    bool            ReplaceItem(int32_t index, const BString &string, void *attach_data = NULL);
+    bool            ReplaceItem(int32_t_t index, const char *string, void *attach_data = NULL);
+    bool            ReplaceItem(int32_t_t index, const BString &string, void *attach_data = NULL);
 
     BStringArray&	SortItems(int (*cmp)(const BString**, const BString**));
-    bool            SwapItems(int32_t indexA,  int32_t indexB);
-    bool            MoveItem(int32_t fromIndex,  int32_t toIndex);
+    bool            SwapItems(int32_t_t indexA,  int32_t_t indexB);
+    bool            MoveItem(int32_t_t fromIndex,  int32_t_t toIndex);
 
     bool            IsEmpty() const;
     void            MakeEmpty();
 
-    const BString*	ItemAt(int32_t index, void **attach_data = NULL) const;
+    const BString*	ItemAt(int32_t_t index, void **attach_data = NULL) const;
     const BString*	FirstItem(void **attach_data = NULL) const;
     const BString*	LastItem(void **attach_data = NULL) const;
 
-     int32_t         CountItems() const;
+     int32_t_t         CountItems() const;
 
     // return value: string index if found, else return -1
-     int32_t         FindString(const char *string,  int32_t startIndex = 0, bool all_equal = true, bool invert = false) const;
-     int32_t         FindString(const BString &string,  int32_t startIndex = 0, bool all_equal = true, bool invert = false) const;
-     int32_t         IFindString(const char *string,  int32_t startIndex = 0, bool all_equal = true, bool invert = false) const;
-     int32_t         IFindString(const BString &string,  int32_t startIndex = 0, bool all_equal = true, bool invert = false) const;
+     int32_t_t         FindString(const char *string,  int32_t_t startIndex = 0, bool all_equal = true, bool invert = false) const;
+     int32_t_t         FindString(const BString &string,  int32_t_t startIndex = 0, bool all_equal = true, bool invert = false) const;
+     int32_t_t         IFindString(const char *string,  int32_t_t startIndex = 0, bool all_equal = true, bool invert = false) const;
+     int32_t_t         IFindString(const BString &string,  int32_t_t startIndex = 0, bool all_equal = true, bool invert = false) const;
 
 private:
     BList list;

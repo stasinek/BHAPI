@@ -79,7 +79,7 @@ read_unlock_disk_device(partition_id partitionID)
 }
 
 
-int32
+int32_t
 find_disk_device(const char* path)
 {
 	KDiskDeviceManager* manager = KDiskDeviceManager::Default();
@@ -92,7 +92,7 @@ find_disk_device(const char* path)
 }
 
 
-int32
+int32_t
 find_partition(const char* path)
 {
 	KDiskDeviceManager* manager = KDiskDeviceManager::Default();
@@ -135,7 +135,7 @@ get_parent_partition(partition_id partitionID)
 
 
 partition_data*
-get_child_partition(partition_id partitionID, int32 index)
+get_child_partition(partition_id partitionID, int32_t index)
 {
 	KDiskDeviceManager* manager = KDiskDeviceManager::Default();
 	if (KPartition* partition = manager->FindPartition(partitionID)) {
@@ -164,7 +164,7 @@ open_partition(partition_id partitionID, int openMode)
 
 
 partition_data*
-create_child_partition(partition_id partitionID, int32 index, off_t offset,
+create_child_partition(partition_id partitionID, int32_t index, off_t offset,
 	off_t size, partition_id childID)
 {
 	KDiskDeviceManager* manager = KDiskDeviceManager::Default();
@@ -245,7 +245,7 @@ get_default_partition_content_name(partition_id partitionID,
 	uint64 result = uint64(size * 10 + 0.5);
 
 	snprintf(buffer, bufferSize, "%s Volume (%" B_PRId32 ".%" B_PRId32 " %sB)",
-		fileSystemName, int32(result / 10), int32(result % 10), suffixes[index]);
+		fileSystemName, int32_t(result / 10), int32_t(result % 10), suffixes[index]);
 
 	return B_OK;
 }
@@ -311,9 +311,9 @@ set_disk_device_job_error_message(disk_job_id jobID, const char* message)
 }
 
 
-uint32
+uint32_t
 update_disk_device_job_interrupt_properties(disk_job_id jobID,
-	uint32 interruptProperties)
+	uint32_t interruptProperties)
 {
 #if 0
 	bool paused = false;

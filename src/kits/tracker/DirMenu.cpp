@@ -62,7 +62,7 @@ All rights reserved.
 //	#pragma mark - BDirMenu
 
 
-BDirMenu::BDirMenu(BMenuBar* bar, BMessenger target, uint32 command,
+BDirMenu::BDirMenu(BMenuBar* bar, BMessenger target, uint32_t command,
 	const char* entryName)
 	:
 	BPopUpMenu("directories"),

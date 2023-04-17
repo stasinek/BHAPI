@@ -46,7 +46,7 @@ public:
 			void				SetTargetTeam(team_id team);
 			team_id				TargetTeam();
 
-			status_t			StartMessage(int32 code, size_t minSize = 0);
+			status_t			StartMessage(int32_t code, size_t minSize = 0);
 			void				CancelMessage();
 			status_t			EndMessage();
 
@@ -54,7 +54,7 @@ public:
 									bool needsReply = false);
 			status_t			Attach(const void* data, ssize_t size);
 			status_t			AttachString(const char* string,
-									int32 length = -1);
+									int32_t length = -1);
 			status_t			AttachRegion(const BRegion& region);
 			status_t			AttachShape(BShape& shape);
 			status_t			AttachGradient(const BGradient& gradient);
@@ -67,7 +67,7 @@ public:
 			void				SetReceiverPort(port_id port);
 			port_id				ReceiverPort();
 
-			status_t			GetNextMessage(int32& code,
+			status_t			GetNextMessage(int32_t& code,
 									bigtime_t timeout = B_INFINITE_TIMEOUT);
 			bool				NeedsReply() const;
 			status_t			Read(void* data, ssize_t size);
@@ -85,7 +85,7 @@ public:
 
 	// convenience methods
 
-			status_t			FlushWithReply(int32& code);
+			status_t			FlushWithReply(int32_t& code);
 			LinkSender&			Sender() { return *fSender; }
 			LinkReceiver&		Receiver() { return *fReceiver; }
 
@@ -124,7 +124,7 @@ ServerLink::TargetTeam()
 }
 
 
-inline status_t ServerLink::StartMessage(int32 code, size_t minSize)
+inline status_t ServerLink::StartMessage(int32_t code, size_t minSize)
 {
 	return fSender->StartMessage(code, minSize);
 }
@@ -154,7 +154,7 @@ inline status_t ServerLink::Attach(const void* data, ssize_t size)
 }
 
 
-inline status_t ServerLink::AttachString(const char* string, int32 length)
+inline status_t ServerLink::AttachString(const char* string, int32_t length)
 {
 	return fSender->AttachString(string, length);
 }
@@ -182,7 +182,7 @@ ServerLink::ReceiverPort()
 }
 
 
-inline status_t ServerLink::GetNextMessage(int32& code, bigtime_t timeout)
+inline status_t ServerLink::GetNextMessage(int32_t& code, bigtime_t timeout)
 {
 	return fReceiver->GetNextMessage(code, timeout);
 }

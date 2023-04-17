@@ -25,7 +25,7 @@ arch_get_system_info(system_info *info, size_t size)
 
 
 void
-arch_fill_topology_node(cpu_topology_node_info* node, int32 cpu)
+arch_fill_topology_node(cpu_topology_node_info* node, int32_t cpu)
 {
 	switch (node->type) {
 		case B_TOPOLOGY_ROOT:

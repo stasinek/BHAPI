@@ -16,11 +16,11 @@ class BSpinner : public BAbstractSpinner {
 public:
 								BSpinner(BRect frame, const char* name,
 									const char* label, BMessage* message,
-									uint32 resizingMode = B_FOLLOW_LEFT | B_FOLLOW_TOP,
-									uint32 flags = B_WILL_DRAW | B_NAVIGABLE);
+									uint32_t resizingMode = B_FOLLOW_LEFT | B_FOLLOW_TOP,
+									uint32_t flags = B_WILL_DRAW | B_NAVIGABLE);
 								BSpinner(const char* name, const char* label,
 									BMessage* message,
-									uint32 flags = B_WILL_DRAW | B_NAVIGABLE);
+									uint32_t flags = B_WILL_DRAW | B_NAVIGABLE);
 								BSpinner(BMessage* data);
 	virtual						~BSpinner();
 
@@ -36,17 +36,17 @@ public:
 
 	virtual	void				SetEnabled(bool enable);
 
-			int32				MaxValue() const { return fMaxValue; }
-	virtual	void				SetMaxValue(int32 max);
+			int32_t				MaxValue() const { return fMaxValue; }
+	virtual	void				SetMaxValue(int32_t max);
 
-			int32				MinValue() const { return fMinValue; }
-	virtual	void				SetMinValue(int32 min);
+			int32_t				MinValue() const { return fMinValue; }
+	virtual	void				SetMinValue(int32_t min);
 
-			void				Range(int32* min, int32* max);
-	virtual	void				SetRange(int32 min, int32 max);
+			void				Range(int32_t* min, int32_t* max);
+	virtual	void				SetRange(int32_t min, int32_t max);
 
-			int32				Value() const { return fValue; };
-	virtual	void				SetValue(int32 value);
+			int32_t				Value() const { return fValue; };
+	virtual	void				SetValue(int32_t value);
 	virtual	void				SetValueFromText();
 
 private:
@@ -75,12 +75,12 @@ private:
 private:
 			void				_InitObject();
 
-			int32				fMinValue;
-			int32				fMaxValue;
-			int32				fValue;
+			int32_t				fMinValue;
+			int32_t				fMaxValue;
+			int32_t				fValue;
 
 	// FBC padding
-			uint32				_reserved[20];
+			uint32_t				_reserved[20];
 };
 
 

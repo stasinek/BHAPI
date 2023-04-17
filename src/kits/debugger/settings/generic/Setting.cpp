@@ -212,7 +212,7 @@ OptionsSettingImpl::~OptionsSettingImpl()
 {
 	SetDefaultOption(NULL);
 
-	for (int32 i = 0; SettingsOption* option = fOptions.ItemAt(i); i++)
+	for (int32_t i = 0; SettingsOption* option = fOptions.ItemAt(i); i++)
 		option->ReleaseReference();
 }
 
@@ -224,14 +224,14 @@ OptionsSettingImpl::DefaultOption() const
 }
 
 
-int32 OptionsSettingImpl::CountOptions() const
+int32_t OptionsSettingImpl::CountOptions() const
 {
 	return fOptions.CountItems();
 }
 
 
 SettingsOption*
-OptionsSettingImpl::OptionAt(int32 index) const
+OptionsSettingImpl::OptionAt(int32_t index) const
 {
 	return fOptions.ItemAt(index);
 }
@@ -240,7 +240,7 @@ OptionsSettingImpl::OptionAt(int32 index) const
 SettingsOption*
 OptionsSettingImpl::OptionByID(const char* id) const
 {
-	for (int32 i = 0; SettingsOption* option = fOptions.ItemAt(i); i++) {
+	for (int32_t i = 0; SettingsOption* option = fOptions.ItemAt(i); i++) {
 		if (strcmp(option->ID(), id) == 0)
 			return option;
 	}

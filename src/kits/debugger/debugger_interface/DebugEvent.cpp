@@ -11,7 +11,7 @@
 // #pragma mark - DebugEvent
 
 
-DebugEvent::DebugEvent(int32 eventType, team_id team,
+DebugEvent::DebugEvent(int32_t eventType, team_id team,
 	thread_id thread)
 	:
 	fEventType(eventType),
@@ -171,7 +171,7 @@ ThreadRenamedEvent::ThreadRenamedEvent(team_id team, thread_id thread,
 
 
 ThreadPriorityChangedEvent::ThreadPriorityChangedEvent(team_id team,
-	thread_id thread, thread_id changedThread, int32 newPriority)
+	thread_id thread, thread_id changedThread, int32_t newPriority)
 	:
 	DebugEvent(DEBUGGER_MESSAGE_THREAD_PRIORITY_CHANGED, team, thread),
 	fChangedThread(changedThread),

@@ -18,13 +18,13 @@
 
 
 enum cpu_vendor sCPUVendor;
-uint32 sCPUModel;
+uint32_t sCPUModel;
 int64 sCPUClockSpeed;
 
 
 static bool
-get_cpuid_for(cpuid_info *info, uint32 currentCPU, uint32 eaxRegister,
-	uint32 forCPU)
+get_cpuid_for(cpuid_info *info, uint32_t currentCPU, uint32_t eaxRegister,
+	uint32_t forCPU)
 {
 	if (currentCPU != forCPU)
 		return false;
@@ -35,9 +35,9 @@ get_cpuid_for(cpuid_info *info, uint32 currentCPU, uint32 eaxRegister,
 
 
 status_t
-get_cpuid(cpuid_info *info, uint32 eaxRegister, uint32 forCPU)
+get_cpuid(cpuid_info *info, uint32_t eaxRegister, uint32_t forCPU)
 {
-	uint32 numCPUs = (uint32)smp_get_num_cpus();
+	uint32_t numCPUs = (uint32_t)smp_get_num_cpus();
 	cpu_status state;
 
 	if (forCPU >= numCPUs)
@@ -102,7 +102,7 @@ arch_system_info_init(struct kernel_args *args)
 
 
 void
-arch_fill_topology_node(cpu_topology_node_info* node, int32 cpu)
+arch_fill_topology_node(cpu_topology_node_info* node, int32_t cpu)
 {
 	switch (node->type) {
 		case B_TOPOLOGY_ROOT:
@@ -135,7 +135,7 @@ arch_fill_topology_node(cpu_topology_node_info* node, int32 cpu)
 
 
 status_t
-_user_get_cpuid(cpuid_info *userInfo, uint32 eaxRegister, uint32 cpuNum)
+_user_get_cpuid(cpuid_info *userInfo, uint32_t eaxRegister, uint32_t cpuNum)
 {
 	cpuid_info info;
 	status_t status;

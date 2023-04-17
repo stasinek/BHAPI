@@ -144,25 +144,25 @@ void BNetworkRoute::UnsetSource()
 }
 
 
-uint32 BNetworkRoute::Flags() const
+uint32_t BNetworkRoute::Flags() const
 {
 	return fRouteEntry.flags;
 }
 
 
-void BNetworkRoute::SetFlags(uint32 flags)
+void BNetworkRoute::SetFlags(uint32_t flags)
 {
 	fRouteEntry.flags = flags;
 }
 
 
-uint32 BNetworkRoute::MTU() const
+uint32_t BNetworkRoute::MTU() const
 {
 	return fRouteEntry.mtu;
 }
 
 
-void BNetworkRoute::SetMTU(uint32 mtu)
+void BNetworkRoute::SetMTU(uint32_t mtu)
 {
 	fRouteEntry.mtu = mtu;
 }
@@ -233,7 +233,7 @@ status_t BNetworkRoute::GetRoutes(int family, const char* interfaceName,
 
 
 status_t BNetworkRoute::GetRoutes(int family, const char* interfaceName,
-	uint32 filterFlags, BObjectList<BNetworkRoute>& routes)
+	uint32_t filterFlags, BObjectList<BNetworkRoute>& routes)
 {
 	int socket = ::socket(family, SOCK_DGRAM, 0);
 	if (socket < 0)
@@ -246,7 +246,7 @@ status_t BNetworkRoute::GetRoutes(int family, const char* interfaceName,
 	if (ioctl(socket, SIOCGRTSIZE, &config, sizeof(struct ifconf)) < 0)
 		return errno;
 
-	uint32 size = (uint32)config.ifc_value;
+	uint32_t size = (uint32_t)config.ifc_value;
 	if (size == 0)
 		return B_OK;
 

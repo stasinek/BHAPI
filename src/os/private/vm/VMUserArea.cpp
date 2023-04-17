@@ -10,8 +10,8 @@
 #include <vm/vm_priv.h>
 
 
-VMUserArea::VMUserArea(VMAddressSpace* addressSpace, uint32 wiring,
-	uint32 protection)
+VMUserArea::VMUserArea(VMAddressSpace* addressSpace, uint32_t wiring,
+	uint32_t protection)
 	:
 	VMArea(addressSpace, wiring, protection)
 {
@@ -25,7 +25,7 @@ VMUserArea::~VMUserArea()
 
 /*static*/ VMUserArea*
 VMUserArea::Create(VMAddressSpace* addressSpace, const char* name,
-	uint32 wiring, uint32 protection, uint32 allocationFlags)
+	uint32_t wiring, uint32_t protection, uint32_t allocationFlags)
 {
 	VMUserArea* area = new(malloc_flags(allocationFlags)) VMUserArea(
 		addressSpace, wiring, protection);
@@ -43,8 +43,8 @@ VMUserArea::Create(VMAddressSpace* addressSpace, const char* name,
 
 
 /*static*/ VMUserArea*
-VMUserArea::CreateReserved(VMAddressSpace* addressSpace, uint32 flags,
-	uint32 allocationFlags)
+VMUserArea::CreateReserved(VMAddressSpace* addressSpace, uint32_t flags,
+	uint32_t allocationFlags)
 {
 	VMUserArea* area = new(malloc_flags(allocationFlags)) VMUserArea(
 		addressSpace, 0, 0);

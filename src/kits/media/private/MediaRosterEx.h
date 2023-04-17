@@ -41,29 +41,29 @@ public:
 
 		status_t			SaveNodeConfiguration(BMediaNode* node);
 		status_t 			LoadNodeConfiguration(media_addon_id addonid,
-							int32 flavorid, BMessage* out_msg);
+							int32_t flavorid, BMessage* out_msg);
 
 		status_t			IncrementAddonFlavorInstancesCount(
-							media_addon_id addonid, int32 flavorid);
+							media_addon_id addonid, int32_t flavorid);
 
 		status_t			DecrementAddonFlavorInstancesCount(
-							media_addon_id addonid, int32 flavorid);
+							media_addon_id addonid, int32_t flavorid);
 
 		status_t			ReleaseNodeAll(const media_node& node);
 
 		status_t			SetNodeCreator(media_node_id node, team_id creator);
 
 		status_t			RegisterNode(BMediaNode* node, media_addon_id addonid,
-								int32 flavorid);
+								int32_t flavorid);
 
 		status_t			InstantiateDormantNode(media_addon_id addonid,
-								int32 flavorid, team_id creator, media_node* out_node);
+								int32_t flavorid, team_id creator, media_node* out_node);
 
 		status_t			GetDormantFlavorInfo(media_addon_id addonid,
-								int32 flavorid, dormant_flavor_info* out_flavor);
+								int32_t flavorid, dormant_flavor_info* out_flavor);
 
 		status_t			GetNode(node_type type, media_node* out_node,
-								int32* out_input_id = NULL,
+								int32_t* out_input_id = NULL,
 								BString* out_input_name = NULL);
 
 		status_t			SetNode(node_type type, const media_node* node,

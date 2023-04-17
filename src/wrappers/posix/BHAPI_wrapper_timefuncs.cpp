@@ -62,16 +62,16 @@ BHAPI_IMPEXP bigtime_t b_real_time_clock_usecs(void)
 
 
 // return the number of seconds elapsed since 00:00 01 January 1970 UTC (Unix epoch)
-BHAPI_IMPEXP  uint32 b_real_time_clock(void)
+BHAPI_IMPEXP  uint32_t b_real_time_clock(void)
 {
-	uint32 current_time = 0;
+	uint32_t current_time = 0;
 #if defined(HAVE_CLOCK_GETTIME) && defined(CLOCK_REALTIME)
 	struct timespec ts;
-	if(clock_gettime(CLOCK_REALTIME, &ts) == 0) current_time = (uint32)ts.tv_sec;
+	if(clock_gettime(CLOCK_REALTIME, &ts) == 0) current_time = (uint32_t)ts.tv_sec;
 #else
 #ifdef HAVE_GETTIMEOFDAY
 	struct timeval tv;
-	if(gettimeofday(&tv, NULL) == 0) current_time = (uint32)tv.tv_sec;
+	if(gettimeofday(&tv, NULL) == 0) current_time = (uint32_t)tv.tv_sec;
 #else
 	#error "no time function implement b_real_time_clock!"
 #endif

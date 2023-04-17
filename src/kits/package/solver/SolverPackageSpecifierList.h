@@ -24,8 +24,8 @@ public:
 								~BSolverPackageSpecifierList();
 
 			bool				IsEmpty() const;
-			int32				CountSpecifiers() const;
-			const BSolverPackageSpecifier* SpecifierAt(int32 index) const;
+			int32_t				CountSpecifiers() const;
+			const BSolverPackageSpecifier* SpecifierAt(int32_t index) const;
 
 			bool				AppendSpecifier(
 									const BSolverPackageSpecifier& specifier);
@@ -33,7 +33,7 @@ public:
 			bool				AppendSpecifier(const BString& selectString);
 			bool				AppendSpecifiers(
 									const char* const* selectStrings,
-									int32 count);
+									int32_t count);
 			void				MakeEmpty();
 
 			BSolverPackageSpecifierList& operator=(

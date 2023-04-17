@@ -44,7 +44,7 @@ public:
 			BPath&			Path() { return fSettingsPath; }
 
 			// General screen saver settings
-			int32			TimeFlags() const { return fTimeFlags; }
+			int32_t			TimeFlags() const { return fTimeFlags; }
 			bigtime_t		BlankTime() const { return fBlankTime; }
 			bigtime_t		StandByTime() const { return fStandByTime; }
 			bigtime_t		SuspendTime() const { return fSuspendTime; }
@@ -64,7 +64,7 @@ public:
 			status_t		GetModuleState(const char* name,
 								BMessage* stateMessage);
 
-			void			SetTimeFlags(uint32 flags)
+			void			SetTimeFlags(uint32_t flags)
 								{ fTimeFlags = flags; }
 			void			SetBlankTime(bigtime_t time)
 								{ fBlankTime = time; }
@@ -94,17 +94,17 @@ public:
 
 			// ScreenSaver preferences settings
 			BRect			WindowFrame() const { return fWindowFrame; }
-			int32			WindowTab() const { return fWindowTab; }
+			int32_t			WindowTab() const { return fWindowTab; }
 
 			void			SetWindowFrame(const BRect& frame)
 								{ fWindowFrame = frame; }
-			void			SetWindowTab(int32 tab)
+			void			SetWindowTab(int32_t tab)
 								{ fWindowTab = tab; }
 
 			BMessage&		Message();
 
 private:
-			int32			fTimeFlags;
+			int32_t			fTimeFlags;
 			bigtime_t		fBlankTime;
 			bigtime_t		fStandByTime;
 			bigtime_t		fSuspendTime;
@@ -118,7 +118,7 @@ private:
 			BString			fLockMethod;
 
 			BRect			fWindowFrame;
-			int32			fWindowTab;
+			int32_t			fWindowTab;
 
 			BMessage		fSettings;
 			BPath			fSettingsPath;

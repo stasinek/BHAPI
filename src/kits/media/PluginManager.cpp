@@ -19,7 +19,7 @@ PluginManager gPluginManager;
 // #pragma mark - Readers/Decoders
 
 
-status_t PluginManager::CreateReader(Reader** reader, int32* streamCount,
+status_t PluginManager::CreateReader(Reader** reader, int32_t* streamCount,
 	media_file_format* mff, BDataIO* source)
 {
 	TRACE("PluginManager::CreateReader enter\n");
@@ -33,7 +33,7 @@ status_t PluginManager::CreateReader(Reader** reader, int32* streamCount,
 
 	// get list of available readers from the server
 	entry_ref refs[MAX_READERS];
-	int32 count;
+	int32_t count;
 
 	status_t ret = AddOnManager::GetInstance()->GetReaders(refs, &count,
 		MAX_READERS);
@@ -44,7 +44,7 @@ status_t PluginManager::CreateReader(Reader** reader, int32* streamCount,
 	}
 
 	// try each reader by calling it's Sniff function...
-	for (int32 i = 0; i < count; i++) {
+	for (int32_t i = 0; i < count; i++) {
 		entry_ref ref = refs[i];
 		MediaPlugin* plugin = GetPlugin(ref);
 		if (plugin == NULL) {
@@ -243,7 +243,7 @@ void PluginManager::DestroyWriter(Writer* writer)
 
 
 status_t PluginManager::CreateEncoder(Encoder** _encoder,
-	const media_codec_info* codecInfo, uint32 flags)
+	const media_codec_info* codecInfo, uint32_t flags)
 {
 	TRACE("PluginManager::CreateEncoder enter\n");
 

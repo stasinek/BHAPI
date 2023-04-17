@@ -24,7 +24,7 @@ TargetHost::TargetHost(const BString& name)
 TargetHost::~TargetHost()
 {
 	while (!fTeams.IsEmpty())
-		delete fTeams.RemoveItemAt((int32)0);
+		delete fTeams.RemoveItemAt((int32_t)0);
 }
 
 
@@ -42,7 +42,7 @@ void TargetHost::RemoveListener(Listener* listener)
 }
 
 
-int32 TargetHost::CountTeams() const
+int32_t TargetHost::CountTeams() const
 {
 	return fTeams.CountItems();
 }
@@ -64,7 +64,7 @@ status_t TargetHost::AddTeam(const team_info& info)
 
 void TargetHost::RemoveTeam(team_id team)
 {
-	int32 index = fTeams.BinarySearchIndexByKey(team,
+	int32_t index = fTeams.BinarySearchIndexByKey(team,
 		&_FindTeamByKey);
 	if (index < 0)
 		return;
@@ -77,7 +77,7 @@ void TargetHost::RemoveTeam(team_id team)
 
 void TargetHost::UpdateTeam(const team_info& info)
 {
-	int32 index = fTeams.BinarySearchIndexByKey(info.team,
+	int32_t index = fTeams.BinarySearchIndexByKey(info.team,
 		&_FindTeamByKey);
 	if (index < 0)
 		return;
@@ -89,7 +89,7 @@ void TargetHost::UpdateTeam(const team_info& info)
 
 
 TeamInfo*
-TargetHost::TeamInfoAt(int32 index) const
+TargetHost::TeamInfoAt(int32_t index) const
 {
 	return fTeams.ItemAt(index);
 }

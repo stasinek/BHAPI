@@ -89,7 +89,7 @@ private:
 									CpuState* state,
 									Value* newValue);
 	virtual	void				ThreadActionRequested(thread_id threadID,
-									uint32 action, target_addr_t address);
+									uint32_t action, target_addr_t address);
 
 	virtual	void				SetBreakpointRequested(target_addr_t address,
 									bool enabled, bool hidden = false);
@@ -113,14 +113,14 @@ private:
 									const char* name);
 
 	virtual	void				SetDefaultSignalDispositionRequested(
-									int32 disposition);
+									int32_t disposition);
 	virtual	void				SetCustomSignalDispositionRequested(
-									int32 signal, int32 disposition);
+									int32_t signal, int32_t disposition);
 	virtual	void				RemoveCustomSignalDispositionRequested(
-									int32 signal);
+									int32_t signal);
 
 	virtual	void				SetWatchpointRequested(target_addr_t address,
-									uint32 type, int32 length, bool enabled);
+									uint32_t type, int32_t length, bool enabled);
 	virtual	void				SetWatchpointEnabledRequested(
 									Watchpoint *watchpoint, bool enabled);
 	virtual	void				ClearWatchpointRequested(target_addr_t address);
@@ -212,7 +212,7 @@ private:
 									UserBreakpoint* breakpoint);
 
 			void				_HandleSetWatchpoint(target_addr_t address,
-									uint32 type, int32 length, 	bool enabled);
+									uint32_t type, int32_t length, 	bool enabled);
 			void				_HandleSetWatchpoint(
 									Watchpoint* watchpoint, bool enabled);
 			void				_HandleClearWatchpoint(	target_addr_t address);

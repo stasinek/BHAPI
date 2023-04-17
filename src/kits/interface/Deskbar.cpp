@@ -30,16 +30,16 @@
 
 static const char *kDeskbarSignature = "application/x-vnd.Be-TSKB";
 
-static const uint32 kMsgAddView = 'icon';
-static const uint32 kMsgAddAddOn = 'adon';
-static const uint32 kMsgHasItem = 'exst';
-static const uint32 kMsgGetItemInfo = 'info';
-static const uint32 kMsgCountItems = 'cwnt';
-static const uint32 kMsgRemoveItem = 'remv';
-static const uint32 kMsgLocation = 'gloc';
-static const uint32 kMsgIsExpanded = 'gexp';
-static const uint32 kMsgSetLocation = 'sloc';
-static const uint32 kMsgExpand = 'sexp';
+static const uint32_t kMsgAddView = 'icon';
+static const uint32_t kMsgAddAddOn = 'adon';
+static const uint32_t kMsgHasItem = 'exst';
+static const uint32_t kMsgGetItemInfo = 'info';
+static const uint32_t kMsgCountItems = 'cwnt';
+static const uint32_t kMsgRemoveItem = 'remv';
+static const uint32_t kMsgLocation = 'gloc';
+static const uint32_t kMsgIsExpanded = 'gexp';
+static const uint32_t kMsgSetLocation = 'sloc';
+static const uint32_t kMsgExpand = 'sexp';
 
 
 status_t get_deskbar_frame(BRect *frame)
@@ -109,7 +109,7 @@ BDeskbar::Location(bool *_isExpanded) const
 	}
 
 	if (fMessenger->SendMessage(&request, &reply) == B_OK) {
-		int32 value;
+		int32_t value;
 		if (reply.FindInt32("location", &value) == B_OK)
 			location = static_cast<deskbar_location>(value);
 
@@ -125,7 +125,7 @@ BDeskbar::Location(bool *_isExpanded) const
 status_t BDeskbar::SetLocation(deskbar_location location, bool expanded)
 {
 	BMessage request(kMsgSetLocation);
-	request.AddInt32("location", static_cast<int32>(location));
+	request.AddInt32("location", static_cast<int32_t>(location));
 	request.AddBool("expand", expanded);
 
 	return fMessenger->SendMessage(&request);
@@ -155,7 +155,7 @@ status_t BDeskbar::Expand(bool expand)
 }
 
 
-status_t BDeskbar::GetItemInfo(int32 id, const char **_name) const
+status_t BDeskbar::GetItemInfo(int32_t id, const char **_name) const
 {
 	if (_name == NULL)
 		return B_BAD_VALUE;
@@ -182,7 +182,7 @@ status_t BDeskbar::GetItemInfo(int32 id, const char **_name) const
 }
 
 
-status_t BDeskbar::GetItemInfo(const char *name, int32 *_id) const
+status_t BDeskbar::GetItemInfo(const char *name, int32_t *_id) const
 {
 	if (name == NULL)
 		return B_BAD_VALUE;
@@ -199,7 +199,7 @@ status_t BDeskbar::GetItemInfo(const char *name, int32 *_id) const
 }
 
 
-bool BDeskbar::HasItem(int32 id) const
+bool BDeskbar::HasItem(int32_t id) const
 {
 	BMessage request(kMsgHasItem);
 	request.AddInt32("id", id);
@@ -225,7 +225,7 @@ bool BDeskbar::HasItem(const char *name) const
 }
 
 
-uint32 BDeskbar::CountItems(void) const
+uint32_t BDeskbar::CountItems(void) const
 {
 	BMessage request(kMsgCountItems);	
 	BMessage reply;
@@ -237,7 +237,7 @@ uint32 BDeskbar::CountItems(void) const
 }
 
 
-status_t BDeskbar::AddItem(BView *view, int32 *_id)
+status_t BDeskbar::AddItem(BView *view, int32_t *_id)
 {
 	BMessage archive;
 	status_t result = view->Archive(&archive);
@@ -260,7 +260,7 @@ status_t BDeskbar::AddItem(BView *view, int32 *_id)
 }
 
 
-status_t BDeskbar::AddItem(entry_ref *addon, int32 *_id)
+status_t BDeskbar::AddItem(entry_ref *addon, int32_t *_id)
 {
 	BMessage request(kMsgAddAddOn);
 	request.AddRef("addon", addon);
@@ -278,7 +278,7 @@ status_t BDeskbar::AddItem(entry_ref *addon, int32 *_id)
 }
 
 
-status_t BDeskbar::RemoveItem(int32 id)
+status_t BDeskbar::RemoveItem(int32_t id)
 {
 	BMessage request(kMsgRemoveItem);
 	request.AddInt32("id", id);

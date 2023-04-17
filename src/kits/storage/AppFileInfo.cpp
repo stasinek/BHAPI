@@ -51,26 +51,26 @@ static const char* kIconType					= "ICON";
 static const char* kCatalogEntryAttribute		= "SYS:NAME";
 
 // resource IDs
-static const int32 kTypeResourceID				= 2;
-static const int32 kSignatureResourceID			= 1;
-static const int32 kAppFlagsResourceID			= 1;
-static const int32 kSupportedTypesResourceID	= 1;
-static const int32 kMiniIconResourceID			= 101;
-static const int32 kLargeIconResourceID			= 101;
-static const int32 kIconResourceID				= 101;
-static const int32 kVersionInfoResourceID		= 1;
-static const int32 kMiniIconForTypeResourceID	= 0;
-static const int32 kLargeIconForTypeResourceID	= 0;
-static const int32 kIconForTypeResourceID		= 0;
-static const int32 kCatalogEntryResourceID		= 1;
+static const int32_t kTypeResourceID				= 2;
+static const int32_t kSignatureResourceID			= 1;
+static const int32_t kAppFlagsResourceID			= 1;
+static const int32_t kSupportedTypesResourceID	= 1;
+static const int32_t kMiniIconResourceID			= 101;
+static const int32_t kLargeIconResourceID			= 101;
+static const int32_t kIconResourceID				= 101;
+static const int32_t kVersionInfoResourceID		= 1;
+static const int32_t kMiniIconForTypeResourceID	= 0;
+static const int32_t kLargeIconForTypeResourceID	= 0;
+static const int32_t kIconForTypeResourceID		= 0;
+static const int32_t kCatalogEntryResourceID		= 1;
 
 // R5 also exports these (Tracker is using them):
 // (maybe we better want to drop them silently and declare 
 // the above in a public Haiku header - and use that one in
 // Tracker when compiled for Haiku)
-extern const uint32 MINI_ICON_TYPE, LARGE_ICON_TYPE;
-const uint32 MINI_ICON_TYPE = 'MICN';
-const uint32 LARGE_ICON_TYPE = 'ICON';
+extern const uint32_t MINI_ICON_TYPE, LARGE_ICON_TYPE;
+const uint32_t MINI_ICON_TYPE = 'MICN';
+const uint32_t LARGE_ICON_TYPE = 'ICON';
 
 
 BAppFileInfo::BAppFileInfo()
@@ -286,7 +286,7 @@ status_t BAppFileInfo::SetCatalogEntry(const char* catalogEntry)
 }
 
 
-status_t BAppFileInfo::GetAppFlags(uint32* flags) const
+status_t BAppFileInfo::GetAppFlags(uint32_t* flags) const
 {
 	// check param and initialization
 	status_t error = flags != NULL ? B_OK : B_BAD_VALUE;
@@ -296,16 +296,16 @@ status_t BAppFileInfo::GetAppFlags(uint32* flags) const
 	size_t read = 0;
 	if (error == B_OK) {
 		error = _ReadData(kAppFlagsAttribute, kAppFlagsResourceID,
-			B_APP_FLAGS_TYPE, flags, sizeof(uint32), read);
+			B_APP_FLAGS_TYPE, flags, sizeof(uint32_t), read);
 	}
 	// check the read data
-	if (error == B_OK && read != sizeof(uint32))
+	if (error == B_OK && read != sizeof(uint32_t))
 		error = B_ERROR;
 	return error;
 }
 
 
-status_t BAppFileInfo::SetAppFlags(uint32 flags)
+status_t BAppFileInfo::SetAppFlags(uint32_t flags)
 {
 	// check initialization
 	status_t error = B_OK;
@@ -314,7 +314,7 @@ status_t BAppFileInfo::SetAppFlags(uint32 flags)
 	if (error == B_OK) {
 		// write the data
 		error = _WriteData(kAppFlagsAttribute, kAppFlagsResourceID,
-			B_APP_FLAGS_TYPE, &flags, sizeof(uint32));
+			B_APP_FLAGS_TYPE, &flags, sizeof(uint32_t));
 	}
 	return error;
 }
@@ -373,7 +373,7 @@ status_t BAppFileInfo::SetSupportedTypes(const BMessage* types, bool updateMimeD
 		if (types) {
 			// check param -- supported types must be valid
 			const char* type;
-			for (int32 i = 0;
+			for (int32_t i = 0;
 				 error == B_OK && types->FindString("types", i, &type) == B_OK;
 				 i++) {
 				if (!BMimeType::IsValid(type))
@@ -445,7 +445,7 @@ bool BAppFileInfo::IsSupportedType(const char* type) const
 	bool found = false;
 	if (error == B_OK) {
 		const char* supportedType;
-		for (int32 i = 0;
+		for (int32_t i = 0;
 			 !found && types.FindString("types", i, &supportedType) == B_OK;
 			 i++) {
 			found = strcmp(supportedType, "application/octet-stream") == 0
@@ -468,7 +468,7 @@ bool BAppFileInfo::Supports(BMimeType* type) const
 	bool found = false;
 	if (error == B_OK) {
 		const char* supportedType;
-		for (int32 i = 0;
+		for (int32_t i = 0;
 			 !found && types.FindString("types", i, &supportedType) == B_OK;
 			 i++) {
 			found = BMimeType(supportedType).Contains(type);
@@ -520,7 +520,7 @@ status_t BAppFileInfo::GetVersionInfo(version_info* info, version_kind kind) con
 	if (info == NULL)
 		return B_BAD_VALUE;
 
-	int32 index = 0;
+	int32_t index = 0;
 	switch (kind) {
 		case B_APP_VERSION_KIND:
 			index = 0;
@@ -569,7 +569,7 @@ status_t BAppFileInfo::SetVersionInfo(const version_info* info, version_kind kin
 	if (error == B_OK) {
 		if (info != NULL) {
 			// check param
-			int32 index = 0;
+			int32_t index = 0;
 			if (error == B_OK) {
 				switch (kind) {
 					case B_APP_VERSION_KIND:
@@ -664,7 +664,7 @@ status_t BAppFileInfo::GetIconForType(const char* type, BBitmap* icon, icon_size
 	// set some icon size related variables
 	BString attributeString;
 	BRect bounds;
-	uint32 attrType = 0;
+	uint32_t attrType = 0;
 	size_t attrSize = 0;
 	switch (size) {
 		case B_MINI_ICON:
@@ -716,8 +716,8 @@ status_t BAppFileInfo::GetIconForType(const char* type, BBitmap* icon, icon_size
 		if (tempBuffer) {
 			// other color space than stored in attribute
 			if (error == B_OK) {
-				error = BIconUtils::ConvertFromCMAP8(buffer, (uint32)size,
-					(uint32)size, (uint32)size, icon);
+				error = BIconUtils::ConvertFromCMAP8(buffer, (uint32_t)size,
+					(uint32_t)size, (uint32_t)size, icon);
 			}
 			delete[] buffer;
 		}
@@ -766,9 +766,9 @@ status_t BAppFileInfo::SetIconForType(const char* type, const BBitmap* icon,
 	// set some icon size related variables
 	BString attributeString;
 	BRect bounds;
-	uint32 attrType = 0;
+	uint32_t attrType = 0;
 	size_t attrSize = 0;
-	int32 resourceID = 0;
+	int32_t resourceID = 0;
 	switch (which) {
 		case B_MINI_ICON:
 			attributeString = kMiniIconAttribute;
@@ -859,8 +859,8 @@ status_t BAppFileInfo::SetIconForType(const char* type, const uint8* data, size_
 
 	// set some icon related variables
 	BString attributeString = kIconAttribute;
-	int32 resourceID = type ? kIconForTypeResourceID : kIconResourceID;
-	uint32 attrType = B_VECTOR_ICON_TYPE;
+	int32_t resourceID = type ? kIconForTypeResourceID : kIconResourceID;
+	uint32_t attrType = B_VECTOR_ICON_TYPE;
 
 	// check type param
 	if (type != NULL) {
@@ -991,7 +991,7 @@ status_t BAppFileInfo::GetMetaMime(BMimeType* meta) const
 	\retval B_NO_MEMORY Ran out of memory allocating the buffer.
 	\retval B_BAD_VALUE \a type did not match.
 */
-status_t BAppFileInfo::_ReadData(const char* name, int32 id, type_code type,
+status_t BAppFileInfo::_ReadData(const char* name, int32_t id, type_code type,
 	void* buffer, size_t bufferSize, size_t& bytesRead, void** allocatedBuffer)
 	const
 {
@@ -1043,7 +1043,7 @@ status_t BAppFileInfo::_ReadData(const char* name, int32 id, type_code type,
 	if (!foundData && IsUsingResources()) {
 		// get a resource info
 		error = B_OK;
-		int32 idFound;
+		int32_t idFound;
 		size_t sizeFound;
 		if (error == B_OK) {
 			if (!fResources->GetResourceInfo(type, name, &idFound, &sizeFound))
@@ -1106,7 +1106,7 @@ status_t BAppFileInfo::_ReadData(const char* name, int32 id, type_code type,
 	\retval B_OK Everything went fine.
 	\retval B_ERROR An error occurred while trying to write the data.
 */
-status_t BAppFileInfo::_WriteData(const char* name, int32 id, type_code type,
+status_t BAppFileInfo::_WriteData(const char* name, int32_t id, type_code type,
 	const void* buffer, size_t bufferSize, bool findID)
 {
 	if (!IsUsingAttributes() && !IsUsingResources())
@@ -1126,7 +1126,7 @@ status_t BAppFileInfo::_WriteData(const char* name, int32 id, type_code type,
 	if (IsUsingResources() && error == B_OK) {
 		if (findID) {
 			// get the resource info
-			int32 idFound;
+			int32_t idFound;
 			size_t sizeFound;
 			if (fResources->GetResourceInfo(type, name, &idFound, &sizeFound))
 				id = idFound;
@@ -1174,7 +1174,7 @@ status_t BAppFileInfo::_RemoveData(const char* name, type_code type)
 	// remove the resource
 	if (IsUsingResources() && error == B_OK) {
 		// get a resource info
-		int32 idFound;
+		int32_t idFound;
 		size_t sizeFound;
 		if (fResources->GetResourceInfo(type, name, &idFound, &sizeFound))
 			error = fResources->RemoveResource(type, idFound);

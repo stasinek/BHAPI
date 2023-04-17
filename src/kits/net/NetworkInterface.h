@@ -23,7 +23,7 @@ public:
 								~BNetworkInterfaceAddress();
 
 			status_t			SetTo(const BNetworkInterface& interface,
-									int32 index);
+									int32_t index);
 
 			void				SetAddress(const BNetworkAddress& address);
 			void				SetMask(const BNetworkAddress& mask);
@@ -41,17 +41,17 @@ public:
 			const BNetworkAddress& Broadcast() const { return fBroadcast; }
 			const BNetworkAddress& Destination() const { return fBroadcast; }
 
-			void				SetFlags(uint32 flags);
-			uint32				Flags() const { return fFlags; }
+			void				SetFlags(uint32_t flags);
+			uint32_t				Flags() const { return fFlags; }
 
-			int32				Index() const { return fIndex; }
+			int32_t				Index() const { return fIndex; }
 
 private:
-			int32				fIndex;
+			int32_t				fIndex;
 			BNetworkAddress		fAddress;
 			BNetworkAddress		fMask;
 			BNetworkAddress		fBroadcast;
-			uint32				fFlags;
+			uint32_t				fFlags;
 };
 
 
@@ -59,35 +59,35 @@ class BNetworkInterface {
 public:
 								BNetworkInterface();
 								BNetworkInterface(const char* name);
-								BNetworkInterface(uint32 index);
+								BNetworkInterface(uint32_t index);
 								~BNetworkInterface();
 
 			void				Unset();
 			void				SetTo(const char* name);
-			status_t			SetTo(uint32 index);
+			status_t			SetTo(uint32_t index);
 
 			bool				Exists() const;
 
 			const char*			Name() const;
-			uint32				Index() const;
-			uint32				Flags() const;
-			uint32				MTU() const;
-			int32				Media() const;
-			uint32				Metric() const;
-			uint32				Type() const;
+			uint32_t				Index() const;
+			uint32_t				Flags() const;
+			uint32_t				MTU() const;
+			int32_t				Media() const;
+			uint32_t				Metric() const;
+			uint32_t				Type() const;
 			status_t			GetStats(ifreq_stats& stats);
 			bool				HasLink() const;
 
-			status_t			SetFlags(uint32 flags);
-			status_t			SetMTU(uint32 mtu);
-			status_t			SetMedia(int32 media);
-			status_t			SetMetric(uint32 metric);
+			status_t			SetFlags(uint32_t flags);
+			status_t			SetMTU(uint32_t mtu);
+			status_t			SetMedia(int32_t media);
+			status_t			SetMetric(uint32_t metric);
 
-			int32				CountAddresses() const;
-			status_t			GetAddressAt(int32 index,
+			int32_t				CountAddresses() const;
+			status_t			GetAddressAt(int32_t index,
 									BNetworkInterfaceAddress& address);
-			int32				FindAddress(const BNetworkAddress& address);
-			int32				FindFirstAddress(int family);
+			int32_t				FindAddress(const BNetworkAddress& address);
+			int32_t				FindFirstAddress(int family);
 
 			status_t			AddAddress(
 									const BNetworkInterfaceAddress& address);
@@ -97,7 +97,7 @@ public:
 			status_t			RemoveAddress(
 									const BNetworkInterfaceAddress& address);
 			status_t			RemoveAddress(const BNetworkAddress& address);
-			status_t			RemoveAddressAt(int32 index);
+			status_t			RemoveAddressAt(int32_t index);
 
 			status_t			GetHardwareAddress(BNetworkAddress& address);
 

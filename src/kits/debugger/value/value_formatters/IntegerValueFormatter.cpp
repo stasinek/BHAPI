@@ -140,7 +140,7 @@ status_t IntegerValueFormatter::_ValidateSigned(const BString& input, type_code 
 			if (parsedValue < INT32_MIN || parsedValue > INT32_MAX)
 				return B_BAD_VALUE;
 
-			newValue.SetTo((int32)parsedValue);
+			newValue.SetTo((int32_t)parsedValue);
 			break;
 		}
 		case B_INT64_TYPE:
@@ -166,7 +166,7 @@ status_t IntegerValueFormatter::_ValidateUnsigned(const BString& input, type_cod
 	::Value*& _output, integer_format format, bool wantsValue) const
 {
 	const char* text = input.String();
-	int32 base = format == INTEGER_FORMAT_UNSIGNED ? 10 : 16;
+	int32_t base = format == INTEGER_FORMAT_UNSIGNED ? 10 : 16;
 
 	char *parseEnd = NULL;
 	uintmax_t parsedValue = strtoumax(text, &parseEnd, base);
@@ -196,7 +196,7 @@ status_t IntegerValueFormatter::_ValidateUnsigned(const BString& input, type_cod
 			if (parsedValue > UINT32_MAX)
 				return B_BAD_VALUE;
 
-			newValue.SetTo((uint32)parsedValue);
+			newValue.SetTo((uint32_t)parsedValue);
 			break;
 		}
 		case B_UINT64_TYPE:

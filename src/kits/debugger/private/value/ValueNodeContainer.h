@@ -29,8 +29,8 @@ public:
 	inline	bool				Lock()		{ return fLock.Lock(); }
 	inline	void				Unlock()	{ fLock.Unlock(); }
 
-			int32				CountChildren() const;
-			ValueNodeChild*		ChildAt(int32 index) const;
+			int32_t				CountChildren() const;
+			ValueNodeChild*		ChildAt(int32_t index) const;
 			bool				AddChild(ValueNodeChild* child);
 			void				RemoveChild(ValueNodeChild* child);
 			void				RemoveAllChildren();

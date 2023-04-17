@@ -42,7 +42,7 @@ int main(int argc, char **argv)
 {
 	const char *name;
 	eint64 count;
-	euint32 flags;
+	euint32_t flags;
 	void *sem;
 	e_status_t status = E_ERROR;
 

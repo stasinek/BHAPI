@@ -45,23 +45,23 @@ public:
 	ResourcesContainer();
 	virtual ~ResourcesContainer();
 
-	bool AddResource(ResourceItem *item, int32 index = -1,
+	bool AddResource(ResourceItem *item, int32_t index = -1,
 					 bool replace = true);
 
-	ResourceItem *RemoveResource(int32 index);
+	ResourceItem *RemoveResource(int32_t index);
 	bool RemoveResource(ResourceItem *item);
 
 	void MakeEmpty();
 
 	void AssimilateResources(ResourcesContainer &container);
 
-	int32 IndexOf(ResourceItem *item) const;
-	int32 IndexOf(const void *data) const;
-	int32 IndexOf(type_code type, int32 id) const;
-	int32 IndexOf(type_code type, const char *name) const;
-	int32 IndexOfType(type_code type, int32 index) const;
-	ResourceItem *ResourceAt(int32 index) const;
-	int32 CountResources() const;
+	int32_t IndexOf(ResourceItem *item) const;
+	int32_t IndexOf(const void *data) const;
+	int32_t IndexOf(type_code type, int32_t id) const;
+	int32_t IndexOf(type_code type, const char *name) const;
+	int32_t IndexOfType(type_code type, int32_t index) const;
+	ResourceItem *ResourceAt(int32_t index) const;
+	int32_t CountResources() const;
 
 	void SetModified(bool modified);
 	bool IsModified() const;

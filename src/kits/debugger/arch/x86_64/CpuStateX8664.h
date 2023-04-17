@@ -123,23 +123,23 @@ public:
 			uint64				InterruptVector() const
 									{ return fInterruptVector; }
 
-			bool				IsRegisterSet(int32 index) const;
+			bool				IsRegisterSet(int32_t index) const;
 
-			uint64				IntRegisterValue(int32 index) const;
-			void				SetIntRegister(int32 index, uint64 value);
+			uint64				IntRegisterValue(int32_t index) const;
+			void				SetIntRegister(int32_t index, uint64 value);
 
-			double				FloatRegisterValue(int32 index) const;
-			void				SetFloatRegister(int32 index, double value);
+			double				FloatRegisterValue(int32_t index) const;
+			void				SetFloatRegister(int32_t index, double value);
 
-			const void*			MMXRegisterValue(int32 index) const;
-			void				SetMMXRegister(int32 index,
+			const void*			MMXRegisterValue(int32_t index) const;
+			void				SetMMXRegister(int32_t index,
 									const uint8* value);
 
-			const void*			XMMRegisterValue(int32 index) const;
-			void				SetXMMRegister(int32 index,
+			const void*			XMMRegisterValue(int32_t index) const;
+			void				SetXMMRegister(int32_t index,
 									const uint8* value);
 
-			void				UnsetRegister(int32 index);
+			void				UnsetRegister(int32_t index);
 
 private:
 	typedef std::bitset<X86_64_REGISTER_COUNT> RegisterBitSet;

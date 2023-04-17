@@ -23,9 +23,9 @@ struct TeamMemoryBlockManager::Key {
 	{
 	}
 
-	uint32 HashValue() const
+	uint32_t HashValue() const
 	{
-		return (uint32)address;
+		return (uint32_t)address;
 	}
 
 	bool operator==(const Key& other) const

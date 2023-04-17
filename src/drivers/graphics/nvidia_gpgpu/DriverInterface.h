@@ -29,7 +29,7 @@ extern "C" {
 
 typedef struct {
 	sem_id	sem;
-	int32	ben;
+	int32_t	ben;
 } benaphore;
 
 #define INIT_BEN(x)		x.sem = create_sem(0, "NV_GPGPU "#x" benaphore");  x.ben = 0;
@@ -142,7 +142,7 @@ enum {
 /* internal used info on overlay buffers */
 typedef	struct {
 	uint16 slopspace;
-	uint32 size;
+	uint32_t size;
 } int_buf_info;
 
 typedef struct { // apsed, see comments in nv.settings
@@ -151,16 +151,16 @@ typedef struct { // apsed, see comments in nv.settings
 	char   primary[B_FILE_NAME_LENGTH];
 	bool   dumprom;
 	// for accelerant
-	uint32 logmask;
-	uint32 memory;
+	uint32_t logmask;
+	uint32_t memory;
 	bool   usebios;
 	bool   hardcursor;
 	bool   switchhead;
 	bool   pgm_panel;
 	bool   force_sync;
 	bool   force_ws;
-	uint32 gpu_clk;
-	uint32 ram_clk;
+	uint32_t gpu_clk;
+	uint32_t ram_clk;
 } nv_settings;
 
 /* shared info */
@@ -177,8 +177,8 @@ typedef struct {
 	bool	accelerant_in_use;
 
   /* bug workaround for 4.5.0 */
-	uint32 use_clone_bugfix;	/*for 4.5.0, cloning of physical memory does not work*/
-	uint32 * clone_bugfix_regs;
+	uint32_t use_clone_bugfix;	/*for 4.5.0, cloning of physical memory does not work*/
+	uint32_t * clone_bugfix_regs;
 
   /*memory mappings*/
 	area_id	regs_area;	/* Kernel's area_id for the memory mapped registers.
@@ -197,10 +197,10 @@ typedef struct {
 
   /*screenmode list*/
 	area_id	mode_area;              /* Contains the list of display modes the driver supports */
-	uint32	mode_count;             /* Number of display modes in the list */
+	uint32_t	mode_count;             /* Number of display modes in the list */
 
   /*flags - used by driver*/
-	uint32 flags;
+	uint32_t flags;
 
   /*vblank semaphore*/
 	sem_id	vblank;	                /* The vertical blank semaphore. Ownership will be
@@ -222,7 +222,7 @@ typedef struct {
 
   /*more display mode stuff*/
 	display_mode dm;		/* current display mode configuration: head1 */
-	uint32 dpms_flags;		/* current DPMS mode */
+	uint32_t dpms_flags;		/* current DPMS mode */
 	bool acc_mode;			/* signals (non)accelerated mode */
 	bool crtc_switch_mode;	/* signals dualhead switch mode if panels are used */
 
@@ -232,26 +232,26 @@ typedef struct {
 
   /*acceleration engine*/
 	struct {
-		uint32		count;		/* last dwgsync slot used */
-		uint32		last_idle;	/* last dwgsync slot we *know* the engine was idle after */ 
+		uint32_t		count;		/* last dwgsync slot used */
+		uint32_t		last_idle;	/* last dwgsync slot we *know* the engine was idle after */ 
 		benaphore	lock;		/* for serializing access to the acc engine */
 		struct {
-			uint32	handle[0x08];	/* FIFO channel's cmd handle for the owning cmd */
-			uint32	ch_ptr[0x20];	/* cmd handle's ptr to it's assigned FIFO ch (if any) */
+			uint32_t	handle[0x08];	/* FIFO channel's cmd handle for the owning cmd */
+			uint32_t	ch_ptr[0x20];	/* cmd handle's ptr to it's assigned FIFO ch (if any) */
 		} fifo;
 		struct {
-			uint32 put;			/* last 32-bit-word adress given to engine to exec. to */
-			uint32 current;		/* first free 32-bit-word adress in buffer */
-			uint32 free;		/* nr. of useable free 32-bit words remaining in buffer */
-			uint32 max;			/* command buffer's useable size in 32-bit words */
+			uint32_t put;			/* last 32-bit-word adress given to engine to exec. to */
+			uint32_t current;		/* first free 32-bit-word adress in buffer */
+			uint32_t free;		/* nr. of useable free 32-bit words remaining in buffer */
+			uint32_t max;			/* command buffer's useable size in 32-bit words */
 		} dma;
 		struct {
-			uint32 clones;		/* clone 'number' (mask, slot) (one bit per clone) */
-			uint32 reload;		/* reload state and surfaces (one bit per clone) */
-			uint32 newmode;		/* re-allocate all buffers (one bit per clone) */
+			uint32_t clones;		/* clone 'number' (mask, slot) (one bit per clone) */
+			uint32_t reload;		/* reload state and surfaces (one bit per clone) */
+			uint32_t newmode;		/* re-allocate all buffers (one bit per clone) */
 			//fixme: memory stuff needs to be expanded (shared texture allocation?)
-			uint32 mem_low;		/* ptr to first free mem adress: cardmem local offset */
-			uint32 mem_high;	/* ptr to last free mem adress: cardmem local offset */
+			uint32_t mem_low;		/* ptr to first free mem adress: cardmem local offset */
+			uint32_t mem_high;	/* ptr to last free mem adress: cardmem local offset */
 			bool mode_changing;	/* a mode-change is in progress (set/clear by 2D drv) */
 		} threeD;
 	} engine;
@@ -261,8 +261,8 @@ typedef struct {
 		/* specialised registers for card initialisation read from NV BIOS (pins) */
 
 		/* general card information */
-		uint32 card_type;           /* see card_type enum above */
-		uint32 card_arch;           /* see card_arch enum above */
+		uint32_t card_type;           /* see card_type enum above */
+		uint32_t card_arch;           /* see card_arch enum above */
 		bool laptop;	            /* mobile chipset or not ('internal' flatpanel!) */
 		bool slaved_tmds1;			/* external TMDS encoder active on CRTC1 */
 		bool slaved_tmds2;			/* external TMDS encoder active on CRTC2 */
@@ -286,30 +286,30 @@ typedef struct {
 		/* PINS */
 		float f_ref;				/* PLL reference-oscillator frequency (Mhz) */
 		bool ext_pll;				/* the extended PLL contains more dividers */
-		uint32 max_system_vco;		/* graphics engine PLL VCO limits (Mhz) */
-		uint32 min_system_vco;
-		uint32 max_pixel_vco;		/* dac1 PLL VCO limits (Mhz) */
-		uint32 min_pixel_vco;
-		uint32 max_video_vco;		/* dac2 PLL VCO limits (Mhz) */
-		uint32 min_video_vco;
-		uint32 std_engine_clock;	/* graphics engine clock speed needed (Mhz) */
-		uint32 std_memory_clock;	/* card memory clock speed needed (Mhz) */
-		uint32 max_dac1_clock;		/* dac1 limits (Mhz) */
-		uint32 max_dac1_clock_8;	/* dac1 limits correlated to RAMspeed limits (Mhz) */
-		uint32 max_dac1_clock_16;
-		uint32 max_dac1_clock_24;
-		uint32 max_dac1_clock_32;
-		uint32 max_dac1_clock_32dh;
-		uint32 max_dac2_clock;		/* dac2 limits (Mhz) */
-		uint32 max_dac2_clock_8;	/* dac2, maven limits correlated to RAMspeed limits (Mhz) */
-		uint32 max_dac2_clock_16;
-		uint32 max_dac2_clock_24;
-		uint32 max_dac2_clock_32;
-		uint32 max_dac2_clock_32dh;
+		uint32_t max_system_vco;		/* graphics engine PLL VCO limits (Mhz) */
+		uint32_t min_system_vco;
+		uint32_t max_pixel_vco;		/* dac1 PLL VCO limits (Mhz) */
+		uint32_t min_pixel_vco;
+		uint32_t max_video_vco;		/* dac2 PLL VCO limits (Mhz) */
+		uint32_t min_video_vco;
+		uint32_t std_engine_clock;	/* graphics engine clock speed needed (Mhz) */
+		uint32_t std_memory_clock;	/* card memory clock speed needed (Mhz) */
+		uint32_t max_dac1_clock;		/* dac1 limits (Mhz) */
+		uint32_t max_dac1_clock_8;	/* dac1 limits correlated to RAMspeed limits (Mhz) */
+		uint32_t max_dac1_clock_16;
+		uint32_t max_dac1_clock_24;
+		uint32_t max_dac1_clock_32;
+		uint32_t max_dac1_clock_32dh;
+		uint32_t max_dac2_clock;		/* dac2 limits (Mhz) */
+		uint32_t max_dac2_clock_8;	/* dac2, maven limits correlated to RAMspeed limits (Mhz) */
+		uint32_t max_dac2_clock_16;
+		uint32_t max_dac2_clock_24;
+		uint32_t max_dac2_clock_32;
+		uint32_t max_dac2_clock_32dh;
 		bool secondary_head;		/* presence of functions */
 		bool primary_dvi;
 		bool secondary_dvi;
-		uint32 memory_size;			/* memory (in bytes) */
+		uint32_t memory_size;			/* memory (in bytes) */
 	} ps;
 
 	/* mirror of the ROM (copied in driver, because may not be mapped permanently) */
@@ -322,35 +322,35 @@ typedef struct {
 
 /* Read or write a value in PCI configuration space */
 typedef struct {
-	uint32	magic;		/* magic number to make sure the caller groks us */
-	uint32	offset;		/* Offset to read/write */
-	uint32	size;		/* Number of bytes to transfer */
-	uint32	value;		/* The value read or written */
+	uint32_t	magic;		/* magic number to make sure the caller groks us */
+	uint32_t	offset;		/* Offset to read/write */
+	uint32_t	size;		/* Number of bytes to transfer */
+	uint32_t	value;		/* The value read or written */
 } nv_get_set_pci;
 
 /* Enable or Disable CRTC (1,2) interrupts */
 typedef struct {
-	uint32	magic;		/* magic number to make sure the caller groks us */
+	uint32_t	magic;		/* magic number to make sure the caller groks us */
 	bool	crtc;		/* adressed CRTC */
 	bool	do_it;		/* state to set */
 } nv_set_vblank_int;
 
 /* Retrieve the area_id of the kernel/accelerant shared info */
 typedef struct {
-	uint32	magic;		/* magic number to make sure the caller groks us */
+	uint32_t	magic;		/* magic number to make sure the caller groks us */
 	area_id	shared_info_area;	/* area_id containing the shared information */
 } nv_get_private_data;
 
 /* Retrieve the device name.  Usefull for when we have a file handle, but want
 to know the device name (like when we are cloning the accelerant) */
 typedef struct {
-	uint32	magic;		/* magic number to make sure the caller groks us */
+	uint32_t	magic;		/* magic number to make sure the caller groks us */
 	char	*name;		/* The name of the device, less the /dev root */
 } nv_device_name;
 
 /* Read or write a value in ISA I/O space */
 typedef struct {
-	uint32	magic;		/* magic number to make sure the caller groks us */
+	uint32_t	magic;		/* magic number to make sure the caller groks us */
 	uint16	adress;		/* Offset to read/write */
 	uint8	size;		/* Number of bytes to transfer */
 	uint16	data;		/* The value read or written */

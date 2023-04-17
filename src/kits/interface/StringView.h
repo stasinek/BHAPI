@@ -41,8 +41,8 @@ public:
     BStringView(BRect frame,
             const char *name,
             const char *initial_text,
-             uint32 resizeMode = B_FOLLOW_LEFT | B_FOLLOW_TOP,
-             uint32 flags = B_WILL_DRAW);
+             uint32_t resizeMode = B_FOLLOW_LEFT | B_FOLLOW_TOP,
+             uint32_t flags = B_WILL_DRAW);
     virtual ~BStringView();
 
     virtual void		SetText(const char *text);

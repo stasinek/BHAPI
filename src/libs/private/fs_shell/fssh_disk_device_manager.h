@@ -22,11 +22,11 @@ typedef struct fssh_partition_data {
 	fssh_off_t			offset;
 	fssh_off_t			size;
 	fssh_off_t			content_size;
-	uint32_t			block_size;
-	int32_t				child_count;
-	int32_t				index;			// [sys]
-	uint32_t			status;
-	uint32_t			flags;
+	uint32_t_t			block_size;
+	int32_t_t				child_count;
+	int32_t_t				index;			// [sys]
+	uint32_t_t			status;
+	uint32_t_t			flags;
 	fssh_dev_t			volume;			// [sys]
 	void				*mount_cookie;	// [sys] 
 	char				*name;			// max: B_OS_NAME_LENGTH
@@ -42,7 +42,7 @@ typedef struct fssh_partition_data {
 // C API disk device representation
 typedef struct fssh_disk_device_data {
 	fssh_partition_id		id;				// equal to that of the root partition
-	uint32_t				flags;
+	uint32_t_t				flags;
 	char					*path;
 	fssh_device_geometry	geometry;
 } fssh_disk_device_data;
@@ -91,8 +91,8 @@ void					fssh_read_unlock_disk_device(
 
 // getting disk devices/partitions by path
 // (no locking required)
-int32_t	fssh_find_disk_device(const char *path);
-int32_t	fssh_find_partition(const char *path);
+int32_t_t	fssh_find_disk_device(const char *path);
+int32_t_t	fssh_find_partition(const char *path);
 
 // disk device/partition read access
 // (read lock required)
@@ -101,12 +101,12 @@ fssh_partition_data*	fssh_get_partition(fssh_partition_id partitionID);
 fssh_partition_data*	fssh_get_parent_partition(
 								fssh_partition_id partitionID);
 fssh_partition_data*	fssh_get_child_partition(fssh_partition_id partitionID,
-								int32_t index);
+								int32_t_t index);
 
 // partition write access
 // (write lock required)
 fssh_partition_data* 	fssh_create_child_partition(
-								fssh_partition_id partitionID, int32_t index,
+								fssh_partition_id partitionID, int32_t_t index,
 								fssh_partition_id childID);
 	// childID is an optional input parameter -- -1 to be ignored
 bool					fssh_delete_partition(fssh_partition_id partitionID);
@@ -127,8 +127,8 @@ bool		fssh_update_disk_device_job_extra_progress(fssh_disk_job_id jobID,
 					const char *info);
 bool		fssh_set_disk_device_job_error_message(fssh_disk_job_id jobID,
 					const char *message);
-uint32_t	fssh_update_disk_device_jobe_interrupt_properties(
-					fssh_disk_job_id jobID, uint32_t interruptProperties);
+uint32_t_t	fssh_update_disk_device_jobe_interrupt_properties(
+					fssh_disk_job_id jobID, uint32_t_t interruptProperties);
 	// returns one of B_DISK_DEVICE_JOB_{CONTINUE,CANCEL,REVERSE}
 
 #ifdef __cplusplus

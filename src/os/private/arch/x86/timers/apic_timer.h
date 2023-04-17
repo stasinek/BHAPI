@@ -7,6 +7,6 @@
 
 #include <kits/support/SupportDefs.h>
 
-status_t apic_timer_per_cpu_init(struct kernel_args *args, int32 cpu);
+status_t apic_timer_per_cpu_init(struct kernel_args *args, int32_t cpu);
 
 #endif /* _KERNEL_ARCH_x86_TIMERS_APIC_H */

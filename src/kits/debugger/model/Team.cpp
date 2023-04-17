@@ -93,10 +93,10 @@ Team::~Team()
 	while (UserBreakpoint* userBreakpoint = fUserBreakpoints.RemoveHead())
 		userBreakpoint->ReleaseReference();
 
-	for (int32 i = 0; Breakpoint* breakpoint = fBreakpoints.ItemAt(i); i++)
+	for (int32_t i = 0; Breakpoint* breakpoint = fBreakpoints.ItemAt(i); i++)
 		breakpoint->ReleaseReference();
 
-	for (int32 i = 0; Watchpoint* watchpoint = fWatchpoints.ItemAt(i); i++)
+	for (int32_t i = 0; Watchpoint* watchpoint = fWatchpoints.ItemAt(i); i++)
 		watchpoint->ReleaseReference();
 
 	while (Image* image = fImages.RemoveHead())
@@ -310,7 +310,7 @@ Team::StopImageNames() const
 }
 
 
-void Team::SetDefaultSignalDisposition(int32 disposition)
+void Team::SetDefaultSignalDisposition(int32_t disposition)
 {
 	if (disposition != fDefaultSignalDisposition) {
 		fDefaultSignalDisposition = disposition;
@@ -319,7 +319,7 @@ void Team::SetDefaultSignalDisposition(int32 disposition)
 }
 
 
-bool Team::SetCustomSignalDisposition(int32 signal, int32 disposition)
+bool Team::SetCustomSignalDisposition(int32_t signal, int32_t disposition)
 {
 	SignalDispositionMappings::iterator it = fCustomSignalDispositions.find(
 		signal);
@@ -338,7 +338,7 @@ bool Team::SetCustomSignalDisposition(int32 signal, int32 disposition)
 }
 
 
-void Team::RemoveCustomSignalDisposition(int32 signal)
+void Team::RemoveCustomSignalDisposition(int32_t signal)
 {
 	SignalDispositionMappings::iterator it = fCustomSignalDispositions.find(
 		signal);
@@ -351,7 +351,7 @@ void Team::RemoveCustomSignalDisposition(int32 signal)
 }
 
 
-int32 Team::SignalDispositionFor(int32 signal) const
+int32_t Team::SignalDispositionFor(int32_t signal) const
 {
 	SignalDispositionMappings::const_iterator it
 		= fCustomSignalDispositions.find(signal);
@@ -387,7 +387,7 @@ bool Team::AddBreakpoint(Breakpoint* breakpoint)
 
 void Team::RemoveBreakpoint(Breakpoint* breakpoint)
 {
-	int32 index = fBreakpoints.BinarySearchIndex(*breakpoint,
+	int32_t index = fBreakpoints.BinarySearchIndex(*breakpoint,
 		&Breakpoint::CompareBreakpoints);
 	if (index < 0)
 		return;
@@ -397,14 +397,14 @@ void Team::RemoveBreakpoint(Breakpoint* breakpoint)
 }
 
 
-int32 Team::CountBreakpoints() const
+int32_t Team::CountBreakpoints() const
 {
 	return fBreakpoints.CountItems();
 }
 
 
 Breakpoint*
-Team::BreakpointAt(int32 index) const
+Team::BreakpointAt(int32_t index) const
 {
 	return fBreakpoints.ItemAt(index);
 }
@@ -421,7 +421,7 @@ Team::BreakpointAtAddress(target_addr_t address) const
 void Team::GetBreakpointsInAddressRange(TargetAddressRange range,
 	BObjectList<UserBreakpoint>& breakpoints) const
 {
-	int32 index = fBreakpoints.FindBinaryInsertionIndex(
+	int32_t index = fBreakpoints.FindBinaryInsertionIndex(
 		BreakpointByAddressPredicate(range.Start()));
 	for (; Breakpoint* breakpoint = fBreakpoints.ItemAt(index); index++) {
 		if (breakpoint->Address() > range.End())
@@ -454,7 +454,7 @@ void Team::GetBreakpointsForSourceCode(SourceCode* sourceCode,
 
 	// TODO: This can probably be optimized. Maybe by registering the user
 	// breakpoints with the team and sorting them by source code.
-	for (int32 i = 0; Breakpoint* breakpoint = fBreakpoints.ItemAt(i); i++) {
+	for (int32_t i = 0; Breakpoint* breakpoint = fBreakpoints.ItemAt(i); i++) {
 		UserBreakpointInstance* userBreakpointInstance
 			= breakpoint->FirstUserBreakpoint();
 		if (userBreakpointInstance == NULL)
@@ -494,7 +494,7 @@ bool Team::AddWatchpoint(Watchpoint* watchpoint)
 
 void Team::RemoveWatchpoint(Watchpoint* watchpoint)
 {
-	int32 index = fWatchpoints.BinarySearchIndex(*watchpoint,
+	int32_t index = fWatchpoints.BinarySearchIndex(*watchpoint,
 		&Watchpoint::CompareWatchpoints);
 	if (index < 0)
 		return;
@@ -504,14 +504,14 @@ void Team::RemoveWatchpoint(Watchpoint* watchpoint)
 }
 
 
-int32 Team::CountWatchpoints() const
+int32_t Team::CountWatchpoints() const
 {
 	return fWatchpoints.CountItems();
 }
 
 
 Watchpoint*
-Team::WatchpointAt(int32 index) const
+Team::WatchpointAt(int32_t index) const
 {
 	return fWatchpoints.ItemAt(index);
 }
@@ -528,7 +528,7 @@ Team::WatchpointAtAddress(target_addr_t address) const
 void Team::GetWatchpointsInAddressRange(TargetAddressRange range,
 	BObjectList<Watchpoint>& watchpoints) const
 {
-	int32 index = fWatchpoints.FindBinaryInsertionIndex(
+	int32_t index = fWatchpoints.FindBinaryInsertionIndex(
 		WatchpointByAddressPredicate(range.Start()));
 	for (; Watchpoint* watchpoint = fWatchpoints.ItemAt(index); index++) {
 		if (watchpoint->Address() > range.End())
@@ -728,7 +728,7 @@ void Team::NotifyStopImageNameRemoved(const BString& name)
 }
 
 
-void Team::NotifyDefaultSignalDispositionChanged(int32 disposition)
+void Team::NotifyDefaultSignalDispositionChanged(int32_t disposition)
 {
 	for (ListenerList::Iterator it = fListeners.GetIterator();
 			Listener* listener = it.Next();) {
@@ -740,7 +740,7 @@ void Team::NotifyDefaultSignalDispositionChanged(int32 disposition)
 }
 
 
-void Team::NotifyCustomSignalDispositionChanged(int32 signal, int32 disposition)
+void Team::NotifyCustomSignalDispositionChanged(int32_t signal, int32_t disposition)
 {
 	for (ListenerList::Iterator it = fListeners.GetIterator();
 			Listener* listener = it.Next();) {
@@ -752,7 +752,7 @@ void Team::NotifyCustomSignalDispositionChanged(int32 signal, int32 disposition)
 }
 
 
-void Team::NotifyCustomSignalDispositionRemoved(int32 signal)
+void Team::NotifyCustomSignalDispositionRemoved(int32_t signal)
 {
 	for (ListenerList::Iterator it = fListeners.GetIterator();
 			Listener* listener = it.Next();) {
@@ -764,7 +764,7 @@ void Team::NotifyCustomSignalDispositionRemoved(int32 signal)
 }
 
 
-void Team::NotifyConsoleOutputReceived(int32 fd, const BString& output)
+void Team::NotifyConsoleOutputReceived(int32_t fd, const BString& output)
 {
 	for (ListenerList::Iterator it = fListeners.GetIterator();
 			Listener* listener = it.Next();) {
@@ -873,7 +873,7 @@ void Team::_NotifyImageRemoved(Image* image)
 // #pragma mark - Event
 
 
-Team::Event::Event(uint32 type, Team* team)
+Team::Event::Event(uint32_t type, Team* team)
 	:
 	fEventType(type),
 	fTeam(team)
@@ -884,7 +884,7 @@ Team::Event::Event(uint32 type, Team* team)
 // #pragma mark - ThreadEvent
 
 
-Team::ThreadEvent::ThreadEvent(uint32 type, Thread* thread)
+Team::ThreadEvent::ThreadEvent(uint32_t type, Thread* thread)
 	:
 	Event(type, thread->GetTeam()),
 	fThread(thread)
@@ -895,7 +895,7 @@ Team::ThreadEvent::ThreadEvent(uint32 type, Thread* thread)
 // #pragma mark - ImageEvent
 
 
-Team::ImageEvent::ImageEvent(uint32 type, Image* image)
+Team::ImageEvent::ImageEvent(uint32_t type, Image* image)
 	:
 	Event(type, image->GetTeam()),
 	fImage(image)
@@ -906,7 +906,7 @@ Team::ImageEvent::ImageEvent(uint32 type, Image* image)
 // #pragma mark - ImageLoadEvent
 
 
-Team::ImageLoadEvent::ImageLoadEvent(uint32 type, Team* team,
+Team::ImageLoadEvent::ImageLoadEvent(uint32_t type, Team* team,
 	bool stopOnImageLoad, bool stopImageNameListEnabled)
 	:
 	Event(type, team),
@@ -919,7 +919,7 @@ Team::ImageLoadEvent::ImageLoadEvent(uint32 type, Team* team,
 // #pragma mark - ImageLoadNameEvent
 
 
-Team::ImageLoadNameEvent::ImageLoadNameEvent(uint32 type, Team* team,
+Team::ImageLoadNameEvent::ImageLoadNameEvent(uint32_t type, Team* team,
 	const BString& name)
 	:
 	Event(type, team),
@@ -931,8 +931,8 @@ Team::ImageLoadNameEvent::ImageLoadNameEvent(uint32 type, Team* team,
 // #pragma mark - DefaultSignalDispositionEvent
 
 
-Team::DefaultSignalDispositionEvent::DefaultSignalDispositionEvent(uint32 type,
-	Team* team, int32 disposition)
+Team::DefaultSignalDispositionEvent::DefaultSignalDispositionEvent(uint32_t type,
+	Team* team, int32_t disposition)
 	:
 	Event(type, team),
 	fDefaultDisposition(disposition)
@@ -943,8 +943,8 @@ Team::DefaultSignalDispositionEvent::DefaultSignalDispositionEvent(uint32 type,
 // #pragma mark - CustomSignalDispositionEvent
 
 
-Team::CustomSignalDispositionEvent::CustomSignalDispositionEvent(uint32 type,
-	Team* team, int32 signal, int32 disposition)
+Team::CustomSignalDispositionEvent::CustomSignalDispositionEvent(uint32_t type,
+	Team* team, int32_t signal, int32_t disposition)
 	:
 	Event(type, team),
 	fSignal(signal),
@@ -956,7 +956,7 @@ Team::CustomSignalDispositionEvent::CustomSignalDispositionEvent(uint32 type,
 // #pragma mark - BreakpointEvent
 
 
-Team::BreakpointEvent::BreakpointEvent(uint32 type, Team* team,
+Team::BreakpointEvent::BreakpointEvent(uint32_t type, Team* team,
 	Breakpoint* breakpoint)
 	:
 	Event(type, team),
@@ -968,8 +968,8 @@ Team::BreakpointEvent::BreakpointEvent(uint32 type, Team* team,
 // #pragma mark - ConsoleOutputEvent
 
 
-Team::ConsoleOutputEvent::ConsoleOutputEvent(uint32 type, Team* team,
-	int32 fd, const BString& output)
+Team::ConsoleOutputEvent::ConsoleOutputEvent(uint32_t type, Team* team,
+	int32_t fd, const BString& output)
 	:
 	Event(type, team),
 	fDescriptor(fd),
@@ -981,7 +981,7 @@ Team::ConsoleOutputEvent::ConsoleOutputEvent(uint32 type, Team* team,
 // #pragma mark - DebugReportEvent
 
 
-Team::DebugReportEvent::DebugReportEvent(uint32 type, Team* team,
+Team::DebugReportEvent::DebugReportEvent(uint32_t type, Team* team,
 	const char* reportPath)
 	:
 	Event(type, team),
@@ -993,7 +993,7 @@ Team::DebugReportEvent::DebugReportEvent(uint32 type, Team* team,
 // #pragma mark - CoreFileChangedEvent
 
 
-Team::CoreFileChangedEvent::CoreFileChangedEvent(uint32 type, Team* team,
+Team::CoreFileChangedEvent::CoreFileChangedEvent(uint32_t type, Team* team,
 	const char* targetPath)
 	:
 	Event(type, team),
@@ -1005,7 +1005,7 @@ Team::CoreFileChangedEvent::CoreFileChangedEvent(uint32 type, Team* team,
 // #pragma mark - MemoryChangedEvent
 
 
-Team::MemoryChangedEvent::MemoryChangedEvent(uint32 type, Team* team,
+Team::MemoryChangedEvent::MemoryChangedEvent(uint32_t type, Team* team,
 	target_addr_t address, target_size_t size)
 	:
 	Event(type, team),
@@ -1018,7 +1018,7 @@ Team::MemoryChangedEvent::MemoryChangedEvent(uint32 type, Team* team,
 // #pragma mark - WatchpointEvent
 
 
-Team::WatchpointEvent::WatchpointEvent(uint32 type, Team* team,
+Team::WatchpointEvent::WatchpointEvent(uint32_t type, Team* team,
 	Watchpoint* watchpoint)
 	:
 	Event(type, team),
@@ -1030,7 +1030,7 @@ Team::WatchpointEvent::WatchpointEvent(uint32 type, Team* team,
 // #pragma mark - UserBreakpointEvent
 
 
-Team::UserBreakpointEvent::UserBreakpointEvent(uint32 type, Team* team,
+Team::UserBreakpointEvent::UserBreakpointEvent(uint32_t type, Team* team,
 	UserBreakpoint* breakpoint)
 	:
 	Event(type, team),

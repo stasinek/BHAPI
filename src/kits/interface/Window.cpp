@@ -154,7 +154,7 @@ BWindowLayoutContainer::Invalidate(BRect rect)
 
 
 void
-BWindow::InitSelf(BRect frame, const char *title, bhapi::window_look look, bhapi::window_feel feel,  __be_uint32 flags,  __be_uint32 workspace)
+BWindow::InitSelf(BRect frame, const char *title, bhapi::window_look look, bhapi::window_feel feel,  __be_uint32_t flags,  __be_uint32_t workspace)
 {
     if(bhapi::app == NULL || bhapi::app->fGraphicsEngine == NULL)
         BHAPI_ERROR("[INTERFACE]: Window must created within a application which has graphics-engine!");
@@ -168,12 +168,12 @@ BWindow::InitSelf(BRect frame, const char *title, bhapi::window_look look, bhapi
     fLayout = new BWindowLayoutContainer(this, frame);
 
     frame.Floor();
-    if((fWindow = bhapi::app->fGraphicsEngine->CreateWindow((__be_int32)frame.left, (__be_int32)frame.top,
-                                 (__be_uint32)max_c(frame.Width(), 0),
-                                 (__be_uint32)max_c(frame.Height(), 0))) == NULL)
+    if((fWindow = bhapi::app->fGraphicsEngine->CreateWindow((__be_int32_t)frame.left, (__be_int32_t)frame.top,
+                                 (__be_uint32_t)max_c(frame.Width(), 0),
+                                 (__be_uint32_t)max_c(frame.Height(), 0))) == NULL)
         BHAPI_ERROR("[INTERFACE]: %s --- Unable to create window!", __PRETTY_FUNCTION__);
-    else if((fPixmap = bhapi::app->fGraphicsEngine->CreatePixmap((__be_uint32)max_c(frame.Width(), 0),
-                                  (__be_uint32)max_c(frame.Height(), 0))) == NULL)
+    else if((fPixmap = bhapi::app->fGraphicsEngine->CreatePixmap((__be_uint32_t)max_c(frame.Width(), 0),
+                                  (__be_uint32_t)max_c(frame.Height(), 0))) == NULL)
         BHAPI_ERROR("[INTERFACE]: %s --- Unable to create pixmap!", __PRETTY_FUNCTION__);
     else if((fDC = bhapi::app->fGraphicsEngine->CreateContext()) == NULL)
         BHAPI_ERROR("[INTERFACE]: %s --- Unable to create graphics context!", __PRETTY_FUNCTION__);
@@ -221,7 +221,7 @@ BWindow::InitSelf(BRect frame, const char *title, bhapi::window_look look, bhapi
 
 BWindow::BWindow(BRect frame, const char *title,
          bhapi::window_type type,
-          __be_uint32 flags,  __be_uint32 workspace)
+          __be_uint32_t flags,  __be_uint32_t workspace)
     : BLooper(NULL, B_DISPLAY_PRIORITY)
 {
     bhapi::window_look look;
@@ -265,7 +265,7 @@ BWindow::BWindow(BRect frame, const char *title,
 
 BWindow::BWindow(BRect frame, const char *title,
          bhapi::window_look look, bhapi::window_feel feel,
-          __be_uint32 flags,  __be_uint32 workspace)
+          __be_uint32_t flags,  __be_uint32_t workspace)
     : BLooper(NULL, B_DISPLAY_PRIORITY)
 {
     InitSelf(frame, title, look, feel, flags, workspace);
@@ -312,7 +312,7 @@ BWindow::DispatchMessage(BMessage *msg, BHandler *target)
     {
         case B_PULSE:
             if(IsHidden()) break;
-            for(__be_int32 i = 0; i < fNeededToPulseViews.CountItems(); i++)
+            for(__be_int32_t i = 0; i < fNeededToPulseViews.CountItems(); i++)
             {
                 BView *view = (BView*)fNeededToPulseViews.ItemAt(i);
                 if(view->IsHidden() == false) PostMessage(msg, view);
@@ -340,9 +340,9 @@ BWindow::DispatchMessage(BMessage *msg, BHandler *target)
 
                 if(msg->what != B_MOUSE_WHEEL_CHANGED)
                 {
-                    __be_uint32 saveWhat = aMsg.what;
+                    __be_uint32_t saveWhat = aMsg.what;
                     aMsg.what = B_MOUSE_MOVED;
-                    for(__be_int32 i = 0; i < fMouseInsideViews.CountItems(); i++)
+                    for(__be_int32_t i = 0; i < fMouseInsideViews.CountItems(); i++)
                     {
                         BView *view = (BView*)fMouseInsideViews.ItemAt(i);
 
@@ -370,7 +370,7 @@ BWindow::DispatchMessage(BMessage *msg, BHandler *target)
                     break; // just one child can receive the message
                 }
 
-                for(__be_int32 i = 0; i < fMouseInterestedViews.CountItems(); i++)
+                for(__be_int32_t i = 0; i < fMouseInterestedViews.CountItems(); i++)
                 {
                     BView *view = (BView*)fMouseInterestedViews.ItemAt(i);
 
@@ -387,7 +387,7 @@ BWindow::DispatchMessage(BMessage *msg, BHandler *target)
         case B_MODIFIERS_CHANGED:
             {
                 // TODO: shortcuts
-                for(__be_int32 i = -1; i < fKeyboardInterestedViews.CountItems(); i++)
+                for(__be_int32_t i = -1; i < fKeyboardInterestedViews.CountItems(); i++)
                 {
                     BView *view = i < 0 ? CurrentFocus() : (BView*)fKeyboardInterestedViews.ItemAt(i);
                     if((i < 0 && view == NULL) || (i >= 0 && view == CurrentFocus())) continue;
@@ -398,12 +398,12 @@ BWindow::DispatchMessage(BMessage *msg, BHandler *target)
 
         case B_WORKSPACES_CHANGED:
             {
-                __be_uint32 curWorkspace;
+                __be_uint32_t curWorkspace;
 
-                if(msg->FindInt32("new", (__be_int32*)&curWorkspace) == false) break;
+                if(msg->FindInt32("new", (__be_int32_t*)&curWorkspace) == false) break;
                 if(curWorkspace != 0 && fWindowWorkspaces != curWorkspace)
                 {
-                    __be_uint32 oldWorkspace = fWindowWorkspaces;
+                    __be_uint32_t oldWorkspace = fWindowWorkspaces;
                     fWindowWorkspaces = curWorkspace;
                     if(oldWorkspace != 0) WorkspacesChanged(oldWorkspace, curWorkspace);
                 }
@@ -463,7 +463,7 @@ BWindow::DispatchMessage(BMessage *msg, BHandler *target)
                     MessageQueue()->Lock();
                     while(MessageQueue()->IsEmpty() == false)
                     {
-                        BMessage *aMsg = MessageQueue()->FindMessage((__be_int32)0);
+                        BMessage *aMsg = MessageQueue()->FindMessage((__be_int32_t)0);
                         if(aMsg == NULL) break;
 
                         if(!(aMsg->what == B_WINDOW_RESIZED || aMsg->what == B_WINDOW_MOVED))
@@ -527,7 +527,7 @@ BWindow::DispatchMessage(BMessage *msg, BHandler *target)
                     rFrame.right = rFrame.left + w;
                     rFrame.bottom = rFrame.top + h;
                     rFrame.Floor();
-                    fPixmap->ResizeTo((__be_uint32)max_c(rFrame.Width(), 0), (__be_uint32)max_c(rFrame.Height(), 0));
+                    fPixmap->ResizeTo((__be_uint32_t)max_c(rFrame.Width(), 0), (__be_uint32_t)max_c(rFrame.Height(), 0));
                     fDC->SetClipping(BRegion(rFrame.OffsetToCopy(B_ORIGIN)));
 
                     fExposeRect = Bounds();
@@ -597,7 +597,7 @@ BWindow::DispatchMessage(BMessage *msg, BHandler *target)
                     BMessage *aMsg = NULL;
 
                     MessageQueue()->Lock();
-                    if((aMsg = MessageQueue()->FindMessage((__be_int32)0)) != NULL)
+                    if((aMsg = MessageQueue()->FindMessage((__be_int32_t)0)) != NULL)
                     {
                         if(aMsg->what == _UPDATE_IF_NEEDED_)
                         {
@@ -644,7 +644,7 @@ BWindow::DispatchMessage(BMessage *msg, BHandler *target)
                     bool noNeededToSendUpdate = false;
                     BMessage *aMsg = NULL;
                     MessageQueue()->Lock();
-                    if((aMsg = MessageQueue()->FindMessage((__be_int32)0)) != NULL)
+                    if((aMsg = MessageQueue()->FindMessage((__be_int32_t)0)) != NULL)
                     {
                         if(aMsg->what == _UPDATE_IF_NEEDED_)
                         {
@@ -736,7 +736,7 @@ BWindow::Hide()
         if(fWindow) fWindow->UngrabMouse();
         fMouseGrabCount = 0;
 
-        for(__be_int32 i = 0; i < fMouseInterestedViews.CountItems(); i++)
+        for(__be_int32_t i = 0; i < fMouseInterestedViews.CountItems(); i++)
         {
             BView *view = (BView*)fMouseInterestedViews.ItemAt(i);
             view->fMouseGrabbed = false;
@@ -748,7 +748,7 @@ BWindow::Hide()
         if(fWindow) fWindow->UngrabKeyboard();
         fKeyboardGrabCount = 0;
 
-        for(__be_int32 i = 0; i < fKeyboardInterestedViews.CountItems(); i++)
+        for(__be_int32_t i = 0; i < fKeyboardInterestedViews.CountItems(); i++)
         {
             BView *view = (BView*)fKeyboardInterestedViews.ItemAt(i);
             view->fKeyboardGrabbed = false;
@@ -868,7 +868,7 @@ BWindow::RemoveChild(BView *child)
 
     if(child->fScrollBar.IsEmpty() == false)
     {
-        for(__be_int32 i = 0; i < child->fScrollBar.CountItems(); i++)
+        for(__be_int32_t i = 0; i < child->fScrollBar.CountItems(); i++)
         {
             BScrollBar *scrollbar = (BScrollBar*)child->fScrollBar.ItemAt(i);
             scrollbar->fTarget = NULL;
@@ -900,7 +900,7 @@ BWindow::RemoveChild(BView *child)
 }
 
 
-__be_int32
+__be_int32_t
 BWindow::CountChildren() const
 {
     return cast_as(fLayout, BWindowLayoutContainer)->TopItem()->CountItems();
@@ -908,7 +908,7 @@ BWindow::CountChildren() const
 
 
 BView*
-BWindow::ChildAt(__be_int32 index) const
+BWindow::ChildAt(__be_int32_t index) const
 {
     BLayoutItem *topItem = cast_as(fLayout, BWindowLayoutContainer)->TopItem();
     return(topItem->ItemAt(index) != NULL ? (BView*)topItem->ItemAt(index)->PrivateData() : NULL);
@@ -1028,13 +1028,13 @@ BWindow::FrameMoved(BPoint new_position)
 
 
 void
-BWindow::WorkspacesChanged(__be_uint32 old_ws,  __be_uint32 new_ws)
+BWindow::WorkspacesChanged(__be_uint32_t old_ws,  __be_uint32_t new_ws)
 {
 }
 
 
 void
-BWindow::WorkspaceActivated(__be_int32 ws, bool state)
+BWindow::WorkspaceActivated(__be_int32_t ws, bool state)
 {
 }
 
@@ -1055,7 +1055,7 @@ BWindow::Minimize(bool minimize)
             if(fWindow) fWindow->UngrabMouse();
             fMouseGrabCount = 0;
 
-            for(__be_int32 i = 0; i < fMouseInterestedViews.CountItems(); i++)
+            for(__be_int32_t i = 0; i < fMouseInterestedViews.CountItems(); i++)
             {
                 BView *view = (BView*)fMouseInterestedViews.ItemAt(i);
                 view->fMouseGrabbed = false;
@@ -1067,7 +1067,7 @@ BWindow::Minimize(bool minimize)
             if(fWindow) fWindow->UngrabKeyboard();
             fKeyboardGrabCount = 0;
 
-            for(__be_int32 i = 0; i < fKeyboardInterestedViews.CountItems(); i++)
+            for(__be_int32_t i = 0; i < fKeyboardInterestedViews.CountItems(); i++)
             {
                 BView *view = (BView*)fKeyboardInterestedViews.ItemAt(i);
                 view->fKeyboardGrabbed = false;
@@ -1172,10 +1172,10 @@ BWindow::EnableUpdates()
     {
         fUpdateRect.Floor();
         fPixmap->CopyTo(fDC, fWindow,
-                (__be_int32)fUpdateRect.left, (__be_int32)fUpdateRect.top,
-                (__be_uint32)fUpdateRect.Width(), (__be_uint32)fUpdateRect.Height(),
-                (__be_int32)fUpdateRect.left, (__be_int32)fUpdateRect.top,
-                (__be_uint32)fUpdateRect.Width(), (__be_uint32)fUpdateRect.Height());
+                (__be_int32_t)fUpdateRect.left, (__be_int32_t)fUpdateRect.top,
+                (__be_uint32_t)fUpdateRect.Width(), (__be_uint32_t)fUpdateRect.Height(),
+                (__be_int32_t)fUpdateRect.left, (__be_int32_t)fUpdateRect.top,
+                (__be_uint32_t)fUpdateRect.Width(), (__be_uint32_t)fUpdateRect.Height());
     }
 
     fUpdateRect = BRect();
@@ -1237,8 +1237,8 @@ BWindow::_UpdateIfNeeded(bigtime_t when)
 
     r.Floor();
     fPixmap->CopyTo(fDC, fWindow,
-            (__be_int32)r.left, (__be_int32)r.top, (__be_uint32)r.Width(), (__be_uint32)r.Height(),
-            (__be_int32)r.left, (__be_int32)r.top, (__be_uint32)r.Width(), (__be_uint32)r.Height());
+            (__be_int32_t)r.left, (__be_int32_t)r.top, (__be_uint32_t)r.Width(), (__be_uint32_t)r.Height(),
+            (__be_int32_t)r.left, (__be_int32_t)r.top, (__be_uint32_t)r.Width(), (__be_uint32_t)r.Height());
 }
 
 
@@ -1260,10 +1260,10 @@ BWindow::_Update(BRect rect, bool force_update)
     {
         fUpdateRect.Floor();
         fPixmap->CopyTo(fDC, fWindow,
-                (__be_int32)fUpdateRect.left, (__be_int32)fUpdateRect.top,
-                (__be_uint32)fUpdateRect.Width(), (__be_uint32)fUpdateRect.Height(),
-                (__be_int32)fUpdateRect.left, (__be_int32)fUpdateRect.top,
-                (__be_uint32)fUpdateRect.Width(), (__be_uint32)fUpdateRect.Height());
+                (__be_int32_t)fUpdateRect.left, (__be_int32_t)fUpdateRect.top,
+                (__be_uint32_t)fUpdateRect.Width(), (__be_uint32_t)fUpdateRect.Height(),
+                (__be_int32_t)fUpdateRect.left, (__be_int32_t)fUpdateRect.top,
+                (__be_uint32_t)fUpdateRect.Width(), (__be_uint32_t)fUpdateRect.Height());
     }
     fUpdateRect = BRect();
 }
@@ -1306,7 +1306,7 @@ BWindow::_Expose(BRect rect, bigtime_t when)
     if(rect.IsValid() == false) return;
 
     BRect r = rect.FloorCopy();
-    fPixmap->FillRect(fDC, (__be_int32)r.left, (__be_int32)r.top, (__be_uint32)r.Width(), (__be_uint32)r.Height());
+    fPixmap->FillRect(fDC, (__be_int32_t)r.left, (__be_int32_t)r.top, (__be_uint32_t)r.Width(), (__be_uint32_t)r.Height());
 
     BRegion region(rect);
 
@@ -1334,7 +1334,7 @@ BWindow::_HasResizeMessage(bool setBrokeOnExpose)
 
     MessageQueue()->Lock();
     BMessage *msg;
-    __be_int32 fromIndex = 0;
+    __be_int32_t fromIndex = 0;
     while(retVal == false && (msg = MessageQueue()->FindMessage(B_WINDOW_RESIZED, fromIndex, 20)) != NULL)
     {
         float w, h;
@@ -1543,7 +1543,7 @@ BWindow::Feel() const
 
 
 status_t
-BWindow::SetFlags(__be_uint32 flags)
+BWindow::SetFlags(__be_uint32_t flags)
 {
     if(fWindowFlags != flags)
     {
@@ -1573,7 +1573,7 @@ BWindow::SetFlags(__be_uint32 flags)
 }
 
 
-__be_uint32
+__be_uint32_t
 BWindow::Flags() const
 {
     return fWindowFlags;
@@ -1581,7 +1581,7 @@ BWindow::Flags() const
 
 
 void
-BWindow::SetWorkspaces(__be_uint32 workspace)
+BWindow::SetWorkspaces(__be_uint32_t workspace)
 {
     if(workspace == 0)
     {
@@ -1598,7 +1598,7 @@ BWindow::SetWorkspaces(__be_uint32 workspace)
     {
         if(fWindow->SetWorkspaces(workspace) == B_OK)
         {
-            __be_uint32 oldWorkspace = fWindowWorkspaces;
+            __be_uint32_t oldWorkspace = fWindowWorkspaces;
             fWindowWorkspaces = workspace;
             if(oldWorkspace != 0) WorkspacesChanged(oldWorkspace, workspace);
         }
@@ -1606,7 +1606,7 @@ BWindow::SetWorkspaces(__be_uint32 workspace)
 }
 
 
-__be_uint32
+__be_uint32_t
 BWindow::Workspaces() const
 {
     return fWindowWorkspaces;
@@ -1640,7 +1640,7 @@ BWindow::MoveTo(BPoint where)
     if(Frame().LeftTop() != where)
     {
         BPoint pt = where.FloorCopy();
-        if(fWindow->MoveTo((__be_int32)pt.x, (__be_int32)pt.y) != B_OK) return;
+        if(fWindow->MoveTo((__be_int32_t)pt.x, (__be_int32_t)pt.y) != B_OK) return;
 
         fPositionChangedTimeStamp = b_real_time_clock_usecs();
         cast_as(fLayout, BWindowLayoutContainer)->MoveTo(where);
@@ -1676,7 +1676,7 @@ BWindow::ResizeTo(float w, float h)
         return;
     }
 
-    __be_uint32 min_h = B_MAXUINT32, max_h = B_MAXUINT32, min_v = B_MAXUINT32, max_v = B_MAXUINT32;
+    __be_uint32_t min_h = B_MAXUINT32, max_h = B_MAXUINT32, min_v = B_MAXUINT32, max_v = B_MAXUINT32;
     fWindow->GetSizeLimits(&min_h, &max_h, &min_v, &max_v);
 
     if(w < (float)min_h && min_h != B_MAXUINT32) w = (float)min_h;
@@ -1690,10 +1690,10 @@ BWindow::ResizeTo(float w, float h)
         frame.right = frame.left + w;
         frame.bottom = frame.top + h;
         frame.Floor();
-        if(fWindow->MoveAndResizeTo((__be_int32)frame.left, (__be_int32)frame.top,
-                        (__be_uint32)max_c(frame.Width(), 0),
-                        (__be_uint32)max_c(frame.Height(), 0)) != B_OK) return;
-        fPixmap->ResizeTo((__be_uint32)max_c(frame.Width(), 0), (__be_uint32)max_c(frame.Height(), 0));
+        if(fWindow->MoveAndResizeTo((__be_int32_t)frame.left, (__be_int32_t)frame.top,
+                        (__be_uint32_t)max_c(frame.Width(), 0),
+                        (__be_uint32_t)max_c(frame.Height(), 0)) != B_OK) return;
+        fPixmap->ResizeTo((__be_uint32_t)max_c(frame.Width(), 0), (__be_uint32_t)max_c(frame.Height(), 0));
         fDC->SetClipping(BRegion(frame.OffsetToCopy(B_ORIGIN)));
 
         fSizeChangedTimeStamp = b_real_time_clock_usecs();
@@ -1730,11 +1730,11 @@ BWindow::SetSizeLimits(float min_h, float max_h, float min_v, float max_v)
         return;
     }
 
-    __be_uint32 minH = B_MAXUINT32, maxH = B_MAXUINT32, minV = B_MAXUINT32, maxV = B_MAXUINT32;
-    if(min_h >= 0) minH = (__be_uint32)ceil((double)min_h);
-    if(max_h >= 0) maxH = (__be_uint32)ceil((double)max_h);
-    if(min_v >= 0) minV = (__be_uint32)ceil((double)min_v);
-    if(max_v >= 0) maxV = (__be_uint32)ceil((double)max_v);
+    __be_uint32_t minH = B_MAXUINT32, maxH = B_MAXUINT32, minV = B_MAXUINT32, maxV = B_MAXUINT32;
+    if(min_h >= 0) minH = (__be_uint32_t)ceil((double)min_h);
+    if(max_h >= 0) maxH = (__be_uint32_t)ceil((double)max_h);
+    if(min_v >= 0) minV = (__be_uint32_t)ceil((double)min_v);
+    if(max_v >= 0) maxV = (__be_uint32_t)ceil((double)max_v);
 
     if(fWindow->SetSizeLimits(minH, maxH, minV, maxV) == B_OK)
     {
@@ -1753,7 +1753,7 @@ BWindow::SetSizeLimits(float min_h, float max_h, float min_v, float max_v)
 void
 BWindow::GetSizeLimits(float *min_h, float *max_h, float *min_v, float *max_v) const
 {
-    __be_uint32 minH = B_MAXUINT32, maxH = B_MAXUINT32, minV = B_MAXUINT32, maxV = B_MAXUINT32;
+    __be_uint32_t minH = B_MAXUINT32, maxH = B_MAXUINT32, minV = B_MAXUINT32, maxV = B_MAXUINT32;
     if(fWindow) fWindow->GetSizeLimits(&minH, &maxH, &minV, &maxV);
 
     if(min_h) *min_h = minH != B_MAXUINT32 ? (float)minH : -1.f;
@@ -2035,10 +2035,10 @@ struct BWindow::unpack_cookie {
     unpack_cookie();
 
     BMessage*	message;
-    int32		index;
+    int32_t		index;
     BHandler*	focus;
-    int32		focus_token;
-    int32		last_view_token;
+    int32_t		focus_token;
+    int32_t		last_view_token;
     bool		found_focus;
     bool		tokens_scanned;
 };
@@ -2046,25 +2046,25 @@ struct BWindow::unpack_cookie {
 
 class BWindow::Shortcut {
 public:
-                            Shortcut(uint32 key, uint32 modifiers,
+                            Shortcut(uint32_t key, uint32_t modifiers,
                                 BMenuItem* item);
-                            Shortcut(uint32 key, uint32 modifiers,
+                            Shortcut(uint32_t key, uint32_t modifiers,
                                 BMessage* message, BHandler* target);
                             ~Shortcut();
 
-            bool			Matches(uint32 key, uint32 modifiers) const;
+            bool			Matches(uint32_t key, uint32_t modifiers) const;
 
             BMenuItem*		MenuItem() const { return fMenuItem; }
             BMessage*		Message() const { return fMessage; }
             BHandler*		Target() const { return fTarget; }
 
-    static	uint32			AllowedModifiers();
-    static	uint32			PrepareKey(uint32 key);
-    static	uint32			PrepareModifiers(uint32 modifiers);
+    static	uint32_t			AllowedModifiers();
+    static	uint32_t			PrepareKey(uint32_t key);
+    static	uint32_t			PrepareModifiers(uint32_t modifiers);
 
 private:
-            uint32			fKey;
-            uint32			fModifiers;
+            uint32_t			fKey;
+            uint32_t			fModifiers;
             BMenuItem*		fMenuItem;
             BMessage*		fMessage;
             BHandler*		fTarget;
@@ -2194,7 +2194,7 @@ BWindow::unpack_cookie::unpack_cookie()
 //	#pragma mark - BWindow::Shortcut
 
 
-BWindow::Shortcut::Shortcut(uint32 key, uint32 modifiers, BMenuItem* item)
+BWindow::Shortcut::Shortcut(uint32_t key, uint32_t modifiers, BMenuItem* item)
     :
     fKey(PrepareKey(key)),
     fModifiers(PrepareModifiers(modifiers)),
@@ -2205,7 +2205,7 @@ BWindow::Shortcut::Shortcut(uint32 key, uint32 modifiers, BMenuItem* item)
 }
 
 
-BWindow::Shortcut::Shortcut(uint32 key, uint32 modifiers, BMessage* message,
+BWindow::Shortcut::Shortcut(uint32_t key, uint32_t modifiers, BMessage* message,
     BHandler* target)
     :
     fKey(PrepareKey(key)),
@@ -2225,14 +2225,14 @@ BWindow::Shortcut::~Shortcut()
 
 
 bool
-BWindow::Shortcut::Matches(uint32 key, uint32 modifiers) const
+BWindow::Shortcut::Matches(uint32_t key, uint32_t modifiers) const
 {
     return fKey == key && fModifiers == modifiers;
 }
 
 
 /*static*/
-uint32
+uint32_t
 BWindow::Shortcut::AllowedModifiers()
 {
     return B_COMMAND_KEY | B_OPTION_KEY | B_SHIFT_KEY | B_CONTROL_KEY
@@ -2241,16 +2241,16 @@ BWindow::Shortcut::AllowedModifiers()
 
 
 /*static*/
-uint32
-BWindow::Shortcut::PrepareModifiers(uint32 modifiers)
+uint32_t
+BWindow::Shortcut::PrepareModifiers(uint32_t modifiers)
 {
     return (modifiers & AllowedModifiers()) | B_COMMAND_KEY;
 }
 
 
 /*static*/
-uint32
-BWindow::Shortcut::PrepareKey(uint32 key)
+uint32_t
+BWindow::Shortcut::PrepareKey(uint32_t key)
 {
     return BUnicodeChar::ToLower(key);
 }
@@ -2260,7 +2260,7 @@ BWindow::Shortcut::PrepareKey(uint32 key)
 
 
 BWindow::BWindow(BRect frame, const char* title, window_type type,
-        uint32 flags, uint32 workspace)
+        uint32_t flags, uint32_t workspace)
     :
     BLooper(title, B_DISPLAY_PRIORITY)
 {
@@ -2273,7 +2273,7 @@ BWindow::BWindow(BRect frame, const char* title, window_type type,
 
 
 BWindow::BWindow(BRect frame, const char* title, window_look look,
-        window_feel feel, uint32 flags, uint32 workspace)
+        window_feel feel, uint32_t flags, uint32_t workspace)
     :
     BLooper(title, B_DISPLAY_PRIORITY)
 {
@@ -2291,19 +2291,19 @@ BWindow::BWindow(BMessage* data)
     data->FindString("_title", &title);
 
     window_look look;
-    data->FindInt32("_wlook", (int32*)&look);
+    data->FindInt32("_wlook", (int32_t*)&look);
 
     window_feel feel;
-    data->FindInt32("_wfeel", (int32*)&feel);
+    data->FindInt32("_wfeel", (int32_t*)&feel);
 
-    if (data->FindInt32("_flags", (int32*)&fFlags) != B_OK)
+    if (data->FindInt32("_flags", (int32_t*)&fFlags) != B_OK)
         fFlags = 0;
 
-    uint32 workspaces;
-    data->FindInt32("_wspace", (int32*)&workspaces);
+    uint32_t workspaces;
+    data->FindInt32("_wspace", (int32_t*)&workspaces);
 
-    uint32 type;
-    if (data->FindInt32("_type", (int32*)&type) == B_OK)
+    uint32_t type;
+    if (data->FindInt32("_type", (int32_t*)&type) == B_OK)
         _DecomposeType((window_type)type, &fLook, &fFeel);
 
         // connect to app_server and initialize data
@@ -2324,7 +2324,7 @@ BWindow::BWindow(BMessage* data)
         SetPulseRate(fPulseRate);
 
     BMessage msg;
-    int32 i = 0;
+    int32_t i = 0;
     while (data->FindMessage("_views", i++, &msg) == B_OK) {
         BArchivable* obj = instantiate_object(&msg);
         if (BView* child = dynamic_cast<BView*>(obj))
@@ -2333,7 +2333,7 @@ BWindow::BWindow(BMessage* data)
 }
 
 
-BWindow::BWindow(BRect frame, int32 bitmapToken)
+BWindow::BWindow(BRect frame, int32_t bitmapToken)
     :
     BLooper("offscreen bitmap")
 {
@@ -2368,8 +2368,8 @@ BWindow::~BWindow()
     delete fTopView;
 
     // remove all remaining shortcuts
-    int32 shortCutCount = fShortcuts.CountItems();
-    for (int32 i = 0; i < shortCutCount; i++) {
+    int32_t shortCutCount = fShortcuts.CountItems();
+    for (int32_t i = 0; i < shortCutCount; i++) {
         delete (Shortcut*)fShortcuts.ItemAtFast(i);
     }
 
@@ -2386,7 +2386,7 @@ BWindow::~BWindow()
     // more pending messages that are executed
     // after the bitmap is deleted (which uses
     // a different link and server side thread)
-    int32 code;
+    int32_t code;
     fLink->FlushWithReply(code);
 
     // the sender port belongs to the app_server
@@ -2421,10 +2421,10 @@ BWindow::Archive(BMessage* data, bool deep) const
     if (ret == B_OK && fFlags != 0)
         ret = data->AddInt32("_flags", fFlags);
     if (ret == B_OK)
-        ret = data->AddInt32("_wspace", (uint32)Workspaces());
+        ret = data->AddInt32("_wspace", (uint32_t)Workspaces());
 
     if (ret == B_OK && !_ComposeType(fLook, fFeel))
-        ret = data->AddInt32("_type", (uint32)Type());
+        ret = data->AddInt32("_type", (uint32_t)Type());
 
     if (fMaxZoomWidth != 32768.0 || fMaxZoomHeight != 32768.0) {
         if (ret == B_OK)
@@ -2449,8 +2449,8 @@ BWindow::Archive(BMessage* data, bool deep) const
         data->AddInt64("_pulse", fPulseRate);
 
     if (ret == B_OK && deep) {
-        int32 noOfViews = CountChildren();
-        for (int32 i = 0; i < noOfViews; i++){
+        int32_t noOfViews = CountChildren();
+        for (int32_t i = 0; i < noOfViews; i++){
             BMessage childArchive;
             ret = ChildAt(i)->Archive(&childArchive, true);
             if (ret == B_OK)
@@ -2522,7 +2522,7 @@ BWindow::RemoveChild(BView* child)
 }
 
 
-int32
+int32_t
 BWindow::CountChildren() const
 {
     BAutolock locker(const_cast<BWindow*>(this));
@@ -2534,7 +2534,7 @@ BWindow::CountChildren() const
 
 
 BView*
-BWindow::ChildAt(int32 index) const
+BWindow::ChildAt(int32_t index) const
 {
     BAutolock locker(const_cast<BWindow*>(this));
     if (!locker.IsLocked())
@@ -2568,7 +2568,7 @@ BWindow::SendBehind(const BWindow* window)
         return B_ERROR;
 
     fLink->StartMessage(AS_SEND_BEHIND);
-    fLink->Attach<int32>(window != NULL ? _get_object_token_(window) : -1);
+    fLink->Attach<int32_t>(window != NULL ? _get_object_token_(window) : -1);
     fLink->Attach<team_id>(Team());
 
     status_t status = B_ERROR;
@@ -2599,7 +2599,7 @@ BWindow::Sync() const
     fLink->StartMessage(AS_SYNC);
 
     // waiting for the reply is the actual syncing
-    int32 code;
+    int32_t code;
     fLink->FlushWithReply(code);
 
     const_cast<BWindow*>(this)->Unlock();
@@ -2682,7 +2682,7 @@ BWindow::MessageReceived(BMessage* message)
         if (message->what == B_KEY_DOWN)
             _KeyboardNavigation();
 
-        if (message->what == (int32)kMsgAppServerRestarted) {
+        if (message->what == (int32_t)kMsgAppServerRestarted) {
             fLink->SetSenderPort(
                 BApplication::Private::ServerLink()->SenderPort());
 
@@ -2695,17 +2695,17 @@ BWindow::MessageReceived(BMessage* message)
             fLink->StartMessage(AS_CREATE_WINDOW);
 
             fLink->Attach<BRect>(fFrame);
-            fLink->Attach<uint32>((uint32)fLook);
-            fLink->Attach<uint32>((uint32)fFeel);
-            fLink->Attach<uint32>(fFlags);
-            fLink->Attach<uint32>(0);
-            fLink->Attach<int32>(_get_object_token_(this));
+            fLink->Attach<uint32_t>((uint32_t)fLook);
+            fLink->Attach<uint32_t>((uint32_t)fFeel);
+            fLink->Attach<uint32_t>(fFlags);
+            fLink->Attach<uint32_t>(0);
+            fLink->Attach<int32_t>(_get_object_token_(this));
             fLink->Attach<port_id>(fLink->ReceiverPort());
             fLink->Attach<port_id>(fMsgPort);
             fLink->AttachString(fTitle);
 
             port_id sendPort;
-            int32 code;
+            int32_t code;
             if (fLink->FlushWithReply(code) == B_OK
                 && code == B_OK
                 && fLink->Read<port_id>(&sendPort) == B_OK) {
@@ -2739,9 +2739,9 @@ BWindow::MessageReceived(BMessage* message)
     bool handled = false;
 
     BMessage specifier;
-    int32 what;
+    int32_t what;
     const char* prop;
-    int32 index;
+    int32_t index;
 
     if (message->GetCurrentSpecifier(&index, &specifier, &what, &prop) != B_OK)
         return BLooper::MessageReceived(message);
@@ -2762,11 +2762,11 @@ BWindow::MessageReceived(BMessage* message)
             break;
         case 1:
             if (message->what == B_GET_PROPERTY) {
-                replyMsg.AddInt32("result", (uint32)Feel());
+                replyMsg.AddInt32("result", (uint32_t)Feel());
                 handled = true;
             } else {
-                uint32 newFeel;
-                if (message->FindInt32("data", (int32*)&newFeel) == B_OK) {
+                uint32_t newFeel;
+                if (message->FindInt32("data", (int32_t*)&newFeel) == B_OK) {
                     SetFeel((window_feel)newFeel);
                     handled = true;
                 }
@@ -2777,8 +2777,8 @@ BWindow::MessageReceived(BMessage* message)
                 replyMsg.AddInt32("result", Flags());
                 handled = true;
             } else {
-                uint32 newFlags;
-                if (message->FindInt32("data", (int32*)&newFlags) == B_OK) {
+                uint32_t newFlags;
+                if (message->FindInt32("data", (int32_t*)&newFlags) == B_OK) {
                     SetFlags(newFlags);
                     handled = true;
                 }
@@ -2815,11 +2815,11 @@ BWindow::MessageReceived(BMessage* message)
             break;
         case 5:
             if (message->what == B_GET_PROPERTY) {
-                replyMsg.AddInt32("result", (uint32)Look());
+                replyMsg.AddInt32("result", (uint32_t)Look());
                 handled = true;
             } else {
-                uint32 newLook;
-                if (message->FindInt32("data", (int32*)&newLook) == B_OK) {
+                uint32_t newLook;
+                if (message->FindInt32("data", (int32_t*)&newLook) == B_OK) {
                     SetLook((window_look)newLook);
                     handled = true;
                 }
@@ -2842,8 +2842,8 @@ BWindow::MessageReceived(BMessage* message)
                 replyMsg.AddInt32( "result", Workspaces());
                 handled = true;
             } else {
-                uint32 newWorkspaces;
-                if (message->FindInt32("data", (int32*)&newWorkspaces) == B_OK) {
+                uint32_t newWorkspaces;
+                if (message->FindInt32("data", (int32_t*)&newWorkspaces) == B_OK) {
                     SetWorkspaces(newWorkspaces);
                     handled = true;
                 }
@@ -2939,7 +2939,7 @@ BWindow::DispatchMessage(BMessage* message, BHandler* target)
             BList list;
             be_roster->GetAppList(info.signature, &list);
 
-            for (int32 i = 0; i < list.CountItems(); i++) {
+            for (int32_t i = 0; i < list.CountItems(); i++) {
                 do_minimize_team(BRect(), (team_id)(addr_t)list.ItemAt(i),
                     false);
             }
@@ -2948,18 +2948,18 @@ BWindow::DispatchMessage(BMessage* message, BHandler* target)
 
         case B_WINDOW_RESIZED:
         {
-            int32 width, height;
+            int32_t width, height;
             if (message->FindInt32("width", &width) == B_OK
                 && message->FindInt32("height", &height) == B_OK) {
                 // combine with pending resize notifications
                 BMessage* pendingMessage;
                 while ((pendingMessage
                         = MessageQueue()->FindMessage(B_WINDOW_RESIZED, 0))) {
-                    int32 nextWidth;
+                    int32_t nextWidth;
                     if (pendingMessage->FindInt32("width", &nextWidth) == B_OK)
                         width = nextWidth;
 
-                    int32 nextHeight;
+                    int32_t nextHeight;
                     if (pendingMessage->FindInt32("height", &nextHeight)
                             == B_OK) {
                         height = nextHeight;
@@ -3065,9 +3065,9 @@ FrameMoved(origin);
         case B_SCREEN_CHANGED:
             if (target == this) {
                 BRect frame;
-                uint32 mode;
+                uint32_t mode;
                 if (message->FindRect("frame", &frame) == B_OK
-                    && message->FindInt32("mode", (int32*)&mode) == B_OK)
+                    && message->FindInt32("mode", (int32_t*)&mode) == B_OK)
                     ScreenChanged(frame, (color_space)mode);
             } else
                 target->MessageReceived(message);
@@ -3075,9 +3075,9 @@ FrameMoved(origin);
 
         case B_WORKSPACE_ACTIVATED:
             if (target == this) {
-                uint32 workspace;
+                uint32_t workspace;
                 bool active;
-                if (message->FindInt32("workspace", (int32*)&workspace) == B_OK
+                if (message->FindInt32("workspace", (int32_t*)&workspace) == B_OK
                     && message->FindBool("active", &active) == B_OK)
                     WorkspaceActivated(workspace, active);
             } else
@@ -3086,9 +3086,9 @@ FrameMoved(origin);
 
         case B_WORKSPACES_CHANGED:
             if (target == this) {
-                uint32 oldWorkspace, newWorkspace;
-                if (message->FindInt32("old", (int32*)&oldWorkspace) == B_OK
-                    && message->FindInt32("new", (int32*)&newWorkspace) == B_OK)
+                uint32_t oldWorkspace, newWorkspace;
+                if (message->FindInt32("old", (int32_t*)&oldWorkspace) == B_OK
+                    && message->FindInt32("new", (int32_t*)&newWorkspace) == B_OK)
                     WorkspacesChanged(oldWorkspace, newWorkspace);
             } else
                 target->MessageReceived(message);
@@ -3178,7 +3178,7 @@ FrameMoved(origin);
         case B_MOUSE_MOVED:
         {
             if (BView* view = dynamic_cast<BView*>(target)) {
-                uint32 eventOptions = view->fEventOptions
+                uint32_t eventOptions = view->fEventOptions
                     | view->fMouseEventOptions;
                 bool noHistory = eventOptions & B_NO_POINTER_HISTORY;
                 bool dropIfLate = !(eventOptions & B_FULL_POINTER_HISTORY);
@@ -3187,8 +3187,8 @@ FrameMoved(origin);
                 if (message->FindInt64("when", (int64*)&eventTime) < B_OK)
                     eventTime = system_time();
 
-                uint32 transit;
-                message->FindInt32("be:transit", (int32*)&transit);
+                uint32_t transit;
+                message->FindInt32("be:transit", (int32_t*)&transit);
                 // don't drop late messages with these important transit values
                 if (transit == B_ENTERED_VIEW || transit == B_EXITED_VIEW)
                     dropIfLate = false;
@@ -3211,7 +3211,7 @@ FrameMoved(origin);
                     queue->Lock();
 
                     BMessage* moved;
-                    for (int32 i = 0; (moved = queue->FindMessage(i)) != NULL;
+                    for (int32_t i = 0; (moved = queue->FindMessage(i)) != NULL;
                             i++) {
                         if (moved != message && moved->what == B_MOUSE_MOVED) {
                             // there is a newer mouse moved message in the
@@ -3225,9 +3225,9 @@ FrameMoved(origin);
                 }
 
                 BPoint where;
-                uint32 buttons;
+                uint32_t buttons;
                 message->FindPoint("be:view_where", &where);
-                message->FindInt32("buttons", (int32*)&buttons);
+                message->FindInt32("buttons", (int32_t*)&buttons);
 
                 if (transit == B_EXITED_VIEW || transit == B_OUTSIDE_VIEW) {
                     if (dynamic_cast<BPrivate::ToolTipWindow*>(this) == NULL)
@@ -3269,7 +3269,7 @@ FrameMoved(origin);
             fLink->StartMessage(AS_BEGIN_UPDATE);
             fInTransaction = true;
 
-            int32 code;
+            int32_t code;
             if (fLink->FlushWithReply(code) == B_OK
                 && code == B_OK) {
                 // read current window position and size first,
@@ -3305,14 +3305,14 @@ FrameMoved(origin);
                 // the tokens, since other communication would likely
                 // mess up the data in the link.
                 struct ViewUpdateInfo {
-                    int32 token;
+                    int32_t token;
                     BRect updateRect;
                 };
                 BList infos(20);
                 while (true) {
                     // read next token and create/add ViewUpdateInfo
-                    int32 token;
-                    status_t error = fLink->Read<int32>(&token);
+                    int32_t token;
+                    status_t error = fLink->Read<int32_t>(&token);
                     if (error < B_OK || token == B_NULL_TOKEN)
                         break;
                     ViewUpdateInfo* info = new(std::nothrow) ViewUpdateInfo;
@@ -3327,8 +3327,8 @@ FrameMoved(origin);
                         break;
                 }
                 // draw
-                int32 count = infos.CountItems();
-                for (int32 i = 0; i < count; i++) {
+                int32_t count = infos.CountItems();
+                for (int32_t i = 0; i < count; i++) {
 //bigtime_t drawStart = system_time();
                     ViewUpdateInfo* info
                         = (ViewUpdateInfo*)infos.ItemAtFast(i);
@@ -3343,7 +3343,7 @@ FrameMoved(origin);
                 // NOTE: The tokens are actually hirachically sorted,
                 // so traversing the list in revers and calling
                 // child->_DrawAfterChildren() actually works like intended.
-                for (int32 i = count - 1; i >= 0; i--) {
+                for (int32_t i = count - 1; i >= 0; i--) {
                     ViewUpdateInfo* info
                         = (ViewUpdateInfo*)infos.ItemAtFast(i);
                     if (BView* view = _FindView(info->token))
@@ -3420,7 +3420,7 @@ BWindow::FrameResized(float newWidth, float newHeight)
 
 
 void
-BWindow::WorkspacesChanged(uint32 oldWorkspaces, uint32 newWorkspaces)
+BWindow::WorkspacesChanged(uint32_t oldWorkspaces, uint32_t newWorkspaces)
 {
     // does nothing
     // Hook function
@@ -3428,7 +3428,7 @@ BWindow::WorkspacesChanged(uint32 oldWorkspaces, uint32 newWorkspaces)
 
 
 void
-BWindow::WorkspaceActivated(int32 workspace, bool state)
+BWindow::WorkspaceActivated(int32_t workspace, bool state)
 {
     // does nothing
     // Hook function
@@ -3467,7 +3467,7 @@ BWindow::SetSizeLimits(float minWidth, float maxWidth,
     fLink->Attach<float>(minHeight);
     fLink->Attach<float>(maxHeight);
 
-    int32 code;
+    int32_t code;
     if (fLink->FlushWithReply(code) == B_OK
         && code == B_OK) {
         // read the values that were really enforced on
@@ -3526,7 +3526,7 @@ BWindow::SetDecoratorSettings(const BMessage& settings)
     // it to the app_server to apply the settings to the
     // decorator
 
-    int32 size = settings.FlattenedSize();
+    int32_t size = settings.FlattenedSize();
     char buffer[size];
     status_t status = settings.Flatten(buffer, size);
     if (status != B_OK)
@@ -3538,7 +3538,7 @@ BWindow::SetDecoratorSettings(const BMessage& settings)
     status = fLink->StartMessage(AS_SET_DECORATOR_SETTINGS);
 
     if (status == B_OK)
-        status = fLink->Attach<int32>(size);
+        status = fLink->Attach<int32_t>(size);
 
     if (status == B_OK)
         status = fLink->Attach(buffer, size);
@@ -3564,15 +3564,15 @@ BWindow::GetDecoratorSettings(BMessage* settings) const
     status_t status = fLink->StartMessage(AS_GET_DECORATOR_SETTINGS);
 
     if (status == B_OK) {
-        int32 code;
+        int32_t code;
         status = fLink->FlushWithReply(code);
         if (status == B_OK && code != B_OK)
             status = code;
     }
 
     if (status == B_OK) {
-        int32 size;
-        status = fLink->Read<int32>(&size);
+        int32_t size;
+        status = fLink->Read<int32_t>(&size);
         if (status == B_OK) {
             char buffer[size];
             status = fLink->Read(buffer, size);
@@ -3717,7 +3717,7 @@ BWindow::PulseRate() const
 
 
 void
-BWindow::AddShortcut(uint32 key, uint32 modifiers, BMenuItem* item)
+BWindow::AddShortcut(uint32_t key, uint32_t modifiers, BMenuItem* item)
 {
     Shortcut* shortcut = new(std::nothrow) Shortcut(key, modifiers, item);
     if (shortcut == NULL)
@@ -3731,14 +3731,14 @@ BWindow::AddShortcut(uint32 key, uint32 modifiers, BMenuItem* item)
 
 
 void
-BWindow::AddShortcut(uint32 key, uint32 modifiers, BMessage* message)
+BWindow::AddShortcut(uint32_t key, uint32_t modifiers, BMessage* message)
 {
     AddShortcut(key, modifiers, message, this);
 }
 
 
 void
-BWindow::AddShortcut(uint32 key, uint32 modifiers, BMessage* message,
+BWindow::AddShortcut(uint32_t key, uint32_t modifiers, BMessage* message,
     BHandler* target)
 {
     if (message == NULL)
@@ -3757,14 +3757,14 @@ BWindow::AddShortcut(uint32 key, uint32 modifiers, BMessage* message,
 
 
 bool
-BWindow::HasShortcut(uint32 key, uint32 modifiers)
+BWindow::HasShortcut(uint32_t key, uint32_t modifiers)
 {
     return _FindShortcut(key, modifiers) != NULL;
 }
 
 
 void
-BWindow::RemoveShortcut(uint32 key, uint32 modifiers)
+BWindow::RemoveShortcut(uint32_t key, uint32_t modifiers)
 {
     Shortcut* shortcut = _FindShortcut(key, modifiers);
     if (shortcut != NULL) {
@@ -3817,7 +3817,7 @@ BWindow::NeedsUpdate() const
 
     fLink->StartMessage(AS_NEEDS_UPDATE);
 
-    int32 code = B_ERROR;
+    int32_t code = B_ERROR;
     fLink->FlushWithReply(code);
 
     const_cast<BWindow*>(this)->Unlock();
@@ -4139,7 +4139,7 @@ BWindow::AddToSubset(BWindow* window)
 
     status_t status = B_ERROR;
     fLink->StartMessage(AS_ADD_TO_SUBSET);
-    fLink->Attach<int32>(_get_object_token_(window));
+    fLink->Attach<int32_t>(_get_object_token_(window));
     fLink->FlushWithReply(status);
 
     Unlock();
@@ -4161,7 +4161,7 @@ BWindow::RemoveFromSubset(BWindow* window)
 
     status_t status = B_ERROR;
     fLink->StartMessage(AS_REMOVE_FROM_SUBSET);
-    fLink->Attach<int32>(_get_object_token_(window));
+    fLink->Attach<int32_t>(_get_object_token_(window));
     fLink->FlushWithReply(status);
 
     Unlock();
@@ -4216,7 +4216,7 @@ BWindow::SetLook(window_look look)
         return B_BAD_VALUE;
 
     fLink->StartMessage(AS_SET_LOOK);
-    fLink->Attach<int32>((int32)look);
+    fLink->Attach<int32_t>((int32_t)look);
 
     status_t status = B_ERROR;
     if (fLink->FlushWithReply(status) == B_OK && status == B_OK)
@@ -4244,7 +4244,7 @@ BWindow::SetFeel(window_feel feel)
         return B_BAD_VALUE;
 
     fLink->StartMessage(AS_SET_FEEL);
-    fLink->Attach<int32>((int32)feel);
+    fLink->Attach<int32_t>((int32_t)feel);
 
     status_t status = B_ERROR;
     if (fLink->FlushWithReply(status) == B_OK && status == B_OK)
@@ -4262,16 +4262,16 @@ BWindow::Feel() const
 
 
 status_t
-BWindow::SetFlags(uint32 flags)
+BWindow::SetFlags(uint32_t flags)
 {
     BAutolock locker(this);
     if (!locker.IsLocked())
         return B_BAD_VALUE;
 
     fLink->StartMessage(AS_SET_FLAGS);
-    fLink->Attach<uint32>(flags);
+    fLink->Attach<uint32_t>(flags);
 
-    int32 status = B_ERROR;
+    int32_t status = B_ERROR;
     if (fLink->FlushWithReply(status) == B_OK && status == B_OK)
         fFlags = flags;
 
@@ -4279,7 +4279,7 @@ BWindow::SetFlags(uint32 flags)
 }
 
 
-uint32
+uint32_t
 BWindow::Flags() const
 {
     return fFlags;
@@ -4288,8 +4288,8 @@ BWindow::Flags() const
 
 status_t
 BWindow::SetWindowAlignment(window_alignment mode,
-    int32 h, int32 hOffset, int32 width, int32 widthOffset,
-    int32 v, int32 vOffset, int32 height, int32 heightOffset)
+    int32_t h, int32_t hOffset, int32_t width, int32_t widthOffset,
+    int32_t v, int32_t vOffset, int32_t height, int32_t heightOffset)
 {
     if ((mode & (B_BYTE_ALIGNMENT | B_PIXEL_ALIGNMENT)) == 0
         || (hOffset >= 0 && hOffset <= h)
@@ -4304,15 +4304,15 @@ BWindow::SetWindowAlignment(window_alignment mode,
         return B_ERROR;
 
     fLink->StartMessage(AS_SET_ALIGNMENT);
-    fLink->Attach<int32>((int32)mode);
-    fLink->Attach<int32>(h);
-    fLink->Attach<int32>(hOffset);
-    fLink->Attach<int32>(width);
-    fLink->Attach<int32>(widthOffset);
-    fLink->Attach<int32>(v);
-    fLink->Attach<int32>(vOffset);
-    fLink->Attach<int32>(height);
-    fLink->Attach<int32>(heightOffset);
+    fLink->Attach<int32_t>((int32_t)mode);
+    fLink->Attach<int32_t>(h);
+    fLink->Attach<int32_t>(hOffset);
+    fLink->Attach<int32_t>(width);
+    fLink->Attach<int32_t>(widthOffset);
+    fLink->Attach<int32_t>(v);
+    fLink->Attach<int32_t>(vOffset);
+    fLink->Attach<int32_t>(height);
+    fLink->Attach<int32_t>(heightOffset);
 
     status_t status = B_ERROR;
     fLink->FlushWithReply(status);
@@ -4325,8 +4325,8 @@ BWindow::SetWindowAlignment(window_alignment mode,
 
 status_t
 BWindow::GetWindowAlignment(window_alignment* mode,
-    int32* h, int32* hOffset, int32* width, int32* widthOffset,
-    int32* v, int32* vOffset, int32* height, int32* heightOffset) const
+    int32_t* h, int32_t* hOffset, int32_t* width, int32_t* widthOffset,
+    int32_t* v, int32_t* vOffset, int32_t* height, int32_t* heightOffset) const
 {
     if (!const_cast<BWindow*>(this)->Lock())
         return B_ERROR;
@@ -4335,15 +4335,15 @@ BWindow::GetWindowAlignment(window_alignment* mode,
 
     status_t status;
     if (fLink->FlushWithReply(status) == B_OK && status == B_OK) {
-        fLink->Read<int32>((int32*)mode);
-        fLink->Read<int32>(h);
-        fLink->Read<int32>(hOffset);
-        fLink->Read<int32>(width);
-        fLink->Read<int32>(widthOffset);
-        fLink->Read<int32>(v);
-        fLink->Read<int32>(hOffset);
-        fLink->Read<int32>(height);
-        fLink->Read<int32>(heightOffset);
+        fLink->Read<int32_t>((int32_t*)mode);
+        fLink->Read<int32_t>(h);
+        fLink->Read<int32_t>(hOffset);
+        fLink->Read<int32_t>(width);
+        fLink->Read<int32_t>(widthOffset);
+        fLink->Read<int32_t>(v);
+        fLink->Read<int32_t>(hOffset);
+        fLink->Read<int32_t>(height);
+        fLink->Read<int32_t>(heightOffset);
     }
 
     const_cast<BWindow*>(this)->Unlock();
@@ -4351,19 +4351,19 @@ BWindow::GetWindowAlignment(window_alignment* mode,
 }
 
 
-uint32
+uint32_t
 BWindow::Workspaces() const
 {
     if (!const_cast<BWindow*>(this)->Lock())
         return 0;
 
-    uint32 workspaces = 0;
+    uint32_t workspaces = 0;
 
     fLink->StartMessage(AS_GET_WORKSPACES);
 
     status_t status;
     if (fLink->FlushWithReply(status) == B_OK && status == B_OK)
-        fLink->Read<uint32>(&workspaces);
+        fLink->Read<uint32_t>(&workspaces);
 
     const_cast<BWindow*>(this)->Unlock();
     return workspaces;
@@ -4371,7 +4371,7 @@ BWindow::Workspaces() const
 
 
 void
-BWindow::SetWorkspaces(uint32 workspaces)
+BWindow::SetWorkspaces(uint32_t workspaces)
 {
     // TODO: don't forget about Tracker's background window.
     if (fFeel != B_NORMAL_WINDOW_FEEL)
@@ -4379,7 +4379,7 @@ BWindow::SetWorkspaces(uint32 workspaces)
 
     if (Lock()) {
         fLink->StartMessage(AS_SET_WORKSPACES);
-        fLink->Attach<uint32>(workspaces);
+        fLink->Attach<uint32_t>(workspaces);
         fLink->Flush();
         Unlock();
     }
@@ -4531,7 +4531,7 @@ BWindow::CenterOnScreen(screen_id id)
 
 
 void
-BWindow::MoveOnScreen(uint32 flags)
+BWindow::MoveOnScreen(uint32_t flags)
 {
     // Set size limits now if needed
     UpdateSizeLimits();
@@ -4701,8 +4701,8 @@ BWindow::GetSupportedSuites(BMessage* data)
 
 
 BHandler*
-BWindow::ResolveSpecifier(BMessage* message, int32 index, BMessage* specifier,
-    int32 what, const char* property)
+BWindow::ResolveSpecifier(BMessage* message, int32_t index, BMessage* specifier,
+    int32_t what, const char* property)
 {
     if (message->what == B_WINDOW_MOVE_BY
         || message->what == B_WINDOW_MOVE_TO)
@@ -4738,7 +4738,7 @@ BWindow::ResolveSpecifier(BMessage* message, int32 index, BMessage* specifier,
 
 void
 BWindow::_InitData(BRect frame, const char* title, window_look look,
-    window_feel feel, uint32 flags,	uint32 workspace, int32 bitmapToken)
+    window_feel feel, uint32_t flags,	uint32_t workspace, int32_t bitmapToken)
 {
     STRACE(("BWindow::InitData()\n"));
 
@@ -4863,22 +4863,22 @@ BWindow::_InitData(BRect frame, const char* title, window_look look,
             fLink->StartMessage(AS_CREATE_WINDOW);
         } else {
             fLink->StartMessage(AS_CREATE_OFFSCREEN_WINDOW);
-            fLink->Attach<int32>(bitmapToken);
+            fLink->Attach<int32_t>(bitmapToken);
             fOffscreen = true;
         }
 
         fLink->Attach<BRect>(fFrame);
-        fLink->Attach<uint32>((uint32)fLook);
-        fLink->Attach<uint32>((uint32)fFeel);
-        fLink->Attach<uint32>(fFlags);
-        fLink->Attach<uint32>(workspace);
-        fLink->Attach<int32>(_get_object_token_(this));
+        fLink->Attach<uint32_t>((uint32_t)fLook);
+        fLink->Attach<uint32_t>((uint32_t)fFeel);
+        fLink->Attach<uint32_t>(fFlags);
+        fLink->Attach<uint32_t>(workspace);
+        fLink->Attach<int32_t>(_get_object_token_(this));
         fLink->Attach<port_id>(receivePort);
         fLink->Attach<port_id>(fMsgPort);
         fLink->AttachString(title);
 
         port_id sendPort;
-        int32 code;
+        int32_t code;
         if (fLink->FlushWithReply(code) == B_OK
             && code == B_OK
             && fLink->Read<port_id>(&sendPort) == B_OK) {
@@ -4921,7 +4921,7 @@ BWindow::_SetName(const char* title)
 #ifdef __HAIKU__
     strlcat(threadName, title, B_OS_NAME_LENGTH);
 #else
-    int32 length = strlen(title);
+    int32_t length = strlen(title);
     length = min_c(length, B_OS_NAME_LENGTH - 3);
     memcpy(threadName + 2, title, length);
     threadName[length + 2] = '\0';
@@ -4941,9 +4941,9 @@ void
 BWindow::_DequeueAll()
 {
     //	Get message count from port
-    int32 count = port_count(fMsgPort);
+    int32_t count = port_count(fMsgPort);
 
-    for (int32 i = 0; i < count; i++) {
+    for (int32_t i = 0; i < count; i++) {
         BMessage* message = MessageFromPort(0);
         if (message != NULL)
             fDirectTarget->Queue()->AddMessage(message);
@@ -4982,8 +4982,8 @@ BWindow::task_looper()
             _AddMessagePriv(msg);
 
         //	Get message count from port
-        int32 msgCount = port_count(fMsgPort);
-        for (int32 i = 0; i < msgCount; ++i) {
+        int32_t msgCount = port_count(fMsgPort);
+        for (int32_t i = 0; i < msgCount; ++i) {
             // Read 'count' messages from port (so we will not block)
             // We use zero as our timeout since we know there is stuff there
             msg = MessageFromPort(0);
@@ -5043,7 +5043,7 @@ BWindow::task_looper()
 
                         // Is this a scripting message?
                         if (fLastMessage->HasSpecifiers()) {
-                            int32 index = 0;
+                            int32_t index = 0;
                             // Make sure the current specifier is kosher
                             if (fLastMessage->GetCurrentSpecifier(&index) == B_OK)
                                 handler = resolve_specifier(handler, fLastMessage);
@@ -5194,8 +5194,8 @@ BWindow::_AdoptResize()
     // saves us some server communication, as the server
     // does the same with our views on its side.
 
-    int32 deltaWidth = (int32)(fFrame.Width() - fTopView->Bounds().Width());
-    int32 deltaHeight = (int32)(fFrame.Height() - fTopView->Bounds().Height());
+    int32_t deltaWidth = (int32_t)(fFrame.Width() - fTopView->Bounds().Width());
+    int32_t deltaHeight = (int32_t)(fFrame.Height() - fTopView->Bounds().Height());
     if (deltaWidth == 0 && deltaHeight == 0)
         return;
 
@@ -5245,7 +5245,7 @@ BWindow::_DetermineTarget(BMessage* message, BHandler* target)
         {
             // if we have a default button, it might want to hear
             // about pressing the <enter> key
-            int32 rawChar;
+            int32_t rawChar;
             if (DefaultButton() != NULL
                 && message->FindInt32("raw_char", &rawChar) == B_OK
                 && rawChar == B_ENTER)
@@ -5267,7 +5267,7 @@ BWindow::_DetermineTarget(BMessage* message, BHandler* target)
         case B_MOUSE_WHEEL_CHANGED:
         case B_MOUSE_IDLE:
             // is there a token of the view that is currently under the mouse?
-            int32 token;
+            int32_t token;
             if (message->FindInt32("_view_token", &token) == B_OK) {
                 BView* view = _FindView(token);
                 if (view != NULL)
@@ -5359,7 +5359,7 @@ BWindow::_UnpackMessage(unpack_cookie& cookie, BMessage** _message,
     // distribute the message to all targets specified in the
     // message directly (but not to the focus view)
 
-    for (int32 token; !cookie.tokens_scanned
+    for (int32_t token; !cookie.tokens_scanned
             && cookie.message->FindInt32("_token", cookie.index, &token)
                 == B_OK;
             cookie.index++) {
@@ -5467,12 +5467,12 @@ BWindow::_SanitizeMessage(BMessage* message, BHandler* target, bool usePreferred
                     // is there a token of the view that is currently under
                     // the mouse?
                     BView* viewUnderMouse = NULL;
-                    int32 token;
+                    int32_t token;
                     if (message->FindInt32("_view_token", &token) == B_OK)
                         viewUnderMouse = _FindView(token);
 
                     // add transit information
-                    uint32 transit
+                    uint32_t transit
                         = _TransitForMouseMoved(view, viewUnderMouse);
                     message->AddInt32("be:transit", transit);
 
@@ -5502,9 +5502,9 @@ BWindow::_SanitizeMessage(BMessage* message, BHandler* target, bool usePreferred
 
         case _MESSAGE_DROPPED_:
         {
-            uint32 originalWhat;
+            uint32_t originalWhat;
             if (message->FindInt32("_original_what",
-                    (int32*)&originalWhat) == B_OK) {
+                    (int32_t*)&originalWhat) == B_OK) {
                 message->what = originalWhat;
                 message->RemoveName("_original_what");
             }
@@ -5535,7 +5535,7 @@ BWindow::_StealMouseMessage(BMessage* message, bool& deleteMessage)
         return false;
     }
 
-    int32 token;
+    int32_t token;
     if (message->FindInt32("_token", 0, &token) == B_OK) {
         // This message has other targets, so we can't remove it;
         // just prevent it from being sent to the preferred handler
@@ -5553,12 +5553,12 @@ BWindow::_StealMouseMessage(BMessage* message, bool& deleteMessage)
             // We need to update the last mouse moved view, as this message
             // won't make it to _SanitizeMessage() anymore.
             BView* viewUnderMouse = NULL;
-            int32 token;
+            int32_t token;
             if (message->FindInt32("_view_token", &token) == B_OK)
                 viewUnderMouse = _FindView(token);
 
             // Don't remove important transit messages!
-            uint32 transit = _TransitForMouseMoved(fLastMouseMovedView,
+            uint32_t transit = _TransitForMouseMoved(fLastMouseMovedView,
                 viewUnderMouse);
             if (transit == B_ENTERED_VIEW || transit == B_EXITED_VIEW)
                 deleteMessage = false;
@@ -5575,10 +5575,10 @@ BWindow::_StealMouseMessage(BMessage* message, bool& deleteMessage)
 }
 
 
-uint32
+uint32_t
 BWindow::_TransitForMouseMoved(BView* view, BView* viewUnderMouse) const
 {
-    uint32 transit;
+    uint32_t transit;
     if (viewUnderMouse == view) {
         // the mouse is over the target view
         if (fLastMouseMovedView != view)
@@ -5599,7 +5599,7 @@ BWindow::_TransitForMouseMoved(BView* view, BView* viewUnderMouse) const
 /*!	Forwards the key to the switcher
 */
 void
-BWindow::_Switcher(int32 rawKey, uint32 modifiers, bool repeat)
+BWindow::_Switcher(int32_t rawKey, uint32_t modifiers, bool repeat)
 {
     // only send the first key press, no repeats
     if (repeat)
@@ -5643,8 +5643,8 @@ BWindow::_HandleKeyDown(BMessage* event)
 
     char key = string[0];
 
-    uint32 modifiers;
-    if (event->FindInt32("modifiers", (int32*)&modifiers) != B_OK)
+    uint32_t modifiers;
+    if (event->FindInt32("modifiers", (int32_t*)&modifiers) != B_OK)
         modifiers = 0;
 
     // handle BMenuBar key
@@ -5661,7 +5661,7 @@ BWindow::_HandleKeyDown(BMessage* event)
         return true;
     }
 
-    int32 rawKey;
+    int32_t rawKey;
     event->FindInt32("key", &rawKey);
 
     // Deskbar's Switcher
@@ -5691,7 +5691,7 @@ BWindow::_HandleKeyDown(BMessage* event)
         // Prepare a message based on the modifier keys pressed and launch the
         // screenshot GUI
         BMessage message(B_ARGV_RECEIVED);
-        int32 argc = 1;
+        int32_t argc = 1;
         message.AddString("argv", "Screenshot");
         if ((modifiers & B_CONTROL_KEY) != 0) {
             argc++;
@@ -5775,9 +5775,9 @@ BWindow::_HandleUnmappedKeyDown(BMessage* event)
     if (!_IsFocusMessage(event))
         return false;
 
-    uint32 modifiers;
-    int32 rawKey;
-    if (event->FindInt32("modifiers", (int32*)&modifiers) != B_OK
+    uint32_t modifiers;
+    int32_t rawKey;
+    if (event->FindInt32("modifiers", (int32_t*)&modifiers) != B_OK
         || event->FindInt32("key", &rawKey))
         return false;
 
@@ -5799,15 +5799,15 @@ BWindow::_KeyboardNavigation()
         return;
 
     const char* bytes;
-    uint32 modifiers;
+    uint32_t modifiers;
     if (message->FindString("bytes", &bytes) != B_OK
         || bytes[0] != B_TAB)
         return;
 
-    message->FindInt32("modifiers", (int32*)&modifiers);
+    message->FindInt32("modifiers", (int32_t*)&modifiers);
 
     BView* nextFocus;
-    int32 jumpGroups = (modifiers & B_OPTION_KEY) != 0
+    int32_t jumpGroups = (modifiers & B_OPTION_KEY) != 0
         ? B_NAVIGABLE_JUMP : B_NAVIGABLE;
     if (modifiers & B_SHIFT_KEY)
         nextFocus = _FindPreviousNavigable(fFocus, jumpGroups);
@@ -5873,21 +5873,21 @@ BWindow::AlertPosition(const BRect& frame)
 
 
 BMessage*
-BWindow::ConvertToMessage(void* raw, int32 code)
+BWindow::ConvertToMessage(void* raw, int32_t code)
 {
     return BLooper::ConvertToMessage(raw, code);
 }
 
 
 BWindow::Shortcut*
-BWindow::_FindShortcut(uint32 key, uint32 modifiers)
+BWindow::_FindShortcut(uint32_t key, uint32_t modifiers)
 {
-    int32 count = fShortcuts.CountItems();
+    int32_t count = fShortcuts.CountItems();
 
     key = Shortcut::PrepareKey(key);
     modifiers = Shortcut::PrepareModifiers(modifiers);
 
-    for (int32 index = 0; index < count; index++) {
+    for (int32_t index = 0; index < count; index++) {
         Shortcut* shortcut = (Shortcut*)fShortcuts.ItemAt(index);
 
         if (shortcut->Matches(key, modifiers))
@@ -5899,7 +5899,7 @@ BWindow::_FindShortcut(uint32 key, uint32 modifiers)
 
 
 BView*
-BWindow::_FindView(int32 token)
+BWindow::_FindView(int32_t token)
 {
     BHandler* handler;
     if (gDefaultTokens.GetToken(token, B_HANDLER_TOKEN,
@@ -5941,7 +5941,7 @@ BWindow::_FindView(BView* view, BPoint point) const
 
 
 BView*
-BWindow::_FindNextNavigable(BView* focus, uint32 flags)
+BWindow::_FindNextNavigable(BView* focus, uint32_t flags)
 {
     if (focus == NULL)
         focus = fTopView;
@@ -5983,7 +5983,7 @@ BWindow::_FindNextNavigable(BView* focus, uint32 flags)
 
 
 BView*
-BWindow::_FindPreviousNavigable(BView* focus, uint32 flags)
+BWindow::_FindPreviousNavigable(BView* focus, uint32_t flags)
 {
     if (focus == NULL)
         focus = fTopView;
@@ -6082,7 +6082,7 @@ void
 BWindow::_SendShowOrHideMessage()
 {
     fLink->StartMessage(AS_SHOW_OR_HIDE_WINDOW);
-    fLink->Attach<int32>(fShowLevel);
+    fLink->Attach<int32_t>(fShowLevel);
     fLink->Flush();
 }
 

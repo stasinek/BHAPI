@@ -65,8 +65,8 @@ enum {
 	B_MULTI_SET_EXTENSION,			/* set the value of an extension */
 	/* multi_mode_list */
 	B_MULTI_LIST_MODES,				/* get a list of possible modes (multi_mode_list * arg) */
-	B_MULTI_GET_MODE,				/* get the current mode (int32 * arg) */
-	B_MULTI_SET_MODE				/* set a new mode (int32 * arg) */
+	B_MULTI_GET_MODE,				/* get the current mode (int32_t * arg) */
+	B_MULTI_SET_MODE				/* set a new mode (int32_t * arg) */
 };
 
 /* sample rate values */
@@ -159,35 +159,35 @@ typedef struct multi_channel_info multi_channel_info;
 struct multi_description {
 
 	size_t			info_size;			/* sizeof(multi_description) */
-	uint32			interface_version;	/* current version of interface that's implemented */
-	uint32			interface_minimum;	/* minimum version required to understand driver */
+	uint32_t			interface_version;	/* current version of interface that's implemented */
+	uint32_t			interface_minimum;	/* minimum version required to understand driver */
 
 	char			friendly_name[32];	/* name displayed to user (C string) */
 	char			vendor_info[32];	/* name used internally by vendor (C string) */
 
-	int32			output_channel_count;
-	int32			input_channel_count;
-	int32			output_bus_channel_count;
-	int32			input_bus_channel_count;
-	int32			aux_bus_channel_count;
+	int32_t			output_channel_count;
+	int32_t			input_channel_count;
+	int32_t			output_bus_channel_count;
+	int32_t			input_bus_channel_count;
+	int32_t			aux_bus_channel_count;
 
-	int32			request_channel_count;		/* how many channel_infos are there */
+	int32_t			request_channel_count;		/* how many channel_infos are there */
 	multi_channel_info *
 					channels;
 
-	uint32			output_rates;
-	uint32			input_rates;
+	uint32_t			output_rates;
+	uint32_t			input_rates;
 	float			min_cvsr_rate;
 	float			max_cvsr_rate;
-	uint32			output_formats;
-	uint32			input_formats;
-	uint32			lock_sources;
-	uint32			timecode_sources;
+	uint32_t			output_formats;
+	uint32_t			input_formats;
+	uint32_t			lock_sources;
+	uint32_t			timecode_sources;
 
-	uint32			interface_flags;
+	uint32_t			interface_flags;
 	bigtime_t		start_latency;		/* how much in advance driver needs SET_START_TIME */
 
-	uint32			_reserved_[11];
+	uint32_t			_reserved_[11];
 
 	char			control_panel[64];	/* MIME type of control panel application */
 };
@@ -263,11 +263,11 @@ typedef enum {
 } channel_kind;
 
 struct multi_channel_info {
-	int32			channel_id;
+	int32_t			channel_id;
 	channel_kind	kind;
-	uint32			designations;
-	uint32			connectors;
-	uint32			_reserved_[4];
+	uint32_t			designations;
+	uint32_t			connectors;
+	uint32_t			_reserved_[4];
 };
 
 
@@ -303,39 +303,39 @@ enum {
 typedef struct multi_get_event_info multi_get_event_info;
 struct multi_get_event_info {
 	size_t		info_size;		/* sizeof(multi_get_event_info) */
-	uint32		supported_mask;	/* what events h/w supports */
-	uint32		current_mask;	/* current driver value */
-	uint32		queue_size;		/* current queue size */
-	uint32		event_count;	/* number of events currently in queue*/
-	uint32		_reserved[3];
+	uint32_t		supported_mask;	/* what events h/w supports */
+	uint32_t		current_mask;	/* current driver value */
+	uint32_t		queue_size;		/* current queue size */
+	uint32_t		event_count;	/* number of events currently in queue*/
+	uint32_t		_reserved[3];
 };
 
 typedef struct multi_set_event_info multi_set_event_info;
 struct multi_set_event_info {
 	size_t		info_size;		/* sizeof(multi_set_event_info) */
-	uint32		in_mask;		/* what events to wait for */
-	int32		semaphore;		/* semaphore app will wait on */
-	uint32		queue_size;		/* minimum number of events to save */
-	uint32		_reserved[4];
+	uint32_t		in_mask;		/* what events to wait for */
+	int32_t		semaphore;		/* semaphore app will wait on */
+	uint32_t		queue_size;		/* minimum number of events to save */
+	uint32_t		_reserved[4];
 };
 
 typedef struct multi_get_event multi_get_event;
 struct multi_get_event {
 	size_t		info_size;		/* sizeof(multi_get_event) */
-	uint32		event;
+	uint32_t		event;
 	bigtime_t	timestamp;		/* real time at which event was received */
-	int32		count;			/* used for configuration events */
+	int32_t		count;			/* used for configuration events */
 	union {
-			int32		channels[100];
-			uint32		clocks;
-			int32		mode;
-			int32		controls[100];
+			int32_t		channels[100];
+			uint32_t		clocks;
+			int32_t		mode;
+			int32_t		controls[100];
 			struct { /* transport event */
 				float		out_rate;		/* what rate it's now playing at */
-				int32		out_hours;		/* location at the time given */
-				int32		out_minutes;
-				int32		out_seconds;
-				int32		out_frames;
+				int32_t		out_hours;		/* location at the time given */
+				int32_t		out_minutes;
+				int32_t		out_seconds;
+				int32_t		out_frames;
 			}transport;
 			char			_reserved_[400];		
 	#if defined(__cplusplus)
@@ -343,7 +343,7 @@ struct multi_get_event {
 	#else
 		} u;
 	#endif
-	uint32	_reserved_1[10];
+	uint32_t	_reserved_1[10];
 };
 
 typedef struct multi_channel_enable multi_channel_enable;
@@ -353,10 +353,10 @@ struct multi_channel_enable {
 	/* channel 0 is lowest bit of first byte */
 	uchar *			enable_bits;
 
-	uint32			lock_source;
-	int32			lock_data;
-	uint32			timecode_source;
-	uint32 *		connectors;			/* which connector(s) is/are active, per channel */
+	uint32_t			lock_source;
+	int32_t			lock_data;
+	uint32_t			timecode_source;
+	uint32_t *		connectors;			/* which connector(s) is/are active, per channel */
 };
 
 #include <stdio.h>
@@ -388,10 +388,10 @@ typedef struct multi_format_info multi_format_info;
 typedef struct _multi_format _multi_format;
 
 struct _multi_format {
-	uint32			rate;
+	uint32_t			rate;
 	float			cvsr;
-	uint32			format;
-	uint32			_reserved_[3];
+	uint32_t			format;
+	uint32_t			_reserved_[3];
 };
 enum {	/* timecode kinds */
 	B_MULTI_NO_TIMECODE,
@@ -405,18 +405,18 @@ struct multi_format_info {
 	size_t			info_size;			/* sizeof(multi_format_info) */
 	bigtime_t		output_latency;
 	bigtime_t		input_latency;
-	int32			timecode_kind;
-	uint32			_reserved_[7];
+	int32_t			timecode_kind;
+	uint32_t			_reserved_[7];
 	_multi_format	input;
 	_multi_format	output;
 };
 struct multi_channel_formats {
 	size_t			info_size;			/* sizeof(multi_channel_formats) */
-	int32			request_channel_count;
-	int32			request_first_channel;
-	int32			returned_channel_count;
-	int32			timecode_kind;
-	int32			_reserved_[4];
+	int32_t			request_channel_count;
+	int32_t			request_first_channel;
+	int32_t			returned_channel_count;
+	int32_t			timecode_kind;
+	int32_t			_reserved_[4];
 	_multi_format *
 					channels;
 	bigtime_t *		latencies;			/* DMA/hardware latencies; client calculates for buffers */
@@ -425,28 +425,28 @@ struct multi_channel_formats {
 
 typedef struct multi_mix_value multi_mix_value;
 struct multi_mix_value {
-	int32			id;
+	int32_t			id;
 	union {
 		float			gain;
-		uint32			mux;	/* bitmask of mux points */
+		uint32_t			mux;	/* bitmask of mux points */
 		bool			enable;
-		uint32			_reserved_[2];
+		uint32_t			_reserved_[2];
 #if defined(__cplusplus)
 	};
 #else
 	} u;
 #endif
-	int32			ramp;
-	uint32			_reserved_2[2];
+	int32_t			ramp;
+	uint32_t			_reserved_2[2];
 };
 
 typedef struct multi_mix_value_info multi_mix_value_info;
 struct multi_mix_value_info {
 	size_t			info_size;		/* sizeof(multi_mix_value_info) */
-	int32			item_count;
+	int32_t			item_count;
 	multi_mix_value *
 					values;
-	int32			at_frame;		/* time at which to start the change */
+	int32_t			at_frame;		/* time at which to start the change */
 };
 
 //	only one of these should be set
@@ -460,9 +460,9 @@ struct multi_mix_value_info {
 
 typedef struct multi_mix_control multi_mix_control;
 struct multi_mix_control {
-	int32			id;				/* unique for device -- not same id as any channel/bus ! */
-	uint32			flags;			/* including kind */
-	int32			master;			/* or 0 if it's not slaved */
+	int32_t			id;				/* unique for device -- not same id as any channel/bus ! */
+	uint32_t			flags;			/* including kind */
+	int32_t			master;			/* or 0 if it's not slaved */
 	union {
 		struct {
 			float			min_gain;		/* dB */
@@ -470,12 +470,12 @@ struct multi_mix_control {
 			float			granularity;	/* dB */
 		}			gain;
 		struct {
-			uint32			_reserved;
+			uint32_t			_reserved;
 		}			mux;
 		struct {
-			uint32			_reserved;
+			uint32_t			_reserved;
 		}			enable;
-		uint32		_reserved[12];
+		uint32_t		_reserved[12];
 #if defined(__cplusplus)
 	};
 #else
@@ -487,33 +487,33 @@ struct multi_mix_control {
 typedef struct multi_mix_channel_info multi_mix_channel_info;
 struct multi_mix_channel_info {
 	size_t			info_size;		/* sizeof(multi_mix_channel_info) */
-	int32			channel_count;
-	int32 *			channels;		/* allocated by caller, lists requested channels */
-	int32			max_count;		/* in: control ids per channel */
-	int32			actual_count;	/* out: actual max # controls for any individual requested channel */
-	int32 **		controls;
+	int32_t			channel_count;
+	int32_t *			channels;		/* allocated by caller, lists requested channels */
+	int32_t			max_count;		/* in: control ids per channel */
+	int32_t			actual_count;	/* out: actual max # controls for any individual requested channel */
+	int32_t **		controls;
 };
 
 typedef struct multi_mix_control_info multi_mix_control_info;
 struct multi_mix_control_info {
 	size_t			info_size;		/* sizeof(multi_mix_control_info) */
-	int32			control_count;	/* in: number of controls */
+	int32_t			control_count;	/* in: number of controls */
 	multi_mix_control *
 					controls;		/* allocated by caller, returns control description for each */
 };
 
 typedef struct multi_mix_connection multi_mix_connection;
 struct multi_mix_connection {
-	int32			from;
-	int32			to;
-	uint32			_reserved_[2];
+	int32_t			from;
+	int32_t			to;
+	uint32_t			_reserved_[2];
 };
 
 typedef struct multi_mix_connection_info multi_mix_connection_info;
 struct multi_mix_connection_info {
 	size_t			info_size;
-	int32			max_count;		/* in: available space */
-	int32			actual_count;	/* out: actual count */
+	int32_t			max_count;		/* in: available space */
+	int32_t			actual_count;	/* out: actual count */
 	multi_mix_connection *
 					connections;	/* allocated by caller, returns connections */
 };
@@ -532,23 +532,23 @@ typedef struct buffer_desc buffer_desc;
 struct multi_buffer_list {
 
 	size_t			info_size;				/* sizeof(multi_buffer_list) */
-	uint32			flags;
+	uint32_t			flags;
 
-	int32			request_playback_buffers;
-	int32			request_playback_channels;
-	uint32			request_playback_buffer_size;		/* frames per buffer */
-	int32			return_playback_buffers;			/* playback_buffers[b][] */
-	int32			return_playback_channels;			/* playback_buffers[][c] */
-	uint32			return_playback_buffer_size;		/* frames */
+	int32_t			request_playback_buffers;
+	int32_t			request_playback_channels;
+	uint32_t			request_playback_buffer_size;		/* frames per buffer */
+	int32_t			return_playback_buffers;			/* playback_buffers[b][] */
+	int32_t			return_playback_channels;			/* playback_buffers[][c] */
+	uint32_t			return_playback_buffer_size;		/* frames */
 	buffer_desc **	playback_buffers;
 	void *			_reserved_1;
 
-	int32			request_record_buffers;
-	int32			request_record_channels;
-	uint32			request_record_buffer_size;			/* frames per buffer */
-	int32			return_record_buffers;
-	int32			return_record_channels;
-	uint32			return_record_buffer_size;			/* frames */
+	int32_t			request_record_buffers;
+	int32_t			request_record_channels;
+	uint32_t			request_record_buffer_size;			/* frames per buffer */
+	int32_t			return_record_buffers;
+	int32_t			return_record_channels;
+	uint32_t			return_record_buffer_size;			/* frames */
 	buffer_desc **	record_buffers;
 	void *			_reserved_2;
 
@@ -557,7 +557,7 @@ struct multi_buffer_list {
 struct buffer_desc {
 	char *			base;		/* pointer to first sample for channel for buffer */
 	size_t			stride;		/* offset to next sample */
-	uint32			_reserved_[2];
+	uint32_t			_reserved_[2];
 };
 
 
@@ -567,28 +567,28 @@ typedef struct multi_buffer_info multi_buffer_info;
 struct multi_buffer_info {
 
 	size_t			info_size;			/* sizeof(multi_buffer_info) */
-	uint32			flags;
+	uint32_t			flags;
 
 	bigtime_t		played_real_time;
 	bigtime_t		played_frames_count;
-	int32			_reserved_0;
-	int32			playback_buffer_cycle;
+	int32_t			_reserved_0;
+	int32_t			playback_buffer_cycle;
 
 	bigtime_t		recorded_real_time;
 	bigtime_t		recorded_frames_count;
-	int32			_reserved_1;
-	int32			record_buffer_cycle;
+	int32_t			_reserved_1;
+	int32_t			record_buffer_cycle;
 
-	int32			meter_channel_count;
+	int32_t			meter_channel_count;
 	char *			meters_peak;	/* in the same format as the data; allocated by caller */
 	char *			meters_average;	/* in the same format as the data; allocated by caller */
 
 	/*	timecode sent and received at buffer swap	*/
-	int32			hours;
-	int32			minutes;
-	int32			seconds;
-	int32			tc_frames;		/* for timecode frames as opposed to sample frames */
-	int32			at_frame_delta;	/* how far into buffer (or before buffer for negative) */
+	int32_t			hours;
+	int32_t			minutes;
+	int32_t			seconds;
+	int32_t			tc_frames;		/* for timecode frames as opposed to sample frames */
+	int32_t			at_frame_delta;	/* how far into buffer (or before buffer for negative) */
 
 };
 
@@ -598,23 +598,23 @@ typedef struct multi_mode_list multi_mode_list;
 
 struct multi_mode_list {
 	size_t			info_size;		/* sizeof(multi_mode_list) */
-	int32			in_request_count;
-	int32			out_actual_count;
-	int32			out_current_mode;
+	int32_t			in_request_count;
+	int32_t			out_actual_count;
+	int32_t			out_current_mode;
 	multi_mode_info *
 					io_modes;
 };
 
 struct multi_mode_info {
-	int32			mode_id;
-	uint32			flags;
+	int32_t			mode_id;
+	uint32_t			flags;
 	char			mode_name[64];
-	int32			input_channel_count;
-	int32			output_channel_count;
+	int32_t			input_channel_count;
+	int32_t			output_channel_count;
 	float			best_frame_rate_in;
 	float			best_frame_rate_out;
-	uint32			sample_formats_in;
-	uint32			sample_formats_out;
+	uint32_t			sample_formats_in;
+	uint32_t			sample_formats_out;
 	char			_reserved[160];
 };
 
@@ -629,16 +629,16 @@ struct multi_mode_info {
 typedef struct multi_extension_list multi_extension_list;
 typedef struct multi_extension_info multi_extension_info;
 struct multi_extension_info {
-	uint32			code;
-	uint32			flags;
+	uint32_t			code;
+	uint32_t			flags;
 	char			name[24];
 };
 
 #define B_MULTI_MAX_EXTENSION_COUNT 31
 struct multi_extension_list	{ /* MULTI_LIST_EXTENSIONS */
 	size_t			info_size;		/* sizeof(multi_extension_list) */
-	uint32			max_count;
-	int32			actual_count;	/* return # of actual extensions */
+	uint32_t			max_count;
+	int32_t			actual_count;	/* return # of actual extensions */
 	multi_extension_info *
 					extensions;		/* allocated by caller */
 };
@@ -646,8 +646,8 @@ struct multi_extension_list	{ /* MULTI_LIST_EXTENSIONS */
 typedef struct multi_extension_cmd multi_extension_cmd;
 struct multi_extension_cmd {	/* MULTI_GET_EXTENSION and MULTI_SET_EXTENSION */
 	size_t			info_size;		/* sizeof(multi_extension_cmd) */
-	uint32			code;
-	uint32			_reserved_1;
+	uint32_t			code;
+	uint32_t			_reserved_1;
 	void *			in_data;
 	size_t			in_size;
 	void *			out_data;
@@ -663,14 +663,14 @@ enum {
 
 typedef struct multi_ex_clock_generation multi_ex_clock_generation;
 struct multi_ex_clock_generation {
-	int32			channel;	/* if specific, or -1 for all */
-	uint32			clock;		/* WORDCLOCK or SUPERCLOCK, typically */
+	int32_t			channel;	/* if specific, or -1 for all */
+	uint32_t			clock;		/* WORDCLOCK or SUPERCLOCK, typically */
 };
 
 typedef struct multi_ex_digital_format multi_ex_digital_format;
 struct multi_ex_digital_format {
-	int32			channel;	/* if specific, or -1 for all */
-	uint32			format; 	/* B_CHANNEL_*_SPDIF or B_CHANNEL_*_EBU */
+	int32_t			channel;	/* if specific, or -1 for all */
+	uint32_t			format; 	/* B_CHANNEL_*_SPDIF or B_CHANNEL_*_EBU */
 };
 
 enum {
@@ -680,8 +680,8 @@ enum {
 
 typedef struct multi_ex_nominal_level multi_ex_nominal_level;
 struct multi_ex_nominal_level {
-	int32			channel;	/* if specific, or -1 for all */
-	int32			level;
+	int32_t			channel;	/* if specific, or -1 for all */
+	int32_t			level;
 };
 
 #endif /* _MULTI_AUDIO_H */

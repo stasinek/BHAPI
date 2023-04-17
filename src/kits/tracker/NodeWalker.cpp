@@ -64,7 +64,7 @@ status_t TWalker::GetNextRef(entry_ref*)
 }
 
 
-int32 TWalker::GetNextDirents(struct dirent*, size_t, int32)
+int32_t TWalker::GetNextDirents(struct dirent*, size_t, int32_t)
 {
 	TRESPASS();
 	return 0;
@@ -78,7 +78,7 @@ status_t TWalker::Rewind()
 }
 
 
-int32 TWalker::CountEntries()
+int32_t TWalker::CountEntries()
 {
 	TRESPASS();
 	return -1;
@@ -378,8 +378,8 @@ status_t TNodeWalker::GetNextRef(entry_ref* ref)
 }
 
 
-static int32 build_dirent(const BEntry* source, struct dirent* ent,
-	size_t size, int32 count)
+static int32_t build_dirent(const BEntry* source, struct dirent* ent,
+	size_t size, int32_t count)
 {
 	entry_ref ref;
 	source->GetRef(&ref);
@@ -413,14 +413,14 @@ static int32 build_dirent(const BEntry* source, struct dirent* ent,
 }
 
 
-int32 TNodeWalker::GetNextDirents(struct dirent* ent, size_t size, int32 count)
+int32_t TNodeWalker::GetNextDirents(struct dirent* ent, size_t size, int32_t count)
 {
 	if (fJustFile != NULL) {
 		if (count == 0)
 			return 0;
 
 		// simulate GetNextDirents by building a single dirent structure
-		int32 result = build_dirent(fJustFile, ent, size, count);
+		int32_t result = build_dirent(fJustFile, ent, size, count);
 		fJustFile = 0;
 		return result;
 	}
@@ -441,7 +441,7 @@ int32 TNodeWalker::GetNextDirents(struct dirent* ent, size_t size, int32 count)
 	}
 
 	// get the next entry
-	int32 nextDirent = fTopDir->GetNextDirents(ent, size, count);
+	int32_t nextDirent = fTopDir->GetNextDirents(ent, size, count);
 	if (nextDirent == 0) {
 		status_t result = PopDirCommon();
 		if (result != B_OK)
@@ -451,7 +451,7 @@ int32 TNodeWalker::GetNextDirents(struct dirent* ent, size_t size, int32 count)
 	}
 
 	// push any directories in the returned entries onto the stack
-	for (int32 i = 0; i < nextDirent; i++) {
+	for (int32_t i = 0; i < nextDirent; i++) {
 		if (fTopDir->Contains(ent->d_name, B_DIRECTORY_NODE)) {
 			entry_ref ref(ent->d_dev, ent->d_ino, ent->d_name);
 			PushDirCommon(&ref);
@@ -489,7 +489,7 @@ status_t TNodeWalker::Rewind()
 		// rewind the directory
 }
 
-int32 TNodeWalker::CountEntries()
+int32_t TNodeWalker::CountEntries()
 {
 	// should not be calling this
 	TRESPASS();
@@ -585,7 +585,7 @@ status_t TVolWalker::GetNextRef(entry_ref* ref)
 }
 
 
-int32 TVolWalker::GetNextDirents(struct dirent* ent, size_t size, int32 count)
+int32_t TVolWalker::GetNextDirents(struct dirent* ent, size_t size, int32_t count)
 {
 	if (fTopDir == NULL)
 		return B_ENTRY_NOT_FOUND;
@@ -662,9 +662,9 @@ status_t TQueryWalker::GetNextRef(entry_ref* ref)
 }
 
 
-int32 TQueryWalker::GetNextDirents(struct dirent* ent, size_t size, int32 count)
+int32_t TQueryWalker::GetNextDirents(struct dirent* ent, size_t size, int32_t count)
 {
-	int32 result;
+	int32_t result;
 
 	for (;;) {
 		result = fQuery.GetNextDirents(ent, size, count);
@@ -699,7 +699,7 @@ status_t TQueryWalker::NextVolume()
 }
 
 
-int32 TQueryWalker::CountEntries()
+int32_t TQueryWalker::CountEntries()
 {
 	// should not be calling this
 	TRESPASS();

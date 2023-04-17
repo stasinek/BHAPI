@@ -24,8 +24,8 @@ public:
 
 	status_t 	InitCheck();	
 	int64 		CountFrames(void);
-	int32 		FrameSize(void);
-	status_t 	ReadFrames(void *in_buffer, int32 frame_count);
+	int32_t 		FrameSize(void);
+	status_t 	ReadFrames(void *in_buffer, int32_t frame_count);
 	status_t 	SeekToFrame(int64 *in_out_frame);
 
 	BMediaTrack * 					Track(void);
@@ -35,10 +35,10 @@ private:
 	void SetToTrack(BMediaTrack *track);
 
 private:
-	int32	fFrameSize;
+	int32_t	fFrameSize;
 	uint8 *	fBuffer;
-	int32 	fBufferOffset;
-	int32	fBufferUsedSize;
+	int32_t 	fBufferOffset;
+	int32_t	fBufferUsedSize;
 	BMediaFile *fMediaFile;
 	BMediaTrack *fMediaTrack;
 	media_raw_audio_format fFormat;

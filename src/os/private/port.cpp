@@ -89,7 +89,7 @@
 namespace {
 
 struct port_message : DoublyLinkedListLinkImpl<port_message> {
-	int32				code;
+	int32_t				code;
 	size_t				size;
 	uid_t				sender;
 	gid_t				sender_group;
@@ -120,19 +120,19 @@ struct Port : public KernelReferenceable {
 	team_id				owner;
 	Port*				name_hash_link;
 	size_t				name_hash;
-	int32				capacity;
+	int32_t				capacity;
 	mutex				lock;
-	int32				state;
-	uint32				read_count;
-	int32				write_count;
+	int32_t				state;
+	uint32_t				read_count;
+	int32_t				write_count;
 	ConditionVariable	read_condition;
 	ConditionVariable	write_condition;
-	int32				total_count;
+	int32_t				total_count;
 		// messages read from port since creation
 	select_info*		select_infos;
 	MessageList			messages;
 
-	Port(team_id owner, int32 queueLength, char* name)
+	Port(team_id owner, int32_t queueLength, char* name)
 		:
 		owner(owner),
 		name_hash(0),
@@ -233,7 +233,7 @@ class PortNotificationService : public DefaultNotificationService {
 public:
 							PortNotificationService();
 
-			void			Notify(uint32 opcode, port_id team);
+			void			Notify(uint32_t opcode, port_id team);
 };
 
 } // namespace
@@ -269,7 +269,7 @@ private:
 	port_id				fID;
 	char*				fName;
 	team_id				fOwner;
-	int32		 		fCapacity;
+	int32_t		 		fCapacity;
 };
 
 
@@ -294,7 +294,7 @@ private:
 
 class Read : public AbstractTraceEntry {
 public:
-	Read(const BReference<Port>& portRef, int32 code, ssize_t result)
+	Read(const BReference<Port>& portRef, int32_t code, ssize_t result)
 		:
 		fID(portRef->id),
 		fReadCount(portRef->read_count),
@@ -305,7 +305,7 @@ public:
 		Initialized();
 	}
 
-	Read(port_id id, int32 readCount, int32 writeCount, int32 code,
+	Read(port_id id, int32_t readCount, int32_t writeCount, int32_t code,
 		ssize_t result)
 		:
 		fID(id),
@@ -325,16 +325,16 @@ public:
 
 private:
 	port_id				fID;
-	int32				fReadCount;
-	int32				fWriteCount;
-	int32				fCode;
+	int32_t				fReadCount;
+	int32_t				fWriteCount;
+	int32_t				fCode;
 	ssize_t				fResult;
 };
 
 
 class Write : public AbstractTraceEntry {
 public:
-	Write(port_id id, int32 readCount, int32 writeCount, int32 code,
+	Write(port_id id, int32_t readCount, int32_t writeCount, int32_t code,
 		size_t bufferSize, ssize_t result)
 		:
 		fID(id),
@@ -355,9 +355,9 @@ public:
 
 private:
 	port_id				fID;
-	int32				fReadCount;
-	int32				fWriteCount;
-	int32				fCode;
+	int32_t				fReadCount;
+	int32_t				fWriteCount;
+	int32_t				fCode;
 	size_t				fBufferSize;
 	ssize_t				fResult;
 };
@@ -365,7 +365,7 @@ private:
 
 class Info : public AbstractTraceEntry {
 public:
-	Info(const BReference<Port>& portRef, int32 code, ssize_t result)
+	Info(const BReference<Port>& portRef, int32_t code, ssize_t result)
 		:
 		fID(portRef->id),
 		fReadCount(portRef->read_count),
@@ -376,7 +376,7 @@ public:
 		Initialized();
 	}
 
-	Info(port_id id, int32 readCount, int32 writeCount, int32 code,
+	Info(port_id id, int32_t readCount, int32_t writeCount, int32_t code,
 		ssize_t result)
 		:
 		fID(id),
@@ -396,9 +396,9 @@ public:
 
 private:
 	port_id				fID;
-	int32				fReadCount;
-	int32				fWriteCount;
-	int32				fCode;
+	int32_t				fReadCount;
+	int32_t				fWriteCount;
+	int32_t				fCode;
 	ssize_t				fResult;
 };
 
@@ -444,14 +444,14 @@ static const size_t kBufferGrowRate = kInitialPortBufferSize;
 #define MAX_QUEUE_LENGTH 4096
 #define PORT_MAX_MESSAGE_SIZE (256 * 1024)
 
-static int32 sMaxPorts = 4096;
-static int32 sUsedPorts;
+static int32_t sMaxPorts = 4096;
+static int32_t sUsedPorts;
 
 static PortHashTable sPorts;
 static PortNameHashTable sPortsByName;
 static ConditionVariable sNoSpaceCondition;
-static int32 sTotalSpaceCommited;
-static int32 sWaitingForSpace;
+static int32_t sTotalSpaceCommited;
+static int32_t sWaitingForSpace;
 static port_id sNextPortID = 1;
 static bool sPortsActive = false;
 static rw_lock sPortsLock = RW_LOCK_INITIALIZER("ports list");
@@ -485,7 +485,7 @@ PortNotificationService::PortNotificationService()
 
 
 void
-PortNotificationService::Notify(uint32 opcode, port_id port)
+PortNotificationService::Notify(uint32_t opcode, port_id port)
 {
 	char eventBuffer[128];
 	KMessage event;
@@ -581,7 +581,7 @@ dump_port_info(int argc, char** argv)
 			name = argv[2];
 	} else if (parse_expression(argv[1]) > 0) {
 		// if the argument looks like a number, treat it as such
-		int32 num = parse_expression(argv[1]);
+		int32_t num = parse_expression(argv[1]);
 		Port* port = sPorts.Lookup(num);
 		if (port == NULL || port->state != Port::kActive) {
 			kprintf("port %" B_PRId32 " (%#" B_PRIx32 ") doesn't exist!\n",
@@ -678,13 +678,13 @@ put_port_message(port_message* message)
 
 /*! Port must be locked. */
 static status_t
-get_port_message(int32 code, size_t bufferSize, uint32 flags, bigtime_t timeout,
+get_port_message(int32_t code, size_t bufferSize, uint32_t flags, bigtime_t timeout,
 	port_message** _message, Port& port)
 {
 	const size_t size = sizeof(port_message) + bufferSize;
 
 	while (true) {
-		int32 previouslyCommited = atomic_add(&sTotalSpaceCommited, size);
+		int32_t previouslyCommited = atomic_add(&sTotalSpaceCommited, size);
 
 		while (previouslyCommited + size > kTotalSpaceLimit) {
 			// TODO: add per team limit
@@ -767,7 +767,7 @@ fill_port_info(Port* port, port_info* info, size_t size)
 
 
 static ssize_t
-copy_port_message(port_message* message, int32* _code, void* buffer,
+copy_port_message(port_message* message, int32_t* _code, void* buffer,
 	size_t bufferSize, bool userCopy)
 {
 	// check output buffer size
@@ -815,7 +815,7 @@ delete_port_logical(Port* port)
 {
 	for (;;) {
 		// Try to logically delete
-		const int32 oldState = atomic_test_and_set(&port->state,
+		const int32_t oldState = atomic_test_and_set(&port->state,
 			Port::kDeleted, Port::kActive);
 			// Linearization point for port deletion
 
@@ -902,14 +902,14 @@ delete_owned_ports(Team* team)
 }
 
 
-int32
+int32_t
 port_max_ports(void)
 {
 	return sMaxPorts;
 }
 
 
-int32
+int32_t
 port_used_ports(void)
 {
 	return sUsedPorts;
@@ -972,7 +972,7 @@ port_init(kernel_args *args)
 
 
 port_id
-create_port(int32 queueLength, const char* name)
+create_port(int32_t queueLength, const char* name)
 {
 	TRACE(("create_port(queueLength = %ld, name = \"%s\")\n", queueLength,
 		name));
@@ -1002,7 +1002,7 @@ create_port(int32 queueLength, const char* name)
 	}
 
 	// check the ports limit
-	const int32 previouslyUsed = atomic_add(&sUsedPorts, 1);
+	const int32_t previouslyUsed = atomic_add(&sUsedPorts, 1);
 	if (previouslyUsed + 1 >= sMaxPorts) {
 		atomic_add(&sUsedPorts, -1);
 		delete port;
@@ -1044,7 +1044,7 @@ create_port(int32 queueLength, const char* name)
 	const port_id id = port->id;
 
 	// Insert port logically by marking it active
-	const int32 oldState = atomic_test_and_set(&port->state,
+	const int32_t oldState = atomic_test_and_set(&port->state,
 		Port::kActive, Port::kUnused);
 		// Linearization point for port creation
 
@@ -1142,7 +1142,7 @@ delete_port(port_id id)
 
 
 status_t
-select_port(int32 id, struct select_info* info, bool kernel)
+select_port(int32_t id, struct select_info* info, bool kernel)
 {
 	if (id < 0)
 		return B_BAD_PORT_ID;
@@ -1188,7 +1188,7 @@ select_port(int32 id, struct select_info* info, bool kernel)
 
 
 status_t
-deselect_port(int32 id, struct select_info* info, bool kernel)
+deselect_port(int32_t id, struct select_info* info, bool kernel)
 {
 	if (id < 0)
 		return B_BAD_PORT_ID;
@@ -1262,7 +1262,7 @@ _get_port_info(port_id id, port_info* info, size_t size)
 
 
 status_t
-_get_next_port_info(team_id teamID, int32* _cookie, struct port_info* info,
+_get_next_port_info(team_id teamID, int32_t* _cookie, struct port_info* info,
 	size_t size)
 {
 	TRACE(("get_next_port_info(team = %ld)\n", teamID));
@@ -1283,8 +1283,8 @@ _get_next_port_info(team_id teamID, int32* _cookie, struct port_info* info,
 	const uint8 lockIndex = teamID % kTeamListLockCount;
 	MutexLocker teamPortsListLocker(sTeamListLock[lockIndex]);
 
-	int32 stopIndex = *_cookie;
-	int32 index = 0;
+	int32_t stopIndex = *_cookie;
+	int32_t index = 0;
 
 	Port* port = (Port*)list_get_first_item(&team->port_list);
 	while (port != NULL) {
@@ -1321,7 +1321,7 @@ port_buffer_size(port_id id)
 
 
 ssize_t
-port_buffer_size_etc(port_id id, uint32 flags, bigtime_t timeout)
+port_buffer_size_etc(port_id id, uint32_t flags, bigtime_t timeout)
 {
 	port_message_info info;
 	status_t error = get_port_message_info_etc(id, &info, flags, timeout);
@@ -1331,7 +1331,7 @@ port_buffer_size_etc(port_id id, uint32 flags, bigtime_t timeout)
 
 status_t
 _get_port_message_info_etc(port_id id, port_message_info* info,
-	size_t infoSize, uint32 flags, bigtime_t timeout)
+	size_t infoSize, uint32_t flags, bigtime_t timeout)
 {
 	if (info == NULL || infoSize != sizeof(port_message_info))
 		return B_BAD_VALUE;
@@ -1428,15 +1428,15 @@ port_count(port_id id)
 
 
 ssize_t
-read_port(port_id port, int32* msgCode, void* buffer, size_t bufferSize)
+read_port(port_id port, int32_t* msgCode, void* buffer, size_t bufferSize)
 {
 	return read_port_etc(port, msgCode, buffer, bufferSize, 0, 0);
 }
 
 
 ssize_t
-read_port_etc(port_id id, int32* _code, void* buffer, size_t bufferSize,
-	uint32 flags, bigtime_t timeout)
+read_port_etc(port_id id, int32_t* _code, void* buffer, size_t bufferSize,
+	uint32_t flags, bigtime_t timeout)
 {
 	if (!sPortsActive || id < 0)
 		return B_BAD_PORT_ID;
@@ -1536,7 +1536,7 @@ read_port_etc(port_id id, int32* _code, void* buffer, size_t bufferSize,
 
 
 status_t
-write_port(port_id id, int32 msgCode, const void* buffer, size_t bufferSize)
+write_port(port_id id, int32_t msgCode, const void* buffer, size_t bufferSize)
 {
 	iovec vec = { (void*)buffer, bufferSize };
 
@@ -1545,8 +1545,8 @@ write_port(port_id id, int32 msgCode, const void* buffer, size_t bufferSize)
 
 
 status_t
-write_port_etc(port_id id, int32 msgCode, const void* buffer,
-	size_t bufferSize, uint32 flags, bigtime_t timeout)
+write_port_etc(port_id id, int32_t msgCode, const void* buffer,
+	size_t bufferSize, uint32_t flags, bigtime_t timeout)
 {
 	iovec vec = { (void*)buffer, bufferSize };
 
@@ -1555,8 +1555,8 @@ write_port_etc(port_id id, int32 msgCode, const void* buffer,
 
 
 status_t
-writev_port_etc(port_id id, int32 msgCode, const iovec* msgVecs,
-	size_t vecCount, size_t bufferSize, uint32 flags, bigtime_t timeout)
+writev_port_etc(port_id id, int32_t msgCode, const iovec* msgVecs,
+	size_t vecCount, size_t bufferSize, uint32_t flags, bigtime_t timeout)
 {
 	if (!sPortsActive || id < 0)
 		return B_BAD_PORT_ID;
@@ -1644,7 +1644,7 @@ writev_port_etc(port_id id, int32 msgCode, const iovec* msgVecs,
 
 	if (bufferSize > 0) {
 		size_t offset = 0;
-		for (uint32 i = 0; i < vecCount; i++) {
+		for (uint32_t i = 0; i < vecCount; i++) {
 			size_t bytes = msgVecs[i].iov_len;
 			if (bytes > bufferSize)
 				bytes = bufferSize;
@@ -1751,7 +1751,7 @@ set_port_owner(port_id id, team_id newTeamID)
 
 
 port_id
-_user_create_port(int32 queueLength, const char *userName)
+_user_create_port(int32_t queueLength, const char *userName)
 {
 	char name[B_OS_NAME_LENGTH];
 
@@ -1818,23 +1818,23 @@ _user_get_port_info(port_id id, struct port_info *userInfo)
 
 
 status_t
-_user_get_next_port_info(team_id team, int32 *userCookie,
+_user_get_next_port_info(team_id team, int32_t *userCookie,
 	struct port_info *userInfo)
 {
 	struct port_info info;
 	status_t status;
-	int32 cookie;
+	int32_t cookie;
 
 	if (userCookie == NULL || userInfo == NULL)
 		return B_BAD_VALUE;
 	if (!IS_USER_ADDRESS(userCookie) || !IS_USER_ADDRESS(userInfo)
-		|| user_memcpy(&cookie, userCookie, sizeof(int32)) < B_OK)
+		|| user_memcpy(&cookie, userCookie, sizeof(int32_t)) < B_OK)
 		return B_BAD_ADDRESS;
 
 	status = get_next_port_info(team, &cookie, &info);
 
 	// copy back to user space
-	if (user_memcpy(userCookie, &cookie, sizeof(int32)) < B_OK
+	if (user_memcpy(userCookie, &cookie, sizeof(int32_t)) < B_OK
 		|| (status == B_OK && user_memcpy(userInfo, &info,
 				sizeof(struct port_info)) < B_OK))
 		return B_BAD_ADDRESS;
@@ -1844,7 +1844,7 @@ _user_get_next_port_info(team_id team, int32 *userCookie,
 
 
 ssize_t
-_user_port_buffer_size_etc(port_id port, uint32 flags, bigtime_t timeout)
+_user_port_buffer_size_etc(port_id port, uint32_t flags, bigtime_t timeout)
 {
 	syscall_restart_handle_timeout_pre(flags, timeout);
 
@@ -1870,10 +1870,10 @@ _user_set_port_owner(port_id port, team_id team)
 
 
 ssize_t
-_user_read_port_etc(port_id port, int32 *userCode, void *userBuffer,
-	size_t bufferSize, uint32 flags, bigtime_t timeout)
+_user_read_port_etc(port_id port, int32_t *userCode, void *userBuffer,
+	size_t bufferSize, uint32_t flags, bigtime_t timeout)
 {
-	int32 messageCode;
+	int32_t messageCode;
 	ssize_t	bytesRead;
 
 	syscall_restart_handle_timeout_pre(flags, timeout);
@@ -1888,7 +1888,7 @@ _user_read_port_etc(port_id port, int32 *userCode, void *userBuffer,
 		flags | PORT_FLAG_USE_USER_MEMCPY | B_CAN_INTERRUPT, timeout);
 
 	if (bytesRead >= 0 && userCode != NULL
-		&& user_memcpy(userCode, &messageCode, sizeof(int32)) < B_OK)
+		&& user_memcpy(userCode, &messageCode, sizeof(int32_t)) < B_OK)
 		return B_BAD_ADDRESS;
 
 	return syscall_restart_handle_timeout_post(bytesRead, timeout);
@@ -1896,8 +1896,8 @@ _user_read_port_etc(port_id port, int32 *userCode, void *userBuffer,
 
 
 status_t
-_user_write_port_etc(port_id port, int32 messageCode, const void *userBuffer,
-	size_t bufferSize, uint32 flags, bigtime_t timeout)
+_user_write_port_etc(port_id port, int32_t messageCode, const void *userBuffer,
+	size_t bufferSize, uint32_t flags, bigtime_t timeout)
 {
 	iovec vec = { (void *)userBuffer, bufferSize };
 
@@ -1916,8 +1916,8 @@ _user_write_port_etc(port_id port, int32 messageCode, const void *userBuffer,
 
 
 status_t
-_user_writev_port_etc(port_id port, int32 messageCode, const iovec *userVecs,
-	size_t vecCount, size_t bufferSize, uint32 flags, bigtime_t timeout)
+_user_writev_port_etc(port_id port, int32_t messageCode, const iovec *userVecs,
+	size_t vecCount, size_t bufferSize, uint32_t flags, bigtime_t timeout)
 {
 	syscall_restart_handle_timeout_pre(flags, timeout);
 
@@ -1949,7 +1949,7 @@ _user_writev_port_etc(port_id port, int32 messageCode, const iovec *userVecs,
 
 status_t
 _user_get_port_message_info_etc(port_id port, port_message_info *userInfo,
-	size_t infoSize, uint32 flags, bigtime_t timeout)
+	size_t infoSize, uint32_t flags, bigtime_t timeout)
 {
 	if (userInfo == NULL || infoSize != sizeof(port_message_info))
 		return B_BAD_VALUE;

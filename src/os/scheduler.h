@@ -50,15 +50,15 @@ enum scheduler_mode {
 namespace bhapi {
 #endif
 #if defined(__cplusplus)
-BHAPI_IMPEXP int32 suggest_thread_priority(uint32 task_flags = B_DEFAULT_MEDIA_PRIORITY, int32 period = 0, bigtime_t jitter = 0, bigtime_t length = 0);
+BHAPI_IMPEXP int32_t suggest_thread_priority(uint32_t task_flags = B_DEFAULT_MEDIA_PRIORITY, int32_t period = 0, bigtime_t jitter = 0, bigtime_t length = 0);
 BHAPI_IMPEXP bigtime_t estimate_max_scheduling_latency(bhapi::thread_id th = -1); /* default is current thread */
-BHAPI_IMPEXP status_t set_scheduler_mode(int32 mode);
-BHAPI_IMPEXP int32 get_scheduler_mode(void);
+BHAPI_IMPEXP status_t set_scheduler_mode(int32_t mode);
+BHAPI_IMPEXP int32_t get_scheduler_mode(void);
 #else
-int32 suggest_thread_priority(uint32 what, int32 period, bigtime_t jitter, bigtime_t length);
+int32_t suggest_thread_priority(uint32_t what, int32_t period, bigtime_t jitter, bigtime_t length);
 bigtime_t estimate_max_scheduling_latency(thread_id th); /* default is current thread */
-status_t set_scheduler_mode(int32 mode);
-int32 get_scheduler_mode(void);
+status_t set_scheduler_mode(int32_t mode);
+int32_t get_scheduler_mode(void);
 #endif
 #if defined(__cplusplus)
 }

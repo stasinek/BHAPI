@@ -109,7 +109,7 @@ BStreamIO::operator<<(uint16 value)
 
 
 BStreamIO&
-BStreamIO::operator<<(int32 value)
+BStreamIO::operator<<(int32_t value)
 {
     BString str;
     str << value;
@@ -119,7 +119,7 @@ BStreamIO::operator<<(int32 value)
 
 
 BStreamIO&
-BStreamIO::operator<<(uint32 value)
+BStreamIO::operator<<(uint32_t value)
 {
     BString str;
     str << value;

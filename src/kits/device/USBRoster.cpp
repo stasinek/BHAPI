@@ -216,7 +216,7 @@ void RosterLooper::Stop()
 
 void RosterLooper::MessageReceived(BMessage *message)
 {
-	int32 opcode;
+	int32_t opcode;
 	if (message->FindInt32("opcode", &opcode) < B_OK)
 		return;
 

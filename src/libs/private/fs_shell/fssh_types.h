@@ -9,7 +9,7 @@
 #include <inttypes.h>
 
 
-typedef volatile int32_t	vint32_t;
+typedef volatile int32_t_t	vint32_t_t;
 typedef volatile int64_t	vint64_t;
 
 #ifdef HAIKU_HOST_PLATFORM_64_BIT
@@ -19,30 +19,30 @@ typedef uint64_t	fssh_generic_addr_t;
 typedef uint64_t	fssh_size_t;
 typedef int64_t		fssh_ssize_t;
 #else
-typedef uint32_t	fssh_addr_t;
-typedef uint32_t	fssh_phys_addr_t;
-typedef uint32_t	fssh_generic_addr_t;
-typedef uint32_t	fssh_size_t;
-typedef int32_t		fssh_ssize_t;
+typedef uint32_t_t	fssh_addr_t;
+typedef uint32_t_t	fssh_phys_addr_t;
+typedef uint32_t_t	fssh_generic_addr_t;
+typedef uint32_t_t	fssh_size_t;
+typedef int32_t_t		fssh_ssize_t;
 #endif
 typedef fssh_phys_addr_t	fssh_phys_size_t;
 typedef fssh_generic_addr_t	fssh_generic_size_t;
 
-typedef int32_t		fssh_dev_t;
+typedef int32_t_t		fssh_dev_t;
 typedef int64_t		fssh_ino_t;
 
 typedef int64_t		fssh_off_t;
 
 typedef int64_t		fssh_bigtime_t;
 
-typedef int32_t		fssh_status_t;
-typedef uint32_t	fssh_type_code;
+typedef int32_t_t		fssh_status_t;
+typedef uint32_t_t	fssh_type_code;
 
-typedef uint32_t	fssh_mode_t;
-typedef uint32_t	fssh_nlink_t;
-typedef uint32_t	fssh_uid_t;
-typedef uint32_t	fssh_gid_t;
-typedef int32_t		fssh_pid_t;
+typedef uint32_t_t	fssh_mode_t;
+typedef uint32_t_t	fssh_nlink_t;
+typedef uint32_t_t	fssh_uid_t;
+typedef uint32_t_t	fssh_gid_t;
+typedef int32_t_t		fssh_pid_t;
 
 #ifndef NULL
 #define NULL (0)

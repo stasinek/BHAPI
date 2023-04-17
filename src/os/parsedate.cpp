@@ -171,7 +171,7 @@ struct known_identifier {
 	uint8		type;
 	uint8		flags;
 	uint8		unit;
-	int32		value;
+	int32_t		value;
 };
 
 static const known_identifier kIdentifiers[] = {
@@ -448,9 +448,9 @@ class DateMask {
 		bool IsComplete();
 
 	private:
-		inline uint32 Flag(uint8 type) const { return 1UL << type; }
+		inline uint32_t Flag(uint8 type) const { return 1UL << type; }
 
-		uint32	fMask;
+		uint32_t	fMask;
 };
 
 
@@ -540,7 +540,7 @@ bool DateMask::IsComplete()
 
 static status_t preparseDate(const char* dateString, parsed_element* elements)
 {
-	int32 index = 0, modify = MODIFY_NONE;
+	int32_t index = 0, modify = MODIFY_NONE;
 	char c;
 
 	if (dateString == NULL)
@@ -609,7 +609,7 @@ static status_t preparseDate(const char* dateString, parsed_element* elements)
 			const char* string = dateString;
 			while (isalpha(dateString[1]))
 				dateString++;
-			int32 length = dateString + 1 - string;
+			int32_t length = dateString + 1 - string;
 
 			// compare with known strings
 			// ToDo: should understand other languages as well...
@@ -753,7 +753,7 @@ computeDate(const char* format, bool* optional, parsed_element* elements,
 	TRACE(("matches: %s\n", format));
 
 	parsed_element* element = elements;
-	uint32 position = 0;
+	uint32_t position = 0;
 	struct tm tm;
 
 	if (now == -1)
@@ -922,7 +922,7 @@ parsedate_etc(const char* dateString, time_t now, int* _flags)
 
 #if TRACE_PARSEDATE
 	printf("parsedate(\"%s\", now %ld)\n", dateString, now);
-	for (int32 index = 0; elements[index].type != TYPE_END; index++) {
+	for (int32_t index = 0; elements[index].type != TYPE_END; index++) {
 		parsed_element e = elements[index];
 
 		printf("  %ld: type = %u, base_type = %u, unit = %u, flags = %u, "
@@ -935,11 +935,11 @@ parsedate_etc(const char* dateString, time_t now, int* _flags)
 
 	bool optional[MAX_ELEMENTS];
 
-	for (int32 index = 0; sFormatsTable[index]; index++) {
+	for (int32_t index = 0; sFormatsTable[index]; index++) {
 		// test if this format matches our date string
 
 		const char* format = sFormatsTable[index];
-		uint32 position = 0;
+		uint32_t position = 0;
 		DateMask dateMask;
 
 		parsed_element* element = elements;
@@ -1121,7 +1121,7 @@ parsedate_etc(const char* dateString, time_t now, int* _flags)
 		// check if the next format has the same beginning as the skipped one,
 		// and if so, skip that one, too.
 
-		int32 length = format + 1 - sFormatsTable[index];
+		int32_t length = format + 1 - sFormatsTable[index];
 
 		while (sFormatsTable[index + 1]
 			&& !strncmp(sFormatsTable[index], sFormatsTable[index + 1], length))

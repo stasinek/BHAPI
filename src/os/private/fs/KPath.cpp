@@ -202,7 +202,7 @@ KPath::Leaf() const
 	// only "/" has trailing slashes -- then we have to return the complete
 	// buffer, as we have to do in case there are no slashes at all
 	if (fPathLength != 1 || fBuffer[0] != '/') {
-		for (int32 i = fPathLength - 1; i >= 0; i--) {
+		for (int32_t i = fPathLength - 1; i >= 0; i--) {
 			if (fBuffer[i] == '/')
 				return fBuffer + i + 1;
 		}
@@ -218,7 +218,7 @@ KPath::ReplaceLeaf(const char* newLeaf)
 	if (!leaf)
 		return B_NO_INIT;
 
-	int32 leafIndex = leaf - fBuffer;
+	int32_t leafIndex = leaf - fBuffer;
 	// chop off the current leaf (don't replace "/", though)
 	if (leafIndex != 0 || fBuffer[leafIndex - 1]) {
 		fBuffer[leafIndex] = '\0';
@@ -242,7 +242,7 @@ KPath::RemoveLeaf()
 		return false;
 
 	// chop off the leaf
-	int32 leafIndex = leaf - fBuffer;
+	int32_t leafIndex = leaf - fBuffer;
 	fBuffer[leafIndex] = '\0';
 	fPathLength = leafIndex;
 	_ChopTrailingSlashes();

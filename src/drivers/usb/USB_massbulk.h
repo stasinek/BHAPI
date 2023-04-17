@@ -26,9 +26,9 @@
 
 
 typedef struct {
-	uint32		signature;
-	uint32		tag;
-	uint32		data_transfer_length;
+	uint32_t		signature;
+	uint32_t		tag;
+	uint32_t		data_transfer_length;
 	uint8		flags;
 	uint8		lun;
 	uint8		command_block_length;
@@ -37,9 +37,9 @@ typedef struct {
 
 
 typedef struct {
-	uint32		signature;
-	uint32		tag;
-	uint32		data_residue;
+	uint32_t		signature;
+	uint32_t		tag;
+	uint32_t		data_residue;
 	uint8		status;
 } _PACKED usb_massbulk_command_status_wrapper;
 

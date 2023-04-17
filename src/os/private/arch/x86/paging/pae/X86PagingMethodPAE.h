@@ -42,7 +42,7 @@ public:
 									page_num_t (*get_free_page)(kernel_args*));
 
 	virtual	bool				IsKernelPageAccessible(addr_t virtualAddress,
-									uint32 protection);
+									uint32_t protection);
 
 			void*				Allocate32BitPage(
 									phys_addr_t& _physicalAddress,
@@ -68,11 +68,11 @@ public:
 	static	void				PutPageTableInPageDir(
 									pae_page_directory_entry* entry,
 									phys_addr_t physicalTable,
-									uint32 attributes);
+									uint32_t attributes);
 	static	void				PutPageTableEntryInTable(
 									pae_page_table_entry* entry,
 									phys_addr_t physicalAddress,
-									uint32 attributes, uint32 memoryType,
+									uint32_t attributes, uint32_t memoryType,
 									bool globalPage);
 	static	pae_page_table_entry SetPageTableEntry(pae_page_table_entry* entry,
 									pae_page_table_entry newEntry);
@@ -92,7 +92,7 @@ public:
 									addr_t address);
 
 	static	uint64				MemoryTypeToPageTableEntryFlags(
-									uint32 memoryType);
+									uint32_t memoryType);
 
 private:
 			struct ToPAESwitcher;
@@ -100,7 +100,7 @@ private:
 			friend struct PhysicalPageSlotPool;
 
 private:
-	inline	int32				_GetInitialPoolCount();
+	inline	int32_t				_GetInitialPoolCount();
 
 			bool				_EarlyQuery(addr_t virtualAddress,
 									phys_addr_t* _physicalAddress);
@@ -196,7 +196,7 @@ X86PagingMethodPAE::ClearPageTableEntryFlags(pae_page_table_entry* entry,
 
 
 /*static*/ inline uint64
-X86PagingMethodPAE::MemoryTypeToPageTableEntryFlags(uint32 memoryType)
+X86PagingMethodPAE::MemoryTypeToPageTableEntryFlags(uint32_t memoryType)
 {
 	// ATM we only handle the uncacheable and write-through type explicitly. For
 	// all other types we rely on the MTRRs to be set up correctly. Since we set

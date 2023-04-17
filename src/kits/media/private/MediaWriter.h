@@ -27,20 +27,20 @@ public:
 
 			status_t			CreateEncoder(Encoder** _encoder,
 									const media_codec_info* codecInfo,
-									media_format* format, uint32 flags = 0);
+									media_format* format, uint32_t flags = 0);
 
-			status_t			SetCopyright(int32 streamIndex,
+			status_t			SetCopyright(int32_t streamIndex,
 									const char* copyright);
 			status_t			SetCopyright(const char* copyright);
 			status_t			CommitHeader();
 			status_t			Flush();
 			status_t			Close();
 
-			status_t			AddTrackInfo(int32 streamIndex, uint32 code,
+			status_t			AddTrackInfo(int32_t streamIndex, uint32_t code,
 									const void* data, size_t size,
-									uint32 flags = 0);
+									uint32_t flags = 0);
 
-			status_t			WriteChunk(int32 streamIndex,
+			status_t			WriteChunk(int32_t streamIndex,
 									const void* chunkBuffer, size_t chunkSize,
 									media_encode_info* encodeInfo);
 

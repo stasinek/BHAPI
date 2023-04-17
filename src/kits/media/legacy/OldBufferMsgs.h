@@ -32,9 +32,9 @@ to which the client wants access.
 Upon success, the server replies with 'stream_id' (used for
 subsequent operations).
 
-GET_STREAM_ID int32("resource")
-=> GET_STREAM_ID int32("stream_id")
-=> ERROR_RETURN int32("error")
+GET_STREAM_ID int32_t("resource")
+=> GET_STREAM_ID int32_t("stream_id")
+=> ERROR_RETURN int32_t("error")
 
 ====
 Acquire access to a stream for subsequent operations.
@@ -47,68 +47,68 @@ Upon success, the server replies with 'subscriber_id' (used for
 subsequent operations).
 
 SUBSCRIBE String("name")
-		  int32("stream_id")
-		  int32("sem") 
+		  int32_t("stream_id")
+		  int32_t("sem") 
 		  Bool("will_wait")
-=> SUBSCRIBE int32("subscriber_id")
-=> ERROR_RETURN int32("error")
+=> SUBSCRIBE int32_t("subscriber_id")
+=> ERROR_RETURN int32_t("error")
 
 ====
 Relinquish access to the stream.
 
-UNSUBSCRIBE int32("subscriber_id")
+UNSUBSCRIBE int32_t("subscriber_id")
 => UNSUBSCRIBE
-=> ERROR_RETURN int32("error")
+=> ERROR_RETURN int32_t("error")
 
 ====
 Join the stream at the specified position and start receiving buffers
 of data.
-ENTER_STREAM int32("subscriber_id")
-			 int32("neighbor")
+ENTER_STREAM int32_t("subscriber_id")
+			 int32_t("neighbor")
 			 Bool("before")
 => ENTER_STREAM
-=> ERROR_RETURN int32("error")
+=> ERROR_RETURN int32_t("error")
 
 ====
 Issue a request to stop receiving buffers.  More buffers may continue
 to arrive, but you must keep acquiring_ and releasing_ them until you
 get one for which is_last_buffer() is true.  Then you can stop.
 
-EXIT_STREAM int32("subscriber_id")
+EXIT_STREAM int32_t("subscriber_id")
 => EXIT_STREAM
-=> ERROR_RETURN int32("error")
+=> ERROR_RETURN int32_t("error")
 
 ====
 Get information about a particular buffer stream.
 
-GET_STREAM_PARAMS int32("stream_id")
-=> GET_STREAM_PARAMS int32("buffer_size")
-					 int32("buffer_count")
+GET_STREAM_PARAMS int32_t("stream_id")
+=> GET_STREAM_PARAMS int32_t("buffer_size")
+					 int32_t("buffer_count")
 					 Bool("is_running")
-					 int32("subscriber_count")
-=> ERROR_RETURN int32("error")
+					 int32_t("subscriber_count")
+=> ERROR_RETURN int32_t("error")
 ====
 Set information about a particular buffer stream.
 
-SET_STREAM_PARAMS int32("stream_id")
-				  int32("buffer_size")	<<optional>>
-				  int32("buffer_count")	<<optional>>
+SET_STREAM_PARAMS int32_t("stream_id")
+				  int32_t("buffer_size")	<<optional>>
+				  int32_t("buffer_count")	<<optional>>
 				  Bool("is_running")	<<optional>>
-=> SET_STREAM_PARAMS int32("buffer_size")
-					 int32("buffer_count")
+=> SET_STREAM_PARAMS int32_t("buffer_size")
+					 int32_t("buffer_count")
 					 Bool("is_running")
-					 int32("subscriber_count")
-=> ERROR_RETURN int32("error")
+					 int32_t("subscriber_count")
+=> ERROR_RETURN int32_t("error")
 
 ====
 Return the subscriber id of the index'th subscriber sharing the
 stream with the given subscriber.
 
-SUBSCRIBER_INFO int32("subscriber_id")
+SUBSCRIBER_INFO int32_t("subscriber_id")
 => SUBSCRIBER_INFO String("subscriber_name")
-				   int32("stream_id")		// granted access to
-				   int32("position")		// position (if active) or -1
-=> ERROR_RETURN int32("error")
+				   int32_t("stream_id")		// granted access to
+				   int32_t("position")		// position (if active) or -1
+=> ERROR_RETURN int32_t("error")
 
 <end of long comment>
 ****************************************************************/

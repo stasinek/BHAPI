@@ -117,7 +117,7 @@ typedef struct scsi_ccb {
 	uchar		path_id;			// Path ID for the request
 	uchar		target_id;			// Target device ID
 	uchar		target_lun;			// Target LUN number
-	uint32		flags;				// Flags for operation of the subsystem
+	uint32_t		flags;				// Flags for operation of the subsystem
 
 	// released once after asynchronous execution of request;
 	// initialised by alloc_ccb, can be replaced for action but
@@ -132,8 +132,8 @@ typedef struct scsi_ccb {
 	uchar		*data;				// pointer to data
 	const physical_entry *sg_list;	// scatter/gather list
 	uint16		sg_count;			// number of S/G entries
-	uint32		data_length;		// length of data
-	int32		data_resid;			// data transfer residual length: 2's comp
+	uint32_t		data_length;		// length of data
+	int32_t		data_resid;			// data transfer residual length: 2's comp
 	void		*io_operation;
 
 	uchar		sense[SCSI_MAX_SENSE_SIZE]; // autosense data
@@ -154,7 +154,7 @@ typedef struct scsi_ccb {
 	uchar		orig_cdb_length;
 	const physical_entry *orig_sg_list;
 	uint16		orig_sg_count;
-	uint32		orig_data_length;
+	uint32_t		orig_data_length;
 
 	// private SIM data
 	uchar		sim_state;			// set to zero when request is submitted first time
@@ -253,10 +253,10 @@ typedef struct {
 	uchar		version_num;			/* Version number for the SIM/HBA */
 	uchar		hba_inquiry;			/* Mimic of INQ byte 7 for the HBA */
 	uchar		hba_misc;				/* Misc HBA feature flags */
-	uint32		sim_priv;				/* Size of SIM private data area */
+	uint32_t		sim_priv;				/* Size of SIM private data area */
 	uchar		vuhba_flags[SCSI_VUHBA];/* Vendor unique capabilities */
 	uchar		initiator_id;			/* ID of the HBA on the SCSI bus */
-	uint32		hba_queue_size;			// size of adapters command queue
+	uint32_t		hba_queue_size;			// size of adapters command queue
 	char		sim_vid[SCSI_SIM_ID];	/* Vendor ID of the SIM */
 	char		hba_vid[SCSI_HBA_ID];	/* Vendor ID of the HBA */
 
@@ -320,7 +320,7 @@ typedef struct scsi_device_interface {
 	// terminate request
 	uchar (*term_io)(scsi_ccb *ccb_to_terminate);
 
-	status_t (*ioctl)(scsi_device device, uint32 op, void *buffer, size_t length);
+	status_t (*ioctl)(scsi_device device, uint32_t op, void *buffer, size_t length);
 } scsi_device_interface;
 
 #define SCSI_DEVICE_MODULE_NAME "bus_managers/scsi/device/driver_v1"
@@ -454,11 +454,11 @@ typedef struct scsi_sim_interface {
 		bool				*no_autosense,	// set to true if there is no autosense;
 											// the SCSI bus manager will request sense on
 											// SCSI_REQ_CMP_ERR/SCSI_STATUS_CHECK_CONDITION
-		uint32 				*max_blocks );	// maximum number of blocks per transfer if > 0;
+		uint32_t 				*max_blocks );	// maximum number of blocks per transfer if > 0;
 											// used for buggy devices that cannot handle
 											// large transfers (read: ATAPI ZIP drives)
 
-	status_t (*ioctl)(scsi_sim_cookie, uint8 targetID, uint32 op, void *buffer, size_t length);
+	status_t (*ioctl)(scsi_sim_cookie, uint8 targetID, uint32_t op, void *buffer, size_t length);
 } scsi_sim_interface;
 
 

@@ -25,7 +25,7 @@ TypeLookupConstraints::TypeLookupConstraints(type_kind typeKind)
 
 
 TypeLookupConstraints::TypeLookupConstraints(type_kind typeKind,
-	int32 subTypeKind)
+	int32_t subTypeKind)
 	:
 	fTypeKind(typeKind),
 	fSubtypeKind(subTypeKind),
@@ -61,7 +61,7 @@ TypeLookupConstraints::TypeKind() const
 }
 
 
-int32 TypeLookupConstraints::SubtypeKind() const
+int32_t TypeLookupConstraints::SubtypeKind() const
 {
 	return fSubtypeKind;
 }
@@ -81,7 +81,7 @@ void TypeLookupConstraints::SetTypeKind(type_kind typeKind)
 }
 
 
-void TypeLookupConstraints::SetSubtypeKind(int32 subtypeKind)
+void TypeLookupConstraints::SetSubtypeKind(int32_t subtypeKind)
 {
 	fSubtypeKind = subtypeKind;
 	fSubtypeKindGiven = true;

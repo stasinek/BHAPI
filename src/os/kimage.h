@@ -43,7 +43,7 @@ extern "C" {
 
 extern image_id register_image(Team *team, image_info *info, size_t size);
 extern status_t unregister_image(Team *team, image_id id);
-extern int32 count_images(Team *team);
+extern int32_t count_images(Team *team);
 extern status_t remove_images(Team *team);
 
 typedef bool (*image_iterator_callback)(struct image* image, void* cookie);
@@ -60,7 +60,7 @@ extern status_t _user_unregister_image(image_id id);
 extern image_id _user_register_image(image_info *userInfo, size_t size);
 extern void		_user_image_relocated(image_id id);
 extern void		_user_loading_app_failed(status_t error);
-extern status_t _user_get_next_image_info(team_id team, int32 *_cookie,
+extern status_t _user_get_next_image_info(team_id team, int32_t *_cookie,
 					image_info *userInfo, size_t size);
 extern status_t _user_get_image_info(image_id id, image_info *userInfo, size_t size);
 

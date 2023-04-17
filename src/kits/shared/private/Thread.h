@@ -89,7 +89,7 @@ class SimpleThread {
 	// this should only be used as a base class,
 	// subclass needs to add proper locking mechanism
 public:
-	SimpleThread(int32 priority = B_LOW_PRIORITY, const char* name = 0);
+	SimpleThread(int32_t priority = B_LOW_PRIORITY, const char* name = 0);
 	virtual ~SimpleThread();
 
 	void Go();
@@ -100,7 +100,7 @@ private:
 
 protected:
 	thread_id fScanThread;
-	int32 fPriority;
+	int32_t fPriority;
 	const char* fName;
 };
 
@@ -108,10 +108,10 @@ protected:
 class Thread : private SimpleThread {
 public:
 	static void Launch(FunctionObject* functor,
-		int32 priority = B_LOW_PRIORITY, const char* name = 0);
+		int32_t priority = B_LOW_PRIORITY, const char* name = 0);
 
 private:
-	Thread(FunctionObject*, int32 priority, const char* name);
+	Thread(FunctionObject*, int32_t priority, const char* name);
 	~Thread();
 	virtual void Run();
 
@@ -122,10 +122,10 @@ private:
 class ThreadSequence : private SimpleThread {
 public:
 	static void Launch(BObjectList<FunctionObject>*, bool async = true,
-		int32 priority = B_LOW_PRIORITY);
+		int32_t priority = B_LOW_PRIORITY);
 
 private:
-	ThreadSequence(BObjectList<FunctionObject>*, int32 priority);
+	ThreadSequence(BObjectList<FunctionObject>*, int32_t priority);
 	~ThreadSequence();
 
 	virtual void Run();
@@ -194,7 +194,7 @@ public:
 	virtual void operator()()
 		{ (function)(fParam1, fParam2); }
 
-	virtual uint32 Size() const { return sizeof(*this); }
+	virtual uint32_t Size() const { return sizeof(*this); }
 
 private:
 	status_t (*function)(Param1, Param2);
@@ -220,7 +220,7 @@ public:
 	virtual void operator()()
 		{ (function)(fParam1, fParam2, fParam3); }
 
-	virtual uint32 Size() const { return sizeof(*this); }
+	virtual uint32_t Size() const { return sizeof(*this); }
 
 private:
 	status_t (*function)(Param1, Param2, Param3);
@@ -248,7 +248,7 @@ public:
 	virtual void operator()()
 		{ (function)(fParam1, fParam2, fParam3, fParam4); }
 
-	virtual uint32 Size() const { return sizeof(*this); }
+	virtual uint32_t Size() const { return sizeof(*this); }
 
 private:
 	status_t (*function)(Param1, Param2, Param3, Param4);
@@ -260,7 +260,7 @@ private:
 
 
 template<class Param1>
-void LaunchInNewThread(const char* name, int32 priority, status_t (*func)(Param1),
+void LaunchInNewThread(const char* name, int32_t priority, status_t (*func)(Param1),
 	Param1 p1)
 {
 	Thread::Launch(new SingleParamFunctionObjectWorkaround<Param1>(func, p1),
@@ -269,7 +269,7 @@ void LaunchInNewThread(const char* name, int32 priority, status_t (*func)(Param1
 
 
 template<class T>
-void LaunchInNewThread(const char* name, int32 priority, status_t (T::*function)(),
+void LaunchInNewThread(const char* name, int32_t priority, status_t (T::*function)(),
 	T* onThis)
 {
 	Thread::Launch(new SimpleMemberFunctionObjectWorkaround<T>(function,
@@ -278,7 +278,7 @@ void LaunchInNewThread(const char* name, int32 priority, status_t (T::*function)
 
 
 template<class Param1, class Param2>
-void LaunchInNewThread(const char* name, int32 priority,
+void LaunchInNewThread(const char* name, int32_t priority,
 	status_t (*func)(Param1, Param2),
 	Param1 p1, Param2 p2)
 {
@@ -289,7 +289,7 @@ void LaunchInNewThread(const char* name, int32 priority,
 
 
 template<class Param1, class Param2, class Param3>
-void LaunchInNewThread(const char* name, int32 priority,
+void LaunchInNewThread(const char* name, int32_t priority,
 	status_t (*func)(Param1, Param2, Param3),
 	Param1 p1, Param2 p2, Param3 p3)
 {
@@ -299,7 +299,7 @@ void LaunchInNewThread(const char* name, int32 priority,
 
 
 template<class Param1, class Param2, class Param3, class Param4>
-void LaunchInNewThread(const char* name, int32 priority,
+void LaunchInNewThread(const char* name, int32_t priority,
 	status_t (*func)(Param1, Param2, Param3, Param4),
 	Param1 p1, Param2 p2, Param3 p3, Param4 p4)
 {
@@ -312,12 +312,12 @@ template<class View>
 class MouseDownThread {
 public:
 	static void TrackMouse(View* view, void (View::*)(BPoint),
-		void (View::*)(BPoint, uint32) = 0,
+		void (View::*)(BPoint, uint32_t) = 0,
 		bigtime_t pressingPeriod = 100000);
 
 protected:
 	MouseDownThread(View* view, void (View::*)(BPoint),
-		void (View::*)(BPoint, uint32), bigtime_t pressingPeriod);
+		void (View::*)(BPoint, uint32_t), bigtime_t pressingPeriod);
 
 	virtual ~MouseDownThread();
 
@@ -329,7 +329,7 @@ protected:
 private:
 	BMessenger fOwner;
 	void (View::*fDonePressing)(BPoint);
-	void (View::*fPressing)(BPoint, uint32);
+	void (View::*fPressing)(BPoint, uint32_t);
 	bigtime_t fPressingPeriod;
 	volatile thread_id fThreadID;
 };
@@ -338,7 +338,7 @@ private:
 template<class View>
 void MouseDownThread<View>::TrackMouse(View* view,
 	void(View::*donePressing)(BPoint),
-	void(View::*pressing)(BPoint, uint32), bigtime_t pressingPeriod)
+	void(View::*pressing)(BPoint, uint32_t), bigtime_t pressingPeriod)
 {
 	(new MouseDownThread(view, donePressing, pressing, pressingPeriod))->Go();
 }
@@ -347,7 +347,7 @@ void MouseDownThread<View>::TrackMouse(View* view,
 template<class View>
 MouseDownThread<View>::MouseDownThread(View* view,
 	void (View::*donePressing)(BPoint),
-	void (View::*pressing)(BPoint, uint32), bigtime_t pressingPeriod)
+	void (View::*pressing)(BPoint, uint32_t), bigtime_t pressingPeriod)
 	:	fOwner(view, view->Window()),
 		fDonePressing(donePressing),
 		fPressing(pressing),
@@ -397,7 +397,7 @@ void MouseDownThread<View>::Track()
 		if (!view)
 			break;
 
-		uint32 buttons;
+		uint32_t buttons;
 		BPoint location;
 		view->GetMouse(&location, &buttons, false);
 		if (!buttons) {

@@ -21,7 +21,7 @@ class BCurrency : public BArchivable {
 
 		const char *CurrencyCode() const;
 		const char *DefaultSymbol() const;
-		int32 DefaultFractionDigits() const;
+		int32_t DefaultFractionDigits() const;
 
 		status_t GetSymbol(char *symbol, size_t maxSize,
 						   BLocale *locale = NULL);
@@ -39,7 +39,7 @@ class BCurrency : public BArchivable {
 
 		BString	fCurrencyCode;
 		BString	fDefaultSymbol;
-		int32	fDefaultFractionDigits;
+		int32_t	fDefaultFractionDigits;
 };
 
 #endif	// _B_CURRENCY_H_

@@ -51,8 +51,8 @@ namespace bhapi {
     }
 
     char			name[B_OS_NAME_LENGTH + 1];
-    int32			queue_length;
-    int32			queue_count;
+    int32_t			queue_length;
+    int32_t			queue_count;
     int64			readerWaitCount;
     int64			writerWaitCount;
     bool			closed;
@@ -88,7 +88,7 @@ typedef struct port_t {
     bhapi::port_info*		portInfo;
 
     bool			created;
-    uint32			refCount;
+    uint32_t			refCount;
 } port_t;
 
 class port_locker_t {
@@ -152,8 +152,8 @@ static port_locker_t __bhapi_port_locker__;
 static bool is_port_for_IPC(const bhapi::port_t *port);
 static void lock_port_inter(bhapi::port_t *port);
 static void unlock_port_inter(bhapi::port_t *port);
-static void* create_port_for_IPC(int32 queue_length, const char *name, bhapi::area_access area_access);
-static void* create_port_for_local(int32 queue_length);
+static void* create_port_for_IPC(int32_t queue_length, const char *name, bhapi::area_access area_access);
+static void* create_port_for_local(int32_t queue_length);
 BHAPI_EXPORT void* open_port(const char *name);
 } /* namespace */
 
@@ -183,11 +183,11 @@ static void bhapi::unlock_port_inter(bhapi::port_t *port)
 }
 //-------------------------------------------------------------------------------------------------
 
-#define BHAPI_PORT_PER_MESSAGE_LENGTH	(sizeof(int32) + sizeof(size_t) + BHAPI_MAX_PORT_BUFFER_SIZE)
+#define BHAPI_PORT_PER_MESSAGE_LENGTH	(sizeof(int32_t) + sizeof(size_t) + BHAPI_MAX_PORT_BUFFER_SIZE)
 
 //-------------------------------------------------------------------------------------------------
 
-static void* bhapi::create_port_for_IPC(int32 queue_length, const char *name, bhapi::area_access area_access)
+static void* bhapi::create_port_for_IPC(int32_t queue_length, const char *name, bhapi::area_access area_access)
 {
     if(queue_length <= 0 || queue_length > BHAPI_VALID_MAX_PORT_QUEUE_LENGTH ||
        name == NULL || *name == 0 || strlen(name) > B_OS_NAME_LENGTH - 1) return NULL;
@@ -354,7 +354,7 @@ BHAPI_EXPORT void* bhapi::open_port_by_source(void *data)
 }
 
 
-static void* bhapi::create_port_for_local(int32 queue_length)
+static void* bhapi::create_port_for_local(int32_t queue_length)
 {
     if(queue_length <= 0 || queue_length > BHAPI_VALID_MAX_PORT_QUEUE_LENGTH) return NULL;
 
@@ -408,7 +408,7 @@ static void* bhapi::create_port_for_local(int32 queue_length)
 }
 
 
-BHAPI_EXPORT void* bhapi::create_port(int32 queue_length, const char *name, bhapi::area_access area_access)
+BHAPI_EXPORT void* bhapi::create_port(int32_t queue_length, const char *name, bhapi::area_access area_access)
 {
     return((name == NULL || *name == 0) ?
             bhapi::create_port_for_local(queue_length) :
@@ -434,7 +434,7 @@ BHAPI_EXPORT status_t bhapi::delete_port(void *data)
             BHAPI_UNLOCKBHAPI_LOCAL_PORT();
             return B_ERROR;
         }
-        uint32 count = --(port->refCount);
+        uint32_t count = --(port->refCount);
         BHAPI_UNLOCKBHAPI_LOCAL_PORT();
 
         if(count > 0) return B_OK;
@@ -477,7 +477,7 @@ BHAPI_EXPORT status_t bhapi::close_port(void *data)
 }
 
 
-BHAPI_EXPORT status_t bhapi::write_port_etc(void *data,  int32 code, const void *buf, size_t buf_size,  uint32 flags, bigtime_t microseconds_timeout)
+BHAPI_EXPORT status_t bhapi::write_port_etc(void *data,  int32_t code, const void *buf, size_t buf_size,  uint32_t flags, bigtime_t microseconds_timeout)
 {
     bhapi::port_t *port = (bhapi::port_t*)data;
     if(!port) return B_BAD_VALUE;
@@ -507,7 +507,7 @@ BHAPI_EXPORT status_t bhapi::write_port_etc(void *data,  int32 code, const void 
         size_t offset = (size_t)port->portInfo->queue_count * BHAPI_PORT_PER_MESSAGE_LENGTH;
         char* buffer = (char*)(port->queueBuffer);
         buffer += offset;
-        memcpy(buffer, &code, sizeof(int32)); buffer += sizeof(int32);
+        memcpy(buffer, &code, sizeof(int32_t)); buffer += sizeof(int32_t);
         memcpy(buffer, &buf_size, sizeof(size_t)); buffer += sizeof(size_t);
         if(buf_size > 0) memcpy(buffer, buf, buf_size);
 
@@ -552,7 +552,7 @@ BHAPI_EXPORT status_t bhapi::write_port_etc(void *data,  int32 code, const void 
             size_t offset = (size_t)port->portInfo->queue_count * BHAPI_PORT_PER_MESSAGE_LENGTH;
             char* buffer = (char*)(port->queueBuffer);
             buffer += offset;
-            memcpy(buffer, &code, sizeof(int32)); buffer += sizeof(int32);
+            memcpy(buffer, &code, sizeof(int32_t)); buffer += sizeof(int32_t);
             memcpy(buffer, &buf_size, sizeof(size_t)); buffer += sizeof(size_t);
             if(buf_size > 0) memcpy(buffer, buf, buf_size);
 
@@ -572,7 +572,7 @@ BHAPI_EXPORT status_t bhapi::write_port_etc(void *data,  int32 code, const void 
 }
 
 
-BHAPI_EXPORT  ssize_t bhapi::port_buffer_size_etc(void *data,  uint32 flags, bigtime_t microseconds_timeout)
+BHAPI_EXPORT  ssize_t bhapi::port_buffer_size_etc(void *data,  uint32_t flags, bigtime_t microseconds_timeout)
 {
     bhapi::port_t *port = (bhapi::port_t*)data;
     if(!port) return B_BAD_VALUE;
@@ -597,7 +597,7 @@ BHAPI_EXPORT  ssize_t bhapi::port_buffer_size_etc(void *data,  uint32 flags, big
         const char* buffer = (const char*)(port->queueBuffer);
         size_t msgLen = 0;
 
-        buffer += sizeof(int32);
+        buffer += sizeof(int32_t);
         memcpy(&msgLen, buffer, sizeof(size_t));
 
         bhapi::unlock_port_inter(port);
@@ -637,7 +637,7 @@ BHAPI_EXPORT  ssize_t bhapi::port_buffer_size_etc(void *data,  uint32 flags, big
             const char* buffer = (const char*)(port->queueBuffer);
             size_t msgLen = 0;
 
-            buffer += sizeof(int32);
+            buffer += sizeof(int32_t);
             memcpy(&msgLen, buffer, sizeof(size_t));
 
             retval = (status_t)msgLen;
@@ -658,7 +658,7 @@ BHAPI_EXPORT  ssize_t bhapi::port_buffer_size_etc(void *data,  uint32 flags, big
 }
 
 
-BHAPI_EXPORT status_t bhapi::read_port_etc(void *data,  int32 *code, void *buf, size_t buf_size,  uint32 flags, bigtime_t microseconds_timeout)
+BHAPI_EXPORT status_t bhapi::read_port_etc(void *data,  int32_t *code, void *buf, size_t buf_size,  uint32_t flags, bigtime_t microseconds_timeout)
 {
     bhapi::port_t *port = (bhapi::port_t*)data;
     if(!port) return B_BAD_VALUE;
@@ -682,7 +682,7 @@ BHAPI_EXPORT status_t bhapi::read_port_etc(void *data,  int32 *code, void *buf, 
     {
         char* buffer = (char*)(port->queueBuffer);
         size_t msgLen = 0;
-        memcpy(code, buffer, sizeof(int32)); buffer += sizeof(int32);
+        memcpy(code, buffer, sizeof(int32_t)); buffer += sizeof(int32_t);
         memcpy(&msgLen, buffer, sizeof(size_t)); buffer += sizeof(size_t);
         if(msgLen > 0 && buf_size > 0) memcpy(buf, buffer, min_c(msgLen, buf_size));
         if(port->portInfo->queue_count > 1)
@@ -731,7 +731,7 @@ BHAPI_EXPORT status_t bhapi::read_port_etc(void *data,  int32 *code, void *buf, 
         {
             char* buffer = (char*)(port->queueBuffer);
             size_t msgLen = 0;
-            memcpy(code, buffer, sizeof(int32)); buffer += sizeof(int32);
+            memcpy(code, buffer, sizeof(int32_t)); buffer += sizeof(int32_t);
             memcpy(&msgLen, buffer, sizeof(size_t)); buffer += sizeof(size_t);
             if(msgLen > 0 && buf_size > 0) memcpy(buf, buffer, min_c(msgLen, buf_size));
             if(port->portInfo->queue_count > 1)
@@ -762,7 +762,7 @@ BHAPI_EXPORT status_t bhapi::read_port_etc(void *data,  int32 *code, void *buf, 
 }
 
 
-BHAPI_EXPORT status_t bhapi::write_port(void *data,  int32 code, const void *buf, size_t buf_size)
+BHAPI_EXPORT status_t bhapi::write_port(void *data,  int32_t code, const void *buf, size_t buf_size)
 {
     return bhapi::write_port_etc(data, code, buf, buf_size, B_TIMEOUT, B_INFINITE_TIMEOUT);
 }
@@ -773,19 +773,19 @@ BHAPI_EXPORT  ssize_t bhapi::port_buffer_size(void *data)
 }
 
 
-BHAPI_EXPORT status_t bhapi::read_port(void *data,  int32 *code, void *buf, size_t buf_size)
+BHAPI_EXPORT status_t bhapi::read_port(void *data,  int32_t *code, void *buf, size_t buf_size)
 {
     return bhapi::read_port_etc(data, code, buf, buf_size, B_TIMEOUT, B_INFINITE_TIMEOUT);
 }
 
 
-BHAPI_EXPORT  int32 bhapi::port_count(void *data)
+BHAPI_EXPORT  int32_t bhapi::port_count(void *data)
 {
     bhapi::port_t *port = (bhapi::port_t*)data;
     if(!port) return B_BAD_VALUE;
 
     bhapi::lock_port_inter(port);
-    int32 retval = port->portInfo->queue_count;
+    int32_t retval = port->portInfo->queue_count;
     bhapi::unlock_port_inter(port);
 
     return retval;

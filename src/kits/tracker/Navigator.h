@@ -68,7 +68,7 @@ public:
 	BNavigator(const Model* model);
 	~BNavigator();
 
-	void UpdateLocation(const Model* newmodel, int32 action);
+	void UpdateLocation(const Model* newmodel, int32_t action);
 
 	BContainerWindow* Window() const;
 

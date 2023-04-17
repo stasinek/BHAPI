@@ -17,7 +17,7 @@
 #include <InstructionInfo.h>
 
 
-static uint8 RegisterNumberFromUdisIndex(int32 udisIndex)
+static uint8 RegisterNumberFromUdisIndex(int32_t udisIndex)
 {
 	switch (udisIndex) {
 		case UD_R_RIP: return X86_REGISTER_EIP;
@@ -99,7 +99,7 @@ status_t DisassemblerX86::GetNextInstruction(BString& line, target_addr_t& _addr
 	if (size < 1)
 		return B_ENTRY_NOT_FOUND;
 
-	uint32 address = (uint32)ud_insn_off(fUdisData);
+	uint32_t address = (uint32_t)ud_insn_off(fUdisData);
 
 	char buffer[256];
 	snprintf(buffer, sizeof(buffer), "0x%08" B_PRIx32 ": %16.16s  %s", address,
@@ -128,7 +128,7 @@ status_t DisassemblerX86::GetPreviousInstruction(target_addr_t nextAddress,
 		if (size < 1)
 			return B_ENTRY_NOT_FOUND;
 
-		uint32 address = (uint32)ud_insn_off(fUdisData);
+		uint32_t address = (uint32_t)ud_insn_off(fUdisData);
 		if (address + size == nextAddress) {
 			_address = address;
 			_size = size;
@@ -145,7 +145,7 @@ status_t DisassemblerX86::GetNextInstructionInfo(InstructionInfo& _info,
 	if (size < 1)
 		return B_ENTRY_NOT_FOUND;
 
-	uint32 address = (uint32)ud_insn_off(fUdisData);
+	uint32_t address = (uint32_t)ud_insn_off(fUdisData);
 
 	instruction_type type = INSTRUCTION_TYPE_OTHER;
 	target_addr_t targetAddress = 0;

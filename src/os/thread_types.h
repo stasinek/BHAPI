@@ -130,14 +130,14 @@ struct team_job_control_children {
 
 struct team_dead_children : team_job_control_children {
 	ConditionVariable	condition_variable;
-	uint32				count;
+	uint32_t				count;
 	bigtime_t			kernel_time;
 	bigtime_t			user_time;
 };
 
 
 struct team_death_entry {
-	int32				remaining_threads;
+	int32_t				remaining_threads;
 	ConditionVariable	condition;
 };
 
@@ -188,7 +188,7 @@ private:
 };
 
 
-typedef int32 (*thread_entry_func)(thread_func, void *);
+typedef int32_t (*thread_entry_func)(thread_func, void *);
 
 
 namespace BKernel {
@@ -228,7 +228,7 @@ struct Team : TeamThreadIteratorEntry<team_id>, KernelReferenceable,
 
 	int				num_threads;	// number of threads in this team
 	int				state;			// current team state, see above
-	int32			flags;
+	int32_t			flags;
 	struct io_context *io_context;
 	struct realtime_sem_context	*realtime_sem_context;
 	struct xsi_sem_context *xsi_sem_context;
@@ -348,24 +348,24 @@ public:
 									{ fPendingSignals.RemoveSignals(mask); }
 			void				ResetSignalsOnExec();
 
-	inline	int32				HighestPendingSignalPriority(
+	inline	int32_t				HighestPendingSignalPriority(
 									sigset_t nonBlocked) const;
 	inline	Signal*				DequeuePendingSignal(sigset_t nonBlocked,
 									Signal& buffer);
 
-			struct sigaction&	SignalActionFor(int32 signal)
+			struct sigaction&	SignalActionFor(int32_t signal)
 									{ return fSignalActions[signal - 1]; }
 			void				InheritSignalActions(Team* parent);
 
 			// user timers -- protected by fLock
-			UserTimer*			UserTimerFor(int32 id) const
+			UserTimer*			UserTimerFor(int32_t id) const
 									{ return fUserTimers.TimerFor(id); }
 			status_t			AddUserTimer(UserTimer* timer);
 			void				RemoveUserTimer(UserTimer* timer);
 			void				DeleteUserTimers(bool userDefinedOnly);
 
 			bool				CheckAddUserDefinedTimer();
-			void				UserDefinedTimersRemoved(int32 count);
+			void				UserDefinedTimersRemoved(int32_t count);
 
 			void				UserTimerActivated(TeamTimeUserTimer* timer)
 									{ fCPUTimeUserTimers.Add(timer); }
@@ -411,12 +411,12 @@ private:
 			TeamTimeUserTimerList fCPUTimeUserTimers;
 									// protected by scheduler lock
 			TeamUserTimeUserTimerList fUserTimeUserTimers;
-			int32				fUserDefinedTimerCount;	// accessed atomically
+			int32_t				fUserDefinedTimerCount;	// accessed atomically
 };
 
 
 struct Thread : TeamThreadIteratorEntry<thread_id>, KernelReferenceable {
-	int32			flags;			// summary of events relevant in interrupt
+	int32_t			flags;			// summary of events relevant in interrupt
 									// handlers (signals pending, user debugging
 									// enabled, etc.)
 	int64			serial_number;	// immutable after adding thread to hash
@@ -424,12 +424,12 @@ struct Thread : TeamThreadIteratorEntry<thread_id>, KernelReferenceable {
 	Thread			*team_next;		// protected by team lock and fLock
 	char			name[B_OS_NAME_LENGTH];	// protected by fLock
 	bool			going_to_suspend;	// protected by scheduler lock
-	int32			priority;		// protected by scheduler lock
-	int32			io_priority;	// protected by fLock
-	int32			state;			// protected by scheduler lock
+	int32_t			priority;		// protected by scheduler lock
+	int32_t			io_priority;	// protected by fLock
+	int32_t			state;			// protected by scheduler lock
 	struct cpu_ent	*cpu;			// protected by scheduler lock
 	struct cpu_ent	*previous_cpu;	// protected by scheduler lock
-	int32			pinned_to_cpu;	// only accessed by this thread or in the
+	int32_t			pinned_to_cpu;	// only accessed by this thread or in the
 									// scheduler, when thread is not running
 	spinlock		scheduler_lock;
 
@@ -461,8 +461,8 @@ struct Thread : TeamThreadIteratorEntry<thread_id>, KernelReferenceable {
 
 	struct {
 		status_t	status;				// current wait status
-		uint32		flags;				// interrupable flags
-		uint32		type;				// type of the object waited on
+		uint32_t		flags;				// interrupable flags
+		uint32_t		type;				// type of the object waited on
 		const void*	object;				// pointer to the object waited on
 		timer		unblock_timer;		// timer for block with timeout
 	} wait;
@@ -474,7 +474,7 @@ struct Thread : TeamThreadIteratorEntry<thread_id>, KernelReferenceable {
 		sem_id		read_sem;	// release by writers after writing, acquired
 								// by this thread when reading
 		thread_id	sender;
-		int32		code;
+		int32_t		code;
 		size_t		size;
 		void*		buffer;
 	} msg;	// write_sem/read_sem are protected by fLock when accessed by
@@ -482,7 +482,7 @@ struct Thread : TeamThreadIteratorEntry<thread_id>, KernelReferenceable {
 
 	void			(*fault_handler)(void);
 	jmp_buf			fault_handler_state;
-	int32			page_faults_allowed;
+	int32_t			page_faults_allowed;
 		/* this field may only stay in debug builds in the future */
 
 	BKernel::Team	*team;	// protected by team lock, thread lock, scheduler
@@ -581,13 +581,13 @@ public:
 									{ fPendingSignals.RemoveSignals(mask); }
 			void				ResetSignalsOnExec();
 
-	inline	int32				HighestPendingSignalPriority(
+	inline	int32_t				HighestPendingSignalPriority(
 									sigset_t nonBlocked) const;
 	inline	Signal*				DequeuePendingSignal(sigset_t nonBlocked,
 									Signal& buffer);
 
 			// user timers -- protected by fLock
-			UserTimer*			UserTimerFor(int32 id) const
+			UserTimer*			UserTimerFor(int32_t id) const
 									{ return fUserTimers.TimerFor(id); }
 			status_t			AddUserTimer(UserTimer* timer);
 			void				RemoveUserTimer(UserTimer* timer);
@@ -620,7 +620,7 @@ private:
 
 struct ProcessSession : BReferenceable {
 	pid_t				id;
-	int32				controlling_tty;	// index of the controlling tty,
+	int32_t				controlling_tty;	// index of the controlling tty,
 											// -1 if none
 	pid_t				foreground_group;
 
@@ -709,7 +709,7 @@ private:
 };
 
 
-inline int32 Team::HighestPendingSignalPriority(sigset_t nonBlocked) const
+inline int32_t Team::HighestPendingSignalPriority(sigset_t nonBlocked) const
 {
 	return fPendingSignals.HighestSignalPriority(nonBlocked);
 }
@@ -736,7 +736,7 @@ Thread::AllPendingSignals() const
 }
 
 
-inline int32 Thread::HighestPendingSignalPriority(sigset_t nonBlocked) const
+inline int32_t Thread::HighestPendingSignalPriority(sigset_t nonBlocked) const
 {
 	return fPendingSignals.HighestSignalPriority(nonBlocked);
 }

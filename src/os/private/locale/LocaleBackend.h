@@ -64,7 +64,7 @@ private:
 		unsigned int nstrings;
 		union locale_data_value
 		{
-			const uint32_t* wstr;
+			const uint32_t_t* wstr;
 			const char* string;
 			unsigned int word;
 		}

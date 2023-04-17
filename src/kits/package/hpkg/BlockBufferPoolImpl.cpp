@@ -26,7 +26,7 @@ namespace BPrivate {
 
 
 BlockBufferPoolImpl::BlockBufferPoolImpl(size_t blockSize,
-	uint32 maxCachedBlocks, BBufferPoolLockable* lockable)
+	uint32_t maxCachedBlocks, BBufferPoolLockable* lockable)
 	:
 	fBlockSize(blockSize),
 	fMaxCachedBlocks(maxCachedBlocks),

@@ -29,7 +29,7 @@ class BDirectMessageTarget {
 	private:
 		~BDirectMessageTarget();
 		
-		int32			fReferenceCount;
+		int32_t			fReferenceCount;
 		BMessageQueue	fQueue;
 		bool			fClosed;
 };

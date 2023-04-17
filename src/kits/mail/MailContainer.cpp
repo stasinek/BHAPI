@@ -22,7 +22,7 @@ typedef struct message_part {
 
 	// Offset where the part starts (includes MIME sub-headers but not the
 	// boundary line) in the message file.
-	int32 start;
+	int32_t start;
 
 	// Offset just past the last byte of data, so total length == end - start.
 	// Note that the CRLF that starts the next boundary isn't included in the
@@ -37,14 +37,14 @@ typedef struct message_part {
     // If you subtract the header length (which includes the blank line) from
     // the MIME part total length (which doesn't include the blank line - it's
     // part of the next boundary), you get -2.
-	int32 end;
+	int32_t end;
 } message_part;
 
 
 BMIMEMultipartMailContainer::BMIMEMultipartMailContainer(
 	const char *boundary,
 	const char *this_is_an_MIME_message_text,
-	uint32 defaultCharSet)
+	uint32_t defaultCharSet)
 	:
 	BMailContainer (defaultCharSet),
 	_boundary(NULL),
@@ -69,10 +69,10 @@ BMIMEMultipartMailContainer::BMIMEMultipartMailContainer(
 
 
 BMIMEMultipartMailContainer::~BMIMEMultipartMailContainer() {
-	for (int32 i = 0; i < _components_in_raw.CountItems(); i++)
+	for (int32_t i = 0; i < _components_in_raw.CountItems(); i++)
 		delete (message_part *)_components_in_raw.ItemAt(i);
 
-	for (int32 i = 0; i < _components_in_code.CountItems(); i++)
+	for (int32_t i = 0; i < _components_in_code.CountItems(); i++)
 		delete (BMailComponent *)_components_in_code.ItemAt(i);
 
 	free((void *)_boundary);
@@ -113,7 +113,7 @@ status_t BMIMEMultipartMailContainer::AddComponent(BMailComponent *component) {
 }
 
 
-BMailComponent *BMIMEMultipartMailContainer::GetComponent(int32 index, bool parse_now) {
+BMailComponent *BMIMEMultipartMailContainer::GetComponent(int32_t index, bool parse_now) {
 	if (index >= CountComponents())
 		return NULL;
 	
@@ -152,7 +152,7 @@ BMailComponent *BMIMEMultipartMailContainer::GetComponent(int32 index, bool pars
 }
 
 
-int32 BMIMEMultipartMailContainer::CountComponents() const
+int32_t BMIMEMultipartMailContainer::CountComponents() const
 {
 	return _components_in_code.CountItems();
 }
@@ -163,7 +163,7 @@ status_t BMIMEMultipartMailContainer::RemoveComponent(BMailComponent *component)
 	if (component == NULL)
 		return B_BAD_VALUE;
 
-	int32 index = _components_in_code.IndexOf(component);
+	int32_t index = _components_in_code.IndexOf(component);
 	if (component == NULL)
 		return B_ENTRY_NOT_FOUND;
 
@@ -174,7 +174,7 @@ status_t BMIMEMultipartMailContainer::RemoveComponent(BMailComponent *component)
 }
 
 
-status_t BMIMEMultipartMailContainer::RemoveComponent(int32 index)
+status_t BMIMEMultipartMailContainer::RemoveComponent(int32_t index)
 {
 	if (index >= CountComponents())
 		return B_BAD_INDEX;
@@ -407,7 +407,7 @@ status_t BMIMEMultipartMailContainer::RenderToRFC822(BPositionIO *render_to) {
 		render_to->Write("\r\n",2);
 	}
 
-	for (int32 i = 0; i < _components_in_code.CountItems() /* both have equal length, so pick one at random */; i++) {
+	for (int32_t i = 0; i < _components_in_code.CountItems() /* both have equal length, so pick one at random */; i++) {
 		render_to->Write(delimiter.String(),delimiter.Length());
 		if (_components_in_code.ItemAt(i) != NULL) { //---- _components_in_code has precedence
 

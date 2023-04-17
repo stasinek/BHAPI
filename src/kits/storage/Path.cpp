@@ -60,7 +60,7 @@ inline void b_path_prepend_current_directory(BString &path)
     str.CopyInto(buf, B_MAXPATH, 0, -1);
 #endif
 
-    int32 len = (int32)strlen(buf);
+    int32_t len = (int32_t)strlen(buf);
     if(buf[len - 1] != '/')
     {
         buf[len] = '/';
@@ -104,11 +104,11 @@ inline bool b_path_do_normalization(BString &path)
         path.ReplaceAll("/./", "/");
     }
 
-    int32 uponIndex;
+    int32_t uponIndex;
     while((uponIndex = path.FindLast("/../")) >= 0)
     {
         retVal = true;
-        int32 tmp = path.FindLast("/", uponIndex - 1);
+        int32_t tmp = path.FindLast("/", uponIndex - 1);
         if(tmp < 0)
             path.MakeEmpty(); // invalid path
         else
@@ -187,7 +187,7 @@ status_t b_path_get_parent(BString &parent, const char *path)
 #endif
 
     parent = path;
-    int32 slashIndex = parent.FindLast("/");
+    int32_t slashIndex = parent.FindLast("/");
     parent.Remove(slashIndex, -1);
 #ifndef _WIN32
     if(parent.Length() == 0) parent = "/";
@@ -296,9 +296,9 @@ BPath::Leaf() const
     if(strlen(fPath) <= 3) return NULL;
 #endif
 
-    int32 slashIndex = -1;
+    int32_t slashIndex = -1;
 
-    for(int32 i = (int32)strlen(fPath) - 1; i >= 0; i--)
+    for(int32_t i = (int32_t)strlen(fPath) - 1; i >= 0; i--)
     {
         if(fPath[i] == '/')
         {
@@ -307,7 +307,7 @@ BPath::Leaf() const
         }
     }
 
-    if(slashIndex < 0 || slashIndex == (int32)strlen(fPath) - 1) return NULL;
+    if(slashIndex < 0 || slashIndex == (int32_t)strlen(fPath) - 1) return NULL;
 
     return(fPath + (slashIndex + 1));
 }
@@ -540,7 +540,7 @@ BPath::SetTo(const char* path, const char* leaf, bool normalize)
         normalize |= !BPrivate::Storage::is_absolute_path(path);
         // build a new path from path and leaf
         // copy path first
-        uint32 pathLen = strlen(path);
+        uint32_t pathLen = strlen(path);
         if (pathLen >= sizeof(newPath))
             error = B_NAME_TOO_LONG;
         if (error == B_OK)
@@ -548,7 +548,7 @@ BPath::SetTo(const char* path, const char* leaf, bool normalize)
         // append leaf, if supplied
         if (error == B_OK && leaf) {
             bool needsSeparator = (pathLen > 0 && path[pathLen - 1] != '/');
-            uint32 wholeLen = pathLen + (needsSeparator ? 1 : 0)
+            uint32_t wholeLen = pathLen + (needsSeparator ? 1 : 0)
                               + strlen(leaf);
             if (wholeLen >= sizeof(newPath))
                 error = B_NAME_TOO_LONG;
@@ -667,7 +667,7 @@ BPath::GetParent(BPath* path) const
     if (error != B_OK)
         return error;
 
-    int32 length = strlen(fName);
+    int32_t length = strlen(fName);
     if (length == 1) {
         // handle "/" (path is supposed to be absolute)
         return B_ENTRY_NOT_FOUND;

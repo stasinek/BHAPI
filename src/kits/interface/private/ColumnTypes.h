@@ -75,7 +75,7 @@ class BStringColumn : public BTitledColumn
 {
 public:
 								BStringColumn(const char* title, float width,
-									float minWidth, float maxWidth, uint32 truncate,
+									float minWidth, float maxWidth, uint32_t truncate,
 									alignment align = B_ALIGN_LEFT);
 	virtual	void				DrawField(BField* field, BRect rect, BView* parent);
 	virtual	int					CompareFields(BField* field1, BField* field2);
@@ -83,7 +83,7 @@ public:
 	virtual	bool				AcceptsField(const BField* field) const;
 
 private:
-			uint32				fTruncate;
+			uint32_t				fTruncate;
 };
 
 
@@ -160,12 +160,12 @@ public:
 class BIntegerField : public BField
 {
 public:
-								BIntegerField(int32 number);
-			void				SetValue(int32);
-			int32				Value();
+								BIntegerField(int32_t number);
+			void				SetValue(int32_t);
+			int32_t				Value();
 
 private:
-			int32				fInteger;
+			int32_t				fInteger;
 };
 
 

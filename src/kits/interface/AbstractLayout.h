@@ -46,12 +46,12 @@ protected:
 	virtual	status_t			AllUnarchived(const BMessage* from);
 
 	virtual status_t			ItemArchived(BMessage* into, BLayoutItem* item,
-									int32 index) const;
+									int32_t index) const;
 	virtual	status_t			ItemUnarchived(const BMessage* from,
-									BLayoutItem* item, int32 index);
+									BLayoutItem* item, int32_t index);
 
-	virtual	bool				ItemAdded(BLayoutItem* item, int32 atIndex);
-	virtual	void				ItemRemoved(BLayoutItem* item, int32 fromIndex);
+	virtual	bool				ItemAdded(BLayoutItem* item, int32_t atIndex);
+	virtual	void				ItemRemoved(BLayoutItem* item, int32_t fromIndex);
 	virtual	void				LayoutInvalidated(bool children);
 	virtual	void				OwnerChanged(BView* was);
 
@@ -81,7 +81,7 @@ private:
 			struct	DataProxy;
 
 			Proxy*				fExplicitData;
-			uint32				_reserved[4];
+			uint32_t				_reserved[4];
 };
 
 #endif	//	_ABSTRACT_LAYOUT_ITEM_H

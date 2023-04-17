@@ -318,9 +318,9 @@ struct LocationDescription {
 
 
 struct DeclarationLocation {
-	uint32	file;
-	uint32	line;
-	uint32	column;
+	uint32_t	file;
+	uint32_t	line;
+	uint32_t	column;
 
 	DeclarationLocation()
 		:
@@ -330,17 +330,17 @@ struct DeclarationLocation {
 	{
 	}
 
-	void SetFile(uint32 file)
+	void SetFile(uint32_t file)
 	{
 		this->file = file;
 	}
 
-	void SetLine(uint32 line)
+	void SetLine(uint32_t line)
 	{
 		this->line = line;
 	}
 
-	void SetColumn(uint32 column)
+	void SetColumn(uint32_t column)
 	{
 		this->column = column;
 	}

@@ -29,14 +29,14 @@ public:
 			bool				UserInputRequired() const;
 
 
-			int32				GetSpecificInfoIndex() const
+			int32_t				GetSpecificInfoIndex() const
 									{ return fSpecificInfoIndex; }
-			void				SetSpecificInfoIndex(int32 index);
+			void				SetSpecificInfoIndex(int32_t index);
 
 private:
 			BReference<SpecificImageDebugInfoLoadingState>
 								fSpecificInfoLoadingState;
-			int32				fSpecificInfoIndex;
+			int32_t				fSpecificInfoIndex;
 };
 
 

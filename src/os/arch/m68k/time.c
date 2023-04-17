@@ -30,7 +30,7 @@ __arch_init_time(struct real_time_data *data, bool setDefaults)
 bigtime_t
 __arch_get_system_time_offset(struct real_time_data *data)
 {
-	int32 version;
+	int32_t version;
 	bigtime_t offset;
 	do {
 		version = sRealTimeData->version;

@@ -100,30 +100,30 @@ void BLooperList::GetLooperList(BList* list)
 	BAutolock locker(fLock);
 	AssertLocked();
 
-	for (uint32 i = 0; i < fData.size(); ++i) {
+	for (uint32_t i = 0; i < fData.size(); ++i) {
 		if (fData[i].looper)
 			list->AddItem(fData[i].looper);
 	}
 }
 
 
-int32 BLooperList::CountLoopers()
+int32_t BLooperList::CountLoopers()
 {
 	BAutolock locker(fLock);
 	AssertLocked();
-	return (int32)fData.size();
+	return (int32_t)fData.size();
 }
 
 
 BLooper*
-BLooperList::LooperAt(int32 index)
+BLooperList::LooperAt(int32_t index)
 {
 	BAutolock locker(fLock);
 	AssertLocked();
 
 	BLooper* looper = NULL;
-	if (index < (int32)fData.size())
-		looper = fData[(uint32)index].looper;
+	if (index < (int32_t)fData.size())
+		looper = fData[(uint32_t)index].looper;
 
 	return looper;
 }

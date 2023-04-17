@@ -48,7 +48,7 @@ public:
     bool		operator!=(const BCursor &other) const;
 
     const void 	*Data() const;
-     uint32		DataLength() const;
+     uint32_t		DataLength() const;
 
      uint8		ColorDepth() const;
      uint8		Width() const;

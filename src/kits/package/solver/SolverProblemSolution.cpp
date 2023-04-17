@@ -127,14 +127,14 @@ BSolverProblemSolution::~BSolverProblemSolution()
 }
 
 
-int32 BSolverProblemSolution::CountElements() const
+int32_t BSolverProblemSolution::CountElements() const
 {
 	return fElements.CountItems();
 }
 
 
 const BSolverProblemSolution::Element*
-BSolverProblemSolution::ElementAt(int32 index) const
+BSolverProblemSolution::ElementAt(int32_t index) const
 {
 	return fElements.ItemAt(index);
 }

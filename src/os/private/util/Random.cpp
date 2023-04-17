@@ -12,9 +12,9 @@
 #include <OS.h>
 
 
-static uint32	sFastLast	= 0;
-static uint32	sLast		= 0;
-static uint32	sSecureLast	= 0;
+static uint32_t	sFastLast	= 0;
+static uint32_t	sLast		= 0;
+static uint32_t	sSecureLast	= 0;
 
 // MD4 helper definitions, based on RFC 1320
 #define F(x, y, z)	(((x) & (y)) | (~(x) & (z)))
@@ -26,16 +26,16 @@ static uint32	sSecureLast	= 0;
 
 
 // MD4 based hash function. Simplified in order to improve performance.
-static uint32
-hash(uint32* data)
+static uint32_t
+hash(uint32_t* data)
 {
-		const uint32 kMD4Round2 = 0x5a827999;
-		const uint32 kMD4Round3 = 0x6ed9eba1;
+		const uint32_t kMD4Round2 = 0x5a827999;
+		const uint32_t kMD4Round3 = 0x6ed9eba1;
 
-		uint32 a = 0x67452301;
-		uint32 b = 0xefcdab89;
-		uint32 c = 0x98badcfe;
-		uint32 d = 0x10325476;
+		uint32_t a = 0x67452301;
+		uint32_t b = 0xefcdab89;
+		uint32_t c = 0x98badcfe;
+		uint32_t d = 0x10325476;
 
 		STEP(F, a, b, c, d, data[0], 3);
 		STEP(F, d, a, b, c, data[1], 7);
@@ -80,7 +80,7 @@ fast_random_value()
 	if (sFastLast == 0)
 		sFastLast = system_time();
 
-	uint32 random = sFastLast * 1103515245 + 12345;
+	uint32_t random = sFastLast * 1103515245 + 12345;
 	sFastLast = random;
 	return (random >> 16) & 0x7fff;
 }
@@ -95,10 +95,10 @@ random_value()
 	if (sLast == 0)
 		sLast = system_time();
 
-	uint32 hi = sLast / 127773;
-	uint32 lo = sLast % 127773;
+	uint32_t hi = sLast / 127773;
+	uint32_t lo = sLast % 127773;
 
-	int32 random = 16807 * lo - 2836 * hi;
+	int32_t random = 16807 * lo - 2836 * hi;
 	if (random <= 0)
 		random += MAX_RANDOM_VALUE;
 	sLast = random;
@@ -109,9 +109,9 @@ random_value()
 unsigned int
 secure_random_value()
 {
-	static int32 count = 0;
+	static int32_t count = 0;
 
-	uint32 data[8];
+	uint32_t data[8];
 	data[0] = atomic_add(&count, 1);
 	data[1] = system_time();
 	data[2] = find_thread(NULL);
@@ -121,7 +121,7 @@ secure_random_value()
 	data[6] = sLast;
 	data[7] = sSecureLast;
 
-	uint32 random = hash(data);
+	uint32_t random = hash(data);
 	sSecureLast = random;
 	return random;
 }

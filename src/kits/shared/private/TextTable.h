@@ -19,17 +19,17 @@ public:
 								TextTable();
 								~TextTable();
 
-			int32				CountColumns() const;
+			int32_t				CountColumns() const;
 			void				AddColumn(const BString& title,
 									enum alignment align = B_ALIGN_LEFT,
 									bool canTruncate = false);
 
-			int32				CountRows() const;
-			BString				TextAt(int32 rowIndex, int32 columnIndex) const;
-			void				SetTextAt(int32 rowIndex, int32 columnIndex,
+			int32_t				CountRows() const;
+			BString				TextAt(int32_t rowIndex, int32_t columnIndex) const;
+			void				SetTextAt(int32_t rowIndex, int32_t columnIndex,
 									const BString& text);
 
-			void				Print(int32 maxWidth);
+			void				Print(int32_t maxWidth);
 
 private:
 			struct Column;

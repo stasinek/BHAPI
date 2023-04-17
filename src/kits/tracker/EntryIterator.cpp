@@ -83,10 +83,10 @@ status_t TWalkerWrapper::GetNextRef(entry_ref* ref)
 }
 
 
-int32 TWalkerWrapper::GetNextDirents(struct dirent* buffer, size_t length,
-	int32 count)
+int32_t TWalkerWrapper::GetNextDirents(struct dirent* buffer, size_t length,
+	int32_t count)
 {
-	int32 result = fWalker->GetNextDirents(buffer, length, count);
+	int32_t result = fWalker->GetNextDirents(buffer, length, count);
 	fStatus = result < B_OK ? result : (result ? B_OK : B_ENTRY_NOT_FOUND);
 
 	return result;
@@ -99,7 +99,7 @@ status_t TWalkerWrapper::Rewind()
 }
 
 
-int32 TWalkerWrapper::CountEntries()
+int32_t TWalkerWrapper::CountEntries()
 {
 	return fWalker->CountEntries();
 }
@@ -132,7 +132,7 @@ EntryListBase::Next(dirent* ent)
 
 
 CachedEntryIterator::CachedEntryIterator(BEntryList* iterator,
-	int32 numEntries, bool sortInodes)
+	int32_t numEntries, bool sortInodes)
 	:
 	fIterator(iterator),
 	fEntryRefBuffer(NULL),
@@ -237,8 +237,8 @@ CachedEntryIterator::_CompareInodes(const dirent* ent1, const dirent* ent2)
 }
 
 
-int32 CachedEntryIterator::GetNextDirents(struct dirent* ent, size_t size,
-	int32 count)
+int32_t CachedEntryIterator::GetNextDirents(struct dirent* ent, size_t size,
+	int32_t count)
 {
 	ASSERT(fEntryRefBuffer == NULL);
 	if (fDirentBuffer == NULL) {
@@ -253,9 +253,9 @@ int32 CachedEntryIterator::GetNextDirents(struct dirent* ent, size_t size,
 	if (fIndex >= fNumEntries) {
 		// we are out of stock, cache em up
 		fCurrentDirent = fDirentBuffer;
-		int32 bufferRemain = kDirentBufferSize;
+		int32_t bufferRemain = kDirentBufferSize;
 		for (fNumEntries = 0; fNumEntries < fCacheSize; ) {
-			int32 count = fIterator->GetNextDirents(fCurrentDirent,
+			int32_t count = fIterator->GetNextDirents(fCurrentDirent,
 				bufferRemain, 1);
 
 			if (count <= 0)
@@ -263,7 +263,7 @@ int32 CachedEntryIterator::GetNextDirents(struct dirent* ent, size_t size,
 
 			fNumEntries += count;
 
-			int32 currentDirentSize = fCurrentDirent->d_reclen;
+			int32_t currentDirentSize = fCurrentDirent->d_reclen;
 			bufferRemain -= currentDirentSize;
 			ASSERT(bufferRemain >= 0);
 
@@ -284,7 +284,7 @@ int32 CachedEntryIterator::GetNextDirents(struct dirent* ent, size_t size,
 			else
 				fSortedList->MakeEmpty();
 
-			for (int32 count = 0; count < fNumEntries; count++) {
+			for (int32_t count = 0; count < fNumEntries; count++) {
 				fSortedList->AddItem(fCurrentDirent, 0);
 				fCurrentDirent = Next(fCurrentDirent);
 			}
@@ -302,7 +302,7 @@ int32 CachedEntryIterator::GetNextDirents(struct dirent* ent, size_t size,
 		fCurrentDirent = fSortedList->ItemAt(fIndex);
 
 	fIndex++;
-	uint32 currentDirentSize = fCurrentDirent->d_reclen;
+	uint32_t currentDirentSize = fCurrentDirent->d_reclen;
 	ASSERT(currentDirentSize <= size);
 	if (currentDirentSize > size)
 		return 0;
@@ -330,7 +330,7 @@ status_t CachedEntryIterator::Rewind()
 }
 
 
-int32 CachedEntryIterator::CountEntries()
+int32_t CachedEntryIterator::CountEntries()
 {
 	return fIterator->CountEntries();
 }
@@ -388,8 +388,8 @@ status_t DirectoryEntryList::GetNextRef(entry_ref* ref)
 }
 
 
-int32 DirectoryEntryList::GetNextDirents(struct dirent* buffer, size_t length,
-	int32 count)
+int32_t DirectoryEntryList::GetNextDirents(struct dirent* buffer, size_t length,
+	int32_t count)
 {
 	fStatus = fDirectory.GetNextDirents(buffer, length, count);
 	return fStatus;
@@ -403,7 +403,7 @@ status_t DirectoryEntryList::Rewind()
 }
 
 
-int32 DirectoryEntryList::CountEntries()
+int32_t DirectoryEntryList::CountEntries()
 {
 	return fDirectory.CountEntries();
 }
@@ -422,7 +422,7 @@ EntryIteratorList::EntryIteratorList()
 
 EntryIteratorList::~EntryIteratorList()
 {
-	int32 count = fList.CountItems();
+	int32_t count = fList.CountItems();
 	for (;count; count--) {
 		// workaround for BEntryList not having a proper destructor
 		BEntryList* entry = fList.RemoveItemAt(count - 1);
@@ -477,10 +477,10 @@ status_t EntryIteratorList::GetNextRef(entry_ref* ref)
 }
 
 
-int32 EntryIteratorList::GetNextDirents(struct dirent* buffer, size_t length,
-	int32 count)
+int32_t EntryIteratorList::GetNextDirents(struct dirent* buffer, size_t length,
+	int32_t count)
 {
-	int32 result = 0;
+	int32_t result = 0;
 	while (true) {
 		if (fCurrentIndex >= fList.CountItems()) {
 			fStatus = B_ENTRY_NOT_FOUND;
@@ -503,20 +503,20 @@ int32 EntryIteratorList::GetNextDirents(struct dirent* buffer, size_t length,
 status_t EntryIteratorList::Rewind()
 {
 	fCurrentIndex = 0;
-	int32 count = fList.CountItems();
-	for (int32 index = 0; index < count; index++)
+	int32_t count = fList.CountItems();
+	for (int32_t index = 0; index < count; index++)
 		fStatus = fList.ItemAt(index)->Rewind();
 
 	return fStatus;
 }
 
 
-int32 EntryIteratorList::CountEntries()
+int32_t EntryIteratorList::CountEntries()
 {
-	int32 result = 0;
+	int32_t result = 0;
 
-	int32 count = fList.CountItems();
-	for (int32 index = 0; index < count; index++)
+	int32_t count = fList.CountItems();
+	for (int32_t index = 0; index < count; index++)
 		result += fList.ItemAt(fCurrentIndex)->CountEntries();
 
 	return result;

@@ -135,7 +135,7 @@ enum { // ABSTRACT_STATE bitmap (for USB_CDC_ABSTRAT_STATE Feature Selector (p66
 };
 
 typedef struct {	// Line Coding Structure (for USB_CDC_SET/GET_LINE_CODING (p69))
-	uint32 	speed;
+	uint32_t 	speed;
 	uint8 	stopbits;
 	uint8 	parity;
 	uint8 	databits;

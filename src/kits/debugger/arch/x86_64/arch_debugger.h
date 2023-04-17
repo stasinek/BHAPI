@@ -25,8 +25,8 @@ typedef struct x86_64_extended_registers {
 	uint16					opcode;
 	uint64					instruction_pointer;
 	uint64					data_pointer;
-	uint32					mxcsr;
-	uint32					mxcsr_mask;
+	uint32_t					mxcsr;
+	uint32_t					mxcsr_mask;
 	union {
 		x86_64_fp_register	fp_registers[8];	// st0-st7
 		x86_64_fp_register	mmx_registers[8];	// mm0-mm7

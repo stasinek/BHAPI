@@ -9,7 +9,7 @@
 
 
 status_t
-get_current_cpuid(cpuid_info* info, uint32 eax, uint32 ecx)
+get_current_cpuid(cpuid_info* info, uint32_t eax, uint32_t ecx)
 {
 	__asm__("cpuid"
 		: "=a" (info->regs.eax), "=b" (info->regs.ebx), "=c" (info->regs.ecx),
@@ -19,7 +19,7 @@ get_current_cpuid(cpuid_info* info, uint32 eax, uint32 ecx)
 }
 
 
-uint32
+uint32_t
 get_eflags()
 {
 	uint64_t flags;
@@ -29,7 +29,7 @@ get_eflags()
 
 
 void
-set_eflags(uint32 value)
+set_eflags(uint32_t value)
 {
 	uint64_t flags = value;
 	__asm__("pushq %0; popf;" : : "r" (flags) : "cc");

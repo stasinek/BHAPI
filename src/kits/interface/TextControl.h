@@ -43,8 +43,8 @@ public:
              const char *label,
              const char *text,
              BMessage *message,
-              uint32 resizeMode = B_FOLLOW_LEFT | B_FOLLOW_TOP,
-              uint32 flags = B_WILL_DRAW | B_FRAME_EVENTS | B_NAVIGABLE);
+              uint32_t resizeMode = B_FOLLOW_LEFT | B_FOLLOW_TOP,
+              uint32_t flags = B_WILL_DRAW | B_FRAME_EVENTS | B_NAVIGABLE);
     virtual ~BTextControl();
 
     virtual void	SetText(const char *text);
@@ -61,7 +61,7 @@ public:
     virtual void	SetLabel(const char *label);
     virtual void	Draw(BRect updateRect);
     virtual void	GetPreferredSize(float *width, float *height);
-    virtual void	KeyDown(const char *bytes,  int32 numBytes);
+    virtual void	KeyDown(const char *bytes,  int32_t numBytes);
 
 private:
     bhapi::alignment fLabelAlignment;

@@ -54,13 +54,13 @@ public:
     status_t	AppendUint8(uint8 value);
     status_t	AppendInt16(int16 value);
     status_t	AppendUint16(uint16 value);
-    status_t	AppendInt32(int32 value);
-    status_t	AppendUint32(uint32 value);
+    status_t	AppendInt32(int32_t value);
+    status_t	AppendUint32_t(uint32_t value);
     status_t	AppendInt64(int64 value);
     status_t	AppendUint64(uint64 value);
 	status_t	AppendFloat(float value);
 	status_t	AppendDouble(double value);
-    status_t	AppenString(const char *string,  int32 len = -1);
+    status_t	AppenString(const char *string,  int32_t len = -1);
 	status_t	AppendMessage(const BMessage &msg);
 
 	status_t	RemoveData(void *data, size_t len);
@@ -68,8 +68,8 @@ public:
     status_t	RemoveUint8(uint8 &value);
     status_t	RemoveInt16(int16 &value);
     status_t	RemoveUint16(uint16 &value);
-    status_t	RemoveInt32(int32 &value);
-    status_t	RemoveUint32(uint32 &value);
+    status_t	RemoveInt32(int32_t &value);
+    status_t	RemoveUint32_t(uint32_t &value);
     status_t	RemoveInt64(int64 &value);
     status_t	RemoveUint64(uint64 &value);
 	status_t	RemoveFloat(float &value);

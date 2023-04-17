@@ -64,9 +64,9 @@ public:
 	virtual	DebugInfoEntry*		SignatureType() const;
 	virtual	LocationDescription* GetLocationDescription();
 
-			bool				GetDeclarationFile(uint32& _file) const;
-			bool				GetDeclarationLine(uint32& _line) const;
-			bool				GetDeclarationColumn(uint32& _column) const;
+			bool				GetDeclarationFile(uint32_t& _file) const;
+			bool				GetDeclarationLine(uint32_t& _line) const;
+			bool				GetDeclarationColumn(uint32_t& _column) const;
 
 	virtual	status_t			AddChild(DebugInfoEntry* child);
 

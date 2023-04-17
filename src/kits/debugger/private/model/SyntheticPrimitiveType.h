@@ -13,10 +13,10 @@
 
 class SyntheticPrimitiveType : public PrimitiveType {
 public:
-								SyntheticPrimitiveType(uint32 typeConstant);
+								SyntheticPrimitiveType(uint32_t typeConstant);
 	virtual						~SyntheticPrimitiveType();
 
-	virtual	uint32				TypeConstant() const;
+	virtual	uint32_t				TypeConstant() const;
 
 	virtual	image_id			ImageID() const;
 	virtual	const BString&		ID() const;
@@ -35,7 +35,7 @@ private:
 	void						_Init();
 
 private:
-	uint32						fTypeConstant;
+	uint32_t						fTypeConstant;
 	BString						fID;
 	BString						fName;
 };

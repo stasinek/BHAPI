@@ -18,11 +18,11 @@ typedef struct mem_info mem_info;
 extern "C" {
 #endif
 
-mem_info *mem_init(const char *name, uint32 start, uint32 length, uint32 blockSize,
-				uint32 heapEntries);
+mem_info *mem_init(const char *name, uint32_t start, uint32_t length, uint32_t blockSize,
+				uint32_t heapEntries);
 void mem_destroy(mem_info *mem);
-status_t mem_alloc(mem_info *mem, uint32 size, void *tag, uint32 *blockID, uint32 *offset);
-status_t mem_free(mem_info *mem, uint32 blockID, void *tag);
+status_t mem_alloc(mem_info *mem, uint32_t size, void *tag, uint32_t *blockID, uint32_t *offset);
+status_t mem_free(mem_info *mem, uint32_t blockID, void *tag);
 status_t mem_freetag(mem_info *mem, void *tag);
 
 #ifdef __cplusplus

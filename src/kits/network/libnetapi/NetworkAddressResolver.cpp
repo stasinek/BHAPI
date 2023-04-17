@@ -14,8 +14,8 @@
 
 static bool strip_port(BString& host, BString& port)
 {
-	int32 first = host.FindFirst(':');
-	int32 separator = host.FindLast(':');
+	int32_t first = host.FindFirst(':');
+	int32_t separator = host.FindLast(':');
 	if (separator != first
 			&& (separator == 0 || host.ByteAt(separator - 1) != ']')) {
 		return false;
@@ -46,7 +46,7 @@ BNetworkAddressResolver::BNetworkAddressResolver()
 
 
 BNetworkAddressResolver::BNetworkAddressResolver(const char* address,
-	uint16 port, uint32 flags)
+	uint16 port, uint32_t flags)
 	:
 	BReferenceable(),
 	fInfo(NULL),
@@ -56,7 +56,7 @@ BNetworkAddressResolver::BNetworkAddressResolver(const char* address,
 }
 
 BNetworkAddressResolver::BNetworkAddressResolver(const char* address,
-	const char* service, uint32 flags)
+	const char* service, uint32_t flags)
 	:
 	BReferenceable(),
 	fInfo(NULL),
@@ -67,7 +67,7 @@ BNetworkAddressResolver::BNetworkAddressResolver(const char* address,
 
 
 BNetworkAddressResolver::BNetworkAddressResolver(int family,
-	const char* address, uint16 port, uint32 flags)
+	const char* address, uint16 port, uint32_t flags)
 	:
 	BReferenceable(),
 	fInfo(NULL),
@@ -78,7 +78,7 @@ BNetworkAddressResolver::BNetworkAddressResolver(int family,
 
 
 BNetworkAddressResolver::BNetworkAddressResolver(int family,
-	const char* address, const char* service, uint32 flags)
+	const char* address, const char* service, uint32_t flags)
 	:
 	BReferenceable(),
 	fInfo(NULL),
@@ -110,21 +110,21 @@ void BNetworkAddressResolver::Unset()
 }
 
 
-status_t BNetworkAddressResolver::SetTo(const char* address, uint16 port, uint32 flags)
+status_t BNetworkAddressResolver::SetTo(const char* address, uint16 port, uint32_t flags)
 {
 	return SetTo(AF_UNSPEC, address, port, flags);
 }
 
 
 status_t BNetworkAddressResolver::SetTo(const char* address, const char* service,
-	uint32 flags)
+	uint32_t flags)
 {
 	return SetTo(AF_UNSPEC, address, service, flags);
 }
 
 
 status_t BNetworkAddressResolver::SetTo(int family, const char* address, uint16 port,
-	uint32 flags)
+	uint32_t flags)
 {
 	BString service;
 	service << port;
@@ -134,7 +134,7 @@ status_t BNetworkAddressResolver::SetTo(int family, const char* address, uint16 
 
 
 status_t BNetworkAddressResolver::SetTo(int family, const char* host,
-	const char* service, uint32 flags)
+	const char* service, uint32_t flags)
 {
 	Unset();
 
@@ -203,7 +203,7 @@ status_t BNetworkAddressResolver::SetTo(int family, const char* host,
 }
 
 
-status_t BNetworkAddressResolver::GetNextAddress(uint32* cookie,
+status_t BNetworkAddressResolver::GetNextAddress(uint32_t* cookie,
 	BNetworkAddress& address) const
 {
 	if (fStatus != B_OK)
@@ -212,8 +212,8 @@ status_t BNetworkAddressResolver::GetNextAddress(uint32* cookie,
 	// Skip previous info entries
 
 	addrinfo* info = fInfo;
-	int32 first = *cookie;
-	for (int32 index = 0; index < first && info != NULL; index++) {
+	int32_t first = *cookie;
+	for (int32_t index = 0; index < first && info != NULL; index++) {
 		info = info->ai_next;
 	}
 
@@ -229,7 +229,7 @@ status_t BNetworkAddressResolver::GetNextAddress(uint32* cookie,
 }
 
 
-status_t BNetworkAddressResolver::GetNextAddress(int family, uint32* cookie,
+status_t BNetworkAddressResolver::GetNextAddress(int family, uint32_t* cookie,
 	BNetworkAddress& address) const
 {
 	if (fStatus != B_OK)
@@ -238,8 +238,8 @@ status_t BNetworkAddressResolver::GetNextAddress(int family, uint32* cookie,
 	// Skip previous info entries, and those that have a non-matching family
 
 	addrinfo* info = fInfo;
-	int32 first = *cookie;
-	for (int32 index = 0; index < first && info != NULL; index++)
+	int32_t first = *cookie;
+	for (int32_t index = 0; index < first && info != NULL; index++)
 		info = info->ai_next;
 
 	while (info != NULL && info->ai_family != family)
@@ -259,14 +259,14 @@ status_t BNetworkAddressResolver::GetNextAddress(int family, uint32* cookie,
 
 /*static*/ BReference<const BNetworkAddressResolver>
 BNetworkAddressResolver::Resolve(const char* address, const char* service,
-	uint32 flags)
+	uint32_t flags)
 {
 	return Resolve(AF_UNSPEC, address, service, flags);
 }
 
 
 /*static*/ BReference<const BNetworkAddressResolver>
-BNetworkAddressResolver::Resolve(const char* address, uint16 port, uint32 flags)
+BNetworkAddressResolver::Resolve(const char* address, uint16 port, uint32_t flags)
 {
 	return Resolve(AF_UNSPEC, address, port, flags);
 }
@@ -274,7 +274,7 @@ BNetworkAddressResolver::Resolve(const char* address, uint16 port, uint32 flags)
 
 /*static*/ BReference<const BNetworkAddressResolver>
 BNetworkAddressResolver::Resolve(int family, const char* address,
-	uint16 port, uint32 flags)
+	uint16 port, uint32_t flags)
 {
 	BString service;
 	service << port;
@@ -285,7 +285,7 @@ BNetworkAddressResolver::Resolve(int family, const char* address,
 
 /*static*/ BReference<const BNetworkAddressResolver>
 BNetworkAddressResolver::Resolve(int family, const char* address,
-	const char* service, uint32 flags)
+	const char* service, uint32_t flags)
 {
 	// TODO it may be faster to use an hash map to have faster lookup of the
 	// cache. However, we also need to access the cache by LRU, and for that

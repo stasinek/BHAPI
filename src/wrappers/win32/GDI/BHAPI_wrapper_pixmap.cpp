@@ -36,7 +36,7 @@
 #include <os/debug.h>
 
 
-EWin32GraphicsDrawable::EWin32GraphicsDrawable(EWin32GraphicsEngine *win32Engine,  uint32 w,  uint32 h)
+EWin32GraphicsDrawable::EWin32GraphicsDrawable(EWin32GraphicsEngine *win32Engine,  uint32_t w,  uint32_t h)
 	: BGraphicsDrawable(), win32Pixmap(NULL), win32HDC(NULL), win32Pen(NULL), win32Brush(NULL),
 	  fRequestAsyncWin(NULL), WMBHAPI_MESSAGE(0)
 {
@@ -176,7 +176,7 @@ EWin32GraphicsDrawable::SetBackgroundColor(bhapi::rgb_color bkColor)
 
 
 status_t 
-EWin32GraphicsDrawable::ResizeTo(uint32 w,  uint32 h)
+EWin32GraphicsDrawable::ResizeTo(uint32_t w,  uint32_t h)
 {
 	if(fRequestAsyncWin == NULL) return B_ERROR;
 
@@ -252,8 +252,8 @@ LRESULT _bhapi_resize_pixmap(EWin32GraphicsEngine *win32Engine, bhapi::win32_gdi
 status_t 
 EWin32GraphicsDrawable::CopyTo(BGraphicsContext *dc,
 			       BGraphicsDrawable *dstDrawable,
-			        int32 x,  int32 y,  uint32 w,  uint32 h,
-			        int32 dstX,  int32 dstY,  uint32 dstW,  uint32 dstH)
+			        int32_t x,  int32_t y,  uint32_t w,  uint32_t h,
+			        int32_t dstX,  int32_t dstY,  uint32_t dstW,  uint32_t dstH)
 {
 	if(fRequestAsyncWin == NULL || dc == NULL || dstDrawable == NULL) return B_ERROR;
 
@@ -383,8 +383,8 @@ LRESULT _bhapi_draw_pixmap(EWin32GraphicsEngine *win32Engine, bhapi::win32_gdi_c
 
 status_t 
 EWin32GraphicsDrawable::DrawPixmap(BGraphicsContext *dc, const BPixmap *pix,
-				    int32 x,  int32 y,  uint32 w,  uint32 h,
-				    int32 dstX,  int32 dstY,  uint32 dstW,  uint32 dstH)
+				    int32_t x,  int32_t y,  uint32_t w,  uint32_t h,
+				    int32_t dstX,  int32_t dstY,  uint32_t dstW,  uint32_t dstH)
 {
 	if(fRequestAsyncWin == NULL) return B_ERROR;
 

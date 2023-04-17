@@ -15,8 +15,8 @@
 extern "C" {
 #endif
 
-int32 dm_create_id(const char *name);
-status_t dm_free_id(const char *name, uint32 id);
+int32_t dm_create_id(const char *name);
+status_t dm_free_id(const char *name, uint32_t id);
 
 void dm_init_id_generator(void);
 

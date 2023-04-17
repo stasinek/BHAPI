@@ -12,7 +12,7 @@
 struct system_profiler_parameters {
 	// general
 	area_id		buffer_area;			// area the events will be written to
-	uint32		flags;					// flags selecting the events to receive
+	uint32_t		flags;					// flags selecting the events to receive
 
 	// scheduling
 	size_t		locking_lookup_size;	// size of the lookup table used for
@@ -20,7 +20,7 @@ struct system_profiler_parameters {
 
 	// sampling
 	bigtime_t	interval;				// interval at which to take samples
-	uint32		stack_depth;			// maximum stack depth to sample
+	uint32_t		stack_depth;			// maximum stack depth to sample
 };
 
 
@@ -169,7 +169,7 @@ struct system_profiler_thread_removed_from_run_queue {
 
 // B_SYSTEM_PROFILER_WAIT_OBJECT_INFO
 struct system_profiler_wait_object_info {
-	uint32		type;
+	uint32_t		type;
 	addr_t		object;
 	addr_t		referenced_object;
 	char		name[1];
@@ -177,19 +177,19 @@ struct system_profiler_wait_object_info {
 
 // B_SYSTEM_PROFILER_IO_SCHEDULER_ADDED
 struct system_profiler_io_scheduler_added {
-	int32		scheduler;
+	int32_t		scheduler;
 	char		name[1];
 };
 
 // B_SYSTEM_PROFILER_IO_SCHEDULER_REMOVED
 struct system_profiler_io_scheduler_removed {
-	int32		scheduler;
+	int32_t		scheduler;
 };
 
 // B_SYSTEM_PROFILER_IO_REQUEST_SCHEDULED
 struct system_profiler_io_request_scheduled {
 	nanotime_t	time;
-	int32		scheduler;
+	int32_t		scheduler;
 	team_id		team;
 	thread_id	thread;
 	void*		request;
@@ -202,7 +202,7 @@ struct system_profiler_io_request_scheduled {
 // B_SYSTEM_PROFILER_IO_REQUEST_FINISHED
 struct system_profiler_io_request_finished {
 	nanotime_t	time;
-	int32		scheduler;
+	int32_t		scheduler;
 	void*		request;
 	status_t	status;
 	size_t		transferred;
@@ -211,7 +211,7 @@ struct system_profiler_io_request_finished {
 // B_SYSTEM_PROFILER_IO_OPERATION_STARTED
 struct system_profiler_io_operation_started {
 	nanotime_t	time;
-	int32		scheduler;
+	int32_t		scheduler;
 	void*		request;
 	void*		operation;
 	off_t		offset;
@@ -222,7 +222,7 @@ struct system_profiler_io_operation_started {
 // B_SYSTEM_PROFILER_IO_OPERATION_FINISHED
 struct system_profiler_io_operation_finished {
 	nanotime_t	time;
-	int32		scheduler;
+	int32_t		scheduler;
 	void*		request;
 	void*		operation;
 	status_t	status;

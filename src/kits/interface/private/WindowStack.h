@@ -17,18 +17,18 @@ public:
 			status_t			AddWindow(const BWindow* window);
 			status_t			AddWindow(const BMessenger& window);
 			status_t			AddWindowAt(const BWindow* window,
-									int32 position);
+									int32_t position);
 			status_t			AddWindowAt(const BMessenger& window,
-									int32 position);
+									int32_t position);
 
 			status_t			RemoveWindow(const BWindow* window);
 			status_t			RemoveWindow(const BMessenger& window);
-			status_t			RemoveWindowAt(int32 position,
+			status_t			RemoveWindowAt(int32_t position,
 									BMessenger* window = NULL);
 
-			int32				CountWindows();
+			int32_t				CountWindows();
 
-			status_t			WindowAt(int32 position,
+			status_t			WindowAt(int32_t position,
 								BMessenger& messenger);
 			bool				HasWindow(const BWindow* window);
 			bool				HasWindow(const BMessenger& window);
@@ -36,7 +36,7 @@ public:
 private:
 			status_t			_AttachMessenger(const BMessenger& window);
 			status_t			_ReadMessenger(BMessenger& window);
-			status_t			_StartMessage(int32 what);
+			status_t			_StartMessage(int32_t what);
 
 			BPrivate::PortLink*	fLink;
 };

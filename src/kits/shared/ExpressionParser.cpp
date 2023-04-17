@@ -19,7 +19,7 @@
 #include <m_apm.h>
 
 
-static const int32 kMaxDecimalPlaces = 32;
+static const int32_t kMaxDecimalPlaces = 32;
 
 
 enum {
@@ -65,7 +65,7 @@ struct ExpressionParser::Token {
 	{
 	}
 
-	Token(const char* string, int32 length, int32 position, int32 type)
+	Token(const char* string, int32_t length, int32_t position, int32_t type)
 		: string(string, length),
 		  type(type),
 		  value(0),
@@ -83,10 +83,10 @@ struct ExpressionParser::Token {
 	}
 
 	BString		string;
-	int32		type;
+	int32_t		type;
 	MAPM		value;
 
-	int32		position;
+	int32_t		position;
 };
 
 
@@ -183,12 +183,12 @@ class ExpressionParser::Tokenizer {
 				}
 			}
 
-			int32 length = fCurrentChar - begin;
+			int32_t length = fCurrentChar - begin;
 			BString test = temp;
 			test << "&_";
 			double value;
 			char t[2];
-			int32 matches = sscanf(test.String(), "%lf&%s", &value, t);
+			int32_t matches = sscanf(test.String(), "%lf&%s", &value, t);
 			if (matches != 2) {
 				throw ParseException("error in constant",
 					_CurrentPos() - length);
@@ -203,7 +203,7 @@ class ExpressionParser::Tokenizer {
 				|| isdigit(*fCurrentChar))) {
 				fCurrentChar++;
 			}
-			int32 length = fCurrentChar - begin;
+			int32_t length = fCurrentChar - begin;
 			fCurrentToken = Token(begin, length, _CurrentPos() - length,
 				TOKEN_IDENTIFIER);
 		} else if (strncmp(fCurrentChar, "π", 2) == 0) {
@@ -211,7 +211,7 @@ class ExpressionParser::Tokenizer {
 				TOKEN_IDENTIFIER);
 			fCurrentChar += 2;
 		} else {
-			int32 type = TOKEN_NONE;
+			int32_t type = TOKEN_NONE;
 
 			switch (*fCurrentChar) {
 				case TOKEN_PLUS:
@@ -277,7 +277,7 @@ class ExpressionParser::Tokenizer {
 		while (_IsHexDigit(*fCurrentChar))
 			fCurrentChar++;
 
-		int32 length = fCurrentChar - begin;
+		int32_t length = fCurrentChar - begin;
 		fCurrentToken = Token(begin, length, _CurrentPos() - length,
 			TOKEN_CONSTANT);
 
@@ -296,7 +296,7 @@ class ExpressionParser::Tokenizer {
 		return fCurrentToken;
 	}
 
-	int32 _CurrentPos() const
+	int32_t _CurrentPos() const
 	{
 		return fCurrentChar - fString.String();
 	}
@@ -358,7 +358,7 @@ ExpressionParser::Evaluate(const char* expressionString)
 		throw ParseException("out of memory", 0);
 
 	// remove surplus zeros
-	int32 lastChar = strlen(buffer) - 1;
+	int32_t lastChar = strlen(buffer) - 1;
 	if (strchr(buffer, '.')) {
 		while (buffer[lastChar] == '0')
 			lastChar--;
@@ -543,11 +543,11 @@ struct Function {
 };
 
 
-void ExpressionParser::_InitArguments(MAPM values[], int32 argumentCount)
+void ExpressionParser::_InitArguments(MAPM values[], int32_t argumentCount)
 {
 	_EatToken(TOKEN_OPENING_BRACKET);
 
-	for (int32 i = 0; i < argumentCount; i++)
+	for (int32_t i = 0; i < argumentCount; i++)
 		values[i] = _ParseBinary();
 
 	_EatToken(TOKEN_CLOSING_BRACKET);
@@ -712,7 +712,7 @@ ExpressionParser::_ParseFactorial(MAPM value)
 }
 
 
-void ExpressionParser::_EatToken(int32 type)
+void ExpressionParser::_EatToken(int32_t type)
 {
 	Token token = fTokenizer->NextToken();
 	if (token.type != type) {

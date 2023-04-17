@@ -163,7 +163,7 @@ void BQueryPoseView::SavePoseLocations(BRect*)
 }
 
 
-void BQueryPoseView::SetViewMode(uint32)
+void BQueryPoseView::SetViewMode(uint32_t)
 {
 }
 
@@ -223,8 +223,8 @@ void BQueryPoseView::AddPosesCompleted()
 
 	PoseList* oldPoseList = fQueryListContainer->OldPoseList();
 	if (oldPoseList != NULL) {
-		int32 count = oldPoseList->CountItems();
-		for (int32 index = count - 1; index >= 0; index--) {
+		int32_t count = oldPoseList->CountItems();
+		for (int32_t index = count - 1; index >= 0; index--) {
 			BPose* pose = oldPoseList->ItemAt(index);
 			DeletePose(pose->TargetModel()->node_ref());
 		}
@@ -317,19 +317,19 @@ BQueryPoseView::InitDirentIterator(const entry_ref* ref)
 			delta = nextMidnight - now;
 
 #if DEBUG
-		int32 secondsTillMidnight = (nextMidnight - now);
-		int32 minutesTillMidnight = secondsTillMidnight/60;
+		int32_t secondsTillMidnight = (nextMidnight - now);
+		int32_t minutesTillMidnight = secondsTillMidnight/60;
 		secondsTillMidnight %= 60;
-		int32 hoursTillMidnight = minutesTillMidnight/60;
+		int32_t hoursTillMidnight = minutesTillMidnight/60;
 		minutesTillMidnight %= 60;
 
 		PRINT(("%" B_PRId32 " hours, %" B_PRId32 " minutes, %" B_PRId32
 			" seconds till midnight\n", hoursTillMidnight, minutesTillMidnight,
 			secondsTillMidnight));
 
-		int32 refreshInSeconds = delta % 60;
-		int32 refreshInMinutes = delta / 60;
-		int32 refreshInHours = refreshInMinutes / 60;
+		int32_t refreshInSeconds = delta % 60;
+		int32_t refreshInMinutes = delta / 60;
+		int32_t refreshInHours = refreshInMinutes / 60;
 		refreshInMinutes %= 60;
 
 		PRINT(("next refresh in %" B_PRId32 " hours, %" B_PRId32 "minutes, %"
@@ -352,7 +352,7 @@ BQueryPoseView::InitDirentIterator(const entry_ref* ref)
 }
 
 
-uint32 BQueryPoseView::WatchNewNodeMask()
+uint32_t BQueryPoseView::WatchNewNodeMask()
 {
 	return B_WATCH_NAME | B_WATCH_STAT | B_WATCH_ATTR;
 }
@@ -392,8 +392,8 @@ const char*  BQueryPoseView::SearchForType() const
 
 bool BQueryPoseView::ActiveOnDevice(dev_t device) const
 {
-	int32 count = fQueryList->CountItems();
-	for (int32 index = 0; index < count; index++) {
+	int32_t count = fQueryList->CountItems();
+	for (int32_t index = 0; index < count; index++) {
 		if (fQueryList->ItemAt(index)->TargetDevice() == device)
 			return true;
 	}
@@ -427,7 +427,7 @@ QueryEntryListCollection::QueryEntryListCollection(Model* model,
 
 	BString buffer;
 	if (modelNode->ReadAttr(kAttrQueryString, B_STRING_TYPE, 0,
-		buffer.LockBuffer((int32)info.size),
+		buffer.LockBuffer((int32_t)info.size),
 			(size_t)info.size) != info.size) {
 		fStatus = B_ERROR;
 		return;
@@ -486,7 +486,7 @@ QueryEntryListCollection::QueryEntryListCollection(Model* model,
 				buffer, (size_t)info.size) == info.size) {
 			BMessage message;
 			if (message.Unflatten(buffer) == B_OK) {
-				for (int32 index = 0; ;index++) {
+				for (int32_t index = 0; ;index++) {
 					ASSERT(index < 100);
 					BVolume volume;
 						// match a volume with the info embedded in
@@ -602,7 +602,7 @@ status_t QueryEntryListCollection::GetNextEntry(BEntry* entry, bool traverse)
 {
 	status_t result = B_ERROR;
 
-	for (int32 count = fQueryListRep->fQueryList->CountItems();
+	for (int32_t count = fQueryListRep->fQueryList->CountItems();
 		fQueryListRep->fQueryListIndex < count;
 		fQueryListRep->fQueryListIndex++) {
 		result = fQueryListRep->fQueryList->
@@ -616,12 +616,12 @@ status_t QueryEntryListCollection::GetNextEntry(BEntry* entry, bool traverse)
 }
 
 
-int32 QueryEntryListCollection::GetNextDirents(struct dirent* buffer, size_t length,
-	int32 count)
+int32_t QueryEntryListCollection::GetNextDirents(struct dirent* buffer, size_t length,
+	int32_t count)
 {
-	int32 result = 0;
+	int32_t result = 0;
 
-	for (int32 queryCount = fQueryListRep->fQueryList->CountItems();
+	for (int32_t queryCount = fQueryListRep->fQueryList->CountItems();
 			fQueryListRep->fQueryListIndex < queryCount;
 			fQueryListRep->fQueryListIndex++) {
 		result = fQueryListRep->fQueryList->
@@ -639,7 +639,7 @@ status_t QueryEntryListCollection::GetNextRef(entry_ref* ref)
 {
 	status_t result = B_ERROR;
 
-	for (int32 count = fQueryListRep->fQueryList->CountItems();
+	for (int32_t count = fQueryListRep->fQueryList->CountItems();
 		fQueryListRep->fQueryListIndex < count;
 		fQueryListRep->fQueryListIndex++) {
 
@@ -661,7 +661,7 @@ status_t QueryEntryListCollection::Rewind()
 }
 
 
-int32 QueryEntryListCollection::CountEntries()
+int32_t QueryEntryListCollection::CountEntries()
 {
 	return 0;
 }

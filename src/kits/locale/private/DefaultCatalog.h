@@ -25,7 +25,7 @@ namespace BPrivate {
 class DefaultCatalog : public HashMapCatalog {
 	public:
 		DefaultCatalog(const entry_ref &catalogOwner, const char *language,
-			uint32 fingerprint);
+			uint32_t fingerprint);
 				// constructor for normal use
 		DefaultCatalog(entry_ref *appOrAddOnRef);
 				// constructor for embedded catalog
@@ -47,7 +47,7 @@ class DefaultCatalog : public HashMapCatalog {
 		void SetSignature(const entry_ref &catalogOwner);
 
 		static BCatalogData *Instantiate(const entry_ref& catalogOwner,
-			const char *language, uint32 fingerprint);
+			const char *language, uint32_t fingerprint);
 		static BCatalogData *Create(const char *signature,
 			const char *language);
 
@@ -65,7 +65,7 @@ class DefaultCatalog : public HashMapCatalog {
 
 extern "C" status_t default_catalog_get_available_languages(BMessage* availableLanguages,
 	const char* sigPattern, const char* langPattern = NULL,
-	int32 fingerprint = 0);
+	int32_t fingerprint = 0);
 
 
 }	// namespace BPrivate

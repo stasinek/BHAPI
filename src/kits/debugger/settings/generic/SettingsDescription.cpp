@@ -16,19 +16,19 @@ SettingsDescription::SettingsDescription()
 
 SettingsDescription::~SettingsDescription()
 {
-	for (int32 i = 0; Setting* setting = SettingAt(i); i++)
+	for (int32_t i = 0; Setting* setting = SettingAt(i); i++)
 		setting->ReleaseReference();
 }
 
 
-int32 SettingsDescription::CountSettings() const
+int32_t SettingsDescription::CountSettings() const
 {
 	return fSettings.CountItems();
 }
 
 
 Setting*
-SettingsDescription::SettingAt(int32 index) const
+SettingsDescription::SettingAt(int32_t index) const
 {
 	return fSettings.ItemAt(index);
 }
@@ -37,7 +37,7 @@ SettingsDescription::SettingAt(int32 index) const
 Setting*
 SettingsDescription::SettingByID(const char* id) const
 {
-	for (int32 i = 0; Setting* setting = fSettings.ItemAt(i); i++) {
+	for (int32_t i = 0; Setting* setting = fSettings.ItemAt(i); i++) {
 		if (strcmp(setting->ID(), id) == 0)
 			return setting;
 	}

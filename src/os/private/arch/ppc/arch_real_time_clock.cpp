@@ -27,7 +27,7 @@ arch_rtc_init(kernel_args *args, struct real_time_data *data)
 	// => (tb * cvFactor) >> 32 = (tb * 2^32 * 1000000 / tbFreq) >> 32
 	//    = tb / tbFreq * 1000000 = time in us
 	data->arch_data.system_time_conversion_factor
-		= uint32((uint64(1) << 32) * 1000000
+		= uint32_t((uint64(1) << 32) * 1000000
 			/ args->arch_args.time_base_frequency);
 	data->arch_data.version = 0;
 
@@ -41,7 +41,7 @@ arch_rtc_init(kernel_args *args, struct real_time_data *data)
 }
 
 
-uint32
+uint32_t
 arch_rtc_get_hw_time(void)
 {
 	return PPCPlatform::Default()->GetHardwareRTC();
@@ -49,7 +49,7 @@ arch_rtc_get_hw_time(void)
 
 
 void
-arch_rtc_set_hw_time(uint32 seconds)
+arch_rtc_set_hw_time(uint32_t seconds)
 {
 	PPCPlatform::Default()->SetHardwareRTC(seconds);
 }
@@ -61,7 +61,7 @@ arch_rtc_set_system_time_offset(struct real_time_data *data, bigtime_t offset)
 	cpu_status state = disable_interrupts();
 	acquire_spinlock(&sSetArchDataLock);
 
-	int32 version = data->arch_data.version + 1;
+	int32_t version = data->arch_data.version + 1;
 	data->arch_data.data[version % 2].system_time_offset = offset;
 	data->arch_data.version = version;
 
@@ -73,7 +73,7 @@ arch_rtc_set_system_time_offset(struct real_time_data *data, bigtime_t offset)
 bigtime_t
 arch_rtc_get_system_time_offset(struct real_time_data *data)
 {
-	int32 version;
+	int32_t version;
 	bigtime_t offset;
 	do {
 		version = data->arch_data.version;

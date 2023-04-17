@@ -58,7 +58,7 @@ static const char rcsid[] = "$Id: memcluster.c,v 1.11 2006/08/30 23:34:38 marka 
 #define DEF_MAX_SIZE		1100
 #define DEF_MEM_TARGET		4096
 
-typedef u_int32_t fence_t;
+typedef u_int32_t_t fence_t;
 
 typedef struct {
 	void *			next;

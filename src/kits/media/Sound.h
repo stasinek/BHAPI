@@ -28,7 +28,7 @@ public:
 			status_t			InitCheck();
 			BSound* 			AcquireRef();
 			bool				ReleaseRef();
-			int32				RefCount() const; // unreliable!
+			int32_t				RefCount() const; // unreliable!
 
 	virtual	bigtime_t			Duration() const;
 	virtual	const media_raw_audio_format &Format() const;
@@ -41,7 +41,7 @@ public:
 
 protected:
 								BSound(const media_raw_audio_format& format);
-	virtual	status_t			Perform(int32 code, ...);
+	virtual	status_t			Perform(int32_t code, ...);
 
 private:
 			friend	class DummyFriend;
@@ -64,7 +64,7 @@ private:
 			void*				fData;
 			size_t				fDataSize;
 			BFile*				fFile;
-			int32				fRefCount;
+			int32_t				fRefCount;
 			status_t			fStatus;
 			media_raw_audio_format fFormat;
 
@@ -72,7 +72,7 @@ private:
 			bool				fReserved[3];
 
 			BPrivate::BTrackReader* fTrackReader;
-			uint32				fReserved2[18];
+			uint32_t				fReserved2[18];
 };
 
 #endif // _SOUND_H

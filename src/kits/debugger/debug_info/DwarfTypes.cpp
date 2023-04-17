@@ -53,7 +53,7 @@ struct HasByteStridePredicate {
 
 
 type_kind
-dwarf_tag_to_type_kind(int32 tag)
+dwarf_tag_to_type_kind(int32_t tag)
 {
 	switch (tag) {
 		case DW_TAG_class_type:
@@ -103,7 +103,7 @@ dwarf_tag_to_type_kind(int32 tag)
 }
 
 
-int32 dwarf_tag_to_subtype_kind(int32 tag)
+int32_t dwarf_tag_to_subtype_kind(int32_t tag)
 {
 	switch (tag) {
 		case DW_TAG_class_type:
@@ -305,7 +305,7 @@ status_t DwarfType::ResolveObjectDataLocation(const ValueLocation& objectLocatio
 	// to a descriptor, not the actual object data.
 
 	// If the given location looks good already, just clone it.
-	int32 count = objectLocation.CountPieces();
+	int32_t count = objectLocation.CountPieces();
 	if (count == 0)
 		return B_BAD_VALUE;
 
@@ -378,14 +378,14 @@ status_t DwarfType::ResolveLocation(DwarfTypeContext* typeContext,
 	// translate the DWARF register indices and the bit offset/size semantics
 	const Register* registers = typeContext->GetArchitecture()->Registers();
 	bool bigEndian = typeContext->GetArchitecture()->IsBigEndian();
-	int32 count = _location.CountPieces();
-	for (int32 i = 0; i < count; i++) {
+	int32_t count = _location.CountPieces();
+	for (int32_t i = 0; i < count; i++) {
 		ValuePieceLocation piece;
 		if (!piece.Copy(_location.PieceAt(i)))
 			return B_NO_MEMORY;
 
 		if (piece.type == VALUE_PIECE_LOCATION_REGISTER) {
-			int32 reg = typeContext->FromDwarfRegisterMap()->MapRegisterIndex(
+			int32_t reg = typeContext->FromDwarfRegisterMap()->MapRegisterIndex(
 				piece.reg);
 			if (reg >= 0) {
 				piece.reg = reg;
@@ -623,7 +623,7 @@ DwarfTemplateParameter::~DwarfTemplateParameter()
 
 
 DwarfPrimitiveType::DwarfPrimitiveType(DwarfTypeContext* typeContext,
-	const BString& name, DIEBaseType* entry, uint32 typeConstant)
+	const BString& name, DIEBaseType* entry, uint32_t typeConstant)
 	:
 	DwarfType(typeContext, name, entry),
 	fEntry(entry),
@@ -639,7 +639,7 @@ DwarfPrimitiveType::GetDIEType() const
 }
 
 
-uint32 DwarfPrimitiveType::TypeConstant() const
+uint32_t DwarfPrimitiveType::TypeConstant() const
 {
 	return fTypeConstant;
 }
@@ -661,14 +661,14 @@ DwarfCompoundType::DwarfCompoundType(DwarfTypeContext* typeContext,
 
 DwarfCompoundType::~DwarfCompoundType()
 {
-	for (int32 i = 0;
+	for (int32_t i = 0;
 			DwarfInheritance* inheritance = fInheritances.ItemAt(i); i++) {
 		inheritance->ReleaseReference();
 	}
-	for (int32 i = 0; DwarfDataMember* member = fDataMembers.ItemAt(i); i++)
+	for (int32_t i = 0; DwarfDataMember* member = fDataMembers.ItemAt(i); i++)
 		member->ReleaseReference();
 
-	for (int32 i = 0; DwarfTemplateParameter* parameter
+	for (int32_t i = 0; DwarfTemplateParameter* parameter
 		= fTemplateParameters.ItemAt(i); i++) {
 		parameter->ReleaseReference();
 	}
@@ -682,40 +682,40 @@ DwarfCompoundType::CompoundKind() const
 }
 
 
-int32 DwarfCompoundType::CountBaseTypes() const
+int32_t DwarfCompoundType::CountBaseTypes() const
 {
 	return fInheritances.CountItems();
 }
 
 
 BaseType*
-DwarfCompoundType::BaseTypeAt(int32 index) const
+DwarfCompoundType::BaseTypeAt(int32_t index) const
 {
 	return fInheritances.ItemAt(index);
 }
 
 
-int32 DwarfCompoundType::CountDataMembers() const
+int32_t DwarfCompoundType::CountDataMembers() const
 {
 	return fDataMembers.CountItems();
 }
 
 
 DataMember*
-DwarfCompoundType::DataMemberAt(int32 index) const
+DwarfCompoundType::DataMemberAt(int32_t index) const
 {
 	return fDataMembers.ItemAt(index);
 }
 
 
-int32 DwarfCompoundType::CountTemplateParameters() const
+int32_t DwarfCompoundType::CountTemplateParameters() const
 {
 	return fTemplateParameters.CountItems();
 }
 
 
 TemplateParameter*
-DwarfCompoundType::TemplateParameterAt(int32 index) const
+DwarfCompoundType::TemplateParameterAt(int32_t index) const
 {
 	return fTemplateParameters.ItemAt(index);
 }
@@ -971,7 +971,7 @@ DwarfArrayType::DwarfArrayType(DwarfTypeContext* typeContext,
 
 DwarfArrayType::~DwarfArrayType()
 {
-	for (int32 i = 0;
+	for (int32_t i = 0;
 		DwarfArrayDimension* dimension = fDimensions.ItemAt(i); i++) {
 		dimension->ReleaseReference();
 	}
@@ -987,14 +987,14 @@ DwarfArrayType::BaseType() const
 }
 
 
-int32 DwarfArrayType::CountDimensions() const
+int32_t DwarfArrayType::CountDimensions() const
 {
 	return fDimensions.CountItems();
 }
 
 
 ArrayDimension*
-DwarfArrayType::DimensionAt(int32 index) const
+DwarfArrayType::DimensionAt(int32_t index) const
 {
 	return fDimensions.ItemAt(index);
 }
@@ -1032,7 +1032,7 @@ status_t DwarfArrayType::ResolveElementLocation(const ArrayIndexPath& indexPath,
 	int64 elementOffset = 0;
 	DwarfArrayDimension* previousDimension = NULL;
 	int64 previousDimensionStride = 0;
-	for (int32 dimensionIndex = CountDimensions() - 1;
+	for (int32_t dimensionIndex = CountDimensions() - 1;
 			dimensionIndex >= 0; dimensionIndex--) {
 		DwarfArrayDimension* dimension = DwarfDimensionAt(dimensionIndex);
 		int64 index = indexPath.IndexAt(dimensionIndex);
@@ -1185,7 +1185,7 @@ bool DwarfArrayType::AddDimension(DwarfArrayDimension* dimension)
 
 
 DwarfModifiedType::DwarfModifiedType(DwarfTypeContext* typeContext,
-	const BString& name, DIEModifiedType* entry, uint32 modifiers,
+	const BString& name, DIEModifiedType* entry, uint32_t modifiers,
 	DwarfType* baseType)
 	:
 	DwarfType(typeContext, name, entry),
@@ -1203,7 +1203,7 @@ DwarfModifiedType::~DwarfModifiedType()
 }
 
 
-uint32 DwarfModifiedType::Modifiers() const
+uint32_t DwarfModifiedType::Modifiers() const
 {
 	return fModifiers;
 }
@@ -1317,7 +1317,7 @@ DwarfEnumerationType::DwarfEnumerationType(DwarfTypeContext* typeContext,
 
 DwarfEnumerationType::~DwarfEnumerationType()
 {
-	for (int32 i = 0; DwarfEnumeratorValue* value = fValues.ItemAt(i); i++)
+	for (int32_t i = 0; DwarfEnumeratorValue* value = fValues.ItemAt(i); i++)
 		value->ReleaseReference();
 
 	if (fBaseType != NULL)
@@ -1332,14 +1332,14 @@ DwarfEnumerationType::BaseType() const
 }
 
 
-int32 DwarfEnumerationType::CountValues() const
+int32_t DwarfEnumerationType::CountValues() const
 {
 	return fValues.CountItems();
 }
 
 
 EnumeratorValue*
-DwarfEnumerationType::ValueAt(int32 index) const
+DwarfEnumerationType::ValueAt(int32_t index) const
 {
 	return fValues.ItemAt(index);
 }
@@ -1455,7 +1455,7 @@ DwarfFunctionType::DwarfFunctionType(DwarfTypeContext* typeContext,
 
 DwarfFunctionType::~DwarfFunctionType()
 {
-	for (int32 i = 0;
+	for (int32_t i = 0;
 		DwarfFunctionParameter* parameter = fParameters.ItemAt(i); i++) {
 		parameter->ReleaseReference();
 	}
@@ -1472,14 +1472,14 @@ DwarfFunctionType::ReturnType() const
 }
 
 
-int32 DwarfFunctionType::CountParameters() const
+int32_t DwarfFunctionType::CountParameters() const
 {
 	return fParameters.CountItems();
 }
 
 
 FunctionParameter*
-DwarfFunctionType::ParameterAt(int32 index) const
+DwarfFunctionType::ParameterAt(int32_t index) const
 {
 	return fParameters.ItemAt(index);
 }

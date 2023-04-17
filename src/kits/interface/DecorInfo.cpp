@@ -455,7 +455,7 @@ status_t DecorInfoUtility::ScanDecorators()
 }
 
 
-int32 DecorInfoUtility::CountDecorators()
+int32_t DecorInfoUtility::CountDecorators()
 {
 	BAutolock _(fLock);
 	if (!fHasScanned)
@@ -466,7 +466,7 @@ int32 DecorInfoUtility::CountDecorators()
 
 
 DecorInfo*
-DecorInfoUtility::DecoratorAt(int32 index)
+DecorInfoUtility::DecoratorAt(int32_t index)
 {
 	BAutolock _(fLock);
 	return fList.ItemAt(index);
@@ -547,7 +547,7 @@ status_t DecorInfoUtility::SetDecorator(DecorInfo* decor)
 }
 
 
-status_t DecorInfoUtility::SetDecorator(int32 index)
+status_t DecorInfoUtility::SetDecorator(int32_t index)
 {
 	BAutolock _(fLock);
 	if (!fHasScanned)

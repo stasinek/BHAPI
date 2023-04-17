@@ -88,7 +88,7 @@ typedef struct bhapi::win32_sem_info {
 	int64			acquiringCount;
 	bool			closed;
 
-	uint32			refCount;
+	uint32_t			refCount;
 } bhapi::win32_sem_info;
 
 
@@ -427,7 +427,7 @@ BHAPI_EXPORT status_t bhapi::delete_sem(void *data)
 		BHAPI_UNLOCK_SEMAPHORE();
 		return B_ERROR;
 	}
-	uint32 count = --(sem->semInfo->refCount);
+	uint32_t count = --(sem->semInfo->refCount);
 	BHAPI_UNLOCK_SEMAPHORE();
 
 	if(bhapi::is_sem_for_IPC(sem))
@@ -468,7 +468,7 @@ BHAPI_EXPORT status_t bhapi::delete_sem_etc(void *data, bool no_clone)
 		return B_ERROR;
 	}
 	if(!bhapi::is_sem_for_IPC(sem) && no_clone) sem->no_clone = true;
-	uint32 count = --(sem->semInfo->refCount);
+	uint32_t count = --(sem->semInfo->refCount);
 	BHAPI_UNLOCK_SEMAPHORE();
 
 	if(bhapi::is_sem_for_IPC(sem))
@@ -518,7 +518,7 @@ BHAPI_EXPORT status_t bhapi::close_sem(void *data)
 }
 
 
-BHAPI_EXPORT status_t bhapi::acquire_sem_etc(void *data,  int64 count,  uint32 flags, bigtime_t microseconds_timeout)
+BHAPI_EXPORT status_t bhapi::acquire_sem_etc(void *data,  int64 count,  uint32_t flags, bigtime_t microseconds_timeout)
 {
 	bhapi::win32_sem_t *sem = (bhapi::win32_sem_t*)data;
 	if(!sem) return B_BAD_VALUE;
@@ -644,7 +644,7 @@ BHAPI_EXPORT status_t bhapi::acquire_sem(void *data)
 }
 
 
-BHAPI_EXPORT status_t bhapi::release_sem_etc(void *data,  int64 count,  uint32 flags)
+BHAPI_EXPORT status_t bhapi::release_sem_etc(void *data,  int64 count,  uint32_t flags)
 {
 	bhapi::win32_sem_t *sem = (bhapi::win32_sem_t*)data;
 	if(!sem || count < B_INT64_CONSTANT(0)) return B_BAD_VALUE;

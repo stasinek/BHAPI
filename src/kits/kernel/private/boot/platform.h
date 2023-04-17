@@ -33,7 +33,7 @@ extern status_t platform_free_region(void *address, size_t size);
 #define BOOT_OPTION_MENU			1
 #define BOOT_OPTION_DEBUG_OUTPUT	2
 
-extern uint32 platform_boot_options(void);
+extern uint32_t platform_boot_options(void);
 
 /* misc functions */
 extern status_t platform_init_video(void);

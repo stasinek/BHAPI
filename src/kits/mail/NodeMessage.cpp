@@ -27,7 +27,7 @@ _EXPORT BNode& operator<<(BNode& n, const BMessage& m)
 	ssize_t     bytes;
 	const void *data;
 	
-	for (int32 i = 0;
+	for (int32_t i = 0;
 		m.GetInfo(B_ANY_TYPE, i, &name, &type) == 0;
 		i++) {
 		m.FindData (name,type,0,&data,&bytes);

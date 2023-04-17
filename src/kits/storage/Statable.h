@@ -67,9 +67,9 @@ private:
 
 	virtual	void _OhSoStatable2();
 	virtual	void _OhSoStatable3();
-	uint32 _reserved[4];
+	uint32_t _reserved[4];
 
-	virtual	status_t set_stat(struct stat &st, uint32 what) = 0;
+	virtual	status_t set_stat(struct stat &st, uint32_t what) = 0;
 };
 
 #endif // _STATABLE_H

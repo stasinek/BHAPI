@@ -61,9 +61,9 @@ struct caller_info {
 	size_t		size;
 };
 
-static const int32 kCallerInfoTableSize = 1024;
+static const int32_t kCallerInfoTableSize = 1024;
 static caller_info sCallerInfoTable[kCallerInfoTableSize];
-static int32 sCallerInfoCount = 0;
+static int32_t sCallerInfoCount = 0;
 
 static caller_info* get_caller_info(addr_t caller);
 
@@ -87,7 +87,7 @@ static const addr_t kSlabCodeAddressRanges[] = {
 	RANGE_MARKER_FUNCTION_ADDRESS_RANGE(SlabSmallObjectCache)
 };
 
-static const uint32 kSlabCodeAddressRangeCount
+static const uint32_t kSlabCodeAddressRangeCount
 	= sizeof(kSlabCodeAddressRanges) / sizeof(kSlabCodeAddressRanges[0]) / 2;
 
 #endif	// SLAB_ALLOCATION_TRACKING_AVAILABLE
@@ -119,7 +119,7 @@ class ObjectCacheTraceEntry
 class Create : public ObjectCacheTraceEntry {
 	public:
 		Create(const char* name, size_t objectSize, size_t alignment,
-				size_t maxByteUsage, uint32 flags, void* cookie,
+				size_t maxByteUsage, uint32_t flags, void* cookie,
 				ObjectCache* cache)
 			:
 			ObjectCacheTraceEntry(cache),
@@ -146,7 +146,7 @@ class Create : public ObjectCacheTraceEntry {
 		size_t		fObjectSize;
 		size_t		fAlignment;
 		size_t		fMaxByteUsage;
-		uint32		fFlags;
+		uint32_t		fFlags;
 		void*		fCookie;
 };
 
@@ -169,7 +169,7 @@ class Delete : public ObjectCacheTraceEntry {
 
 class Alloc : public ObjectCacheTraceEntry {
 	public:
-		Alloc(ObjectCache* cache, uint32 flags, void* object)
+		Alloc(ObjectCache* cache, uint32_t flags, void* object)
 			:
 			ObjectCacheTraceEntry(cache),
 			fFlags(flags),
@@ -185,7 +185,7 @@ class Alloc : public ObjectCacheTraceEntry {
 		}
 
 	private:
-		uint32		fFlags;
+		uint32_t		fFlags;
 		void*		fObject;
 };
 
@@ -213,7 +213,7 @@ class Free : public ObjectCacheTraceEntry {
 
 class Reserve : public ObjectCacheTraceEntry {
 	public:
-		Reserve(ObjectCache* cache, size_t count, uint32 flags)
+		Reserve(ObjectCache* cache, size_t count, uint32_t flags)
 			:
 			ObjectCacheTraceEntry(cache),
 			fCount(count),
@@ -229,8 +229,8 @@ class Reserve : public ObjectCacheTraceEntry {
 		}
 
 	private:
-		uint32		fCount;
-		uint32		fFlags;
+		uint32_t		fCount;
+		uint32_t		fFlags;
 };
 
 
@@ -501,7 +501,7 @@ static caller_info*
 get_caller_info(addr_t caller)
 {
 	// find the caller info
-	for (int32 i = 0; i < sCallerInfoCount; i++) {
+	for (int32_t i = 0; i < sCallerInfoCount; i++) {
 		if (caller == sCallerInfoTable[i].caller)
 			return &sCallerInfoTable[i];
 	}
@@ -543,7 +543,7 @@ static bool
 analyze_allocation_callers(ObjectCache* cache, slab* slab,
 	AllocationTrackingCallback& callback)
 {
-	for (uint32 i = 0; i < slab->size; i++) {
+	for (uint32_t i = 0; i < slab->size; i++) {
 		if (!callback.ProcessTrackingInfo(&slab->tracking[i],
 				cache->ObjectAtIndex(slab, i), cache->object_size)) {
 			return false;
@@ -589,7 +589,7 @@ dump_allocation_infos(int argc, char **argv)
 	thread_id threadFilter = -1;
 	bool printStackTraces = false;
 
-	for (int32 i = 1; i < argc; i++) {
+	for (int32_t i = 1; i < argc; i++) {
 		if (strcmp(argv[i], "--stacktrace") == 0)
 			printStackTraces = true;
 		else if (strcmp(argv[i], "-a") == 0) {
@@ -711,7 +711,7 @@ dump_allocations_per_caller(int argc, char **argv)
 	ObjectCache* cache = NULL;
 	addr_t caller = 0;
 
-	for (int32 i = 1; i < argc; i++) {
+	for (int32_t i = 1; i < argc; i++) {
 		if (strcmp(argv[i], "-c") == 0) {
 			sortBySize = false;
 		} else if (strcmp(argv[i], "-d") == 0) {
@@ -791,7 +791,7 @@ dump_allocations_per_caller(int argc, char **argv)
 
 	kprintf("     count        size      caller\n");
 	kprintf("----------------------------------\n");
-	for (int32 i = 0; i < sCallerInfoCount; i++) {
+	for (int32_t i = 0; i < sCallerInfoCount; i++) {
 		caller_info& info = sCallerInfoTable[i];
 		kprintf("%10" B_PRIuSIZE "  %10" B_PRIuSIZE "  %p", info.count,
 			info.size, (void*)info.caller);
@@ -823,7 +823,7 @@ dump_allocations_per_caller(int argc, char **argv)
 
 
 void
-add_alloc_tracing_entry(ObjectCache* cache, uint32 flags, void* object)
+add_alloc_tracing_entry(ObjectCache* cache, uint32_t flags, void* object)
 {
 #if SLAB_OBJECT_CACHE_TRACING
 #if SLAB_OBJECT_CACHE_ALLOCATION_TRACKING
@@ -891,7 +891,7 @@ increase_object_reserve(ObjectCache* cache)
 */
 static status_t
 object_cache_reserve_internal(ObjectCache* cache, size_t objectCount,
-	uint32 flags)
+	uint32_t flags)
 {
 	// If someone else is already adding slabs, we wait for that to be finished
 	// first.
@@ -961,7 +961,7 @@ object_cache_reserve_internal(ObjectCache* cache, size_t objectCount,
 
 
 static void
-object_cache_low_memory(void* dummy, uint32 resources, int32 level)
+object_cache_low_memory(void* dummy, uint32_t resources, int32_t level)
 {
 	if (level == B_NO_LOW_RESOURCE)
 		return;
@@ -1139,7 +1139,7 @@ create_object_cache(const char* name, size_t object_size, size_t alignment,
 object_cache*
 create_object_cache_etc(const char* name, size_t objectSize, size_t alignment,
 	size_t maximum, size_t magazineCapacity, size_t maxMagazineCount,
-	uint32 flags, void* cookie, object_cache_constructor constructor,
+	uint32_t flags, void* cookie, object_cache_constructor constructor,
 	object_cache_destructor destructor, object_cache_reclaimer reclaimer)
 {
 	ObjectCache* cache;
@@ -1216,7 +1216,7 @@ object_cache_set_minimum_reserve(object_cache* cache, size_t objectCount)
 
 
 void*
-object_cache_alloc(object_cache* cache, uint32 flags)
+object_cache_alloc(object_cache* cache, uint32_t flags)
 {
 	if (!(cache->flags & CACHE_NO_DEPOT)) {
 		void* object = object_depot_obtain(&cache->depot);
@@ -1278,7 +1278,7 @@ object_cache_alloc(object_cache* cache, uint32 flags)
 
 
 void
-object_cache_free(object_cache* cache, void* object, uint32 flags)
+object_cache_free(object_cache* cache, void* object, uint32_t flags)
 {
 	if (object == NULL)
 		return;
@@ -1287,7 +1287,7 @@ object_cache_free(object_cache* cache, void* object, uint32 flags)
 
 #if PARANOID_KERNEL_FREE
 	// TODO: allow forcing the check even if we don't find deadbeef
-	if (*(uint32*)object == 0xdeadbeef) {
+	if (*(uint32_t*)object == 0xdeadbeef) {
 		if (!cache->AssertObjectNotFreed(object))
 			return;
 
@@ -1319,7 +1319,7 @@ object_cache_free(object_cache* cache, void* object, uint32 flags)
 
 
 status_t
-object_cache_reserve(object_cache* cache, size_t objectCount, uint32 flags)
+object_cache_reserve(object_cache* cache, size_t objectCount, uint32_t flags)
 {
 	if (objectCount == 0)
 		return B_OK;

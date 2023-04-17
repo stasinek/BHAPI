@@ -74,7 +74,7 @@ const char* kShelfPath = "tracker_shelf";
 
 const char* kShortcutsSettings = "shortcuts_settings";
 const char* kDefaultShortcut = "BEOS:default_shortcut";
-const uint32 kDefaultModifiers = B_OPTION_KEY | B_COMMAND_KEY;
+const uint32_t kDefaultModifiers = B_OPTION_KEY | B_COMMAND_KEY;
 
 
 static struct AddonShortcut*
@@ -89,7 +89,7 @@ MatchOne(struct AddonShortcut* item, void* castToName)
 }
 
 
-static void AddOneShortcut(Model* model, char key, uint32 modifiers, BDeskWindow* window)
+static void AddOneShortcut(Model* model, char key, uint32_t modifiers, BDeskWindow* window)
 {
 	if (key == '\0')
 		return;
@@ -273,8 +273,8 @@ void BDeskWindow::InitAddonsList(bool update)
 		BStringList addOnPaths;
 		BPathFinder::FindPaths(B_FIND_PATH_ADD_ONS_DIRECTORY, "Tracker",
 			addOnPaths);
-		int32 count = addOnPaths.CountStrings();
-		for (int32 i = 0; i < count; i++) {
+		int32_t count = addOnPaths.CountStrings();
+		for (int32_t i = 0; i < count; i++) {
 			LoadAddOnDir(BDirectory(addOnPaths.StringAt(i)), this,
 				fAddonsList);
 		}
@@ -308,10 +308,10 @@ void BDeskWindow::ApplyShortcutPreferences(bool update)
 		}
 		shortcutSettings.GetNodeRef(fNodeRef);
 
-		int32 i = 0;
+		int32_t i = 0;
 		BMessage message;
 		while (fileMsg.FindMessage("spec", i++, &message) == B_OK) {
-			int32 key;
+			int32_t key;
 			if (message.FindInt32("key", &key) == B_OK) {
 				// only handle shortcuts referring add-ons
 				BString command;
@@ -323,7 +323,7 @@ void BDeskWindow::ApplyShortcutPreferences(bool update)
 				BStringList addOnPaths;
 				BPathFinder::FindPaths(B_FIND_PATH_ADD_ONS_DIRECTORY,
 					"Tracker/", addOnPaths);
-				for (int32 i = 0; i < addOnPaths.CountStrings(); i++) {
+				for (int32_t i = 0; i < addOnPaths.CountStrings(); i++) {
 					if (command.StartsWith(addOnPaths.StringAt(i))) {
 						isInAddons = true;
 						break;
@@ -341,10 +341,10 @@ void BDeskWindow::ApplyShortcutPreferences(bool update)
 				if (strlen(shortcut) != 1)
 					continue;
 
-				uint32 modifiers = B_COMMAND_KEY;
+				uint32_t modifiers = B_COMMAND_KEY;
 					// it's required by interface kit to at least
 					// have B_COMMAND_KEY
-				int32 value;
+				int32_t value;
 				if (message.FindInt32("mcidx", 0, &value) == B_OK)
 					modifiers |= (value != 0 ? B_SHIFT_KEY : 0);
 
@@ -394,7 +394,7 @@ void BDeskWindow::Quit()
 
 
 BPoseView*
-BDeskWindow::NewPoseView(Model* model, uint32 viewMode)
+BDeskWindow::NewPoseView(Model* model, uint32_t viewMode)
 {
 	return new DesktopPoseView(model, viewMode);
 }
@@ -547,7 +547,7 @@ void BDeskWindow::AddWindowContextMenus(BMenu* menu)
 }
 
 
-void BDeskWindow::WorkspaceActivated(int32 workspace, bool state)
+void BDeskWindow::WorkspaceActivated(int32_t workspace, bool state)
 {
 	if (fBackgroundImage)
 		fBackgroundImage->WorkspaceActivated(PoseView(), workspace, state);

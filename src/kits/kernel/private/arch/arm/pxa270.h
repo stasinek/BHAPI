@@ -75,10 +75,10 @@
 #ifndef _ASSEMBLER
 
 typedef struct pxa27x_dma_descriptor {
-	uint32 ddadr;
-	uint32 dsadr;
-	uint32 dtadr;
-	uint32 dcmd;
+	uint32_t ddadr;
+	uint32_t dsadr;
+	uint32_t dtadr;
+	uint32_t dcmd;
 } pxa27x_dma_descriptor __attribute__ ((aligned(16)));
 
 #endif	// !_ASSEMBLER
@@ -113,10 +113,10 @@ typedef struct pxa27x_dma_descriptor {
 #ifndef _ASSEMBLER
 
 typedef struct pxa27x_lcd_dma_descriptor {
-	uint32 fdadr;
-	uint32 fsadr;
-	uint32 fidr;
-	uint32 ldcmd;
+	uint32_t fdadr;
+	uint32_t fsadr;
+	uint32_t fidr;
+	uint32_t ldcmd;
 } pxa27x_lcd_dma_descriptor __attribute__ ((aligned(16)));
 
 #endif	// !_ASSEMBLER

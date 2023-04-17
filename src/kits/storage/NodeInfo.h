@@ -75,7 +75,7 @@ private:
 
 private:
             BNode*				fNode;
-            uint32				_reserved[2];
+            uint32_t				_reserved[2];
             status_t			fCStatus;
 };
 //-----------------------------------------------------------------------------

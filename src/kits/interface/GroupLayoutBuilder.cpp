@@ -46,7 +46,7 @@ BGroupLayoutBuilder::RootLayout() const
 BGroupLayout*
 BGroupLayoutBuilder::TopLayout() const
 {
-	int32 count = fLayoutStack.CountItems();
+	int32_t count = fLayoutStack.CountItems();
 	return (count > 0
 		? (BGroupLayout*)fLayoutStack.ItemAt(count - 1) : NULL);
 }
@@ -191,7 +191,7 @@ bool BGroupLayoutBuilder::_PushLayout(BGroupLayout* layout)
 // _PopLayout
 void BGroupLayoutBuilder::_PopLayout()
 {
-	int32 count = fLayoutStack.CountItems();
+	int32_t count = fLayoutStack.CountItems();
 	if (count > 0)
 		fLayoutStack.RemoveItem(count - 1);
 }

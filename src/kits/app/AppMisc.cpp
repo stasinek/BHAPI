@@ -49,7 +49,7 @@ status_t get_app_path(team_id team, char *buffer)
 		return B_BAD_VALUE;
 
 	image_info info;
-	int32 cookie = 0;
+	int32_t cookie = 0;
 
 	while (get_next_image_info(team, &cookie, &info) == B_OK) {
 		if (info.type == B_APP_IMAGE) {
@@ -175,7 +175,7 @@ bool is_app_showing_modal_window(team_id team)
 
 /*!	Creates a connection with the desktop.
 */
-status_t create_desktop_connection(ServerLink* link, const char* name, int32 capacity)
+status_t create_desktop_connection(ServerLink* link, const char* name, int32_t capacity)
 {
 	// Create the port so that the app_server knows where to send messages
 	port_id clientPort = create_port(capacity, name);
@@ -225,7 +225,7 @@ get_app_server_port()
 
 /*! Creates a connection with the desktop.
 */
-status_t create_desktop_connection(ServerLink* link, const char* name, int32 capacity)
+status_t create_desktop_connection(ServerLink* link, const char* name, int32_t capacity)
 {
 	port_id serverPort = get_app_server_port();
 	if (serverPort < 0)
@@ -240,11 +240,11 @@ status_t create_desktop_connection(ServerLink* link, const char* name, int32 cap
 
 	link->StartMessage(AS_GET_DESKTOP);
 	link->Attach<port_id>(clientPort);
-	link->Attach<int32>(getuid());
+	link->Attach<int32_t>(getuid());
 	link->AttachString(getenv("TARGET_SCREEN"));
-	link->Attach<int32>(AS_PROTOCOL_VERSION);
+	link->Attach<int32_t>(AS_PROTOCOL_VERSION);
 
-	int32 code;
+	int32_t code;
 	if (link->FlushWithReply(code) != B_OK || code != B_OK) {
 		link->SetSenderPort(-1);
 		return B_ERROR;

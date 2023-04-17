@@ -62,12 +62,12 @@ extern "C" {
 #endif
 
 extern void console_clear_screen(void);
-extern int32 console_width(void);
-extern int32 console_height(void);
-extern void console_set_cursor(int32 x, int32 y);
+extern int32_t console_width(void);
+extern int32_t console_height(void);
+extern void console_set_cursor(int32_t x, int32_t y);
 extern void console_show_cursor(void);
 extern void console_hide_cursor(void);
-extern void console_set_color(int32 foreground, int32 background);
+extern void console_set_color(int32_t foreground, int32_t background);
 
 extern int console_wait_for_key(void);
 

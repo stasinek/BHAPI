@@ -100,7 +100,7 @@ BApplicationConnector::task(void *data)
     if(buffer == NULL)
         BHAPI_ERROR("[PRIVATE]: %s --- Unable to allocate memory.", __PRETTY_FUNCTION__);
 
-     __be_int32 code;
+     __be_int32_t code;
     status_t err;
 
     for(code = 0;

@@ -42,9 +42,9 @@ BSamples::~BSamples()
 //------------------------------------------------------------------------------
 
 void BSamples::Start(
-	void* sampleData, int32 frames, int16 bytes_per_sample, 
-	int16 channel_count, double pitch, int32 loopStart, int32 loopEnd, 
-	double sampleVolume, double stereoPosition, int32 hook_arg, 
+	void* sampleData, int32_t frames, int16 bytes_per_sample, 
+	int16 channel_count, double pitch, int32_t loopStart, int32_t loopEnd, 
+	double sampleVolume, double stereoPosition, int32_t hook_arg, 
 	sample_loop_hook pLoopContinueProc, sample_exit_hook pDoneProc)
 {
 	fprintf(stderr, "[midi] BSamples is not supported\n");

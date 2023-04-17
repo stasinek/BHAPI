@@ -799,7 +799,7 @@
 /* Macros for convenient accesses to the NV chips */
 #define ENG_REG8(r_)  ((vuint8  *)regs)[(r_)]
 #define ENG_REG16(r_) ((vuint16 *)regs)[(r_) >> 1]
-#define ENG_REG32(r_) ((vuint32 *)regs)[(r_) >> 2]
+#define ENG_REG32(r_) ((vuint32_t *)regs)[(r_) >> 2]
 
 /* read and write to PCI config space */
 #define CFGR(A)   (eng_pci_access.offset=ENCFG_##A, ioctl(fd,ENG_GET_PCI, &eng_pci_access,sizeof(eng_pci_access)), eng_pci_access.value)

@@ -16,7 +16,7 @@
 
 class ParseException {
  public:
-	ParseException(const char* message, int32 position)
+	ParseException(const char* message, int32_t position)
 		: message(message),
 		  position(position)
 	{
@@ -29,7 +29,7 @@ class ParseException {
 	}
 
 	BString	message;
-	int32	position;
+	int32_t	position;
 };
 
 struct Function;
@@ -61,12 +61,12 @@ class ExpressionParser {
 			MAPM				_ParsePower();
 			MAPM				_ParseUnary();
 			void				_InitArguments(MAPM values[],
-									int32 argumentCount);
+									int32_t argumentCount);
 			MAPM				_ParseFunction(const Token& token);
 			MAPM				_ParseAtom();
 			MAPM				_ParseFactorial(MAPM value);
 
-			void				_EatToken(int32 type);
+			void				_EatToken(int32_t type);
 
 			Tokenizer*			fTokenizer;
 

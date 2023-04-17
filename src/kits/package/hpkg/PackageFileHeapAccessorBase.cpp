@@ -61,7 +61,7 @@ bool PackageFileHeapAccessorBase::OffsetArray::InitUncompressedChunksOffsets(
 		return false;
 
 	{
-		uint32 offset = kChunkSize;
+		uint32_t offset = kChunkSize;
 		for (size_t i = 1; i < actual32BitChunks; i++, offset += kChunkSize)
 			fOffsets[i] = offset;
 
@@ -69,11 +69,11 @@ bool PackageFileHeapAccessorBase::OffsetArray::InitUncompressedChunksOffsets(
 
 	if (actual32BitChunks < totalChunkCount) {
 		uint64 offset = actual32BitChunks * kChunkSize;
-		uint32* offsets = fOffsets + actual32BitChunks;
+		uint32_t* offsets = fOffsets + actual32BitChunks;
 		for (size_t i = actual32BitChunks; i < totalChunkCount;
 				i++, offset += kChunkSize) {
-			*offsets++ = (uint32)offset;
-			*offsets++ = uint32(offset >> 32);
+			*offsets++ = (uint32_t)offset;
+			*offsets++ = uint32_t(offset >> 32);
 		}
 	}
 
@@ -103,12 +103,12 @@ bool PackageFileHeapAccessorBase::OffsetArray::InitChunksOffsets(
 			// chunkSizes[i]. We compute the offset of the following element
 			// which we store at index (baseIndex + i + 1).
 
-		if (offset <= ~(uint32)0) {
-			fOffsets[index] = (uint32)offset;
+		if (offset <= ~(uint32_t)0) {
+			fOffsets[index] = (uint32_t)offset;
 		} else {
 			if (fOffsets[0] == 0) {
 				// Not scaled to allow for 64 bit offsets yet. Do that.
-				uint32* newOffsets = _AllocateOffsetArray(totalChunkCount,
+				uint32_t* newOffsets = _AllocateOffsetArray(totalChunkCount,
 					index);
 				if (newOffsets == NULL)
 					return false;
@@ -121,8 +121,8 @@ bool PackageFileHeapAccessorBase::OffsetArray::InitChunksOffsets(
 			}
 
 			index += index - fOffsets[0];
-			fOffsets[index] = (uint32)offset;
-			fOffsets[index + 1] = uint32(offset >> 32);
+			fOffsets[index] = (uint32_t)offset;
+			fOffsets[index + 1] = uint32_t(offset >> 32);
 		}
 	}
 
@@ -140,7 +140,7 @@ bool PackageFileHeapAccessorBase::OffsetArray::Init(size_t totalChunkCount,
 		? totalChunkCount
 		: 2 * totalChunkCount - other.fOffsets[0];
 
-	fOffsets = new(std::nothrow) uint32[elementCount];
+	fOffsets = new(std::nothrow) uint32_t[elementCount];
 	if (fOffsets == NULL)
 		return false;
 
@@ -149,11 +149,11 @@ bool PackageFileHeapAccessorBase::OffsetArray::Init(size_t totalChunkCount,
 }
 
 
-/*static*/ uint32*
+/*static*/ uint32_t*
 PackageFileHeapAccessorBase::OffsetArray::_AllocateOffsetArray(
 	size_t totalChunkCount, size_t offset32BitChunkCount)
 {
-	uint32* offsets = new(std::nothrow) uint32[
+	uint32_t* offsets = new(std::nothrow) uint32_t[
 		2 * totalChunkCount - offset32BitChunkCount];
 
 	if (offsets != NULL) {

@@ -38,25 +38,25 @@ extern addr_t gBiosBase;
 
 static bool sAPMEnabled = false;
 static struct {
-	uint32	offset;
+	uint32_t	offset;
 	uint16	segment;
 } sAPMBiosEntry;
 
 
 struct bios_regs {
 	bios_regs() : eax(0), ebx(0), ecx(0), edx(0), esi(0), flags(0) {}
-	uint32	eax;
-	uint32	ebx;
-	uint32	ecx;
-	uint32	edx;
-	uint32	esi;
-	uint32	flags;
+	uint32_t	eax;
+	uint32_t	ebx;
+	uint32_t	ecx;
+	uint32_t	edx;
+	uint32_t	esi;
+	uint32_t	flags;
 };
 
 
 #ifdef TRACE_APM
 static const char *
-apm_error(uint32 error)
+apm_error(uint32_t error)
 {
 	switch (error >> 8) {
 		case APM_ERROR_DISABLED:
@@ -223,7 +223,7 @@ get_apm_battery_info(apm_battery_info *info)
 	if (info->percent > 100 || info->percent < 0)
 		info->percent = -1;
 
-	info->time_left = info->percent >= 0 ? (int32)(regs.edx & 0xffff) : -1;
+	info->time_left = info->percent >= 0 ? (int32_t)(regs.edx & 0xffff) : -1;
 	if (info->time_left & 0x8000)
 		info->time_left = (info->time_left & 0x7fff) * 60;
 
@@ -232,7 +232,7 @@ get_apm_battery_info(apm_battery_info *info)
 
 
 static status_t
-apm_control(const char *subsystem, uint32 function,
+apm_control(const char *subsystem, uint32_t function,
 	void *buffer, size_t bufferSize)
 {
 	struct apm_battery_info info;
@@ -313,7 +313,7 @@ apm_init(kernel_args *args)
 	// (the first 640kB are mapped as DMA area in arch_vm_init()).
 	addr_t biosData = (addr_t)gDmaAddress + 0x400;
 
-	for (uint32 i = 0; i < args->num_cpus; i++) {
+	for (uint32_t i = 0; i < args->num_cpus; i++) {
 		segment_descriptor* gdt = get_gdt(i);
 
 		set_segment_descriptor(&gdt[BIOS_DATA_SEGMENT], biosData,

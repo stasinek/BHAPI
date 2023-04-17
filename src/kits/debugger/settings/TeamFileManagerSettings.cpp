@@ -55,10 +55,10 @@ status_t TeamFileManagerSettings::WriteTo(BMessage& archive) const
 }
 
 
-int32 TeamFileManagerSettings::CountSourceMappings() const
+int32_t TeamFileManagerSettings::CountSourceMappings() const
 {
 	type_code type;
-	int32 count = 0;
+	int32_t count = 0;
 
 	if (fValues.GetInfo("source:mapping", &type, &count) == B_OK)
 		return count;
@@ -81,13 +81,13 @@ status_t TeamFileManagerSettings::AddSourceMapping(const BString& sourcePath,
 }
 
 
-status_t TeamFileManagerSettings::RemoveSourceMappingAt(int32 index)
+status_t TeamFileManagerSettings::RemoveSourceMappingAt(int32_t index)
 {
 	return fValues.RemoveData("source:mapping", index);
 }
 
 
-status_t TeamFileManagerSettings::GetSourceMappingAt(int32 index, BString& sourcePath,
+status_t TeamFileManagerSettings::GetSourceMappingAt(int32_t index, BString& sourcePath,
 	BString& locatedPath)
 {
 	BMessage mapping;

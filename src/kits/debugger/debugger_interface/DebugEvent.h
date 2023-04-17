@@ -27,11 +27,11 @@ enum {
 
 class DebugEvent {
 public:
-								DebugEvent(int32 eventType,
+								DebugEvent(int32_t eventType,
 									team_id team, thread_id thread);
 	virtual						~DebugEvent();
 
-			int32 				EventType() const		{ return fEventType; }
+			int32_t 				EventType() const		{ return fEventType; }
 			team_id				Team() const			{ return fTeam; }
 			thread_id			Thread() const			{ return fThread; }
 
@@ -39,7 +39,7 @@ public:
 			void				SetThreadStopped(bool stopped);
 
 private:
-			int32 				fEventType;
+			int32_t 				fEventType;
 			team_id				fTeam;
 			thread_id			fThread;
 			bool				fThreadStopped;
@@ -157,14 +157,14 @@ class ThreadPriorityChangedEvent : public DebugEvent {
 public:
 								ThreadPriorityChangedEvent(team_id team,
 									thread_id thread, thread_id changedThread,
-									int32 newPriority);
+									int32_t newPriority);
 
 			thread_id			ChangedThread() const { return fChangedThread; }
-			int32				NewPriority() const	{ return fNewPriority; }
+			int32_t				NewPriority() const	{ return fNewPriority; }
 
 private:
 			thread_id			fChangedThread;
-			int32				fNewPriority;
+			int32_t				fNewPriority;
 };
 
 

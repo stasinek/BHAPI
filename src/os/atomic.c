@@ -12,43 +12,43 @@
 #ifdef ATOMIC_FUNCS_ARE_SYSCALLS
 
 void
-atomic_set(int32 *value, int32 newValue)
+atomic_set(int32_t *value, int32_t newValue)
 {
     _kern_atomic_set(value, newValue);
 }
 
 
-int32 atomic_get_and_set(int32 *value, int32 newValue)
+int32_t atomic_get_and_set(int32_t *value, int32_t newValue)
 {
     return _kern_atomic_get_and_set(value, newValue);
 }
 
 
-int32 atomic_test_and_set(int32 *value, int32 newValue, int32 testAgainst)
+int32_t atomic_test_and_set(int32_t *value, int32_t newValue, int32_t testAgainst)
 {
     return _kern_atomic_test_and_set(value, newValue, testAgainst);
 }
 
 
-int32 atomic_add(int32 *value, int32 addValue)
+int32_t atomic_add(int32_t *value, int32_t addValue)
 {
     return _kern_atomic_add(value, addValue);
 }
 
 
-int32 atomic_and(int32 *value, int32 andValue)
+int32_t atomic_and(int32_t *value, int32_t andValue)
 {
     return _kern_atomic_and(value, andValue);
 }
 
 
-int32 atomic_or(int32 *value, int32 orValue)
+int32_t atomic_or(int32_t *value, int32_t orValue)
 {
     return _kern_atomic_or(value, orValue);
 }
 
 
-int32 atomic_get(int32 *value)
+int32_t atomic_get(int32_t *value)
 {
     return _kern_atomic_get(value);
 }
@@ -103,11 +103,11 @@ int64 atomic_get64(int64 *value)
  * TODO: Update libstdc++ and drop this.
  * cf. http://fedoraproject.org/wiki/Architectures/ARM/GCCBuiltInAtomicOperations
  */
-extern int32_t __sync_fetch_and_add_4(int32_t *value, int32_t addValue);
+extern int32_t_t __sync_fetch_and_add_4(int32_t_t *value, int32_t_t addValue);
 
-extern int32_t __sync_fetch_and_add_4(int32_t *value, int32_t addValue)
+extern int32_t_t __sync_fetch_and_add_4(int32_t_t *value, int32_t_t addValue)
 {
-    return atomic_add((int32 *)value, addValue);
+    return atomic_add((int32_t *)value, addValue);
 }
 
 #endif
@@ -125,54 +125,54 @@ extern int32_t __sync_fetch_and_add_4(int32_t *value, int32_t addValue)
 
 
 void
-atomic_set(int32 *value, int32 newValue)
+atomic_set(int32_t *value, int32_t newValue)
 {
     *value = newValue;
 }
 
 
-int32 atomic_get_and_set(int32 *value, int32 newValue)
+int32_t atomic_get_and_set(int32_t *value, int32_t newValue)
 {
-    int32 oldValue = *value;
+    int32_t oldValue = *value;
     *value = newValue;
     return oldValue;
 }
 
 
-int32 atomic_test_and_set(int32 *value, int32 newValue, int32 testAgainst)
+int32_t atomic_test_and_set(int32_t *value, int32_t newValue, int32_t testAgainst)
 {
-    int32 oldValue = *value;
+    int32_t oldValue = *value;
     if (oldValue == testAgainst)
         *value = newValue;
     return oldValue;
 }
 
 
-int32 atomic_add(int32 *value, int32 addValue)
+int32_t atomic_add(int32_t *value, int32_t addValue)
 {
-    int32 oldValue = *value;
+    int32_t oldValue = *value;
     *value += addValue;
     return oldValue;
 }
 
 
-int32 atomic_and(int32 *value, int32 andValue)
+int32_t atomic_and(int32_t *value, int32_t andValue)
 {
-    int32 oldValue = *value;
+    int32_t oldValue = *value;
     *value &= andValue;
     return oldValue;
 }
 
 
-int32 atomic_or(int32 *value, int32 orValue)
+int32_t atomic_or(int32_t *value, int32_t orValue)
 {
-    int32 oldValue = *value;
+    int32_t oldValue = *value;
     *value |= orValue;
     return oldValue;
 }
 
 
-int32 atomic_get(int32 *value)
+int32_t atomic_get(int32_t *value)
 {
     return *value;
 }

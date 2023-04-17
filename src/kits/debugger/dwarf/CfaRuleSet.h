@@ -13,18 +13,18 @@ class CfaRuleSet {
 public:
 								CfaRuleSet();
 
-			status_t			Init(uint32 registerCount);
+			status_t			Init(uint32_t registerCount);
 			CfaRuleSet*			Clone() const;
 
 			CfaCfaRule*			GetCfaCfaRule()			{ return &fCfaCfaRule; }
 			const CfaCfaRule*	GetCfaCfaRule() const	{ return &fCfaCfaRule; }
 
-			CfaRule*			RegisterRule(uint32 index) const;
+			CfaRule*			RegisterRule(uint32_t index) const;
 
 private:
 			CfaCfaRule			fCfaCfaRule;
 			CfaRule*			fRegisterRules;
-			uint32				fRegisterCount;
+			uint32_t				fRegisterCount;
 };
 
 

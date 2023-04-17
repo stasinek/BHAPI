@@ -68,7 +68,7 @@ public:
 			bool				HandleSignalReceived(
 									SignalReceivedEvent* event);
 
-			void				HandleThreadAction(uint32 action,
+			void				HandleThreadAction(uint32_t action,
 									target_addr_t address);
 
 			void				HandleThreadStateChanged();
@@ -84,15 +84,15 @@ private:
 									ImageDebugInfo*& _info);
 
 			bool				_HandleThreadStopped(CpuState* cpuState,
-									uint32 stoppedReason,
+									uint32_t stoppedReason,
 									const BString& stoppedReasonInfo
 										= BString());
 
 			bool				_HandleSetAddress(CpuState* cpuState,
 									target_addr_t address);
 
-			void				_SetThreadState(uint32 state,
-									CpuState* cpuState, uint32 stoppedReason,
+			void				_SetThreadState(uint32_t state,
+									CpuState* cpuState, uint32_t stoppedReason,
 									const BString& stoppedReasonInfo);
 
 			Statement*			_GetStatementAtInstructionPointer(
@@ -127,7 +127,7 @@ private:
 			DebuggerInterface*	fDebuggerInterface;
 			JobListener*		fJobListener;
 			BreakpointManager*	fBreakpointManager;
-			uint32				fStepMode;
+			uint32_t				fStepMode;
 			Statement*			fStepStatement;
 			target_addr_t		fBreakpointAddress;
 			target_addr_t		fSteppedOverFunctionAddress;

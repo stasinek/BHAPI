@@ -70,7 +70,7 @@ private:
 			mutex				fSerializationLock;
 			off_t				fDeviceCapacity;
 			size_t				fLineSize;
-			uint32				fLineSizeShift;
+			uint32_t				fLineSizeShift;
 			size_t				fPagesPerLine;
 			area_id				fArea;
 			void*				fAreaBase;

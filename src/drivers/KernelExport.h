@@ -20,9 +20,9 @@ typedef ulong cpu_status;
 
 #if B_DEBUG_SPINLOCK_CONTENTION
 	typedef struct {
-		int32	lock;
-		int32	count_low;
-		int32	count_high;
+		int32_t	lock;
+		int32_t	count_low;
+		int32_t	count_high;
 	} spinlock;
 
 #	define B_SPINLOCK_INITIALIZER { 0, 0, 0 }
@@ -33,7 +33,7 @@ typedef ulong cpu_status;
 		} while (false)
 #else
 	typedef struct {
-		int32	lock;
+		int32_t	lock;
 	} spinlock;
 
 #	define B_SPINLOCK_INITIALIZER { 0 }
@@ -45,7 +45,7 @@ typedef ulong cpu_status;
 #define B_SPINLOCK_IS_LOCKED(spinlock)	(atomic_get(&(spinlock)->lock) > 0)
 
 typedef struct {
-	int32		lock;
+	int32_t		lock;
 } rw_spinlock;
 
 #define B_RW_SPINLOCK_INITIALIZER	{ 0 }
@@ -55,7 +55,7 @@ typedef struct {
 
 typedef struct {
 	spinlock	lock;
-	uint32		count;
+	uint32_t		count;
 } seqlock;
 
 #define B_SEQLOCK_INITIALIZER	{ B_SPINLOCK_INITIALIZER, 0 }
@@ -66,7 +66,7 @@ typedef struct {
 
 /* interrupt handling support for device drivers */
 
-typedef int32 (*interrupt_handler)(void *data);
+typedef int32_t (*interrupt_handler)(void *data);
 
 /* Values returned by interrupt handlers */
 #define B_UNHANDLED_INTERRUPT	0	/* pass to next handler */
@@ -80,7 +80,7 @@ typedef int32 (*interrupt_handler)(void *data);
 /* timer interrupts services */
 
 typedef struct timer timer;
-typedef	int32 (*timer_hook)(timer *);
+typedef	int32_t (*timer_hook)(timer *);
 
 struct timer {
 	struct timer *next;
@@ -160,8 +160,8 @@ extern void			release_read_spinlock(rw_spinlock* lock);
 extern bool			try_acquire_write_seqlock(seqlock* lock);
 extern void			acquire_write_seqlock(seqlock* lock);
 extern void			release_write_seqlock(seqlock* lock);
-extern uint32		acquire_read_seqlock(seqlock* lock);
-extern bool			release_read_seqlock(seqlock* lock, uint32 count);
+extern uint32_t		acquire_read_seqlock(seqlock* lock);
+extern bool			release_read_seqlock(seqlock* lock, uint32_t count);
 
 extern status_t		install_io_interrupt_handler(long interrupt_number,
 						interrupt_handler handler, void *data, ulong flags);
@@ -169,31 +169,31 @@ extern status_t		remove_io_interrupt_handler(long interrupt_number,
 						interrupt_handler handler, void	*data);
 
 extern status_t		add_timer(timer *t, timer_hook hook, bigtime_t period,
-						int32 flags);
+						int32_t flags);
 extern bool			cancel_timer(timer *t);
 
 /* kernel threads */
 extern thread_id	spawn_kernel_thread(thread_func function,
-						const char *name, int32 priority, void *arg);
+						const char *name, int32_t priority, void *arg);
 
 /* signal functions */
-extern int			send_signal_etc(pid_t thread, uint signal, uint32 flags);
+extern int			send_signal_etc(pid_t thread, uint signal, uint32_t flags);
 
 /* virtual memory */
 extern status_t		lock_memory_etc(team_id team, void *buffer, size_t numBytes,
-						uint32 flags);
-extern status_t		lock_memory(void *buffer, size_t numBytes, uint32 flags);
+						uint32_t flags);
+extern status_t		lock_memory(void *buffer, size_t numBytes, uint32_t flags);
 extern status_t		unlock_memory_etc(team_id team, void *address,
-						size_t numBytes, uint32 flags);
-extern status_t		unlock_memory(void *buffer, size_t numBytes, uint32 flags);
+						size_t numBytes, uint32_t flags);
+extern status_t		unlock_memory(void *buffer, size_t numBytes, uint32_t flags);
 extern status_t		get_memory_map_etc(team_id team, const void *address,
 						size_t numBytes, physical_entry *table,
-						uint32* _numEntries);
-extern int32		get_memory_map(const void *buffer, size_t size,
-						physical_entry *table, int32 numEntries);
+						uint32_t* _numEntries);
+extern int32_t		get_memory_map(const void *buffer, size_t size,
+						physical_entry *table, int32_t numEntries);
 extern area_id		map_physical_memory(const char *areaName,
-						phys_addr_t physicalAddress, size_t size, uint32 flags,
-						uint32 protection, void **_mappedAddress);
+						phys_addr_t physicalAddress, size_t size, uint32_t flags,
+						uint32_t protection, void **_mappedAddress);
 
 /* kernel debugging facilities */
 extern void			dprintf(const char *format, ...) _PRINTFLIKE(1, 2);

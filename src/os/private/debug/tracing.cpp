@@ -47,13 +47,13 @@ enum {
 static const size_t kTraceOutputBufferSize = 10240;
 static const size_t kBufferSize = MAX_TRACE_SIZE / sizeof(trace_entry);
 
-static const uint32 kMaxRecoveringErrorCount	= 100;
+static const uint32_t kMaxRecoveringErrorCount	= 100;
 static const addr_t kMetaDataBaseAddress		= 32 * 1024 * 1024;
 static const addr_t kMetaDataBaseEndAddress		= 128 * 1024 * 1024;
 static const addr_t kMetaDataAddressIncrement	= 8 * 1024 * 1024;
-static const uint32 kMetaDataMagic1 = 'Vali';
-static const uint32 kMetaDataMagic2 = 'dTra';
-static const uint32 kMetaDataMagic3 = 'cing';
+static const uint32_t kMetaDataMagic1 = 'Vali';
+static const uint32_t kMetaDataMagic2 = 'dTra';
+static const uint32_t kMetaDataMagic3 = 'cing';
 
 // the maximum we can address with the trace_entry::[previous_]size fields
 static const size_t kMaxTracingEntryByteSize
@@ -90,8 +90,8 @@ public:
 	inline	trace_entry*		FirstEntry() const;
 	inline	trace_entry*		AfterLastEntry() const;
 
-	inline	uint32				Entries() const;
-	inline	uint32				EntriesEver() const;
+	inline	uint32_t				Entries() const;
+	inline	uint32_t				EntriesEver() const;
 
 	inline	void				IncrementEntriesEver();
 
@@ -114,17 +114,17 @@ private:
 			bool				_InitPreviousTracingData();
 
 private:
-			uint32				fMagic1;
+			uint32_t				fMagic1;
 			trace_entry*		fBuffer;
 			trace_entry*		fFirstEntry;
 			trace_entry*		fAfterLastEntry;
-			uint32				fEntries;
-			uint32				fMagic2;
-			uint32				fEntriesEver;
+			uint32_t				fEntries;
+			uint32_t				fMagic2;
+			uint32_t				fEntriesEver;
 			spinlock			fLock;
 			char*				fTraceOutputBuffer;
 			phys_addr_t			fPhysicalAddress;
-			uint32				fMagic3;
+			uint32_t				fMagic3;
 };
 
 static TracingMetaData sFallbackTracingMetaData;
@@ -146,7 +146,7 @@ print_stack_trace(struct tracing_stack_trace* stackTrace,
 	static const size_t kBufferSize = 256;
 	char* buffer = (char*)debug_malloc(kBufferSize);
 
-	for (int32 i = 0; i < stackTrace->depth; i++) {
+	for (int32_t i = 0; i < stackTrace->depth; i++) {
 		addr_t address = stackTrace->return_addresses[i];
 
 		const char* symbol;
@@ -209,14 +209,14 @@ TracingMetaData::AfterLastEntry() const
 }
 
 
-uint32
+uint32_t
 TracingMetaData::Entries() const
 {
 	return fEntries;
 }
 
 
-uint32
+uint32_t
 TracingMetaData::EntriesEver() const
 {
 	return fEntriesEver;
@@ -587,10 +587,10 @@ TracingMetaData::_InitPreviousTracingData()
 		fTraceOutputBuffer, kTraceOutputBufferSize + MAX_TRACE_SIZE);
 
 	// verify/repair the tracing entry list
-	uint32 errorCount = 0;
-	uint32 entryCount = 0;
-	uint32 nonBufferEntryCount = 0;
-	uint32 previousEntrySize = 0;
+	uint32_t errorCount = 0;
+	uint32_t entryCount = 0;
+	uint32_t nonBufferEntryCount = 0;
+	uint32_t previousEntrySize = 0;
 	trace_entry* entry = fFirstEntry;
 	while (errorCount <= kMaxRecoveringErrorCount) {
 		// check previous entry size
@@ -616,7 +616,7 @@ TracingMetaData::_InitPreviousTracingData()
 			break;
 		}
 
-		if (entry->size > uint32(fBuffer + kBufferSize - entry)) {
+		if (entry->size > uint32_t(fBuffer + kBufferSize - entry)) {
 			dprintf("ktrace recovering: entry %p: size too big: %" B_PRIu32 "\n",
 				entry, entry->size);
 			errorCount++;
@@ -634,7 +634,7 @@ TracingMetaData::_InitPreviousTracingData()
 
 		// check for wrap entry
 		if ((entry->flags & WRAP_ENTRY) != 0) {
-			if ((uint32)(fBuffer + kBufferSize - entry)
+			if ((uint32_t)(fBuffer + kBufferSize - entry)
 					> kMaxTracingEntryByteSize / sizeof(trace_entry)) {
 				dprintf("ktrace recovering: entry %p: wrap entry at invalid "
 					"buffer location\n", entry);
@@ -692,7 +692,7 @@ TracingMetaData::_InitPreviousTracingData()
 // #pragma mark -
 
 
-TraceOutput::TraceOutput(char* buffer, size_t bufferSize, uint32 flags)
+TraceOutput::TraceOutput(char* buffer, size_t bufferSize, uint32_t flags)
 	: fBuffer(buffer),
 	  fCapacity(bufferSize),
 	  fFlags(flags)
@@ -1219,7 +1219,7 @@ TraceEntryIterator::Next()
 TraceEntry*
 TraceEntryIterator::Previous()
 {
-	if (fIndex == (int32)sTracingMetaData->Entries() + 1)
+	if (fIndex == (int32_t)sTracingMetaData->Entries() + 1)
 		fEntry = sTracingMetaData->AfterLastEntry();
 
 	if (fEntry != NULL) {
@@ -1233,20 +1233,20 @@ TraceEntryIterator::Previous()
 
 
 TraceEntry*
-TraceEntryIterator::MoveTo(int32 index)
+TraceEntryIterator::MoveTo(int32_t index)
 {
 	if (index == fIndex)
 		return Current();
 
-	if (index <= 0 || index > (int32)sTracingMetaData->Entries()) {
+	if (index <= 0 || index > (int32_t)sTracingMetaData->Entries()) {
 		fIndex = (index <= 0 ? 0 : sTracingMetaData->Entries() + 1);
 		fEntry = NULL;
 		return NULL;
 	}
 
 	// get the shortest iteration path
-	int32 distance = index - fIndex;
-	int32 direction = distance < 0 ? -1 : 1;
+	int32_t distance = index - fIndex;
+	int32_t direction = distance < 0 ? -1 : 1;
 	distance *= direction;
 
 	if (index < distance) {
@@ -1255,7 +1255,7 @@ TraceEntryIterator::MoveTo(int32 index)
 		fEntry = NULL;
 		fIndex = 0;
 	}
-	if ((int32)sTracingMetaData->Entries() + 1 - fIndex < distance) {
+	if ((int32_t)sTracingMetaData->Entries() + 1 - fIndex < distance) {
 		distance = sTracingMetaData->Entries() + 1 - fIndex;
 		direction = -1;
 		fEntry = NULL;
@@ -1301,30 +1301,30 @@ dump_tracing_internal(int argc, char** argv, WrapperTraceFilter* wrapperFilter)
 	int argi = 1;
 
 	// variables in which we store our state to be continuable
-	static int32 _previousCount = 0;
+	static int32_t _previousCount = 0;
 	static bool _previousHasFilter = false;
 	static bool _previousPrintStackTrace = false;
-	static int32 _previousMaxToCheck = 0;
-	static int32 _previousFirstChecked = 1;
-	static int32 _previousLastChecked = -1;
-	static int32 _previousDirection = 1;
-	static uint32 _previousEntriesEver = 0;
-	static uint32 _previousEntries = 0;
-	static uint32 _previousOutputFlags = 0;
+	static int32_t _previousMaxToCheck = 0;
+	static int32_t _previousFirstChecked = 1;
+	static int32_t _previousLastChecked = -1;
+	static int32_t _previousDirection = 1;
+	static uint32_t _previousEntriesEver = 0;
+	static uint32_t _previousEntries = 0;
+	static uint32_t _previousOutputFlags = 0;
 	static TraceEntryIterator iterator;
 
-	uint32 entriesEver = sTracingMetaData->EntriesEver();
+	uint32_t entriesEver = sTracingMetaData->EntriesEver();
 
 	// Note: start and index are Pascal-like indices (i.e. in [1, Entries()]).
-	int32 start = 0;	// special index: print the last count entries
-	int32 count = 0;
-	int32 maxToCheck = 0;
-	int32 cont = 0;
+	int32_t start = 0;	// special index: print the last count entries
+	int32_t count = 0;
+	int32_t maxToCheck = 0;
+	int32_t cont = 0;
 
 	bool hasFilter = false;
 	bool printStackTrace = false;
 
-	uint32 outputFlags = 0;
+	uint32_t outputFlags = 0;
 	while (argi < argc) {
 		if (strcmp(argv[argi], "--difftime") == 0) {
 			outputFlags |= TRACE_OUTPUT_DIFF_TIME;
@@ -1365,7 +1365,7 @@ dump_tracing_internal(int argc, char** argv, WrapperTraceFilter* wrapperFilter)
 	}
 
 	// get start, count, maxToCheck
-	int32* params[3] = { &start, &count, &maxToCheck };
+	int32_t* params[3] = { &start, &count, &maxToCheck };
 	for (int i = 0; i < 3 && !hasFilter && argi < argc; i++) {
 		if (strcmp(argv[argi], "filter") == 0) {
 			hasFilter = true;
@@ -1390,9 +1390,9 @@ dump_tracing_internal(int argc, char** argv, WrapperTraceFilter* wrapperFilter)
 		}
 	}
 
-	int32 direction;
-	int32 firstToCheck;
-	int32 lastToCheck;
+	int32_t direction;
+	int32_t firstToCheck;
+	int32_t lastToCheck;
 
 	if (cont != 0) {
 		// get values from the previous iteration
@@ -1424,13 +1424,13 @@ dump_tracing_internal(int argc, char** argv, WrapperTraceFilter* wrapperFilter)
 			count = -count;
 		if (maxToCheck < 0)
 			maxToCheck = -maxToCheck;
-		if (maxToCheck > (int32)sTracingMetaData->Entries())
+		if (maxToCheck > (int32_t)sTracingMetaData->Entries())
 			maxToCheck = sTracingMetaData->Entries();
 		if (count > maxToCheck)
 			count = maxToCheck;
 
 		// validate start
-		if (start <= 0 || start > (int32)sTracingMetaData->Entries())
+		if (start <= 0 || start > (int32_t)sTracingMetaData->Entries())
 			start = max_c(1, sTracingMetaData->Entries());
 	}
 
@@ -1439,7 +1439,7 @@ dump_tracing_internal(int argc, char** argv, WrapperTraceFilter* wrapperFilter)
 		lastToCheck = start;
 	} else {
 		firstToCheck = start;
-		lastToCheck = min_c((int32)sTracingMetaData->Entries(),
+		lastToCheck = min_c((int32_t)sTracingMetaData->Entries(),
 			start + maxToCheck - 1);
 	}
 
@@ -1453,8 +1453,8 @@ dump_tracing_internal(int argc, char** argv, WrapperTraceFilter* wrapperFilter)
 		kTraceOutputBufferSize, outputFlags);
 
 	bool markedMatching = false;
-	int32 firstToDump = firstToCheck;
-	int32 lastToDump = lastToCheck;
+	int32_t firstToDump = firstToCheck;
+	int32_t lastToDump = lastToCheck;
 
 	TraceFilter* filter = NULL;
 	if (hasFilter)
@@ -1471,7 +1471,7 @@ dump_tracing_internal(int argc, char** argv, WrapperTraceFilter* wrapperFilter)
 
 		// From the last entry to check iterate backwards to check filter
 		// matches.
-		int32 matching = 0;
+		int32_t matching = 0;
 
 		// move to the entry after the last entry to check
 		iterator.MoveTo(lastToCheck + 1);
@@ -1511,10 +1511,10 @@ dump_tracing_internal(int argc, char** argv, WrapperTraceFilter* wrapperFilter)
 
 	// dump the entries matching the filter in the range
 	// [firstToDump, lastToDump]
-	int32 dumped = 0;
+	int32_t dumped = 0;
 
 	while (TraceEntry* entry = iterator.Next()) {
-		int32 index = iterator.Index();
+		int32_t index = iterator.Index();
 		if (index < firstToDump)
 			continue;
 		if (index > lastToDump || dumped >= count) {
@@ -1652,7 +1652,7 @@ alloc_tracing_buffer_strcpy(const char* source, size_t maxSize, bool user)
 
 
 tracing_stack_trace*
-capture_tracing_stack_trace(int32 maxCount, int32 skipFrames, bool kernelOnly)
+capture_tracing_stack_trace(int32_t maxCount, int32_t skipFrames, bool kernelOnly)
 {
 #if	ENABLE_TRACING
 	// page_fault_exception() doesn't allow us to gracefully handle a bad
@@ -1682,13 +1682,13 @@ capture_tracing_stack_trace(int32 maxCount, int32 skipFrames, bool kernelOnly)
 
 addr_t
 tracing_find_caller_in_stack_trace(struct tracing_stack_trace* stackTrace,
-	const addr_t excludeRanges[], uint32 excludeRangeCount)
+	const addr_t excludeRanges[], uint32_t excludeRangeCount)
 {
-	for (int32 i = 0; i < stackTrace->depth; i++) {
+	for (int32_t i = 0; i < stackTrace->depth; i++) {
 		addr_t returnAddress = stackTrace->return_addresses[i];
 
 		bool inRange = false;
-		for (uint32 j = 0; j < excludeRangeCount; j++) {
+		for (uint32_t j = 0; j < excludeRangeCount; j++) {
 			if (returnAddress >= excludeRanges[j * 2 + 0]
 				&& returnAddress < excludeRanges[j * 2 + 1]) {
 				inRange = true;

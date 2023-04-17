@@ -55,7 +55,7 @@ public:
     ~BSystemClipboard()
     {
         BMessenger *msgr;
-        while((msgr = (BMessenger*)fWatchingList.RemoveItem((int32)0)) != NULL) delete msgr;
+        while((msgr = (BMessenger*)fWatchingList.RemoveItem((int32_t)0)) != NULL) delete msgr;
     }
 
     bool Lock()
@@ -73,7 +73,7 @@ public:
         return fData;
     }
 
-    uint32 Count()
+    uint32_t Count()
     {
         return(fData.IsEmpty() ? 0 : 1);
     }
@@ -82,7 +82,7 @@ public:
     {
         if(target.IsValid() == false) return B_ERROR;
 
-        for(int32 i = 0; i < fWatchingList.CountItems(); i++)
+        for(int32_t i = 0; i < fWatchingList.CountItems(); i++)
         {
             BMessenger *msgr = (BMessenger*)fWatchingList.ItemAt(i);
             if(*msgr == target) return B_ERROR;
@@ -100,7 +100,7 @@ public:
 
     status_t RemoveWatching(const BMessenger &target)
     {
-        for(int32 i = 0; i < fWatchingList.CountItems(); i++)
+        for(int32_t i = 0; i < fWatchingList.CountItems(); i++)
         {
             BMessenger *msgr = (BMessenger*)fWatchingList.ItemAt(i);
             if(*msgr == target)
@@ -124,7 +124,7 @@ public:
         aMsg.AddInt64("when", b_real_time_clock_usecs());
         aMsg.AddString("name", "system");
 
-        for(int32 i = 0; i < fWatchingList.CountItems(); i++)
+        for(int32_t i = 0; i < fWatchingList.CountItems(); i++)
         {
             BMessenger *msgr = (BMessenger*)fWatchingList.ItemAt(i);
             msgr->SendMessage(&aMsg);
@@ -235,19 +235,19 @@ BMessage* BClipboard::Data() const
     return fData;
 }
 
-uint32 BClipboard::LocalCount() const
+uint32_t BClipboard::LocalCount() const
 {
     // TODO
     return SystemCount();
 }
 
-uint32 BClipboard::SystemCount() const
+uint32_t BClipboard::SystemCount() const
 {
     // TODO
     if(fName == NULL) return 0;
 
     __bhapi_system_clipboard__.Lock();
-    uint32 retVal = __bhapi_system_clipboard__.Count();
+    uint32_t retVal = __bhapi_system_clipboard__.Count();
     __bhapi_system_clipboard__.Unlock();
 
     return retVal;

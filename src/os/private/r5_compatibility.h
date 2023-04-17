@@ -34,7 +34,7 @@
 struct r5_sockaddr_in {
 	uint16	sin_family;
 	uint16	sin_port;
-	uint32	sin_addr;
+	uint32_t	sin_addr;
 	char	sin_zero[4];
 };
 

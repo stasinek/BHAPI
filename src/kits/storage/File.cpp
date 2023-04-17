@@ -54,7 +54,7 @@ using namespace bhapi;
 #ifdef _WIN32
 extern "C" {
 namespace bhapi {
-char* win32_convert_utf8_to_active(const char *str,  int32 length);
+char* win32_convert_utf8_to_active(const char *str,  int32_t length);
 }
 }
 #endif // _WIN32
@@ -63,7 +63,7 @@ namespace bhapi {
 extern status_t path_expound(BString &path, const char *dir, const char *leaf, bool *normalize);
 
 #ifndef _WIN32
-inline int file_openmode_to_flags(uint32 open_mode)
+inline int file_openmode_to_flags(uint32_t open_mode)
 {
     int flags;
 
@@ -87,7 +87,7 @@ inline int file_openmode_to_flags(uint32 open_mode)
     return flags;
 }
 #else
-inline DWORD file_openmode_to_creation_disposition(uint32 open_mode)
+inline DWORD file_openmode_to_creation_disposition(uint32_t open_mode)
 {
     if(open_mode & B_CREATE_FILE)
     {
@@ -103,7 +103,7 @@ inline DWORD file_openmode_to_creation_disposition(uint32 open_mode)
 
 
 #ifndef _WIN32
-inline mode_t file_access_mode_to_mode_t(uint32 access_mode)
+inline mode_t file_access_mode_to_mode_t(uint32_t access_mode)
 {
     mode_t mode = 0;
 
@@ -130,21 +130,21 @@ BFile::BFile()
 }
 
 
-BFile::BFile(const char *path,  uint32 open_mode,  uint32 access_mode)
+BFile::BFile(const char *path,  uint32_t open_mode,  uint32_t access_mode)
     : fFD(NULL), fMode(0)
 {
     SetTo(path, open_mode, access_mode);
 }
 
 
-BFile::BFile(const BEntry *entry,  uint32 open_mode,  uint32 access_mode)
+BFile::BFile(const BEntry *entry,  uint32_t open_mode,  uint32_t access_mode)
     : fFD(NULL), fMode(0)
 {
     SetTo(entry, open_mode, access_mode);
 }
 
 
-BFile::BFile(const BDirectory *dir, const char *leaf,  uint32 open_mode,  uint32 access_mode)
+BFile::BFile(const BDirectory *dir, const char *leaf,  uint32_t open_mode,  uint32_t access_mode)
     : fFD(NULL), fMode(0)
 {
     SetTo(dir, leaf, open_mode, access_mode);
@@ -180,7 +180,7 @@ BFile::InitCheck() const
 
 
 status_t
-BFile::SetTo(const char *path,  uint32 open_mode,  uint32 access_mode)
+BFile::SetTo(const char *path,  uint32_t open_mode,  uint32_t access_mode)
 {
     if(path == NULL || *path == 0) return B_BAD_VALUE;
 
@@ -230,7 +230,7 @@ BFile::SetTo(const char *path,  uint32 open_mode,  uint32 access_mode)
 
 
 status_t
-BFile::SetTo(const BEntry *entry,  uint32 open_mode,  uint32 access_mode)
+BFile::SetTo(const BEntry *entry,  uint32_t open_mode,  uint32_t access_mode)
 {
     if(entry == NULL) return B_BAD_VALUE;
 
@@ -242,7 +242,7 @@ BFile::SetTo(const BEntry *entry,  uint32 open_mode,  uint32 access_mode)
 
 
 status_t
-BFile::SetTo(const BDirectory *dir, const char *leaf,  uint32 open_mode,  uint32 access_mode)
+BFile::SetTo(const BDirectory *dir, const char *leaf,  uint32_t open_mode,  uint32_t access_mode)
 {
     if(dir == NULL || leaf == NULL) return B_BAD_VALUE;
 
@@ -342,7 +342,7 @@ BFile::WriteAt(int64 pos, const void *buffer, size_t size)
 }
 
 
-off_t BFile::Seek(off_t position,  uint32 seek_mode)
+off_t BFile::Seek(off_t position,  uint32_t seek_mode)
 {
     if(fFD == NULL || (seek_mode == B_SEEK_SET && position < B_INT64_CONSTANT(0))) return B_INT64_CONSTANT(-1);
 

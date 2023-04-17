@@ -111,7 +111,7 @@ _EXPORT BFilePanel*
 __10BFilePanel15file_panel_modeP10BMessengerP9entry_refUlbP8BMessageP10BRefFilterT5T5
 (void* self,
 	file_panel_mode mode, BMessenger* target,
-	entry_ref* ref, uint32 nodeFlavors, bool multipleSelection,
+	entry_ref* ref, uint32_t nodeFlavors, bool multipleSelection,
 	BMessage* message, BRefFilter* filter, bool modal,
 	bool hideWhenDone)
 {

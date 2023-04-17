@@ -149,7 +149,7 @@ status_t DecodedFormat__11BMediaTrackP12media_format(BMediaTrack* self,
 }
 
 
-status_t BMediaTrack::DecodedFormat(media_format* _format, uint32 flags)
+status_t BMediaTrack::DecodedFormat(media_format* _format, uint32_t flags)
 {
 	CALLED();
 
@@ -418,7 +418,7 @@ status_t BMediaTrack::ReplaceFrames(const void* inBuffer, int64* _frameCount,
 }
 
 
-status_t BMediaTrack::SeekToTime(bigtime_t* _time, int32 flags)
+status_t BMediaTrack::SeekToTime(bigtime_t* _time, int32_t flags)
 {
 	CALLED();
 
@@ -466,7 +466,7 @@ status_t BMediaTrack::SeekToTime(bigtime_t* _time, int32 flags)
 }
 
 
-status_t BMediaTrack::SeekToFrame(int64* _frame, int32 flags)
+status_t BMediaTrack::SeekToFrame(int64* _frame, int32_t flags)
 {
 	CALLED();
 
@@ -514,7 +514,7 @@ status_t BMediaTrack::SeekToFrame(int64* _frame, int32 flags)
 }
 
 
-status_t BMediaTrack::FindKeyFrameForTime(bigtime_t* _time, int32 flags) const
+status_t BMediaTrack::FindKeyFrameForTime(bigtime_t* _time, int32_t flags) const
 {
 	CALLED();
 
@@ -539,7 +539,7 @@ status_t BMediaTrack::FindKeyFrameForTime(bigtime_t* _time, int32 flags) const
 }
 
 
-status_t BMediaTrack::FindKeyFrameForFrame(int64* _frame, int32 flags) const
+status_t BMediaTrack::FindKeyFrameForFrame(int64* _frame, int32_t flags) const
 {
 	CALLED();
 
@@ -564,7 +564,7 @@ status_t BMediaTrack::FindKeyFrameForFrame(int64* _frame, int32 flags) const
 }
 
 
-status_t BMediaTrack::ReadChunk(char** _buffer, int32* _size, media_header* _header)
+status_t BMediaTrack::ReadChunk(char** _buffer, int32_t* _size, media_header* _header)
 {
 	CALLED();
 
@@ -613,8 +613,8 @@ status_t BMediaTrack::AddCopyright(const char* copyright)
 }
 
 
-status_t BMediaTrack::AddTrackInfo(uint32 code, const void* data, size_t size,
-	uint32 flags)
+status_t BMediaTrack::AddTrackInfo(uint32_t code, const void* data, size_t size,
+	uint32_t flags)
 {
 	if (fWriter == NULL)
 		return B_NO_INIT;
@@ -623,7 +623,7 @@ status_t BMediaTrack::AddTrackInfo(uint32 code, const void* data, size_t size,
 }
 
 
-status_t BMediaTrack::WriteFrames(const void* data, int32 frameCount, int32 flags)
+status_t BMediaTrack::WriteFrames(const void* data, int32_t frameCount, int32_t flags)
 {
 	media_encode_info encodeInfo;
 	encodeInfo.flags = flags;
@@ -642,7 +642,7 @@ status_t BMediaTrack::WriteFrames(const void* data, int64 frameCount,
 }
 
 
-status_t BMediaTrack::WriteChunk(const void* data, size_t size, uint32 flags)
+status_t BMediaTrack::WriteChunk(const void* data, size_t size, uint32_t flags)
 {
 	media_encode_info encodeInfo;
 	encodeInfo.flags = flags;
@@ -700,7 +700,7 @@ status_t BMediaTrack::GetParameterWeb(BParameterWeb** outWeb)
 }
 
 
-status_t BMediaTrack::GetParameterValue(int32 id, void* value, size_t* size)
+status_t BMediaTrack::GetParameterValue(int32_t id, void* value, size_t* size)
 {
 	if (value == NULL || size == NULL)
 		return B_BAD_VALUE;
@@ -712,7 +712,7 @@ status_t BMediaTrack::GetParameterValue(int32 id, void* value, size_t* size)
 }
 
 
-status_t BMediaTrack::SetParameterValue(int32 id, const void* value, size_t size)
+status_t BMediaTrack::SetParameterValue(int32_t id, const void* value, size_t size)
 {
 	if (value == NULL || size == 0)
 		return B_BAD_VALUE;
@@ -793,7 +793,7 @@ status_t BMediaTrack::SetEncodeParameters(encode_parameters* parameters)
 }
 
 
-status_t BMediaTrack::Perform(int32 selector, void* data)
+status_t BMediaTrack::Perform(int32_t selector, void* data)
 {
 	return B_OK;
 }
@@ -802,7 +802,7 @@ status_t BMediaTrack::Perform(int32 selector, void* data)
 
 
 BMediaTrack::BMediaTrack(BPrivate::media::MediaExtractor* extractor,
-	int32 stream)
+	int32_t stream)
 {
 	CALLED();
 
@@ -834,7 +834,7 @@ BMediaTrack::BMediaTrack(BPrivate::media::MediaExtractor* extractor,
 
 
 BMediaTrack::BMediaTrack(BPrivate::media::MediaWriter* writer,
-	int32 streamIndex, media_format* format,
+	int32_t streamIndex, media_format* format,
 	const media_codec_info* codecInfo)
 {
 	CALLED();
@@ -875,7 +875,7 @@ BMediaTrack::BMediaTrack(BPrivate::media::MediaWriter* writer,
 
 
 // Does nothing, returns B_ERROR, for Zeta compatiblity only
-status_t BMediaTrack::ControlCodec(int32 selector, void* io_data, size_t size)
+status_t BMediaTrack::ControlCodec(int32_t selector, void* io_data, size_t size)
 {
 	return B_ERROR;
 }
@@ -996,54 +996,54 @@ BMediaTrack::BMediaTrack(const BMediaTrack &)
 BMediaTrack &BMediaTrack::operator=(const BMediaTrack &)
 #endif
 
-status_t BMediaTrack::_Reserved_BMediaTrack_0(int32 arg, ...) { return B_ERROR; }
-status_t BMediaTrack::_Reserved_BMediaTrack_1(int32 arg, ...) { return B_ERROR; }
-status_t BMediaTrack::_Reserved_BMediaTrack_2(int32 arg, ...) { return B_ERROR; }
-status_t BMediaTrack::_Reserved_BMediaTrack_3(int32 arg, ...) { return B_ERROR; }
-status_t BMediaTrack::_Reserved_BMediaTrack_4(int32 arg, ...) { return B_ERROR; }
-status_t BMediaTrack::_Reserved_BMediaTrack_5(int32 arg, ...) { return B_ERROR; }
-status_t BMediaTrack::_Reserved_BMediaTrack_6(int32 arg, ...) { return B_ERROR; }
-status_t BMediaTrack::_Reserved_BMediaTrack_7(int32 arg, ...) { return B_ERROR; }
-status_t BMediaTrack::_Reserved_BMediaTrack_8(int32 arg, ...) { return B_ERROR; }
-status_t BMediaTrack::_Reserved_BMediaTrack_9(int32 arg, ...) { return B_ERROR; }
-status_t BMediaTrack::_Reserved_BMediaTrack_10(int32 arg, ...) { return B_ERROR; }
-status_t BMediaTrack::_Reserved_BMediaTrack_11(int32 arg, ...) { return B_ERROR; }
-status_t BMediaTrack::_Reserved_BMediaTrack_12(int32 arg, ...) { return B_ERROR; }
-status_t BMediaTrack::_Reserved_BMediaTrack_13(int32 arg, ...) { return B_ERROR; }
-status_t BMediaTrack::_Reserved_BMediaTrack_14(int32 arg, ...) { return B_ERROR; }
-status_t BMediaTrack::_Reserved_BMediaTrack_15(int32 arg, ...) { return B_ERROR; }
-status_t BMediaTrack::_Reserved_BMediaTrack_16(int32 arg, ...) { return B_ERROR; }
-status_t BMediaTrack::_Reserved_BMediaTrack_17(int32 arg, ...) { return B_ERROR; }
-status_t BMediaTrack::_Reserved_BMediaTrack_18(int32 arg, ...) { return B_ERROR; }
-status_t BMediaTrack::_Reserved_BMediaTrack_19(int32 arg, ...) { return B_ERROR; }
-status_t BMediaTrack::_Reserved_BMediaTrack_20(int32 arg, ...) { return B_ERROR; }
-status_t BMediaTrack::_Reserved_BMediaTrack_21(int32 arg, ...) { return B_ERROR; }
-status_t BMediaTrack::_Reserved_BMediaTrack_22(int32 arg, ...) { return B_ERROR; }
-status_t BMediaTrack::_Reserved_BMediaTrack_23(int32 arg, ...) { return B_ERROR; }
-status_t BMediaTrack::_Reserved_BMediaTrack_24(int32 arg, ...) { return B_ERROR; }
-status_t BMediaTrack::_Reserved_BMediaTrack_25(int32 arg, ...) { return B_ERROR; }
-status_t BMediaTrack::_Reserved_BMediaTrack_26(int32 arg, ...) { return B_ERROR; }
-status_t BMediaTrack::_Reserved_BMediaTrack_27(int32 arg, ...) { return B_ERROR; }
-status_t BMediaTrack::_Reserved_BMediaTrack_28(int32 arg, ...) { return B_ERROR; }
-status_t BMediaTrack::_Reserved_BMediaTrack_29(int32 arg, ...) { return B_ERROR; }
-status_t BMediaTrack::_Reserved_BMediaTrack_30(int32 arg, ...) { return B_ERROR; }
-status_t BMediaTrack::_Reserved_BMediaTrack_31(int32 arg, ...) { return B_ERROR; }
-status_t BMediaTrack::_Reserved_BMediaTrack_32(int32 arg, ...) { return B_ERROR; }
-status_t BMediaTrack::_Reserved_BMediaTrack_33(int32 arg, ...) { return B_ERROR; }
-status_t BMediaTrack::_Reserved_BMediaTrack_34(int32 arg, ...) { return B_ERROR; }
-status_t BMediaTrack::_Reserved_BMediaTrack_35(int32 arg, ...) { return B_ERROR; }
-status_t BMediaTrack::_Reserved_BMediaTrack_36(int32 arg, ...) { return B_ERROR; }
-status_t BMediaTrack::_Reserved_BMediaTrack_37(int32 arg, ...) { return B_ERROR; }
-status_t BMediaTrack::_Reserved_BMediaTrack_38(int32 arg, ...) { return B_ERROR; }
-status_t BMediaTrack::_Reserved_BMediaTrack_39(int32 arg, ...) { return B_ERROR; }
-status_t BMediaTrack::_Reserved_BMediaTrack_40(int32 arg, ...) { return B_ERROR; }
-status_t BMediaTrack::_Reserved_BMediaTrack_41(int32 arg, ...) { return B_ERROR; }
-status_t BMediaTrack::_Reserved_BMediaTrack_42(int32 arg, ...) { return B_ERROR; }
-status_t BMediaTrack::_Reserved_BMediaTrack_43(int32 arg, ...) { return B_ERROR; }
-status_t BMediaTrack::_Reserved_BMediaTrack_44(int32 arg, ...) { return B_ERROR; }
-status_t BMediaTrack::_Reserved_BMediaTrack_45(int32 arg, ...) { return B_ERROR; }
-status_t BMediaTrack::_Reserved_BMediaTrack_46(int32 arg, ...) { return B_ERROR; }
-status_t BMediaTrack::_Reserved_BMediaTrack_47(int32 arg, ...) { return B_ERROR; }
+status_t BMediaTrack::_Reserved_BMediaTrack_0(int32_t arg, ...) { return B_ERROR; }
+status_t BMediaTrack::_Reserved_BMediaTrack_1(int32_t arg, ...) { return B_ERROR; }
+status_t BMediaTrack::_Reserved_BMediaTrack_2(int32_t arg, ...) { return B_ERROR; }
+status_t BMediaTrack::_Reserved_BMediaTrack_3(int32_t arg, ...) { return B_ERROR; }
+status_t BMediaTrack::_Reserved_BMediaTrack_4(int32_t arg, ...) { return B_ERROR; }
+status_t BMediaTrack::_Reserved_BMediaTrack_5(int32_t arg, ...) { return B_ERROR; }
+status_t BMediaTrack::_Reserved_BMediaTrack_6(int32_t arg, ...) { return B_ERROR; }
+status_t BMediaTrack::_Reserved_BMediaTrack_7(int32_t arg, ...) { return B_ERROR; }
+status_t BMediaTrack::_Reserved_BMediaTrack_8(int32_t arg, ...) { return B_ERROR; }
+status_t BMediaTrack::_Reserved_BMediaTrack_9(int32_t arg, ...) { return B_ERROR; }
+status_t BMediaTrack::_Reserved_BMediaTrack_10(int32_t arg, ...) { return B_ERROR; }
+status_t BMediaTrack::_Reserved_BMediaTrack_11(int32_t arg, ...) { return B_ERROR; }
+status_t BMediaTrack::_Reserved_BMediaTrack_12(int32_t arg, ...) { return B_ERROR; }
+status_t BMediaTrack::_Reserved_BMediaTrack_13(int32_t arg, ...) { return B_ERROR; }
+status_t BMediaTrack::_Reserved_BMediaTrack_14(int32_t arg, ...) { return B_ERROR; }
+status_t BMediaTrack::_Reserved_BMediaTrack_15(int32_t arg, ...) { return B_ERROR; }
+status_t BMediaTrack::_Reserved_BMediaTrack_16(int32_t arg, ...) { return B_ERROR; }
+status_t BMediaTrack::_Reserved_BMediaTrack_17(int32_t arg, ...) { return B_ERROR; }
+status_t BMediaTrack::_Reserved_BMediaTrack_18(int32_t arg, ...) { return B_ERROR; }
+status_t BMediaTrack::_Reserved_BMediaTrack_19(int32_t arg, ...) { return B_ERROR; }
+status_t BMediaTrack::_Reserved_BMediaTrack_20(int32_t arg, ...) { return B_ERROR; }
+status_t BMediaTrack::_Reserved_BMediaTrack_21(int32_t arg, ...) { return B_ERROR; }
+status_t BMediaTrack::_Reserved_BMediaTrack_22(int32_t arg, ...) { return B_ERROR; }
+status_t BMediaTrack::_Reserved_BMediaTrack_23(int32_t arg, ...) { return B_ERROR; }
+status_t BMediaTrack::_Reserved_BMediaTrack_24(int32_t arg, ...) { return B_ERROR; }
+status_t BMediaTrack::_Reserved_BMediaTrack_25(int32_t arg, ...) { return B_ERROR; }
+status_t BMediaTrack::_Reserved_BMediaTrack_26(int32_t arg, ...) { return B_ERROR; }
+status_t BMediaTrack::_Reserved_BMediaTrack_27(int32_t arg, ...) { return B_ERROR; }
+status_t BMediaTrack::_Reserved_BMediaTrack_28(int32_t arg, ...) { return B_ERROR; }
+status_t BMediaTrack::_Reserved_BMediaTrack_29(int32_t arg, ...) { return B_ERROR; }
+status_t BMediaTrack::_Reserved_BMediaTrack_30(int32_t arg, ...) { return B_ERROR; }
+status_t BMediaTrack::_Reserved_BMediaTrack_31(int32_t arg, ...) { return B_ERROR; }
+status_t BMediaTrack::_Reserved_BMediaTrack_32(int32_t arg, ...) { return B_ERROR; }
+status_t BMediaTrack::_Reserved_BMediaTrack_33(int32_t arg, ...) { return B_ERROR; }
+status_t BMediaTrack::_Reserved_BMediaTrack_34(int32_t arg, ...) { return B_ERROR; }
+status_t BMediaTrack::_Reserved_BMediaTrack_35(int32_t arg, ...) { return B_ERROR; }
+status_t BMediaTrack::_Reserved_BMediaTrack_36(int32_t arg, ...) { return B_ERROR; }
+status_t BMediaTrack::_Reserved_BMediaTrack_37(int32_t arg, ...) { return B_ERROR; }
+status_t BMediaTrack::_Reserved_BMediaTrack_38(int32_t arg, ...) { return B_ERROR; }
+status_t BMediaTrack::_Reserved_BMediaTrack_39(int32_t arg, ...) { return B_ERROR; }
+status_t BMediaTrack::_Reserved_BMediaTrack_40(int32_t arg, ...) { return B_ERROR; }
+status_t BMediaTrack::_Reserved_BMediaTrack_41(int32_t arg, ...) { return B_ERROR; }
+status_t BMediaTrack::_Reserved_BMediaTrack_42(int32_t arg, ...) { return B_ERROR; }
+status_t BMediaTrack::_Reserved_BMediaTrack_43(int32_t arg, ...) { return B_ERROR; }
+status_t BMediaTrack::_Reserved_BMediaTrack_44(int32_t arg, ...) { return B_ERROR; }
+status_t BMediaTrack::_Reserved_BMediaTrack_45(int32_t arg, ...) { return B_ERROR; }
+status_t BMediaTrack::_Reserved_BMediaTrack_46(int32_t arg, ...) { return B_ERROR; }
+status_t BMediaTrack::_Reserved_BMediaTrack_47(int32_t arg, ...) { return B_ERROR; }
 
 
 RawDecoderChunkProvider::RawDecoderChunkProvider(Decoder* decoder,

@@ -15,43 +15,43 @@ class BGenericNumberFormat {
 		status_t FormatInteger(const BIntegerFormatParameters *parameters,
 							   int64 number, BString *buffer,
 							   format_field_position *positions = NULL,
-							   int32 positionCount = 1,
-							   int32 *fieldCount = NULL,
+							   int32_t positionCount = 1,
+							   int32_t *fieldCount = NULL,
 							   bool allFieldPositions = false) const;
 
 		status_t FormatInteger(const BIntegerFormatParameters *parameters,
 							   int64 number, char *buffer, size_t bufferSize,
 							   format_field_position *positions = NULL,
-							   int32 positionCount = 1,
-							   int32 *fieldCount = NULL,
+							   int32_t positionCount = 1,
+							   int32_t *fieldCount = NULL,
 							   bool allFieldPositions = false) const;
 
 		status_t FormatInteger(const BIntegerFormatParameters *parameters,
 							   uint64 number, BString *buffer,
 							   format_field_position *positions = NULL,
-							   int32 positionCount = 1,
-							   int32 *fieldCount = NULL,
+							   int32_t positionCount = 1,
+							   int32_t *fieldCount = NULL,
 							   bool allFieldPositions = false) const;
 
 		status_t FormatInteger(const BIntegerFormatParameters *parameters,
 							   uint64 number, char *buffer, size_t bufferSize,
 							   format_field_position *positions = NULL,
-							   int32 positionCount = 1,
-							   int32 *fieldCount = NULL,
+							   int32_t positionCount = 1,
+							   int32_t *fieldCount = NULL,
 							   bool allFieldPositions = false) const;
 
 		status_t FormatFloat(const BFloatFormatParameters *parameters,
 							 double number, BString *buffer,
 							 format_field_position *positions = NULL,
-							 int32 positionCount = 1,
-							 int32 *fieldCount = NULL,
+							 int32_t positionCount = 1,
+							 int32_t *fieldCount = NULL,
 							 bool allFieldPositions = false) const;
 
 		status_t FormatFloat(const BFloatFormatParameters *parameters,
 							 double number, char *buffer, size_t bufferSize,
 							 format_field_position *positions = NULL,
-							 int32 positionCount = 1,
-							 int32 *fieldCount = NULL,
+							 int32_t positionCount = 1,
+							 int32_t *fieldCount = NULL,
 							 bool allFieldPositions = false) const;
 
 		// default number format parameters
@@ -138,8 +138,8 @@ class BGenericNumberFormat {
 							   const Integer &integer, char *buffer,
 							   size_t bufferSize,
 							   format_field_position *positions = NULL,
-							   int32 positionCount = 1,
-							   int32 *fieldCount = NULL,
+							   int32_t positionCount = 1,
+							   int32_t *fieldCount = NULL,
 							   bool allFieldPositions = false) const;
 
 		const Symbol *DigitSymbols() const;

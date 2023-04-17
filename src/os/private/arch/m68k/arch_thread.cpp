@@ -95,7 +95,7 @@ m68k_get_user_iframe(void)
 }
 
 
-uint32
+uint32_t
 m68k_next_page_directory(Thread *from, Thread *to)
 {
 	VMAddressSpace* toAddressSpace = to->team->address_space;

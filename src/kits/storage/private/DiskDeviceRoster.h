@@ -137,7 +137,7 @@ public:
 								BDiskDevice* device);
 
 			status_t		StartWatching(BMessenger target,
-								uint32 eventMask = B_DEVICE_REQUEST_ALL);
+								uint32_t eventMask = B_DEVICE_REQUEST_ALL);
 			status_t		StopWatching(BMessenger target);
 
 private:
@@ -147,14 +147,14 @@ private:
 
 	// TODO: Introduce iterators instead of these functions.
 
-	static status_t _GetNextAddOn(BDirectory **directory, int32 *index,
+	static status_t _GetNextAddOn(BDirectory **directory, int32_t *index,
 								  const char *subdir,
 								  BPrivate::AddOnImage *image);
 	static status_t _GetNextAddOn(BDirectory *directory,
 								  BPrivate::AddOnImage *image);
-	static status_t _GetNextAddOnDir(BPath *path, int32 *index,
+	static status_t _GetNextAddOnDir(BPath *path, int32_t *index,
 									 const char *subdir);
-	static status_t _GetNextAddOnDir(BDirectory **directory, int32 *index,
+	static status_t _GetNextAddOnDir(BDirectory **directory, int32_t *index,
 									 const char *subdir);
 
 	static status_t _LoadPartitionAddOn(const char *partitioningSystem,
@@ -162,13 +162,13 @@ private:
 										BDiskScannerPartitionAddOn **addOn);
 #endif	// 0
 private:
-	int32					fDeviceCookie;
-	int32					fDiskSystemCookie;
-	int32					fJobCookie;
+	int32_t					fDeviceCookie;
+	int32_t					fDiskSystemCookie;
+	int32_t					fJobCookie;
 //	BDirectory	*fPartitionAddOnDir;
 //	BDirectory	*fFSAddOnDir;
-//	int32		fPartitionAddOnDirIndex;
-//	int32		fFSAddOnDirIndex;
+//	int32_t		fPartitionAddOnDirIndex;
+//	int32_t		fFSAddOnDirIndex;
 };
 
 #endif	// _DISK_DEVICE_ROSTER_H

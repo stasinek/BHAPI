@@ -81,7 +81,7 @@ BHttpResult::Headers() const
 }
 
 
-int32 BHttpResult::StatusCode() const
+int32_t BHttpResult::StatusCode() const
 {
 	return fStatusCode;
 }

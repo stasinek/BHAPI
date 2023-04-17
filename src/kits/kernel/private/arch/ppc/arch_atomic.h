@@ -40,14 +40,14 @@ static inline void memory_full_barrier_inline(void)
 #define memory_full_barrier		memory_full_barrier_inline
 
 
-static inline void atomic_set_inline(int32* value, int32 newValue)
+static inline void atomic_set_inline(int32_t* value, int32_t newValue)
 {
 	memory_write_barrier();
-	*(volatile int32*)value = newValue;
+	*(volatile int32_t*)value = newValue;
 }
 
 
-static inline int32 atomic_get_and_set_inline(int32* value, int32 newValue)
+static inline int32_t atomic_get_and_set_inline(int32_t* value, int32_t newValue)
 {
 	// BIG TODO: PowerPC Atomic get and set
 //	asm volatile("xchgl %0, (%1)"
@@ -58,7 +58,7 @@ static inline int32 atomic_get_and_set_inline(int32* value, int32 newValue)
 }
 
 
-static inline int32 atomic_test_and_set_inline(int32* value, int32 newValue, int32 testAgainst)
+static inline int32_t atomic_test_and_set_inline(int32_t* value, int32_t newValue, int32_t testAgainst)
 {
 	// BIG TODO: PowerPC Atomic test and set inline
 //	asm volatile("lock; cmpxchgl %2, (%3)"
@@ -69,7 +69,7 @@ static inline int32 atomic_test_and_set_inline(int32* value, int32 newValue, int
 }
 
 
-static inline int32 atomic_add_inline(int32* value, int32 newValue)
+static inline int32_t atomic_add_inline(int32_t* value, int32_t newValue)
 {
 	// BIG TODO: PowerPC Atomic add inline
 //	asm volatile("lock; xaddl %0, (%1)"
@@ -80,9 +80,9 @@ static inline int32 atomic_add_inline(int32* value, int32 newValue)
 }
 
 
-static inline int32 atomic_get_inline(int32* value)
+static inline int32_t atomic_get_inline(int32_t* value)
 {
-	int32 newValue = *(volatile int32*)value;
+	int32_t newValue = *(volatile int32_t*)value;
 	memory_read_barrier();
 	return newValue;
 }

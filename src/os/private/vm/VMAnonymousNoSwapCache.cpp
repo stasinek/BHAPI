@@ -39,8 +39,8 @@ VMAnonymousNoSwapCache::~VMAnonymousNoSwapCache()
 
 
 status_t
-VMAnonymousNoSwapCache::Init(bool canOvercommit, int32 numPrecommittedPages,
-	int32 numGuardPages, uint32 allocationFlags)
+VMAnonymousNoSwapCache::Init(bool canOvercommit, int32_t numPrecommittedPages,
+	int32_t numGuardPages, uint32_t allocationFlags)
 {
 	TRACE(("VMAnonymousNoSwapCache::Init(canOvercommit = %s, numGuardPages = %ld) "
 		"at %p\n", canOvercommit ? "yes" : "no", numGuardPages, store));
@@ -69,7 +69,7 @@ VMAnonymousNoSwapCache::Commit(off_t size, int priority)
 
 		// pre-commit some pages to make a later failure less probable
 		fHasPrecommitted = true;
-		uint32 precommitted = fPrecommittedPages * B_PAGE_SIZE;
+		uint32_t precommitted = fPrecommittedPages * B_PAGE_SIZE;
 		if (size > precommitted)
 			size = precommitted;
 	}
@@ -101,7 +101,7 @@ VMAnonymousNoSwapCache::HasPage(off_t offset)
 
 status_t
 VMAnonymousNoSwapCache::Read(off_t offset, const iovec* vecs, size_t count,
-	uint32 flags, size_t* _numBytes)
+	uint32_t flags, size_t* _numBytes)
 {
 	panic("anonymous_store: read called. Invalid!\n");
 	return B_ERROR;
@@ -110,7 +110,7 @@ VMAnonymousNoSwapCache::Read(off_t offset, const iovec* vecs, size_t count,
 
 status_t
 VMAnonymousNoSwapCache::Write(off_t offset, const iovec* vecs, size_t count,
-	uint32 flags, size_t* _numBytes)
+	uint32_t flags, size_t* _numBytes)
 {
 	// no place to write, this will cause the page daemon to skip this store
 	return B_ERROR;
@@ -121,7 +121,7 @@ status_t
 VMAnonymousNoSwapCache::Fault(struct VMAddressSpace* aspace, off_t offset)
 {
 	if (fGuardedSize > 0) {
-		uint32 guardOffset;
+		uint32_t guardOffset;
 
 #ifdef STACK_GROWS_DOWNWARDS
 		guardOffset = 0;

@@ -105,11 +105,11 @@ public:
 	bool ShowNavigator();
 	void SetShowNavigator(bool);
 
-	void RecentCounts(int32* applications, int32* documents,
-		int32* folders);
-	void SetRecentApplicationsCount(int32);
-	void SetRecentDocumentsCount(int32);
-	void SetRecentFoldersCount(int32);
+	void RecentCounts(int32_t* applications, int32_t* documents,
+		int32_t* folders);
+	void SetRecentApplicationsCount(int32_t);
+	void SetRecentDocumentsCount(int32_t);
+	void SetRecentFoldersCount(int32_t);
 
 	FormatSeparator TimeFormatSeparator();
 	void SetTimeFormatSeparator(FormatSeparator);

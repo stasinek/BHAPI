@@ -66,7 +66,7 @@ public:
 
 			void				CreateStatusItem(thread_id,
 									StatusWindowState);
-			void				InitStatusItem(thread_id, int32 totalItems,
+			void				InitStatusItem(thread_id, int32_t totalItems,
 									off_t totalSize,
 									const entry_ref* destDir = NULL,
 									bool showCount = true);
@@ -106,7 +106,7 @@ public:
 
 			void				Init();
 
-			void				InitStatus(int32 totalItems, off_t totalSize,
+			void				InitStatus(int32_t totalItems, off_t totalSize,
 									const entry_ref* destDir, bool showCount);
 
 	// BView overrides
@@ -149,8 +149,8 @@ private:
 			off_t				fSizeProcessed;
 			off_t				fLastSpeedReferenceSize;
 			off_t				fEstimatedFinishReferenceSize;
-			int32				fCurItem;
-			int32				fType;
+			int32_t				fCurItem;
+			int32_t				fType;
 			BBitmap*			fBitmap;
 			BButton*			fStopButton;
 			BButton*			fPauseButton;

@@ -414,11 +414,11 @@ struct DwarfFile::CIEAugmentation {
 				TRACE_CFI(" signed 16-bit: %" B_PRId64 "\n", address);
 				break;
 			case CFI_ADDRESS_FORMAT_UNSIGNED_32:
-				address += reader.Read<uint32>(0);
+				address += reader.Read<uint32_t>(0);
 				TRACE_CFI(" unsigned 32-bit: %" B_PRId64 "\n", address);
 				break;
 			case CFI_ADDRESS_FORMAT_SIGNED_32:
-				address += reader.Read<int32>(0);
+				address += reader.Read<int32_t>(0);
 				TRACE_CFI(" signed 32-bit: %" B_PRId64 "\n", address);
 				break;
 			case CFI_ADDRESS_FORMAT_UNSIGNED_64:
@@ -437,7 +437,7 @@ struct DwarfFile::CIEAugmentation {
 
 private:
 	const char*	fString;
-	uint32		fFlags;
+	uint32_t		fFlags;
 	int8		fAddressEncoding;
 };
 
@@ -651,7 +651,7 @@ status_t DwarfFile::FinishLoading()
 			return fFinishError = error;
 	}
 
-	for (int32 i = 0; CompilationUnit* unit = fCompilationUnits.ItemAt(i);
+	for (int32_t i = 0; CompilationUnit* unit = fCompilationUnits.ItemAt(i);
 			i++) {
 		error = _FinishUnit(unit);
 		if (error != B_OK)
@@ -665,14 +665,14 @@ status_t DwarfFile::FinishLoading()
 }
 
 
-int32 DwarfFile::CountCompilationUnits() const
+int32_t DwarfFile::CountCompilationUnits() const
 {
 	return fCompilationUnits.CountItems();
 }
 
 
 CompilationUnit*
-DwarfFile::CompilationUnitAt(int32 index) const
+DwarfFile::CompilationUnitAt(int32_t index) const
 {
 	return fCompilationUnits.ItemAt(index);
 }
@@ -692,7 +692,7 @@ DwarfFile::CompilationUnitForDIE(const DebugInfoEntry* entry) const
 		return NULL;
 
 	// find the compilation unit
-	for (int32 i = 0; CompilationUnit* unit = fCompilationUnits.ItemAt(i);
+	for (int32_t i = 0; CompilationUnit* unit = fCompilationUnits.ItemAt(i);
 			i++) {
 		if (unit->UnitEntry() == unitEntry)
 			return unit;
@@ -977,7 +977,7 @@ status_t DwarfFile::_ParseDebugInfoSection()
 		int version = dataReader.Read<uint16>(0);
 		off_t abbrevOffset = dwarf64
 			? dataReader.Read<uint64>(0)
-			: dataReader.Read<uint32>(0);
+			: dataReader.Read<uint32_t>(0);
 		uint8 addressSize = dataReader.Read<uint8>(0);
 
 		if (dataReader.HasOverflow()) {
@@ -1049,7 +1049,7 @@ status_t DwarfFile::_ParseTypesSection()
 		int version = dataReader.Read<uint16>(0);
 		off_t abbrevOffset = dwarf64
 			? dataReader.Read<uint64>(0)
-			: dataReader.Read<uint32>(0);
+			: dataReader.Read<uint32_t>(0);
 		uint8 addressSize = dataReader.Read<uint8>(0);
 
 		if (dataReader.HasOverflow()) {
@@ -1064,7 +1064,7 @@ status_t DwarfFile::_ParseTypesSection()
 
 		off_t typeOffset = dwarf64
 			? dataReader.Read<uint64>(0)
-			: dataReader.Read<uint32>(0);
+			: dataReader.Read<uint32_t>(0);
 
 		off_t unitContentOffset = dataReader.Offset();
 
@@ -1146,7 +1146,7 @@ status_t DwarfFile::_ParseFrameSection(ElfSection* section, uint8 addressSize,
 
 		// CIE ID/CIE pointer
 		uint64 cieID = dwarf64
-			? dataReader.Read<uint64>(0) : dataReader.Read<uint32>(0);
+			? dataReader.Read<uint64>(0) : dataReader.Read<uint32_t>(0);
 
 		// In .debug_frame ~0 indicates a CIE, in .eh_frame 0 does.
 		if (ehFrame
@@ -1327,7 +1327,7 @@ status_t DwarfFile::_ParseDebugInfoEntry(DataReader& dataReader,
 	off_t entryOffset = dataReader.Offset()
 		+ unit->RelativeContentOffset();
 
-	uint32 code = dataReader.ReadUnsignedLEB128(0);
+	uint32_t code = dataReader.ReadUnsignedLEB128(0);
 	if (code == 0) {
 		if (dataReader.HasOverflow()) {
 			WARNING("Unexpected end of .debug_info section.\n");
@@ -1443,7 +1443,7 @@ status_t DwarfFile::_FinishUnit(BaseUnit* unit)
 		dataReader.SeekAbsolute(offset);
 
 		// read the entry code
-		uint32 code = dataReader.ReadUnsignedLEB128(0);
+		uint32_t code = dataReader.ReadUnsignedLEB128(0);
 
 		// get the respective abbreviation entry
 		AbbreviationEntry abbreviationEntry;
@@ -1503,8 +1503,8 @@ status_t DwarfFile::_FinishUnit(BaseUnit* unit)
 status_t DwarfFile::_ParseEntryAttributes(DataReader& dataReader,
 	BaseUnit* unit, DebugInfoEntry* entry, AbbreviationEntry& abbreviationEntry)
 {
-	uint32 attributeName;
-	uint32 attributeForm;
+	uint32_t attributeName;
+	uint32_t attributeForm;
 	while (abbreviationEntry.GetNextAttribute(attributeName,
 			attributeForm)) {
 		// resolve attribute form indirection
@@ -1533,13 +1533,13 @@ status_t DwarfFile::_ParseEntryAttributes(DataReader& dataReader,
 				blockLength = dataReader.Read<uint16>(0);
 				break;
 			case DW_FORM_block4:
-				blockLength = dataReader.Read<uint32>(0);
+				blockLength = dataReader.Read<uint32_t>(0);
 				break;
 			case DW_FORM_data2:
 				value = dataReader.Read<uint16>(0);
 				break;
 			case DW_FORM_data4:
-				value = dataReader.Read<uint32>(0);
+				value = dataReader.Read<uint32_t>(0);
 				break;
 			case DW_FORM_data8:
 				value = dataReader.Read<uint64>(0);
@@ -1569,7 +1569,7 @@ status_t DwarfFile::_ParseEntryAttributes(DataReader& dataReader,
 				if (fDebugStringSection != NULL) {
 					uint64 offset = unit->IsDwarf64()
 						? dataReader.Read<uint64>(0)
-						: dataReader.Read<uint32>(0);
+						: dataReader.Read<uint32_t>(0);
 					if (offset >= fDebugStringSection->Size()) {
 						WARNING("Invalid DW_FORM_strp offset: %" B_PRIu64 "\n",
 							offset);
@@ -1589,7 +1589,7 @@ status_t DwarfFile::_ParseEntryAttributes(DataReader& dataReader,
 			case DW_FORM_ref_addr:
 				value = unit->IsDwarf64()
 					? dataReader.Read<uint64>(0)
-					: (uint64)dataReader.Read<uint32>(0);
+					: (uint64)dataReader.Read<uint32_t>(0);
 				refType = dwarf_reference_type_global;
 				break;
 			case DW_FORM_ref1:
@@ -1599,7 +1599,7 @@ status_t DwarfFile::_ParseEntryAttributes(DataReader& dataReader,
 				value = dataReader.Read<uint16>(0);
 				break;
 			case DW_FORM_ref4:
-				value = dataReader.Read<uint32>(0);
+				value = dataReader.Read<uint32_t>(0);
 				break;
 			case DW_FORM_ref8:
 				value = dataReader.Read<uint64>(0);
@@ -1618,7 +1618,7 @@ status_t DwarfFile::_ParseEntryAttributes(DataReader& dataReader,
 			case DW_FORM_sec_offset:
 				value = unit->IsDwarf64()
 					? dataReader.Read<uint64>(0)
-					: (uint64)dataReader.Read<uint32>(0);
+					: (uint64)dataReader.Read<uint32_t>(0);
 				break;
 			case DW_FORM_indirect:
 			default:
@@ -1758,7 +1758,7 @@ status_t DwarfFile::_ParseLineInfo(CompilationUnit* unit)
 
 	// header_length (4/8)
 	uint64 headerLength = dwarf64
-		? dataReader.Read<uint64>(0) : (uint64)dataReader.Read<uint32>(0);
+		? dataReader.Read<uint64>(0) : (uint64)dataReader.Read<uint32_t>(0);
 	off_t headerOffset = dataReader.Offset();
 
 	if ((uint64)dataReader.BytesRemaining() < headerLength)
@@ -1883,7 +1883,7 @@ status_t DwarfFile::_UnwindCallFrame(CompilationUnit* unit, uint8 addressSize,
 
 	// skip CIE ID, initial offset and range, since we already know those
 	// from FDELookupInfo.
-	dwarf64	? dataReader.Read<uint64>(0) : dataReader.Read<uint32>(0);
+	dwarf64	? dataReader.Read<uint64>(0) : dataReader.Read<uint32_t>(0);
 	cieAugmentation.ReadEncodedAddress(dataReader, fElfFile,
 		currentFrameSection);
 	cieAugmentation.ReadEncodedAddress(dataReader, fElfFile,
@@ -1895,7 +1895,7 @@ status_t DwarfFile::_UnwindCallFrame(CompilationUnit* unit, uint8 addressSize,
 		info->cieOffset, info->start, info->end - info->start);
 
 	context.SetLocation(location, info->start);
-	uint32 registerCount = outputInterface->CountRegisters();
+	uint32_t registerCount = outputInterface->CountRegisters();
 	error = context.Init(registerCount);
 	if (error != B_OK)
 		return error;
@@ -1973,10 +1973,10 @@ status_t DwarfFile::_UnwindCallFrame(CompilationUnit* unit, uint8 addressSize,
 	TRACE_CFI("  frame address: %#" B_PRIx64 "\n", frameAddress);
 
 	// apply the register rules
-	for (uint32 i = 0; i < registerCount; i++) {
+	for (uint32_t i = 0; i < registerCount; i++) {
 		TRACE_CFI("  reg %" B_PRIu32 "\n", i);
 
-		uint32 valueType = outputInterface->RegisterValueType(i);
+		uint32_t valueType = outputInterface->RegisterValueType(i);
 		if (valueType == 0)
 			continue;
 
@@ -2094,7 +2094,7 @@ status_t DwarfFile::_ParseCIEHeader(ElfSection* debugFrameSection,
 
 	// CIE ID/CIE pointer
 	uint64 cieID = dwarf64
-		? dataReader.Read<uint64>(0) : dataReader.Read<uint32>(0);
+		? dataReader.Read<uint64>(0) : dataReader.Read<uint32_t>(0);
 	if (usingEHFrameSection) {
 		if (cieID != 0)
 			return B_BAD_DATA;
@@ -2117,7 +2117,7 @@ status_t DwarfFile::_ParseCIEHeader(ElfSection* debugFrameSection,
 	// the exception table pointer is located immediately before the
 	// code/data alignment values. We have no use for it so simply skip.
 	if (strcmp(cieAugmentation.String(), "eh") == 0)
-		dataReader.Skip(dwarf64 ? sizeof(uint64) : sizeof(uint32));
+		dataReader.Skip(dwarf64 ? sizeof(uint64) : sizeof(uint32_t));
 
 	context.SetCodeAlignment(dataReader.ReadUnsignedLEB128(0));
 	context.SetDataAlignment(dataReader.ReadSignedLEB128(0));
@@ -2157,7 +2157,7 @@ status_t DwarfFile::_ParseFrameInfoInstructions(CompilationUnit* unit,
 
 		uint8 opcode = dataReader.Read<uint8>(0);
 		if ((opcode >> 6) != 0) {
-			uint32 operand = opcode & 0x3f;
+			uint32_t operand = opcode & 0x3f;
 
 			switch (opcode >> 6) {
 				case DW_CFA_advance_loc:
@@ -2215,7 +2215,7 @@ status_t DwarfFile::_ParseFrameInfoInstructions(CompilationUnit* unit,
 				}
 				case DW_CFA_advance_loc1:
 				{
-					uint32 delta = dataReader.Read<uint8>(0);
+					uint32_t delta = dataReader.Read<uint8>(0);
 
 					TRACE_CFI("    DW_CFA_advance_loc1: %#" B_PRIx32 "\n",
 						delta);
@@ -2229,7 +2229,7 @@ status_t DwarfFile::_ParseFrameInfoInstructions(CompilationUnit* unit,
 				}
 				case DW_CFA_advance_loc2:
 				{
-					uint32 delta = dataReader.Read<uint16>(0);
+					uint32_t delta = dataReader.Read<uint16>(0);
 
 					TRACE_CFI("    DW_CFA_advance_loc2: %#" B_PRIx32 "\n",
 						delta);
@@ -2243,7 +2243,7 @@ status_t DwarfFile::_ParseFrameInfoInstructions(CompilationUnit* unit,
 				}
 				case DW_CFA_advance_loc4:
 				{
-					uint32 delta = dataReader.Read<uint32>(0);
+					uint32_t delta = dataReader.Read<uint32_t>(0);
 
 					TRACE_CFI("    DW_CFA_advance_loc4: %#" B_PRIx32 "\n",
 						delta);
@@ -2257,7 +2257,7 @@ status_t DwarfFile::_ParseFrameInfoInstructions(CompilationUnit* unit,
 				}
 				case DW_CFA_offset_extended:
 				{
-					uint32 reg = dataReader.ReadUnsignedLEB128(0);
+					uint32_t reg = dataReader.ReadUnsignedLEB128(0);
 					uint64 offset = dataReader.ReadUnsignedLEB128(0);
 
 					TRACE_CFI("    DW_CFA_offset_extended: reg: %" B_PRIu32 ", "
@@ -2271,7 +2271,7 @@ status_t DwarfFile::_ParseFrameInfoInstructions(CompilationUnit* unit,
 				}
 				case DW_CFA_restore_extended:
 				{
-					uint32 reg = dataReader.ReadUnsignedLEB128(0);
+					uint32_t reg = dataReader.ReadUnsignedLEB128(0);
 
 					TRACE_CFI("    DW_CFA_restore_extended: %#" B_PRIx32 "\n",
 						reg);
@@ -2281,7 +2281,7 @@ status_t DwarfFile::_ParseFrameInfoInstructions(CompilationUnit* unit,
 				}
 				case DW_CFA_undefined:
 				{
-					uint32 reg = dataReader.ReadUnsignedLEB128(0);
+					uint32_t reg = dataReader.ReadUnsignedLEB128(0);
 
 					TRACE_CFI("    DW_CFA_undefined: %" B_PRIu32 "\n", reg);
 
@@ -2291,7 +2291,7 @@ status_t DwarfFile::_ParseFrameInfoInstructions(CompilationUnit* unit,
 				}
 				case DW_CFA_same_value:
 				{
-					uint32 reg = dataReader.ReadUnsignedLEB128(0);
+					uint32_t reg = dataReader.ReadUnsignedLEB128(0);
 
 					TRACE_CFI("    DW_CFA_same_value: %" B_PRIu32 "\n", reg);
 
@@ -2301,8 +2301,8 @@ status_t DwarfFile::_ParseFrameInfoInstructions(CompilationUnit* unit,
 				}
 				case DW_CFA_register:
 				{
-					uint32 reg1 = dataReader.ReadUnsignedLEB128(0);
-					uint32 reg2 = dataReader.ReadUnsignedLEB128(0);
+					uint32_t reg1 = dataReader.ReadUnsignedLEB128(0);
+					uint32_t reg2 = dataReader.ReadUnsignedLEB128(0);
 
 					TRACE_CFI("    DW_CFA_register: reg1: %" B_PRIu32 ", reg2: "
 						"%" B_PRIu32 "\n", reg1, reg2);
@@ -2331,7 +2331,7 @@ status_t DwarfFile::_ParseFrameInfoInstructions(CompilationUnit* unit,
 				}
 				case DW_CFA_def_cfa:
 				{
-					uint32 reg = dataReader.ReadUnsignedLEB128(0);
+					uint32_t reg = dataReader.ReadUnsignedLEB128(0);
 					uint64 offset = dataReader.ReadUnsignedLEB128(0);
 
 					TRACE_CFI("    DW_CFA_def_cfa: reg: %" B_PRIu32 ", offset: "
@@ -2342,7 +2342,7 @@ status_t DwarfFile::_ParseFrameInfoInstructions(CompilationUnit* unit,
 				}
 				case DW_CFA_def_cfa_register:
 				{
-					uint32 reg = dataReader.ReadUnsignedLEB128(0);
+					uint32_t reg = dataReader.ReadUnsignedLEB128(0);
 
 					TRACE_CFI("    DW_CFA_def_cfa_register: %" B_PRIu32 "\n",
 						reg);
@@ -2383,7 +2383,7 @@ status_t DwarfFile::_ParseFrameInfoInstructions(CompilationUnit* unit,
 				}
 				case DW_CFA_expression:
 				{
-					uint32 reg = dataReader.ReadUnsignedLEB128(0);
+					uint32_t reg = dataReader.ReadUnsignedLEB128(0);
 					uint64 blockLength = dataReader.ReadUnsignedLEB128(0);
 					uint8* block = (uint8*)dataReader.Data();
 					dataReader.Skip(blockLength);
@@ -2397,7 +2397,7 @@ status_t DwarfFile::_ParseFrameInfoInstructions(CompilationUnit* unit,
 				}
 				case DW_CFA_offset_extended_sf:
 				{
-					uint32 reg = dataReader.ReadUnsignedLEB128(0);
+					uint32_t reg = dataReader.ReadUnsignedLEB128(0);
 					int64 offset = dataReader.ReadSignedLEB128(0);
 
 					TRACE_CFI("    DW_CFA_offset_extended: reg: %" B_PRIu32 ", "
@@ -2405,20 +2405,20 @@ status_t DwarfFile::_ParseFrameInfoInstructions(CompilationUnit* unit,
 
 					if (CfaRule* rule = context.RegisterRule(reg)) {
 						rule->SetToLocationOffset(
-							offset * (int32)context.DataAlignment());
+							offset * (int32_t)context.DataAlignment());
 					}
 					break;
 				}
 				case DW_CFA_def_cfa_sf:
 				{
-					uint32 reg = dataReader.ReadUnsignedLEB128(0);
+					uint32_t reg = dataReader.ReadUnsignedLEB128(0);
 					int64 offset = dataReader.ReadSignedLEB128(0);
 
 					TRACE_CFI("    DW_CFA_def_cfa_sf: reg: %" B_PRIu32 ", "
 						"offset: %" B_PRId64 "\n", reg, offset);
 
 					context.GetCfaCfaRule()->SetToRegisterOffset(reg,
-						offset * (int32)context.DataAlignment());
+						offset * (int32_t)context.DataAlignment());
 					break;
 				}
 				case DW_CFA_def_cfa_offset_sf:
@@ -2433,12 +2433,12 @@ status_t DwarfFile::_ParseFrameInfoInstructions(CompilationUnit* unit,
 						return B_BAD_DATA;
 					}
 					context.GetCfaCfaRule()->SetOffset(
-						offset * (int32)context.DataAlignment());
+						offset * (int32_t)context.DataAlignment());
 					break;
 				}
 				case DW_CFA_val_offset:
 				{
-					uint32 reg = dataReader.ReadUnsignedLEB128(0);
+					uint32_t reg = dataReader.ReadUnsignedLEB128(0);
 					uint64 offset = dataReader.ReadUnsignedLEB128(0);
 
 					TRACE_CFI("    DW_CFA_val_offset: reg: %" B_PRIu32 ", "
@@ -2452,7 +2452,7 @@ status_t DwarfFile::_ParseFrameInfoInstructions(CompilationUnit* unit,
 				}
 				case DW_CFA_val_offset_sf:
 				{
-					uint32 reg = dataReader.ReadUnsignedLEB128(0);
+					uint32_t reg = dataReader.ReadUnsignedLEB128(0);
 					int64 offset = dataReader.ReadSignedLEB128(0);
 
 					TRACE_CFI("    DW_CFA_val_offset_sf: reg: %" B_PRIu32 ", "
@@ -2460,13 +2460,13 @@ status_t DwarfFile::_ParseFrameInfoInstructions(CompilationUnit* unit,
 
 					if (CfaRule* rule = context.RegisterRule(reg)) {
 						rule->SetToValueOffset(
-							offset * (int32)context.DataAlignment());
+							offset * (int32_t)context.DataAlignment());
 					}
 					break;
 				}
 				case DW_CFA_val_expression:
 				{
-					uint32 reg = dataReader.ReadUnsignedLEB128(0);
+					uint32_t reg = dataReader.ReadUnsignedLEB128(0);
 					uint64 blockLength = dataReader.ReadUnsignedLEB128(0);
 					uint8* block = (uint8*)dataReader.Data();
 					dataReader.Skip(blockLength);
@@ -2516,7 +2516,7 @@ status_t DwarfFile::_ParseFrameInfoInstructions(CompilationUnit* unit,
 				case DW_CFA_GNU_negative_offset_extended:
 				{
 					// obsolete
-					uint32 reg = dataReader.ReadUnsignedLEB128(0);
+					uint32_t reg = dataReader.ReadUnsignedLEB128(0);
 					int64 offset = dataReader.ReadSignedLEB128(0);
 
 					TRACE_CFI("    DW_CFA_GNU_negative_offset_extended: "
@@ -2525,7 +2525,7 @@ status_t DwarfFile::_ParseFrameInfoInstructions(CompilationUnit* unit,
 
 					if (CfaRule* rule = context.RegisterRule(reg)) {
 						rule->SetToLocationOffset(
-							offset * (int32)context.DataAlignment());
+							offset * (int32_t)context.DataAlignment());
 					}
 					break;
 				}
@@ -2590,10 +2590,10 @@ status_t DwarfFile::_ParsePublicTypesInfo(DataReader& dataReader, bool dwarf64)
 
 	TRACE_PUBTYPES_ONLY(off_t debugInfoOffset =) dwarf64
 		? dataReader.Read<uint64>(0)
-		: (uint64)dataReader.Read<uint32>(0);
+		: (uint64)dataReader.Read<uint32_t>(0);
 	TRACE_PUBTYPES_ONLY(off_t debugInfoSize =) dwarf64
 		? dataReader.Read<uint64>(0)
-		: (uint64)dataReader.Read<uint32>(0);
+		: (uint64)dataReader.Read<uint32_t>(0);
 
 	if (dataReader.HasOverflow())
 		return B_BAD_DATA;
@@ -2605,7 +2605,7 @@ status_t DwarfFile::_ParsePublicTypesInfo(DataReader& dataReader, bool dwarf64)
 	while (dataReader.BytesRemaining() > 0) {
 		off_t entryOffset = dwarf64
 			? dataReader.Read<uint64>(0)
-			: (uint64)dataReader.Read<uint32>(0);
+			: (uint64)dataReader.Read<uint32_t>(0);
 		if (entryOffset == 0)
 			return B_OK;
 
@@ -2791,8 +2791,8 @@ status_t DwarfFile::_LocateDebugInfo(BString& _requiredExternalFileName,
 
 /*
 		// TODO: validate CRC
-		int32 debugCRC = *(int32*)((char*)debugLinkSection->Data()
-			+ debugLinkSection->Size() - sizeof(int32));
+		int32_t debugCRC = *(int32_t*)((char*)debugLinkSection->Data()
+			+ debugLinkSection->Size() - sizeof(int32_t));
 */
 		if (fAlternateElfFile == NULL) {
 			fAlternateElfFile = new(std::nothrow) ElfFile;

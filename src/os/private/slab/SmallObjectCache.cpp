@@ -25,7 +25,7 @@ slab_in_pages(const void *pages, size_t slab_size)
 /*static*/ SmallObjectCache*
 SmallObjectCache::Create(const char* name, size_t object_size,
 	size_t alignment, size_t maximum, size_t magazineCapacity,
-	size_t maxMagazineCount, uint32 flags, void* cookie,
+	size_t maxMagazineCount, uint32_t flags, void* cookie,
 	object_cache_constructor constructor, object_cache_destructor destructor,
 	object_cache_reclaimer reclaimer)
 {
@@ -62,7 +62,7 @@ SmallObjectCache::Delete()
 
 
 slab*
-SmallObjectCache::CreateSlab(uint32 flags)
+SmallObjectCache::CreateSlab(uint32_t flags)
 {
 	if (!check_cache_quota(this))
 		return NULL;
@@ -88,7 +88,7 @@ SmallObjectCache::CreateSlab(uint32 flags)
 
 
 void
-SmallObjectCache::ReturnSlab(slab* slab, uint32 flags)
+SmallObjectCache::ReturnSlab(slab* slab, uint32_t flags)
 {
 	UninitSlab(slab);
 

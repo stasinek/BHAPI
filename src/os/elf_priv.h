@@ -25,7 +25,7 @@ struct elf_image_info {
     struct elf_image_info* next;		// next image in the hash
     char*			name;
     image_id		id;
-    int32			ref_count;
+    int32_t			ref_count;
     struct vnode*	vnode;
     elf_region		text_region;
     elf_region		data_region;
@@ -38,7 +38,7 @@ struct elf_image_info {
 
     // pointer to symbol participation data structures
     char*			needed;
-    uint32*			symhash;
+    uint32_t*			symhash;
     elf_sym*		syms;
     char*			strtab;
     elf_rel*		rel;
@@ -50,17 +50,17 @@ struct elf_image_info {
     int				pltrel_type;
 
     elf_sym*		debug_symbols;
-    uint32			num_debug_symbols;
+    uint32_t			num_debug_symbols;
     const char*		debug_string_table;
 
     // versioning related structures
-    uint32			num_version_definitions;
+    uint32_t			num_version_definitions;
     elf_verdef*		version_definitions;
-    uint32			num_needed_versions;
+    uint32_t			num_needed_versions;
     elf_verneed*	needed_versions;
     elf_versym*		symbol_versions;
     struct elf_version_info* versions;
-    uint32			num_versions;
+    uint32_t			num_versions;
 };
 #ifdef __cplusplus
 }

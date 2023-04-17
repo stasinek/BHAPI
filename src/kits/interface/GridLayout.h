@@ -17,8 +17,8 @@ public:
 								BGridLayout(BMessage* from);
 	virtual						~BGridLayout();
 
-			int32				CountColumns() const;
-			int32				CountRows() const;
+			int32_t				CountColumns() const;
+			int32_t				CountRows() const;
 
 			float				HorizontalSpacing() const;
 			float				VerticalSpacing() const;
@@ -27,36 +27,36 @@ public:
 			void				SetVerticalSpacing(float spacing);
 			void				SetSpacing(float horizontal, float vertical);
 
-			float				ColumnWeight(int32 column) const;
-			void				SetColumnWeight(int32 column, float weight);
+			float				ColumnWeight(int32_t column) const;
+			void				SetColumnWeight(int32_t column, float weight);
 
-			float				MinColumnWidth(int32 column) const;
-			void				SetMinColumnWidth(int32 column, float width);
+			float				MinColumnWidth(int32_t column) const;
+			void				SetMinColumnWidth(int32_t column, float width);
 
-			float				MaxColumnWidth(int32 column) const;
-			void				SetMaxColumnWidth(int32 column, float width);
+			float				MaxColumnWidth(int32_t column) const;
+			void				SetMaxColumnWidth(int32_t column, float width);
 
-			float				RowWeight(int32 row) const;
-			void				SetRowWeight(int32 row, float weight);
+			float				RowWeight(int32_t row) const;
+			void				SetRowWeight(int32_t row, float weight);
 
 			float				MinRowHeight(int row) const;
-			void				SetMinRowHeight(int32 row, float height);
+			void				SetMinRowHeight(int32_t row, float height);
 
-			float				MaxRowHeight(int32 row) const;
-			void				SetMaxRowHeight(int32 row, float height);
+			float				MaxRowHeight(int32_t row) const;
+			void				SetMaxRowHeight(int32_t row, float height);
 
-			BLayoutItem*		ItemAt(int32 column, int32 row) const;
+			BLayoutItem*		ItemAt(int32_t column, int32_t row) const;
 
 	virtual	BLayoutItem*		AddView(BView* child);
-	virtual	BLayoutItem*		AddView(int32 index, BView* child);
-	virtual	BLayoutItem*		AddView(BView* child, int32 column, int32 row,
-									int32 columnCount = 1, int32 rowCount = 1);
+	virtual	BLayoutItem*		AddView(int32_t index, BView* child);
+	virtual	BLayoutItem*		AddView(BView* child, int32_t column, int32_t row,
+									int32_t columnCount = 1, int32_t rowCount = 1);
 
 	virtual	bool				AddItem(BLayoutItem* item);
-	virtual	bool				AddItem(int32 index, BLayoutItem* item);
-	virtual	bool				AddItem(BLayoutItem* item, int32 column,
-									int32 row, int32 columnCount = 1,
-									int32 rowCount = 1);
+	virtual	bool				AddItem(int32_t index, BLayoutItem* item);
+	virtual	bool				AddItem(BLayoutItem* item, int32_t column,
+									int32_t row, int32_t columnCount = 1,
+									int32_t rowCount = 1);
 
 	virtual	status_t			Archive(BMessage* into, bool deep = true) const;
 	static	BArchivable*		Instantiate(BMessage* from);
@@ -67,21 +67,21 @@ protected:
 	virtual status_t			AllArchived(BMessage* into) const;
 	virtual	status_t			AllUnarchived(const BMessage* from);
 	virtual status_t			ItemArchived(BMessage* into,
-									BLayoutItem* item, int32 index) const;
+									BLayoutItem* item, int32_t index) const;
 	virtual status_t			ItemUnarchived(const BMessage* from,
-									BLayoutItem* item, int32 index);
+									BLayoutItem* item, int32_t index);
 
-	virtual	bool				ItemAdded(BLayoutItem* item, int32 atIndex);
-	virtual	void				ItemRemoved(BLayoutItem* item, int32 fromIndex);
+	virtual	bool				ItemAdded(BLayoutItem* item, int32_t atIndex);
+	virtual	void				ItemRemoved(BLayoutItem* item, int32_t fromIndex);
 
 	virtual	bool				HasMultiColumnItems();
 	virtual	bool				HasMultiRowItems();
 
-	virtual	int32				InternalCountColumns();
-	virtual	int32				InternalCountRows();
+	virtual	int32_t				InternalCountColumns();
+	virtual	int32_t				InternalCountRows();
 	virtual	void				GetColumnRowConstraints(
 									orientation orientation,
-									int32 index,
+									int32_t index,
 									ColumnRowConstraints* constraints);
 	virtual	void				GetItemDimensions(BLayoutItem* item,
 									Dimensions* dimensions);
@@ -90,12 +90,12 @@ private:
 			class RowInfoArray;
 			struct ItemLayoutData;
 
-			bool				_IsGridCellEmpty(int32 column, int32 row);
-			bool				_AreGridCellsEmpty(int32 column, int32 row,
-									int32 columnCount, int32 rowCount);
+			bool				_IsGridCellEmpty(int32_t column, int32_t row);
+			bool				_AreGridCellsEmpty(int32_t column, int32_t row,
+									int32_t columnCount, int32_t rowCount);
 
 			bool				_InsertItemIntoGrid(BLayoutItem* item);
-			bool				_ResizeGrid(int32 columnCount, int32 rowCount);
+			bool				_ResizeGrid(int32_t columnCount, int32_t rowCount);
 
 			ItemLayoutData*		_LayoutDataForItem(BLayoutItem* item) const;
 
@@ -118,16 +118,16 @@ private:
 			void				operator =(const BGridLayout&);
 
 			BLayoutItem***		fGrid;
-			int32				fColumnCount;
-			int32				fRowCount;
+			int32_t				fColumnCount;
+			int32_t				fRowCount;
 
 			RowInfoArray*		fRowInfos;
 			RowInfoArray*		fColumnInfos;
 
-			int32				fMultiColumnItems;
-			int32				fMultiRowItems;
+			int32_t				fMultiColumnItems;
+			int32_t				fMultiRowItems;
 
-			uint32				_reserved[5];
+			uint32_t				_reserved[5];
 };
 
 

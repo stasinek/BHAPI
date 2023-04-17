@@ -68,7 +68,7 @@ public:
 	virtual ~AddMenuItemVisitor();
 
 	virtual bool Visit(BDiskDevice* device);
-	virtual bool Visit(BPartition* partition, int32 level);
+	virtual bool Visit(BPartition* partition, int32_t level);
 
 private:
 	BMenu* fMenu;
@@ -96,7 +96,7 @@ bool AddMenuItemVisitor::Visit(BDiskDevice* device)
 }
 
 
-bool AddMenuItemVisitor::Visit(BPartition* partition, int32 level)
+bool AddMenuItemVisitor::Visit(BPartition* partition, int32_t level)
 {
 	if (!partition->ContainsFileSystem())
 		return false;
@@ -110,7 +110,7 @@ bool AddMenuItemVisitor::Visit(BPartition* partition, int32 level)
 			if (type == NULL)
 				return false;
 
-			uint32 divisor = 1UL << 30;
+			uint32_t divisor = 1UL << 30;
 			char unit = 'G';
 			if (partition->Size() < divisor) {
 				divisor = 1UL << 20;
@@ -174,7 +174,7 @@ bool MountMenu::AddDynamicItem(add_state)
 {
 	// remove old items
 	for (;;) {
-		BMenuItem* item = RemoveItem((int32)0);
+		BMenuItem* item = RemoveItem((int32_t)0);
 		if (item == NULL)
 			break;
 		delete item;

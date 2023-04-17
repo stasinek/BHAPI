@@ -37,12 +37,12 @@
 
 class TView : public EView {
 public:
-	TView(ERect frame, const char *name, euint32 resizingMode, euint32 flags);
+	TView(ERect frame, const char *name, euint32_t resizingMode, euint32_t flags);
 	virtual ~TView();
 };
 
 
-TView::TView(ERect frame, const char *name, euint32 resizingMode, euint32 flags)
+TView::TView(ERect frame, const char *name, euint32_t resizingMode, euint32_t flags)
 	: EView(frame, name, resizingMode, flags)
 {
 	EStringView *strv = new EStringView(ERect(10, 10, 150, 150), NULL, "在这里我们测试字符串，\n还有多行文字，\n这又是一行。", E_FOLLOW_ALL);
@@ -67,8 +67,8 @@ public:
 	TWindow(ERect frame,
 		const char *title,
 		e_window_type type,
-		euint32 flags,
-		euint32 workspace = E_CURRENT_WORKSPACE);
+		euint32_t flags,
+		euint32_t workspace = E_CURRENT_WORKSPACE);
 	virtual ~TWindow();
 
 	virtual void WindowActivated(bool state);
@@ -87,7 +87,7 @@ public:
 	virtual void	ReadyToRun();
 };
 
-TWindow::TWindow(ERect frame, const char *title, e_window_type type, euint32 flags, euint32 workspace)
+TWindow::TWindow(ERect frame, const char *title, e_window_type type, euint32_t flags, euint32_t workspace)
 	: EWindow(frame, title, type, flags, workspace), quited(false)
 {
 //	SetBackgroundColor(0, 255, 255);

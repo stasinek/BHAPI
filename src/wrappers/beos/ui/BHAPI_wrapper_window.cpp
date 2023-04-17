@@ -44,14 +44,14 @@
 class EBePrivateWin : public BWindow
 {
 public:
-	EBePrivateWin(int32 x,  int32 y,  int32 w,  int32 h);
+	EBePrivateWin(int32_t x,  int32_t y,  int32_t w,  int32_t h);
 	virtual ~EBePrivateWin();
 
 	virtual bool QuitRequested();
 
 	virtual void FrameMoved(BPoint new_position);
 	virtual void FrameResized(float new_width, float new_height);
-	virtual void WorkspacesChanged(uint32 old_ws, uint32 new_ws);
+	virtual void WorkspacesChanged(uint32_t old_ws, uint32_t new_ws);
 	virtual void DispatchMessage(BMessage *bMsg, BHandler *handler);
 
 	BMessenger fContactor;
@@ -60,20 +60,20 @@ public:
 private:
 	bool doQuit;
 	bigtime_t fPrevMouseDownTime;
-	int32 fPrevMouseDownCount;
+	int32_t fPrevMouseDownCount;
 };
 
 
 class EBePrivateWinTopView : public BView
 {
 public:
-	EBePrivateWinTopView(BRect frame, const char *name, uint32 resizeMask, uint32 flags);
+	EBePrivateWinTopView(BRect frame, const char *name, uint32_t resizeMask, uint32_t flags);
 	virtual ~EBePrivateWinTopView();
 	virtual void Draw(BRect updateRect);
 };
 
 
-EBePrivateWinTopView::EBePrivateWinTopView(BRect frame, const char *name, uint32 resizeMask, uint32 flags)
+EBePrivateWinTopView::EBePrivateWinTopView(BRect frame, const char *name, uint32_t resizeMask, uint32_t flags)
 	: BView(frame, name, resizeMask, flags)
 {
 }
@@ -107,7 +107,7 @@ EBePrivateWinTopView::Draw(BRect updateRect)
 }
 
 
-EBePrivateWin::EBePrivateWin(int32 x,  int32 y,  int32 w,  int32 h)
+EBePrivateWin::EBePrivateWin(int32_t x,  int32_t y,  int32_t w,  int32_t h)
 	: BWindow(BRect(0, 0, 10, 10), NULL, B_TITLED_WINDOW, 0),
 	  fTopView(NULL), doQuit(false),
 	  fPrevMouseDownTime(0), fPrevMouseDownCount(0)
@@ -140,7 +140,7 @@ EBePrivateWin::QuitRequested()
 }
 
 
-static bool b_beos_get_byte(int32 modifiers, int32 key_code, char *result)
+static bool b_beos_get_byte(int32_t modifiers, int32_t key_code, char *result)
 {
 	if(result == NULL || key_code < 0 || key_code >= 128) return false;
 
@@ -155,7 +155,7 @@ static bool b_beos_get_byte(int32 modifiers, int32 key_code, char *result)
 		return false;
 	}
 
-	int32 offset;
+	int32_t offset;
 	bool retVal = false;
 
 	if((modifiers & B_SHIFT_KEY) && (modifiers & B_CAPS_LOCK))
@@ -186,7 +186,7 @@ static void __bhapi_convert_region(const BRegion *region, BRegion *beRegion, BRe
 
 	if(region != NULL)
 	{
-		for(int32 i = 0; i < region->CountRects(); i++)
+		for(int32_t i = 0; i < region->CountRects(); i++)
 		{
 			BRect r = region->RectAt(i);
 			BRect bRect(r.left, r.top, r.right, r.bottom);
@@ -207,7 +207,7 @@ EBePrivateWin::DispatchMessage(BMessage *bMsg, BHandler *handler)
 
 	if(bMsg->what == 'b_')
 	{
-		int32 what = 0;
+		int32_t what = 0;
 		bMsg->FindInt32("BHAPI:what", &what);
 
 		switch(what)
@@ -231,7 +231,7 @@ EBePrivateWin::DispatchMessage(BMessage *bMsg, BHandler *handler)
 			case BHAPI_BEOS_SET_BACKGROUND:
 				{
 					rgb_color bkColor;
-					if(bMsg->FindInt32("background", (int32*)&bkColor) != B_OK) break;
+					if(bMsg->FindInt32("background", (int32_t*)&bkColor) != B_OK) break;
 					fTopView->SetViewColor(bkColor);
 					fTopView->Invalidate();
 				}
@@ -283,8 +283,8 @@ EBePrivateWin::DispatchMessage(BMessage *bMsg, BHandler *handler)
 
 			case BHAPI_BEOS_SET_WORKSPACES:
 				{
-					uint32 workspaces = 0;
-					if(bMsg->FindInt32("workspaces", (int32*)&workspaces) != B_OK) break;
+					uint32_t workspaces = 0;
+					if(bMsg->FindInt32("workspaces", (int32_t*)&workspaces) != B_OK) break;
 					if(workspaces == 0) workspaces = current_workspace() + 1;
 					SetWorkspaces(workspaces);
 				}
@@ -292,8 +292,8 @@ EBePrivateWin::DispatchMessage(BMessage *bMsg, BHandler *handler)
 
 			case BHAPI_BEOS_GET_WORKSPACES:
 				{
-					uint32 workspaces = Workspaces();
-					bMsg->AddInt32("workspaces", *((int32*)&workspaces));
+					uint32_t workspaces = Workspaces();
+					bMsg->AddInt32("workspaces", *((int32_t*)&workspaces));
 				}
 				break;
 
@@ -304,7 +304,7 @@ EBePrivateWin::DispatchMessage(BMessage *bMsg, BHandler *handler)
 			case BHAPI_BEOS_SHOW:
 				if(IsHidden())
 				{
-					uint32 oldFlags = Flags();
+					uint32_t oldFlags = Flags();
 					SetFlags(oldFlags | B_AVOID_FOCUS);
 					Show();
 					if(Look() != B_NO_BORDER_WINDOW_LOOK) SetFlags(oldFlags);
@@ -318,7 +318,7 @@ EBePrivateWin::DispatchMessage(BMessage *bMsg, BHandler *handler)
 			case BHAPI_BEOS_RAISE:
 				if(!IsFront())
 				{
-					uint32 oldFlags = Flags();
+					uint32_t oldFlags = Flags();
 					SetFlags(oldFlags | B_AVOID_FOCUS);
 					Activate(true);
 					if(Look() != B_NO_BORDER_WINDOW_LOOK) SetFlags(oldFlags);
@@ -389,7 +389,7 @@ EBePrivateWin::DispatchMessage(BMessage *bMsg, BHandler *handler)
 			case BHAPI_BEOS_GRAB_MOUSE:
 			case BHAPI_BEOS_UNGRAB_MOUSE:
 				{
-					uint32 options = (what == BHAPI_BEOS_GRAB_MOUSE ? B_LOCK_WINDOW_FOCUS : 0);
+					uint32_t options = (what == BHAPI_BEOS_GRAB_MOUSE ? B_LOCK_WINDOW_FOCUS : 0);
 					if(fTopView->SetEventMask(B_POINTER_EVENTS, options) != B_OK) break;
 					bMsg->AddBool("state", what == BHAPI_BEOS_GRAB_MOUSE);
 				}
@@ -398,7 +398,7 @@ EBePrivateWin::DispatchMessage(BMessage *bMsg, BHandler *handler)
 			case BHAPI_BEOS_GRAB_KEYBOARD:
 			case BHAPI_BEOS_UNGRAB_KEYBOARD:
 				{
-					uint32 options = (what == BHAPI_BEOS_GRAB_KEYBOARD ? B_LOCK_WINDOW_FOCUS : 0);
+					uint32_t options = (what == BHAPI_BEOS_GRAB_KEYBOARD ? B_LOCK_WINDOW_FOCUS : 0);
 					if(fTopView->SetEventMask(B_KEYBOARD_EVENTS, options) != B_OK) break;
 					bMsg->AddBool("state", what == BHAPI_BEOS_GRAB_KEYBOARD);
 				}
@@ -407,11 +407,11 @@ EBePrivateWin::DispatchMessage(BMessage *bMsg, BHandler *handler)
 			case BHAPI_BEOS_QUERY_MOUSE:
 				{
 					BPoint pt;
-					uint32 btns = 0;
+					uint32_t btns = 0;
 					fTopView->GetMouse(&pt, &btns, false);
-					bMsg->AddInt32("x", (int32)pt.x);
-					bMsg->AddInt32("y", (int32)pt.y);
-					bMsg->AddInt32("buttons", (int32)btns);
+					bMsg->AddInt32("x", (int32_t)pt.x);
+					bMsg->AddInt32("y", (int32_t)pt.y);
+					bMsg->AddInt32("buttons", (int32_t)btns);
 				}
 				break;
 
@@ -466,12 +466,12 @@ EBePrivateWin::DispatchMessage(BMessage *bMsg, BHandler *handler)
 				if(fContactor.IsValid() == false) break;
 
 				BPoint where;
-				int32 buttons = 0;
+				int32_t buttons = 0;
 
 				bMsg->FindPoint("where", &where);
 				if(bMsg->what != B_MOUSE_UP) bMsg->FindInt32("buttons", &buttons);
 
-				int32 clicks = 1;
+				int32_t clicks = 1;
 				if(bMsg->what == B_MOUSE_DOWN)
 				{
 #if 0
@@ -519,11 +519,11 @@ EBePrivateWin::DispatchMessage(BMessage *bMsg, BHandler *handler)
 
 				int8 byte[4];
 				const char *bytes = NULL;
-				int32 numBytes = 0;
-				int32 key = 0;
-				int32 key_repeat = 0;
-				int32 beModifiers = 0;
-				int32 modifiers = 0;
+				int32_t numBytes = 0;
+				int32_t key = 0;
+				int32_t key_repeat = 0;
+				int32_t beModifiers = 0;
+				int32_t modifiers = 0;
 
 				bMsg->FindInt32("key", &key);
 				bMsg->FindInt32("modifiers", &beModifiers);
@@ -531,7 +531,7 @@ EBePrivateWin::DispatchMessage(BMessage *bMsg, BHandler *handler)
 
 				if(bMsg->what == B_KEY_DOWN || bMsg->what == B_KEY_UP)
 				{
-					for(int32 i = 0; i < 3; i++) bMsg->FindInt8("byte", i, &byte[i]);
+					for(int32_t i = 0; i < 3; i++) bMsg->FindInt8("byte", i, &byte[i]);
 					if(bMsg->FindString("bytes", &bytes) == B_OK) numBytes = strlen(bytes);
 //					if(bMsg->what == B_KEY_DOWN) bMsg->FindInt32("be:key_repeat", &key_repeat);
 				}
@@ -558,7 +558,7 @@ EBePrivateWin::DispatchMessage(BMessage *bMsg, BHandler *handler)
 				if(bMsg->what == B_KEY_DOWN || bMsg->what == B_KEY_UP)
 				{
 					if(bMsg->what == B_KEY_DOWN) message.AddInt32("BHAPI:key_repeat", key_repeat);
-					for(int32 i = 0; i < 3; i++) message.AddInt8("byte", byte[i]);
+					for(int32_t i = 0; i < 3; i++) message.AddInt8("byte", byte[i]);
 					if(!(numBytes != 1 || *bytes != byte[0]))
 					{
 						b_beos_get_byte(beModifiers, key, (char*)byte);
@@ -585,10 +585,10 @@ EBePrivateWin::DispatchMessage(BMessage *bMsg, BHandler *handler)
 			{
 				if(fContactor.IsValid() == false) break;
 
-				int32 modifiers = 0;
-				int32 old_modifiers = 0;
-				int32 beModifiers = 0;
-				int32 old_beModifiers = 0;
+				int32_t modifiers = 0;
+				int32_t old_modifiers = 0;
+				int32_t beModifiers = 0;
+				int32_t old_beModifiers = 0;
 
 				bMsg->FindInt32("modifiers", &beModifiers);
 				bMsg->FindInt32("be:old_modifiers", &old_beModifiers);
@@ -657,7 +657,7 @@ EBePrivateWin::FrameResized(float new_width, float new_height)
 
 
 void 
-EBePrivateWin::WorkspacesChanged(uint32 old_ws, uint32 new_ws)
+EBePrivateWin::WorkspacesChanged(uint32_t old_ws, uint32_t new_ws)
 {
 	BWindow::WorkspacesChanged(old_ws, new_ws);
 
@@ -666,13 +666,13 @@ EBePrivateWin::WorkspacesChanged(uint32 old_ws, uint32 new_ws)
 		BMessage message(B_WORKSPACES_CHANGED);
 		message.AddBool("BHAPI:msg_from_gui", true);
 		message.AddInt64("when", b_real_time_clock_usecs());
-		message.AddInt32("new", (int32)new_ws);
+		message.AddInt32("new", (int32_t)new_ws);
 		fContactor.SendMessage(&message);
 	}
 }
 
 
-EBeGraphicsWindow::EBeGraphicsWindow(EBeGraphicsEngine *beEngine,  int32 x,  int32 y,  uint32 w,  uint32 h)
+EBeGraphicsWindow::EBeGraphicsWindow(EBeGraphicsEngine *beEngine,  int32_t x,  int32_t y,  uint32_t w,  uint32_t h)
 	: BGraphicsWindow(), fEngine(NULL)
 {
 	if(w == B_MAXUINT32 || h == B_MAXUINT32)
@@ -740,7 +740,7 @@ EBeGraphicsWindow::SetBackgroundColor(bhapi::rgb_color bkColor)
 
 	BMessage msg('b_');
 	msg.AddInt32("BHAPI:what", BHAPI_BEOS_SET_BACKGROUND);
-	msg.AddInt32("background", *((int32*)&bkColor));
+	msg.AddInt32("background", *((int32_t*)&bkColor));
 
 	beWinMsgr.SendMessage(&msg, &msg);
 	if(msg.IsReply())
@@ -753,7 +753,7 @@ EBeGraphicsWindow::SetBackgroundColor(bhapi::rgb_color bkColor)
 
 
 status_t 
-EBeGraphicsWindow::SetFlags(uint32 flags)
+EBeGraphicsWindow::SetFlags(uint32_t flags)
 {
 	// TODO
 	return B_OK;
@@ -797,13 +797,13 @@ EBeGraphicsWindow::SetTitle(const char *title)
 
 
 status_t 
-EBeGraphicsWindow::SetWorkspaces(uint32 workspaces)
+EBeGraphicsWindow::SetWorkspaces(uint32_t workspaces)
 {
 	if(beWinMsgr.IsValid() == false) return B_ERROR;
 
 	BMessage msg('b_');
 	msg.AddInt32("BHAPI:what", BHAPI_BEOS_SET_WORKSPACES);
-	msg.AddInt32("workspaces", *((int32*)&workspaces));
+	msg.AddInt32("workspaces", *((int32_t*)&workspaces));
 
 	beWinMsgr.SendMessage(&msg, &msg);
 	return(msg.IsReply() ? B_OK : B_ERROR);
@@ -811,7 +811,7 @@ EBeGraphicsWindow::SetWorkspaces(uint32 workspaces)
 
 
 status_t 
-EBeGraphicsWindow::GetWorkspaces(uint32 *workspaces)
+EBeGraphicsWindow::GetWorkspaces(uint32_t *workspaces)
 {
 	if(beWinMsgr.IsValid() == false || workspaces == NULL) return B_ERROR;
 
@@ -820,7 +820,7 @@ EBeGraphicsWindow::GetWorkspaces(uint32 *workspaces)
 
 	beWinMsgr.SendMessage(&msg, &msg);
 	if(msg.IsReply() == false) return B_ERROR;
-	return(msg.FindInt32("workspaces", (int32*)workspaces) == B_OK ? B_OK : B_ERROR);
+	return(msg.FindInt32("workspaces", (int32_t*)workspaces) == B_OK ? B_OK : B_ERROR);
 }
 
 
@@ -922,7 +922,7 @@ EBeGraphicsWindow::GetActivatedState(bool *state) const
 
 
 status_t 
-EBeGraphicsWindow::MoveTo(int32 x,  int32 y)
+EBeGraphicsWindow::MoveTo(int32_t x,  int32_t y)
 {
 	if(beWinMsgr.IsValid() == false) return B_ERROR;
 
@@ -936,7 +936,7 @@ EBeGraphicsWindow::MoveTo(int32 x,  int32 y)
 
 
 status_t 
-EBeGraphicsWindow::ResizeTo(uint32 w,  uint32 h)
+EBeGraphicsWindow::ResizeTo(uint32_t w,  uint32_t h)
 {
 	if(w == B_MAXUINT32 || h == B_MAXUINT32)
 	{
@@ -957,7 +957,7 @@ EBeGraphicsWindow::ResizeTo(uint32 w,  uint32 h)
 
 
 status_t 
-EBeGraphicsWindow::MoveAndResizeTo(int32 x,  int32 y,  uint32 w,  uint32 h)
+EBeGraphicsWindow::MoveAndResizeTo(int32_t x,  int32_t y,  uint32_t w,  uint32_t h)
 {
 	if(w == B_MAXUINT32 || h == B_MAXUINT32)
 	{
@@ -979,7 +979,7 @@ EBeGraphicsWindow::MoveAndResizeTo(int32 x,  int32 y,  uint32 w,  uint32 h)
 
 
 status_t 
-EBeGraphicsWindow::SetSizeLimits(uint32 min_w,  uint32 max_w,  uint32 min_h,  uint32 max_h)
+EBeGraphicsWindow::SetSizeLimits(uint32_t min_w,  uint32_t max_w,  uint32_t min_h,  uint32_t max_h)
 {
 	if(beWinMsgr.IsValid() == false) return B_ERROR;
 
@@ -993,7 +993,7 @@ EBeGraphicsWindow::SetSizeLimits(uint32 min_w,  uint32 max_w,  uint32 min_h,  ui
 
 
 status_t 
-EBeGraphicsWindow::GetSizeLimits(uint32 *min_w,  uint32 *max_w,  uint32 *min_h,  uint32 *max_h)
+EBeGraphicsWindow::GetSizeLimits(uint32_t *min_w,  uint32_t *max_w,  uint32_t *min_h,  uint32_t *max_h)
 {
 	if(min_w == NULL || max_w == NULL || min_h == NULL || max_h == NULL) return B_ERROR;
 
@@ -1012,10 +1012,10 @@ EBeGraphicsWindow::GetSizeLimits(uint32 *min_w,  uint32 *max_w,  uint32 *min_h, 
 	BRect r;
 	if(msg.IsReply() == false || msg.FindRect("limits", &r) != B_OK) return B_ERROR;
 
-	if(r.left >= 0) *min_w = (uint32)r.left;
-	if(r.right >= 0) *max_w = (uint32)r.right;
-	if(r.top >= 0) *min_h = (uint32)r.top;
-	if(r.bottom >= 0) *max_h = (uint32)r.bottom;
+	if(r.left >= 0) *min_w = (uint32_t)r.left;
+	if(r.right >= 0) *max_w = (uint32_t)r.right;
+	if(r.top >= 0) *min_h = (uint32_t)r.top;
+	if(r.bottom >= 0) *max_h = (uint32_t)r.bottom;
 
 	return B_OK;
 }
@@ -1090,7 +1090,7 @@ EBeGraphicsWindow::UngrabKeyboard()
 
 
 status_t 
-EBeGraphicsWindow::QueryMouse(int32 *x,  int32 *y,  int32 *buttons)
+EBeGraphicsWindow::QueryMouse(int32_t *x,  int32_t *y,  int32_t *buttons)
 {
 	if(x == NULL && y == NULL && buttons == NULL) return B_ERROR;
 	if(beWinMsgr.IsValid() == false) return B_ERROR;
@@ -1101,9 +1101,9 @@ EBeGraphicsWindow::QueryMouse(int32 *x,  int32 *y,  int32 *buttons)
 	beWinMsgr.SendMessage(&msg, &msg);
 	if(msg.IsReply() == false) return B_ERROR;
 
-	if(x) if(msg.FindInt32("x", (int32*)x) != B_OK) return B_ERROR;
-	if(y) if(msg.FindInt32("y", (int32*)y) != B_OK) return B_ERROR;
-	if(buttons) if(msg.FindInt32("buttons", (int32*)buttons) != B_OK) return B_ERROR;
+	if(x) if(msg.FindInt32("x", (int32_t*)x) != B_OK) return B_ERROR;
+	if(y) if(msg.FindInt32("y", (int32_t*)y) != B_OK) return B_ERROR;
+	if(buttons) if(msg.FindInt32("buttons", (int32_t*)buttons) != B_OK) return B_ERROR;
 
 	return B_OK;
 }
@@ -1112,8 +1112,8 @@ EBeGraphicsWindow::QueryMouse(int32 *x,  int32 *y,  int32 *buttons)
 status_t 
 EBeGraphicsWindow::CopyTo(BGraphicsContext *dc,
 			  BGraphicsDrawable *dstDrawable,
-			   int32 x,  int32 y,  uint32 w,  uint32 h,
-			   int32 dstX,  int32 dstY,  uint32 dstW,  uint32 dstH)
+			   int32_t x,  int32_t y,  uint32_t w,  uint32_t h,
+			   int32_t dstX,  int32_t dstY,  uint32_t dstW,  uint32_t dstH)
 {
 	// TODO
 	return B_ERROR;
@@ -1122,8 +1122,8 @@ EBeGraphicsWindow::CopyTo(BGraphicsContext *dc,
 
 status_t 
 EBeGraphicsWindow::DrawPixmap(BGraphicsContext *dc, const BPixmap *pix,
-			       int32 x,  int32 y,  uint32 w,  uint32 h,
-			       int32 dstX,  int32 dstY,  uint32 dstW,  uint32 dstH)
+			       int32_t x,  int32_t y,  uint32_t w,  uint32_t h,
+			       int32_t dstX,  int32_t dstY,  uint32_t dstW,  uint32_t dstH)
 {
 	// TODO
 	return B_ERROR;
@@ -1132,7 +1132,7 @@ EBeGraphicsWindow::DrawPixmap(BGraphicsContext *dc, const BPixmap *pix,
 
 status_t 
 EBeGraphicsWindow::StrokePoint(BGraphicsContext *dc,
-			        int32 x,  int32 y)
+			        int32_t x,  int32_t y)
 {
 	// TODO
 	return B_ERROR;
@@ -1141,7 +1141,7 @@ EBeGraphicsWindow::StrokePoint(BGraphicsContext *dc,
 
 status_t 
 EBeGraphicsWindow::StrokePoints(BGraphicsContext *dc,
-				const  int32 *pts,  int32 count)
+				const  int32_t *pts,  int32_t count)
 {
 	// TODO
 	return B_ERROR;
@@ -1150,7 +1150,7 @@ EBeGraphicsWindow::StrokePoints(BGraphicsContext *dc,
 
 status_t 
 EBeGraphicsWindow::StrokePoints_Colors(BGraphicsContext *dc,
-				       const BList *ptsArrayLists,  int32 arrayCount,
+				       const BList *ptsArrayLists,  int32_t arrayCount,
 				       const bhapi::rgb_color *highColors)
 {
 	// TODO
@@ -1160,7 +1160,7 @@ EBeGraphicsWindow::StrokePoints_Colors(BGraphicsContext *dc,
 
 status_t 
 EBeGraphicsWindow::StrokePoints_Alphas(BGraphicsContext *dc,
-				       const  int32 *pts, const  uint8 *alpha,  int32 count)
+				       const  int32_t *pts, const  uint8 *alpha,  int32_t count)
 {
 	// TODO
 	return B_ERROR;
@@ -1169,7 +1169,7 @@ EBeGraphicsWindow::StrokePoints_Alphas(BGraphicsContext *dc,
 
 status_t 
 EBeGraphicsWindow::StrokeLine(BGraphicsContext *dc,
-			       int32 x0,  int32 y0,  int32 x1,  int32 y1)
+			       int32_t x0,  int32_t y0,  int32_t x1,  int32_t y1)
 {
 	// TODO
 	return B_ERROR;
@@ -1178,7 +1178,7 @@ EBeGraphicsWindow::StrokeLine(BGraphicsContext *dc,
 
 status_t 
 EBeGraphicsWindow::StrokePolygon(BGraphicsContext *dc,
-				 const  int32 *pts,  int32 count, bool closed)
+				 const  int32_t *pts,  int32_t count, bool closed)
 {
 	// TODO
 	return B_ERROR;
@@ -1187,7 +1187,7 @@ EBeGraphicsWindow::StrokePolygon(BGraphicsContext *dc,
 
 status_t 
 EBeGraphicsWindow::FillPolygon(BGraphicsContext *dc,
-			       const  int32 *pts,  int32 count)
+			       const  int32_t *pts,  int32_t count)
 {
 	// TODO
 	return B_ERROR;
@@ -1196,7 +1196,7 @@ EBeGraphicsWindow::FillPolygon(BGraphicsContext *dc,
 
 status_t 
 EBeGraphicsWindow::StrokeRect(BGraphicsContext *dc,
-			       int32 x,  int32 y,  uint32 w,  uint32 h)
+			       int32_t x,  int32_t y,  uint32_t w,  uint32_t h)
 {
 	// TODO
 	return B_ERROR;
@@ -1205,7 +1205,7 @@ EBeGraphicsWindow::StrokeRect(BGraphicsContext *dc,
 
 status_t 
 EBeGraphicsWindow::FillRect(BGraphicsContext *dc,
-			     int32 x,  int32 y,  uint32 w,  uint32 h)
+			     int32_t x,  int32_t y,  uint32_t w,  uint32_t h)
 {
 	// TODO
 	return B_ERROR;
@@ -1214,7 +1214,7 @@ EBeGraphicsWindow::FillRect(BGraphicsContext *dc,
 
 status_t 
 EBeGraphicsWindow::StrokeRects(BGraphicsContext *dc,
-			       const  int32 *rects,  int32 count)
+			       const  int32_t *rects,  int32_t count)
 {
 	// TODO
 	return B_ERROR;
@@ -1223,7 +1223,7 @@ EBeGraphicsWindow::StrokeRects(BGraphicsContext *dc,
 
 status_t 
 EBeGraphicsWindow::FillRects(BGraphicsContext *dc,
-			     const  int32 *rects,  int32 count)
+			     const  int32_t *rects,  int32_t count)
 {
 	// TODO
 	return B_ERROR;
@@ -1241,7 +1241,7 @@ EBeGraphicsWindow::FillRegion(BGraphicsContext *dc,
 
 status_t 
 EBeGraphicsWindow::StrokeRoundRect(BGraphicsContext *dc,
-				    int32 x,  int32 y,  uint32 w,  uint32 h,  uint32 xRadius,  uint32 yRadius)
+				    int32_t x,  int32_t y,  uint32_t w,  uint32_t h,  uint32_t xRadius,  uint32_t yRadius)
 {
 	// TODO
 	return B_ERROR;
@@ -1250,7 +1250,7 @@ EBeGraphicsWindow::StrokeRoundRect(BGraphicsContext *dc,
 
 status_t 
 EBeGraphicsWindow::FillRoundRect(BGraphicsContext *dc,
-				  int32 x,  int32 y,  uint32 w,  uint32 h,  uint32 xRadius,  uint32 yRadius)
+				  int32_t x,  int32_t y,  uint32_t w,  uint32_t h,  uint32_t xRadius,  uint32_t yRadius)
 {
 	// TODO
 	return B_ERROR;
@@ -1259,7 +1259,7 @@ EBeGraphicsWindow::FillRoundRect(BGraphicsContext *dc,
 
 status_t 
 EBeGraphicsWindow::StrokeArc(BGraphicsContext *dc,
-			      int32 x,  int32 y,  uint32 w,  uint32 h, float startAngle, float endAngle)
+			      int32_t x,  int32_t y,  uint32_t w,  uint32_t h, float startAngle, float endAngle)
 {
 	// TODO
 	return B_ERROR;
@@ -1268,7 +1268,7 @@ EBeGraphicsWindow::StrokeArc(BGraphicsContext *dc,
 
 status_t 
 EBeGraphicsWindow::FillArc(BGraphicsContext *dc,
-			    int32 x,  int32 y,  uint32 w,  uint32 h, float startAngle, float endAngle)
+			    int32_t x,  int32_t y,  uint32_t w,  uint32_t h, float startAngle, float endAngle)
 {
 	// TODO
 	return B_ERROR;

@@ -81,11 +81,11 @@ void Template::FillEllipse(BPoint center, BPoint radii) {
 }
 
 
-void Template::StrokePolygon(int32 numPoints, BPoint *points, bool isClosed) { 
+void Template::StrokePolygon(int32_t numPoints, BPoint *points, bool isClosed) { 
 }
 
 
-void Template::FillPolygon(int32 numPoints, BPoint *points, bool isClosed) { 
+void Template::FillPolygon(int32_t numPoints, BPoint *points, bool isClosed) { 
 }
 
 
@@ -101,11 +101,11 @@ void Template::DrawString(char *string, float escapement_nospace, float escapeme
 }
 
 
-void Template::DrawPixels(BRect src, BRect dest, int32 width, int32 height, int32 bytesPerRow, int32 pixelFormat, int32 flags, void *data) { 
+void Template::DrawPixels(BRect src, BRect dest, int32_t width, int32_t height, int32_t bytesPerRow, int32_t pixelFormat, int32_t flags, void *data) { 
 }
 
 
-void Template::SetClippingRects(BRect *rects, uint32 numRects) { 
+void Template::SetClippingRects(BRect *rects, uint32_t numRects) { 
 }
 
 
@@ -181,7 +181,7 @@ void Template::SetFontStyle(char *style) {
 }
 
 
-void Template::SetFontSpacing(int32 spacing) { 
+void Template::SetFontSpacing(int32_t spacing) { 
 }
 
 
@@ -193,11 +193,11 @@ void Template::SetFontRotate(float rotation) {
 }
 
 
-void Template::SetFontEncoding(int32 encoding) { 
+void Template::SetFontEncoding(int32_t encoding) { 
 }
 
 
-void Template::SetFontFlags(int32 flags) { 
+void Template::SetFontFlags(int32_t flags) { 
 }
 
 
@@ -205,7 +205,7 @@ void Template::SetFontShear(float shear) {
 }
 
 
-void Template::SetFontFace(int32 flags) { 
+void Template::SetFontFace(int32_t flags) { 
 }
 
 

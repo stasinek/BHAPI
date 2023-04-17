@@ -21,16 +21,16 @@ typedef struct pci_device_module_info {
 	uint16	(*read_io_16)(pci_device *device, addr_t mappedIOAddress);
 	void	(*write_io_16)(pci_device *device, addr_t mappedIOAddress,
 				uint16 value);
-	uint32	(*read_io_32)(pci_device *device, addr_t mappedIOAddress);
+	uint32_t	(*read_io_32)(pci_device *device, addr_t mappedIOAddress);
 	void	(*write_io_32)(pci_device *device, addr_t mappedIOAddress,
-				uint32 value);
+				uint32_t value);
 
 	void	*(*ram_address)(pci_device *device, const void *physicalAddress);
 
-	uint32	(*read_pci_config)(pci_device *device, uint16 offset,
+	uint32_t	(*read_pci_config)(pci_device *device, uint16 offset,
 				uint8 size);
 	void	(*write_pci_config)(pci_device *device, uint16 offset,
-				uint8 size, uint32 value);
+				uint8 size, uint32_t value);
 	status_t (*find_pci_capability)(pci_device *device, uint8 capID,
 				uint8 *offset);
 	void 	(*get_pci_info)(pci_device *device, struct pci_info *info);
@@ -40,7 +40,7 @@ typedef struct pci_device_module_info {
 
 
 /* Attributes of PCI device nodes */
-#define B_PCI_DEVICE_DOMAIN		"pci/domain"		/* uint32 */
+#define B_PCI_DEVICE_DOMAIN		"pci/domain"		/* uint32_t */
 #define B_PCI_DEVICE_BUS		"pci/bus"			/* uint8 */
 #define B_PCI_DEVICE_DEVICE		"pci/device"		/* uint8 */
 #define B_PCI_DEVICE_FUNCTION	"pci/function"		/* uint8 */

@@ -9,10 +9,10 @@
 #include <fssh_defs.h>
 
 
-typedef int32_t fssh_clock_t;
-typedef int32_t fssh_time_t;
-typedef int32_t fssh_suseconds_t;
-typedef uint32_t fssh_useconds_t;
+typedef int32_t_t fssh_clock_t;
+typedef int32_t_t fssh_time_t;
+typedef int32_t_t fssh_suseconds_t;
+typedef uint32_t_t fssh_useconds_t;
 
 #define FSSH_CLOCKS_PER_SEC	1000
 #define FSSH_CLK_TCK		FSSH_CLOCKS_PER_SEC

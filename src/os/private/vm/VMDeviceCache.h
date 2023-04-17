@@ -16,13 +16,13 @@
 class VMDeviceCache : public VMCache {
 public:
 			status_t			Init(addr_t baseAddress,
-									uint32 allocationFlags);
+									uint32_t allocationFlags);
 
 	virtual	status_t			Read(off_t offset, const iovec* vecs,
-									size_t count, uint32 flags,
+									size_t count, uint32_t flags,
 						 			size_t* _numBytes);
 	virtual	status_t			Write(off_t offset, const iovec* vecs,
-									size_t count, uint32 flags,
+									size_t count, uint32_t flags,
 						  			size_t* _numBytes);
 
 protected:

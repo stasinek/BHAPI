@@ -50,8 +50,8 @@ public:
 
             const char*			Name() const;
 
-            uint32				LocalCount() const;
-            uint32				SystemCount() const;
+            uint32_t				LocalCount() const;
+            uint32_t				SystemCount() const;
             status_t			StartWatching(BMessenger target);
             status_t			StopWatching(BMessenger target);
 
@@ -79,14 +79,14 @@ private:
             status_t			_DownloadFromSystem(bool force = false);
             status_t			_UploadToSystem();
 
-            uint32				_reserved0;
+            uint32_t				_reserved0;
             BMessage*			fData;
             BLocker				fLock;
             BMessenger			fClipHandler;
             BMessenger			fDataSource;
-            uint32				fCount;
+            uint32_t				fCount;
             char*				fName;
-            uint32				_reserved[4];
+            uint32_t				_reserved[4];
 public:
      int64		CountLocks() const;
 

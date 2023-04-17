@@ -66,7 +66,7 @@ private:
 			Operand				_ParseIdentifier(ValueNode* parentNode = NULL);
 			Operand				_ParseAtom();
 
-			void				_EatToken(int32 type);
+			void				_EatToken(int32_t type);
 
 			Operand				_ParseType(Type* baseType);
 									// the passed in Type object

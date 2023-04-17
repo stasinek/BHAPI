@@ -9,7 +9,7 @@ BHAPI_EXPORT bool bhapi::IsInsideGlyph(uchar ch)
 }
 //-------------------------------------------------------------------------------------------------
 
-BHAPI_EXPORT uint32 bhapi::UTF8NextCharLenUnsafe(const char *text)
+BHAPI_EXPORT uint32_t bhapi::UTF8NextCharLenUnsafe(const char *text)
 {
     const char *ptr = text;
 
@@ -21,7 +21,7 @@ BHAPI_EXPORT uint32 bhapi::UTF8NextCharLenUnsafe(const char *text)
 }
 //-------------------------------------------------------------------------------------------------
 
-BHAPI_EXPORT uint32 bhapi::UTF8NextCharLen(const char *text)
+BHAPI_EXPORT uint32_t bhapi::UTF8NextCharLen(const char *text)
 {
     if (text == NULL || *text == 0)
         return 0;
@@ -30,7 +30,7 @@ BHAPI_EXPORT uint32 bhapi::UTF8NextCharLen(const char *text)
 }
 //-------------------------------------------------------------------------------------------------
 
-BHAPI_EXPORT uint32 bhapi::UTF8NextCharLen(const char *bytes, size_t length)
+BHAPI_EXPORT uint32_t bhapi::UTF8NextCharLen(const char *bytes, size_t length)
 {
     if (bytes == NULL || length == 0 || bytes[0] == 0)
         return 0;
@@ -76,7 +76,7 @@ BHAPI_EXPORT uint32 bhapi::UTF8NextCharLen(const char *bytes, size_t length)
 }
 //-------------------------------------------------------------------------------------------------
 
-BHAPI_EXPORT uint32 bhapi::UTF8PreviousCharLen(const char *text, const char *limit)
+BHAPI_EXPORT uint32_t bhapi::UTF8PreviousCharLen(const char *text, const char *limit)
 {
     const char *ptr = text;
 
@@ -96,7 +96,7 @@ BHAPI_EXPORT uint32 bhapi::UTF8PreviousCharLen(const char *text, const char *lim
     numChars characters are read. If numChars is a negative value it is ignored
     and the string is read up to the terminating 0.
 */
-BHAPI_EXPORT uint32 bhapi::UTF8CountBytes(const char *bytes, int32 numChars)
+BHAPI_EXPORT uint32_t bhapi::UTF8CountBytes(const char *bytes, int32_t numChars)
 {
     if (bytes == NULL)
         return 0;
@@ -120,12 +120,12 @@ BHAPI_EXPORT uint32 bhapi::UTF8CountBytes(const char *bytes, int32 numChars)
     numBytes bytes are read. If numBytes is a negative value it is ignored
     and the string is read up to the terminating 0.
 */
-BHAPI_EXPORT uint32 bhapi::UTF8CountChars(const char *bytes, int32 numBytes)
+BHAPI_EXPORT uint32_t bhapi::UTF8CountChars(const char *bytes, int32_t numBytes)
 {
     if (bytes == NULL)
         return 0;
 
-    uint32 length = 0;
+    uint32_t length = 0;
     const char *last;
     if (numBytes < 0)
         last = (const char *)SIZE_MAX;
@@ -147,11 +147,11 @@ BHAPI_EXPORT uint32 bhapi::UTF8CountChars(const char *bytes, int32 numBytes)
     returned. This makes it safe to overruns and enables streamed processing
     of UTF8 strings.
 */
-BHAPI_EXPORT uint32 bhapi::UTF8ToCharCode(const char **bytes)
+BHAPI_EXPORT uint32_t bhapi::UTF8ToCharCode(const char **bytes)
 {
     #define UTF8_SUBSTITUTE_CHARACTER	0xfffd
 
-    uint32 result;
+    uint32_t result;
     if (((*bytes)[0] & 0x80) == 0) {
         // a single byte character
         result = (*bytes)[0];
@@ -171,7 +171,7 @@ BHAPI_EXPORT uint32 bhapi::UTF8ToCharCode(const char **bytes)
 
     // start of a multibyte character
     uint8 mask = 0x80;
-    result = (uint32)((*bytes)[0] & 0xff);
+    result = (uint32_t)((*bytes)[0] & 0xff);
     (*bytes)++;
 
     while (result & mask) {

@@ -45,7 +45,7 @@ public:
 	virtual	ssize_t				ReadAt(off_t pos, void* buffer, size_t size);
 	virtual	ssize_t				WriteAt(off_t pos, const void* buffer,
 									size_t size);
-	virtual	off_t				Seek(off_t position, uint32 seekMode);
+	virtual	off_t				Seek(off_t position, uint32_t seekMode);
 	virtual	off_t				Position() const;
 	virtual	status_t			SetSize(off_t size);
 	virtual	status_t			Flush();
@@ -73,7 +73,7 @@ private:
 			size_t				fBufferUsed;
 			off_t				fPosition;
 
-			uint32				_reserved_ints[4];
+			uint32_t				_reserved_ints[4];
 
 			bool				fBufferIsDirty;
 			bool				fOwnsStream;

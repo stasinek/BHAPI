@@ -362,7 +362,7 @@ public:
 	inline bool Contains(Element* element) const;
 		// O(n)!
 
-	inline int32 Count() const;
+	inline int32_t Count() const;
 		// O(n)!
 
 	template<typename Less>
@@ -630,9 +630,9 @@ bool DOUBLY_LINKED_LIST_CLASS_NAME::Contains(Element* _element) const
 
 // Count
 DOUBLY_LINKED_LIST_TEMPLATE_LIST
-int32 DOUBLY_LINKED_LIST_CLASS_NAME::Count() const
+int32_t DOUBLY_LINKED_LIST_CLASS_NAME::Count() const
 {
-	int32 count = 0;
+	int32_t count = 0;
 	for (Element* element = First(); element; element = GetNext(element))
 		count++;
 	return count;

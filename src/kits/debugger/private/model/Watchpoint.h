@@ -14,13 +14,13 @@
 
 class Watchpoint : public BReferenceable {
 public:
-								Watchpoint(target_addr_t address, uint32 type,
-									int32 length);
+								Watchpoint(target_addr_t address, uint32_t type,
+									int32_t length);
 								~Watchpoint();
 
 			target_addr_t		Address() const		{ return fAddress; }
-			uint32				Type() const		{ return fType; }
-			int32				Length() const	{ return fLength; }
+			uint32_t				Type() const		{ return fType; }
+			int32_t				Length() const	{ return fLength; }
 
 			bool				IsInstalled() const	{ return fInstalled; }
 			void				SetInstalled(bool installed);
@@ -42,8 +42,8 @@ public:
 
 private:
 			target_addr_t		fAddress;
-			uint32				fType;
-			int32				fLength;
+			uint32_t				fType;
+			int32_t				fLength;
 
 			bool				fInstalled;
 			bool				fEnabled;

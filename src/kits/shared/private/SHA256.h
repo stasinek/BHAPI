@@ -27,9 +27,9 @@ private:
 			void				_ProcessChunk();
 
 private:
-			uint32				fHash[8];
-			uint32				fDigest[8];
-			uint32				fBuffer[64];
+			uint32_t				fHash[8];
+			uint32_t				fDigest[8];
+			uint32_t				fBuffer[64];
 			size_t				fBytesInBuffer;
 			size_t				fMessageSize;
 			bool				fDigested;

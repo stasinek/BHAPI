@@ -37,15 +37,15 @@
 #include <Haiku.h>
 
 
-typedef uint32 radix_slot_t;
-typedef uint32 bitmap_t;
+typedef uint32_t radix_slot_t;
+typedef uint32_t bitmap_t;
 
 typedef struct radix_node {
 	union {
 		bitmap_t  bitmap;      // bitmap for the slots if we are a leaf
-		int32     available;   // available slots under us if we are not a leaf
+		int32_t     available;   // available slots under us if we are not a leaf
 	} u;
-	int32  big_hint;  // the biggest continuous slots under us
+	int32_t  big_hint;  // the biggest continuous slots under us
 } radix_node;
 
 // Bitmap which uses radix tree for hinting.
@@ -65,10 +65,10 @@ typedef struct radix_bitmap {
 #define RADIX_SLOT_NONE	((radix_slot_t)-1)
 
 
-extern radix_bitmap *radix_bitmap_create(uint32 slots);
-extern radix_slot_t radix_bitmap_alloc(radix_bitmap *bmp, uint32 count);
+extern radix_bitmap *radix_bitmap_create(uint32_t slots);
+extern radix_slot_t radix_bitmap_alloc(radix_bitmap *bmp, uint32_t count);
 extern void radix_bitmap_dealloc(radix_bitmap *bmp, radix_slot_t slotIndex,
-		uint32 count);
+		uint32_t count);
 extern void radix_bitmap_destroy(radix_bitmap *bmp);
 
 #endif  // _KERNEL_UTIL_RADIX_BITMAP_H

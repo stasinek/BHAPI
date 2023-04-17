@@ -44,8 +44,8 @@ class ValueLocation;
 
 
 // conversion functions between model types and dwarf types
-type_kind dwarf_tag_to_type_kind(int32 tag);
-int32 dwarf_tag_to_subtype_kind(int32 tag);
+type_kind dwarf_tag_to_type_kind(int32_t tag);
+int32_t dwarf_tag_to_subtype_kind(int32_t tag);
 
 
 class DwarfTypeContext : public BReferenceable {
@@ -269,17 +269,17 @@ public:
 								DwarfPrimitiveType(
 									DwarfTypeContext* typeContext,
 									const BString& name, DIEBaseType* entry,
-									uint32 typeConstant);
+									uint32_t typeConstant);
 
 	virtual	DIEType*			GetDIEType() const;
-	virtual	uint32				TypeConstant() const;
+	virtual	uint32_t				TypeConstant() const;
 
 			DIEBaseType*		Entry() const
 									{ return fEntry; }
 
 private:
 			DIEBaseType*		fEntry;
-			uint32				fTypeConstant;
+			uint32_t				fTypeConstant;
 };
 
 
@@ -292,14 +292,14 @@ public:
 
 	virtual	compound_type_kind	CompoundKind() const;
 
-	virtual	int32				CountBaseTypes() const;
-	virtual	BaseType*			BaseTypeAt(int32 index) const;
+	virtual	int32_t				CountBaseTypes() const;
+	virtual	BaseType*			BaseTypeAt(int32_t index) const;
 
-	virtual	int32				CountDataMembers() const;
-	virtual	DataMember*			DataMemberAt(int32 index) const;
+	virtual	int32_t				CountDataMembers() const;
+	virtual	DataMember*			DataMemberAt(int32_t index) const;
 
-	virtual int32				CountTemplateParameters() const;
-	virtual TemplateParameter*	TemplateParameterAt(int32 index) const;
+	virtual int32_t				CountTemplateParameters() const;
+	virtual TemplateParameter*	TemplateParameterAt(int32_t index) const;
 
 	virtual	status_t			ResolveBaseTypeLocation(BaseType* _baseType,
 									const ValueLocation& parentLocation,
@@ -349,8 +349,8 @@ public:
 
 	virtual	Type*				BaseType() const;
 
-	virtual	int32				CountDimensions() const;
-	virtual	ArrayDimension*		DimensionAt(int32 index) const;
+	virtual	int32_t				CountDimensions() const;
+	virtual	ArrayDimension*		DimensionAt(int32_t index) const;
 
 	virtual	status_t			ResolveElementLocation(
 									const ArrayIndexPath& indexPath,
@@ -361,7 +361,7 @@ public:
 
 			bool				AddDimension(DwarfArrayDimension* dimension);
 
-			DwarfArrayDimension* DwarfDimensionAt(int32 index) const
+			DwarfArrayDimension* DwarfDimensionAt(int32_t index) const
 									{ return fDimensions.ItemAt(index); }
 			DIEArrayType*		Entry() const
 									{ return fEntry; }
@@ -380,10 +380,10 @@ class DwarfModifiedType : public ModifiedType, public DwarfType {
 public:
 								DwarfModifiedType(DwarfTypeContext* typeContext,
 									const BString& name, DIEModifiedType* entry,
-									uint32 modifiers, DwarfType* baseType);
+									uint32_t modifiers, DwarfType* baseType);
 								~DwarfModifiedType();
 
-	virtual	uint32				Modifiers() const;
+	virtual	uint32_t				Modifiers() const;
 	virtual	Type*				BaseType() const;
 
 	virtual	DIEType*			GetDIEType() const;
@@ -393,7 +393,7 @@ public:
 
 private:
 			DIEModifiedType*	fEntry;
-			uint32				fModifiers;
+			uint32_t				fModifiers;
 			DwarfType*			fBaseType;
 };
 
@@ -453,8 +453,8 @@ public:
 
 	virtual	Type*				BaseType() const;
 
-	virtual	int32				CountValues() const;
-	virtual	EnumeratorValue*	ValueAt(int32 index) const;
+	virtual	int32_t				CountValues() const;
+	virtual	EnumeratorValue*	ValueAt(int32_t index) const;
 
 	virtual	DIEType*			GetDIEType() const;
 
@@ -529,8 +529,8 @@ public:
 
 	virtual	Type*				ReturnType() const;
 
-	virtual	int32				CountParameters() const;
-	virtual	FunctionParameter*	ParameterAt(int32 index) const;
+	virtual	int32_t				CountParameters() const;
+	virtual	FunctionParameter*	ParameterAt(int32_t index) const;
 
 	virtual	bool				HasVariableArguments() const;
 			void				SetHasVariableArguments(bool hasVarArgs);
@@ -539,7 +539,7 @@ public:
 
 			bool				AddParameter(DwarfFunctionParameter* parameter);
 
-			DwarfFunctionParameter* DwarfParameterAt(int32 index) const
+			DwarfFunctionParameter* DwarfParameterAt(int32_t index) const
 									{ return fParameters.ItemAt(index); }
 
 			DIESubroutineType*	Entry() const

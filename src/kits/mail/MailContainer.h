@@ -14,15 +14,15 @@ class BPositionIO;
 
 class BMailContainer : public BMailComponent {
 	public:
-		BMailContainer (uint32 defaultCharSet = B_MAIL_NULL_CONVERSION) :
+		BMailContainer (uint32_t defaultCharSet = B_MAIL_NULL_CONVERSION) :
 			BMailComponent (defaultCharSet) {};
 
 		virtual status_t AddComponent(BMailComponent *component) = 0;
 		virtual status_t RemoveComponent(BMailComponent *component) = 0;
-		virtual status_t RemoveComponent(int32 index) = 0;
+		virtual status_t RemoveComponent(int32_t index) = 0;
 
-		virtual BMailComponent *GetComponent(int32 index, bool parse_now = false) = 0;
-		virtual int32 CountComponents() const = 0;
+		virtual BMailComponent *GetComponent(int32_t index, bool parse_now = false) = 0;
+		virtual int32_t CountComponents() const = 0;
 	
 	private:
 		virtual void _ReservedContainer1();
@@ -36,7 +36,7 @@ class BMIMEMultipartMailContainer : public BMailContainer {
 		BMIMEMultipartMailContainer(
 			const char *boundary = NULL,
 			const char *this_is_an_MIME_message_text = NULL,
-			uint32 defaultCharSet = B_MAIL_NULL_CONVERSION);
+			uint32_t defaultCharSet = B_MAIL_NULL_CONVERSION);
 		BMIMEMultipartMailContainer(BMIMEMultipartMailContainer &copy);
 		virtual ~BMIMEMultipartMailContainer();
 
@@ -46,10 +46,10 @@ class BMIMEMultipartMailContainer : public BMailContainer {
 		// MailContainer
 		virtual status_t AddComponent(BMailComponent *component);
 		virtual status_t RemoveComponent(BMailComponent *component);
-		virtual status_t RemoveComponent(int32 index);
+		virtual status_t RemoveComponent(int32_t index);
 
-		virtual BMailComponent *GetComponent(int32 index, bool parse_now = false);
-		virtual int32 CountComponents() const;
+		virtual BMailComponent *GetComponent(int32_t index, bool parse_now = false);
+		virtual int32_t CountComponents() const;
 
 		// MailComponent
 		virtual status_t GetDecodedData(BPositionIO *data);
@@ -72,7 +72,7 @@ class BMIMEMultipartMailContainer : public BMailContainer {
 		BList _components_in_code;
 		
 
-		uint32 _reserved[5];
+		uint32_t _reserved[5];
 };
 
 #endif	/* ZOIDBERG_MAIL_CONTAINER_H */

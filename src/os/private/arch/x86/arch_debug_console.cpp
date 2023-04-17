@@ -59,7 +59,7 @@ enum keycodes {
 };
 
 
-static const uint32 kSerialBaudRate = 115200;
+static const uint32_t kSerialBaudRate = 115200;
 static uint16 sSerialBasePort = 0x3f8;
 	// COM1 is the default debug output port
 
@@ -69,7 +69,7 @@ static spinlock sSerialOutputSpinlock = B_SPINLOCK_INITIALIZER;
 
 
 static void
-init_serial_port(uint16 basePort, uint32 baudRate)
+init_serial_port(uint16 basePort, uint32_t baudRate)
 {
 	sSerialBasePort = basePort;
 
@@ -99,7 +99,7 @@ put_char(const char c)
  *	again if anything else requests the interrupt 1.
  */
 
-static int32
+static int32_t
 debug_keyboard_interrupt(void *data)
 {
 	static bool controlPressed = false;
@@ -160,7 +160,7 @@ debug_keyboard_interrupt(void *data)
 
 
 void
-arch_debug_remove_interrupt_handler(uint32 line)
+arch_debug_remove_interrupt_handler(uint32_t line)
 {
 	if (line != INT_PS2_KEYBOARD || !sKeyboardHandlerInstalled)
 		return;
@@ -434,7 +434,7 @@ arch_debug_console_init(kernel_args *args)
 status_t
 arch_debug_console_init_settings(kernel_args *args)
 {
-	uint32 baudRate = kSerialBaudRate;
+	uint32_t baudRate = kSerialBaudRate;
 	uint16 basePort = sSerialBasePort;
 	void *handle;
 
@@ -444,7 +444,7 @@ arch_debug_console_init_settings(kernel_args *args)
 		const char *value = get_driver_parameter(handle, "serial_debug_port",
 			NULL, NULL);
 		if (value != NULL) {
-			int32 number = strtol(value, NULL, 0);
+			int32_t number = strtol(value, NULL, 0);
 			if (number >= MAX_SERIAL_PORTS) {
 				// use as port number directly
 				basePort = number;
@@ -459,7 +459,7 @@ arch_debug_console_init_settings(kernel_args *args)
 
 		value = get_driver_parameter(handle, "serial_debug_speed", NULL, NULL);
 		if (value != NULL) {
-			int32 number = strtol(value, NULL, 0);
+			int32_t number = strtol(value, NULL, 0);
 			switch (number) {
 				case 9600:
 				case 19200:

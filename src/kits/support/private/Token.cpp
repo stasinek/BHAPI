@@ -64,7 +64,7 @@ BTokensDepotPrivateData::~BTokensDepotPrivateData()
 
 	while((list = (BList*)RemoveItems(0,1)) != NULL)
 	{
-		for(__be_int32 i = 0; i < list->CountItems(); i++)
+		for(__be_int32_t i = 0; i < list->CountItems(); i++)
 		{
 			_bhapi_token_t *aToken = (_bhapi_token_t*)list->ItemAt(i);
 			if(aToken != NULL) delete aToken;
@@ -81,7 +81,7 @@ BTokensDepotPrivateData::AddToken(void *data)
 	_bhapi_token_t *aToken = new _bhapi_token_t;
 
 	BList *list = NULL;
-	for(__be_int32 i = 0; i < CountItems(); i++)
+	for(__be_int32_t i = 0; i < CountItems(); i++)
 	{
 		list = (BList*)ItemAt(i);
 		if(list->CountItems() >= B_MAXINT32 - 1 || list->AddItem(aToken) == false)
@@ -106,10 +106,10 @@ BTokensDepotPrivateData::AddToken(void *data)
 				token = ((__be_uint64)(CountItems() - 1) << 32) | (__be_uint64)(list->CountItems() - 1);
 			}
 		}
-		else for(__be_int32 i = 0; i < CountItems(); i++)
+		else for(__be_int32_t i = 0; i < CountItems(); i++)
 		{
 			list = (BList*)ItemAt(i);
-			__be_int32 index = list->IndexOf(NULL);
+			__be_int32_t index = list->IndexOf(NULL);
 			if(index < 0)
 			{
 				list = NULL;
@@ -145,11 +145,11 @@ BTokensDepotPrivateData::RemoveToken(__be_uint64 token)
 	__be_uint64 index = token >> 32;
 	if(index > (__be_uint64)B_MAXINT32 - 1) return;
 
-	BList *list = (BList*)ItemAt((__be_int32)index);
+	BList *list = (BList*)ItemAt((__be_int32_t)index);
 	if(list == NULL) return;
 
 	index = token & 0xffffffff;
-	_bhapi_token_t *aToken = (_bhapi_token_t*)(list->ItemAt((__be_int32)index));
+	_bhapi_token_t *aToken = (_bhapi_token_t*)(list->ItemAt((__be_int32_t)index));
 	if(aToken == NULL) return;
 
 	if(aToken->vitalities > 1)
@@ -161,11 +161,11 @@ BTokensDepotPrivateData::RemoveToken(__be_uint64 token)
 	{
 		if(index < (__be_uint64)list->CountItems() - 1)
 		{
-			list->ReplaceItem((__be_int32)index, NULL);
+			list->ReplaceItem((__be_int32_t)index, NULL);
 		}
 		else
 		{
-			list->RemoveItem((__be_int32)index);
+			list->RemoveItem((__be_int32_t)index);
 			while(list->LastItem() == NULL && list->IsEmpty() == false) list->RemoveItem(list->CountItems() - 1);
 			for(; !(list == NULL || LastItem() != (void*)list || list->IsEmpty() == false); list = (BList*)LastItem())
 			{
@@ -183,11 +183,11 @@ BTokensDepotPrivateData::TokenAt(__be_uint64 token) const
 	__be_uint64 index = token >> 32;
 	if(index > (__be_uint64)B_MAXINT32 - 1) return NULL;
 
-	BList *list = (BList*)ItemAt((__be_int32)index);
+	BList *list = (BList*)ItemAt((__be_int32_t)index);
 	if(list == NULL) return NULL;
 
 	index = token & 0xffffffff;
-	return((_bhapi_token_t*)(list->ItemAt((__be_int32)index)));
+	return((_bhapi_token_t*)(list->ItemAt((__be_int32_t)index)));
 }
 
 

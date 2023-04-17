@@ -43,32 +43,32 @@ public:
 			void				SetSplitterSize(float size);
 
 	virtual	BLayoutItem*		AddView(BView* child);
-	virtual	BLayoutItem*		AddView(int32 index, BView* child);
+	virtual	BLayoutItem*		AddView(int32_t index, BView* child);
 	virtual	BLayoutItem*		AddView(BView* child, float weight);
-	virtual	BLayoutItem*		AddView(int32 index, BView* child,
+	virtual	BLayoutItem*		AddView(int32_t index, BView* child,
 									float weight);
 
 	virtual	bool				AddItem(BLayoutItem* item);
-	virtual	bool				AddItem(int32 index, BLayoutItem* item);
+	virtual	bool				AddItem(int32_t index, BLayoutItem* item);
 	virtual	bool				AddItem(BLayoutItem* item, float weight);
-	virtual	bool				AddItem(int32 index, BLayoutItem* item,
+	virtual	bool				AddItem(int32_t index, BLayoutItem* item,
 									float weight);
 
 
-			float				ItemWeight(int32 index) const;
+			float				ItemWeight(int32_t index) const;
 			float				ItemWeight(BLayoutItem* item) const;
-			void				SetItemWeight(int32 index, float weight,
+			void				SetItemWeight(int32_t index, float weight,
 									bool invalidateLayout);
 			void				SetItemWeight(BLayoutItem* item, float weight);
 
-			bool				IsCollapsible(int32 index) const;
+			bool				IsCollapsible(int32_t index) const;
 			void				SetCollapsible(bool collapsible);
-			void				SetCollapsible(int32 index, bool collapsible);
-			void				SetCollapsible(int32 first, int32 last,
+			void				SetCollapsible(int32_t index, bool collapsible);
+			void				SetCollapsible(int32_t first, int32_t last,
 									bool collapsible);
 
-			bool				IsItemCollapsed(int32 index) const;
-			void				SetItemCollapsed(int32 index, bool visible);
+			bool				IsItemCollapsed(int32_t index) const;
+			void				SetItemCollapsed(int32_t index, bool visible);
 
 	virtual	BSize				BaseMinSize();
 	virtual	BSize				BaseMaxSize();
@@ -83,26 +83,26 @@ public:
 	virtual	void				DoLayout();
 
 	// interface for BSplitView
-			BRect				SplitterItemFrame(int32 index) const;
+			BRect				SplitterItemFrame(int32_t index) const;
 			bool				IsAboveSplitter(const BPoint& point) const;
 
 			bool				StartDraggingSplitter(BPoint point);
 			bool				DragSplitter(BPoint point);
 			bool				StopDraggingSplitter();
-			int32				DraggedSplitter() const;
+			int32_t				DraggedSplitter() const;
 
 	// archiving methods
 	virtual status_t			Archive(BMessage* into, bool deep = true) const;
 	static	BArchivable*		Instantiate(BMessage* from);
 
 	virtual status_t			ItemArchived(BMessage* into, BLayoutItem* item,
-									int32 index) const;
+									int32_t index) const;
 	virtual	status_t			ItemUnarchived(const BMessage* from,
-									BLayoutItem* item, int32 index);
+									BLayoutItem* item, int32_t index);
 
 protected:
-	virtual	bool				ItemAdded(BLayoutItem* item, int32 atIndex);
-	virtual	void				ItemRemoved(BLayoutItem* item, int32 fromIndex);
+	virtual	bool				ItemAdded(BLayoutItem* item, int32_t atIndex);
+	virtual	void				ItemRemoved(BLayoutItem* item, int32_t fromIndex);
 
 private:
 			class ItemLayoutInfo;
@@ -114,19 +114,19 @@ private:
 			void				_InvalidateCachedHeightForWidth();
 
 			SplitterItem*		_SplitterItemAt(const BPoint& point,
-									int32* index = NULL) const;
-			SplitterItem*		_SplitterItemAt(int32 index) const;
+									int32_t* index = NULL) const;
+			SplitterItem*		_SplitterItemAt(int32_t index) const;
 
-			void				_GetSplitterValueRange(int32 index,
+			void				_GetSplitterValueRange(int32_t index,
 									ValueRange& range);
-			int32				_SplitterValue(int32 index) const;
+			int32_t				_SplitterValue(int32_t index) const;
 
 			void				_LayoutItem(BLayoutItem* item, BRect frame,
 									bool visible);
 			void				_LayoutItem(BLayoutItem* item,
 									ItemLayoutInfo* info);
 
-			bool				_SetSplitterValue(int32 index, int32 value);
+			bool				_SetSplitterValue(int32_t index, int32_t value);
 
 			ItemLayoutInfo*		_ItemLayoutInfo(BLayoutItem* item) const;
 
@@ -184,9 +184,9 @@ private:
 			float				fCachedPreferredHeightForWidth;
 
 			BPoint				fDraggingStartPoint;
-			int32				fDraggingStartValue;
-			int32				fDraggingCurrentValue;
-			int32				fDraggingSplitterIndex;
+			int32_t				fDraggingStartValue;
+			int32_t				fDraggingCurrentValue;
+			int32_t				fDraggingSplitterIndex;
 };
 
 #endif	// _SPLIT_LAYOUT_H

@@ -20,7 +20,7 @@
 #define MAX_FIELD_PREALLOCATION			50
 
 
-static const int32 kPortMessageCode = 'pjpp';
+static const int32_t kPortMessageCode = 'pjpp';
 
 
 enum {
@@ -46,32 +46,32 @@ struct BMessage::field_header {
 	uint16		flags;
 	uint16		name_length;
 	type_code	type;
-	uint32		count;
-	uint32		data_size;
-	uint32		offset;
-	int32		next_field;
+	uint32_t		count;
+	uint32_t		data_size;
+	uint32_t		offset;
+	int32_t		next_field;
 } _PACKED;
 
 
 struct BMessage::message_header {
-	uint32		format;
-	uint32		what;
-	uint32		flags;
+	uint32_t		format;
+	uint32_t		what;
+	uint32_t		flags;
 
-	int32		target;
-	int32		current_specifier;
+	int32_t		target;
+	int32_t		current_specifier;
 	area_id		message_area;
 
 	// reply info
 	port_id		reply_port;
-	int32		reply_target;
+	int32_t		reply_target;
 	team_id		reply_team;
 
 	// body info
-	uint32		data_size;
-	uint32		field_count;
-	uint32		hash_table_size;
-	int32		hash_table[MESSAGE_BODY_HASH_TABLE_SIZE];
+	uint32_t		data_size;
+	uint32_t		field_count;
+	uint32_t		hash_table_size;
+	int32_t		hash_table[MESSAGE_BODY_HASH_TABLE_SIZE];
 
 	/*	The hash table does contain indexes into the field list and
 		not direct offsets to the fields. This has the advantage
@@ -96,7 +96,7 @@ class BMessage::Private {
 		{
 		}
 
-		void 		SetTarget(int32 token)
+		void 		SetTarget(int32_t token)
 		{
 			fMessage->fHeader->target = token;
 		}
@@ -109,14 +109,14 @@ class BMessage::Private {
 			fMessage->fHeader->reply_team = messengerPrivate.Team();
 		}
 
-		void 		SetReply(team_id team, port_id port, int32 target)
+		void 		SetReply(team_id team, port_id port, int32_t target)
 		{
 			fMessage->fHeader->reply_port = port;
 			fMessage->fHeader->reply_target = target;
 			fMessage->fHeader->reply_team = team;
 		}
 
-		int32 		GetTarget()
+		int32_t 		GetTarget()
 		{
 			return fMessage->fHeader->target;
 		}
@@ -167,14 +167,14 @@ class BMessage::Private {
 			return fMessage->_FlattenToArea(header);
 		}
 
-		status_t 		SendMessage(port_id port, team_id portOwner, int32 token,
+		status_t 		SendMessage(port_id port, team_id portOwner, int32_t token,
 			bigtime_t timeout, bool replyRequired, BMessenger &replyTo) const
 		{
 			return fMessage->_SendMessage(port, portOwner, token,
 				timeout, replyRequired, replyTo);
 		}
 
-		status_t 		SendMessage(port_id port, team_id portOwner, int32 token,
+		status_t 		SendMessage(port_id port, team_id portOwner, int32_t token,
 			BMessage *reply, bigtime_t sendTimeout,
 			bigtime_t replyTimeout) const
 		{
@@ -194,8 +194,8 @@ class BMessage::Private {
 
 		// static methods
 
-		static status_t 		SendFlattenedMessage(void *data, int32 size, port_id port,
-			int32 token, bigtime_t timeout)
+		static status_t 		SendFlattenedMessage(void *data, int32_t size, port_id port,
+			int32_t token, bigtime_t timeout)
 		{
 			return BMessage::_SendFlattenedMessage(data, size,
 				port, token, timeout);

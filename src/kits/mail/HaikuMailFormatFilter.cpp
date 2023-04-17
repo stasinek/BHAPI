@@ -55,9 +55,9 @@ void sanitize_white_space(BString& string)
 	if (buffer == NULL)
 		return;
 
-	int32 count = string.Length();
-	int32 spaces = 0;
-	for (int32 i = 0; buffer[i] != '\0'; i++, count--) {
+	int32_t count = string.Length();
+	int32_t spaces = 0;
+	for (int32_t i = 0; buffer[i] != '\0'; i++, count--) {
 		if (isspace(buffer[i])) {
 			buffer[i] = ' ';
 			spaces++;
@@ -215,7 +215,7 @@ void HaikuMailFormatFilter::BodyFetched(const entry_ref& ref, BFile& file,
 void HaikuMailFormatFilter::MessageSent(const entry_ref& ref, BFile& file)
 {
 	mail_flags flags = B_MAIL_SENT;
-	file.WriteAttr(B_MAIL_ATTR_FLAGS, B_INT32_TYPE, 0, &flags, sizeof(int32));
+	file.WriteAttr(B_MAIL_ATTR_FLAGS, B_INT32_TYPE, 0, &flags, sizeof(int32_t));
 	file.WriteAttr(B_MAIL_ATTR_STATUS, B_STRING_TYPE, 0, "Sent", 5);
 
 	if (!fOutboundDirectory.IsEmpty()) {
@@ -271,7 +271,7 @@ HaikuMailFormatFilter::_ExtractName(const BString& from)
 	// if name is empty return the mail address without "<>"
 
 	BString name;
-	int32 emailStart = from.FindFirst("<");
+	int32_t emailStart = from.FindFirst("<");
 	if (emailStart < 0) {
 		name = from;
 		return name.Trim();

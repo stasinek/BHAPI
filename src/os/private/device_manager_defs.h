@@ -27,7 +27,7 @@ struct device_attr_info {
 	union {
 		uint8   ui8;
 		uint16  ui16;
-		uint32  ui32;
+		uint32_t  ui32;
 		uint64  ui64;
 		char    string[255];
 		struct {

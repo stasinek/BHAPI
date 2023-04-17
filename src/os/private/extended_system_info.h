@@ -19,7 +19,7 @@ namespace BPrivate {
 struct KMessage;
 
 
-status_t get_extended_team_info(team_id teamID, uint32 flags, KMessage& info);
+status_t get_extended_team_info(team_id teamID, uint32_t flags, KMessage& info);
 
 
 }	// namespace BPrivate

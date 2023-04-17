@@ -26,7 +26,7 @@ struct ViewSetStateInfo {
 	join_mode					lineJoin;
 	cap_mode					lineCap;
 	float						miterLimit;
-	int32						fillRule;
+	int32_t						fillRule;
 	source_alpha				alphaSourceMode;
 	alpha_function				alphaFunctionMode;
 	bool						fontAntialiasing;
@@ -34,7 +34,7 @@ struct ViewSetStateInfo {
 
 
 struct ViewGetStateInfo {
-	int32						fontID;
+	int32_t						fontID;
 	float						fontSize;
 	float						fontShear;
 	float						fontRotation;
@@ -42,30 +42,30 @@ struct ViewGetStateInfo {
 	int8						fontSpacing;
 	int8						fontEncoding;
 	int16						fontFace;
-	int32						fontFlags;
+	int32_t						fontFlags;
 
 	ViewSetStateInfo			viewStateInfo;
 };
 
 
 struct ViewDragImageInfo {
-	int32						bitmapToken;
-	int32						dragMode;
+	int32_t						bitmapToken;
+	int32_t						dragMode;
 	BPoint						offset;
-	int32						bufferSize;
+	int32_t						bufferSize;
 };
 
 
 struct ViewSetViewCursorInfo {
-	int32						cursorToken;
-	int32						viewToken;
+	int32_t						cursorToken;
+	int32_t						viewToken;
 	bool						sync;
 };
 
 
 struct ViewBeginRectTrackingInfo {
 	BRect						rect;
-	uint32						style;
+	uint32_t						style;
 };
 
 
@@ -83,15 +83,15 @@ struct ViewBlendingModeInfo {
 
 
 struct ViewDrawBitmapInfo {
-	int32						bitmapToken;
-	uint32						options;
+	int32_t						bitmapToken;
+	uint32_t						options;
 	BRect						viewRect;
 	BRect						bitmapRect;
 };
 
 
 struct ViewDrawStringInfo {
-	int32						stringLength;
+	int32_t						stringLength;
 	BPoint						location;
 	escapement_delta			delta;
 };

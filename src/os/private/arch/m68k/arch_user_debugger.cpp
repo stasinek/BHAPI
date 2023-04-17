@@ -91,7 +91,7 @@ arch_clear_breakpoint(void *address)
 
 
 status_t
-arch_set_watchpoint(void *address, uint32 type, int32 length)
+arch_set_watchpoint(void *address, uint32_t type, int32_t length)
 {
 	return B_ERROR;
 }

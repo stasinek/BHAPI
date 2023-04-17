@@ -21,7 +21,7 @@ public:
 	BStringByteSink(BString* dest)
 		: fDest(dest)
 		{}
-	virtual void Append(const char* data, int32_t n)
+	virtual void Append(const char* data, int32_t_t n)
 		{ fDest->Append(data, n); }
 
 	void SetTo(BString* dest)

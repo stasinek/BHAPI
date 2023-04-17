@@ -115,7 +115,7 @@ struct rootfs_dir_cookie {
 	struct list_link			link;
 	mutex						lock;
 	struct rootfs_vnode*		current;
-	int32						iteration_state;
+	int32_t						iteration_state;
 };
 
 // directory iteration states
@@ -361,7 +361,7 @@ rootfs_remove(struct rootfs* fs, struct rootfs_vnode* dir, const char* name,
 
 
 static status_t
-rootfs_mount(fs_volume* volume, const char* device, uint32 flags,
+rootfs_mount(fs_volume* volume, const char* device, uint32_t flags,
 	const char* args, ino_t* _rootID)
 {
 	struct rootfs* fs;
@@ -495,7 +495,7 @@ rootfs_get_vnode_name(fs_volume* _volume, fs_vnode* _vnode, char* buffer,
 
 static status_t
 rootfs_get_vnode(fs_volume* _volume, ino_t id, fs_vnode* _vnode, int* _type,
-	uint32* _flags, bool reenter)
+	uint32_t* _flags, bool reenter)
 {
 	struct rootfs* fs = (struct rootfs*)_volume->private_volume;
 	struct rootfs_vnode* vnode;
@@ -725,7 +725,7 @@ rootfs_free_dir_cookie(fs_volume* _volume, fs_vnode* _vnode, void* _cookie)
 
 static status_t
 rootfs_read_dir(fs_volume* _volume, fs_vnode* _vnode, void* _cookie,
-	struct dirent* dirent, size_t bufferSize, uint32* _num)
+	struct dirent* dirent, size_t bufferSize, uint32_t* _num)
 {
 	struct rootfs_vnode* vnode = (struct rootfs_vnode*)_vnode->private_node;
 	struct rootfs_dir_cookie* cookie = (rootfs_dir_cookie*)_cookie;
@@ -807,7 +807,7 @@ rootfs_rewind_dir(fs_volume* _volume, fs_vnode* _vnode, void* _cookie)
 
 
 static status_t
-rootfs_ioctl(fs_volume* _volume, fs_vnode* _v, void* _cookie, uint32 op,
+rootfs_ioctl(fs_volume* _volume, fs_vnode* _v, void* _cookie, uint32_t op,
 	void* buffer, size_t length)
 {
 	TRACE(("rootfs_ioctl: vnode %p, cookie %p, op %d, buf %p, length %d\n",
@@ -1026,7 +1026,7 @@ rootfs_read_stat(fs_volume* _volume, fs_vnode* _v, struct stat* stat)
 
 static status_t
 rootfs_write_stat(fs_volume* _volume, fs_vnode* _vnode, const struct stat* stat,
-	uint32 statMask)
+	uint32_t statMask)
 {
 	struct rootfs* fs = (rootfs*)_volume->private_volume;
 	struct rootfs_vnode* vnode = (rootfs_vnode*)_vnode->private_node;
@@ -1064,7 +1064,7 @@ rootfs_write_stat(fs_volume* _volume, fs_vnode* _vnode, const struct stat* stat,
 
 static status_t
 rootfs_create_special_node(fs_volume* _volume, fs_vnode* _dir, const char* name,
-	fs_vnode* subVnode, mode_t mode, uint32 flags, fs_vnode* _superVnode,
+	fs_vnode* subVnode, mode_t mode, uint32_t flags, fs_vnode* _superVnode,
 	ino_t* _nodeID)
 {
 	struct rootfs* fs = (rootfs*)_volume->private_volume;
@@ -1116,7 +1116,7 @@ rootfs_create_special_node(fs_volume* _volume, fs_vnode* _dir, const char* name,
 
 
 static status_t
-rootfs_std_ops(int32 op, ...)
+rootfs_std_ops(int32_t op, ...)
 {
 	switch (op) {
 		case B_MODULE_INIT:

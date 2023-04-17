@@ -93,7 +93,7 @@ print_irq_routing_table(const IRQRoutingTable& table)
 static status_t
 update_pci_info_for_entry(pci_module_info* pci, const irq_routing_entry& entry)
 {
-	uint32 updateCount = 0;
+	uint32_t updateCount = 0;
 	for (uint8 function = 0; function < kMaxPCIFunctionCount; function++) {
 		if ((entry.pci_function_mask & (1 << function)) == 0)
 			continue;

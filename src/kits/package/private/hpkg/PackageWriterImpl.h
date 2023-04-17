@@ -97,9 +97,9 @@ private:
 
 			void				_WritePackageAttributes(hpkg_header& header,
 									uint64& _length);
-			uint32				_WritePackageAttributesCompressed(
-									uint32& _stringsLengthUncompressed,
-									uint32& _attributesLengthUncompressed);
+			uint32_t				_WritePackageAttributesCompressed(
+									uint32_t& _stringsLengthUncompressed,
+									uint32_t& _attributesLengthUncompressed);
 
 			void				_AddEntry(int dirFD, Entry* entry,
 									const char* fileName, char* pathBuffer);

@@ -36,7 +36,7 @@ public:
 	virtual	status_t		Write(void* cookie, off_t pos, const void* buffer,
 								size_t* _length);
 	virtual	status_t		IO(void* cookie, io_request* request);
-	virtual	status_t		Control(void* cookie, int32 op, void* buffer,
+	virtual	status_t		Control(void* cookie, int32_t op, void* buffer,
 								size_t length);
 	virtual	status_t		Select(void* cookie, uint8 event, selectsync* sync);
 	virtual	status_t		Deselect(void* cookie, uint8 event,
@@ -47,7 +47,7 @@ public:
 
 protected:
 	device_node*			fNode;
-	int32					fInitialized;
+	int32_t					fInitialized;
 	device_module_info*		fDeviceModule;
 	void*					fDeviceData;
 };

@@ -28,14 +28,14 @@ class _BWidthBuffer_;
 namespace BPrivate {
 
 
-const static uint32 kTableCount = 128;
-const static uint32 kInvalidCode = 0xFFFFFFFF;
+const static uint32_t kTableCount = 128;
+const static uint32_t kInvalidCode = 0xFFFFFFFF;
 WidthBuffer* gWidthBuffer = NULL;
 	// initialized in InterfaceDefs.cpp
 
 
 struct hashed_escapement {
-	uint32 code;
+	uint32_t code;
 	float escapement;
 
 	hashed_escapement()
@@ -52,11 +52,11 @@ struct hashed_escapement {
 	\param charLen the length of the character to examine.
 	\return The code for the given character,
 */
-static inline uint32 CharToCode(const char* text, const int32 charLen)
+static inline uint32_t CharToCode(const char* text, const int32_t charLen)
 {
-	uint32 value = 0;
-	int32 shiftVal = 24;
-	for (int32 c = 0; c < charLen; c++) {
+	uint32_t value = 0;
+	int32_t shiftVal = 24;
+	for (int32_t c = 0; c < charLen; c++) {
 		value |= ((unsigned char)text[c] << shiftVal);
 		shiftVal -= 8;
 	}
@@ -78,7 +78,7 @@ WidthBuffer::WidthBuffer()
 */
 WidthBuffer::~WidthBuffer()
 {
-	for (int32 x = 0; x < fItemCount; x++)
+	for (int32_t x = 0; x < fItemCount; x++)
 		delete[] (hashed_escapement*)fBuffer[x].widths;
 }
 
@@ -91,7 +91,7 @@ WidthBuffer::~WidthBuffer()
 	\return The space (in pixels) required to draw the given string.
 */
 float
-WidthBuffer::StringWidth(const char* inText, int32 fromOffset, int32 length,
+WidthBuffer::StringWidth(const char* inText, int32_t fromOffset, int32_t length,
 	const BFont* inStyle)
 {
 	if (inText == NULL || length <= 0)
@@ -99,19 +99,19 @@ WidthBuffer::StringWidth(const char* inText, int32 fromOffset, int32 length,
 
 	BAutolock _(fLock);
 
-	int32 index = 0;
+	int32_t index = 0;
 	if (!FindTable(inStyle, &index))
 		index = InsertTable(inStyle);
 
 	char* text = NULL;
-	int32 numChars = 0;
-	int32 textLen = 0;
+	int32_t numChars = 0;
+	int32_t textLen = 0;
 
 	const char* sourceText = inText + fromOffset;
 	const float fontSize = inStyle->Size();
 	float stringWidth = 0;
 
-	for (int32 charLen = 0; length > 0;
+	for (int32_t charLen = 0; length > 0;
 			sourceText += charLen, length -= charLen) {
 		charLen = UTF8NextCharLen(sourceText, length);
 
@@ -120,7 +120,7 @@ WidthBuffer::StringWidth(const char* inText, int32 fromOffset, int32 length,
 			break;
 
 		// Some magic, to uniquely identify this character
-		const uint32 value = CharToCode(sourceText, charLen);
+		const uint32_t value = CharToCode(sourceText, charLen);
 
 		float escapement;
 		if (GetEscapement(value, index, &escapement)) {
@@ -129,7 +129,7 @@ WidthBuffer::StringWidth(const char* inText, int32 fromOffset, int32 length,
 		} else {
 			// Store this character into an array, which we'll
 			// pass to HashEscapements() later
-			int32 offset = textLen;
+			int32_t offset = textLen;
 			textLen += charLen;
 			numChars++;
 			char* newText = (char*)realloc(text, textLen + 1);
@@ -164,8 +164,8 @@ WidthBuffer::StringWidth(const char* inText, int32 fromOffset, int32 length,
 	\return The space (in pixels) required to draw the given string.
 */
 float
-WidthBuffer::StringWidth(TextGapBuffer &inBuffer, int32 fromOffset,
-	int32 length, const BFont* inStyle)
+WidthBuffer::StringWidth(TextGapBuffer &inBuffer, int32_t fromOffset,
+	int32_t length, const BFont* inStyle)
 {
 	const char* text = inBuffer.GetString(fromOffset, &length);
 	return StringWidth(text, 0, length, inStyle);
@@ -174,19 +174,19 @@ WidthBuffer::StringWidth(TextGapBuffer &inBuffer, int32 fromOffset,
 
 /*! \brief Searches for the table for the given font.
 	\param inStyle The font to search for.
-	\param outIndex a pointer to an int32, where the function will store
+	\param outIndex a pointer to an int32_t, where the function will store
 	the index of the table, if found, or -1, if not.
 	\return \c true if the function founds the table,
 		\c false if not.
 */
-bool WidthBuffer::FindTable(const BFont* inStyle, int32* outIndex)
+bool WidthBuffer::FindTable(const BFont* inStyle, int32_t* outIndex)
 {
 	if (inStyle == NULL)
 		return false;
 
-	int32 tableIndex = -1;
+	int32_t tableIndex = -1;
 
-	for (int32 i = 0; i < fItemCount; i++) {
+	for (int32_t i = 0; i < fItemCount; i++) {
 		if (*inStyle == fBuffer[i].font) {
 			tableIndex = i;
 			break;
@@ -203,7 +203,7 @@ bool WidthBuffer::FindTable(const BFont* inStyle, int32* outIndex)
 	\param font The font to create the table for.
 	\return The index of the newly created table.
 */
-int32 WidthBuffer::InsertTable(const BFont* font)
+int32_t WidthBuffer::InsertTable(const BFont* font)
 {
 	_width_table_ table;
 
@@ -212,7 +212,7 @@ int32 WidthBuffer::InsertTable(const BFont* font)
 	table.tableCount = kTableCount;
 	table.widths = new hashed_escapement[kTableCount];
 
-	uint32 position = fItemCount;
+	uint32_t position = fItemCount;
 	InsertItemsAt(1, position, &table);
 
 	return position;
@@ -227,19 +227,19 @@ int32 WidthBuffer::InsertTable(const BFont* font)
 	\return \c true if the function could find the escapement
 		for the given character, \c false if not.
 */
-bool WidthBuffer::GetEscapement(uint32 value, int32 index, float* escapement)
+bool WidthBuffer::GetEscapement(uint32_t value, int32_t index, float* escapement)
 {
 	const _width_table_ &table = fBuffer[index];
 	const hashed_escapement* widths
 		= static_cast<hashed_escapement*>(table.widths);
-	uint32 hashed = Hash(value) & (table.tableCount - 1);
+	uint32_t hashed = Hash(value) & (table.tableCount - 1);
 
-	uint32 found;
+	uint32_t found;
 	while ((found = widths[hashed].code) != kInvalidCode) {
 		if (found == value)
 			break;
 
-		if (++hashed >= (uint32)table.tableCount)
+		if (++hashed >= (uint32_t)table.tableCount)
 			hashed = 0;
 	}
 
@@ -253,10 +253,10 @@ bool WidthBuffer::GetEscapement(uint32 value, int32 index, float* escapement)
 }
 
 
-uint32 WidthBuffer::Hash(uint32 val)
+uint32_t WidthBuffer::Hash(uint32_t val)
 {
-	uint32 shifted = val >> 24;
-	uint32 result = (val >> 15) + (shifted * 3);
+	uint32_t shifted = val >> 24;
+	uint32_t result = (val >> 15) + (shifted * 3);
 
 	result ^= (val >> 6) - (shifted * 22);
 	result ^= (val << 3);
@@ -277,8 +277,8 @@ uint32 WidthBuffer::Hash(uint32 val)
 		the size of the font).
 */
 float
-WidthBuffer::HashEscapements(const char* inText, int32 numChars, int32 textLen,
-	int32 tableIndex, const BFont* inStyle)
+WidthBuffer::HashEscapements(const char* inText, int32_t numChars, int32_t textLen,
+	int32_t tableIndex, const BFont* inStyle)
 {
 	ASSERT(inText != NULL);
 	ASSERT(numChars > 0);
@@ -290,25 +290,25 @@ WidthBuffer::HashEscapements(const char* inText, int32 numChars, int32 textLen,
 	_width_table_ &table = fBuffer[tableIndex];
 	hashed_escapement* widths = static_cast<hashed_escapement*>(table.widths);
 
-	int32 charCount = 0;
+	int32_t charCount = 0;
 	char* text = (char*)inText;
 	const char* textEnd = inText + textLen;
 	// Insert the escapements into the hash table
 	do {
 		// Using this variant is safe as the handed in string is guaranteed to
 		// be 0 terminated.
-		const int32 charLen = UTF8NextCharLen(text);
+		const int32_t charLen = UTF8NextCharLen(text);
 		if (charLen == 0)
 			break;
 
-		const uint32 value = CharToCode(text, charLen);
+		const uint32_t value = CharToCode(text, charLen);
 
-		uint32 hashed = Hash(value) & (table.tableCount - 1);
-		uint32 found;
+		uint32_t hashed = Hash(value) & (table.tableCount - 1);
+		uint32_t found;
 		while ((found = widths[hashed].code) != kInvalidCode) {
 			if (found == value)
 				break;
-			if (++hashed >= (uint32)table.tableCount)
+			if (++hashed >= (uint32_t)table.tableCount)
 				hashed = 0;
 		}
 
@@ -322,19 +322,19 @@ WidthBuffer::HashEscapements(const char* inText, int32 numChars, int32 textLen,
 			// we double the current size when hashCount is 2/3 of
 			// the total size.
 			if (table.tableCount * 2 / 3 <= table.hashCount) {
-				const int32 newSize = table.tableCount * 2;
+				const int32_t newSize = table.tableCount * 2;
 
 				// Create and initialize a new hash table
 				hashed_escapement* newWidths = new hashed_escapement[newSize];
 
 				// Rehash the values, and put them into the new table
-				for (uint32 oldPos = 0; oldPos < (uint32)table.tableCount;
+				for (uint32_t oldPos = 0; oldPos < (uint32_t)table.tableCount;
 						oldPos++) {
 					if (widths[oldPos].code != kInvalidCode) {
-						uint32 newPos
+						uint32_t newPos
 							= Hash(widths[oldPos].code) & (newSize - 1);
 						while (newWidths[newPos].code != kInvalidCode) {
-							if (++newPos >= (uint32)newSize)
+							if (++newPos >= (uint32_t)newSize)
 								newPos = 0;
 						}
 						newWidths[newPos] = widths[oldPos];
@@ -354,7 +354,7 @@ WidthBuffer::HashEscapements(const char* inText, int32 numChars, int32 textLen,
 
 	// Calculate the width of the string
 	float width = 0;
-	for (int32 x = 0; x < numChars; x++)
+	for (int32_t x = 0; x < numChars; x++)
 		width += escapements[x];
 
 	delete[] escapements;
@@ -381,7 +381,7 @@ _BWidthBuffer_* gCompatibilityWidthBuffer = NULL;
 extern "C"
 float
 StringWidth__14_BWidthBuffer_PCcllPC5BFont(_BWidthBuffer_* widthBuffer,
-	const char* inText, int32 fromOffset, int32 length, const BFont* inStyle)
+	const char* inText, int32_t fromOffset, int32_t length, const BFont* inStyle)
 {
 	return BPrivate::gWidthBuffer->StringWidth(inText, fromOffset, length,
 		inStyle);

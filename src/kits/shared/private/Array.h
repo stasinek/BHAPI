@@ -27,37 +27,37 @@ public:
 								Array(const Array<Element>& other);
 	inline						~Array();
 
-	inline	int32				Size() const		{ return fSize; }
-	inline	int32				Count() const		{ return fSize; }
+	inline	int32_t				Size() const		{ return fSize; }
+	inline	int32_t				Count() const		{ return fSize; }
 	inline	bool				IsEmpty() const		{ return fSize == 0; }
 	inline	Element*			Elements() const	{ return fElements; }
 
 	inline	bool				Add(const Element& element);
-	inline	bool				AddUninitialized(int32 elementCount);
-	inline	bool				Insert(const Element& element, int32 index);
-	inline	bool				InsertUninitialized(int32 index, int32 count);
-	inline	bool				Remove(int32 index, int32 count = 1);
+	inline	bool				AddUninitialized(int32_t elementCount);
+	inline	bool				Insert(const Element& element, int32_t index);
+	inline	bool				InsertUninitialized(int32_t index, int32_t count);
+	inline	bool				Remove(int32_t index, int32_t count = 1);
 
 			void				Clear();
 	inline	void				MakeEmpty();
 
-	inline	Element&			ElementAt(int32 index);
-	inline	const Element&		ElementAt(int32 index) const;
+	inline	Element&			ElementAt(int32_t index);
+	inline	const Element&		ElementAt(int32_t index) const;
 
-	inline	Element&			operator[](int32 index);
-	inline	const Element&		operator[](int32 index) const;
+	inline	Element&			operator[](int32_t index);
+	inline	const Element&		operator[](int32_t index) const;
 
 			Array<Element>&		operator=(const Array<Element>& other);
 
 private:
-	static	const int32			kMinCapacity = 8;
+	static	const int32_t			kMinCapacity = 8;
 
-			bool				_Resize(int32 index, int32 delta);
+			bool				_Resize(int32_t index, int32_t delta);
 
 private:
 			Element*			fElements;
-			int32				fSize;
-			int32				fCapacity;
+			int32_t				fSize;
+			int32_t				fCapacity;
 };
 
 
@@ -102,14 +102,14 @@ bool Array<Element>::Add(const Element& element)
 
 
 template<typename Element>
-inline bool Array<Element>::AddUninitialized(int32 elementCount)
+inline bool Array<Element>::AddUninitialized(int32_t elementCount)
 {
 	return InsertUninitialized(fSize, elementCount);
 }
 
 
 template<typename Element>
-bool Array<Element>::Insert(const Element& element, int32 index)
+bool Array<Element>::Insert(const Element& element, int32_t index)
 {
 	if (index < 0 || index > fSize)
 		index = fSize;
@@ -124,7 +124,7 @@ bool Array<Element>::Insert(const Element& element, int32 index)
 
 
 template<typename Element>
-bool Array<Element>::InsertUninitialized(int32 index, int32 count)
+bool Array<Element>::InsertUninitialized(int32_t index, int32_t count)
 {
 	if (index < 0 || index > fSize || count < 0)
 		return false;
@@ -140,7 +140,7 @@ bool Array<Element>::InsertUninitialized(int32 index, int32 count)
 
 
 template<typename Element>
-bool Array<Element>::Remove(int32 index, int32 count)
+bool Array<Element>::Remove(int32_t index, int32_t count)
 {
 	if (index < 0 || count < 0 || index + count > fSize) {
 #if DEBUG
@@ -189,7 +189,7 @@ void Array<Element>::MakeEmpty()
 
 template<typename Element>
 Element&
-Array<Element>::ElementAt(int32 index)
+Array<Element>::ElementAt(int32_t index)
 {
 	return fElements[index];
 }
@@ -197,7 +197,7 @@ Array<Element>::ElementAt(int32 index)
 
 template<typename Element>
 const Element&
-Array<Element>::ElementAt(int32 index) const
+Array<Element>::ElementAt(int32_t index) const
 {
 	return fElements[index];
 }
@@ -205,7 +205,7 @@ Array<Element>::ElementAt(int32 index) const
 
 template<typename Element>
 Element&
-Array<Element>::operator[](int32 index)
+Array<Element>::operator[](int32_t index)
 {
 	return fElements[index];
 }
@@ -213,7 +213,7 @@ Array<Element>::operator[](int32 index)
 
 template<typename Element>
 const Element&
-Array<Element>::operator[](int32 index) const
+Array<Element>::operator[](int32_t index) const
 {
 	return fElements[index];
 }
@@ -235,11 +235,11 @@ Array<Element>::operator=(const Array<Element>& other)
 
 
 template<typename Element>
-bool Array<Element>::_Resize(int32 index, int32 delta)
+bool Array<Element>::_Resize(int32_t index, int32_t delta)
 {
 	// determine new capacity
-	int32 newSize = fSize + delta;
-	int32 newCapacity = kMinCapacity;
+	int32_t newSize = fSize + delta;
+	int32_t newCapacity = kMinCapacity;
 	while (newCapacity < newSize)
 		newCapacity *= 2;
 

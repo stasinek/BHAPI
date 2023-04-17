@@ -13,8 +13,8 @@ extern "C" {
 
 typedef struct mutex {
 	const char*	name;
-	int32		lock;
-	uint32		flags;
+	int32_t		lock;
+	uint32_t		flags;
 } mutex;
 
 #define MUTEX_FLAG_CLONE_NAME		0x1
@@ -28,7 +28,7 @@ typedef struct mutex {
 #define mutex_unlock(lock)                __mutex_unlock(lock)
 
 void		__mutex_init(mutex *lock, const char *name);
-void		__mutex_init_etc(mutex *lock, const char *name, uint32 flags);
+void		__mutex_init_etc(mutex *lock, const char *name, uint32_t flags);
 void		__mutex_destroy(mutex *lock);
 status_t	__mutex_lock(mutex *lock);
 void		__mutex_unlock(mutex *lock);
@@ -39,9 +39,9 @@ typedef struct rw_lock {
 	struct rw_lock_waiter *	waiters;
 	struct rw_lock_waiter *	last_waiter;
 	thread_id				holder;
-	int32					reader_count;
-	int32					writer_count;
-	int32					owner_count;
+	int32_t					reader_count;
+	int32_t					writer_count;
+	int32_t					owner_count;
 } rw_lock;
 
 #define RW_LOCK_FLAG_CLONE_NAME			MUTEX_FLAG_CLONE_NAME
@@ -58,7 +58,7 @@ typedef struct rw_lock {
 #define rw_lock_write_unlock(lock) __rw_lock_write_unlock(lock)
 
 void		__rw_lock_init(rw_lock *lock, const char *name);
-void		__rw_lock_init_etc(rw_lock *lock, const char *name, uint32 flags);
+void		__rw_lock_init_etc(rw_lock *lock, const char *name, uint32_t flags);
 void		__rw_lock_destroy(rw_lock *lock);
 status_t	__rw_lock_read_lock(rw_lock *lock);
 status_t	__rw_lock_read_unlock(rw_lock *lock);
@@ -69,7 +69,7 @@ status_t	__rw_lock_write_unlock(rw_lock *lock);
 typedef struct recursive_lock {
 	mutex		lock;
 	thread_id	holder;
-	int32		recursion;
+	int32_t		recursion;
 } recursive_lock;
 
 #define RECURSIVE_LOCK_FLAG_CLONE_NAME		MUTEX_FLAG_CLONE_NAME
@@ -85,17 +85,17 @@ typedef struct recursive_lock {
 
 void		__recursive_lock_init(recursive_lock *lock, const char *name);
 void		__recursive_lock_init_etc(recursive_lock *lock, const char *name,
-				uint32 flags);
+				uint32_t flags);
 void		__recursive_lock_destroy(recursive_lock *lock);
 status_t	__recursive_lock_lock(recursive_lock *lock);
 void		__recursive_lock_unlock(recursive_lock *lock);
-int32		__recursive_lock_get_recursion(recursive_lock *lock);
+int32_t		__recursive_lock_get_recursion(recursive_lock *lock);
 
 
 #define		INIT_ONCE_UNINITIALIZED	-1
 #define		INIT_ONCE_INITIALIZED	-4
 
-status_t	__init_once(int32* control, status_t (*initRoutine)(void*),
+status_t	__init_once(int32_t* control, status_t (*initRoutine)(void*),
 				void* data);
 
 #ifdef __cplusplus

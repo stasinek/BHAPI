@@ -47,8 +47,8 @@ public:
 	virtual status_t UnpublishDevice();
 	virtual status_t RepublishDevice();
 
-	void SetDeviceFlags(uint32 flags);	// comprises the ones below
-	uint32 DeviceFlags() const;
+	void SetDeviceFlags(uint32_t flags);	// comprises the ones below
+	uint32_t DeviceFlags() const;
 	bool IsReadOnlyMedia() const;
 	bool IsWriteOnce() const;
 	bool IsRemovable() const;
@@ -80,7 +80,7 @@ public:
 		user_partition_data *data);
 	void WriteUserData(UserDataWriter &writer);
 
-	virtual void Dump(bool deep = true, int32 level = 0);
+	virtual void Dump(bool deep = true, int32_t level = 0);
 
 protected:
 	virtual status_t GetMediaStatus(status_t *mediaStatus);

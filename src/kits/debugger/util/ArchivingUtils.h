@@ -21,11 +21,11 @@ public:
 									BMessage& parentArchive,
 									const char* fieldName);
 	static	BArchivable*		UnarchiveChild(const BMessage& parentArchive,
-									const char* fieldName, int32 index = 0);
+									const char* fieldName, int32_t index = 0);
 
 	template<typename ObjectType>
 	static	ObjectType*			UnarchiveChild(const BMessage& archive,
-									const char* fieldName, int32 index = 0);
+									const char* fieldName, int32_t index = 0);
 };
 
 
@@ -56,7 +56,7 @@ ArchivingUtils::Unarchive(const BMessage& archive)
 template<typename ObjectType>
 /*static*/ ObjectType*
 ArchivingUtils::UnarchiveChild(const BMessage& archive, const char* fieldName,
-	int32 index)
+	int32_t index)
 {
 	return CastOrDelete<ObjectType>(UnarchiveChild(archive, fieldName, index));
 }

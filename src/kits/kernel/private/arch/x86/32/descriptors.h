@@ -52,37 +52,37 @@
 struct segment_descriptor {
 	uint16 limit_00_15;				// bit	 0 - 15
 	uint16 base_00_15;				//		16 - 31
-	uint32 base_23_16 : 8;			//		 0 -  7
-	uint32 type : 4;				//		 8 - 11
-	uint32 desc_type : 1;			//		12		(0 = system, 1 = code/data)
-	uint32 privilege_level : 2;		//		13 - 14
-	uint32 present : 1;				//		15
-	uint32 limit_19_16 : 4;			//		16 - 19
-	uint32 available : 1;			//		20
-	uint32 zero : 1;				//		21
-	uint32 d_b : 1;					//		22
-	uint32 granularity : 1;			//		23
-	uint32 base_31_24 : 8;			//		24 - 31
+	uint32_t base_23_16 : 8;			//		 0 -  7
+	uint32_t type : 4;				//		 8 - 11
+	uint32_t desc_type : 1;			//		12		(0 = system, 1 = code/data)
+	uint32_t privilege_level : 2;		//		13 - 14
+	uint32_t present : 1;				//		15
+	uint32_t limit_19_16 : 4;			//		16 - 19
+	uint32_t available : 1;			//		20
+	uint32_t zero : 1;				//		21
+	uint32_t d_b : 1;					//		22
+	uint32_t granularity : 1;			//		23
+	uint32_t base_31_24 : 8;			//		24 - 31
 };
 
 struct interrupt_descriptor {
-	uint32 a;
-	uint32 b;
+	uint32_t a;
+	uint32_t b;
 };
 
 struct tss {
 	uint16 prev_task;
 	uint16 unused0;
-	uint32 sp0;
-	uint32 ss0;
-	uint32 sp1;
-	uint32 ss1;
-	uint32 sp2;
-	uint32 ss2;
-	uint32 cr3;
-	uint32 eip, eflags, eax, ecx, edx, ebx, esp, ebp, esi, edi;
-	uint32 es, cs, ss, ds, fs, gs;
-	uint32 ldt_seg_selector;
+	uint32_t sp0;
+	uint32_t ss0;
+	uint32_t sp1;
+	uint32_t ss1;
+	uint32_t sp2;
+	uint32_t ss2;
+	uint32_t cr3;
+	uint32_t eip, eflags, eax, ecx, edx, ebx, esp, ebp, esi, edi;
+	uint32_t es, cs, ss, ds, fs, gs;
+	uint32_t ldt_seg_selector;
 	uint16 unused1;
 	uint16 io_map_base;
 };
@@ -105,7 +105,7 @@ static inline void set_segment_descriptor_base(segment_descriptor* desc, addr_t 
 }
 
 
-static inline void set_segment_descriptor(segment_descriptor* desc, addr_t base, uint32 limit,
+static inline void set_segment_descriptor(segment_descriptor* desc, addr_t base, uint32_t limit,
 	uint8 type, uint8 privilegeLevel)
 {
 	set_segment_descriptor_base(desc, base);
@@ -133,7 +133,7 @@ static inline void set_segment_descriptor(segment_descriptor* desc, addr_t base,
 }
 
 
-static inline void set_tss_descriptor(segment_descriptor* desc, addr_t base, uint32 limit)
+static inline void set_tss_descriptor(segment_descriptor* desc, addr_t base, uint32_t limit)
 {
 	// the TSS descriptor has a special layout different from the standard descriptor
 	set_segment_descriptor_base(desc, base);
@@ -155,7 +155,7 @@ static inline void set_tss_descriptor(segment_descriptor* desc, addr_t base, uin
 
 
 static inline segment_descriptor*
-get_gdt(int32 cpu)
+get_gdt(int32_t cpu)
 {
 	return gGDTs[cpu];
 }

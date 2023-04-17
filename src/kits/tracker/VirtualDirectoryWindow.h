@@ -21,18 +21,18 @@ class VirtualDirectoryWindow : public BContainerWindow {
 public:
 								VirtualDirectoryWindow(
 									LockingList<BWindow>* windowList,
-									uint32 containerWindowFlags,
+									uint32_t containerWindowFlags,
 									window_look look = B_DOCUMENT_WINDOW_LOOK,
 									window_feel feel = B_NORMAL_WINDOW_FEEL,
-									uint32 flags = B_WILL_ACCEPT_FIRST_CLICK
+									uint32_t flags = B_WILL_ACCEPT_FIRST_CLICK
 										| B_NO_WORKSPACE_ACTIVATION,
-									uint32 workspace = B_CURRENT_WORKSPACE);
+									uint32_t workspace = B_CURRENT_WORKSPACE);
 
 	VirtualDirectoryPoseView*	PoseView() const;
 
 protected:
 	virtual	void				CreatePoseView(Model* model);
-	virtual	BPoseView*			NewPoseView(Model* model, uint32 viewMode);
+	virtual	BPoseView*			NewPoseView(Model* model, uint32_t viewMode);
 	virtual	void				AddWindowMenu(BMenu* menu);
 	virtual	void				AddWindowContextMenus(BMenu* menu);
 

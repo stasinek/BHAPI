@@ -82,7 +82,7 @@ BNetAddress::BNetAddress(const struct in_addr addr,  __be_uint16 port)
 }
 
 
-BNetAddress::BNetAddress(__be_uint32 addr,  __be_uint16 port)
+BNetAddress::BNetAddress(__be_uint32_t addr,  __be_uint16 port)
 	: BArchivable(), fStatus(B_NO_INIT)
 {
 	bzero(&fAddr, sizeof(struct sockaddr_in));
@@ -181,7 +181,7 @@ status_t BNetAddress::SetTo(const char *hostname,  __be_uint16 port)
 	switch(ent->h_addrtype)
 	{
 		case AF_INET:
-			fAddr.sin_addr.s_addr = *((__be_uint32*)ent->h_addr);
+			fAddr.sin_addr.s_addr = *((__be_uint32_t*)ent->h_addr);
 			fAddr.sin_family = AF_INET;
 			fAddr.sin_port = htons(port);
 			retVal = fStatus = B_OK;
@@ -248,7 +248,7 @@ status_t BNetAddress::SetTo(const struct in_addr addr,  __be_uint16 port)
 }
 
 
-status_t BNetAddress::SetTo(__be_uint32 addr,  __be_uint16 port)
+status_t BNetAddress::SetTo(__be_uint32_t addr,  __be_uint16 port)
 {
 	fAddr.sin_family = AF_INET;
 	fAddr.sin_port = htons(port);

@@ -187,8 +187,8 @@ public:
 
 			void				Open(int openMode);
 			void				Close(file_cookie* cookie);
-			int32				ReaderCount() const { return fReaderCount; }
-			int32				WriterCount() const { return fWriterCount; }
+			int32_t				ReaderCount() const { return fReaderCount; }
+			int32_t				WriterCount() const { return fWriterCount; }
 
 			status_t			Select(uint8 event, selectsync* sync,
 									int openMode);
@@ -211,8 +211,8 @@ private:
 
 			ConditionVariable	fWriteCondition;
 
-			int32				fReaderCount;
-			int32				fWriterCount;
+			int32_t				fReaderCount;
+			int32_t				fWriterCount;
 			bool				fActive;
 
 			select_sync_pool*	fReadSelectSyncPool;
@@ -1037,7 +1037,7 @@ fifo_read_stat(fs_volume* volume, fs_vnode* vnode, struct ::stat* st)
 
 static status_t
 fifo_write_stat(fs_volume* volume, fs_vnode* vnode, const struct ::stat* st,
-	uint32 statMask)
+	uint32_t statMask)
 {
 	// we cannot change the size of anything
 	if ((statMask & B_STAT_SIZE) != 0)
@@ -1059,7 +1059,7 @@ fifo_write_stat(fs_volume* volume, fs_vnode* vnode, const struct ::stat* st,
 
 
 static status_t
-fifo_ioctl(fs_volume* _volume, fs_vnode* _node, void* _cookie, uint32 op,
+fifo_ioctl(fs_volume* _volume, fs_vnode* _node, void* _cookie, uint32_t op,
 	void* buffer, size_t length)
 {
 	file_cookie* cookie = (file_cookie*)_cookie;

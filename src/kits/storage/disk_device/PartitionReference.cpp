@@ -7,7 +7,7 @@
 
 
 // constructor
-PartitionReference::PartitionReference(partition_id id, int32 changeCounter)
+PartitionReference::PartitionReference(partition_id id, int32_t changeCounter)
 	:
 	BReferenceable(),
 	fID(id),
@@ -23,7 +23,7 @@ PartitionReference::~PartitionReference()
 
 
 // SetTo
-void PartitionReference::SetTo(partition_id id, int32 changeCounter)
+void PartitionReference::SetTo(partition_id id, int32_t changeCounter)
 {
 	fID = id;
 	fChangeCounter = changeCounter;
@@ -46,14 +46,14 @@ void PartitionReference::SetPartitionID(partition_id id)
 
 
 // ChangeCounter
-int32 PartitionReference::ChangeCounter() const
+int32_t PartitionReference::ChangeCounter() const
 {
 	return fChangeCounter;
 }
 
 
 // SetChangeCounter
-void PartitionReference::SetChangeCounter(int32 counter)
+void PartitionReference::SetChangeCounter(int32_t counter)
 {
 	fChangeCounter = counter;
 }

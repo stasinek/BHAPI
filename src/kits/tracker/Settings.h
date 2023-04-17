@@ -82,15 +82,15 @@ protected:
 };
 
 class ScalarValueSetting : public SettingsArgvDispatcher {
-	// simple int32 setting
+	// simple int32_t setting
 public:
-	ScalarValueSetting(const char* name, int32 defaultValue,
+	ScalarValueSetting(const char* name, int32_t defaultValue,
 		const char* valueExpectedErrorString,
-		const char* wrongValueErrorString, int32 min = INT32_MIN,
-		int32 max = INT32_MAX);
+		const char* wrongValueErrorString, int32_t min = INT32_MIN,
+		int32_t max = INT32_MAX);
 
-	void ValueChanged(int32 newValue);
-	int32 Value() const;
+	void ValueChanged(int32_t newValue);
+	int32_t Value() const;
 	void GetValueAsString(char*) const;
 	virtual const char* Handle(const char* const *argv);
 
@@ -98,22 +98,22 @@ protected:
 	virtual void SaveSettingValue(Settings*);
 	virtual bool NeedsSaving() const;
 
-	int32 fDefaultValue;
-	int32 fValue;
-	int32 fMax;
-	int32 fMin;
+	int32_t fDefaultValue;
+	int32_t fValue;
+	int32_t fMax;
+	int32_t fMin;
 
 	const char* fValueExpectedErrorString;
 	const char* fWrongValueErrorString;
 };
 
 class HexScalarValueSetting : public ScalarValueSetting {
-	// hexadecimal int32 setting
+	// hexadecimal int32_t setting
 public:
-	HexScalarValueSetting(const char* name, int32 defaultValue,
+	HexScalarValueSetting(const char* name, int32_t defaultValue,
 		const char* valueExpectedErrorString,
-		const char* wrongValueErrorString, int32 min = INT32_MIN,
-		int32 max = INT32_MAX);
+		const char* wrongValueErrorString, int32_t min = INT32_MIN,
+		int32_t max = INT32_MAX);
 
 	void GetValueAsString(char* buffer) const;
 

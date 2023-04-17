@@ -41,12 +41,12 @@ public:
 			void				AddScheduler(IOScheduler* scheduler);
 			void				RemoveScheduler(IOScheduler* scheduler);
 
-			void				Notify(uint32 eventCode,
+			void				Notify(uint32_t eventCode,
 									const IOScheduler* scheduler,
 									IORequest* request = NULL,
 									IOOperation* operation = NULL);
 
-			int32				NextID();
+			int32_t				NextID();
 
 private:
 								IOSchedulerRoster();
@@ -54,7 +54,7 @@ private:
 
 private:
 			mutex				fLock;
-			int32				fNextID;
+			int32_t				fNextID;
 			IOSchedulerList		fSchedulers;
 			DefaultNotificationService fNotificationService;
 			char				fEventBuffer[256];

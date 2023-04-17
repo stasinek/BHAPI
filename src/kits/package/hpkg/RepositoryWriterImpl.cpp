@@ -67,7 +67,7 @@ struct PackageEntryDataFetcher {
 		ObjectDeleter<BAbstractBufferedDataReader> readerDeleter(reader);
 
 		// copy data into the given string
-		int32 bufferSize = fPackageData.Size();
+		int32_t bufferSize = fPackageData.Size();
 		char* buffer = _contents.LockBuffer(bufferSize);
 		if (buffer == NULL)
 			return B_NO_MEMORY;
@@ -466,8 +466,8 @@ void RepositoryWriterImpl::_WritePackageAttributes(hpkg_repo_header& header,
 	// write the package attributes (zlib writer on top of a file writer)
 	uint64 startOffset = fHeapWriter->UncompressedHeapSize();
 
-	uint32 stringsLength;
-	uint32 stringsCount = WritePackageAttributes(PackageAttributes(),
+	uint32_t stringsLength;
+	uint32_t stringsCount = WritePackageAttributes(PackageAttributes(),
 		stringsLength);
 
 	uint64 sectionSize = fHeapWriter->UncompressedHeapSize() - startOffset;

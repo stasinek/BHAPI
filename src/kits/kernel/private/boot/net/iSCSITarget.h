@@ -37,8 +37,8 @@ public:
 	status_t Logout(bool closeSession = false);
 	status_t GetText(const char* request, size_t requestLength, char** response, size_t* responseLength);
 	status_t SendCommand(const void* command, size_t commandSize,
-		bool r, bool w, uint32 expectedDataTransferLength,
-		void* response, uint32 responseOffset, size_t responseLength);
+		bool r, bool w, uint32_t expectedDataTransferLength,
+		void* response, uint32_t responseOffset, size_t responseLength);
 
 	bool Active() const { return fConnected; }
 
@@ -50,7 +50,7 @@ private:
 	TCPSocket* fSocket;
 	bool fConnected;
 	uint16 fConnectionID;
-	uint32 fStatusSequenceNumber;
+	uint32_t fStatusSequenceNumber;
 };
 
 class iSCSISession {
@@ -61,8 +61,8 @@ public:
 	status_t Init(ip_addr_t address, uint16 port, char** targetAlias = NULL);
 	status_t Close();
 
-	uint32 CommandSequenceNumber() const { return fCommandSequenceNumber; }
-	uint32 NextCommandSequenceNumber() { return fCommandSequenceNumber++; }
+	uint32_t CommandSequenceNumber() const { return fCommandSequenceNumber; }
+	uint32_t NextCommandSequenceNumber() { return fCommandSequenceNumber++; }
 	iSCSIConnection* Connection() const { return fConnection; }
 
 	bool Active() { return fConnection != NULL && fConnection->Active(); }
@@ -70,7 +70,7 @@ public:
 private:
 	bool fDiscovery;
 	const char* fTargetName;
-	uint32 fCommandSequenceNumber;
+	uint32_t fCommandSequenceNumber;
 	iSCSIConnection* fConnection;
 		// XXX should allow for multiple
 };
@@ -100,8 +100,8 @@ private:
 	iSCSISession* fSession;
 	char* fTargetName;
 	char* fTargetAlias;
-	uint32 fLastLBA;
-	uint32 fBlockSize;
+	uint32_t fLastLBA;
+	uint32_t fBlockSize;
 };
 
 

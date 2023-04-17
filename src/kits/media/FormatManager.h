@@ -24,8 +24,8 @@ public:
 			void				GetFormats(bigtime_t lastUpdate, BMessage& reply);
 			status_t			MakeFormatFor(
 									const media_format_description* descriptions,
-									int32 descriptionCount,
-									media_format& format, uint32 flags,
+									int32_t descriptionCount,
+									media_format& format, uint32_t flags,
 									void* _reserved);
 			void				RemoveFormat(const media_format& format);
 
@@ -40,7 +40,7 @@ private:
 			BObjectList<meta_format> fList;
 			BLocker				fLock;
 			bigtime_t			fLastUpdate;
-			int32				fNextCodecID;
+			int32_t				fNextCodecID;
 
 			static FormatManager* sInstance;
 			static pthread_once_t	sInitOnce;

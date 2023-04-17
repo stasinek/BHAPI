@@ -9,7 +9,7 @@
 
 
 sem_id
-create_sem(int32 count, const char *name)
+create_sem(int32_t count, const char *name)
 {
     return _kern_create_sem(count, name);
 }
@@ -30,7 +30,7 @@ acquire_sem(sem_id id)
 
 
 status_t
-acquire_sem_etc(sem_id id, int32 count, uint32 flags, bigtime_t timeout)
+acquire_sem_etc(sem_id id, int32_t count, uint32_t flags, bigtime_t timeout)
 {
     return _kern_acquire_sem_etc(id, count, flags, timeout);
 }
@@ -47,7 +47,7 @@ switch_sem(sem_id releaseSem, sem_id id)
 
 
 status_t
-switch_sem_etc(sem_id releaseSem, sem_id id, int32 count, uint32 flags, bigtime_t timeout)
+switch_sem_etc(sem_id releaseSem, sem_id id, int32_t count, uint32_t flags, bigtime_t timeout)
 {
     return _kern_switch_sem_etc(releaseSem, id, count, flags, timeout);
 }
@@ -61,14 +61,14 @@ release_sem(sem_id id)
 
 
 status_t
-release_sem_etc(sem_id id, int32 count, uint32 flags)
+release_sem_etc(sem_id id, int32_t count, uint32_t flags)
 {
     return _kern_release_sem_etc(id, count, flags);
 }
 
 
 status_t
-get_sem_count(sem_id sem, int32 *count)
+get_sem_count(sem_id sem, int32_t *count)
 {
     return _kern_get_sem_count(sem, count);
 }
@@ -89,7 +89,7 @@ _get_sem_info(sem_id sem, sem_info *info, size_t size)
 
 
 status_t
-_get_next_sem_info(team_id team, int32 *cookie, sem_info *info, size_t size)
+_get_next_sem_info(team_id team, int32_t *cookie, sem_info *info, size_t size)
 {
     return _kern_get_next_sem_info(team, cookie, info, size);
 }
@@ -109,7 +109,7 @@ _get_next_sem_info(team_id team, int32 *cookie, sem_info *info, size_t size)
 
 struct semaphore {
     char*	name;
-    int32	count;
+    int32_t	count;
     bool	inUse;
 };
 
@@ -127,7 +127,7 @@ check_sem(sem_id id)
 
 // create_sem
 sem_id
-create_sem(int32 count, const char *name)
+create_sem(int32_t count, const char *name)
 {
     for (int i = 0; i < kSemaphoreCount; i++) {
         semaphore &sem = sSemaphores[i];
@@ -169,7 +169,7 @@ acquire_sem(sem_id id)
 
 // acquire_sem_etc
 status_t
-acquire_sem_etc(sem_id id, int32 count, uint32 flags, bigtime_t timeout)
+acquire_sem_etc(sem_id id, int32_t count, uint32_t flags, bigtime_t timeout)
 {
     if (!check_sem(id))
         return B_BAD_SEM_ID;
@@ -232,7 +232,7 @@ release_sem(sem_id id)
 
 // release_sem_etc
 status_t
-release_sem_etc(sem_id id, int32 count, uint32 flags)
+release_sem_etc(sem_id id, int32_t count, uint32_t flags)
 {
     if (!check_sem(id))
         return B_BAD_SEM_ID;
@@ -248,7 +248,7 @@ release_sem_etc(sem_id id, int32 count, uint32 flags)
 
 // get_sem_count
 status_t
-get_sem_count(sem_id id, int32 *threadCount)
+get_sem_count(sem_id id, int32_t *threadCount)
 {
     if (!check_sem(id))
         return B_BAD_SEM_ID;
@@ -291,7 +291,7 @@ _get_sem_info(sem_id id, struct sem_info *info, size_t infoSize)
 
 // _get_next_sem_info
 status_t
-_get_next_sem_info(team_id team, int32 *cookie, struct sem_info *info,
+_get_next_sem_info(team_id team, int32_t *cookie, struct sem_info *info,
     size_t infoSize)
 {
     if (team < 0 || team > 2)

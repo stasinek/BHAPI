@@ -21,8 +21,8 @@
 
 typedef struct _joystick {
 	bigtime_t	timestamp;
-	uint32		horizontal;
-	uint32		vertical;
+	uint32_t		horizontal;
+	uint32_t		vertical;
 	bool		button1;
 	bool		button2;
 } joystick;
@@ -38,7 +38,7 @@ typedef struct _joystick {
 
 typedef struct _extended_joystick {
 	bigtime_t	timestamp;		/* system_time when it was read */
-	uint32		buttons;		/* lsb to msb, 1 == on */
+	uint32_t		buttons;		/* lsb to msb, 1 == on */
 	int16		axes[MAX_AXES];	/* -32768 to 32767, X, Y, Z, U, V, W */
 	uint8		hats[MAX_HATS];	/* 0 through 8 (1 == N, 3 == E, 5 == S, 7 == W) */
 } _PACKED extended_joystick;
@@ -50,14 +50,14 @@ typedef struct _extended_joystick {
 // transmitted, not the whole structure.
 typedef struct _variable_joystick {
 #ifdef __cplusplus
-	status_t initialize(uint32 axisCount, uint32 hatCount, uint32 buttonCount)
+	status_t initialize(uint32_t axisCount, uint32_t hatCount, uint32_t buttonCount)
 	{
 		axis_count = axisCount;
 		hat_count = hatCount;
 		button_blocks = (buttonCount + 31) / 32;
 
 		data_size = sizeof(bigtime_t)			// timestamp
-			+ button_blocks * sizeof(uint32)	// bitmaps
+			+ button_blocks * sizeof(uint32_t)	// bitmaps
 			+ axis_count * sizeof(int16)		// axis values
 			+ hat_count * sizeof(uint8);		// hat values
 
@@ -67,7 +67,7 @@ typedef struct _variable_joystick {
 
 		// fill in the convenience pointers
 		timestamp = (bigtime_t *)data;
-		buttons = (uint32 *)&timestamp[1];
+		buttons = (uint32_t *)&timestamp[1];
 		axes = (int16 *)&buttons[button_blocks];
 		hats = (uint8 *)&axes[axis_count];
 		return B_OK;
@@ -79,23 +79,23 @@ typedef struct _variable_joystick {
 	}
 #endif
 
-	uint32		axis_count;
-	uint32		hat_count;
-	uint32		button_blocks;
+	uint32_t		axis_count;
+	uint32_t		hat_count;
+	uint32_t		button_blocks;
 		// count of 32 bit button bitmap blocks == (button_count + 31) / 32
 
 	// These pointers all point into the data section and are here for
 	// convenience. They need to be set up manually by the one who creates this
 	// structure or by using the initialize() method.
 	bigtime_t *	timestamp;
-	uint32 *	buttons;
+	uint32_t *	buttons;
 	int16 *		axes;
 	uint8 *		hats;
 
 	// The data is always structured in the following way (see extended_joystick
 	// for data interpretation):
 	//		bigtime_t	timestamp;
-	//		uint32		button_bitmap_blocks[button_blocks];
+	//		uint32_t		button_bitmap_blocks[button_blocks];
 	//		int16		axes[axis_count];
 	//		uint8		hats[hat_count];
 	size_t		data_size;
@@ -118,7 +118,7 @@ typedef struct _joystick_module_info {
 	int16			num_buttons;
 	int16			num_hats;
 	uint16			_reserved[7];
-	uint32			flags;
+	uint32_t			flags;
 	uint16			num_sticks;
 	int16			config_size;
 	char			device_config[MAX_CONFIG_SIZE];	/* device specific */
@@ -147,8 +147,8 @@ typedef struct _joystick_module {
     by the device module. */
 enum { /* Joystick driver ioctl() opcodes */
     B_JOYSTICK_GET_SPEED_COMPENSATION = B_JOYSTICK_DRIVER_BASE,
-                                            /* arg -> ptr to int32 */
-    B_JOYSTICK_SET_SPEED_COMPENSATION,      /* arg -> ptr to int32 */
+                                            /* arg -> ptr to int32_t */
+    B_JOYSTICK_SET_SPEED_COMPENSATION,      /* arg -> ptr to int32_t */
     B_JOYSTICK_GET_MAX_LATENCY,             /* arg -> ptr to long long */
     B_JOYSTICK_SET_MAX_LATENCY,             /* arg -> ptr to long long */
     B_JOYSTICK_SET_DEVICE_MODULE,			/* arg -> ptr to joystick_module; also enters enhanced mode */
@@ -170,10 +170,10 @@ typedef struct _generic_gameport_module {
 	module_info minfo;
 	status_t (*create_device)(int port, void ** out_storage);
 	status_t (*delete_device)(void * storage);
-	status_t (*open_hook)(void * storage, uint32 flags, void ** out_cookie);
+	status_t (*open_hook)(void * storage, uint32_t flags, void ** out_cookie);
 	status_t (*close_hook)(void * cookie);
 	status_t (*free_hook)(void * cookie);
-	status_t (*control_hook)(void * cookie, uint32 op, void * data, size_t len);
+	status_t (*control_hook)(void * cookie, uint32_t op, void * data, size_t len);
 	status_t (*read_hook)(void * cookie, off_t pos, void * data, size_t * len);
 	status_t (*write_hook)(void * cookie, off_t pos, const void * data, size_t * len);
 	int	_reserved_;

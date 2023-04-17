@@ -45,7 +45,7 @@ public:
 			status_t			WriteScaleBy(double x, double y);
 			status_t			WriteRotateBy(double angleRadians);
 			status_t			WriteSetPattern(const ::pattern& pattern);
-			status_t			WriteClipToPicture(int32 pictureToken,
+			status_t			WriteClipToPicture(int32_t pictureToken,
 									const BPoint& origin, bool inverse);
 			status_t			WriteSetClipping(const BRegion& region);
 			status_t			WriteClearClipping();
@@ -55,13 +55,13 @@ public:
 
 			status_t			WriteSetFontFamily(const font_family family);
 			status_t			WriteSetFontStyle(const font_style style);
-			status_t			WriteSetFontSpacing(const int32& spacing);
+			status_t			WriteSetFontSpacing(const int32_t& spacing);
 			status_t			WriteSetFontSize(const float& size);
 			status_t			WriteSetFontRotation(const float& rotation);
-			status_t			WriteSetFontEncoding(const int32& encoding);
-			status_t			WriteSetFontFlags(const int32& flags);
+			status_t			WriteSetFontEncoding(const int32_t& encoding);
+			status_t			WriteSetFontFlags(const int32_t& flags);
 			status_t			WriteSetFontShear(const float& shear);
-			status_t			WriteSetFontFace(const int32& face);
+			status_t			WriteSetFontFace(const int32_t& face);
 
 			status_t			WriteStrokeLine(const BPoint& start,
 									const BPoint& end);
@@ -76,33 +76,33 @@ public:
 									const BPoint& radius,
 									const float& startTheta,
 									const float& arcTheta, const bool& fill);
-			status_t			WriteDrawPolygon(const int32& numPoints,
+			status_t			WriteDrawPolygon(const int32_t& numPoints,
 									BPoint* points, const bool& isClosed,
 									const bool& fill);
 			status_t			WriteDrawBezier(const BPoint points[4],
 									const bool& fill);
 			status_t			WriteDrawString(const BPoint& where,
-									const char* string, const int32& length,
+									const char* string, const int32_t& length,
 									const escapement_delta& delta);
-			status_t			WriteDrawShape(const int32& opCount,
-									const void* opList, const int32& ptCount,
+			status_t			WriteDrawShape(const int32_t& opCount,
+									const void* opList, const int32_t& ptCount,
 									const void* ptList, const bool& fill);
 			status_t			WriteDrawBitmap(const BRect& srcRect,
-									const BRect& dstRect, const int32& width,
-									const int32& height,
-									const int32& bytesPerRow,
-									const int32& colorSpace,
-									const int32& flags,
-									const void* data, const int32& length);
+									const BRect& dstRect, const int32_t& width,
+									const int32_t& height,
+									const int32_t& bytesPerRow,
+									const int32_t& colorSpace,
+									const int32_t& flags,
+									const void* data, const int32_t& length);
 
 			status_t			WriteDrawPicture(const BPoint& where,
-									const int32& token);
+									const int32_t& token);
 
 			status_t			WriteBlendLayer(Layer* layer);
 			status_t			WriteClipToRect(const BRect& rect,
 									bool inverse);
-			status_t			WriteClipToShape(int32 opCount,
-									const void* opList, int32 ptCount,
+			status_t			WriteClipToShape(int32_t opCount,
+									const void* opList, int32_t ptCount,
 									const void* ptList, bool inverse);
 
 protected:

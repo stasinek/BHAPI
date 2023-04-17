@@ -27,9 +27,9 @@ bool TypeComponent::HasPrefix(const TypeComponent& other) const
 }
 
 
-uint32 TypeComponent::HashValue() const
+uint32_t TypeComponent::HashValue() const
 {
-	uint32 hash = ((uint32)index << 8) | (componentKind << 4) | typeKind;
+	uint32_t hash = ((uint32_t)index << 8) | (componentKind << 4) | typeKind;
 	return StringUtils::HashValue(name) * 13 + hash;
 }
 
@@ -123,14 +123,14 @@ TypeComponentPath::~TypeComponentPath()
 }
 
 
-int32 TypeComponentPath::CountComponents() const
+int32_t TypeComponentPath::CountComponents() const
 {
 	return fComponents.CountItems();
 }
 
 
 TypeComponent
-TypeComponentPath::ComponentAt(int32 index) const
+TypeComponentPath::ComponentAt(int32_t index) const
 {
 	TypeComponent* component = fComponents.ItemAt(index);
 	return component != NULL ? *component : TypeComponent();
@@ -156,7 +156,7 @@ void TypeComponentPath::Clear()
 
 
 TypeComponentPath*
-TypeComponentPath::CreateSubPath(int32 componentCount) const
+TypeComponentPath::CreateSubPath(int32_t componentCount) const
 {
 	if (componentCount < 0 || componentCount > fComponents.CountItems())
 		componentCount = fComponents.CountItems();
@@ -166,7 +166,7 @@ TypeComponentPath::CreateSubPath(int32 componentCount) const
 		return NULL;
 	BReference<TypeComponentPath> pathReference(path, true);
 
-	for (int32 i = 0; i < componentCount; i++) {
+	for (int32_t i = 0; i < componentCount; i++) {
 		if (!path->AddComponent(*fComponents.ItemAt(i)))
 			return NULL;
 	}
@@ -175,15 +175,15 @@ TypeComponentPath::CreateSubPath(int32 componentCount) const
 }
 
 
-uint32 TypeComponentPath::HashValue() const
+uint32_t TypeComponentPath::HashValue() const
 {
-	int32 count = fComponents.CountItems();
+	int32_t count = fComponents.CountItems();
 	if (count == 0)
 		return 0;
 
-	uint32 hash = fComponents.ItemAt(0)->HashValue();
+	uint32_t hash = fComponents.ItemAt(0)->HashValue();
 
-	for (int32 i = 1; i < count; i++)
+	for (int32_t i = 1; i < count; i++)
 		hash = hash * 17 + fComponents.ItemAt(i)->HashValue();
 
 	return hash;
@@ -192,8 +192,8 @@ uint32 TypeComponentPath::HashValue() const
 
 void TypeComponentPath::Dump() const
 {
-	int32 count = fComponents.CountItems();
-	for (int32 i = 0; i < count; i++) {
+	int32_t count = fComponents.CountItems();
+	for (int32_t i = 0; i < count; i++) {
 		if (i == 0)
 			printf("[");
 		else
@@ -210,7 +210,7 @@ TypeComponentPath::operator=(const TypeComponentPath& other)
 	if (this != &other) {
 		fComponents.MakeEmpty();
 
-		for (int32 i = 0;
+		for (int32_t i = 0;
 				TypeComponent* component = other.fComponents.ItemAt(i); i++) {
 			if (!AddComponent(*component))
 				break;
@@ -223,11 +223,11 @@ TypeComponentPath::operator=(const TypeComponentPath& other)
 
 bool TypeComponentPath::operator==(const TypeComponentPath& other) const
 {
-	int32 count = fComponents.CountItems();
+	int32_t count = fComponents.CountItems();
 	if (count != other.fComponents.CountItems())
 		return false;
 
-	for (int32 i = 0; i < count; i++) {
+	for (int32_t i = 0; i < count; i++) {
 		if (*fComponents.ItemAt(i) != *other.fComponents.ItemAt(i))
 			return false;
 	}

@@ -49,7 +49,7 @@ struct DiskSystemAddOnManager::AddOnImage {
 	}
 
 	image_id			image;
-	int32				refCount;
+	int32_t				refCount;
 };
 
 
@@ -64,7 +64,7 @@ struct DiskSystemAddOnManager::AddOn {
 
 	AddOnImage*			image;
 	BDiskSystemAddOn*	addOn;
-	int32				refCount;
+	int32_t				refCount;
 };
 
 
@@ -141,13 +141,13 @@ void DiskSystemAddOnManager::UnloadDiskSystems()
 
 	// put all add-ons -- that will cause them to be deleted as soon as they're
 	// unused
-	for (int32 i = fAddOnsToBeUnloaded.CountItems() - 1; i >= 0; i--)
+	for (int32_t i = fAddOnsToBeUnloaded.CountItems() - 1; i >= 0; i--)
 		_PutAddOn(i);
 }
 
 
 // CountAddOns
-int32 DiskSystemAddOnManager::CountAddOns() const
+int32_t DiskSystemAddOnManager::CountAddOns() const
 {
 	return fAddOns.CountItems();
 }
@@ -155,7 +155,7 @@ int32 DiskSystemAddOnManager::CountAddOns() const
 
 // AddOnAt
 BDiskSystemAddOn*
-DiskSystemAddOnManager::AddOnAt(int32 index) const
+DiskSystemAddOnManager::AddOnAt(int32_t index) const
 {
 	AddOn* addOn = _AddOnAt(index);
 	return addOn ? addOn->addOn : NULL;
@@ -171,7 +171,7 @@ DiskSystemAddOnManager::GetAddOn(const char* name)
 
 	AutoLocker<BLocker> _(fLock);
 
-	for (int32 i = 0; AddOn* addOn = _AddOnAt(i); i++) {
+	for (int32_t i = 0; AddOn* addOn = _AddOnAt(i); i++) {
 		if (strcmp(addOn->addOn->Name(), name) == 0) {
 			addOn->refCount++;
 			return addOn->addOn;
@@ -190,7 +190,7 @@ void DiskSystemAddOnManager::PutAddOn(BDiskSystemAddOn* _addOn)
 
 	AutoLocker<BLocker> _(fLock);
 
-	for (int32 i = 0; AddOn* addOn = _AddOnAt(i); i++) {
+	for (int32_t i = 0; AddOn* addOn = _AddOnAt(i); i++) {
 		if (_addOn == addOn->addOn) {
 			if (addOn->refCount > 1) {
 				addOn->refCount--;
@@ -202,7 +202,7 @@ void DiskSystemAddOnManager::PutAddOn(BDiskSystemAddOn* _addOn)
 		}
 	}
 
-	for (int32 i = 0;
+	for (int32_t i = 0;
 		 AddOn* addOn = (AddOn*)fAddOnsToBeUnloaded.ItemAt(i); i++) {
 		if (_addOn == addOn->addOn) {
 			_PutAddOn(i);
@@ -232,14 +232,14 @@ DiskSystemAddOnManager::DiskSystemAddOnManager()
 
 // _AddOnAt
 DiskSystemAddOnManager::AddOn*
-DiskSystemAddOnManager::_AddOnAt(int32 index) const
+DiskSystemAddOnManager::_AddOnAt(int32_t index) const
 {
 	return (AddOn*)fAddOns.ItemAt(index);
 }
 
 
 // _PutAddOn
-void DiskSystemAddOnManager::_PutAddOn(int32 index)
+void DiskSystemAddOnManager::_PutAddOn(int32_t index)
 {
 	AddOn* addOn = (AddOn*)fAddOnsToBeUnloaded.ItemAt(index);
 	if (!addOn)
@@ -329,8 +329,8 @@ status_t DiskSystemAddOnManager::_LoadAddOns(StringSet& alreadyLoaded,
 		}
 
 		// create and add AddOn objects
-		int32 count = addOns.CountItems();
-		for (int32 i = 0; i < count; i++) {
+		int32_t count = addOns.CountItems();
+		for (int32_t i = 0; i < count; i++) {
 			BDiskSystemAddOn* diskSystemAddOn
 				= (BDiskSystemAddOn*)addOns.ItemAt(i);
 			AddOn* addOn = new(nothrow) AddOn(addOnImage, diskSystemAddOn);

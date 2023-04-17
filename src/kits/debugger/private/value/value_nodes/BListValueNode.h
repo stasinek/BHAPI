@@ -33,17 +33,17 @@ public:
 	virtual bool					ChildCreationNeedsValue() const
 										{ return true; }
 	virtual status_t				CreateChildren(TeamTypeInformation* info);
-	virtual int32					CountChildren() const;
-	virtual ValueNodeChild*			ChildAt(int32 index) const;
+	virtual int32_t					CountChildren() const;
+	virtual ValueNodeChild*			ChildAt(int32_t index) const;
 
 	virtual	bool					IsRangedContainer() const;
 	virtual	bool					IsContainerRangeFixed() const;
 	virtual	void					ClearChildren();
 	virtual	status_t				CreateChildrenInRange(
 										TeamTypeInformation* info,
-										int32 lowIndex, int32 highIndex);
-	virtual	status_t				SupportedChildRange(int32& lowIndex,
-										int32& highIndex) const;
+										int32_t lowIndex, int32_t highIndex);
+	virtual	status_t				SupportedChildRange(int32_t& lowIndex,
+										int32_t& highIndex) const;
 private:
 			class BListElementNodeChild;
 			class BListItemCountNodeChild;
@@ -61,7 +61,7 @@ private:
 			BVariant				fDataLocation;
 			BVariant				fItemCountLocation;
 			Type*					fItemCountType;
-			int32					fItemCount;
+			int32_t					fItemCount;
 			bool					fCountChildCreated;
 };
 

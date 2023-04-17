@@ -22,10 +22,10 @@ public:
 //	static	float				AddSizesFloat(float a, float b, float c);
 	static	float				AddDistances(float a, float b);
 	static	float				AddDistances(float a, float b, float c);
-	static	int32				AddSizesInt32(int32 a, int32 b);
-	static	int32				AddSizesInt32(int32 a, int32 b, int32 c);
+	static	int32_t				AddSizesInt32(int32_t a, int32_t b);
+	static	int32_t				AddSizesInt32(int32_t a, int32_t b, int32_t c);
 //	static	float				SubtractSizesFloat(float a, float b);
-	static	int32				SubtractSizesInt32(int32 a, int32 b);
+	static	int32_t				SubtractSizesInt32(int32_t a, int32_t b);
 	static	float				SubtractDistances(float a, float b);
 
 	static	void				FixSizeConstraints(float& min, float& max,

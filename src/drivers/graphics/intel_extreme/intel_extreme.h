@@ -106,7 +106,7 @@
 
 
 struct DeviceType {
-	uint32			type;
+	uint32_t			type;
 
 	DeviceType(int t)
 	{
@@ -119,17 +119,17 @@ struct DeviceType {
 		return *this;
 	}
 
-	bool InFamily(uint32 family) const
+	bool InFamily(uint32_t family) const
 	{
 		return (type & INTEL_TYPE_FAMILY_MASK) == family;
 	}
 
-	bool InGroup(uint32 group) const
+	bool InGroup(uint32_t group) const
 	{
 		return (type & INTEL_TYPE_GROUP_MASK) == group;
 	}
 
-	bool IsModel(uint32 model) const
+	bool IsModel(uint32_t model) const
 	{
 		return (type & INTEL_TYPE_MODEL_MASK) == model;
 	}
@@ -143,19 +143,19 @@ struct DeviceType {
 
 // info about PLL on graphics card
 struct pll_info {
-	uint32			reference_frequency;
-	uint32			max_frequency;
-	uint32			min_frequency;
-	uint32			divisor_register;
+	uint32_t			reference_frequency;
+	uint32_t			max_frequency;
+	uint32_t			min_frequency;
+	uint32_t			divisor_register;
 };
 
 struct ring_buffer {
 	struct lock		lock;
-	uint32			register_base;
-	uint32			offset;
-	uint32			size;
-	uint32			position;
-	uint32			space_left;
+	uint32_t			register_base;
+	uint32_t			offset;
+	uint32_t			size;
+	uint32_t			position;
+	uint32_t			space_left;
 	uint8*			base;
 };
 
@@ -163,24 +163,24 @@ struct overlay_registers;
 
 struct intel_shared_info {
 	area_id			mode_list_area;		// area containing display mode list
-	uint32			mode_count;
+	uint32_t			mode_count;
 
 	display_mode	current_mode;
-	uint32			bytes_per_row;
-	uint32			bits_per_pixel;
-	uint32			dpms_mode;
+	uint32_t			bytes_per_row;
+	uint32_t			bits_per_pixel;
+	uint32_t			dpms_mode;
 
 	area_id			registers_area;			// area of memory mapped registers
-	uint32			register_blocks[REGISTER_BLOCK_COUNT];
+	uint32_t			register_blocks[REGISTER_BLOCK_COUNT];
 
 	uint8*			status_page;
 	phys_addr_t		physical_status_page;
 	uint8*			graphics_memory;
 	phys_addr_t		physical_graphics_memory;
-	uint32			graphics_memory_size;
+	uint32_t			graphics_memory_size;
 
 	addr_t			frame_buffer;
-	uint32			frame_buffer_offset;
+	uint32_t			frame_buffer_offset;
 
 	bool			got_vbt;
 	bool			single_head_locked;
@@ -190,19 +190,19 @@ struct intel_shared_info {
 
 	ring_buffer		primary_ring_buffer;
 
-	int32			overlay_channel_used;
+	int32_t			overlay_channel_used;
 	bool			overlay_active;
 	uintptr_t		overlay_token;
 	phys_addr_t		physical_overlay_registers;
-	uint32			overlay_offset;
+	uint32_t			overlay_offset;
 
 	bool			hardware_cursor_enabled;
 	sem_id			vblank_sem;
 
 	uint8*			cursor_memory;
 	phys_addr_t		physical_cursor_memory;
-	uint32			cursor_buffer_offset;
-	uint32			cursor_format;
+	uint32_t			cursor_buffer_offset;
+	uint32_t			cursor_format;
 	bool			cursor_visible;
 	uint16			cursor_hot_x;
 	uint16			cursor_hot_y;
@@ -231,22 +231,22 @@ enum {
 
 // retrieve the area_id of the kernel/accelerant shared info
 struct intel_get_private_data {
-	uint32	magic;				// magic number
+	uint32_t	magic;				// magic number
 	area_id	shared_info_area;
 };
 
 // allocate graphics memory
 struct intel_allocate_graphics_memory {
-	uint32	magic;
-	uint32	size;
-	uint32	alignment;
-	uint32	flags;
+	uint32_t	magic;
+	uint32_t	size;
+	uint32_t	alignment;
+	uint32_t	flags;
 	addr_t	buffer_base;
 };
 
 // free graphics memory
 struct intel_free_graphics_memory {
-	uint32 	magic;
+	uint32_t 	magic;
 	addr_t	buffer_base;
 };
 
@@ -595,12 +595,12 @@ struct intel_free_graphics_memory {
 #define INTEL_OVERLAY_GAMMA_0			0x30024
 
 struct overlay_scale {
-	uint32 _reserved0 : 3;
-	uint32 horizontal_scale_fraction : 12;
-	uint32 _reserved1 : 1;
-	uint32 horizontal_downscale_factor : 3;
-	uint32 _reserved2 : 1;
-	uint32 vertical_scale_fraction : 12;
+	uint32_t _reserved0 : 3;
+	uint32_t horizontal_scale_fraction : 12;
+	uint32_t _reserved1 : 1;
+	uint32_t horizontal_downscale_factor : 3;
+	uint32_t _reserved2 : 1;
+	uint32_t vertical_scale_fraction : 12;
 };
 
 #define OVERLAY_FORMAT_RGB15			0x2
@@ -617,12 +617,12 @@ struct overlay_scale {
 // The real overlay registers are written to using an update buffer
 
 struct overlay_registers {
-	uint32 buffer_rgb0;
-	uint32 buffer_rgb1;
-	uint32 buffer_u0;
-	uint32 buffer_v0;
-	uint32 buffer_u1;
-	uint32 buffer_v1;
+	uint32_t buffer_rgb0;
+	uint32_t buffer_rgb1;
+	uint32_t buffer_u0;
+	uint32_t buffer_v0;
+	uint32_t buffer_u1;
+	uint32_t buffer_v1;
 	// (0x18) OSTRIDE - overlay stride
 	uint16 stride_rgb;
 	uint16 stride_uv;
@@ -636,13 +636,13 @@ struct overlay_registers {
 	uint16 horizontal_phase_rgb;
 	uint16 horizontal_phase_uv;
 	// (0x28) INIT_PHS - initial phase shift
-	uint32 initial_vertical_phase0_shift_rgb0 : 4;
-	uint32 initial_vertical_phase1_shift_rgb0 : 4;
-	uint32 initial_horizontal_phase_shift_rgb0 : 4;
-	uint32 initial_vertical_phase0_shift_uv : 4;
-	uint32 initial_vertical_phase1_shift_uv : 4;
-	uint32 initial_horizontal_phase_shift_uv : 4;
-	uint32 _reserved0 : 8;
+	uint32_t initial_vertical_phase0_shift_rgb0 : 4;
+	uint32_t initial_vertical_phase1_shift_rgb0 : 4;
+	uint32_t initial_horizontal_phase_shift_rgb0 : 4;
+	uint32_t initial_vertical_phase0_shift_uv : 4;
+	uint32_t initial_vertical_phase1_shift_uv : 4;
+	uint32_t initial_horizontal_phase_shift_uv : 4;
+	uint32_t _reserved0 : 8;
 	// (0x2c) DWINPOS - destination window position
 	uint16 window_left;
 	uint16 window_top;
@@ -660,84 +660,84 @@ struct overlay_registers {
 	overlay_scale scale_rgb;
 	overlay_scale scale_uv;
 	// (0x48) OCLRC0 - overlay color correction 0
-	uint32 brightness_correction : 8;		// signed, -128 to 127
-	uint32 _reserved1 : 10;
-	uint32 contrast_correction : 9;			// fixed point: 3.6 bits
-	uint32 _reserved2 : 5;
+	uint32_t brightness_correction : 8;		// signed, -128 to 127
+	uint32_t _reserved1 : 10;
+	uint32_t contrast_correction : 9;			// fixed point: 3.6 bits
+	uint32_t _reserved2 : 5;
 	// (0x4c) OCLRC1 - overlay color correction 1
-	uint32 saturation_cos_correction : 10;	// fixed point: 3.7 bits
-	uint32 _reserved3 : 6;
-	uint32 saturation_sin_correction : 11;	// signed fixed point: 3.7 bits
-	uint32 _reserved4 : 5;
+	uint32_t saturation_cos_correction : 10;	// fixed point: 3.7 bits
+	uint32_t _reserved3 : 6;
+	uint32_t saturation_sin_correction : 11;	// signed fixed point: 3.7 bits
+	uint32_t _reserved4 : 5;
 	// (0x50) DCLRKV - destination color key value
-	uint32 color_key_blue : 8;
-	uint32 color_key_green : 8;
-	uint32 color_key_red : 8;
-	uint32 _reserved5 : 8;
+	uint32_t color_key_blue : 8;
+	uint32_t color_key_green : 8;
+	uint32_t color_key_red : 8;
+	uint32_t _reserved5 : 8;
 	// (0x54) DCLRKM - destination color key mask
-	uint32 color_key_mask_blue : 8;
-	uint32 color_key_mask_green : 8;
-	uint32 color_key_mask_red : 8;
-	uint32 _reserved6 : 7;
-	uint32 color_key_enabled : 1;
+	uint32_t color_key_mask_blue : 8;
+	uint32_t color_key_mask_green : 8;
+	uint32_t color_key_mask_red : 8;
+	uint32_t _reserved6 : 7;
+	uint32_t color_key_enabled : 1;
 	// (0x58) SCHRKVH - source chroma key high value
-	uint32 source_chroma_key_high_red : 8;
-	uint32 source_chroma_key_high_blue : 8;
-	uint32 source_chroma_key_high_green : 8;
-	uint32 _reserved7 : 8;
+	uint32_t source_chroma_key_high_red : 8;
+	uint32_t source_chroma_key_high_blue : 8;
+	uint32_t source_chroma_key_high_green : 8;
+	uint32_t _reserved7 : 8;
 	// (0x5c) SCHRKVL - source chroma key low value
-	uint32 source_chroma_key_low_red : 8;
-	uint32 source_chroma_key_low_blue : 8;
-	uint32 source_chroma_key_low_green : 8;
-	uint32 _reserved8 : 8;
+	uint32_t source_chroma_key_low_red : 8;
+	uint32_t source_chroma_key_low_blue : 8;
+	uint32_t source_chroma_key_low_green : 8;
+	uint32_t _reserved8 : 8;
 	// (0x60) SCHRKEN - source chroma key enable
-	uint32 _reserved9 : 24;
-	uint32 source_chroma_key_red_enabled : 1;
-	uint32 source_chroma_key_blue_enabled : 1;
-	uint32 source_chroma_key_green_enabled : 1;
-	uint32 _reserved10 : 5;
+	uint32_t _reserved9 : 24;
+	uint32_t source_chroma_key_red_enabled : 1;
+	uint32_t source_chroma_key_blue_enabled : 1;
+	uint32_t source_chroma_key_green_enabled : 1;
+	uint32_t _reserved10 : 5;
 	// (0x64) OCONFIG - overlay configuration
-	uint32 _reserved11 : 3;
-	uint32 color_control_output_mode : 1;
-	uint32 yuv_to_rgb_bypass : 1;
-	uint32 _reserved12 : 11;
-	uint32 gamma2_enabled : 1;
-	uint32 _reserved13 : 1;
-	uint32 select_pipe : 1;
-	uint32 slot_time : 8;
-	uint32 _reserved14 : 5;
+	uint32_t _reserved11 : 3;
+	uint32_t color_control_output_mode : 1;
+	uint32_t yuv_to_rgb_bypass : 1;
+	uint32_t _reserved12 : 11;
+	uint32_t gamma2_enabled : 1;
+	uint32_t _reserved13 : 1;
+	uint32_t select_pipe : 1;
+	uint32_t slot_time : 8;
+	uint32_t _reserved14 : 5;
 	// (0x68) OCOMD - overlay command
-	uint32 overlay_enabled : 1;
-	uint32 active_field : 1;
-	uint32 active_buffer : 2;
-	uint32 test_mode : 1;
-	uint32 buffer_field_mode : 1;
-	uint32 _reserved15 : 1;
-	uint32 tv_flip_field_enabled : 1;
-	uint32 _reserved16 : 1;
-	uint32 tv_flip_field_parity : 1;
-	uint32 source_format : 4;
-	uint32 ycbcr422_order : 2;
-	uint32 _reserved18 : 1;
-	uint32 mirroring_mode : 2;
-	uint32 _reserved19 : 13;
+	uint32_t overlay_enabled : 1;
+	uint32_t active_field : 1;
+	uint32_t active_buffer : 2;
+	uint32_t test_mode : 1;
+	uint32_t buffer_field_mode : 1;
+	uint32_t _reserved15 : 1;
+	uint32_t tv_flip_field_enabled : 1;
+	uint32_t _reserved16 : 1;
+	uint32_t tv_flip_field_parity : 1;
+	uint32_t source_format : 4;
+	uint32_t ycbcr422_order : 2;
+	uint32_t _reserved18 : 1;
+	uint32_t mirroring_mode : 2;
+	uint32_t _reserved19 : 13;
 
-	uint32 _reserved20;
+	uint32_t _reserved20;
 
-	uint32 start_0y;
-	uint32 start_1y;
-	uint32 start_0u;
-	uint32 start_0v;
-	uint32 start_1u;
-	uint32 start_1v;
-	uint32 _reserved21[6];
+	uint32_t start_0y;
+	uint32_t start_1y;
+	uint32_t start_0u;
+	uint32_t start_0v;
+	uint32_t start_1u;
+	uint32_t start_1v;
+	uint32_t _reserved21[6];
 #if 0
 	// (0x70) AWINPOS - alpha blend window position
-	uint32 awinpos;
+	uint32_t awinpos;
 	// (0x74) AWINSZ - alpha blend window size
-	uint32 awinsz;
+	uint32_t awinsz;
 
-	uint32 _reserved21[10];
+	uint32_t _reserved21[10];
 #endif
 
 	// (0xa0) FASTHSCALE - fast horizontal downscale (strangely enough,
@@ -748,13 +748,13 @@ struct overlay_registers {
 	uint16 vertical_scale_uv;
 	uint16 vertical_scale_rgb;
 
-	uint32 _reserved22[86];
+	uint32_t _reserved22[86];
 
 	// (0x200) polyphase filter coefficients
 	uint16 vertical_coefficients_rgb[128];
 	uint16 horizontal_coefficients_rgb[128];
 
-	uint32	_reserved23[64];
+	uint32_t	_reserved23[64];
 
 	// (0x500)
 	uint16 vertical_coefficients_uv[128];
@@ -772,16 +772,16 @@ inline bool intel_uses_physical_overlay(intel_shared_info &info)
 
 
 struct hardware_status {
-	uint32	interrupt_status_register;
-	uint32	_reserved0[3];
+	uint32_t	interrupt_status_register;
+	uint32_t	_reserved0[3];
 	void*	primary_ring_head_storage;
-	uint32	_reserved1[3];
+	uint32_t	_reserved1[3];
 	void*	secondary_ring_0_head_storage;
 	void*	secondary_ring_1_head_storage;
-	uint32	_reserved2[2];
+	uint32_t	_reserved2[2];
 	void*	binning_head_storage;
-	uint32	_reserved3[3];
-	uint32	store[1008];
+	uint32_t	_reserved3[3];
+	uint32_t	store[1008];
 };
 
 #endif	/* INTEL_EXTREME_H */

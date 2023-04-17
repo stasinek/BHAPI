@@ -268,7 +268,7 @@ status_t SymlinkDescriptor::GetPath(string& path) const
 
 
 AttributeDescriptor::AttributeDescriptor(int fileFD, const char* attribute,
-	uint32 type, int openMode)
+	uint32_t type, int openMode)
 	:
 	fFileFD(dup_maybe_system(fileFD)),
 	fType(type),

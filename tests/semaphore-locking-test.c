@@ -34,17 +34,17 @@
 #include "./../kernel/Kernel.h>
 #include "./../support/String.h>
 
-static eint32 test_count = 324;
+static eint32_t test_count = 324;
 static void* sem_locker = NULL;
 
-eint32 test_subtract(void *arg)
+eint32_t test_subtract(void *arg)
 {
 	char *name = (char*)arg;
-	eint32 i;
+	eint32_t i;
 
 	for(i = 0; i < 5; i++)
 	{
-		eint32 origin_count;
+		eint32_t origin_count;
 		e_status_t status = etk_acquire_sem(sem_locker);
 		if(status != E_OK)
 		{
@@ -65,14 +65,14 @@ eint32 test_subtract(void *arg)
 }
 
 
-eint32 test_plus(void *arg)
+eint32_t test_plus(void *arg)
 {
 	char *name = (char*)arg;
-	eint32 i;
+	eint32_t i;
 
 	for(i = 0; i < 5; i++)
 	{
-		eint32 origin_count;
+		eint32_t origin_count;
 		e_status_t status = etk_acquire_sem(sem_locker);
 
 		if(status != E_OK)
@@ -99,7 +99,7 @@ int main(int argc, char **argv)
 {
 	void *thread_plus[TEST_THREAD_NUM];
 	void *thread_subtract[TEST_THREAD_NUM];
-	eint32 i;
+	eint32_t i;
 
 	ETK_OUTPUT("semaphore-locking-test in ETK(%u.%u.%u)...\n",
 		etk_major_version, etk_minor_version, etk_micro_version);

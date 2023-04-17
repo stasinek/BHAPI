@@ -59,7 +59,7 @@ compare_partitions_net_devices(const void *_a, const void *_b)
 
 class NetStackInitializer {
 public:
-	NetStackInitializer(uint64 clientMAC, uint32 clientIP, uint32 netMask)
+	NetStackInitializer(uint64 clientMAC, uint32_t clientIP, uint32_t netMask)
 		:
 		fSocket(-1),
 		fLinkSocket(-1),
@@ -291,8 +291,8 @@ private:
 	int					fSocket;
 	int					fLinkSocket;
 	uint64				fClientMAC;
-	uint32				fClientIP;
-	uint32				fNetMask;
+	uint32_t				fClientIP;
+	uint32_t				fNetMask;
 	bool				fFoundInterface;
 	bool				fConfiguredInterface;
 };
@@ -301,7 +301,7 @@ private:
 // #pragma mark - NetBootMethod
 
 
-NetBootMethod::NetBootMethod(const KMessage& bootVolume, int32 method)
+NetBootMethod::NetBootMethod(const KMessage& bootVolume, int32_t method)
 	: BootMethod(bootVolume, method)
 {
 }
@@ -319,15 +319,15 @@ NetBootMethod::Init()
 	status_t status;
 
 	uint64 clientMAC;
-	uint32 clientIP = 0;
-	uint32 netMask;
+	uint32_t clientIP = 0;
+	uint32_t netMask;
 	if (fBootVolume.FindInt64("client MAC", (int64*)&clientMAC) != B_OK
-		|| fBootVolume.FindInt32("client IP", (int32*)&clientIP) != B_OK) {
+		|| fBootVolume.FindInt32("client IP", (int32_t*)&clientIP) != B_OK) {
 		panic("no client MAC or IP address or net mask\n");
 		return B_ERROR;
 	}
 
-	if (fBootVolume.FindInt32("net mask", (int32*)&netMask) != B_OK) {
+	if (fBootVolume.FindInt32("net mask", (int32_t*)&netMask) != B_OK) {
 		// choose default netmask depending on the class of the address
 		if (IN_CLASSA(clientIP)
 			|| (clientIP >> IN_CLASSA_NSHIFT) == IN_LOOPBACKNET) {
@@ -377,7 +377,7 @@ NetBootMethod::IsBootPartition(KPartition* partition, bool& foundForSure)
 
 
 void
-NetBootMethod::SortPartitions(KPartition** partitions, int32 count)
+NetBootMethod::SortPartitions(KPartition** partitions, int32_t count)
 {
 	qsort(partitions, count, sizeof(KPartition*),
 		compare_partitions_net_devices);

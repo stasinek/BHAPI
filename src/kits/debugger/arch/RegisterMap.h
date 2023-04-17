@@ -13,8 +13,8 @@ class RegisterMap : public BReferenceable {
 public:
 	virtual						~RegisterMap();
 
-	virtual	int32				CountRegisters() const = 0;
-	virtual	int32				MapRegisterIndex(int32 index) const = 0;
+	virtual	int32_t				CountRegisters() const = 0;
+	virtual	int32_t				MapRegisterIndex(int32_t index) const = 0;
 };
 
 

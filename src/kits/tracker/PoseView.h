@@ -95,18 +95,18 @@ class EntryListBase;
 class TScrollBar;
 
 
-const int32 kSmallStep = 10;
-const int32 kListOffset = 20;
+const int32_t kSmallStep = 10;
+const int32_t kListOffset = 20;
 
-const uint32 kMiniIconMode = 'Tmic';
-const uint32 kIconMode = 'Ticn';
-const uint32 kListMode = 'Tlst';
+const uint32_t kMiniIconMode = 'Tmic';
+const uint32_t kIconMode = 'Ticn';
+const uint32_t kListMode = 'Tlst';
 
-const uint32 kCheckTypeahead = 'Tcty';
+const uint32_t kCheckTypeahead = 'Tcty';
 
 class BPoseView : public BView {
 public:
-	BPoseView(Model*, uint32 viewMode);
+	BPoseView(Model*, uint32_t viewMode);
 	virtual ~BPoseView();
 
 	// setup, teardown
@@ -146,8 +146,8 @@ public:
 	bool StateNeedsSaving();
 
 	// switch between mini icon mode, icon mode and list mode
-	virtual void SetViewMode(uint32 mode);
-	uint32 ViewMode() const;
+	virtual void SetViewMode(uint32_t mode);
+	uint32_t ViewMode() const;
 
 	// re-use the pose view for a new directory
  	virtual void SwitchDir(const entry_ref*,
@@ -166,13 +166,13 @@ public:
 	virtual	BSize MinSize();
 	virtual void Draw(BRect update_rect);
 	virtual void DrawAfterChildren(BRect update_rect);
-	virtual void MouseMoved(BPoint, uint32, const BMessage*);
+	virtual void MouseMoved(BPoint, uint32_t, const BMessage*);
 	virtual void MouseDown(BPoint where);
 	virtual void MouseUp(BPoint where);
 	virtual void MouseDragged(const BMessage*);
 	virtual void MouseLongDown(const BMessage*);
 	virtual void MouseIdle(const BMessage*);
-	virtual void KeyDown(const char*, int32);
+	virtual void KeyDown(const char*, int32_t);
 	virtual void Pulse();
 	virtual void ScrollTo(BPoint);
 
@@ -207,15 +207,15 @@ public:
 
 	// sorting
 	virtual void SortPoses();
-	void SetPrimarySort(uint32 attrHash);
-	void SetSecondarySort(uint32 attrHash);
+	void SetPrimarySort(uint32_t attrHash);
+	void SetSecondarySort(uint32_t attrHash);
 	void SetReverseSort(bool reverse);
-	uint32 PrimarySort() const;
-	uint32 PrimarySortType() const;
-	uint32 SecondarySort() const;
-	uint32 SecondarySortType() const;
+	uint32_t PrimarySort() const;
+	uint32_t PrimarySortType() const;
+	uint32_t SecondarySort() const;
+	uint32_t SecondarySortType() const;
 	bool ReverseSort() const;
-	void CheckPoseSortOrder(BPose*, int32 index);
+	void CheckPoseSortOrder(BPose*, int32_t index);
 	void CheckPoseVisibility(BRect* = NULL);
 		// make sure pose fits the screen and/or window bounds if needed
 
@@ -227,14 +227,14 @@ public:
 
 	void SetIconPoseHeight();
 	float IconPoseHeight() const;
-	uint32 IconSizeInt() const;
+	uint32_t IconSizeInt() const;
 	icon_size IconSize() const;
 
 	BRect Extent() const;
-	void GetLayoutInfo(uint32 viewMode, BPoint* grid,
+	void GetLayoutInfo(uint32_t viewMode, BPoint* grid,
 		BPoint* offset) const;
 
-	int32 CountItems() const;
+	int32_t CountItems() const;
 	void UpdateCount();
 
 	rgb_color DeskTextColor() const;
@@ -245,7 +245,7 @@ public:
 		// used to not erase when we have a background image and
 		// invalidate instead
 
-	void ScrollView(int32 type);
+	void ScrollView(int32_t type);
 
 	// column handling
 	void ColumnRedraw(BRect updateRect);
@@ -259,33 +259,33 @@ public:
 		// returns the bottom right of the last pose drawn or
 		// the bottom right of bounds
 
-	BColumn* ColumnAt(int32 index) const;
-	BColumn* ColumnFor(uint32 attribute_hash) const;
+	BColumn* ColumnAt(int32_t index) const;
+	BColumn* ColumnFor(uint32_t attribute_hash) const;
 	BColumn* FirstColumn() const;
 	BColumn* LastColumn() const;
-	int32 IndexOfColumn(const BColumn*) const;
-	int32 CountColumns() const;
+	int32_t IndexOfColumn(const BColumn*) const;
+	int32_t CountColumns() const;
 
 	// pose access
-	int32 IndexOfPose(const BPose*) const;
-	BPose* PoseAtIndex(int32 index) const;
+	int32_t IndexOfPose(const BPose*) const;
+	BPose* PoseAtIndex(int32_t index) const;
 
-	BPose* FindPose(BPoint where, int32* index = NULL) const;
+	BPose* FindPose(BPoint where, int32_t* index = NULL) const;
 		// return pose at location h, v (search list starting from
 		// bottom so drawing and hit detection reflect the same pose
 		// ordering)
-	BPose* FindPose(const Model*, int32* index = NULL) const;
-	BPose* FindPose(const node_ref*, int32* index = NULL) const;
-	BPose* FindPose(const entry_ref*, int32* index = NULL) const;
-	BPose* FindPose(const entry_ref*, int32 specifierForm,
-		int32* index) const;
+	BPose* FindPose(const Model*, int32_t* index = NULL) const;
+	BPose* FindPose(const node_ref*, int32_t* index = NULL) const;
+	BPose* FindPose(const entry_ref*, int32_t* index = NULL) const;
+	BPose* FindPose(const entry_ref*, int32_t specifierForm,
+		int32_t* index) const;
 		// special form of FindPose used for scripting,
 		// <specifierForm> may ask for previous or next pose
-	BPose* DeepFindPose(const node_ref* node, int32* index = NULL) const;
+	BPose* DeepFindPose(const node_ref* node, int32_t* index = NULL) const;
 		// same as FindPose, node can be a target of the actual
 		// pose if the pose is a symlink
-	BPose* FirstVisiblePose(int32* _index = NULL) const;
-	BPose* LastVisiblePose(int32* _index = NULL) const;
+	BPose* FirstVisiblePose(int32_t* _index = NULL) const;
+	BPose* LastVisiblePose(int32_t* _index = NULL) const;
 
 	void OpenInfoWindows();
 	void SetDefaultPrinter();
@@ -295,9 +295,9 @@ public:
 	virtual void OpenParent();
 
 	virtual void OpenSelection(BPose* clicked_pose = NULL,
-		int32* index = NULL);
+		int32_t* index = NULL);
 	void OpenSelectionUsing(BPose* clicked_pose = NULL,
-		int32* index = NULL);
+		int32_t* index = NULL);
 		// launches the open with window
 	virtual void MoveSelectionTo(BPoint, BPoint, BContainerWindow*);
 	void DuplicateSelection(BPoint* dropStart = NULL,
@@ -317,11 +317,11 @@ public:
 	PoseList* SelectionList() const;
 	void SelectAll();
 	void InvertSelection();
-	int32 SelectMatchingEntries(const BMessage*);
+	int32_t SelectMatchingEntries(const BMessage*);
 	void ShowSelectionWindow();
 	void ClearSelection();
 	void ShowSelection(bool);
-	void AddRemovePoseFromSelection(BPose* pose, int32 index,
+	void AddRemovePoseFromSelection(BPose* pose, int32_t index,
 		bool select);
 
 	BLooper* SelectionHandler();
@@ -330,16 +330,16 @@ public:
 	BObjectList<BString>*MimeTypesInSelection();
 
 	// pose selection
-	void SelectPose(BPose*, int32 index, bool scrollIntoView = true);
-	void AddPoseToSelection(BPose*, int32 index,
+	void SelectPose(BPose*, int32_t index, bool scrollIntoView = true);
+	void AddPoseToSelection(BPose*, int32_t index,
 		bool scrollIntoView = true);
 	void RemovePoseFromSelection(BPose*);
 	void SelectPoseAtLocation(BPoint);
-	void SelectPoses(int32 start, int32 end);
-	void MoveOrChangePoseSelection(int32 to);
+	void SelectPoses(int32_t start, int32_t end);
+	void MoveOrChangePoseSelection(int32_t to);
 
 	// pose handling
-	void ScrollIntoView(BPose* pose, int32 index);
+	void ScrollIntoView(BPose* pose, int32_t index);
 	void ScrollIntoView(BRect poseRect);
 	void SetActivePose(BPose*);
 	BPose* ActivePose() const;
@@ -355,7 +355,7 @@ public:
 	// clipboard handling for poses
 	inline bool HasPosesInClipboard();
 	inline void SetHasPosesInClipboard(bool hasPoses);
-	void SetPosesClipboardMode(uint32 clipboardMode);
+	void SetPosesClipboardMode(uint32_t clipboardMode);
 	void UpdatePosesClipboardModeFromClipboard(
 		BMessage* clipboardReport = NULL);
 
@@ -365,8 +365,8 @@ public:
 
 	// access for mime types represented in the pose view
 	void AddMimeType(const char* mimeType);
-	const char* MimeTypeAt(int32 index);
-	int32 CountMimeTypes();
+	const char* MimeTypeAt(int32_t index);
+	int32_t CountMimeTypes();
 	void RefreshMimeTypeList();
 
 	// drag&drop handling
@@ -383,7 +383,7 @@ public:
 		bool relativeLink = false);
 	static void MoveSelectionInto(Model* destFolder,
 		BContainerWindow* srcWindow, BContainerWindow* destWindow,
-		uint32 buttons, BPoint loc, bool forceCopy,
+		uint32_t buttons, BPoint loc, bool forceCopy,
 		bool forceMove = false, bool createLink = false,
 		bool relativeLink = false, BPoint clickPoint = BPoint(0, 0),
 		bool pinToGrid = false);
@@ -400,14 +400,14 @@ public:
 		// hook for spring loaded nav-menus
 
 	// scripting
-	virtual BHandler* ResolveSpecifier(BMessage* message, int32 index,
-		BMessage* specifier, int32 form, const char* property);
+	virtual BHandler* ResolveSpecifier(BMessage* message, int32_t index,
+		BMessage* specifier, int32_t form, const char* property);
 	virtual status_t GetSupportedSuites(BMessage*);
 
 	// string width calls that use local width caches, faster than using
 	// the general purpose BView::StringWidth
 	float StringWidth(const char*) const;
-	float StringWidth(const char*, int32) const;
+	float StringWidth(const char*, int32_t) const;
 		// deliberately hide the BView StringWidth here - this makes it
 		// easy to have the right StringWidth picked up by
 		// template instantiation, as used by WidgetAttributeText
@@ -457,15 +457,15 @@ protected:
 
 	// scripting handlers
 	virtual bool HandleScriptingMessage(BMessage* message);
-	bool SetProperty(BMessage* message, BMessage* specifier, int32 form,
+	bool SetProperty(BMessage* message, BMessage* specifier, int32_t form,
 		const char* property, BMessage* reply);
-	bool GetProperty(BMessage*, int32, const char*, BMessage*);
-	bool CreateProperty(BMessage* message, BMessage* specifier, int32,
+	bool GetProperty(BMessage*, int32_t, const char*, BMessage*);
+	bool CreateProperty(BMessage* message, BMessage* specifier, int32_t,
 		const char*, BMessage* reply);
-	bool ExecuteProperty(BMessage* specifier, int32, const char*,
+	bool ExecuteProperty(BMessage* specifier, int32_t, const char*,
 		BMessage* reply);
-	bool CountProperty(BMessage*, int32, const char*, BMessage*);
-	bool DeleteProperty(BMessage*, int32, const char*, BMessage*);
+	bool CountProperty(BMessage*, int32_t, const char*, BMessage*);
+	bool DeleteProperty(BMessage*, int32_t, const char*, BMessage*);
 
 	void ClearPoses();
 		// remove all the current poses from the view
@@ -474,20 +474,20 @@ protected:
 	void ReadPoseInfo(Model*, PoseInfo*);
 	ExtendedPoseInfo* ReadExtendedPoseInfo(Model*);
 
-	void _CheckPoseSortOrder(PoseList* list, BPose*, int32 index);
+	void _CheckPoseSortOrder(PoseList* list, BPose*, int32_t index);
 
 	// pose creation
 	BPose* EntryCreated(const node_ref*, const node_ref*, const char*,
-		int32* index = 0);
+		int32_t* index = 0);
 
 	void AddPoseToList(PoseList* list, bool visibleList,
 		bool insertionSort, BPose* pose, BRect&viewBounds,
-		float& listViewScrollBy, bool forceDraw, int32* indexPtr = NULL);
+		float& listViewScrollBy, bool forceDraw, int32_t* indexPtr = NULL);
 	BPose* CreatePose(Model*, PoseInfo*, bool insertionSort = true,
-		int32* index = 0, BRect* boundsPointer = 0, bool forceDraw = true);
+		int32_t* index = 0, BRect* boundsPointer = 0, bool forceDraw = true);
 	virtual void CreatePoses(Model**models, PoseInfo* poseInfoArray,
-		int32 count, BPose** resultingPoses, bool insertionSort = true,
-		int32* lastPoseIndexPointer = 0, BRect* boundsPointer = 0,
+		int32_t count, BPose** resultingPoses, bool insertionSort = true,
+		int32_t* lastPoseIndexPointer = 0, BRect* boundsPointer = 0,
 		bool forceDraw = false);
 	virtual bool ShouldShowPose(const Model*, const PoseInfo*);
 		// filter, subclasses override to control which poses show up
@@ -515,14 +515,14 @@ protected:
 	virtual void AddTrashPoses();
 
 	virtual bool DeletePose(const node_ref*, BPose* pose = NULL,
-		int32 index = 0);
+		int32_t index = 0);
 	virtual void DeleteSymLinkPoseTarget(const node_ref* itemNode,
-		BPose* pose, int32 index);
+		BPose* pose, int32_t index);
 		// the pose itself wasn't deleted but it's target node was - the
 		// pose must be a symlink
 	static void PoseHandleDeviceUnmounted(BPose* pose, Model* model,
-		int32 index, BPoseView* poseView, dev_t device);
-	static void RemoveNonBootDesktopModels(BPose*, Model* model, int32,
+		int32_t index, BPoseView* poseView, dev_t device);
+	static void RemoveNonBootDesktopModels(BPose*, Model* model, int32_t,
 		BPoseView* poseView, dev_t);
 
 	// pose placement
@@ -540,32 +540,32 @@ protected:
 	BPoint PinToGrid(BPoint, BPoint grid, BPoint offset) const;
 
 	// zombie pose handling
-	Model* FindZombie(const node_ref*, int32* index = 0);
-	BPose* ConvertZombieToPose(Model* zombie, int32 index);
+	Model* FindZombie(const node_ref*, int32_t* index = 0);
+	BPose* ConvertZombieToPose(Model* zombie, int32_t index);
 
 	// pose handling
-	BRect CalcPoseRect(const BPose*, int32 index,
+	BRect CalcPoseRect(const BPose*, int32_t index,
 		bool firstColumnOnly = false) const;
 	BRect CalcPoseRectIcon(const BPose*) const;
-	BRect CalcPoseRectList(const BPose*, int32 index,
+	BRect CalcPoseRectList(const BPose*, int32_t index,
 		bool firstColumnOnly = false) const;
-	void DrawPose(BPose*, int32 index, bool fullDraw = true);
+	void DrawPose(BPose*, int32_t index, bool fullDraw = true);
 	void DrawViewCommon(const BRect&updateRect);
 
 	// pose list handling
-	int32 BSearchList(PoseList* poseList, const BPose*, int32* index,
-		int32 oldIndex);
-	void InsertPoseAfter(BPose* pose, int32* index, int32 orientation,
+	int32_t BSearchList(PoseList* poseList, const BPose*, int32_t* index,
+		int32_t oldIndex);
+	void InsertPoseAfter(BPose* pose, int32_t* index, int32_t orientation,
 		BRect* invalidRect);
 		// does a CopyBits to scroll poses making room for a new pose,
 		// returns rectangle that needs invalidating
 	void CloseGapInList(BRect* invalidRect);
-	int32 FirstIndexAtOrBelow(int32 y, bool constrainIndex = true) const;
+	int32_t FirstIndexAtOrBelow(int32_t y, bool constrainIndex = true) const;
 	void AddToVSList(BPose*);
-	int32 RemoveFromVSList(const BPose*);
-	BPose* FindNearbyPose(char arrow, int32* index);
-	BPose* FindBestMatch(int32* index);
-	BPose* FindNextMatch(int32* index, bool reverse = false);
+	int32_t RemoveFromVSList(const BPose*);
+	BPose* FindNearbyPose(char arrow, int32_t* index);
+	BPose* FindBestMatch(int32_t* index);
+	BPose* FindNextMatch(int32_t* index, bool reverse = false);
 
 	// node monitoring calls
 	virtual void StartWatching();
@@ -577,8 +577,8 @@ protected:
 		// query pose view, etc. however we need to call WatchNewNode
 		// from inside AddPosesTask while the window is unlocked - we
 		// have to use the static and a cached messenger and masks.
-	static status_t WatchNewNode(const node_ref*, uint32, BMessenger);
-	virtual uint32 WatchNewNodeMask();
+	static status_t WatchNewNode(const node_ref*, uint32_t, BMessenger);
+	virtual uint32_t WatchNewNodeMask();
 		// override to change different watch modes for query pose
 		// view, etc.
 
@@ -589,9 +589,9 @@ protected:
 		// iterates through each pose in current selectiond in the source
 		// window of the current drag message; locks the window
 		// add const version
-	BRect GetDragRect(int32 clickedPoseIndex);
+	BRect GetDragRect(int32_t clickedPoseIndex);
 	BBitmap* MakeDragBitmap(BRect dragRect, BPoint clickedPoint,
-		int32 clickedPoseIndex, BPoint&offset);
+		int32_t clickedPoseIndex, BPoint&offset);
 	static bool FindDragNDropAction(const BMessage* dragMessage,
 		bool&canCopy, bool&canMove, bool&canLink, bool&canErase);
 
@@ -605,7 +605,7 @@ protected:
 		BPoint dropPoint = BPoint(0, 0));
 
 	// opening files, lanunching
-	void OpenSelectionCommon(BPose*, int32*, bool);
+	void OpenSelectionCommon(BPose*, int32_t*, bool);
 		// used by OpenSelection and OpenSelectionUsing
 	static void LaunchAppWithSelection(Model*, const BMessage*,
 		bool checkTypes = true);
@@ -617,8 +617,8 @@ protected:
 	virtual void MetaMimeChanged(const char*, const char*);
 
 	// click handling
-	bool WasDoubleClick(const BPose*, BPoint point, int32 buttons);
-	bool WasClickInPath(const BPose*, int32 index,
+	bool WasDoubleClick(const BPose*, BPoint point, int32_t buttons);
+	bool WasClickInPath(const BPose*, int32_t index,
 		BPoint mouseLocation) const;
 
 	// selection
@@ -666,7 +666,7 @@ protected:
 
 	// typeahead filtering
 	void EnsurePoseUnselected(BPose* pose);
-	void RemoveFilteredPose(BPose* pose, int32 index);
+	void RemoveFilteredPose(BPose* pose, int32_t index);
 	void FilterChanged();
 	void UpdateAfterFilterChange();
 	bool FilterPose(BPose* pose);
@@ -678,7 +678,7 @@ protected:
 	// misc
 	BList* GetDropPointList(BPoint dropPoint, BPoint startPoint,
 		const PoseList*, bool sourceInListMode, bool dropOnGrid) const;
-	void SendSelectionAsRefs(uint32 what, bool onlyQueries = false);
+	void SendSelectionAsRefs(uint32_t what, bool onlyQueries = false);
 	void MoveListToTrash(BObjectList<entry_ref>*, bool selectNext,
 		bool deleteDirectly);
 	void Delete(BObjectList<entry_ref>*, bool selectNext, bool askUser);
@@ -724,7 +724,7 @@ protected:
 	BPose* fAlreadySelectedDropTarget;
 	BLooper* fSelectionHandler;
 	BPoint fLastClickPoint;
-	int32 fLastClickButtons;
+	int32_t fLastClickButtons;
 	const BPose* fLastClickedPose;
 	BPoint fLastLeftTop;
 	BRect fLastExtent;
@@ -734,7 +734,7 @@ protected:
 	BPoint fOffset;
 	BPoint fHintLocation;
 	float fAutoScrollInc;
-	int32 fAutoScrollState;
+	int32_t fAutoScrollState;
 	std::set<thread_id> fAddPosesThreads;
 	bool fWidgetTextOutline;
 	const BPose* fSelectionPivotPose;
@@ -780,8 +780,8 @@ protected:
 	bool fFiltering : 1;
 
 	BObjectList<BString> fFilterStrings;
-	int32 fLastFilterStringCount;
-	int32 fLastFilterStringLength;
+	int32_t fLastFilterStringCount;
+	int32_t fLastFilterStringLength;
 
 	BRect fStartFrame;
 
@@ -832,7 +832,7 @@ private:
 };
 
 
-extern bool ClearViewOriginOne(const char* name, uint32 type, off_t size, void* data,
+extern bool ClearViewOriginOne(const char* name, uint32_t type, off_t size, void* data,
 	void* params);
 
 
@@ -867,7 +867,7 @@ BPoseView::IconPoseHeight() const
 }
 
 
-inline uint32 BPoseView::IconSizeInt() const
+inline uint32_t BPoseView::IconSizeInt() const
 {
 	return fViewState->IconSize();
 }
@@ -928,7 +928,7 @@ inline bool BPoseView::StateNeedsSaving()
 }
 
 
-inline uint32 BPoseView::ViewMode() const
+inline uint32_t BPoseView::ViewMode() const
 {
 	return fViewState->ViewMode();
 }
@@ -979,25 +979,25 @@ inline bool BPoseView::IsDesktopView() const
 }
 
 
-inline uint32 BPoseView::PrimarySort() const
+inline uint32_t BPoseView::PrimarySort() const
 {
 	return fViewState->PrimarySort();
 }
 
 
-inline uint32 BPoseView::PrimarySortType() const
+inline uint32_t BPoseView::PrimarySortType() const
 {
 	return fViewState->PrimarySortType();
 }
 
 
-inline uint32 BPoseView::SecondarySort() const
+inline uint32_t BPoseView::SecondarySort() const
 {
 	return fViewState->SecondarySort();
 }
 
 
-inline uint32 BPoseView::SecondarySortType() const
+inline uint32_t BPoseView::SecondarySortType() const
 {
 	return fViewState->SecondarySortType();
 }
@@ -1033,33 +1033,33 @@ inline void BPoseView::ClearExtent()
 }
 
 
-inline int32 BPoseView::CountColumns() const
+inline int32_t BPoseView::CountColumns() const
 {
 	return fColumnList->CountItems();
 }
 
 
-inline int32 BPoseView::IndexOfColumn(const BColumn* column) const
+inline int32_t BPoseView::IndexOfColumn(const BColumn* column) const
 {
 	return fColumnList->IndexOf(const_cast<BColumn*>(column));
 }
 
 
-inline int32 BPoseView::IndexOfPose(const BPose* pose) const
+inline int32_t BPoseView::IndexOfPose(const BPose* pose) const
 {
 	return CurrentPoseList()->IndexOf(pose);
 }
 
 
 inline BPose*
-BPoseView::PoseAtIndex(int32 index) const
+BPoseView::PoseAtIndex(int32_t index) const
 {
 	return CurrentPoseList()->ItemAt(index);
 }
 
 
 inline BColumn*
-BPoseView::ColumnAt(int32 index) const
+BPoseView::ColumnAt(int32_t index) const
 {
 	return fColumnList->ItemAt(index);
 }
@@ -1079,7 +1079,7 @@ BPoseView::LastColumn() const
 }
 
 
-inline int32 BPoseView::CountItems() const
+inline int32_t BPoseView::CountItems() const
 {
 	return CurrentPoseList()->CountItems();
 }
@@ -1167,21 +1167,21 @@ BPoseView::RefFilter() const
 
 
 inline BPose*
-BPoseView::FindPose(const Model* model, int32* index) const
+BPoseView::FindPose(const Model* model, int32_t* index) const
 {
 	return CurrentPoseList()->FindPose(model, index);
 }
 
 
 inline BPose*
-BPoseView::FindPose(const node_ref* node, int32* index) const
+BPoseView::FindPose(const node_ref* node, int32_t* index) const
 {
 	return CurrentPoseList()->FindPose(node, index);
 }
 
 
 inline BPose*
-BPoseView::FindPose(const entry_ref* entry, int32* index) const
+BPoseView::FindPose(const entry_ref* entry, int32_t* index) const
 {
 	return CurrentPoseList()->FindPose(entry, index);
 }
@@ -1210,7 +1210,7 @@ template<class Param1>
 void EachTextWidget(BPose* pose, BPoseView* poseView,
 	void (*func)(BTextWidget*, BPose*, BPoseView*, BColumn*, Param1), Param1 p1)
 {
-	for (int32 index = 0; ;index++) {
+	for (int32_t index = 0; ;index++) {
 		BColumn* column = poseView->ColumnAt(index);
 		if (column == NULL)
 			break;
@@ -1227,7 +1227,7 @@ void EachTextWidget(BPose* pose, BPoseView* poseView,
 	void (*func)(BTextWidget*, BPose*, BPoseView*, BColumn*,
 	Param1, Param2), Param1 p1, Param2 p2)
 {
-	for (int32 index = 0; ;index++) {
+	for (int32_t index = 0; ;index++) {
 		BColumn* column = poseView->ColumnAt(index);
 		if (column == NULL)
 			break;
@@ -1245,7 +1245,7 @@ WhileEachTextWidget(BPose* pose, BPoseView* poseView,
 	Result (*func)(BTextWidget*, BPose*, BPoseView*, BColumn*,
 	Param1, Param2), Param1 p1, Param2 p2)
 {
-	for (int32 index = 0; ;index++) {
+	for (int32_t index = 0; ;index++) {
 		BColumn* column = poseView->ColumnAt(index);
 		if (column == NULL)
 			break;

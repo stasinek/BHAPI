@@ -19,7 +19,7 @@ namespace BPrivate {
 class PlainTextCatalog : public HashMapCatalog {
 	public:
 		PlainTextCatalog(const entry_ref& owner, const char *language,
-			uint32 fingerprint);
+			uint32_t fingerprint);
 				// constructor for normal use
 		PlainTextCatalog(const char *path, const char *signature,
 			const char *language);
@@ -34,7 +34,7 @@ class PlainTextCatalog : public HashMapCatalog {
 		status_t WriteToFile(const char *path = NULL);
 
 		static BCatalogData *Instantiate(const entry_ref &signature,
-			const char *language, uint32 fingerprint);
+			const char *language, uint32_t fingerprint);
 
 		static const char *kCatMimeType;
 

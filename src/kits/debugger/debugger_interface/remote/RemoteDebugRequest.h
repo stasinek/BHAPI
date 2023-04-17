@@ -169,9 +169,9 @@ public:
 								RemoteDebugSetTeamFlagsRequest();
 	virtual						~RemoteDebugSetTeamFlagsRequest();
 
-			void				SetTo(int32 flags);
+			void				SetTo(int32_t flags);
 
-			int32				Flags() const	{ return fFlags; }
+			int32_t				Flags() const	{ return fFlags; }
 
 	virtual	remote_request_type	Type() const;
 
@@ -182,7 +182,7 @@ protected:
 									BMessage& _output) const;
 
 private:
-			int32				fFlags;
+			int32_t				fFlags;
 };
 
 
@@ -191,10 +191,10 @@ public:
 								RemoteDebugSetThreadFlagsRequest();
 	virtual						~RemoteDebugSetThreadFlagsRequest();
 
-			void				SetTo(thread_id thread, int32 flags);
+			void				SetTo(thread_id thread, int32_t flags);
 
 			thread_id			Thread() const	{ return fThread; }
-			int32				Flags() const	{ return fFlags; }
+			int32_t				Flags() const	{ return fFlags; }
 
 	virtual	remote_request_type	Type() const;
 
@@ -206,7 +206,7 @@ protected:
 
 private:
 			thread_id			fThread;
-			int32				fFlags;
+			int32_t				fFlags;
 };
 
 

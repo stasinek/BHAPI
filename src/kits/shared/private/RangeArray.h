@@ -42,7 +42,7 @@ public:
 	inline						RangeArray();
 	inline						RangeArray(const RangeArray<Value>& other);
 
-	inline	int32				CountRanges() const
+	inline	int32_t				CountRanges() const
 									{ return fRanges.Count(); }
 	inline	bool				IsEmpty() const
 									{ return fRanges.IsEmpty(); }
@@ -55,7 +55,7 @@ public:
 	inline	bool				RemoveRange(const RangeType& range);
 			bool				RemoveRange(const Value& offset,
 									const Value& size);
-	inline	bool				RemoveRanges(int32 index, int32 count = 1);
+	inline	bool				RemoveRanges(int32_t index, int32_t count = 1);
 
 	inline	void				Clear()			{ fRanges.Clear(); }
 	inline	void				MakeEmpty()		{ fRanges.MakeEmpty(); }
@@ -64,18 +64,18 @@ public:
 			bool				IntersectsWith(const Value& offset,
 									const Value& size) const;
 
-			int32				InsertionIndex(const Value& offset) const;
+			int32_t				InsertionIndex(const Value& offset) const;
 
-	inline	const RangeType&	RangeAt(int32 index) const
+	inline	const RangeType&	RangeAt(int32_t index) const
 									{ return fRanges.ElementAt(index); }
 
-	inline	const RangeType&	operator[](int32 index) const
+	inline	const RangeType&	operator[](int32_t index) const
 									{ return fRanges[index]; }
 
 	inline	RangeArray<Value>&	operator=(const RangeArray<Value>& other);
 
 private:
-	inline	 RangeType&			_RangeAt(int32 index)
+	inline	 RangeType&			_RangeAt(int32_t index)
 									{ return fRanges.ElementAt(index); }
 
 private:
@@ -119,13 +119,13 @@ bool RangeArray<Value>::AddRange(const Value& offset, const Value& size)
 	if (size == 0)
 		return true;
 
-	int32 index = InsertionIndex(offset);
+	int32_t index = InsertionIndex(offset);
 
 	// determine the last range the range intersects with/adjoins
 	Value endOffset = offset + size;
-	int32 endIndex = index;
+	int32_t endIndex = index;
 		// index after the last affected range
-	int32 count = CountRanges();
+	int32_t count = CountRanges();
 	while (endIndex < count && RangeAt(endIndex).offset <= endOffset)
 		endIndex++;
 
@@ -176,13 +176,13 @@ bool RangeArray<Value>::RemoveRange(const Value& offset, const Value& size)
 	if (size == 0)
 		return true;
 
-	int32 index = InsertionIndex(offset);
+	int32_t index = InsertionIndex(offset);
 
 	// determine the last range the range intersects with
 	Value endOffset = offset + size;
-	int32 endIndex = index;
+	int32_t endIndex = index;
 		// index after the last affected range
-	int32 count = CountRanges();
+	int32_t count = CountRanges();
 	while (endIndex < count && RangeAt(endIndex).offset < endOffset)
 		endIndex++;
 
@@ -195,8 +195,8 @@ bool RangeArray<Value>::RemoveRange(const Value& offset, const Value& size)
 	RangeType& firstRange = _RangeAt(index);
 	RangeType& lastRange = _RangeAt(endIndex - 1);
 
-	int32 firstRemoveIndex = firstRange.offset >= offset ? index : index + 1;
-	int32 endRemoveIndex = lastRange.EndOffset() <= endOffset
+	int32_t firstRemoveIndex = firstRange.offset >= offset ? index : index + 1;
+	int32_t endRemoveIndex = lastRange.EndOffset() <= endOffset
 		? endIndex : endIndex - 1;
 
 	if (firstRemoveIndex > endRemoveIndex) {
@@ -227,7 +227,7 @@ bool RangeArray<Value>::RemoveRange(const Value& offset, const Value& size)
 
 
 template<typename Value>
-inline bool RangeArray<Value>::RemoveRanges(int32 index, int32 count)
+inline bool RangeArray<Value>::RemoveRanges(int32_t index, int32_t count)
 {
 	return fRanges.Remove(index, count);
 }
@@ -243,7 +243,7 @@ inline bool RangeArray<Value>::IntersectsWith(const RangeType& range) const
 template<typename Value>
 bool RangeArray<Value>::IntersectsWith(const Value& offset, const Value& size) const
 {
-	int32 index = InsertionIndex(offset);
+	int32_t index = InsertionIndex(offset);
 	return index < CountRanges() && RangeAt(index).offset < offset + size;
 }
 
@@ -258,14 +258,14 @@ bool RangeArray<Value>::IntersectsWith(const Value& offset, const Value& size) c
 	\return The insertion index for a range starting at \a offset.
 */
 template<typename Value>
-int32 RangeArray<Value>::InsertionIndex(const Value& offset) const
+int32_t RangeArray<Value>::InsertionIndex(const Value& offset) const
 {
 	// binary search the index
-	int32 lower = 0;
-	int32 upper = CountRanges();
+	int32_t lower = 0;
+	int32_t upper = CountRanges();
 
 	while (lower < upper) {
-		int32 mid = (lower + upper) / 2;
+		int32_t mid = (lower + upper) / 2;
 		const RangeType& range = RangeAt(mid);
 		if (offset >= range.EndOffset())
 			lower = mid + 1;

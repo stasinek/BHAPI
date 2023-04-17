@@ -102,11 +102,11 @@
 #define TERMINATOR -1
 
 
-static uint32
-radix_bitmap_init(radix_node *node, uint32 radix, uint32 skip, uint32 slots)
+static uint32_t
+radix_bitmap_init(radix_node *node, uint32_t radix, uint32_t skip, uint32_t slots)
 {
-	uint32 index = 0;
-	int32 big_hint = radix < slots ? radix : slots;
+	uint32_t index = 0;
+	int32_t big_hint = radix < slots ? radix : slots;
 
 	// leaf node
 	if (radix == BITMAP_RADIX) {
@@ -127,9 +127,9 @@ radix_bitmap_init(radix_node *node, uint32 radix, uint32 skip, uint32 slots)
 	}
 
 	radix /= NODE_RADIX;
-	uint32 next_skip = skip / NODE_RADIX;
+	uint32_t next_skip = skip / NODE_RADIX;
 
-	uint32 i;
+	uint32_t i;
 	for (i = 1; i <= skip; i += next_skip) {
 		if (slots >= radix) {
 			index = i + radix_bitmap_init(node ? &node[i] : NULL,
@@ -154,10 +154,10 @@ radix_bitmap_init(radix_node *node, uint32 radix, uint32 skip, uint32 slots)
 
 
 radix_bitmap *
-radix_bitmap_create(uint32 slots)
+radix_bitmap_create(uint32_t slots)
 {
-	uint32 radix = BITMAP_RADIX;
-	uint32 skip = 0;
+	uint32_t radix = BITMAP_RADIX;
+	uint32_t skip = 0;
 
 	while (radix < slots) {
 		radix *= NODE_RADIX;
@@ -194,13 +194,13 @@ radix_bitmap_destroy(radix_bitmap *bmp)
 
 
 static radix_slot_t
-radix_leaf_alloc(radix_node *leaf, radix_slot_t slotIndex, int32 count)
+radix_leaf_alloc(radix_node *leaf, radix_slot_t slotIndex, int32_t count)
 {
-	if (count <= (int32)BITMAP_RADIX) {
+	if (count <= (int32_t)BITMAP_RADIX) {
 		bitmap_t bitmap = ~leaf->u.bitmap;
-		uint32 n = BITMAP_RADIX - count;
+		uint32_t n = BITMAP_RADIX - count;
 		bitmap_t mask = (bitmap_t)-1 >> n;
-		for (uint32 j = 0; j <= n; j++) {
+		for (uint32_t j = 0; j <= n; j++) {
 			if ((bitmap & mask) == mask) {
 				leaf->u.bitmap |= mask;
 				return (slotIndex + j);
@@ -217,13 +217,13 @@ radix_leaf_alloc(radix_node *leaf, radix_slot_t slotIndex, int32 count)
 
 
 static radix_slot_t
-radix_node_alloc(radix_node *node, radix_slot_t slotIndex, int32 count,
-		uint32 radix, uint32 skip)
+radix_node_alloc(radix_node *node, radix_slot_t slotIndex, int32_t count,
+		uint32_t radix, uint32_t skip)
 {
-	uint32 next_skip = skip / NODE_RADIX;
+	uint32_t next_skip = skip / NODE_RADIX;
 	radix /= NODE_RADIX;
 
-	for (uint32 i = 1; i <= skip; i += next_skip) {
+	for (uint32_t i = 1; i <= skip; i += next_skip) {
 		if (node[i].big_hint == TERMINATOR)  // TERMINATOR
 			break;
 
@@ -253,7 +253,7 @@ radix_node_alloc(radix_node *node, radix_slot_t slotIndex, int32 count,
 
 
 radix_slot_t
-radix_bitmap_alloc(radix_bitmap *bmp, uint32 count)
+radix_bitmap_alloc(radix_bitmap *bmp, uint32_t count)
 {
 	radix_slot_t addr = RADIX_SLOT_NONE;
 
@@ -270,9 +270,9 @@ radix_bitmap_alloc(radix_bitmap *bmp, uint32 count)
 
 
 static void
-radix_leaf_dealloc(radix_node *leaf, radix_slot_t slotIndex, uint32 count)
+radix_leaf_dealloc(radix_node *leaf, radix_slot_t slotIndex, uint32_t count)
 {
-	uint32 n = slotIndex & (BITMAP_RADIX - 1);
+	uint32_t n = slotIndex & (BITMAP_RADIX - 1);
 	bitmap_t mask = ((bitmap_t)-1 >> (BITMAP_RADIX - count - n))
 		& ((bitmap_t)-1 << n);
 	leaf->u.bitmap &= ~mask;
@@ -282,20 +282,20 @@ radix_leaf_dealloc(radix_node *leaf, radix_slot_t slotIndex, uint32 count)
 
 
 static void
-radix_node_dealloc(radix_node *node, radix_slot_t slotIndex, uint32 count,
-		uint32 radix, uint32 skip, radix_slot_t index)
+radix_node_dealloc(radix_node *node, radix_slot_t slotIndex, uint32_t count,
+		uint32_t radix, uint32_t skip, radix_slot_t index)
 {
 	node->u.available += count;
 
-	uint32 next_skip = skip / NODE_RADIX;
+	uint32_t next_skip = skip / NODE_RADIX;
 	radix /= NODE_RADIX;
 
-	uint32 i = (slotIndex - index) / radix;
+	uint32_t i = (slotIndex - index) / radix;
 	index += i * radix;
 	i = i * next_skip + 1;
 
 	while (i <= skip && index < slotIndex + count) {
-		uint32 v = index + radix - slotIndex;
+		uint32_t v = index + radix - slotIndex;
 		if (v > count)
 			v = count;
 
@@ -317,7 +317,7 @@ radix_node_dealloc(radix_node *node, radix_slot_t slotIndex, uint32 count,
 
 
 void
-radix_bitmap_dealloc(radix_bitmap *bmp, radix_slot_t slotIndex, uint32 count)
+radix_bitmap_dealloc(radix_bitmap *bmp, radix_slot_t slotIndex, uint32_t count)
 {
 	if (bmp->radix == BITMAP_RADIX)
 		radix_leaf_dealloc(bmp->root, slotIndex, count);

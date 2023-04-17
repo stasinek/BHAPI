@@ -79,7 +79,7 @@ status_t SupportingApps::GetSupportingApps(const char *type, BMessage *apps)
 			if (mime.IsSupertypeOnly()) {
 				// Add the apps that support this supertype (plus their count)
 				std::set<std::string> &superApps = fSupportingApps[type];
-				int32 count = 0;
+				int32_t count = 0;
 				std::set<std::string>::const_iterator i;
 				for (i = superApps.begin(); i != superApps.end() && !err; i++) {
 					err = apps->AddString(kApplicationsField, (*i).c_str());
@@ -90,7 +90,7 @@ status_t SupportingApps::GetSupportingApps(const char *type, BMessage *apps)
 			} else {
 				// Add the apps that support this subtype (plus their count)
 				std::set<std::string> &subApps = fSupportingApps[type];
-				int32 count = 0;
+				int32_t count = 0;
 				std::set<std::string>::const_iterator i;
 				for (i = subApps.begin(); i != subApps.end() && !err; i++) {
 					err = apps->AddString(kApplicationsField, (*i).c_str());
@@ -171,7 +171,7 @@ status_t SupportingApps::SetSupportedTypes(const char *app, const BMessage *type
 		// each type.
 		newTypes.clear();
 		const char *type;
-		for (int32 i = 0; types->FindString(kTypesField, i, &type) == B_OK;
+		for (int32_t i = 0; types->FindString(kTypesField, i, &type) == B_OK;
 				i++) {
 			newTypes.insert(type);
 			AddSupportingApp(type, app);

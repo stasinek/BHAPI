@@ -22,7 +22,7 @@ public:
 							~ArchUARTPL011();
 
 			void			InitEarly();
-			void			InitPort(uint32 baud);
+			void			InitPort(uint32_t baud);
 
 			void			Enable();
 			void			Disable();
@@ -34,8 +34,8 @@ public:
 			void			FlushRx();
 
 private:
-			void			Out32(int reg, uint32 value);
-			uint32			In32(int reg);
+			void			Out32(int reg, uint32_t value);
+			uint32_t			In32(int reg);
 	virtual	void			Barrier();
 };
 

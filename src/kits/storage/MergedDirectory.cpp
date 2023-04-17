@@ -106,7 +106,7 @@ status_t BMergedDirectory::GetNextEntry(BEntry* entry, bool traverse)
 status_t BMergedDirectory::GetNextRef(entry_ref* ref)
 {
 	BPrivate::Storage::LongDirEntry entry;
-	int32 result = GetNextDirents(&entry, sizeof(entry), 1);
+	int32_t result = GetNextDirents(&entry, sizeof(entry), 1);
 	if (result < 0)
 		return result;
 	if (result == 0)
@@ -118,14 +118,14 @@ status_t BMergedDirectory::GetNextRef(entry_ref* ref)
 }
 
 
-int32 BMergedDirectory::GetNextDirents(struct dirent* direntBuffer, size_t bufferSize,
-	int32 maxEntries)
+int32_t BMergedDirectory::GetNextDirents(struct dirent* direntBuffer, size_t bufferSize,
+	int32_t maxEntries)
 {
 	if (maxEntries <= 0)
 		return B_BAD_VALUE;
 
 	while (fDirectoryIndex < fDirectories.CountItems()) {
-		int32 count = fDirectories.ItemAt(fDirectoryIndex)->GetNextDirents(
+		int32_t count = fDirectories.ItemAt(fDirectoryIndex)->GetNextDirents(
 			direntBuffer, bufferSize, 1);
 		if (count < 0)
 			return count;
@@ -171,7 +171,7 @@ int32 BMergedDirectory::GetNextDirents(struct dirent* direntBuffer, size_t buffe
 
 status_t BMergedDirectory::Rewind()
 {
-	for (int32 i = 0; BDirectory* directory = fDirectories.ItemAt(i); i++)
+	for (int32_t i = 0; BDirectory* directory = fDirectories.ItemAt(i); i++)
 		directory->Rewind();
 
 	if (fVisitedEntries != NULL)
@@ -182,9 +182,9 @@ status_t BMergedDirectory::Rewind()
 }
 
 
-int32 BMergedDirectory::CountEntries()
+int32_t BMergedDirectory::CountEntries()
 {
-	int32 count = 0;
+	int32_t count = 0;
 	char buffer[sizeof(dirent) + B_FILE_NAME_LENGTH];
 	while (GetNextDirents((dirent*)&buffer, sizeof(buffer), 1) == 1)
 		count++;
@@ -192,8 +192,8 @@ int32 BMergedDirectory::CountEntries()
 }
 
 
-bool BMergedDirectory::ShallPreferFirstEntry(const entry_ref& entry1, int32 index1,
-	const entry_ref& entry2, int32 index2)
+bool BMergedDirectory::ShallPreferFirstEntry(const entry_ref& entry1, int32_t index1,
+	const entry_ref& entry2, int32_t index2)
 {
 	// That's basically B_ALWAYS_FIRST semantics. A derived class will implement
 	// the desired semantics.
@@ -207,10 +207,10 @@ void BMergedDirectory::_FindBestEntry(dirent* direntBuffer)
 		direntBuffer->d_name);
 	if (bestEntry.name == NULL)
 		return;
-	int32 bestIndex = fDirectoryIndex;
+	int32_t bestIndex = fDirectoryIndex;
 
-	int32 directoryCount = fDirectories.CountItems();
-	for (int32 i = fDirectoryIndex + 1; i < directoryCount; i++) {
+	int32_t directoryCount = fDirectories.CountItems();
+	for (int32_t i = fDirectoryIndex + 1; i < directoryCount; i++) {
 		BEntry entry(fDirectories.ItemAt(i), bestEntry.name);
 		struct stat st;
 		entry_ref ref;

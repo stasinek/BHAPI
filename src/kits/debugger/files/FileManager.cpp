@@ -260,7 +260,7 @@ private:
 	{
 		// construct the located entry path
 		BString locatedEntryPath(locatedDirectoryPath);
-		int32 pathLength = locatedEntryPath.Length();
+		int32_t pathLength = locatedEntryPath.Length();
 		if (pathLength >= 1 && locatedEntryPath[pathLength - 1] != '/')
 			locatedEntryPath << '/';
 		locatedEntryPath << entry->Name();
@@ -397,7 +397,7 @@ private:
 	{
 		BString normalizedPath;
 		char* buffer = normalizedPath.LockBuffer(path.Length());
-		int32 outIndex = 0;
+		int32_t outIndex = 0;
 		const char* remaining = path.String();
 
 		while (*remaining != '\0') {
@@ -455,7 +455,7 @@ private:
 		BString& _name)
 	{
 		// handle single component (including root dir) cases
-		int32 lastSlash = path.FindLast('/');
+		int32_t lastSlash = path.FindLast('/');
 		if (lastSlash < 0 || path.Length() == 1) {
 			_directory = (const char*)NULL;
 			_name = path;
@@ -719,7 +719,7 @@ status_t FileManager::LoadSourceFile(LocatableFile* file, SourceFile*& _sourceFi
 status_t FileManager::LoadLocationMappings(TeamFileManagerSettings* settings)
 {
 	AutoLocker<FileManager> locker(this);
-	for (int32 i = 0; i < settings->CountSourceMappings(); i++) {
+	for (int32_t i = 0; i < settings->CountSourceMappings(); i++) {
 		BString sourcePath;
 		BString locatedPath;
 

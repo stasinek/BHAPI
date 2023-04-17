@@ -16,11 +16,11 @@ class BResources;
 
 
 struct version_info {
-	uint32	major;
-	uint32	middle;
-	uint32	minor;
-	uint32	variety;
-	uint32	internal;
+	uint32_t	major;
+	uint32_t	middle;
+	uint32_t	minor;
+	uint32_t	variety;
+	uint32_t	internal;
 	char	short_info[64];
 	char	long_info[256];
 };
@@ -63,8 +63,8 @@ public:
 			status_t			GetCatalogEntry(char* catalogEntry) const;
 			status_t			SetCatalogEntry(const char* catalogEntry);
 
-			status_t			GetAppFlags(uint32* flags) const;
-			status_t			SetAppFlags(uint32 flags);
+			status_t			GetAppFlags(uint32_t* flags) const;
+			status_t			SetAppFlags(uint32_t flags);
 			status_t			RemoveAppFlags();
 
 			status_t			GetSupportedTypes(BMessage* types) const;
@@ -120,11 +120,11 @@ private:
 
 			status_t			GetMetaMime(BMimeType* meta) const;
 
-			status_t			_ReadData(const char* name, int32 id,
+			status_t			_ReadData(const char* name, int32_t id,
 									type_code type, void* buffer,
 									size_t bufferSize, size_t& bytesRead,
 									void** allocatedBuffer = NULL) const;
-			status_t			_WriteData(const char* name, int32 id,
+			status_t			_WriteData(const char* name, int32_t id,
 									type_code type, const void* buffer,
 									size_t bufferSize, bool findID = false);
 			status_t			_RemoveData(const char* name, type_code type);
@@ -132,7 +132,7 @@ private:
 private:
 			BResources*			fResources;
 			info_location		fWhere;
-			uint32				_reserved[2];
+			uint32_t				_reserved[2];
 };
 
 

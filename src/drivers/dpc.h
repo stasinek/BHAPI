@@ -20,7 +20,7 @@ typedef void (*dpc_func) (void *arg);
 typedef struct {
 	module_info	info;
 
-	status_t	(*new_dpc_queue)(void **queue, const char *name, int32 priority);
+	status_t	(*new_dpc_queue)(void **queue, const char *name, int32_t priority);
 	status_t	(*delete_dpc_queue)(void *queue);
 	status_t	(*queue_dpc)(void *queue, dpc_func func, void *arg);
 } dpc_module_info;

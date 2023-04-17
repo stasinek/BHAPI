@@ -48,8 +48,8 @@ void BDiskDeviceList::MessageReceived(BMessage *message)
 	switch (message->what) {
 		case B_DEVICE_UPDATE:
 		{
-			uint32 event;
-			if (message->FindInt32("event", (int32*)&event) == B_OK) {
+			uint32_t event;
+			if (message->FindInt32("event", (int32_t*)&event) == B_OK) {
 				switch (event) {
 					case B_DEVICE_MOUNT_POINT_MOVED:
 						_MountPointMoved(message);
@@ -210,7 +210,7 @@ void BDiskDeviceList::Unlock()
 
 	\return The number of devices in the list.
 */
-int32 BDiskDeviceList::CountDevices() const
+int32_t BDiskDeviceList::CountDevices() const
 {
 	return fDevices.CountItems();
 }
@@ -225,7 +225,7 @@ int32 BDiskDeviceList::CountDevices() const
 			locked or \a index is out of range.
 */
 BDiskDevice *
-BDiskDeviceList::DeviceAt(int32 index) const
+BDiskDeviceList::DeviceAt(int32_t index) const
 {
 	return fDevices.ItemAt(index);
 }
@@ -247,7 +247,7 @@ BDiskDevice *
 BDiskDeviceList::VisitEachDevice(BDiskDeviceVisitor *visitor)
 {
 	if (visitor) {
-		for (int32 i = 0; BDiskDevice *device = DeviceAt(i); i++) {
+		for (int32_t i = 0; BDiskDevice *device = DeviceAt(i); i++) {
 			if (visitor->Visit(device))
 				return device;
 		}
@@ -272,7 +272,7 @@ BPartition *
 BDiskDeviceList::VisitEachPartition(BDiskDeviceVisitor *visitor)
 {
 	if (visitor) {
-		for (int32 i = 0; BDiskDevice *device = DeviceAt(i); i++) {
+		for (int32_t i = 0; BDiskDevice *device = DeviceAt(i); i++) {
 			if (BPartition *partition = device->VisitEachDescendant(visitor))
 				return partition;
 		}
@@ -301,7 +301,7 @@ BDiskDeviceList::VisitEachMountedPartition(BDiskDeviceVisitor *visitor)
 	if (visitor) {
 		struct MountedPartitionFilter : public PartitionFilter {
 			virtual ~MountedPartitionFilter() {};
-			virtual bool Filter(BPartition *partition, int32 level)
+			virtual bool Filter(BPartition *partition, int32_t level)
 				{ return partition->IsMounted(); }
 		} filter;
 		PartitionFilterVisitor filterVisitor(visitor, &filter);
@@ -331,7 +331,7 @@ BDiskDeviceList::VisitEachMountablePartition(BDiskDeviceVisitor *visitor)
 	if (visitor) {
 		struct MountablePartitionFilter : public PartitionFilter {
 			virtual ~MountablePartitionFilter() {};
-			virtual bool Filter(BPartition *partition, int32 level)
+			virtual bool Filter(BPartition *partition, int32_t level)
 				{ return partition->ContainsFileSystem(); }
 		} filter;
 		PartitionFilterVisitor filterVisitor(visitor, &filter);
@@ -350,7 +350,7 @@ BDiskDeviceList::VisitEachMountablePartition(BDiskDeviceVisitor *visitor)
 			locked or no device with ID \a id is in the list.
 */
 BDiskDevice *
-BDiskDeviceList::DeviceWithID(int32 id) const
+BDiskDeviceList::DeviceWithID(int32_t id) const
 {
 	IDFinderVisitor visitor(id);
 	return const_cast<BDiskDeviceList*>(this)->VisitEachDevice(&visitor);
@@ -366,7 +366,7 @@ BDiskDeviceList::DeviceWithID(int32 id) const
 			locked or no partition with ID \a id is in the list.
 */
 BPartition *
-BDiskDeviceList::PartitionWithID(int32 id) const
+BDiskDeviceList::PartitionWithID(int32_t id) const
 {
 	IDFinderVisitor visitor(id);
 	return const_cast<BDiskDeviceList*>(this)->VisitEachPartition(&visitor);
@@ -511,7 +511,7 @@ void BDiskDeviceList::PartitionRepaired(BPartition *partition)
 	\param partition The concerned partition.
 	\param event The event that occurred, if you are interested in it after all.
 */
-void BDiskDeviceList::PartitionChanged(BPartition *partition, uint32 event)
+void BDiskDeviceList::PartitionChanged(BPartition *partition, uint32_t event)
 {
 }
 
@@ -721,7 +721,7 @@ void BDiskDeviceList::_MediaChanged(BMessage *message)
 */
 void BDiskDeviceList::_DeviceAdded(BMessage *message)
 {
-	int32 id;
+	int32_t id;
 	if (message->FindInt32("device_id", &id) == B_OK && !DeviceWithID(id)) {
 		BDiskDevice *device = new(nothrow) BDiskDevice;
 		if (BDiskDeviceRoster().GetDeviceWithID(id, device) == B_OK) {
@@ -755,7 +755,7 @@ BDiskDevice *
 BDiskDeviceList::_FindDevice(BMessage *message)
 {
 	BDiskDevice *device = NULL;
-	int32 id;
+	int32_t id;
 	if (message->FindInt32("device_id", &id) == B_OK)
 		device = DeviceWithID(id);
 	return device;
@@ -771,7 +771,7 @@ BPartition *
 BDiskDeviceList::_FindPartition(BMessage *message)
 {
 	BPartition *partition = NULL;
-	int32 id;
+	int32_t id;
 	if (message->FindInt32("partition_id", &id) == B_OK)
 		partition = PartitionWithID(id);
 	return partition;

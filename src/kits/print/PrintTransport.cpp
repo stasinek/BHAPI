@@ -77,7 +77,7 @@ status_t PrintTransport::Open(BNode* printerFolder)
 		B_SYSTEM_ADDONS_DIRECTORY,
 	};
 	BPath path;
-	for (uint32 i = 0; i < sizeof(paths) / sizeof(paths[0]); ++i) {
+	for (uint32_t i = 0; i < sizeof(paths) / sizeof(paths[0]); ++i) {
 		if (find_directory(paths[i], &path) != B_OK)
 			continue;
 	path.Append("Print/transport");

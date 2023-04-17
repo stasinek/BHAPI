@@ -159,9 +159,9 @@ static status_t can_app_be_used(const entry_ref* ref)
             the first one is greater than the second one, and \c 0, if both
             are equal.
 */
-static int32 compare_version_infos(const version_info& info1, const version_info& info2)
+static int32_t compare_version_infos(const version_info& info1, const version_info& info2)
 {
-    int32 result = 0;
+    int32_t result = 0;
     if (info1.major < info2.major)
         result = -1;
     else if (info1.major > info2.major)
@@ -203,7 +203,7 @@ static int32 compare_version_infos(const version_info& info1, const version_info
             one, \c 1, if the first one is greater than the second one, and
             \c 0, if both are equal.
 */
-static int32 compare_queried_apps(const entry_ref* app1, const entry_ref* app2)
+static int32_t compare_queried_apps(const entry_ref* app1, const entry_ref* app2)
 {
     BPath path1(app1);
     BPath path2(app2);
@@ -266,7 +266,7 @@ static int32 compare_queried_apps(const entry_ref* app1, const entry_ref* app2)
     file1.GetModificationTime(&modificationTime1);
     file2.GetModificationTime(&modificationTime2);
 
-    int32 result = 0;
+    int32_t result = 0;
 
     version_info versionInfo1;
     version_info versionInfo2;
@@ -339,7 +339,7 @@ static status_t query_for_app(const char* signature, entry_ref* appRef)
                 char string[B_MIME_TYPE_LENGTH * 4];
                 strlcpy(string, "application/", sizeof(string));
 
-                int32 length = strlen(string);
+                int32_t length = strlen(string);
                 const char* from = signature + length;
                 char* to = string + length;
 
@@ -611,7 +611,7 @@ void BRoster::GetAppList(BList* teamIDList) const
     if (error == B_OK) {
         if (reply.what == B_REG_SUCCESS) {
             team_id team;
-            for (int32 i = 0; reply.FindInt32("teams", i, &team) == B_OK; i++)
+            for (int32_t i = 0; reply.FindInt32("teams", i, &team) == B_OK; i++)
                 teamIDList->AddItem((void*)(addr_t)team);
         } else {
             if (reply.FindInt32("error", &error) != B_OK)
@@ -645,7 +645,7 @@ void BRoster::GetAppList(const char* signature, BList* teamIDList) const
     if (error == B_OK) {
         if (reply.what == B_REG_SUCCESS) {
             team_id team;
-            for (int32 i = 0; reply.FindInt32("teams", i, &team) == B_OK; i++)
+            for (int32_t i = 0; reply.FindInt32("teams", i, &team) == B_OK; i++)
                 teamIDList->AddItem((void*)(addr_t)team);
         } else if (reply.FindInt32("error", &error) != B_OK)
             error = B_ERROR;
@@ -805,7 +805,7 @@ status_t BRoster::Broadcast(BMessage* message, BMessenger replyTo) const
 }
 
 
-status_t BRoster::StartWatching(BMessenger target, uint32 eventMask) const
+status_t BRoster::StartWatching(BMessenger target, uint32_t eventMask) const
 {
     status_t error = B_OK;
     // compose the request message
@@ -813,7 +813,7 @@ status_t BRoster::StartWatching(BMessenger target, uint32 eventMask) const
     if (error == B_OK)
         error = request.AddMessenger("target", target);
     if (error == B_OK)
-        error = request.AddInt32("events", (int32)eventMask);
+        error = request.AddInt32("events", (int32_t)eventMask);
 
     // send the request
     BMessage reply;
@@ -985,7 +985,7 @@ extern "C" status_t Launch__C7BRosterP9entry_refiPPcPl(BRoster* roster, entry_re
 //	#pragma mark - Recent document and app support
 
 
-void BRoster::GetRecentDocuments(BMessage* refList, int32 maxCount,
+void BRoster::GetRecentDocuments(BMessage* refList, int32_t maxCount,
     const char* fileType, const char* signature) const
 {
     if (refList == NULL)
@@ -1030,8 +1030,8 @@ void BRoster::GetRecentDocuments(BMessage* refList, int32 maxCount,
 }
 
 
-void BRoster::GetRecentDocuments(BMessage* refList, int32 maxCount,
-    const char* fileTypes[], int32 fileTypesCount,
+void BRoster::GetRecentDocuments(BMessage* refList, int32_t maxCount,
+    const char* fileTypes[], int32_t fileTypesCount,
     const char* signature) const
 {
     if (refList == NULL)
@@ -1076,7 +1076,7 @@ void BRoster::GetRecentDocuments(BMessage* refList, int32 maxCount,
 }
 
 
-void BRoster::GetRecentFolders(BMessage* refList, int32 maxCount,
+void BRoster::GetRecentFolders(BMessage* refList, int32_t maxCount,
     const char* signature) const
 {
     if (refList == NULL)
@@ -1118,7 +1118,7 @@ void BRoster::GetRecentFolders(BMessage* refList, int32 maxCount,
 }
 
 
-void BRoster::GetRecentApps(BMessage* refList, int32 maxCount) const
+void BRoster::GetRecentApps(BMessage* refList, int32_t maxCount) const
 {
     if (refList == NULL)
         return;
@@ -1325,7 +1325,7 @@ status_t BRoster::_ShutDown(bool reboot, bool confirm, bool synchronous)
     \param thread The application's main thread
     \param port The application's looper port
     \param fullRegistration \c true for full, \c false for pre-registration
-    \param pToken A pointer to a pre-allocated uint32 into which the token
+    \param pToken A pointer to a pre-allocated uint32_t into which the token
            assigned by the registrar is written (may be \c NULL)
     \param otherTeam A pointer to a pre-allocated team_id into which the
            team ID of the already running instance of a single/exclusive
@@ -1340,8 +1340,8 @@ status_t BRoster::_ShutDown(bool reboot, bool confirm, bool synchronous)
             was already registered.
 */
 status_t BRoster::_AddApplication(const char* signature, const entry_ref* ref,
-    uint32 flags, team_id team, thread_id thread, port_id port,
-    bool fullRegistration, uint32* pToken, team_id* otherTeam) const
+    uint32_t flags, team_id team, thread_id thread, port_id port,
+    bool fullRegistration, uint32_t* pToken, team_id* otherTeam) const
 {
     status_t error = B_OK;
 
@@ -1354,7 +1354,7 @@ status_t BRoster::_AddApplication(const char* signature, const entry_ref* ref,
         error = request.AddRef("ref", ref);
 
     if (error == B_OK)
-        error = request.AddInt32("flags", (int32)flags);
+        error = request.AddInt32("flags", (int32_t)flags);
 
     if (error == B_OK && team >= 0)
         error = request.AddInt32("team", team);
@@ -1377,8 +1377,8 @@ status_t BRoster::_AddApplication(const char* signature, const entry_ref* ref,
     if (error == B_OK) {
         if (reply.what == B_REG_SUCCESS) {
             if (!fullRegistration && team < 0) {
-                uint32 token;
-                if (reply.FindInt32("token", (int32*)&token) == B_OK) {
+                uint32_t token;
+                if (reply.FindInt32("token", (int32_t*)&token) == B_OK) {
                     if (pToken != NULL)
                         *pToken = token;
                 } else
@@ -1394,7 +1394,7 @@ status_t BRoster::_AddApplication(const char* signature, const entry_ref* ref,
                 *otherTeam = -1;
             }
             if (pToken != NULL
-                && reply.FindInt32("token", (int32*)pToken) != B_OK) {
+                && reply.FindInt32("token", (int32_t*)pToken) != B_OK) {
                 *pToken = 0;
             }
         }
@@ -1466,7 +1466,7 @@ void BRoster::_SetThread(team_id team, thread_id thread) const
     \retval B_REG_APP_NOT_PRE_REGISTERED The supplied token did not identify a
             pre-registered application.
 */
-status_t BRoster::_SetThreadAndTeam(uint32 entryToken, thread_id thread,
+status_t BRoster::_SetThreadAndTeam(uint32_t entryToken, thread_id thread,
     team_id team, port_id* _port) const
 {
     status_t error = B_OK;
@@ -1474,7 +1474,7 @@ status_t BRoster::_SetThreadAndTeam(uint32 entryToken, thread_id thread,
     // compose the request message
     BMessage request(B_REG_SET_THREAD_AND_TEAM);
     if (error == B_OK)
-        error = request.AddInt32("token", (int32)entryToken);
+        error = request.AddInt32("token", (int32_t)entryToken);
 
     if (error == B_OK && team >= 0)
         error = request.AddInt32("team", team);
@@ -1566,7 +1566,7 @@ status_t BRoster::_CompleteRegistration(team_id team, thread_id thread,
             is not registered or an error occurred.
 */
 status_t BRoster::_IsAppRegistered(const entry_ref* ref, team_id team,
-    uint32 token, bool* preRegistered, app_info* info) const
+    uint32_t token, bool* preRegistered, app_info* info) const
 {
     status_t error = B_OK;
 
@@ -1577,7 +1577,7 @@ status_t BRoster::_IsAppRegistered(const entry_ref* ref, team_id team,
     if (error == B_OK && team >= 0)
         error = request.AddInt32("team", team);
     if (error == B_OK && token > 0)
-        error = request.AddInt32("token", (int32)token);
+        error = request.AddInt32("token", (int32_t)token);
 
     // send the request
     BMessage reply;
@@ -1621,14 +1621,14 @@ status_t BRoster::_IsAppRegistered(const entry_ref* ref, team_id team,
     \retval B_REG_APP_NOT_PRE_REGISTERED The supplied token did not identify
             a pre-registered application.
 */
-status_t BRoster::_RemovePreRegApp(uint32 entryToken) const
+status_t BRoster::_RemovePreRegApp(uint32_t entryToken) const
 {
     status_t error = B_OK;
 
     // compose the request message
     BMessage request(B_REG_REMOVE_PRE_REGISTERED_APP);
     if (error == B_OK)
-        error = request.AddInt32("token", (int32)entryToken);
+        error = request.AddInt32("token", (int32_t)entryToken);
 
     // send the request
     BMessage reply;
@@ -1784,7 +1784,7 @@ status_t BRoster::_UpdateActiveApp(team_id team) const
 status_t BRoster::_LaunchApp(const char* mimeType, const entry_ref* ref,
     const BList* messageList, int argc, const char* const* args,
     const char** environment, team_id* _appTeam, thread_id* _appThread,
-    port_id* _appPort, uint32* _appToken, bool launchSuspended) const
+    port_id* _appPort, uint32_t* _appToken, bool launchSuspended) const
 {
     DBG(OUT("BRoster::_LaunchApp()"));
 
@@ -1805,8 +1805,8 @@ status_t BRoster::_LaunchApp(const char* mimeType, const entry_ref* ref,
         docRef = &_docRef;
     }
 
-    uint32 otherAppFlags = B_REG_DEFAULT_APP_FLAGS;
-    uint32 appFlags = B_REG_DEFAULT_APP_FLAGS;
+    uint32_t otherAppFlags = B_REG_DEFAULT_APP_FLAGS;
+    uint32_t appFlags = B_REG_DEFAULT_APP_FLAGS;
     bool alreadyRunning = false;
     bool wasDocument = true;
     status_t error = B_OK;
@@ -1814,7 +1814,7 @@ status_t BRoster::_LaunchApp(const char* mimeType, const entry_ref* ref,
     team_id team = -1;
     thread_id appThread = -1;
     port_id appPort = -1;
-    uint32 appToken = 0;
+    uint32_t appToken = 0;
 
     do {
         // find the app
@@ -1958,7 +1958,7 @@ status_t BRoster::_LaunchApp(const char* mimeType, const entry_ref* ref,
 }
 
 
-void BRoster::_SetAppFlags(team_id team, uint32 flags) const
+void BRoster::_SetAppFlags(team_id team, uint32_t flags) const
 {
 }
 
@@ -1994,7 +1994,7 @@ void BRoster::_DumpRoster() const
     \param signature A pointer to a pre-allocated char buffer of at
            least size \c B_MIME_TYPE_LENGTH to be filled with the signature of
            the found application. May be \c NULL.
-    \param appFlags A pointer to a pre-allocated uint32 variable to be filled
+    \param appFlags A pointer to a pre-allocated uint32_t variable to be filled
            with the app flags of the found application. May be \c NULL.
     \param wasDocument A pointer to a pre-allocated bool variable to be set to
            \c true, if the supplied file was not identifying an application,
@@ -2008,7 +2008,7 @@ void BRoster::_DumpRoster() const
     \see FindApp() for other error codes.
 */
 status_t BRoster::_ResolveApp(const char* inType, entry_ref* ref,
-    entry_ref* _appRef, char* _signature, uint32* _appFlags,
+    entry_ref* _appRef, char* _signature, uint32_t* _appFlags,
     bool* _wasDocument) const
 {
     if ((inType == NULL && ref == NULL)
@@ -2316,7 +2316,7 @@ status_t BRoster::_TranslateType(const char* mimeType, BMimeType* appMeta,
     BMessage supportingSignatures;
     if (error == B_OK
         && type.GetSupportingApps(&supportingSignatures) == B_OK) {
-        int32 subCount;
+        int32_t subCount;
         if (supportingSignatures.FindInt32("be:sub", &subCount) != B_OK)
             subCount = 0;
         // Add all signatures with direct support for the sub-type.
@@ -2324,7 +2324,7 @@ status_t BRoster::_TranslateType(const char* mimeType, BMimeType* appMeta,
         if (!addedSecondarySignature) {
             // Try to add the secondarySignature in front of all other
             // supporting apps, if we find it among those.
-            for (int32 i = 0; error == B_OK && i < subCount
+            for (int32_t i = 0; error == B_OK && i < subCount
                     && supportingSignatures.FindString(kSigField, i,
                         &supportingType) == B_OK; i++) {
                 if (strcmp(primarySignature, supportingType) != 0
@@ -2336,7 +2336,7 @@ status_t BRoster::_TranslateType(const char* mimeType, BMimeType* appMeta,
             }
         }
 
-        for (int32 i = 0; error == B_OK && i < subCount
+        for (int32_t i = 0; error == B_OK && i < subCount
                 && supportingSignatures.FindString(kSigField, i,
                     &supportingType) == B_OK; i++) {
             if (strcmp(primarySignature, supportingType) != 0
@@ -2355,7 +2355,7 @@ status_t BRoster::_TranslateType(const char* mimeType, BMimeType* appMeta,
         }
 
         // Add all signatures with support for the super-type.
-        for (int32 i = subCount; error == B_OK
+        for (int32_t i = subCount; error == B_OK
                 && supportingSignatures.FindString(kSigField, i,
                     &supportingType) == B_OK; i++) {
             // Don't add the signature if it's one of the preferred apps
@@ -2379,7 +2379,7 @@ status_t BRoster::_TranslateType(const char* mimeType, BMimeType* appMeta,
 
     // See if we can find a good application that is valid from the messege.
     const char* signature;
-    for (int32 i = 0;
+    for (int32_t i = 0;
         signatures.FindString(kSigField, i, &signature) == B_OK; i++) {
         if (signature[0] == '\0')
             continue;
@@ -2510,7 +2510,7 @@ status_t BRoster::_SendToRunning(team_id team, int argc, const char* const* args
 
         // send messages from the list
         if (messageList != NULL) {
-            for (int32 i = 0;
+            for (int32_t i = 0;
                     BMessage* message = (BMessage*)messageList->ItemAt(i);
                     i++) {
                 messenger.SendMessage(message);
@@ -2522,7 +2522,7 @@ status_t BRoster::_SendToRunning(team_id team, int argc, const char* const* args
         if (args != NULL && argc > 1) {
             BMessage message(B_ARGV_RECEIVED);
             message.AddInt32("argc", argc);
-            for (int32 i = 0; i < argc; i++)
+            for (int32_t i = 0; i < argc; i++)
                 message.AddString("argv", args[i]);
 
             // also add current working directory

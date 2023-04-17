@@ -17,8 +17,8 @@ extern "C" {
 #endif
 
 
-uint32 hash_hash_string(const char* string);
-uint32 hash_hash_string_part(const char* string, size_t maxLength);
+uint32_t hash_hash_string(const char* string);
+uint32_t hash_hash_string_part(const char* string, size_t maxLength);
 
 
 #ifdef __cplusplus

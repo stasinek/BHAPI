@@ -156,7 +156,7 @@ new_fd_etc(struct io_context* context, struct file_descriptor* descriptor,
 	int firstIndex)
 {
 	int fd = -1;
-	uint32 i;
+	uint32_t i;
 
 	mutex_lock(&context->io_mutex);
 
@@ -197,7 +197,7 @@ new_fd(struct io_context* context, struct file_descriptor* descriptor)
 void
 put_fd(struct file_descriptor* descriptor)
 {
-	int32 previous = atomic_add(&descriptor->ref_count, -1);
+	int32_t previous = atomic_add(&descriptor->ref_count, -1);
 
 	TFD(PutFD(descriptor));
 
@@ -287,7 +287,7 @@ inc_fd_ref_count(struct file_descriptor* descriptor)
 static struct file_descriptor*
 get_fd_locked(struct io_context* context, int fd)
 {
-	if (fd < 0 || (uint32)fd >= context->table_size)
+	if (fd < 0 || (uint32_t)fd >= context->table_size)
 		return NULL;
 
 	struct file_descriptor* descriptor = context->fds[fd];
@@ -337,7 +337,7 @@ remove_fd(struct io_context* context, int fd)
 
 	mutex_lock(&context->io_mutex);
 
-	if ((uint32)fd < context->table_size)
+	if ((uint32_t)fd < context->table_size)
 		descriptor = context->fds[fd];
 
 	select_info* selectInfos = NULL;
@@ -418,8 +418,8 @@ dup2_fd(int oldfd, int newfd, bool kernel)
 
 	// Check if the fds are valid (mutex must be locked because
 	// the table size could be changed)
-	if ((uint32)oldfd >= context->table_size
-		|| (uint32)newfd >= context->table_size
+	if ((uint32_t)oldfd >= context->table_size
+		|| (uint32_t)newfd >= context->table_size
 		|| context->fds[oldfd] == NULL
 		|| (context->fds[oldfd]->open_mode & O_DISCONNECTED) != 0) {
 		mutex_unlock(&context->io_mutex);
@@ -496,7 +496,7 @@ dup_foreign_fd(team_id fromTeam, int fd, bool kernel)
 
 
 static status_t
-fd_ioctl(bool kernelFD, int fd, uint32 op, void* buffer, size_t length)
+fd_ioctl(bool kernelFD, int fd, uint32_t op, void* buffer, size_t length)
 {
 	struct file_descriptor* descriptor;
 	int status;
@@ -549,7 +549,7 @@ deselect_select_infos(file_descriptor* descriptor, select_info* infos,
 
 
 status_t
-select_fd(int32 fd, struct select_info* info, bool kernel)
+select_fd(int32_t fd, struct select_info* info, bool kernel)
 {
 	TRACE(("select_fd(fd = %ld, info = %p (%p), 0x%x)\n", fd, info,
 		info->sync, info->selected_events));
@@ -579,7 +579,7 @@ select_fd(int32 fd, struct select_info* info, bool kernel)
 	locker.Unlock();
 
 	// select any events asked for
-	uint32 selectedEvents = 0;
+	uint32_t selectedEvents = 0;
 
 	for (uint16 event = 1; event < 16; event++) {
 		if ((eventsToSelect & SELECT_FLAG(event)) != 0
@@ -624,7 +624,7 @@ select_fd(int32 fd, struct select_info* info, bool kernel)
 
 
 status_t
-deselect_fd(int32 fd, struct select_info* info, bool kernel)
+deselect_fd(int32_t fd, struct select_info* info, bool kernel)
 {
 	TRACE(("deselect_fd(fd = %ld, info = %p (%p), 0x%x)\n", fd, info,
 		info->sync, info->selected_events));
@@ -802,7 +802,7 @@ common_user_vector_io(int fd, off_t pos, const iovec* userVecs, size_t count,
 	SyscallRestartWrapper<status_t> status;
 
 	ssize_t bytesTransferred = 0;
-	for (uint32 i = 0; i < count; i++) {
+	for (uint32_t i = 0; i < count; i++) {
 		size_t length = vecs[i].iov_len;
 		if (write) {
 			status = descriptor->ops->fd_write(descriptor, pos,
@@ -838,7 +838,7 @@ common_user_vector_io(int fd, off_t pos, const iovec* userVecs, size_t count,
 
 
 status_t
-user_fd_kernel_ioctl(int fd, uint32 op, void* buffer, size_t length)
+user_fd_kernel_ioctl(int fd, uint32_t op, void* buffer, size_t length)
 {
 	TRACE(("user_fd_kernel_ioctl: fd %d\n", fd));
 
@@ -901,7 +901,7 @@ _user_seek(int fd, off_t pos, int seekType)
 
 
 status_t
-_user_ioctl(int fd, uint32 op, void* buffer, size_t length)
+_user_ioctl(int fd, uint32_t op, void* buffer, size_t length)
 {
 	if (!IS_USER_ADDRESS(buffer))
 		return B_BAD_ADDRESS;
@@ -916,7 +916,7 @@ _user_ioctl(int fd, uint32 op, void* buffer, size_t length)
 
 ssize_t
 _user_read_dir(int fd, struct dirent* userBuffer, size_t bufferSize,
-	uint32 maxCount)
+	uint32_t maxCount)
 {
 	TRACE(("user_read_dir(fd = %d, userBuffer = %p, bufferSize = %ld, count = "
 		"%lu)\n", fd, userBuffer, bufferSize, maxCount));
@@ -946,7 +946,7 @@ _user_read_dir(int fd, struct dirent* userBuffer, size_t bufferSize,
 	MemoryDeleter bufferDeleter(buffer);
 
 	// read the directory
-	uint32 count = maxCount;
+	uint32_t count = maxCount;
 	status_t status = descriptor->ops->fd_read_dir(ioContext, descriptor,
 		buffer, bufferSize, &count);
 	if (status != B_OK)
@@ -955,7 +955,7 @@ _user_read_dir(int fd, struct dirent* userBuffer, size_t bufferSize,
 	// copy the buffer back -- determine the total buffer size first
 	size_t sizeToCopy = 0;
 	struct dirent* entry = buffer;
-	for (uint32 i = 0; i < count; i++) {
+	for (uint32_t i = 0; i < count; i++) {
 		size_t length = entry->d_reclen;
 		sizeToCopy += length;
 		entry = (struct dirent*)((uint8*)entry + length);
@@ -1060,7 +1060,7 @@ _kern_readv(int fd, off_t pos, const iovec* vecs, size_t count)
 {
 	bool movePosition = false;
 	status_t status;
-	uint32 i;
+	uint32_t i;
 
 	if (pos < -1)
 		return B_BAD_VALUE;
@@ -1155,7 +1155,7 @@ _kern_writev(int fd, off_t pos, const iovec* vecs, size_t count)
 {
 	bool movePosition = false;
 	status_t status;
-	uint32 i;
+	uint32_t i;
 
 	if (pos < -1)
 		return B_BAD_VALUE;
@@ -1224,7 +1224,7 @@ _kern_seek(int fd, off_t pos, int seekType)
 
 
 status_t
-_kern_ioctl(int fd, uint32 op, void* buffer, size_t length)
+_kern_ioctl(int fd, uint32_t op, void* buffer, size_t length)
 {
 	TRACE(("kern_ioctl: fd %d\n", fd));
 
@@ -1236,7 +1236,7 @@ _kern_ioctl(int fd, uint32 op, void* buffer, size_t length)
 
 ssize_t
 _kern_read_dir(int fd, struct dirent* buffer, size_t bufferSize,
-	uint32 maxCount)
+	uint32_t maxCount)
 {
 	struct file_descriptor* descriptor;
 	ssize_t retval;
@@ -1250,7 +1250,7 @@ _kern_read_dir(int fd, struct dirent* buffer, size_t bufferSize,
 		return B_FILE_ERROR;
 
 	if (descriptor->ops->fd_read_dir) {
-		uint32 count = maxCount;
+		uint32_t count = maxCount;
 		retval = descriptor->ops->fd_read_dir(ioContext, descriptor, buffer,
 			bufferSize, &count);
 		if (retval >= 0)

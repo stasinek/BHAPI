@@ -61,7 +61,7 @@ typedef struct {
 	// hook_arg		- value to be passed to hooks as arg
 	locked_pool_cookie (*create)(int block_size, int alignment, int next_ofs,
 		int chunk_size, int max_blocks, int min_free_blocks, const char *name,
-		uint32 lock_flags, locked_pool_add_hook add_hook, 
+		uint32_t lock_flags, locked_pool_add_hook add_hook, 
 		locked_pool_remove_hook remove_hook, void *hook_arg);
 	void (*destroy)(locked_pool_cookie pool);
 } locked_pool_interface;

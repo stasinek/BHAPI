@@ -41,8 +41,8 @@ status_t BShapeIterator::Iterate(BShape* shape)
 	shape_data* data = (shape_data*)shape->fPrivateData;
 	BPoint* points = data->ptList;
 
-	for (int32 i = 0; i < data->opCount; i++) {
-		int32 op = data->opList[i] & 0xFF000000;
+	for (int32_t i = 0; i < data->opCount; i++) {
+		int32_t op = data->opList[i] & 0xFF000000;
 
 		if ((op & OP_MOVETO) != 0) {
 			IterateMoveTo(points);
@@ -50,13 +50,13 @@ status_t BShapeIterator::Iterate(BShape* shape)
 		}
 
 		if ((op & OP_LINETO) != 0) {
-			int32 count = data->opList[i] & 0x00FFFFFF;
+			int32_t count = data->opList[i] & 0x00FFFFFF;
 			IterateLineTo(count, points);
 			points += count;
 		}
 
 		if ((op & OP_BEZIERTO) != 0) {
-			int32 count = data->opList[i] & 0x00FFFFFF;
+			int32_t count = data->opList[i] & 0x00FFFFFF;
 			IterateBezierTo(count / 3, points);
 			points += count;
 		}
@@ -64,8 +64,8 @@ status_t BShapeIterator::Iterate(BShape* shape)
 		if ((op & OP_LARGE_ARC_TO_CW) != 0 || (op & OP_LARGE_ARC_TO_CCW) != 0
 			|| (op & OP_SMALL_ARC_TO_CW) != 0
 			|| (op & OP_SMALL_ARC_TO_CCW) != 0) {
-			int32 count = data->opList[i] & 0x00FFFFFF;
-			for (int32 i = 0; i < count / 3; i++) {
+			int32_t count = data->opList[i] & 0x00FFFFFF;
+			for (int32_t i = 0; i < count / 3; i++) {
 				IterateArcTo(points[0].x, points[0].y, points[1].x,
 					op & (OP_LARGE_ARC_TO_CW | OP_LARGE_ARC_TO_CCW),
 					op & (OP_SMALL_ARC_TO_CCW | OP_LARGE_ARC_TO_CCW),
@@ -88,13 +88,13 @@ status_t BShapeIterator::IterateMoveTo(BPoint* point)
 }
 
 
-status_t BShapeIterator::IterateLineTo(int32 lineCount, BPoint* linePoints)
+status_t BShapeIterator::IterateLineTo(int32_t lineCount, BPoint* linePoints)
 {
 	return B_OK;
 }
 
 
-status_t BShapeIterator::IterateBezierTo(int32 bezierCount, BPoint* bezierPoints)
+status_t BShapeIterator::IterateBezierTo(int32_t bezierCount, BPoint* bezierPoints)
 {
 	return B_OK;
 }
@@ -146,14 +146,14 @@ BShape::BShape(BMessage* archive)
 	shape_data* data = (shape_data*)fPrivateData;
 
 	ssize_t size = 0;
-	int32 count = 0;
+	int32_t count = 0;
 	type_code type = 0;
 	archive->GetInfo("ops", &type, &count);
 	if (!AllocateOps(count))
 		return;
 
-	int32 i = 0;
-	const uint32* opPtr;
+	int32_t i = 0;
+	const uint32_t* opPtr;
 	while (archive->FindData("ops", B_INT32_TYPE, i++,
 			(const void**)&opPtr, &size) == B_OK) {
 		data->opList[data->opCount++] = *opPtr;
@@ -204,16 +204,16 @@ status_t BShape::Archive(BMessage* archive, bool deep) const
 	if (result != B_OK)
 		return result;
 
-	for (int32 i = 1; i < data->ptCount && result == B_OK; i++)
+	for (int32_t i = 1; i < data->ptCount && result == B_OK; i++)
 		result = archive->AddPoint("pts", data->ptList[i]);
 
 	// Avoids allocation for each op
 	if (result == B_OK) {
 		result = archive->AddData("ops", B_INT32_TYPE, data->opList,
-			sizeof(int32), true, data->opCount);
+			sizeof(int32_t), true, data->opCount);
 	}
 
-	for (int32 i = 1; i < data->opCount && result == B_OK; i++)
+	for (int32_t i = 1; i < data->opCount && result == B_OK; i++)
 		result = archive->AddInt32("ops", data->opList[i]);
 
 	return result;
@@ -257,7 +257,7 @@ bool BShape::operator==(const BShape& other) const
 		return false;
 
 	return memcmp(data->opList, otherData->opList,
-			data->opCount * sizeof(uint32)) == 0
+			data->opCount * sizeof(uint32_t)) == 0
 		&& memcmp(data->ptList, otherData->ptList,
 			data->ptCount * sizeof(BPoint)) == 0;
 }
@@ -321,7 +321,7 @@ status_t BShape::AddShape(const BShape* otherShape)
 		return B_NO_MEMORY;
 
 	memcpy(data->opList + data->opCount, otherData->opList,
-		otherData->opCount * sizeof(uint32));
+		otherData->opCount * sizeof(uint32_t));
 	data->opCount += otherData->opCount;
 
 	memcpy(data->ptList + data->ptCount, otherData->ptList,
@@ -433,7 +433,7 @@ status_t BShape::ArcTo(float rx, float ry, float angle, bool largeArc,
 
 	shape_data* data = (shape_data*)fPrivateData;
 
-	uint32 op;
+	uint32_t op;
 	if (largeArc) {
 		if (counterClockWise)
 			op = OP_LARGE_ARC_TO_CCW;
@@ -517,7 +517,7 @@ void BShape::_ReservedShape4() {}
 //	#pragma mark - BShape private methods
 
 
-void BShape::GetData(int32* opCount, int32* ptCount, uint32** opList,
+void BShape::GetData(int32_t* opCount, int32_t* ptCount, uint32_t** opList,
 	BPoint** ptList)
 {
 	shape_data* data = (shape_data*)fPrivateData;
@@ -529,7 +529,7 @@ void BShape::GetData(int32* opCount, int32* ptCount, uint32** opList,
 }
 
 
-void BShape::SetData(int32 opCount, int32 ptCount, const uint32* opList,
+void BShape::SetData(int32_t opCount, int32_t ptCount, const uint32_t* opList,
 	const BPoint* ptList)
 {
 	Clear();
@@ -542,7 +542,7 @@ void BShape::SetData(int32 opCount, int32 ptCount, const uint32* opList,
 	if (!AllocateOps(opCount) || !AllocatePts(ptCount))
 		return;
 
-	memcpy(data->opList, opList, opCount * sizeof(uint32));
+	memcpy(data->opList, opList, opCount * sizeof(uint32_t));
 	data->opCount = opCount;
 	fBuildingOp = data->opList[data->opCount - 1];
 
@@ -570,15 +570,15 @@ void BShape::InitData()
 }
 
 
-inline bool BShape::AllocateOps(int32 count)
+inline bool BShape::AllocateOps(int32_t count)
 {
 	shape_data* data = (shape_data*)fPrivateData;
 
-	int32 newSize = (data->opCount + count + 255) / 256 * 256;
+	int32_t newSize = (data->opCount + count + 255) / 256 * 256;
 	if (data->opSize >= newSize)
 		return true;
 
-	uint32* resizedArray = (uint32*)realloc(data->opList, newSize * sizeof(uint32));
+	uint32_t* resizedArray = (uint32_t*)realloc(data->opList, newSize * sizeof(uint32_t));
 	if (resizedArray) {
 		data->opList = resizedArray;
 		data->opSize = newSize;
@@ -588,11 +588,11 @@ inline bool BShape::AllocateOps(int32 count)
 }
 
 
-inline bool BShape::AllocatePts(int32 count)
+inline bool BShape::AllocatePts(int32_t count)
 {
 	shape_data* data = (shape_data*)fPrivateData;
 
-	int32 newSize = (data->ptCount + count + 255) / 256 * 256;
+	int32_t newSize = (data->ptCount + count + 255) / 256 * 256;
 	if (data->ptSize >= newSize)
 		return true;
 

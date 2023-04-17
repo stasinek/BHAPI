@@ -14,22 +14,22 @@ class SymbolInfo {
 public:
 								SymbolInfo();
 								SymbolInfo(target_addr_t address,
-									target_size_t size, uint32 type,
+									target_size_t size, uint32_t type,
 									const BString& name);
 								~SymbolInfo();
 
 			void				SetTo(target_addr_t address, target_size_t size,
-									uint32 type, const BString& name);
+									uint32_t type, const BString& name);
 
 			target_addr_t		Address() const		{ return fAddress; }
 			target_size_t		Size() const		{ return fSize; }
-			uint32				Type() const		{ return fType; }
+			uint32_t				Type() const		{ return fType; }
 			const char*			Name() const		{ return fName.String(); }
 
 private:
 			target_addr_t		fAddress;
 			target_size_t		fSize;
-			uint32				fType;
+			uint32_t				fType;
 			BString				fName;
 };
 

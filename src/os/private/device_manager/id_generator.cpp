@@ -57,9 +57,9 @@ struct id_generator : DoublyLinkedListLinkImpl<id_generator> {
 		free(name);
 	}
 
-	int32		ref_count;
+	int32_t		ref_count;
 	char*		name;
-	uint32		num_ids;
+	uint32_t		num_ids;
 	uint8		alloc_map[(GENERATOR_MAX_ID + 7) / 8];
 };
 
@@ -93,10 +93,10 @@ create_generator(const char* name)
 
 
 /*! Allocate ID */
-static int32
+static int32_t
 create_id_internal(id_generator* generator)
 {
-	uint32 id;
+	uint32_t id;
 
 	TRACE(("create_id_internal(name: %s)\n", generator->name));
 
@@ -176,7 +176,7 @@ dm_init_id_generator(void)
 
 
 /*! Create automatic ID */
-int32
+int32_t
 dm_create_id(const char* name)
 {
 
@@ -193,7 +193,7 @@ dm_create_id(const char* name)
 		return B_NO_MEMORY;
 
 	// get ID
-	int32 id = create_id_internal(generator);
+	int32_t id = create_id_internal(generator);
 
 	release_generator(generator);
 
@@ -204,7 +204,7 @@ dm_create_id(const char* name)
 
 /*!	Free automatically generated ID */
 status_t
-dm_free_id(const char* name, uint32 id)
+dm_free_id(const char* name, uint32_t id)
 {
 	TRACE(("dm_free_id(name: %s, id: %ld)\n", name, id));
 

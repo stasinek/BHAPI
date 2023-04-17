@@ -42,11 +42,11 @@
 #define	ICI_VECTOR		0xfd
 
 
-static uint32 sCPUAPICIds[SMP_MAX_CPUS];
-static uint32 sAPICVersions[SMP_MAX_CPUS];
+static uint32_t sCPUAPICIds[SMP_MAX_CPUS];
+static uint32_t sAPICVersions[SMP_MAX_CPUS];
 
 
-static int32
+static int32_t
 x86_ici_interrupt(void *data)
 {
 	// genuine inter-cpu interrupt
@@ -56,7 +56,7 @@ x86_ici_interrupt(void *data)
 }
 
 
-static int32
+static int32_t
 x86_spurious_interrupt(void *data)
 {
 	// spurious interrupt
@@ -69,7 +69,7 @@ x86_spurious_interrupt(void *data)
 }
 
 
-static int32
+static int32_t
 x86_smp_error_interrupt(void *data)
 {
 	// smp error interrupt
@@ -78,8 +78,8 @@ x86_smp_error_interrupt(void *data)
 }
 
 
-uint32
-x86_get_cpu_apic_id(int32 cpu)
+uint32_t
+x86_get_cpu_apic_id(int32_t cpu)
 {
 	ASSERT(cpu >= 0 && cpu < SMP_MAX_CPUS);
 	return sCPUAPICIds[cpu];
@@ -118,7 +118,7 @@ arch_smp_init(kernel_args *args)
 
 
 status_t
-arch_smp_per_cpu_init(kernel_args *args, int32 cpu)
+arch_smp_per_cpu_init(kernel_args *args, int32_t cpu)
 {
 	// set up the local apic on the current cpu
 	TRACE(("arch_smp_init_percpu: setting up the apic on cpu %" B_PRId32 "\n",
@@ -142,22 +142,22 @@ arch_smp_send_multicast_ici(CPUSet& cpuSet)
 
 	memory_write_barrier();
 
-	int32 i = 0;
-	int32 cpuCount = smp_get_num_cpus();
+	int32_t i = 0;
+	int32_t cpuCount = smp_get_num_cpus();
 
-	int32 logicalModeCPUs;
+	int32_t logicalModeCPUs;
 	if (x2apic_available())
 		logicalModeCPUs = cpuCount;
 	else
-		logicalModeCPUs = std::min(cpuCount, int32(8));
+		logicalModeCPUs = std::min(cpuCount, int32_t(8));
 
-	uint32 destination = 0;
+	uint32_t destination = 0;
 	for (; i < logicalModeCPUs; i++) {
 		if (cpuSet.GetBit(i) && i != smp_get_current_cpu())
 			destination |= gCPU[i].arch.logical_apic_id;
 	}
 
-	uint32 mode = ICI_VECTOR | APIC_DELIVERY_MODE_FIXED
+	uint32_t mode = ICI_VECTOR | APIC_DELIVERY_MODE_FIXED
 			| APIC_INTR_COMMAND_1_ASSERT
 			| APIC_INTR_COMMAND_1_DEST_MODE_LOGICAL
 			| APIC_INTR_COMMAND_1_DEST_FIELD;
@@ -168,8 +168,8 @@ arch_smp_send_multicast_ici(CPUSet& cpuSet)
 
 	for (; i < cpuCount; i++) {
 		if (cpuSet.GetBit(i)) {
-			uint32 destination = sCPUAPICIds[i];
-			uint32 mode = ICI_VECTOR | APIC_DELIVERY_MODE_FIXED
+			uint32_t destination = sCPUAPICIds[i];
+			uint32_t mode = ICI_VECTOR | APIC_DELIVERY_MODE_FIXED
 					| APIC_INTR_COMMAND_1_ASSERT
 					| APIC_INTR_COMMAND_1_DEST_MODE_PHYSICAL
 					| APIC_INTR_COMMAND_1_DEST_FIELD;
@@ -192,7 +192,7 @@ arch_smp_send_broadcast_ici(void)
 
 	memory_write_barrier();
 
-	uint32 mode = ICI_VECTOR | APIC_DELIVERY_MODE_FIXED
+	uint32_t mode = ICI_VECTOR | APIC_DELIVERY_MODE_FIXED
 			| APIC_INTR_COMMAND_1_ASSERT
 			| APIC_INTR_COMMAND_1_DEST_MODE_PHYSICAL
 			| APIC_INTR_COMMAND_1_DEST_ALL_BUT_SELF;
@@ -204,7 +204,7 @@ arch_smp_send_broadcast_ici(void)
 
 
 void
-arch_smp_send_ici(int32 target_cpu)
+arch_smp_send_ici(int32_t target_cpu)
 {
 #if KDEBUG
 	if (are_interrupts_enabled())
@@ -213,8 +213,8 @@ arch_smp_send_ici(int32 target_cpu)
 
 	memory_write_barrier();
 
-	uint32 destination = sCPUAPICIds[target_cpu];
-	uint32 mode = ICI_VECTOR | APIC_DELIVERY_MODE_FIXED
+	uint32_t destination = sCPUAPICIds[target_cpu];
+	uint32_t mode = ICI_VECTOR | APIC_DELIVERY_MODE_FIXED
 			| APIC_INTR_COMMAND_1_ASSERT
 			| APIC_INTR_COMMAND_1_DEST_MODE_PHYSICAL
 			| APIC_INTR_COMMAND_1_DEST_FIELD;

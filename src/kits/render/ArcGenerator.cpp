@@ -36,10 +36,10 @@
 
 
 namespace bhapi {
-BHAPI_LOCAL bool get_arc_12(BPoint &radius, BPoint &pStart, BPoint &pEnd,  int32 &x,  int32 &y, BPoint &radius2, float &deltaNext);
+BHAPI_LOCAL bool get_arc_12(BPoint &radius, BPoint &pStart, BPoint &pEnd,  int32_t &x,  int32_t &y, BPoint &radius2, float &deltaNext);
 }
 
-BHAPI_LOCAL bool bhapi::get_arc_12(BPoint &radius, BPoint &pStart, BPoint &pEnd,  int32 &x,  int32 &y, BPoint &radius2, float &deltaNext)
+BHAPI_LOCAL bool bhapi::get_arc_12(BPoint &radius, BPoint &pStart, BPoint &pEnd,  int32_t &x,  int32_t &y, BPoint &radius2, float &deltaNext)
 {
 	if(radius.x <= 0 || radius.y <= 0 || pStart.x > pEnd.x || pStart.y > 0 || pEnd.y > 0) return false;
 
@@ -78,8 +78,8 @@ BHAPI_LOCAL bool bhapi::get_arc_12(BPoint &radius, BPoint &pStart, BPoint &pEnd,
 			}
 		}
 
-		x = (int32)pStart.FloorCopy().x;
-		y = (int32)pStart.FloorCopy().y;
+		x = (int32_t)pStart.FloorCopy().x;
+		y = (int32_t)pStart.FloorCopy().y;
 
 		return true;
 	}
@@ -202,7 +202,7 @@ BArcGenerator::BArcGenerator(BPoint center, float xRadius, float yRadius, BPoint
 
 
 bool 
-BArcGenerator::Start(int32 &x,  int32 &y,  int32 &step,  int32 &pixels, bool &both, bool isLoopX, float pixel_size)
+BArcGenerator::Start(int32_t &x,  int32_t &y,  int32_t &step,  int32_t &pixels, bool &both, bool isLoopX, float pixel_size)
 {
 	fIsLoopX = isLoopX;
 
@@ -246,19 +246,19 @@ BArcGenerator::Start(int32 &x,  int32 &y,  int32 &step,  int32 &pixels, bool &bo
 		_fRadius.y = fRadius.y;
 	}
 
-	_fCenterX = (int32)floor((double)(fCenter.x / pixel_size));
-	_fCenterY = (int32)floor((double)(fCenter.y / pixel_size));
-	_fRadiusX = (int32)floor((double)_fRadius.x);
-	_fStartX = (int32)floor((double)(fStart.x / pixel_size));
-	_fStartY = (int32)floor((double)(fStart.y / pixel_size));
-	_fEndX = (int32)floor((double)(fEnd.x / pixel_size));
-	_fEndY = (int32)floor((double)(fEnd.y / pixel_size));
+	_fCenterX = (int32_t)floor((double)(fCenter.x / pixel_size));
+	_fCenterY = (int32_t)floor((double)(fCenter.y / pixel_size));
+	_fRadiusX = (int32_t)floor((double)_fRadius.x);
+	_fStartX = (int32_t)floor((double)(fStart.x / pixel_size));
+	_fStartY = (int32_t)floor((double)(fStart.y / pixel_size));
+	_fEndX = (int32_t)floor((double)(fEnd.x / pixel_size));
+	_fEndY = (int32_t)floor((double)(fEnd.y / pixel_size));
 
-	fStep = (int32)(_fEnd.FloorCopy().x - _fStart.FloorCopy().x);
+	fStep = (int32_t)(_fEnd.FloorCopy().x - _fStart.FloorCopy().x);
 	fRadius2.Set(-1, -1);
 
 	bool havePixels = false;
-	int32 oldX = 0, oldY = 0, lastY = 0;
+	int32_t oldX = 0, oldY = 0, lastY = 0;
 
 	while(bhapi::get_arc_12(_fRadius, _fStart, _fEnd, _X, _Y, fRadius2, fDeltaNext))
 	{
@@ -310,7 +310,7 @@ BArcGenerator::Start(int32 &x,  int32 &y,  int32 &step,  int32 &pixels, bool &bo
 
 
 bool 
-BArcGenerator::Next(int32 &next,  int32 &pixels, bool &both)
+BArcGenerator::Next(int32_t &next,  int32_t &pixels, bool &both)
 {
 	if(fStep <= 0) return false;
 
@@ -320,7 +320,7 @@ BArcGenerator::Next(int32 &next,  int32 &pixels, bool &both)
 		return false;
 	}
 
-	int32 oldX = _X, oldY = _Y, lastY = _Y;
+	int32_t oldX = _X, oldY = _Y, lastY = _Y;
 
 	while(bhapi::get_arc_12(_fRadius, _fStart, _fEnd, _X, _Y, fRadius2, fDeltaNext))
 	{

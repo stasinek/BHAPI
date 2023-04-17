@@ -54,18 +54,18 @@ public:
 								_BStyleRunDescBuffer_();
 
 			void				InsertDesc(STEStyleRunDesc* inDesc,
-								int32 index);
-			void				RemoveDescs(int32 index, int32 count = 1);
+								int32_t index);
+			void				RemoveDescs(int32_t index, int32_t count = 1);
 
-			int32				OffsetToRun(int32 offset) const;
-			void				BumpOffset(int32 delta, int32 index);
+			int32_t				OffsetToRun(int32_t offset) const;
+			void				BumpOffset(int32_t delta, int32_t index);
 
-			STEStyleRunDesc*	operator[](int32 index) const;
+			STEStyleRunDesc*	operator[](int32_t index) const;
 };
 
 
 inline STEStyleRunDesc*
-_BStyleRunDescBuffer_::operator[](int32 index) const
+_BStyleRunDescBuffer_::operator[](int32_t index) const
 {
 	return &fBuffer[index];
 }
@@ -76,21 +76,21 @@ class _BStyleRecordBuffer_ : public _BTextViewSupportBuffer_<STEStyleRecord> {
 public:
 								_BStyleRecordBuffer_();
 
-			int32				InsertRecord(const BFont* inFont,
+			int32_t				InsertRecord(const BFont* inFont,
 									const rgb_color* inColor);
-			void				CommitRecord(int32 index);
-			void				RemoveRecord(int32 index);
+			void				CommitRecord(int32_t index);
+			void				RemoveRecord(int32_t index);
 
 			bool				MatchRecord(const BFont* inFont,
 									const rgb_color* inColor,
-									int32* outIndex);
+									int32_t* outIndex);
 
-			STEStyleRecord*		operator[](int32 index) const;
+			STEStyleRecord*		operator[](int32_t index) const;
 };
 
 
 inline STEStyleRecord*
-_BStyleRecordBuffer_::operator[](int32 index) const
+_BStyleRecordBuffer_::operator[](int32_t index) const
 {
 	return &fBuffer[index];
 }
@@ -105,45 +105,45 @@ public:
 			void				InvalidateNullStyle();
 			bool				IsValidNullStyle() const;
 
-			void				SyncNullStyle(int32 offset);
-			void				SetNullStyle(uint32 inMode,
+			void				SyncNullStyle(int32_t offset);
+			void				SetNullStyle(uint32_t inMode,
 									const BFont* inFont,
 									const rgb_color* inColor,
-									int32 offset = 0);
+									int32_t offset = 0);
 			void				GetNullStyle(const BFont** font,
 									const rgb_color** color) const;
 
-			void				GetStyle(int32 inOffset, BFont* outFont,
+			void				GetStyle(int32_t inOffset, BFont* outFont,
 									rgb_color* outColor) const;
-			void				ContinuousGetStyle(BFont*, uint32*,
-									rgb_color*, bool*, int32, int32) const;
+			void				ContinuousGetStyle(BFont*, uint32_t*,
+									rgb_color*, bool*, int32_t, int32_t) const;
 
 			STEStyleRange*		AllocateStyleRange(
-									const int32 numStyles) const;
-			void				SetStyleRange(int32 fromOffset,
-									int32 toOffset, int32 textLen,
-									uint32 inMode, const BFont* inFont,
+									const int32_t numStyles) const;
+			void				SetStyleRange(int32_t fromOffset,
+									int32_t toOffset, int32_t textLen,
+									uint32_t inMode, const BFont* inFont,
 									const rgb_color* inColor);
-			STEStyleRange*		GetStyleRange(int32 startOffset,
-									int32 endOffset) const;
+			STEStyleRange*		GetStyleRange(int32_t startOffset,
+									int32_t endOffset) const;
 
-			void				RemoveStyleRange(int32 fromOffset,
-									int32 toOffset);
-			void				RemoveStyles(int32 index, int32 count = 1);
+			void				RemoveStyleRange(int32_t fromOffset,
+									int32_t toOffset);
+			void				RemoveStyles(int32_t index, int32_t count = 1);
 
-			int32				Iterate(int32 fromOffset, int32 length,
+			int32_t				Iterate(int32_t fromOffset, int32_t length,
 									InlineInput* input,
 									const BFont** outFont = NULL,
 									const rgb_color** outColor = NULL,
 									float* outAscent = NULL,
 									float* outDescen = NULL,
-									uint32* = NULL) const;
+									uint32_t* = NULL) const;
 
-			int32				OffsetToRun(int32 offset) const;
-			void				BumpOffset(int32 delta, int32 index);
+			int32_t				OffsetToRun(int32_t offset) const;
+			void				BumpOffset(int32_t delta, int32_t index);
 
-			STEStyleRun			operator[](int32 index) const;
-			int32				NumRuns() const;
+			STEStyleRun			operator[](int32_t index) const;
+			int32_t				NumRuns() const;
 
 	const	_BStyleRunDescBuffer_&	RunBuffer() const;
 	const	_BStyleRecordBuffer_&	RecordBuffer() const;
@@ -156,7 +156,7 @@ private:
 };
 
 
-inline int32 BTextView::StyleBuffer::NumRuns() const
+inline int32_t BTextView::StyleBuffer::NumRuns() const
 {
 	return fStyleRunDesc.ItemCount();
 }

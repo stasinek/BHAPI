@@ -48,13 +48,13 @@ public:
 		virtual void		FillArc(BPoint center, BPoint radii, float startTheta, float arcTheta);
 		virtual void		StrokeEllipse(BPoint center, BPoint radii);
 		virtual void		FillEllipse(BPoint center, BPoint radii);
-		virtual void		StrokePolygon(int32 numPoints, BPoint *points, bool isClosed);
-		virtual void		FillPolygon(int32 numPoints, BPoint *points, bool isClosed);
+		virtual void		StrokePolygon(int32_t numPoints, BPoint *points, bool isClosed);
+		virtual void		FillPolygon(int32_t numPoints, BPoint *points, bool isClosed);
 		virtual void        StrokeShape(BShape *shape);
 		virtual void        FillShape(BShape *shape);
 		virtual void		DrawString(char *string, float escapement_nospace, float escapement_space);
-		virtual void		DrawPixels(BRect src, BRect dest, int32 width, int32 height, int32 bytesPerRow, int32 pixelFormat, int32 flags, void *data);
-		virtual void		SetClippingRects(BRect *rects, uint32 numRects);
+		virtual void		DrawPixels(BRect src, BRect dest, int32_t width, int32_t height, int32_t bytesPerRow, int32_t pixelFormat, int32_t flags, void *data);
+		virtual void		SetClippingRects(BRect *rects, uint32_t numRects);
 		virtual void    	ClipToPicture(BPicture *picture, BPoint point, bool clip_to_inverse_picture);
 		virtual void		PushState();
 		virtual void		PopState();
@@ -73,13 +73,13 @@ public:
 		virtual void		SetScale(float scale);
 		virtual void		SetFontFamily(char *family);
 		virtual void		SetFontStyle(char *style);
-		virtual void		SetFontSpacing(int32 spacing);
+		virtual void		SetFontSpacing(int32_t spacing);
 		virtual void		SetFontSize(float size);
 		virtual void		SetFontRotate(float rotation);
-		virtual void		SetFontEncoding(int32 encoding);
-		virtual void		SetFontFlags(int32 flags);
+		virtual void		SetFontEncoding(int32_t encoding);
+		virtual void		SetFontFlags(int32_t flags);
 		virtual void		SetFontShear(float shear);
-		virtual void		SetFontFace(int32 flags);
+		virtual void		SetFontFace(int32_t flags);
 };
 
 #endif // _TEMPLATE_H

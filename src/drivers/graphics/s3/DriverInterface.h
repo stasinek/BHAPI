@@ -25,7 +25,7 @@
 
 struct Benaphore {
 	sem_id	sem;
-	int32	count;
+	int32_t	count;
 
 	status_t Init(const char* name)
 	{
@@ -122,8 +122,8 @@ enum MonitorType {
 
 
 struct DisplayModeEx : display_mode {
-	uint32	bpp;				// bits/pixel
-	uint32	bytesPerRow;		// actual number of bytes in one line/row
+	uint32_t	bpp;				// bits/pixel
+	uint32_t	bytesPerRow;		// actual number of bytes in one line/row
 };
 
 
@@ -132,7 +132,7 @@ struct SharedInfo {
 	uint16	vendorID;			// PCI vendor ID, from pci_info
 	uint16	deviceID;			// PCI device ID, from pci_info
 	uint8	revision;			// PCI device revsion, from pci_info
-	uint32	chipType;			// indicates group in which chip belongs (a group has similar functionality)
+	uint32_t	chipType;			// indicates group in which chip belongs (a group has similar functionality)
 	char	chipName[32];		// user recognizable name of chip
 
 	bool	bAccelerantInUse;	// true = accelerant has been initialized
@@ -149,19 +149,19 @@ struct SharedInfo {
 	area_id videoMemArea;		// video memory area_id.  The addresses are shared with all teams.
 	void*	videoMemAddr;		// video memory addr as viewed from virtual memory
 	void*	videoMemPCI;		// video memory addr as viewed from the PCI bus (for DMA)
-	uint32	videoMemSize; 		// video memory size in bytes.
+	uint32_t	videoMemSize; 		// video memory size in bytes.
 
-	uint32	cursorOffset;		// offset of cursor in video memory
-	uint32	frameBufferOffset;	// offset of frame buffer in video memory
-	uint32	maxFrameBufferSize;	// max available video memory for frame buffer
+	uint32_t	cursorOffset;		// offset of cursor in video memory
+	uint32_t	frameBufferOffset;	// offset of frame buffer in video memory
+	uint32_t	maxFrameBufferSize;	// max available video memory for frame buffer
 
 	// Color spaces supported by current video chip/driver.
 	color_space	colorSpaces[6];
-	uint32	colorSpaceCount;	// number of color spaces in array colorSpaces
+	uint32_t	colorSpaceCount;	// number of color spaces in array colorSpaces
 
 	// List of screen modes.
 	area_id modeArea;			// area containing list of display modes the driver supports
-	uint32	modeCount;			// number of display modes in the list
+	uint32_t	modeCount;			// number of display modes in the list
 
 	uint16	cursorHotX;			// Cursor hot spot. Top left corner of the cursor
 	uint16	cursorHotY;			// is 0,0
@@ -169,7 +169,7 @@ struct SharedInfo {
 	// Current display mode configuration, and other parameters related to
 	// current display mode.
 	DisplayModeEx displayMode;	// current display mode configuration
-	int32	commonCmd;			// flags common to drawing commands of current display mode
+	int32_t	commonCmd;			// flags common to drawing commands of current display mode
 
 	edid1_info	edidInfo;
 	bool		bHaveEDID;		// true = EDID info from device is in edidInfo
@@ -184,38 +184,38 @@ struct SharedInfo {
 	uint16	panelY;				// laptop LCD height
 
 	// Command Overflow Buffer (COB) parameters for Savage chips.
-	uint32	cobSizeIndex;		// size index
-	uint32	cobOffset;			// offset in video memory
+	uint32_t	cobSizeIndex;		// size index
+	uint32_t	cobOffset;			// offset in video memory
 
-	uint32	globalBitmapDesc;	// Global Bitmap Descriptor for BCI
+	uint32_t	globalBitmapDesc;	// Global Bitmap Descriptor for BCI
 };
 
 
 // Set some boolean condition (like enabling or disabling interrupts)
 struct S3SetBoolState {
-	uint32	magic;		// magic number
+	uint32_t	magic;		// magic number
 	bool	bEnable;	// state to set
 };
 
 
 // Retrieve the area_id of the kernel/accelerant shared info
 struct S3GetPrivateData {
-	uint32	magic;			// magic number
+	uint32_t	magic;			// magic number
 	area_id sharedInfoArea;	// ID of area containing shared information
 };
 
 
 struct S3GetEDID {
-	uint32		magic;		// magic number
+	uint32_t		magic;		// magic number
 	edid1_raw	rawEdid;	// raw EDID info to obtain
 };
 
 
 struct S3GetSetPIO {
-	uint32	magic;	// magic number
-	uint32	offset;	// offset of PIO register to read/write
-	uint32	size;		// number of bytes to transfer
-	uint32	value;	// value to write or value that was read
+	uint32_t	magic;	// magic number
+	uint32_t	offset;	// offset of PIO register to read/write
+	uint32_t	size;		// number of bytes to transfer
+	uint32_t	value;	// value to write or value that was read
 };
 
 

@@ -44,15 +44,15 @@ typedef struct pci_info {
 	uchar	reserved;				/* filler, for alignment */
 	union {
 		struct {
-			uint32	cardbus_cis;			/* CardBus CIS pointer */
+			uint32_t	cardbus_cis;			/* CardBus CIS pointer */
 			ushort	subsystem_id;			/* subsystem (add-in card) id */
 			ushort	subsystem_vendor_id;	/* subsystem (add-in card) vendor id */
-			uint32	rom_base;				/* rom base address, viewed from host */
-			uint32	rom_base_pci;			/* rom base addr, viewed from pci */
-			uint32	rom_size;				/* rom size */
-			uint32	base_registers[6];		/* base registers, viewed from host */
-			uint32	base_registers_pci[6];	/* base registers, viewed from pci */
-			uint32	base_register_sizes[6];	/* size of what base regs point to */
+			uint32_t	rom_base;				/* rom base address, viewed from host */
+			uint32_t	rom_base_pci;			/* rom base addr, viewed from pci */
+			uint32_t	rom_size;				/* rom size */
+			uint32_t	base_registers[6];		/* base registers, viewed from host */
+			uint32_t	base_registers_pci[6];	/* base registers, viewed from pci */
+			uint32_t	base_register_sizes[6];	/* size of what base regs point to */
 			uchar	base_register_flags[6];	/* flags from base address fields */
 			uchar	interrupt_line;			/* interrupt line */
 			uchar	interrupt_pin;			/* interrupt pin */
@@ -60,9 +60,9 @@ typedef struct pci_info {
 			uchar	max_latency;			/* how often PCI access needed */
 		} h0;
 		struct {
-			uint32	base_registers[2];		/* base registers, viewed from host */
-			uint32	base_registers_pci[2];	/* base registers, viewed from pci */
-			uint32	base_register_sizes[2];	/* size of what base regs point to */
+			uint32_t	base_registers[2];		/* base registers, viewed from host */
+			uint32_t	base_registers_pci[2];	/* base registers, viewed from pci */
+			uint32_t	base_register_sizes[2];	/* size of what base regs point to */
 			uchar	base_register_flags[2];	/* flags from base address fields */
 			uchar	primary_bus;
 			uchar	secondary_bus;
@@ -75,12 +75,12 @@ typedef struct pci_info {
 			ushort	memory_limit;
 			ushort  prefetchable_memory_base;
 			ushort  prefetchable_memory_limit;
-			uint32	prefetchable_memory_base_upper32;
-			uint32	prefetchable_memory_limit_upper32;
+			uint32_t	prefetchable_memory_base_upper32;
+			uint32_t	prefetchable_memory_limit_upper32;
 			ushort	io_base_upper16;
 			ushort	io_limit_upper16;
-			uint32	rom_base;				/* rom base address, viewed from host */
-			uint32	rom_base_pci;			/* rom base addr, viewed from pci */
+			uint32_t	rom_base;				/* rom base address, viewed from host */
+			uint32_t	rom_base_pci;			/* rom base addr, viewed from pci */
 			uchar	interrupt_line;			/* interrupt line */
 			uchar	interrupt_pin;			/* interrupt pin */
 			ushort	bridge_control;
@@ -98,14 +98,14 @@ typedef struct pci_info {
 			uchar   subordinate_bus;
 			uchar   secondary_latency;
 			ushort  reserved;
-			uint32  memory_base;
-			uint32  memory_limit;
-			uint32  memory_base_upper32;
-			uint32  memory_limit_upper32;
-			uint32  io_base;
-			uint32  io_limit;
-			uint32  io_base_upper32;
-			uint32  io_limit_upper32;
+			uint32_t  memory_base;
+			uint32_t  memory_limit;
+			uint32_t  memory_base_upper32;
+			uint32_t  memory_limit_upper32;
+			uint32_t  io_base;
+			uint32_t  io_limit;
+			uint32_t  io_base_upper32;
+			uint32_t  io_limit_upper32;
 			ushort  secondary_status;
 			ushort  bridge_control;
 #endif /* __HAIKU_PCI_BUS_MANAGER_TESTING */
@@ -123,14 +123,14 @@ struct pci_module_info {
 	void			(*write_io_8) (int mapped_io_addr, uint8 value);
 	uint16			(*read_io_16) (int mapped_io_addr);
 	void			(*write_io_16) (int mapped_io_addr, uint16 value);
-	uint32			(*read_io_32) (int mapped_io_addr);
-	void			(*write_io_32) (int mapped_io_addr, uint32 value);
+	uint32_t			(*read_io_32) (int mapped_io_addr);
+	void			(*write_io_32) (int mapped_io_addr, uint32_t value);
 
 	long			(*get_nth_pci_info) (
 						long		index,	/* index into pci device table */
 						pci_info 	*info	/* caller-supplied buffer for info */
 					);
-	uint32			(*read_pci_config) (
+	uint32_t			(*read_pci_config) (
 						uint8	bus,		/* bus number */
 						uint8	device,		/* device # on bus */
 						uint8	function,	/* function # in device */
@@ -143,7 +143,7 @@ struct pci_module_info {
 						uint8	function,	/* function # in device */
 						uint16	offset,		/* offset in configuration space */
 						uint8	size,		/* # bytes to write (1, 2 or 4) */
-						uint32	value		/* value to write */
+						uint32_t	value		/* value to write */
 					);
 
 	void *			(*ram_address) (const void *physical_address_in_system_memory);

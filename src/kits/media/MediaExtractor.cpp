@@ -29,7 +29,7 @@ static const size_t kMaxCacheBytes = 3 * 1024 * 1024;
 
 class MediaExtractorChunkProvider : public ChunkProvider {
 public:
-	MediaExtractorChunkProvider(MediaExtractor* extractor, int32 stream)
+	MediaExtractorChunkProvider(MediaExtractor* extractor, int32_t stream)
 		:
 		fExtractor(extractor),
 		fStream(stream)
@@ -45,14 +45,14 @@ public:
 
 private:
 	MediaExtractor*	fExtractor;
-	int32			fStream;
+	int32_t			fStream;
 };
 
 
 // #pragma mark -
 
 
-MediaExtractor::MediaExtractor(BDataIO* source, int32 flags)
+MediaExtractor::MediaExtractor(BDataIO* source, int32_t flags)
 	:
 	fExtractorThread(-1),
 	fSource(source),
@@ -79,7 +79,7 @@ MediaExtractor::MediaExtractor(BDataIO* source, int32 flags)
 	fStreamInfo = new stream_info[fStreamCount];
 
 	// initialize stream infos
-	for (int32 i = 0; i < fStreamCount; i++) {
+	for (int32_t i = 0; i < fStreamCount; i++) {
 		fStreamInfo[i].status = B_OK;
 		fStreamInfo[i].cookie = 0;
 		fStreamInfo[i].hasCookie = false;
@@ -98,7 +98,7 @@ MediaExtractor::MediaExtractor(BDataIO* source, int32 flags)
 	}
 
 	// create all stream cookies
-	for (int32 i = 0; i < fStreamCount; i++) {
+	for (int32_t i = 0; i < fStreamCount; i++) {
 		if (fReader->AllocateCookie(i, &fStreamInfo[i].cookie) != B_OK) {
 			fStreamInfo[i].cookie = 0;
 			fStreamInfo[i].hasCookie = false;
@@ -110,7 +110,7 @@ MediaExtractor::MediaExtractor(BDataIO* source, int32 flags)
 	}
 
 	// get info for all streams
-	for (int32 i = 0; i < fStreamCount; i++) {
+	for (int32_t i = 0; i < fStreamCount; i++) {
 		if (fStreamInfo[i].status != B_OK)
 			continue;
 
@@ -149,7 +149,7 @@ MediaExtractor::~MediaExtractor()
 
 	// free all stream cookies
 	// and chunk caches
-	for (int32 i = 0; i < fStreamCount; i++) {
+	for (int32_t i = 0; i < fStreamCount; i++) {
 		if (fStreamInfo[i].hasCookie)
 			fReader->FreeCookie(fStreamInfo[i].cookie);
 
@@ -184,7 +184,7 @@ status_t MediaExtractor::GetMetaData(BMessage* _data) const
 }
 
 
-int32 MediaExtractor::StreamCount()
+int32_t MediaExtractor::StreamCount()
 {
 	CALLED();
 	return fStreamCount;
@@ -198,13 +198,13 @@ const char*  MediaExtractor::Copyright()
 
 
 const media_format*
-MediaExtractor::EncodedFormat(int32 stream)
+MediaExtractor::EncodedFormat(int32_t stream)
 {
 	return &fStreamInfo[stream].encodedFormat;
 }
 
 
-int64 MediaExtractor::CountFrames(int32 stream) const
+int64 MediaExtractor::CountFrames(int32_t stream) const
 {
 	CALLED();
 	if (fStreamInfo[stream].status != B_OK)
@@ -224,7 +224,7 @@ int64 MediaExtractor::CountFrames(int32 stream) const
 
 
 bigtime_t
-MediaExtractor::Duration(int32 stream) const
+MediaExtractor::Duration(int32_t stream) const
 {
 	CALLED();
 
@@ -244,7 +244,7 @@ MediaExtractor::Duration(int32 stream) const
 }
 
 
-status_t MediaExtractor::Seek(int32 stream, uint32 seekTo, int64* _frame,
+status_t MediaExtractor::Seek(int32_t stream, uint32_t seekTo, int64* _frame,
 	bigtime_t* _time)
 {
 	CALLED();
@@ -266,7 +266,7 @@ status_t MediaExtractor::Seek(int32 stream, uint32 seekTo, int64* _frame,
 }
 
 
-status_t MediaExtractor::FindKeyFrame(int32 stream, uint32 seekTo, int64* _frame,
+status_t MediaExtractor::FindKeyFrame(int32_t stream, uint32_t seekTo, int64* _frame,
 	bigtime_t* _time) const
 {
 	CALLED();
@@ -279,7 +279,7 @@ status_t MediaExtractor::FindKeyFrame(int32 stream, uint32 seekTo, int64* _frame
 }
 
 
-status_t MediaExtractor::GetNextChunk(int32 stream, const void** _chunkBuffer,
+status_t MediaExtractor::GetNextChunk(int32_t stream, const void** _chunkBuffer,
 	size_t* _chunkSize, media_header* mediaHeader)
 {
 	stream_info& info = fStreamInfo[stream];
@@ -312,7 +312,7 @@ status_t MediaExtractor::GetNextChunk(int32 stream, const void** _chunkBuffer,
 }
 
 
-status_t MediaExtractor::CreateDecoder(int32 stream, Decoder** _decoder,
+status_t MediaExtractor::CreateDecoder(int32_t stream, Decoder** _decoder,
 	media_codec_info* codecInfo)
 {
 	CALLED();
@@ -375,7 +375,7 @@ status_t MediaExtractor::CreateDecoder(int32 stream, Decoder** _decoder,
 }
 
 
-status_t MediaExtractor::GetStreamMetaData(int32 stream, BMessage* _data) const
+status_t MediaExtractor::GetStreamMetaData(int32_t stream, BMessage* _data) const
 {
 	const stream_info& info = fStreamInfo[stream];
 
@@ -417,11 +417,11 @@ void MediaExtractor::_ExtractorThread()
 
 		// Iterate over all streams until they are all filled
 
-		int32 streamsFilled;
+		int32_t streamsFilled;
 		do {
 			streamsFilled = 0;
 
-			for (int32 stream = 0; stream < fStreamCount; stream++) {
+			for (int32_t stream = 0; stream < fStreamCount; stream++) {
 				stream_info& info = fStreamInfo[stream];
 				if (info.status != B_OK) {
 					streamsFilled++;

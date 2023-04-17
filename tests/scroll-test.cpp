@@ -59,8 +59,8 @@ public:
 	TWindow(ERect frame,
 		const char *title,
 		e_window_type type,
-		euint32 flags,
-		euint32 workspace = E_CURRENT_WORKSPACE);
+		euint32_t flags,
+		euint32_t workspace = E_CURRENT_WORKSPACE);
 	virtual ~TWindow();
 
 	virtual bool QuitRequested();
@@ -78,7 +78,7 @@ public:
 
 class TView : public EView {
 public:
-	TView(ERect frame, const char *name, euint32 resizingMode, euint32 flags);
+	TView(ERect frame, const char *name, euint32_t resizingMode, euint32_t flags);
 
 	virtual void Pulse();
 
@@ -91,7 +91,7 @@ private:
 };
 
 
-TView::TView(ERect frame, const char *name, euint32 resizingMode, euint32 flags)
+TView::TView(ERect frame, const char *name, euint32_t resizingMode, euint32_t flags)
 	: EView(frame, name, resizingMode, flags)
 {
 	SetViewColor(216, 216, 216);
@@ -326,7 +326,7 @@ TView::Pulse()
 }
 
 
-TWindow::TWindow(ERect frame, const char *title, e_window_type type, euint32 flags, euint32 workspace)
+TWindow::TWindow(ERect frame, const char *title, e_window_type type, euint32_t flags, euint32_t workspace)
 	: EWindow(frame, title, type, flags, workspace)
 {
 	EView *view = new TView(frame.OffsetToCopy(E_ORIGIN), NULL, E_FOLLOW_ALL, E_WILL_DRAW | E_FRAME_EVENTS);

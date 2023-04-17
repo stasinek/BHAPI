@@ -95,7 +95,7 @@ class Database {
 
 		// Sniffer
 		status_t GuessMimeType(const entry_ref *file, BString *result);
-		status_t GuessMimeType(const void *buffer, int32 length, BString *result);
+		status_t GuessMimeType(const void *buffer, int32_t length, BString *result);
 		status_t GuessMimeType(const char *filename, BString *result);
 
 		// Monitor
@@ -127,26 +127,26 @@ class Database {
 			bool	notify;
 		};
 
-		status_t _SetStringValue(const char *type, int32 what,
+		status_t _SetStringValue(const char *type, int32_t what,
 					const char* attribute, type_code attributeType,
 					size_t maxLength, const char *value);
 
 		// Functions to send monitor notifications
 		status_t _SendInstallNotification(const char *type);
 		status_t _SendDeleteNotification(const char *type);	
-		status_t _SendMonitorUpdate(int32 which, const char *type,
-					const char *extraType, bool largeIcon, int32 action);
-		status_t _SendMonitorUpdate(int32 which, const char *type,
-					const char *extraType, int32 action);
-		status_t _SendMonitorUpdate(int32 which, const char *type,
-					bool largeIcon, int32 action);
-		status_t _SendMonitorUpdate(int32 which, const char *type,
-					int32 action);
+		status_t _SendMonitorUpdate(int32_t which, const char *type,
+					const char *extraType, bool largeIcon, int32_t action);
+		status_t _SendMonitorUpdate(int32_t which, const char *type,
+					const char *extraType, int32_t action);
+		status_t _SendMonitorUpdate(int32_t which, const char *type,
+					bool largeIcon, int32_t action);
+		status_t _SendMonitorUpdate(int32_t which, const char *type,
+					int32_t action);
 		status_t _SendMonitorUpdate(BMessage &msg);
 
 		DeferredInstallNotification* _FindDeferredInstallNotification(
 			const char* type, bool remove = false);
-		bool _CheckDeferredInstallNotification(int32 which, const char* type);
+		bool _CheckDeferredInstallNotification(int32_t which, const char* type);
 
 	private:
 		status_t fStatus;

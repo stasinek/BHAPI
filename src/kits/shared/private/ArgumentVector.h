@@ -25,7 +25,7 @@ public:
 								ArgumentVector();
 								~ArgumentVector();
 
-			int32				ArgumentCount() const	{ return fCount; }
+			int32_t				ArgumentCount() const	{ return fCount; }
 			const char* const*	Arguments() const		{ return fArguments; }
 
 			char**				DetachArguments();
@@ -40,7 +40,7 @@ private:
 
 private:
 			char**				fArguments;
-			int32				fCount;
+			int32_t				fCount;
 };
 
 

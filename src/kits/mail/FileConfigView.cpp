@@ -27,14 +27,14 @@
 #define B_TRANSLATION_CONTEXT "MailKit"
 
 
-static const uint32 kMsgSelectButton = 'fsel';
+static const uint32_t kMsgSelectButton = 'fsel';
 
 
 namespace BPrivate {
 
 
 FileControl::FileControl(const char* name, const char* label,
-	const char* pathOfFile, uint32 flavors)
+	const char* pathOfFile, uint32_t flavors)
 	:
 	BView(name, 0)
 {
@@ -124,7 +124,7 @@ void FileControl::SetEnabled(bool enabled)
 
 
 MailFileConfigView::MailFileConfigView(const char* label, const char* name,
-	bool useMeta, const char* defaultPath, uint32 flavors)
+	bool useMeta, const char* defaultPath, uint32_t flavors)
 	:
 	FileControl(name, label, defaultPath, flavors),
 	fUseMeta(useMeta),

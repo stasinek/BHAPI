@@ -34,7 +34,7 @@ public:
 
 protected:
 
-	virtual	BMediaAddOn*	AddOn(int32* id) const;
+	virtual	BMediaAddOn*	AddOn(int32_t* id) const;
 
 	virtual void			NodeRegistered();
 
@@ -55,7 +55,7 @@ protected:
 	virtual	void			TimeWarp(bigtime_t realTime,
 								bigtime_t performanceTime);
 
-	virtual	status_t		HandleMessage(int32 message,
+	virtual	status_t		HandleMessage(int32_t message,
 								const void* data,
 								size_t size);
 
@@ -68,16 +68,16 @@ protected:
 	virtual	status_t		AcceptFormat(const media_destination& dest,
 								media_format* format);
 
-	virtual	status_t		GetNextInput(int32* cookie,
+	virtual	status_t		GetNextInput(int32_t* cookie,
 								media_input* outInput);
 
-	virtual	void			DisposeInputCookie(int32 cookie);
+	virtual	void			DisposeInputCookie(int32_t cookie);
 
 	virtual	void			BufferReceived(BBuffer* buffer);
 
 	virtual	void			ProducerDataStatus(
 								const media_destination& destination,
-								int32 status,
+								int32_t status,
 								bigtime_t performanceTime);
 
 	virtual	status_t		GetLatencyFor(const media_destination& destination,
@@ -94,7 +94,7 @@ protected:
 
 	virtual	status_t		FormatChanged(const media_source& producer,
 								const media_destination& consumer,
-								int32 tag,
+								int32_t tag,
 								const media_format& format);
 
 protected:

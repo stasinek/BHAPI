@@ -95,7 +95,7 @@ void BGroupLayout::SetOrientation(orientation orientation)
 
 
 float
-BGroupLayout::ItemWeight(int32 index) const
+BGroupLayout::ItemWeight(int32_t index) const
 {
 	if (index < 0 || index >= CountItems())
 		return 0;
@@ -105,7 +105,7 @@ BGroupLayout::ItemWeight(int32 index) const
 }
 
 
-void BGroupLayout::SetItemWeight(int32 index, float weight)
+void BGroupLayout::SetItemWeight(int32_t index, float weight)
 {
 	if (index < 0 || index >= CountItems())
 		return;
@@ -125,7 +125,7 @@ BGroupLayout::AddView(BView* child)
 
 
 BLayoutItem*
-BGroupLayout::AddView(int32 index, BView* child)
+BGroupLayout::AddView(int32_t index, BView* child)
 {
 	return BTwoDimensionalLayout::AddView(index, child);
 }
@@ -139,7 +139,7 @@ BGroupLayout::AddView(BView* child, float weight)
 
 
 BLayoutItem*
-BGroupLayout::AddView(int32 index, BView* child, float weight)
+BGroupLayout::AddView(int32_t index, BView* child, float weight)
 {
 	BLayoutItem* item = AddView(index, child);
 	if (ItemLayoutData* data = _LayoutDataForItem(item))
@@ -155,7 +155,7 @@ bool BGroupLayout::AddItem(BLayoutItem* item)
 }
 
 
-bool BGroupLayout::AddItem(int32 index, BLayoutItem* item)
+bool BGroupLayout::AddItem(int32_t index, BLayoutItem* item)
 {
 	return BTwoDimensionalLayout::AddItem(index, item);
 }
@@ -167,7 +167,7 @@ bool BGroupLayout::AddItem(BLayoutItem* item, float weight)
 }
 
 
-bool BGroupLayout::AddItem(int32 index, BLayoutItem* item, float weight)
+bool BGroupLayout::AddItem(int32_t index, BLayoutItem* item, float weight)
 {
 	bool success = AddItem(index, item);
 	if (success) {
@@ -213,14 +213,14 @@ BGroupLayout::Instantiate(BMessage* from)
 
 
 status_t BGroupLayout::ItemArchived(BMessage* into,
-	BLayoutItem* item, int32 index) const
+	BLayoutItem* item, int32_t index) const
 {
 	return into->AddFloat(kItemWeightField, _LayoutDataForItem(item)->weight);
 }
 
 
 status_t BGroupLayout::ItemUnarchived(const BMessage* from,
-	BLayoutItem* item, int32 index)
+	BLayoutItem* item, int32_t index)
 {
 	float weight;
 	status_t result = from->FindFloat(kItemWeightField, index, &weight);
@@ -232,14 +232,14 @@ status_t BGroupLayout::ItemUnarchived(const BMessage* from,
 }
 
 
-bool BGroupLayout::ItemAdded(BLayoutItem* item, int32 atIndex)
+bool BGroupLayout::ItemAdded(BLayoutItem* item, int32_t atIndex)
 {
 	item->SetLayoutData(new(nothrow) ItemLayoutData);
 	return item->LayoutData() != NULL;
 }
 
 
-void BGroupLayout::ItemRemoved(BLayoutItem* item, int32 fromIndex)
+void BGroupLayout::ItemRemoved(BLayoutItem* item, int32_t fromIndex)
 {
 	if (ItemLayoutData* data = _LayoutDataForItem(item)) {
 		item->SetLayoutData(NULL);
@@ -252,7 +252,7 @@ void BGroupLayout::PrepareItems(orientation orientation)
 {
 	// filter the visible items
 	fVisibleItems.MakeEmpty();
-	int32 itemCount = CountItems();
+	int32_t itemCount = CountItems();
 	for (int i = 0; i < itemCount; i++) {
 		BLayoutItem* item = ItemAt(i);
 		if (item->IsVisible())
@@ -261,19 +261,19 @@ void BGroupLayout::PrepareItems(orientation orientation)
 }
 
 
-int32 BGroupLayout::InternalCountColumns()
+int32_t BGroupLayout::InternalCountColumns()
 {
 	return (fOrientation == B_HORIZONTAL ? fVisibleItems.CountItems() : 1);
 }
 
 
-int32 BGroupLayout::InternalCountRows()
+int32_t BGroupLayout::InternalCountRows()
 {
 	return (fOrientation == B_VERTICAL ? fVisibleItems.CountItems() : 1);
 }
 
 
-void BGroupLayout::GetColumnRowConstraints(orientation orientation, int32 index,
+void BGroupLayout::GetColumnRowConstraints(orientation orientation, int32_t index,
 	ColumnRowConstraints* constraints)
 {
 	if (index >= 0 && index < fVisibleItems.CountItems()) {
@@ -290,7 +290,7 @@ void BGroupLayout::GetColumnRowConstraints(orientation orientation, int32 index,
 
 void BGroupLayout::GetItemDimensions(BLayoutItem* item, Dimensions* dimensions)
 {
-	int32 index = fVisibleItems.IndexOf(item);
+	int32_t index = fVisibleItems.IndexOf(item);
 	if (index < 0)
 		return;
 

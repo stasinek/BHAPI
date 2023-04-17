@@ -70,7 +70,7 @@ protected:
 									ino_t toDirectory, dev_t device,
 									ino_t node, dev_t nodeDevice);
 	virtual	void				StatChanged(ino_t node, dev_t device,
-									int32 statFields);
+									int32_t statFields);
 
 private:
 			void				_HandlePendingEntries();

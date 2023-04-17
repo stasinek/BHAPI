@@ -108,8 +108,8 @@ private:
 private:
 			status_t 			_AddSourceCodeInfo(CompilationUnit* unit,
 									FileSourceCode* sourceCode,
-									int32 fileIndex);
-			int32				_GetSourceFileIndex(CompilationUnit* unit,
+									int32_t fileIndex);
+			int32_t				_GetSourceFileIndex(CompilationUnit* unit,
 									LocatableFile* sourceFile) const;
 
 			status_t			_CreateLocalVariables(CompilationUnit* unit,

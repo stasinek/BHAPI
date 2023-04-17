@@ -51,8 +51,8 @@ public:
             status_t			AddCookie(BNetworkCookie* cookie);
             status_t			AddCookies(const BNetworkCookieList& cookies);
 
-            uint32				DeleteOutdatedCookies();
-            uint32				PurgeForExit();
+            uint32_t				DeleteOutdatedCookies();
+            uint32_t				PurgeForExit();
 
     // BArchivable members
     virtual	status_t			Archive(BMessage* into,
@@ -115,7 +115,7 @@ private:
             BNetworkCookieList*	fList;
     const	BNetworkCookie*		fElement;
     const	BNetworkCookie*		fLastElement;
-            int32				fIndex;
+            int32_t				fIndex;
 };
 
 
@@ -151,8 +151,8 @@ private:
     const	BNetworkCookie*		fElement;
     const	BNetworkCookie*		fLastElement;
 
-            int32				fIndex;
-            int32				fLastIndex;
+            int32_t				fIndex;
+            int32_t				fLastIndex;
 
             BUrl				fUrl;
 };

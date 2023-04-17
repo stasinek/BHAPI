@@ -14,7 +14,7 @@
 
 using namespace BPrivate::Storage::Sniffer;
 
-Range::Range(int32 start, int32 end)
+Range::Range(int32_t start, int32_t end)
 	: fStart(-1)
 	, fEnd(-1)
 	, fCStatus(B_NO_INIT)
@@ -39,15 +39,15 @@ Range::GetErr() const {
 	}
 }
 
-int32 Range::Start() const {
+int32_t Range::Start() const {
 	return fStart;
 }
 
-int32 Range::End() const {
+int32_t Range::End() const {
 	return fEnd;
 }
 	
-void Range::SetTo(int32 start, int32 end) {
+void Range::SetTo(int32_t start, int32_t end) {
 		fStart = start;
 		fEnd = end;
 	if (start > end) {

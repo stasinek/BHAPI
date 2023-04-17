@@ -69,8 +69,8 @@ BHAPI_EXPORT bool bhapi::validate_instantiation(const BMessage *from, const char
 {
     if(from == NULL || class_name == NULL || *class_name == 0) return false;
 
-     int32 items = from->CountItems("class", B_STRING_TYPE);
-    for(int32 i = 0; i < items; i++)
+     int32_t items = from->CountItems("class", B_STRING_TYPE);
+    for(int32_t i = 0; i < items; i++)
     {
         const char *_class_name = NULL;
         from->FindString("class", i, &_class_name);

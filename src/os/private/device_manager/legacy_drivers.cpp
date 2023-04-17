@@ -96,13 +96,13 @@ struct legacy_driver {
 	ino_t			node;
 	timespec		last_modified;
 	image_id		image;
-	uint32			devices_used;
+	uint32_t			devices_used;
 	bool			binary_updated;
-	int32			priority;
+	int32_t			priority;
 	DeviceList		devices;
 
 	// driver image information
-	int32			api_version;
+	int32_t			api_version;
 	device_hooks*	(*find_device)(const char *);
 	const char**	(*publish_devices)(void);
 	status_t		(*uninit_driver)(void);
@@ -139,7 +139,7 @@ struct driver_entry : DoublyLinkedListLinkImpl<driver_entry> {
 	char*			path;
 	dev_t			device;
 	ino_t			node;
-	int32			busses;
+	int32_t			busses;
 };
 
 typedef DoublyLinkedList<driver_entry> DriverEntryList;
@@ -170,8 +170,8 @@ struct DirectoryNodeHashDefinition {
 		GetLink(directory_node_entry* entry) const
 		{ return entry->hash_link; }
 
-	uint32 _Hash(ino_t node) const
-		{ return (uint32)(node >> 32) + (uint32)node; }
+	uint32_t _Hash(ino_t node) const
+		{ return (uint32_t)(node >> 32) + (uint32_t)node; }
 };
 
 typedef BOpenHashTable<DirectoryNodeHashDefinition> DirectoryNodeHash;
@@ -255,7 +255,7 @@ static status_t load_driver(legacy_driver *driver);
 
 
 static DriverWatcher sDriverWatcher;
-static int32 sDriverEventsPending;
+static int32_t sDriverEventsPending;
 static DriverEventList sDriverEvents;
 static mutex sDriverEventsLock = MUTEX_INITIALIZER("driver events");
 	// inner lock, protects the sDriverEvents list only
@@ -292,7 +292,7 @@ republish_driver(legacy_driver* driver)
 	// now ask the driver for it's currently published devices
 	const char** devicePaths = driver->publish_devices();
 
-	int32 exported = 0;
+	int32_t exported = 0;
 	for (; devicePaths != NULL && devicePaths[0]; devicePaths++) {
 		LegacyDevice* device;
 
@@ -369,7 +369,7 @@ load_driver(legacy_driver *driver)
 
 	// For a valid device driver the following exports are required
 
-	int32 *apiVersion;
+	int32_t *apiVersion;
 	if (get_image_symbol(image, "api_version", B_SYMBOL_TYPE_DATA,
 			(void **)&apiVersion) == B_OK) {
 #if B_CUR_DRIVER_API_VERSION != 2
@@ -508,7 +508,7 @@ change_driver_watcher(dev_t device, ino_t node, bool add)
 }
 
 
-static int32
+static int32_t
 get_priority(const char* path)
 {
 	// TODO: would it be better to initialize a static structure here
@@ -520,7 +520,7 @@ get_priority(const char* path)
 	};
 	KPath pathBuffer;
 
-	for (uint32 index = 0; index < sizeof(whichPath) / sizeof(whichPath[0]);
+	for (uint32_t index = 0; index < sizeof(whichPath) / sizeof(whichPath[0]);
 			index++) {
 		if (__find_directory(whichPath[index], gBootDevice, false,
 			pathBuffer.LockBuffer(), pathBuffer.BufferSize()) == B_OK) {
@@ -577,7 +577,7 @@ add_driver(const char *path, image_id image)
 			return errno;
 	}
 
-	int32 priority = get_priority(path);
+	int32_t priority = get_priority(path);
 
 	RecursiveLocker _(sLock);
 
@@ -793,7 +793,7 @@ void
 DriverWatcher::EventOccurred(NotificationService& service,
 	const KMessage* event)
 {
-	int32 opcode = event->GetInt32("opcode", -1);
+	int32_t opcode = event->GetInt32("opcode", -1);
 	if (opcode != B_STAT_CHANGED
 		|| (event->GetInt32("fields", 0) & B_STAT_MODIFICATION_TIME) == 0)
 		return;
@@ -943,7 +943,7 @@ DirectoryIterator::SetTo(const char* path, const char* subPath, bool recursive)
 		bool disableUserAddOns = get_safemode_boolean(
 			B_SAFEMODE_DISABLE_USER_ADD_ONS, false);
 
-		for (uint32 i = 0; i < sizeof(whichPath) / sizeof(whichPath[0]); i++) {
+		for (uint32_t i = 0; i < sizeof(whichPath) / sizeof(whichPath[0]); i++) {
 			if (i < 2 && disableUserAddOns)
 				continue;
 
@@ -1056,7 +1056,7 @@ void
 DirectoryWatcher::EventOccurred(NotificationService& service,
 	const KMessage* event)
 {
-	int32 opcode = event->GetInt32("opcode", -1);
+	int32_t opcode = event->GetInt32("opcode", -1);
 	dev_t device = event->GetInt32("device", -1);
 	ino_t directory = event->GetInt64("directory", -1);
 	const char *name = event->GetString("name", NULL);
@@ -1484,7 +1484,7 @@ legacy_driver_probe(const char* subPath)
 		bool disableUserAddOns = get_safemode_boolean(
 			B_SAFEMODE_DISABLE_USER_ADD_ONS, false);
 
-		for (uint32 i = 0; i < sizeof(whichPath) / sizeof(whichPath[0]); i++) {
+		for (uint32_t i = 0; i < sizeof(whichPath) / sizeof(whichPath[0]); i++) {
 			if (i < 2 && disableUserAddOns)
 				continue;
 

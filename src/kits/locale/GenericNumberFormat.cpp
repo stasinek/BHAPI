@@ -80,8 +80,8 @@ class BGenericNumberFormat::GroupingInfo {
 		{
 		}
 
-		GroupingInfo(const char **separators, int32 separatorCount,
-					 const size_t *sizes, int32 sizeCount)
+		GroupingInfo(const char **separators, int32_t separatorCount,
+					 const size_t *sizes, int32_t sizeCount)
 			: fSeparators(NULL),
 			  fSeparatorCount(0),
 			  fSizes(NULL),
@@ -97,8 +97,8 @@ class BGenericNumberFormat::GroupingInfo {
 			Unset();
 		}
 
-		status_t SetTo(const char **separators, int32 separatorCount,
-					   const size_t *sizes, int32 sizeCount)
+		status_t SetTo(const char **separators, int32_t separatorCount,
+					   const size_t *sizes, int32_t sizeCount)
 		{
 			// unset old
 			Unset();
@@ -108,8 +108,8 @@ class BGenericNumberFormat::GroupingInfo {
 				return B_OK;
 			// allocate arrays
 			fSeparators = new(nothrow) Symbol[separatorCount];
-			fSizes = new(nothrow) int32[sizeCount];
-			fSumSizes = new(nothrow) int32[sizeCount];
+			fSizes = new(nothrow) int32_t[sizeCount];
+			fSumSizes = new(nothrow) int32_t[sizeCount];
 			fSumSeparators = new(nothrow) Symbol*[separatorCount];
 			if (!fSeparators || !fSizes || !fSumSizes || !fSumSeparators) {
 				Unset();
@@ -126,9 +126,9 @@ class BGenericNumberFormat::GroupingInfo {
 				}
 			}
 			// sizes and sum arrays
-			int32 sumSize = -1;
-			for (int32 i = 0; i < sizeCount; i++) {
-				fSizes[i] = (int32)sizes[i];
+			int32_t sumSize = -1;
+			for (int32_t i = 0; i < sizeCount; i++) {
+				fSizes[i] = (int32_t)sizes[i];
 				sumSize += fSizes[i];
 				fSumSizes[i] = sumSize;
 				fSumSeparators[i] = &fSeparators[min(i, fSeparatorCount)];
@@ -158,7 +158,7 @@ class BGenericNumberFormat::GroupingInfo {
 			}
 		}
 
-		const Symbol *SeparatorForDigit(int32 position) const
+		const Symbol *SeparatorForDigit(int32_t position) const
 		{
 			for (int i = fSizeCount - 1; i >= 0; i--) {
 				if (fSumSizes[i] <= position) {
@@ -175,10 +175,10 @@ class BGenericNumberFormat::GroupingInfo {
 
 	private:
 		Symbol	*fSeparators;
-		int32	fSeparatorCount;
-		int32	*fSizes;
-		int32	fSizeCount;
-		int32	*fSumSizes;
+		int32_t	fSeparatorCount;
+		int32_t	*fSizes;
+		int32_t	fSizeCount;
+		int32_t	*fSumSizes;
 		Symbol	**fSumSeparators;
 };
 
@@ -311,12 +311,12 @@ class BGenericNumberFormat::SignSymbols {
 // BufferWriter
 class BGenericNumberFormat::BufferWriter {
 	public:
-		BufferWriter(char *buffer = NULL, int32 bufferSize = 0)
+		BufferWriter(char *buffer = NULL, int32_t bufferSize = 0)
 		{
 			SetTo(buffer, bufferSize);
 		}
 
-		void SetTo(char *buffer = NULL, int32 bufferSize = 0)
+		void SetTo(char *buffer = NULL, int32_t bufferSize = 0)
 		{
 			fBuffer = buffer;
 			fBufferSize = bufferSize;
@@ -327,12 +327,12 @@ class BGenericNumberFormat::BufferWriter {
 				fBuffer[0] = '\0';
 		}
 
-		int32 StringLength() const
+		int32_t StringLength() const
 		{
 			return fPosition;
 		}
 
-		int32 CharCount() const
+		int32_t CharCount() const
 		{
 			return fCharCount;
 		}
@@ -344,7 +344,7 @@ class BGenericNumberFormat::BufferWriter {
 
 		void Append(const char *bytes, size_t length, size_t charCount)
 		{
-			int32 newPosition = fPosition + length;
+			int32_t newPosition = fPosition + length;
 			fDryRun |= (newPosition >= fBufferSize);
 			if (!fDryRun && length > 0) {
 				memcpy(fBuffer + fPosition, bytes, length);
@@ -365,11 +365,11 @@ class BGenericNumberFormat::BufferWriter {
 				Append(*symbol);
 		}
 
-		void Append(char c, int32 count)	// ASCII 128 chars only!
+		void Append(char c, int32_t count)	// ASCII 128 chars only!
 		{
 			if (count <= 0)
 				return;
-			int32 newPosition = fPosition + count;
+			int32_t newPosition = fPosition + count;
 			fDryRun |= (newPosition >= fBufferSize);
 			if (!fDryRun && count > 0) {
 				memset(fBuffer + fPosition, c, count);
@@ -379,12 +379,12 @@ class BGenericNumberFormat::BufferWriter {
 			fCharCount += count;
 		}
 
-		void Append(const Symbol &symbol, int32 count)
+		void Append(const Symbol &symbol, int32_t count)
 		{
 			if (count <= 0)
 				return;
-			int32 bytes = count * symbol.length;
-			int32 newPosition = fPosition + bytes;
+			int32_t bytes = count * symbol.length;
+			int32_t newPosition = fPosition + bytes;
 			fDryRun |= (newPosition >= fBufferSize);
 			if (!fDryRun && count > 0) {
 				for (int i = 0; i < count * symbol.length; i++)
@@ -395,7 +395,7 @@ class BGenericNumberFormat::BufferWriter {
 			fCharCount += count * symbol.char_count;
 		}
 
-		void Append(const Symbol *symbol, int32 count)
+		void Append(const Symbol *symbol, int32_t count)
 		{
 			if (symbol)
 				Append(*symbol, count);
@@ -403,9 +403,9 @@ class BGenericNumberFormat::BufferWriter {
 
 	private:
 		char	*fBuffer;
-		int32	fBufferSize;
-		int32	fPosition;
-		int32	fCharCount;
+		int32_t	fBufferSize;
+		int32_t	fPosition;
+		int32_t	fCharCount;
 		bool	fDryRun;
 };
 
@@ -424,17 +424,17 @@ const BGenericNumberFormat::Symbol
 
 // grouping separator symbols
 static const char *kDefaultGroupingSeparators[] = { "," };
-static const int32 kDefaultGroupingSeparatorCount
+static const int32_t kDefaultGroupingSeparatorCount
 	= sizeof(kDefaultGroupingSeparators) / sizeof(const char*);
 static const char *kNoGroupingSeparators[] = { NULL };	// to please mwcc
-static const int32 kNoGroupingSeparatorCount = 0;
+static const int32_t kNoGroupingSeparatorCount = 0;
 
 // grouping sizes
 static const size_t kDefaultGroupingSizes[] = { 3 };
-static const int32 kDefaultGroupingSizeCount
+static const int32_t kDefaultGroupingSizeCount
 	= sizeof(kDefaultGroupingSizes) / sizeof(size_t);
 static const size_t kNoGroupingSizes[] = { 0 };			// to please mwcc
-static const int32 kNoGroupingSizeCount = 0;
+static const int32_t kNoGroupingSizeCount = 0;
 
 // grouping info
 const BGenericNumberFormat::GroupingInfo
@@ -545,7 +545,7 @@ class BGenericNumberFormat::Integer {
 		void Format(BufferWriter &writer, const Symbol *digitSymbols,
 			const SignSymbols *signSymbols,
 			number_format_sign_policy signPolicy,
-			const GroupingInfo *groupingInfo, int32 minDigits)  const
+			const GroupingInfo *groupingInfo, int32_t minDigits)  const
 		{
 			const Symbol *suffix = NULL;
 			// write sign prefix
@@ -577,7 +577,7 @@ class BGenericNumberFormat::Integer {
 				if (groupingInfo) {
 					// use grouping
 					// pad with zeros up to minDigits
-					int32 digitCount = max(fDigitCount, minDigits);
+					int32_t digitCount = max(fDigitCount, minDigits);
 					for (int i = minDigits - 1; i >= fDigitCount; i--) {
 						if (i != digitCount - 1)
 							writer.Append(groupingInfo->SeparatorForDigit(i));
@@ -616,7 +616,7 @@ class BGenericNumberFormat::Integer {
 
 	private:
 		uchar	fDigits[kMaxIntDigitCount];
-		int32	fDigitCount;
+		int32_t	fDigitCount;
 		bool	fNegative;
 };
 
@@ -657,7 +657,7 @@ class BGenericNumberFormat::Float {
 			double mantissa = number * pow(10, shiftBy / 2);
 			mantissa *= pow(10, shiftBy - shiftBy / 2);
 			// get the mantissa's digits -- we drop trailing zeros
-			int32 firstNonNull = -1;
+			int32_t firstNonNull = -1;
 			for (int i = 0; i < kMaxFloatDigitCount; i++) {
 				char digit = (char)fmod(mantissa, 10);
 				if (firstNonNull < 0 && digit > 0)
@@ -694,8 +694,8 @@ class BGenericNumberFormat::Float {
 			float_format_type formatType,
 			number_format_sign_policy signPolicy,
 			const GroupingInfo *groupingInfo,
-			int32 minIntegerDigits, int32 minFractionDigits,
-			int32 maxFractionDigits, bool forceFractionSeparator,
+			int32_t minIntegerDigits, int32_t minFractionDigits,
+			int32_t maxFractionDigits, bool forceFractionSeparator,
 			bool keepTrailingFractionZeros) const
 		{
 			// deal with special numbers
@@ -750,8 +750,8 @@ class BGenericNumberFormat::Float {
 			const SignSymbols *mantissaSignSymbols,
 			const SignSymbols *exponentSignSymbols,
 			number_format_sign_policy signPolicy,
-			int32 minIntegerDigits, int32 minFractionDigits,
-			int32 maxFractionDigits, bool forceFractionSeparator,
+			int32_t minIntegerDigits, int32_t minFractionDigits,
+			int32_t maxFractionDigits, bool forceFractionSeparator,
 			bool keepTrailingFractionZeros) const
 		{
 			const Symbol *suffix = NULL;
@@ -786,13 +786,13 @@ class BGenericNumberFormat::Float {
 				}
 			}
 			// round
-			int32 exponent = fExponent;
+			int32_t exponent = fExponent;
 			char digits[kMaxFloatDigitCount];
-			int32 integerDigits = max(minIntegerDigits, 1L);
-			int32 fractionDigits
+			int32_t integerDigits = max(minIntegerDigits, 1L);
+			int32_t fractionDigits
 				= max(fDigitCount - integerDigits, minFractionDigits);
 			fractionDigits = min(fractionDigits, maxFractionDigits);
-			int32 digitCount
+			int32_t digitCount
 				= _Round(digits, integerDigits + fractionDigits, exponent);
 			fractionDigits = digitCount - integerDigits;
 			if (keepTrailingFractionZeros)
@@ -800,7 +800,7 @@ class BGenericNumberFormat::Float {
 			fractionDigits = min(fractionDigits, maxFractionDigits);
 			// the mantissa
 			// integer part
-			int32 existingIntegerDigits = min(integerDigits, digitCount);
+			int32_t existingIntegerDigits = min(integerDigits, digitCount);
 			for (int i = 0; i < existingIntegerDigits; i++)
 				writer.Append(digitSymbols[(int)digits[digitCount - i - 1]]);
 			// pad with zeros to get the desired number of integer digits
@@ -814,7 +814,7 @@ class BGenericNumberFormat::Float {
 			// fraction part
 			if (fractionDigits > 0 || forceFractionSeparator)
 				writer.Append(fractionSeparator);
-			int32 existingFractionDigits
+			int32_t existingFractionDigits
 				= min(digitCount - integerDigits, fractionDigits);
 			for (int i = existingFractionDigits - 1; i >= 0; i--)
 				writer.Append(digitSymbols[(int)digits[i]]);
@@ -839,8 +839,8 @@ class BGenericNumberFormat::Float {
 			const SignSymbols *mantissaSignSymbols,
 			number_format_sign_policy signPolicy,
 			const GroupingInfo *groupingInfo,
-			int32 minIntegerDigits, int32 minFractionDigits,
-			int32 maxFractionDigits, bool forceFractionSeparator,
+			int32_t minIntegerDigits, int32_t minFractionDigits,
+			int32_t maxFractionDigits, bool forceFractionSeparator,
 			bool keepTrailingFractionZeros) const
 		{
 			const Symbol *suffix = NULL;
@@ -875,20 +875,20 @@ class BGenericNumberFormat::Float {
 				}
 			}
 			// round
-			int32 exponent = fExponent;
+			int32_t exponent = fExponent;
 			char digits[kMaxFloatDigitCount];
-			int32 integerDigits = max(minIntegerDigits, exponent + 1L);
-			int32 fractionDigits
+			int32_t integerDigits = max(minIntegerDigits, exponent + 1L);
+			int32_t fractionDigits
 				= max(fDigitCount - integerDigits, minFractionDigits);
 			fractionDigits = min(fractionDigits, maxFractionDigits);
-			int32 digitCount
+			int32_t digitCount
 				= _Round(digits, integerDigits + fractionDigits, exponent);
 			fractionDigits = digitCount - integerDigits;
 			if (keepTrailingFractionZeros)
 				fractionDigits = max(fractionDigits, minFractionDigits);
 			fractionDigits = min(fractionDigits, maxFractionDigits);
 			// integer part
-			int32 existingIntegerDigits = min(integerDigits, exponent + 1);
+			int32_t existingIntegerDigits = min(integerDigits, exponent + 1);
 			existingIntegerDigits = max(existingIntegerDigits, 0L);
 			if (groupingInfo) {
 				// use grouping
@@ -923,7 +923,7 @@ class BGenericNumberFormat::Float {
 			// fraction part
 			if (fractionDigits > 0 || forceFractionSeparator)
 				writer.Append(fractionSeparator);
-			int32 existingFractionDigits
+			int32_t existingFractionDigits
 				= min(digitCount - existingIntegerDigits, fractionDigits);
 			for (int i = existingFractionDigits - 1; i >= 0; i--)
 				writer.Append(digitSymbols[(int)digits[i]]);
@@ -938,7 +938,7 @@ class BGenericNumberFormat::Float {
 		}
 
 	private:
-		int32 _Round(char *digits, int32 count, int32 &exponent) const
+		int32_t _Round(char *digits, int32_t count, int32_t &exponent) const
 		{
 			if (count > fDigitCount)
 				count = fDigitCount;
@@ -977,7 +977,7 @@ class BGenericNumberFormat::Float {
 			return count;
 		}
 
-		static bool _IsZero(const char *digits, int32 digitCount)
+		static bool _IsZero(const char *digits, int32_t digitCount)
 		{
 			return (digitCount == 1 && digits[0] == 0);
 		}
@@ -985,9 +985,9 @@ class BGenericNumberFormat::Float {
 	private:
 		bool	fNegative;
 		int		fClass;
-		int32	fExponent;
+		int32_t	fExponent;
 		char	fDigits[kMaxFloatDigitCount];
-		int32	fDigitCount;
+		int32_t	fDigitCount;
 };
 
 
@@ -1023,7 +1023,7 @@ BGenericNumberFormat::~BGenericNumberFormat()
 // FormatInteger
 status_t BGenericNumberFormat::FormatInteger(
 	const BIntegerFormatParameters *parameters, int64 number, BString *buffer,
-	format_field_position *positions, int32 positionCount, int32 *fieldCount,
+	format_field_position *positions, int32_t positionCount, int32_t *fieldCount,
 	bool allFieldPositions) const
 {
 	if (!buffer)
@@ -1042,7 +1042,7 @@ status_t BGenericNumberFormat::FormatInteger(
 // FormatInteger
 status_t BGenericNumberFormat::FormatInteger(
 	const BIntegerFormatParameters *parameters, uint64 number, BString *buffer,
-	format_field_position *positions, int32 positionCount, int32 *fieldCount,
+	format_field_position *positions, int32_t positionCount, int32_t *fieldCount,
 	bool allFieldPositions) const
 {
 	if (!buffer)
@@ -1061,8 +1061,8 @@ status_t BGenericNumberFormat::FormatInteger(
 // FormatInteger
 status_t BGenericNumberFormat::FormatInteger(
 	const BIntegerFormatParameters *parameters, int64 number, char *buffer,
-	size_t bufferSize, format_field_position *positions, int32 positionCount,
-	int32 *fieldCount, bool allFieldPositions) const
+	size_t bufferSize, format_field_position *positions, int32_t positionCount,
+	int32_t *fieldCount, bool allFieldPositions) const
 {
 	Integer integer(number);
 	return FormatInteger(parameters, integer, buffer, bufferSize, positions,
@@ -1072,8 +1072,8 @@ status_t BGenericNumberFormat::FormatInteger(
 // FormatInteger
 status_t BGenericNumberFormat::FormatInteger(
 	const BIntegerFormatParameters *parameters, uint64 number, char *buffer,
-	size_t bufferSize, format_field_position *positions, int32 positionCount,
-	int32 *fieldCount, bool allFieldPositions) const
+	size_t bufferSize, format_field_position *positions, int32_t positionCount,
+	int32_t *fieldCount, bool allFieldPositions) const
 {
 	Integer integer(number);
 	return FormatInteger(parameters, integer, buffer, bufferSize, positions,
@@ -1083,7 +1083,7 @@ status_t BGenericNumberFormat::FormatInteger(
 // FormatFloat
 status_t BGenericNumberFormat::FormatFloat(const BFloatFormatParameters *parameters,
 	double number, BString *buffer, format_field_position *positions,
-	int32 positionCount, int32 *fieldCount, bool allFieldPositions) const
+	int32_t positionCount, int32_t *fieldCount, bool allFieldPositions) const
 {
 	if (!buffer)
 		return B_BAD_VALUE;
@@ -1102,7 +1102,7 @@ status_t BGenericNumberFormat::FormatFloat(const BFloatFormatParameters *paramet
 // FormatFloat
 status_t BGenericNumberFormat::FormatFloat(const BFloatFormatParameters *parameters,
 	double number, char *buffer, size_t bufferSize,
-	format_field_position *positions, int32 positionCount, int32 *fieldCount,
+	format_field_position *positions, int32_t positionCount, int32_t *fieldCount,
 	bool allFieldPositions) const
 {
 	// TODO: Check parameters.
@@ -1128,12 +1128,12 @@ status_t BGenericNumberFormat::FormatFloat(const BFloatFormatParameters *paramet
 		parameters->MaximalFractionDigits(),
 		parameters->AlwaysUseFractionSeparator(),
 		parameters->KeepTrailingFractionZeros());
-	int32 stringLength = writer.StringLength();
-	int32 charCount = writer.CharCount();
+	int32_t stringLength = writer.StringLength();
+	int32_t charCount = writer.CharCount();
 	// consider alignment and check the available space in the buffer
-	int32 padding = max(0L, (int32)parameters->FormatWidth() - charCount);
+	int32_t padding = max(0L, (int32_t)parameters->FormatWidth() - charCount);
 // TODO: Padding with zeros.
-	if ((int32)bufferSize <= stringLength + padding)
+	if ((int32_t)bufferSize <= stringLength + padding)
 		return EOVERFLOW;
 	// prepare for writing
 	writer.SetTo(buffer, bufferSize);
@@ -1361,7 +1361,7 @@ status_t BGenericNumberFormat::SetExponentSignSymbols(const char *plusPrefix,
 status_t BGenericNumberFormat::FormatInteger(
 	const BIntegerFormatParameters *parameters, const Integer &integer,
 	char *buffer, size_t bufferSize, format_field_position *positions,
-	int32 positionCount, int32 *fieldCount, bool allFieldPositions) const
+	int32_t positionCount, int32_t *fieldCount, bool allFieldPositions) const
 {
 	// TODO: Check parameters.
 	if (!parameters)
@@ -1377,12 +1377,12 @@ status_t BGenericNumberFormat::FormatInteger(
 	integer.Format(writer, DigitSymbols(),
 		GetSignSymbols(), parameters->SignPolicy(), groupingInfo,
 		parameters->MinimalIntegerDigits());
-	int32 stringLength = writer.StringLength();
-	int32 charCount = writer.CharCount();
+	int32_t stringLength = writer.StringLength();
+	int32_t charCount = writer.CharCount();
 	// consider alignment and check the available space in the buffer
-	int32 padding = max(0L, (int32)parameters->FormatWidth() - charCount);
+	int32_t padding = max(0L, (int32_t)parameters->FormatWidth() - charCount);
 // TODO: Padding with zeros.
-	if ((int32)bufferSize <= stringLength + padding)
+	if ((int32_t)bufferSize <= stringLength + padding)
 		return EOVERFLOW;
 	// prepare for writing
 	writer.SetTo(buffer, bufferSize);

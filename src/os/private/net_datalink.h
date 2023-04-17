@@ -38,26 +38,26 @@ typedef struct net_interface_address {
 	struct sockaddr*	local;
 	struct sockaddr*	destination;
 	struct sockaddr*	mask;
-	uint32_t			flags;
+	uint32_t_t			flags;
 } net_interface_address;
 
 typedef struct net_interface {
 	struct net_device*	device;
 
 	char				name[IF_NAMESIZE];
-	uint32				index;
-	uint32				flags;
+	uint32_t				index;
+	uint32_t				flags;
 	uint8				type;
-	uint32				mtu;
-	uint32				metric;
+	uint32_t				mtu;
+	uint32_t				metric;
 } net_interface;
 
 typedef struct net_route {
 	struct sockaddr*	destination;
 	struct sockaddr*	mask;
 	struct sockaddr*	gateway;
-	uint32				flags;
-	uint32				mtu;
+	uint32_t				flags;
+	uint32_t				mtu;
 	struct net_interface_address* interface_address;
 } net_route;
 
@@ -71,7 +71,7 @@ typedef struct net_route_info {
 struct net_datalink_module_info {
 	module_info info;
 
-	status_t		(*control)(net_domain* domain, int32 option, void* value,
+	status_t		(*control)(net_domain* domain, int32_t option, void* value,
 						size_t* _length);
 	status_t		(*send_routed_data)(net_route* route, net_buffer* buffer);
 	status_t		(*send_data)(struct net_protocol* protocol,
@@ -80,12 +80,12 @@ struct net_datalink_module_info {
 	bool			(*is_local_address)(net_domain* domain,
 						const struct sockaddr* address,
 						net_interface_address** _interfaceAddress,
-						uint32* _matchedType);
+						uint32_t* _matchedType);
 	bool			(*is_local_link_address)(net_domain* domain,
 						bool unconfigured, const struct sockaddr* address,
 						net_interface_address** _interfaceAddress);
 
-	net_interface*	(*get_interface)(net_domain* domain, uint32 index);
+	net_interface*	(*get_interface)(net_domain* domain, uint32_t index);
 	net_interface*	(*get_interface_with_address)(
 						const struct sockaddr* address);
 	void			(*put_interface)(net_interface* interface);
@@ -122,7 +122,7 @@ struct net_datalink_module_info {
 
 struct net_address_module_info {
 	module_info info;
-	uint32 flags;
+	uint32_t flags;
 
 	status_t		(*copy_address)(const struct sockaddr* from,
 						struct sockaddr** to, bool replaceWithZeros,
@@ -143,7 +143,7 @@ struct net_address_module_info {
 						bool checkPort);
 	bool			(*is_same_family)(const struct sockaddr* address);
 
-	int32			(*first_mask_bit)(const struct sockaddr* mask);
+	int32_t			(*first_mask_bit)(const struct sockaddr* mask);
 
 	bool			(*check_mask)(const struct sockaddr* address);
 
@@ -166,9 +166,9 @@ struct net_address_module_info {
 	status_t		(*update_to)(struct sockaddr* address,
 						const struct sockaddr* from);
 
-	uint32			(*hash_address)(const struct sockaddr* address,
+	uint32_t			(*hash_address)(const struct sockaddr* address,
 						bool includePort);
-	uint32			(*hash_address_pair)(const struct sockaddr* ourAddress,
+	uint32_t			(*hash_address_pair)(const struct sockaddr* ourAddress,
 						const struct sockaddr* peerAddress);
 
 	status_t		(*checksum_address)(struct Checksum* checksum,

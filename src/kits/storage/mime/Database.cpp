@@ -190,7 +190,7 @@ status_t Database::Delete(const char *type)
 }
 
 
-status_t Database::_SetStringValue(const char *type, int32 what, const char* attribute,
+status_t Database::_SetStringValue(const char *type, int32_t what, const char* attribute,
 	type_code attributeType, size_t maxLength, const char *value)
 {
 	size_t length = value != NULL ? strlen(value) : 0;
@@ -417,7 +417,7 @@ status_t Database::SetIconForType(const char *type, const char *fileType,
 	if (type == NULL || data == NULL)
 		return B_BAD_VALUE;
 
-	int32 attrType = 0;
+	int32_t attrType = 0;
 
 	// Figure out what kind of data we *should* have
 	switch (which) {
@@ -497,7 +497,7 @@ status_t Database::SetIconForType(const char *type, const char *fileType,
 	if (type == NULL || data == NULL)
 		return B_BAD_VALUE;
 
-	int32 attrType = B_VECTOR_ICON_TYPE;
+	int32_t attrType = B_VECTOR_ICON_TYPE;
 
 	// Construct our attribute name
 	std::string attr;
@@ -603,7 +603,7 @@ status_t Database::SetSupportedTypes(const char *type, const BMessage *types, bo
 
 	// Install the types
 	const char *supportedType;
-	for (int32 i = 0; types->FindString("types", i, &supportedType) == B_OK; i++) {
+	for (int32_t i = 0; types->FindString("types", i, &supportedType) == B_OK; i++) {
 		if (!fLocation->IsInstalled(supportedType)) {
 			if (Install(supportedType) != B_OK)
 				break;
@@ -807,7 +807,7 @@ status_t Database::GuessMimeType(const entry_ref *ref, BString *result)
 	- \c B_OK: success
 	- error code: failure
 */
-status_t Database::GuessMimeType(const void *buffer, int32 length, BString *result)
+status_t Database::GuessMimeType(const void *buffer, int32_t length, BString *result)
 {
 	if (buffer == NULL || result == NULL)
 		return B_BAD_VALUE;
@@ -1350,8 +1350,8 @@ status_t Database::_SendDeleteNotification(const char *type)
 	\param largeIcon \true if the the large icon was updated, \false if the
 		   small icon was updated
 */
-status_t Database::_SendMonitorUpdate(int32 which, const char *type, const char *extraType,
-	bool largeIcon, int32 action)
+status_t Database::_SendMonitorUpdate(int32_t which, const char *type, const char *extraType,
+	bool largeIcon, int32_t action)
 {
 	BMessage msg(B_META_MIME_CHANGED);
 	status_t err;
@@ -1380,8 +1380,8 @@ status_t Database::_SendMonitorUpdate(int32 which, const char *type, const char 
 	\param which Bitmask describing which attribute was updated
 	\param extraType The MIME type to which the change is applies
 */
-status_t Database::_SendMonitorUpdate(int32 which, const char *type, const char *extraType,
-	int32 action)
+status_t Database::_SendMonitorUpdate(int32_t which, const char *type, const char *extraType,
+	int32_t action)
 {
 	if (_CheckDeferredInstallNotification(which, type))
 		return B_OK;
@@ -1408,7 +1408,7 @@ status_t Database::_SendMonitorUpdate(int32 which, const char *type, const char 
 	\param largeIcon \true if the the large icon was updated, \false if the
 		   small icon was updated
 */
-status_t Database::_SendMonitorUpdate(int32 which, const char *type, bool largeIcon, int32 action)
+status_t Database::_SendMonitorUpdate(int32_t which, const char *type, bool largeIcon, int32_t action)
 {
 	if (_CheckDeferredInstallNotification(which, type))
 		return B_OK;
@@ -1433,7 +1433,7 @@ status_t Database::_SendMonitorUpdate(int32 which, const char *type, bool largeI
 	\param type The MIME type that was updated
 	\param which Bitmask describing which attribute was updated
 */
-status_t Database::_SendMonitorUpdate(int32 which, const char *type, int32 action)
+status_t Database::_SendMonitorUpdate(int32_t which, const char *type, int32_t action)
 {
 	if (_CheckDeferredInstallNotification(which, type))
 		return B_OK;
@@ -1476,7 +1476,7 @@ status_t Database::_SendMonitorUpdate(BMessage &msg)
 Database::DeferredInstallNotification*
 Database::_FindDeferredInstallNotification(const char* type, bool remove)
 {
-	for (int32 i = 0;
+	for (int32_t i = 0;
 		DeferredInstallNotification* notification
 			= (DeferredInstallNotification*)fDeferredInstallNotifications
 				.ItemAt(i); i++) {
@@ -1491,7 +1491,7 @@ Database::_FindDeferredInstallNotification(const char* type, bool remove)
 }
 
 
-bool Database::_CheckDeferredInstallNotification(int32 which, const char* type)
+bool Database::_CheckDeferredInstallNotification(int32_t which, const char* type)
 {
 	AutoLocker<BLocker> locker(fDeferredInstallNotificationsLocker);
 

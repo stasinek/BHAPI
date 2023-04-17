@@ -20,7 +20,7 @@ public:
 	static	BNetworkRoster&		Default();
 
 			size_t				CountInterfaces() const;
-			status_t			GetNextInterface(uint32* cookie,
+			status_t			GetNextInterface(uint32_t* cookie,
 									BNetworkInterface& interface) const;
 
 			status_t			AddInterface(const char* name);
@@ -30,15 +30,15 @@ public:
 			status_t			RemoveInterface(
 									const BNetworkInterface& interface);
 
-			int32				CountPersistentNetworks() const;
-			status_t			GetNextPersistentNetwork(uint32* cookie,
+			int32_t				CountPersistentNetworks() const;
+			status_t			GetNextPersistentNetwork(uint32_t* cookie,
 									wireless_network& network) const;
 			status_t			AddPersistentNetwork(
 									const wireless_network& network);
 			status_t			RemovePersistentNetwork(const char* name);
 
 			status_t			StartWatching(const BMessenger& target,
-									uint32 eventMask);
+									uint32_t eventMask);
 			void				StopWatching(const BMessenger& target);
 
 private:

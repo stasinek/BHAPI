@@ -7,7 +7,7 @@
 
 #include <kits/nettermios.h>
 
-#define B_IOCTL_GET_TTY_INDEX	(TCGETA + 32)	/* param is int32* */
+#define B_IOCTL_GET_TTY_INDEX	(TCGETA + 32)	/* param is int32_t* */
 #define B_IOCTL_GRANT_TTY		(TCGETA + 33)	/* no param (cf. grantpt()) */
 
 

@@ -1,4 +1,4 @@
-﻿/* --------------------------------------------------------------------------
+/* --------------------------------------------------------------------------
  *
  * BHAPI++ Copyright (C) 2017, Stanislaw Stasiak, based on Haiku & ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2007, Anthony Lee, All Rights Reserved
@@ -26,7 +26,6 @@
  * File: Flattenable.h
  *
  * --------------------------------------------------------------------------*/
-
 #ifndef BHAPI_FLATTENABLE_H
 #define BHAPI_FLATTENABLE_H
 
@@ -42,12 +41,11 @@ public:
     virtual type_code	TypeCode() const = 0;
     virtual bool		AllowsTypeCode(type_code code) const;
 
-    virtual  ssize_t		FlattenedSize() const = 0;
+    virtual  ssize_t	FlattenedSize() const = 0;
     virtual status_t	Flatten(void *buffer,  ssize_t numBytes);
     virtual status_t	Unflatten(type_code, const void *buffer,  ssize_t numBytes);
 };
 
 #endif /* __cplusplus */
-
 #endif /* BHAPI_FLATTENABLE_H */
 

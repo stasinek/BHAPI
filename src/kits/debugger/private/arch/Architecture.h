@@ -65,9 +65,9 @@ public:
 	inline	bool				IsBigEndian() const		{ return fBigEndian; }
 	inline	bool				IsHostEndian() const;
 
-	virtual int32				StackGrowthDirection() const = 0;
+	virtual int32_t				StackGrowthDirection() const = 0;
 
-	virtual	int32				CountRegisters() const = 0;
+	virtual	int32_t				CountRegisters() const = 0;
 	virtual	const Register*		Registers() const = 0;
 	virtual status_t			InitRegisterRules(CfaContext& context) const;
 
@@ -75,7 +75,7 @@ public:
 									RegisterMap** _fromDwarf) const = 0;
 										// returns references
 
-	virtual	status_t			GetCpuFeatures(uint32& flags) = 0;
+	virtual	status_t			GetCpuFeatures(uint32_t& flags) = 0;
 
 	virtual	status_t			CreateCpuState(CpuState*& _state) = 0;
 	virtual	status_t			CreateCpuState(const void* cpuStateData,
@@ -98,10 +98,10 @@ public:
 										// to the CPU state.
 
 	virtual	status_t			ReadValueFromMemory(target_addr_t address,
-									uint32 valueType, BVariant& _value) const
+									uint32_t valueType, BVariant& _value) const
 										= 0;
 	virtual	status_t			ReadValueFromMemory(target_addr_t addressSpace,
-									target_addr_t address, uint32 valueType,
+									target_addr_t address, uint32_t valueType,
 									BVariant& _value) const = 0;
 
 	virtual	status_t			DisassembleCode(FunctionDebugInfo* function,
@@ -123,14 +123,14 @@ public:
 									CpuState* cpuState,
 									StackTrace*& _stackTrace,
 									ReturnValueInfoList* returnValueInfos,
-									int32 maxStackDepth = -1,
+									int32_t maxStackDepth = -1,
 									bool useExistingTrace = false,
 									bool getFullFrameInfo = true);
 										// team is not locked
 
 	virtual	status_t			GetWatchpointDebugCapabilities(
-									int32& _maxRegisterCount,
-									int32& _maxBytesPerRegister,
+									int32_t& _maxRegisterCount,
+									int32_t& _maxBytesPerRegister,
 									uint8& _watchpointCapabilityFlags) = 0;
 
 	virtual	status_t			GetReturnAddressLocation(

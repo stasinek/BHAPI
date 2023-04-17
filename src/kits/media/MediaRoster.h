@@ -53,7 +53,7 @@ public:
 				// The output should not be used directly in common use cases.
 				// Use the mixer node instead.
 			status_t			GetAudioOutput(media_node* _node,
-									int32* _inputId, BString* _inputName);
+									int32_t* _inputId, BString* _inputName);
 			status_t			GetTimeSource(media_node* _node);
 
 	// Setting common system nodes:
@@ -107,7 +107,7 @@ public:
 									media_format* _inOutFormat,
 									media_output* _output,
 									media_input* _input,
-									uint32 flags, void* _reserved = NULL);
+									uint32_t flags, void* _reserved = NULL);
 				
 			status_t			Disconnect(media_node_id sourceNode,
 									const media_source& source,
@@ -158,7 +158,7 @@ public:
 										= BMediaNode::B_RECORDING);
 				// NOTE: Should only be used with B_RECORDING
 			status_t			SetProducerRate(const media_node& producer,
-									int32 numer, int32 denom);
+									int32_t numer, int32_t denom);
 				// NOTE: This feature is not necessarily supported by the node.
 
 	// Retrieving information about available inputs/outputs.
@@ -168,7 +168,7 @@ public:
 			status_t			GetLiveNodeInfo(const media_node& node,
 									live_node_info* _liveInfo);
 			status_t			GetLiveNodes(live_node_info* _liveNodes,
-									int32* inOutTotalCount,
+									int32_t* inOutTotalCount,
 									const media_format* hasInput = NULL,
 									const media_format* hasOutput = NULL,
 									const char* name = NULL,
@@ -177,46 +177,46 @@ public:
 
 			status_t			GetFreeInputsFor(const media_node& node,
 									media_input* _freeInputsBuffer,
-									int32 bufferCapacity,
-									int32* _foundCount,
+									int32_t bufferCapacity,
+									int32_t* _foundCount,
 									media_type filterType
 										= B_MEDIA_UNKNOWN_TYPE);
 			status_t			GetConnectedInputsFor(const media_node& node,
 									media_input* _activeInputsBuffer,
-									int32 bufferCapacity,
-									int32* _foundCount);
+									int32_t bufferCapacity,
+									int32_t* _foundCount);
 			status_t			GetAllInputsFor(const media_node& node,
 									media_input* _inputsBuffer,
-									int32 bufferCapacity,
-									int32* _foundCount);
+									int32_t bufferCapacity,
+									int32_t* _foundCount);
 			status_t			GetFreeOutputsFor(const media_node& node,
 									media_output* _freeOutputsBuffer,
-									int32 bufferCapacity,
-									int32* _foundCount,
+									int32_t bufferCapacity,
+									int32_t* _foundCount,
 									media_type filterType
 										= B_MEDIA_UNKNOWN_TYPE);
 			status_t			GetConnectedOutputsFor(const media_node& node,
 									media_output* _activeOutputsBuffer,
-									int32 bufferCapacity,
-									int32* _foundCount);
+									int32_t bufferCapacity,
+									int32_t* _foundCount);
 			status_t			GetAllOutputsFor(const media_node& node,
 									media_output* _outputsBuffer,
-									int32 bufferCapacity,
-									int32* _foundCount);
+									int32_t bufferCapacity,
+									int32_t* _foundCount);
 
 	// Event notification support:
 			status_t			StartWatching(const BMessenger& target);
 			status_t			StartWatching(const BMessenger& target,
-									int32 notificationType);
+									int32_t notificationType);
 			status_t			StartWatching(const BMessenger& target,
 									const media_node& node,
-									int32 notificationType);
+									int32_t notificationType);
 			status_t			StopWatching(const BMessenger& target);
 			status_t			StopWatching(const BMessenger& target,
-									int32 notificationType);
+									int32_t notificationType);
 			status_t			StopWatching(const BMessenger& target,
 									const media_node& node,
-									int32 notificationType);
+									int32_t notificationType);
 
 			status_t			RegisterNode(BMediaNode* node);
 			status_t			UnregisterNode(BMediaNode* node);
@@ -233,7 +233,7 @@ public:
 	// Information about nodes which are not running, but could
 	// be instantiated from add-ons:
 			status_t			GetDormantNodes(dormant_node_info* _info,
-									int32* _inOutCount,
+									int32_t* _inOutCount,
 									const media_format* _hasInput = NULL,
 									const media_format* _hasOutput = NULL,
 									const char* name = NULL,
@@ -242,7 +242,7 @@ public:
 			status_t			InstantiateDormantNode(
 									const dormant_node_info& info,
 									media_node* _node,
-									uint32 flags);
+									uint32_t flags);
 				// NOTE: Supported flags are currently B_FLAVOR_IS_GLOBAL
 				// or B_FLAVOR_IS_LOCAL
 			status_t			InstantiateDormantNode(
@@ -260,7 +260,7 @@ public:
 			status_t			GetInitialLatencyFor(
 									const media_node& producer,
 									bigtime_t* _latency,
-									uint32* _flags = NULL);
+									uint32_t* _flags = NULL);
 			status_t			GetStartLatencyFor(
 									const media_node& timeSource,
 									bigtime_t* _latency);
@@ -269,7 +269,7 @@ public:
 			status_t			GetFileFormatsFor(
 									const media_node& fileInterface, 
 									media_file_format* _formatsBuffer,
-									int32* _inOutNumInfos);
+									int32_t* _inOutNumInfos);
 			status_t			SetRefFor(const media_node& fileInterface,
 									const entry_ref& file,
 									bool createAndTruncate,
@@ -295,18 +295,18 @@ public:
 			status_t			GetReadFileFormatsFor(
 									const dormant_node_info& node,
 									media_file_format* _readFormatsBuffer,
-									int32 bufferCapacity, int32* _foundCount);
+									int32_t bufferCapacity, int32_t* _foundCount);
 			status_t			GetWriteFileFormatsFor(
 									const dormant_node_info& node,
 									media_file_format* _writeFormatsBuffer,
-									int32 bufferCapacity, int32* _foundCount);
+									int32_t bufferCapacity, int32_t* _foundCount);
 
 			status_t			GetFormatFor(const media_output& output,
 									media_format* _inOutFormat,
-									uint32 flags = 0);
+									uint32_t flags = 0);
 			status_t			GetFormatFor(const media_input& input,
 									media_format* _inOutFormat,
-									uint32 flags = 0);
+									uint32_t flags = 0);
 			status_t			GetFormatFor(const media_node& node,
 									media_format* _inOutFormat,
 									float quality = B_MEDIA_ANY_QUALITY);
@@ -315,16 +315,16 @@ public:
 									size_t inMaxCount);
 			media_node_id		NodeIDFor(port_id sourceOrDestinationPort);
 			status_t			GetInstancesFor(media_addon_id addon,
-									int32 flavor,media_node_id* _id,
-									int32* _inOutCount = NULL);
+									int32_t flavor,media_node_id* _id,
+									int32_t* _inOutCount = NULL);
 										// _inOutCount defaults to 1
 										// if unspecified (NULL).
 
 	// General MediaKit configuration:
-			status_t			SetRealtimeFlags(uint32 enabledFlags);
-			status_t			GetRealtimeFlags(uint32* _enabledFlags);
-			ssize_t				AudioBufferSizeFor(int32 channelCount,
-									uint32 sampleFormat, float frameRate,
+			status_t			SetRealtimeFlags(uint32_t enabledFlags);
+			status_t			GetRealtimeFlags(uint32_t* _enabledFlags);
+			ssize_t				AudioBufferSizeFor(int32_t channelCount,
+									uint32_t sampleFormat, float frameRate,
 									bus_type busType = B_UNKNOWN_BUS);
 
 	// Use MediaFlags to inquire about specific features of the Media Kit.
@@ -338,8 +338,8 @@ public:
 	virtual	bool				QuitRequested();
 
 	virtual	BHandler*			ResolveSpecifier(BMessage* message,
-									int32 index, BMessage* specifier,
-									int32 form, const char* property);
+									int32_t index, BMessage* specifier,
+									int32_t form, const char* property);
 	virtual	status_t			GetSupportedSuites(BMessage* data);
 
 	virtual						~BMediaRoster();
@@ -376,7 +376,7 @@ private:
 									const media_node& node);
 
 private:
-			uint32				_reserved_media_roster_[67];
+			uint32_t				_reserved_media_roster_[67];
 
 	static	BMediaRoster*		sDefaultInstance;
 };

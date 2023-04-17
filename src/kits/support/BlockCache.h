@@ -59,8 +59,8 @@ enum {
 
 class BBlockCache {
 	public:
-        BBlockCache(uint32 a_blockCount, size_t a_blockSize,
-            uint32 a_allocationType);
+        BBlockCache(uint32_t a_blockCount, size_t a_blockSize,
+            uint32_t a_allocationType);
 		virtual	~BBlockCache();
 
         void*	Get(size_t a_blockSize);
@@ -77,12 +77,12 @@ class BBlockCache {
 
 		_FreeBlock*	fFreeList;
 		size_t		fBlockSize;
-		int32		fFreeBlocks;
-		int32		fBlockCount;
+		int32_t		fFreeBlocks;
+		int32_t		fBlockCount;
 		BLocker		fLocker;
         void*		(*fAlloc)(size_t a_size);
         void		(*fFree)(void *a_pointer);
-		uint32		_reserved[2];
+		uint32_t		_reserved[2];
 };
 
 #endif	// _BLOCK_CACHE_H

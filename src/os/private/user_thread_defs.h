@@ -14,9 +14,9 @@
 
 struct user_thread {
 	pthread_t		pthread;			// pthread pointer
-	uint32			flags;
+	uint32_t			flags;
 	status_t		wait_status;		// wait status for thread blocking
-	int32			defer_signals;		// counter; 0 == signals allowed
+	int32_t			defer_signals;		// counter; 0 == signals allowed
 	sigset_t		pending_signals;	// signals that are pending, when
 										// signals are deferred
 };

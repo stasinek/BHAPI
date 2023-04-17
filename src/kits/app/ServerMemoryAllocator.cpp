@@ -47,7 +47,7 @@ ServerMemoryAllocator::ServerMemoryAllocator()
 
 ServerMemoryAllocator::~ServerMemoryAllocator()
 {
-	for (int32 i = fAreas.CountItems(); i-- > 0;) {
+	for (int32_t i = fAreas.CountItems(); i-- > 0;) {
 		area_mapping* mapping = (area_mapping*)fAreas.ItemAt(i);
 
 		delete_area(mapping->local_area);
@@ -72,7 +72,7 @@ status_t ServerMemoryAllocator::AddArea(area_id serverArea, area_id& _area,
 	}
 
 	status_t status = B_ERROR;
-	uint32 addressSpec = B_ANY_ADDRESS;
+	uint32_t addressSpec = B_ANY_ADDRESS;
 	void* base;
 #ifndef HAIKU_TARGET_PLATFORM_LIBBE_TEST
 	if (!readOnly && size < kReserveMaxSize) {
@@ -110,7 +110,7 @@ status_t ServerMemoryAllocator::AddArea(area_id serverArea, area_id& _area,
 
 void ServerMemoryAllocator::RemoveArea(area_id serverArea)
 {
-	for (int32 i = fAreas.CountItems(); i-- > 0;) {
+	for (int32_t i = fAreas.CountItems(); i-- > 0;) {
 		area_mapping* mapping = (area_mapping*)fAreas.ItemAt(i);
 
 		if (mapping->server_area == serverArea) {
@@ -128,7 +128,7 @@ status_t ServerMemoryAllocator::AreaAndBaseFor(area_id serverArea, area_id& _are
 	uint8*& _base)
 {
 	// TODO: why not use a map?
-	for (int32 i = fAreas.CountItems(); i-- > 0;) {
+	for (int32_t i = fAreas.CountItems(); i-- > 0;) {
 		area_mapping* mapping = (area_mapping*)fAreas.ItemAt(i);
 
 		if (mapping->server_area == serverArea) {

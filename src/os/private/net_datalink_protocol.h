@@ -29,11 +29,11 @@ struct net_datalink_protocol_module_info {
 	void		(*interface_down)(net_datalink_protocol* self);
 
 	status_t	(*change_address)(net_datalink_protocol* self,
-					net_interface_address* address, int32 option,
+					net_interface_address* address, int32_t option,
 					const struct sockaddr* oldAddress,
 					const struct sockaddr* newAddress);
 
-	status_t	(*control)(net_datalink_protocol* self, int32 option,
+	status_t	(*control)(net_datalink_protocol* self, int32_t option,
 					void* argument, size_t length);
 
 	status_t	(*join_multicast)(net_datalink_protocol* self,

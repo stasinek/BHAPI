@@ -28,12 +28,12 @@
 
 
 struct shape_data : public BReferenceable {
-	uint32*	opList;
+	uint32_t*	opList;
 	BPoint*	ptList;
-	int32	opCount;
-	int32	opSize;
-	int32	ptCount;
-	int32	ptSize;
+	int32_t	opCount;
+	int32_t	opSize;
+	int32_t	ptCount;
+	int32_t	ptSize;
 
 	bool    fOwnsMemory;
 
@@ -53,7 +53,7 @@ struct shape_data : public BReferenceable {
 
 	shape_data(const shape_data& other)
 	{
-		opList = new(std::nothrow) uint32[other.opCount];
+		opList = new(std::nothrow) uint32_t[other.opCount];
 		ptList = new(std::nothrow) BPoint[other.ptCount];
 		fOwnsMemory = true;
 		opCount = other.opCount;
@@ -77,7 +77,7 @@ struct shape_data : public BReferenceable {
 		bounds.right = ptList[0].x;
 		bounds.bottom = ptList[0].y;
 
-		for (int32 i = 1; i < ptCount; i++) {
+		for (int32_t i = 1; i < ptCount; i++) {
 			if (bounds.left > ptList[i].x)
 				bounds.left = ptList[i].x;
 

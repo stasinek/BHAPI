@@ -14,13 +14,13 @@
 /* Buffer header for audio server */
 
 typedef struct audio_buffer_header {
-  int32 buffer_number;
-  int32 subscriber_count;
+  int32_t buffer_number;
+  int32_t subscriber_count;
   bigtime_t time;
-  int32 reserved_1;
-  int32 reserved_2;
-  int32 reserved_3;
-  int32 reserved_4;
+  int32_t reserved_1;
+  int32_t reserved_2;
+  int32_t reserved_3;
+  int32_t reserved_4;
 } audio_buffer_header;
 
 

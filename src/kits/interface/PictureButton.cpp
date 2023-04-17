@@ -16,7 +16,7 @@
 
 BPictureButton::BPictureButton(BRect frame, const char* name,
 	BPicture* off, BPicture* on, BMessage* message,
-	uint32 behavior, uint32 resizingMode, uint32 flags)
+	uint32_t behavior, uint32_t resizingMode, uint32_t flags)
 	:
 	BControl(frame, name, "", message, resizingMode, flags),
 	fEnabledOff(new(std::nothrow) BPicture(*off)),
@@ -39,7 +39,7 @@ BPictureButton::BPictureButton(BMessage* data)
 	BMessage pictureArchive;
 
 	// Default to 1 state button if not here - is this valid?
-	if (data->FindInt32("_behave", (int32*)&fBehavior) != B_OK)
+	if (data->FindInt32("_behave", (int32_t*)&fBehavior) != B_OK)
 		fBehavior = B_ONE_STATE_BUTTON;
 
 	// Now expand the pictures:
@@ -209,7 +209,7 @@ void BPictureButton::MessageReceived(BMessage* message)
 }
 
 
-void BPictureButton::KeyDown(const char* bytes, int32 numBytes)
+void BPictureButton::KeyDown(const char* bytes, int32_t numBytes)
 {
 	if (numBytes == 1) {
 		switch (bytes[0]) {
@@ -274,7 +274,7 @@ void BPictureButton::MouseUp(BPoint where)
 }
 
 
-void BPictureButton::MouseMoved(BPoint where, uint32 code,
+void BPictureButton::MouseMoved(BPoint where, uint32_t code,
 	const BMessage* dragMessage)
 {
 	if (IsEnabled() && IsTracking()) {
@@ -346,19 +346,19 @@ BPictureButton::DisabledOff() const
 }
 
 
-void BPictureButton::SetBehavior(uint32 behavior)
+void BPictureButton::SetBehavior(uint32_t behavior)
 {
 	fBehavior = behavior;
 }
 
 
-uint32 BPictureButton::Behavior() const
+uint32_t BPictureButton::Behavior() const
 {
 	return fBehavior;
 }
 
 
-void BPictureButton::SetValue(int32 value)
+void BPictureButton::SetValue(int32_t value)
 {
 	BControl::SetValue(value);
 }
@@ -371,8 +371,8 @@ status_t BPictureButton::Invoke(BMessage* message)
 
 
 BHandler*
-BPictureButton::ResolveSpecifier(BMessage* message, int32 index,
-	BMessage* specifier, int32 what, const char* property)
+BPictureButton::ResolveSpecifier(BMessage* message, int32_t index,
+	BMessage* specifier, int32_t what, const char* property)
 {
 	return BControl::ResolveSpecifier(message, index, specifier,
 		what, property);
@@ -445,7 +445,7 @@ status_t BPictureButton::Perform(perform_code code, void* _data)
 }
 
 
-status_t BPictureButton::SetIcon(const BBitmap* icon, uint32 flags)
+status_t BPictureButton::SetIcon(const BBitmap* icon, uint32_t flags)
 {
 	return BControl::SetIcon(icon, flags);
 }

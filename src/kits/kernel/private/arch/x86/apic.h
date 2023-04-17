@@ -111,33 +111,33 @@
 
 bool		apic_available();
 bool		x2apic_available();
-uint32		apic_read(uint32 offset);
-void		apic_write(uint32 offset, uint32 data);
-uint32		apic_local_id();
-uint32		apic_local_version();
-uint32		apic_task_priority();
-void		apic_set_task_priority(uint32 config);
+uint32_t		apic_read(uint32_t offset);
+void		apic_write(uint32_t offset, uint32_t data);
+uint32_t		apic_local_id();
+uint32_t		apic_local_version();
+uint32_t		apic_task_priority();
+void		apic_set_task_priority(uint32_t config);
 void		apic_end_of_interrupt();
 
 void		apic_disable_local_ints();
 
-uint32		apic_spurious_intr_vector();
-void		apic_set_spurious_intr_vector(uint32 config);
+uint32_t		apic_spurious_intr_vector();
+void		apic_set_spurious_intr_vector(uint32_t config);
 
-void		apic_set_interrupt_command(uint32 destination, uint32 mode);
+void		apic_set_interrupt_command(uint32_t destination, uint32_t mode);
 bool		apic_interrupt_delivered(void);
 
-uint32		apic_lvt_timer();
-void		apic_set_lvt_timer(uint32 config);
-uint32		apic_lvt_error();
-void		apic_set_lvt_error(uint32 config);
-uint32		apic_lvt_initial_timer_count();
-void		apic_set_lvt_initial_timer_count(uint32 config);
-uint32		apic_lvt_timer_divide_config();
-void		apic_set_lvt_timer_divide_config(uint32 config);
+uint32_t		apic_lvt_timer();
+void		apic_set_lvt_timer(uint32_t config);
+uint32_t		apic_lvt_error();
+void		apic_set_lvt_error(uint32_t config);
+uint32_t		apic_lvt_initial_timer_count();
+void		apic_set_lvt_initial_timer_count(uint32_t config);
+uint32_t		apic_lvt_timer_divide_config();
+void		apic_set_lvt_timer_divide_config(uint32_t config);
 
 status_t	apic_init(kernel_args *args);
-status_t	apic_per_cpu_init(kernel_args *args, int32 cpu);
+status_t	apic_per_cpu_init(kernel_args *args, int32_t cpu);
 
 #endif // !_BOOT_MODE
 

@@ -108,7 +108,7 @@ struct BDebugLooper::RemoveDebuggerJob : Job {
 
 	virtual status_t Do(BDebugLooper* looper)
 	{
-		for (int32 i = 0; Debugger* debugger = looper->fDebuggers.ItemAt(i);
+		for (int32_t i = 0; Debugger* debugger = looper->fDebuggers.ItemAt(i);
 				i++) {
 			if (debugger->debugger->Team() == fTeam) {
 				delete looper->fDebuggers.RemoveItemAt(i);
@@ -252,10 +252,10 @@ status_t BDebugLooper::_MessageLoop()
 {
 	while (true) {
 		// prepare the wait info array
-		int32 debuggerCount = fDebuggers.CountItems();
+		int32_t debuggerCount = fDebuggers.CountItems();
 		object_wait_info waitInfos[debuggerCount + 1];
 
-		for (int32 i = 0; i < debuggerCount; i++) {
+		for (int32_t i = 0; i < debuggerCount; i++) {
 			waitInfos[i].object
 				= fDebuggers.ItemAt(i)->debugger->DebuggerPort();
 			waitInfos[i].type = B_OBJECT_TYPE_PORT;
@@ -290,13 +290,13 @@ status_t BDebugLooper::_MessageLoop()
 			continue;
 
 		// read a pending port message
-		for (int32 i = 0; i < debuggerCount; i++) {
+		for (int32_t i = 0; i < debuggerCount; i++) {
 			if ((waitInfos[i].events & B_EVENT_READ) != 0) {
 				Debugger* debugger = fDebuggers.ItemAt(i);
 
 				// read the message
 				debug_debugger_message_data message;
-				int32 code;
+				int32_t code;
 				ssize_t messageSize = read_port(
 					debugger->debugger->DebuggerPort(), &code, &message,
 					sizeof(message));

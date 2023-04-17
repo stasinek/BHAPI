@@ -71,8 +71,8 @@ const char* kDefaultOpenWithTemplate = "OpenWithSettings";
 
 const float kMaxMenuWidth = 150;
 
-const int32 kDocumentKnobWidth = 16;
-const int32 kOpenAndMakeDefault = 'OpDf';
+const int32_t kDocumentKnobWidth = 16;
+const int32_t kOpenAndMakeDefault = 'OpDf';
 const rgb_color kOpenWithDefaultColor = { 0xFF, 0xFF, 0xCC, 255};
 
 
@@ -147,7 +147,7 @@ OpenWithContainerWindow::~OpenWithContainerWindow()
 
 
 BPoseView*
-OpenWithContainerWindow::NewPoseView(Model*, uint32)
+OpenWithContainerWindow::NewPoseView(Model*, uint32_t)
 {
 	return new OpenWithPoseView;
 }
@@ -170,7 +170,7 @@ const BMessage*  OpenWithContainerWindow::EntryList() const
 
 void OpenWithContainerWindow::OpenWithSelection()
 {
-	int32 count = PoseView()->SelectionList()->CountItems();
+	int32_t count = PoseView()->SelectionList()->CountItems();
 	ASSERT(count == 1);
 	if (count == 0)
 		return;
@@ -262,7 +262,7 @@ SetDefaultAppForOneType(const BString* element, void* castToEntryRef)
 
 void OpenWithContainerWindow::MakeDefaultAndOpen()
 {
-	int32 count = PoseView()->SelectionList()->CountItems();
+	int32_t count = PoseView()->SelectionList()->CountItems();
 	ASSERT(count == 1);
 	if (count == 0)
 		return;
@@ -324,7 +324,7 @@ OpenWithContainerWindow::KeyDownFilter(BMessage* message, BHandler**,
 	if (message->FindInt8("byte", (int8*)&key) != B_OK)
 		return B_DISPATCH_MESSAGE;
 
-	int32 modifiers = 0;
+	int32_t modifiers = 0;
 	message->FindInt32("modifiers", &modifiers);
 	if (modifiers == 0 && key == B_ESCAPE) {
 		filter->Looper()->PostMessage(kCancelButton);
@@ -361,7 +361,7 @@ void OpenWithContainerWindow::NewAttributeMenu(BMenu* menu)
 	message->AddString("attr_name", kAttrOpenWithRelation);
 	message->AddInt32("attr_type", B_STRING_TYPE);
 	message->AddInt32("attr_hash",
-		(int32)AttrHashString(kAttrOpenWithRelation, B_STRING_TYPE));
+		(int32_t)AttrHashString(kAttrOpenWithRelation, B_STRING_TYPE));
 	message->AddFloat("attr_width", 180);
 	message->AddInt32("attr_align", B_ALIGN_LEFT);
 	message->AddBool("attr_editable", false);
@@ -373,7 +373,7 @@ void OpenWithContainerWindow::NewAttributeMenu(BMenu* menu)
 	message->AddString("attr_name", kAttrAppVersion);
 	message->AddInt32("attr_type", B_STRING_TYPE);
 	message->AddInt32("attr_hash",
-		(int32)AttrHashString(kAttrAppVersion, B_STRING_TYPE));
+		(int32_t)AttrHashString(kAttrAppVersion, B_STRING_TYPE));
 	message->AddFloat("attr_width", 70);
 	message->AddInt32("attr_align", B_ALIGN_LEFT);
 	message->AddBool("attr_editable", false);
@@ -570,7 +570,7 @@ static void AddSupportingAppForTypeToQuery(SearchForSignatureEntryList* queryIte
 	// push each of the supporting apps signature uniquely
 
 	const char* signature;
-	for (int32 index = 0; message.FindString("applications", index,
+	for (int32_t index = 0; message.FindString("applications", index,
 			&signature) == B_OK; index++) {
 		queryIterator->PushUniqueSignature(signature);
 	}
@@ -663,11 +663,11 @@ void OpenWithPoseView::ReturnDirentIterator(EntryListBase* iterator)
 }
 
 
-void OpenWithPoseView::OpenSelection(BPose* pose, int32*)
+void OpenWithPoseView::OpenSelection(BPose* pose, int32_t*)
 {
 	OpenWithContainerWindow* window = ContainerWindow();
 
-	int32 count = fSelectionList->CountItems();
+	int32_t count = fSelectionList->CountItems();
 	if (count == 0)
 		return;
 
@@ -801,15 +801,15 @@ bool OpenWithPoseView::AddPosesThreadValid(const entry_ref*) const
 
 
 void OpenWithPoseView::CreatePoses(Model** models, PoseInfo* poseInfoArray,
-	int32 count, BPose** resultingPoses, bool insertionSort,
-	int32* lastPoseIndexPtr, BRect* boundsPtr, bool forceDraw)
+	int32_t count, BPose** resultingPoses, bool insertionSort,
+	int32_t* lastPoseIndexPtr, BRect* boundsPtr, bool forceDraw)
 {
 	// overridden to try to select the preferred handling app
 	_inherited::CreatePoses(models, poseInfoArray, count, resultingPoses,
 		insertionSort, lastPoseIndexPtr, boundsPtr, forceDraw);
 
 	if (resultingPoses != NULL) {
-		for (int32 index = 0; index < count; index++) {
+		for (int32_t index = 0; index < count; index++) {
 			if (resultingPoses[index] && fHaveCommonPreferredApp
 				&& *(models[index]->EntryRef()) == fPreferredRef) {
 				// this is our preferred app, select it's pose
@@ -821,7 +821,7 @@ void OpenWithPoseView::CreatePoses(Model** models, PoseInfo* poseInfoArray,
 }
 
 
-void OpenWithPoseView::KeyDown(const char* bytes, int32 count)
+void OpenWithPoseView::KeyDown(const char* bytes, int32_t count)
 {
 	if (bytes[0] == B_TAB) {
 		// just shift the focus, don't tab to the next pose
@@ -908,7 +908,7 @@ bool OpenWithPoseView::HandleMessageDropped(BMessage* DEBUG_ONLY(message))
 }
 
 
-int32 OpenWithPoseView::OpenWithRelation(const Model* model) const
+int32_t OpenWithPoseView::OpenWithRelation(const Model* model) const
 {
 	OpenWithContainerWindow* window = ContainerWindow();
 
@@ -969,7 +969,7 @@ RelationCachingModelProxy::~RelationCachingModelProxy()
 }
 
 
-int32 RelationCachingModelProxy::Relation(SearchForSignatureEntryList* iterator,
+int32_t RelationCachingModelProxy::Relation(SearchForSignatureEntryList* iterator,
 	BMessage* entries) const
 {
 	if (fRelation == kUnknownRelation)
@@ -1030,8 +1030,8 @@ SortByRelationAndName(const RelationCachingModelProxy* model1,
 	OpenWithMenu* menu = (OpenWithMenu*)castToMenu;
 
 	// find out the relations of app models to the opened entries
-	int32 relation1 = model1->Relation(menu->fIterator, &menu->fEntriesToOpen);
-	int32 relation2 = model2->Relation(menu->fIterator, &menu->fEntriesToOpen);
+	int32_t relation1 = model1->Relation(menu->fIterator, &menu->fEntriesToOpen);
+	int32_t relation2 = model2->Relation(menu->fIterator, &menu->fEntriesToOpen);
 
 	if (relation1 < relation2) {
 		// relation with the lowest number goes first
@@ -1096,8 +1096,8 @@ void OpenWithMenu::DoneBuildingItemList()
 
 	// check if each app is unique
 	bool isUnique = true;
-	int32 count = fSupportingAppList->CountItems();
-	for (int32 index = 0; index < count - 1; index++) {
+	int32_t count = fSupportingAppList->CountItems();
+	for (int32_t index = 0; index < count - 1; index++) {
 		// the list is sorted, just compare two adjacent models
 		if (strcmp(fSupportingAppList->ItemAt(index)->fModel->Name(),
 			fSupportingAppList->ItemAt(index + 1)->fModel->Name()) == 0) {
@@ -1110,8 +1110,8 @@ void OpenWithMenu::DoneBuildingItemList()
 	BFont font;
 	GetFont(&font);
 
-	int32 lastRelation = -1;
-	for (int32 index = 0; index < count ; index++) {
+	int32_t lastRelation = -1;
+	for (int32_t index = 0; index < count ; index++) {
 		RelationCachingModelProxy* modelProxy
 			= fSupportingAppList->ItemAt(index);
 		Model* model = modelProxy->fModel;
@@ -1149,7 +1149,7 @@ void OpenWithMenu::DoneBuildingItemList()
 #endif
 
 		// divide different relations of opening with a separator
-		int32 relation = modelProxy->Relation(fIterator, &fEntriesToOpen);
+		int32_t relation = modelProxy->Relation(fIterator, &fEntriesToOpen);
 		if (lastRelation != -1 && relation != lastRelation)
 			AddSeparatorItem();
 		lastRelation = relation;
@@ -1231,8 +1231,8 @@ status_t SearchForSignatureEntryList::GetNextRef(entry_ref* ref)
 }
 
 
-int32 SearchForSignatureEntryList::GetNextDirents(struct dirent* buffer,
-	size_t length, int32 count)
+int32_t SearchForSignatureEntryList::GetNextDirents(struct dirent* buffer,
+	size_t length, int32_t count)
 {
 	return fIteratorList->GetNextDirents(buffer, length, count);
 }
@@ -1291,7 +1291,7 @@ status_t SearchForSignatureEntryList::Rewind()
 }
 
 
-int32 SearchForSignatureEntryList::CountEntries()
+int32_t SearchForSignatureEntryList::CountEntries()
 {
 	return 0;
 }
@@ -1348,10 +1348,10 @@ bool SearchForSignatureEntryList::ShowAllApplications() const
 }
 
 
-int32 SearchForSignatureEntryList::Relation(const Model* nodeModel,
+int32_t SearchForSignatureEntryList::Relation(const Model* nodeModel,
 	const Model* applicationModel)
 {
-	int32 supportsMimeType = applicationModel->SupportsMimeType(
+	int32_t supportsMimeType = applicationModel->SupportsMimeType(
 		nodeModel->MimeType(), 0, true);
 	switch (supportsMimeType) {
 		case kDoesNotSupportType:
@@ -1372,7 +1372,7 @@ int32 SearchForSignatureEntryList::Relation(const Model* nodeModel,
 }
 
 
-int32 SearchForSignatureEntryList::Relation(const BMessage* entriesToOpen,
+int32_t SearchForSignatureEntryList::Relation(const BMessage* entriesToOpen,
 	const Model* model) const
 {
 	return Relation(entriesToOpen, model,
@@ -1390,11 +1390,11 @@ void SearchForSignatureEntryList::RelationDescription(const BMessage* entriesToO
 }
 
 
-int32 SearchForSignatureEntryList::Relation(const BMessage* entriesToOpen,
+int32_t SearchForSignatureEntryList::Relation(const BMessage* entriesToOpen,
 	const Model* applicationModel, const entry_ref* preferredApp,
 	const entry_ref* preferredAppForFile)
 {
-	for (int32 index = 0; ; index++) {
+	for (int32_t index = 0; ; index++) {
 		entry_ref ref;
 		if (entriesToOpen->FindRef("refs", index, &ref) != B_OK)
 			break;
@@ -1406,7 +1406,7 @@ int32 SearchForSignatureEntryList::Relation(const BMessage* entriesToOpen,
 		if (model.InitCheck())
 			continue;
 
-		int32 result = Relation(&model, applicationModel);
+		int32_t result = Relation(&model, applicationModel);
 		if (result != kNoRelation) {
 			if (preferredAppForFile
 				&& *applicationModel->EntryRef() == *preferredAppForFile) {
@@ -1431,7 +1431,7 @@ void SearchForSignatureEntryList::RelationDescription(const BMessage* entriesToO
 	const Model* applicationModel, BString* description,
 	const entry_ref* preferredApp, const entry_ref* preferredAppForFile)
 {
-	for (int32 index = 0; ;index++) {
+	for (int32_t index = 0; ;index++) {
 		entry_ref ref;
 		if (entriesToOpen->FindRef("refs", index, &ref) != B_OK)
 			break;
@@ -1446,7 +1446,7 @@ void SearchForSignatureEntryList::RelationDescription(const BMessage* entriesToO
 			continue;
 
 		BMimeType mimeType;
-		int32 result = Relation(&model, applicationModel);
+		int32_t result = Relation(&model, applicationModel);
 		switch (result) {
 			case kDoesNotSupportType:
 				continue;
@@ -1557,7 +1557,7 @@ bool SearchForSignatureEntryList::CanOpenWithFilter(const Model* appModel,
 	if (ShowAllApplications()) {
 		// don't check for these if we didn't look for every single app
 		// to not slow filtering down
-		uint32 flags;
+		uint32_t flags;
 		BAppFileInfo appFileInfo(dynamic_cast<BFile*>(appModel->Node()));
 		if (appFileInfo.GetAppFlags(&flags) != B_OK)
 			return false;
@@ -1570,7 +1570,7 @@ bool SearchForSignatureEntryList::CanOpenWithFilter(const Model* appModel,
 			return false;
 	}
 
-	int32 relation = Relation(entriesToOpen, appModel, preferredApp, 0);
+	int32_t relation = Relation(entriesToOpen, appModel, preferredApp, 0);
 	if (relation == kNoRelation && !ShowAllApplications()) {
 #if xDEBUG
 		BPath path;
@@ -1645,8 +1645,8 @@ status_t ConditionalAllAppsIterator::GetNextRef(entry_ref* ref)
 }
 
 
-int32 ConditionalAllAppsIterator::GetNextDirents(struct dirent* buffer,
-	size_t length, int32 count)
+int32_t ConditionalAllAppsIterator::GetNextDirents(struct dirent* buffer,
+	size_t length, int32_t count)
 {
 	if (!Iterate())
 		return 0;
@@ -1666,7 +1666,7 @@ status_t ConditionalAllAppsIterator::Rewind()
 }
 
 
-int32 ConditionalAllAppsIterator::CountEntries()
+int32_t ConditionalAllAppsIterator::CountEntries()
 {
 	if (!Iterate())
 		return 0;

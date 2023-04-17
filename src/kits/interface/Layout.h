@@ -30,19 +30,19 @@ public:
 
 	// methods dealing with items
 	virtual	BLayoutItem*		AddView(BView* child);
-	virtual	BLayoutItem*		AddView(int32 index, BView* child);
+	virtual	BLayoutItem*		AddView(int32_t index, BView* child);
 
 	virtual	bool				AddItem(BLayoutItem* item);
-	virtual	bool				AddItem(int32 index, BLayoutItem* item);
+	virtual	bool				AddItem(int32_t index, BLayoutItem* item);
 
 	virtual	bool				RemoveView(BView* child);
 	virtual	bool				RemoveItem(BLayoutItem* item);
-	virtual	BLayoutItem*		RemoveItem(int32 index);
+	virtual	BLayoutItem*		RemoveItem(int32_t index);
 
-			BLayoutItem*		ItemAt(int32 index) const;
-			int32				CountItems() const;
-			int32				IndexOfItem(const BLayoutItem* item) const;
-			int32				IndexOfView(BView* child) const;
+			BLayoutItem*		ItemAt(int32_t index) const;
+			int32_t				CountItems() const;
+			int32_t				IndexOfItem(const BLayoutItem* item) const;
+			int32_t				IndexOfView(BView* child) const;
 
 			bool				AncestorsVisible() const;
 
@@ -70,12 +70,12 @@ protected:
 	virtual	status_t			AllUnarchived(const BMessage* from);
 
 	virtual status_t			ItemArchived(BMessage* into, BLayoutItem* item,
-									int32 index) const;
+									int32_t index) const;
 	virtual	status_t			ItemUnarchived(const BMessage* from,
-									BLayoutItem* item, int32 index);
+									BLayoutItem* item, int32_t index);
 	// BLayout hook methods
-	virtual	bool				ItemAdded(BLayoutItem* item, int32 atIndex);
-	virtual	void				ItemRemoved(BLayoutItem* item, int32 fromIndex);
+	virtual	bool				ItemAdded(BLayoutItem* item, int32_t atIndex);
+	virtual	void				ItemRemoved(BLayoutItem* item, int32_t fromIndex);
 	virtual	void				LayoutInvalidated(bool children);
 	virtual	void				DoLayout() = 0;
 	virtual	void				OwnerChanged(BView* was);
@@ -116,16 +116,16 @@ private:
 			void				_LayoutWithinContext(bool force,
 									BLayoutContext* context);
 
-			uint32				fState;
+			uint32_t				fState;
 			bool				fAncestorsVisible;
-			int32				fInvalidationDisabled;
+			int32_t				fInvalidationDisabled;
 			BLayoutContext*		fContext;
 			BView*				fOwner;
 			BView*				fTarget;
 			BList				fItems;
 			BList				fNestedLayouts;
 
-			uint32				_reserved[10];
+			uint32_t				_reserved[10];
 };
 
 

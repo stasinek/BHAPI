@@ -29,11 +29,11 @@
 #define roundup2(x, y)  (((x)+((y)-1))&(~((y)-1))) /* if y is powers of two */
 #define powerof2(x)     ((((x)-1)&(x))==0) // 是否是2的次方
 
-typedef uint32_t bus_addr_t;
-typedef uint32_t bus_size_t;
+typedef uint32_t_t bus_addr_t;
+typedef uint32_t_t bus_size_t;
 
-#define atomic_readandclear_int(ptr) atomic_get_and_set((int32*)(ptr), 0)
-#define atomic_set_int(ptr, value) atomic_or((int32 *)(ptr), value)
+#define atomic_readandclear_int(ptr) atomic_get_and_set((int32_t*)(ptr), 0)
+#define atomic_set_int(ptr, value) atomic_or((int32_t *)(ptr), value)
 
 #define mtx_lock mutex_lock
 #define mtx_unlock mutex_unlock
@@ -49,8 +49,8 @@ typedef uint32_t bus_size_t;
 
 #define DELAY(n)	snooze(n)
 
-#define OWRITE(sc, offset, value) (*(volatile uint32 *)((char *)(sc->regAddr) + (offset)) = value)
-#define OREAD(sc, offset) (*(volatile uint32 *)((char *)(sc->regAddr) + (offset)))
+#define OWRITE(sc, offset, value) (*(volatile uint32_t *)((char *)(sc->regAddr) + (offset)) = value)
+#define OREAD(sc, offset) (*(volatile uint32_t *)((char *)(sc->regAddr) + (offset)))
 
 #define MAX_CARDS 4
 extern dpc_module_info *gDpc;

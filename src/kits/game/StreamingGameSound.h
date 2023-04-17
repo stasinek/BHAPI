@@ -34,7 +34,7 @@ public:
 	virtual	status_t			SetAttributes(gs_attribute* attributes,
 									size_t attributeCount);
 
-	virtual	status_t 			Perform(int32 selector, void* data);
+	virtual	status_t 			Perform(int32_t selector, void* data);
 
 protected:
 								BStreamingGameSound(BGameSoundDevice* device);
@@ -53,30 +53,30 @@ private:
 			BStreamingGameSound& operator=(const BStreamingGameSound& other);
 									// not implemented
 
-	virtual	status_t			_Reserved_BStreamingGameSound_0(int32 arg,...);
-	virtual	status_t			_Reserved_BStreamingGameSound_1(int32 arg,...);
-	virtual	status_t			_Reserved_BStreamingGameSound_2(int32 arg,...);
-	virtual	status_t			_Reserved_BStreamingGameSound_3(int32 arg,...);
-	virtual	status_t			_Reserved_BStreamingGameSound_4(int32 arg,...);
-	virtual	status_t			_Reserved_BStreamingGameSound_5(int32 arg,...);
-	virtual	status_t			_Reserved_BStreamingGameSound_6(int32 arg,...);
-	virtual	status_t			_Reserved_BStreamingGameSound_7(int32 arg,...);
-	virtual	status_t			_Reserved_BStreamingGameSound_8(int32 arg,...);
-	virtual	status_t			_Reserved_BStreamingGameSound_9(int32 arg,...);
-	virtual	status_t			_Reserved_BStreamingGameSound_10(int32 arg,...);
-	virtual	status_t			_Reserved_BStreamingGameSound_11(int32 arg,...);
-	virtual	status_t			_Reserved_BStreamingGameSound_12(int32 arg,...);
-	virtual	status_t			_Reserved_BStreamingGameSound_13(int32 arg,...);
-	virtual	status_t			_Reserved_BStreamingGameSound_14(int32 arg,...);
-	virtual	status_t			_Reserved_BStreamingGameSound_15(int32 arg,...);
-	virtual	status_t			_Reserved_BStreamingGameSound_16(int32 arg,...);
-	virtual	status_t			_Reserved_BStreamingGameSound_17(int32 arg,...);
-	virtual	status_t			_Reserved_BStreamingGameSound_18(int32 arg,...);
-	virtual	status_t			_Reserved_BStreamingGameSound_19(int32 arg,...);
-	virtual	status_t			_Reserved_BStreamingGameSound_20(int32 arg,...);
-	virtual	status_t			_Reserved_BStreamingGameSound_21(int32 arg,...);
-	virtual	status_t			_Reserved_BStreamingGameSound_22(int32 arg,...);
-	virtual	status_t			_Reserved_BStreamingGameSound_23(int32 arg,...);
+	virtual	status_t			_Reserved_BStreamingGameSound_0(int32_t arg,...);
+	virtual	status_t			_Reserved_BStreamingGameSound_1(int32_t arg,...);
+	virtual	status_t			_Reserved_BStreamingGameSound_2(int32_t arg,...);
+	virtual	status_t			_Reserved_BStreamingGameSound_3(int32_t arg,...);
+	virtual	status_t			_Reserved_BStreamingGameSound_4(int32_t arg,...);
+	virtual	status_t			_Reserved_BStreamingGameSound_5(int32_t arg,...);
+	virtual	status_t			_Reserved_BStreamingGameSound_6(int32_t arg,...);
+	virtual	status_t			_Reserved_BStreamingGameSound_7(int32_t arg,...);
+	virtual	status_t			_Reserved_BStreamingGameSound_8(int32_t arg,...);
+	virtual	status_t			_Reserved_BStreamingGameSound_9(int32_t arg,...);
+	virtual	status_t			_Reserved_BStreamingGameSound_10(int32_t arg,...);
+	virtual	status_t			_Reserved_BStreamingGameSound_11(int32_t arg,...);
+	virtual	status_t			_Reserved_BStreamingGameSound_12(int32_t arg,...);
+	virtual	status_t			_Reserved_BStreamingGameSound_13(int32_t arg,...);
+	virtual	status_t			_Reserved_BStreamingGameSound_14(int32_t arg,...);
+	virtual	status_t			_Reserved_BStreamingGameSound_15(int32_t arg,...);
+	virtual	status_t			_Reserved_BStreamingGameSound_16(int32_t arg,...);
+	virtual	status_t			_Reserved_BStreamingGameSound_17(int32_t arg,...);
+	virtual	status_t			_Reserved_BStreamingGameSound_18(int32_t arg,...);
+	virtual	status_t			_Reserved_BStreamingGameSound_19(int32_t arg,...);
+	virtual	status_t			_Reserved_BStreamingGameSound_20(int32_t arg,...);
+	virtual	status_t			_Reserved_BStreamingGameSound_21(int32_t arg,...);
+	virtual	status_t			_Reserved_BStreamingGameSound_22(int32_t arg,...);
+	virtual	status_t			_Reserved_BStreamingGameSound_23(int32_t arg,...);
 
 private:
 			void				(*fStreamHook)(void* cookie, void* buffer,
@@ -84,7 +84,7 @@ private:
 			void*				fStreamCookie;
 			BLocker				fLock;
 
-			uint32				_reserved[12];
+			uint32_t				_reserved[12];
 };
 
 

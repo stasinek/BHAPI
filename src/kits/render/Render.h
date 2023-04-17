@@ -61,44 +61,44 @@ public:
 	void		SetSquarePointStyle(bool state);
 	bool		IsSquarePointStyle() const;
 
-    void		FillRect(int32 x,  int32 y,  uint32 width,  uint32 height,
+    void		FillRect(int32_t x,  int32_t y,  uint32_t width,  uint32_t height,
                  bhapi::pattern pattern = bhapi::B_SOLID_HIGH);
     void		FillRect(BRect rect, bhapi::pattern pattern = bhapi::B_SOLID_HIGH);
 
-    void		StrokePoint(int32 x,  int32 y, bhapi::pattern pattern = bhapi::B_SOLID_HIGH);
+    void		StrokePoint(int32_t x,  int32_t y, bhapi::pattern pattern = bhapi::B_SOLID_HIGH);
     void		StrokePoint(BPoint pt, bhapi::pattern pattern = bhapi::B_SOLID_HIGH);
 
-    void		StrokeLine(int32 x0,  int32 y0,  int32 x1,  int32 y1,
+    void		StrokeLine(int32_t x0,  int32_t y0,  int32_t x1,  int32_t y1,
                    bhapi::pattern pattern = bhapi::B_SOLID_HIGH);
     void		StrokeLine(BPoint pt0, BPoint pt1, bhapi::pattern pattern = bhapi::B_SOLID_HIGH);
 
-    void		StrokeTriangle(int32 x0,  int32 y0,  int32 x1,  int32 y1,  int32 x2,  int32 y2, bhapi::pattern pattern = bhapi::B_SOLID_HIGH);
+    void		StrokeTriangle(int32_t x0,  int32_t y0,  int32_t x1,  int32_t y1,  int32_t x2,  int32_t y2, bhapi::pattern pattern = bhapi::B_SOLID_HIGH);
     void		StrokeTriangle(BPoint pt1, BPoint pt2, BPoint pt3, bhapi::pattern pattern = bhapi::B_SOLID_HIGH);
-    void		FillTriangle(int32 x0,  int32 y0,  int32 x1,  int32 y1,  int32 x2,  int32 y2,
+    void		FillTriangle(int32_t x0,  int32_t y0,  int32_t x1,  int32_t y1,  int32_t x2,  int32_t y2,
                      bool stroke_edge = true, bhapi::pattern pattern = bhapi::B_SOLID_HIGH);
     void		FillTriangle(BPoint pt0, BPoint pt1, BPoint pt2, bool stroke_edge = true, bhapi::pattern pattern = bhapi::B_SOLID_HIGH);
 
     void		StrokePolygon(const BPolygon *aPolygon, bool closed = true, bhapi::pattern pattern = bhapi::B_SOLID_HIGH);
-    void		StrokePolygon(const BPoint *ptArray,  int32 numPts, bool closed = true, bhapi::pattern pattern = bhapi::B_SOLID_HIGH);
+    void		StrokePolygon(const BPoint *ptArray,  int32_t numPts, bool closed = true, bhapi::pattern pattern = bhapi::B_SOLID_HIGH);
     void		FillPolygon(const BPolygon *aPolygon, bool stroke_edge = true, bhapi::pattern pattern = bhapi::B_SOLID_HIGH);
-    void		FillPolygon(const BPoint *ptArray,  int32 numPts, bool stroke_edge = true, bhapi::pattern pattern = bhapi::B_SOLID_HIGH);
+    void		FillPolygon(const BPoint *ptArray,  int32_t numPts, bool stroke_edge = true, bhapi::pattern pattern = bhapi::B_SOLID_HIGH);
 
-    void		StrokeEllipse(int32 x,  int32 y,  uint32 width,  uint32 height,
+    void		StrokeEllipse(int32_t x,  int32_t y,  uint32_t width,  uint32_t height,
                       bhapi::pattern pattern = bhapi::B_SOLID_HIGH);
-    void		StrokeEllipse(int32 xCenter,  int32 yCenter,  int32 xRadius,  int32 yRadius,
+    void		StrokeEllipse(int32_t xCenter,  int32_t yCenter,  int32_t xRadius,  int32_t yRadius,
                       bhapi::pattern pattern = bhapi::B_SOLID_HIGH);
     void		StrokeEllipse(BRect rect, bhapi::pattern pattern = bhapi::B_SOLID_HIGH);
-    void		FillEllipse(int32 x,  int32 y,  uint32 width,  uint32 height,
+    void		FillEllipse(int32_t x,  int32_t y,  uint32_t width,  uint32_t height,
                     bool stroke_edge = true, bhapi::pattern pattern = bhapi::B_SOLID_HIGH);
-    void		FillEllipse(int32 xCenter,  int32 yCenter,  int32 xRadius,  int32 yRadius,
+    void		FillEllipse(int32_t xCenter,  int32_t yCenter,  int32_t xRadius,  int32_t yRadius,
                     bool stroke_edge = true, bhapi::pattern pattern = bhapi::B_SOLID_HIGH);
     void		FillEllipse(BRect rect, bool stroke_edge = true, bhapi::pattern pattern = bhapi::B_SOLID_HIGH);
 
-    void		StrokeArc(int32 x,  int32 y,  uint32 width,  uint32 height,
-                   int32 startAngle,  int32 endAngle,
+    void		StrokeArc(int32_t x,  int32_t y,  uint32_t width,  uint32_t height,
+                   int32_t startAngle,  int32_t endAngle,
                   bhapi::pattern pattern = bhapi::B_SOLID_HIGH);
-    void		StrokeArc(int32 xCenter,  int32 yCenter,  int32 xRadius,  int32 yRadius,
-                   int32 startAngle,  int32 endAngle,
+    void		StrokeArc(int32_t xCenter,  int32_t yCenter,  int32_t xRadius,  int32_t yRadius,
+                   int32_t startAngle,  int32_t endAngle,
                   bhapi::pattern pattern = bhapi::B_SOLID_HIGH);
     void		StrokeArc(BPoint ctPt, float xRadius, float yRadius,
 				  float startAngle, float arcAngle,
@@ -114,12 +114,12 @@ private:
 	bool fSquarePointStyle;
 
 	virtual status_t InitCheck() const = 0;
-    virtual void GetFrame(int32 *originX,  int32 *originY,  uint32 *width,  uint32 *height) const = 0;
-    virtual void GetPixel(int32 x,  int32 y, bhapi::rgb_color &color) const = 0;
-    virtual void PutPixel(int32 x,  int32 y, bhapi::rgb_color color) = 0;
-    virtual void PutRect(int32 x,  int32 y,  uint32 width,  uint32 height, bhapi::rgb_color color);
+    virtual void GetFrame(int32_t *originX,  int32_t *originY,  uint32_t *width,  uint32_t *height) const = 0;
+    virtual void GetPixel(int32_t x,  int32_t y, bhapi::rgb_color &color) const = 0;
+    virtual void PutPixel(int32_t x,  int32_t y, bhapi::rgb_color color) = 0;
+    virtual void PutRect(int32_t x,  int32_t y,  uint32_t width,  uint32_t height, bhapi::rgb_color color);
 
-    void drawPixel(int32 x,  int32 y, bhapi::pattern pattern);
+    void drawPixel(int32_t x,  int32_t y, bhapi::pattern pattern);
 };
 #endif /* __cplusplus */
 #endif /* BHAPI_RENDER_H */

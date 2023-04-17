@@ -31,15 +31,15 @@ struct natural_chunk {
 	};
 	chunk_type	type;
 	char		buffer[B_FILE_NAME_LENGTH];
-	int32		length;
+	int32_t		length;
 };
 
 
-inline int32 FetchNaturalChunk(natural_chunk& chunk, const char* source)
+inline int32_t FetchNaturalChunk(natural_chunk& chunk, const char* source)
 {
 	if (chunk.type == natural_chunk::ASCII) {
 		// string chunk
-		int32 pos = 0;
+		int32_t pos = 0;
 		while (!isdigit(source[pos]) && !isspace(source[pos])
 			&& source[pos] != '\0') {
 			pos++;
@@ -50,14 +50,14 @@ inline int32 FetchNaturalChunk(natural_chunk& chunk, const char* source)
 	}
 
 	// Skip leading zeros and whitespace characters
-	int32 skip = 0;
+	int32_t skip = 0;
 	while (source[0] == '0' || isspace(source[0])) {
 		source++;
 		skip++;
 	}
 
 	// Number chunk (stop at next white space)
-	int32 pos = 0;
+	int32_t pos = 0;
 	while (isdigit(source[pos])) {
 		pos++;
 	}
@@ -87,8 +87,8 @@ NaturalCompare(const char* stringA, const char* stringB)
 	natural_chunk a;
 	natural_chunk b;
 
-	uint32 indexA = 0;
-	uint32 indexB = 0;
+	uint32_t indexA = 0;
+	uint32_t indexB = 0;
 
 	while (true) {
 		// Determine type of next chunks in each string based on first char

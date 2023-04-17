@@ -23,7 +23,7 @@
 
 
 // soft limit for the number of breakpoints
-const int32 kMaxBreakpointCount = 10240;
+const int32_t kMaxBreakpointCount = 10240;
 
 
 BreakpointManager::InstalledBreakpoint::InstalledBreakpoint(addr_t address)
@@ -78,7 +78,7 @@ status_t
 BreakpointManager::Init()
 {
 	// create objects for the hardware breakpoints
-	for (int32 i = 0; i < DEBUG_MAX_BREAKPOINTS; i++) {
+	for (int32_t i = 0; i < DEBUG_MAX_BREAKPOINTS; i++) {
 		Breakpoint* breakpoint = new(std::nothrow) Breakpoint;
 		if (breakpoint == NULL)
 			return B_NO_MEMORY;
@@ -166,7 +166,7 @@ BreakpointManager::UninstallBreakpoint(void* _address)
 
 
 status_t
-BreakpointManager::InstallWatchpoint(void* _address, uint32 type, int32 length)
+BreakpointManager::InstallWatchpoint(void* _address, uint32_t type, int32_t length)
 {
 	const addr_t address = (addr_t)_address;
 
@@ -597,7 +597,7 @@ BreakpointManager::_FindWatchpoint(addr_t address) const
 
 status_t
 BreakpointManager::_InstallWatchpoint(InstalledWatchpoint* watchpoint,
-	addr_t address, uint32 type, int32 length)
+	addr_t address, uint32_t type, int32_t length)
 {
 #if DEBUG_SHARED_BREAK_AND_WATCHPOINTS
 	// We need a hardware breakpoint.
@@ -658,8 +658,8 @@ BreakpointManager::_ReadMemory(const addr_t _address, void* _buffer,
 		}
 
 		// don't cross page boundaries in a single read
-		int32 toRead = size;
-		int32 maxRead = B_PAGE_SIZE - (addr_t)address % B_PAGE_SIZE;
+		int32_t toRead = size;
+		int32_t maxRead = B_PAGE_SIZE - (addr_t)address % B_PAGE_SIZE;
 		if (toRead > maxRead)
 			toRead = maxRead;
 
@@ -728,8 +728,8 @@ BreakpointManager::_WriteMemory(addr_t _address, const void* _buffer,
 		}
 
 		// restrict this round of writing to the found area
-		int32 toWrite = size;
-		int32 maxWrite = (uint8*)areaInfo.address + areaInfo.size - address;
+		int32_t toWrite = size;
+		int32_t maxWrite = (uint8*)areaInfo.address + areaInfo.size - address;
 		if (toWrite > maxWrite)
 			toWrite = maxWrite;
 

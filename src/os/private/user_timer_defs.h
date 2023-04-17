@@ -43,7 +43,7 @@
 struct user_timer_info {
 	bigtime_t	remaining_time;
 	bigtime_t	interval;
-	uint32		overrun_count;
+	uint32_t		overrun_count;
 };
 
 

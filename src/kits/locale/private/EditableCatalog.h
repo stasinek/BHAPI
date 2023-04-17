@@ -27,11 +27,11 @@ public:
 									const char* translated,
 									const char* context = NULL,
 									const char* comment = NULL);
-			status_t			SetString(int32 id, const char* translated);
+			status_t			SetString(int32_t id, const char* translated);
 
 			bool				CanWriteData() const;
 			status_t			SetData(const char* name, BMessage* msg);
-			status_t			SetData(uint32 id, BMessage* msg);
+			status_t			SetData(uint32_t id, BMessage* msg);
 
 			status_t			ReadFromFile(const char* path = NULL);
 			status_t			ReadFromAttribute(

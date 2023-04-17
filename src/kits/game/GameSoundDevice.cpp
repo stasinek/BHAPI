@@ -47,10 +47,10 @@
 
 
 // BGameSoundDevice definitions ------------------------------------
-const int32 kInitSoundCount = 32;
-const int32 kGrowth = 16;
+const int32_t kInitSoundCount = 32;
+const int32_t kGrowth = 16;
 
-static int32 sDeviceCount = 0;
+static int32_t sDeviceCount = 0;
 static BGameSoundDevice* sDevice = NULL;
 static BLocker sDeviceRefCountLock = BLocker("GameSound device lock");
 
@@ -92,7 +92,7 @@ BGameSoundDevice::BGameSoundDevice()
 	fInitError = B_OK;
 
 	fSounds = new GameSoundBuffer*[kInitSoundCount];
-	for (int32 i = 0; i < kInitSoundCount; i++)
+	for (int32_t i = 0; i < kInitSoundCount; i++)
 		fSounds[i] = NULL;
 }
 
@@ -100,7 +100,7 @@ BGameSoundDevice::BGameSoundDevice()
 BGameSoundDevice::~BGameSoundDevice()
 {
 	// We need to stop all the sounds before we stop the mixer
-	for (int32 i = 0; i < fSoundCount; i++) {
+	for (int32_t i = 0; i < fSoundCount; i++) {
 		if (fSounds[i])
 			fSounds[i]->StopPlaying();
 		delete fSounds[i];
@@ -143,7 +143,7 @@ status_t BGameSoundDevice::CreateBuffer(gs_id* sound, const gs_audio_format* for
 		return B_BAD_VALUE;
 
 	status_t err = B_MEDIA_TOO_MANY_BUFFERS;
-	int32 position = AllocateSound();
+	int32_t position = AllocateSound();
 
 	if (position >= 0) {
 		fSounds[position] = new SimpleSoundBuffer(format, data, frames);
@@ -167,7 +167,7 @@ status_t BGameSoundDevice::CreateBuffer(gs_id* sound, const void* object,
 		return B_BAD_VALUE;
 
 	status_t err = B_MEDIA_TOO_MANY_BUFFERS;
-	int32 position = AllocateSound();
+	int32_t position = AllocateSound();
 
 	if (position >= 0) {
 		fSounds[position] = new StreamingSoundBuffer(format, object,
@@ -274,18 +274,18 @@ status_t BGameSoundDevice::SetAttributes(gs_id sound, gs_attribute* attributes,
 }
 
 
-int32 BGameSoundDevice::AllocateSound()
+int32_t BGameSoundDevice::AllocateSound()
 {
-	for (int32 i = 0; i < fSoundCount; i++)
+	for (int32_t i = 0; i < fSoundCount; i++)
 		if (!fSounds[i])
 			return i;
 
 	// we need to allocate new space for the sound
 	GameSoundBuffer ** sounds = new GameSoundBuffer*[fSoundCount + kGrowth];
-	for (int32 i = 0; i < fSoundCount; i++)
+	for (int32_t i = 0; i < fSoundCount; i++)
 		sounds[i] = fSounds[i];
 
-	for (int32 i = fSoundCount; i < fSoundCount + kGrowth; i++)
+	for (int32_t i = fSoundCount; i < fSoundCount + kGrowth; i++)
 		sounds[i] = NULL;
 
 	// replace the old list

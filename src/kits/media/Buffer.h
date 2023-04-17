@@ -23,10 +23,10 @@ struct buffer_clone_info {
 			area_id				area;
 			size_t				offset;
 			size_t				size;
-			int32				flags;
+			int32_t				flags;
 
 private:
-			uint32				_reserved_[4];
+			uint32_t				_reserved_[4];
 };
 
 
@@ -43,7 +43,7 @@ public:
 			size_t				SizeAvailable();
 			size_t				SizeUsed();
 			void				SetSizeUsed(size_t used);
-			uint32				Flags();
+			uint32_t				Flags();
 
 			void				Recycle();
 			buffer_clone_info	CloneInfo() const;
@@ -81,9 +81,9 @@ private:
 			void*				fData;
 			size_t				fOffset;
 			size_t				fSize;
-			int32				fFlags;
+			int32_t				fFlags;
 
-			uint32				_reserved[12];
+			uint32_t				_reserved[12];
 };
 
 

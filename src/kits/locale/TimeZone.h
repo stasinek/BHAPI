@@ -53,7 +53,7 @@ private:
 			U_ICU_NAMESPACE::Locale*		fICULocale;
 			status_t			fInitStatus;
 
-	mutable uint32				fInitializedFields;
+	mutable uint32_t				fInitializedFields;
 	mutable BString				fZoneID;
 	mutable BString				fName;
 	mutable BString				fDaylightSavingName;

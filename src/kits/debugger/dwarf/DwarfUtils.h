@@ -30,7 +30,7 @@ public:
 									const DebugInfoEntry* entry,
 									const char*& _directory,
 									const char*& _file,
-									int32& _line, int32& _column);
+									int32_t& _line, int32_t& _column);
 
 	template<typename EntryType, typename Predicate>
 	static	EntryType*			GetDIEByPredicate(EntryType* entry,

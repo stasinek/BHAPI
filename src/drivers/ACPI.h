@@ -84,41 +84,41 @@ enum {
 /* ACPI control method arg type */
 
 union acpi_object_type {
-	uint32 object_type;
+	uint32_t object_type;
 	struct {
-		uint32 object_type;
+		uint32_t object_type;
 		uint64 integer;
 	} integer;
 	struct {
-		uint32 object_type;
-		uint32 len;
+		uint32_t object_type;
+		uint32_t len;
 		char *string; /* You have to allocate string space yourself */
 	} string;
 	struct {
-		uint32 object_type;
-		uint32 length;
+		uint32_t object_type;
+		uint32_t length;
 		void *buffer;
 	} buffer;
 	struct {
-		uint32 object_type;
-		uint32 count;
+		uint32_t object_type;
+		uint32_t count;
 		acpi_object_type *objects;
 	} package;
 	struct {
-		uint32 object_type;
-		uint32 actual_type;
+		uint32_t object_type;
+		uint32_t actual_type;
 		acpi_handle handle;
 	} reference;
 	struct {
-		uint32 object_type;
-		uint32 cpu_id;
+		uint32_t object_type;
+		uint32_t cpu_id;
 		acpi_io_address pblk_address;
-		uint32 pblk_length;
+		uint32_t pblk_length;
 	} processor;
 	struct {
-		uint32 object_type;
-		uint32 min_power_state;
-		uint32 resource_order;
+		uint32_t object_type;
+		uint32_t min_power_state;
+		uint32_t resource_order;
 	} power_resource;
 };
 
@@ -127,7 +127,7 @@ union acpi_object_type {
  * List of objects, used as a parameter list for control method evaluation
  */
 typedef struct acpi_objects {
-	uint32				count;
+	uint32_t				count;
 	acpi_object_type	*pointer;
 } acpi_objects;
 
@@ -147,7 +147,7 @@ enum {
 /*
  * acpi_status should return ACPI specific error codes, not BeOS ones.
  */
-typedef uint32 acpi_status;
+typedef uint32_t acpi_status;
 
 typedef struct acpi_resource acpi_resource;
 
@@ -157,18 +157,18 @@ typedef struct acpi_resource acpi_resource;
 #endif	// __ACTYPES_H__
 
 
-typedef uint32 (*acpi_event_handler)(void *context);
-typedef uint32 (*acpi_gpe_handler) (acpi_handle GpeDevice, uint32 GpeNumber,
+typedef uint32_t (*acpi_event_handler)(void *context);
+typedef uint32_t (*acpi_gpe_handler) (acpi_handle GpeDevice, uint32_t GpeNumber,
 	void *context);
 
-typedef acpi_status (*acpi_adr_space_handler)(uint32 function,
-	acpi_physical_address address, uint32 bitWidth, int *value,
+typedef acpi_status (*acpi_adr_space_handler)(uint32_t function,
+	acpi_physical_address address, uint32_t bitWidth, int *value,
 	void *handlerContext, void *regionContext);
 
 typedef acpi_status (*acpi_adr_space_setup)(acpi_handle regionHandle,
-	uint32 function, void *handlerContext, void **regionContext);
+	uint32_t function, void *handlerContext, void **regionContext);
 
-typedef void (*acpi_notify_handler)(acpi_handle device, uint32 value,
+typedef void (*acpi_notify_handler)(acpi_handle device, uint32_t value,
 	void *context);
 
 typedef acpi_status (*acpi_walk_resources_callback)(acpi_resource* resource,
@@ -180,76 +180,76 @@ struct acpi_module_info {
 
 	status_t	(*get_handle)(acpi_handle parent, const char *pathname,
 					acpi_handle *retHandle);
-	status_t 	(*get_name)(acpi_handle handle, uint32 nameType,
+	status_t 	(*get_name)(acpi_handle handle, uint32_t nameType,
 					char* returnedName, size_t bufferLength);
 
 	/* Global Lock */
 
-	status_t	(*acquire_global_lock)(uint16 timeout, uint32 *handle);
-	status_t	(*release_global_lock)(uint32 handle);
+	status_t	(*acquire_global_lock)(uint16 timeout, uint32_t *handle);
+	status_t	(*release_global_lock)(uint32_t handle);
 
 	/* Notify Handler */
 
 	status_t	(*install_notify_handler)(acpi_handle device,
-					uint32 handlerType, acpi_notify_handler handler,
+					uint32_t handlerType, acpi_notify_handler handler,
 					void *context);
 	status_t	(*remove_notify_handler)(acpi_handle device,
-					uint32 handlerType, acpi_notify_handler handler);
+					uint32_t handlerType, acpi_notify_handler handler);
 
 	/* GPE Handler */
 
 	status_t	(*update_all_gpes)();
-	status_t	(*enable_gpe)(acpi_handle handle, uint32 gpeNumber);
-	status_t	(*disable_gpe)(acpi_handle handle, uint32 gpeNumber);
-	status_t	(*clear_gpe)(acpi_handle handle, uint32 gpeNumber);
-	status_t	(*set_gpe)(acpi_handle handle, uint32 gpeNumber,
+	status_t	(*enable_gpe)(acpi_handle handle, uint32_t gpeNumber);
+	status_t	(*disable_gpe)(acpi_handle handle, uint32_t gpeNumber);
+	status_t	(*clear_gpe)(acpi_handle handle, uint32_t gpeNumber);
+	status_t	(*set_gpe)(acpi_handle handle, uint32_t gpeNumber,
 					uint8 action);
-	status_t	(*finish_gpe)(acpi_handle handle, uint32 gpeNumber);
-	status_t	(*install_gpe_handler)(acpi_handle handle, uint32 gpeNumber,
-					uint32 type, acpi_gpe_handler handler, void *data);
-	status_t	(*remove_gpe_handler)(acpi_handle handle, uint32 gpeNumber,
+	status_t	(*finish_gpe)(acpi_handle handle, uint32_t gpeNumber);
+	status_t	(*install_gpe_handler)(acpi_handle handle, uint32_t gpeNumber,
+					uint32_t type, acpi_gpe_handler handler, void *data);
+	status_t	(*remove_gpe_handler)(acpi_handle handle, uint32_t gpeNumber,
 					acpi_gpe_handler address);
 
 	/* Address Space Handler */
 
 	status_t	(*install_address_space_handler)(acpi_handle handle,
-					uint32 spaceId,
+					uint32_t spaceId,
 					acpi_adr_space_handler handler,
 					acpi_adr_space_setup setup,	void *data);
 	status_t	(*remove_address_space_handler)(acpi_handle handle,
-					uint32 spaceId,
+					uint32_t spaceId,
 					acpi_adr_space_handler handler);
 
 	/* Fixed Event Management */
 
-	void		(*enable_fixed_event)(uint32 event);
-	void		(*disable_fixed_event)(uint32 event);
+	void		(*enable_fixed_event)(uint32_t event);
+	void		(*disable_fixed_event)(uint32_t event);
 
-	uint32		(*fixed_event_status) (uint32 event);
+	uint32_t		(*fixed_event_status) (uint32_t event);
 					/* Returns 1 if event set, 0 otherwise */
-	void		(*reset_fixed_event) (uint32 event);
+	void		(*reset_fixed_event) (uint32_t event);
 
-	status_t	(*install_fixed_event_handler)(uint32 event,
+	status_t	(*install_fixed_event_handler)(uint32_t event,
 					acpi_event_handler handler, void *data);
-	status_t	(*remove_fixed_event_handler)(uint32 event,
+	status_t	(*remove_fixed_event_handler)(uint32_t event,
 					acpi_event_handler handler);
 
 	/* Namespace Access */
 
-	status_t	(*get_next_entry)(uint32 objectType, const char *base,
+	status_t	(*get_next_entry)(uint32_t objectType, const char *base,
 					char *result, size_t length, void **_counter);
-	status_t	(*get_next_object)(uint32 objectType, acpi_handle parent,
+	status_t	(*get_next_object)(uint32_t objectType, acpi_handle parent,
 					acpi_handle* currentChild);
-	status_t	(*get_device)(const char *hid, uint32 index, char *result,
+	status_t	(*get_device)(const char *hid, uint32_t index, char *result,
 					size_t resultLength);
 
 	status_t	(*get_device_hid)(const char *path, char *hid,
 					size_t hidLength);
-	uint32		(*get_object_type)(const char *path);
+	uint32_t		(*get_object_type)(const char *path);
 	status_t	(*get_object)(const char *path,
 					acpi_object_type **_returnValue);
 	status_t	(*get_object_typed)(const char *path,
-					acpi_object_type **_returnValue, uint32 objectType);
+					acpi_object_type **_returnValue, uint32_t objectType);
 	status_t	(*ns_handle_to_pathname)(acpi_handle targetHandle,
 					acpi_data *buffer);
 
@@ -282,12 +282,12 @@ struct acpi_module_info {
 	status_t	(*reboot)(void);
 
 	/* Table Access */
-	status_t	(*get_table)(const char *signature, uint32 instance,
+	status_t	(*get_table)(const char *signature, uint32_t instance,
 					void **tableHeader);
 
 	/* Register Access */
-	status_t	(*read_bit_register)(uint32 regid, uint32 *val);
-	status_t	(*write_bit_register)(uint32 regid, uint32 val);
+	status_t	(*read_bit_register)(uint32_t regid, uint32_t *val);
+	status_t	(*write_bit_register)(uint32_t regid, uint32_t val);
 };
 
 
@@ -317,22 +317,22 @@ typedef struct acpi_device_module_info {
 	/* Notify Handler */
 
 	status_t	(*install_notify_handler)(acpi_device device,
-					uint32 handlerType, acpi_notify_handler handler,
+					uint32_t handlerType, acpi_notify_handler handler,
 					void *context);
 	status_t	(*remove_notify_handler)(acpi_device device,
-					uint32 handlerType, acpi_notify_handler handler);
+					uint32_t handlerType, acpi_notify_handler handler);
 
 	/* Address Space Handler */
 	status_t	(*install_address_space_handler)(acpi_device device,
-					uint32 spaceId,
+					uint32_t spaceId,
 					acpi_adr_space_handler handler,
 					acpi_adr_space_setup setup,	void *data);
 	status_t	(*remove_address_space_handler)(acpi_device device,
-					uint32 spaceId,
+					uint32_t spaceId,
 					acpi_adr_space_handler handler);
 
 	/* Namespace Access */
-	uint32		(*get_object_type)(acpi_device device);
+	uint32_t		(*get_object_type)(acpi_device device);
 	status_t	(*get_object)(acpi_device device, const char *path,
 					acpi_object_type **_returnValue);
 

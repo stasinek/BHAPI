@@ -306,7 +306,7 @@ dprintf("jumpOffset: %p\n", (void*)jumpOffset);
 					// 0:5 opcode (= 18), 6:29 address, 30 AA, 31 LK
 					// "b" instruction: opcode = 18, AA = 0, LK = 0
 					// address: 24 high-order bits of 26 bit offset
-					*(uint32*)P = 0x48000000 | ((jumpOffset) & 0x03fffffc);
+					*(uint32_t*)P = 0x48000000 | ((jumpOffset) & 0x03fffffc);
 				}
 				break;
 			}

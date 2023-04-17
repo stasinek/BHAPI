@@ -109,7 +109,7 @@ status_t RemoteMemoryAccessor::Init()
 // PrepareAddress
 const void *
 RemoteMemoryAccessor::PrepareAddress(const void *remoteAddress,
-	int32 size) const
+	int32_t size) const
 {
 	TRACE(("RemoteMemoryAccessor::PrepareAddress(%p, %" B_PRId32 ")\n",
 		remoteAddress, size));
@@ -125,7 +125,7 @@ RemoteMemoryAccessor::PrepareAddress(const void *remoteAddress,
 
 const void *
 RemoteMemoryAccessor::PrepareAddressNoThrow(const void *remoteAddress,
-	int32 size) const
+	int32_t size) const
 {
 	if (remoteAddress == NULL)
 		return NULL;
@@ -157,7 +157,7 @@ RemoteMemoryAccessor::AreaForLocalAddress(const void* address) const
 
 // _FindArea
 Area &
-RemoteMemoryAccessor::_FindArea(const void *address, int32 size) const
+RemoteMemoryAccessor::_FindArea(const void *address, int32_t size) const
 {
 	TRACE(("RemoteMemoryAccessor::_FindArea(%p, %" B_PRId32 ")\n", address,
 		size));
@@ -176,7 +176,7 @@ RemoteMemoryAccessor::_FindArea(const void *address, int32 size) const
 
 // _FindAreaNoThrow
 Area*
-RemoteMemoryAccessor::_FindAreaNoThrow(const void *address, int32 size) const
+RemoteMemoryAccessor::_FindAreaNoThrow(const void *address, int32_t size) const
 {
 	for (AreaList::ConstIterator it = fAreas.GetIterator(); it.HasNext();) {
 		Area *area = it.Next();
@@ -194,7 +194,7 @@ RemoteMemoryAccessor::_FindAreaNoThrow(const void *address, int32 size) const
 class SymbolLookup::LoadedImage : public Image {
 public:
 								LoadedImage(SymbolLookup* symbolLookup,
-									const image_t* image, int32 symbolCount);
+									const image_t* image, int32_t symbolCount);
 	virtual						~LoadedImage();
 
 	virtual	const elf_sym*		LookupSymbol(addr_t address,
@@ -202,16 +202,16 @@ public:
 									const char** _symbolName,
 									size_t *_symbolNameLen,
 									bool *_exactMatch) const;
-	virtual	status_t			NextSymbol(int32& iterator,
+	virtual	status_t			NextSymbol(int32_t& iterator,
 									const char** _symbolName,
 									size_t* _symbolNameLen,
 									addr_t* _symbolAddress, size_t* _symbolSize,
-									int32* _symbolType) const;
+									int32_t* _symbolType) const;
 
 private:
 			SymbolLookup*			fSymbolLookup;
 			const image_t*			fImage;
-			int32					fSymbolCount;
+			int32_t					fSymbolCount;
 			size_t					fTextDelta;
 };
 
@@ -284,7 +284,7 @@ status_t SymbolLookup::Init()
 	image_info imageInfo;
 	if (fImageID < 0) {
 		// create a list of the team's images
-		int32 cookie = 0;
+		int32_t cookie = 0;
 		while (get_next_image_info(fTeam, &cookie, &imageInfo) == B_OK) {
 			error = _LoadImageInfo(imageInfo);
 			if (error != B_OK)
@@ -395,7 +395,7 @@ status_t SymbolLookup::InitSymbolIteratorByAddress(addr_t address,
 // NextSymbol
 status_t SymbolLookup::NextSymbol(SymbolIterator& iterator, const char** _symbolName,
 	size_t* _symbolNameLen, addr_t* _symbolAddress, size_t* _symbolSize,
-	int32* _symbolType) const
+	int32_t* _symbolType) const
 {
 	return iterator.image->NextSymbol(iterator.currentIndex, _symbolName,
 		_symbolNameLen, _symbolAddress, _symbolSize, _symbolType);
@@ -403,8 +403,8 @@ status_t SymbolLookup::NextSymbol(SymbolIterator& iterator, const char** _symbol
 
 
 // GetSymbol
-status_t SymbolLookup::GetSymbol(image_id imageID, const char* name, int32 symbolType,
-	void** _symbolLocation, size_t* _symbolSize, int32* _symbolType) const
+status_t SymbolLookup::GetSymbol(image_id imageID, const char* name, int32_t symbolType,
+	void** _symbolLocation, size_t* _symbolSize, int32_t* _symbolType) const
 {
 	Image* image = _FindImageByID(imageID);
 	if (image == NULL)
@@ -554,7 +554,7 @@ status_t SymbolLookup::_LoadImageInfo(const image_info& imageInfo)
 
 
 SymbolLookup::LoadedImage::LoadedImage(SymbolLookup* symbolLookup,
-	const image_t* image, int32 symbolCount)
+	const image_t* image, int32_t symbolCount)
 	:
 	fSymbolLookup(symbolLookup),
 	fImage(image),
@@ -597,10 +597,10 @@ SymbolLookup::LoadedImage::LookupSymbol(addr_t address, addr_t* _baseAddress,
 	bool exactMatch = false;
 	const char *symbolName = NULL;
 
-	int32 symbolCount = fSymbolLookup->Read(fImage->symhash[1]);
+	int32_t symbolCount = fSymbolLookup->Read(fImage->symhash[1]);
 	const elf_region_t *textRegion = fImage->regions;				// local
 
-	for (int32 i = 0; i < symbolCount; i++) {
+	for (int32_t i = 0; i < symbolCount; i++) {
 		const elf_sym *symbol = &fSymbolLookup->Read(fImage->syms[i]);
 
 		// The symbol table contains not only symbols referring to functions
@@ -659,9 +659,9 @@ SymbolLookup::LoadedImage::LookupSymbol(addr_t address, addr_t* _baseAddress,
 }
 
 
-status_t SymbolLookup::LoadedImage::NextSymbol(int32& iterator, const char** _symbolName,
+status_t SymbolLookup::LoadedImage::NextSymbol(int32_t& iterator, const char** _symbolName,
 	size_t* _symbolNameLen, addr_t* _symbolAddress, size_t* _symbolSize,
-	int32* _symbolType) const
+	int32_t* _symbolType) const
 {
 	while (true) {
 		if (++iterator >= fSymbolCount)

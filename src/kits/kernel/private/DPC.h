@@ -58,8 +58,8 @@ public:
 
 	static	DPCQueue*			DefaultQueue(int priority);
 
-			status_t			Init(const char* name, int32 priority,
-									uint32 reservedSlots);
+			status_t			Init(const char* name, int32_t priority,
+									uint32_t reservedSlots);
 			void				Close(bool cancelPending);
 
 			status_t			Add(DPCCallback* callback);

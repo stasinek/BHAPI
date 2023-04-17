@@ -23,7 +23,7 @@ struct ThreadData : public DoublyLinkedListLinkImpl<ThreadData>,
 private:
 	inline	void		_InitBase();
 
-	inline	int32		_GetMinimalPriority() const;
+	inline	int32_t		_GetMinimalPriority() const;
 
 	inline	CoreEntry*	_ChooseCore() const;
 	inline	CPUEntry*	_ChooseCPU(CoreEntry* core,
@@ -37,7 +37,7 @@ public:
 
 			void		Dump() const;
 
-	inline	int32		GetPriority() const	{ return fThread->priority; }
+	inline	int32_t		GetPriority() const	{ return fThread->priority; }
 	inline	Thread*		GetThread() const	{ return fThread; }
 
 	inline	bool		IsRealTime() const;
@@ -46,7 +46,7 @@ public:
 	inline	bool		HasCacheExpired() const;
 	inline	CoreEntry*	Rebalance() const;
 
-	inline	int32		GetEffectivePriority() const;
+	inline	int32_t		GetEffectivePriority() const;
 
 	inline	void		StartCPUTime();
 	inline	void		StopCPUTime();
@@ -82,7 +82,7 @@ public:
 	inline	bool		IsEnqueued() const	{ return fEnqueued; }
 	inline	void		SetDequeued()	{ fEnqueued = false; }
 
-	inline	int32		GetLoad() const	{ return fNeededLoad; }
+	inline	int32_t		GetLoad() const	{ return fNeededLoad; }
 
 	inline	CoreEntry*	Core() const	{ return fCore; }
 			void		UnassignCore(bool running = false);
@@ -91,15 +91,15 @@ public:
 
 private:
 	inline	void		_IncreasePenalty();
-	inline	int32		_GetPenalty() const;
+	inline	int32_t		_GetPenalty() const;
 
 			void		_ComputeNeededLoad();
 
 			void		_ComputeEffectivePriority() const;
 
 	static	bigtime_t	_ScaleQuantum(bigtime_t maxQuantum,
-							bigtime_t minQuantum, int32 maxPriority,
-							int32 minPriority, int32 priority);
+							bigtime_t minQuantum, int32_t maxPriority,
+							int32_t minPriority, int32_t priority);
 
 			bigtime_t	fStolenTime;
 			bigtime_t	fQuantumStart;
@@ -113,10 +113,10 @@ private:
 
 			Thread*		fThread;
 
-			int32		fPriorityPenalty;
-			int32		fAdditionalPenalty;
+			int32_t		fPriorityPenalty;
+			int32_t		fAdditionalPenalty;
 
-	mutable	int32		fEffectivePriority;
+	mutable	int32_t		fEffectivePriority;
 	mutable	bigtime_t	fBaseQuantum;
 
 			bigtime_t	fTimeUsed;
@@ -125,8 +125,8 @@ private:
 			bigtime_t	fMeasureAvailableTime;
 			bigtime_t	fLastMeasureAvailableTime;
 
-			int32		fNeededLoad;
-			uint32		fLoadMeasurementEpoch;
+			int32_t		fNeededLoad;
+			uint32_t		fLoadMeasurementEpoch;
 
 			CoreEntry*	fCore;
 };
@@ -139,17 +139,17 @@ public:
 };
 
 
-inline int32
+inline int32_t
 ThreadData::_GetMinimalPriority() const
 {
 	SCHEDULER_ENTER_FUNCTION();
 
-	const int32 kDivisor = 5;
+	const int32_t kDivisor = 5;
 
-	const int32 kMaximalPriority = 25;
-	const int32 kMinimalPriority = B_LOWEST_ACTIVE_PRIORITY;
+	const int32_t kMaximalPriority = 25;
+	const int32_t kMinimalPriority = B_LOWEST_ACTIVE_PRIORITY;
 
-	int32 priority = GetPriority() / kDivisor;
+	int32_t priority = GetPriority() / kDivisor;
 	return std::max(std::min(priority, kMaximalPriority), kMinimalPriority);
 }
 
@@ -186,7 +186,7 @@ ThreadData::Rebalance() const
 }
 
 
-inline int32
+inline int32_t
 ThreadData::GetEffectivePriority() const
 {
 	SCHEDULER_ENTER_FUNCTION();
@@ -204,7 +204,7 @@ ThreadData::_IncreasePenalty()
 
 	TRACE("increasing thread %ld penalty\n", fThread->id);
 
-	int32 oldPenalty = fPriorityPenalty++;
+	int32_t oldPenalty = fPriorityPenalty++;
 	const int kMinimalPriority = _GetMinimalPriority();
 	if (GetPriority() - oldPenalty <= kMinimalPriority)
 		fPriorityPenalty = oldPenalty;
@@ -247,7 +247,7 @@ ThreadData::CancelPenalty()
 {
 	SCHEDULER_ENTER_FUNCTION();
 
-	int32 oldPenalty = fPriorityPenalty;
+	int32_t oldPenalty = fPriorityPenalty;
 	fPriorityPenalty = 0;
 
 	if (oldPenalty != 0) {
@@ -384,7 +384,7 @@ ThreadData::PutBack()
 {
 	SCHEDULER_ENTER_FUNCTION();
 
-	int32 priority = GetEffectivePriority();
+	int32_t priority = GetEffectivePriority();
 
 	if (fThread->pinned_to_cpu > 0) {
 		ASSERT(fThread->cpu != NULL);
@@ -427,7 +427,7 @@ ThreadData::Enqueue()
 
 	fThread->state = B_THREAD_READY;
 
-	int32 priority = GetEffectivePriority();
+	int32_t priority = GetEffectivePriority();
 
 	if (fThread->pinned_to_cpu > 0) {
 		ASSERT(fThread->previous_cpu != NULL);

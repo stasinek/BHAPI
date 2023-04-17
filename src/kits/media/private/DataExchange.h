@@ -27,19 +27,19 @@ status_t SendToServer(BMessage* msg);
 status_t QueryServer(BMessage& request, BMessage& reply);
 
 // Raw data based data exchange with the media_server
-status_t SendToServer(int32 msgCode, command_data* msg, size_t size);
-status_t QueryServer(int32 msgCode, request_data* request, size_t requestSize,
+status_t SendToServer(int32_t msgCode, command_data* msg, size_t size);
+status_t QueryServer(int32_t msgCode, request_data* request, size_t requestSize,
 	reply_data* reply, size_t replySize);
 
 // Raw data based data exchange with the media_addon_server
-status_t SendToAddOnServer(int32 msgCode, command_data *msg, size_t size);
-status_t QueryAddOnServer(int32 msgCode, request_data* request,
+status_t SendToAddOnServer(int32_t msgCode, command_data *msg, size_t size);
+status_t QueryAddOnServer(int32_t msgCode, request_data* request,
 	size_t requestSize, reply_data* reply, size_t replySize);
 
 // Raw data based data exchange with any (media node control-) port
-status_t SendToPort(port_id sendPort, int32 msgCode, command_data* msg,
+status_t SendToPort(port_id sendPort, int32_t msgCode, command_data* msg,
 	size_t size);
-status_t QueryPort(port_id requestPort, int32 msgCode, request_data* request,
+status_t QueryPort(port_id requestPort, int32_t msgCode, request_data* request,
 	size_t requestSize, reply_data* reply, size_t replySize);
 
 

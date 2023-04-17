@@ -55,9 +55,9 @@ public:
 								BDriverParameterContainer();
 	virtual						~BDriverParameterContainer();
 
-			int32				CountParameters() const;
+			int32_t				CountParameters() const;
 			const driver_parameter*	Parameters() const;
-			BDriverParameter	ParameterAt(int32 index) const;
+			BDriverParameter	ParameterAt(int32_t index) const;
 			bool				FindParameter(const char* name,
 									BDriverParameter* _parameter) const;
 			BDriverParameter	GetParameter(const char* name) const;
@@ -71,15 +71,15 @@ public:
 			bool				GetBoolParameterValue(const char* name,
 									bool unknownValue = false,
 									bool noValue = false) const;
-			int32				GetInt32ParameterValue(const char* name,
-									int32 unknownValue = 0,
-									int32 noValue = 0) const;
+			int32_t				GetInt32ParameterValue(const char* name,
+									int32_t unknownValue = 0,
+									int32_t noValue = 0) const;
 			int64				GetInt64ParameterValue(const char* name,
 									int64 unknownValue = 0,
 									int64 noValue = 0) const;
 
 protected:
-	virtual	const driver_parameter* GetParametersAndCount(int32& _count) const
+	virtual	const driver_parameter* GetParametersAndCount(int32_t& _count) const
 									= 0;
 
 private:
@@ -99,7 +99,7 @@ public:
 			void				Unset();
 
 protected:
-	virtual	const driver_parameter* GetParametersAndCount(int32& _count) const;
+	virtual	const driver_parameter* GetParametersAndCount(int32_t& _count) const;
 
 private:
 			void*				fSettingsHandle;
@@ -120,21 +120,21 @@ public:
 			bool				IsValid() const;
 
 			const char*			Name() const;
-			int32				CountValues() const;
+			int32_t				CountValues() const;
 			const char* const*	Values() const;
-			const char*			ValueAt(int32 index,
+			const char*			ValueAt(int32_t index,
 									const char* noValue = NULL) const;
-			bool				BoolValueAt(int32 index,
+			bool				BoolValueAt(int32_t index,
 									bool noValue = false) const;
-			int32				Int32ValueAt(int32 index,
-									int32 noValue = 0) const;
-			int64				Int64ValueAt(int32 index,
+			int32_t				Int32ValueAt(int32_t index,
+									int32_t noValue = 0) const;
+			int64				Int64ValueAt(int32_t index,
 									int64 noValue = 0) const;
 
 			BDriverParameter&	operator=(const BDriverParameter& other);
 
 protected:
-	virtual	const driver_parameter* GetParametersAndCount(int32& _count) const;
+	virtual	const driver_parameter* GetParametersAndCount(int32_t& _count) const;
 
 private:
 			const driver_parameter*	fParameter;

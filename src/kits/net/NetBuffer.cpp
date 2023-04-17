@@ -149,16 +149,16 @@ status_t BNetBuffer::AppendUint16(__be_uint16 value)
 }
 
 
-status_t BNetBuffer::AppendInt32(__be_int32 value)
+status_t BNetBuffer::AppendInt32(__be_int32_t value)
 {
-	__be_int32 v = B_HOST_TO_BENDIAN_INT32(value);
+	__be_int32_t v = B_HOST_TO_BENDIAN_INT32(value);
 	return AppendData(&v, 4);
 }
 
 
-status_t BNetBuffer::AppendUint32(__be_uint32 value)
+status_t BNetBuffer::AppendUint32_t(__be_uint32_t value)
 {
-	__be_int32 v = B_HOST_TO_BENDIAN_INT32(value);
+	__be_int32_t v = B_HOST_TO_BENDIAN_INT32(value);
 	return AppendData(&v, 4);
 }
 
@@ -189,7 +189,7 @@ status_t BNetBuffer::AppendDouble(double value)
 }
 
 
-status_t BNetBuffer::AppenString(const char *string,  __be_int32 len)
+status_t BNetBuffer::AppenString(const char *string,  __be_int32_t len)
 {
 	size_t strLen = 0;
 
@@ -234,7 +234,7 @@ status_t BNetBuffer::AppendMessage(const BMessage &msg)
 	free(buf);
 
 	// size
-	__be_uint32 tmp = (__be_uint32)msgSize;
+	__be_uint32_t tmp = (__be_uint32_t)msgSize;
 #ifdef BHAPI_LITTLE_LENDIAN
 	tmp = B_SWAP_INT32(tmp);
 #endif
@@ -292,7 +292,7 @@ status_t BNetBuffer::RemoveUint16(__be_uint16 &value)
 }
 
 
-status_t BNetBuffer::RemoveInt32(__be_int32 &value)
+status_t BNetBuffer::RemoveInt32(__be_int32_t &value)
 {
 	if(RemoveData(&value, 4) != B_OK) return B_ERROR;
 
@@ -301,7 +301,7 @@ status_t BNetBuffer::RemoveInt32(__be_int32 &value)
 }
 
 
-status_t BNetBuffer::RemoveUint32(__be_uint32 &value)
+status_t BNetBuffer::RemoveUint32_t(__be_uint32_t &value)
 {
 	if(RemoveData(&value, 4) != B_OK) return B_ERROR;
 
@@ -361,7 +361,7 @@ status_t BNetBuffer::RemoveMessage(BMessage &msg)
 	const unsigned char *magic = fData + fPos - 4;
 	if(magic[0] != 0 || magic[1] != 'm' || magic[2] != 's' || magic[3] != 'g') return B_ERROR;
 
-	__be_uint32 msgSize = 0;
+	__be_uint32_t msgSize = 0;
 	memcpy(&msgSize, fData + fPos - 8, 4);
 #ifdef BHAPI_LITTLE_LENDIAN
 	msgSize = B_SWAP_INT32(msgSize);

@@ -22,7 +22,7 @@
 	- \c B_OK: Everything went fine.
 	- an error code: The contents of \a sessionInfo is undefined.
 */
-status_t get_nth_session_info(int deviceFD, int32 index, session_info *sessionInfo)
+status_t get_nth_session_info(int deviceFD, int32_t index, session_info *sessionInfo)
 {
 	status_t error = (sessionInfo ? B_OK : B_BAD_VALUE);
 	disk_scanner_module_info *diskScanner = NULL;
@@ -62,7 +62,7 @@ status_t get_nth_session_info(int deviceFD, int32 index, session_info *sessionIn
 	- \c B_OK: Everything went fine.
 	- an error code: The contents of \a partitionInfo is undefined.
 */
-status_t get_nth_partition_info(int deviceFD, int32 sessionIndex, int32 partitionIndex,
+status_t get_nth_partition_info(int deviceFD, int32_t sessionIndex, int32_t partitionIndex,
 					   extended_partition_info *partitionInfo,
 					   char *partitionMapName)
 {
@@ -155,7 +155,7 @@ partitionInfo->info.device[0] = '\0';
 	  small. \a actualSize has to be checked!
 	- another error code, if something went wrong
 */
-status_t get_partitioning_parameters(int deviceFD, int32 sessionIndex,
+status_t get_partitioning_parameters(int deviceFD, int32_t sessionIndex,
 							const char *identifier, char *buffer,
 							size_t bufferSize, size_t *actualSize)
 {
@@ -211,8 +211,8 @@ status_t get_partitioning_parameters(int deviceFD, int32 sessionIndex,
 	  small. \a actualSize has to be checked!
 	- another error code, if something went wrong
 */
-status_t get_fs_initialization_parameters(int deviceFD, int32 sessionIndex,
-								 int32 partitionIndex, const char *fileSystem,
+status_t get_fs_initialization_parameters(int deviceFD, int32_t sessionIndex,
+								 int32_t partitionIndex, const char *fileSystem,
 								 char *buffer, size_t bufferSize,
 								 size_t *actualSize)
 {
@@ -232,7 +232,7 @@ status_t get_fs_initialization_parameters(int deviceFD, int32 sessionIndex,
 		   module.
 	\return \c B_OK, if everything went fine, an error code otherwise.
 */
-status_t partition_session(int deviceFD, int32 sessionIndex, const char *identifier,
+status_t partition_session(int deviceFD, int32_t sessionIndex, const char *identifier,
 				  const char *parameters)
 {
 	status_t error = (identifier ? B_OK : B_BAD_VALUE);

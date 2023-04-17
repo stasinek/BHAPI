@@ -36,7 +36,7 @@ protected:
 
 class EnqueueThread : public SchedulerTraceEntry {
 public:
-	EnqueueThread(Thread* thread, int32 effectivePriority)
+	EnqueueThread(Thread* thread, int32_t effectivePriority)
 		:
 		SchedulerTraceEntry(thread),
 		fPriority(thread->priority),
@@ -53,8 +53,8 @@ public:
 
 private:
 	char*				fName;
-	int32				fPriority;
-	int32				fEffectivePriority;
+	int32_t				fPriority;
+	int32_t				fEffectivePriority;
 };
 
 
@@ -112,7 +112,7 @@ public:
 
 private:
 	thread_id			fPreviousID;
-	int32				fCPU;
+	int32_t				fCPU;
 	char*				fName;
 	uint8				fPriority;
 	uint8				fPreviousState;

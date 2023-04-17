@@ -12,7 +12,7 @@
 
 dev_t
 fs_mount_volume(const char *where, const char *device,
-	const char *fileSystem, uint32 flags, const char *parameters)
+	const char *fileSystem, uint32_t flags, const char *parameters)
 {
 	return _kern_mount(where, device, fileSystem, flags, (void *)parameters,
 		parameters ? strlen(parameters) : 0);
@@ -20,7 +20,7 @@ fs_mount_volume(const char *where, const char *device,
 
 
 status_t
-fs_unmount_volume(const char *path, uint32 flags)
+fs_unmount_volume(const char *path, uint32_t flags)
 {
 	return _kern_unmount(path, flags);
 }

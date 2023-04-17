@@ -1,4 +1,4 @@
-﻿/* --------------------------------------------------------------------------
+/* --------------------------------------------------------------------------
  *
  * BHAPI++ Copyright (C) 2017, Stanislaw Stasiak, based on Haiku & ETK++, The Easy Toolkit for C++ programing
  * Copyright (C) 2004-2007, Anthony Lee, All Rights Reserved
@@ -338,39 +338,39 @@ namespace bhapi {
 #endif
 //-------------------------------------------------------------------------------------------------
 #if __GNUC__ > 4 || (__GNUC__ == 4 && __GNUC_MINOR__ >= 7) || defined(__clang__)
-static __inline__ void atomic_set(int32_t* value, int32_t newValue)
+static __inline__ void atomic_set(int32_t_t* value, int32_t_t newValue)
 {
     __atomic_store_n(value, newValue, __ATOMIC_RELEASE);
 }
 //-------------------------------------------------------------------------------------------------
-static __inline__ int32_t atomic_get_and_set(int32_t* value, int32_t newValue)
+static __inline__ int32_t_t atomic_get_and_set(int32_t_t* value, int32_t_t newValue)
 {
     return __atomic_exchange_n(value, newValue, __ATOMIC_SEQ_CST);
 }
 //-------------------------------------------------------------------------------------------------
-static __inline__ int32_t atomic_test_and_set(int32_t* value, int32_t newValue, int32_t testAgainst)
+static __inline__ int32_t_t atomic_test_and_set(int32_t_t* value, int32_t_t newValue, int32_t_t testAgainst)
 {
     __atomic_compare_exchange_n(value, &testAgainst, newValue, 1,
         __ATOMIC_SEQ_CST, __ATOMIC_SEQ_CST);
     return testAgainst;
 }
 //-------------------------------------------------------------------------------------------------
-static __inline__ int32_t atomic_add(int32_t* value, int32_t addValue)
+static __inline__ int32_t_t atomic_add(int32_t_t* value, int32_t_t addValue)
 {
     return __atomic_fetch_add(value, addValue, __ATOMIC_SEQ_CST);
 }
 //-------------------------------------------------------------------------------------------------
-static __inline__ int32_t atomic_and(int32_t* value, int32_t andValue)
+static __inline__ int32_t_t atomic_and(int32_t_t* value, int32_t_t andValue)
 {
     return __atomic_fetch_and(value, andValue, __ATOMIC_SEQ_CST);
 }
 //-------------------------------------------------------------------------------------------------
-static __inline__ int32_t atomic_or(int32_t* value, int32_t orValue)
+static __inline__ int32_t_t atomic_or(int32_t_t* value, int32_t_t orValue)
 {
     return __atomic_fetch_or(value, orValue, __ATOMIC_SEQ_CST);
 }
 //-------------------------------------------------------------------------------------------------
-static __inline__ int32_t atomic_get(int32_t* value)
+static __inline__ int32_t_t atomic_get(int32_t_t* value)
 {
     return __atomic_load_n(value, __ATOMIC_ACQUIRE);
 }
@@ -414,13 +414,13 @@ static __inline__ int64_t atomic_get64(int64_t* value)
 #else	/* __GNUC__ > 4 || (__GNUC__ == 4 && __GNUC_MINOR__ >= 7) */
 //-------------------------------------------------------------------------------------------------
 /* Atomic functions; previous value is returned */
-extern void		atomic_set(int32_t* value, int32_t newValue);
-extern int32_t	atomic_get_and_set(int32_t* value, int32_t newValue);
-extern int32_t	atomic_test_and_set(int32_t *value, int32_t newValue, int32_t testAgainst);
-extern int32_t	atomic_add(int32_t *value, int32_t addValue);
-extern int32_t	atomic_and(int32_t *value, int32_t andValue);
-extern int32_t	atomic_or(int32_t *value, int32_t orValue);
-extern int32_t	atomic_get(int32_t *value);
+extern void		atomic_set(int32_t_t* value, int32_t_t newValue);
+extern int32_t_t	atomic_get_and_set(int32_t_t* value, int32_t_t newValue);
+extern int32_t_t	atomic_test_and_set(int32_t_t *value, int32_t_t newValue, int32_t_t testAgainst);
+extern int32_t_t	atomic_add(int32_t_t *value, int32_t_t addValue);
+extern int32_t_t	atomic_and(int32_t_t *value, int32_t_t andValue);
+extern int32_t_t	atomic_or(int32_t_t *value, int32_t_t orValue);
+extern int32_t_t	atomic_get(int32_t_t *value);
 
 extern void		atomic_set64(int64_t* value, int64_t newValue);
 extern int64_t	atomic_get_and_set64(int64_t* value, int64_t newValue);

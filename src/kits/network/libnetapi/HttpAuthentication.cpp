@@ -92,7 +92,7 @@ status_t BHttpAuthentication::Initialize(const BString& wwwAuthenticate)
 
 	BString authRequired;
 	BString additionalData;
-	int32 firstSpace = wwwAuthenticate.FindFirst(' ');
+	int32_t firstSpace = wwwAuthenticate.FindFirst(' ');
 
 	if (firstSpace == -1)
 		wwwAuthenticate.CopyInto(authRequired, 0, wwwAuthenticate.Length());
@@ -113,7 +113,7 @@ status_t BHttpAuthentication::Initialize(const BString& wwwAuthenticate)
 
 
 	while (additionalData.Length()) {
-		int32 firstComma = additionalData.FindFirst(',');
+		int32_t firstComma = additionalData.FindFirst(',');
 		if (firstComma == -1)
 			firstComma = additionalData.Length();
 
@@ -122,7 +122,7 @@ status_t BHttpAuthentication::Initialize(const BString& wwwAuthenticate)
 		additionalData.Remove(0, 1);
 		additionalData.Trim();
 
-		int32 equal = value.FindFirst('=');
+		int32_t equal = value.FindFirst('=');
 		if (equal <= 0)
 			continue;
 

@@ -128,27 +128,27 @@ status_t BKeyStore::RemoveKey(const char* keyring, const BKey& key)
 }
 
 
-status_t BKeyStore::GetNextKey(uint32& cookie, BKey& key)
+status_t BKeyStore::GetNextKey(uint32_t& cookie, BKey& key)
 {
 	return GetNextKey(NULL, cookie, key);
 }
 
 
-status_t BKeyStore::GetNextKey(BKeyType type, BKeyPurpose purpose, uint32& cookie,
+status_t BKeyStore::GetNextKey(BKeyType type, BKeyPurpose purpose, uint32_t& cookie,
 	BKey& key)
 {
 	return GetNextKey(NULL, type, purpose, cookie, key);
 }
 
 
-status_t BKeyStore::GetNextKey(const char* keyring, uint32& cookie, BKey& key)
+status_t BKeyStore::GetNextKey(const char* keyring, uint32_t& cookie, BKey& key)
 {
 	return GetNextKey(keyring, B_KEY_TYPE_ANY, B_KEY_PURPOSE_ANY, cookie, key);
 }
 
 
 status_t BKeyStore::GetNextKey(const char* keyring, BKeyType type, BKeyPurpose purpose,
-	uint32& cookie, BKey& key)
+	uint32_t& cookie, BKey& key)
 {
 	BMessage message(KEY_STORE_GET_NEXT_KEY);
 	message.AddString("keyring", keyring);
@@ -189,7 +189,7 @@ status_t BKeyStore::RemoveKeyring(const char* keyring)
 }
 
 
-status_t BKeyStore::GetNextKeyring(uint32& cookie, BString& keyring)
+status_t BKeyStore::GetNextKeyring(uint32_t& cookie, BString& keyring)
 {
 	BMessage message(KEY_STORE_GET_NEXT_KEYRING);
 	message.AddUInt32("cookie", cookie);
@@ -260,7 +260,7 @@ status_t BKeyStore::RemoveKeyringFromMaster(const char* keyring)
 }
 
 
-status_t BKeyStore::GetNextMasterKeyring(uint32& cookie, BString& keyring)
+status_t BKeyStore::GetNextMasterKeyring(uint32_t& cookie, BString& keyring)
 {
 	BMessage message(KEY_STORE_GET_NEXT_MASTER_KEYRING);
 	message.AddUInt32("cookie", cookie);
@@ -316,13 +316,13 @@ status_t BKeyStore::LockMasterKeyring()
 // #pragma mark - Applications
 
 
-status_t BKeyStore::GetNextApplication(uint32& cookie, BString& signature) const
+status_t BKeyStore::GetNextApplication(uint32_t& cookie, BString& signature) const
 {
 	return GetNextApplication(NULL, cookie, signature);
 }
 
 
-status_t BKeyStore::GetNextApplication(const char* keyring, uint32& cookie,
+status_t BKeyStore::GetNextApplication(const char* keyring, uint32_t& cookie,
 	BString& signature) const
 {
 	BMessage message(KEY_STORE_GET_NEXT_APPLICATION);
@@ -361,7 +361,7 @@ status_t BKeyStore::RemoveApplication(const char* keyring, const char* signature
 // #pragma mark - Service functions
 
 
-status_t BKeyStore::GeneratePassword(BPasswordKey& password, size_t length, uint32 flags)
+status_t BKeyStore::GeneratePassword(BPasswordKey& password, size_t length, uint32_t flags)
 {
 	return B_ERROR;
 }

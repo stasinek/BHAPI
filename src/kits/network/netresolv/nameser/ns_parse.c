@@ -81,7 +81,7 @@ struct _ns_flagdata _ns_flagdata[16] = {
 };
 
 int ns_msg_getflag(ns_msg handle, int flag) {
-	return((u_int32_t)((handle)._flags & _ns_flagdata[flag].mask) >> _ns_flagdata[flag].shift);
+	return((u_int32_t_t)((handle)._flags & _ns_flagdata[flag].mask) >> _ns_flagdata[flag].shift);
 }
 
 int

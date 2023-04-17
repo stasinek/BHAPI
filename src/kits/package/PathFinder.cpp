@@ -44,7 +44,7 @@ static status_t find_package(const BPackageResolvableExpression& expression,
 
 	// find the newest matching package
 	BSolverPackage* foundPackage = NULL;
-	for (int32 i = 0; BSolverPackage* package = packages.ItemAt(i); i++) {
+	for (int32_t i = 0; BSolverPackage* package = packages.ItemAt(i); i++) {
 		if (package->Info().Matches(expression)
 			&& (foundPackage == NULL
 				|| package->Info().Version().Compare(

@@ -11,7 +11,7 @@
 
 void __arch_init_time(struct real_time_data *data, bool setDefaults)
 {
-	uint32 conversionFactor;
+	uint32_t conversionFactor;
 	uint64 conversionFactorNsecs;
 
 	if (setDefaults) {

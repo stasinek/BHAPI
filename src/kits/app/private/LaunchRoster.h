@@ -41,7 +41,7 @@ public:
             status_t			StartSession(const char* login);
 
             status_t			RegisterEvent(const BMessenger& source,
-                                    const char* name, uint32 flags);
+                                    const char* name, uint32_t flags);
             status_t			UnregisterEvent(const BMessenger& source,
                                     const char* name);
             status_t			NotifyEvent(const BMessenger& source,
@@ -63,15 +63,15 @@ private:
             status_t			_SendRequest(BMessage& request);
             status_t			_SendRequest(BMessage& request,
                                     BMessage& reply);
-            status_t			_UpdateEvent(uint32 what,
+            status_t			_UpdateEvent(uint32_t what,
                                     const BMessenger& source, const char* name,
-                                    uint32 flags = 0);
-            status_t			_GetInfo(uint32 what, const char* name,
+                                    uint32_t flags = 0);
+            status_t			_GetInfo(uint32_t what, const char* name,
                                     BMessage& info);
 
 private:
             BMessenger			fMessenger;
-            uint32				_reserved[5];
+            uint32_t				_reserved[5];
 };
 
 

@@ -232,13 +232,13 @@ status_t PictureDataWriter::WriteSetPattern(const ::pattern& pattern)
 }
 
 
-status_t PictureDataWriter::WriteClipToPicture(int32 pictureToken,
+status_t PictureDataWriter::WriteClipToPicture(int32_t pictureToken,
 						const BPoint& origin, bool inverse)
 {
 	// TODO: I don't know if it's compatible with R5's BPicture version
 	try {
 		BeginOp(B_PIC_CLIP_TO_PICTURE);
-		Write<int32>(pictureToken);
+		Write<int32_t>(pictureToken);
 		Write<BPoint>(origin);
 		Write<bool>(inverse);
 		EndOp();
@@ -254,11 +254,11 @@ status_t PictureDataWriter::WriteSetClipping(const BRegion& region)
 {
 	// TODO: I don't know if it's compatible with R5's BPicture version
 	try {
-		const int32 numRects = region.CountRects();
+		const int32_t numRects = region.CountRects();
 		if (numRects > 0 && region.Frame().IsValid()) {
 			BeginOp(B_PIC_SET_CLIPPING_RECTS);
-			Write<uint32>(numRects);
-			for (int32 i = 0; i < numRects; i++)
+			Write<uint32_t>(numRects);
+			for (int32_t i = 0; i < numRects; i++)
 				Write<BRect>(region.RectAt(i));
 
 			EndOp();
@@ -375,13 +375,13 @@ status_t PictureDataWriter::WriteDrawArc(const BPoint& center, const BPoint& rad
 }
 
 
-status_t PictureDataWriter::WriteDrawPolygon(const int32& numPoints, BPoint* points,
+status_t PictureDataWriter::WriteDrawPolygon(const int32_t& numPoints, BPoint* points,
 	const bool& isClosed, const bool& fill)
 {
 	try {
 		BeginOp(fill ? B_PIC_FILL_POLYGON : B_PIC_STROKE_POLYGON);
-		Write<int32>(numPoints);
-		for (int32 i = 0; i < numPoints; i++)
+		Write<int32_t>(numPoints);
+		for (int32_t i = 0; i < numPoints; i++)
 			Write<BPoint>(points[i]);
 
 		if (!fill)
@@ -400,7 +400,7 @@ status_t PictureDataWriter::WriteDrawBezier(const BPoint points[4], const bool& 
 {
 	try {
 		BeginOp(fill ? B_PIC_FILL_BEZIER : B_PIC_STROKE_BEZIER);
-		for (int32 i = 0; i < 4; i++)
+		for (int32_t i = 0; i < 4; i++)
 			Write<BPoint>(points[i]);
 
 		EndOp();
@@ -428,7 +428,7 @@ status_t PictureDataWriter::WriteStrokeLine(const BPoint& start, const BPoint& e
 
 
 status_t PictureDataWriter::WriteDrawString(const BPoint& where, const char* string,
-	const int32& length, const escapement_delta& escapement)
+	const int32_t& length, const escapement_delta& escapement)
 {
 	try {
 		BeginOp(B_PIC_SET_PEN_LOCATION);
@@ -451,14 +451,14 @@ status_t PictureDataWriter::WriteDrawString(const BPoint& where, const char* str
 }
 
 
-status_t PictureDataWriter::WriteDrawShape(const int32& opCount, const void* opList,
-	const int32& ptCount, const void* ptList, const bool& fill)
+status_t PictureDataWriter::WriteDrawShape(const int32_t& opCount, const void* opList,
+	const int32_t& ptCount, const void* ptList, const bool& fill)
 {
 	try {
 		BeginOp(fill ? B_PIC_FILL_SHAPE : B_PIC_STROKE_SHAPE);
-		Write<int32>(opCount);
-		Write<int32>(ptCount);
-		WriteData(opList, opCount * sizeof(uint32));
+		Write<int32_t>(opCount);
+		Write<int32_t>(ptCount);
+		WriteData(opList, opCount * sizeof(uint32_t));
 		WriteData(ptList, ptCount * sizeof(BPoint));
 		EndOp();
 	} catch (status_t& status) {
@@ -470,9 +470,9 @@ status_t PictureDataWriter::WriteDrawShape(const int32& opCount, const void* opL
 
 
 status_t PictureDataWriter::WriteDrawBitmap(const BRect& srcRect, const BRect& dstRect,
-	const int32& width, const int32& height, const int32& bytesPerRow,
-	const int32& colorSpace, const int32& flags, const void* data,
-	const int32& length)
+	const int32_t& width, const int32_t& height, const int32_t& bytesPerRow,
+	const int32_t& colorSpace, const int32_t& flags, const void* data,
+	const int32_t& length)
 {
 	if (length != height * bytesPerRow)
 		debugger("PictureDataWriter::WriteDrawBitmap: invalid length");
@@ -480,11 +480,11 @@ status_t PictureDataWriter::WriteDrawBitmap(const BRect& srcRect, const BRect& d
 		BeginOp(B_PIC_DRAW_PIXELS);
 		Write<BRect>(srcRect);
 		Write<BRect>(dstRect);
-		Write<int32>(width);
-		Write<int32>(height);
-		Write<int32>(bytesPerRow);
-		Write<int32>(colorSpace);
-		Write<int32>(flags);
+		Write<int32_t>(width);
+		Write<int32_t>(height);
+		Write<int32_t>(bytesPerRow);
+		Write<int32_t>(colorSpace);
+		Write<int32_t>(flags);
 		WriteData(data, length);
 		EndOp();
 	} catch (status_t& status) {
@@ -495,7 +495,7 @@ status_t PictureDataWriter::WriteDrawBitmap(const BRect& srcRect, const BRect& d
 }
 
 
-status_t PictureDataWriter::WriteDrawPicture(const BPoint& where, const int32& token)
+status_t PictureDataWriter::WriteDrawPicture(const BPoint& where, const int32_t& token)
 {
 	// TODO: I'm not sure about this function. I think we need
 	// to attach the picture data too.
@@ -504,7 +504,7 @@ status_t PictureDataWriter::WriteDrawPicture(const BPoint& where, const int32& t
 	try {
 		BeginOp(B_PIC_DRAW_PICTURE);
 		Write<BPoint>(where);
-		Write<int32>(token);
+		Write<int32_t>(token);
 		EndOp();
 	} catch (status_t& status) {
 		return status;
@@ -544,11 +544,11 @@ status_t PictureDataWriter::WriteSetFontStyle(const font_style style)
 }
 
 
-status_t PictureDataWriter::WriteSetFontSpacing(const int32& spacing)
+status_t PictureDataWriter::WriteSetFontSpacing(const int32_t& spacing)
 {
 	try {
 		BeginOp(B_PIC_SET_FONT_SPACING);
-		Write<int32>(spacing);
+		Write<int32_t>(spacing);
 		EndOp();
 	} catch (status_t& status) {
 		return status;
@@ -586,11 +586,11 @@ status_t PictureDataWriter::WriteSetFontRotation(const float& rotation)
 }
 
 
-status_t PictureDataWriter::WriteSetFontEncoding(const int32& encoding)
+status_t PictureDataWriter::WriteSetFontEncoding(const int32_t& encoding)
 {
 	try {
 		BeginOp(B_PIC_SET_FONT_ENCODING);
-		Write<int32>(encoding);
+		Write<int32_t>(encoding);
 		EndOp();
 	} catch (status_t& status) {
 		return status;
@@ -600,11 +600,11 @@ status_t PictureDataWriter::WriteSetFontEncoding(const int32& encoding)
 }
 
 
-status_t PictureDataWriter::WriteSetFontFlags(const int32& flags)
+status_t PictureDataWriter::WriteSetFontFlags(const int32_t& flags)
 {
 	try {
 		BeginOp(B_PIC_SET_FONT_FLAGS);
-		Write<int32>(flags);
+		Write<int32_t>(flags);
 		EndOp();
 	} catch (status_t& status) {
 		return status;
@@ -628,11 +628,11 @@ status_t PictureDataWriter::WriteSetFontShear(const float& shear)
 }
 
 
-status_t PictureDataWriter::WriteSetFontFace(const int32& face)
+status_t PictureDataWriter::WriteSetFontFace(const int32_t& face)
 {
 	try {
 		BeginOp(B_PIC_SET_FONT_FACE);
-		Write<int32>(face);
+		Write<int32_t>(face);
 		EndOp();
 	} catch (status_t& status) {
 		return status;
@@ -697,15 +697,15 @@ status_t PictureDataWriter::WriteClipToRect(const BRect& rect, bool inverse)
 }
 
 
-status_t PictureDataWriter::WriteClipToShape(int32 opCount, const void* opList,
-	int32 ptCount, const void* ptList, bool inverse)
+status_t PictureDataWriter::WriteClipToShape(int32_t opCount, const void* opList,
+	int32_t ptCount, const void* ptList, bool inverse)
 {
 	try {
 		BeginOp(B_PIC_CLIP_TO_SHAPE);
 		Write<bool>(inverse);
-		Write<int32>(opCount);
-		Write<int32>(ptCount);
-		WriteData(opList, opCount * sizeof(uint32));
+		Write<int32_t>(opCount);
+		Write<int32_t>(ptCount);
+		WriteData(opList, opCount * sizeof(uint32_t));
 		WriteData(ptList, ptCount * sizeof(BPoint));
 		EndOp();
 	} catch (status_t& status) {
@@ -726,7 +726,7 @@ void PictureDataWriter::BeginOp(const int16& op)
 	fData->Write(&op, sizeof(op));
 
 	// Init the size of the opcode block to 0
-	int32 size = 0;
+	int32_t size = 0;
 	fData->Write(&size, sizeof(size));
 }
 
@@ -743,8 +743,8 @@ void PictureDataWriter::EndOp()
 	// The size of the op is calculated like this:
 	// current position on the stream minus the position on the stack,
 	// minus the space occupied by the op code itself (int16)
-	// and the space occupied by the size field (int32)
-	int32 size = curPos - stackPos - sizeof(int32) - sizeof(int16);
+	// and the space occupied by the size field (int32_t)
+	int32_t size = curPos - stackPos - sizeof(int32_t) - sizeof(int16);
 
 	// Size was set to 0 in BeginOp()
 	// Now we overwrite it with the correct value

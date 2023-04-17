@@ -37,7 +37,7 @@ static inline void syscall_restart_handle_timeout_pre(bigtime_t& timeout)
 	the value from the syscall restart parameters, if the syscall has been
 	restarted.
 */
-static inline void syscall_restart_handle_timeout_pre(uint32& flags, bigtime_t& timeout)
+static inline void syscall_restart_handle_timeout_pre(uint32_t& flags, bigtime_t& timeout)
 {
 	// If restarted, get the timeout from the restart parameters. Otherwise
 	// convert relative timeout to an absolute one. Note that we preserve

@@ -27,7 +27,7 @@ typedef struct {
 
 	// The virtual ranges we want to keep in the kernel. E.g. those belonging
 	// to the Open Firmware.
-	uint32		num_virtual_ranges_to_keep;
+	uint32_t		num_virtual_ranges_to_keep;
 	addr_range	virtual_ranges_to_keep[MAX_VIRTUAL_RANGES_TO_KEEP];
 
 	// platform type we booted from

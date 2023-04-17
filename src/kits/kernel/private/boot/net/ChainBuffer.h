@@ -11,13 +11,13 @@
 class ChainBuffer {
 public:
 
-	ChainBuffer(void *data = 0, uint32 size = 0, ChainBuffer *next = NULL,
+	ChainBuffer(void *data = 0, uint32_t size = 0, ChainBuffer *next = NULL,
 		bool freeData = false);
 	~ChainBuffer();
 
 	void *Data() const			{ return fData; }
-	uint32 Size() const			{ return fSize; }
-	uint32 TotalSize() const	{ return fTotalSize; }
+	uint32_t Size() const			{ return fSize; }
+	uint32_t TotalSize() const	{ return fTotalSize; }
 
 	ChainBuffer *Next() const	{ return fNext; }
 	ChainBuffer *DetachNext();
@@ -35,12 +35,12 @@ private:
 		CHAIN_BUFFER_ON_STACK		= 0x8,
 	};
 
-	void _Init(void *data, uint32 size, ChainBuffer *next, uint32 flags);
+	void _Init(void *data, uint32_t size, ChainBuffer *next, uint32_t flags);
 	void _Destroy();
 
-	uint32		fFlags:4;
-	uint32		fSize:14;
-	uint32		fTotalSize:14;
+	uint32_t		fFlags:4;
+	uint32_t		fSize:14;
+	uint32_t		fTotalSize:14;
 	void		*fData;
 	ChainBuffer	*fNext;
 	uint8		fBuffer[0];

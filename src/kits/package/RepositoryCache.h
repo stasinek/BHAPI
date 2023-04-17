@@ -32,7 +32,7 @@ public:
 
 			void				SetIsUserSpecific(bool isUserSpecific);
 
-			uint32				CountPackages() const;
+			uint32_t				CountPackages() const;
 			Iterator			GetIterator() const;
 
 private:

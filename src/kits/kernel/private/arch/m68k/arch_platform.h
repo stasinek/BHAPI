@@ -51,8 +51,8 @@ public:
 	// mimic the PC CMOS
 	virtual uint8 ReadRTCReg(uint8 reg) = 0;
 	virtual void WriteRTCReg(uint8 reg, uint8 val) = 0;
-	virtual	void SetHardwareRTC(uint32 seconds) = 0;
-	virtual	uint32 GetHardwareRTC() = 0;
+	virtual	void SetHardwareRTC(uint32_t seconds) = 0;
+	virtual	uint32_t GetHardwareRTC() = 0;
 
 	virtual void SetHardwareTimer(bigtime_t timeout) = 0;
 	virtual void ClearHardwareTimer(void) = 0;

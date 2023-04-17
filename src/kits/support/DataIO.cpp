@@ -99,7 +99,7 @@ ssize_t BMallocIO::WriteAt(int64 pos, const void *buffer, size_t size)
     return B_NO_MEMORY;
 }
 
-off_t BMallocIO::Seek(int64 position,  uint32 seek_mode)
+off_t BMallocIO::Seek(int64 position,  uint32_t seek_mode)
 {
     int64 retVal = B_INT64_CONSTANT(-1);
 
@@ -237,7 +237,7 @@ ssize_t BMemoryIO::WriteAt(int64 pos, const void *buffer, size_t size)
     return 0;
 }
 
-off_t BMemoryIO::Seek(int64 position,  uint32 seek_mode)
+off_t BMemoryIO::Seek(int64 position,  uint32_t seek_mode)
 {
     int64 retVal = B_INT64_CONSTANT(-1);
 

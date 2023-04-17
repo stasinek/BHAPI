@@ -119,11 +119,11 @@ compare_cd_boot(const void* _a, const void* _b)
 
 /*!	Computes a check sum for the specified block.
 	The check sum is the sum of all data in that block interpreted as an
-	array of uint32 values.
+	array of uint32_t values.
 	Note, this must use the same method as the one used in
 	boot/platform/bios_ia32/devices.cpp (or similar solutions).
 */
-static uint32
+static uint32_t
 compute_check_sum(KDiskDevice* device, off_t offset)
 {
 	char buffer[512];
@@ -134,11 +134,11 @@ compute_check_sum(KDiskDevice* device, off_t offset)
 	if (bytesRead < (ssize_t)sizeof(buffer))
 		memset(buffer + bytesRead, 0, sizeof(buffer) - bytesRead);
 
-	uint32* array = (uint32*)buffer;
-	uint32 sum = 0;
+	uint32_t* array = (uint32_t*)buffer;
+	uint32_t sum = 0;
 
-	for (uint32 i = 0;
-			i < (bytesRead + sizeof(uint32) - 1) / sizeof(uint32); i++) {
+	for (uint32_t i = 0;
+			i < (bytesRead + sizeof(uint32_t) - 1) / sizeof(uint32_t); i++) {
 		sum += array[i];
 	}
 
@@ -149,7 +149,7 @@ compute_check_sum(KDiskDevice* device, off_t offset)
 // #pragma mark - BootMethod
 
 
-BootMethod::BootMethod(const KMessage& bootVolume, int32 method)
+BootMethod::BootMethod(const KMessage& bootVolume, int32_t method)
 	:
 	fBootVolume(bootVolume),
 	fMethod(method)
@@ -174,14 +174,14 @@ BootMethod::Init()
 
 class DiskBootMethod : public BootMethod {
 public:
-	DiskBootMethod(const KMessage& bootVolume, int32 method)
+	DiskBootMethod(const KMessage& bootVolume, int32_t method)
 		: BootMethod(bootVolume, method)
 	{
 	}
 
 	virtual bool IsBootDevice(KDiskDevice* device, bool strict);
 	virtual bool IsBootPartition(KPartition* partition, bool& foundForSure);
-	virtual void SortPartitions(KPartition** partitions, int32 count);
+	virtual void SortPartitions(KPartition** partitions, int32_t count);
 };
 
 
@@ -189,7 +189,7 @@ bool
 DiskBootMethod::IsBootDevice(KDiskDevice* device, bool strict)
 {
 	disk_identifier* disk;
-	int32 diskIdentifierSize;
+	int32_t diskIdentifierSize;
 	if (fBootVolume.FindData(BOOT_VOLUME_DISK_IDENTIFIER, B_RAW_TYPE,
 			(const void**)&disk, &diskIdentifierSize) != B_OK) {
 		dprintf("DiskBootMethod::IsBootDevice(): no disk identifier!\n");
@@ -229,7 +229,7 @@ DiskBootMethod::IsBootDevice(KDiskDevice* device, bool strict)
 				break;
 
 			// check if the check sums match, too
-			for (int32 i = 0; i < NUM_DISK_CHECK_SUMS; i++) {
+			for (int32_t i = 0; i < NUM_DISK_CHECK_SUMS; i++) {
 				if (disk->device.unknown.check_sums[i].offset == -1)
 					continue;
 
@@ -310,7 +310,7 @@ DiskBootMethod::IsBootPartition(KPartition* partition, bool& foundForSure)
 
 
 void
-DiskBootMethod::SortPartitions(KPartition** partitions, int32 count)
+DiskBootMethod::SortPartitions(KPartition** partitions, int32_t count)
 {
 	qsort(partitions, count, sizeof(KPartition*),
 		fMethod == BOOT_METHOD_CD ? compare_cd_boot : compare_image_boot);
@@ -333,7 +333,7 @@ get_boot_partitions(KMessage& bootVolume, PartitionStack& partitions)
 	bootVolume.Dump(&dprintf);
 
 	// create boot method
-	int32 bootMethodType = bootVolume.GetInt32(BOOT_METHOD, BOOT_METHOD_DEFAULT);
+	int32_t bootMethodType = bootVolume.GetInt32(BOOT_METHOD, BOOT_METHOD_DEFAULT);
 	dprintf("get_boot_partitions(): boot method type: %" B_PRId32 "\n",
 		bootMethodType);
 
@@ -367,7 +367,7 @@ get_boot_partitions(KMessage& bootVolume, PartitionStack& partitions)
 
 	if (1 /* dump devices and partitions */) {
 		KDiskDevice *device;
-		int32 cookie = 0;
+		int32_t cookie = 0;
 		while ((device = manager->NextDevice(&cookie)) != NULL) {
 			device->Dump(true, 0);
 		}
@@ -402,7 +402,7 @@ get_boot_partitions(KMessage& bootVolume, PartitionStack& partitions)
 
 	while (true) {
 		KDiskDevice *device;
-		int32 cookie = 0;
+		int32_t cookie = 0;
 		while ((device = manager->NextDevice(&cookie)) != NULL) {
 			if (!bootMethod->IsBootDevice(device, strict))
 				continue;
@@ -453,7 +453,7 @@ vfs_bootstrap_file_systems(void)
 
 	// create some standard links on the rootfs
 
-	for (int32 i = 0; sPredefinedLinks[i].path != NULL; i++) {
+	for (int32_t i = 0; sPredefinedLinks[i].path != NULL; i++) {
 		_kern_create_symlink(-1, sPredefinedLinks[i].path,
 			sPredefinedLinks[i].target, 0);
 			// we don't care if it will succeed or not
@@ -559,7 +559,7 @@ vfs_mount_boot_file_system(kernel_args* args)
 	// whether the module images the boot loader has pre-loaded are the same as
 	// on the boot volume. That is the case when booting from hard disk or CD,
 	// but not via network.
-	int32 bootMethodType = bootVolume.GetInt32(BOOT_METHOD, BOOT_METHOD_DEFAULT);
+	int32_t bootMethodType = bootVolume.GetInt32(BOOT_METHOD, BOOT_METHOD_DEFAULT);
 	bool bootingFromBootLoaderVolume = bootMethodType == BOOT_METHOD_HARD_DISK
 		|| bootMethodType == BOOT_METHOD_CD;
 	module_init_post_boot_device(bootingFromBootLoaderVolume);

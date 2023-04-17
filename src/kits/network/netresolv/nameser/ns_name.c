@@ -575,7 +575,7 @@ ns_name_pack(const u_char *src, u_char *dst, int dstsiz,
 				if (dstp + 1 >= eob) {
 					goto cleanup;
 				}
-				*dstp++ = ((u_int32_t)l >> 8) | NS_CMPRSFLGS;
+				*dstp++ = ((u_int32_t_t)l >> 8) | NS_CMPRSFLGS;
 				*dstp++ = l % 256;
 				assert(INT_MIN <= (dstp - dst) && (dstp - dst) <= INT_MAX);
 				return (int)(dstp - dst);
@@ -1022,7 +1022,7 @@ decode_bitstring(const unsigned char **cpp, char *dn, const char *eom)
 	} else if (b > 0) {
 		tc = *cp++;
 		i = SPRINTF((dn, "%1x",
-			       (((u_int32_t)tc >> 4) & 0x0f) & (0x0f << (4 - b)))); 
+			       (((u_int32_t_t)tc >> 4) & 0x0f) & (0x0f << (4 - b)))); 
 		if (i < 0)
 			return (-1);
 		dn += i;

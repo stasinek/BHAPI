@@ -64,7 +64,7 @@ static void DimmedIconBlitter(BView* view, BPoint where, BBitmap* bitmap, void*)
 
 
 ModelMenuItem::ModelMenuItem(const Model* model, const char* title,
-	BMessage* message, char shortcut, uint32 modifiers,
+	BMessage* message, char shortcut, uint32_t modifiers,
 	bool drawText, bool extraPad)
 	:
 	BMenuItem(title, message, shortcut, modifiers),

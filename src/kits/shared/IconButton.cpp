@@ -99,7 +99,7 @@ void BIconButton::Draw(BRect updateRect)
 
 	BRect r(Bounds());
 
-	uint32 flags = 0;
+	uint32_t flags = 0;
 	BBitmap* bitmap = fNormalBitmap;
 	if (!IsEnabled()) {
 		flags |= BControlLook::B_DISABLED;
@@ -139,7 +139,7 @@ bool BIconButton::ShouldDrawBorder() const
 
 
 void BIconButton::DrawBorder(BRect& frame, const BRect& updateRect,
-	const rgb_color& backgroundColor, uint32 flags)
+	const rgb_color& backgroundColor, uint32_t flags)
 {
 	be_control_look->DrawButtonFrame(this, frame, updateRect, backgroundColor,
 		backgroundColor, flags);
@@ -147,7 +147,7 @@ void BIconButton::DrawBorder(BRect& frame, const BRect& updateRect,
 
 
 void BIconButton::DrawBackground(BRect& frame, const BRect& updateRect,
-	const rgb_color& backgroundColor, uint32 flags)
+	const rgb_color& backgroundColor, uint32_t flags)
 {
 	be_control_look->DrawButtonBackground(this, frame, updateRect,
 		backgroundColor, flags);
@@ -188,13 +188,13 @@ void BIconButton::MouseUp(BPoint where)
 }
 
 
-void BIconButton::MouseMoved(BPoint where, uint32 transit, const BMessage* message)
+void BIconButton::MouseMoved(BPoint where, uint32_t transit, const BMessage* message)
 {
 	if (!IsValid())
 		return;
 
-	uint32 buttons = 0;
-	Window()->CurrentMessage()->FindInt32("buttons", (int32*)&buttons);
+	uint32_t buttons = 0;
+	Window()->CurrentMessage()->FindInt32("buttons", (int32_t*)&buttons);
 	// catch a mouse up event that we might have missed
 	if (!buttons && _HasFlags(STATE_PRESSED)) {
 		MouseUp(where);
@@ -285,7 +285,7 @@ bool BIconButton::IsPressed() const
 }
 
 
-status_t BIconButton::SetIcon(int32 resourceID)
+status_t BIconButton::SetIcon(int32_t resourceID)
 {
 	app_info info;
 	status_t status =  __be_app->GetAppInfo(&info);
@@ -366,7 +366,7 @@ status_t BIconButton::SetIcon(const char* pathToBitmap)
 }
 
 
-status_t BIconButton::SetIcon(const BBitmap* bitmap, uint32 flags)
+status_t BIconButton::SetIcon(const BBitmap* bitmap, uint32_t flags)
 {
 	if (bitmap && bitmap->ColorSpace() == B_CMAP8) {
 		status_t status = bitmap->InitCheck();
@@ -416,7 +416,7 @@ status_t BIconButton::SetIcon(const BMimeType* fileType, bool small)
 
 
 status_t BIconButton::SetIcon(const unsigned char* bitsFromQuickRes,
-	uint32 width, uint32 height, color_space format, bool convertToBW)
+	uint32_t width, uint32_t height, color_space format, bool convertToBW)
 {
 	status_t status = B_BAD_VALUE;
 	if (bitsFromQuickRes && width > 0 && height > 0) {
@@ -457,11 +457,11 @@ status_t BIconButton::SetIcon(const unsigned char* bitsFromQuickRes,
 				if (convertToBW) {
 					// convert to gray scale icon
 					uint8* bits = (uint8*)quickResBitmap->Bits();
-					uint32 bpr = quickResBitmap->BytesPerRow();
-					for (uint32 y = 0; y < height; y++) {
+					uint32_t bpr = quickResBitmap->BytesPerRow();
+					for (uint32_t y = 0; y < height; y++) {
 						uint8* handle = bits;
 						uint8 gray;
-						for (uint32 x = 0; x < width; x++) {
+						for (uint32_t x = 0; x < width; x++) {
 							gray = uint8((116 * handle[0] + 600 * handle[1]
 								+ 308 * handle[2]) / 1024);
 							handle[0] = gray;
@@ -497,14 +497,14 @@ void BIconButton::TrimIcon(bool keepAspect)
 		return;
 
 	uint8* bits = (uint8*)fNormalBitmap->Bits();
-	uint32 bpr = fNormalBitmap->BytesPerRow();
-	uint32 width = fNormalBitmap->Bounds().IntegerWidth() + 1;
-	uint32 height = fNormalBitmap->Bounds().IntegerHeight() + 1;
+	uint32_t bpr = fNormalBitmap->BytesPerRow();
+	uint32_t width = fNormalBitmap->Bounds().IntegerWidth() + 1;
+	uint32_t height = fNormalBitmap->Bounds().IntegerHeight() + 1;
 	BRect trimmed(INT32_MAX, INT32_MAX, INT32_MIN, INT32_MIN);
-	for (uint32 y = 0; y < height; y++) {
+	for (uint32_t y = 0; y < height; y++) {
 		uint8* b = bits + 3;
 		bool rowHasAlpha = false;
-		for (uint32 x = 0; x < width; x++) {
+		for (uint32_t x = 0; x < width; x++) {
 			if (*b) {
 				rowHasAlpha = true;
 				if (x < trimmed.left)
@@ -537,12 +537,12 @@ void BIconButton::TrimIcon(bool keepAspect)
 	BBitmap trimmedBitmap(trimmed.OffsetToCopy(B_ORIGIN),
 		B_BITMAP_NO_SERVER_LINK, B_RGBA32);
 	bits = (uint8*)fNormalBitmap->Bits();
-	bits += 4 * (int32)trimmed.left + bpr * (int32)trimmed.top;
+	bits += 4 * (int32_t)trimmed.left + bpr * (int32_t)trimmed.top;
 	uint8* dst = (uint8*)trimmedBitmap.Bits();
-	uint32 trimmedWidth = trimmedBitmap.Bounds().IntegerWidth() + 1;
-	uint32 trimmedHeight = trimmedBitmap.Bounds().IntegerHeight() + 1;
-	uint32 trimmedBPR = trimmedBitmap.BytesPerRow();
-	for (uint32 y = 0; y < trimmedHeight; y++) {
+	uint32_t trimmedWidth = trimmedBitmap.Bounds().IntegerWidth() + 1;
+	uint32_t trimmedHeight = trimmedBitmap.Bounds().IntegerHeight() + 1;
+	uint32_t trimmedBPR = trimmedBitmap.BytesPerRow();
+	for (uint32_t y = 0; y < trimmedHeight; y++) {
 		memcpy(dst, bits, trimmedWidth * 4);
 		dst += trimmedBPR;
 		bits += bpr;
@@ -572,16 +572,16 @@ BIconButton::Bitmap() const
 			// TODO: remove this functionality when we use real transparent
 			// bitmaps
 			uint8* bits = (uint8*)bitmap->Bits();
-			uint32 bpr = bitmap->BytesPerRow();
-			uint32 width = bitmap->Bounds().IntegerWidth() + 1;
-			uint32 height = bitmap->Bounds().IntegerHeight() + 1;
+			uint32_t bpr = bitmap->BytesPerRow();
+			uint32_t width = bitmap->Bounds().IntegerWidth() + 1;
+			uint32_t height = bitmap->Bounds().IntegerHeight() + 1;
 			color_space format = bitmap->ColorSpace();
 			if (format == B_CMAP8) {
 				// replace gray with magic transparent index
 			} else if (format == B_RGB32) {
-				for (uint32 y = 0; y < height; y++) {
+				for (uint32_t y = 0; y < height; y++) {
 					uint8* bitsHandle = bits;
-					for (uint32 x = 0; x < width; x++) {
+					for (uint32_t x = 0; x < width; x++) {
 						if (bitsHandle[0] == 216
 							&& bitsHandle[1] == 216
 							&& bitsHandle[2] == 216) {
@@ -602,7 +602,7 @@ BIconButton::Bitmap() const
 }
 
 
-void BIconButton::SetValue(int32 value)
+void BIconButton::SetValue(int32_t value)
 {
 	BControl::SetValue(value);
 	_SetFlags(STATE_PRESSED, value != 0);
@@ -680,17 +680,17 @@ status_t BIconButton::_MakeBitmaps(const BBitmap* bitmap)
 			uint8* cBits = (uint8*)fClickedBitmap->Bits();
 			uint8* dcBits = (uint8*)fDisabledClickedBitmap->Bits();
 			uint8* fBits = (uint8*)bitmap->Bits();
-			int32 nbpr = fNormalBitmap->BytesPerRow();
-			int32 fbpr = bitmap->BytesPerRow();
-			int32 pixels = b.IntegerWidth() + 1;
-			int32 lines = b.IntegerHeight() + 1;
+			int32_t nbpr = fNormalBitmap->BytesPerRow();
+			int32_t fbpr = bitmap->BytesPerRow();
+			int32_t pixels = b.IntegerWidth() + 1;
+			int32_t lines = b.IntegerHeight() + 1;
 			// nontransparent version:
 			if (format == B_RGB32 || format == B_RGB32_BIG) {
 				// iterate over color components
-				for (int32 y = 0; y < lines; y++) {
-					for (int32 x = 0; x < pixels; x++) {
-						int32 nOffset = 4 * x;
-						int32 fOffset = 4 * x;
+				for (int32_t y = 0; y < lines; y++) {
+					for (int32_t x = 0; x < pixels; x++) {
+						int32_t nOffset = 4 * x;
+						int32_t fOffset = 4 * x;
 						nBits[nOffset + 0] = fBits[fOffset + 0];
 						nBits[nOffset + 1] = fBits[fOffset + 1];
 						nBits[nOffset + 2] = fBits[fOffset + 2];
@@ -731,10 +731,10 @@ status_t BIconButton::_MakeBitmaps(const BBitmap* bitmap)
 			// transparent version:
 			} else if (format == B_RGBA32 || format == B_RGBA32_BIG) {
 				// iterate over color components
-				for (int32 y = 0; y < lines; y++) {
-					for (int32 x = 0; x < pixels; x++) {
-						int32 nOffset = 4 * x;
-						int32 fOffset = 4 * x;
+				for (int32_t y = 0; y < lines; y++) {
+					for (int32_t x = 0; x < pixels; x++) {
+						int32_t nOffset = 4 * x;
+						int32_t fOffset = 4 * x;
 						nBits[nOffset + 0] = fBits[fOffset + 0];
 						nBits[nOffset + 1] = fBits[fOffset + 1];
 						nBits[nOffset + 2] = fBits[fOffset + 2];
@@ -809,7 +809,7 @@ void BIconButton::_Update()
 }
 
 
-void BIconButton::_SetFlags(uint32 flags, bool set)
+void BIconButton::_SetFlags(uint32_t flags, bool set)
 {
 	if (_HasFlags(flags) != set) {
 		if (set)
@@ -824,7 +824,7 @@ void BIconButton::_SetFlags(uint32 flags, bool set)
 }
 
 
-bool BIconButton::_HasFlags(uint32 flags) const
+bool BIconButton::_HasFlags(uint32_t flags) const
 {
 	return (fButtonState & flags) != 0;
 }

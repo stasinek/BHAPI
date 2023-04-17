@@ -28,7 +28,7 @@ enum value_piece_location_type {
 struct ValuePieceLocation {
 	union {
 		target_addr_t			address;	// memory address
-		uint32					reg;		// register number
+		uint32_t					reg;		// register number
 	};
 	target_size_t				size;		// size in bytes (including
 											// incomplete ones)
@@ -104,7 +104,7 @@ struct ValuePieceLocation {
 		this->writable = true;
 	}
 
-	void SetToRegister(uint32 reg)
+	void SetToRegister(uint32_t reg)
 	{
 		type = VALUE_PIECE_LOCATION_REGISTER;
 		this->reg = reg;
@@ -164,9 +164,9 @@ public:
 
 			bool				AddPiece(const ValuePieceLocation& piece);
 
-			int32				CountPieces() const;
-			ValuePieceLocation	PieceAt(int32 index) const;
-			bool				SetPieceAt(int32 index,
+			int32_t				CountPieces() const;
+			ValuePieceLocation	PieceAt(int32_t index) const;
+			bool				SetPieceAt(int32_t index,
 									const ValuePieceLocation& piece);
 			ValueLocation&		operator=(const ValueLocation& other);
 

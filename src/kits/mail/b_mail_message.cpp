@@ -20,7 +20,7 @@ class _EXPORT BMailMessage;
 struct CharsetConversionEntry
 {
 	const char *charset;
-	uint32 flavor;
+	uint32_t flavor;
 };
 
 extern const CharsetConversionEntry mail_charsets[];
@@ -36,8 +36,8 @@ BMailMessage::~BMailMessage(void)
 	delete ((BEmailMessage *)(fFields));
 }
 
-status_t BMailMessage::AddContent(const char *text, int32 length,
-	uint32 encoding, bool /*clobber*/)
+status_t BMailMessage::AddContent(const char *text, int32_t length,
+	uint32_t encoding, bool /*clobber*/)
 {
 	BTextMailComponent *comp = new BTextMailComponent;
 	BMemoryIO io(text,length);
@@ -51,18 +51,18 @@ status_t BMailMessage::AddContent(const char *text, int32 length,
 	return B_OK;
 }
 					
-status_t BMailMessage::AddContent(const char *text, int32 length,
+status_t BMailMessage::AddContent(const char *text, int32_t length,
 	const char *encoding, bool /*clobber*/)
 {
 	BTextMailComponent *comp = new BTextMailComponent();
 	BMemoryIO io(text,length);
 	comp->SetDecodedData(&io);
 	
-	uint32 encode = B_ISO1_CONVERSION;
+	uint32_t encode = B_ISO1_CONVERSION;
 	//-----I'm assuming that encoding is one of the RFC charsets
 	//-----there are no docs. Am I right?
 	if (encoding != NULL) {
-		for (int32 i = 0; mail_charsets[i].charset != NULL; i++) {
+		for (int32_t i = 0; mail_charsets[i].charset != NULL; i++) {
 			if (strcasecmp(encoding,mail_charsets[i].charset) == 0) {
 				encode = mail_charsets[i].flavor;
 				break;
@@ -99,7 +99,7 @@ status_t BMailMessage::AddEnclosure(const char *path, bool /*clobber*/)
 	return B_OK;
 }
 
-status_t BMailMessage::AddEnclosure(const char *MIME_type, void *data, int32 len,
+status_t BMailMessage::AddEnclosure(const char *MIME_type, void *data, int32_t len,
 	bool /*clobber*/)
 {
 	BSimpleMailAttachment *attach = new BSimpleMailAttachment;
@@ -110,7 +110,7 @@ status_t BMailMessage::AddEnclosure(const char *MIME_type, void *data, int32 len
 	return B_OK;
 }
 
-status_t BMailMessage::AddHeaderField(uint32 /*encoding*/, const char *field_name, const char *str, 
+status_t BMailMessage::AddHeaderField(uint32_t /*encoding*/, const char *field_name, const char *str, 
 	bool /*clobber*/)
 {
 	//printf("First AddHeaderField. Args are %s%s\n",field_name,str);

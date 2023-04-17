@@ -94,21 +94,21 @@ void BMidiSynthFile::Resume(void)
 }
 
 
-int32 
+int32_t 
 BMidiSynthFile::Duration(void) const
 {
 	return fStore->DeltaOfEvent(fStore->CountEvents());
 }
 
 
-int32 
-BMidiSynthFile::Position(int32 ticks) const
+int32_t 
+BMidiSynthFile::Position(int32_t ticks) const
 {
 	return fStore->EventAtDelta(ticks);
 }
 
 
-int32 
+int32_t 
 BMidiSynthFile::Seek()
 {
 	return fStore->CurrentEvent();
@@ -131,7 +131,7 @@ status_t BMidiSynthFile::GetPatches(
 }
 
 
-void BMidiSynthFile::SetFileHook(synth_file_hook pSongHook, int32 arg)
+void BMidiSynthFile::SetFileHook(synth_file_hook pSongHook, int32_t arg)
 {
 	fStore->fHookFunc = pSongHook;
 	fStore->fHookArg = arg;
@@ -146,17 +146,17 @@ bool BMidiSynthFile::IsFinished() const
 
 void BMidiSynthFile::ScaleTempoBy(double tempoFactor)
 {
-	fStore->SetTempo((int32) (Tempo() * tempoFactor));
+	fStore->SetTempo((int32_t) (Tempo() * tempoFactor));
 }
 
 
-void BMidiSynthFile::SetTempo(int32 newTempoBPM)
+void BMidiSynthFile::SetTempo(int32_t newTempoBPM)
 {
 	fStore->SetTempo(newTempoBPM);
 }
 
 
-int32 
+int32_t 
 BMidiSynthFile::Tempo(void) const
 {
 	return fStore->Tempo();

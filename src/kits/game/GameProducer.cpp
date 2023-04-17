@@ -82,14 +82,14 @@ GameProducer::~GameProducer()
 
 // BMediaNode methods
 BMediaAddOn*
-GameProducer::AddOn(int32* internal_id) const
+GameProducer::AddOn(int32_t* internal_id) const
 {
 	return NULL;
 }
 
 
 // BBufferProducer methods
-status_t GameProducer::GetNextOutput(int32* cookie, media_output* _output)
+status_t GameProducer::GetNextOutput(int32_t* cookie, media_output* _output)
 {
 	// we currently support only one output
 	if (0 != *cookie)
@@ -101,7 +101,7 @@ status_t GameProducer::GetNextOutput(int32* cookie, media_output* _output)
 }
 
 
-status_t GameProducer::DisposeOutputCookie(int32 cookie)
+status_t GameProducer::DisposeOutputCookie(int32_t cookie)
 {
 	// do nothing because our cookie is only an integer
 	return B_OK;
@@ -109,7 +109,7 @@ status_t GameProducer::DisposeOutputCookie(int32 cookie)
 
 
 void GameProducer::EnableOutput(const media_source& what, bool enabled,
-	int32* _deprecated_)
+	int32_t* _deprecated_)
 {
 	// If I had more than one output, I'd have to walk my list of output records
 	// to see which one matched the given source, and then enable/disable that
@@ -122,7 +122,7 @@ void GameProducer::EnableOutput(const media_source& what, bool enabled,
 }
 
 
-status_t GameProducer::FormatSuggestionRequested(media_type type, int32 /*quality*/,
+status_t GameProducer::FormatSuggestionRequested(media_type type, int32_t /*quality*/,
 	media_format* format)
 {
 	// insure that we received a format
@@ -233,12 +233,12 @@ void GameProducer::Connect(status_t error, const media_source& source,
 
 	// The first step to setup the buffer
 	bigtime_t start, produceLatency;
-	int32 frames = int32(fBufferSize / fFrameSize);
+	int32_t frames = int32_t(fBufferSize / fFrameSize);
 	float* data = new float[frames * 2];
 
 	// Second, fill the buffer
 	start = ::system_time();
-	for (int32 i = 0; i < frames; i++) {
+	for (int32_t i = 0; i < frames; i++) {
 		data[i * 2] = 0.8 * float(i / frames);
 		data[i * 2 + 1] = 0.8 * float(i / frames);
 	}
@@ -259,7 +259,7 @@ void GameProducer::Connect(status_t error, const media_source& source,
 	// Set up the buffer group for our connection, as long as nobody handed us a
 	// buffer group (via SetBufferGroup()) prior to this.
 	if (!fBufferGroup) {
-		int32 count = int32(fLatency / BufferDuration() + 2);
+		int32_t count = int32_t(fLatency / BufferDuration() + 2);
 		fBufferGroup = new BBufferGroup(fBufferSize, count);
 	}
 }
@@ -280,7 +280,7 @@ void GameProducer::Disconnect(const media_source& what,
 
 status_t GameProducer::FormatChangeRequested(const media_source& source,
 	const media_destination& destination, media_format* io_format,
-	int32* _deprecated_)
+	int32_t* _deprecated_)
 {
 	// we don't support any other formats, so we just reject any format changes.
 	return B_ERROR;
@@ -318,7 +318,7 @@ status_t GameProducer::SetBufferGroup(const media_source& forSource,
 		// we were passed a NULL group pointer; that means we construct
 		// our own buffer group to use from now on
 		fBufferSize = fOutput.format.u.raw_audio.buffer_size;
-		int32 count = int32(fLatency / BufferDuration() + 2);
+		int32_t count = int32_t(fLatency / BufferDuration() + 2);
 		fBufferGroup = new BBufferGroup(fBufferSize, count);
 	}
 
@@ -366,7 +366,7 @@ void GameProducer::LateNoticeReceived(const media_source& what, bigtime_t howMuc
 
 
 void GameProducer::LatencyChanged(const media_source& source,
-	const media_destination& destination, bigtime_t new_latency, uint32 flags)
+	const media_destination& destination, bigtime_t new_latency, uint32_t flags)
 {
 	// something downstream changed latency, so we need to start producing
 	// buffers earlier (or later) than we were previously.  Make sure that the
@@ -379,14 +379,14 @@ void GameProducer::LatencyChanged(const media_source& source,
 }
 
 
-status_t GameProducer::SetPlayRate(int32 numerator, int32 denominator)
+status_t GameProducer::SetPlayRate(int32_t numerator, int32_t denominator)
 {
 	// Play rates are weird.  We don't support them
 	return B_ERROR;
 }
 
 
-status_t GameProducer::HandleMessage(int32 message, const void* data, size_t size)
+status_t GameProducer::HandleMessage(int32_t message, const void* data, size_t size)
 {
 	// We currently do not handle private messages
 	return B_ERROR;

@@ -78,7 +78,7 @@ arch_vm_translation_map_init(kernel_args *args,
 
 #ifdef TRACE_VM_TMAP
 	TRACE("physical memory ranges:\n");
-	for (uint32 i = 0; i < args->num_physical_memory_ranges; i++) {
+	for (uint32_t i = 0; i < args->num_physical_memory_ranges; i++) {
 		phys_addr_t start = args->physical_memory_range[i].start;
 		phys_addr_t end = start + args->physical_memory_range[i].size;
 		TRACE("  %#10" B_PRIxPHYSADDR " - %#10" B_PRIxPHYSADDR "\n", start,
@@ -86,7 +86,7 @@ arch_vm_translation_map_init(kernel_args *args,
 	}
 
 	TRACE("allocated physical ranges:\n");
-	for (uint32 i = 0; i < args->num_physical_allocated_ranges; i++) {
+	for (uint32_t i = 0; i < args->num_physical_allocated_ranges; i++) {
 		phys_addr_t start = args->physical_allocated_range[i].start;
 		phys_addr_t end = start + args->physical_allocated_range[i].size;
 		TRACE("  %#10" B_PRIxPHYSADDR " - %#10" B_PRIxPHYSADDR "\n", start,
@@ -94,7 +94,7 @@ arch_vm_translation_map_init(kernel_args *args,
 	}
 
 	TRACE("allocated virtual ranges:\n");
-	for (uint32 i = 0; i < args->num_virtual_allocated_ranges; i++) {
+	for (uint32_t i = 0; i < args->num_virtual_allocated_ranges; i++) {
 		addr_t start = args->virtual_allocated_range[i].start;
 		addr_t end = start + args->virtual_allocated_range[i].size;
 		TRACE("  %#10" B_PRIxADDR " - %#10" B_PRIxADDR "\n", start, end);
@@ -167,7 +167,7 @@ arch_vm_translation_map_early_query(addr_t va, addr_t *out_physical)
 
 bool
 arch_vm_translation_map_is_kernel_page_accessible(addr_t virtualAddress,
-	uint32 protection)
+	uint32_t protection)
 {
 	return gM68KPagingMethod->IsKernelPageAccessible(virtualAddress, protection);
 }

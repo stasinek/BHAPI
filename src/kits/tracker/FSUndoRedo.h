@@ -57,7 +57,7 @@ class Undo {
 class MoveCopyUndo : public Undo {
 	public:
 		MoveCopyUndo(BObjectList<entry_ref>* sourceList, BDirectory &dest,
-			BList* pointList, uint32 moveMode);
+			BList* pointList, uint32_t moveMode);
 };
 
 
@@ -80,21 +80,21 @@ class RenameVolumeUndo : public Undo {
 
 
 static
-inline bool FSIsUndoMoveMode(uint32 moveMode)
+inline bool FSIsUndoMoveMode(uint32_t moveMode)
 {
 	return (moveMode & '\xff\0\0\0') == 'U\0\0\0';
 }
 
 
 static
-inline uint32 FSUndoMoveMode(uint32 moveMode)
+inline uint32_t FSUndoMoveMode(uint32_t moveMode)
 {
 	return (moveMode & ~'\xff\0\0\0') | 'U\0\0\0';
 }
 
 
 static
-inline uint32 FSMoveMode(uint32 moveMode)
+inline uint32_t FSMoveMode(uint32_t moveMode)
 {
 	return (moveMode & ~'\xff\0\0\0') | 'T\0\0\0';
 }

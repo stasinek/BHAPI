@@ -80,7 +80,7 @@ private:
 									uint8 stackDirection);
 
 			status_t			_ResolveValueIfNeeded(ValueNode* node,
-									StackFrame* frame, int32 maxDepth);
+									StackFrame* frame, int32_t maxDepth);
 
 			void				_HandleMemoryBlockRetrieved(
 									TeamMemoryBlock* block, status_t result);

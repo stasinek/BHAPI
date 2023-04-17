@@ -19,12 +19,12 @@ protected:
 protected:
 								BFileInterface();
 
-	virtual	status_t			HandleMessage(int32 message, const void* data,
+	virtual	status_t			HandleMessage(int32_t message, const void* data,
 									size_t size);
 
-	virtual	status_t			GetNextFileFormat(int32* cookie,
+	virtual	status_t			GetNextFileFormat(int32_t* cookie,
 									media_file_format* _format) = 0;
-	virtual	void				DisposeFileFormatCookie(int32 cookie) = 0;
+	virtual	void				DisposeFileFormatCookie(int32_t cookie) = 0;
 
 	virtual	status_t			GetDuration(bigtime_t* _time) = 0;
 	virtual	status_t			SniffRef(const entry_ref& file,
@@ -60,7 +60,7 @@ private:
 	virtual	status_t			_Reserved_FileInterface_14(void*);
 	virtual	status_t			_Reserved_FileInterface_15(void*);
 
-			uint32				_reserved_file_interface_[16];
+			uint32_t				_reserved_file_interface_[16];
 };
 
 #endif // _FILE_INTERFACE_H

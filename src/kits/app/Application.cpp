@@ -48,7 +48,7 @@
 #include <kits/netApplication.h>
 #include <kits/netClipboard.h>
 //-----------------------------------------------------------------------------
-#define B_APP_CURSOR_REQUESTED (uint32)0
+#define B_APP_CURSOR_REQUESTED (uint32_t)0
 BHAPI_LOCAL BCursor _B_CURSOR_SYSTEM_DEFAULT(NULL);
 
 BHAPI_EXPORT BApplication bhapi::__be_app;
@@ -148,7 +148,7 @@ BApplication::~BApplication()
     if(fSignature) delete[] fSignature;
 
     hLocker->Lock();
-    for(int32 i = 0; i < fModalWindows.CountItems(); i++)
+    for(int32_t i = 0; i < fModalWindows.CountItems(); i++)
     {
         BMessenger *tMsgr = (BMessenger*)fModalWindows.ItemAt(i);
         delete tMsgr;
@@ -222,7 +222,7 @@ void *BApplication::Run()
         if(!fQuit)
         {
             MessageQueue()->Lock();
-            aMsg = MessageQueue()->FindMessage((int32)0);
+            aMsg = MessageQueue()->FindMessage((int32_t)0);
             if(!(aMsg == NULL || aMsg->what != _QUIT_)) fQuit = true;
             MessageQueue()->Unlock();
         }
@@ -250,7 +250,7 @@ void BApplication::dispatch_message_runners()
 
     sRunnerMinimumInterval = B_INT64_CONSTANT(0);
     bigtime_t curTime = b_real_time_clock_usecs();
-    for(int32 i = 0; i < sRunnerList.CountItems(); i++)
+    for(int32_t i = 0; i < sRunnerList.CountItems(); i++)
     {
         BMessageRunner *runner = (BMessageRunner*)sRunnerList.ItemAt(i);
         if(runner == NULL || runner->IsValid() == false || runner->fCount == 0 || runner->fInterval <= B_INT64_CONSTANT(0) ||
@@ -441,7 +441,7 @@ void BApplication::MessageReceived(BMessage *msg)
 #if 0
 //-----------------------------------------------------------------------------
 
-int32 BApplication::CountLoopers()
+int32_t BApplication::CountLoopers()
 {
     BLocker *hLocker = bhapi::get_handler_operator_locker();
     BAutolock <BLocker>autolock(hLocker);
@@ -450,7 +450,7 @@ int32 BApplication::CountLoopers()
 }
 //-----------------------------------------------------------------------------
 
-BLooper* BApplication::LooperAt(int32 index)
+BLooper* BApplication::LooperAt(int32_t index)
 {
     BLocker *hLocker = bhapi::get_handler_operator_locker();
     BAutolock <BLocker>autolock(hLocker);
@@ -463,7 +463,7 @@ BLooper* BApplication::LooperAt(int32 index)
 
 bool BApplication::quit_all_loopers(bool force)
 {
-     int32 index;
+     int32_t index;
     BLooper *looper = NULL;
     BLocker *hLocker = bhapi::get_handler_operator_locker();
 
@@ -654,7 +654,7 @@ bool BApplication::AddModalWindow(BMessenger &msgr)
 
     BLocker *hLocker = bhapi::get_handler_operator_locker();
     hLocker->Lock();
-    for(int32 i = 0; i < fModalWindows.CountItems(); i++)
+    for(int32_t i = 0; i < fModalWindows.CountItems(); i++)
     {
         BMessenger *tMsgr = (BMessenger*)fModalWindows.ItemAt(i);
         if(*tMsgr == *aMsgr)
@@ -680,7 +680,7 @@ bool BApplication::RemoveModalWindow(BMessenger &msgr)
 {
     BLocker *hLocker = bhapi::get_handler_operator_locker();
     hLocker->Lock();
-    for(int32 i = 0; i < fModalWindows.CountItems(); i++)
+    for(int32_t i = 0; i < fModalWindows.CountItems(); i++)
     {
         BMessenger *tMsgr = (BMessenger*)fModalWindows.ItemAt(i);
         if(*tMsgr == msgr)
@@ -988,14 +988,14 @@ fill_argv_message(BMessage &message)
 {
     message.what = B_ARGV_RECEIVED;
 
-    int32 argc = __libc_argc;
+    int32_t argc = __libc_argc;
     const char* const *argv = __libc_argv;
 
     // add argc
     message.AddInt32("argc", argc);
 
     // add argv
-    for (int32 i = 0; i < argc; i++) {
+    for (int32_t i = 0; i < argc; i++) {
         if (argv[i] != NULL)
             message.AddString("argv", argv[i]);
     }
@@ -1032,7 +1032,7 @@ BApplication::BApplication(const char* signature, const char* looperName,
 
 /*
 BApplication::BApplication(BMessage* data)
-    // Note: BeOS calls the private BLooper(int32, port_id, const char*)
+    // Note: BeOS calls the private BLooper(int32_t, port_id, const char*)
     // constructor here, test if it's needed
     :
     BLooper(kDefaultLooperName)
@@ -1048,7 +1048,7 @@ BApplication::BApplication(BMessage* data)
 }
 */
 
-BApplication::BApplication(uint32 signature)
+BApplication::BApplication(uint32_t signature)
 {
 }
 
@@ -1066,7 +1066,7 @@ BApplication::BApplication(const BApplication &rhs)
     _QuitAllWindows(true);
 
     // quit registered loopers
-    for (int32 i = 0; i < sOnQuitLooperList.CountItems(); i++) {
+    for (int32_t i = 0; i < sOnQuitLooperList.CountItems(); i++) {
         BLooper* looper = sOnQuitLooperList.ItemAt(i);
         if (looper->Lock())
             looper->Quit();
@@ -1147,7 +1147,7 @@ BApplication::_InitData(const char* signature, bool initGUI, status_t* _error)
     }
 
     // get the BAppFileInfo and extract the information we need
-    uint32 appFlags = B_REG_DEFAULT_APP_FLAGS;
+    uint32_t appFlags = B_REG_DEFAULT_APP_FLAGS;
     if (fInitError == B_OK) {
         BAppFileInfo fileInfo;
         BFile file(&ref, B_READ_ONLY);
@@ -1421,9 +1421,9 @@ BApplication::MessageReceived(BMessage* message)
         case B_GET_PROPERTY:
         case B_SET_PROPERTY:
         {
-            int32 index;
+            int32_t index;
             BMessage specifier;
-            int32 what;
+            int32_t what;
             const char* property = NULL;
             if (message->GetCurrentSpecifier(&index, &specifier, &what,
                     &property) < B_OK
@@ -1446,7 +1446,7 @@ BApplication::MessageReceived(BMessage* message)
 
         case kMsgDeleteServerMemoryArea:
         {
-            int32 serverArea;
+            int32_t serverArea;
             if (message->FindInt32("server area", &serverArea) == B_OK) {
                 // The link is not used, but we currently borrow its lock
                 BPrivate::AppServerLink link;
@@ -1462,18 +1462,18 @@ BApplication::MessageReceived(BMessage* message)
 */
 /*
 BHandler*
-BApplication::ResolveSpecifier(BMessage* message, int32 index,
-    BMessage* specifier, int32 what, const char* property)
+BApplication::ResolveSpecifier(BMessage* message, int32_t index,
+    BMessage* specifier, int32_t what, const char* property)
 {
     BPropertyInfo propInfo(sPropertyInfo);
     status_t err = B_OK;
-    uint32 data;
+    uint32_t data;
 
     if (propInfo.FindMatch(message, 0, specifier, what, property, &data) >= 0) {
         switch (data) {
             case kWindowByIndex:
             {
-                int32 index;
+                int32_t index;
                 err = specifier->FindInt32("index", &index);
                 if (err != B_OK)
                     break;
@@ -1497,7 +1497,7 @@ BApplication::ResolveSpecifier(BMessage* message, int32 index,
                 if (err != B_OK)
                     break;
 
-                for (int32 i = 0;; i++) {
+                for (int32_t i = 0;; i++) {
                     BWindow* window = WindowAt(i);
                     if (window == NULL) {
                         err = B_NAME_NOT_FOUND;
@@ -1515,7 +1515,7 @@ BApplication::ResolveSpecifier(BMessage* message, int32 index,
 
             case kLooperByIndex:
             {
-                int32 index;
+                int32_t index;
                 err = specifier->FindInt32("index", &index);
                 if (err != B_OK)
                     break;
@@ -1544,7 +1544,7 @@ BApplication::ResolveSpecifier(BMessage* message, int32 index,
                 if (err != B_OK)
                     break;
 
-                for (int32 i = 0;; i++) {
+                for (int32_t i = 0;; i++) {
                     BLooper* looper = LooperAt(i);
                     if (looper == NULL) {
                         err = B_NAME_NOT_FOUND;
@@ -1611,7 +1611,7 @@ bool
 BApplication::IsCursorHidden() const
 {
     BPrivate::AppServerLink link;
-    int32 status = B_ERROR;
+    int32_t status = B_ERROR;
     link.StartMessage(AS_QUERY_CURSOR_HIDDEN);
     link.FlushWithReply(status);
 
@@ -1634,10 +1634,10 @@ BApplication::SetCursor(const BCursor* cursor, bool sync)
     BPrivate::AppServerLink link;
     link.StartMessage(AS_SET_CURSOR);
     link.Attach<bool>(sync);
-    link.Attach<int32>(cursor->fServerToken);
+    link.Attach<int32_t>(cursor->fServerToken);
 
     if (sync) {
-        int32 code;
+        int32_t code;
         link.FlushWithReply(code);
     } else
         link.Flush();
@@ -1646,7 +1646,7 @@ BApplication::SetCursor(const BCursor* cursor, bool sync)
 */
 
 
-int32
+int32_t
 BApplication::CountWindows() const
 {
     return _CountWindows(false);
@@ -1655,14 +1655,14 @@ BApplication::CountWindows() const
 
 
 BWindow*
-BApplication::WindowAt(int32 index) const
+BApplication::WindowAt(int32_t index) const
 {
     return _WindowAt(index, false);
         // we're ignoring menu windows
 }
 
 
-int32
+int32_t
 BApplication::CountLoopers() const
 {
     AutoLocker<BLooperList.h> ListLock(gLooperList);
@@ -1675,7 +1675,7 @@ BApplication::CountLoopers() const
 
 
 BLooper*
-BApplication::LooperAt(int32 index) const
+BApplication::LooperAt(int32_t index) const
 {
     BLooper* looper = NULL;
     AutoLocker<BLooperList.h> listLock(gLooperList);
@@ -1772,7 +1772,7 @@ BApplication::DispatchMessage(BMessage* message, BHandler* handler)
             // this adds the refs that are part of this message to the recent
             // lists, but only folders and documents are handled here
             entry_ref ref;
-            int32 i = 0;
+            int32_t i = 0;
             while (message->FindRef("refs", i++, &ref) == B_OK) {
                 BEntry entry(&ref, true);
                 if (entry.InitCheck() != B_OK)
@@ -1827,8 +1827,8 @@ BApplication::DispatchMessage(BMessage* message, BHandler* handler)
                 break;
 
             BWindow* window = NULL;
-            uint32 count = gLooperList.CountLoopers();
-            for (uint32 index = 0; index < count; ++index) {
+            uint32_t count = gLooperList.CountLoopers();
+            for (uint32_t index = 0; index < count; ++index) {
                 window = dynamic_cast<BWindow*>(gLooperList.LooperAt(index));
                 if (window == NULL || (window != NULL && window->fOffscreen))
                     continue;
@@ -1927,8 +1927,8 @@ void BApplication::_ReservedApplication8() {}
 
 
 bool
-BApplication::ScriptReceived(BMessage* message, int32 index,
-    BMessage* specifier, int32 what, const char* property)
+BApplication::ScriptReceived(BMessage* message, int32_t index,
+    BMessage* specifier, int32_t what, const char* property)
 {
     BMessage reply(B_REPLY);
     status_t err = B_BAD_SCRIPT_SYNTAX;
@@ -1936,16 +1936,16 @@ BApplication::ScriptReceived(BMessage* message, int32 index,
     switch (message->what) {
         case B_GET_PROPERTY:
             if (strcmp("Loopers", property) == 0) {
-                int32 count = CountLoopers();
+                int32_t count = CountLoopers();
                 err = B_OK;
-                for (int32 i=0; err == B_OK && i<count; i++) {
+                for (int32_t i=0; err == B_OK && i<count; i++) {
                     BMessenger messenger(LooperAt(i));
                     err = reply.AddMessenger("result", messenger);
                 }
             } else if (strcmp("Windows", property) == 0) {
-                int32 count = CountWindows();
+                int32_t count = CountWindows();
                 err = B_OK;
-                for (int32 i=0; err == B_OK && i<count; i++) {
+                for (int32_t i=0; err == B_OK && i<count; i++) {
                     BMessenger messenger(WindowAt(i));
                     err = reply.AddMessenger("result", messenger);
                 }
@@ -1954,7 +1954,7 @@ BApplication::ScriptReceived(BMessage* message, int32 index,
                     case B_INDEX_SPECIFIER:
                     case B_REVERSE_INDEX_SPECIFIER:
                     {
-                        int32 index = -1;
+                        int32_t index = -1;
                         err = specifier->FindInt32("index", &index);
                         if (err != B_OK)
                             break;
@@ -1979,7 +1979,7 @@ BApplication::ScriptReceived(BMessage* message, int32 index,
                         if (err != B_OK)
                             break;
                         err = B_NAME_NOT_FOUND;
-                        for (int32 i = 0; i < CountWindows(); i++) {
+                        for (int32_t i = 0; i < CountWindows(); i++) {
                             BWindow* window = WindowAt(i);
                             if (window && window->Name() != NULL
                                 && !strcmp(window->Name(), name)) {
@@ -1996,7 +1996,7 @@ BApplication::ScriptReceived(BMessage* message, int32 index,
                     case B_INDEX_SPECIFIER:
                     case B_REVERSE_INDEX_SPECIFIER:
                     {
-                        int32 index = -1;
+                        int32_t index = -1;
                         err = specifier->FindInt32("index", &index);
                         if (err != B_OK)
                             break;
@@ -2021,7 +2021,7 @@ BApplication::ScriptReceived(BMessage* message, int32 index,
                         if (err != B_OK)
                             break;
                         err = B_NAME_NOT_FOUND;
-                        for (int32 i = 0; i < CountLoopers(); i++) {
+                        for (int32_t i = 0; i < CountLoopers(); i++) {
                             BLooper* looper = LooperAt(i);
                             if (looper != NULL && looper->Name()
                                 && strcmp(looper->Name(), name) == 0) {
@@ -2074,7 +2074,7 @@ BApplication::BeginRectTracking(BRect rect, bool trackWhole)
     BPrivate::AppServerLink link;
     link.StartMessage(AS_BEGIN_RECT_TRACKING);
     link.Attach<BRect>(rect);
-    link.Attach<int32>(trackWhole);
+    link.Attach<int32_t>(trackWhole);
     link.Flush();
 }
 
@@ -2139,21 +2139,21 @@ BApplication::_ConnectToServer()
     // 1) port_id - receiver port of a regular app
     // 2) port_id - looper port for this BApplication
     // 3) team_id - team identification field
-    // 4) int32 - handler ID token of the app
+    // 4) int32_t - handler ID token of the app
     // 5) char* - signature of the regular app
 
     fServerLink->StartMessage(AS_CREATE_APP);
     fServerLink->Attach<port_id>(fServerLink->ReceiverPort());
     fServerLink->Attach<port_id>(_get_looper_port_(this));
     fServerLink->Attach<team_id>(Team());
-    fServerLink->Attach<int32>(_get_object_token_(this));
+    fServerLink->Attach<int32_t>(_get_object_token_(this));
     fServerLink->AttachString(fAppName);
 
     area_id sharedReadOnlyArea;
     team_id serverTeam;
     port_id serverPort;
 
-    int32 code;
+    int32_t code;
     if (fServerLink->FlushWithReply(code) == B_OK
         && code == B_OK) {
         // We don't need to contact the main app_server anymore
@@ -2198,8 +2198,8 @@ BApplication::_ReconnectToServer()
     if (!listLock.IsLocked())
         return;
 
-    uint32 count = gLooperList.CountLoopers();
-    for (uint32 i = 0; i < count ; i++) {
+    uint32_t count = gLooperList.CountLoopers();
+    for (uint32_t i = 0; i < count ; i++) {
         BWindow* window = dynamic_cast<BWindow*>(gLooperList.LooperAt(i));
         if (window == NULL)
             continue;
@@ -2214,7 +2214,7 @@ BApplication::_ReconnectToServer()
 
 #if 0
 void
-BApplication::send_drag(BMessage* message, int32 vs_token, BPoint offset,
+BApplication::send_drag(BMessage* message, int32_t vs_token, BPoint offset,
     BRect dragRect, BHandler* replyTo)
 {
     // TODO: implement
@@ -2222,8 +2222,8 @@ BApplication::send_drag(BMessage* message, int32 vs_token, BPoint offset,
 
 
 void
-BApplication::send_drag(BMessage* message, int32 vs_token, BPoint offset,
-    int32 bitmapToken, drawing_mode dragMode, BHandler* replyTo)
+BApplication::send_drag(BMessage* message, int32_t vs_token, BPoint offset,
+    int32_t bitmapToken, drawing_mode dragMode, BHandler* replyTo)
 {
     // TODO: implement
 }
@@ -2240,7 +2240,7 @@ BApplication::write_drag(_BSession_* session, BMessage* message)
 bool
 BApplication::_WindowQuitLoop(bool quitFilePanels, bool force)
 {
-    int32 index = 0;
+    int32_t index = 0;
     while (true) {
          BWindow* window = WindowAt(index);
          if (window == NULL)
@@ -2306,7 +2306,7 @@ void BApplication::_ArgvReceived(BMessage* message)
 
     // build the argv vector
     status_t error = B_OK;
-    int32 argc = 0;
+    int32_t argc = 0;
     char** argv = NULL;
     if (message->FindInt32("argc", &argc) == B_OK && argc > 0) {
         // allocate a NULL terminated array
@@ -2315,7 +2315,7 @@ void BApplication::_ArgvReceived(BMessage* message)
             return;
 
         // copy the arguments
-        for (int32 i = 0; error == B_OK && i < argc; i++) {
+        for (int32_t i = 0; error == B_OK && i < argc; i++) {
             const char* arg = NULL;
             error = message->FindString("argv", i, &arg);
             if (error == B_OK && arg) {
@@ -2340,25 +2340,25 @@ void BApplication::_ArgvReceived(BMessage* message)
 
     // cleanup
     if (argv) {
-        for (int32 i = 0; i < argc; i++)
+        for (int32_t i = 0; i < argc; i++)
             free(argv[i]);
         delete[] argv;
     }
 }
 
 
-uint32
+uint32_t
 BApplication::InitialWorkspace()
 {
     return fInitialWorkspace;
 }
 
 
-int32
+int32_t
 BApplication::_CountWindows(bool includeMenus) const
 {
-    uint32 count = 0;
-    for (int32 i = 0; i < gLooperList.CountLoopers(); i++) {
+    uint32_t count = 0;
+    for (int32_t i = 0; i < gLooperList.CountLoopers(); i++) {
         BWindow* window = dynamic_cast<BWindow*>(gLooperList.LooperAt(i));
         if (window != NULL && !window->fOffscreen && (includeMenus
                 || dynamic_cast<BMenuWindow*>(window) == NULL)) {
@@ -2371,14 +2371,14 @@ BApplication::_CountWindows(bool includeMenus) const
 
 
 BWindow*
-BApplication::_WindowAt(uint32 index, bool includeMenus) const
+BApplication::_WindowAt(uint32_t index, bool includeMenus) const
 {
     AutoLocker<BLooperList.h> listLock(gLooperList);
     if (!listLock.IsLocked())
         return NULL;
 
-    uint32 count = gLooperList.CountLoopers();
-    for (uint32 i = 0; i < count && index < count; i++) {
+    uint32_t count = gLooperList.CountLoopers();
+    for (uint32_t i = 0; i < count && index < count; i++) {
         BWindow* window = dynamic_cast<BWindow*>(gLooperList.LooperAt(i));
         if (window == NULL || (window != NULL && window->fOffscreen)
             || (!includeMenus && dynamic_cast<BMenuWindow*>(window) != NULL)) {

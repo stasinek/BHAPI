@@ -53,7 +53,7 @@ KPartitioningSystem::Init()
 	if (error == B_OK)
 		error = SetPrettyName(fModule->pretty_name);
 
-	SetFlags(fModule->flags & ~(uint32)B_DISK_SYSTEM_IS_FILE_SYSTEM);
+	SetFlags(fModule->flags & ~(uint32_t)B_DISK_SYSTEM_IS_FILE_SYSTEM);
 	Unload();
 	return error;
 }

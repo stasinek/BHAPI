@@ -39,7 +39,7 @@
 #include <kits/support/List.h>
 
 
-BListItem::BListItem(__be_uint32 outlineLevel, bool expanded,  __be_uint32 flags)
+BListItem::BListItem(__be_uint32_t outlineLevel, bool expanded,  __be_uint32_t flags)
 	: BArchivable(), fOwner(NULL), fFullOwner(NULL),
 	  fWidth(-1), fHeight(-1), fSelected(false), fEnabled(true)
 {
@@ -157,7 +157,7 @@ void BListItem::SetExpanded(bool state)
 }
 
 
-__be_uint32 BListItem::OutlineLevel() const
+__be_uint32_t BListItem::OutlineLevel() const
 {
 	return fLevel;
 }
@@ -229,13 +229,13 @@ void BListItem::GetLeaderSize(float *width, float *height) const
 }
 
 
-void BListItem::SetFlags(__be_uint32 flags)
+void BListItem::SetFlags(__be_uint32_t flags)
 {
 	fFlags = flags;
 }
 
 
-__be_uint32 BListItem::Flags() const
+__be_uint32_t BListItem::Flags() const
 {
 	return fFlags;
 }
@@ -251,22 +251,22 @@ void BListItem::MouseUp(BView *owner, BPoint where)
 }
 
 
-void BListItem::MouseMoved(BView *owner, BPoint where,  __be_uint32 code, const BMessage *a_message)
+void BListItem::MouseMoved(BView *owner, BPoint where,  __be_uint32_t code, const BMessage *a_message)
 {
 }
 
 
-void BListItem::KeyDown(BView *owner, const char *bytes,  __be_int32 numBytes)
+void BListItem::KeyDown(BView *owner, const char *bytes,  __be_int32_t numBytes)
 {
 }
 
 
-void BListItem::KeyUp(BView *owner, const char *bytes,  __be_int32 numBytes)
+void BListItem::KeyUp(BView *owner, const char *bytes,  __be_int32_t numBytes)
 {
 }
 
 
-StringItem::StringItem(const char *text,  __be_uint32 outlineLevel, bool expanded)
+StringItem::StringItem(const char *text,  __be_uint32_t outlineLevel, bool expanded)
 	: BListItem(outlineLevel, expanded, 0), fText(NULL)
 {
 	if(text) fText = bhapi::strdup(text);

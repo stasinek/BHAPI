@@ -70,7 +70,7 @@ struct TimerLocker {
 		// called for new threads not added to the team yet.
 	}
 
-	status_t LockAndGetTimer(thread_id threadID, int32 timerID,
+	status_t LockAndGetTimer(thread_id threadID, int32_t timerID,
 		UserTimer*& _timer)
 	{
 		team = thread_get_current_thread()->team;
@@ -171,7 +171,7 @@ UserTimer::Cancel()
 
 
 /*!	\fn UserTimer::GetInfo(bigtime_t& _remainingTime, bigtime_t& _interval,
-		uint32& _overrunCount)
+		uint32_t& _overrunCount)
 	Return information on the current timer.
 
 	\param _remainingTime Return variable that will be set to the microseconds
@@ -187,7 +187,7 @@ UserTimer::Cancel()
 */
 
 
-/*static*/ int32
+/*static*/ int32_t
 UserTimer::HandleTimerHook(struct timer* timer)
 {
 	UserTimer* userTimer = reinterpret_cast<UserTimer*>(timer->user_data);
@@ -294,7 +294,7 @@ UserTimer::CancelTimer()
 
 void
 SystemTimeUserTimer::Schedule(bigtime_t nextTime, bigtime_t interval,
-	uint32 flags, bigtime_t& _oldRemainingTime, bigtime_t& _oldInterval)
+	uint32_t flags, bigtime_t& _oldRemainingTime, bigtime_t& _oldInterval)
 {
 	InterruptsWriteSequentialLocker locker(sUserTimerLock);
 
@@ -331,9 +331,9 @@ SystemTimeUserTimer::Schedule(bigtime_t nextTime, bigtime_t interval,
 
 void
 SystemTimeUserTimer::GetInfo(bigtime_t& _remainingTime, bigtime_t& _interval,
-	uint32& _overrunCount)
+	uint32_t& _overrunCount)
 {
-	uint32 count;
+	uint32_t count;
 	do {
 		count = acquire_read_seqlock(&sUserTimerLock);
 
@@ -379,7 +379,7 @@ SystemTimeUserTimer::ScheduleKernelTimer(bigtime_t now,
 	if (checkPeriodicOverrun)
 		CheckPeriodicOverrun(now);
 
-	uint32 timerFlags = B_ONE_SHOT_ABSOLUTE_TIMER
+	uint32_t timerFlags = B_ONE_SHOT_ABSOLUTE_TIMER
 			| B_TIMER_USE_TIMER_STRUCT_TIMES;
 
 	fTimer.schedule_time = std::max(fNextTime, (bigtime_t)0);
@@ -396,7 +396,7 @@ SystemTimeUserTimer::ScheduleKernelTimer(bigtime_t now,
 
 void
 RealTimeUserTimer::Schedule(bigtime_t nextTime, bigtime_t interval,
-	uint32 flags, bigtime_t& _oldRemainingTime, bigtime_t& _oldInterval)
+	uint32_t flags, bigtime_t& _oldRemainingTime, bigtime_t& _oldInterval)
 {
 	InterruptsWriteSequentialLocker locker(sUserTimerLock);
 
@@ -506,7 +506,7 @@ TeamTimeUserTimer::~TeamTimeUserTimer()
 
 void
 TeamTimeUserTimer::Schedule(bigtime_t nextTime, bigtime_t interval,
-	uint32 flags, bigtime_t& _oldRemainingTime, bigtime_t& _oldInterval)
+	uint32_t flags, bigtime_t& _oldRemainingTime, bigtime_t& _oldInterval)
 {
 	InterruptsWriteSequentialLocker locker(sUserTimerLock);
 	SpinLocker timeLocker(fTeam != NULL ? &fTeam->time_lock : NULL);
@@ -569,9 +569,9 @@ TeamTimeUserTimer::Schedule(bigtime_t nextTime, bigtime_t interval,
 
 void
 TeamTimeUserTimer::GetInfo(bigtime_t& _remainingTime, bigtime_t& _interval,
-	uint32& _overrunCount)
+	uint32_t& _overrunCount)
 {
-	uint32 count;
+	uint32_t count;
 	do {
 		count = acquire_read_seqlock(&sUserTimerLock);
 
@@ -632,8 +632,8 @@ TeamTimeUserTimer::Update(Thread* unscheduledThread, Thread* lockedThread)
 
 	// determine how many of the team's threads are currently running
 	fRunningThreads = 0;
-	int32 cpuCount = smp_get_num_cpus();
-	for (int32 i = 0; i < cpuCount; i++) {
+	int32_t cpuCount = smp_get_num_cpus();
+	for (int32_t i = 0; i < cpuCount; i++) {
 		Thread* thread = gCPU[i].running_thread;
 		if (thread != unscheduledThread && thread->team == fTeam)
 			fRunningThreads++;
@@ -754,7 +754,7 @@ TeamUserTimeUserTimer::~TeamUserTimeUserTimer()
 
 void
 TeamUserTimeUserTimer::Schedule(bigtime_t nextTime, bigtime_t interval,
-	uint32 flags, bigtime_t& _oldRemainingTime, bigtime_t& _oldInterval)
+	uint32_t flags, bigtime_t& _oldRemainingTime, bigtime_t& _oldInterval)
 {
 	InterruptsWriteSequentialLocker locker(sUserTimerLock);
 	SpinLocker timeLocker(fTeam != NULL ? &fTeam->time_lock : NULL);
@@ -810,9 +810,9 @@ TeamUserTimeUserTimer::Schedule(bigtime_t nextTime, bigtime_t interval,
 
 void
 TeamUserTimeUserTimer::GetInfo(bigtime_t& _remainingTime, bigtime_t& _interval,
-	uint32& _overrunCount)
+	uint32_t& _overrunCount)
 {
-	uint32 count;
+	uint32_t count;
 	do {
 		count = acquire_read_seqlock(&sUserTimerLock);
 
@@ -900,7 +900,7 @@ ThreadTimeUserTimer::~ThreadTimeUserTimer()
 
 void
 ThreadTimeUserTimer::Schedule(bigtime_t nextTime, bigtime_t interval,
-	uint32 flags, bigtime_t& _oldRemainingTime, bigtime_t& _oldInterval)
+	uint32_t flags, bigtime_t& _oldRemainingTime, bigtime_t& _oldInterval)
 {
 	InterruptsWriteSequentialLocker locker(sUserTimerLock);
 	SpinLocker timeLocker(fThread->time_lock);
@@ -964,9 +964,9 @@ ThreadTimeUserTimer::Schedule(bigtime_t nextTime, bigtime_t interval,
 
 void
 ThreadTimeUserTimer::GetInfo(bigtime_t& _remainingTime, bigtime_t& _interval,
-	uint32& _overrunCount)
+	uint32_t& _overrunCount)
 {
-	uint32 count;
+	uint32_t count;
 	do {
 		count = acquire_read_seqlock(&sUserTimerLock);
 
@@ -1039,7 +1039,7 @@ ThreadTimeUserTimer::Start()
 		fTimer.schedule_time = 0;
 	fTimer.period = 0;
 
-	uint32 flags = B_ONE_SHOT_ABSOLUTE_TIMER | B_TIMER_USE_TIMER_STRUCT_TIMES;
+	uint32_t flags = B_ONE_SHOT_ABSOLUTE_TIMER | B_TIMER_USE_TIMER_STRUCT_TIMES;
 	add_timer(&fTimer, &HandleTimerHook, fTimer.schedule_time, flags);
 
 	fScheduled = true;
@@ -1138,7 +1138,7 @@ UserTimerList::~UserTimerList()
 		timer.
 */
 UserTimer*
-UserTimerList::TimerFor(int32 id) const
+UserTimerList::TimerFor(int32_t id) const
 {
 	// TODO: Use a more efficient data structure. E.g. a sorted array.
 	for (TimerList::ConstIterator it = fTimers.GetIterator();
@@ -1158,7 +1158,7 @@ UserTimerList::TimerFor(int32 id) const
 void
 UserTimerList::AddTimer(UserTimer* timer)
 {
-	int32 id = timer->ID();
+	int32_t id = timer->ID();
 	if (id < 0) {
 		// user-defined timer -- find an usused ID
 		id = USER_TIMER_FIRST_USER_DEFINED_ID;
@@ -1201,10 +1201,10 @@ UserTimerList::AddTimer(UserTimer* timer)
 		otherwise all timers are deleted.
 	\return The number of user-defined timers that were removed and deleted.
 */
-int32
+int32_t
 UserTimerList::DeleteTimers(bool userDefinedOnly)
 {
-	int32 userDefinedCount = 0;
+	int32_t userDefinedCount = 0;
 
 	for (TimerList::Iterator it = fTimers.GetIterator();
 			UserTimer* timer = it.Next();) {
@@ -1227,9 +1227,9 @@ UserTimerList::DeleteTimers(bool userDefinedOnly)
 // #pragma mark - private
 
 
-static int32
-create_timer(clockid_t clockID, int32 timerID, Team* team, Thread* thread,
-	uint32 flags, const struct sigevent& event,
+static int32_t
+create_timer(clockid_t clockID, int32_t timerID, Team* team, Thread* thread,
+	uint32_t flags, const struct sigevent& event,
 	ThreadCreationAttributes* threadAttributes, bool isDefaultEvent)
 {
 	// create the timer object
@@ -1421,7 +1421,7 @@ user_timer_create_thread_timers(Team* team, Thread* thread)
 	event.sigev_notify = SIGEV_SIGNAL;
 	event.sigev_signo = SIGALRM;
 
-	int32 timerID = create_timer(CLOCK_MONOTONIC, USER_TIMER_REAL_TIME_ID,
+	int32_t timerID = create_timer(CLOCK_MONOTONIC, USER_TIMER_REAL_TIME_ID,
 		team, thread, USER_TIMER_SIGNAL_THREAD, event, NULL, true);
 	if (timerID < 0)
 		return timerID;
@@ -1443,7 +1443,7 @@ user_timer_create_team_timers(Team* team)
 	event.sigev_notify = SIGEV_SIGNAL;
 	event.sigev_signo = SIGALRM;
 
-	int32 timerID = create_timer(CLOCK_MONOTONIC, USER_TIMER_REAL_TIME_ID,
+	int32_t timerID = create_timer(CLOCK_MONOTONIC, USER_TIMER_REAL_TIME_ID,
 		team, NULL, 0, event, NULL, true);
 	if (timerID < 0)
 		return timerID;
@@ -1686,8 +1686,8 @@ _user_set_clock(clockid_t clockID, bigtime_t time)
 }
 
 
-int32
-_user_create_timer(clockid_t clockID, thread_id threadID, uint32 flags,
+int32_t
+_user_create_timer(clockid_t clockID, thread_id threadID, uint32_t flags,
 	const struct sigevent* userEvent,
 	const thread_creation_attributes* userThreadAttributes)
 {
@@ -1734,7 +1734,7 @@ _user_create_timer(clockid_t clockID, thread_id threadID, uint32 flags,
 
 
 status_t
-_user_delete_timer(int32 timerID, thread_id threadID)
+_user_delete_timer(int32_t timerID, thread_id threadID)
 {
 	// can only delete user-defined timers
 	if (timerID < USER_TIMER_FIRST_USER_DEFINED_ID)
@@ -1762,7 +1762,7 @@ _user_delete_timer(int32 timerID, thread_id threadID)
 
 
 status_t
-_user_get_timer(int32 timerID, thread_id threadID,
+_user_get_timer(int32_t timerID, thread_id threadID,
 	struct user_timer_info* userInfo)
 {
 	// get the timer
@@ -1795,8 +1795,8 @@ _user_get_timer(int32 timerID, thread_id threadID,
 
 
 status_t
-_user_set_timer(int32 timerID, thread_id threadID, bigtime_t startTime,
-	bigtime_t interval, uint32 flags, struct user_timer_info* userOldInfo)
+_user_set_timer(int32_t timerID, thread_id threadID, bigtime_t startTime,
+	bigtime_t interval, uint32_t flags, struct user_timer_info* userOldInfo)
 {
 	// check the values
 	if (startTime < 0 || interval < 0)

@@ -56,12 +56,12 @@ public:
 			const char*			Name() const	{ return fName.String(); }
 			void				SetName(const BString& name);
 
-			uint32				State() const	{ return fState; }
-			void				SetState(uint32 state,
-									uint32 reason = THREAD_STOPPED_UNKNOWN,
+			uint32_t				State() const	{ return fState; }
+			void				SetState(uint32_t state,
+									uint32_t reason = THREAD_STOPPED_UNKNOWN,
 									const BString& info = BString());
 
-			uint32				StoppedReason() const
+			uint32_t				StoppedReason() const
 									{ return fStoppedReason; }
 			const BString&		StoppedReasonInfo() const
 									{ return fStoppedReasonInfo; }
@@ -86,11 +86,11 @@ private:
 			Team*				fTeam;
 			thread_id			fID;
 			BString				fName;
-			uint32				fState;
+			uint32_t				fState;
 			ReturnValueInfoList*
 								fReturnValueInfos;
 			bool				fStopRequestPending;
-			uint32				fStoppedReason;
+			uint32_t				fStoppedReason;
 			BString				fStoppedReasonInfo;
 			CpuState*			fCpuState;
 			StackTrace*			fStackTrace;

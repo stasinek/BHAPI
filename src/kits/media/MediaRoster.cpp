@@ -79,7 +79,7 @@ namespace media {
 
 struct RosterNotification {
 	BMessenger	messenger;
-	int32		what;
+	int32_t		what;
 };
 
 static bool sServerIsUp = false;
@@ -176,7 +176,7 @@ BMediaRosterEx::~BMediaRosterEx()
 
 status_t BMediaRosterEx::SaveNodeConfiguration(BMediaNode* node)
 {
-	int32 flavorID;
+	int32_t flavorID;
 	BMediaAddOn* addon = node->AddOn(&flavorID);
 	if (addon == NULL) {
 		// NOTE: This node could have been created by an application,
@@ -197,7 +197,7 @@ status_t BMediaRosterEx::SaveNodeConfiguration(BMediaNode* node)
 }
 
 
-status_t BMediaRosterEx::LoadNodeConfiguration(media_addon_id addonID, int32 flavorID,
+status_t BMediaRosterEx::LoadNodeConfiguration(media_addon_id addonID, int32_t flavorID,
 	BMessage *_msg)
 {
 	// TODO: fix this
@@ -210,7 +210,7 @@ status_t BMediaRosterEx::LoadNodeConfiguration(media_addon_id addonID, int32 fla
 
 
 status_t BMediaRosterEx::IncrementAddonFlavorInstancesCount(media_addon_id addonID,
-	int32 flavorID)
+	int32_t flavorID)
 {
 	server_change_flavor_instances_count_request request;
 	server_change_flavor_instances_count_reply reply;
@@ -225,7 +225,7 @@ status_t BMediaRosterEx::IncrementAddonFlavorInstancesCount(media_addon_id addon
 
 
 status_t BMediaRosterEx::DecrementAddonFlavorInstancesCount(media_addon_id addonID,
-	int32 flavorID)
+	int32_t flavorID)
 {
 	server_change_flavor_instances_count_request request;
 	server_change_flavor_instances_count_reply reply;
@@ -292,7 +292,7 @@ status_t BMediaRosterEx::SetNodeCreator(media_node_id node, team_id creator)
 
 
 status_t BMediaRosterEx::GetNode(node_type type, media_node* out_node,
-	int32* out_input_id, BString* out_input_name)
+	int32_t* out_input_id, BString* out_input_name)
 {
 	if (out_node == NULL)
 		return B_BAD_VALUE;
@@ -341,7 +341,7 @@ status_t BMediaRosterEx::SetNode(node_type type, const media_node* node,
 
 status_t BMediaRosterEx::GetAllOutputs(const media_node& node, List<media_output>* list)
 {
-	int32 cookie;
+	int32_t cookie;
 	status_t rv;
 	status_t result;
 
@@ -387,7 +387,7 @@ status_t BMediaRosterEx::GetAllOutputs(const media_node& node, List<media_output
 
 status_t BMediaRosterEx::GetAllOutputs(BBufferProducer* node, List<media_output>* list)
 {
-	int32 cookie;
+	int32_t cookie;
 	status_t result;
 
 	PRINT(4, "BMediaRosterEx::GetAllOutputs() (by pointer) node %" B_PRId32
@@ -416,7 +416,7 @@ status_t BMediaRosterEx::GetAllOutputs(BBufferProducer* node, List<media_output>
 
 status_t BMediaRosterEx::GetAllInputs(const media_node& node, List<media_input>* list)
 {
-	int32 cookie;
+	int32_t cookie;
 	status_t rv;
 	status_t result;
 
@@ -462,7 +462,7 @@ status_t BMediaRosterEx::GetAllInputs(const media_node& node, List<media_input>*
 
 status_t BMediaRosterEx::GetAllInputs(BBufferConsumer* node, List<media_input>* list)
 {
-	int32 cookie;
+	int32_t cookie;
 	status_t result;
 
 	PRINT(4, "BMediaRosterEx::GetAllInputs() (by pointer) node %" B_PRId32
@@ -495,7 +495,7 @@ status_t BMediaRosterEx::PublishOutputs(const media_node& node, List<media_outpu
 	server_publish_outputs_reply reply;
 	media_output* output;
 	media_output* outputs;
-	int32 count;
+	int32_t count;
 	status_t rv;
 
 	count = list->CountItems();
@@ -543,7 +543,7 @@ status_t BMediaRosterEx::PublishInputs(const media_node& node, List<media_input>
 	server_publish_inputs_reply reply;
 	media_input* input;
 	media_input* inputs;
-	int32 count;
+	int32_t count;
 	status_t rv;
 
 	count = list->CountItems();
@@ -647,7 +647,7 @@ status_t BMediaRoster::GetAudioOutput(media_node* _node)
 }
 
 
-status_t BMediaRoster::GetAudioOutput(media_node* _node, int32* _inputID,
+status_t BMediaRoster::GetAudioOutput(media_node* _node, int32_t* _inputID,
 	BString* _inputName)
 {
 	CALLED();
@@ -881,7 +881,7 @@ status_t BMediaRoster::Connect(const media_source& from, const media_destination
 
 status_t BMediaRoster::Connect(const media_source& from, const media_destination& to,
 	media_format* io_format, media_output* out_output, media_input* out_input,
-	uint32 in_flags, void* _reserved)
+	uint32_t in_flags, void* _reserved)
 {
 	CALLED();
 	if (io_format == NULL || out_output == NULL || out_input == NULL)
@@ -1465,8 +1465,8 @@ status_t BMediaRoster::SetProducerRunModeDelay(const media_node& node,
 }
 
 
-status_t BMediaRoster::SetProducerRate(const media_node& producer, int32 numer,
-	int32 denom)
+status_t BMediaRoster::SetProducerRate(const media_node& producer, int32_t numer,
+	int32_t denom)
 {
 	CALLED();
 	if (IS_INVALID_NODE(producer))
@@ -1483,7 +1483,7 @@ status_t BMediaRoster::SetProducerRate(const media_node& producer, int32 numer,
 		return status;
 
 	producer_set_play_rate_reply reply;
-	int32 code;
+	int32_t code;
 	status = read_port(request.reply_port, &code, &reply, sizeof(reply));
 
 	return status < B_OK ? status : reply.result;
@@ -1519,7 +1519,7 @@ status_t BMediaRoster::GetLiveNodeInfo(const media_node& node,
 }
 
 
-status_t BMediaRoster::GetLiveNodes(live_node_info* liveNodes, int32* _totalCount,
+status_t BMediaRoster::GetLiveNodes(live_node_info* liveNodes, int32_t* _totalCount,
 	const media_format* hasInput, const media_format* hasOutput,
 	const char* name, uint64 nodeKinds)
 {
@@ -1565,7 +1565,7 @@ status_t BMediaRoster::GetLiveNodes(live_node_info* liveNodes, int32* _totalCoun
 	else
 		info = reply.live_info;
 
-	for (int32 i = 0; i < reply.count; i++)
+	for (int32_t i = 0; i < reply.count; i++)
 		liveNodes[i] = info[i];
 
 	if (reply.area >= 0)
@@ -1577,8 +1577,8 @@ status_t BMediaRoster::GetLiveNodes(live_node_info* liveNodes, int32* _totalCoun
 
 
 status_t BMediaRoster::GetFreeInputsFor(const media_node& node,
-	media_input * out_free_inputs, int32 buf_num_inputs,
-	int32 * out_total_count, media_type filter_type)
+	media_input * out_free_inputs, int32_t buf_num_inputs,
+	int32_t * out_total_count, media_type filter_type)
 {
 	CALLED();
 	if (IS_INVALID_NODE(node)) {
@@ -1608,7 +1608,7 @@ status_t BMediaRoster::GetFreeInputsFor(const media_node& node,
 		", filter-type %" B_PRId32 "\n", node.node, buf_num_inputs,
 		filter_type);
 
-	int32 i;
+	int32_t i;
 	for (i = 0, list.Rewind(); list.GetNext(&input);) {
 		if (filter_type != B_MEDIA_UNKNOWN_TYPE
 			&& filter_type != input->format.type) {
@@ -1637,8 +1637,8 @@ status_t BMediaRoster::GetFreeInputsFor(const media_node& node,
 
 
 status_t BMediaRoster::GetConnectedInputsFor(const media_node& node,
-	media_input* out_active_inputs, int32 buf_num_inputs,
-	int32* out_total_count)
+	media_input* out_active_inputs, int32_t buf_num_inputs,
+	int32_t* out_total_count)
 {
 	CALLED();
 	if (IS_INVALID_NODE(node) || (node.kind & B_BUFFER_CONSUMER) == 0)
@@ -1659,7 +1659,7 @@ status_t BMediaRoster::GetConnectedInputsFor(const media_node& node,
 	PRINT(4, "BMediaRoster::GetConnectedInputsFor node %" B_PRId32 ", max %"
 		B_PRId32 "\n", node.node, buf_num_inputs);
 
-	int32 i;
+	int32_t i;
 	for (i = 0, list.Rewind(); list.GetNext(&input);) {
 		if (input->source == media_source::null)
 			continue; // consumer source not connected
@@ -1680,7 +1680,7 @@ status_t BMediaRoster::GetConnectedInputsFor(const media_node& node,
 
 
 status_t BMediaRoster::GetAllInputsFor(const media_node& node, media_input* out_inputs,
-	int32 buf_num_inputs, int32* out_total_count)
+	int32_t buf_num_inputs, int32_t* out_total_count)
 {
 	CALLED();
 	if (IS_INVALID_NODE(node) || (node.kind & B_BUFFER_CONSUMER) == 0)
@@ -1701,7 +1701,7 @@ status_t BMediaRoster::GetAllInputsFor(const media_node& node, media_input* out_
 	PRINT(4, "BMediaRoster::GetAllInputsFor node %" B_PRId32 ", max %" B_PRId32
 		"\n", node.node, buf_num_inputs);
 
-	int32 i;
+	int32_t i;
 	for (i = 0, list.Rewind(); list.GetNext(&input); i++) {
 		out_inputs[i] = *input;
 		*out_total_count += 1;
@@ -1719,8 +1719,8 @@ status_t BMediaRoster::GetAllInputsFor(const media_node& node, media_input* out_
 
 
 status_t BMediaRoster::GetFreeOutputsFor(const media_node& node,
-	media_output* out_free_outputs, int32 buf_num_outputs,
-	int32* out_total_count, media_type filter_type)
+	media_output* out_free_outputs, int32_t buf_num_outputs,
+	int32_t* out_total_count, media_type filter_type)
 {
 	CALLED();
 	if (IS_INVALID_NODE(node) || (node.kind & B_BUFFER_PRODUCER) == 0)
@@ -1742,7 +1742,7 @@ status_t BMediaRoster::GetFreeOutputsFor(const media_node& node,
 		B_PRId32 ", filter-type %" B_PRId32 "\n", node.node, buf_num_outputs,
 		filter_type);
 
-	int32 i;
+	int32_t i;
 	for (i = 0, list.Rewind(); list.GetNext(&output);) {
 		if (filter_type != B_MEDIA_UNKNOWN_TYPE
 			&& filter_type != output->format.type) {
@@ -1771,8 +1771,8 @@ status_t BMediaRoster::GetFreeOutputsFor(const media_node& node,
 
 
 status_t BMediaRoster::GetConnectedOutputsFor(const media_node& node,
-	media_output* out_active_outputs, int32 buf_num_outputs,
-	int32* out_total_count)
+	media_output* out_active_outputs, int32_t buf_num_outputs,
+	int32_t* out_total_count)
 {
 	CALLED();
 	if (IS_INVALID_NODE(node) || (node.kind & B_BUFFER_PRODUCER) == 0)
@@ -1793,7 +1793,7 @@ status_t BMediaRoster::GetConnectedOutputsFor(const media_node& node,
 	PRINT(4, "BMediaRoster::GetConnectedOutputsFor node %" B_PRId32 ", max %"
 		B_PRId32 "\n", node.node, buf_num_outputs);
 
-	int32 i;
+	int32_t i;
 	for (i = 0, list.Rewind(); list.GetNext(&output);) {
 		if (output->destination == media_destination::null) {
 			// producer destination not connected
@@ -1816,7 +1816,7 @@ status_t BMediaRoster::GetConnectedOutputsFor(const media_node& node,
 
 
 status_t BMediaRoster::GetAllOutputsFor(const media_node& node,
-	media_output* out_outputs, int32 buf_num_outputs, int32* out_total_count)
+	media_output* out_outputs, int32_t buf_num_outputs, int32_t* out_total_count)
 {
 	CALLED();
 	if (IS_INVALID_NODE(node) || (node.kind & B_BUFFER_PRODUCER) == 0)
@@ -1837,7 +1837,7 @@ status_t BMediaRoster::GetAllOutputsFor(const media_node& node,
 	PRINT(4, "BMediaRoster::GetAllOutputsFor node %" B_PRId32 ", max %" B_PRId32
 		"\n", node.node, buf_num_outputs);
 
-	int32 i;
+	int32_t i;
 	for (i = 0, list.Rewind(); list.GetNext(&output); i++) {
 		out_outputs[i] = *output;
 		*out_total_count += 1;
@@ -1866,7 +1866,7 @@ status_t BMediaRoster::StartWatching(const BMessenger& where)
 }
 
 
-status_t BMediaRoster::StartWatching(const BMessenger & where, int32 notificationType)
+status_t BMediaRoster::StartWatching(const BMessenger & where, int32_t notificationType)
 {
 	CALLED();
 	if (!where.IsValid()) {
@@ -1888,7 +1888,7 @@ status_t BMediaRoster::StartWatching(const BMessenger & where, int32 notificatio
 
 
 status_t BMediaRoster::StartWatching(const BMessenger& where, const media_node& node,
-	int32 notificationType)
+	int32_t notificationType)
 {
 	CALLED();
 	if (!where.IsValid()) {
@@ -1918,7 +1918,7 @@ status_t BMediaRoster::StopWatching(const BMessenger& where)
 }
 
 
-status_t BMediaRoster::StopWatching(const BMessenger& where, int32 notificationType)
+status_t BMediaRoster::StopWatching(const BMessenger& where, int32_t notificationType)
 {
 	CALLED();
 	// messenger may already be invalid, so we don't check this
@@ -1933,7 +1933,7 @@ status_t BMediaRoster::StopWatching(const BMessenger& where, int32 notificationT
 
 
 status_t BMediaRoster::StopWatching(const BMessenger& where, const media_node& node,
-	int32 notificationType)
+	int32_t notificationType)
 {
 	CALLED();
 	// messenger may already be invalid, so we don't check this
@@ -1960,7 +1960,7 @@ status_t BMediaRoster::RegisterNode(BMediaNode* node)
 
 
 status_t BMediaRosterEx::RegisterNode(BMediaNode* node, media_addon_id addOnID,
-	int32 flavorID)
+	int32_t flavorID)
 {
 	CALLED();
 	if (node == NULL)
@@ -1970,7 +1970,7 @@ status_t BMediaRosterEx::RegisterNode(BMediaNode* node, media_addon_id addOnID,
 	// I'm not sure if the media kit warrants to call BMediaNode::AddOn() here.
 	// Perhaps we don't need it.
 	DEBUG_ONLY(
-		int32 testFlavorID;
+		int32_t testFlavorID;
 		BMediaAddOn* addon = node->AddOn(&testFlavorID);
 
 		ASSERT(addOnID == (addon != NULL ? addon->AddonID() : -1));
@@ -2253,9 +2253,9 @@ status_t BMediaRoster::GetParameterWebFor(const media_node& node, BParameterWeb*
 
 	controllable_get_parameter_web_request request;
 	controllable_get_parameter_web_reply reply;
-	int32 requestsize[] = {B_PAGE_SIZE, 4 * B_PAGE_SIZE, 16 * B_PAGE_SIZE,
+	int32_t requestsize[] = {B_PAGE_SIZE, 4 * B_PAGE_SIZE, 16 * B_PAGE_SIZE,
 		64 * B_PAGE_SIZE, 128 * B_PAGE_SIZE, 256 * B_PAGE_SIZE, 0};
-	int32 size;
+	int32_t size;
 
 	// TODO: it might be better to query the node for the (current) parameter
 	// size first
@@ -2340,7 +2340,7 @@ status_t BMediaRoster::StartControlPanel(const media_node& node, BMessenger* _me
 }
 
 
-status_t BMediaRoster::GetDormantNodes(dormant_node_info* _info, int32* _count,
+status_t BMediaRoster::GetDormantNodes(dormant_node_info* _info, int32_t* _count,
 	const media_format* hasInput, const media_format* hasOutput,
 	const char* name, uint64 requireKinds, uint64 denyKinds)
 {
@@ -2377,7 +2377,7 @@ status_t BMediaRoster::GetDormantNodes(dormant_node_info* _info, int32* _count,
 	*_count = reply.count;
 
 	if (reply.count > 0) {
-		int32 code;
+		int32_t code;
 		status = read_port(request.reply_port, &code, _info,
 			reply.count * sizeof(dormant_node_info));
 		if (status < B_OK)
@@ -2395,7 +2395,7 @@ status_t BMediaRoster::GetDormantNodes(dormant_node_info* _info, int32* _count,
 
 	Checks concerning global/local are not done here.
 */
-status_t BMediaRosterEx::InstantiateDormantNode(media_addon_id addonID, int32 flavorID,
+status_t BMediaRosterEx::InstantiateDormantNode(media_addon_id addonID, int32_t flavorID,
 	team_id creator, media_node *_node)
 {
 	// This function is always called from the correct context, if the node
@@ -2530,7 +2530,7 @@ status_t BMediaRosterEx::InstantiateDormantNode(media_addon_id addonID, int32 fl
 
 
 status_t BMediaRoster::InstantiateDormantNode(const dormant_node_info& info,
-	media_node* _node, uint32 flags)
+	media_node* _node, uint32_t flags)
 {
 	CALLED();
 	if (_node == NULL)
@@ -2666,7 +2666,7 @@ status_t BMediaRoster::GetDormantNodeFor(const media_node& node,
 }
 
 
-status_t BMediaRosterEx::GetDormantFlavorInfo(media_addon_id addonID, int32 flavorID,
+status_t BMediaRosterEx::GetDormantFlavorInfo(media_addon_id addonID, int32_t flavorID,
 	dormant_flavor_info* _flavor)
 {
 	CALLED();
@@ -2738,7 +2738,7 @@ status_t BMediaRoster::GetLatencyFor(const media_node& producer, bigtime_t* _lat
 
 
 status_t BMediaRoster::GetInitialLatencyFor(const media_node& producer,
-	bigtime_t* _latency, uint32* _flags)
+	bigtime_t* _latency, uint32_t* _flags)
 {
 	CALLED();
 	if (_latency == NULL)
@@ -2794,7 +2794,7 @@ status_t BMediaRoster::GetStartLatencyFor(const media_node& timeSource,
 
 
 status_t BMediaRoster::GetFileFormatsFor(const media_node& fileInterface,
-	media_file_format* _formats, int32* _numFormats)
+	media_file_format* _formats, int32_t* _numFormats)
 {
 	CALLED();
 
@@ -2946,8 +2946,8 @@ status_t BMediaRoster::SniffRef(const entry_ref& file, uint64 requireNodeKinds,
 	BMimeType aMimeType;
 
 	dormant_node_info nodes[30];
-	int32 count = 30;
-	int32 highestCapability = -1;
+	int32_t count = 30;
+	int32_t highestCapability = -1;
 	float capability;
 
 	media_node node;
@@ -2955,7 +2955,7 @@ status_t BMediaRoster::SniffRef(const entry_ref& file, uint64 requireNodeKinds,
 	// Get all dormant nodes using GetDormantNodes
 	if (GetDormantNodes(nodes, &count, NULL, NULL, NULL, requireNodeKinds | B_FILE_INTERFACE, 0) == B_OK) {
 		// Call SniffRefFor on each node that matches requireNodeKinds
-		for (int32 i=0;i<count;i++) {
+		for (int32_t i=0;i<count;i++) {
 			if (InstantiateDormantNode(nodes[i], &node) == B_OK) {
 
 				if (SniffRefFor(node, file, &aMimeType, &capability) == B_OK) {
@@ -3000,7 +3000,7 @@ status_t BMediaRoster::GetDormantNodeForType(const BMimeType& type,
 
 
 status_t BMediaRoster::GetReadFileFormatsFor(const dormant_node_info& node,
-	media_file_format* _readFormats, int32 readCount, int32* _readCount)
+	media_file_format* _readFormats, int32_t readCount, int32_t* _readCount)
 {
 	UNIMPLEMENTED();
 	return B_ERROR;
@@ -3008,7 +3008,7 @@ status_t BMediaRoster::GetReadFileFormatsFor(const dormant_node_info& node,
 
 
 status_t BMediaRoster::GetWriteFileFormatsFor(const dormant_node_info& node,
-	media_file_format* _write_formats, int32 writeCount, int32* _writeCount)
+	media_file_format* _write_formats, int32_t writeCount, int32_t* _writeCount)
 {
 	UNIMPLEMENTED();
 	return B_ERROR;
@@ -3016,7 +3016,7 @@ status_t BMediaRoster::GetWriteFileFormatsFor(const dormant_node_info& node,
 
 
 status_t BMediaRoster::GetFormatFor(const media_output& output, media_format* _format,
-	uint32 flags)
+	uint32_t flags)
 {
 	CALLED();
 	if (_format == NULL)
@@ -3044,7 +3044,7 @@ status_t BMediaRoster::GetFormatFor(const media_output& output, media_format* _f
 
 
 status_t BMediaRoster::GetFormatFor(const media_input& input, media_format* _format,
-	uint32 flags)
+	uint32_t flags)
 {
 	CALLED();
 	if (_format == NULL)
@@ -3150,8 +3150,8 @@ BMediaRoster::NodeIDFor(port_id port)
 }
 
 
-status_t BMediaRoster::GetInstancesFor(media_addon_id addon, int32 flavor,
-	media_node_id* _id, int32* _count)
+status_t BMediaRoster::GetInstancesFor(media_addon_id addon, int32_t flavor,
+	media_node_id* _id, int32_t* _count)
 {
 	CALLED();
 	if (_id == NULL)
@@ -3190,14 +3190,14 @@ bool BMediaRoster::IsRunning()
 }
 
 
-status_t BMediaRoster::SetRealtimeFlags(uint32 enabled)
+status_t BMediaRoster::SetRealtimeFlags(uint32_t enabled)
 {
 	UNIMPLEMENTED();
 	return B_ERROR;
 }
 
 
-status_t BMediaRoster::GetRealtimeFlags(uint32* _enabled)
+status_t BMediaRoster::GetRealtimeFlags(uint32_t* _enabled)
 {
 	UNIMPLEMENTED();
 	return B_ERROR;
@@ -3205,7 +3205,7 @@ status_t BMediaRoster::GetRealtimeFlags(uint32* _enabled)
 
 
 ssize_t
-BMediaRoster::AudioBufferSizeFor(int32 channelCount, uint32 sampleFormat,
+BMediaRoster::AudioBufferSizeFor(int32_t channelCount, uint32_t sampleFormat,
 	float frameRate, bus_type busKind)
 {
 	bigtime_t bufferDuration;
@@ -3287,7 +3287,7 @@ void BMediaRoster::MessageReceived(BMessage* message)
 					"find messenger");
 				return;
 			}
-			for (int32 i = 0; i < sNotificationList.CountItems(); i++) {
+			for (int32_t i = 0; i < sNotificationList.CountItems(); i++) {
 				RosterNotification* current;
 				if (sNotificationList.Get(i, &current) != true)
 					return;
@@ -3325,7 +3325,7 @@ void BMediaRoster::MessageReceived(BMessage* message)
 						"to media_server.");
 				}
 
-				for (int32 i = 0; i < sNotificationList.CountItems(); i++) {
+				for (int32_t i = 0; i < sNotificationList.CountItems(); i++) {
 					RosterNotification* current;
 					if (sNotificationList.Get(i, &current) != true)
 						return;
@@ -3355,7 +3355,7 @@ void BMediaRoster::MessageReceived(BMessage* message)
 			// Send the notification to our subscribers
 			if (!BMediaRoster::IsRunning() && sServerIsUp == true) {
 				sServerIsUp = false;
-				for (int32 i = 0; i < sNotificationList.CountItems(); i++) {
+				for (int32_t i = 0; i < sNotificationList.CountItems(); i++) {
 					RosterNotification* current;
 					if (sNotificationList.Get(i, &current) != true)
 						return;
@@ -3408,8 +3408,8 @@ bool BMediaRoster::QuitRequested()
 
 
 BHandler*
-BMediaRoster::ResolveSpecifier(BMessage* msg, int32 index, BMessage* specifier,
-	int32 form, const char* property)
+BMediaRoster::ResolveSpecifier(BMessage* msg, int32_t index, BMessage* specifier,
+	int32_t form, const char* property)
 {
 	return BLooper::ResolveSpecifier(msg, index, specifier, form, property);
 }

@@ -72,7 +72,7 @@ size_to_index(size_t size)
 
 
 void*
-block_alloc(size_t size, size_t alignment, uint32 flags)
+block_alloc(size_t size, size_t alignment, uint32_t flags)
 {
 	if (alignment > kMinObjectAlignment) {
 		// Make size >= alignment and a power of two. This is sufficient, since
@@ -145,7 +145,7 @@ block_alloc_early(size_t size)
 
 
 void
-block_free(void* block, uint32 flags)
+block_free(void* block, uint32_t flags)
 {
 	if (block == NULL)
 		return;
@@ -169,7 +169,7 @@ block_allocator_init_boot()
 		snprintf(name, sizeof(name), "block allocator: %lu",
 			kBlockSizes[index]);
 
-		uint32 flags = CACHE_DURING_BOOT;
+		uint32_t flags = CACHE_DURING_BOOT;
 		size_t size = kBlockSizes[index];
 
 		// align the power of two objects to their size
@@ -214,14 +214,14 @@ memalign(size_t alignment, size_t size)
 
 
 void *
-memalign_etc(size_t alignment, size_t size, uint32 flags)
+memalign_etc(size_t alignment, size_t size, uint32_t flags)
 {
 	return block_alloc(size, alignment, flags & CACHE_ALLOC_FLAGS);
 }
 
 
 void
-free_etc(void *address, uint32 flags)
+free_etc(void *address, uint32_t flags)
 {
 	block_free(address, flags & CACHE_ALLOC_FLAGS);
 }

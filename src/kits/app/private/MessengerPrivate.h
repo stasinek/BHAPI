@@ -17,14 +17,14 @@ class BMessenger::Private {
 
 		port_id	Port()
 			{ return fMessenger->fPort; }
-		int32 Token()
+		int32_t Token()
 			{ return fMessenger->fHandlerToken; }
 		team_id	Team()
 			{ return fMessenger->fTeam; }
 		bool IsPreferredTarget()
 			{ return fMessenger->fHandlerToken == B_PREFERRED_TOKEN; }
 
-		void SetTo(team_id team, port_id port, int32 token)
+		void SetTo(team_id team, port_id port, int32_t token)
 			{ fMessenger->_SetTo(team, port, token); }
 
 	private:

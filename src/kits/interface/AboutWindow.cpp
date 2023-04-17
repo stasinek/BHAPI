@@ -434,7 +434,7 @@ void BAboutWindow::AddDescription(const char* description)
 }
 
 
-void BAboutWindow::AddCopyright(int32 firstCopyrightYear,
+void BAboutWindow::AddCopyright(int32_t firstCopyrightYear,
 	const char* copyrightHolder, const char** extraCopyrights)
 {
 	BString copyright(B_UTF8_COPYRIGHT " %years% %holder%");
@@ -464,7 +464,7 @@ void BAboutWindow::AddCopyright(int32 firstCopyrightYear,
 	// Add extra copyright strings
 	if (extraCopyrights != NULL) {
 		// Add optional extra copyright information
-		for (int32 i = 0; extraCopyrights[i]; i++)
+		for (int32_t i = 0; extraCopyrights[i]; i++)
 			text << "\n" << B_UTF8_COPYRIGHT << " " << extraCopyrights[i];
 	}
 
@@ -534,7 +534,7 @@ void BAboutWindow::AddExtraInfo(const char* extraInfo)
 void BAboutWindow::AddText(const char* header, const char** contents)
 {
 	BTextView* infoView = fAboutView->InfoView();
-	int32 textLength = infoView->TextLength();
+	int32_t textLength = infoView->TextLength();
 	BString text("");
 
 	if (textLength > 0) {
@@ -550,7 +550,7 @@ void BAboutWindow::AddText(const char* header, const char** contents)
 
 	if (contents != NULL) {
 		text << "\n";
-		for (int32 i = 0; contents[i]; i++)
+		for (int32_t i = 0; contents[i]; i++)
 			text << indent << contents[i] << "\n";
 	}
 

@@ -10,19 +10,19 @@
 #include <ByteOrder.h>
 
 
-typedef uint32 Elf32_Addr;
+typedef uint32_t Elf32_Addr;
 typedef uint16 Elf32_Half;
-typedef uint32 Elf32_Off;
-typedef int32 Elf32_Sword;
-typedef uint32 Elf32_Word;
+typedef uint32_t Elf32_Off;
+typedef int32_t Elf32_Sword;
+typedef uint32_t Elf32_Word;
 
 typedef Elf32_Half Elf32_Versym;
 
 typedef uint64 Elf64_Addr;
 typedef uint64 Elf64_Off;
 typedef uint16 Elf64_Half;
-typedef uint32 Elf64_Word;
-typedef int32 Elf64_Sword;
+typedef uint32_t Elf64_Word;
+typedef int32_t Elf64_Sword;
 typedef uint64 Elf64_Xword;
 typedef int64 Elf64_Sxword;
 

@@ -89,7 +89,7 @@ typedef struct bhapi::beos_sem_info {
 	int64			acquiringCount;
 	bool			closed;
 
-	uint32			refCount;
+	uint32_t			refCount;
 	sem_id			Locker;
 	sem_id			Cond;
 } bhapi::beos_sem_info;
@@ -154,7 +154,7 @@ public:
 
 		while(true)
 		{
-			int32 msgCode = 0;
+			int32_t msgCode = 0;
 			char buf = 0;
 			ssize_t readBytes = read_port(iLocker, &msgCode, &buf, 1);
 			if(readBytes < 1) continue;
@@ -435,7 +435,7 @@ BHAPI_IMPEXP status_t bhapi::delete_sem(void *data)
 		return B_ERROR;
 	}
 
-	uint32 count = --(sem->semInfo->refCount);
+	uint32_t count = --(sem->semInfo->refCount);
 
 	team_id curTeam = __bhapi_get_current_beos_team_id();
 
@@ -492,7 +492,7 @@ BHAPI_IMPEXP status_t bhapi::delete_sem_etc(void *data, bool no_clone)
 		return B_ERROR;
 	}
 
-	uint32 count = --(sem->semInfo->refCount);
+	uint32_t count = --(sem->semInfo->refCount);
 
 	team_id curTeam = __bhapi_get_current_beos_team_id();
 
@@ -571,7 +571,7 @@ BHAPI_IMPEXP status_t bhapi::close_sem(void *data)
 }
 
 
-BHAPI_IMPEXP status_t bhapi::acquire_sem_etc(void *data,  int64 count,  uint32 flags, bigtime_t microseconds_timeout)
+BHAPI_IMPEXP status_t bhapi::acquire_sem_etc(void *data,  int64 count,  uint32_t flags, bigtime_t microseconds_timeout)
 {
 	bhapi::beos_sem_t *sem = (bhapi::beos_sem_t*)data;
 	if(!sem) return B_BAD_VALUE;
@@ -688,7 +688,7 @@ BHAPI_IMPEXP status_t bhapi::acquire_sem(void *data)
 }
 
 
-BHAPI_IMPEXP status_t bhapi::release_sem_etc(void *data,  int64 count,  uint32 flags)
+BHAPI_IMPEXP status_t bhapi::release_sem_etc(void *data,  int64 count,  uint32_t flags)
 {
 	bhapi::beos_sem_t *sem = (bhapi::beos_sem_t*)data;
 	if(!sem || count < B_INT64_CONSTANT(0)) return B_BAD_VALUE;

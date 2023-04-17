@@ -59,8 +59,8 @@ CatalogAddOnInfo::CatalogAddOnInfo(const BString& name, const BString& path,
 
 CatalogAddOnInfo::~CatalogAddOnInfo()
 {
-	int32 count = fLoadedCatalogs.CountItems();
-	for (int32 i = 0; i < count; ++i) {
+	int32_t count = fLoadedCatalogs.CountItems();
+	for (int32_t i = 0; i < count; ++i) {
 		BCatalogData* cat
 			= static_cast<BCatalogData*>(fLoadedCatalogs.ItemAt(i));
 		delete cat;
@@ -333,14 +333,14 @@ status_t LocaleRosterData::_InitializeCatalogAddOns()
 	BDirectory addOnFolder;
 	char buf[4096];
 	status_t err;
-	for (int32 f = 0; f < folders.CountStrings(); f++) {
+	for (int32_t f = 0; f < folders.CountStrings(); f++) {
 		BString addOnFolderName = folders.StringAt(f);
 		err = addOnFolder.SetTo(addOnFolderName.String());
 		if (err != B_OK)
 			continue;
 
 		// scan through all the folder's entries for catalog add-ons:
-		int32 count;
+		int32_t count;
 		int8 priority;
 		entry_ref eref;
 		BNode node;
@@ -412,8 +412,8 @@ void LocaleRosterData::_CleanupCatalogAddOns()
 	if (!lock.IsLocked())
 		return;
 
-	int32 count = fCatalogAddOnInfos.CountItems();
-	for (int32 i = 0; i<count; ++i) {
+	int32_t count = fCatalogAddOnInfos.CountItems();
+	for (int32_t i = 0; i<count; ++i) {
 		CatalogAddOnInfo* info
 			= static_cast<CatalogAddOnInfo*>(fCatalogAddOnInfos.ItemAt(i));
 		delete info;

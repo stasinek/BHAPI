@@ -61,9 +61,9 @@ private:
 }	// namespace BPrivate
 
 
-const uint32 kSettingsViewChanged = 'Svch';
-const uint32 kDefaultsButtonPressed = 'Apbp';
-const uint32 kRevertButtonPressed = 'Rebp';
+const uint32_t kSettingsViewChanged = 'Svch';
+const uint32_t kDefaultsButtonPressed = 'Apbp';
+const uint32_t kRevertButtonPressed = 'Rebp';
 
 
 #undef B_TRANSLATION_CONTEXT
@@ -175,9 +175,9 @@ void TrackerSettingsWindow::MessageReceived(BMessage* message)
 void TrackerSettingsWindow::Show()
 {
 	if (Lock()) {
-		int32 itemCount = fSettingsTypeListView->CountItems();
+		int32_t itemCount = fSettingsTypeListView->CountItems();
 
-		for (int32 i = 0; i < itemCount; i++) {
+		for (int32_t i = 0; i < itemCount; i++) {
 			_ViewAt(i)->RecordRevertSettings();
 			_ViewAt(i)->ShowCurrentSettings();
 		}
@@ -205,7 +205,7 @@ void TrackerSettingsWindow::ShowPage(SettingsPage page)
 
 
 SettingsView*
-TrackerSettingsWindow::_ViewAt(int32 i)
+TrackerSettingsWindow::_ViewAt(int32_t i)
 {
 	if (!Lock())
 		return NULL;
@@ -230,12 +230,12 @@ void TrackerSettingsWindow::_HandleChangedContents()
 
 void TrackerSettingsWindow::_UpdateButtons()
 {
-	int32 itemCount = fSettingsTypeListView->CountItems();
+	int32_t itemCount = fSettingsTypeListView->CountItems();
 
 	bool defaultable = false;
 	bool revertable = false;
 
-	for (int32 i = 0; i < itemCount; i++) {
+	for (int32_t i = 0; i < itemCount; i++) {
 		defaultable |= _ViewAt(i)->IsDefaultable();
 		revertable |= _ViewAt(i)->IsRevertable();
 	}
@@ -247,9 +247,9 @@ void TrackerSettingsWindow::_UpdateButtons()
 
 void TrackerSettingsWindow::_HandlePressedDefaultsButton()
 {
-	int32 itemCount = fSettingsTypeListView->CountItems();
+	int32_t itemCount = fSettingsTypeListView->CountItems();
 
-	for (int32 i = 0; i < itemCount; i++) {
+	for (int32_t i = 0; i < itemCount; i++) {
 		if (_ViewAt(i)->IsDefaultable())
 			_ViewAt(i)->SetDefaults();
 	}
@@ -260,9 +260,9 @@ void TrackerSettingsWindow::_HandlePressedDefaultsButton()
 
 void TrackerSettingsWindow::_HandlePressedRevertButton()
 {
-	int32 itemCount = fSettingsTypeListView->CountItems();
+	int32_t itemCount = fSettingsTypeListView->CountItems();
 
-	for (int32 i = 0; i < itemCount; i++) {
+	for (int32_t i = 0; i < itemCount; i++) {
 		if (_ViewAt(i)->IsRevertable())
 			_ViewAt(i)->Revert();
 	}
@@ -273,7 +273,7 @@ void TrackerSettingsWindow::_HandlePressedRevertButton()
 
 void TrackerSettingsWindow::_HandleChangedSettingsView()
 {
-	int32 currentSelection = fSettingsTypeListView->CurrentSelection();
+	int32_t currentSelection = fSettingsTypeListView->CurrentSelection();
 	if (currentSelection < 0)
 		return;
 

@@ -35,14 +35,14 @@ public:
                                     const char** _symbolName,
                                     size_t *_symbolNameLen,
                                     bool *_exactMatch) const = 0;
-    virtual	status_t			NextSymbol(int32& iterator,
+    virtual	status_t			NextSymbol(int32_t& iterator,
                                     const char** _symbolName,
                                     size_t* _symbolNameLen,
                                     addr_t* _symbolAddress, size_t* _symbolSize,
-                                    int32* _symbolType) const = 0;
-    virtual	status_t			GetSymbol(const char* name, int32 symbolType,
+                                    int32_t* _symbolType) const = 0;
+    virtual	status_t			GetSymbol(const char* name, int32_t symbolType,
                                     void** _symbolLocation, size_t* _symbolSize,
-                                    int32* _symbolType) const;
+                                    int32_t* _symbolType) const;
 
 protected:
             bhapi::image_info			fInfo;
@@ -58,11 +58,11 @@ public:
                                     const char** _symbolName,
                                     size_t *_symbolNameLen,
                                     bool *_exactMatch) const;
-    virtual	status_t			NextSymbol(int32& iterator,
+    virtual	status_t			NextSymbol(int32_t& iterator,
                                     const char** _symbolName,
                                     size_t* _symbolNameLen,
                                     addr_t* _symbolAddress, size_t* _symbolSize,
-                                    int32* _symbolType) const;
+                                    int32_t* _symbolType) const;
 
 protected:
             size_t				_SymbolNameLen(const char* symbolName) const;
@@ -71,7 +71,7 @@ protected:
             addr_t				fLoadDelta;
             elf_sym*			fSymbolTable;
             char*				fStringTable;
-            int32				fSymbolCount;
+            int32_t				fSymbolCount;
             size_t				fStringTableSize;
 };
 

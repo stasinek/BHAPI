@@ -31,7 +31,7 @@ struct PPCVMTranslationMap460 : PPCVMTranslationMap {
 
 	virtual	status_t			Map(addr_t virtualAddress,
 									phys_addr_t physicalAddress,
-									uint32 attributes, uint32 memoryType,
+									uint32_t attributes, uint32_t memoryType,
 									vm_page_reservation* reservation);
 	virtual	status_t			Unmap(addr_t start, addr_t end);
 
@@ -51,16 +51,16 @@ struct PPCVMTranslationMap460 : PPCVMTranslationMap {
 
 	virtual	status_t			Query(addr_t virtualAddress,
 									phys_addr_t* _physicalAddress,
-									uint32* _flags);
+									uint32_t* _flags);
 	virtual	status_t			QueryInterrupt(addr_t virtualAddress,
 									phys_addr_t* _physicalAddress,
-									uint32* _flags);
+									uint32_t* _flags);
 
 	virtual	status_t			Protect(addr_t base, addr_t top,
-									uint32 attributes, uint32 memoryType);
+									uint32_t attributes, uint32_t memoryType);
 
 	virtual	status_t			ClearFlags(addr_t virtualAddress,
-									uint32 flags);
+									uint32_t flags);
 
 	virtual	bool				ClearAccessedAndModified(
 									VMArea* area, addr_t address,

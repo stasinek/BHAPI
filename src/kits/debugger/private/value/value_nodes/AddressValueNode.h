@@ -30,8 +30,8 @@ public:
 			// locking required
 
 	virtual	status_t			CreateChildren(TeamTypeInformation* info);
-	virtual	int32				CountChildren() const;
-	virtual	ValueNodeChild*		ChildAt(int32 index) const;
+	virtual	int32_t				CountChildren() const;
+	virtual	ValueNodeChild*		ChildAt(int32_t index) const;
 
 private:
 			AddressType*		fType;

@@ -30,7 +30,7 @@ public:
 
 	// Readers and Decoders
 			status_t			CreateReader(Reader** reader,
-									int32* streamCount, media_file_format* mff,
+									int32_t* streamCount, media_file_format* mff,
 									BDataIO* source);
 			void				DestroyReader(Reader* reader);
 
@@ -50,7 +50,7 @@ public:
 
 			status_t			CreateEncoder(Encoder** encoder,
 									const media_codec_info* codecInfo,
-									uint32 flags);
+									uint32_t flags);
 			void				DestroyEncoder(Encoder* encoder);
 	
 private:

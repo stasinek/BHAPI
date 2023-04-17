@@ -48,10 +48,10 @@ public:
 
 			status_t			FindPath(const char* architecture,
 									path_base_directory baseDirectory,
-									const char* subPath, uint32 flags,
+									const char* subPath, uint32_t flags,
 									BPath& _path);
 			status_t			FindPath(path_base_directory baseDirectory,
-									const char* subPath, uint32 flags,
+									const char* subPath, uint32_t flags,
 									BPath& _path);
 			status_t			FindPath(path_base_directory baseDirectory,
 									const char* subPath, BPath& _path);
@@ -60,10 +60,10 @@ public:
 
 	static	status_t			FindPaths(const char* architecture,
 									path_base_directory baseDirectory,
-									const char* subPath, uint32 flags,
+									const char* subPath, uint32_t flags,
 							 		BStringList& _paths);
 	static	status_t			FindPaths(path_base_directory baseDirectory,
-									const char* subPath, uint32 flags,
+									const char* subPath, uint32_t flags,
 							 		BStringList& _paths);
 	static	status_t			FindPaths(path_base_directory baseDirectory,
 									const char* subPath, BStringList& _paths);

@@ -44,7 +44,7 @@ get_option_from_kernel_args(kernel_args* args, const char* settingsName,
 	// we might not have a working heap yet. So we do very limited parsing
 	// ourselves.
 	const char* settingsEnd = settings + strlen(settings);
-	int32 parameterLevel = 0;
+	int32_t parameterLevel = 0;
 
 	while (*settings != '\0') {
 		// find end of line

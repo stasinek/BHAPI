@@ -55,8 +55,8 @@ public:
 									{ return fChildrenCreated; }
 
 	virtual	status_t			CreateChildren(TeamTypeInformation* info) = 0;
-	virtual	int32				CountChildren() const = 0;
-	virtual	ValueNodeChild*		ChildAt(int32 index) const = 0;
+	virtual	int32_t				CountChildren() const = 0;
+	virtual	ValueNodeChild*		ChildAt(int32_t index) const = 0;
 
 	// optional virtual hooks for container type value nodes such as
 	// arrays that may contain a variable (and potentially quite large)
@@ -71,9 +71,9 @@ public:
 	virtual	void				ClearChildren();
 	virtual	status_t			CreateChildrenInRange(
 									TeamTypeInformation* info,
-									int32 lowIndex, int32 highIndex);
-	virtual	status_t			SupportedChildRange(int32& lowIndex,
-									int32& highIndex) const;
+									int32_t lowIndex, int32_t highIndex);
+	virtual	status_t			SupportedChildRange(int32_t& lowIndex,
+									int32_t& highIndex) const;
 
 			status_t			LocationAndValueResolutionState() const
 									{ return fLocationResolutionState; }
@@ -138,8 +138,8 @@ public:
 								ChildlessValueNode(ValueNodeChild* nodeChild);
 
 	virtual	status_t			CreateChildren(TeamTypeInformation* info);
-	virtual	int32				CountChildren() const;
-	virtual	ValueNodeChild*		ChildAt(int32 index) const;
+	virtual	int32_t				CountChildren() const;
+	virtual	ValueNodeChild*		ChildAt(int32_t index) const;
 };
 
 

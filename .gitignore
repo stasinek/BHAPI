@@ -54,3 +54,6 @@
 *.#*
 debug/*
 realese/*
+Desktop*/*
+build-*/*
+Makefile.win

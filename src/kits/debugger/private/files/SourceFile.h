@@ -28,9 +28,9 @@ public:
 
 			status_t			Init(const char* path);
 
-			int32				CountLines() const;
-			const char*			LineAt(int32 index) const;
-			int32				LineLengthAt(int32 index) const;
+			int32_t				CountLines() const;
+			const char*			LineAt(int32_t index) const;
+			int32_t				LineLengthAt(int32_t index) const;
 
 protected:
 	virtual	void				LastReferenceReleased();
@@ -38,8 +38,8 @@ protected:
 private:
 			SourceFileOwner*	fOwner;
 			char*				fFileContent;
-			int32*				fLineOffsets;
-			int32				fLineCount;
+			int32_t*				fLineOffsets;
+			int32_t				fLineCount;
 };
 
 

@@ -127,14 +127,14 @@ public:
 	bool Lock(int* lockable)
 	{
 		*lockable = disable_interrupts();
-		for (int32 i = 0; i < smp_get_num_cpus(); i++)
+		for (int32_t i = 0; i < smp_get_num_cpus(); i++)
 			CPUEntry::GetCPU(i)->LockScheduler();
 		return true;
 	}
 
 	void Unlock(int* lockable)
 	{
-		for (int32 i = 0; i < smp_get_num_cpus(); i++)
+		for (int32_t i = 0; i < smp_get_num_cpus(); i++)
 			CPUEntry::GetCPU(i)->UnlockScheduler();
 		restore_interrupts(*lockable);
 	}

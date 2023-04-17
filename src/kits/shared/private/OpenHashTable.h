@@ -63,23 +63,23 @@ class ElementVector {
 	// element vector for OpenHashTable needs to implement this
 	// interface
 public:
-	Element &At(int32 index);
+	Element &At(int32_t index);
 	Element *Add();
-	int32 IndexOf(const Element &) const;
-	void Remove(int32 index);
+	int32_t IndexOf(const Element &) const;
+	void Remove(int32_t index);
 };
 
 class OpenHashElement {
 public:
-	uint32 Hash() const;
+	uint32_t Hash() const;
 	bool operator==(const OpenHashElement &) const;
 	void Adopt(OpenHashElement &);
 		// low overhead copy, original element is in undefined state
 		// after call (calls Adopt on BString members, etc.)
-	int32 fNext;
+	int32_t fNext;
 };
 
-const uint32 kPrimes [] = {
+const uint32_t kPrimes [] = {
 	509, 1021, 2039, 4093, 8191, 16381, 32749, 65521, 131071, 262139,
 	524287, 1048573, 2097143, 4194301, 8388593, 16777213, 33554393, 67108859,
 	134217689, 268435399, 536870909, 1073741789, 2147483647, 0
@@ -88,7 +88,7 @@ const uint32 kPrimes [] = {
 template <class Element, class ElementVec = ElementVector<Element> >
 class OpenHashTable {
 public:
-	OpenHashTable(int32 minSize, ElementVec *elementVector = 0,
+	OpenHashTable(int32_t minSize, ElementVec *elementVector = 0,
 				  float maxLoadFactor = 0.8);
 		// it is up to the subclass of OpenHashTable to supply
 		// elementVector
@@ -98,8 +98,8 @@ public:
 
 	void SetElementVector(ElementVec *elementVector);
 
-	Element *FindFirst(uint32 elementHash) const;
-	Element *Add(uint32 elementHash);
+	Element *FindFirst(uint32_t elementHash) const;
+	Element *Add(uint32_t elementHash);
 
 	void Remove(Element *element, bool dontRehash = false);
 	void RemoveAll();
@@ -107,24 +107,24 @@ public:
 	// when calling Add, any outstanding element pointer may become
 	// invalid; to deal with this, get the element index and restore
 	// it after the add
-	int32 ElementIndex(const Element *) const;
-	Element *ElementAt(int32 index) const;
+	int32_t ElementIndex(const Element *) const;
+	Element *ElementAt(int32_t index) const;
 
-	int32 ArraySize() const;
-	int32 VectorSize() const;
-	int32 CountElements() const;
+	int32_t ArraySize() const;
+	int32_t VectorSize() const;
+	int32_t CountElements() const;
 
 protected:
-	static int32 OptimalSize(int32 minSize);
+	static int32_t OptimalSize(int32_t minSize);
 
 private:
 	bool _RehashIfNeeded();
 	bool _Rehash();
 
-	int32 fArraySize;
-	int32 fInitialSize;
-	int32 fElementCount;
-	int32 *fHashArray;
+	int32_t fArraySize;
+	int32_t fInitialSize;
+	int32_t fElementCount;
+	int32_t *fHashArray;
 	ElementVec *fElementVector;
 	float fMaxLoadFactor;
 };
@@ -135,31 +135,31 @@ class OpenHashElementArray : public ElementVector<Element> {
 	// deleting is handled by linking deleted elements into a free list
 	// the vector never shrinks
 public:
-	OpenHashElementArray(int32 initialSize);
+	OpenHashElementArray(int32_t initialSize);
 	~OpenHashElementArray();
 
 	bool InitCheck() const;
 
-	Element &At(int32 index);
-	const Element &At(int32 index) const;
+	Element &At(int32_t index);
+	const Element &At(int32_t index) const;
 	Element *Add(const Element &);
 	Element *Add();
-	void Remove(int32 index);
-	int32 IndexOf(const Element &) const;
-	int32 Size() const;
+	void Remove(int32_t index);
+	int32_t IndexOf(const Element &) const;
+	int32_t Size() const;
 
 private:
 	Element *fData;
-	int32 fSize;
-	int32 fNextFree;
-	int32 fNextDeleted;
+	int32_t fSize;
+	int32_t fNextFree;
+	int32_t fNextDeleted;
 };
 
 
 //-----------------------------------
 
 template<class Element, class ElementVec>
-OpenHashTable<Element, ElementVec>::OpenHashTable(int32 minSize,
+OpenHashTable<Element, ElementVec>::OpenHashTable(int32_t minSize,
 	ElementVec *elementVector, float maxLoadFactor)
 	:	fArraySize(OptimalSize(minSize)),
 		fInitialSize(fArraySize),
@@ -171,9 +171,9 @@ OpenHashTable<Element, ElementVec>::OpenHashTable(int32 minSize,
 	if (fMaxLoadFactor < 0.5)
 		fMaxLoadFactor = 0.5;
 	// allocate and init the array
-	fHashArray = (int32*)calloc(fArraySize, sizeof(int32));
+	fHashArray = (int32_t*)calloc(fArraySize, sizeof(int32_t));
 	if (fHashArray) {
-		for (int32 index = 0; index < fArraySize; index++)
+		for (int32_t index = 0; index < fArraySize; index++)
 			fHashArray[index] = -1;
 	}
 }
@@ -192,18 +192,18 @@ bool OpenHashTable<Element, ElementVec>::InitCheck() const
 }
 
 template<class Element, class ElementVec>
-int32 OpenHashTable<Element, ElementVec>::OptimalSize(int32 minSize)
+int32_t OpenHashTable<Element, ElementVec>::OptimalSize(int32_t minSize)
 {
-	for (int32 index = 0; ; index++)
-		if (!kPrimes[index] || kPrimes[index] >= (uint32)minSize)
-			return (int32)kPrimes[index];
+	for (int32_t index = 0; ; index++)
+		if (!kPrimes[index] || kPrimes[index] >= (uint32_t)minSize)
+			return (int32_t)kPrimes[index];
 
 	return 0;
 }
 
 template<class Element, class ElementVec>
 Element *
-OpenHashTable<Element, ElementVec>::FindFirst(uint32 hash) const
+OpenHashTable<Element, ElementVec>::FindFirst(uint32_t hash) const
 {
 	_OPEN_HASH_TABLE_ASSERT(fElementVector);
 	hash %= fArraySize;
@@ -214,32 +214,32 @@ OpenHashTable<Element, ElementVec>::FindFirst(uint32 hash) const
 }
 
 template<class Element, class ElementVec>
-int32 OpenHashTable<Element, ElementVec>::ElementIndex(const Element *element) const
+int32_t OpenHashTable<Element, ElementVec>::ElementIndex(const Element *element) const
 {
 	return fElementVector->IndexOf(*element);
 }
 
 template<class Element, class ElementVec>
 Element *
-OpenHashTable<Element, ElementVec>::ElementAt(int32 index) const
+OpenHashTable<Element, ElementVec>::ElementAt(int32_t index) const
 {
 	return &fElementVector->At(index);
 }
 
 template<class Element, class ElementVec>
-int32 OpenHashTable<Element, ElementVec>::ArraySize() const
+int32_t OpenHashTable<Element, ElementVec>::ArraySize() const
 {
 	return fArraySize;
 }
 
 template<class Element, class ElementVec>
-int32 OpenHashTable<Element, ElementVec>::VectorSize() const
+int32_t OpenHashTable<Element, ElementVec>::VectorSize() const
 {
 	return fElementVector->Size();
 }
 
 template<class Element, class ElementVec>
-int32 OpenHashTable<Element, ElementVec>::CountElements() const
+int32_t OpenHashTable<Element, ElementVec>::CountElements() const
 {
 	return fElementCount;
 }
@@ -247,7 +247,7 @@ int32 OpenHashTable<Element, ElementVec>::CountElements() const
 
 template<class Element, class ElementVec>
 Element *
-OpenHashTable<Element, ElementVec>::Add(uint32 hash)
+OpenHashTable<Element, ElementVec>::Add(uint32_t hash)
 {
 	_OPEN_HASH_TABLE_ASSERT(fElementVector);
 	_RehashIfNeeded();
@@ -266,8 +266,8 @@ void OpenHashTable<Element, ElementVec>::Remove(Element *element, bool dontRehas
 {
 	if (!dontRehash)
 		_RehashIfNeeded();
-	uint32 hash = element->Hash() % fArraySize;
-	int32 next = fHashArray[hash];
+	uint32_t hash = element->Hash() % fArraySize;
+	int32_t next = fHashArray[hash];
 	_OPEN_HASH_TABLE_ASSERT(next >= 0);
 
 	if (&fElementVector->At(next) == element) {
@@ -277,7 +277,7 @@ void OpenHashTable<Element, ElementVec>::Remove(Element *element, bool dontRehas
 		return;
 	}
 
-	for (int32 index = next; index >= 0; ) {
+	for (int32_t index = next; index >= 0; ) {
 		// look for an existing match in table
 		next = fElementVector->At(index).fNext;
 		if (next < 0) {
@@ -298,11 +298,11 @@ void OpenHashTable<Element, ElementVec>::Remove(Element *element, bool dontRehas
 template<class Element, class ElementVec>
 void OpenHashTable<Element, ElementVec>::RemoveAll()
 {
-	for (int32 i = 0; fElementCount > 0 && i < fArraySize; i++) {
-		int32 index = fHashArray[i];
+	for (int32_t i = 0; fElementCount > 0 && i < fArraySize; i++) {
+		int32_t index = fHashArray[i];
 		while (index >= 0) {
 			Element* element = &fElementVector->At(index);
-			int32 next = element->fNext;
+			int32_t next = element->fNext;
 			fElementVector->Remove(index);
 			fElementCount--;
 			index = next;
@@ -338,24 +338,24 @@ template<class Element, class ElementVec>
 bool OpenHashTable<Element, ElementVec>::_Rehash()
 {
 	bool result = true;
-	int32 newSize = int32(fElementCount * 1.73 * fMaxLoadFactor);
+	int32_t newSize = int32_t(fElementCount * 1.73 * fMaxLoadFactor);
 	newSize = (fInitialSize > newSize ? fInitialSize : newSize);
 	if (newSize != fArraySize) {
 		// allocate a new array
-		int32 *newHashArray = (int32*)calloc(newSize, sizeof(int32));
+		int32_t *newHashArray = (int32_t*)calloc(newSize, sizeof(int32_t));
 		if (newHashArray) {
 			// init the new hash array
-			for (int32 index = 0; index < newSize; index++)
+			for (int32_t index = 0; index < newSize; index++)
 				newHashArray[index] = -1;
 			// iterate through all elements and put them into the new
 			// hash array
 			for (int i = 0; i < fArraySize; i++) {
-				int32 index = fHashArray[i];
+				int32_t index = fHashArray[i];
 				while (index >= 0) {
 					// insert the element in the new array
 					Element &element = fElementVector->At(index);
-					int32 next = element.fNext;
-					uint32 hash = (element.Hash() % newSize);
+					int32_t next = element.fNext;
+					uint32_t hash = (element.Hash() % newSize);
 					element.fNext = newHashArray[hash];
 					newHashArray[hash] = index;
 					// next element in old list
@@ -374,7 +374,7 @@ bool OpenHashTable<Element, ElementVec>::_Rehash()
 
 
 template<class Element>
-OpenHashElementArray<Element>::OpenHashElementArray(int32 initialSize)
+OpenHashElementArray<Element>::OpenHashElementArray(int32_t initialSize)
 	:	fSize(initialSize),
 		fNextFree(0),
 		fNextDeleted(-1)
@@ -396,7 +396,7 @@ bool OpenHashElementArray<Element>::InitCheck() const
 
 template<class Element>
 Element &
-OpenHashElementArray<Element>::At(int32 index)
+OpenHashElementArray<Element>::At(int32_t index)
 {
 	_OPEN_HASH_TABLE_ASSERT(index < fSize);
 	return fData[index];
@@ -404,16 +404,16 @@ OpenHashElementArray<Element>::At(int32 index)
 
 template<class Element>
 const Element &
-OpenHashElementArray<Element>::At(int32 index) const
+OpenHashElementArray<Element>::At(int32_t index) const
 {
 	_OPEN_HASH_TABLE_ASSERT(index < fSize);
 	return fData[index];
 }
 
 template<class Element>
-int32 OpenHashElementArray<Element>::IndexOf(const Element &element) const
+int32_t OpenHashElementArray<Element>::IndexOf(const Element &element) const
 {
-	int32 result = &element - fData;
+	int32_t result = &element - fData;
 	if (result < 0 || result > fSize)
 		return -1;
 
@@ -421,7 +421,7 @@ int32 OpenHashElementArray<Element>::IndexOf(const Element &element) const
 }
 
 template<class Element>
-int32 OpenHashElementArray<Element>::Size() const
+int32_t OpenHashElementArray<Element>::Size() const
 {
 	return fSize;
 }
@@ -438,21 +438,21 @@ OpenHashElementArray<Element>::Add(const Element &newElement)
 }
 
 #if DEBUG
-const int32 kGrowChunk = 10;
+const int32_t kGrowChunk = 10;
 #else
-const int32 kGrowChunk = 1024;
+const int32_t kGrowChunk = 1024;
 #endif
 
 template<class Element>
 Element *
 OpenHashElementArray<Element>::Add()
 {
-	int32 index = fNextFree;
+	int32_t index = fNextFree;
 	if (fNextDeleted >= 0) {
 		index = fNextDeleted;
 		fNextDeleted = At(index).fNext;
 	} else if (fNextFree >= fSize - 1) {
-		int32 newSize = fSize + kGrowChunk;
+		int32_t newSize = fSize + kGrowChunk;
 /*
 		Element *newData = (Element *)calloc((size_t)newSize , sizeof(Element));
 		if (!newData)
@@ -480,7 +480,7 @@ OpenHashElementArray<Element>::Add()
 }
 
 template<class Element>
-void OpenHashElementArray<Element>::Remove(int32 index)
+void OpenHashElementArray<Element>::Remove(int32_t index)
 {
 	// delete by chaining empty elements in a single linked
 	// list, reusing the next field

@@ -15,12 +15,12 @@
 
 class CollapsingLayouter::ProxyLayoutInfo : public LayoutInfo {
 public:
-	ProxyLayoutInfo(LayoutInfo* target, int32 elementCount)
+	ProxyLayoutInfo(LayoutInfo* target, int32_t elementCount)
 		:
 		fTarget(target),
 		fElementCount(elementCount)
 	{
-		fElements = new int32[elementCount];
+		fElements = new int32_t[elementCount];
 	}
 
 	~ProxyLayoutInfo()
@@ -35,13 +35,13 @@ public:
 			layouter->Layout(fTarget, size);
 	}
 
-	void 	SetElementPosition(int32 element, int32 position)
+	void 	SetElementPosition(int32_t element, int32_t position)
 	{
 		fElements[element] = position;
 	}
 
 	float
-	ElementLocation(int32 element)
+	ElementLocation(int32_t element)
 	{
 		if (element < 0 || element >= fElementCount || fElements[element] < 0)
 			return 0;
@@ -49,7 +49,7 @@ public:
 	}
 
 	float
-	ElementSize(int32 element)
+	ElementSize(int32_t element)
 	{
 		if (element < 0 || element >= fElementCount || fElements[element] < 0)
 			return 0;
@@ -57,7 +57,7 @@ public:
 	}
 
 	float
-	ElementRangeSize(int32 element, int32 length)
+	ElementRangeSize(int32_t element, int32_t length)
 	{
 		if (element < 0 || element >= fElementCount || fElements[element] < 0)
 			return 0;
@@ -65,14 +65,14 @@ public:
 	}
 
 private:
-	int32*					fElements;
+	int32_t*					fElements;
 	LayoutInfo*				fTarget;
-	int32					fElementCount;
+	int32_t					fElementCount;
 };
 
 
 struct CollapsingLayouter::Constraint {
-	int32 length;
+	int32_t length;
 	float min;
 	float max;
 	float preferred;
@@ -81,7 +81,7 @@ struct CollapsingLayouter::Constraint {
 
 struct CollapsingLayouter::ElementInfo {
 	float weight;
-	int32 position;
+	int32_t position;
 	bool valid;
 	BObjectList<Constraint> constraints;
 
@@ -103,13 +103,13 @@ struct CollapsingLayouter::ElementInfo {
 		weight = other.weight;
 		position = other.position;
 		valid = other.valid;
-		for (int32 i = other.constraints.CountItems() - 1; i >= 0; i--)
+		for (int32_t i = other.constraints.CountItems() - 1; i >= 0; i--)
 			constraints.AddItem(new Constraint(*other.constraints.ItemAt(i)));
 	}
 };
 
 
-CollapsingLayouter::CollapsingLayouter(int32 elementCount, float spacing)
+CollapsingLayouter::CollapsingLayouter(int32_t elementCount, float spacing)
 	:
 	fElementCount(elementCount),
 	fElements(new ElementInfo[elementCount]),
@@ -128,7 +128,7 @@ CollapsingLayouter::~CollapsingLayouter()
 }
 
 
-void CollapsingLayouter::AddConstraints(int32 element, int32 length, float min,
+void CollapsingLayouter::AddConstraints(int32_t element, int32_t length, float min,
 	float max, float preferred)
 {
 	if (min == B_SIZE_UNSET && max == B_SIZE_UNSET)
@@ -145,9 +145,9 @@ void CollapsingLayouter::AddConstraints(int32 element, int32 length, float min,
 	if (length > 1)
 		fHaveMultiElementConstraints = true;
 	
-	int32 validElements = fValidElementCount;
+	int32_t validElements = fValidElementCount;
 
-	for (int32 i = element; i < element + length; i++) {
+	for (int32_t i = element; i < element + length; i++) {
 		if (fElements[i].valid == false) {
 			fElements[i].valid = true;
 			fValidElementCount++;
@@ -166,7 +166,7 @@ void CollapsingLayouter::AddConstraints(int32 element, int32 length, float min,
 }
 
 
-void CollapsingLayouter::SetWeight(int32 element, float weight)
+void CollapsingLayouter::SetWeight(int32_t element, float weight)
 {
 	if (element < 0 || element >= fElementCount)
 		return;
@@ -217,7 +217,7 @@ void CollapsingLayouter::Layout(LayoutInfo* layoutInfo, float size)
 {
 	_ValidateLayouter();
 	ProxyLayoutInfo* info = static_cast<ProxyLayoutInfo*>(layoutInfo);
-	for (int32 i = 0; i < fElementCount; i++) {
+	for (int32_t i = 0; i < fElementCount; i++) {
 		info->SetElementPosition(i, fElements[i].position);
 	}
 
@@ -229,7 +229,7 @@ Layouter*
 CollapsingLayouter::CloneLayouter()
 {
 	CollapsingLayouter* clone = new CollapsingLayouter(fElementCount, fSpacing);
-	for (int32 i = 0; i < fElementCount; i++)
+	for (int32_t i = 0; i < fElementCount; i++)
 		clone->fElements[i].SetTo(fElements[i]);
 
 	clone->fValidElementCount = fValidElementCount;
@@ -275,8 +275,8 @@ CollapsingLayouter::_CreateLayouter()
 
 void CollapsingLayouter::_DoCollapse()
 {
-	int32 shift = 0;
-	for (int32 i = 0; i < fElementCount; i++) {
+	int32_t shift = 0;
+	for (int32_t i = 0; i < fElementCount; i++) {
 		ElementInfo& element = fElements[i];
 		if (!element.valid) {
 			shift++;
@@ -294,15 +294,15 @@ void CollapsingLayouter::_AddConstraints()
 	if (fLayouter == NULL)
 		return;
 
-	for (int32 i = 0; i < fElementCount; i++) {
+	for (int32_t i = 0; i < fElementCount; i++) {
 		ElementInfo& element = fElements[i];
-		for (int32 i = element.constraints.CountItems() - 1; i >= 0; i--)
+		for (int32_t i = element.constraints.CountItems() - 1; i >= 0; i--)
 			_AddConstraints(element.position, element.constraints.ItemAt(i));
 	}
 }
 
 
-void CollapsingLayouter::_AddConstraints(int32 position, const Constraint* c)
+void CollapsingLayouter::_AddConstraints(int32_t position, const Constraint* c)
 {
 	fLayouter->AddConstraints(position, c->length, c->min, c->max,
 		c->preferred);
@@ -314,7 +314,7 @@ void CollapsingLayouter::_SetWeights()
 	if (!fLayouter)
 		return;
 
-	for (int32 i = 0; i < fElementCount; i++) {
+	for (int32_t i = 0; i < fElementCount; i++) {
 		fLayouter->SetWeight(fElements[i].position, fElements[i].weight);
 	}
 }

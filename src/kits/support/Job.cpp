@@ -100,13 +100,13 @@ BJob::ErrorString() const
 }
 
 
-uint32 BJob::TicketNumber() const
+uint32_t BJob::TicketNumber() const
 {
 	return fTicketNumber;
 }
 
 
-void BJob::_SetTicketNumber(uint32 ticketNumber)
+void BJob::_SetTicketNumber(uint32_t ticketNumber)
 {
 	fTicketNumber = ticketNumber;
 }
@@ -194,14 +194,14 @@ bool BJob::IsRunnable() const
 }
 
 
-int32 BJob::CountDependencies() const
+int32_t BJob::CountDependencies() const
 {
 	return fDependencies.CountItems();
 }
 
 
 BJob*
-BJob::DependantJobAt(int32 index) const
+BJob::DependantJobAt(int32_t index) const
 {
 	return fDependantJobs.ItemAt(index);
 }
@@ -215,7 +215,7 @@ void BJob::SetState(BJobState state)
 
 void BJob::NotifyStateListeners()
 {
-	int32 count = fStateListeners.CountItems();
+	int32_t count = fStateListeners.CountItems();
 	for (int i = 0; i < count; ++i) {
 		BJobStateListener* listener = fStateListeners.ItemAt(i);
 		if (listener == NULL)

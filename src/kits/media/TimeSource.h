@@ -47,7 +47,7 @@ public:
 protected:
 								BTimeSource();
 
-	virtual	status_t			HandleMessage(int32 message, const void* data,
+	virtual	status_t			HandleMessage(int32_t message, const void* data,
 									size_t size);
 
 			void				PublishTime(bigtime_t performanceTime,
@@ -68,10 +68,10 @@ protected:
 
 	struct time_source_op_info {
 		time_source_op	op;
-		int32			_reserved1;
+		int32_t			_reserved1;
 		bigtime_t		real_time;
 		bigtime_t		performance_time;
-		int32			_reserved2[6];
+		int32_t			_reserved2[6];
 	};
 
 	virtual	status_t			TimeSourceOp(const time_source_op_info& op,
@@ -119,7 +119,7 @@ private:
 			area_id				_reserved_area;
 			bool				fIsRealtime;
 			bool				_reserved_bool_[3];
-			uint32				_reserved_time_source_[10];
+			uint32_t				_reserved_time_source_[10];
 };
 
 

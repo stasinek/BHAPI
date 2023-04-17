@@ -114,11 +114,11 @@ public:
             media_node			Node();
 
             BParameterGroup*	MakeGroup(const char* name);
-            int32				CountGroups();
-            BParameterGroup*	GroupAt(int32 index);
+            int32_t				CountGroups();
+            BParameterGroup*	GroupAt(int32_t index);
 
-            int32				CountParameters();
-            BParameter*			ParameterAt(int32 index);
+            int32_t				CountParameters();
+            BParameter*			ParameterAt(int32_t index);
 
     // BFlattenable implementation
     virtual	bool				IsFixedSize() const;
@@ -151,7 +151,7 @@ private:
 private:
             BList*				fGroups;
             media_node			fNode;
-            uint32				_reserved[8];
+            uint32_t				_reserved[8];
             BList*				fOldRefs;
             BList*				fNewRefs;
 };
@@ -167,28 +167,28 @@ public:
             BParameterWeb*		Web() const;
             const char*			Name() const;
 
-            void				SetFlags(uint32 flags);
-            uint32				Flags() const;
+            void				SetFlags(uint32_t flags);
+            uint32_t				Flags() const;
 
-            BNullParameter*		MakeNullParameter(int32 id, media_type type,
+            BNullParameter*		MakeNullParameter(int32_t id, media_type type,
                                     const char* name, const char* kind);
-            BContinuousParameter* MakeContinuousParameter(int32 id,
+            BContinuousParameter* MakeContinuousParameter(int32_t id,
                                     media_type type, const char* name,
                                     const char* kind, const char* unit,
                                     float min, float max, float step);
-            BDiscreteParameter*	MakeDiscreteParameter(int32 id, media_type type,
+            BDiscreteParameter*	MakeDiscreteParameter(int32_t id, media_type type,
                                     const char* name, const char* kind);
-            BTextParameter*		MakeTextParameter(int32 id, media_type type,
+            BTextParameter*		MakeTextParameter(int32_t id, media_type type,
                                     const char* name, const char* kind,
                                     size_t maxBytes);
 
             BParameterGroup*	MakeGroup(const char* name);
 
-            int32				CountParameters();
-            BParameter*			ParameterAt(int32 index);
+            int32_t				CountParameters();
+            BParameter*			ParameterAt(int32_t index);
 
-            int32				CountGroups();
-            BParameterGroup*	GroupAt(int32 index);
+            int32_t				CountGroups();
+            BParameterGroup*	GroupAt(int32_t index);
 
     // BFlattenable implementation
     virtual	bool				IsFixedSize() const;
@@ -206,7 +206,7 @@ private:
                                 BParameterGroup(const BParameterGroup& other);
             BParameterGroup&	operator=(const BParameterGroup& other);
 
-            BParameter*			MakeControl(int32 type);
+            BParameter*			MakeControl(int32_t type);
 
     // reserved
     virtual	status_t			_Reserved_ControlGroup_0(void*);
@@ -223,8 +223,8 @@ private:
             BList*				fControls;
             BList*				fGroups;
             char*				fName;
-            uint32				fFlags;
-            uint32				_reserved[7];
+            uint32_t				fFlags;
+            uint32_t				_reserved[7];
 };
 //-------------------------------------------------------------------------------------------------
 
@@ -243,10 +243,10 @@ public:
             const char*			Name() const;
             const char*			Kind() const;
             const char*			Unit() const;
-            int32				ID() const;
+            int32_t				ID() const;
 
-            void				SetFlags(uint32 flags);
-            uint32				Flags() const;
+            void				SetFlags(uint32_t flags);
+            uint32_t				Flags() const;
 
     virtual	type_code			ValueType() = 0;
 
@@ -255,18 +255,18 @@ public:
             status_t			SetValue(const void* buffer, size_t size,
                                     bigtime_t when);
 
-            int32				CountChannels();
-            void				SetChannelCount(int32 count);
+            int32_t				CountChannels();
+            void				SetChannelCount(int32_t count);
 
             media_type			MediaType();
             void				SetMediaType(media_type type);
 
-            int32				CountInputs();
-            BParameter*			InputAt(int32 index);
+            int32_t				CountInputs();
+            BParameter*			InputAt(int32_t index);
             void				AddInput(BParameter* input);
 
-            int32				CountOutputs();
-            BParameter*			OutputAt(int32 index);
+            int32_t				CountOutputs();
+            BParameter*			OutputAt(int32_t index);
             void				AddOutput(BParameter* output);
 
     // BFlattenable implementation
@@ -286,7 +286,7 @@ private:
     friend class BParameterGroup;
     friend class BParameterWeb;
 
-                                BParameter(int32 id, media_type mediaType,
+                                BParameter(int32_t id, media_type mediaType,
                                     media_parameter_type type,
                                     BParameterWeb* web, const char* name,
                                     const char* kind, const char* unit);
@@ -306,7 +306,7 @@ private:
     virtual	void				FixRefs(BList& old, BList& updated);
 
 private:
-            int32				fID;
+            int32_t				fID;
             media_parameter_type fType;
             BParameterWeb*		fWeb;
             BParameterGroup*	fGroup;
@@ -317,10 +317,10 @@ private:
             BList*				fOutputs;
             bool				fSwapDetected;
             media_type			fMediaType;
-            int32				fChannels;
-            uint32				fFlags;
+            int32_t				fChannels;
+            uint32_t				fFlags;
 
-            uint32				_reserved[7];
+            uint32_t				_reserved[7];
 };
 //-------------------------------------------------------------------------------------------------
 
@@ -353,7 +353,7 @@ public:
 private:
     friend class BParameterGroup;
 
-                                BContinuousParameter(int32 id,
+                                BContinuousParameter(int32_t id,
                                     media_type mediaType,
                                     BParameterWeb* web, const char* name,
                                     const char* kind, const char* unit,
@@ -378,7 +378,7 @@ private:
             float				fFactor;
             float				fOffset;
 
-            uint32				_reserved[8];
+            uint32_t				_reserved[8];
 };
 //-------------------------------------------------------------------------------------------------
 
@@ -386,10 +386,10 @@ class BDiscreteParameter : public BParameter {
 public:
     virtual	type_code			ValueType();
 
-            int32				CountItems();
-            const char*			ItemNameAt(int32 index);
-            int32				ItemValueAt(int32 index);
-            status_t			AddItem(int32 value, const char* name);
+            int32_t				CountItems();
+            const char*			ItemNameAt(int32_t index);
+            int32_t				ItemValueAt(int32_t index);
+            status_t			AddItem(int32_t value, const char* name);
 
             status_t			MakeItemsFromInputs();
             status_t			MakeItemsFromOutputs();
@@ -404,7 +404,7 @@ public:
 private:
     friend class BParameterGroup;
 
-                                BDiscreteParameter(int32 id,
+                                BDiscreteParameter(int32_t id,
                                     media_type mediaType,
                                     BParameterWeb* web, const char* name,
                                     const char* kind);
@@ -424,7 +424,7 @@ private:
             BList*				fSelections;
             BList*				fValues;
 
-            uint32				_reserved[8];
+            uint32_t				_reserved[8];
 };
 //-------------------------------------------------------------------------------------------------
 
@@ -442,7 +442,7 @@ public:
 private:
     friend class BParameterGroup;
 
-                                BTextParameter(int32 id,
+                                BTextParameter(int32_t id,
                                     media_type mediaType,
                                     BParameterWeb* web, const char* name,
                                     const char* kind, size_t maxBytes);
@@ -459,9 +459,9 @@ private:
     virtual	status_t			_Reserved_TextParameter_7(void*);
 
 private:
-            uint32				fMaxBytes;
+            uint32_t				fMaxBytes;
 
-            uint32				_reserved[8];
+            uint32_t				_reserved[8];
 };
 //-------------------------------------------------------------------------------------------------
 
@@ -477,7 +477,7 @@ public:
 private:
     friend class BParameterGroup;
 
-                                BNullParameter(int32 id,
+                                BNullParameter(int32_t id,
                                     media_type mediaType,
                                     BParameterWeb* web, const char* name,
                                     const char* kind);
@@ -494,7 +494,7 @@ private:
     virtual	status_t			_Reserved_NullParameter_7(void*);
 
 private:
-            uint32				_reserved[8];
+            uint32_t				_reserved[8];
 };
 //-------------------------------------------------------------------------------------------------
 

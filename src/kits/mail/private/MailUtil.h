@@ -31,12 +31,12 @@ status_t read_read_attr(BNode& node, read_flags& flag);
 // convert_from_utf8 so that they can also convert from UTF-8 to UTF-8 by
 // specifying the MDR_UTF8_CONVERSION constant as the conversion operation.
 
-status_t mail_convert_to_utf8(uint32 srcEncoding, const char *src,
-	int32 *srcLen, char *dst, int32 *dstLen, int32 *state,
+status_t mail_convert_to_utf8(uint32_t srcEncoding, const char *src,
+	int32_t *srcLen, char *dst, int32_t *dstLen, int32_t *state,
 	char substitute = B_SUBSTITUTE);
 
-status_t mail_convert_from_utf8(uint32 dstEncoding, const char *src,
-	int32 *srcLen, char *dst, int32 *dstLen, int32 *state,
+status_t mail_convert_from_utf8(uint32_t dstEncoding, const char *src,
+	int32_t *srcLen, char *dst, int32_t *dstLen, int32_t *state,
 	char substitute = B_SUBSTITUTE);
 
 
@@ -50,7 +50,7 @@ time_t ParseDateWithTimeZone(const char *DateString);
 // Converts a date to a time.  Handles time zones too, unlike parsedate.
 
 ssize_t rfc2047_to_utf8(char **buffer, size_t *bufLen, size_t strLen = 0);
-ssize_t utf8_to_rfc2047(char **bufp, ssize_t length,uint32 charset, char encoding);
+ssize_t utf8_to_rfc2047(char **bufp, ssize_t length,uint32_t charset, char encoding);
 // convert (in place) RFC 2047-style escape sequences ("=?...?.?...?=")
 // in the first strLen characters of *buffer into UTF-8, and return the
 // length of the converted string or an error code less than 0 on error.

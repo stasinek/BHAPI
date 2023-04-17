@@ -46,15 +46,15 @@ private:
 			void				_Finisher();
 			bool				_FinisherWorkPending();
 			off_t				_ComputeRequestOwnerBandwidth(
-									int32 priority) const;
+									int32_t priority) const;
 			bool				_NextActiveRequestOwner(IORequestOwner*& owner,
 									off_t& quantum);
 			bool				_PrepareRequestOperations(IORequest* request,
 									IOOperationList& operations,
-									int32& operationsPrepared);
+									int32_t& operationsPrepared);
 			bool				_PrepareRequestOperations(IORequest* request,
 									IOOperationList& operations,
-									int32& operationsPrepared, off_t quantum,
+									int32_t& operationsPrepared, off_t quantum,
 									off_t& usedBandwidth);
 			void				_SortOperations(IOOperationList& operations,
 									off_t& lastOffset);
@@ -81,12 +81,12 @@ private:
 			IOOperationList		fUnusedOperations;
 			IOOperationList		fCompletedOperations;
 			IORequestOwner*		fAllocatedRequestOwners;
-			int32				fAllocatedRequestOwnerCount;
+			int32_t				fAllocatedRequestOwnerCount;
 			RequestOwnerList	fActiveRequestOwners;
 			RequestOwnerList	fUnusedRequestOwners;
 			RequestOwnerHashTable* fRequestOwners;
 			generic_size_t		fBlockSize;
-			int32				fPendingOperations;
+			int32_t				fPendingOperations;
 			off_t				fIterationBandwidth;
 			off_t				fMinOwnerBandwidth;
 			off_t				fMaxOwnerBandwidth;

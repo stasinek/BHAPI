@@ -29,14 +29,14 @@ enum {
 };
 
 
-uint16	get_attribute_name_classes(uint32 name);
-uint16	get_attribute_form_classes(uint32 form);
-uint8	get_attribute_class(uint32 name, uint32 form);
+uint16	get_attribute_name_classes(uint32_t name);
+uint16	get_attribute_form_classes(uint32_t form);
+uint8	get_attribute_class(uint32_t name, uint32_t form);
 
-const char*	get_attribute_name_name(uint32 name);
-const char*	get_attribute_form_name(uint32 form);
+const char*	get_attribute_name_name(uint32_t name);
+const char*	get_attribute_form_name(uint32_t form);
 
-DebugInfoEntrySetter	get_attribute_name_setter(uint32 name);
+DebugInfoEntrySetter	get_attribute_name_setter(uint32_t name);
 
 
 #endif	// ATTRIBUTE_TABLES_H

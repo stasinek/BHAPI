@@ -49,7 +49,7 @@ using namespace std;
 struct KPartition::ListenerSet : VectorSet<KPartitionListener*> {};
 
 
-int32 KPartition::sNextID = 0;
+int32_t KPartition::sNextID = 0;
 
 
 KPartition::KPartition(partition_id id)
@@ -122,7 +122,7 @@ KPartition::Unregister()
 }
 
 
-int32
+int32_t
 KPartition::CountReferences() const
 {
 	return fReferenceCount;
@@ -437,7 +437,7 @@ KPartition::ContentSize() const
 
 
 void
-KPartition::SetBlockSize(uint32 blockSize)
+KPartition::SetBlockSize(uint32_t blockSize)
 {
 	if (fPartitionData.block_size != blockSize) {
 		fPartitionData.block_size = blockSize;
@@ -446,7 +446,7 @@ KPartition::SetBlockSize(uint32 blockSize)
 }
 
 
-uint32
+uint32_t
 KPartition::BlockSize() const
 {
 	return fPartitionData.block_size;
@@ -454,7 +454,7 @@ KPartition::BlockSize() const
 
 
 void
-KPartition::SetIndex(int32 index)
+KPartition::SetIndex(int32_t index)
 {
 	if (fPartitionData.index != index) {
 		fPartitionData.index = index;
@@ -463,7 +463,7 @@ KPartition::SetIndex(int32 index)
 }
 
 
-int32
+int32_t
 KPartition::Index() const
 {
 	return fPartitionData.index;
@@ -471,7 +471,7 @@ KPartition::Index() const
 
 
 void
-KPartition::SetStatus(uint32 status)
+KPartition::SetStatus(uint32_t status)
 {
 	if (fPartitionData.status != status) {
 		fPartitionData.status = status;
@@ -480,7 +480,7 @@ KPartition::SetStatus(uint32 status)
 }
 
 
-uint32
+uint32_t
 KPartition::Status() const
 {
 	return fPartitionData.status;
@@ -495,7 +495,7 @@ KPartition::IsUninitialized() const
 
 
 void
-KPartition::SetFlags(uint32 flags)
+KPartition::SetFlags(uint32_t flags)
 {
 	if (fPartitionData.flags != flags) {
 		fPartitionData.flags = flags;
@@ -505,7 +505,7 @@ KPartition::SetFlags(uint32 flags)
 
 
 void
-KPartition::AddFlags(uint32 flags)
+KPartition::AddFlags(uint32_t flags)
 {
 	if (~fPartitionData.flags & flags) {
 		fPartitionData.flags |= flags;
@@ -515,7 +515,7 @@ KPartition::AddFlags(uint32 flags)
 
 
 void
-KPartition::ClearFlags(uint32 flags)
+KPartition::ClearFlags(uint32_t flags)
 {
 	if (fPartitionData.flags & flags) {
 		fPartitionData.flags &= ~flags;
@@ -524,7 +524,7 @@ KPartition::ClearFlags(uint32 flags)
 }
 
 
-uint32
+uint32_t
 KPartition::Flags() const
 {
 	return fPartitionData.flags;
@@ -765,7 +765,7 @@ KPartition::MountCookie() const
 
 
 status_t
-KPartition::Mount(uint32 mountFlags, const char* parameters)
+KPartition::Mount(uint32_t mountFlags, const char* parameters)
 {
 	// not implemented
 	return B_ERROR;
@@ -844,10 +844,10 @@ KPartition::Parent() const
 
 
 status_t
-KPartition::AddChild(KPartition* partition, int32 index)
+KPartition::AddChild(KPartition* partition, int32_t index)
 {
 	// check parameters
-	int32 count = fPartitionData.child_count;
+	int32_t count = fPartitionData.child_count;
 	if (index == -1)
 		index = count;
 	if (index < 0 || index > count || !partition)
@@ -883,11 +883,11 @@ KPartition::AddChild(KPartition* partition, int32 index)
 
 
 status_t
-KPartition::CreateChild(partition_id id, int32 index, off_t offset, off_t size,
+KPartition::CreateChild(partition_id id, int32_t index, off_t offset, off_t size,
 	KPartition** _child)
 {
 	// check parameters
-	int32 count = fPartitionData.child_count;
+	int32_t count = fPartitionData.child_count;
 	if (index == -1)
 		index = count;
 	if (index < 0 || index > count)
@@ -914,7 +914,7 @@ KPartition::CreateChild(partition_id id, int32 index, off_t offset, off_t size,
 
 
 bool
-KPartition::RemoveChild(int32 index)
+KPartition::RemoveChild(int32_t index)
 {
 	if (index < 0 || index >= fPartitionData.child_count)
 		return false;
@@ -944,7 +944,7 @@ bool
 KPartition::RemoveChild(KPartition* child)
 {
 	if (child) {
-		int32 index = fChildren.IndexOf(child);
+		int32_t index = fChildren.IndexOf(child);
 		if (index >= 0)
 			return RemoveChild(index);
 	}
@@ -955,8 +955,8 @@ KPartition::RemoveChild(KPartition* child)
 bool
 KPartition::RemoveAllChildren()
 {
-	int32 count = CountChildren();
-	for (int32 i = count - 1; i >= 0; i--) {
+	int32_t count = CountChildren();
+	for (int32_t i = count - 1; i >= 0; i--) {
 		if (!RemoveChild(i))
 			return false;
 	}
@@ -965,25 +965,25 @@ KPartition::RemoveAllChildren()
 
 
 KPartition*
-KPartition::ChildAt(int32 index) const
+KPartition::ChildAt(int32_t index) const
 {
 	return index >= 0 && index < fChildren.Count()
 		? fChildren.ElementAt(index) : NULL;
 }
 
 
-int32
+int32_t
 KPartition::CountChildren() const
 {
 	return fPartitionData.child_count;
 }
 
 
-int32
+int32_t
 KPartition::CountDescendants() const
 {
-	int32 count = 1;
-	for (int32 i = 0; KPartition* child = ChildAt(i); i++)
+	int32_t count = 1;
+	for (int32_t i = 0; KPartition* child = ChildAt(i); i++)
 		count += child->CountDescendants();
 	return count;
 }
@@ -996,7 +996,7 @@ KPartition::VisitEachDescendant(KPartitionVisitor* visitor)
 		return NULL;
 	if (visitor->VisitPre(this))
 		return this;
-	for (int32 i = 0; KPartition* child = ChildAt(i); i++) {
+	for (int32_t i = 0; KPartition* child = ChildAt(i); i++) {
 		if (KPartition* result = child->VisitEachDescendant(visitor))
 			return result;
 	}
@@ -1133,7 +1133,7 @@ KPartition::RemoveListener(KPartitionListener* listener)
 
 
 void
-KPartition::Changed(uint32 flags, uint32 clearFlags)
+KPartition::Changed(uint32_t flags, uint32_t clearFlags)
 {
 	fChangeFlags &= ~clearFlags;
 	fChangeFlags |= flags;
@@ -1144,20 +1144,20 @@ KPartition::Changed(uint32 flags, uint32 clearFlags)
 
 
 void
-KPartition::SetChangeFlags(uint32 flags)
+KPartition::SetChangeFlags(uint32_t flags)
 {
 	fChangeFlags = flags;
 }
 
 
-uint32
+uint32_t
 KPartition::ChangeFlags() const
 {
 	return fChangeFlags;
 }
 
 
-int32
+int32_t
 KPartition::ChangeCounter() const
 {
 	return fChangeCounter;
@@ -1168,7 +1168,7 @@ status_t
 KPartition::UninitializeContents(bool logChanges)
 {
 	if (DiskSystem()) {
-		uint32 flags = B_PARTITION_CHANGED_INITIALIZATION
+		uint32_t flags = B_PARTITION_CHANGED_INITIALIZATION
 			| B_PARTITION_CHANGED_CONTENT_TYPE
 			| B_PARTITION_CHANGED_STATUS
 			| B_PARTITION_CHANGED_FLAGS;
@@ -1241,13 +1241,13 @@ KPartition::UninitializeContents(bool logChanges)
 
 
 void
-KPartition::SetAlgorithmData(uint32 data)
+KPartition::SetAlgorithmData(uint32_t data)
 {
 	fAlgorithmData = data;
 }
 
 
-uint32
+uint32_t
 KPartition::AlgorithmData() const
 {
 	return fAlgorithmData;
@@ -1293,7 +1293,7 @@ KPartition::WriteUserData(UserDataWriter& writer, user_partition_data* data)
 		writer.AddRelocationEntry(&data->content_parameters);
 	}
 	// children
-	for (int32 i = 0; KPartition* child = ChildAt(i); i++) {
+	for (int32_t i = 0; KPartition* child = ChildAt(i); i++) {
 		user_partition_data* childData
 			= writer.AllocatePartitionData(child->CountChildren());
 		if (data) {
@@ -1306,7 +1306,7 @@ KPartition::WriteUserData(UserDataWriter& writer, user_partition_data* data)
 
 
 void
-KPartition::Dump(bool deep, int32 level)
+KPartition::Dump(bool deep, int32_t level)
 {
 	if (level < 0 || level > 255)
 		return;
@@ -1336,7 +1336,7 @@ KPartition::Dump(bool deep, int32 level)
 	OUT("%s  params:            %s\n", prefix, Parameters());
 	OUT("%s  content params:    %s\n", prefix, ContentParameters());
 	if (deep) {
-		for (int32 i = 0; KPartition* child = ChildAt(i); i++)
+		for (int32_t i = 0; KPartition* child = ChildAt(i); i++)
 			child->Dump(true, level + 1);
 	}
 }
@@ -1379,7 +1379,7 @@ KPartition::FireContentSizeChanged(off_t size)
 
 
 void
-KPartition::FireBlockSizeChanged(uint32 blockSize)
+KPartition::FireBlockSizeChanged(uint32_t blockSize)
 {
 	if (fListeners) {
 		for (ListenerSet::Iterator it = fListeners->Begin();
@@ -1391,7 +1391,7 @@ KPartition::FireBlockSizeChanged(uint32 blockSize)
 
 
 void
-KPartition::FireIndexChanged(int32 index)
+KPartition::FireIndexChanged(int32_t index)
 {
 	if (fListeners) {
 		for (ListenerSet::Iterator it = fListeners->Begin();
@@ -1403,7 +1403,7 @@ KPartition::FireIndexChanged(int32 index)
 
 
 void
-KPartition::FireStatusChanged(uint32 status)
+KPartition::FireStatusChanged(uint32_t status)
 {
 	if (fListeners) {
 		for (ListenerSet::Iterator it = fListeners->Begin();
@@ -1415,7 +1415,7 @@ KPartition::FireStatusChanged(uint32 status)
 
 
 void
-KPartition::FireFlagsChanged(uint32 flags)
+KPartition::FireFlagsChanged(uint32_t flags)
 {
 	if (fListeners) {
 		for (ListenerSet::Iterator it = fListeners->Begin();
@@ -1523,7 +1523,7 @@ KPartition::FireContentParametersChanged(const char* parameters)
 
 
 void
-KPartition::FireChildAdded(KPartition* child, int32 index)
+KPartition::FireChildAdded(KPartition* child, int32_t index)
 {
 	if (fListeners) {
 		for (ListenerSet::Iterator it = fListeners->Begin();
@@ -1535,7 +1535,7 @@ KPartition::FireChildAdded(KPartition* child, int32 index)
 
 
 void
-KPartition::FireChildRemoved(KPartition* child, int32 index)
+KPartition::FireChildRemoved(KPartition* child, int32_t index)
 {
 	if (fListeners) {
 		for (ListenerSet::Iterator it = fListeners->Begin();
@@ -1583,15 +1583,15 @@ KPartition::FireContentCookieChanged(void* cookie)
 
 
 void
-KPartition::_UpdateChildIndices(int32 start, int32 end)
+KPartition::_UpdateChildIndices(int32_t start, int32_t end)
 {
 	if (start < end) {
-		for (int32 i = start; i < end; i++) {
+		for (int32_t i = start; i < end; i++) {
 			fChildren.ElementAt(i)->SetIndex(i);
 			fChildren.ElementAt(i)->RepublishDevice();
 		}
 	} else {
-		for (int32 i = start; i > end; i--) {
+		for (int32_t i = start; i > end; i--) {
 			fChildren.ElementAt(i)->SetIndex(i);
 			fChildren.ElementAt(i)->RepublishDevice();
 		}
@@ -1599,7 +1599,7 @@ KPartition::_UpdateChildIndices(int32 start, int32 end)
 }
 
 
-int32
+int32_t
 KPartition::_NextID()
 {
 	return atomic_add(&sNextID, 1);

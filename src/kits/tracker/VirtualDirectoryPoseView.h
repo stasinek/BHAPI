@@ -31,7 +31,7 @@ protected:
 	virtual	void				RestoreState(AttributeStreamNode* node);
 	virtual	void				RestoreState(const BMessage& message);
 	virtual	void				SavePoseLocations(BRect* frameIfDesktop = NULL);
-	virtual	void				SetViewMode(uint32 newMode);
+	virtual	void				SetViewMode(uint32_t newMode);
 	virtual	EntryListBase*		InitDirentIterator(const entry_ref* ref);
 
 	virtual	void				StartWatching();
@@ -49,7 +49,7 @@ private:
 			bool				_NodeStatChanged(const BMessage* message);
 
 			void				_DispatchEntryCreatedOrRemovedMessage(
-									int32 opcode, const node_ref& nodeRef,
+									int32_t opcode, const node_ref& nodeRef,
 									const entry_ref& entryRef,
 									const char* path = NULL,
 									bool dispatchToSuperClass = true);

@@ -32,7 +32,7 @@
 #define BHAPI_STRING_VIEW_LINE_SPACING	0.25f
 
 
-BStringView::BStringView(BRect frame, const char *name, const char *initial_text,  __be_uint32 resizeMode,  __be_uint32 flags)
+BStringView::BStringView(BRect frame, const char *name, const char *initial_text,  __be_uint32_t resizeMode,  __be_uint32_t flags)
     : BView(frame, name, resizeMode, flags), fTextArray(NULL), fAlignment(B_ALIGN_LEFT), fVerticalAlignment(B_ALIGN_TOP)
 {
 	if(initial_text)
@@ -157,7 +157,7 @@ void BStringView::Draw(BRect updateRect)
     SetDrawingMode(B_OP_COPY);
 	SetHighColor(fgColor);
 	SetLowColor(ViewColor());
-	for(__be_int32 i = 0; i < fTextArray->CountItems(); i++)
+	for(__be_int32_t i = 0; i < fTextArray->CountItems(); i++)
 	{
         const BString *str = fTextArray->ItemAt(i);
 		float strWidth = 0;
@@ -207,7 +207,7 @@ void BStringView::GetPreferredSize(float *width, float *height)
 	if(width)
 	{
 		*width = 0;
-		if(fTextArray != NULL) for(__be_int32 i = 0; i < fTextArray->CountItems(); i++)
+		if(fTextArray != NULL) for(__be_int32_t i = 0; i < fTextArray->CountItems(); i++)
 		{
             const BString *str = fTextArray->ItemAt(i);
 			if(str) *width = max_c(*width, (float)ceil((double)font.StringWidth(str->String())));

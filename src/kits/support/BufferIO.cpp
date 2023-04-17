@@ -164,7 +164,7 @@ ssize_t BBufferIO::WriteAt(off_t pos, const void* buffer, size_t size)
 	return size;
 }
 
-off_t BBufferIO::Seek(off_t position, uint32 seekMode)
+off_t BBufferIO::Seek(off_t position, uint32_t seekMode)
 {
 	if (fStream == NULL)
 		return B_NO_INIT;

@@ -43,8 +43,8 @@ typedef struct threadCallback {
 
 
 typedef struct b_beos_thread_t {
-	int32			priority;
-	int32			running;
+	int32_t			priority;
+	int32_t			running;
 	bool			exited;
 	status_t		status;
 	int64			ID;
@@ -163,13 +163,13 @@ public:
 		return priThread;
 	}
 
-	int32 UnrefThread(b_beos_thread_private_t *priThread)
+	int32_t UnrefThread(b_beos_thread_private_t *priThread)
 	{
 		b_beos_thread_t *td = (priThread == NULL ? NULL : priThread->thread);
 		if(td == NULL || td->private_threads.CountItems() == 0 || fList.IndexOf((void*)td) < 0) return -1;
 		if(td->private_threads.RemoveItem((void*)priThread) == false) return -1;
 		delete priThread;
-		int32 count = td->private_threads.CountItems();
+		int32_t count = td->private_threads.CountItems();
 		if(count == 0) fList.RemoveItem((void*)td);
 		return count;
 	}
@@ -177,7 +177,7 @@ public:
 	b_beos_thread_private_t* OpenThread(int64 tid)
 	{
 		if(tid == B_INT64_CONSTANT(0)) return NULL;
-		for(int32 i = 0; i < fList.CountItems(); i++)
+		for(int32_t i = 0; i < fList.CountItems(); i++)
 		{
 			b_beos_thread_t* td = (b_beos_thread_t*)fList.ItemAt(i);
 			if(td->ID == tid) return RefThread(td);
@@ -212,7 +212,7 @@ static void bhapi::unlock_thread_inter(b_beos_thread_t *thread)
 }
 
 
-int32 b_spawn_thread_func(void *data)
+int32_t b_spawn_thread_func(void *data)
 {
 	b_beos_thread_t *thread = (b_beos_thread_t*)data;
 	b_beos_thread_private_t *priThread = NULL;
@@ -237,7 +237,7 @@ int32 b_spawn_thread_func(void *data)
 
 		while(true)
 		{
-			int32 semCount = 0;
+			int32_t semCount = 0;
 			if(get_sem_count(thread->cond, &semCount) != B_OK) break;
 			if(semCount > 0) break;
 			release_sem(thread->cond);
@@ -273,7 +273,7 @@ int32 b_spawn_thread_func(void *data)
 
 	while(true)
 	{
-		int32 semCount = 0;
+		int32_t semCount = 0;
 		if(get_sem_count(thread->cond, &semCount) != B_OK) break;
 		if(semCount > 0) break;
 		release_sem(thread->cond);
@@ -330,7 +330,7 @@ BHAPI_IMPEXP void* bhapi::create_thread_by_current_thread(void)
 
 
 BHAPI_IMPEXP void* bhapi::create_thread(b_thread_func threadFunction,
-				     int32 priority,
+				     int32_t priority,
 				    void *arg,
 				     int64 *threadId)
 {
@@ -403,7 +403,7 @@ BHAPI_IMPEXP status_t bhapi::delete_thread(void *data)
 	bool threadIsCopy = priThread->copy;
 
 	BHAPI_LOCK_THREAD();
-	int32 count = BHAPI_UNREF_THREAD_(priThread);
+	int32_t count = BHAPI_UNREF_THREAD_(priThread);
 	BHAPI_UNLOCK_THREAD();
 
 	if(count < 0) return B_ERROR;
@@ -421,7 +421,7 @@ BHAPI_IMPEXP status_t bhapi::delete_thread(void *data)
 
 			while(true)
 			{
-				int32 semCount = 0;
+				int32_t semCount = 0;
 				if(get_sem_count(thread->cond, &semCount) != B_OK) break;
 				if(semCount > 0) break;
 				release_sem(thread->cond);
@@ -540,13 +540,13 @@ BHAPI_IMPEXP  int64 bhapi::get_thread_id(void *data)
 }
 
 
-BHAPI_IMPEXP  uint32 bhapi::get_thread_run_state(void *data)
+BHAPI_IMPEXP  uint32_t bhapi::get_thread_run_state(void *data)
 {
 	b_beos_thread_private_t *priThread = (b_beos_thread_private_t*)data;
 	b_beos_thread_t *thread = (priThread == NULL ? NULL : priThread->thread);
 	if(thread == NULL) return BHAPI_THREAD_INVALID;
 
-	uint32 retVal = BHAPI_THREAD_INVALID;
+	uint32_t retVal = BHAPI_THREAD_INVALID;
 
 	bhapi::lock_thread_inter(thread);
 
@@ -579,7 +579,7 @@ BHAPI_IMPEXP  uint32 bhapi::get_thread_run_state(void *data)
 }
 
 
-BHAPI_IMPEXP status_t b_set_thread_priority(void *data,  int32 new_priority)
+BHAPI_IMPEXP status_t b_set_thread_priority(void *data,  int32_t new_priority)
 {
 	b_beos_thread_private_t *priThread = (b_beos_thread_private_t*)data;
 	b_beos_thread_t *thread = (priThread == NULL ? NULL : priThread->thread);
@@ -592,7 +592,7 @@ BHAPI_IMPEXP status_t b_set_thread_priority(void *data,  int32 new_priority)
 		bhapi::unlock_thread_inter(thread);
 		return B_ERROR;
 	}
-	int32 old_priority = thread->priority;
+	int32_t old_priority = thread->priority;
 	thread->priority = new_priority;
 	bhapi::unlock_thread_inter(thread);
 
@@ -600,14 +600,14 @@ BHAPI_IMPEXP status_t b_set_thread_priority(void *data,  int32 new_priority)
 }
 
 
-BHAPI_IMPEXP  int32 bhapi::get_thread_priority(void *data)
+BHAPI_IMPEXP  int32_t bhapi::get_thread_priority(void *data)
 {
 	b_beos_thread_private_t *priThread = (b_beos_thread_private_t*)data;
 	b_beos_thread_t *thread = (priThread == NULL ? NULL : priThread->thread);
 	if(thread == NULL) return -1;
 
 	bhapi::lock_thread_inter(thread);
-	int32 priority = thread->priority;
+	int32_t priority = thread->priority;
 	bhapi::unlock_thread_inter(thread);
 
 	return priority;
@@ -672,7 +672,7 @@ BHAPI_IMPEXP void b_exit_thread(status_t status)
 
 	while(true)
 	{
-		int32 semCount = 0;
+		int32_t semCount = 0;
 		if(get_sem_count(thread->cond, &semCount) != B_OK) break;
 		if(semCount > 0) break;
 		release_sem(thread->cond);
@@ -696,7 +696,7 @@ BHAPI_IMPEXP void b_exit_thread(status_t status)
 }
 
 
-BHAPI_IMPEXP status_t bhapi::wait_for_thread_etc(void *data, status_t *thread_return_value,  uint32 flags, bigtime_t microseconds_timeout)
+BHAPI_IMPEXP status_t bhapi::wait_for_thread_etc(void *data, status_t *thread_return_value,  uint32_t flags, bigtime_t microseconds_timeout)
 {
 	b_beos_thread_private_t *priThread = (b_beos_thread_private_t*)data;
 	b_beos_thread_t *thread = (priThread == NULL ? NULL : priThread->thread);

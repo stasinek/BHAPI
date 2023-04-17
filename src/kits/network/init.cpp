@@ -25,7 +25,7 @@ addr_t __gNetAPIEnd;
 
 static void find_own_image()
 {
-	int32 cookie = 0;
+	int32_t cookie = 0;
 	image_info info;
 	while (get_next_image_info(B_CURRENT_TEAM, &cookie, &info) == B_OK) {
 		if (((addr_t)info.text <= (addr_t)find_own_image
@@ -47,8 +47,8 @@ extern "C" void initialize_before()
 
 	// get image of executable
 	image_info info;
-	uint32 cookie = 0;
-	if (get_next_image_info(B_CURRENT_TEAM, (int32*)&cookie, &info) != B_OK)
+	uint32_t cookie = 0;
+	if (get_next_image_info(B_CURRENT_TEAM, (int32_t*)&cookie, &info) != B_OK)
 		return;
 
 	if (get_image_symbol(info.id, "__gHaikuStartupCode", B_SYMBOL_TYPE_DATA,
@@ -62,7 +62,7 @@ extern "C" void initialize_before()
 	// As dependencies to network libraries may be "hidden" in libraries, we
 	// may have to scan not only the executable, but every loaded image.
 	int enable = 0;
-	uint32 crumble;
+	uint32_t crumble;
 	const char *name;
 	do {
 		crumble = 0;
@@ -84,5 +84,5 @@ extern "C" void initialize_before()
 			return;
 		}
 	} while (enable == 0
-		&& get_next_image_info(B_CURRENT_TEAM, (int32*)&cookie, &info) == B_OK);
+		&& get_next_image_info(B_CURRENT_TEAM, (int32_t*)&cookie, &info) == B_OK);
 }

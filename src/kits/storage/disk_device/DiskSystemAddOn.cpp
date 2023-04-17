@@ -12,7 +12,7 @@
 // #pragma mark - BDiskSystemAddOn
 
 
-BDiskSystemAddOn::BDiskSystemAddOn(const char* name, uint32 flags)
+BDiskSystemAddOn::BDiskSystemAddOn(const char* name, uint32_t flags)
 	:
 	fName(name),
 	fFlags(flags)
@@ -31,7 +31,7 @@ const char*  BDiskSystemAddOn::Name() const
 }
 
 
-uint32 BDiskSystemAddOn::Flags() const
+uint32_t BDiskSystemAddOn::Flags() const
 {
 	return fFlags;
 }
@@ -98,14 +98,14 @@ BPartitionHandle::Partition() const
 }
 
 
-uint32 BPartitionHandle::SupportedOperations(uint32 mask)
+uint32_t BPartitionHandle::SupportedOperations(uint32_t mask)
 {
 	return 0;
 }
 
 
-uint32 BPartitionHandle::SupportedChildOperations(const BMutablePartition* child,
-	uint32 mask)
+uint32_t BPartitionHandle::SupportedChildOperations(const BMutablePartition* child,
+	uint32_t mask)
 {
 	return 0;
 }
@@ -119,7 +119,7 @@ bool BPartitionHandle::SupportsInitializingChild(const BMutablePartition* child,
 
 
 status_t BPartitionHandle::GetNextSupportedType(const BMutablePartition* child,
-	int32* cookie, BString* type)
+	int32_t* cookie, BString* type)
 {
 	return B_ENTRY_NOT_FOUND;
 }

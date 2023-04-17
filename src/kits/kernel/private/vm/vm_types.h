@@ -41,7 +41,7 @@ typedef DoublyLinkedListLink<vm_page_mapping> vm_page_mapping_link;
 struct virtual_address_restrictions {
 	void*	address;
 				// base or exact address, depending on address_specification
-	uint32	address_specification;
+	uint32_t	address_specification;
 				// address specification as passed to create_area()
 	size_t	alignment;
 				// address alignment; overridden when
@@ -107,7 +107,7 @@ typedef phys_addr_t page_num_t;
 
 struct VMCacheRef {
 			VMCache*			cache;
-			int32				ref_count;
+			int32_t				ref_count;
 
 								VMCacheRef(VMCache* cache);
 };
@@ -136,7 +136,7 @@ public:
 #endif
 
 #if DEBUG_PAGE_ACCESS
-	int32					accessing_thread;
+	int32_t					accessing_thread;
 #endif
 
 #if VM_PAGE_ALLOCATION_TRACKING_AVAILABLE

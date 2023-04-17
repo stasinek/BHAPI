@@ -39,11 +39,11 @@ BPrinterRoster::~BPrinterRoster()
 }
 
 
-int32 BPrinterRoster::CountPrinters()
+int32_t BPrinterRoster::CountPrinters()
 {
 	Rewind();
 
-	int32 i = 0;
+	int32_t i = 0;
 	BPrinter printer;
 	while (GetNextPrinter(&printer) == B_OK)
 		i++;

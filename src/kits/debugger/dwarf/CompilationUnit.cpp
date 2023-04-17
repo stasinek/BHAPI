@@ -86,20 +86,20 @@ bool CompilationUnit::AddDirectory(const char* directory)
 }
 
 
-int32 CompilationUnit::CountDirectories() const
+int32_t CompilationUnit::CountDirectories() const
 {
 	return fDirectories.CountItems();
 }
 
 
-const char*  CompilationUnit::DirectoryAt(int32 index) const
+const char*  CompilationUnit::DirectoryAt(int32_t index) const
 {
 	BString* directory = fDirectories.ItemAt(index);
 	return directory != NULL ? directory->String() : NULL;
 }
 
 
-bool CompilationUnit::AddFile(const char* fileName, int32 dirIndex)
+bool CompilationUnit::AddFile(const char* fileName, int32_t dirIndex)
 {
 	File* file = new(std::nothrow) File(fileName, DirectoryAt(dirIndex));
 	if (file == NULL || file->fileName.Length() == 0 || !fFiles.AddItem(file)) {
@@ -111,13 +111,13 @@ bool CompilationUnit::AddFile(const char* fileName, int32 dirIndex)
 }
 
 
-int32 CompilationUnit::CountFiles() const
+int32_t CompilationUnit::CountFiles() const
 {
 	return fFiles.CountItems();
 }
 
 
-const char*  CompilationUnit::FileAt(int32 index, const char** _directory) const
+const char*  CompilationUnit::FileAt(int32_t index, const char** _directory) const
 {
 	if (File* file = fFiles.ItemAt(index)) {
 		if (_directory != NULL)

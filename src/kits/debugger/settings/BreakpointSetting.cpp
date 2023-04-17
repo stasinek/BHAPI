@@ -82,11 +82,11 @@ status_t BreakpointSetting::SetTo(const BMessage& archive)
 
 	archive.FindString("sourceFile", &fSourceFile);
 
-	int32 line;
+	int32_t line;
 	if (archive.FindInt32("line", &line) != B_OK)
 		line = -1;
 
-	int32 column;
+	int32_t column;
 	if (archive.FindInt32("column", &column) != B_OK)
 		column = -1;
 

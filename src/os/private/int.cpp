@@ -53,14 +53,14 @@ struct io_handler {
 struct io_vector {
 	struct io_handler	*handler_list;
 	spinlock			vector_lock;
-	int32				enable_count;
+	int32_t				enable_count;
 	bool				no_lock_vector;
 	interrupt_type		type;
 
 	spinlock			load_lock;
 	bigtime_t			last_measure_time;
 	bigtime_t			last_measure_active;
-	int32				load;
+	int32_t				load;
 
 	irq_assignment*		assigned_cpu;
 
@@ -72,7 +72,7 @@ struct io_vector {
 #endif
 };
 
-static int32 sLastCPU;
+static int32_t sLastCPU;
 
 static io_vector sVectors[NUM_IO_VECTORS];
 static bool sAllocatedIOInterruptVectors[NUM_IO_VECTORS];
@@ -254,7 +254,7 @@ update_int_load(int i)
 	if (!try_acquire_spinlock(&sVectors[i].load_lock))
 		return;
 
-	int32 oldLoad = sVectors[i].load;
+	int32_t oldLoad = sVectors[i].load;
 	compute_load(sVectors[i].last_measure_time, sVectors[i].last_measure_active,
 		sVectors[i].load, system_time());
 
@@ -409,11 +409,11 @@ restore_interrupts(cpu_status status)
 
 
 static
-uint32 assign_cpu(void)
+uint32_t assign_cpu(void)
 {
 	const cpu_topology_node* node;
 	do {
-		int32 nextID = atomic_add(&sLastCPU, 1);
+		int32_t nextID = atomic_add(&sLastCPU, 1);
 		node = get_cpu_topology();
 
 		while (node->level != CPU_TOPOLOGY_SMT) {
@@ -467,7 +467,7 @@ install_io_interrupt_handler(long vector, interrupt_handler handler, void *data,
 		&& sVectors[vector].handler_list == NULL
 		&& sVectors[vector].assigned_cpu->cpu == -1) {
 
-		int32 cpuID = assign_cpu();
+		int32_t cpuID = assign_cpu();
 		arch_int_assign_to_cpu(vector, cpuID);
 		sVectors[vector].assigned_cpu->cpu = cpuID;
 
@@ -567,11 +567,11 @@ remove_io_interrupt_handler(long vector, interrupt_handler handler, void *data)
 		&& sVectors[vector].assigned_cpu != NULL
 		&& sVectors[vector].assigned_cpu->handlers_count > 0) {
 
-		int32 oldHandlersCount
+		int32_t oldHandlersCount
 			= atomic_add(&sVectors[vector].assigned_cpu->handlers_count, -1);
 
 		if (oldHandlersCount == 1) {
-			int32 oldCPU;
+			int32_t oldCPU;
 			SpinLocker locker;
 			cpu_ent* cpu;
 
@@ -714,11 +714,11 @@ free_io_interrupt_vectors(long count, long startVector)
 }
 
 
-void assign_io_interrupt_to_cpu(long vector, int32 newCPU)
+void assign_io_interrupt_to_cpu(long vector, int32_t newCPU)
 {
 	ASSERT(sVectors[vector].type == INTERRUPT_TYPE_IRQ);
 
-	int32 oldCPU = sVectors[vector].assigned_cpu->cpu;
+	int32_t oldCPU = sVectors[vector].assigned_cpu->cpu;
 
 	if (newCPU == -1)
 		newCPU = assign_cpu();

@@ -47,7 +47,7 @@ public:
     status_t	GetEntry(BEntry *entry) const;
     status_t	GetNextEntry(BEntry *entry, bool traverse = false);
 	status_t	Rewind();
-     int32		CountEntries();
+     int32_t		CountEntries();
 
 	void		DoForEach(bool (*func)(const char *path));
 	void		DoForEach(bool (*func)(const char *path, void *user_data), void *user_data);

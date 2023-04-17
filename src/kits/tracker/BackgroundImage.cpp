@@ -87,9 +87,9 @@ BackgroundImage::GetBackgroundImage(const BNode* node, bool isDesktop)
 		return NULL;
 
 	BackgroundImage* backgroundImage = NULL;
-	for (int32 index = 0; ; index++) {
+	for (int32_t index = 0; ; index++) {
 		const char* path;
-		uint32 workspaces = B_ALL_WORKSPACES;
+		uint32_t workspaces = B_ALL_WORKSPACES;
 		Mode mode = kTiled;
 		bool textWidgetLabelOutline = false;
 		BPoint offset;
@@ -107,8 +107,8 @@ BackgroundImage::GetBackgroundImage(const BNode* node, bool isDesktop)
 			be_control_look->SetBackgroundInfo(container);
 
 		container.FindInt32(kBackgroundImageInfoWorkspaces, index,
-			(int32*)&workspaces);
-		container.FindInt32(kBackgroundImageInfoMode, index, (int32*)&mode);
+			(int32_t*)&workspaces);
+		container.FindInt32(kBackgroundImageInfoMode, index, (int32_t*)&mode);
 		container.FindBool(kBackgroundImageInfoTextOutline, index,
 			&textWidgetLabelOutline);
 		container.FindPoint(kBackgroundImageInfoOffset, index, &offset);
@@ -127,7 +127,7 @@ BackgroundImage::GetBackgroundImage(const BNode* node, bool isDesktop)
 }
 
 
-BackgroundImage::BackgroundImageInfo::BackgroundImageInfo(uint32 workspaces,
+BackgroundImage::BackgroundImageInfo::BackgroundImageInfo(uint32_t workspaces,
 	BBitmap* bitmap, Mode mode, BPoint offset, bool textWidgetOutline)
 	:
 	fWorkspace(workspaces),
@@ -167,7 +167,7 @@ void BackgroundImage::Add(BackgroundImageInfo* info)
 }
 
 
-void BackgroundImage::Show(BView* view, int32 workspace)
+void BackgroundImage::Show(BView* view, int32_t workspace)
 {
 	fView = view;
 
@@ -198,8 +198,8 @@ void BackgroundImage::Show(BackgroundImageInfo* info, BView* view)
 	BRect bitmapBounds(info->fBitmap->Bounds());
 	BRect destinationBitmapBounds(bitmapBounds);
 
-	uint32 options = 0;
-	uint32 followFlags = B_FOLLOW_TOP | B_FOLLOW_LEFT;
+	uint32_t options = 0;
+	uint32_t followFlags = B_FOLLOW_TOP | B_FOLLOW_LEFT;
 
 	// figure out the display mode and the destination bounds for the bitmap
 	switch (info->fMode) {
@@ -292,20 +292,20 @@ void BackgroundImage::Remove()
 
 
 BackgroundImage::BackgroundImageInfo*
-BackgroundImage::ImageInfoForWorkspace(int32 workspace) const
+BackgroundImage::ImageInfoForWorkspace(int32_t workspace) const
 {
-	uint32 workspaceMask = 1;
+	uint32_t workspaceMask = 1;
 
 	for ( ; workspace; workspace--)
 		workspaceMask *= 2;
 
-	int32 count = fBitmapForWorkspaceList.CountItems();
+	int32_t count = fBitmapForWorkspaceList.CountItems();
 
 	// do a simple lookup for the most likely candidate bitmap -
 	// pick the imageInfo that is only defined for this workspace over one
 	// that supports multiple workspaces
 	BackgroundImageInfo* result = NULL;
-	for (int32 index = 0; index < count; index++) {
+	for (int32_t index = 0; index < count; index++) {
 		BackgroundImageInfo* info = fBitmapForWorkspaceList.ItemAt(index);
 		if (info->fWorkspace == workspaceMask)
 			return info;
@@ -318,7 +318,7 @@ BackgroundImage::ImageInfoForWorkspace(int32 workspace) const
 }
 
 
-void BackgroundImage::WorkspaceActivated(BView* view, int32 workspace, bool state)
+void BackgroundImage::WorkspaceActivated(BView* view, int32_t workspace, bool state)
 {
 	if (!fIsDesktop) {
 		// we only care for desktop bitmaps

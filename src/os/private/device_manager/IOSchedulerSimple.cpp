@@ -169,7 +169,7 @@ IOSchedulerSimple::Init(const char* name)
 	if (fAllocatedRequestOwners == NULL)
 		return B_NO_MEMORY;
 
-	for (int32 i = 0; i < fAllocatedRequestOwnerCount; i++) {
+	for (int32_t i = 0; i < fAllocatedRequestOwnerCount; i++) {
 		IORequestOwner& owner = fAllocatedRequestOwners[i];
 		owner.team = -1;
 		owner.thread = -1;
@@ -256,7 +256,7 @@ IOSchedulerSimple::ScheduleRequest(IORequest* request)
 	request->SetOwner(owner);
 	owner->requests.Add(request);
 
-	int32 priority = thread_get_io_priority(request->ThreadID());
+	int32_t priority = thread_get_io_priority(request->ThreadID());
 	if (priority >= 0)
 		owner->priority = priority;
 //dprintf("  request %p -> owner %p (thread %ld, active %d)\n", request, owner, owner->thread, wasActive);
@@ -415,7 +415,7 @@ IOSchedulerSimple::_FinisherWorkPending()
 
 bool
 IOSchedulerSimple::_PrepareRequestOperations(IORequest* request,
-	IOOperationList& operations, int32& operationsPrepared, off_t quantum,
+	IOOperationList& operations, int32_t& operationsPrepared, off_t quantum,
 	off_t& usedBandwidth)
 {
 //dprintf("IOSchedulerSimple::_PrepareRequestOperations(%p)\n", request);
@@ -482,7 +482,7 @@ IOSchedulerSimple::_PrepareRequestOperations(IORequest* request,
 
 
 off_t
-IOSchedulerSimple::_ComputeRequestOwnerBandwidth(int32 priority) const
+IOSchedulerSimple::_ComputeRequestOwnerBandwidth(int32_t priority) const
 {
 // TODO: Use a priority dependent quantum!
 	return fMinOwnerBandwidth;
@@ -549,7 +549,7 @@ IOSchedulerSimple::_SortOperations(IOOperationList& operations,
 {
 // TODO: _Scheduler() could directly add the operations to the array.
 	// move operations to an array and sort it
-	int32 count = 0;
+	int32_t count = 0;
 	while (IOOperation* operation = operations.RemoveHead())
 		fOperationArray[count++] = operation;
 
@@ -558,7 +558,7 @@ IOSchedulerSimple::_SortOperations(IOOperationList& operations,
 	// move the sorted operations to a temporary list we can work with
 //dprintf("operations after sorting:\n");
 	IOOperationList sortedOperations;
-	for (int32 i = 0; i < count; i++)
+	for (int32_t i = 0; i < count; i++)
 //{
 //dprintf("  %3ld: %p: offset: %lld, length: %lu\n", i, fOperationArray[i], fOperationArray[i]->Offset(), fOperationArray[i]->Length());
 		sortedOperations.Add(fOperationArray[i]);
@@ -606,7 +606,7 @@ IOSchedulerSimple::_Scheduler()
 		MutexLocker locker(fLock);
 
 		IOOperationList operations;
-		int32 operationCount = 0;
+		int32_t operationCount = 0;
 		bool resourcesAvailable = true;
 		off_t iterationBandwidth = fIterationBandwidth;
 
@@ -695,7 +695,7 @@ panic("no more requests for owner %p (thread %" B_PRId32 ")", owner, owner->thre
 
 		// execute the operations
 #ifdef TRACE_IO_SCHEDULER
-		int32 i = 0;
+		int32_t i = 0;
 #endif
 		while (IOOperation* operation = operations.RemoveHead()) {
 			TRACE("IOSchedulerSimple::_Scheduler(): calling callback for "

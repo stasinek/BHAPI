@@ -29,13 +29,13 @@ protected:
 	virtual	void				RedoSelf(BClipboard* clipboard);
 	
 			BTextView*			fTextView;
-			int32				fStart;
-			int32				fEnd;
+			int32_t				fStart;
+			int32_t				fEnd;
 
 			char*				fTextData;
-			int32				fTextLength;
+			int32_t				fTextLength;
 			text_run_array*		fRunArray;
-			int32				fRunArrayLength;
+			int32_t				fRunArrayLength;
 
 			bool				fRedo;
 
@@ -59,9 +59,9 @@ protected:
 class BTextView::PasteUndoBuffer : public BTextView::UndoBuffer {
 public:
 								PasteUndoBuffer(BTextView* textView,
-									const char* text, int32 textLength,
+									const char* text, int32_t textLength,
 									text_run_array* runArray,
-									int32 runArrayLen);
+									int32_t runArrayLen);
 	virtual						~PasteUndoBuffer();
 
 protected:
@@ -70,7 +70,7 @@ protected:
 
 private:
 			char*				fPasteText;
-			int32				fPasteTextLength;
+			int32_t				fPasteTextLength;
 			text_run_array*		fPasteRunArray;
 };
 
@@ -90,9 +90,9 @@ protected:
 class BTextView::DropUndoBuffer : public BTextView::UndoBuffer {
 public:
 								DropUndoBuffer(BTextView* textView,
-									char const* text, int32 textLength,
+									char const* text, int32_t textLength,
 									text_run_array* runArray,
-									int32 runArrayLength, int32 location,
+									int32_t runArrayLength, int32_t location,
 									bool internalDrop);
 	virtual						~DropUndoBuffer();
 
@@ -102,10 +102,10 @@ protected:
 
 private:
 			char*				fDropText;
-			int32				fDropTextLength;
+			int32_t				fDropTextLength;
 			text_run_array*		fDropRunArray;
 	
-			int32				fDropLocation;
+			int32_t				fDropLocation;
 			bool				fInternalDrop;
 };
 
@@ -116,7 +116,7 @@ public:
 								TypingUndoBuffer(BTextView* textView);
 	virtual						~TypingUndoBuffer();
 
-			void				InputCharacter(int32 length);
+			void				InputCharacter(int32_t length);
 			void				BackwardErase();
 			void				ForwardErase();
 
@@ -128,9 +128,9 @@ private:
 			void				_Reset();
 	
 			char*				fTypedText;
-			int32				fTypedStart;
-			int32				fTypedEnd;
-			int32				fUndone;
+			int32_t				fTypedStart;
+			int32_t				fTypedEnd;
+			int32_t				fUndone;
 };
 
 #endif //__UNDOBUFFER_H

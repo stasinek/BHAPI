@@ -114,7 +114,7 @@ FT_BEGIN_HEADER
     union
     {
       char*          atom;
-      long           int32;
+      long           int32_t;
       unsigned long  card32;
 
     } value;             /* Value of the property.  */

@@ -96,7 +96,7 @@ status_t BEventStream::SeekToTime(BMediaChannel *channel,
 
 
 BMediaRenderer::BMediaRenderer(const char *name,
-							   int32 priority)
+							   int32_t priority)
 {
 	UNIMPLEMENTED();
 }
@@ -233,7 +233,7 @@ void BMediaRenderer::StreamChangedReceived()
  *************************************************************/
 
 
-int32 BMediaRenderer::_LoopThread(void *arg)
+int32_t BMediaRenderer::_LoopThread(void *arg)
 {
 	UNIMPLEMENTED();
 
@@ -412,7 +412,7 @@ void BTransport::SeekToTime(mk_time)
 
 
 BMediaChannel *
-BTransport::GetChannel(int32 selector)
+BTransport::GetChannel(int32_t selector)
 {
 	UNIMPLEMENTED();
 	return NULL;
@@ -527,7 +527,7 @@ bool BTimeBase::IsAbsolute()
  * private BTimeBase
  *************************************************************/
 
-int32 BTimeBase::_SnoozeThread(void *arg)
+int32_t BTimeBase::_SnoozeThread(void *arg)
 {
 	UNIMPLEMENTED();
 

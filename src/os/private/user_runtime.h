@@ -23,7 +23,7 @@ struct user_space_program_args {
 	char	program_name[B_OS_NAME_LENGTH];
 	char	program_path[B_PATH_NAME_LENGTH];
 	port_id	error_port;
-	uint32	error_token;
+	uint32_t	error_token;
 	int		arg_count;
 	int		env_count;
 	char	**args;

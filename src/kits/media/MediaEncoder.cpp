@@ -91,7 +91,7 @@ status_t BMediaEncoder::SetEncodeParameters(encode_parameters *parameters)
  * protected BMediaEncoder
  *************************************************************/
 
-/* virtual */ status_t BMediaEncoder::AddTrackInfo(uint32 code, const char *data, size_t size)
+/* virtual */ status_t BMediaEncoder::AddTrackInfo(uint32_t code, const char *data, size_t size)
 {
 	UNIMPLEMENTED();
 	return B_OK;
@@ -129,22 +129,22 @@ void BMediaEncoder::ReleaseEncoder()
 	UNIMPLEMENTED();
 }
 
-status_t BMediaEncoder::_Reserved_BMediaEncoder_0(int32 arg, ...) { return B_ERROR; }
-status_t BMediaEncoder::_Reserved_BMediaEncoder_1(int32 arg, ...) { return B_ERROR; }
-status_t BMediaEncoder::_Reserved_BMediaEncoder_2(int32 arg, ...) { return B_ERROR; }
-status_t BMediaEncoder::_Reserved_BMediaEncoder_3(int32 arg, ...) { return B_ERROR; }
-status_t BMediaEncoder::_Reserved_BMediaEncoder_4(int32 arg, ...) { return B_ERROR; }
-status_t BMediaEncoder::_Reserved_BMediaEncoder_5(int32 arg, ...) { return B_ERROR; }
-status_t BMediaEncoder::_Reserved_BMediaEncoder_6(int32 arg, ...) { return B_ERROR; }
-status_t BMediaEncoder::_Reserved_BMediaEncoder_7(int32 arg, ...) { return B_ERROR; }
-status_t BMediaEncoder::_Reserved_BMediaEncoder_8(int32 arg, ...) { return B_ERROR; }
-status_t BMediaEncoder::_Reserved_BMediaEncoder_9(int32 arg, ...) { return B_ERROR; }
-status_t BMediaEncoder::_Reserved_BMediaEncoder_10(int32 arg, ...) { return B_ERROR; }
-status_t BMediaEncoder::_Reserved_BMediaEncoder_11(int32 arg, ...) { return B_ERROR; }
-status_t BMediaEncoder::_Reserved_BMediaEncoder_12(int32 arg, ...) { return B_ERROR; }
-status_t BMediaEncoder::_Reserved_BMediaEncoder_13(int32 arg, ...) { return B_ERROR; }
-status_t BMediaEncoder::_Reserved_BMediaEncoder_14(int32 arg, ...) { return B_ERROR; }
-status_t BMediaEncoder::_Reserved_BMediaEncoder_15(int32 arg, ...) { return B_ERROR; }
+status_t BMediaEncoder::_Reserved_BMediaEncoder_0(int32_t arg, ...) { return B_ERROR; }
+status_t BMediaEncoder::_Reserved_BMediaEncoder_1(int32_t arg, ...) { return B_ERROR; }
+status_t BMediaEncoder::_Reserved_BMediaEncoder_2(int32_t arg, ...) { return B_ERROR; }
+status_t BMediaEncoder::_Reserved_BMediaEncoder_3(int32_t arg, ...) { return B_ERROR; }
+status_t BMediaEncoder::_Reserved_BMediaEncoder_4(int32_t arg, ...) { return B_ERROR; }
+status_t BMediaEncoder::_Reserved_BMediaEncoder_5(int32_t arg, ...) { return B_ERROR; }
+status_t BMediaEncoder::_Reserved_BMediaEncoder_6(int32_t arg, ...) { return B_ERROR; }
+status_t BMediaEncoder::_Reserved_BMediaEncoder_7(int32_t arg, ...) { return B_ERROR; }
+status_t BMediaEncoder::_Reserved_BMediaEncoder_8(int32_t arg, ...) { return B_ERROR; }
+status_t BMediaEncoder::_Reserved_BMediaEncoder_9(int32_t arg, ...) { return B_ERROR; }
+status_t BMediaEncoder::_Reserved_BMediaEncoder_10(int32_t arg, ...) { return B_ERROR; }
+status_t BMediaEncoder::_Reserved_BMediaEncoder_11(int32_t arg, ...) { return B_ERROR; }
+status_t BMediaEncoder::_Reserved_BMediaEncoder_12(int32_t arg, ...) { return B_ERROR; }
+status_t BMediaEncoder::_Reserved_BMediaEncoder_13(int32_t arg, ...) { return B_ERROR; }
+status_t BMediaEncoder::_Reserved_BMediaEncoder_14(int32_t arg, ...) { return B_ERROR; }
+status_t BMediaEncoder::_Reserved_BMediaEncoder_15(int32_t arg, ...) { return B_ERROR; }
 
 /*************************************************************
  * public BMediaBufferEncoder

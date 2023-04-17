@@ -29,11 +29,11 @@
 /* Buffer header for audio server */
 
 typedef struct audio_buffer_header {
-	int32		buffer_number;
-	int32		subscriber_count;
+	int32_t		buffer_number;
+	int32_t		subscriber_count;
 	bigtime_t	time;
-	int32		reserved_1;
-	int32		reserved_2;
+	int32_t		reserved_1;
+	int32_t		reserved_2;
 	bigtime_t	sample_clock;
 } audio_buffer_header;
 

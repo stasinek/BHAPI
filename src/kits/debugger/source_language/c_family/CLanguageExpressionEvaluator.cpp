@@ -47,7 +47,7 @@ enum operand_kind {
 };
 
 
-static BString TokenTypeToString(int32 type)
+static BString TokenTypeToString(int32_t type)
 {
 	BString token;
 
@@ -171,9 +171,9 @@ public:
 	}
 
 protected:
-	virtual	uint32 ComputeHashValue() const
+	virtual	uint32_t ComputeHashValue() const
 	{
-		return *(uint32*)(&fValue);
+		return *(uint32_t*)(&fValue);
 	}
 
 private:
@@ -1651,7 +1651,7 @@ CLanguageExpressionEvaluator::_ParseIdentifier(ValueNode* parentNode)
 
 		if (parentNode == NULL) {
 			ValueNodeChild* thisChild = NULL;
-			for (int32 i = 0; i < container->CountChildren(); i++) {
+			for (int32_t i = 0; i < container->CountChildren(); i++) {
 				ValueNodeChild* current = container->ChildAt(i);
 				const BString& nodeName = current->Name();
 				if (nodeName == identifierName) {
@@ -1682,7 +1682,7 @@ CLanguageExpressionEvaluator::_ParseIdentifier(ValueNode* parentNode)
 				return _ParseIdentifier(parentNode);
 			}
 
-			for (int32 i = 0; i < parentNode->CountChildren(); i++) {
+			for (int32_t i = 0; i < parentNode->CountChildren(); i++) {
 				ValueNodeChild* current = parentNode->ChildAt(i);
 				const BString& nodeName = current->Name();
 				if (nodeName == identifierName) {
@@ -1795,7 +1795,7 @@ CLanguageExpressionEvaluator::_ParseAtom()
 }
 
 
-void CLanguageExpressionEvaluator::_EatToken(int32 type)
+void CLanguageExpressionEvaluator::_EatToken(int32_t type)
 {
 	Token token = fTokenizer->NextToken();
 	if (token.type != type) {
@@ -1869,7 +1869,7 @@ CLanguageExpressionEvaluator::_ParseType(Type* baseType)
 
 			_EatToken(TOKEN_CLOSING_SQUARE_BRACKET);
 
-			uint32 resolvedSize = indexSize.PrimitiveValue().ToUInt32();
+			uint32_t resolvedSize = indexSize.PrimitiveValue().ToUInt32();
 			if (resolvedSize == 0) {
 				throw ParseException("Non-zero array size required in type"
 					" specifier.", token.position);

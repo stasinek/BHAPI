@@ -36,7 +36,7 @@ private:
 
 			int			fFd;
 			bool		fIsInput;
-			uint32		_fReserved[3];
+			uint32_t		_fReserved[3];
 };
 
 #endif // _DIGITAL_PORT_H

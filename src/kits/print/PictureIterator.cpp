@@ -44,14 +44,14 @@ static void	_StrokeArc(void *p, BPoint center, BPoint radii, float startTheta, f
 static void	_FillArc(void *p, BPoint center, BPoint radii, float startTheta, float arcTheta)		{ return ((PictureIterator *) p)->FillArc(center, radii, startTheta, arcTheta); }
 static void	_StrokeEllipse(void *p, BPoint center, BPoint radii)									{ return ((PictureIterator *) p)->StrokeEllipse(center, radii); }
 static void	_FillEllipse(void *p, BPoint center, BPoint radii)										{ return ((PictureIterator *) p)->FillEllipse(center, radii); }
-static void	_StrokePolygon(void *p, int32 numPoints, BPoint *points, bool isClosed) 				{ return ((PictureIterator *) p)->StrokePolygon(numPoints, points, isClosed); }
-static void	_FillPolygon(void *p, int32 numPoints, BPoint *points, bool isClosed)					{ return ((PictureIterator *) p)->FillPolygon(numPoints, points, isClosed); }
+static void	_StrokePolygon(void *p, int32_t numPoints, BPoint *points, bool isClosed) 				{ return ((PictureIterator *) p)->StrokePolygon(numPoints, points, isClosed); }
+static void	_FillPolygon(void *p, int32_t numPoints, BPoint *points, bool isClosed)					{ return ((PictureIterator *) p)->FillPolygon(numPoints, points, isClosed); }
 static void	_StrokeShape(void * p, BShape *shape)													{ return ((PictureIterator *) p)->StrokeShape(shape); }
 static void	_FillShape(void * p, BShape *shape)														{ return ((PictureIterator *) p)->FillShape(shape); }
 static void	_DrawString(void *p, char *string, float deltax, float deltay)							{ return ((PictureIterator *) p)->DrawString(string, deltax, deltay); }
-static void	_DrawPixels(void *p, BRect src, BRect dest, int32 width, int32 height, int32 bytesPerRow, int32 pixelFormat, int32 flags, void *data)
+static void	_DrawPixels(void *p, BRect src, BRect dest, int32_t width, int32_t height, int32_t bytesPerRow, int32_t pixelFormat, int32_t flags, void *data)
 						{ return ((PictureIterator *) p)->DrawPixels(src, dest, width, height, bytesPerRow, pixelFormat, flags, data); }
-static void	_SetClippingRects(void *p, BRect *rects, uint32 numRects)								{ return ((PictureIterator *) p)->SetClippingRects(rects, numRects); }
+static void	_SetClippingRects(void *p, BRect *rects, uint32_t numRects)								{ return ((PictureIterator *) p)->SetClippingRects(rects, numRects); }
 static void	_ClipToPicture(void * p, BPicture *picture, BPoint point, bool clip_to_inverse_picture)	{ return ((PictureIterator *) p)->ClipToPicture(picture, point, clip_to_inverse_picture); }
 static void	_PushState(void *p)  																	{ return ((PictureIterator *) p)->PushState(); }
 static void	_PopState(void *p)  																	{ return ((PictureIterator *) p)->PopState(); }
@@ -70,13 +70,13 @@ static void	_SetStipplePattern(void *p, pattern pat)												{ return ((Pictu
 static void	_SetScale(void *p, float scale)															{ return ((PictureIterator *) p)->SetScale(scale); }
 static void	_SetFontFamily(void *p, char *family)													{ return ((PictureIterator *) p)->SetFontFamily(family); }
 static void	_SetFontStyle(void *p, char *style)														{ return ((PictureIterator *) p)->SetFontStyle(style); }
-static void	_SetFontSpacing(void *p, int32 spacing)													{ return ((PictureIterator *) p)->SetFontSpacing(spacing); }
+static void	_SetFontSpacing(void *p, int32_t spacing)													{ return ((PictureIterator *) p)->SetFontSpacing(spacing); }
 static void	_SetFontSize(void *p, float size)														{ return ((PictureIterator *) p)->SetFontSize(size); }
 static void	_SetFontRotate(void *p, float rotation)													{ return ((PictureIterator *) p)->SetFontRotate(rotation); }
-static void	_SetFontEncoding(void *p, int32 encoding)												{ return ((PictureIterator *) p)->SetFontEncoding(encoding); }
-static void	_SetFontFlags(void *p, int32 flags)														{ return ((PictureIterator *) p)->SetFontFlags(flags); }
+static void	_SetFontEncoding(void *p, int32_t encoding)												{ return ((PictureIterator *) p)->SetFontEncoding(encoding); }
+static void	_SetFontFlags(void *p, int32_t flags)														{ return ((PictureIterator *) p)->SetFontFlags(flags); }
 static void	_SetFontShear(void *p, float shear)														{ return ((PictureIterator *) p)->SetFontShear(shear); }
-static void	_SetFontFace(void * p, int32 flags)														{ return ((PictureIterator *) p)->SetFontFace(flags); }
+static void	_SetFontFace(void * p, int32_t flags)														{ return ((PictureIterator *) p)->SetFontFace(flags); }
 
 // undefined or undocumented operation handlers...
 static void	_op0(void * p)	{ return ((PictureIterator *) p)->Op(0); }
@@ -104,14 +104,14 @@ playbackHandlers[] = {
 		(void *)_FillArc,				// 10	FillArc(void *user, BPoint center, BPoint radii, float startTheta, float arcTheta)
 		(void *)_StrokeEllipse,			// 11	StrokeEllipse(void *user, BPoint center, BPoint radii)
 		(void *)_FillEllipse,			// 12	FillEllipse(void *user, BPoint center, BPoint radii)
-		(void *)_StrokePolygon,			// 13	StrokePolygon(void *user, int32 numPoints, BPoint *points, bool isClosed)
-		(void *)_FillPolygon,			// 14	FillPolygon(void *user, int32 numPoints, BPoint *points, bool isClosed)
+		(void *)_StrokePolygon,			// 13	StrokePolygon(void *user, int32_t numPoints, BPoint *points, bool isClosed)
+		(void *)_FillPolygon,			// 14	FillPolygon(void *user, int32_t numPoints, BPoint *points, bool isClosed)
 		(void *)_StrokeShape,			// 15	StrokeShape(void *user, BShape *shape)
 		(void *)_FillShape,				// 16	FillShape(void *user, BShape *shape)
 		(void *)_DrawString,			// 17	DrawString(void *user, char *string, float deltax, float deltay)
-		(void *)_DrawPixels,			// 18	DrawPixels(void *user, BRect src, BRect dest, int32 width, int32 height, int32 bytesPerRow, int32 pixelFormat, int32 flags, void *data)
+		(void *)_DrawPixels,			// 18	DrawPixels(void *user, BRect src, BRect dest, int32_t width, int32_t height, int32_t bytesPerRow, int32_t pixelFormat, int32_t flags, void *data)
 		(void *)_op19,					// 19	*reserved*
-		(void *)_SetClippingRects,		// 20	SetClippingRects(void *user, BRect *rects, uint32 numRects)
+		(void *)_SetClippingRects,		// 20	SetClippingRects(void *user, BRect *rects, uint32_t numRects)
 		(void *)_ClipToPicture,			// 21	ClipToPicture(void *user, BPicture *picture, BPoint pt, bool clip_to_inverse_picture)
 		(void *)_PushState,				// 22	PushState(void *user)
 		(void *)_PopState,				// 23	PopState(void *user)
@@ -130,14 +130,14 @@ playbackHandlers[] = {
 		(void *)_SetScale,				// 36	SetScale(void *user, float scale)
 		(void *)_SetFontFamily,			// 37	SetFontFamily(void *user, char *family)
 		(void *)_SetFontStyle,			// 38	SetFontStyle(void *user, char *style)
-		(void *)_SetFontSpacing,		// 39	SetFontSpacing(void *user, int32 spacing)
+		(void *)_SetFontSpacing,		// 39	SetFontSpacing(void *user, int32_t spacing)
 		(void *)_SetFontSize,			// 40	SetFontSize(void *user, float size)
 		(void *)_SetFontRotate,			// 41	SetFontRotate(void *user, float rotation)
-		(void *)_SetFontEncoding,		// 42	SetFontEncoding(void *user, int32 encoding)
-		(void *)_SetFontFlags,			// 43	SetFontFlags(void *user, int32 flags)
+		(void *)_SetFontEncoding,		// 42	SetFontEncoding(void *user, int32_t encoding)
+		(void *)_SetFontFlags,			// 43	SetFontFlags(void *user, int32_t flags)
 		(void *)_SetFontShear,			// 44	SetFontShear(void *user, float shear)
 		(void *)_op45,					// 45	*reserved*
-		(void *)_SetFontFace,			// 46	SetFontFace(void *user, int32 flags)
+		(void *)_SetFontFace,			// 46	SetFontFace(void *user, int32_t flags)
 		(void *)_op47,
 		(void *)_op48,
 		(void *)_op49,

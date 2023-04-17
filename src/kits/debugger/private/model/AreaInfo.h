@@ -18,12 +18,12 @@ public:
 								AreaInfo(team_id team, area_id area,
 									const BString& name, target_addr_t address,
 									target_size_t size, target_size_t ram_size,
-									uint32 lock, uint32 protection);
+									uint32_t lock, uint32_t protection);
 
 			void				SetTo(team_id team, area_id area,
 									const BString& name, target_addr_t address,
 									target_size_t size, target_size_t ram_size,
-									uint32 lock, uint32 protection);
+									uint32_t lock, uint32_t protection);
 
 			team_id				TeamID() const	{ return fTeam; }
 			area_id				AreaID() const	{ return fArea; }
@@ -32,8 +32,8 @@ public:
 			target_addr_t		BaseAddress() const	{ return fAddress; }
 			target_size_t		Size() const		{ return fSize; }
 			target_size_t		RamSize() const 	{ return fRamSize; }
-			uint32				Lock() const		{ return fLock; }
-			uint32				Protection() const	{ return fProtection; }
+			uint32_t				Lock() const		{ return fLock; }
+			uint32_t				Protection() const	{ return fProtection; }
 
 
 private:
@@ -43,8 +43,8 @@ private:
 			target_addr_t		fAddress;
 			target_size_t		fSize;
 			target_size_t		fRamSize;
-			uint32				fLock;
-			uint32				fProtection;
+			uint32_t				fLock;
+			uint32_t				fProtection;
 };
 
 

@@ -162,7 +162,7 @@ protected:
     BBitmap* fHighlightedLargeIcon;
     BBitmap* fMiniIcon;
     BBitmap* fHighlightedMiniIcon;
-    int32 fAliasForIndex;
+    int32_t fAliasForIndex;
 
     // list of other icon kinds would be added here
 
@@ -206,12 +206,12 @@ public:
     const char* AppSignature() const;
 
     // hash table support
-    uint32 Hash() const;
-    static uint32 Hash(const char* fileType, const char* appSignature = 0);
+    uint32_t Hash() const;
+    static uint32_t Hash(const char* fileType, const char* appSignature = 0);
     bool operator==(const SharedCacheEntry &) const;
     void SetTo(const char* fileType, const char* appSignature = 0);
 
-    int32 fNext;
+    int32_t fNext;
 private:
     BString fFileType;
     BString fAppSignature;
@@ -223,7 +223,7 @@ private:
 class SharedCacheEntryArray : public OpenHashElementArray<SharedCacheEntry> {
     // SharedIconCache stores all it's elements in this array
 public:
-    SharedCacheEntryArray(int32 initialSize);
+    SharedCacheEntryArray(int32_t initialSize);
     SharedCacheEntry* Add();
 };
 
@@ -251,9 +251,9 @@ public:
     void SetAliasFor(IconCacheEntry* entry,
         const SharedCacheEntry* original) const;
     IconCacheEntry* ResolveIfAlias(IconCacheEntry* entry) const;
-    int32 EntryIndex(const SharedCacheEntry* entry) const;
+    int32_t EntryIndex(const SharedCacheEntry* entry) const;
 
-    void RemoveAliasesTo(int32 index);
+    void RemoveAliasesTo(int32_t index);
 
 private:
     SharedCacheEntryArray fElementArray;
@@ -277,14 +277,14 @@ public:
 
     const node_ref* Node() const;
 
-    uint32 Hash() const;
-    static uint32 Hash(const node_ref*);
+    uint32_t Hash() const;
+    static uint32_t Hash(const node_ref*);
     bool operator==(const NodeCacheEntry&) const;
     void SetTo(const node_ref*);
     void MakePermanent();
     bool Permanent() const;
 
-    int32 fNext;
+    int32_t fNext;
 private:
     node_ref fRef;
     bool fPermanent;
@@ -297,7 +297,7 @@ private:
 class NodeCacheEntryArray : public OpenHashElementArray<NodeCacheEntry> {
     // NodeIconCache stores all it's elements in this array
 public:
-    NodeCacheEntryArray(int32 initialSize);
+    NodeCacheEntryArray(int32_t initialSize);
     NodeCacheEntry* Add();
 };
 
@@ -327,7 +327,7 @@ public:
     void Deleting(const BView*);
     void IconChanged(const Model*);
 
-    void RemoveAliasesTo(int32 index);
+    void RemoveAliasesTo(int32_t index);
 
 private:
     NodeCacheEntryArray fElementArray;
@@ -335,7 +335,7 @@ private:
 };
 
 
-const int32 kColorTransformTableSize = 256;
+const int32_t kColorTransformTableSize = 256;
 
 
 class IconCache {
@@ -443,14 +443,14 @@ private:
         LazyBitmapAllocator* lazyBitmap, IconCacheEntry* entry);
 
     BBitmap* MakeTransformedIcon(const BBitmap*, icon_size,
-        int32 colorTransformTable [], LazyBitmapAllocator*);
+        int32_t colorTransformTable [], LazyBitmapAllocator*);
 
     NodeIconCache fNodeCache;
     SharedIconCache fSharedCache;
 
     void InitHighlightTable();
 
-    int32 fHighlightTable[kColorTransformTableSize];
+    int32_t fHighlightTable[kColorTransformTableSize];
     bool fInitHighlightTable;
         // whether or not we need to initialize the highlight table
 };
@@ -505,7 +505,7 @@ SharedIconCache::ResolveIfAlias(IconCacheEntry* entry) const
 }
 
 
-inline int32 SharedIconCache::EntryIndex(const SharedCacheEntry* entry) const
+inline int32_t SharedIconCache::EntryIndex(const SharedCacheEntry* entry) const
 {
     return fHashTable.ElementIndex(entry);
 }

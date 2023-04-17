@@ -34,7 +34,7 @@ private:
 
 			BSeparatorItem&		operator=(const BSeparatorItem& other);
 
-			uint32				_reserved[1];
+			uint32_t				_reserved[1];
 };
 
 

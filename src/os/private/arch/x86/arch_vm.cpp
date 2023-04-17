@@ -64,7 +64,7 @@ namespace {
 struct memory_type_range : DoublyLinkedListLinkImpl<memory_type_range> {
 	uint64						base;
 	uint64						size;
-	uint32						type;
+	uint32_t						type;
 	area_id						area;
 };
 
@@ -96,17 +96,17 @@ typedef DoublyLinkedList<memory_type_range> MemoryTypeRangeList;
 
 static mutex sMemoryTypeLock = MUTEX_INITIALIZER("memory type ranges");
 static MemoryTypeRangeList sMemoryTypeRanges;
-static int32 sMemoryTypeRangeCount = 0;
+static int32_t sMemoryTypeRangeCount = 0;
 
-static const uint32 kMaxMemoryTypeRegisters	= 32;
+static const uint32_t kMaxMemoryTypeRegisters	= 32;
 static x86_mtrr_info sMemoryTypeRegisters[kMaxMemoryTypeRegisters];
-static uint32 sMemoryTypeRegisterCount;
-static uint32 sMemoryTypeRegistersUsed;
+static uint32_t sMemoryTypeRegisterCount;
+static uint32_t sMemoryTypeRegistersUsed;
 
 static memory_type_range* sTemporaryRanges = NULL;
 static memory_type_range_point* sTemporaryRangePoints = NULL;
-static int32 sTemporaryRangeCount = 0;
-static int32 sTemporaryRangePointCount = 0;
+static int32_t sTemporaryRangeCount = 0;
+static int32_t sTemporaryRangePointCount = 0;
 
 
 static void
@@ -117,7 +117,7 @@ set_mtrrs()
 
 #if TRACE_MTRR_ARCH_VM
 	TRACE_MTRR("set MTRRs to:\n");
-	for (uint32 i = 0; i < sMemoryTypeRegistersUsed; i++) {
+	for (uint32_t i = 0; i < sMemoryTypeRegistersUsed; i++) {
 		const x86_mtrr_info& info = sMemoryTypeRegisters[i];
 		TRACE_MTRR("  mtrr: %2" B_PRIu32 ": base: %#10" B_PRIx64  ", size: %#10"
 			B_PRIx64 ", type: %u\n", i, info.base, info.size,
@@ -128,7 +128,7 @@ set_mtrrs()
 
 
 static bool
-add_used_mtrr(uint64 base, uint64 size, uint32 type)
+add_used_mtrr(uint64 base, uint64 size, uint32_t type)
 {
 	if (sMemoryTypeRegistersUsed == sMemoryTypeRegisterCount)
 		return false;
@@ -143,7 +143,7 @@ add_used_mtrr(uint64 base, uint64 size, uint32 type)
 
 
 static bool
-add_mtrrs_for_range(uint64 base, uint64 size, uint32 type)
+add_mtrrs_for_range(uint64 base, uint64 size, uint32_t type)
 {
 	for (uint64 interval = B_PAGE_SIZE; size > 0; interval <<= 1) {
 		if ((base & interval) != 0) {
@@ -178,7 +178,7 @@ find_range(area_id areaID)
 
 
 static void
-optimize_memory_ranges(MemoryTypeRangeList& ranges, uint32 type,
+optimize_memory_ranges(MemoryTypeRangeList& ranges, uint32_t type,
 	bool removeRanges)
 {
 	uint64 previousEnd = 0;
@@ -268,13 +268,13 @@ optimize_memory_ranges(MemoryTypeRangeList& ranges, uint32 type,
 
 
 static bool
-ensure_temporary_ranges_space(int32 count)
+ensure_temporary_ranges_space(int32_t count)
 {
 	if (sTemporaryRangeCount >= count && sTemporaryRangePointCount >= count)
 		return true;
 
 	// round count to power of 2
-	int32 unalignedCount = count;
+	int32_t unalignedCount = count;
 	count = 8;
 	while (count < unalignedCount)
 		count <<= 1;
@@ -317,7 +317,7 @@ update_mtrrs(update_mtrr_info& updateInfo)
 
 	// get the range points and sort them
 	memory_type_range_point* rangePoints = sTemporaryRangePoints;
-	int32 pointCount = 0;
+	int32_t pointCount = 0;
 	for (MemoryTypeRangeList::Iterator it = sMemoryTypeRanges.GetIterator();
 			memory_type_range* range = it.Next();) {
 		if (range->type == IA32_MTR_UNCACHED) {
@@ -341,7 +341,7 @@ update_mtrrs(update_mtrr_info& updateInfo)
 
 #if TRACE_MTRR_ARCH_VM >= 2
 	TRACE_MTRR2("memory type range points:\n");
-	for (int32 i = 0; i < pointCount; i++) {
+	for (int32_t i = 0; i < pointCount; i++) {
 		TRACE_MTRR2("%12" B_PRIx64 " (%p)\n", rangePoints[i].address,
 			rangePoints[i].range);
 	}
@@ -357,9 +357,9 @@ update_mtrrs(update_mtrr_info& updateInfo)
 	typedef DoublyLinkedList<memory_type_range_point> PointList;
 	PointList pendingPoints;
 	memory_type_range* activeRange = NULL;
-	int32 rangeCount = 0;
+	int32_t rangeCount = 0;
 
-	for (int32 i = 0; i < pointCount; i++) {
+	for (int32_t i = 0; i < pointCount; i++) {
 		memory_type_range_point* point = &rangePoints[i];
 		bool terminateRange = false;
 		if (point->IsStart()) {
@@ -412,7 +412,7 @@ update_mtrrs(update_mtrr_info& updateInfo)
 
 #if TRACE_MTRR_ARCH_VM >= 2
 	TRACE_MTRR2("effective memory type ranges:\n");
-	for (int32 i = 0; i < rangeCount; i++) {
+	for (int32_t i = 0; i < rangeCount; i++) {
 		TRACE_MTRR2("%12" B_PRIx64 " - %12" B_PRIx64 ": %" B_PRIu32 "\n",
 			ranges[i].base, ranges[i].base + ranges[i].size, ranges[i].type);
 	}
@@ -433,21 +433,21 @@ update_mtrrs(update_mtrr_info& updateInfo)
 	// write-back ranges.
 
 	MemoryTypeRangeList rangeList;
-	for (int32 i = 0; i < rangeCount; i++)
+	for (int32_t i = 0; i < rangeCount; i++)
 		rangeList.Add(&ranges[i]);
 
-	static const uint32 kMemoryTypes[] = {
+	static const uint32_t kMemoryTypes[] = {
 		IA32_MTR_UNCACHED,
 		IA32_MTR_WRITE_COMBINING,
 		IA32_MTR_WRITE_PROTECTED,
 		IA32_MTR_WRITE_THROUGH,
 		IA32_MTR_WRITE_BACK
 	};
-	static const int32 kMemoryTypeCount = sizeof(kMemoryTypes)
+	static const int32_t kMemoryTypeCount = sizeof(kMemoryTypes)
 		/ sizeof(*kMemoryTypes);
 
-	for (int32 i = 0; i < kMemoryTypeCount; i++) {
-		uint32 type = kMemoryTypes[i];
+	for (int32_t i = 0; i < kMemoryTypeCount; i++) {
+		uint32_t type = kMemoryTypes[i];
 
 		// Remove uncached and write-through ranges after processing them. This
 		// let's us leverage their intersection property with any other
@@ -460,7 +460,7 @@ update_mtrrs(update_mtrr_info& updateInfo)
 
 #if TRACE_MTRR_ARCH_VM >= 2
 	TRACE_MTRR2("optimized memory type ranges:\n");
-	for (int32 i = 0; i < rangeCount; i++) {
+	for (int32_t i = 0; i < rangeCount; i++) {
 		if (ranges[i].size > 0) {
 			TRACE_MTRR2("%12" B_PRIx64 " - %12" B_PRIx64 ": %" B_PRIu32 "\n",
 				ranges[i].base, ranges[i].base + ranges[i].size,
@@ -471,14 +471,14 @@ update_mtrrs(update_mtrr_info& updateInfo)
 
 	// compute the mtrrs from the ranges
 	sMemoryTypeRegistersUsed = 0;
-	for (int32 i = 0; i < kMemoryTypeCount; i++) {
-		uint32 type = kMemoryTypes[i];
+	for (int32_t i = 0; i < kMemoryTypeCount; i++) {
+		uint32_t type = kMemoryTypes[i];
 
 		// skip write-back ranges -- that'll be the default type anyway
 		if (type == IA32_MTR_WRITE_BACK)
 			continue;
 
-		for (int32 i = 0; i < rangeCount; i++) {
+		for (int32_t i = 0; i < rangeCount; i++) {
 			if (ranges[i].size == 0 || ranges[i].type != type)
 				continue;
 
@@ -535,7 +535,7 @@ update_mtrrs()
 
 
 static status_t
-add_memory_type_range(area_id areaID, uint64 base, uint64 size, uint32 type)
+add_memory_type_range(area_id areaID, uint64 base, uint64 size, uint32_t type)
 {
 	// translate the type
 	if (type == 0)
@@ -567,7 +567,7 @@ add_memory_type_range(area_id areaID, uint64 base, uint64 size, uint32 type)
 	MutexLocker locker(sMemoryTypeLock);
 
 	memory_type_range* range = areaID >= 0 ? find_range(areaID) : NULL;
-	int32 oldRangeType = -1;
+	int32_t oldRangeType = -1;
 	if (range != NULL) {
 		if (range->base != base || range->size != size)
 			return B_BAD_VALUE;
@@ -697,7 +697,7 @@ arch_vm_init_post_modules(kernel_args *args)
 		sMemoryTypeRegisterCount = kMaxMemoryTypeRegisters;
 
 	// set the physical memory ranges to write-back mode
-	for (uint32 i = 0; i < args->num_physical_memory_ranges; i++) {
+	for (uint32_t i = 0; i < args->num_physical_memory_ranges; i++) {
 		add_memory_type_range(-1, args->physical_memory_range[i].start,
 			args->physical_memory_range[i].size, B_MTR_WB);
 	}
@@ -721,7 +721,7 @@ arch_vm_aspace_swap(struct VMAddressSpace *from, struct VMAddressSpace *to)
 
 
 bool
-arch_vm_supports_protection(uint32 protection)
+arch_vm_supports_protection(uint32_t protection)
 {
 	// x86 always has the same read/write properties for userland and the
 	// kernel.
@@ -758,7 +758,7 @@ arch_vm_unset_memory_type(struct VMArea *area)
 
 status_t
 arch_vm_set_memory_type(struct VMArea *area, phys_addr_t physicalBase,
-	uint32 type)
+	uint32_t type)
 {
 	return add_memory_type_range(area->id, physicalBase, area->Size(), type);
 }

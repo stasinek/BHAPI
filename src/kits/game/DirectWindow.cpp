@@ -141,7 +141,7 @@ static void print_direct_buffer_info(const direct_buffer_info &info)
 	region.PrintToStream();
 
 	region.MakeEmpty();
-	for (uint32 i = 0; i < info.clip_list_count; i++)
+	for (uint32_t i = 0; i < info.clip_list_count; i++)
 		region.Include(info.clip_list[i]);
 
 	printf("- clip_list:\n");
@@ -160,7 +160,7 @@ static void print_direct_buffer_info(const direct_buffer_info &info)
 
 
 BDirectWindow::BDirectWindow(BRect frame, const char* title, window_type type,
-		uint32 flags, uint32 workspace)
+		uint32_t flags, uint32_t workspace)
 	:
 	BWindow(frame, title, type, flags, workspace)
 {
@@ -169,7 +169,7 @@ BDirectWindow::BDirectWindow(BRect frame, const char* title, window_type type,
 
 
 BDirectWindow::BDirectWindow(BRect frame, const char* title, window_look look,
-		window_feel feel, uint32 flags, uint32 workspace)
+		window_feel feel, uint32_t flags, uint32_t workspace)
 	:
 	BWindow(frame, title, look, feel, flags, workspace)
 {
@@ -223,13 +223,13 @@ void BDirectWindow::FrameMoved(BPoint newPosition)
 }
 
 
-void BDirectWindow::WorkspacesChanged(uint32 oldWorkspaces, uint32 newWorkspaces)
+void BDirectWindow::WorkspacesChanged(uint32_t oldWorkspaces, uint32_t newWorkspaces)
 {
 	inherited::WorkspacesChanged(oldWorkspaces, newWorkspaces);
 }
 
 
-void BDirectWindow::WorkspaceActivated(int32 index, bool state)
+void BDirectWindow::WorkspaceActivated(int32_t index, bool state)
 {
 	inherited::WorkspaceActivated(index, state);
 }
@@ -290,8 +290,8 @@ void BDirectWindow::Hide()
 
 
 BHandler*
-BDirectWindow::ResolveSpecifier(BMessage* message, int32 index,
-	BMessage* specifier, int32 what, const char* property)
+BDirectWindow::ResolveSpecifier(BMessage* message, int32_t index,
+	BMessage* specifier, int32_t what, const char* property)
 {
 	return inherited::ResolveSpecifier(message, index, specifier, what,
 		property);
@@ -316,7 +316,7 @@ void BDirectWindow::task_looper()
 }
 
 
-BMessage*  BDirectWindow::ConvertToMessage(void* raw, int32 code)
+BMessage*  BDirectWindow::ConvertToMessage(void* raw, int32_t code)
 {
 	return inherited::ConvertToMessage(raw, code);
 }
@@ -346,13 +346,13 @@ status_t BDirectWindow::GetClippingRegion(BRegion* region, BPoint* origin) const
 
 	// BPoint's coordinates are floats. We can only work
 	// with integers._DaemonStarter
-	int32 originX, originY;
+	int32_t originX, originY;
 	if (origin == NULL) {
 		originX = 0;
 		originY = 0;
 	} else {
-		originX = (int32)origin->x;
-		originY = (int32)origin->y;
+		originX = (int32_t)origin->x;
+		originY = (int32_t)origin->y;
 	}
 
 #ifndef HAIKU_TARGET_PLATFORM_DANO
@@ -366,7 +366,7 @@ status_t BDirectWindow::GetClippingRegion(BRegion* region, BPoint* origin) const
 	}
 	region->fCount = fBufferDesc->clip_list_count;
 	region->fBounds = region->_ConvertToInternal(fBufferDesc->clip_bounds);
-	for (uint32 c = 0; c < fBufferDesc->clip_list_count; c++) {
+	for (uint32_t c = 0; c < fBufferDesc->clip_list_count; c++) {
 		region->fData[c] = region->_ConvertToInternal(
 			fBufferDesc->clip_list[c]);
 	}
@@ -422,13 +422,13 @@ bool BDirectWindow::IsFullScreen() const
 //	#pragma mark - Private methods
 
 
-/*static*/ int32 BDirectWindow::_daemon_thread(void* arg)
+/*static*/ int32_t BDirectWindow::_daemon_thread(void* arg)
 {
 	return static_cast<BDirectWindow*>(arg)->_DirectDaemon();
 }
 
 
-int32 BDirectWindow::_DirectDaemon()
+int32_t BDirectWindow::_DirectDaemon()
 {
 	while (!fDaemonKiller) {
 		// This sem is released by the app_server when our

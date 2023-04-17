@@ -50,7 +50,7 @@ public:
 								UserMessagingMessageSender();
 
 			void				SendMessage(const KMessage* message,
-									port_id port, int32 token);
+									port_id port, int32_t token);
 			void				FlushMessage();
 
 private:
@@ -60,14 +60,14 @@ private:
 
 			const KMessage*		fMessage;
 			messaging_target	fTargets[MAX_MESSAGING_TARGET_COUNT];
-			int32				fTargetCount;
+			int32_t				fTargetCount;
 };
 
 class UserMessagingListener : public NotificationListener {
 public:
 								UserMessagingListener(
 									UserMessagingMessageSender& sender,
-									port_id port, int32 token);
+									port_id port, int32_t token);
 	virtual						~UserMessagingListener();
 
 	virtual void				EventOccurred(NotificationService& service,
@@ -76,7 +76,7 @@ public:
 									NotificationService& service);
 
 			port_id				Port() const	{ return fPort; }
-			int32				Token() const	{ return fToken; }
+			int32_t				Token() const	{ return fToken; }
 
 			bool				operator==(
 									const NotificationListener& _other) const;
@@ -84,7 +84,7 @@ public:
 private:
 	UserMessagingMessageSender&	fSender;
 	port_id						fPort;
-	int32						fToken;
+	int32_t						fToken;
 };
 
 inline bool UserMessagingListener::operator==(const NotificationListener& _other) const
@@ -117,7 +117,7 @@ private:
 struct default_listener : public DoublyLinkedListLinkImpl<default_listener> {
 	~default_listener();
 
-	uint32	eventMask;
+	uint32_t	eventMask;
 	team_id	team;
 	NotificationListener* listener;
 };
@@ -136,9 +136,9 @@ public:
 	inline	void				Unlock()
 									{ recursive_lock_unlock(&fLock); }
 
-	inline	void				Notify(const KMessage& event, uint32 eventMask);
+	inline	void				Notify(const KMessage& event, uint32_t eventMask);
 			void				NotifyLocked(const KMessage& event,
-									uint32 eventMask);
+									uint32_t eventMask);
 
 	inline	bool				HasListeners() const
 									{ return !fListeners.IsEmpty(); }
@@ -156,7 +156,7 @@ public:
 
 protected:
 	virtual status_t			ToEventMask(const KMessage& eventSpecifier,
-									uint32& eventMask);
+									uint32_t& eventMask);
 	virtual	void				FirstAdded();
 	virtual	void				LastRemoved();
 
@@ -179,16 +179,16 @@ public:
 	virtual	status_t			RemoveListener(const KMessage* eventSpecifier,
 									NotificationListener& listener);
 
-			status_t			RemoveUserListeners(port_id port, uint32 token);
-			status_t			UpdateUserListener(uint32 eventMask,
-									port_id port, uint32 token);
+			status_t			RemoveUserListeners(port_id port, uint32_t token);
+			status_t			UpdateUserListener(uint32_t eventMask,
+									port_id port, uint32_t token);
 
 private:
 	virtual void				EventOccurred(NotificationService& service,
 									const KMessage* event);
 	virtual void				AllListenersNotified(
 									NotificationService& service);
-			status_t			_AddListener(uint32 eventMask,
+			status_t			_AddListener(uint32_t eventMask,
 									NotificationListener& listener);
 
 			UserMessagingMessageSender fSender;
@@ -204,14 +204,14 @@ public:
 									NotificationService& service);
 
 			status_t			AddListener(const char* service,
-									uint32 eventMask,
+									uint32_t eventMask,
 									NotificationListener& listener);
 			status_t			AddListener(const char* service,
 									const KMessage* eventSpecifier,
 									NotificationListener& listener);
 
 			status_t			UpdateListener(const char* service,
-									uint32 eventMask,
+									uint32_t eventMask,
 									NotificationListener& listener);
 			status_t			UpdateListener(const char* service,
 									const KMessage* eventSpecifier,
@@ -251,7 +251,7 @@ private:
 };
 
 
-void DefaultNotificationService::Notify(const KMessage& event, uint32 eventMask)
+void DefaultNotificationService::Notify(const KMessage& event, uint32_t eventMask)
 {
 	RecursiveLocker _(fLock);
 	NotifyLocked(event, eventMask);

@@ -26,7 +26,7 @@
 #include <MailSettings.h>
 
 
-_EXPORT status_t check_for_mail(int32* _incomingCount)
+_EXPORT status_t check_for_mail(int32_t* _incomingCount)
 {
 	status_t status = BMailDaemon().CheckMail();
 	if (status != B_OK)
@@ -45,7 +45,7 @@ _EXPORT status_t send_queued_mail(void)
 }
 
 
-_EXPORT int32 count_pop_accounts(void)
+_EXPORT int32_t count_pop_accounts(void)
 {
 	BMailAccounts accounts;
 	return accounts.CountAccounts();
@@ -66,7 +66,7 @@ _EXPORT status_t set_mail_notification(mail_notification *, bool)
 }
 
 
-_EXPORT status_t get_pop_account(mail_pop_account* account, int32 index)
+_EXPORT status_t get_pop_account(mail_pop_account* account, int32_t index)
 {
 	BMailAccounts accounts;
 	BMailAccountSettings* accountSettings = accounts.AccountAt(index);
@@ -90,7 +90,7 @@ _EXPORT status_t get_pop_account(mail_pop_account* account, int32 index)
 }
 
 
-_EXPORT status_t set_pop_account(mail_pop_account *, int32, bool)
+_EXPORT status_t set_pop_account(mail_pop_account *, int32_t, bool)
 {
 	return B_NO_REPLY;
 }

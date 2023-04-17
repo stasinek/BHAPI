@@ -73,11 +73,11 @@ bool gKernelStartup = true;
 bool gKernelShutdown = false;
 
 static kernel_args sKernelArgs;
-static uint32 sCpuRendezvous;
-static uint32 sCpuRendezvous2;
-static uint32 sCpuRendezvous3;
+static uint32_t sCpuRendezvous;
+static uint32_t sCpuRendezvous2;
+static uint32_t sCpuRendezvous3;
 
-static int32 main2(void *);
+static int32_t main2(void *);
 
 
 static void
@@ -273,7 +273,7 @@ _start(kernel_args *bootKernelArgs, int currentCPU)
 }
 
 
-static int32
+static int32_t
 main2(void* /*unused*/)
 {
 	TRACE("start of main2: initializing devices\n");
@@ -372,7 +372,7 @@ main2(void* /*unused*/)
 		}
 
 		const char* args[] = { serverPath.Path(), NULL };
-		int32 argc = 1;
+		int32_t argc = 1;
 		thread_id thread;
 
 		thread = load_image(argc, args, NULL);

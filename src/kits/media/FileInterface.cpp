@@ -44,7 +44,7 @@ BFileInterface::BFileInterface()
 }
 
 
-status_t BFileInterface::HandleMessage(int32 message,
+status_t BFileInterface::HandleMessage(int32_t message,
 							  const void *data,
 							  size_t size)
 {
@@ -113,7 +113,7 @@ status_t BFileInterface::HandleMessage(int32 message,
 				break;
 			}
 
-			int32 cookie = 0;
+			int32_t cookie = 0;
 			while (GetNextFileFormat(&cookie, formats) == B_OK) {
 				if (cookie >= request->num_formats)
 					break;

@@ -397,7 +397,7 @@ bool BMenuWindow::_Scroll(const BPoint& where)
 	const BRect &lowerFrame = fLowerScroller->Frame();
 	const BRect &upperFrame = fUpperScroller->Frame();
 
-	int32 delta = 0;
+	int32_t delta = 0;
 	if (fLowerScroller->IsEnabled() && lowerFrame.Contains(cursor))
 		delta = 1;
 	else if (fUpperScroller->IsEnabled() && upperFrame.Contains(cursor))

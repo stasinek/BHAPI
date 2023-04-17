@@ -19,10 +19,10 @@ public:
 	virtual void OffsetChanged(KPartition *partition, off_t offset);
 	virtual void SizeChanged(KPartition *partition, off_t size);
 	virtual void ContentSizeChanged(KPartition *partition, off_t size);
-	virtual void BlockSizeChanged(KPartition *partition, uint32 blockSize);
-	virtual void IndexChanged(KPartition *partition, int32 index);
-	virtual void StatusChanged(KPartition *partition, uint32 status);
-	virtual void FlagsChanged(KPartition *partition, uint32 flags);
+	virtual void BlockSizeChanged(KPartition *partition, uint32_t blockSize);
+	virtual void IndexChanged(KPartition *partition, int32_t index);
+	virtual void StatusChanged(KPartition *partition, uint32_t status);
+	virtual void FlagsChanged(KPartition *partition, uint32_t flags);
 	virtual void NameChanged(KPartition *partition, const char *name);
 	virtual void ContentNameChanged(KPartition *partition, const char *name);
 	virtual void TypeChanged(KPartition *partition, const char *type);
@@ -34,9 +34,9 @@ public:
 	virtual void ContentParametersChanged(KPartition *partition,
 										  const char *parameters);
 	virtual void ChildAdded(KPartition *partition, KPartition *child,
-							int32 index);
+							int32_t index);
 	virtual void ChildRemoved(KPartition *partition, KPartition *child,
-							  int32 index);
+							  int32_t index);
 	virtual void DiskSystemChanged(KPartition *partition,
 								   KDiskSystem *diskSystem);
 	virtual void CookieChanged(KPartition *partition, void *cookie);

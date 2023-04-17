@@ -75,7 +75,7 @@ BSplitLayoutBuilder::Add(BLayoutItem* item, float weight)
 BSplitLayoutBuilder&
 BSplitLayoutBuilder::SetCollapsible(bool collapsible)
 {
-	int32 count = fView->CountChildren();
+	int32_t count = fView->CountChildren();
 	if (count > 0)
 		fView->SetCollapsible(count - 1, collapsible);
 	return *this;

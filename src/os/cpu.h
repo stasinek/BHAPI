@@ -52,7 +52,7 @@ typedef struct cpu_ent {
 	bigtime_t		last_kernel_time;
 	bigtime_t		last_user_time;
 
-	int32			ici_counter;
+	int32_t			ici_counter;
 
 	// used in the kernel debugger
 	addr_t			fault_handler;
@@ -77,7 +77,7 @@ typedef struct cpu_ent {
 } cpu_ent CACHE_LINE_ALIGN;
 
 extern cpu_ent gCPU[];
-extern uint32 gCPUCacheLevelCount;
+extern uint32_t gCPUCacheLevelCount;
 
 #ifdef __cplusplus
 extern "C" {
@@ -87,7 +87,7 @@ status_t cpu_init(struct kernel_args *args);
 status_t cpu_init_percpu(struct kernel_args *ka, int curr_cpu);
 status_t cpu_init_post_vm(struct kernel_args *args);
 status_t cpu_init_post_modules(struct kernel_args *args);
-bigtime_t cpu_get_active_time(int32 cpu);
+bigtime_t cpu_get_active_time(int32_t cpu);
 cpu_ent *get_cpu_struct(void);
 extern inline cpu_ent *get_cpu_struct(void) { return &gCPU[smp_get_current_cpu()]; }
 status_t cpu_build_topology_tree(void);
@@ -96,16 +96,16 @@ void cpu_set_scheduler_mode(enum scheduler_mode mode);
 status_t increase_cpu_performance(int delta);
 status_t decrease_cpu_performance(int delta);
 void cpu_idle(void);
-void cpu_wait(int32* variable, int32 test);
+void cpu_wait(int32_t* variable, int32_t test);
 
 static inline void cpu_pause(void)
 {
 	arch_cpu_pause();
 }
 
-void _user_clear_caches(void *address, size_t length, uint32 flags);
-bool _user_cpu_enabled(int32 cpu);
-status_t _user_set_cpu_enabled(int32 cpu, bool enabled);
+void _user_clear_caches(void *address, size_t length, uint32_t flags);
+bool _user_cpu_enabled(int32_t cpu);
+status_t _user_set_cpu_enabled(int32_t cpu, bool enabled);
 
 #ifdef __cplusplus
 }

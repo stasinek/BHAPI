@@ -53,13 +53,13 @@ struct Buffer {
 		fBytesWritten++;
 	}
 
-	void PutPadding(int32 count)
+	void PutPadding(int32_t count)
 	{
 		if (count <= 0)
 			return;
 
 		if (fBytesWritten < fSize) {
-			int32 toWrite = std::min(fSize - fBytesWritten, (size_t)count);
+			int32_t toWrite = std::min(fSize - fBytesWritten, (size_t)count);
 			while (--toWrite >= 0)
 				*fCurrent++ = ' ';
 		}
@@ -67,13 +67,13 @@ struct Buffer {
 		fBytesWritten += count;
 	}
 
-	void PutString(const char *source, int32 length)
+	void PutString(const char *source, int32_t length)
 	{
 		if (length <= 0)
 			return;
 
 		if (fBytesWritten < fSize) {
-			int32 toWrite = std::min(fSize - fBytesWritten, (size_t)length);
+			int32_t toWrite = std::min(fSize - fBytesWritten, (size_t)length);
 			memcpy(fCurrent, source, toWrite);
 			fCurrent += toWrite;
 		}
@@ -109,7 +109,7 @@ skip_atoi(const char **s)
 
 
 static uint64
-do_div(uint64 *_number, uint32 base)
+do_div(uint64 *_number, uint32_t base)
 {
 	uint64 result = *_number % (uint64)base;
 	*_number = *_number / (uint64)base;
@@ -136,7 +136,7 @@ sign_symbol(int flags, bool negative)
 
 
 static void
-number(Buffer& outBuffer, uint64 num, uint32 base, int size,
+number(Buffer& outBuffer, uint64 num, uint32_t base, int size,
 	int precision, int flags)
 {
 	const char *digits = "0123456789abcdefghijklmnopqrstuvwxyz";
@@ -219,7 +219,7 @@ floating(Buffer& outBuffer, double value, int fieldWidth, int flags)
 	char buffer[66];
 	uint64 fraction;
 	uint64 integer;
-	int32 length = 0;
+	int32_t length = 0;
 	char sign;
 
 	sign = sign_symbol(flags, value < 0.0);
@@ -370,7 +370,7 @@ vsnprintf(char *buffer, size_t bufferSize, const char *format, va_list args)
 			case 's':
 			{
 				const char *argument = va_arg(args, char *);
-				int32 length;
+				int32_t length;
 
 				if (argument == NULL)
 					argument = "<NULL>";

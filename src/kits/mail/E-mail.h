@@ -24,11 +24,11 @@ struct entry_ref;
 #define B_MAIL_ATTR_SUBJECT		"MAIL:subject"			// indexed string
 #define B_MAIL_ATTR_REPLY		"MAIL:reply"			// indexed string
 #define B_MAIL_ATTR_WHEN		"MAIL:when"				// indexed time
-#define B_MAIL_ATTR_FLAGS		"MAIL:flags"			// indexed int32 #define B_MAIL_ATTR_RECIPIENTS	"MAIL:recipients"		// string
+#define B_MAIL_ATTR_FLAGS		"MAIL:flags"			// indexed int32_t #define B_MAIL_ATTR_RECIPIENTS	"MAIL:recipients"		// string
 #define B_MAIL_ATTR_MIME		"MAIL:mime"				// string
-#define B_MAIL_ATTR_HEADER		"MAIL:header_length"	// int32 #define B_MAIL_ATTR_CONTENT		"MAIL:content_length"	// int32 #define B_MAIL_ATTR_READ		"MAIL:read"				// int32 #define B_MAIL_ATTR_THREAD		"MAIL:thread"			// string
+#define B_MAIL_ATTR_HEADER		"MAIL:header_length"	// int32_t #define B_MAIL_ATTR_CONTENT		"MAIL:content_length"	// int32_t #define B_MAIL_ATTR_READ		"MAIL:read"				// int32_t #define B_MAIL_ATTR_THREAD		"MAIL:thread"			// string
 #define B_MAIL_ATTR_ACCOUNT		"MAIL:account"			// string
-#define B_MAIL_ATTR_ACCOUNT_ID	"MAIL:account_id"		// int32 
+#define B_MAIL_ATTR_ACCOUNT_ID	"MAIL:account_id"		// int32_t 
 
 // read flags
 enum read_flags {
@@ -90,10 +90,10 @@ typedef struct {
 	char		pop_host[B_MAX_HOST_NAME_LENGTH];
 	char		real_name[128];
 	char		reply_to[128];
-	int32		days;			/* see flags above*/
-	int32		interval;		/* in seconds*/
-	int32		begin_time;		/* in seconds*/
-	int32		end_time;		/* in seconds*/
+	int32_t		days;			/* see flags above*/
+	int32_t		interval;		/* in seconds*/
+	int32_t		begin_time;		/* in seconds*/
+	int32_t		end_time;		/* in seconds*/
 } mail_pop_account;
 
 typedef struct {
@@ -104,9 +104,9 @@ typedef struct {
 
 // #pragma mark - global functions
 
-int32 count_pop_accounts(void);
-status_t get_pop_account(mail_pop_account*, int32 index = 0);
-status_t set_pop_account(mail_pop_account*, int32 index = 0,
+int32_t count_pop_accounts(void);
+status_t get_pop_account(mail_pop_account*, int32_t index = 0);
+status_t set_pop_account(mail_pop_account*, int32_t index = 0,
 	bool save = true);
 
 
@@ -117,10 +117,10 @@ public:
 								BMailMessage();
 								~BMailMessage();
 
-			status_t			AddContent(const char* text, int32 length,
-									uint32 encoding = B_ISO1_CONVERSION,
+			status_t			AddContent(const char* text, int32_t length,
+									uint32_t encoding = B_ISO1_CONVERSION,
 									bool clobber = false);
-			status_t			AddContent(const char* text, int32 length,
+			status_t			AddContent(const char* text, int32_t length,
 									const char* encoding,
 									bool clobber = false);
 	
@@ -129,9 +129,9 @@ public:
 			status_t			AddEnclosure(const char* path,
 									bool clobber = false);
 			status_t			AddEnclosure(const char* MIME_type, void* data,
-									int32 len, bool clobber = false);
+									int32_t len, bool clobber = false);
 	
-			status_t			AddHeaderField(uint32 encoding,
+			status_t			AddHeaderField(uint32_t encoding,
 									const char* field_name, const char* str, 
 									bool clobber = false);
 			status_t			AddHeaderField(const char* field_name,
@@ -141,14 +141,14 @@ public:
 									 bool removeAfterSending = false);
 
 private:
-			int32				concatinate(char**, int32, char*);
-			int32				count_fields(char* name = NULL);
+			int32_t				concatinate(char**, int32_t, char*);
+			int32_t				count_fields(char* name = NULL);
 			status_t			find_field(char*, type_code*, char**, void**,
-									int32*, uint32*, char**, bool*, int32);
+									int32_t*, uint32_t*, char**, bool*, int32_t);
 			BList*				find_field(const char*);
-			status_t			get_field_name(char**, int32);
+			status_t			get_field_name(char**, int32_t);
 			status_t			set_field(const char*, type_code, const char*,
-									const void*, int32, uint32, const char*,
+									const void*, int32_t, uint32_t, const char*,
 									bool);
 
 private:

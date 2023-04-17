@@ -53,13 +53,13 @@ public:
 
 			BString				Name() const;
 
-			int32				Priority() const;
-			void				SetPriority(int32 priority);
+			int32_t				Priority() const;
+			void				SetPriority(int32_t priority);
 									// negative priority is fine
 
 			bool				IsEmpty() const;
-			int32				CountPackages() const;
-			BSolverPackage*		PackageAt(int32 index) const;
+			int32_t				CountPackages() const;
+			BSolverPackage*		PackageAt(int32_t index) const;
 
 			status_t			AddPackage(const BPackageInfo& info,
 									BSolverPackage** _package = NULL);
@@ -75,7 +75,7 @@ private:
 
 private:
 			BString				fName;
-			int32				fPriority;
+			int32_t				fPriority;
 			bool				fIsInstalled;
 			PackageList			fPackages;
 			uint64				fChangeCount;

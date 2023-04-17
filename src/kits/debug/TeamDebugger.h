@@ -23,16 +23,16 @@ public:
 			status_t			Uninstall();
 
 			status_t			LoadProgram(const char* const* args,
-									int32 argCount, bool traceLoading);
+									int32_t argCount, bool traceLoading);
 
-			status_t			ReadDebugMessage(int32& _messageCode,
+			status_t			ReadDebugMessage(int32_t& _messageCode,
 									debug_debugger_message_data& messageBuffer);
 
 			port_id				DebuggerPort() const { return fDebuggerPort; }
 
 private:
 	static	thread_id			_LoadProgram(const char* const* args,
-									int32 argCount, bool traceLoading);
+									int32_t argCount, bool traceLoading);
 	static	status_t			_FindProgram(const char* programName,
 									BPath& resolvedPath);
 

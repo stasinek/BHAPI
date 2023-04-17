@@ -274,14 +274,14 @@ BMessenger::IsValid() const
 
 
 status_t 
-BMessenger::SendMessage(uint32 command) const
+BMessenger::SendMessage(uint32_t command) const
 {
     BMessage msg(command);
     return SendMessage(&msg, NULL, B_INFINITE_TIMEOUT);
 }
 
 status_t 
-BMessenger::SendMessage(uint32 command, BHandler *reply_to = NULL) const
+BMessenger::SendMessage(uint32_t command, BHandler *reply_to = NULL) const
 {
     BMessage msg(command);
     return SendMessage(&msg, reply_to, B_INFINITE_TIMEOUT);
@@ -393,7 +393,7 @@ BMessenger::_SendMessage(const BMessage *a_message,
 
 
 status_t 
-BMessenger::_SendMessageToPort(void *port, const BMessage *msg,  uint32 flags, bigtime_t timeout)
+BMessenger::_SendMessageToPort(void *port, const BMessage *msg,  uint32_t flags, bigtime_t timeout)
 {
     if(!port || !msg) return B_ERROR;
 
@@ -433,7 +433,7 @@ BMessenger::_SendMessageToPort(void *port, const BMessage *msg,  uint32 flags, b
 
 
 BMessage*
-BMessenger::_GetMessageFromPort(void *port,  uint32 flags, bigtime_t timeout, status_t *err)
+BMessenger::_GetMessageFromPort(void *port,  uint32_t flags, bigtime_t timeout, status_t *err)
 {
     status_t retErr = B_OK;
     BMessage* retMsg = NULL;
@@ -442,7 +442,7 @@ BMessenger::_GetMessageFromPort(void *port,  uint32 flags, bigtime_t timeout, st
          int64 bufferSize = bhapi::port_buffer_size_etc((port_id)port, flags, timeout);
         if(bufferSize == 0)
         {
-            int32 code;
+            int32_t code;
             retErr = bhapi::read_port_etc((port_id)port, &code, NULL, 0, B_TIMEOUT, B_INT64_CONSTANT(0));
 //			if(retErr != B_OK) BHAPI_DEBUG("[APP]: Port read failed(0x%x). (%s:%d)", retErr, __FILE__, __LINE__);
             break;
@@ -464,7 +464,7 @@ BMessenger::_GetMessageFromPort(void *port,  uint32 flags, bigtime_t timeout, st
         }
         bzero(buffer, (size_t)bufferSize);
 
-        int32 code;
+        int32_t code;
         if((retErr = bhapi::read_port_etc((port_id)port, &code, buffer, bufferSize, B_TIMEOUT, B_INT64_CONSTANT(0))) != B_OK)
         {
 //			BHAPI_DEBUG("[APP]: Port read failed(0x%x). (%s:%d)", retErr, __FILE__, __LINE__);

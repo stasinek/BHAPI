@@ -59,9 +59,9 @@ class TFilePanel : public BContainerWindow {
 public:
 	TFilePanel(file_panel_mode = B_OPEN_PANEL,
 		BMessenger* target = NULL, const BEntry* startDirectory = NULL,
-		uint32 nodeFlavors = B_FILE_NODE | B_SYMLINK_NODE,
+		uint32_t nodeFlavors = B_FILE_NODE | B_SYMLINK_NODE,
 		bool multipleSelection = true, BMessage* = NULL, BRefFilter* = NULL,
-		uint32 containerWindowFlags = 0,
+		uint32_t containerWindowFlags = 0,
 		window_look look = B_DOCUMENT_WINDOW_LOOK,
 		window_feel feel = B_NORMAL_WINDOW_FEEL,
 		bool hideWhenDone = true);
@@ -78,7 +78,7 @@ public:
 
 	void SetClientObject(BFilePanel*);
 	void SetRefFilter(BRefFilter*);
-	void SetNodeFlavors(uint32 nodeFlavors) { fNodeFlavors = nodeFlavors; }
+	void SetNodeFlavors(uint32_t nodeFlavors) { fNodeFlavors = nodeFlavors; }
 	void SetSaveText(const char* text);
 	void SetButtonLabel(file_panel_button, const char* text);
 	void SetTo(const entry_ref* ref);
@@ -103,7 +103,7 @@ public:
 	bool TrackingMenu() const;
 
 protected:
-	BPoseView* NewPoseView(Model* model, uint32);
+	BPoseView* NewPoseView(Model* model, uint32_t);
 	virtual	void Init(const BMessage* message = NULL);
 	virtual	void SaveState(bool hide = true);
 	virtual	void SaveState(BMessage &) const;
@@ -126,7 +126,7 @@ protected:
 	static filter_result MessageDropFilter(BMessage*, BHandler**,
 		BMessageFilter*);
 
-	int32 ShowCenteredAlert(const char* text, const char* button1,
+	int32_t ShowCenteredAlert(const char* text, const char* button1,
 		const char* button2 = NULL, const char* button3 = NULL);
 
 private:
@@ -139,14 +139,14 @@ private:
 	void OpenSelectionCommon(BMessage*);
 
 	bool fIsSavePanel;
-	uint32 fNodeFlavors;
+	uint32_t fNodeFlavors;
 	BView* fBackView;
 	BDirMenu* fDirMenu;
 	BMenuField* fDirMenuField;
 	BTextControl* fTextControl;
 	BMessenger fTarget;
 	BFilePanel* fClientObject;
-	int32 fSelectionIterator;
+	int32_t fSelectionIterator;
 	BMessage* fMessage;
 	BString fButtonText;
 	bool fHideWhenDone;

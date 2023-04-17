@@ -30,7 +30,7 @@ enum {
 										| B_KERNEL_RESOURCE_ADDRESS_SPACE
 };
 
-typedef void (*low_resource_func)(void *data, uint32 resources, int32 level);
+typedef void (*low_resource_func)(void *data, uint32_t resources, int32_t level);
 
 #ifdef __cplusplus
 extern "C" {
@@ -38,13 +38,13 @@ extern "C" {
 
 status_t low_resource_manager_init(void);
 status_t low_resource_manager_init_post_thread(void);
-int32 low_resource_state(uint32 resources);
-void low_resource(uint32 resource, uint64 requirements, uint32 flags,
-	uint32 timeout);
+int32_t low_resource_state(uint32_t resources);
+void low_resource(uint32_t resource, uint64 requirements, uint32_t flags,
+	uint32_t timeout);
 
 // these calls might get public some day
 status_t register_low_resource_handler(low_resource_func function, void *data,
-			uint32 resources, int32 priority);
+			uint32_t resources, int32_t priority);
 status_t unregister_low_resource_handler(low_resource_func function,
 			void *data);
 

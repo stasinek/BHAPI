@@ -20,7 +20,7 @@ public:
 			void				SetLocation(target_addr_t targetLocation,
 									target_addr_t initialLocation);
 
-			status_t			Init(uint32 registerCount);
+			status_t			Init(uint32_t registerCount);
 			status_t			SaveInitialRuleSet();
 
 			status_t			PushRuleSet();
@@ -33,24 +33,24 @@ public:
 									{ return fLocation; }
 			void				SetLocation(target_addr_t location);
 
-			uint32				CodeAlignment() const
+			uint32_t				CodeAlignment() const
 									{ return fCodeAlignment; }
-			void				SetCodeAlignment(uint32 alignment);
+			void				SetCodeAlignment(uint32_t alignment);
 
-			int32				DataAlignment() const
+			int32_t				DataAlignment() const
 									{ return fDataAlignment; }
-			void				SetDataAlignment(int32 alignment);
+			void				SetDataAlignment(int32_t alignment);
 
-			uint32				ReturnAddressRegister() const
+			uint32_t				ReturnAddressRegister() const
 									{ return fReturnAddressRegister; }
-			void				SetReturnAddressRegister(uint32 reg);
+			void				SetReturnAddressRegister(uint32_t reg);
 
 			CfaCfaRule*			GetCfaCfaRule() const
 									{ return fRuleSet->GetCfaCfaRule(); }
-			CfaRule*			RegisterRule(uint32 index) const
+			CfaRule*			RegisterRule(uint32_t index) const
 									{ return fRuleSet->RegisterRule(index); }
 
-			void				RestoreRegisterRule(uint32 reg);
+			void				RestoreRegisterRule(uint32_t reg);
 
 private:
 			typedef BObjectList<CfaRuleSet> RuleSetList;
@@ -58,9 +58,9 @@ private:
 private:
 			target_addr_t		fTargetLocation;
 			target_addr_t		fLocation;
-			uint32				fCodeAlignment;
-			int32				fDataAlignment;
-			uint32				fReturnAddressRegister;
+			uint32_t				fCodeAlignment;
+			int32_t				fDataAlignment;
+			uint32_t				fReturnAddressRegister;
 			CfaRuleSet*			fRuleSet;
 			CfaRuleSet*			fInitialRuleSet;
 			RuleSetList			fRuleSetStack;

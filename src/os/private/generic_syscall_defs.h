@@ -9,7 +9,7 @@
 /* predefined functions */
 #define B_RESERVED_SYSCALL_BASE		0x80000000
 #define B_SYSCALL_INFO				(B_RESERVED_SYSCALL_BASE)
-	// gets a minimum version uint32, and fills it with the current version on
+	// gets a minimum version uint32_t, and fills it with the current version on
 	// return
 
 

@@ -65,7 +65,7 @@
 
 static const struct {
 	const char*	name;
-	int32		priority;
+	int32_t		priority;
 } kSignalInfos[__MAX_SIGNO + 1] = {
 	{"NONE",			-1},
 	{"HUP",				0},
@@ -136,7 +136,7 @@ static const struct {
 
 
 static inline const char*
-signal_name(uint32 number)
+signal_name(uint32_t number)
 {
 	return number <= __MAX_SIGNO ? kSignalInfos[number].name : "invalid";
 }
@@ -181,7 +181,7 @@ private:
 	\param limit The maximum allowed value the counter may have. When
 		\code < 0 \endcode, the value is not limited.
 */
-QueuedSignalsCounter::QueuedSignalsCounter(int32 limit)
+QueuedSignalsCounter::QueuedSignalsCounter(int32_t limit)
 	:
 	fLimit(limit)
 {
@@ -240,7 +240,7 @@ Signal::Signal(const Signal& other)
 }
 
 
-Signal::Signal(uint32 number, int32 signalCode, int32 errorCode,
+Signal::Signal(uint32_t number, int32_t signalCode, int32_t errorCode,
 	pid_t sendingProcess)
 	:
 	fCounter(NULL),
@@ -307,7 +307,7 @@ Signal::CreateQueuable(const Signal& signal, bool queuingRequired,
 }
 
 void
-Signal::SetTo(uint32 number)
+Signal::SetTo(uint32_t number)
 {
 	Team* team = thread_get_current_thread()->team;
 
@@ -323,7 +323,7 @@ Signal::SetTo(uint32 number)
 }
 
 
-int32
+int32_t
 Signal::Priority() const
 {
 	return kSignalInfos[fNumber].priority;
@@ -370,11 +370,11 @@ PendingSignals::~PendingSignals()
 	\return The priority of the highest priority non-blocked signal, or, if all
 		signals are blocked, \c -1.
 */
-int32
+int32_t
 PendingSignals::HighestSignalPriority(sigset_t nonBlocked) const
 {
 	Signal* queuedSignal;
-	int32 unqueuedSignal;
+	int32_t unqueuedSignal;
 	return _GetHighestPrioritySignal(nonBlocked, queuedSignal, unqueuedSignal);
 }
 
@@ -398,7 +398,7 @@ void
 PendingSignals::AddSignal(Signal* signal)
 {
 	// queue according to priority
-	int32 priority = signal->Priority();
+	int32_t priority = signal->Priority();
 	Signal* otherSignal = NULL;
 	for (SignalList::Iterator it = fQueuedSignals.GetIterator();
 			(otherSignal = it.Next()) != NULL;) {
@@ -458,7 +458,7 @@ PendingSignals::DequeueSignal(sigset_t nonBlocked, Signal& buffer)
 {
 	// find the signal with the highest priority
 	Signal* queuedSignal;
-	int32 unqueuedSignal;
+	int32_t unqueuedSignal;
 	if (_GetHighestPrioritySignal(nonBlocked, queuedSignal, unqueuedSignal) < 0)
 		return NULL;
 
@@ -490,13 +490,13 @@ PendingSignals::DequeueSignal(sigset_t nonBlocked, Signal& buffer)
 	\return The priority of the highest priority non-blocked signal, or, if all
 		signals are blocked, \c -1.
 */
-int32
+int32_t
 PendingSignals::_GetHighestPrioritySignal(sigset_t nonBlocked,
-	Signal*& _queuedSignal, int32& _unqueuedSignal) const
+	Signal*& _queuedSignal, int32_t& _unqueuedSignal) const
 {
 	// check queued signals
 	Signal* queuedSignal = NULL;
-	int32 queuedPriority = -1;
+	int32_t queuedPriority = -1;
 
 	if ((fQueuedSignalsMask & nonBlocked) != 0) {
 		for (SignalList::ConstIterator it = fQueuedSignals.GetIterator();
@@ -510,16 +510,16 @@ PendingSignals::_GetHighestPrioritySignal(sigset_t nonBlocked,
 	}
 
 	// check unqueued signals
-	int32 unqueuedSignal = -1;
-	int32 unqueuedPriority = -1;
+	int32_t unqueuedSignal = -1;
+	int32_t unqueuedPriority = -1;
 
 	sigset_t unqueuedSignals = fUnqueuedSignalsMask & nonBlocked;
 	if (unqueuedSignals != 0) {
-		int32 signal = 1;
+		int32_t signal = 1;
 		while (unqueuedSignals != 0) {
 			sigset_t mask = SIGNAL_TO_MASK(signal);
 			if ((unqueuedSignals & mask) != 0) {
-				int32 priority = kSignalInfos[signal].priority;
+				int32_t priority = kSignalInfos[signal].priority;
 				if (priority > unqueuedPriority) {
 					unqueuedSignal = signal;
 					unqueuedPriority = priority;
@@ -568,7 +568,7 @@ namespace SignalTracing {
 
 class HandleSignal : public AbstractTraceEntry {
 	public:
-		HandleSignal(uint32 signal)
+		HandleSignal(uint32_t signal)
 			:
 			fSignal(signal)
 		{
@@ -582,13 +582,13 @@ class HandleSignal : public AbstractTraceEntry {
 		}
 
 	private:
-		uint32		fSignal;
+		uint32_t		fSignal;
 };
 
 
 class ExecuteSignalHandler : public AbstractTraceEntry {
 	public:
-		ExecuteSignalHandler(uint32 signal, struct sigaction* handler)
+		ExecuteSignalHandler(uint32_t signal, struct sigaction* handler)
 			:
 			fSignal(signal),
 			fHandler((void*)handler->sa_handler)
@@ -603,14 +603,14 @@ class ExecuteSignalHandler : public AbstractTraceEntry {
 		}
 
 	private:
-		uint32	fSignal;
+		uint32_t	fSignal;
 		void*	fHandler;
 };
 
 
 class SendSignal : public AbstractTraceEntry {
 	public:
-		SendSignal(pid_t target, uint32 signal, uint32 flags)
+		SendSignal(pid_t target, uint32_t signal, uint32_t flags)
 			:
 			fTarget(target),
 			fSignal(signal),
@@ -628,14 +628,14 @@ class SendSignal : public AbstractTraceEntry {
 
 	private:
 		pid_t	fTarget;
-		uint32	fSignal;
-		uint32	fFlags;
+		uint32_t	fSignal;
+		uint32_t	fFlags;
 };
 
 
 class SigAction : public AbstractTraceEntry {
 	public:
-		SigAction(uint32 signal, const struct sigaction* act)
+		SigAction(uint32_t signal, const struct sigaction* act)
 			:
 			fSignal(signal),
 			fAction(*act)
@@ -652,7 +652,7 @@ class SigAction : public AbstractTraceEntry {
 		}
 
 	private:
-		uint32				fSignal;
+		uint32_t				fSignal;
 		struct sigaction	fAction;
 };
 
@@ -731,7 +731,7 @@ class SigSuspendDone : public AbstractTraceEntry {
 		}
 
 	private:
-		uint32		fSignals;
+		uint32_t		fSignals;
 };
 
 }	// namespace SignalTracing
@@ -935,7 +935,7 @@ handle_signals(Thread* thread)
 	thread->user_thread->pending_signals = 0;
 
 	// determine syscall restart behavior
-	uint32 restartFlags = atomic_and(&thread->flags,
+	uint32_t restartFlags = atomic_and(&thread->flags,
 		~THREAD_FLAGS_DONT_RESTART_SYSCALL);
 	bool alwaysRestart
 		= (restartFlags & THREAD_FLAGS_ALWAYS_RESTART_SYSCALL) != 0;
@@ -1356,8 +1356,8 @@ has_permission_to_signal(Team* team)
 		code otherwise.
 */
 status_t
-send_signal_to_thread_locked(Thread* thread, uint32 signalNumber,
-	Signal* signal, uint32 flags)
+send_signal_to_thread_locked(Thread* thread, uint32_t signalNumber,
+	Signal* signal, uint32_t flags)
 {
 	ASSERT(signal == NULL || signalNumber == signal->Number());
 
@@ -1489,7 +1489,7 @@ send_signal_to_thread_locked(Thread* thread, uint32 signalNumber,
 		code otherwise.
 */
 status_t
-send_signal_to_thread(Thread* thread, const Signal& signal, uint32 flags)
+send_signal_to_thread(Thread* thread, const Signal& signal, uint32_t flags)
 {
 	// Clone the signal -- the clone will be queued. If something fails and the
 	// caller doesn't require queuing, we will add an unqueued signal.
@@ -1534,7 +1534,7 @@ send_signal_to_thread(Thread* thread, const Signal& signal, uint32 flags)
 		code otherwise.
 */
 status_t
-send_signal_to_thread_id(thread_id threadID, const Signal& signal, uint32 flags)
+send_signal_to_thread_id(thread_id threadID, const Signal& signal, uint32_t flags)
 {
 	Thread* thread = Thread::Get(threadID);
 	if (thread == NULL)
@@ -1567,8 +1567,8 @@ send_signal_to_thread_id(thread_id threadID, const Signal& signal, uint32 flags)
 		code otherwise.
 */
 status_t
-send_signal_to_team_locked(Team* team, uint32 signalNumber, Signal* signal,
-	uint32 flags)
+send_signal_to_team_locked(Team* team, uint32_t signalNumber, Signal* signal,
+	uint32_t flags)
 {
 	ASSERT(signal == NULL || signalNumber == signal->Number());
 
@@ -1701,7 +1701,7 @@ send_signal_to_team_locked(Team* team, uint32 signalNumber, Signal* signal,
 		code otherwise.
 */
 status_t
-send_signal_to_team(Team* team, const Signal& signal, uint32 flags)
+send_signal_to_team(Team* team, const Signal& signal, uint32_t flags)
 {
 	// Clone the signal -- the clone will be queued. If something fails and the
 	// caller doesn't require queuing, we will add an unqueued signal.
@@ -1742,7 +1742,7 @@ send_signal_to_team(Team* team, const Signal& signal, uint32 flags)
 		code otherwise.
 */
 status_t
-send_signal_to_team_id(team_id teamID, const Signal& signal, uint32 flags)
+send_signal_to_team_id(team_id teamID, const Signal& signal, uint32_t flags)
 {
 	// get the team
 	Team* team = Team::Get(teamID);
@@ -1774,7 +1774,7 @@ send_signal_to_team_id(team_id teamID, const Signal& signal, uint32 flags)
 */
 status_t
 send_signal_to_process_group_locked(ProcessGroup* group, const Signal& signal,
-	uint32 flags)
+	uint32_t flags)
 {
 	T(SendSignal(-group->id, signal.Number(), flags));
 
@@ -1819,7 +1819,7 @@ send_signal_to_process_group_locked(ProcessGroup* group, const Signal& signal,
 		code otherwise.
 */
 status_t
-send_signal_to_process_group(pid_t groupID, const Signal& signal, uint32 flags)
+send_signal_to_process_group(pid_t groupID, const Signal& signal, uint32_t flags)
 {
 	ProcessGroup* group = ProcessGroup::Get(groupID);
 	if (group == NULL)
@@ -1846,7 +1846,7 @@ send_signal_to_process_group(pid_t groupID, const Signal& signal, uint32 flags)
 
 static status_t
 send_signal_internal(pid_t id, uint signalNumber, union sigval userValue,
-	uint32 flags)
+	uint32_t flags)
 {
 	if (signalNumber > MAX_SIGNAL_NUMBER)
 		return B_BAD_VALUE;
@@ -1883,7 +1883,7 @@ send_signal_internal(pid_t id, uint signalNumber, union sigval userValue,
 
 
 int
-send_signal_etc(pid_t id, uint signalNumber, uint32 flags)
+send_signal_etc(pid_t id, uint signalNumber, uint32_t flags)
 {
 	// a dummy user value
 	union sigval userValue;
@@ -2006,7 +2006,7 @@ sigaction(int signal, const struct sigaction* act, struct sigaction* oldAction)
 	set), or a relative timeout \code <= 0 \endcode (\c B_RELATIVE_TIMEOUT set).
 */
 static status_t
-sigwait_internal(const sigset_t* set, siginfo_t* info, uint32 flags,
+sigwait_internal(const sigset_t* set, siginfo_t* info, uint32_t flags,
 	bigtime_t timeout)
 {
 	// restrict mask to blockable signals
@@ -2190,8 +2190,8 @@ sigpending_internal(sigset_t* set)
 	\return \c B_OK on success, another error code otherwise.
 */
 status_t
-_user_send_signal(int32 id, uint32 signalNumber,
-	const union sigval* userUserValue, uint32 flags)
+_user_send_signal(int32_t id, uint32_t signalNumber,
+	const union sigval* userUserValue, uint32_t flags)
 {
 	// restrict flags to the allowed ones and add B_CHECK_PERMISSION
 	flags &= SIGNAL_FLAG_QUEUING_REQUIRED | SIGNAL_FLAG_SEND_TO_THREAD;
@@ -2279,7 +2279,7 @@ _user_sigaction(int signal, const struct sigaction *userAction,
 
 
 status_t
-_user_sigwait(const sigset_t *userSet, siginfo_t *userInfo, uint32 flags,
+_user_sigwait(const sigset_t *userSet, siginfo_t *userInfo, uint32_t flags,
 	bigtime_t timeout)
 {
 	// copy userSet to stack

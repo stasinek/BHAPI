@@ -23,14 +23,14 @@ class ElfSymbolLookupSource;
 
 class ElfSection {
 public:
-								ElfSection(const char* name, uint32 type,
+								ElfSection(const char* name, uint32_t type,
 									int fd, uint64 offset, uint64 size,
-									target_addr_t loadAddress, uint32 flags,
-									uint32 linkIndex);
+									target_addr_t loadAddress, uint32_t flags,
+									uint32_t linkIndex);
 								~ElfSection();
 
 			const char*			Name() const	{ return fName; }
-			uint32				Type() const	{ return fType; }
+			uint32_t				Type() const	{ return fType; }
 			uint64				Offset() const	{ return fOffset; }
 			uint64				Size() const	{ return fSize; }
 			const void*			Data() const	{ return fData; }
@@ -42,35 +42,35 @@ public:
 			status_t			Load();
 			void				Unload();
 			bool				IsLoaded() const	{ return fLoadCount > 0; }
-			uint32				LinkIndex() const	{ return fLinkIndex; }
+			uint32_t				LinkIndex() const	{ return fLinkIndex; }
 
 private:
 			const char*			fName;
-			uint32				fType;
+			uint32_t				fType;
 			int					fFD;
 			uint64				fOffset;
 			uint64				fSize;
 			void*				fData;
 			target_addr_t		fLoadAddress;
-			uint32				fFlags;
-			int32				fLoadCount;
-			uint32				fLinkIndex;
+			uint32_t				fFlags;
+			int32_t				fLoadCount;
+			uint32_t				fLinkIndex;
 };
 
 
 class ElfSegment {
 public:
-								ElfSegment(uint32 type, uint64 fileOffset,
+								ElfSegment(uint32_t type, uint64 fileOffset,
 									uint64 fileSize, target_addr_t loadAddress,
-									target_size_t loadSize, uint32 flags);
+									target_size_t loadSize, uint32_t flags);
 								~ElfSegment();
 
-			uint32				Type()				{ return fType; }
+			uint32_t				Type()				{ return fType; }
 			uint64				FileOffset() const	{ return fFileOffset; }
 			uint64				FileSize() const	{ return fFileSize; }
 			target_addr_t		LoadAddress() const	{ return fLoadAddress; }
 			target_size_t		LoadSize() const	{ return fLoadSize; }
-			uint32				Flags() const		{ return fFlags; }
+			uint32_t				Flags() const		{ return fFlags; }
 			bool				IsWritable() const
 									{ return (fFlags & PF_WRITE) != 0; }
 
@@ -79,14 +79,14 @@ private:
 			uint64				fFileSize;
 			target_addr_t		fLoadAddress;
 			target_size_t		fLoadSize;
-			uint32				fType;
-			uint32				fFlags;
+			uint32_t				fType;
+			uint32_t				fFlags;
 };
 
 
 struct ElfClass32 {
-	typedef uint32					Address;
-	typedef uint32					Size;
+	typedef uint32_t					Address;
+	typedef uint32_t					Size;
 	typedef Elf32_Ehdr				Ehdr;
 	typedef Elf32_Phdr				Phdr;
 	typedef Elf32_Shdr				Shdr;
@@ -129,18 +129,18 @@ public:
 			uint16				Type() const	{ return fType; }
 			uint16				Machine() const	{ return fMachine; }
 
-			int32				CountSection() const
+			int32_t				CountSection() const
 									{ return fSections.CountItems(); }
-			ElfSection*			SectionAt(int32 index) const
+			ElfSection*			SectionAt(int32_t index) const
 									{ return fSections.ItemAt(index); }
 			ElfSection*			GetSection(const char* name);
 			void				PutSection(ElfSection* section);
 			ElfSection*			FindSection(const char* name) const;
-			ElfSection*			FindSection(uint32 type) const;
+			ElfSection*			FindSection(uint32_t type) const;
 
-			int32				CountSegments() const
+			int32_t				CountSegments() const
 									{ return fSegments.CountItems(); }
-			ElfSegment*			SegmentAt(int32 index) const
+			ElfSegment*			SegmentAt(int32_t index) const
 									{ return fSegments.ItemAt(index); }
 
 			ElfSegment*			TextSegment() const;
@@ -173,7 +173,7 @@ private:
 
 			bool				_FindSymbolSections(ElfSection*& _symbolSection,
 									ElfSection*& _stringSection,
-									uint32 type) const;
+									uint32_t type) const;
 
 			bool				_CheckRange(uint64 offset, uint64 size) const;
 
@@ -185,10 +185,10 @@ private:
 									{ return value; }
 	static	uint16				_Swap(const uint16& value)
 									{ return (uint16)B_SWAP_INT16(value); }
-	static	int32				_Swap(const int32& value)
+	static	int32_t				_Swap(const int32_t& value)
 									{ return B_SWAP_INT32(value); }
-	static	uint32				_Swap(const uint32& value)
-									{ return (uint32)B_SWAP_INT32(value); }
+	static	uint32_t				_Swap(const uint32_t& value)
+									{ return (uint32_t)B_SWAP_INT32(value); }
 	static	int64				_Swap(const int64& value)
 									{ return B_SWAP_INT64(value); }
 	static	uint64				_Swap(const uint64& value)

@@ -15,12 +15,12 @@
 
 namespace BPrivate {
 
-const int32			kSecondsPerMinute			= 60;
+const int32_t			kSecondsPerMinute			= 60;
 
-const int32			kHoursPerDay				= 24;
-const int32			kMinutesPerDay				= 1440;
-const int32			kSecondsPerDay				= 86400;
-const int32			kMillisecondsPerDay			= 86400000;
+const int32_t			kHoursPerDay				= 24;
+const int32_t			kMinutesPerDay				= 1440;
+const int32_t			kSecondsPerDay				= 86400;
+const int32_t			kMillisecondsPerDay			= 86400000;
 
 const bigtime_t		kMicrosecondsPerSecond		= 1000000LL;
 const bigtime_t		kMicrosecondsPerMinute		= 60000000LL;
@@ -55,7 +55,7 @@ BTime::BTime(const BTime& other)
 	0 and 59 and \c microsecond should be in the range of 0 and 999999. If the
 	specified time is invalid, the time is not set and IsValid() returns false.
 */
-BTime::BTime(int32 hour, int32 minute, int32 second, int32 microsecond)
+BTime::BTime(int32_t hour, int32_t minute, int32_t second, int32_t microsecond)
 	:
 	fMicroseconds(-1)
 {
@@ -119,7 +119,7 @@ bool BTime::IsValid(const BTime& time)
 	This is an overloaded member function, provided for convenience.
 */
 /*static*/
-bool BTime::IsValid(int32 hour, int32 minute, int32 second, int32 microsecond)
+bool BTime::IsValid(int32_t hour, int32_t minute, int32_t second, int32_t microsecond)
 {
 	return BTime(hour, minute, second, microsecond).IsValid();
 }
@@ -147,7 +147,7 @@ BTime BTime::CurrentTime(time_type type)
 	if (timeinfo == NULL)
 		return BTime();
 
-	int32 sec = timeinfo->tm_sec;
+	int32_t sec = timeinfo->tm_sec;
 	return BTime(timeinfo->tm_hour, timeinfo->tm_min, (sec > 59) ? 59 : sec,
 		tv.tv_usec);
 }
@@ -179,7 +179,7 @@ bool BTime::SetTime(const BTime& time)
 	true if the time is valid; otherwise false. If the specified time is
 	invalid, the time is not set and the function returns false.
 */
-bool BTime::SetTime(int32 hour, int32 minute, int32 second, int32 microsecond)
+bool BTime::SetTime(int32_t hour, int32_t minute, int32_t second, int32_t microsecond)
 {
 	return _SetTime(hour, minute, second, microsecond);
 }
@@ -188,7 +188,7 @@ bool BTime::SetTime(int32 hour, int32 minute, int32 second, int32 microsecond)
 	Adds \c hours to the current time. If the passed value is negative it
 	will become earlier. Note: The time will wrap if it passes midnight.
 */
-BTime& BTime::AddHours(int32 hours)
+BTime& BTime::AddHours(int32_t hours)
 {
 	return _AddMicroseconds(bigtime_t(hours % kHoursPerDay)
 		* kMicrosecondsPerHour);
@@ -198,7 +198,7 @@ BTime& BTime::AddHours(int32 hours)
 	Adds \c minutes to the current time. If the passed value is negative it
 	will become earlier. Note: The time will wrap if it passes midnight.
 */
-BTime& BTime::AddMinutes(int32 minutes)
+BTime& BTime::AddMinutes(int32_t minutes)
 {
 	return _AddMicroseconds(bigtime_t(minutes % kMinutesPerDay)
 		* kMicrosecondsPerMinute);
@@ -208,7 +208,7 @@ BTime& BTime::AddMinutes(int32 minutes)
 	Adds \c seconds to the current time. If the passed value is negative
 	it will become earlier. Note: The time will wrap if it passes midnight.
 */
-BTime& BTime::AddSeconds(int32 seconds)
+BTime& BTime::AddSeconds(int32_t seconds)
 {
 	return _AddMicroseconds(bigtime_t(seconds % kSecondsPerDay)
 		* kMicrosecondsPerSecond);
@@ -219,7 +219,7 @@ BTime& BTime::AddSeconds(int32 seconds)
 	Adds \c milliseconds to the current time. If the passed value is negative
 	it will become earlier. Note: The time will wrap if it passes midnight.
 */
-BTime& BTime::AddMilliseconds(int32 milliseconds)
+BTime& BTime::AddMilliseconds(int32_t milliseconds)
 {
 	return _AddMicroseconds(bigtime_t(milliseconds % kMillisecondsPerDay)
 		* 1000);
@@ -229,7 +229,7 @@ BTime& BTime::AddMilliseconds(int32 milliseconds)
 	Adds \c microseconds to the current time. If the passed value is negative
 	it will become earlier. Note: The time will wrap if it passes midnight.
 */
-BTime& BTime::AddMicroseconds(int32 microseconds)
+BTime& BTime::AddMicroseconds(int32_t microseconds)
 {
 	return _AddMicroseconds(microseconds);
 }
@@ -237,32 +237,32 @@ BTime& BTime::AddMicroseconds(int32 microseconds)
 /*!
 	Returns the hour fragment of the time.
 */
-int32 BTime::Hour() const
+int32_t BTime::Hour() const
 {
-	return int32(_Microseconds() / kMicrosecondsPerHour);
+	return int32_t(_Microseconds() / kMicrosecondsPerHour);
 }
 
 /*!
 	Returns the minute fragment of the time.
 */
-int32 BTime::Minute() const
+int32_t BTime::Minute() const
 {
-	return int32(((_Microseconds() % kMicrosecondsPerHour))
+	return int32_t(((_Microseconds() % kMicrosecondsPerHour))
 		/ kMicrosecondsPerMinute);
 }
 
 /*!
 	Returns the second fragment of the time.
 */
-int32 BTime::Second() const
+int32_t BTime::Second() const
 {
-	return int32(_Microseconds() / kMicrosecondsPerSecond) % kSecondsPerMinute;
+	return int32_t(_Microseconds() / kMicrosecondsPerSecond) % kSecondsPerMinute;
 }
 
 /*!
 	Returns the millisecond fragment of the time.
 */
-int32 BTime::Millisecond() const
+int32_t BTime::Millisecond() const
 {
 
 	return Microsecond() / 1000;
@@ -271,9 +271,9 @@ int32 BTime::Millisecond() const
 /*!
 	Returns the microsecond fragment of the time.
 */
-int32 BTime::Microsecond() const
+int32_t BTime::Microsecond() const
 {
-	return int32(_Microseconds() % kMicrosecondsPerSecond);
+	return int32_t(_Microseconds() % kMicrosecondsPerSecond);
 }
 
 bigtime_t BTime::_Microseconds() const
@@ -421,7 +421,7 @@ BDate::BDate(const BDate& other)
 	that every passed year will be interpreted as is.
 
 */
-BDate::BDate(int32 year, int32 month, int32 day)
+BDate::BDate(int32_t year, int32_t month, int32_t day)
 {
 	_SetDate(year, month, day);
 }
@@ -512,7 +512,7 @@ bool BDate::IsValid() const
 /*!
 	This is an overloaded member function, provided for convenience.
 */
-/*static*/ bool BDate::IsValid(int32 year, int32 month, int32 day)
+/*static*/ bool BDate::IsValid(int32_t year, int32_t month, int32_t day)
 {
 	// no year 0 in Julian and nothing before 1.1.4713 BC
 	if (year == 0 || year < -4713)
@@ -563,7 +563,7 @@ bool BDate::SetDate(const BDate& date)
 	Returns true if the date is valid; otherwise false. If the specified date is
 	invalid, the date is not set and the function returns false.
 */
-bool BDate::SetDate(int32 year, int32 month, int32 day)
+bool BDate::SetDate(int32_t year, int32_t month, int32_t day)
 {
 	return _SetDate(year, month, day);
 }
@@ -574,7 +574,7 @@ bool BDate::SetDate(int32 year, int32 month, int32 day)
 	invalid, the values will be set to -1 for \c month and \c day, the \c year
 	will be set to 0.
 */
-void BDate::GetDate(int32* year, int32* month, int32* day) const
+void BDate::GetDate(int32_t* year, int32_t* month, int32_t* day) const
 {
 	if (year)
 		*year = fYear;
@@ -590,7 +590,7 @@ void BDate::GetDate(int32* year, int32* month, int32* day) const
 	Adds \c days to the current date. If the passed value is negativ it will
 	become earlier. If the current date is invalid, the \c days are not added.
 */
-void BDate::AddDays(int32 days)
+void BDate::AddDays(int32_t days)
 {
 	if (IsValid())
 		*this = JulianDayToDate(DateToJulianDay() + days);
@@ -602,10 +602,10 @@ void BDate::AddDays(int32 days)
 	The day/ month combination will be adjusted if it does not exist in the
 	resulting year, so this function will then return the latest valid date.
 */
-void BDate::AddYears(int32 years)
+void BDate::AddYears(int32_t years)
 {
 	if (IsValid()) {
-		const int32 tmp = fYear;
+		const int32_t tmp = fYear;
 		fYear += years;
 
 		if ((tmp > 0 && fYear <= 0) || (tmp < 0 && fYear >= 0))
@@ -621,10 +621,10 @@ void BDate::AddYears(int32 years)
 	The day/ month combination will be adjusted if it does not exist in the
 	resulting year, so this function will then return the latest valid date.
 */
-void BDate::AddMonths(int32 months)
+void BDate::AddMonths(int32_t months)
 {
 	if (IsValid()) {
-		const int32 tmp = fYear;
+		const int32_t tmp = fYear;
 		fYear += months / 12;
 		fMonth +=  months % 12;
 
@@ -651,7 +651,7 @@ void BDate::AddMonths(int32 months)
 	Returns the day fragment of the date. The return value will be in the range
 	of 1 to 31, in case the date is invalid it will be -1.
 */
-int32 BDate::Day() const
+int32_t BDate::Day() const
 {
 	return fDay;
 }
@@ -661,7 +661,7 @@ int32 BDate::Day() const
 	Returns the year fragment of the date. If the date is invalid, the function
 	returns 0.
 */
-int32 BDate::Year() const
+int32_t BDate::Year() const
 {
 	return fYear;
 }
@@ -671,7 +671,7 @@ int32 BDate::Year() const
 	Returns the month fragment of the date. The return value will be in the
 	range of 1 to 12, in case the date is invalid it will be -1.
 */
-int32 BDate::Month() const
+int32_t BDate::Month() const
 {
 	return fMonth;
 }
@@ -682,22 +682,22 @@ int32 BDate::Month() const
 	If \c date is earlier the return value will be negativ. If the calculation
 	is done with an invalid date, the result is undefined.
 */
-int32 BDate::Difference(const BDate& date) const
+int32_t BDate::Difference(const BDate& date) const
 {
 	return date.DateToJulianDay() - DateToJulianDay();
 }
 
-void BDate::SetDay(int32 day)
+void BDate::SetDay(int32_t day)
 {
 	fDay = day;
 }
 
-void BDate::SetMonth(int32 month)
+void BDate::SetMonth(int32_t month)
 {
 	fMonth = month;
 }
 
-void BDate::SetYear(int32 year)
+void BDate::SetYear(int32_t year)
 {
 	fYear = year;
 }
@@ -707,7 +707,7 @@ void BDate::SetYear(int32 year)
 	B_ERROR. Please note that this function does only work within the Gregorian
 	calendar, thus a date before 15.10.1582 will return B_ERROR.
 */
-int32 BDate::WeekNumber() const
+int32_t BDate::WeekNumber() const
 {
 	/*
 		This algorithm is taken from:
@@ -720,36 +720,36 @@ int32 BDate::WeekNumber() const
 	if (!IsValid() || fYear < 1582
 		|| (fYear == 1582 && fMonth < 10)
 		|| (fYear == 1582 && fMonth == 10 && fDay < 15))
-		return int32(B_ERROR);
+		return int32_t(B_ERROR);
 
-	int32 a;
-	int32 b;
-	int32 s;
-	int32 e;
-	int32 f;
+	int32_t a;
+	int32_t b;
+	int32_t s;
+	int32_t e;
+	int32_t f;
 
 	if (fMonth > 0 && fMonth < 3) {
 		a = fYear - 1;
 		b = (a / 4) - (a / 100) + (a / 400);
-		int32 c = ((a - 1) / 4) - ((a - 1) / 100) + ((a -1) / 400);
+		int32_t c = ((a - 1) / 4) - ((a - 1) / 100) + ((a -1) / 400);
 		s = b - c;
 		e = 0;
 		f = fDay - 1 + 31 * (fMonth - 1);
 	} else if (fMonth >= 3 && fMonth <= 12) {
 		a = fYear;
 		b = (a / 4) - (a / 100) + (a / 400);
-		int32 c = ((a - 1) / 4) - ((a - 1) / 100) + ((a -1) / 400);
+		int32_t c = ((a - 1) / 4) - ((a - 1) / 100) + ((a -1) / 400);
 		s = b - c;
 		e = s + 1;
 		f = fDay + ((153 * (fMonth - 3) + 2) / 5) + 58 + s;
 	} else
-		return int32(B_ERROR);
+		return int32_t(B_ERROR);
 
-	int32 g = (a + b) % 7;
-	int32 d = (f + g - e) % 7;
-	int32 n = f + 3 - d;
+	int32_t g = (a + b) % 7;
+	int32_t d = (f + g - e) % 7;
+	int32_t n = f + 3 - d;
 
-	int32 weekNumber;
+	int32_t weekNumber;
 	if (n < 0)
 		weekNumber = 53 - (g -s) / 5;
 	else if (n > 364 + s)
@@ -765,10 +765,10 @@ int32 BDate::WeekNumber() const
 	Returns the day of the week in the range of 1 to 7, while 1 stands for
 	monday. If the date is invalid, the function will return B_ERROR.
 */
-int32 BDate::DayOfWeek() const
+int32_t BDate::DayOfWeek() const
 {
 	// http://en.wikipedia.org/wiki/Julian_day#Calculation
-	return IsValid() ? (DateToJulianDay() % 7) + 1 : int32(B_ERROR);
+	return IsValid() ? (DateToJulianDay() % 7) + 1 : int32_t(B_ERROR);
 }
 
 
@@ -776,10 +776,10 @@ int32 BDate::DayOfWeek() const
 	Returns the day of the year in the range of 1 to 365 (366 in leap years). If
 	the date is invalid, the function will return B_ERROR.
 */
-int32 BDate::DayOfYear() const
+int32_t BDate::DayOfYear() const
 {
 	if (!IsValid())
-		return int32(B_ERROR);
+		return int32_t(B_ERROR);
 
 	return DateToJulianDay() - _DateToJulianDay(fYear, 1, 1) + 1;
 }
@@ -799,7 +799,7 @@ bool BDate::IsLeapYear() const
 	Returns true if the passed \c year is a leap year, otherwise false. If the
 	\c year passed is before 4713 BC, the result is undefined.
 */
-/*static*/ bool BDate::IsLeapYear(int32 year)
+/*static*/ bool BDate::IsLeapYear(int32_t year)
 {
 	if (year < 1582) {
 		if (year < 0)
@@ -814,10 +814,10 @@ bool BDate::IsLeapYear() const
 	Returns the number of days in the year of the current date. If the date is
 	valid it will return 365 or 366, otherwise B_ERROR;
 */
-int32 BDate::DaysInYear() const
+int32_t BDate::DaysInYear() const
 {
 	if (!IsValid())
-		return int32(B_ERROR);
+		return int32_t(B_ERROR);
 
 	return IsLeapYear(fYear) ? 366 : 365;
 }
@@ -827,10 +827,10 @@ int32 BDate::DaysInYear() const
 	Returns the number of days in the month of the current date. If the date is
 	valid it will return 28 up to 31, otherwise B_ERROR;
 */
-int32 BDate::DaysInMonth() const
+int32_t BDate::DaysInMonth() const
 {
 	if (!IsValid())
-		return int32(B_ERROR);
+		return int32_t(B_ERROR);
 
 	return _DaysInMonth(fYear, fMonth);
 }
@@ -852,7 +852,7 @@ BDate::ShortDayName() const
 	monday.
 */
 /*static*/ BString
-BDate::ShortDayName(int32 day)
+BDate::ShortDayName(int32_t day)
 {
 	if (day < 1 || day > 7)
 		return BString();
@@ -883,7 +883,7 @@ BDate::ShortMonthName() const
 	string. The passed \c month must be in the range of 1 to 12.
 */
 /*static*/ BString
-BDate::ShortMonthName(int32 month)
+BDate::ShortMonthName(int32_t month)
 {
 	if (month < 1 || month > 12)
 		return BString();
@@ -915,7 +915,7 @@ BDate::LongDayName() const
 	monday.
 */
 /*static*/ BString
-BDate::LongDayName(int32 day)
+BDate::LongDayName(int32_t day)
 {
 	if (day < 1 || day > 7)
 		return BString();
@@ -946,7 +946,7 @@ BDate::LongMonthName() const
 	string. The passed \c month must be in the range of 1 to 12.
 */
 /*static*/ BString
-BDate::LongMonthName(int32 month)
+BDate::LongMonthName(int32_t month)
 {
 	if (month < 1 || month > 12)
 		return BString();
@@ -966,7 +966,7 @@ BDate::LongMonthName(int32 month)
 	Converts the date to Julian day. If your date is invalid, the function will
 	return B_ERROR.
 */
-int32 BDate::DateToJulianDay() const
+int32_t BDate::DateToJulianDay() const
 {
 	return _DateToJulianDay(fYear, fMonth, fDay);
 }
@@ -978,33 +978,33 @@ int32 BDate::DateToJulianDay() const
 	calendar to Gregorian calendar the 4.10.1582 is followed by the 15.10.1582.
 */
 /*static*/ BDate
-BDate::JulianDayToDate(int32 julianDay)
+BDate::JulianDayToDate(int32_t julianDay)
 {
 	BDate date;
-	const int32 kGregorianCalendarStart = 2299161;
+	const int32_t kGregorianCalendarStart = 2299161;
 	if (julianDay >= kGregorianCalendarStart) {
 		// http://en.wikipedia.org/wiki/Julian_day#Gregorian_calendar_from_Julian_day_number
-		int32 j = julianDay + 32044;
-		int32 dg = j % 146097;
-		int32 c = (dg / 36524 + 1) * 3 / 4;
-		int32 dc = dg - c * 36524;
-		int32 db = dc % 1461;
-		int32 a = (db / 365 + 1) * 3 / 4;
-		int32 da = db - a * 365;
-		int32 m = (da * 5 + 308) / 153 - 2;
+		int32_t j = julianDay + 32044;
+		int32_t dg = j % 146097;
+		int32_t c = (dg / 36524 + 1) * 3 / 4;
+		int32_t dc = dg - c * 36524;
+		int32_t db = dc % 1461;
+		int32_t a = (db / 365 + 1) * 3 / 4;
+		int32_t da = db - a * 365;
+		int32_t m = (da * 5 + 308) / 153 - 2;
 		date.fYear = ((j / 146097) * 400 + c * 100 + (dc / 1461) * 4 + a)
 			- 4800 + (m + 2) / 12;
 		date.fMonth = (m + 2) % 12 + 1;
-		date.fDay = int32((da - (m + 4) * 153 / 5 + 122) + 1.5);
+		date.fDay = int32_t((da - (m + 4) * 153 / 5 + 122) + 1.5);
 	} else if (julianDay >= 0) {
 		// http://en.wikipedia.org/wiki/Julian_day#Calculation
 		julianDay += 32082;
-		int32 d = (4 * julianDay + 3) / 1461;
-		int32 e = julianDay - (1461 * d) / 4;
-		int32 m = ((5 * e) + 2) / 153;
+		int32_t d = (4 * julianDay + 3) / 1461;
+		int32_t e = julianDay - (1461 * d) / 4;
+		int32_t m = ((5 * e) + 2) / 153;
 		date.fDay = e - (153 * m + 2) / 5 + 1;
 		date.fMonth = m + 3 - 12 * (m / 10);
-		int32 year = d - 4800 + (m / 10);
+		int32_t year = d - 4800 + (m / 10);
 		if (year <= 0)
 			year--;
 		date.fYear = year;
@@ -1069,7 +1069,7 @@ bool BDate::operator>=(const BDate& date) const
 }
 
 
-bool BDate::_SetDate(int32 year, int32 month, int32 day)
+bool BDate::_SetDate(int32_t year, int32_t month, int32_t day)
 {
 	fDay = -1;
 	fYear = 0;
@@ -1086,27 +1086,27 @@ bool BDate::_SetDate(int32 year, int32 month, int32 day)
 }
 
 
-int32 BDate::_DaysInMonth(int32 year, int32 month)
+int32_t BDate::_DaysInMonth(int32_t year, int32_t month)
 {
 	if (month == 2 && IsLeapYear(year))
 		return 29;
 
-	const int32 daysInMonth[12] =
+	const int32_t daysInMonth[12] =
 		{31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
 
 	return daysInMonth[month -1];
 }
 
 
-int32 BDate::_DateToJulianDay(int32 _year, int32 month, int32 day)
+int32_t BDate::_DateToJulianDay(int32_t _year, int32_t month, int32_t day)
 {
 	if (IsValid(_year, month, day)) {
-		int32 year = _year;
+		int32_t year = _year;
 		if (year < 0) year++;
 
-		int32 a = (14 - month) / 12;
-		int32 y = year + 4800 - a;
-		int32 m = month + (12 * a) - 3;
+		int32_t a = (14 - month) / 12;
+		int32_t y = year + 4800 - a;
+		int32_t m = month + (12 * a) - 3;
 
 		// http://en.wikipedia.org/wiki/Julian_day#Calculation
 		if (year > 1582
@@ -1125,7 +1125,7 @@ int32 BDate::_DateToJulianDay(int32 _year, int32 month, int32 day)
 	//		The last day of the Julian calendar was Thursday October 4, 1582
 	//		and this was followed by the first day of the Gregorian calendar,
 	//		Friday October 15, 1582 (the cycle of weekdays was not affected).
-	return int32(B_ERROR);
+	return int32_t(B_ERROR);
 }
 
 

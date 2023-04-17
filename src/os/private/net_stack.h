@@ -29,7 +29,7 @@ struct net_timer;
 typedef struct net_fifo {
 	mutex		lock;
 	sem_id		notify;
-	int32		waiting;
+	int32_t		waiting;
 
 	size_t		max_bytes;
 	size_t		current_bytes;
@@ -44,7 +44,7 @@ typedef struct net_timer {
 	net_timer_func	hook;
 	void*			data;
 	bigtime_t		due;
-	uint32			flags;
+	uint32_t			flags;
 } net_timer;
 
 typedef status_t (*net_deframe_func)(net_device* device, net_buffer* buffer);
@@ -63,7 +63,7 @@ typedef struct net_device_monitor {
 
 	status_t (*receive)(struct net_device_monitor* monitor,
 		struct net_buffer* buffer);
-	void (*event)(struct net_device_monitor* monitor, int32 event);
+	void (*event)(struct net_device_monitor* monitor, int32_t event);
 } net_device_monitor;
 
 typedef struct ancillary_data_header {
@@ -75,7 +75,7 @@ typedef struct ancillary_data_header {
 typedef struct ancillary_data_container ancillary_data_container;
 
 
-#define B_NET_FRAME_TYPE(super, sub)	(((int32)(super) << 16) | (sub))
+#define B_NET_FRAME_TYPE(super, sub)	(((int32_t)(super) << 16) | (sub))
 	// Use this when registering a device handler, see net/if_types.h for
 	// the possible "super" values. Input values are in host byte order.
 
@@ -109,9 +109,9 @@ struct net_stack_module_info {
 					const char* moduleName);
 
 	status_t	(*get_domain_receiving_protocol)(net_domain* domain,
-					uint32 type, struct net_protocol_module_info** _module);
+					uint32_t type, struct net_protocol_module_info** _module);
 	status_t	(*put_domain_receiving_protocol)(net_domain* domain,
-					uint32 type);
+					uint32_t type);
 
 	// devices
 	status_t	(*register_device_deframer)(net_device* device,
@@ -119,10 +119,10 @@ struct net_stack_module_info {
 	status_t	(*unregister_device_deframer)(net_device* device);
 
 	status_t	(*register_domain_device_handler)(net_device* device,
-					int32 type, net_domain* domain);
+					int32_t type, net_domain* domain);
 	status_t	(*register_device_handler)(net_device* device,
-					int32 type, net_receive_func receiveFunc, void* cookie);
-	status_t	(*unregister_device_handler)(net_device* device, int32 type);
+					int32_t type, net_receive_func receiveFunc, void* cookie);
+	status_t	(*unregister_device_handler)(net_device* device, int32_t type);
 
 	status_t	(*register_device_monitor)(net_device* device,
 					struct net_device_monitor* monitor);
@@ -138,7 +138,7 @@ struct net_stack_module_info {
 	// Utility Functions
 
 	// notification
-	status_t	(*notify_socket)(net_socket* socket, uint8 event, int32 value);
+	status_t	(*notify_socket)(net_socket* socket, uint8 event, int32_t value);
 
 	// checksum
 	uint16		(*checksum)(uint8* buffer, size_t length);
@@ -147,7 +147,7 @@ struct net_stack_module_info {
 	status_t	(*init_fifo)(net_fifo* fifo, const char* name, size_t maxBytes);
 	void		(*uninit_fifo)(net_fifo* fifo);
 	status_t	(*fifo_enqueue_buffer)(net_fifo* fifo, net_buffer* buffer);
-	ssize_t		(*fifo_dequeue_buffer)(net_fifo* fifo, uint32 flags,
+	ssize_t		(*fifo_dequeue_buffer)(net_fifo* fifo, uint32_t flags,
 					bigtime_t timeout, net_buffer** _buffer);
 	status_t	(*clear_fifo)(net_fifo* fifo);
 	status_t	(*fifo_socket_enqueue_buffer)(net_fifo* fifo,

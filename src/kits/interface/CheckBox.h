@@ -39,15 +39,15 @@ public:
           const char *name,
           const char *label,
           BMessage *message,
-           uint32 resizeMode = B_FOLLOW_LEFT | B_FOLLOW_TOP,
-           uint32 flags = B_WILL_DRAW | B_NAVIGABLE);
+           uint32_t resizeMode = B_FOLLOW_LEFT | B_FOLLOW_TOP,
+           uint32_t flags = B_WILL_DRAW | B_NAVIGABLE);
     virtual ~BCheckBox();
 
     virtual void	SetLabel(const char *label);
 
     virtual void	Draw(BRect updateRect);
     virtual void	MouseDown(BPoint where);
-    virtual void	KeyDown(const char *bytes,  int32 numBytes);
+    virtual void	KeyDown(const char *bytes,  int32_t numBytes);
     virtual void	SetFont(const BFont *font,  uint8 mask = B_FONT_ALL);
     virtual void	WindowActivated(bool state);
 

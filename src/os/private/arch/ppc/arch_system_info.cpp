@@ -11,7 +11,7 @@
 
 
 enum cpu_vendor sCPUVendor;
-uint32 sPVR;
+uint32_t sPVR;
 
 static uint64 sCPUClockFrequency;
 static uint64 sBusClockFrequency;
@@ -59,7 +59,7 @@ struct cpu_model kCPUModels[] = {
 
 
 void
-arch_fill_topology_node(cpu_topology_node_info* node, int32 cpu)
+arch_fill_topology_node(cpu_topology_node_info* node, int32_t cpu)
 {
 	switch (node->type) {
 		case B_TOPOLOGY_ROOT:

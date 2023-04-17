@@ -276,7 +276,7 @@ void GameSoundBuffer::Play(void * data, int64 frames)
 			case gs_audio_format::B_GS_S32:
 			{
 				for (int64 i = 0; i < frames; i++) {
-					ApplyMod((int32*)data, (int32*)buffer, i, pan);
+					ApplyMod((int32_t*)data, (int32_t*)buffer, i, pan);
 					UpdateMods();
 				}
 
@@ -381,7 +381,7 @@ status_t GameSoundBuffer::Connect(media_node * consumer)
 	// got the nodes; now we find the endpoints of the connection
 	media_input mixerInput;
 	media_output soundOutput;
-	int32 count = 1;
+	int32_t count = 1;
 	err = roster->GetFreeOutputsFor(fConnection->producer, &soundOutput, 1,
 		&count);
 

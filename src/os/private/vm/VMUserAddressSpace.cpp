@@ -53,7 +53,7 @@ is_valid_spot(addr_t base, addr_t alignedBase, addr_t size, addr_t limit)
 
 
 static inline bool
-is_base_address_spec(uint32 addressSpec)
+is_base_address_spec(uint32_t addressSpec)
 {
 	return addressSpec == B_BASE_ADDRESS
 		|| addressSpec == B_RANDOMIZED_BASE_ADDRESS;
@@ -68,7 +68,7 @@ align_address(addr_t address, size_t alignment)
 
 
 static inline addr_t
-align_address(addr_t address, size_t alignment, uint32 addressSpec,
+align_address(addr_t address, size_t alignment, uint32_t addressSpec,
 	addr_t baseAddress)
 {
 	if (is_base_address_spec(addressSpec))
@@ -115,15 +115,15 @@ VMUserAddressSpace::NextArea(VMArea* _area) const
 
 
 VMArea*
-VMUserAddressSpace::CreateArea(const char* name, uint32 wiring,
-	uint32 protection, uint32 allocationFlags)
+VMUserAddressSpace::CreateArea(const char* name, uint32_t wiring,
+	uint32_t protection, uint32_t allocationFlags)
 {
 	return VMUserArea::Create(this, name, wiring, protection, allocationFlags);
 }
 
 
 void
-VMUserAddressSpace::DeleteArea(VMArea* _area, uint32 allocationFlags)
+VMUserAddressSpace::DeleteArea(VMArea* _area, uint32_t allocationFlags)
 {
 	VMUserArea* area = static_cast<VMUserArea*>(_area);
 	area->~VMUserArea();
@@ -163,7 +163,7 @@ VMUserAddressSpace::LookupArea(addr_t address) const
 status_t
 VMUserAddressSpace::InsertArea(VMArea* _area, size_t size,
 	const virtual_address_restrictions* addressRestrictions,
-	uint32 allocationFlags, void** _address)
+	uint32_t allocationFlags, void** _address)
 {
 	VMUserArea* area = static_cast<VMUserArea*>(_area);
 
@@ -214,7 +214,7 @@ VMUserAddressSpace::InsertArea(VMArea* _area, size_t size,
 
 //! You must hold the address space's write lock.
 void
-VMUserAddressSpace::RemoveArea(VMArea* _area, uint32 allocationFlags)
+VMUserAddressSpace::RemoveArea(VMArea* _area, uint32_t allocationFlags)
 {
 	VMUserArea* area = static_cast<VMUserArea*>(_area);
 
@@ -254,7 +254,7 @@ VMUserAddressSpace::CanResizeArea(VMArea* area, size_t newSize)
 
 status_t
 VMUserAddressSpace::ResizeArea(VMArea* _area, size_t newSize,
-	uint32 allocationFlags)
+	uint32_t allocationFlags)
 {
 	VMUserArea* area = static_cast<VMUserArea*>(_area);
 
@@ -290,7 +290,7 @@ VMUserAddressSpace::ResizeArea(VMArea* _area, size_t newSize,
 
 status_t
 VMUserAddressSpace::ShrinkAreaHead(VMArea* area, size_t size,
-	uint32 allocationFlags)
+	uint32_t allocationFlags)
 {
 	size_t oldSize = area->Size();
 	if (size == oldSize)
@@ -305,7 +305,7 @@ VMUserAddressSpace::ShrinkAreaHead(VMArea* area, size_t size,
 
 status_t
 VMUserAddressSpace::ShrinkAreaTail(VMArea* area, size_t size,
-	uint32 allocationFlags)
+	uint32_t allocationFlags)
 {
 	size_t oldSize = area->Size();
 	if (size == oldSize)
@@ -320,7 +320,7 @@ VMUserAddressSpace::ShrinkAreaTail(VMArea* area, size_t size,
 status_t
 VMUserAddressSpace::ReserveAddressRange(size_t size,
 	const virtual_address_restrictions* addressRestrictions,
-	uint32 flags, uint32 allocationFlags, void** _address)
+	uint32_t flags, uint32_t allocationFlags, void** _address)
 {
 	// check to see if this address space has entered DELETE state
 	if (fDeleting) {
@@ -351,7 +351,7 @@ VMUserAddressSpace::ReserveAddressRange(size_t size,
 
 status_t
 VMUserAddressSpace::UnreserveAddressRange(addr_t address, size_t size,
-	uint32 allocationFlags)
+	uint32_t allocationFlags)
 {
 	// check to see if this address space has entered DELETE state
 	if (fDeleting) {
@@ -381,7 +381,7 @@ VMUserAddressSpace::UnreserveAddressRange(addr_t address, size_t size,
 
 
 void
-VMUserAddressSpace::UnreserveAllAddressRanges(uint32 allocationFlags)
+VMUserAddressSpace::UnreserveAllAddressRanges(uint32_t allocationFlags)
 {
 	for (VMUserAreaList::Iterator it = fAreas.GetIterator();
 			VMUserArea* area = it.Next();) {
@@ -415,7 +415,7 @@ VMUserAddressSpace::Dump() const
 
 
 inline bool
-VMUserAddressSpace::_IsRandomized(uint32 addressSpec) const
+VMUserAddressSpace::_IsRandomized(uint32_t addressSpec) const
 {
 	return fRandomizingEnabled
 		&& (addressSpec == B_RANDOMIZED_ANY_ADDRESS
@@ -453,7 +453,7 @@ VMUserAddressSpace::_RandomizeAddress(addr_t start, addr_t end,
 */
 status_t
 VMUserAddressSpace::_InsertAreaIntoReservedRegion(addr_t start, size_t size,
-	VMUserArea* area, uint32 allocationFlags)
+	VMUserArea* area, uint32_t allocationFlags)
 {
 	VMUserArea* next;
 
@@ -529,8 +529,8 @@ VMUserAddressSpace::_InsertAreaIntoReservedRegion(addr_t start, size_t size,
 /*!	Must be called with this address space's write lock held */
 status_t
 VMUserAddressSpace::_InsertAreaSlot(addr_t start, addr_t size, addr_t end,
-	uint32 addressSpec, size_t alignment, VMUserArea* area,
-	uint32 allocationFlags)
+	uint32_t addressSpec, size_t alignment, VMUserArea* area,
+	uint32_t allocationFlags)
 {
 	VMUserArea* last = NULL;
 	VMUserArea* next;

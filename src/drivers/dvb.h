@@ -78,10 +78,10 @@
  * DVB_START_CAPTURE         | (none)                  | start the capture
  * DVB_STOP_CAPTURE          | (none)                  | stop the capture
  * DVB_GET_STATUS            | dvstatus_t            | get current status
- * DVB_GET_SS                | uint32                  | signal strength, range 0 to 1000
- * DVB_GET_BER               | uint32                  | block error rate, range 0 to 1000
- * DVB_GET_SNR               | uint32                  | signal noise ratio, range 0 to 1000
- * DVB_GET_UPC               | uint32                  | XXX ???, range 0 to 1000
+ * DVB_GET_SS                | uint32_t                  | signal strength, range 0 to 1000
+ * DVB_GET_BER               | uint32_t                  | block error rate, range 0 to 1000
+ * DVB_GET_SNR               | uint32_t                  | signal noise ratio, range 0 to 1000
+ * DVB_GET_UPC               | uint32_t                  | XXX ???, range 0 to 1000
  * DVB_CAPTURE               | dvb_capture_t           | get information about captured data
  *
  */
@@ -209,22 +209,22 @@ typedef enum {
 
 
 typedef struct {
-	uint32					version;	// set this to 1
-	uint32					flags;		// set this to 0
+	uint32_t					version;	// set this to 1
+	uint32_t					flags;		// set this to 0
 	dvb_type_t				type;
-	uint32					_res1[16];
+	uint32_t					_res1[16];
 	char					name[100];
 	char					info[500];
-	uint32					_res2[16];
+	uint32_t					_res2[16];
 } dvbe_interface_info_t;
 
 
 typedef struct {
-	uint32					_res1[16];
+	uint32_t					_res1[16];
 	uint64					frequency_min;
 	uint64					frequency_max;
 	uint64					frequency_step;
-	uint32					_res2[64];
+	uint32_t					_res2[64];
 } dvb_frequency_info_t;
 
 
@@ -245,7 +245,7 @@ typedef struct {
 	uint64					frequency;
 	dvb_inversion_t			inversion;
 	dvb_modulation_t		modulation;
-	uint32					symbolrate;
+	uint32_t					symbolrate;
 	dvb_polarity_t			polarity;
 } dvb_s_tuning_parameters_t;
 
@@ -254,7 +254,7 @@ typedef struct {
 	union {
 		dvb_t_tuning_parameters_t	dvb_t;
 		dvb_s_tuning_parameters_t	dvb_s;
-		uint32						_pad[32];
+		uint32_t						_pad[32];
 	} u;
 } dvb_tuning_parameters_t;
 
@@ -263,7 +263,7 @@ typedef struct {
 	void *					data;
 	size_t					size;
 	bigtime_t				end_time;
-	uint32					_res[2];
+	uint32_t					_res[2];
 } dvb_capture_t;
 
 #endif

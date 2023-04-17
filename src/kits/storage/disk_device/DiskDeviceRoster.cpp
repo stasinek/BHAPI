@@ -42,7 +42,7 @@ static const directory_which kAddOnDirs[] = {
 	B_SYSTEM_ADDONS_DIRECTORY,
 };
 /*!	\brief Size of the kAddOnDirs array. */
-static const int32 kAddOnDirCount
+static const int32_t kAddOnDirCount
 	= sizeof(kAddOnDirs) / sizeof(directory_which);
 
 
@@ -132,7 +132,7 @@ status_t BDiskDeviceRoster::GetDiskSystem(BDiskSystem* system, const char* name)
 	if (!system)
 		return B_BAD_VALUE;
 
-	int32 cookie = 0;
+	int32_t cookie = 0;
 	user_disk_system_info info;
 	while (_kern_get_next_disk_system_info(&cookie, &info) == B_OK) {
 		if (!strcmp(name, info.name)
@@ -187,7 +187,7 @@ bool BDiskDeviceRoster::VisitEachDevice(BDiskDeviceVisitor* visitor,
 {
 	bool terminatedEarly = false;
 	if (visitor) {
-		int32 oldCookie = fDeviceCookie;
+		int32_t oldCookie = fDeviceCookie;
 		fDeviceCookie = 0;
 		BDiskDevice deviceOnStack;
 		BDiskDevice* useDevice = device ? device : &deviceOnStack;
@@ -224,7 +224,7 @@ bool BDiskDeviceRoster::VisitEachPartition(BDiskDeviceVisitor* visitor,
 {
 	bool terminatedEarly = false;
 	if (visitor) {
-		int32 oldCookie = fDeviceCookie;
+		int32_t oldCookie = fDeviceCookie;
 		fDeviceCookie = 0;
 		BDiskDevice deviceOnStack;
 		BDiskDevice* useDevice = device ? device : &deviceOnStack;
@@ -269,7 +269,7 @@ bool BDiskDeviceRoster::VisitEachMountedPartition(BDiskDeviceVisitor* visitor,
 	bool terminatedEarly = false;
 	if (visitor) {
 		struct MountedPartitionFilter : public PartitionFilter {
-			virtual bool Filter(BPartition *partition, int32)
+			virtual bool Filter(BPartition *partition, int32_t)
 				{ return partition->IsMounted(); }
 		} filter;
 		PartitionFilterVisitor filterVisitor(visitor, &filter);
@@ -303,7 +303,7 @@ bool BDiskDeviceRoster::VisitEachMountablePartition(BDiskDeviceVisitor* visitor,
 	bool terminatedEarly = false;
 	if (visitor) {
 		struct MountablePartitionFilter : public PartitionFilter {
-			virtual bool Filter(BPartition *partition, int32)
+			virtual bool Filter(BPartition *partition, int32_t)
 				{ return partition->ContainsFileSystem(); }
 		} filter;
 		PartitionFilterVisitor filterVisitor(visitor, &filter);
@@ -332,7 +332,7 @@ status_t BDiskDeviceRoster::FindPartitionByVolume(const BVolume& volume,
 			return Visit(device, 0);
 		}
 
-		virtual bool Visit(BPartition* partition, int32 level)
+		virtual bool Visit(BPartition* partition, int32_t level)
 		{
 			BVolume volume;
 			return partition->GetVolume(&volume) == B_OK
@@ -376,7 +376,7 @@ status_t BDiskDeviceRoster::FindPartitionByMountPoint(const char* mountPoint,
 	- \c B_ENTRY_NOT_FOUND: A device with ID \a id could not be found.
 	- other error codes
 */
-status_t BDiskDeviceRoster::GetDeviceWithID(int32 id, BDiskDevice* device) const
+status_t BDiskDeviceRoster::GetDeviceWithID(int32_t id, BDiskDevice* device) const
 {
 	if (!device)
 		return B_BAD_VALUE;
@@ -400,7 +400,7 @@ status_t BDiskDeviceRoster::GetDeviceWithID(int32 id, BDiskDevice* device) const
 	- \c B_ENTRY_NOT_FOUND: A partition with ID \a id could not be found.
 	- other error codes
 */
-status_t BDiskDeviceRoster::GetPartitionWithID(int32 id, BDiskDevice* device,
+status_t BDiskDeviceRoster::GetPartitionWithID(int32_t id, BDiskDevice* device,
 	BPartition** partition) const
 {
 	if (!device || !partition)
@@ -493,14 +493,14 @@ status_t BDiskDeviceRoster::GetFileDeviceForPath(const char* filename,
 		   notified.
 	\return \c B_OK, if everything went fine, another error code otherwise.
 */
-status_t BDiskDeviceRoster::StartWatching(BMessenger target, uint32 eventMask)
+status_t BDiskDeviceRoster::StartWatching(BMessenger target, uint32_t eventMask)
 {
 	if (eventMask == 0)
 		return B_BAD_VALUE;
 
 	BMessenger::Private messengerPrivate(target);
 	port_id port = messengerPrivate.Port();
-	int32 token = messengerPrivate.Token();
+	int32_t token = messengerPrivate.Token();
 
 	return _kern_start_watching_disks(eventMask, port, token);
 }
@@ -516,7 +516,7 @@ status_t BDiskDeviceRoster::StopWatching(BMessenger target)
 {
 	BMessenger::Private messengerPrivate(target);
 	port_id port = messengerPrivate.Port();
-	int32 token = messengerPrivate.Token();
+	int32_t token = messengerPrivate.Token();
 
 	return _kern_stop_watching_disks(port, token);
 }
@@ -685,7 +685,7 @@ status_t BDiskDeviceRoster::RewindFileSystems()
 		 ID \a id could not be found.
 	- other error codes
 */
-status_t BDiskDeviceRoster::_GetObjectWithID(const char *fieldName, int32 id,
+status_t BDiskDeviceRoster::_GetObjectWithID(const char *fieldName, int32_t id,
 	BDiskDevice *device) const
 {
 	status_t error = (device ? B_OK : B_BAD_VALUE);
@@ -724,7 +724,7 @@ status_t BDiskDeviceRoster::_GetObjectWithID(const char *fieldName, int32 id,
 	- \c B_ENTRY_NOT_FOUND: End of directory.
 	- other error codes
 */
-status_t BDiskDeviceRoster::_GetNextAddOn(BDirectory **directory, int32 *index,
+status_t BDiskDeviceRoster::_GetNextAddOn(BDirectory **directory, int32_t *index,
 	const char *subdir, AddOnImage *image)
 {
 	status_t error = (directory && index && subdir && image
@@ -786,7 +786,7 @@ status_t BDiskDeviceRoster::_GetNextAddOn(BDirectory *directory, AddOnImage *ima
 	- \c B_ENTRY_NOT_FOUND: End of directory list.
 	- other error codes
 */
-status_t BDiskDeviceRoster::_GetNextAddOnDir(BPath *path, int32 *index,
+status_t BDiskDeviceRoster::_GetNextAddOnDir(BPath *path, int32_t *index,
 	const char *subdir)
 {
 	status_t error = (*index < kAddOnDirCount ? B_OK : B_ENTRY_NOT_FOUND);
@@ -818,7 +818,7 @@ printf("  next add-on dir: `%s'\n", path->Path());
 	- \c B_ENTRY_NOT_FOUND: End of directory list.
 	- other error codes
 */
-status_t BDiskDeviceRoster::_GetNextAddOnDir(BDirectory **directory, int32 *index,
+status_t BDiskDeviceRoster::_GetNextAddOnDir(BDirectory **directory, int32_t *index,
 	const char *subdir)
 {
 	BPath path;
@@ -851,7 +851,7 @@ status_t BDiskDeviceRoster::_LoadPartitionAddOn(const char *partitioningSystem,
 	bool found = false;
 	BPath path;
 	BDirectory *directory = NULL;
-	int32 index = 0;
+	int32_t index = 0;
 	while (error == B_OK && !found) {
 		error = _GetNextAddOn(&directory, &index, "partition", image);
 		if (error == B_OK) {

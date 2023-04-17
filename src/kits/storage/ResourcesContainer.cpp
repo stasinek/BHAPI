@@ -32,7 +32,7 @@ ResourcesContainer::~ResourcesContainer()
 // AddResource
 //
 // Returns false, if item is NULL or memory is insufficient, true otherwise.
-bool ResourcesContainer::AddResource(ResourceItem *item, int32 index,
+bool ResourcesContainer::AddResource(ResourceItem *item, int32_t index,
 								bool replace)
 {
 	bool result = false;
@@ -40,7 +40,7 @@ bool ResourcesContainer::AddResource(ResourceItem *item, int32 index,
 		// replace an item with the same type and id
 		if (replace)
 			delete RemoveResource(IndexOf(item->Type(), item->ID()));
-		int32 count = CountResources();
+		int32_t count = CountResources();
 		if (index < 0 || index > count)
 			index = count;
 		result = fResources.AddItem(item, count);
@@ -51,7 +51,7 @@ bool ResourcesContainer::AddResource(ResourceItem *item, int32 index,
 
 // RemoveResource
 ResourceItem*
-ResourcesContainer::RemoveResource(int32 index)
+ResourcesContainer::RemoveResource(int32_t index)
 {
 	ResourceItem* item = (ResourceItem*)fResources.RemoveItem(index);
 	if (item)
@@ -68,7 +68,7 @@ bool ResourcesContainer::RemoveResource(ResourceItem *item)
 // MakeEmpty
 void ResourcesContainer::MakeEmpty()
 {
-	for (int32 i = 0; ResourceItem *item = ResourceAt(i); i++)
+	for (int32_t i = 0; ResourceItem *item = ResourceAt(i); i++)
 		delete item;
 	fResources.MakeEmpty();
 	SetModified(false);
@@ -78,8 +78,8 @@ void ResourcesContainer::MakeEmpty()
 void ResourcesContainer::AssimilateResources(ResourcesContainer &container)
 {
 	// Resistance is futile! ;-)
-	int32 newCount = container.CountResources();
-	for (int32 i = 0; i < newCount; i++) {
+	int32_t newCount = container.CountResources();
+	for (int32_t i = 0; i < newCount; i++) {
 		ResourceItem *item = container.ResourceAt(i);
 		if (item->IsLoaded())
 			AddResource(item);
@@ -95,18 +95,18 @@ void ResourcesContainer::AssimilateResources(ResourcesContainer &container)
 }
 
 // IndexOf
-int32 ResourcesContainer::IndexOf(ResourceItem *item) const
+int32_t ResourcesContainer::IndexOf(ResourceItem *item) const
 {
 	return fResources.IndexOf(item);
 }
 
 // IndexOf
-int32 ResourcesContainer::IndexOf(const void *data) const
+int32_t ResourcesContainer::IndexOf(const void *data) const
 {
-	int32 index = -1;
+	int32_t index = -1;
 	if (data) {
-		int32 count = CountResources();
-		for (int32 i = 0; index == -1 && i < count; i++) {
+		int32_t count = CountResources();
+		for (int32_t i = 0; index == -1 && i < count; i++) {
 			if (ResourceAt(i)->Data() == data)
 				index = i;
 		}
@@ -115,11 +115,11 @@ int32 ResourcesContainer::IndexOf(const void *data) const
 }
 
 // IndexOf
-int32 ResourcesContainer::IndexOf(type_code type, int32 id) const
+int32_t ResourcesContainer::IndexOf(type_code type, int32_t id) const
 {
-	int32 index = -1;
-	int32 count = CountResources();
-	for (int32 i = 0; index == -1 && i < count; i++) {
+	int32_t index = -1;
+	int32_t count = CountResources();
+	for (int32_t i = 0; index == -1 && i < count; i++) {
 		ResourceItem *item = ResourceAt(i);
 		if (item->Type() == type && item->ID() == id)
 			index = i;
@@ -128,11 +128,11 @@ int32 ResourcesContainer::IndexOf(type_code type, int32 id) const
 }
 
 // IndexOf
-int32 ResourcesContainer::IndexOf(type_code type, const char *name) const
+int32_t ResourcesContainer::IndexOf(type_code type, const char *name) const
 {
-	int32 index = -1;
-	int32 count = CountResources();
-	for (int32 i = 0; index == -1 && i < count; i++) {
+	int32_t index = -1;
+	int32_t count = CountResources();
+	for (int32_t i = 0; index == -1 && i < count; i++) {
 		ResourceItem *item = ResourceAt(i);
 		const char *itemName = item->Name();
 		if (item->Type() == type && ((name == NULL && itemName == NULL)
@@ -145,11 +145,11 @@ int32 ResourcesContainer::IndexOf(type_code type, const char *name) const
 }
 
 // IndexOfType
-int32 ResourcesContainer::IndexOfType(type_code type, int32 typeIndex) const
+int32_t ResourcesContainer::IndexOfType(type_code type, int32_t typeIndex) const
 {
-	int32 index = -1;
-	int32 count = CountResources();
-	for (int32 i = 0; index == -1 && i < count; i++) {
+	int32_t index = -1;
+	int32_t count = CountResources();
+	for (int32_t i = 0; index == -1 && i < count; i++) {
 		ResourceItem *item = ResourceAt(i);
 		if (item->Type() == type) {
 			if (typeIndex == 0)
@@ -162,13 +162,13 @@ int32 ResourcesContainer::IndexOfType(type_code type, int32 typeIndex) const
 
 // ResourceAt
 ResourceItem*
-ResourcesContainer::ResourceAt(int32 index) const
+ResourcesContainer::ResourceAt(int32_t index) const
 {
 	return (ResourceItem*)fResources.ItemAt(index);
 }
 
 // CountResources
-int32 ResourcesContainer::CountResources() const
+int32_t ResourcesContainer::CountResources() const
 {
 	return fResources.CountItems();
 }
@@ -179,8 +179,8 @@ void ResourcesContainer::SetModified(bool modified)
 	fIsModified = modified;
 	// If unmodified, set the resource item's modified flag as well.
 	if (!modified) {
-		int32 count = CountResources();
-		for (int32 i = 0; i < count; i++)
+		int32_t count = CountResources();
+		for (int32_t i = 0; i < count; i++)
 			ResourceAt(i)->SetModified(false);
 	}
 }
@@ -189,8 +189,8 @@ void ResourcesContainer::SetModified(bool modified)
 bool ResourcesContainer::IsModified() const
 {
 	bool isModified = fIsModified;
-	int32 count = CountResources();
-	for (int32 i = 0; !isModified && i < count; i++)
+	int32_t count = CountResources();
+	for (int32_t i = 0; !isModified && i < count; i++)
 		isModified |= ResourceAt(i)->IsModified();
 	return isModified;
 }

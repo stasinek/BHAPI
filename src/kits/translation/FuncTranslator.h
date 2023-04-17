@@ -18,15 +18,15 @@
 struct translator_data {
 	const char*	name;
 	const char*	info;
-	int32		version;
+	int32_t		version;
 	const translation_format* input_formats;
 	const translation_format* output_formats;
 
 	status_t	(*identify_hook)(BPositionIO* source, const translation_format* format,
-					BMessage* ioExtension, translator_info* outInfo, uint32 outType);
+					BMessage* ioExtension, translator_info* outInfo, uint32_t outType);
 
 	status_t	(*translate_hook)(BPositionIO* source, const translator_info* info,
-					BMessage* ioExtension, uint32 outType, BPositionIO* destination);
+					BMessage* ioExtension, uint32_t outType, BPositionIO* destination);
 
 	status_t	(*make_config_hook)(BMessage* ioExtension, BView** _view, BRect* _extent);
 	status_t	(*get_config_message_hook)(BMessage* ioExtension);
@@ -40,16 +40,16 @@ class BFuncTranslator : public BTranslator {
 
 		virtual const char *TranslatorName() const;
 		virtual const char *TranslatorInfo() const;
-		virtual int32 TranslatorVersion() const;
+		virtual int32_t TranslatorVersion() const;
 
-		virtual const translation_format *InputFormats(int32 *out_count) const;
-		virtual const translation_format *OutputFormats(int32 *out_count) const;
+		virtual const translation_format *InputFormats(int32_t *out_count) const;
+		virtual const translation_format *OutputFormats(int32_t *out_count) const;
 
 		virtual status_t Identify(BPositionIO *inSource, 
 			const translation_format *inFormat, BMessage *ioExtension,
-			translator_info *outInfo, uint32 outType);
+			translator_info *outInfo, uint32_t outType);
 		virtual status_t Translate(BPositionIO *inSource,
-			const translator_info *inInfo, BMessage *ioExtension, uint32 outType,
+			const translator_info *inInfo, BMessage *ioExtension, uint32_t outType,
 			BPositionIO * outDestination);
 		virtual status_t MakeConfigurationView(BMessage *ioExtension,
 			BView **outView, BRect *outExtent);

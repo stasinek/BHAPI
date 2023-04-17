@@ -33,11 +33,11 @@ public:
 	virtual	status_t			GetNextEntry(BEntry* entry,
 									bool traverse = false);
 	virtual	status_t			GetNextRef(entry_ref* ref);
-	virtual	int32				GetNextDirents(struct dirent* buffer,
-									size_t length, int32 count = INT_MAX);
+	virtual	int32_t				GetNextDirents(struct dirent* buffer,
+									size_t length, int32_t count = INT_MAX);
 
 	virtual	status_t			Rewind();
-	virtual	int32				CountEntries();
+	virtual	int32_t				CountEntries();
 
 private:
 

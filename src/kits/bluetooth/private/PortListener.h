@@ -11,10 +11,10 @@ template <
 	typename TYPE,
 	ssize_t MAX_MESSAGE_SIZE = 256,
 	size_t MAX_MESSAGE_DEEP	= 16,
-	uint32 PRIORITY	= B_URGENT_DISPLAY_PRIORITY>
+	uint32_t PRIORITY	= B_URGENT_DISPLAY_PRIORITY>
 class PortListener {
 public:
-	typedef status_t (*port_listener_func)(TYPE*, int32, size_t);
+	typedef status_t (*port_listener_func)(TYPE*, int32_t, size_t);
 
 	PortListener(const char* name, port_listener_func handler)
 	{
@@ -44,13 +44,13 @@ public:
 	}
 
 
-	status_t Trigger(int32 code)
+	status_t Trigger(int32_t code)
 	{
 			return write_port(fPort, code, NULL, 0);
 	}
 
 
-	status_t Trigger(int32 code, TYPE* buffer, size_t size)
+	status_t Trigger(int32_t code, TYPE* buffer, size_t size)
 	{
 		if (buffer == NULL)
 			return B_ERROR;
@@ -131,12 +131,12 @@ private:
 	char* fThreadName;
 	char* fPortName;
 
-	static int32 threadFunction(void* data)
+	static int32_t threadFunction(void* data)
 	{
 		ssize_t	ssizePort;
 		ssize_t	ssizeRead;
 		status_t status = B_OK;
-		int32 code;
+		int32_t code;
 
 		port_id* port = ((struct PortListenerInfo*)data)->port;
 		port_listener_func handler = ((struct PortListenerInfo*)data)->func;

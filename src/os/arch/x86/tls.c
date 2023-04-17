@@ -29,12 +29,12 @@ void* ___tls_get_addr(struct tls_index* ti) __attribute__((__regparm__(1)));
 #endif	// GCC2
 
 
-static int32 gNextSlot = TLS_FIRST_FREE_SLOT;
+static int32_t gNextSlot = TLS_FIRST_FREE_SLOT;
 
 
-int32 tls_allocate(void)
+int32_t tls_allocate(void)
 {
-	int32 next = atomic_add(&gNextSlot, 1);
+	int32_t next = atomic_add(&gNextSlot, 1);
 	if (next >= TLS_MAX_KEYS)
 		return B_NO_MEMORY;
 
@@ -43,7 +43,7 @@ int32 tls_allocate(void)
 
 
 void *
-tls_get(int32 index)
+tls_get(int32_t index)
 {
 	void *ret;
 	__asm__ __volatile__ ( 
@@ -54,7 +54,7 @@ tls_get(int32 index)
 
 
 void **
-tls_address(int32 index)
+tls_address(int32_t index)
 {
 	void **ret;
 	__asm__ __volatile__ ( 
@@ -66,7 +66,7 @@ tls_address(int32 index)
 
 
 void
-tls_set(int32 index, void *value)
+tls_set(int32_t index, void *value)
 {
 	__asm__ __volatile__ ( 
 		"movl	%1, %%fs:(, %0, 4)"

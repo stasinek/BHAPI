@@ -68,7 +68,7 @@ private:
 	BString					fName;
 	BString					fShortName;
 	BString					fPrettyName;
-	uint32					fFlags;
+	uint32_t					fFlags;
 };
 
 #endif	// _DISK_SYSTEM_H

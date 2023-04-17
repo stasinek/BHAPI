@@ -45,8 +45,8 @@ status_t BPackageInfo::Parser::Parse(const BString& packageInfoString,
 			// map error position to line and column
 			int line = 1;
 			int inLineOffset;
-			int32 offset = error.pos - packageInfoString.String();
-			int32 newlinePos = packageInfoString.FindLast('\n', offset - 1);
+			int32_t offset = error.pos - packageInfoString.String();
+			int32_t newlinePos = packageInfoString.FindLast('\n', offset - 1);
 			if (newlinePos < 0)
 				inLineOffset = offset;
 			else {
@@ -88,7 +88,7 @@ status_t BPackageInfo::Parser::ParseVersion(const BString& versionString,
 		_ParseVersionValue(token, &_version, revisionIsOptional);
 	} catch (const ParseError& error) {
 		if (fListener != NULL) {
-			int32 offset = error.pos - versionString.String();
+			int32_t offset = error.pos - versionString.String();
 			fListener->OnError(error.message, 1, offset);
 		}
 		return B_BAD_DATA;
@@ -112,7 +112,7 @@ status_t BPackageInfo::Parser::ParseResolvableExpression(const BString& expressi
 		_ParseResolvableExpression(_NextToken(), _expression, NULL);
 	} catch (const ParseError& error) {
 		if (fListener != NULL) {
-			int32 offset = error.pos - expressionString.String();
+			int32_t offset = error.pos - expressionString.String();
 			fListener->OnError(error.message, 1, offset);
 		}
 		return B_BAD_DATA;
@@ -333,8 +333,8 @@ void BPackageInfo::Parser::_ParseVersionValue(BPackageVersion* value,
 		throw ParseError("expected string (a version)", word.pos);
 
 	// get the revision number
-	uint32 revision = 0;
-	int32 dashPos = word.text.FindLast('-');
+	uint32_t revision = 0;
+	int32_t dashPos = word.text.FindLast('-');
 	if (dashPos >= 0) {
 		char* end;
 		long long number = strtoll(word.text.String() + dashPos + 1, &end,
@@ -344,7 +344,7 @@ void BPackageInfo::Parser::_ParseVersionValue(BPackageVersion* value,
 				word.pos + dashPos + 1);
 		}
 
-		revision = (uint32)number;
+		revision = (uint32_t)number;
 		word.text.Truncate(dashPos);
 	}
 
@@ -355,7 +355,7 @@ void BPackageInfo::Parser::_ParseVersionValue(BPackageVersion* value,
 
 	// get the pre-release string
 	BString preRelease;
-	int32 tildePos = word.text.FindLast('~');
+	int32_t tildePos = word.text.FindLast('~');
 	if (tildePos >= 0) {
 		word.text.CopyInto(preRelease, tildePos + 1,
 			word.text.Length() - tildePos - 1);
@@ -366,7 +366,7 @@ void BPackageInfo::Parser::_ParseVersionValue(BPackageVersion* value,
 				word.pos + tildePos + 1);
 		}
 
-		int32 errorPos;
+		int32_t errorPos;
 		if (!_IsAlphaNumUnderscore(preRelease, ".", &errorPos)) {
 			throw ParseError("invalid character in pre-release string",
 				word.pos + tildePos + 1 + errorPos);
@@ -377,12 +377,12 @@ void BPackageInfo::Parser::_ParseVersionValue(BPackageVersion* value,
 	BString major;
 	BString minor;
 	BString micro;
-	int32 firstDotPos = word.text.FindFirst('.');
+	int32_t firstDotPos = word.text.FindFirst('.');
 	if (firstDotPos < 0)
 		major = word.text;
 	else {
 		word.text.CopyInto(major, 0, firstDotPos);
-		int32 secondDotPos = word.text.FindFirst('.', firstDotPos + 1);
+		int32_t secondDotPos = word.text.FindFirst('.', firstDotPos + 1);
 		if (secondDotPos == firstDotPos + 1)
 			throw ParseError("expected minor version", word.pos + secondDotPos);
 
@@ -393,21 +393,21 @@ void BPackageInfo::Parser::_ParseVersionValue(BPackageVersion* value,
 				secondDotPos - (firstDotPos + 1));
 			word.text.CopyInto(micro, secondDotPos + 1, word.text.Length());
 
-			int32 errorPos;
+			int32_t errorPos;
 			if (!_IsAlphaNumUnderscore(micro, ".", &errorPos)) {
 				throw ParseError("invalid character in micro version string",
 					word.pos + secondDotPos + 1 + errorPos);
 			}
 		}
 
-		int32 errorPos;
+		int32_t errorPos;
 		if (!_IsAlphaNumUnderscore(minor, "", &errorPos)) {
 			throw ParseError("invalid character in minor version string",
 				word.pos + firstDotPos + 1 + errorPos);
 		}
 	}
 
-	int32 errorPos;
+	int32_t errorPos;
 	if (!_IsAlphaNumUnderscore(major, "", &errorPos)) {
 		throw ParseError("invalid character in major version string",
 			word.pos + errorPos);
@@ -425,7 +425,7 @@ void BPackageInfo::Parser::_ParseResolvableExpression(const Token& token,
 			token.pos);
 	}
 
-	int32 errorPos;
+	int32_t errorPos;
 	if (!_IsValidResolvableName(token.text, &errorPos)) {
 		throw ParseError("invalid character in resolvable name",
 			token.pos + errorPos);
@@ -519,7 +519,7 @@ void BPackageInfo::Parser::_ParseStringList(BStringList* value,
 				throw ParseError("expected string", token.pos);
 
 			if (requireResolvableName) {
-				int32 errorPos;
+				int32_t errorPos;
 				if (!_IsValidResolvableName(token.text, &errorPos)) {
 					throw ParseError("invalid character in resolvable name",
 						token.pos + errorPos);
@@ -538,10 +538,10 @@ void BPackageInfo::Parser::_ParseStringList(BStringList* value,
 }
 
 
-uint32 BPackageInfo::Parser::_ParseFlags()
+uint32_t BPackageInfo::Parser::_ParseFlags()
 {
 	struct FlagParser : public ListElementParser {
-		uint32 flags;
+		uint32_t flags;
 
 		FlagParser()
 			:
@@ -594,7 +594,7 @@ void BPackageInfo::Parser::_ParseResolvableList(
 					token.pos);
 			}
 
-			int32 errorPos;
+			int32_t errorPos;
 			if (!_IsValidResolvableName(token.text, &errorPos)) {
 				throw ParseError("invalid character in resolvable name",
 					token.pos + errorPos);
@@ -937,7 +937,7 @@ void BPackageInfo::Parser::_Parse(BPackageInfo* packageInfo)
 				const char* namePos;
 				_ParseStringValue(&name, &namePos);
 
-				int32 errorPos;
+				int32_t errorPos;
 				if (!_IsValidResolvableName(name, &errorPos)) {
 					throw ParseError("invalid character in package name",
 						namePos + errorPos);
@@ -1068,7 +1068,7 @@ void BPackageInfo::Parser::_Parse(BPackageInfo* packageInfo)
 
 
 /*static*/ inline bool BPackageInfo::Parser::_IsAlphaNumUnderscore(const BString& string,
-	const char* additionalChars, int32* _errorPos)
+	const char* additionalChars, int32_t* _errorPos)
 {
 	return _IsAlphaNumUnderscore(string.String(),
 		string.String() + string.Length(), additionalChars, _errorPos);
@@ -1076,7 +1076,7 @@ void BPackageInfo::Parser::_Parse(BPackageInfo* packageInfo)
 
 
 /*static*/ inline bool BPackageInfo::Parser::_IsAlphaNumUnderscore(const char* string,
-	const char* additionalChars, int32* _errorPos)
+	const char* additionalChars, int32_t* _errorPos)
 {
 	return _IsAlphaNumUnderscore(string, string + strlen(string),
 		additionalChars, _errorPos);
@@ -1084,7 +1084,7 @@ void BPackageInfo::Parser::_Parse(BPackageInfo* packageInfo)
 
 
 /*static*/ bool BPackageInfo::Parser::_IsAlphaNumUnderscore(const char* start, const char* end,
-	const char* additionalChars, int32* _errorPos)
+	const char* additionalChars, int32_t* _errorPos)
 {
 	for (const char* c = start; c < end; c++) {
 		if (!isalnum(*c) && *c != '_' && strchr(additionalChars, *c) == NULL) {
@@ -1099,7 +1099,7 @@ void BPackageInfo::Parser::_Parse(BPackageInfo* packageInfo)
 
 
 /*static*/ bool BPackageInfo::Parser::_IsValidResolvableName(const char* string,
-	int32* _errorPos)
+	int32_t* _errorPos)
 {
 	for (const char* c = string; *c != '\0'; c++) {
 		switch (*c) {

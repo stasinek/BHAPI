@@ -23,9 +23,9 @@ extern "C" {
 #endif
 
 extern dev_t	fs_mount_volume(const char *where, const char *device,
-					const char *filesystem, uint32 flags,
+					const char *filesystem, uint32_t flags,
 					const char *parameters);
-extern status_t	fs_unmount_volume(const char *path, uint32 flags);
+extern status_t	fs_unmount_volume(const char *path, uint32_t flags);
 
 #ifdef  __cplusplus
 }

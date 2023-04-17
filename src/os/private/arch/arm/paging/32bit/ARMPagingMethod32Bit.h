@@ -35,9 +35,9 @@ public:
 									page_num_t (*get_free_page)(kernel_args*));
 
 	virtual	bool				IsKernelPageAccessible(addr_t virtualAddress,
-									uint32 protection);
+									uint32_t protection);
 
-	inline	uint32				KernelPhysicalPageDirectory() const
+	inline	uint32_t				KernelPhysicalPageDirectory() const
 									{ return fKernelPhysicalPageDirectory; }
 	inline	page_directory_entry* KernelVirtualPageDirectory() const
 									{ return fKernelVirtualPageDirectory; }
@@ -51,33 +51,33 @@ public:
 	static	void				PutPageTableInPageDir(
 									page_directory_entry* entry,
 									phys_addr_t pgtablePhysical,
-									uint32 attributes);
+									uint32_t attributes);
 	static	void				PutPageTableEntryInTable(
 									page_table_entry* entry,
 									phys_addr_t physicalAddress,
-									uint32 attributes, uint32 memoryType,
+									uint32_t attributes, uint32_t memoryType,
 									bool globalPage);
 	static	page_table_entry	SetPageTableEntry(page_table_entry* entry,
 									page_table_entry newEntry);
 	static	page_table_entry	SetPageTableEntryFlags(page_table_entry* entry,
-									uint32 flags);
+									uint32_t flags);
 	static	page_table_entry	TestAndSetPageTableEntry(
 									page_table_entry* entry,
 									page_table_entry newEntry,
 									page_table_entry oldEntry);
 	static	page_table_entry	ClearPageTableEntry(page_table_entry* entry);
 	static	page_table_entry	ClearPageTableEntryFlags(
-									page_table_entry* entry, uint32 flags);
+									page_table_entry* entry, uint32_t flags);
 
-	static	uint32				MemoryTypeToPageTableEntryFlags(
-									uint32 memoryType);
+	static	uint32_t				MemoryTypeToPageTableEntryFlags(
+									uint32_t memoryType);
 
 private:
 			struct PhysicalPageSlotPool;
 			friend struct PhysicalPageSlotPool;
 
 private:
-	inline	int32				_GetInitialPoolCount();
+	inline	int32_t				_GetInitialPoolCount();
 
 	static	void				_EarlyPreparePageTables(
 									page_table_entry* pageTables,
@@ -86,7 +86,7 @@ private:
 									phys_addr_t *_physicalAddress);
 
 private:
-			uint32				fKernelPhysicalPageDirectory;
+			uint32_t				fKernelPhysicalPageDirectory;
 			page_directory_entry* fKernelVirtualPageDirectory;
 
 			ARMPhysicalPageMapper* fPhysicalPageMapper;
@@ -105,15 +105,15 @@ ARMPagingMethod32Bit::Method()
 ARMPagingMethod32Bit::SetPageTableEntry(page_table_entry* entry,
 	page_table_entry newEntry)
 {
-	return atomic_get_and_set((int32*)entry, newEntry);
+	return atomic_get_and_set((int32_t*)entry, newEntry);
 }
 
 
 /*static*/ inline page_table_entry
 ARMPagingMethod32Bit::SetPageTableEntryFlags(page_table_entry* entry,
-	uint32 flags)
+	uint32_t flags)
 {
-	return atomic_or((int32*)entry, flags);
+	return atomic_or((int32_t*)entry, flags);
 }
 
 
@@ -121,7 +121,7 @@ ARMPagingMethod32Bit::SetPageTableEntryFlags(page_table_entry* entry,
 ARMPagingMethod32Bit::TestAndSetPageTableEntry(page_table_entry* entry,
 	page_table_entry newEntry, page_table_entry oldEntry)
 {
-	return atomic_test_and_set((int32*)entry, newEntry, oldEntry);
+	return atomic_test_and_set((int32_t*)entry, newEntry, oldEntry);
 }
 
 
@@ -133,14 +133,14 @@ ARMPagingMethod32Bit::ClearPageTableEntry(page_table_entry* entry)
 
 
 /*static*/ inline page_table_entry
-ARMPagingMethod32Bit::ClearPageTableEntryFlags(page_table_entry* entry, uint32 flags)
+ARMPagingMethod32Bit::ClearPageTableEntryFlags(page_table_entry* entry, uint32_t flags)
 {
-	return atomic_and((int32*)entry, ~flags);
+	return atomic_and((int32_t*)entry, ~flags);
 }
 
 
-/*static*/ inline uint32
-ARMPagingMethod32Bit::MemoryTypeToPageTableEntryFlags(uint32 memoryType)
+/*static*/ inline uint32_t
+ARMPagingMethod32Bit::MemoryTypeToPageTableEntryFlags(uint32_t memoryType)
 {
 #if 0 //IRA
 	// ATM we only handle the uncacheable and write-through type explicitly. For

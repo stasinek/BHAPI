@@ -26,7 +26,7 @@ class LocalDevice : public BluetoothDevice {
 public:
 	/* Possible throwing */
 	static	LocalDevice*	GetLocalDevice();
-	static	uint32			GetLocalDeviceCount();
+	static	uint32_t			GetLocalDeviceCount();
 
 	static	LocalDevice*	GetLocalDevice(const hci_id hid);
 	static	LocalDevice*	GetLocalDevice(const bdaddr_t bdaddr);
@@ -42,7 +42,7 @@ public:
 			status_t		SetAuthentication(bool authentication);
 
 			BString			GetProperty(const char* property);
-			status_t 		GetProperty(const char* property, uint32* value);
+			status_t 		GetProperty(const char* property, uint32_t* value);
 
 			int				GetDiscoverable();
 			bdaddr_t		GetBluetoothAddress();

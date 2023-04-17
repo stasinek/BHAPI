@@ -22,13 +22,13 @@ class BNetworkAddress : public BFlattenable {
 public:
                                 BNetworkAddress();
                                 BNetworkAddress(const char* address,
-                                    uint16 port = 0, uint32 flags = 0);
+                                    uint16 port = 0, uint32_t flags = 0);
                                 BNetworkAddress(const char* address,
-                                    const char* service, uint32 flags = 0);
+                                    const char* service, uint32_t flags = 0);
                                 BNetworkAddress(int family, const char* address,
-                                    uint16 port = 0, uint32 flags = 0);
+                                    uint16 port = 0, uint32_t flags = 0);
                                 BNetworkAddress(int family, const char* address,
-                                    const char* service, uint32 flags = 0);
+                                    const char* service, uint32_t flags = 0);
                                 BNetworkAddress(const sockaddr& address);
                                 BNetworkAddress(
                                     const sockaddr_storage& address);
@@ -47,13 +47,13 @@ public:
             void				Unset();
 
             status_t			SetTo(const char* address, uint16 port = 0,
-                                    uint32 flags = 0);
+                                    uint32_t flags = 0);
             status_t			SetTo(const char* address, const char* service,
-                                    uint32 flags = 0);
+                                    uint32_t flags = 0);
             status_t			SetTo(int family, const char* address,
-                                    uint16 port = 0, uint32 flags = 0);
+                                    uint16 port = 0, uint32_t flags = 0);
             status_t			SetTo(int family, const char* address,
-                                    const char* service, uint32 flags = 0);
+                                    const char* service, uint32_t flags = 0);
             void				SetTo(const sockaddr& address);
             void				SetTo(const sockaddr& address, size_t length);
             void				SetTo(const sockaddr_storage& address);
@@ -69,7 +69,7 @@ public:
                                     uint16 port = 0);
             status_t			SetToLoopback(int family = AF_UNSPEC,
                                     uint16 port = 0);
-            status_t			SetToMask(int family, uint32 prefixLength);
+            status_t			SetToMask(int family, uint32_t prefixLength);
             status_t			SetToWildcard(int family, uint16 port = 0);
 
             status_t			SetAddress(in_addr_t address);
@@ -79,8 +79,8 @@ public:
 
             void				SetToLinkLevel(uint8* address, size_t length);
             void				SetToLinkLevel(const char* name);
-            void				SetToLinkLevel(uint32 index);
-            void				SetLinkLevelIndex(uint32 index);
+            void				SetToLinkLevel(uint32_t index);
+            void				SetLinkLevelIndex(uint32_t index);
             void				SetLinkLevelType(uint8 type);
             void				SetLinkLevelFrameType(uint16 frameType);
 
@@ -105,7 +105,7 @@ public:
 
             ssize_t				PrefixLength() const;
 
-            uint32				LinkLevelIndex() const;
+            uint32_t				LinkLevelIndex() const;
             BString				LinkLevelInterface() const;
             uint8				LinkLevelType() const;
             uint16				LinkLevelFrameType() const;

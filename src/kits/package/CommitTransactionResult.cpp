@@ -175,13 +175,13 @@ BTransactionIssue::ToString() const
 status_t BTransactionIssue::AddToMessage(BMessage& message) const
 {
 	status_t error;
-	if ((error = message.AddInt32("type", (int32)fType)) != B_OK
+	if ((error = message.AddInt32("type", (int32_t)fType)) != B_OK
 		|| (error = message.AddString("package", fPackageName)) != B_OK
 		|| (error = message.AddString("path1", fPath1)) != B_OK
 		|| (error = message.AddString("path2", fPath2)) != B_OK
-		|| (error = message.AddInt32("system error", (int32)fSystemError))
+		|| (error = message.AddInt32("system error", (int32_t)fSystemError))
 				!= B_OK
-		|| (error = message.AddInt32("exit code", (int32)fExitCode)) != B_OK) {
+		|| (error = message.AddInt32("exit code", (int32_t)fExitCode)) != B_OK) {
 			return error;
 	}
 
@@ -192,9 +192,9 @@ status_t BTransactionIssue::AddToMessage(BMessage& message) const
 status_t BTransactionIssue::ExtractFromMessage(const BMessage& message)
 {
 	status_t error;
-	int32 type;
-	int32 systemError;
-	int32 exitCode;
+	int32_t type;
+	int32_t systemError;
+	int32_t exitCode;
 	if ((error = message.FindInt32("type", &type)) != B_OK
 		|| (error = message.FindString("package", &fPackageName)) != B_OK
 		|| (error = message.FindString("path1", &fPath1)) != B_OK
@@ -295,14 +295,14 @@ void BCommitTransactionResult::Unset()
 }
 
 
-int32 BCommitTransactionResult::CountIssues() const
+int32_t BCommitTransactionResult::CountIssues() const
 {
 	return fIssues.CountItems();
 }
 
 
 const BTransactionIssue*
-BCommitTransactionResult::IssueAt(int32 index) const
+BCommitTransactionResult::IssueAt(int32_t index) const
 {
 	if (index < 0 || index >= CountIssues())
 		return NULL;
@@ -554,8 +554,8 @@ void BCommitTransactionResult::SetOldStateDirectory(const BString& directory)
 status_t BCommitTransactionResult::AddToMessage(BMessage& message) const
 {
 	status_t error;
-	if ((error = message.AddInt32("error", (int32)fError)) != B_OK
-		|| (error = message.AddInt32("system error", (int32)fSystemError))
+	if ((error = message.AddInt32("error", (int32_t)fError)) != B_OK
+		|| (error = message.AddInt32("system error", (int32_t)fSystemError))
 			!= B_OK
 		|| (error = message.AddString("error package", fErrorPackage)) != B_OK
 		|| (error = message.AddString("path1", fPath1)) != B_OK
@@ -567,8 +567,8 @@ status_t BCommitTransactionResult::AddToMessage(BMessage& message) const
 		return error;
 	}
 
-	int32 count = fIssues.CountItems();
-	for (int32 i = 0; i < count; i++) {
+	int32_t count = fIssues.CountItems();
+	for (int32_t i = 0; i < count; i++) {
 		const BTransactionIssue* issue = fIssues.ItemAt(i);
 		BMessage issueMessage;
 		if ((error = issue->AddToMessage(issueMessage)) != B_OK
@@ -585,8 +585,8 @@ status_t BCommitTransactionResult::ExtractFromMessage(const BMessage& message)
 {
 	Unset();
 
-	int32 resultError;
-	int32 systemError;
+	int32_t resultError;
+	int32_t systemError;
 	status_t error;
 	if ((error = message.FindInt32("error", &resultError)) != B_OK
 		|| (error = message.FindInt32("system error", &systemError)) != B_OK
@@ -604,7 +604,7 @@ status_t BCommitTransactionResult::ExtractFromMessage(const BMessage& message)
 	fSystemError = (status_t)systemError;
 
 	BMessage issueMessage;
-	for (int32 i = 0; message.FindMessage("issues", i, &issueMessage) == B_OK;
+	for (int32_t i = 0; message.FindMessage("issues", i, &issueMessage) == B_OK;
 			i++) {
 		BTransactionIssue issue;
 		error = issue.ExtractFromMessage(issueMessage);
@@ -633,7 +633,7 @@ BCommitTransactionResult::operator=(const BCommitTransactionResult& other)
 	fString2 = other.fString2;
 	fOldStateDirectory = other.fOldStateDirectory;
 
-	for (int32 i = 0; const BTransactionIssue* issue = other.fIssues.ItemAt(i);
+	for (int32_t i = 0; const BTransactionIssue* issue = other.fIssues.ItemAt(i);
 			i++) {
 		AddIssue(*issue);
 	}

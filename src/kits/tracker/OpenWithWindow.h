@@ -78,11 +78,11 @@ public:
 	// entry list iterators
 	virtual status_t GetNextEntry(BEntry* entry, bool traverse = false);
 	virtual status_t GetNextRef(entry_ref* ref);
-	virtual int32 GetNextDirents(struct dirent* buffer, size_t length,
-		int32 count = INT_MAX);
+	virtual int32_t GetNextDirents(struct dirent* buffer, size_t length,
+		int32_t count = INT_MAX);
 
 	virtual status_t Rewind();
-	virtual int32 CountEntries();
+	virtual int32_t CountEntries();
 
 	bool GetPreferredApp(entry_ref* ref) const;
 		// gets the preferred app for all the files it was asked to
@@ -91,7 +91,7 @@ public:
 	void TrySettingPreferredApp(const entry_ref*);
 	void TrySettingPreferredAppForFile(const entry_ref*);
 
-	int32 Relation(const BMessage* entriesToOpen, const Model*) const;
+	int32_t Relation(const BMessage* entriesToOpen, const Model*) const;
 		// returns the reason why an application is shown in
 		// Open With window
 	void RelationDescription(const BMessage* entriesToOpen, const Model*,
@@ -99,7 +99,7 @@ public:
 		// returns a string describing why application handles files
 		// to open
 
-	static int32 Relation(const BMessage* entriesToOpen,
+	static int32_t Relation(const BMessage* entriesToOpen,
 		const Model*, const entry_ref* preferredApp,
 		const entry_ref* preferredAppForFile);
 		// returns the reason why an application is shown in Open With
@@ -119,7 +119,7 @@ public:
 	bool ShowAllApplications() const;
 
 private:
-	static int32 Relation(const Model* node, const Model* app);
+	static int32_t Relation(const Model* node, const Model* app);
 		// returns the reason why an application is shown in
 		// Open With window
 
@@ -127,9 +127,9 @@ private:
 	BObjectList<BString> fSignatures;
 
 	entry_ref fPreferredRef;
-	int32 fPreferredAppCount;
+	int32_t fPreferredAppCount;
 	entry_ref fPreferredRefForFile;
-	int32 fPreferredAppForFileCount;
+	int32_t fPreferredAppForFileCount;
 	bool fGenericFilesOnly;
 	bool fCanAddAllApps;
 	bool fFoundOneNonSuperHandler;
@@ -155,7 +155,7 @@ public:
 	OpenWithPoseView* PoseView() const;
 
 protected:
-	virtual BPoseView* NewPoseView(Model* model, uint32 viewMode);
+	virtual BPoseView* NewPoseView(Model* model, uint32_t viewMode);
 
 	virtual	bool ShouldAddMenus() const;
 	virtual	void ShowContextMenu(BPoint, const entry_ref*, BView*);
@@ -202,10 +202,10 @@ public:
 	OpenWithPoseView();
 	virtual ~OpenWithPoseView();
 
-	virtual void OpenSelection(BPose*, int32*);
+	virtual void OpenSelection(BPose*, int32_t*);
 		// open entries with the selected app
 
-	int32 OpenWithRelation(const Model*) const;
+	int32_t OpenWithRelation(const Model*) const;
 		// returns the reason why an application is shown in
 		// Open With window
 	void OpenWithRelationDescription(const Model*, BString*) const;
@@ -248,15 +248,15 @@ protected:
 	virtual bool Represents(const entry_ref*) const;
 
 	virtual void CreatePoses(Model** models, PoseInfo* poseInfoArray,
-		int32 count, BPose** resultingPoses, bool insertionSort = true,
-		int32* lastPoseIndexPtr = NULL, BRect* boundsPtr = NULL,
+		int32_t count, BPose** resultingPoses, bool insertionSort = true,
+		int32_t* lastPoseIndexPtr = NULL, BRect* boundsPtr = NULL,
 		bool forceDraw = false);
 		// override to add selecting the default handling app
 		// for selection
 
 	virtual void Pulse();
 
-	virtual void KeyDown(const char* bytes, int32 count);
+	virtual void KeyDown(const char* bytes, int32_t count);
 
 private:
 	entry_ref fPreferredRef;
@@ -288,11 +288,11 @@ public:
 	RelationCachingModelProxy(Model* model);
 	~RelationCachingModelProxy();
 
-	int32 Relation(SearchForSignatureEntryList* iterator,
+	int32_t Relation(SearchForSignatureEntryList* iterator,
 		BMessage* entries) const;
 
 	Model* fModel;
-	mutable int32 fRelation;
+	mutable int32_t fRelation;
 };
 
 
@@ -336,11 +336,11 @@ public:
 
 	virtual status_t GetNextEntry(BEntry* entry, bool traverse = false);
 	virtual status_t GetNextRef(entry_ref* ref);
-	virtual int32 GetNextDirents(struct dirent* buffer, size_t length,
-		int32 count = INT_MAX);
+	virtual int32_t GetNextDirents(struct dirent* buffer, size_t length,
+		int32_t count = INT_MAX);
 
 	virtual status_t Rewind();
-	virtual int32 CountEntries();
+	virtual int32_t CountEntries();
 
 protected:
 	bool Iterate() const;

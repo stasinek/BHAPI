@@ -119,7 +119,7 @@ static addr_t sIOSpaceBase;
 #define IS_KERNEL_MAP(map)		(map->arch_data->rtdir_phys == sKernelPhysicalPageRoot)
 
 static status_t early_query(addr_t va, addr_t *out_physical);
-static status_t get_physical_page_tmap_internal(addr_t pa, addr_t *va, uint32 flags);
+static status_t get_physical_page_tmap_internal(addr_t pa, addr_t *va, uint32_t flags);
 static status_t put_physical_page_tmap_internal(addr_t va);
 
 static void flush_tmap(vm_translation_map *map);
@@ -225,7 +225,7 @@ early_query(addr_t va, addr_t *_physicalAddress)
 	page_indirect_entry *pi;
 	page_table_entry *pt;
 	addr_t pa;
-	int32 index;
+	int32_t index;
 	status_t err = B_ERROR;	// no pagetable here
 	TRACE(("%s(%p,)\n", __FUNCTION__, va));
 
@@ -394,7 +394,7 @@ destroy_tmap(vm_translation_map *map)
 
 static void
 put_pgdir_in_pgroot(page_root_entry *entry,
-	addr_t pgdir_phys, uint32 attributes)
+	addr_t pgdir_phys, uint32_t attributes)
 {
 	page_root_entry dir;
 	// put it in the pgdir
@@ -417,7 +417,7 @@ put_pgdir_in_pgroot(page_root_entry *entry,
 
 static void
 put_pgtable_in_pgdir(page_directory_entry *entry,
-	addr_t pgtable_phys, uint32 attributes)
+	addr_t pgtable_phys, uint32_t attributes)
 {
 	page_directory_entry table;
 	// put it in the pgdir
@@ -440,7 +440,7 @@ put_pgtable_in_pgdir(page_directory_entry *entry,
 
 static void
 put_page_table_entry_in_pgtable(page_table_entry *entry,
-	addr_t physicalAddress, uint32 attributes, bool globalPage)
+	addr_t physicalAddress, uint32_t attributes, bool globalPage)
 {
 	page_table_entry page;
 	init_page_table_entry(&page);
@@ -469,7 +469,7 @@ put_page_table_entry_in_pgtable(page_table_entry *entry,
 
 static void
 put_page_indirect_entry_in_pgtable(page_indirect_entry *entry,
-	addr_t physicalAddress, uint32 attributes, bool globalPage)
+	addr_t physicalAddress, uint32_t attributes, bool globalPage)
 {
 	page_indirect_entry page;
 	init_page_indirect_entry(&page);
@@ -514,7 +514,7 @@ map_max_pages_need(vm_translation_map */*map*/, addr_t start, addr_t end)
 
 
 static status_t
-map_tmap(vm_translation_map *map, addr_t va, addr_t pa, uint32 attributes)
+map_tmap(vm_translation_map *map, addr_t va, addr_t pa, uint32_t attributes)
 {
 	page_root_entry *pr;
 	page_directory_entry *pd;
@@ -720,14 +720,14 @@ restart:
 // XXX: 040 should be able to do that with PTEST (but not 030 or 060)
 static status_t
 query_tmap_interrupt(vm_translation_map *map, addr_t va, addr_t *_physical,
-	uint32 *_flags)
+	uint32_t *_flags)
 {
 	page_root_entry *pr = map->arch_data->rtdir_virt;
 	page_directory_entry *pd;
 	page_indirect_entry *pi;
 	page_table_entry *pt;
 	addr_t physicalPageTable;
-	int32 index;
+	int32_t index;
 	status_t err = B_ERROR;	// no pagetable here
 
 	if (sQueryPage == NULL)
@@ -775,7 +775,7 @@ query_tmap_interrupt(vm_translation_map *map, addr_t va, addr_t *_physical,
 
 
 static status_t
-query_tmap(vm_translation_map *map, addr_t va, addr_t *_physical, uint32 *_flags)
+query_tmap(vm_translation_map *map, addr_t va, addr_t *_physical, uint32_t *_flags)
 {
 	page_table_entry *pt;
 	page_indirect_entry *pi;
@@ -783,7 +783,7 @@ query_tmap(vm_translation_map *map, addr_t va, addr_t *_physical, uint32 *_flags
 	page_directory_entry *pr = map->arch_data->rtdir_virt;
 	addr_t pd_pg, pt_pg, pi_pg;
 	status_t status;
-	int32 index;
+	int32_t index;
 
 	// default the flags to not present
 	*_flags = 0;
@@ -865,7 +865,7 @@ get_mapped_size_tmap(vm_translation_map *map)
 
 
 static status_t
-protect_tmap(vm_translation_map *map, addr_t start, addr_t end, uint32 attributes)
+protect_tmap(vm_translation_map *map, addr_t start, addr_t end, uint32_t attributes)
 {
 	page_table_entry *pt;
 	page_directory_entry *pd;
@@ -945,7 +945,7 @@ restart:
 
 
 static status_t
-clear_flags_tmap(vm_translation_map *map, addr_t va, uint32 flags)
+clear_flags_tmap(vm_translation_map *map, addr_t va, uint32_t flags)
 {
 	page_table_entry *pt;
 	page_indirect_entry *pi;
@@ -1061,7 +1061,7 @@ flush_tmap(vm_translation_map *map)
 
 
 static status_t
-map_iospace_chunk(addr_t va, addr_t pa, uint32 flags)
+map_iospace_chunk(addr_t va, addr_t pa, uint32_t flags)
 {
 	int i;
 	page_table_entry *pt;
@@ -1098,7 +1098,7 @@ map_iospace_chunk(addr_t va, addr_t pa, uint32 flags)
 
 
 static status_t
-get_physical_page_tmap_internal(addr_t pa, addr_t *va, uint32 flags)
+get_physical_page_tmap_internal(addr_t pa, addr_t *va, uint32_t flags)
 {
 	return generic_get_physical_page(pa, va, flags);
 }
@@ -1374,7 +1374,7 @@ m68k_vm_translation_map_init_post_area(kernel_args *args)
 		page_indirect_entry *pageTableEntry;
 		addr_t physicalPageDir, physicalPageTable;
 		addr_t physicalIndirectDesc;
-		int32 index;
+		int32_t index;
 
 		// first get pa for the indirect descriptor
 
@@ -1449,8 +1449,8 @@ m68k_vm_translation_map_early_map(kernel_args *args, addr_t va, addr_t pa,
 	page_directory_entry *pd;
 	page_table_entry *pt;
 	addr_t tbl;
-	uint32 index;
-	uint32 i;
+	uint32_t index;
+	uint32_t i;
 	TRACE(("early_tmap: entry pa 0x%lx va 0x%lx\n", pa, va));
 
 	// everything much simpler here because pa = va
@@ -1469,11 +1469,11 @@ m68k_vm_translation_map_early_map(kernel_args *args, addr_t va, addr_t pa,
 		// for each pgdir on the allocated page:
 		for (i = 0; i < NUM_DIRTBL_PER_PAGE; i++) {
 			put_pgdir_in_pgroot(&pr[aindex + i], tbl, attributes);
-			//TRACE(("inserting tbl @ %p as %08x pr[%d] %08x\n", tbl, TA_TO_PREA(tbl), aindex + i, *(uint32 *)apr));
+			//TRACE(("inserting tbl @ %p as %08x pr[%d] %08x\n", tbl, TA_TO_PREA(tbl), aindex + i, *(uint32_t *)apr));
 			// clear the table
 			//TRACE(("clearing table[%d]\n", i));
 			pd = (page_directory_entry *)tbl;
-			for (int32 j = 0; j < NUM_DIRENT_PER_TBL; j++)
+			for (int32_t j = 0; j < NUM_DIRENT_PER_TBL; j++)
 				*(page_directory_entry_scalar *)(&pd[j]) = DFL_DIRENT_VAL;
 			tbl += SIZ_DIRTBL;
 		}
@@ -1496,7 +1496,7 @@ m68k_vm_translation_map_early_map(kernel_args *args, addr_t va, addr_t pa,
 			// clear the table
 			//TRACE(("clearing table[%d]\n", i));
 			pt = (page_table_entry *)tbl;
-			for (int32 j = 0; j < NUM_PAGEENT_PER_TBL; j++)
+			for (int32_t j = 0; j < NUM_PAGEENT_PER_TBL; j++)
 				*(page_table_entry_scalar *)(&pt[j]) = DFL_PAGEENT_VAL;
 			tbl += SIZ_PAGETBL;
 		}
@@ -1515,7 +1515,7 @@ m68k_vm_translation_map_early_map(kernel_args *args, addr_t va, addr_t pa,
 
 static bool
 m68k_vm_translation_map_is_kernel_page_accessible(addr_t virtualAddress,
-	uint32 protection)
+	uint32_t protection)
 {
 	// TODO: Implement!
 	return false;

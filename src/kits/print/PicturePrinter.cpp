@@ -163,14 +163,14 @@ void PicturePrinter::FillEllipse(BPoint center, BPoint radii) {
 }
 
 
-void PicturePrinter::StrokePolygon(int32 numPoints, BPoint *points, bool isClosed) { 
+void PicturePrinter::StrokePolygon(int32_t numPoints, BPoint *points, bool isClosed) { 
 	Indent(); Print("StrokePolygon");
 	printf("%s ", isClosed ? "closed" : "open"); Cr();
 	Print(numPoints, points);
 }
 
 
-void PicturePrinter::FillPolygon(int32 numPoints, BPoint *points, bool isClosed) { 
+void PicturePrinter::FillPolygon(int32_t numPoints, BPoint *points, bool isClosed) { 
 	Indent(); Print("FillPolygon");
 	printf("%s ", isClosed ? "closed" : "open"); Cr();
 	Print(numPoints, points);
@@ -195,12 +195,12 @@ void PicturePrinter::DrawString(char *string, float escapement_nospace, float es
 }
 
 
-void PicturePrinter::DrawPixels(BRect src, BRect dest, int32 width, int32 height, int32 bytesPerRow, int32 pixelFormat, int32 flags, void *data) { 
+void PicturePrinter::DrawPixels(BRect src, BRect dest, int32_t width, int32_t height, int32_t bytesPerRow, int32_t pixelFormat, int32_t flags, void *data) { 
 	Indent(); Print("DrawPixels"); Cr();
 }
 
 
-void PicturePrinter::SetClippingRects(BRect *rects, uint32 numRects) { 
+void PicturePrinter::SetClippingRects(BRect *rects, uint32_t numRects) { 
 	Indent(); Print("SetClippingRects"); 
 	if (numRects == 0) Print("none"); Cr();
 	Print(numRects, rects);
@@ -347,7 +347,7 @@ void PicturePrinter::SetFontStyle(char *style) {
 }
 
 
-void PicturePrinter::SetFontSpacing(int32 spacing) { 
+void PicturePrinter::SetFontSpacing(int32_t spacing) { 
 	Indent(); Print("SetFontSpacing"); 
 	switch(spacing) {
 		case B_CHAR_SPACING: Print("B_CHAR_SPACING"); break;
@@ -370,7 +370,7 @@ void PicturePrinter::SetFontRotate(float rotation) {
 }
 
 
-void PicturePrinter::SetFontEncoding(int32 encoding) { 
+void PicturePrinter::SetFontEncoding(int32_t encoding) { 
 	Indent(); Print("SetFontEncoding");
 	switch (encoding) {
 		case B_UNICODE_UTF8: Print("B_UNICODE_UTF8"); break;
@@ -393,7 +393,7 @@ void PicturePrinter::SetFontEncoding(int32 encoding) {
 #define PRINT_FLAG(flag) \
   if (flags & flag) { f |= flag; Print(#flag); }
 
-void PicturePrinter::SetFontFlags(int32 flags) { 
+void PicturePrinter::SetFontFlags(int32_t flags) { 
 	Indent(); Print("SetFontFlags"); 
 	int f = 0;
 	if (flags == 0) Print("none set");
@@ -409,9 +409,9 @@ void PicturePrinter::SetFontShear(float shear) {
 }
 
 
-void PicturePrinter::SetFontFace(int32 flags) { 
+void PicturePrinter::SetFontFace(int32_t flags) { 
 	Indent(); Print("SetFontFace");
-	int32 f = 0;
+	int32_t f = 0;
 	if (flags == 0) Print("none set");
 	PRINT_FLAG(B_REGULAR_FACE);
 	PRINT_FLAG(B_BOLD_FACE);
@@ -436,10 +436,10 @@ ShapePrinter::~ShapePrinter() {
 	fPrinter->DecIndent();
 }
 
-status_t ShapePrinter::IterateBezierTo(int32 bezierCount, BPoint *control)
+status_t ShapePrinter::IterateBezierTo(int32_t bezierCount, BPoint *control)
 {
 	fPrinter->Indent(); fPrinter->Print("BezierTo"); fPrinter->Cr();
-	for (int32 i = 0; i < bezierCount; i++, control += 3) {
+	for (int32_t i = 0; i < bezierCount; i++, control += 3) {
 		fPrinter->Indent(1); 
 		fPrinter->Print(i / 3.0);
 		fPrinter->Print(&control[0]);
@@ -456,11 +456,11 @@ status_t ShapePrinter::IterateClose(void)
 	return B_OK;
 }
 
-status_t ShapePrinter::IterateLineTo(int32 lineCount, BPoint *linePoints)
+status_t ShapePrinter::IterateLineTo(int32_t lineCount, BPoint *linePoints)
 {
 	fPrinter->Indent(); fPrinter->Print("LineTo"); fPrinter->Cr();
 	BPoint *p = linePoints;
-	for (int32 i = 0; i < lineCount; i++) {
+	for (int32_t i = 0; i < lineCount; i++) {
 		fPrinter->Indent(1); fPrinter->Print(p); fPrinter->Cr();
 		p++;
 	}

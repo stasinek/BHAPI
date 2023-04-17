@@ -44,7 +44,7 @@ public:
 									page_num_t (*get_free_page)(kernel_args*));
 
 	virtual	bool				IsKernelPageAccessible(addr_t virtualAddress,
-									uint32 protection);
+									uint32_t protection);
 
 	inline	X86PhysicalPageMapper* PhysicalPageMapper() const
 									{ return fPhysicalPageMapper; }
@@ -63,29 +63,29 @@ public:
 									bool allocateTables,
 									vm_page_reservation* reservation,
 									TranslationMapPhysicalPageMapper*
-										pageMapper, int32& mapCount);
+										pageMapper, int32_t& mapCount);
 	static	uint64*				PageDirectoryEntryForAddress(
 									uint64* virtualPML4, addr_t virtualAddress,
 									bool isKernel, bool allocateTables,
 									vm_page_reservation* reservation,
 									TranslationMapPhysicalPageMapper*
-										pageMapper, int32& mapCount);
+										pageMapper, int32_t& mapCount);
 	static	uint64*				PageTableForAddress(uint64* virtualPML4,
 									addr_t virtualAddress, bool isKernel,
 									bool allocateTables,
 									vm_page_reservation* reservation,
 									TranslationMapPhysicalPageMapper*
-										pageMapper, int32& mapCount);
+										pageMapper, int32_t& mapCount);
 	static	uint64*				PageTableEntryForAddress(uint64* virtualPML4,
 									addr_t virtualAddress, bool isKernel,
 									bool allocateTables,
 									vm_page_reservation* reservation,
 									TranslationMapPhysicalPageMapper*
-										pageMapper, int32& mapCount);
+										pageMapper, int32_t& mapCount);
 
 	static	void				PutPageTableEntryInTable(
 									uint64* entry, phys_addr_t physicalAddress,
-									uint32 attributes, uint32 memoryType,
+									uint32_t attributes, uint32_t memoryType,
 									bool globalPage);
 	static	void				SetTableEntry(uint64_t* entry,
 									uint64_t newEntry);
@@ -98,7 +98,7 @@ public:
 									uint64_t flags);
 
 	static	uint64				MemoryTypeToPageTableEntryFlags(
-									uint32 memoryType);
+									uint32_t memoryType);
 
 private:
 	static	void				_EnableExecutionDisable(void* dummy, int cpu);
@@ -163,7 +163,7 @@ X86PagingMethod64Bit::ClearTableEntryFlags(uint64_t* entryPointer,
 
 
 /*static*/ inline uint64
-X86PagingMethod64Bit::MemoryTypeToPageTableEntryFlags(uint32 memoryType)
+X86PagingMethod64Bit::MemoryTypeToPageTableEntryFlags(uint32_t memoryType)
 {
 	// ATM we only handle the uncacheable and write-through type explicitly. For
 	// all other types we rely on the MTRRs to be set up correctly. Since we set

@@ -35,11 +35,11 @@ public:
 
 			const BString&		TeamName() const	{ return fTeamName; }
 
-			int32				CountBreakpoints() const;
-			const BreakpointSetting* BreakpointAt(int32 index) const;
+			int32_t				CountBreakpoints() const;
+			const BreakpointSetting* BreakpointAt(int32_t index) const;
 
-			int32				CountUiSettings() const;
-			const TeamUiSettings*	UiSettingAt(int32 index) const;
+			int32_t				CountUiSettings() const;
+			const TeamUiSettings*	UiSettingAt(int32_t index) const;
 			const TeamUiSettings*	UiSettingFor(const char* id) const;
 			status_t			AddUiSettings(TeamUiSettings* settings);
 

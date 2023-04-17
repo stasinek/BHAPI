@@ -58,7 +58,7 @@ const char* BLocaleRoster::kCatFingerprintAttr = "BEOS:LOCALE_FINGERPRINT";
 const char* BLocaleRoster::kEmbeddedCatAttr = "BEOS:LOCALE_EMBEDDED_CATALOG";
 	// attribute which contains flattened data of embedded catalog
 	// this may live in an app- or add-on-file
-int32 BLocaleRoster::kEmbeddedCatResId = 0xCADA;
+int32_t BLocaleRoster::kEmbeddedCatResId = 0xCADA;
 	// a unique value used to identify the resource (=> embedded CAtalog DAta)
 	// which contains flattened data of embedded catalog.
 	// this may live in an app- or add-on-file
@@ -212,7 +212,7 @@ status_t BLocaleRoster::GetAvailableLanguages(BMessage* languages) const
 	if (!languages)
 		return B_BAD_VALUE;
 
-	int32_t localeCount;
+	int32_t_t localeCount;
 	const Locale* icuLocaleList = Locale::getAvailableLocales(localeCount);
 
 	for (int i = 0; i < localeCount; i++)
@@ -227,7 +227,7 @@ status_t BLocaleRoster::GetAvailableCountries(BMessage* countries) const
 	if (!countries)
 		return B_BAD_VALUE;
 
-	int32 i;
+	int32_t i;
 	const char* const* countryList = uloc_getISOCountries();
 
 	for (i = 0; countryList[i] != NULL; i++)
@@ -247,7 +247,7 @@ status_t BLocaleRoster::GetAvailableTimeZones(BMessage* timeZones) const
 	StringEnumeration* zoneList = TimeZone::createEnumeration();
 
 	UErrorCode icuStatus = U_ZERO_ERROR;
-	int32 count = zoneList->count(icuStatus);
+	int32_t count = zoneList->count(icuStatus);
 	if (U_SUCCESS(icuStatus)) {
 		for (int i = 0; i < count; ++i) {
 			const char* zoneID = zoneList->next(NULL, icuStatus);
@@ -278,7 +278,7 @@ status_t BLocaleRoster::GetAvailableTimeZonesWithRegionInfo(BMessage* timeZones)
 	StringEnumeration* zoneList = TimeZone::createTimeZoneIDEnumeration(
 		UCAL_ZONE_TYPE_CANONICAL, NULL, NULL, icuStatus);
 
-	int32 count = zoneList->count(icuStatus);
+	int32_t count = zoneList->count(icuStatus);
 	if (U_SUCCESS(icuStatus)) {
 		for (int i = 0; i < count; ++i) {
 			const char* zoneID = zoneList->next(NULL, icuStatus);
@@ -318,7 +318,7 @@ status_t BLocaleRoster::GetAvailableTimeZonesForCountry(BMessage* timeZones,
 		// countryCode == NULL will yield all timezones not bound to a country
 
 	UErrorCode icuStatus = U_ZERO_ERROR;
-	int32 count = zoneList->count(icuStatus);
+	int32_t count = zoneList->count(icuStatus);
 	if (U_SUCCESS(icuStatus)) {
 		for (int i = 0; i < count; ++i) {
 			const char* zoneID = zoneList->next(NULL, icuStatus);
@@ -418,7 +418,7 @@ status_t BLocaleRoster::GetFlagIconForLanguage(BBitmap* flagIcon,
 
 
 status_t BLocaleRoster::GetAvailableCatalogs(BMessage*  languageList,
-	const char* sigPattern,	const char* langPattern, int32 fingerprint) const
+	const char* sigPattern,	const char* langPattern, int32_t fingerprint) const
 {
 	if (languageList == NULL)
 		return B_BAD_VALUE;
@@ -427,8 +427,8 @@ status_t BLocaleRoster::GetAvailableCatalogs(BMessage*  languageList,
 	if (!lock.IsLocked())
 		return B_ERROR;
 
-	int32 count = fData->fCatalogAddOnInfos.CountItems();
-	for (int32 i = 0; i < count; ++i) {
+	int32_t count = fData->fCatalogAddOnInfos.CountItems();
+	for (int32_t i = 0; i < count; ++i) {
 		CatalogAddOnInfo* info
 			= (CatalogAddOnInfo*)fData->fCatalogAddOnInfos.ItemAt(i);
 
@@ -509,7 +509,7 @@ static status_t _InitializeCatalog(void* param)
 
 	// figure out image (shared object) from catalog address
 	image_info info;
-	int32 cookie = 0;
+	int32_t cookie = 0;
 	bool found = false;
 
 	while (get_next_image_info(0, &cookie, &info) == B_OK) {
@@ -533,7 +533,7 @@ static status_t _InitializeCatalog(void* param)
 
 
 BCatalog*
-BLocaleRoster::_GetCatalog(BCatalog* catalog, int32* catalogInitStatus)
+BLocaleRoster::_GetCatalog(BCatalog* catalog, int32_t* catalogInitStatus)
 {
 	// This function is used in the translation macros, so it can't return a
 	// status_t. Maybe it could throw exceptions ?
@@ -559,8 +559,8 @@ status_t BLocaleRoster::_PrepareCatalogEntry(const entry_ref& ref, BString& sign
 	if (status != B_OK)
 		return status;
 
-	int32 first = signature.FindFirst(':');
-	int32 last = signature.FindLast(':');
+	int32_t first = signature.FindFirst(':');
+	int32_t last = signature.FindLast(':');
 	if (first == last)
 		return B_ENTRY_NOT_FOUND;
 

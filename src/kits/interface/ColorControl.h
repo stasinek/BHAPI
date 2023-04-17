@@ -39,7 +39,7 @@ public:
     BColorControl(BPoint leftTop, const char *name, BMessage *message = NULL, bool bufferedDrawing = false);
     virtual ~BColorControl();
 
-    virtual void	SetValue(int32 color);
+    virtual void	SetValue(int32_t color);
     void		SetValue(bhapi::rgb_color color);
     bhapi::rgb_color	ValueAsColor();
 

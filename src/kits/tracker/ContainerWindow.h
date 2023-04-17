@@ -88,18 +88,18 @@ struct AddonShortcut {
 	Model*	model;
 	char	key;
 	char	defaultKey;
-	uint32	modifiers;
+	uint32_t	modifiers;
 };
 
 
 class BContainerWindow : public BWindow {
 public:
 	BContainerWindow(LockingList<BWindow>* windowList,
-		uint32 containerWindowFlags,
+		uint32_t containerWindowFlags,
 		window_look look = B_DOCUMENT_WINDOW_LOOK,
 		window_feel feel = B_NORMAL_WINDOW_FEEL,
-		uint32 flags = B_WILL_ACCEPT_FIRST_CLICK | B_NO_WORKSPACE_ACTIVATION,
-		uint32 workspace = B_CURRENT_WORKSPACE, bool useLayouts = true,
+		uint32_t flags = B_WILL_ACCEPT_FIRST_CLICK | B_NO_WORKSPACE_ACTIVATION,
+		uint32_t workspace = B_CURRENT_WORKSPACE, bool useLayouts = true,
 		bool isDeskWindow = false);
 
 	virtual ~BContainerWindow();
@@ -118,14 +118,14 @@ public:
 	virtual void CreatePoseView(Model*);
 
 	virtual void ShowContextMenu(BPoint, const entry_ref*, BView*);
-	virtual uint32 ShowDropContextMenu(BPoint);
+	virtual uint32_t ShowDropContextMenu(BPoint);
 	virtual void MenusBeginning();
 	virtual void MenusEnded();
 	virtual void MessageReceived(BMessage*);
 	virtual void FrameResized(float, float);
 	virtual void FrameMoved(BPoint);
 	virtual void Zoom(BPoint, float, float);
-	virtual void WorkspacesChanged(uint32, uint32);
+	virtual void WorkspacesChanged(uint32_t, uint32_t);
 
 	// virtuals that control setup of window
 	virtual bool ShouldAddMenus() const;
@@ -147,7 +147,7 @@ public:
 	BNavigator* Navigator() const;
 
 	virtual void SelectionChanged();
-	virtual void ViewModeChanged(uint32 oldMode, uint32 newMode);
+	virtual void ViewModeChanged(uint32_t oldMode, uint32_t newMode);
 
 	virtual void RestoreState();
 	virtual void RestoreState(const BMessage &);
@@ -173,10 +173,10 @@ public:
 	void MarkAttributeMenu();
 	void MarkArrangeByMenu(BMenu*);
 	BMenuItem* NewAttributeMenuItem(const char* label, const char* name,
-		int32 type, float width, int32 align, bool editable,
+		int32_t type, float width, int32_t align, bool editable,
 		bool statField);
 	BMenuItem* NewAttributeMenuItem(const char* label, const char* name,
-		int32 type, const char* displayAs, float width, int32 align,
+		int32_t type, const char* displayAs, float width, int32_t align,
 		bool editable, bool statField);
 	virtual void NewAttributeMenu(BMenu*);
 
@@ -192,8 +192,8 @@ public:
 		bool createNew = false, bool createFolder = true);
 
 	// add-on iteration
-	void EachAddon(bool (*)(const Model*, const char*, uint32 shortcut,
-		uint32 modifiers, bool primary, void*), void*, BStringList&);
+	void EachAddon(bool (*)(const Model*, const char*, uint32_t shortcut,
+		uint32_t modifiers, bool primary, void*), void*, BStringList&);
 
 	BPopUpMenu* ContextMenu();
 
@@ -212,7 +212,7 @@ public:
 	bool IsPathWatchingEnabled(void) const;
 
 protected:
-	virtual BPoseView* NewPoseView(Model*, uint32);
+	virtual BPoseView* NewPoseView(Model*, uint32_t);
 		// instantiate a different flavor of BPoseView for different
 		// ContainerWindows
 
@@ -251,7 +251,7 @@ protected:
 	virtual void SetCloseItem(BMenu*);
 	virtual void SetupNavigationMenu(const entry_ref*, BMenu*);
 	virtual void SetupMoveCopyMenus(const entry_ref*, BMenu*);
-	virtual void PopulateMoveCopyNavMenu(BNavMenu*, uint32,
+	virtual void PopulateMoveCopyNavMenu(BNavMenu*, uint32_t,
 		const entry_ref*, bool);
 
 	virtual void SetupOpenWithMenu(BMenu*);
@@ -270,13 +270,13 @@ protected:
 	virtual void UpdateMenu(BMenu* menu, UpdateMenuContext context);
 
 	BMenu* AddMimeMenu(const BMimeType& mimeType, bool isSuperType,
-		BMenu* menu, int32 start);
+		BMenu* menu, int32_t start);
 
-	BHandler* ResolveSpecifier(BMessage*, int32, BMessage*, int32,
+	BHandler* ResolveSpecifier(BMessage*, int32_t, BMessage*, int32_t,
 		const char*);
 
 	bool EachAddon(BPath &path,
-		bool (*)(const Model*, const char*, uint32, bool, void*),
+		bool (*)(const Model*, const char*, uint32_t, bool, void*),
 		BObjectList<Model>*, void*, BStringList&);
 	void LoadAddOn(BMessage*);
 
@@ -318,7 +318,7 @@ protected:
 	bool fIsPrinters;
 	bool fIsDesktop;
 
-	uint32 fContainerWindowFlags;
+	uint32_t fContainerWindowFlags;
 	BackgroundImage* fBackgroundImage;
 
 	static LockingList<struct AddonShortcut>* fAddonsList;
@@ -341,7 +341,7 @@ private:
 
 	typedef BWindow _inherited;
 
-	friend int32 show_context_menu(void*);
+	friend int32_t show_context_menu(void*);
 	friend class BackgroundView;
 
 	void _UpdateSelectionMIMEInfo();

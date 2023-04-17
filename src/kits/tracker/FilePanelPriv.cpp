@@ -88,7 +88,7 @@ All rights reserved.
 const char* kDefaultFilePanelTemplate = "FilePanelSettings";
 
 
-static uint32 GetLinkFlavor(const Model* model, bool resolve = true)
+static uint32_t GetLinkFlavor(const Model* model, bool resolve = true)
 {
 	if (model && model->IsSymLink()) {
 		if (!resolve)
@@ -126,7 +126,7 @@ key_down_filter(BMessage* message, BHandler** handler, BMessageFilter* filter)
 	if (message->FindInt8("byte", (int8*)&key) != B_OK)
 		return B_DISPATCH_MESSAGE;
 
-	int32 modifier = 0;
+	int32_t modifier = 0;
 	message->FindInt32("modifiers", &modifier);
 	if (!modifier && key == B_ESCAPE) {
 		if (view->ActivePose())
@@ -153,8 +153,8 @@ key_down_filter(BMessage* message, BHandler** handler, BMessageFilter* filter)
 
 
 TFilePanel::TFilePanel(file_panel_mode mode, BMessenger* target,
-	const BEntry* startDir, uint32 nodeFlavors, bool multipleSelection,
-	BMessage* message, BRefFilter* filter, uint32 containerWindowFlags,
+	const BEntry* startDir, uint32_t nodeFlavors, bool multipleSelection,
+	BMessage* message, BRefFilter* filter, uint32_t containerWindowFlags,
 	window_look look, window_feel feel, bool hideWhenDone)
 	:
 	BContainerWindow(0, containerWindowFlags, look, feel, 0,
@@ -278,8 +278,8 @@ TFilePanel::MessageDropFilter(BMessage* message, BHandler**,
 	if (panel == NULL)
 		return B_DISPATCH_MESSAGE;
 
-	uint32 type;
-	int32 count;
+	uint32_t type;
+	int32_t count;
 	if (message->GetInfo("refs", &type, &count) != B_OK)
 		return B_SKIP_MESSAGE;
 
@@ -451,7 +451,7 @@ bool TFilePanel::QuitRequested()
 
 		BMessage message(*fMessage);
 		message.what = B_CANCEL;
-		message.AddInt32("old_what", (int32)fMessage->what);
+		message.AddInt32("old_what", (int32_t)fMessage->what);
 		message.AddPointer("source", fClientObject);
 		fTarget.SendMessage(&message);
 
@@ -575,16 +575,16 @@ void TFilePanel::AdjustButton()
 		} else
 			fPoseView->ShowSelection(false);
 	} else {
-		int32 count = selectionList->CountItems();
+		int32_t count = selectionList->CountItems();
 		if (count) {
 			enabled = true;
 
 			// go through selection list looking at content
-			for (int32 index = 0; index < count; index++) {
+			for (int32_t index = 0; index < count; index++) {
 				Model* model = selectionList->ItemAt(index)->TargetModel();
 
-				uint32 modelFlavor = GetLinkFlavor(model, false);
-				uint32 linkFlavor = GetLinkFlavor(model, true);
+				uint32_t modelFlavor = GetLinkFlavor(model, false);
+				uint32_t linkFlavor = GetLinkFlavor(model, true);
 
 				// if only one item is selected and we're not in dir
 				// selection mode then we don't disable button ever
@@ -631,7 +631,7 @@ status_t TFilePanel::GetNextEntryRef(entry_ref* ref)
 
 
 BPoseView*
-TFilePanel::NewPoseView(Model* model, uint32)
+TFilePanel::NewPoseView(Model* model, uint32_t)
 {
 	return new BFilePanelPoseView(model);
 }
@@ -668,7 +668,7 @@ void TFilePanel::Init(const BMessage*)
 	fDirMenuField->MenuBar()->SetMaxContentWidth(rect.Width() - 26.0f);
 		// Make room for the icon
 
-	fDirMenuField->MenuBar()->RemoveItem((int32)0);
+	fDirMenuField->MenuBar()->RemoveItem((int32_t)0);
 	fDirMenu->SetMenuBar(fDirMenuField->MenuBar());
 		// the above is a weird call from BDirMenu
 		// ToDo: clean up
@@ -828,7 +828,7 @@ void TFilePanel::Init(const BMessage*)
 			// remove add-ons menu, identifier menu, separator
 			item = menu->FindItem(B_TRANSLATE("Add-ons"));
 			if (item) {
-				int32 index = menu->IndexOf(item);
+				int32_t index = menu->IndexOf(item);
 				delete menu->RemoveItem(index);
 				delete menu->RemoveItem(--index);
 				delete menu->RemoveItem(--index);
@@ -1040,7 +1040,7 @@ void TFilePanel::AddDropContextMenus(BMenu*)
 
 void TFilePanel::MenusBeginning()
 {
-	int32 count = PoseView()->SelectionList()->CountItems();
+	int32_t count = PoseView()->SelectionList()->CountItems();
 
 	EnableNamedMenuItem(fMenuBar, kNewFolder, !TargetModel()->IsRoot());
 	EnableNamedMenuItem(fMenuBar, kMoveToTrash, !TargetModel()->IsRoot()
@@ -1173,7 +1173,7 @@ void TFilePanel::MessageReceived(BMessage* message)
 							break;
 
 						if (IsSavePanel()) {
-							int32 count = 0;
+							int32_t count = 0;
 							type_code type;
 							message->GetInfo("refs", &type, &count);
 
@@ -1203,7 +1203,7 @@ void TFilePanel::MessageReceived(BMessage* message)
 
 					  	// send handler a message and close
 						BMessage openMessage(*fMessage);
-						for (int32 index = 0; ; index++) {
+						for (int32_t index = 0; ; index++) {
 					  		if (message->FindRef("refs", index, &ref) != B_OK)
 								break;
 							openMessage.AddRef("refs", &ref);
@@ -1318,7 +1318,7 @@ void TFilePanel::MessageReceived(BMessage* message)
 
 		case B_OBSERVER_NOTICE_CHANGE:
 		{
-			int32 observerWhat;
+			int32_t observerWhat;
 			if (message->FindInt32("be:observe_change_what", &observerWhat)
 					== B_OK) {
 				switch (observerWhat) {
@@ -1445,7 +1445,7 @@ bool TFilePanel::SelectChildInParent(const entry_ref*, const node_ref* child)
 	if (!IsLocked())
 		return false;
 
-	int32 index;
+	int32_t index;
 	BPose* pose = PoseView()->FindPose(child, &index);
 	if (!pose)
 		return false;
@@ -1458,7 +1458,7 @@ bool TFilePanel::SelectChildInParent(const entry_ref*, const node_ref* child)
 }
 
 
-int32 TFilePanel::ShowCenteredAlert(const char* text, const char* button1,
+int32_t TFilePanel::ShowCenteredAlert(const char* text, const char* button1,
 	const char* button2, const char* button3)
 {
 	BAlert* alert = new BAlert("", text, button1, button2, button3,
@@ -1554,7 +1554,7 @@ void TFilePanel::OpenSelectionCommon(BMessage* openMessage)
 	if (!openMessage->HasRef("refs"))
 		return;
 
-	for (int32 index = 0; ; index++) {
+	for (int32_t index = 0; ; index++) {
 		entry_ref ref;
 		if (openMessage->FindRef("refs", index, &ref) != B_OK)
 			break;
@@ -1607,7 +1607,7 @@ void TFilePanel::HandleOpenButton()
 	if (selection->CountItems()) {
 		BMessage message(*fMessage);
 		// go through selection and add appropriate items
-		for (int32 index = 0; index < selection->CountItems(); index++) {
+		for (int32_t index = 0; index < selection->CountItems(); index++) {
 			Model* model = selection->ItemAt(index)->TargetModel();
 
 			if (((fNodeFlavors & B_DIRECTORY_NODE) != 0
@@ -1627,10 +1627,10 @@ void TFilePanel::HandleOpenButton()
 void TFilePanel::SwitchDirMenuTo(const entry_ref* ref)
 {
 	BEntry entry(ref);
-	for (int32 index = fDirMenu->CountItems() - 1; index >= 0; index--)
+	for (int32_t index = fDirMenu->CountItems() - 1; index >= 0; index--)
 		delete fDirMenu->RemoveItem(index);
 
-	fDirMenuField->MenuBar()->RemoveItem((int32)0);
+	fDirMenuField->MenuBar()->RemoveItem((int32_t)0);
 	fDirMenu->Populate(&entry, 0, true, true, false, true);
 
 	ModelMenuItem* item = dynamic_cast<ModelMenuItem*>(

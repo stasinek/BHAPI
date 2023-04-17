@@ -476,8 +476,8 @@ typedef BPrivate::AutoDeleter<double*, MatrixDelete> MatrixDeleter;
 
 // Constraint
 struct LayoutOptimizer::Constraint {
-	Constraint(int32 left, int32 right, double value, bool equality,
-			int32 index)
+	Constraint(int32_t left, int32_t right, double value, bool equality,
+			int32_t index)
 		: left(left),
 		  right(right),
 		  value(value),
@@ -502,10 +502,10 @@ struct LayoutOptimizer::Constraint {
 			(equality ? "=" : ">="), (int)value);
 	}
 
-	int32	left;
-	int32	right;
+	int32_t	left;
+	int32_t	right;
 	double	value;
-	int32	index;
+	int32_t	index;
 	bool	equality;
 };
 
@@ -514,7 +514,7 @@ struct LayoutOptimizer::Constraint {
 
 
 // constructor
-LayoutOptimizer::LayoutOptimizer(int32 variableCount)
+LayoutOptimizer::LayoutOptimizer(int32_t variableCount)
 	: fVariableCount(variableCount),
 	  fConstraints(),
 	  fVariables(new (nothrow) double[variableCount])
@@ -536,7 +536,7 @@ LayoutOptimizer::~LayoutOptimizer()
 
 	delete[] fVariables;
 
-	for (int32 i = 0;
+	for (int32_t i = 0;
 		 Constraint* constraint = (Constraint*)fConstraints.ItemAt(i);
 		 i++) {
 		delete constraint;
@@ -574,7 +574,7 @@ LayoutOptimizer::Clone() const
 	  -\sum_{i=right+1}^{left} x_i >=/= value, if left > right
 	If \a equality is \c true, the constraint is an equality constraint.
 */
-bool LayoutOptimizer::AddConstraint(int32 left, int32 right, double value,
+bool LayoutOptimizer::AddConstraint(int32_t left, int32_t right, double value,
 	bool equality)
 {
 	Constraint* constraint = new(nothrow) Constraint(left, right, value,
@@ -597,8 +597,8 @@ bool LayoutOptimizer::AddConstraintsFrom(const LayoutOptimizer* other)
 	if (!other || other->fVariableCount != fVariableCount)
 		return false;
 
-	int32 count = fConstraints.CountItems();
-	for (int32 i = 0; i < count; i++) {
+	int32_t count = fConstraints.CountItems();
+	for (int32_t i = 0; i < count; i++) {
 		Constraint* constraint = (Constraint*)other->fConstraints.ItemAt(i);
 		if (!AddConstraint(constraint->left, constraint->right,
 				constraint->value, constraint->equality)) {
@@ -613,8 +613,8 @@ bool LayoutOptimizer::AddConstraintsFrom(const LayoutOptimizer* other)
 // RemoveAllConstraints
 void LayoutOptimizer::RemoveAllConstraints()
 {
-	int32 count = fConstraints.CountItems();
-	for (int32 i = 0; i < count; i++) {
+	int32_t count = fConstraints.CountItems();
+	for (int32_t i = 0; i < count; i++) {
 		Constraint* constraint = (Constraint*)fConstraints.ItemAt(i);
 		delete constraint;
 	}
@@ -635,7 +635,7 @@ bool LayoutOptimizer::Solve(const double* desired, double size, double* values)
 	if (fVariables == NULL || desired == NULL|| values == NULL)
 		return false;
 
-	int32 constraintCount = fConstraints.CountItems() + 1;
+	int32_t constraintCount = fConstraints.CountItems() + 1;
 
 	// allocate the active constraint matrix and its transposed matrix
 	fActiveMatrix = allocate_matrix(constraintCount, fVariableCount);
@@ -663,11 +663,11 @@ bool LayoutOptimizer::Solve(const double* desired, double size, double* values)
 // _Solve
 bool LayoutOptimizer::_Solve(const double* desired, double* values)
 {
-	int32 constraintCount = fConstraints.CountItems();
+	int32_t constraintCount = fConstraints.CountItems();
 
 TRACE_ONLY(
 	TRACE("constraints:\n");
-	for (int32 i = 0; i < constraintCount; i++) {
+	for (int32_t i = 0; i < constraintCount; i++) {
 		TRACE(" %-2ld:  ", i);
 		((Constraint*)fConstraints.ItemAt(i))->Print();
 	}
@@ -695,7 +695,7 @@ TRACE_ONLY(
 	// init active set
 	BList activeConstraints(constraintCount);
 
-	for (int32 i = 0; i < constraintCount; i++) {
+	for (int32_t i = 0; i < constraintCount; i++) {
 		Constraint* constraint = (Constraint*)fConstraints.ItemAt(i);
 		double actualValue = constraint->ActualValue(x);
 		TRACE("constraint %ld: actual: %f  constraint: %f\n", i, actualValue,
@@ -713,7 +713,7 @@ TRACE_ONLY(int iteration = 0;)
 TRACE_ONLY(
 		TRACE("\n[iteration %d]\n", iteration++);
 		TRACE("active set:\n");
-		for (int32 i = 0; i < activeConstraints.CountItems(); i++) {
+		for (int32_t i = 0; i < activeConstraints.CountItems(); i++) {
 			TRACE("  ");
 			((Constraint*)activeConstraints.ItemAt(i))->Print();
 		}
@@ -726,7 +726,7 @@ TRACE_ONLY(
 		//        g_k = Gx_k + d
 		//        p = x - x_k
 
-		int32 activeCount = activeConstraints.CountItems();
+		int32_t activeCount = activeConstraints.CountItems();
 		if (activeCount == 0) {
 			TRACE_ERROR("Solve(): Error: No more active constraints!\n");
 			return false;
@@ -738,7 +738,7 @@ TRACE_ONLY(
 		bool independentRows[activeCount];
 		zero_matrix(fActiveMatrix, am, an);
 
-		for (int32 i = 0; i < activeCount; i++) {
+		for (int32_t i = 0; i < activeCount; i++) {
 			Constraint* constraint = (Constraint*)activeConstraints.ItemAt(i);
 			if (constraint->right >= 0)
 				fActiveMatrix[i][constraint->right] = 1;
@@ -834,7 +834,7 @@ TRACE_ONLY(
 			double alpha = 1;
 			int barrier = -1;
 			// if alpha_k < 1, add a barrier constraint to W^k
-			for (int32 i = 0; i < constraintCount; i++) {
+			for (int32_t i = 0; i < constraintCount; i++) {
 				Constraint* constraint = (Constraint*)fConstraints.ItemAt(i);
 				if (activeConstraints.HasItem(constraint))
 					continue;

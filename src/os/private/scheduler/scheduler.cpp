@@ -71,8 +71,8 @@ static scheduler_mode_operations* sSchedulerModes[] = {
 // Since CPU IDs used internally by the kernel bear no relation to the actual
 // CPU topology the following arrays are used to efficiently get the core
 // and the package that CPU in question belongs to.
-static int32* sCPUToCore;
-static int32* sCPUToPackage;
+static int32_t* sCPUToCore;
+static int32_t* sCPUToPackage;
 
 
 static void enqueue(Thread* thread, bool newOne);
@@ -99,7 +99,7 @@ enqueue(Thread* thread, bool newOne)
 
 	ThreadData* threadData = thread->scheduler_data;
 
-	int32 threadPriority = threadData->GetEffectivePriority();
+	int32_t threadPriority = threadData->GetEffectivePriority();
 	T(EnqueueThread(thread, threadPriority));
 
 	CPUEntry* targetCPU = NULL;
@@ -126,7 +126,7 @@ enqueue(Thread* thread, bool newOne)
 	NotifySchedulerListeners(&SchedulerListener::ThreadEnqueuedInRunQueue,
 		thread);
 
-	int32 heapPriority = CPUPriorityHeap::GetKey(targetCPU);
+	int32_t heapPriority = CPUPriorityHeap::GetKey(targetCPU);
 	if (threadPriority > heapPriority
 		|| (threadPriority == heapPriority && rescheduleNeeded)) {
 
@@ -165,8 +165,8 @@ scheduler_enqueue_in_run_queue(Thread *thread)
 
 /*!	Sets the priority of a thread.
 */
-int32
-scheduler_set_thread_priority(Thread *thread, int32 priority)
+int32_t
+scheduler_set_thread_priority(Thread *thread, int32_t priority)
 {
 	ASSERT(are_interrupts_enabled());
 
@@ -176,7 +176,7 @@ scheduler_set_thread_priority(Thread *thread, int32 priority)
 	SCHEDULER_ENTER_FUNCTION();
 
 	ThreadData* threadData = thread->scheduler_data;
-	int32 oldPriority = thread->priority;
+	int32_t oldPriority = thread->priority;
 
 	TRACE("changing thread %ld priority to %ld (old: %ld, effective: %ld)\n",
 		thread->id, priority, oldPriority, threadData->GetEffectivePriority());
@@ -313,12 +313,12 @@ switch_thread(Thread* fromThread, Thread* toThread)
 
 
 static void
-reschedule(int32 nextState)
+reschedule(int32_t nextState)
 {
 	ASSERT(!are_interrupts_enabled());
 	SCHEDULER_ENTER_FUNCTION();
 
-	int32 thisCPU = smp_get_current_cpu();
+	int32_t thisCPU = smp_get_current_cpu();
 
 	CPUEntry* cpu = CPUEntry::GetCPU(thisCPU);
 	CoreEntry* core = CoreEntry::GetCore(thisCPU);
@@ -450,7 +450,7 @@ reschedule(int32 nextState)
 	Note: expects thread spinlock to be held
 */
 void
-scheduler_reschedule(int32 nextState)
+scheduler_reschedule(int32_t nextState)
 {
 	ASSERT(!are_interrupts_enabled());
 	SCHEDULER_ENTER_FUNCTION();
@@ -482,8 +482,8 @@ scheduler_on_thread_init(Thread* thread)
 	ASSERT(thread->scheduler_data != NULL);
 
 	if (thread_is_idle_thread(thread)) {
-		static int32 sIdleThreadsID;
-		int32 cpuID = atomic_add(&sIdleThreadsID, 1);
+		static int32_t sIdleThreadsID;
+		int32_t cpuID = atomic_add(&sIdleThreadsID, 1);
 
 		thread->previous_cpu = &gCPU[cpuID];
 		thread->pinned_to_cpu = 1;
@@ -537,7 +537,7 @@ scheduler_set_operation_mode(scheduler_mode mode)
 
 
 void
-scheduler_set_cpu_enabled(int32 cpuID, bool enabled)
+scheduler_set_cpu_enabled(int32_t cpuID, bool enabled)
 {
 #if KDEBUG
 	if (are_interrupts_enabled())
@@ -599,34 +599,34 @@ traverse_topology_tree(const cpu_topology_node* node, int packageID, int coreID)
 			break;
 	}
 
-	for (int32 i = 0; i < node->children_count; i++)
+	for (int32_t i = 0; i < node->children_count; i++)
 		traverse_topology_tree(node->children[i], packageID, coreID);
 }
 
 
 static status_t
-build_topology_mappings(int32& cpuCount, int32& coreCount, int32& packageCount)
+build_topology_mappings(int32_t& cpuCount, int32_t& coreCount, int32_t& packageCount)
 {
 	cpuCount = smp_get_num_cpus();
 
-	sCPUToCore = new(std::nothrow) int32[cpuCount];
+	sCPUToCore = new(std::nothrow) int32_t[cpuCount];
 	if (sCPUToCore == NULL)
 		return B_NO_MEMORY;
-	ArrayDeleter<int32> cpuToCoreDeleter(sCPUToCore);
+	ArrayDeleter<int32_t> cpuToCoreDeleter(sCPUToCore);
 
-	sCPUToPackage = new(std::nothrow) int32[cpuCount];
+	sCPUToPackage = new(std::nothrow) int32_t[cpuCount];
 	if (sCPUToPackage == NULL)
 		return B_NO_MEMORY;
-	ArrayDeleter<int32> cpuToPackageDeleter(sCPUToPackage);
+	ArrayDeleter<int32_t> cpuToPackageDeleter(sCPUToPackage);
 
 	coreCount = 0;
-	for (int32 i = 0; i < cpuCount; i++) {
+	for (int32_t i = 0; i < cpuCount; i++) {
 		if (gCPU[i].topology_id[CPU_TOPOLOGY_SMT] == 0)
 			coreCount++;
 	}
 
 	packageCount = 0;
-	for (int32 i = 0; i < cpuCount; i++) {
+	for (int32_t i = 0; i < cpuCount; i++) {
 		if (gCPU[i].topology_id[CPU_TOPOLOGY_SMT] == 0
 			&& gCPU[i].topology_id[CPU_TOPOLOGY_CORE] == 0) {
 			packageCount++;
@@ -646,7 +646,7 @@ static status_t
 init()
 {
 	// create logical processor to core and package mappings
-	int32 cpuCount, coreCount, packageCount;
+	int32_t cpuCount, coreCount, packageCount;
 	status_t result = build_topology_mappings(cpuCount, coreCount,
 		packageCount);
 	if (result != B_OK)
@@ -684,7 +684,7 @@ init()
 
 	new(&gIdlePackageList) IdlePackageList;
 
-	for (int32 i = 0; i < cpuCount; i++) {
+	for (int32_t i = 0; i < cpuCount; i++) {
 		CoreEntry* core = &gCoreEntries[sCPUToCore[i]];
 		PackageEntry* package = &gPackageEntries[sCPUToPackage[i]];
 
@@ -706,7 +706,7 @@ init()
 void
 scheduler_init()
 {
-	int32 cpuCount = smp_get_num_cpus();
+	int32_t cpuCount = smp_get_num_cpus();
 	dprintf("scheduler_init: found %" B_PRId32 " logical cpu%s and %" B_PRId32
 		" cache level%s\n", cpuCount, cpuCount != 1 ? "s" : "",
 		gCPUCacheLevelCount, gCPUCacheLevelCount != 1 ? "s" : "");
@@ -798,9 +798,9 @@ _user_estimate_max_scheduling_latency(thread_id id)
 	ThreadData* threadData = thread->scheduler_data;
 	CoreEntry* core = threadData->Core();
 	if (core == NULL)
-		core = &gCoreEntries[get_random<int32>() % gCoreCount];
+		core = &gCoreEntries[get_random<int32_t>() % gCoreCount];
 
-	int32 threadCount = core->ThreadCount();
+	int32_t threadCount = core->ThreadCount();
 	if (core->CPUCount() > 0)
 		threadCount /= core->CPUCount();
 
@@ -816,7 +816,7 @@ _user_estimate_max_scheduling_latency(thread_id id)
 
 
 status_t
-_user_set_scheduler_mode(int32 mode)
+_user_set_scheduler_mode(int32_t mode)
 {
 	scheduler_mode schedulerMode = static_cast<scheduler_mode>(mode);
 	status_t error = scheduler_set_operation_mode(schedulerMode);
@@ -826,7 +826,7 @@ _user_set_scheduler_mode(int32 mode)
 }
 
 
-int32
+int32_t
 _user_get_scheduler_mode()
 {
 	return gCurrentModeID;

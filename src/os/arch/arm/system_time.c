@@ -12,10 +12,10 @@
 #include <libroot_private.h>
 #include <real_time_data.h>
 
-static vint32 *sConversionFactor;
+static vint32_t *sConversionFactor;
 
 void
-__arm_setup_system_time(vint32 *cvFactor)
+__arm_setup_system_time(vint32_t *cvFactor)
 {
 	sConversionFactor = cvFactor;
 }
@@ -34,6 +34,6 @@ system_time(void)
 {
 	uint64 timeBase = __arm_get_time_base();
 
-	uint32 cv = sConversionFactor ? *sConversionFactor : 0;
+	uint32_t cv = sConversionFactor ? *sConversionFactor : 0;
 	return (timeBase >> 32) * cv + (((timeBase & 0xffffffff) * cv) >> 32);
 }

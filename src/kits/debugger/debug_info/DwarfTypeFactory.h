@@ -81,7 +81,7 @@ private:
 									DwarfType*& _type);
 			status_t			_CreateModifiedType(const BString& name,
 									DIEModifiedType* typeEntry,
-									uint32 modifiers, DwarfType*& _type);
+									uint32_t modifiers, DwarfType*& _type);
 			status_t			_CreateTypedefType(const BString& name,
 									DIETypedef* typeEntry, DwarfType*& _type);
 			status_t			_CreateArrayType(const BString& name,

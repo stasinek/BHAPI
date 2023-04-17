@@ -147,7 +147,7 @@ status_t BListValueNode::BListItemCountNodeChild::ResolveLocation(
 
 	ValuePieceLocation piece;
 	piece.SetToMemory(fLocation.ToUInt64());
-	piece.SetSize(sizeof(int32));
+	piece.SetSize(sizeof(int32_t));
 	location->AddPiece(piece);
 
 	_location = location;
@@ -173,7 +173,7 @@ BListValueNode::BListValueNode(ValueNodeChild* nodeChild,
 BListValueNode::~BListValueNode()
 {
 	fType->ReleaseReference();
-	for (int32 i = 0; i < fChildren.CountItems(); i++)
+	for (int32_t i = 0; i < fChildren.CountItems(); i++)
 		fChildren.ItemAt(i)->ReleaseReference();
 
 	if (fItemCountType != NULL)
@@ -237,7 +237,7 @@ status_t BListValueNode::ResolvedLocationAndValue(ValueLoader* valueLoader,
 
 	}
 
-	for (int32 i = 0; i < baseType->CountDataMembers(); i++) {
+	for (int32_t i = 0; i < baseType->CountDataMembers(); i++) {
 		DataMember* member = baseType->DataMemberAt(i);
 		if (strcmp(member->Name(), "fObjectList") == 0) {
 			error = baseType->ResolveDataMemberLocation(member,
@@ -297,14 +297,14 @@ status_t BListValueNode::CreateChildren(TeamTypeInformation* info)
 }
 
 
-int32 BListValueNode::CountChildren() const
+int32_t BListValueNode::CountChildren() const
 {
 	return fChildren.CountItems();
 }
 
 
 ValueNodeChild*
-BListValueNode::ChildAt(int32 index) const
+BListValueNode::ChildAt(int32_t index) const
 {
 	return fChildren.ItemAt(index);
 }
@@ -332,7 +332,7 @@ void BListValueNode::ClearChildren()
 
 
 status_t BListValueNode::CreateChildrenInRange(TeamTypeInformation* info,
-	int32 lowIndex, int32 highIndex)
+	int32_t lowIndex, int32_t highIndex)
 {
 	if (fLocationResolutionState != B_OK)
 		return fLocationResolutionState;
@@ -377,7 +377,7 @@ status_t BListValueNode::CreateChildrenInRange(TeamTypeInformation* info,
 			return result;
 	}
 
-	for (int32 i = lowIndex; i <= highIndex; i++)
+	for (int32_t i = lowIndex; i <= highIndex; i++)
 	{
 		BListElementNodeChild* child =
 			new(std::nothrow) BListElementNodeChild(this, i, type);
@@ -396,7 +396,7 @@ status_t BListValueNode::CreateChildrenInRange(TeamTypeInformation* info,
 }
 
 
-status_t BListValueNode::SupportedChildRange(int32& lowIndex, int32& highIndex) const
+status_t BListValueNode::SupportedChildRange(int32_t& lowIndex, int32_t& highIndex) const
 {
 	lowIndex = 0;
 	highIndex = fItemCount - 1;

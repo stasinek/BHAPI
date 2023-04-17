@@ -40,10 +40,10 @@
 using namespace BPrivate;
 
 
-const uint32 kMsgDeleteMessage = '&DeM';
-const uint32 kMsgAppendMessage = '&ApM';
+const uint32_t kMsgDeleteMessage = '&DeM';
+const uint32_t kMsgAppendMessage = '&ApM';
 
-const uint32 kMsgSendMessage = '&SeM';
+const uint32_t kMsgSendMessage = '&SeM';
 
 
 BMailProtocol::BMailProtocol(const BMailAccountSettings& settings)
@@ -96,7 +96,7 @@ bool BMailProtocol::AddFilter(BMailFilter* filter)
 }
 
 
-int32 BMailProtocol::CountFilter() const
+int32_t BMailProtocol::CountFilter() const
 {
 	BLocker locker(this);
 	return fFilterList.CountItems();
@@ -104,7 +104,7 @@ int32 BMailProtocol::CountFilter() const
 
 
 BMailFilter*
-BMailProtocol::FilterAt(int32 index) const
+BMailProtocol::FilterAt(int32_t index) const
 {
 	BLocker locker(this);
 	return fFilterList.ItemAt(index);
@@ -112,7 +112,7 @@ BMailProtocol::FilterAt(int32 index) const
 
 
 BMailFilter*
-BMailProtocol::RemoveFilter(int32 index)
+BMailProtocol::RemoveFilter(int32_t index)
 {
 	BLocker locker(this);
 	return fFilterList.RemoveItemAt(index);
@@ -160,7 +160,7 @@ void BMailProtocol::ShowMessage(const char* message)
 }
 
 
-void BMailProtocol::SetTotalItems(uint32 items)
+void BMailProtocol::SetTotalItems(uint32_t items)
 {
 	if (MailNotifier() != NULL)
 		MailNotifier()->SetTotalItems(items);
@@ -174,7 +174,7 @@ void BMailProtocol::SetTotalItemsSize(uint64 size)
 }
 
 
-void BMailProtocol::ReportProgress(uint32 messages, uint64 bytes,
+void BMailProtocol::ReportProgress(uint32_t messages, uint64 bytes,
 	const char* message)
 {
 	if (MailNotifier() != NULL)
@@ -189,7 +189,7 @@ void BMailProtocol::ResetProgress(const char* message)
 }
 
 
-void BMailProtocol::NotifyNewMessagesToFetch(int32 count)
+void BMailProtocol::NotifyNewMessagesToFetch(int32_t count)
 {
 	ResetProgress();
 	SetTotalItems(count);
@@ -317,7 +317,7 @@ BMailProtocol::_ProcessHeaderFetched(entry_ref& ref, BFile& file,
 	status_t status = newParent.InitCheck();
 	BString workerName;
 	if (status == B_OK) {
-		int32 uniqueNumber = 1;
+		int32_t uniqueNumber = 1;
 		do {
 			workerName = outRef.name;
 			if (uniqueNumber > 1)
@@ -441,7 +441,7 @@ status_t BInboundMailProtocol::AppendMessage(const entry_ref& ref)
 
 void BInboundMailProtocol::NotiyMailboxSynchronized(status_t status)
 {
-	for (int32 i = 0; i < CountFilter(); i++)
+	for (int32_t i = 0; i < CountFilter(); i++)
 		FilterAt(i)->MailboxSynchronized(status);
 }
 

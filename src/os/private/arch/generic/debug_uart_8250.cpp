@@ -86,7 +86,7 @@ DebugUART8250::~DebugUART8250()
 
 
 void
-DebugUART8250::InitPort(uint32 baud)
+DebugUART8250::InitPort(uint32_t baud)
 {
 	Disable();
 

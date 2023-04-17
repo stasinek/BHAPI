@@ -32,31 +32,31 @@ enum _mmu040_cache_mode {
 											// or comments
 struct short_page_directory_entry {
 	// upper 32 bits
-	uint32 addr : 28;						// address
-	uint32 accessed : 1;					// = used
-	uint32 write_protect : 1;
-	uint32 type : 2;						// DT_*
+	uint32_t addr : 28;						// address
+	uint32_t accessed : 1;					// = used
+	uint32_t write_protect : 1;
+	uint32_t type : 2;						// DT_*
 };
 
 struct short_page_table_entry {
-	uint32 addr : 20;						// address
-	uint32 user_reserved : 1;
-	uint32 global : 1;
-	uint32 upa0 : 1;						// User Page Attribute 0
-	uint32 upa1 : 1;						// User Page Attribute 1
-	uint32 supervisor : 1;
-	uint32 cache_mode : 2;
-	uint32 dirty : 1;						// = modified
-	uint32 accessed : 1;					// = used
-	uint32 write_protect : 1;
-	uint32 type : 2;
+	uint32_t addr : 20;						// address
+	uint32_t user_reserved : 1;
+	uint32_t global : 1;
+	uint32_t upa0 : 1;						// User Page Attribute 0
+	uint32_t upa1 : 1;						// User Page Attribute 1
+	uint32_t supervisor : 1;
+	uint32_t cache_mode : 2;
+	uint32_t dirty : 1;						// = modified
+	uint32_t accessed : 1;					// = used
+	uint32_t write_protect : 1;
+	uint32_t type : 2;
 };
 
 /* rarely used */
 struct short_indirect_entry {
 	// upper 32 bits
-	uint32 addr : 30;						// address
-	uint32 type : 2;						// DT_*
+	uint32_t addr : 30;						// address
+	uint32_t type : 2;						// DT_*
 };
 
 /* for clarity:
@@ -72,10 +72,10 @@ typedef struct short_page_table_entry page_table_entry_s;
 typedef struct short_indirect_entry page_indirect_entry_s;
 
 /* scalar storage type that maps them */
-typedef uint32 page_root_entry;
-typedef uint32 page_directory_entry;
-typedef uint32 page_table_entry;
-typedef uint32 page_indirect_entry;
+typedef uint32_t page_root_entry;
+typedef uint32_t page_directory_entry;
+typedef uint32_t page_table_entry;
+typedef uint32_t page_indirect_entry;
 
 #define DT_ROOT DT_VALID_4
 #define DT_DIR DT_VALID_4
@@ -148,35 +148,35 @@ typedef uint32 page_indirect_entry;
 
 // from a root entry
 #define PRE_TYPE(e)  	((e) & M68K_PE_DT_MASK)
-#define PRE_TO_TA(e)	(((uint32)(e)) & ~((1<<9)-1))
-#define PRE_TO_PN(e)	(((uint32)(e)) >> 12)
-#define PRE_TO_PA(e)	(((uint32)(e)) & ~((1<<12)-1))
-//#define PRE_TO_PO(e)	(((uint32)(e)) & ((1<<12)-1))
-//#define PRE_TO_PI(e)	((((uint32)(e)) & ((1<<12)-1)) / SIZ_DIRTBL)
+#define PRE_TO_TA(e)	(((uint32_t)(e)) & ~((1<<9)-1))
+#define PRE_TO_PN(e)	(((uint32_t)(e)) >> 12)
+#define PRE_TO_PA(e)	(((uint32_t)(e)) & ~((1<<12)-1))
+//#define PRE_TO_PO(e)	(((uint32_t)(e)) & ((1<<12)-1))
+//#define PRE_TO_PI(e)	((((uint32_t)(e)) & ((1<<12)-1)) / SIZ_DIRTBL)
 #define TA_TO_PREA(a)	((a) & M68K_PRE_ADDRESS_MASK)
 
 // from a directory entry
 #define PDE_TYPE(e)  	((e) & M68K_PE_DT_MASK)
-#define PDE_TO_TA(e)	(((uint32)(e)) & ~((1<<8)-1))
-#define PDE_TO_PN(e)	(((uint32)(e)) >> 12)
-#define PDE_TO_PA(e)	(((uint32)(e)) & ~((1<<12)-1))
-//#define PDE_TO_PO(e)	(((uint32)(e)) & ((1<<12)-1))
-//#define PDE_TO_PI(e)	((((uint32)(e)) & ((1<<12)-1)) / SIZ_PAGETBL)
+#define PDE_TO_TA(e)	(((uint32_t)(e)) & ~((1<<8)-1))
+#define PDE_TO_PN(e)	(((uint32_t)(e)) >> 12)
+#define PDE_TO_PA(e)	(((uint32_t)(e)) & ~((1<<12)-1))
+//#define PDE_TO_PO(e)	(((uint32_t)(e)) & ((1<<12)-1))
+//#define PDE_TO_PI(e)	((((uint32_t)(e)) & ((1<<12)-1)) / SIZ_PAGETBL)
 #define TA_TO_PDEA(a)	((a) & M68K_PDE_ADDRESS_MASK)
 
 // from a table entry
 #define PTE_TYPE(e)  	((e) & M68K_PE_DT_MASK)
-#define PTE_TO_TA(e)	(((uint32)(e)) & ~((1<<12)-1))
-#define PTE_TO_PN(e)	(((uint32)(e)) >> 12)
-#define PTE_TO_PA(e)	(((uint32)(e)) & ~((1<<12)-1))
+#define PTE_TO_TA(e)	(((uint32_t)(e)) & ~((1<<12)-1))
+#define PTE_TO_PN(e)	(((uint32_t)(e)) >> 12)
+#define PTE_TO_PA(e)	(((uint32_t)(e)) & ~((1<<12)-1))
 #define TA_TO_PTEA(a)	((a) & M68K_PTE_ADDRESS_MASK)
 
 // from an indirect entry
 #define PIE_TYPE(e)  	((e) & M68K_PE_DT_MASK)
-#define PIE_TO_TA(e)	(((uint32)(e)) & ~((1<<2)-1))
-#define PIE_TO_PN(e)	(((uint32)(e)) >> 12)
-#define PIE_TO_PA(e)	(((uint32)(e)) & ~((1<<12)-1))
-#define PIE_TO_PO(e)	(((uint32)(e)) & ((1<<12)-(1<<2)))
+#define PIE_TO_TA(e)	(((uint32_t)(e)) & ~((1<<2)-1))
+#define PIE_TO_PN(e)	(((uint32_t)(e)) >> 12)
+#define PIE_TO_PA(e)	(((uint32_t)(e)) & ~((1<<12)-1))
+#define PIE_TO_PO(e)	(((uint32_t)(e)) & ((1<<12)-(1<<2)))
 #define TA_TO_PIEA(a)	((a) & M68K_PIE_ADDRESS_MASK)
 
 /* 7/7/6 split */

@@ -21,15 +21,15 @@
 // #pragma mark - CRC-32
 
 
-static const uint32 kCRC32Polynom = 0x04c11db7;
-static uint32 sCRC32Table[256];
+static const uint32_t kCRC32Polynom = 0x04c11db7;
+static uint32_t sCRC32Table[256];
 
 
-static uint32
-crc32_reflect(uint32 value, int32 bits)
+static uint32_t
+crc32_reflect(uint32_t value, int32_t bits)
 {
-	uint32 result = 0;
-	for (int32 i = 1; i <= bits; i++) {
+	uint32_t result = 0;
+	for (int32_t i = 1; i <= bits; i++) {
 		if (value & 1)
 			result |= 1 << (bits - i);
 		value >>= 1;
@@ -42,9 +42,9 @@ crc32_reflect(uint32 value, int32 bits)
 static void
 init_crc32_table()
 {
-	for (int32 i = 0; i < 256; i++) {
+	for (int32_t i = 0; i < 256; i++) {
 		sCRC32Table[i] = crc32_reflect(i, 8) << 24;
-		for (int32 k = 0; k < 8; k++) {
+		for (int32_t k = 0; k < 8; k++) {
 			sCRC32Table[i] = (sCRC32Table[i] << 1)
 				^ (sCRC32Table[i] & (1 << 31) ? kCRC32Polynom : 0);
 		}
@@ -53,11 +53,11 @@ init_crc32_table()
 }
 
 
-static uint32
+static uint32_t
 crc32(const void* _data, size_t size)
 {
 	uint8* data = (uint8*)_data;
-	uint32 crc = 0xffffffff;
+	uint32_t crc = 0xffffffff;
 
 	while (size-- > 0) {
 		crc = (crc >> 8) ^ sCRC32Table[(crc & 0xff) ^ *data];
@@ -99,7 +99,7 @@ public:
 private:
 	const void*		fAddress;
 	size_t			fSize;
-	uint32			fCheckSum;
+	uint32_t			fCheckSum;
 	ParanoiaCheck*	fNext;
 
 	friend class ParanoiaCheckSet;
@@ -599,7 +599,7 @@ debug_paranoia_init()
 	init_crc32_table();
 
 	// init paranoia slot free list
-	for (int32 i = 0; i < PARANOIA_SLOT_COUNT; i++)
+	for (int32_t i = 0; i < PARANOIA_SLOT_COUNT; i++)
 		free_slot(&sSlots[i]);
 #endif
 }

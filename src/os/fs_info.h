@@ -24,7 +24,7 @@
 typedef struct fs_info {
 	dev_t	dev;								/* volume dev_t */
 	ino_t	root;								/* root ino_t */
-	uint32	flags;								/* flags (see above) */
+	uint32_t	flags;								/* flags (see above) */
 	off_t	block_size;							/* fundamental block size */
 	off_t	io_size;							/* optimal i/o size */
 	off_t	total_blocks;						/* total number of blocks */
@@ -42,7 +42,7 @@ extern "C" {
 #endif
 
 extern dev_t	dev_for_path(const char *path);
-extern dev_t	next_dev(int32 *pos);
+extern dev_t	next_dev(int32_t *pos);
 extern int		fs_stat_dev(dev_t dev, fs_info *info);
 
 #ifdef  __cplusplus

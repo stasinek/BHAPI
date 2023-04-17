@@ -38,7 +38,7 @@ public:
 	inline	void				Requeue(vm_page* page, bool tail);
 
 	inline	void				AppendUnlocked(vm_page* page);
-	inline	void				AppendUnlocked(PageList& pages, uint32 count);
+	inline	void				AppendUnlocked(PageList& pages, uint32_t count);
 	inline	void				PrependUnlocked(vm_page* page);
 	inline	void				RemoveUnlocked(vm_page* page);
 	inline	vm_page*			RemoveHeadUnlocked();
@@ -187,7 +187,7 @@ VMPageQueue::AppendUnlocked(vm_page* page)
 
 
 void
-VMPageQueue::AppendUnlocked(PageList& pages, uint32 count)
+VMPageQueue::AppendUnlocked(PageList& pages, uint32_t count)
 {
 #if DEBUG_PAGE_QUEUE
 	for (PageList::Iterator it = pages.GetIterator();

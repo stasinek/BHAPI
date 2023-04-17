@@ -145,7 +145,7 @@ typedef struct {
 
 typedef struct {
 	off_t	block;
-	int32	mode;
+	int32_t	mode;
 } scsi_data_mode;
 
 

@@ -25,7 +25,7 @@ using BPrivate::BlockBufferPoolImpl;
 class BBlockBufferPool : public BBufferPool, public BBufferPoolLockable {
 public:
 								BBlockBufferPool(size_t blockSize,
-									uint32 maxCachedBlocks);
+									uint32_t maxCachedBlocks);
 	virtual						~BBlockBufferPool();
 
 	virtual	status_t			Init();

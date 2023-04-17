@@ -64,7 +64,7 @@ namespace BPrivate {
 struct AttributeTemplate {
 	// used for read-only attribute source
 	const char* fAttributeName;
-	uint32 fAttributeType;
+	uint32_t fAttributeType;
 	off_t fSize;
 	const char* fBits;
 };
@@ -76,13 +76,13 @@ public:
 	AttributeInfo();
 	AttributeInfo(const AttributeInfo& other);
 	AttributeInfo(const char* name, attr_info info);
-	AttributeInfo(const char* name, uint32 type, off_t size);
+	AttributeInfo(const char* name, uint32_t type, off_t size);
 
 	void SetTo(const AttributeInfo& other);
 	void SetTo(const char* name, attr_info info);
-	void SetTo(const char* name, uint32 type, off_t size);
+	void SetTo(const char* name, uint32_t type, off_t size);
 	const char* Name() const;
-	uint32 Type() const;
+	uint32_t Type() const;
 	off_t Size() const;
 
 private:
@@ -110,14 +110,14 @@ public:
 	virtual void MakeEmpty() {}
 		// remove any attributes the node may have
 
-	virtual off_t Contains(const char*, uint32);
+	virtual off_t Contains(const char*, uint32_t);
 		// returns size of attribute if found
 
 	virtual off_t Read(const char* name, const char* foreignName,
-		uint32 type, off_t size, void* buffer, void (*swapFunc)(void*) = 0);
+		uint32_t type, off_t size, void* buffer, void (*swapFunc)(void*) = 0);
 		// read from this node
 	virtual off_t Write(const char* name, const char* foreignName,
-		uint32 type, off_t size, const void* buffer);
+		uint32_t type, off_t size, const void* buffer);
 		// write to this node
 
 	// work calls
@@ -160,10 +160,10 @@ public:
 
 	virtual void MakeEmpty();
 	virtual void Rewind();
-	virtual off_t Contains(const char* name, uint32 type);
-	virtual off_t Read(const char* name, const char* foreignName, uint32 type,
+	virtual off_t Contains(const char* name, uint32_t type);
+	virtual off_t Read(const char* name, const char* foreignName, uint32_t type,
 		off_t size, void* buffer, void (*swapFunc)(void*) = 0);
-	virtual off_t Write(const char* name, const char* foreignName, uint32 type,
+	virtual off_t Write(const char* name, const char* foreignName, uint32_t type,
 		off_t size, const void* buffer);
 
 	void SetTo(BNode*);
@@ -195,11 +195,11 @@ public:
 	AttributeStreamMemoryNode();
 
 	virtual void MakeEmpty();
-	virtual off_t Contains(const char* name, uint32 type);
+	virtual off_t Contains(const char* name, uint32_t type);
 	virtual off_t Read(const char* name, const char* foreignName,
-		uint32 type, off_t size, void* buffer, void (*swapFunc)(void*) = 0);
+		uint32_t type, off_t size, void* buffer, void (*swapFunc)(void*) = 0);
 	virtual off_t Write(const char* name, const char* foreignName,
-		uint32 type, off_t size, const void* buffer);
+		uint32_t type, off_t size, const void* buffer);
 
 protected:
 	virtual bool CanFeed() const { return true; }
@@ -211,7 +211,7 @@ protected:
 
 	class AttrNode {
 	public:
-		AttrNode(const char* name, uint32 type, off_t size, char* data)
+		AttrNode(const char* name, uint32_t type, off_t size, char* data)
 		:
 		fAttr(name, type, size),
 		fData(data)
@@ -229,12 +229,12 @@ protected:
 
 		// utility calls
 	virtual AttrNode* BufferingGet();
-	virtual AttrNode* BufferingGet(const char* name, uint32 type, off_t size);
-	int32 Find(const char* name, uint32 type) const;
+	virtual AttrNode* BufferingGet(const char* name, uint32_t type, off_t size);
+	int32_t Find(const char* name, uint32_t type) const;
 
 private:
 	BObjectList<AttrNode> fAttributes;
-	int32 fCurrentIndex;
+	int32_t fCurrentIndex;
 
 	typedef AttributeStreamNode _inherited;
 };
@@ -244,9 +244,9 @@ class AttributeStreamTemplateNode : public AttributeStreamNode {
 	// in read-only memory attribute source
 	// can only be used as a source for Next and Get
 public:
-	AttributeStreamTemplateNode(const AttributeTemplate*, int32 count);
+	AttributeStreamTemplateNode(const AttributeTemplate*, int32_t count);
 
-	virtual off_t Contains(const char* name, uint32 type);
+	virtual off_t Contains(const char* name, uint32_t type);
 
 protected:
 	virtual bool CanFeed() const { return true; }
@@ -255,13 +255,13 @@ protected:
 	virtual const char* Get();
 	virtual bool Fill(char* buffer) const;
 
-	int32 Find(const char* name, uint32 type) const;
+	int32_t Find(const char* name, uint32_t type) const;
 
 private:
 	AttributeInfo fCurrentAttr;
 	const AttributeTemplate* fAttributes;
-	int32 fCurrentIndex;
-	int32 fCount;
+	int32_t fCurrentIndex;
+	int32_t fCount;
 
 	typedef AttributeStreamNode _inherited;
 };
@@ -272,14 +272,14 @@ class AttributeStreamFilterNode : public AttributeStreamNode {
 public:
 	AttributeStreamFilterNode()
 		{}
-	virtual off_t Contains(const char* name, uint32 type);
+	virtual off_t Contains(const char* name, uint32_t type);
 	virtual off_t Read(const char* name, const char* foreignName,
-		uint32 type, off_t size, void* buffer, void (*swapFunc)(void*) = 0);
+		uint32_t type, off_t size, void* buffer, void (*swapFunc)(void*) = 0);
 	virtual off_t Write(const char* name, const char* foreignName,
-		uint32 type, off_t size, const void* buffer);
+		uint32_t type, off_t size, const void* buffer);
 
 protected:
-	virtual bool Reject(const char* name, uint32 type, off_t size);
+	virtual bool Reject(const char* name, uint32_t type, off_t size);
 		// override to implement filtering
 	virtual const AttributeInfo* Next();
 
@@ -295,7 +295,7 @@ public:
 	NamesToAcceptAttrFilter(const char**);
 
 protected:
-	virtual bool Reject(const char* name, uint32 type, off_t size);
+	virtual bool Reject(const char* name, uint32_t type, off_t size);
 
 private:
 	const char** fNameList;
@@ -306,23 +306,23 @@ class SelectiveAttributeTransformer : public AttributeStreamNode {
 	// node applies a transformation on specified attributes
 public:
 	SelectiveAttributeTransformer(const char* attributeName,
-		bool (*)(const char*, uint32 , off_t , void*, void*), void* params);
+		bool (*)(const char*, uint32_t , off_t , void*, void*), void* params);
 	virtual ~SelectiveAttributeTransformer();
 
-	virtual off_t Read(const char* name, const char* foreignName, uint32 type,
+	virtual off_t Read(const char* name, const char* foreignName, uint32_t type,
 		off_t size, void* buffer, void (*swapFunc)(void*) = 0);
 
 	virtual void Rewind();
 
 protected:
-	virtual bool WillTransform(const char* name, uint32 type, off_t size,
+	virtual bool WillTransform(const char* name, uint32_t type, off_t size,
 		const char* data) const;
 		// override to implement filtering, should only return true if
 		// transformation will occur
-	virtual char* CopyAndApplyTransformer(const char* name, uint32 type,
+	virtual char* CopyAndApplyTransformer(const char* name, uint32_t type,
 		off_t size, const char* data);
 		// makes a copy of data
-	virtual bool ApplyTransformer(const char* name, uint32 type, off_t size,
+	virtual bool ApplyTransformer(const char* name, uint32_t type, off_t size,
 		char* data);
 		// transforms in place
 	virtual const AttributeInfo* Next();
@@ -331,7 +331,7 @@ protected:
 private:
 	AttributeInfo fCurrentAttr;
 	const char* fAttributeNameToTransform;
-	bool (*fTransformFunc)(const char*, uint32 , off_t , void*, void*);
+	bool (*fTransformFunc)(const char*, uint32_t , off_t , void*, void*);
 	void* fTransformParams;
 
 	BObjectList<char> fTransformedBuffers;
@@ -343,7 +343,7 @@ private:
 template <class Type>
 class AttributeStreamConstValue : public AttributeStreamNode {
 public:
-	AttributeStreamConstValue(const char* name, uint32 attributeType,
+	AttributeStreamConstValue(const char* name, uint32_t attributeType,
 		Type value);
 
 protected:
@@ -353,7 +353,7 @@ protected:
 	virtual const char* Get();
 	virtual bool Fill(char* buffer) const;
 
-	int32 Find(const char* name, uint32 type) const;
+	int32_t Find(const char* name, uint32_t type) const;
 
 private:
 	AttributeInfo fAttr;
@@ -366,7 +366,7 @@ private:
 
 template<class Type>
 AttributeStreamConstValue<Type>::AttributeStreamConstValue(const char* name,
-	uint32 attributeType, Type value)
+	uint32_t attributeType, Type value)
 	:
 	fAttr(name, attributeType, sizeof(Type)),
 	fValue(value),
@@ -403,7 +403,7 @@ bool AttributeStreamConstValue<Type>::Fill(char* buffer) const
 
 
 template<class Type>
-int32 AttributeStreamConstValue<Type>::Find(const char* name, uint32 type) const
+int32_t AttributeStreamConstValue<Type>::Find(const char* name, uint32_t type) const
 {
 	if (strcmp(fAttr.Name(), name) == 0 && type == fAttr.Type())
 		return 0;
@@ -422,11 +422,11 @@ public:
 };
 
 
-class AttributeStreamInt32Value : public AttributeStreamConstValue<int32> {
+class AttributeStreamInt32Value : public AttributeStreamConstValue<int32_t> {
 public:
-	AttributeStreamInt32Value(const char* name, int32 value)
+	AttributeStreamInt32Value(const char* name, int32_t value)
 		:
-		AttributeStreamConstValue<int32>(name, B_INT32_TYPE, value)
+		AttributeStreamConstValue<int32_t>(name, B_INT32_TYPE, value)
 	{
 	}
 };

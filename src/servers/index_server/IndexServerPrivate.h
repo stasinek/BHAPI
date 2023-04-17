@@ -16,19 +16,19 @@ const BString kIndexServerDirectory = ".IndexServer";
 const BString kVolumeStatusFileName = "VolumeStatus";
 
 // messages between preferences app
-const uint32 kStopWatching = 'StoW';
-const uint32 kStartWatching = 'StaW';
+const uint32_t kStopWatching = 'StoW';
+const uint32_t kStartWatching = 'StaW';
 
-const uint32 kRegisterWatcher = 'RegW';
-const uint32 kVolumenAdded = 'VAdd';
-const uint32 kVolumenRemoved = 'VRem';
-const uint32 kAddOnAdded = 'AAdd';
-const uint32 kAddOnRemoved = 'ARem';
+const uint32_t kRegisterWatcher = 'RegW';
+const uint32_t kVolumenAdded = 'VAdd';
+const uint32_t kVolumenRemoved = 'VRem';
+const uint32_t kAddOnAdded = 'AAdd';
+const uint32_t kAddOnRemoved = 'ARem';
 
-const uint32 kGetVolumenInfos = 'GVIn';
-const uint32 kGetAddOnInfos = 'GAIn';
+const uint32_t kGetVolumenInfos = 'GVIn';
+const uint32_t kGetAddOnInfos = 'GAIn';
 
-const uint32 kEnableAddOn = 'EnaA';
-const uint32 kDisableAddOn = 'DisA';
+const uint32_t kEnableAddOn = 'EnaA';
+const uint32_t kDisableAddOn = 'DisA';
 
 #endif // INDEX_SERVER_PRIVATE_H

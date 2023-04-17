@@ -11,7 +11,7 @@
 #include <TextControl.h>
 
 
-static const uint32 kAcceptInput = 'acin';
+static const uint32_t kAcceptInput = 'acin';
 
 
 PromptWindow::PromptWindow(const char* title, const char* label,

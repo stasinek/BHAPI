@@ -51,19 +51,19 @@ BFuncTranslator::TranslatorInfo() const
 }
 
 
-int32 BFuncTranslator::TranslatorVersion() const
+int32_t BFuncTranslator::TranslatorVersion() const
 {
 	return fData.version;
 }
 
 
 const translation_format *
-BFuncTranslator::InputFormats(int32* _count) const
+BFuncTranslator::InputFormats(int32_t* _count) const
 {
 	if (_count == NULL || fData.input_formats == NULL)
 		return NULL;
 
-	int32 count = 0;
+	int32_t count = 0;
 	while (fData.input_formats[count].type) {
 		count++;
 	}
@@ -74,12 +74,12 @@ BFuncTranslator::InputFormats(int32* _count) const
 
 
 const translation_format *
-BFuncTranslator::OutputFormats(int32* _count) const
+BFuncTranslator::OutputFormats(int32_t* _count) const
 {
 	if (_count == NULL || fData.output_formats == NULL)
 		return NULL;
 
-	int32 count = 0;
+	int32_t count = 0;
 	while (fData.output_formats[count].type) {
 		count++;
 	}
@@ -90,7 +90,7 @@ BFuncTranslator::OutputFormats(int32* _count) const
 
 
 status_t BFuncTranslator::Identify(BPositionIO* source, const translation_format* format,
-	BMessage* ioExtension, translator_info* info, uint32 type)
+	BMessage* ioExtension, translator_info* info, uint32_t type)
 {
 	if (fData.identify_hook == NULL)
 		return B_ERROR;
@@ -100,7 +100,7 @@ status_t BFuncTranslator::Identify(BPositionIO* source, const translation_format
 
 
 status_t BFuncTranslator::Translate(BPositionIO* source, const translator_info *info,
-	BMessage* ioExtension, uint32 type, BPositionIO* destination)
+	BMessage* ioExtension, uint32_t type, BPositionIO* destination)
 {
 	if (fData.translate_hook == NULL)
 		return B_ERROR;

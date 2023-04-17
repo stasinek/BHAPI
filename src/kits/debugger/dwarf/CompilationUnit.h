@@ -43,12 +43,12 @@ public:
 									{ return fLineNumberProgram; }
 
 			bool				AddDirectory(const char* directory);
-			int32				CountDirectories() const;
-			const char*			DirectoryAt(int32 index) const;
+			int32_t				CountDirectories() const;
+			const char*			DirectoryAt(int32_t index) const;
 
-			bool				AddFile(const char* fileName, int32 dirIndex);
-			int32				CountFiles() const;
-			const char*			FileAt(int32 index,
+			bool				AddFile(const char* fileName, int32_t dirIndex);
+			int32_t				CountFiles() const;
+			const char*			FileAt(int32_t index,
 									const char** _directory = NULL) const;
 
 	virtual	dwarf_unit_kind		Kind() const;

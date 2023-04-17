@@ -179,7 +179,7 @@ void BSlowContextMenu::ClearMenuBuildingState()
 }
 
 
-const int32 kItemsToAddChunk = 20;
+const int32_t kItemsToAddChunk = 20;
 const bigtime_t kMaxTimeBuildingMenu = 200000;
 
 
@@ -199,7 +199,7 @@ bool BSlowContextMenu::AddDynamicItem(add_state state)
 	}
 
 	bigtime_t timeToBail = system_time() + kMaxTimeBuildingMenu;
-	for (int32 count = 0; count < kItemsToAddChunk; count++) {
+	for (int32_t count = 0; count < kItemsToAddChunk; count++) {
 		if (!AddNextItem()) {
 			fMenuBuilt = true;
 			DoneBuildingItemList();
@@ -486,8 +486,8 @@ void BSlowContextMenu::DoneBuildingItemList()
 	else
 		fItemList->SortItems(&BNavMenu::CompareOne);
 
-	int32 count = fItemList->CountItems();
-	for (int32 index = 0; index < count; index++)
+	int32_t count = fItemList->CountItems();
+	for (int32_t index = 0; index < count; index++)
 		AddItem(fItemList->ItemAt(index));
 
 	fItemList->MakeEmpty();
@@ -531,8 +531,8 @@ void BSlowContextMenu::SetTrackingHookDeep(BMenu* menu,
 	bool (*func)(BMenu*, void*), void* state)
 {
 	menu->SetTrackingHook(func, state);
-	int32 count = menu->CountItems();
-	for (int32 index = 0; index < count; index++) {
+	int32_t count = menu->CountItems();
+	for (int32_t index = 0; index < count; index++) {
 		BMenuItem* item = menu->ItemAt(index);
 		if (!item)
 			continue;

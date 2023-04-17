@@ -66,7 +66,7 @@ struct VMCache::PageEventWaiter {
 	Thread*				thread;
 	PageEventWaiter*	next;
 	vm_page*			page;
-	uint32				events;
+	uint32_t				events;
 };
 
 
@@ -444,7 +444,7 @@ command_cache_stack(int argc, char** argv)
 	}
 
 	TraceEntryIterator baseIterator;
-	if (baseIterator.MoveTo((int32)debugEntryIndex) == NULL) {
+	if (baseIterator.MoveTo((int32_t)debugEntryIndex) == NULL) {
 		kprintf("Invalid tracing entry index %" B_PRIu64 "\n", debugEntryIndex);
 		return 0;
 	}
@@ -615,7 +615,7 @@ VMCache::~VMCache()
 
 
 status_t
-VMCache::Init(uint32 cacheType, uint32 allocationFlags)
+VMCache::Init(uint32_t cacheType, uint32_t allocationFlags)
 {
 	mutex_init(&fLock, "VMCache");
 
@@ -898,7 +898,7 @@ VMCache::MoveAllPages(VMCache* fromCache)
 		otherwise it won't be locked.
 */
 void
-VMCache::WaitForPageEvents(vm_page* page, uint32 events, bool relock)
+VMCache::WaitForPageEvents(vm_page* page, uint32_t events, bool relock)
 {
 	PageEventWaiter waiter;
 	waiter.thread = thread_get_current_thread();
@@ -1014,10 +1014,10 @@ VMCache::TransferAreas(VMCache* fromCache)
 }
 
 
-uint32
+uint32_t
 VMCache::CountWritableAreas(VMArea* ignoreArea) const
 {
-	uint32 count = 0;
+	uint32_t count = 0;
 
 	for (VMArea* area = areas; area != NULL; area = area->cache_next) {
 		if (area != ignoreArea
@@ -1097,9 +1097,9 @@ VMCache::Resize(off_t newSize, int priority)
 	if (status != B_OK)
 		return status;
 
-	uint32 oldPageCount = (uint32)((virtual_end + B_PAGE_SIZE - 1)
+	uint32_t oldPageCount = (uint32_t)((virtual_end + B_PAGE_SIZE - 1)
 		>> PAGE_SHIFT);
-	uint32 newPageCount = (uint32)((newSize + B_PAGE_SIZE - 1) >> PAGE_SHIFT);
+	uint32_t newPageCount = (uint32_t)((newSize + B_PAGE_SIZE - 1) >> PAGE_SHIFT);
 
 	if (newPageCount < oldPageCount) {
 		// we need to remove all pages in the cache outside of the new virtual
@@ -1213,7 +1213,7 @@ VMCache::HasPage(off_t offset)
 
 status_t
 VMCache::Read(off_t offset, const generic_io_vec *vecs, size_t count,
-	uint32 flags, generic_size_t *_numBytes)
+	uint32_t flags, generic_size_t *_numBytes)
 {
 	return B_ERROR;
 }
@@ -1221,7 +1221,7 @@ VMCache::Read(off_t offset, const generic_io_vec *vecs, size_t count,
 
 status_t
 VMCache::Write(off_t offset, const generic_io_vec *vecs, size_t count,
-	uint32 flags, generic_size_t *_numBytes)
+	uint32_t flags, generic_size_t *_numBytes)
 {
 	return B_ERROR;
 }
@@ -1229,7 +1229,7 @@ VMCache::Write(off_t offset, const generic_io_vec *vecs, size_t count,
 
 status_t
 VMCache::WriteAsync(off_t offset, const generic_io_vec* vecs, size_t count,
-	generic_size_t numBytes, uint32 flags, AsyncIOCallback* callback)
+	generic_size_t numBytes, uint32_t flags, AsyncIOCallback* callback)
 {
 	// Not supported, fall back to the synchronous hook.
 	generic_size_t transferred = numBytes;
@@ -1375,7 +1375,7 @@ VMCache::Dump(bool showPages) const
 	\param events The mask of events that occurred.
 */
 void
-VMCache::_NotifyPageEvents(vm_page* page, uint32 events)
+VMCache::_NotifyPageEvents(vm_page* page, uint32_t events)
 {
 	PageEventWaiter** it = &fPageEventWaiters;
 	while (PageEventWaiter* waiter = *it) {
@@ -1460,10 +1460,10 @@ VMCache::_RemoveConsumer(VMCache* consumer)
 
 /*static*/ status_t
 VMCacheFactory::CreateAnonymousCache(VMCache*& _cache, bool canOvercommit,
-	int32 numPrecommittedPages, int32 numGuardPages, bool swappable,
+	int32_t numPrecommittedPages, int32_t numGuardPages, bool swappable,
 	int priority)
 {
-	uint32 allocationFlags = HEAP_DONT_WAIT_FOR_MEMORY
+	uint32_t allocationFlags = HEAP_DONT_WAIT_FOR_MEMORY
 		| HEAP_DONT_LOCK_KERNEL_SPACE;
 	if (priority >= VM_PRIORITY_VIP)
 		allocationFlags |= HEAP_PRIORITY_VIP;
@@ -1512,7 +1512,7 @@ VMCacheFactory::CreateAnonymousCache(VMCache*& _cache, bool canOvercommit,
 /*static*/ status_t
 VMCacheFactory::CreateVnodeCache(VMCache*& _cache, struct vnode* vnode)
 {
-	const uint32 allocationFlags = HEAP_DONT_WAIT_FOR_MEMORY
+	const uint32_t allocationFlags = HEAP_DONT_WAIT_FOR_MEMORY
 		| HEAP_DONT_LOCK_KERNEL_SPACE;
 		// Note: Vnode cache creation is never VIP.
 
@@ -1537,7 +1537,7 @@ VMCacheFactory::CreateVnodeCache(VMCache*& _cache, struct vnode* vnode)
 /*static*/ status_t
 VMCacheFactory::CreateDeviceCache(VMCache*& _cache, addr_t baseAddress)
 {
-	const uint32 allocationFlags = HEAP_DONT_WAIT_FOR_MEMORY
+	const uint32_t allocationFlags = HEAP_DONT_WAIT_FOR_MEMORY
 		| HEAP_DONT_LOCK_KERNEL_SPACE;
 		// Note: Device cache creation is never VIP.
 
@@ -1562,7 +1562,7 @@ VMCacheFactory::CreateDeviceCache(VMCache*& _cache, addr_t baseAddress)
 /*static*/ status_t
 VMCacheFactory::CreateNullCache(int priority, VMCache*& _cache)
 {
-	uint32 allocationFlags = HEAP_DONT_WAIT_FOR_MEMORY
+	uint32_t allocationFlags = HEAP_DONT_WAIT_FOR_MEMORY
 		| HEAP_DONT_LOCK_KERNEL_SPACE;
 	if (priority >= VM_PRIORITY_VIP)
 		allocationFlags |= HEAP_PRIORITY_VIP;

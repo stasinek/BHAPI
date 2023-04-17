@@ -35,7 +35,7 @@ sync_icache_030(addr_t address, size_t len)
 {
 	int l, off;
 	char *p;
-	uint32 cacr;
+	uint32_t cacr;
 
 	off = (unsigned int)address & (CACHELINE - 1);
 	len += off;

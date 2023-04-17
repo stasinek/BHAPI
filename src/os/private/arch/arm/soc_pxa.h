@@ -24,7 +24,7 @@ protected:
 	PXAInterruptController(fdt_module_info *fdt, fdt_device_node node);
 
 	area_id fRegArea;
-	uint32 *fRegBase;
+	uint32_t *fRegBase;
 };
 
 
@@ -44,11 +44,11 @@ protected:
 	PXATimer(fdt_module_info *fdt, fdt_device_node node);
 
 	area_id fRegArea;
-	uint32 *fRegBase;
+	uint32_t *fRegBase;
 	bigtime_t fSystemTime;
 private:
-	static int32 _InterruptWrapper(void *data);
-	int32 HandleInterrupt();
+	static int32_t _InterruptWrapper(void *data);
+	int32_t HandleInterrupt();
 };
 
 

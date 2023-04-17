@@ -43,7 +43,7 @@ All rights reserved.
 #include <Path.h>
 
 
-static const int32 kUndoRedoListMaxCount = 20;
+static const int32_t kUndoRedoListMaxCount = 20;
 
 
 namespace BPrivate {
@@ -65,7 +65,7 @@ static BLocker sLock("undo");
 class UndoItemCopy : public UndoItem {
 	public:
 		UndoItemCopy(BObjectList<entry_ref>* sourceList, BDirectory &target,
-			BList* pointList, uint32 moveMode);
+			BList* pointList, uint32_t moveMode);
 		virtual ~UndoItemCopy();
 
 		virtual status_t Undo();
@@ -76,7 +76,7 @@ class UndoItemCopy : public UndoItem {
 		BObjectList<entry_ref> fSourceList;
 		BObjectList<entry_ref> fTargetList;
 		entry_ref	fSourceRef, fTargetRef;
-		uint32		fMoveMode;
+		uint32_t		fMoveMode;
 };
 
 
@@ -155,7 +155,7 @@ static status_t ChangeListSource(BObjectList<entry_ref> &list, BEntry &entry)
 	if (entry.GetNodeRef(&source) != B_OK)
 		return B_ERROR;
 
-	for (int32 index = 0; index < list.CountItems(); index++) {
+	for (int32_t index = 0; index < list.CountItems(); index++) {
 		entry_ref* ref = list.ItemAt(index);
 
 		ref->device = source.device;
@@ -204,7 +204,7 @@ void Undo::Remove()
 
 
 MoveCopyUndo::MoveCopyUndo(BObjectList<entry_ref>* sourceList,
-	BDirectory &dest, BList* pointList, uint32 moveMode)
+	BDirectory &dest, BList* pointList, uint32_t moveMode)
 {
 	if (moveMode == kMoveSelectionTo)
 		fUndo = new UndoItemMove(sourceList, dest, pointList);
@@ -235,7 +235,7 @@ RenameVolumeUndo::RenameVolumeUndo(BVolume &volume, const char* newName)
 
 
 UndoItemCopy::UndoItemCopy(BObjectList<entry_ref>* sourceList,
-	BDirectory &target, BList* /*pointList*/, uint32 moveMode)
+	BDirectory &target, BList* /*pointList*/, uint32_t moveMode)
 	:
 	fSourceList(*sourceList),
 	fTargetList(*sourceList),
@@ -281,7 +281,7 @@ void UndoItemCopy::UpdateEntry(BEntry* entry, const char* name)
 	if (entry->GetRef(&changedRef) != B_OK)
 		return;
 
-	for (int32 index = 0; index < fSourceList.CountItems(); index++) {
+	for (int32_t index = 0; index < fSourceList.CountItems(); index++) {
 		entry_ref* ref = fSourceList.ItemAt(index);
 		if (changedRef != *ref)
 			continue;

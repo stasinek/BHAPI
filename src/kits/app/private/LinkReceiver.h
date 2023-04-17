@@ -29,10 +29,10 @@ class LinkReceiver {
 		void SetPort(port_id port);
 		port_id	Port(void) const { return fReceivePort; }
 
-		status_t GetNextMessage(int32& code, bigtime_t timeout = B_INFINITE_TIMEOUT);
+		status_t GetNextMessage(int32_t& code, bigtime_t timeout = B_INFINITE_TIMEOUT);
 		bool HasMessages() const;
 		bool NeedsReply() const;
-		int32 Code() const;
+		int32_t Code() const;
 
 		virtual status_t Read(void* data, ssize_t size);
 		status_t ReadString(char** _string, size_t* _length = NULL);
@@ -52,12 +52,12 @@ class LinkReceiver {
 		port_id fReceivePort;
 
 		char*	fRecvBuffer;
-		int32	fRecvPosition;	//current read position
-		int32	fRecvStart;	//start of current message
-		int32	fRecvBufferSize;
+		int32_t	fRecvPosition;	//current read position
+		int32_t	fRecvStart;	//start of current message
+		int32_t	fRecvBufferSize;
 
-		int32	fDataSize;	//size of data in recv buffer
-		int32	fReplySize;	//size of current reply message
+		int32_t	fDataSize;	//size of data in recv buffer
+		int32_t	fReplySize;	//size of current reply message
 
 		status_t fReadError;	//Read failed for current message
 };

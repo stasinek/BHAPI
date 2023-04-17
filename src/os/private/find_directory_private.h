@@ -15,14 +15,14 @@ __BEGIN_DECLS
 
 
 status_t __find_directory(directory_which which, dev_t device, bool createIt,
-	char *returnedPath, int32 pathLength);
+	char *returnedPath, int32_t pathLength);
 
 status_t __find_path(const void* codePointer, path_base_directory baseDirectory,
 	const char* subPath, char* pathBuffer, size_t bufferSize);
 
 status_t __find_path_etc(const void* codePointer, const char* dependency,
 	const char* architecture, path_base_directory baseDirectory,
-	const char* subPath, uint32 flags, char* pathBuffer, size_t bufferSize);
+	const char* subPath, uint32_t flags, char* pathBuffer, size_t bufferSize);
 
 status_t __find_path_for_path(const char* path,
 	path_base_directory baseDirectory, const char* subPath, char* pathBuffer,
@@ -30,13 +30,13 @@ status_t __find_path_for_path(const char* path,
 
 status_t __find_path_for_path_etc(const char* path, const char* dependency,
 	const char* architecture, path_base_directory baseDirectory,
-	const char* subPath, uint32 flags, char* pathBuffer, size_t bufferSize);
+	const char* subPath, uint32_t flags, char* pathBuffer, size_t bufferSize);
 
 status_t __find_paths(path_base_directory baseDirectory, const char* subPath,
 	char*** _paths, size_t* _pathCount);
 
 status_t __find_paths_etc(const char* architecture,
-	path_base_directory baseDirectory, const char* subPath, uint32 flags,
+	path_base_directory baseDirectory, const char* subPath, uint32_t flags,
 	char*** _paths, size_t* _pathCount);
 
 const char* __guess_secondary_architecture_from_path(const char* path,

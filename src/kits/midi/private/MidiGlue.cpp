@@ -94,7 +94,7 @@ void BMidiGlue::SystemRealTime(uchar status, bigtime_t time)
 }
 
 
-void BMidiGlue::TempoChange(int32 beatsPerMinute, bigtime_t time)
+void BMidiGlue::TempoChange(int32_t beatsPerMinute, bigtime_t time)
 {
 	fMidiObject->TempoChange(beatsPerMinute, MAKE_TIME(time));
 }
@@ -179,7 +179,7 @@ void BMidiPortGlue::SystemRealTime(uchar status, bigtime_t time)
 }
 
 
-void BMidiPortGlue::TempoChange(int32 beatsPerMinute, bigtime_t time)
+void BMidiPortGlue::TempoChange(int32_t beatsPerMinute, bigtime_t time)
 {
 	fMidiObject->SprayTempoChange(beatsPerMinute, MAKE_TIME(time));
 }

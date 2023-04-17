@@ -68,7 +68,7 @@ static void discard_invalid_input_character(iconv_t* conversion, char** inputBuf
     *inputLeft -= left;
 }
 
-status_t convert_encoding(const char* from, const char* to, const char* src, int32* srcLen, char* dst, int32* dstLen, int32* state,	char substitute)
+status_t convert_encoding(const char* from, const char* to, const char* src, int32_t* srcLen, char* dst, int32_t* dstLen, int32_t* state,	char substitute)
 {
     if (*srcLen == 0) {
         // nothing to do!
@@ -156,7 +156,7 @@ status_t convert_encoding(const char* from, const char* to, const char* src, int
     return B_OK;
 }
 
-status_t convert_to_utf8(uint32 srcEncoding, const char* src, int32* srcLen, char* dst, int32* dstLen, int32* state, char substitute)
+status_t convert_to_utf8(uint32_t srcEncoding, const char* src, int32_t* srcLen, char* dst, int32_t* dstLen, int32_t* state, char substitute)
 {
     const BCharacterSet* charset = BCharacterSetRoster::GetCharacterSetByConversionID(
         srcEncoding);
@@ -175,7 +175,7 @@ status_t convert_to_utf8(uint32 srcEncoding, const char* src, int32* srcLen, cha
         dst, dstLen, state, substitute);
 }
 
-status_t convert_from_utf8(uint32 dstEncoding, const char* src, int32* srcLen, char* dst, int32* dstLen, int32* state, char substitute)
+status_t convert_from_utf8(uint32_t dstEncoding, const char* src, int32_t* srcLen, char* dst, int32_t* dstLen, int32_t* state, char substitute)
 {
     const BCharacterSet* charset = BCharacterSetRoster::GetCharacterSetByConversionID(
         dstEncoding);

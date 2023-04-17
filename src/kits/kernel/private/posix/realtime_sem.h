@@ -25,7 +25,7 @@ struct realtime_sem_context* clone_realtime_sem_context(
 					struct realtime_sem_context* context);
 
 status_t	_user_realtime_sem_open(const char* name, int openFlagsOrShared,
-					mode_t mode, uint32 semCount, sem_t* userSem,
+					mode_t mode, uint32_t semCount, sem_t* userSem,
 					sem_t** _usedUserSem);
 status_t	_user_realtime_sem_close(sem_id semID, sem_t** _deleteUserSem);
 status_t	_user_realtime_sem_unlink(const char* name);

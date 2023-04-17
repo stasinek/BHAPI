@@ -55,7 +55,7 @@ KDiskDeviceManager* KDiskDeviceManager::sDefaultManager = NULL;
 
 
 struct device_event {
-	int32					opcode;
+	int32_t					opcode;
 	const char*				name;
 	dev_t					device;
 	ino_t					directory;
@@ -139,7 +139,7 @@ public:
 	virtual void EventOccurred(NotificationService& service,
 		const KMessage* event)
 	{
-		int32 opcode = event->GetInt32("opcode", -1);
+		int32_t opcode = event->GetInt32("opcode", -1);
 		switch (opcode) {
 			case B_ENTRY_CREATED:
 			case B_ENTRY_REMOVED:
@@ -280,7 +280,7 @@ KDiskDeviceManager::~KDiskDeviceManager()
 	delete fDeviceWatcher;
 
 	// remove all devices
-	for (int32 cookie = 0; KDiskDevice* device = NextDevice(&cookie);) {
+	for (int32_t cookie = 0; KDiskDevice* device = NextDevice(&cookie);) {
 		PartitionRegistrar _(device);
 		_RemoveDevice(device);
 	}
@@ -303,7 +303,7 @@ KDiskDeviceManager::~KDiskDeviceManager()
 		}
 	}
 	// remove all disk systems
-	for (int32 cookie = 0; KDiskSystem* diskSystem = NextDiskSystem(&cookie);) {
+	for (int32_t cookie = 0; KDiskSystem* diskSystem = NextDiskSystem(&cookie);) {
 		fDiskSystems->Remove(diskSystem->ID());
 		if (diskSystem->IsLoaded()) {
 			DBG(OUT("WARNING: Disk system `%s' (%" B_PRId32 ") is still loaded!\n",
@@ -390,7 +390,7 @@ KDiskDeviceManager::Notifications()
 
 
 void
-KDiskDeviceManager::Notify(const KMessage& event, uint32 eventMask)
+KDiskDeviceManager::Notify(const KMessage& event, uint32_t eventMask)
 {
 	fNotifications->Notify(event, eventMask);
 }
@@ -399,7 +399,7 @@ KDiskDeviceManager::Notify(const KMessage& event, uint32 eventMask)
 KDiskDevice*
 KDiskDeviceManager::FindDevice(const char* path)
 {
-	for (int32 cookie = 0; KDiskDevice* device = NextDevice(&cookie); ) {
+	for (int32_t cookie = 0; KDiskDevice* device = NextDevice(&cookie); ) {
 		if (device->Path() && !strcmp(path, device->Path()))
 			return device;
 	}
@@ -454,7 +454,7 @@ KDiskDeviceManager::FindPartition(partition_id id)
 KFileDiskDevice*
 KDiskDeviceManager::FindFileDevice(const char* filePath)
 {
-	for (int32 cookie = 0; KDiskDevice* device = NextDevice(&cookie); ) {
+	for (int32_t cookie = 0; KDiskDevice* device = NextDevice(&cookie); ) {
 		KFileDiskDevice* fileDevice = dynamic_cast<KFileDiskDevice*>(device);
 		if (fileDevice && fileDevice->FilePath()
 			&& !strcmp(filePath, fileDevice->FilePath())) {
@@ -469,7 +469,7 @@ KDiskDevice*
 KDiskDeviceManager::RegisterDevice(const char* path)
 {
 	if (ManagerLocker locker = this) {
-		for (int32 i = 0; i < 2; i++) {
+		for (int32_t i = 0; i < 2; i++) {
 			if (KDiskDevice* device = FindDevice(path)) {
 				device->Register();
 				return device;
@@ -500,7 +500,7 @@ KDiskDeviceManager::RegisterDevice(partition_id id, bool deviceOnly)
 
 
 KDiskDevice*
-KDiskDeviceManager::RegisterNextDevice(int32* cookie)
+KDiskDeviceManager::RegisterNextDevice(int32_t* cookie)
 {
 	if (!cookie)
 		return NULL;
@@ -519,7 +519,7 @@ KPartition*
 KDiskDeviceManager::RegisterPartition(const char* path)
 {
 	if (ManagerLocker locker = this) {
-		for (int32 i = 0; i < 2; i++) {
+		for (int32_t i = 0; i < 2; i++) {
 			if (KPartition* partition = FindPartition(path)) {
 				partition->Register();
 				return partition;
@@ -834,7 +834,7 @@ KDiskDeviceManager::DeleteFileDevice(partition_id id)
 }
 
 
-int32
+int32_t
 KDiskDeviceManager::CountDevices()
 {
 	return fDevices->Count();
@@ -842,7 +842,7 @@ KDiskDeviceManager::CountDevices()
 
 
 KDiskDevice*
-KDiskDeviceManager::NextDevice(int32* cookie)
+KDiskDeviceManager::NextDevice(int32_t* cookie)
 {
 	if (!cookie)
 		return NULL;
@@ -896,7 +896,7 @@ KDiskDeviceManager::DeletePartition(KPartition* partition)
 KDiskSystem*
 KDiskDeviceManager::FindDiskSystem(const char* name, bool byPrettyName)
 {
-	for (int32 cookie = 0; KDiskSystem* diskSystem = NextDiskSystem(&cookie);) {
+	for (int32_t cookie = 0; KDiskSystem* diskSystem = NextDiskSystem(&cookie);) {
 		if (byPrettyName) {
 			if (strcmp(name, diskSystem->PrettyName()) == 0)
 				return diskSystem;
@@ -919,7 +919,7 @@ KDiskDeviceManager::FindDiskSystem(disk_system_id id)
 }
 
 
-int32
+int32_t
 KDiskDeviceManager::CountDiskSystems()
 {
 	return fDiskSystems->Count();
@@ -927,7 +927,7 @@ KDiskDeviceManager::CountDiskSystems()
 
 
 KDiskSystem*
-KDiskDeviceManager::NextDiskSystem(int32* cookie)
+KDiskDeviceManager::NextDiskSystem(int32_t* cookie)
 {
 	if (!cookie)
 		return NULL;
@@ -969,7 +969,7 @@ KDiskDeviceManager::LoadDiskSystem(disk_system_id id)
 
 
 KDiskSystem*
-KDiskDeviceManager::LoadNextDiskSystem(int32* cookie)
+KDiskDeviceManager::LoadNextDiskSystem(int32_t* cookie)
 {
 	if (!cookie)
 		return NULL;
@@ -999,7 +999,7 @@ KDiskDeviceManager::InitialDeviceScan()
 	}
 
 	// scan the devices for partitions
-	int32 cookie = 0;
+	int32_t cookie = 0;
 	while (KDiskDevice* device = RegisterNextDevice(&cookie)) {
 		PartitionRegistrar _(device, true);
 		if (DeviceWriteLocker deviceLocker = device) {
@@ -1093,7 +1093,7 @@ KDiskDeviceManager::RescanDiskSystems()
 	Unlock();
 
 	// rescan existing devices with the new disk systems
-	int32 cookie = 0;
+	int32_t cookie = 0;
 	while (KDiskDevice* device = RegisterNextDevice(&cookie)) {
 		PartitionRegistrar _(device, true);
 		if (DeviceWriteLocker deviceLocker = device) {
@@ -1205,11 +1205,11 @@ KDiskDeviceManager::_UpdateBusyPartitions(KDiskDevice *device)
 	device->VisitEachDescendant(&visitor);
 	// Iterate through all job queues and all jobs scheduled or in
 	// progress and mark their scope busy.
-	for (int32 cookie = 0;
+	for (int32_t cookie = 0;
 		 KDiskDeviceJobQueue *jobQueue = NextJobQueue(&cookie); ) {
 		if (jobQueue->Device() != device)
 			continue;
-		for (int32 i = jobQueue->ActiveJobIndex();
+		for (int32_t i = jobQueue->ActiveJobIndex();
 			 KDiskDeviceJob *job = jobQueue->JobAt(i); i++) {
 			if (job->Status() != B_DISK_DEVICE_JOB_IN_PROGRESS
 				&& job->Status() != B_DISK_DEVICE_JOB_SCHEDULED) {
@@ -1278,8 +1278,8 @@ KDiskDeviceManager::_Scan(const char* path)
 	} else {
 		// not a directory
 		// check, if it is named "raw"
-		int32 len = strlen(path);
-		int32 leafLen = strlen("/raw");
+		int32_t len = strlen(path);
+		int32_t leafLen = strlen("/raw");
 		if (len <= leafLen || strcmp(path + len - leafLen, "/raw"))
 			return B_ERROR;
 		if (FindDevice(path) != NULL) {
@@ -1367,7 +1367,7 @@ KDiskDeviceManager::_ScanPartition(KPartition* partition,
 	if (partition->CountChildren() > 0) {
 		// Since this partition has already children, we don't scan it
 		// again, but only its children.
-		for (int32 i = 0; KPartition* child = partition->ChildAt(i); i++) {
+		for (int32_t i = 0; KPartition* child = partition->ChildAt(i); i++) {
 			_ScanPartition(child, restrictScan);
 		}
 		return B_OK;
@@ -1437,7 +1437,7 @@ KDiskDeviceManager::_ScanPartition(KPartition* partition,
 		bestDiskSystem->FreeIdentifyCookie(partition, bestCookie);
 		if (error == B_OK) {
 			partition->SetDiskSystem(bestDiskSystem, bestPriority);
-			for (int32 i = 0; KPartition* child = partition->ChildAt(i); i++)
+			for (int32_t i = 0; KPartition* child = partition->ChildAt(i); i++)
 				_ScanPartition(child, restrictScan);
 		} else {
 			// TODO: Handle the error.
@@ -1504,7 +1504,7 @@ status_t
 KDiskDeviceManager::_CheckMediaStatus()
 {
 	while (!fTerminating) {
-		int32 cookie = 0;
+		int32_t cookie = 0;
 		while (KDiskDevice* device = RegisterNextDevice(&cookie)) {
 			PartitionRegistrar _(device, true);
 			DeviceWriteLocker locker(device);
@@ -1553,8 +1553,8 @@ KDiskDeviceManager::_CheckMediaStatusDaemon(void* self)
 
 
 void
-KDiskDeviceManager::_NotifyDeviceEvent(KDiskDevice* device, int32 event,
-	uint32 mask)
+KDiskDeviceManager::_NotifyDeviceEvent(KDiskDevice* device, int32_t event,
+	uint32_t mask)
 {
 	char messageBuffer[512];
 	KMessage message;

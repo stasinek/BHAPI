@@ -49,11 +49,11 @@ public:
 	char			*Name() const;
 	BBufferStream	*Stream() const;
 
-	int32			BufferCount() const;
-	void			SetBufferCount(int32 count);
+	int32_t			BufferCount() const;
+	void			SetBufferCount(int32_t count);
 
-	int32			BufferSize() const;
-	void			SetBufferSize(int32 bytes);
+	int32_t			BufferSize() const;
+	void			SetBufferSize(int32_t bytes);
 
   /* Get or set the minimum delay between sending out successive buffers.
    * Although the StreamManager automatically shuts down when there
@@ -173,8 +173,8 @@ virtual	void		_ReservedBufferStreamManager3();
   stream_state	fState;				/* running, stopping, etc. */
   sem_id		fSem;
 
-  int32			fBufferCount;		/* desired # of buffers */
-  int32			fBufferSize;		/* desired size of each buffer */
+  int32_t			fBufferCount;		/* desired # of buffers */
+  int32_t			fBufferSize;		/* desired size of each buffer */
   bigtime_t		fBufferDelay;		/* minimum time between sends */
   bigtime_t		fTimeout;			/* watchdog timer */
 
@@ -184,7 +184,7 @@ virtual	void		_ReservedBufferStreamManager3();
 
   BLocker		fLock;
   char*			fName;
-  uint32		_reserved[4];
+  uint32_t		_reserved[4];
 };
 
 #endif			// #ifdef _BUFFER_STREAM_MANAGER_H

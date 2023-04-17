@@ -274,15 +274,15 @@ typedef struct x86_mtrr_info {
 
 typedef struct x86_cpu_module_info {
 	module_info	info;
-	uint32		(*count_mtrrs)(void);
+	uint32_t		(*count_mtrrs)(void);
 	void		(*init_mtrrs)(void);
 
-	void		(*set_mtrr)(uint32 index, uint64 base, uint64 length,
+	void		(*set_mtrr)(uint32_t index, uint64 base, uint64 length,
 					uint8 type);
-	status_t	(*get_mtrr)(uint32 index, uint64* _base, uint64* _length,
+	status_t	(*get_mtrr)(uint32_t index, uint64* _base, uint64* _length,
 					uint8* _type);
 	void		(*set_mtrrs)(uint8 defaultType, const x86_mtrr_info* infos,
-					uint32 count);
+					uint32_t count);
 } x86_cpu_module_info;
 
 // features
@@ -318,7 +318,7 @@ enum x86_vendors {
 typedef struct arch_cpu_info {
 	// saved cpu info
 	enum x86_vendors	vendor;
-	uint32				feature[FEATURE_NUM];
+	uint32_t				feature[FEATURE_NUM];
 	char				model_name[49];
 	const char*			vendor_name;
 	int					type;
@@ -328,7 +328,7 @@ typedef struct arch_cpu_info {
 	int					model;
 	int					extended_model;
 
-	uint32				logical_apic_id;
+	uint32_t				logical_apic_id;
 
 	struct X86PagingStructures* active_paging_structures;
 
@@ -416,7 +416,7 @@ typedef struct arch_cpu_info {
 })
 
 #define in32(port) ({ \
-	uint32 _v; \
+	uint32_t _v; \
 	__asm__ volatile ("inl %%dx,%%eax":"=a" (_v) : "d" (port)); \
 	_v; \
 })
@@ -450,24 +450,24 @@ struct arch_thread;
 void __x86_setup_system_time(uint64 conversionFactor,
 	uint64 conversionFactorNsecs);
 #else
-void __x86_setup_system_time(uint32 conversionFactor,
-	uint32 conversionFactorNsecs, bool conversionFactorNsecsShift);
+void __x86_setup_system_time(uint32_t conversionFactor,
+	uint32_t conversionFactorNsecs, bool conversionFactorNsecsShift);
 #endif
 
 void x86_userspace_thread_exit(void);
 void x86_end_userspace_thread_exit(void);
 
 addr_t x86_get_stack_frame();
-uint32 x86_count_mtrrs(void);
-void x86_set_mtrr(uint32 index, uint64 base, uint64 length, uint8 type);
-status_t x86_get_mtrr(uint32 index, uint64* _base, uint64* _length,
+uint32_t x86_count_mtrrs(void);
+void x86_set_mtrr(uint32_t index, uint64 base, uint64 length, uint8 type);
+status_t x86_get_mtrr(uint32_t index, uint64* _base, uint64* _length,
 	uint8* _type);
 void x86_set_mtrrs(uint8 defaultType, const x86_mtrr_info* infos,
-	uint32 count);
+	uint32_t count);
 void x86_init_fpu();
-bool x86_check_feature(uint32 feature, enum x86_feature_type type);
-void* x86_get_double_fault_stack(int32 cpu, size_t* _size);
-int32 x86_double_fault_get_cpu(void);
+bool x86_check_feature(uint32_t feature, enum x86_feature_type type);
+void* x86_get_double_fault_stack(int32_t cpu, size_t* _size);
+int32_t x86_double_fault_get_cpu(void);
 
 void x86_invalid_exception(iframe* frame);
 void x86_fatal_exception(iframe* frame);
@@ -479,8 +479,8 @@ void x86_page_fault_exception(iframe* iframe);
 
 void x86_swap_pgdir(addr_t newPageDir);
 
-uint64 x86_read_msr(uint32 registerNumber);
-void x86_write_msr(uint32 registerNumber, uint64 value);
+uint64 x86_read_msr(uint32_t registerNumber);
+void x86_write_msr(uint32_t registerNumber, uint64 value);
 
 void x86_context_switch(struct arch_thread* oldState,
 	struct arch_thread* newState);

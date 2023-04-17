@@ -21,25 +21,25 @@ bool BString::Private::IsShareable() const
 }
 //-------------------------------------------------------------------------------------------------
 
-int32& BString::Private::DataRefCount(char* data)
+int32_t& BString::Private::DataRefCount(char* data)
 {
-    return *(((int32 *)data) - 2);
+    return *(((int32_t *)data) - 2);
 }
 //-------------------------------------------------------------------------------------------------
 
-int32& BString::Private::DataRefCount()
+int32_t& BString::Private::DataRefCount()
 {
     return DataRefCount(Data());
 }
 //-------------------------------------------------------------------------------------------------
 
-int32& BString::Private::DataLength(char* data)
+int32_t& BString::Private::DataLength(char* data)
 {
-    return *(((int32*)data) - 1);
+    return *(((int32_t*)data) - 1);
 }
 //-------------------------------------------------------------------------------------------------
 
-int32& BString::Private::DataLength()
+int32_t& BString::Private::DataLength()
 {
     return DataLength(Data());
 }

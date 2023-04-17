@@ -31,7 +31,7 @@ BADCStream::~BADCStream()
 }
 
 
-status_t BADCStream::SetADCInput(int32 device)
+status_t BADCStream::SetADCInput(int32_t device)
 {
 	UNIMPLEMENTED();
 
@@ -39,7 +39,7 @@ status_t BADCStream::SetADCInput(int32 device)
 }
 
 
-status_t BADCStream::ADCInput(int32 *device) const
+status_t BADCStream::ADCInput(int32_t *device) const
 {
 	UNIMPLEMENTED();
 
@@ -80,7 +80,7 @@ bool BADCStream::IsMicBoosted() const
 
 
 status_t BADCStream::SetStreamBuffers(size_t bufferSize,
-							 int32 bufferCount)
+							 int32_t bufferCount)
 {
 	UNIMPLEMENTED();
 
@@ -162,7 +162,7 @@ status_t BDACStream::SamplingRate(float *sRate) const
 }
 
 
-status_t BDACStream::SetVolume(int32 device,
+status_t BDACStream::SetVolume(int32_t device,
 					  float l_volume,
 					  float r_volume)
 {
@@ -172,7 +172,7 @@ status_t BDACStream::SetVolume(int32 device,
 }
 
 
-status_t BDACStream::GetVolume(int32 device,
+status_t BDACStream::GetVolume(int32_t device,
 					  float *l_volume,
 					  float *r_volume,
 					  bool *enabled) const
@@ -183,7 +183,7 @@ status_t BDACStream::GetVolume(int32 device,
 }
 
 
-status_t BDACStream::EnableDevice(int32 device,
+status_t BDACStream::EnableDevice(int32_t device,
 						 bool enable)
 {
 	UNIMPLEMENTED();
@@ -192,7 +192,7 @@ status_t BDACStream::EnableDevice(int32 device,
 }
 
 
-bool BDACStream::IsDeviceEnabled(int32 device) const
+bool BDACStream::IsDeviceEnabled(int32_t device) const
 {
 	UNIMPLEMENTED();
 
@@ -201,7 +201,7 @@ bool BDACStream::IsDeviceEnabled(int32 device) const
 
 
 status_t BDACStream::SetStreamBuffers(size_t bufferSize,
-							 int32 bufferCount)
+							 int32_t bufferCount)
 {
 	UNIMPLEMENTED();
 

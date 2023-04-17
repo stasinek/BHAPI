@@ -42,8 +42,8 @@ private:
 
 private:
 				thread_id		fOwner;
-				int32			fOwnerCount;
-				int32			fReaderCount;
+				int32_t			fOwnerCount;
+				int32_t			fReaderCount;
 				WaiterList		fWaiters;
 };
 

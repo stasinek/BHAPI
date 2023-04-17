@@ -40,9 +40,9 @@ extern BHAPI_EXPORT const bhapi::pattern B_SOLID_LOW = bhapi::make_pattern(0x00,
 extern BHAPI_EXPORT const bhapi::rgb_color B_TRANSPARENT_COLOR = bhapi::make_rgb_color(233, 233, 233, 255);
 
 #ifdef BHAPI_BIG_ENDIAN
-extern BHAPI_EXPORT const  __be_uint32 B_TRANSPARENT_MAGIC_RGBA32 = 0xE9E9E9FF;
+extern BHAPI_EXPORT const  __be_uint32_t B_TRANSPARENT_MAGIC_RGBA32 = 0xE9E9E9FF;
 #else
-extern BHAPI_EXPORT const  __be_uint32 B_TRANSPARENT_MAGIC_RGBA32 = 0xFFE9E9E9;
+extern BHAPI_EXPORT const  __be_uint32_t B_TRANSPARENT_MAGIC_RGBA32 = 0xFFE9E9E9;
 #endif
 
 BHAPI_EXPORT  __be_uint8 bhapi::find_index_for_color(__be_uint8 r,  __be_uint8 g,  __be_uint8 b)

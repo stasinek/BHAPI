@@ -80,7 +80,7 @@ status_t VirtualDirectoryEntryList::GetNextEntry(BEntry* entry, bool traverse)
 status_t VirtualDirectoryEntryList::GetNextRef(entry_ref* ref)
 {
 	BPrivate::Storage::LongDirEntry entry;
-	int32 result = GetNextDirents(&entry, sizeof(entry), 1);
+	int32_t result = GetNextDirents(&entry, sizeof(entry), 1);
 	if (result < 0)
 		return result;
 	if (result == 0)
@@ -92,13 +92,13 @@ status_t VirtualDirectoryEntryList::GetNextRef(entry_ref* ref)
 }
 
 
-int32 VirtualDirectoryEntryList::GetNextDirents(struct dirent* buffer, size_t length,
-	int32 count)
+int32_t VirtualDirectoryEntryList::GetNextDirents(struct dirent* buffer, size_t length,
+	int32_t count)
 {
 	if (count > 1)
 		count = 1;
 
-	int32 countRead = fMergedDirectory.GetNextDirents(buffer, length, count);
+	int32_t countRead = fMergedDirectory.GetNextDirents(buffer, length, count);
 	if (countRead != 1)
 		return countRead;
 
@@ -124,7 +124,7 @@ status_t VirtualDirectoryEntryList::Rewind()
 }
 
 
-int32 VirtualDirectoryEntryList::CountEntries()
+int32_t VirtualDirectoryEntryList::CountEntries()
 {
 	return 0;
 }
@@ -137,8 +137,8 @@ status_t VirtualDirectoryEntryList::_InitMergedDirectory(
 	if (error != B_OK)
 		return error;
 
-	int32 count = directoryPaths.CountStrings();
-	for (int32 i = 0; i < count; i++)
+	int32_t count = directoryPaths.CountStrings();
+	for (int32_t i = 0; i < count; i++)
 		fMergedDirectory.AddDirectory(directoryPaths.StringAt(i));
 
 	return B_OK;

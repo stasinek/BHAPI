@@ -62,7 +62,7 @@ TMenuItemGroup::~TMenuItemGroup()
 
 	if (fMenu == NULL) {
 		BMenuItem* item;
-		while ((item = RemoveItem((int32)0)) != NULL)
+		while ((item = RemoveItem((int32_t)0)) != NULL)
 			delete item;
 	}
 }
@@ -81,7 +81,7 @@ bool TMenuItemGroup::AddItem(BMenuItem* item)
 }
 
 
-bool TMenuItemGroup::AddItem(BMenuItem* item, int32 atIndex)
+bool TMenuItemGroup::AddItem(BMenuItem* item, int32_t atIndex)
 {
 	if (!fList.AddItem(item, atIndex))
 		return false;
@@ -109,7 +109,7 @@ bool TMenuItemGroup::AddItem(BMenu* menu)
 }
 
 
-bool TMenuItemGroup::AddItem(BMenu* menu, int32 atIndex)
+bool TMenuItemGroup::AddItem(BMenu* menu, int32_t atIndex)
 {
 	BMenuItem* item = new BMenuItem(menu);
 	if (item == NULL)
@@ -144,7 +144,7 @@ bool TMenuItemGroup::RemoveItem(BMenu* menu)
 
 
 BMenuItem*
-TMenuItemGroup::RemoveItem(int32 index)
+TMenuItemGroup::RemoveItem(int32_t index)
 {
 	BMenuItem* item = ItemAt(index);
 	if (item == NULL)
@@ -158,13 +158,13 @@ TMenuItemGroup::RemoveItem(int32 index)
 
 
 BMenuItem*
-TMenuItemGroup::ItemAt(int32 index)
+TMenuItemGroup::ItemAt(int32_t index)
 {
 	return static_cast<BMenuItem*>(fList.ItemAt(index));
 }
 
 
-int32 TMenuItemGroup::CountItems()
+int32_t TMenuItemGroup::CountItems()
 {
 	return fList.CountItems();
 }
@@ -202,7 +202,7 @@ TGroupedMenu::TGroupedMenu(const char* name)
 TGroupedMenu::~TGroupedMenu()
 {
 	TMenuItemGroup* group;
-	while ((group = static_cast<TMenuItemGroup*>(fGroups.RemoveItem((int32)0)))
+	while ((group = static_cast<TMenuItemGroup*>(fGroups.RemoveItem((int32_t)0)))
 			!= NULL) {
 		delete group;
 	}
@@ -216,7 +216,7 @@ bool TGroupedMenu::AddGroup(TMenuItemGroup* group)
 
 	group->fMenu = this;
 
-	for (int32 i = 0; i < group->CountItems(); i++) {
+	for (int32_t i = 0; i < group->CountItems(); i++) {
 		AddGroupItem(group, group->ItemAt(i), i);
 	}
 
@@ -224,14 +224,14 @@ bool TGroupedMenu::AddGroup(TMenuItemGroup* group)
 }
 
 
-bool TGroupedMenu::AddGroup(TMenuItemGroup* group, int32 atIndex)
+bool TGroupedMenu::AddGroup(TMenuItemGroup* group, int32_t atIndex)
 {
 	if (!fGroups.AddItem(group, atIndex))
 		return false;
 
 	group->fMenu = this;
 
-	for (int32 i = 0; i < group->CountItems(); i++) {
+	for (int32_t i = 0; i < group->CountItems(); i++) {
 		AddGroupItem(group, group->ItemAt(i), i);
 	}
 
@@ -249,7 +249,7 @@ bool TGroupedMenu::RemoveGroup(TMenuItemGroup* group)
 	group->fMenu = NULL;
 	group->fFirstItemIndex = -1;
 
-	for (int32 i = 0; i < group->CountItems(); i++) {
+	for (int32_t i = 0; i < group->CountItems(); i++) {
 		RemoveItem(group->ItemAt(i));
 	}
 
@@ -258,22 +258,22 @@ bool TGroupedMenu::RemoveGroup(TMenuItemGroup* group)
 
 
 TMenuItemGroup*
-TGroupedMenu::GroupAt(int32 index)
+TGroupedMenu::GroupAt(int32_t index)
 {
 	return static_cast<TMenuItemGroup*>(fGroups.ItemAt(index));
 }
 
 
-int32 TGroupedMenu::CountGroups()
+int32_t TGroupedMenu::CountGroups()
 {
 	return fGroups.CountItems();
 }
 
 
 void TGroupedMenu::AddGroupItem(TMenuItemGroup* group, BMenuItem* item,
-	int32 atIndex)
+	int32_t atIndex)
 {
-	int32 groupIndex = fGroups.IndexOf(group);
+	int32_t groupIndex = fGroups.IndexOf(group);
 	bool addSeparator = false;
 
 	if (group->fFirstItemIndex == -1) {
@@ -313,7 +313,7 @@ void TGroupedMenu::AddGroupItem(TMenuItemGroup* group, BMenuItem* item,
 
 	// move the groups after this one
 
-	for (int32 i = groupIndex + 1; i < CountGroups(); i++) {
+	for (int32_t i = groupIndex + 1; i < CountGroups(); i++) {
 		group = GroupAt(i);
 		group->fFirstItemIndex += addSeparator ? 2 : 1;
 	}
@@ -322,7 +322,7 @@ void TGroupedMenu::AddGroupItem(TMenuItemGroup* group, BMenuItem* item,
 
 void TGroupedMenu::RemoveGroupItem(TMenuItemGroup* group, BMenuItem* item)
 {
-	int32 groupIndex = fGroups.IndexOf(group);
+	int32_t groupIndex = fGroups.IndexOf(group);
 	bool removedSeparator = false;
 
 	if (group->CountItems() == 1) {
@@ -340,7 +340,7 @@ void TGroupedMenu::RemoveGroupItem(TMenuItemGroup* group, BMenuItem* item)
 
 	// move the groups after this one
 
-	for (int32 i = groupIndex + 1; i < CountGroups(); i++) {
+	for (int32_t i = groupIndex + 1; i < CountGroups(); i++) {
 		group = GroupAt(i);
 		group->fFirstItemIndex -= removedSeparator ? 2 : 1;
 	}

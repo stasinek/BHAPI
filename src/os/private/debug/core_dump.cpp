@@ -200,12 +200,12 @@ struct ThreadState : DoublyLinkedListLinkImpl<ThreadState> {
 		fComplete = complete;
 	}
 
-	int32 State() const
+	int32_t State() const
 	{
 		return fState;
 	}
 
-	int32 Priority() const
+	int32_t Priority() const
 	{
 		return fPriority;
 	}
@@ -232,8 +232,8 @@ struct ThreadState : DoublyLinkedListLinkImpl<ThreadState> {
 
 private:
 	Thread*			fThread;
-	int32			fState;
-	int32			fPriority;
+	int32_t			fState;
+	int32_t			fPriority;
 	addr_t			fStackBase;
 	addr_t			fStackEnd;
 	char			fName[B_OS_NAME_LENGTH];
@@ -374,7 +374,7 @@ struct ImageInfo : DoublyLinkedListLinkImpl<ImageInfo> {
 		return fStringTableData;
 	}
 
-	uint32 SymbolCount() const
+	uint32_t SymbolCount() const
 	{
 		return fSymbolCount;
 	}
@@ -390,7 +390,7 @@ private:
 		image_id commpageId = get_commpage_image();
 
 		// get the size of the tables
-		int32 symbolCount = 0;
+		int32_t symbolCount = 0;
 		size_t stringTableSize = 0;
 		status_t error = elf_read_kernel_image_symbols(commpageId, NULL,
 			&symbolCount, NULL, &stringTableSize,
@@ -449,7 +449,7 @@ private:
 	// for commpage image
 	elf_sym*	fSymbolTableData;
 	char*		fStringTableData;
-	uint32		fSymbolCount;
+	uint32_t		fSymbolCount;
 	size_t		fStringTableSize;
 };
 
@@ -501,12 +501,12 @@ struct AreaInfo : DoublyLinkedListLinkImpl<AreaInfo> {
 		return fSize;
 	}
 
-	uint32 Lock() const
+	uint32_t Lock() const
 	{
 		return fLock;
 	}
 
-	uint32 Protection() const
+	uint32_t Protection() const
 	{
 		return fProtection;
 	}
@@ -546,8 +546,8 @@ private:
 	const char*	fName;
 	addr_t		fBase;
 	size_t		fSize;
-	uint32		fLock;
-	uint32		fProtection;
+	uint32_t		fLock;
+	uint32_t		fProtection;
 	size_t		fRamSize;
 	dev_t		fDeviceId;
 	ino_t		fNodeId;
@@ -790,7 +790,7 @@ struct CoreDumper {
 
 		fTeam->SetCoreDumpCondition(&fThreadBlockCondition);
 
-		int32 threadCount = _SetThreadsCoreDumpFlag(true);
+		int32_t threadCount = _SetThreadsCoreDumpFlag(true);
 
 		teamLocker.Unlock();
 
@@ -806,7 +806,7 @@ struct CoreDumper {
 
 		fTeam->SetCoreDumpCondition(NULL);
 
-		atomic_and(&fTeam->flags, ~(int32)TEAM_FLAG_DUMP_CORE);
+		atomic_and(&fTeam->flags, ~(int32_t)TEAM_FLAG_DUMP_CORE);
 
 		_SetThreadsCoreDumpFlag(false);
 
@@ -816,7 +816,7 @@ struct CoreDumper {
 	}
 
 private:
-	status_t _Dump(const char* path, int32 threadCount)
+	status_t _Dump(const char* path, int32_t threadCount)
 	{
 		status_t error = _GetTeamInfo();
 		if (error != B_OK)
@@ -867,9 +867,9 @@ private:
 		return _WriteElfHeader();
 	}
 
-	int32 _SetThreadsCoreDumpFlag(bool setFlag)
+	int32_t _SetThreadsCoreDumpFlag(bool setFlag)
 	{
-		int32 count = 0;
+		int32_t count = 0;
 
 		for (Thread* thread = fTeam->thread_list; thread != NULL;
 				thread = thread->team_next) {
@@ -878,7 +878,7 @@ private:
 				atomic_or(&thread->flags, THREAD_FLAGS_TRAP_FOR_CORE_DUMP);
 			} else {
 				atomic_and(&thread->flags,
-					~(int32)THREAD_FLAGS_TRAP_FOR_CORE_DUMP);
+					~(int32_t)THREAD_FLAGS_TRAP_FOR_CORE_DUMP);
 			}
 		}
 
@@ -890,7 +890,7 @@ private:
 		return get_team_info(fTeam->id, &fTeamInfo);
 	}
 
-	bool _AllocateThreadStates(int32 count)
+	bool _AllocateThreadStates(int32_t count)
 	{
 		if (!_PreAllocateThreadStates(count))
 			return false;
@@ -899,7 +899,7 @@ private:
 
 		for (;;) {
 			fThreadCount = 0;
-			int32 missing = 0;
+			int32_t missing = 0;
 
 			for (Thread* thread = fTeam->thread_list; thread != NULL;
 					thread = thread->team_next) {
@@ -927,9 +927,9 @@ private:
 		return true;
 	}
 
-	bool _PreAllocateThreadStates(int32 count)
+	bool _PreAllocateThreadStates(int32_t count)
 	{
-		for (int32 i = 0; i < count; i++) {
+		for (int32_t i = 0; i < count; i++) {
 			ThreadState* state = ThreadState::Create();
 			if (state == NULL)
 				return false;
@@ -1168,7 +1168,7 @@ private:
 			memset(&header, 0, sizeof(header));
 			header.p_type = PT_LOAD;
 			header.p_flags = 0;
-			uint32 protection = areaInfo->Protection();
+			uint32_t protection = areaInfo->Protection();
 			if ((protection & B_READ_AREA) != 0)
 				header.p_flags |= PF_READ;
 			if ((protection & B_WRITE_AREA) != 0)
@@ -1245,7 +1245,7 @@ private:
 		note.nt_id = fTeamInfo.team;
 		note.nt_uid = fTeamInfo.uid;
 		note.nt_gid = fTeamInfo.gid;
-		writer.Write((uint32)sizeof(note));
+		writer.Write((uint32_t)sizeof(note));
 		writer.Write(note);
 
 		// write args
@@ -1326,8 +1326,8 @@ private:
 	void _WriteAreasNote(Writer& writer)
 	{
 		// area count
-		writer.Write((uint32)fAreaCount);
-		writer.Write((uint32)sizeof(elf_note_area_entry));
+		writer.Write((uint32_t)fAreaCount);
+		writer.Write((uint32_t)sizeof(elf_note_area_entry));
 
 		// write table
 		for (AreaInfoList::Iterator it = fAreaInfos.GetIterator();
@@ -1374,8 +1374,8 @@ private:
 	void _WriteImagesNote(Writer& writer)
 	{
 		// image count
-		writer.Write((uint32)fImageCount);
-		writer.Write((uint32)sizeof(elf_note_image_entry));
+		writer.Write((uint32_t)fImageCount);
+		writer.Write((uint32_t)sizeof(elf_note_image_entry));
 
 		// write table
 		for (ImageInfoList::Iterator it = fImageInfos.GetIterator();
@@ -1447,10 +1447,10 @@ private:
 	template<typename Writer>
 	void _WriteImageSymbolsNote(const ImageInfo* imageInfo, Writer& writer)
 	{
-		uint32 symbolCount = imageInfo->SymbolCount();
-		uint32 symbolEntrySize = (uint32)sizeof(elf_sym);
+		uint32_t symbolCount = imageInfo->SymbolCount();
+		uint32_t symbolEntrySize = (uint32_t)sizeof(elf_sym);
 
-		writer.Write((int32)imageInfo->Id());
+		writer.Write((int32_t)imageInfo->Id());
 		writer.Write(symbolCount);
 		writer.Write(symbolEntrySize);
 		writer.Write(imageInfo->SymbolTableData(),
@@ -1482,9 +1482,9 @@ private:
 	void _WriteThreadsNote(Writer& writer)
 	{
 		// thread count and size of CPU state
-		writer.Write((uint32)fThreadCount);
-		writer.Write((uint32)sizeof(elf_note_thread_entry));
-		writer.Write((uint32)sizeof(debug_cpu_state));
+		writer.Write((uint32_t)fThreadCount);
+		writer.Write((uint32_t)sizeof(elf_note_thread_entry));
+		writer.Write((uint32_t)sizeof(debug_cpu_state));
 
 		// write table
 		for (ThreadStateList::Iterator it = fThreadStates.GetIterator();
@@ -1527,7 +1527,7 @@ private:
 		return fFile.Status();
 	}
 
-	status_t _WriteNoteHeader(const char* name, uint32 type, uint32 dataSize)
+	status_t _WriteNoteHeader(const char* name, uint32_t type, uint32_t dataSize)
 	{
 		// prepare and write the header
 		Elf32_Nhdr noteHeader;

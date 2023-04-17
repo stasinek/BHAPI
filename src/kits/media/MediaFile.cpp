@@ -38,7 +38,7 @@ BMediaFile::BMediaFile(BDataIO* source)
 }
 
 
-BMediaFile::BMediaFile(const entry_ref* ref, int32 flags)
+BMediaFile::BMediaFile(const entry_ref* ref, int32_t flags)
 {
 	CALLED();
 	_Init();
@@ -47,7 +47,7 @@ BMediaFile::BMediaFile(const entry_ref* ref, int32 flags)
 }
 
 
-BMediaFile::BMediaFile(BDataIO* source, int32 flags)
+BMediaFile::BMediaFile(BDataIO* source, int32_t flags)
 {
 	CALLED();
 	_Init();
@@ -56,7 +56,7 @@ BMediaFile::BMediaFile(BDataIO* source, int32 flags)
 
 
 BMediaFile::BMediaFile(const entry_ref* ref, const media_file_format* mfi,
-	int32 flags)
+	int32_t flags)
 {
 	CALLED();
 	_Init();
@@ -67,7 +67,7 @@ BMediaFile::BMediaFile(const entry_ref* ref, const media_file_format* mfi,
 
 
 BMediaFile::BMediaFile(BDataIO* destination, const media_file_format* mfi,
-	int32 flags)
+	int32_t flags)
 {
 	CALLED();
 	_Init();
@@ -76,7 +76,7 @@ BMediaFile::BMediaFile(BDataIO* destination, const media_file_format* mfi,
 
 
 // File will be set later by SetTo()
-BMediaFile::BMediaFile(const media_file_format* mfi, int32 flags)
+BMediaFile::BMediaFile(const media_file_format* mfi, int32_t flags)
 {
 	debugger("BMediaFile::BMediaFile not implemented");
 }
@@ -157,7 +157,7 @@ const char*  BMediaFile::Copyright() const
 }
 
 
-int32 BMediaFile::CountTracks() const
+int32_t BMediaFile::CountTracks() const
 {
 	return fTrackNum;
 }
@@ -166,7 +166,7 @@ int32 BMediaFile::CountTracks() const
 // Can be called multiple times with the same index.  You must call
 // ReleaseTrack() when you're done with a track.
 BMediaTrack*
-BMediaFile::TrackAt(int32 index)
+BMediaFile::TrackAt(int32_t index)
 {
 	CALLED();
 	if (fTrackList == NULL || fExtractor == NULL
@@ -191,7 +191,7 @@ status_t BMediaFile::ReleaseTrack(BMediaTrack* track)
 	CALLED();
 	if (!fTrackList || !track)
 		return B_ERROR;
-	for (int32 i = 0; i < fTrackNum; i++) {
+	for (int32_t i = 0; i < fTrackNum; i++) {
 		if (fTrackList[i] == track) {
 			TRACE("BMediaFile::ReleaseTrack, releasing track %p with index "
 				"%ld\n", track, i);
@@ -210,7 +210,7 @@ status_t BMediaFile::ReleaseAllTracks()
 	CALLED();
 	if (!fTrackList)
 		return B_ERROR;
-	for (int32 i = 0; i < fTrackNum; i++) {
+	for (int32_t i = 0; i < fTrackNum; i++) {
 		if (fTrackList[i]) {
 			TRACE("BMediaFile::ReleaseAllTracks, releasing track %p with "
 				"index %ld\n", fTrackList[i], i);
@@ -225,7 +225,7 @@ status_t BMediaFile::ReleaseAllTracks()
 // Create and add a track to the media file
 BMediaTrack*
 BMediaFile::CreateTrack(media_format* mediaFormat,
-	const media_codec_info* codecInfo, uint32 flags)
+	const media_codec_info* codecInfo, uint32_t flags)
 {
 	if (mediaFormat == NULL)
 		return NULL;
@@ -240,7 +240,7 @@ BMediaFile::CreateTrack(media_format* mediaFormat,
 	if (trackList == NULL)
 		return NULL;
 
-	int32 streamIndex = fTrackNum;
+	int32_t streamIndex = fTrackNum;
 	fTrackList = trackList;
 	fTrackNum += 1;
 
@@ -255,7 +255,7 @@ BMediaFile::CreateTrack(media_format* mediaFormat,
 
 // Create and add a raw track to the media file (it has no encoder)
 BMediaTrack*
-BMediaFile::CreateTrack(media_format* mf, uint32 flags)
+BMediaFile::CreateTrack(media_format* mf, uint32_t flags)
 {
 	return CreateTrack(mf, NULL, flags);
 }
@@ -294,7 +294,7 @@ status_t BMediaFile::AddCopyright(const char* copyright)
 
 
 // Call this to add user-defined chunks to a file (if they're supported)
-status_t BMediaFile::AddChunk(int32 type, const void* data, size_t size)
+status_t BMediaFile::AddChunk(int32_t type, const void* data, size_t size)
 {
 	UNIMPLEMENTED();
 	return B_OK;
@@ -339,14 +339,14 @@ BMediaFile::Web()
 }
 
 
-status_t BMediaFile::GetParameterValue(int32 id,	void* value, size_t* size)
+status_t BMediaFile::GetParameterValue(int32_t id,	void* value, size_t* size)
 {
 	UNIMPLEMENTED();
 	return B_OK;
 }
 
 
-status_t BMediaFile::SetParameterValue(int32 id,	const void* value, size_t size)
+status_t BMediaFile::SetParameterValue(int32_t id,	const void* value, size_t size)
 {
 	UNIMPLEMENTED();
 	return B_OK;
@@ -361,14 +361,14 @@ BMediaFile::GetParameterView()
 }
 
 
-status_t BMediaFile::Perform(int32 selector, void* data)
+status_t BMediaFile::Perform(int32_t selector, void* data)
 {
 	UNIMPLEMENTED();
 	return B_OK;
 }
 
 
-status_t BMediaFile::ControlFile(int32 selector, void* ioData, size_t size)
+status_t BMediaFile::ControlFile(int32_t selector, void* ioData, size_t size)
 {
 	UNIMPLEMENTED();
 	return B_ERROR;
@@ -416,7 +416,7 @@ void BMediaFile::_UnInit()
 }
 
 
-void BMediaFile::_InitReader(BDataIO* source, int32 flags)
+void BMediaFile::_InitReader(BDataIO* source, int32_t flags)
 {
 	CALLED();
 
@@ -469,7 +469,7 @@ void BMediaFile::_InitReader(BDataIO* source, int32 flags)
 
 
 void BMediaFile::_InitWriter(BDataIO* target, const media_file_format* fileFormat,
-	int32 flags)
+	int32_t flags)
 {
 	CALLED();
 
@@ -505,52 +505,52 @@ BMediaFile::BMediaFile(const BMediaFile&);
  BMediaFile::BMediaFile& operator=(const BMediaFile&);
 */
 
-status_t BMediaFile::_Reserved_BMediaFile_0(int32 arg, ...) { return B_ERROR; }
-status_t BMediaFile::_Reserved_BMediaFile_1(int32 arg, ...) { return B_ERROR; }
-status_t BMediaFile::_Reserved_BMediaFile_2(int32 arg, ...) { return B_ERROR; }
-status_t BMediaFile::_Reserved_BMediaFile_3(int32 arg, ...) { return B_ERROR; }
-status_t BMediaFile::_Reserved_BMediaFile_4(int32 arg, ...) { return B_ERROR; }
-status_t BMediaFile::_Reserved_BMediaFile_5(int32 arg, ...) { return B_ERROR; }
-status_t BMediaFile::_Reserved_BMediaFile_6(int32 arg, ...) { return B_ERROR; }
-status_t BMediaFile::_Reserved_BMediaFile_7(int32 arg, ...) { return B_ERROR; }
-status_t BMediaFile::_Reserved_BMediaFile_8(int32 arg, ...) { return B_ERROR; }
-status_t BMediaFile::_Reserved_BMediaFile_9(int32 arg, ...) { return B_ERROR; }
-status_t BMediaFile::_Reserved_BMediaFile_10(int32 arg, ...) { return B_ERROR; }
-status_t BMediaFile::_Reserved_BMediaFile_11(int32 arg, ...) { return B_ERROR; }
-status_t BMediaFile::_Reserved_BMediaFile_12(int32 arg, ...) { return B_ERROR; }
-status_t BMediaFile::_Reserved_BMediaFile_13(int32 arg, ...) { return B_ERROR; }
-status_t BMediaFile::_Reserved_BMediaFile_14(int32 arg, ...) { return B_ERROR; }
-status_t BMediaFile::_Reserved_BMediaFile_15(int32 arg, ...) { return B_ERROR; }
-status_t BMediaFile::_Reserved_BMediaFile_16(int32 arg, ...) { return B_ERROR; }
-status_t BMediaFile::_Reserved_BMediaFile_17(int32 arg, ...) { return B_ERROR; }
-status_t BMediaFile::_Reserved_BMediaFile_18(int32 arg, ...) { return B_ERROR; }
-status_t BMediaFile::_Reserved_BMediaFile_19(int32 arg, ...) { return B_ERROR; }
-status_t BMediaFile::_Reserved_BMediaFile_20(int32 arg, ...) { return B_ERROR; }
-status_t BMediaFile::_Reserved_BMediaFile_21(int32 arg, ...) { return B_ERROR; }
-status_t BMediaFile::_Reserved_BMediaFile_22(int32 arg, ...) { return B_ERROR; }
-status_t BMediaFile::_Reserved_BMediaFile_23(int32 arg, ...) { return B_ERROR; }
-status_t BMediaFile::_Reserved_BMediaFile_24(int32 arg, ...) { return B_ERROR; }
-status_t BMediaFile::_Reserved_BMediaFile_25(int32 arg, ...) { return B_ERROR; }
-status_t BMediaFile::_Reserved_BMediaFile_26(int32 arg, ...) { return B_ERROR; }
-status_t BMediaFile::_Reserved_BMediaFile_27(int32 arg, ...) { return B_ERROR; }
-status_t BMediaFile::_Reserved_BMediaFile_28(int32 arg, ...) { return B_ERROR; }
-status_t BMediaFile::_Reserved_BMediaFile_29(int32 arg, ...) { return B_ERROR; }
-status_t BMediaFile::_Reserved_BMediaFile_30(int32 arg, ...) { return B_ERROR; }
-status_t BMediaFile::_Reserved_BMediaFile_31(int32 arg, ...) { return B_ERROR; }
-status_t BMediaFile::_Reserved_BMediaFile_32(int32 arg, ...) { return B_ERROR; }
-status_t BMediaFile::_Reserved_BMediaFile_33(int32 arg, ...) { return B_ERROR; }
-status_t BMediaFile::_Reserved_BMediaFile_34(int32 arg, ...) { return B_ERROR; }
-status_t BMediaFile::_Reserved_BMediaFile_35(int32 arg, ...) { return B_ERROR; }
-status_t BMediaFile::_Reserved_BMediaFile_36(int32 arg, ...) { return B_ERROR; }
-status_t BMediaFile::_Reserved_BMediaFile_37(int32 arg, ...) { return B_ERROR; }
-status_t BMediaFile::_Reserved_BMediaFile_38(int32 arg, ...) { return B_ERROR; }
-status_t BMediaFile::_Reserved_BMediaFile_39(int32 arg, ...) { return B_ERROR; }
-status_t BMediaFile::_Reserved_BMediaFile_40(int32 arg, ...) { return B_ERROR; }
-status_t BMediaFile::_Reserved_BMediaFile_41(int32 arg, ...) { return B_ERROR; }
-status_t BMediaFile::_Reserved_BMediaFile_42(int32 arg, ...) { return B_ERROR; }
-status_t BMediaFile::_Reserved_BMediaFile_43(int32 arg, ...) { return B_ERROR; }
-status_t BMediaFile::_Reserved_BMediaFile_44(int32 arg, ...) { return B_ERROR; }
-status_t BMediaFile::_Reserved_BMediaFile_45(int32 arg, ...) { return B_ERROR; }
-status_t BMediaFile::_Reserved_BMediaFile_46(int32 arg, ...) { return B_ERROR; }
-status_t BMediaFile::_Reserved_BMediaFile_47(int32 arg, ...) { return B_ERROR; }
+status_t BMediaFile::_Reserved_BMediaFile_0(int32_t arg, ...) { return B_ERROR; }
+status_t BMediaFile::_Reserved_BMediaFile_1(int32_t arg, ...) { return B_ERROR; }
+status_t BMediaFile::_Reserved_BMediaFile_2(int32_t arg, ...) { return B_ERROR; }
+status_t BMediaFile::_Reserved_BMediaFile_3(int32_t arg, ...) { return B_ERROR; }
+status_t BMediaFile::_Reserved_BMediaFile_4(int32_t arg, ...) { return B_ERROR; }
+status_t BMediaFile::_Reserved_BMediaFile_5(int32_t arg, ...) { return B_ERROR; }
+status_t BMediaFile::_Reserved_BMediaFile_6(int32_t arg, ...) { return B_ERROR; }
+status_t BMediaFile::_Reserved_BMediaFile_7(int32_t arg, ...) { return B_ERROR; }
+status_t BMediaFile::_Reserved_BMediaFile_8(int32_t arg, ...) { return B_ERROR; }
+status_t BMediaFile::_Reserved_BMediaFile_9(int32_t arg, ...) { return B_ERROR; }
+status_t BMediaFile::_Reserved_BMediaFile_10(int32_t arg, ...) { return B_ERROR; }
+status_t BMediaFile::_Reserved_BMediaFile_11(int32_t arg, ...) { return B_ERROR; }
+status_t BMediaFile::_Reserved_BMediaFile_12(int32_t arg, ...) { return B_ERROR; }
+status_t BMediaFile::_Reserved_BMediaFile_13(int32_t arg, ...) { return B_ERROR; }
+status_t BMediaFile::_Reserved_BMediaFile_14(int32_t arg, ...) { return B_ERROR; }
+status_t BMediaFile::_Reserved_BMediaFile_15(int32_t arg, ...) { return B_ERROR; }
+status_t BMediaFile::_Reserved_BMediaFile_16(int32_t arg, ...) { return B_ERROR; }
+status_t BMediaFile::_Reserved_BMediaFile_17(int32_t arg, ...) { return B_ERROR; }
+status_t BMediaFile::_Reserved_BMediaFile_18(int32_t arg, ...) { return B_ERROR; }
+status_t BMediaFile::_Reserved_BMediaFile_19(int32_t arg, ...) { return B_ERROR; }
+status_t BMediaFile::_Reserved_BMediaFile_20(int32_t arg, ...) { return B_ERROR; }
+status_t BMediaFile::_Reserved_BMediaFile_21(int32_t arg, ...) { return B_ERROR; }
+status_t BMediaFile::_Reserved_BMediaFile_22(int32_t arg, ...) { return B_ERROR; }
+status_t BMediaFile::_Reserved_BMediaFile_23(int32_t arg, ...) { return B_ERROR; }
+status_t BMediaFile::_Reserved_BMediaFile_24(int32_t arg, ...) { return B_ERROR; }
+status_t BMediaFile::_Reserved_BMediaFile_25(int32_t arg, ...) { return B_ERROR; }
+status_t BMediaFile::_Reserved_BMediaFile_26(int32_t arg, ...) { return B_ERROR; }
+status_t BMediaFile::_Reserved_BMediaFile_27(int32_t arg, ...) { return B_ERROR; }
+status_t BMediaFile::_Reserved_BMediaFile_28(int32_t arg, ...) { return B_ERROR; }
+status_t BMediaFile::_Reserved_BMediaFile_29(int32_t arg, ...) { return B_ERROR; }
+status_t BMediaFile::_Reserved_BMediaFile_30(int32_t arg, ...) { return B_ERROR; }
+status_t BMediaFile::_Reserved_BMediaFile_31(int32_t arg, ...) { return B_ERROR; }
+status_t BMediaFile::_Reserved_BMediaFile_32(int32_t arg, ...) { return B_ERROR; }
+status_t BMediaFile::_Reserved_BMediaFile_33(int32_t arg, ...) { return B_ERROR; }
+status_t BMediaFile::_Reserved_BMediaFile_34(int32_t arg, ...) { return B_ERROR; }
+status_t BMediaFile::_Reserved_BMediaFile_35(int32_t arg, ...) { return B_ERROR; }
+status_t BMediaFile::_Reserved_BMediaFile_36(int32_t arg, ...) { return B_ERROR; }
+status_t BMediaFile::_Reserved_BMediaFile_37(int32_t arg, ...) { return B_ERROR; }
+status_t BMediaFile::_Reserved_BMediaFile_38(int32_t arg, ...) { return B_ERROR; }
+status_t BMediaFile::_Reserved_BMediaFile_39(int32_t arg, ...) { return B_ERROR; }
+status_t BMediaFile::_Reserved_BMediaFile_40(int32_t arg, ...) { return B_ERROR; }
+status_t BMediaFile::_Reserved_BMediaFile_41(int32_t arg, ...) { return B_ERROR; }
+status_t BMediaFile::_Reserved_BMediaFile_42(int32_t arg, ...) { return B_ERROR; }
+status_t BMediaFile::_Reserved_BMediaFile_43(int32_t arg, ...) { return B_ERROR; }
+status_t BMediaFile::_Reserved_BMediaFile_44(int32_t arg, ...) { return B_ERROR; }
+status_t BMediaFile::_Reserved_BMediaFile_45(int32_t arg, ...) { return B_ERROR; }
+status_t BMediaFile::_Reserved_BMediaFile_46(int32_t arg, ...) { return B_ERROR; }
+status_t BMediaFile::_Reserved_BMediaFile_47(int32_t arg, ...) { return B_ERROR; }
 

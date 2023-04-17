@@ -61,7 +61,7 @@ public:
 	TrackerString();
 	TrackerString(const char*);
 	TrackerString(const TrackerString&);
-	TrackerString(const char*, int32 maxLength);
+	TrackerString(const char*, int32_t maxLength);
 	~TrackerString();
 
 	bool Matches(const char*, bool caseSensitivity = false,

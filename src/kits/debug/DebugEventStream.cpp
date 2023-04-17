@@ -149,7 +149,7 @@ status_t BDebugEventInputStream::Seek(off_t streamOffset)
 		the info, the size of the data associated with the event otherwise.
 */
 ssize_t
-BDebugEventInputStream::ReadNextEvent(uint32* _event, uint32* _cpu,
+BDebugEventInputStream::ReadNextEvent(uint32_t* _event, uint32_t* _cpu,
 	const void** _buffer, off_t* _streamOffset)
 {
 	// get the next header
@@ -291,7 +291,7 @@ BDebugEventOutputStream::~BDebugEventOutputStream()
 }
 
 
-status_t BDebugEventOutputStream::SetTo(BDataIO* stream, uint32 flags, uint32 eventMask)
+status_t BDebugEventOutputStream::SetTo(BDataIO* stream, uint32_t flags, uint32_t eventMask)
 {
 	Unset();
 

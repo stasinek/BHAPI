@@ -15,7 +15,7 @@
 
 struct apm_battery_info {
 	bool	online;
-	int32	percent;
+	int32_t	percent;
 	time_t	time_left;
 };
 

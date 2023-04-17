@@ -44,14 +44,14 @@ public:
 	static	void				Init(kernel_args* args);
 	static	void				InitPostArea();
 
-	static	status_t			Allocate(ObjectCache* cache, uint32 flags,
+	static	status_t			Allocate(ObjectCache* cache, uint32_t flags,
 									void*& _pages);
-	static	void				Free(void* pages, uint32 flags);
+	static	void				Free(void* pages, uint32_t flags);
 
-	static	status_t			AllocateRaw(size_t size, uint32 flags,
+	static	status_t			AllocateRaw(size_t size, uint32_t flags,
 									void*& _pages);
 	static	ObjectCache*		FreeRawOrReturnCache(void* pages,
-									uint32 flags);
+									uint32_t flags);
 
 	static	size_t				AcceptableChunkSize(size_t size);
 	static	ObjectCache*		GetAllocationInfo(void* address,
@@ -147,17 +147,17 @@ private:
 
 private:
 	static	status_t			_AllocateChunks(size_t chunkSize,
-									uint32 chunkCount, uint32 flags,
+									uint32_t chunkCount, uint32_t flags,
 									MetaChunk*& _metaChunk, Chunk*& _chunk);
 	static	bool				_GetChunks(MetaChunkList* metaChunkList,
-									size_t chunkSize, uint32 chunkCount,
+									size_t chunkSize, uint32_t chunkCount,
 									MetaChunk*& _metaChunk, Chunk*& _chunk);
 	static	bool				_GetChunk(MetaChunkList* metaChunkList,
 									size_t chunkSize, MetaChunk*& _metaChunk,
 									Chunk*& _chunk);
 	static	void				_FreeChunk(Area* area, MetaChunk* metaChunk,
 									Chunk* chunk, addr_t chunkAddress,
-									bool alreadyUnmapped, uint32 flags);
+									bool alreadyUnmapped, uint32_t flags);
 
 	static	void				_PrepareMetaChunk(MetaChunk* metaChunk,
 									size_t chunkSize);
@@ -166,15 +166,15 @@ private:
 	static	Area*				_PopFreeArea();
 
 	static	void				_AddArea(Area* area);
-	static	status_t			_AllocateArea(uint32 flags, Area*& _area);
+	static	status_t			_AllocateArea(uint32_t flags, Area*& _area);
 	static	void				_FreeArea(Area* area, bool areaRemoved,
-									uint32 flags);
+									uint32_t flags);
 
 	static	status_t			_MapChunk(VMArea* vmArea, addr_t address,
 									size_t size, size_t reserveAdditionalMemory,
-									uint32 flags);
+									uint32_t flags);
 	static	status_t			_UnmapChunk(VMArea* vmArea, addr_t address,
-									size_t size, uint32 flags);
+									size_t size, uint32_t flags);
 
 	static	void				_UnmapFreeChunksEarly(Area* area);
 	static	void				_ConvertEarlyArea(Area* area);
@@ -183,7 +183,7 @@ private:
 
 	static	addr_t				_AreaBaseAddressForAddress(addr_t address);
 	static	Area*				_AreaForAddress(addr_t address);
-	static	uint32				_ChunkIndexForAddress(
+	static	uint32_t				_ChunkIndexForAddress(
 									const MetaChunk* metaChunk, addr_t address);
 	static	addr_t				_ChunkAddress(const MetaChunk* metaChunk,
 									const Chunk* chunk);
@@ -273,7 +273,7 @@ MemoryManager::_AreaForAddress(addr_t address)
 }
 
 
-/*static*/ inline uint32
+/*static*/ inline uint32_t
 MemoryManager::_ChunkIndexForAddress(const MetaChunk* metaChunk, addr_t address)
 {
 	return (address - metaChunk->chunkBase) / metaChunk->chunkSize;

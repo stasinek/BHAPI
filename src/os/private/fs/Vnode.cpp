@@ -21,7 +21,7 @@ vnode::Bucket::Bucket()
 /*static*/ void
 vnode::StaticInit()
 {
-	for (uint32 i = 0; i < kBucketCount; i++)
+	for (uint32_t i = 0; i < kBucketCount; i++)
 		new(&sBuckets[i]) Bucket;
 }
 

@@ -139,17 +139,17 @@ status_t BNetBuffer::AppendUint16(uint16 data)
 }
 
 
-status_t BNetBuffer::AppendInt32(int32 data)
+status_t BNetBuffer::AppendInt32(int32_t data)
 {
-	int32  __be_data = B_HOST_TO_BENDIAN_INT32(data);
-	return AppendData((const void*)&be_data, sizeof(int32));
+	int32_t  __be_data = B_HOST_TO_BENDIAN_INT32(data);
+	return AppendData((const void*)&be_data, sizeof(int32_t));
 }
 
 
-status_t BNetBuffer::AppendUint32(uint32 data)
+status_t BNetBuffer::AppendUint32_t(uint32_t data)
 {
-	uint32  __be_data = B_HOST_TO_BENDIAN_INT32(data);
-	return AppendData((const void*)&be_data, sizeof(uint32));
+	uint32_t  __be_data = B_HOST_TO_BENDIAN_INT32(data);
+	return AppendData((const void*)&be_data, sizeof(uint32_t));
 }
 
 
@@ -269,10 +269,10 @@ status_t BNetBuffer::RemoveUint16(uint16& data)
 }
 
 
-status_t BNetBuffer::RemoveInt32(int32& data)
+status_t BNetBuffer::RemoveInt32(int32_t& data)
 {
-	int32  __be_data;
-	status_t result = RemoveData((void*)&be_data, sizeof(int32));
+	int32_t  __be_data;
+	status_t result = RemoveData((void*)&be_data, sizeof(int32_t));
 	if (result != B_OK)
 		return result;
 
@@ -282,10 +282,10 @@ status_t BNetBuffer::RemoveInt32(int32& data)
 }
 
 
-status_t BNetBuffer::RemoveUint32(uint32& data)
+status_t BNetBuffer::RemoveUint32_t(uint32_t& data)
 {
-	uint32  __be_data;
-	status_t result = RemoveData((void*)&be_data, sizeof(uint32));
+	uint32_t  __be_data;
+	status_t result = RemoveData((void*)&be_data, sizeof(uint32_t));
 	if (result != B_OK)
 		return result;
 
@@ -334,11 +334,11 @@ status_t BNetBuffer::RemoveMessage(BMessage& data)
 
 	unsigned char* bufferPtr = fImpl->Data();
 
-	if (*(int32*)bufferPtr != B_MESSAGE_TYPE)
+	if (*(int32_t*)bufferPtr != B_MESSAGE_TYPE)
 		return B_ERROR;
 
-	bufferPtr += sizeof(int32);
-	int32 dataSize = *(int32*)bufferPtr;
+	bufferPtr += sizeof(int32_t);
+	int32_t dataSize = *(int32_t*)bufferPtr;
 
 	char* flattenedData = new (std::nothrow) char[dataSize];
 	if (flattenedData == NULL)

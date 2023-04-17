@@ -16,7 +16,7 @@ static bool CompareLists(BObjectList<BString> a, BObjectList<BString> b)
 	if (a.CountItems() != b.CountItems())
 		return false;
 
-	for (int32 i = 0; i < a.CountItems(); i++) {
+	for (int32_t i = 0; i < a.CountItems(); i++) {
 		if (*a.ItemAt(i) != *b.ItemAt(i))
 			return false;
 	}
@@ -178,12 +178,12 @@ status_t BKey::Flatten(BMessage& message) const
 status_t BKey::Unflatten(const BMessage& message)
 {
 	BKeyType type;
-	if (message.FindUInt32("type", (uint32*)&type) != B_OK || type != Type())
+	if (message.FindUInt32("type", (uint32_t*)&type) != B_OK || type != Type())
 		return B_BAD_VALUE;
 
 	const void* data = NULL;
 	ssize_t dataLength = 0;
-	if (message.FindUInt32("purpose", (uint32*)&fPurpose) != B_OK
+	if (message.FindUInt32("purpose", (uint32_t*)&fPurpose) != B_OK
 		|| message.FindString("identifier", &fIdentifier) != B_OK
 		|| message.FindString("secondaryIdentifier", &fSecondaryIdentifier)
 			!= B_OK

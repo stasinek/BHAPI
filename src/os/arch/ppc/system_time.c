@@ -10,10 +10,10 @@
 #include <real_time_data.h>
 
 
-static vint32 *sConversionFactor;
+static vint32_t *sConversionFactor;
 
 void
-__ppc_setup_system_time(vint32 *cvFactor)
+__ppc_setup_system_time(vint32_t *cvFactor)
 {
 	sConversionFactor = cvFactor;
 }
@@ -24,6 +24,6 @@ system_time(void)
 {
 	uint64 timeBase = __ppc_get_time_base();
 
-	uint32 cv = *sConversionFactor;
+	uint32_t cv = *sConversionFactor;
 	return (timeBase >> 32) * cv + (((timeBase & 0xffffffff) * cv) >> 32);
 }

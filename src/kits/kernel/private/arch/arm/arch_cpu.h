@@ -19,25 +19,25 @@
 
 /* raw exception frames */
 struct iframe {
-	uint32 spsr;
-	uint32 r0;
-	uint32 r1;
-	uint32 r2;
-	uint32 r3;
-	uint32 r4;
-	uint32 r5;
-	uint32 r6;
-	uint32 r7;
-	uint32 r8;
-	uint32 r9;
-	uint32 r10;
-	uint32 r11;
-	uint32 r12;
-	uint32 usr_sp;
-	uint32 usr_lr;
-	uint32 svc_sp;
-	uint32 svc_lr;
-	uint32 pc;
+	uint32_t spsr;
+	uint32_t r0;
+	uint32_t r1;
+	uint32_t r2;
+	uint32_t r3;
+	uint32_t r4;
+	uint32_t r5;
+	uint32_t r6;
+	uint32_t r7;
+	uint32_t r8;
+	uint32_t r9;
+	uint32_t r10;
+	uint32_t r11;
+	uint32_t r12;
+	uint32_t usr_sp;
+	uint32_t usr_lr;
+	uint32_t svc_sp;
+	uint32_t svc_lr;
+	uint32_t pc;
 } _PACKED;
 
 /**! Values for arch_cpu_info.arch */
@@ -70,7 +70,7 @@ extern "C" {
 #endif
 
 extern addr_t arm_get_far(void);
-extern int32 arm_get_fsr(void);
+extern int32_t arm_get_fsr(void);
 extern addr_t arm_get_fp(void);
 
 extern int mmu_read_c1(void);
@@ -85,7 +85,7 @@ static inline void arch_cpu_pause(void)
 
 static inline void arch_cpu_idle(void)
 {
-	uint32 Rd = 0;
+	uint32_t Rd = 0;
 	asm volatile("mcr p15, 0, %[c7format], c7, c0, 4"
 		: : [c7format] "r" (Rd) );
 }

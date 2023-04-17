@@ -39,19 +39,19 @@ public:
 									const media_format& format);
 
 			status_t			GetReaders(entry_ref* _ref,
-									int32* _count, int32 maxCount);
+									int32_t* _count, int32_t maxCount);
 
-			status_t			GetEncoder(entry_ref* _ref, int32 id);
+			status_t			GetEncoder(entry_ref* _ref, int32_t id);
 
 			status_t			GetWriter(entry_ref* _ref,
-									uint32 internalID);
+									uint32_t internalID);
 
 			status_t			GetFileFormat(media_file_format* _fileFormat,
-									int32 cookie);
+									int32_t cookie);
 			status_t			GetCodecInfo(media_codec_info* _codecInfo,
 									media_format_family* _formatFamily,
 									media_format* _inputFormat,
-									media_format* _outputFormat, int32 cookie);
+									media_format* _outputFormat, int32_t cookie);
 
 			void				RegisterAddOns();
 
@@ -74,8 +74,8 @@ private:
 									const BPath& path,
 									entry_ref* _decoderRef);
 			void				_GetReaders(const BPath& path,
-									entry_ref* outRefs, int32* outCount,
-									int32 maxCount);
+									entry_ref* outRefs, int32_t* outCount,
+									int32_t maxCount);
 
 private:
 			struct reader_info {
@@ -83,7 +83,7 @@ private:
 			};
 			struct writer_info {
 				entry_ref			ref;
-				uint32				internalID;
+				uint32_t				internalID;
 			};
 			struct decoder_info {
 				entry_ref			ref;
@@ -91,7 +91,7 @@ private:
 			};
 			struct encoder_info {
 				entry_ref			ref;
-				uint32				internalID;
+				uint32_t				internalID;
 				media_codec_info	codecInfo;
 				media_format_family	formatFamily;
 				media_format		intputFormat;
@@ -106,8 +106,8 @@ private:
 
 			List<media_file_format> fWriterFileFormats;
 
-			uint32				fNextWriterFormatFamilyID;
-			uint32				fNextEncoderCodecInfoID;
+			uint32_t				fNextWriterFormatFamilyID;
+			uint32_t				fNextEncoderCodecInfoID;
 
 			static AddOnManager	sInstance;
 };

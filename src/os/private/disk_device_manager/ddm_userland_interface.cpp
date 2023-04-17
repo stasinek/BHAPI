@@ -149,7 +149,7 @@ move_descendants(KPartition *partition, off_t moveBy)
 		return;
 	partition->SetOffset(partition->Offset() + moveBy);
 	// move children
-	for (int32 i = 0; KPartition *child = partition->ChildAt(i); i++)
+	for (int32_t i = 0; KPartition *child = partition->ChildAt(i); i++)
 		move_descendants(child, moveBy);
 }
 
@@ -168,7 +168,7 @@ move_descendants_contents(KPartition *partition)
 			return error;
 	}
 	// move children's contents
-	for (int32 i = 0; KPartition *child = partition->ChildAt(i); i++) {
+	for (int32_t i = 0; KPartition *child = partition->ChildAt(i); i++) {
 		status_t error = move_descendants_contents(child);
 		if (error != B_OK)
 			return error;
@@ -179,11 +179,11 @@ move_descendants_contents(KPartition *partition)
 
 
 partition_id
-_user_get_next_disk_device_id(int32 *_cookie, size_t *neededSize)
+_user_get_next_disk_device_id(int32_t *_cookie, size_t *neededSize)
 {
 	if (!_cookie)
 		return B_BAD_VALUE;
-	int32 cookie;
+	int32_t cookie;
 	user_memcpy(&cookie, _cookie, sizeof(cookie));
 
 	partition_id id = B_ENTRY_NOT_FOUND;
@@ -487,11 +487,11 @@ _user_get_disk_system_info(disk_system_id id, user_disk_system_info *_info)
 
 
 status_t
-_user_get_next_disk_system_info(int32 *_cookie, user_disk_system_info *_info)
+_user_get_next_disk_system_info(int32_t *_cookie, user_disk_system_info *_info)
 {
 	if (!_cookie || !_info)
 		return B_BAD_VALUE;
-	int32 cookie;
+	int32_t cookie;
 	user_memcpy(&cookie, _cookie, sizeof(cookie));
 	status_t result = B_ENTRY_NOT_FOUND;
 	KDiskDeviceManager *manager = KDiskDeviceManager::Default();
@@ -531,10 +531,10 @@ _user_find_disk_system(const char *_name, user_disk_system_info *_info)
 
 
 status_t
-_user_defragment_partition(partition_id partitionID, int32* _changeCounter)
+_user_defragment_partition(partition_id partitionID, int32_t* _changeCounter)
 {
 	// copy parameters in
-	int32 changeCounter;
+	int32_t changeCounter;
 
 	status_t error;
 	if ((error = copy_from_user_value(changeCounter, _changeCounter)) != B_OK)
@@ -585,11 +585,11 @@ _user_defragment_partition(partition_id partitionID, int32* _changeCounter)
 
 
 status_t
-_user_repair_partition(partition_id partitionID, int32* _changeCounter,
+_user_repair_partition(partition_id partitionID, int32_t* _changeCounter,
 	bool checkOnly)
 {
 	// copy parameters in
-	int32 changeCounter;
+	int32_t changeCounter;
 
 	status_t error;
 	if ((error = copy_from_user_value(changeCounter, _changeCounter)) != B_OK)
@@ -640,13 +640,13 @@ _user_repair_partition(partition_id partitionID, int32* _changeCounter,
 
 
 status_t
-_user_resize_partition(partition_id partitionID, int32* _changeCounter,
-	partition_id childID, int32* _childChangeCounter, off_t size,
+_user_resize_partition(partition_id partitionID, int32_t* _changeCounter,
+	partition_id childID, int32_t* _childChangeCounter, off_t size,
 	off_t contentSize)
 {
 	// copy parameters in
-	int32 changeCounter;
-	int32 childChangeCounter;
+	int32_t changeCounter;
+	int32_t childChangeCounter;
 
 	status_t error;
 	if ((error = copy_from_user_value(changeCounter, _changeCounter)) != B_OK
@@ -735,10 +735,10 @@ _user_resize_partition(partition_id partitionID, int32* _changeCounter,
 
 
 status_t
-_user_move_partition(partition_id partitionID, int32* changeCounter,
-	partition_id childID, int32* childChangeCounter, off_t newOffset,
-	partition_id* descendantIDs, int32* descendantChangeCounters,
-	int32 descendantCount)
+_user_move_partition(partition_id partitionID, int32_t* changeCounter,
+	partition_id childID, int32_t* childChangeCounter, off_t newOffset,
+	partition_id* descendantIDs, int32_t* descendantChangeCounters,
+	int32_t descendantCount)
 {
 #if 0
 	KDiskDeviceManager *manager = KDiskDeviceManager::Default();
@@ -776,13 +776,13 @@ return B_BAD_VALUE;
 
 
 status_t
-_user_set_partition_name(partition_id partitionID, int32* _changeCounter,
-	partition_id childID, int32* _childChangeCounter, const char* _name)
+_user_set_partition_name(partition_id partitionID, int32_t* _changeCounter,
+	partition_id childID, int32_t* _childChangeCounter, const char* _name)
 {
 	// copy parameters in
 	UserStringParameter<false> name;
-	int32 changeCounter;
-	int32 childChangeCounter;
+	int32_t changeCounter;
+	int32_t childChangeCounter;
 
 	status_t error;
 	if ((error = name.Init(_name, B_DISK_DEVICE_NAME_LENGTH)) != B_OK
@@ -857,11 +857,11 @@ _user_set_partition_name(partition_id partitionID, int32* _changeCounter,
 
 status_t
 _user_set_partition_content_name(partition_id partitionID,
-	int32* _changeCounter, const char* _name)
+	int32_t* _changeCounter, const char* _name)
 {
 	// copy parameters in
 	UserStringParameter<true> name;
-	int32 changeCounter;
+	int32_t changeCounter;
 
 	status_t error;
 	if ((error = name.Init(_name, B_DISK_DEVICE_NAME_LENGTH)) != B_OK
@@ -915,13 +915,13 @@ _user_set_partition_content_name(partition_id partitionID,
 
 
 status_t
-_user_set_partition_type(partition_id partitionID, int32* _changeCounter,
-	partition_id childID, int32* _childChangeCounter, const char* _type)
+_user_set_partition_type(partition_id partitionID, int32_t* _changeCounter,
+	partition_id childID, int32_t* _childChangeCounter, const char* _type)
 {
 	// copy parameters in
 	UserStringParameter<false> type;
-	int32 changeCounter;
-	int32 childChangeCounter;
+	int32_t changeCounter;
+	int32_t childChangeCounter;
 
 	status_t error;
 	if ((error = type.Init(_type, B_DISK_DEVICE_TYPE_LENGTH)) != B_OK
@@ -995,13 +995,13 @@ _user_set_partition_type(partition_id partitionID, int32* _changeCounter,
 
 
 status_t
-_user_set_partition_parameters(partition_id partitionID, int32* _changeCounter,
-	partition_id childID, int32* _childChangeCounter, const char* _parameters)
+_user_set_partition_parameters(partition_id partitionID, int32_t* _changeCounter,
+	partition_id childID, int32_t* _childChangeCounter, const char* _parameters)
 {
 	// copy parameters in
 	UserStringParameter<true> parameters;
-	int32 changeCounter;
-	int32 childChangeCounter;
+	int32_t changeCounter;
+	int32_t childChangeCounter;
 
 	status_t error;
 	if ((error = parameters.Init(_parameters, B_DISK_DEVICE_MAX_PARAMETER_SIZE))
@@ -1077,11 +1077,11 @@ _user_set_partition_parameters(partition_id partitionID, int32* _changeCounter,
 
 status_t
 _user_set_partition_content_parameters(partition_id partitionID,
-	int32* _changeCounter, const char* _parameters)
+	int32_t* _changeCounter, const char* _parameters)
 {
 	// copy parameters in
 	UserStringParameter<true> parameters;
-	int32 changeCounter;
+	int32_t changeCounter;
 
 	status_t error
 		= parameters.Init(_parameters, B_DISK_DEVICE_MAX_PARAMETER_SIZE);
@@ -1136,14 +1136,14 @@ _user_set_partition_content_parameters(partition_id partitionID,
 
 
 status_t
-_user_initialize_partition(partition_id partitionID, int32* _changeCounter,
+_user_initialize_partition(partition_id partitionID, int32_t* _changeCounter,
 	const char* _diskSystemName, const char* _name, const char* _parameters)
 {
 	// copy parameters in
 	UserStringParameter<false> diskSystemName;
 	UserStringParameter<true> name;
 	UserStringParameter<true> parameters;
-	int32 changeCounter;
+	int32_t changeCounter;
 
 	status_t error;
 	if ((error = diskSystemName.Init(_diskSystemName,
@@ -1218,10 +1218,10 @@ _user_initialize_partition(partition_id partitionID, int32* _changeCounter,
 
 
 status_t
-_user_uninitialize_partition(partition_id partitionID, int32* _changeCounter)
+_user_uninitialize_partition(partition_id partitionID, int32_t* _changeCounter)
 {
 	// copy parameters in
-	int32 changeCounter;
+	int32_t changeCounter;
 
 	status_t error;
 	if ((error = copy_from_user_value(changeCounter, _changeCounter)) != B_OK)
@@ -1281,15 +1281,15 @@ _user_uninitialize_partition(partition_id partitionID, int32* _changeCounter)
 
 
 status_t
-_user_create_child_partition(partition_id partitionID, int32* _changeCounter,
+_user_create_child_partition(partition_id partitionID, int32_t* _changeCounter,
 	off_t offset, off_t size, const char* _type, const char* _name,
-	const char* _parameters, partition_id* childID, int32* childChangeCounter)
+	const char* _parameters, partition_id* childID, int32_t* childChangeCounter)
 {
 	// copy parameters in
 	UserStringParameter<false> type;
 	UserStringParameter<true> name;
 	UserStringParameter<true> parameters;
-	int32 changeCounter;
+	int32_t changeCounter;
 
 	status_t error;
 	if ((error = type.Init(_type, B_DISK_DEVICE_TYPE_LENGTH)) != B_OK
@@ -1354,11 +1354,11 @@ _user_create_child_partition(partition_id partitionID, int32* _changeCounter,
 
 
 status_t
-_user_delete_child_partition(partition_id partitionID, int32* _changeCounter,
-	partition_id childID, int32 childChangeCounter)
+_user_delete_child_partition(partition_id partitionID, int32_t* _changeCounter,
+	partition_id childID, int32_t childChangeCounter)
 {
 	// copy parameters in
-	int32 changeCounter;
+	int32_t changeCounter;
 
 	status_t error;
 	if ((error = copy_from_user_value(changeCounter, _changeCounter)) != B_OK)
@@ -1419,7 +1419,7 @@ _user_delete_child_partition(partition_id partitionID, int32* _changeCounter,
 
 
 status_t
-_user_start_watching_disks(uint32 eventMask, port_id port, int32 token)
+_user_start_watching_disks(uint32_t eventMask, port_id port, int32_t token)
 {
 	KDiskDeviceManager* manager = KDiskDeviceManager::Default();
 	return manager->Notifications().UpdateUserListener(eventMask, port, token);
@@ -1427,7 +1427,7 @@ _user_start_watching_disks(uint32 eventMask, port_id port, int32 token)
 
 
 status_t
-_user_stop_watching_disks(port_id port, int32 token)
+_user_stop_watching_disks(port_id port, int32_t token)
 {
 	KDiskDeviceManager* manager = KDiskDeviceManager::Default();
 	return manager->Notifications().RemoveUserListeners(port, token);

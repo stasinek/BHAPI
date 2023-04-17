@@ -30,10 +30,10 @@ enum {
 };
 
 typedef struct {
-	uint32	space;	/* color_space of buffer */
+	uint32_t	space;	/* color_space of buffer */
 	uint16	width;	/* width in pixels */
 	uint16	height;	/* height in lines */
-	uint32	bytes_per_row;		/* number of bytes in one line */
+	uint32_t	bytes_per_row;		/* number of bytes in one line */
 	void	*buffer;		/* pointer to first byte of overlay buffer in virtual memory */
 	void	*buffer_dma;	/* pointer to first byte of overlay buffer in physical memory for DMA */
 } overlay_buffer;
@@ -74,7 +74,7 @@ typedef struct {
 	overlay_key_color	green;
 	overlay_key_color	blue;
 	overlay_key_color	alpha;
-	uint32	flags;	/* which features should be enabled.  See enum above. */
+	uint32_t	flags;	/* which features should be enabled.  See enum above. */
 } overlay_window;
 
 typedef struct {
@@ -105,9 +105,9 @@ typedef struct {
 
 typedef void * overlay_token;
 
-typedef uint32 (*overlay_count)(const display_mode *dm);
-typedef const uint32 *(*overlay_supported_spaces)(const display_mode *dm);
-typedef uint32 (*overlay_supported_features)(uint32 a_color_space);
+typedef uint32_t (*overlay_count)(const display_mode *dm);
+typedef const uint32_t *(*overlay_supported_spaces)(const display_mode *dm);
+typedef uint32_t (*overlay_supported_features)(uint32_t a_color_space);
 typedef const overlay_buffer *(*allocate_overlay_buffer)(color_space cs, uint16 width, uint16 height);
 typedef status_t (*release_overlay_buffer)(const overlay_buffer *ob);
 typedef status_t (*get_overlay_constraints)(const display_mode *dm, const overlay_buffer *ob, overlay_constraints *oc);

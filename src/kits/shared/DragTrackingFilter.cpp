@@ -24,7 +24,7 @@
 
 static const int kSquaredDragThreshold = 9;
 
-DragTrackingFilter::DragTrackingFilter(BView* targetView, uint32 messageWhat)
+DragTrackingFilter::DragTrackingFilter(BView* targetView, uint32_t messageWhat)
 	: BMessageFilter(B_ANY_DELIVERY, B_ANY_SOURCE),
 	fTargetView(targetView),
 	fMessageWhat(messageWhat),
@@ -43,7 +43,7 @@ DragTrackingFilter::Filter(BMessage* message, BHandler** /*_target*/)
 	switch (message->what) {
 		case B_MOUSE_DOWN:
 			message->FindPoint("where", &fClickPoint);
-			message->FindInt32("buttons", (int32*)&fClickButtons);
+			message->FindInt32("buttons", (int32_t*)&fClickButtons);
 			fIsTracking = true;
 
 			fTargetView->SetMouseEventMask(B_POINTER_EVENTS);

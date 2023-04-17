@@ -58,10 +58,10 @@ public:
 
 	virtual status_t GetNextEntry(BEntry*, bool traverse = false) = 0;
 	virtual status_t GetNextRef(entry_ref*) = 0;
-	virtual int32 GetNextDirents(struct dirent*, size_t,
-		int32 count = INT_MAX) = 0;
+	virtual int32_t GetNextDirents(struct dirent*, size_t,
+		int32_t count = INT_MAX) = 0;
 	virtual status_t Rewind() = 0;
-	virtual int32 CountEntries() = 0;
+	virtual int32_t CountEntries() = 0;
 };
 
 
@@ -84,8 +84,8 @@ public:
 
 	virtual	status_t GetNextEntry(BEntry*, bool traverse = false);
 	virtual	status_t GetNextRef(entry_ref*);
-	virtual	int32 GetNextDirents(struct dirent*, size_t,
-		int32 count = INT_MAX);
+	virtual	int32_t GetNextDirents(struct dirent*, size_t,
+		int32_t count = INT_MAX);
 	virtual	status_t Rewind();
 
 protected:
@@ -93,12 +93,12 @@ protected:
 	void PushDirCommon(const entry_ref*);
 
 private:
-	virtual	int32 CountEntries();
+	virtual	int32_t CountEntries();
 		// don't know how to do that, have just a fake stub here
 
 protected:
 	BObjectList<BDirectory> fDirs;
-	int32 fTopIndex;
+	int32_t fTopIndex;
 	BDirectory* fTopDir;
 	bool fIncludeTopDir;
 	bool fOriginalIncludeTopDir;
@@ -121,8 +121,8 @@ public:
 
 	virtual status_t GetNextEntry(BEntry*, bool traverse = false);
 	virtual status_t GetNextRef(entry_ref*);
-	virtual int32 GetNextDirents(struct dirent*, size_t,
-		int32 count = INT_MAX);
+	virtual int32_t GetNextDirents(struct dirent*, size_t,
+		int32_t count = INT_MAX);
 	virtual status_t Rewind();
 
 	virtual status_t NextVolume();
@@ -152,15 +152,15 @@ public:
 	// Does an in-fix walk of all entries
 	virtual status_t GetNextEntry(BEntry*, bool traverse = false);
 	virtual status_t GetNextRef(entry_ref*);
-	virtual int32 GetNextDirents(struct dirent*, size_t,
-		int32 count = INT_MAX);
+	virtual int32_t GetNextDirents(struct dirent*, size_t,
+		int32_t count = INT_MAX);
 
 	virtual status_t NextVolume();
 	// skips to the next volume
 	virtual status_t Rewind();
 
 private:
-	virtual int32 CountEntries();
+	virtual int32_t CountEntries();
 		// can't count
 
 	BQuery fQuery;

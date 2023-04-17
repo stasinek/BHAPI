@@ -59,11 +59,11 @@ public:
 
 	virtual status_t GetNextEntry(BEntry* entry, bool traverse = false) = 0;
 	virtual status_t GetNextRef(entry_ref* ref) = 0;
-	virtual int32 GetNextDirents(struct dirent* buffer, size_t length,
-		int32 count = INT_MAX) = 0;
+	virtual int32_t GetNextDirents(struct dirent* buffer, size_t length,
+		int32_t count = INT_MAX) = 0;
 
 	virtual status_t Rewind() = 0;
-	virtual int32 CountEntries() = 0;
+	virtual int32_t CountEntries() = 0;
 
 	static dirent* Next(dirent*);
 
@@ -81,10 +81,10 @@ public:
 	virtual status_t InitCheck() const;
 	virtual status_t GetNextEntry(BEntry* entry, bool traverse = false);
 	virtual status_t GetNextRef(entry_ref* ref);
-	virtual int32 GetNextDirents(struct dirent* buffer, size_t length,
-		int32 count = INT_MAX);
+	virtual int32_t GetNextDirents(struct dirent* buffer, size_t length,
+		int32_t count = INT_MAX);
 	virtual status_t Rewind();
-	virtual int32 CountEntries();
+	virtual int32_t CountEntries();
 
 protected:
 	BTrackerPrivate::TWalker* fWalker;
@@ -92,7 +92,7 @@ protected:
 };
 
 
-const int32 kDirentBufferSize = 10 * 1024;
+const int32_t kDirentBufferSize = 10 * 1024;
 
 
 class CachedEntryIterator : public EntryListBase {
@@ -105,18 +105,18 @@ public:
 	// better performance over just using the order in which they show up
 	// using the default BEntryList iterator subclass
 
-	CachedEntryIterator(BEntryList* iterator, int32 numEntries,
+	CachedEntryIterator(BEntryList* iterator, int32_t numEntries,
 		bool sortInodes = false);
 		// CachedEntryIterator does not get to own the <iterator>
 	virtual ~CachedEntryIterator();
 
 	virtual status_t GetNextEntry(BEntry* entry, bool traverse = false);
 	virtual status_t GetNextRef(entry_ref* ref);
-	virtual int32 GetNextDirents(struct dirent* buffer, size_t length,
-		int32 count = INT_MAX);
+	virtual int32_t GetNextDirents(struct dirent* buffer, size_t length,
+		int32_t count = INT_MAX);
 
 	virtual status_t Rewind();
-	virtual int32 CountEntries();
+	virtual int32_t CountEntries();
 
 	virtual void SetTo(BEntryList* iterator);
 		// CachedEntryIterator does not get to own the <iterator>
@@ -126,9 +126,9 @@ private:
 
 	BEntryList* fIterator;
 	entry_ref* fEntryRefBuffer;
-	int32 fCacheSize;
-	int32 fNumEntries;
-	int32 fIndex;
+	int32_t fCacheSize;
+	int32_t fNumEntries;
+	int32_t fIndex;
 
 	dirent* fDirentBuffer;
 	dirent* fCurrentDirent;
@@ -145,11 +145,11 @@ public:
 
 	virtual status_t GetNextEntry(BEntry* entry, bool traverse = false);
 	virtual status_t GetNextRef(entry_ref* ref);
-	virtual int32 GetNextDirents(struct dirent* buffer, size_t length,
-		int32 count = INT_MAX);
+	virtual int32_t GetNextDirents(struct dirent* buffer, size_t length,
+		int32_t count = INT_MAX);
 
 	virtual status_t Rewind();
-	virtual int32 CountEntries();
+	virtual int32_t CountEntries();
 
 private:
 	BDirectory fDirectory;
@@ -182,15 +182,15 @@ public:
 
 	virtual status_t GetNextEntry(BEntry* entry, bool traverse = false);
 	virtual status_t GetNextRef(entry_ref* ref);
-	virtual int32 GetNextDirents(struct dirent* buffer, size_t length,
-		int32 count = INT_MAX);
+	virtual int32_t GetNextDirents(struct dirent* buffer, size_t length,
+		int32_t count = INT_MAX);
 
 	virtual status_t Rewind();
-	virtual int32 CountEntries();
+	virtual int32_t CountEntries();
 
 protected:
 	BObjectList<BEntryList.h> fList;
-	int32 fCurrentIndex;
+	int32_t fCurrentIndex;
 };
 
 

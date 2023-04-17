@@ -96,14 +96,14 @@ BSolverProblem::Dependency() const
 }
 
 
-int32 BSolverProblem::CountSolutions() const
+int32_t BSolverProblem::CountSolutions() const
 {
 	return fSolutions.CountItems();
 }
 
 
 const BSolverProblemSolution*
-BSolverProblem::SolutionAt(int32 index) const
+BSolverProblem::SolutionAt(int32_t index) const
 {
 	return fSolutions.ItemAt(index);
 }

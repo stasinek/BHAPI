@@ -112,7 +112,7 @@ BTranslationUtils::GetBitmap(const char *kName, BTranslatorRoster *roster)
 //          BBitmap * to the bitmap identified by type and id
 // ---------------------------------------------------------------
 BBitmap *
-BTranslationUtils::GetBitmap(uint32 type, int32 id, BTranslatorRoster *roster)
+BTranslationUtils::GetBitmap(uint32_t type, int32_t id, BTranslatorRoster *roster)
 {
 	BResources *pResources = BApplication::AppResources();
 		// Remember: pResources must not be freed because
@@ -158,7 +158,7 @@ BTranslationUtils::GetBitmap(uint32 type, int32 id, BTranslatorRoster *roster)
 //          BBitmap * to the bitmap identified by type and kName
 // ---------------------------------------------------------------
 BBitmap *
-BTranslationUtils::GetBitmap(uint32 type, const char *kName,
+BTranslationUtils::GetBitmap(uint32_t type, const char *kName,
 	BTranslatorRoster *roster)
 {
 	BResources *pResources = BApplication::AppResources();
@@ -361,14 +361,14 @@ status_t BTranslationUtils::GetStyledText(BPositionIO* source, BTextView* intoVi
 	// convert the stm_header.header struct to the host format
 	const size_t kRecordHeaderSize = sizeof(TranslatorStyledTextRecordHeader);
 	swap_data(B_UINT32_TYPE, &header.header, kRecordHeaderSize, B_SWAP_BENDIAN_TO_HOST);
-	swap_data(B_INT32_TYPE, &header.version, sizeof(int32), B_SWAP_BENDIAN_TO_HOST);
+	swap_data(B_INT32_TYPE, &header.version, sizeof(int32_t), B_SWAP_BENDIAN_TO_HOST);
 
 	if (header.header.magic != 'STXT')
 		return B_BAD_TYPE;
 
 	// copy the text header from the mallocIO buffer
 
-	uint32 offset = header.header.header_size + header.header.data_size;
+	uint32_t offset = header.header.header_size + header.header.data_size;
 	const size_t kTextHeaderSize = sizeof(TranslatorStyledTextTextHeader);
 	if (mallocIO.BufferLength() < offset + kTextHeaderSize)
 		return B_BAD_DATA;
@@ -378,7 +378,7 @@ status_t BTranslationUtils::GetStyledText(BPositionIO* source, BTextView* intoVi
 
 	// convert the stm_header.header struct to the host format
 	swap_data(B_UINT32_TYPE, &textHeader.header, kRecordHeaderSize, B_SWAP_BENDIAN_TO_HOST);
-	swap_data(B_INT32_TYPE, &textHeader.charset, sizeof(int32), B_SWAP_BENDIAN_TO_HOST);
+	swap_data(B_INT32_TYPE, &textHeader.charset, sizeof(int32_t), B_SWAP_BENDIAN_TO_HOST);
 
 	if (textHeader.header.magic != 'TEXT' || textHeader.charset != B_UNICODE_UTF8)
 		return B_BAD_TYPE;
@@ -404,8 +404,8 @@ status_t BTranslationUtils::GetStyledText(BPositionIO* source, BTextView* intoVi
 			TranslatorStyledTextStyleHeader styleHeader =
 				*(reinterpret_cast<const TranslatorStyledTextStyleHeader *>(buffer + offset));
 			swap_data(B_UINT32_TYPE, &styleHeader.header, kRecordHeaderSize, B_SWAP_BENDIAN_TO_HOST);
-			swap_data(B_UINT32_TYPE, &styleHeader.apply_offset, sizeof(uint32), B_SWAP_BENDIAN_TO_HOST);
-			swap_data(B_UINT32_TYPE, &styleHeader.apply_length, sizeof(uint32), B_SWAP_BENDIAN_TO_HOST);
+			swap_data(B_UINT32_TYPE, &styleHeader.apply_offset, sizeof(uint32_t), B_SWAP_BENDIAN_TO_HOST);
+			swap_data(B_UINT32_TYPE, &styleHeader.apply_length, sizeof(uint32_t), B_SWAP_BENDIAN_TO_HOST);
 			if (styleHeader.header.magic == 'STYL') {
 				offset += styleHeader.header.header_size;
 				if (mallocIO.BufferLength() >= offset + styleHeader.header.data_size)
@@ -469,20 +469,20 @@ status_t BTranslationUtils::PutStyledText(BTextView *fromView, BPositionIO *into
 	if (fromView == NULL || intoStream == NULL)
 		return B_BAD_VALUE;
 
-	int32 textLength = fromView->TextLength();
+	int32_t textLength = fromView->TextLength();
 	if (textLength < 0)
 		return B_ERROR;
 
 	const char *pTextData = fromView->Text();
 		// its OK if the result of fromView->Text() is NULL
 
-	int32 runArrayLength = 0;
+	int32_t runArrayLength = 0;
 	text_run_array *runArray = fromView->RunArray(0, textLength,
 		&runArrayLength);
 	if (runArray == NULL)
 		return B_ERROR;
 
-	int32 flatRunArrayLength = 0;
+	int32_t flatRunArrayLength = 0;
 	void *pflatRunArray =
 		BTextView::FlattenRunArray(runArray, &flatRunArrayLength);
 	if (pflatRunArray == NULL) {
@@ -517,7 +517,7 @@ status_t BTranslationUtils::PutStyledText(BTextView *fromView, BPositionIO *into
 		if (swap_data(B_UINT32_TYPE, &stm_header.header, kRecordHeaderSize,
 			B_SWAP_HOST_TO_BENDIAN) != B_OK)
 			break;
-		if (swap_data(B_INT32_TYPE, &stm_header.version, sizeof(int32),
+		if (swap_data(B_INT32_TYPE, &stm_header.version, sizeof(int32_t),
 			B_SWAP_HOST_TO_BENDIAN) != B_OK)
 			break;
 
@@ -532,7 +532,7 @@ status_t BTranslationUtils::PutStyledText(BTextView *fromView, BPositionIO *into
 		if (swap_data(B_UINT32_TYPE, &txt_header.header, kRecordHeaderSize,
 			B_SWAP_HOST_TO_BENDIAN) != B_OK)
 			break;
-		if (swap_data(B_INT32_TYPE, &txt_header.charset, sizeof(int32),
+		if (swap_data(B_INT32_TYPE, &txt_header.charset, sizeof(int32_t),
 			B_SWAP_HOST_TO_BENDIAN) != B_OK)
 			break;
 
@@ -549,10 +549,10 @@ status_t BTranslationUtils::PutStyledText(BTextView *fromView, BPositionIO *into
 		if (swap_data(B_UINT32_TYPE, &stl_header.header, kRecordHeaderSize,
 			B_SWAP_HOST_TO_BENDIAN) != B_OK)
 			break;
-		if (swap_data(B_UINT32_TYPE, &stl_header.apply_offset, sizeof(uint32),
+		if (swap_data(B_UINT32_TYPE, &stl_header.apply_offset, sizeof(uint32_t),
 			B_SWAP_HOST_TO_BENDIAN) != B_OK)
 			break;
-		if (swap_data(B_UINT32_TYPE, &stl_header.apply_length, sizeof(uint32),
+		if (swap_data(B_UINT32_TYPE, &stl_header.apply_length, sizeof(uint32_t),
 			B_SWAP_HOST_TO_BENDIAN) != B_OK)
 			break;
 
@@ -616,7 +616,7 @@ status_t BTranslationUtils::WriteStyledEditFile(BTextView* view, BFile* file, co
 	if (view == NULL || file == NULL)
 		return B_BAD_VALUE;
 
-	int32 textLength = view->TextLength();
+	int32_t textLength = view->TextLength();
 	if (textLength < 0)
 		return B_ERROR;
 
@@ -646,21 +646,21 @@ status_t BTranslationUtils::WriteStyledEditFile(BTextView* view, BFile* file, co
 		// be:encoding, defaults to UTF-8 (65535)
 		// Note that the B_UNICODE_UTF8 constant is 0 and for some reason
 		// not appropriate for use here.
-		int32 value = 65535;
+		int32_t value = 65535;
 		file->WriteAttr("be:encoding", B_INT32_TYPE, 0, &value, sizeof(value));
 	} else {
 		// we need to convert the text
-		uint32 id = characterSet->GetConversionID();
+		uint32_t id = characterSet->GetConversionID();
 		const char* outText = view->Text();
-		int32 sourceLength = textLength;
-		int32 state = 0;
+		int32_t sourceLength = textLength;
+		int32_t state = 0;
 
 		textLength = 0;
 
 		do {
 			char buffer[32768];
-			int32 length = sourceLength;
-			int32 bufferSize = sizeof(buffer);
+			int32_t length = sourceLength;
+			int32_t bufferSize = sizeof(buffer);
 			status = convert_from_utf8(id, outText, &length, buffer, &bufferSize, &state);
 			if (status != B_OK)
 				return status;
@@ -697,24 +697,24 @@ status_t BTranslationUtils::WriteStyledEditFile(BTextView* view, BFile* file, co
 	}
 
 	// word wrap setting, turned on by default
-	int32 wordWrap = view->DoesWordWrap() ? 1 : 0;
+	int32_t wordWrap = view->DoesWordWrap() ? 1 : 0;
 	ssize_t bytesWritten = file->WriteAttr("wrap", B_INT32_TYPE, 0,
-		&wordWrap, sizeof(int32));
-	if (bytesWritten != sizeof(int32))
+		&wordWrap, sizeof(int32_t));
+	if (bytesWritten != sizeof(int32_t))
 		return B_OK;
 
 	// alignment, default is B_ALIGN_LEFT
-	int32 alignment = view->Alignment();
+	int32_t alignment = view->Alignment();
 	bytesWritten = file->WriteAttr("alignment", B_INT32_TYPE, 0,
-		&alignment, sizeof(int32));
-	if (bytesWritten != sizeof(int32))
+		&alignment, sizeof(int32_t));
+	if (bytesWritten != sizeof(int32_t))
 		return B_OK;
 
 	// Write text_run_array, ie. the styles of the text
 
 	text_run_array *runArray = view->RunArray(0, view->TextLength());
 	if (runArray != NULL) {
-		int32 runArraySize = 0;
+		int32_t runArraySize = 0;
 		void *flattenedRunArray = BTextView::FlattenRunArray(runArray, &runArraySize);
 		if (flattenedRunArray != NULL) {
 			file->WriteAttr("styles", B_RAW_TYPE, 0, flattenedRunArray,
@@ -799,11 +799,11 @@ BTranslationUtils::GetDefaultSettings(translator_id forTranslator,
 // ---------------------------------------------------------------
 BMessage *
 BTranslationUtils::GetDefaultSettings(const char *kTranslatorName,
-	int32 translatorVersion)
+	int32_t translatorVersion)
 {
 	BTranslatorRoster *roster = BTranslatorRoster::Default();
 	translator_id *translators = NULL;
-	int32 numTranslators = 0;
+	int32_t numTranslators = 0;
 	if (roster == NULL
 		|| roster->GetAllTranslators(&translators, &numTranslators) != B_OK)
 		return NULL;
@@ -813,7 +813,7 @@ BTranslationUtils::GetDefaultSettings(const char *kTranslatorName,
 	// that I was given
 	BMessage *pMessage = NULL;
 	const char *currentTranName = NULL, *currentTranInfo = NULL;
-	int32 currentTranVersion = 0;
+	int32_t currentTranVersion = 0;
 	for (int i = 0; i < numTranslators; i++) {
 
 		if (roster->GetTranslatorInfo(translators[i], &currentTranName,
@@ -867,7 +867,7 @@ BTranslationUtils::GetDefaultSettings(const char *kTranslatorName,
 //          B_OK, if successful
 //          error value if not successful
 // ---------------------------------------------------------------
-status_t BTranslationUtils::AddTranslationItems(BMenu *intoMenu, uint32 fromType,
+status_t BTranslationUtils::AddTranslationItems(BMenu *intoMenu, uint32_t fromType,
 	const BMessage *kModel, const char *kTranslatorIdName,
 	const char *kTranslatorTypeName, BTranslatorRoster *roster)
 {
@@ -884,7 +884,7 @@ status_t BTranslationUtils::AddTranslationItems(BMenu *intoMenu, uint32 fromType
 		kTranslatorTypeName = "be:type";
 
 	translator_id * ids = NULL;
-	int32 count = 0;
+	int32_t count = 0;
 	status_t err = roster->GetAllTranslators(&ids, &count);
 	if (err < B_OK)
 		return err;
@@ -893,7 +893,7 @@ status_t BTranslationUtils::AddTranslationItems(BMenu *intoMenu, uint32 fromType
 
 	for (int tix = 0; tix < count; tix++) {
 		const translation_format *formats = NULL;
-		int32 numFormats = 0;
+		int32_t numFormats = 0;
 		bool ok = false;
 		err = roster->GetInputFormats(ids[tix], &formats, &numFormats);
 		if (err == B_OK) {

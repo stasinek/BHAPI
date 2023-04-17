@@ -31,14 +31,14 @@ public:
 
 			const user_partition_data* PartitionData() const;
 
-			Delegate*			ChildAt(int32 index) const;
-			int32				CountChildren() const;
+			Delegate*			ChildAt(int32_t index) const;
+			int32_t				CountChildren() const;
 
 			bool				IsModified() const;
 
-			uint32				SupportedOperations(uint32 mask);
-			uint32				SupportedChildOperations(Delegate* child,
-									uint32 mask);
+			uint32_t				SupportedOperations(uint32_t mask);
+			uint32_t				SupportedChildOperations(Delegate* child,
+									uint32_t mask);
 
 			// Self Modification
 
@@ -75,7 +75,7 @@ public:
 									B_PARAMETER_EDITOR_TYPE type,
 									BPartitionParameterEditor** editor) const;
 			status_t			GetNextSupportedChildType(Delegate* child,
-									int32* cookie, BString* type) const;
+									int32_t* cookie, BString* type) const;
 			bool				IsSubSystem(Delegate* child,
 									const char* diskSystem) const;
 

@@ -104,7 +104,7 @@ private:
 			media_input			fInput;
 
 			void*				fBufferCookie;
-			uint32				fPadding[32];
+			uint32_t				fPadding[32];
 
 			friend class		BMediaRecorderNode;
 };

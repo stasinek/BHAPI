@@ -49,14 +49,14 @@ All rights reserved.
 #include <PoseView.h>
 
 
-int32 CalcFreeSpace(BVolume* volume)
+int32_t CalcFreeSpace(BVolume* volume)
 {
 	off_t capacity = volume->Capacity();
 	if (capacity == 0)
 		return 100;
 
-	int32 percent
-		= static_cast<int32>(volume->FreeBytes() / (capacity / 100));
+	int32_t percent
+		= static_cast<int32_t>(volume->FreeBytes() / (capacity / 100));
 
 	// warn below 20 MB of free space (if this is less than 10% of free space)
 	if (volume->FreeBytes() < 20 * 1024 * 1024 && percent < 10)
@@ -69,7 +69,7 @@ int32 CalcFreeSpace(BVolume* volume)
 // symlink pose uses the resolved model to retrieve the icon, if not broken
 // everything else, like the attributes, etc. is retrieved directly from the
 // symlink itself
-BPose::BPose(Model* model, BPoseView* view, uint32 clipboardMode,
+BPose::BPose(Model* model, BPoseView* view, uint32_t clipboardMode,
 	bool selected)
 	:
 	fModel(model),
@@ -119,8 +119,8 @@ BPose::~BPose()
 		if (gPeriodicUpdatePoses.RemovePose(this, (void**)&volume))
 			delete volume;
 	}
-	int32 count = fWidgetList.CountItems();
-	for (int32 i = 0; i < count; i++)
+	int32_t count = fWidgetList.CountItems();
+	for (int32_t i = 0; i < count; i++)
 		delete fWidgetList.ItemAt(i);
 
 	delete fModel;
@@ -129,7 +129,7 @@ BPose::~BPose()
 
 void BPose::CreateWidgets(BPoseView* poseView)
 {
-	for (int32 index = 0; ; index++) {
+	for (int32_t index = 0; ; index++) {
 		BColumn* column = poseView->ColumnAt(index);
 		if (column == NULL)
 			break;
@@ -170,7 +170,7 @@ BPose::AddWidget(BPoseView* poseView, BColumn* column,
 
 void BPose::RemoveWidget(BPoseView*, BColumn* column)
 {
-	int32 index;
+	int32_t index;
 	BTextWidget* widget = WidgetFor(column->AttrHash(), &index);
 	if (widget != NULL)
 		delete fWidgetList.RemoveItemAt(index);
@@ -178,10 +178,10 @@ void BPose::RemoveWidget(BPoseView*, BColumn* column)
 
 
 void BPose::Commit(bool saveChanges, BPoint loc, BPoseView* poseView,
-	int32 poseIndex)
+	int32_t poseIndex)
 {
-	int32 count = fWidgetList.CountItems();
-	for (int32 index = 0; index < count; index++) {
+	int32_t count = fWidgetList.CountItems();
+	for (int32_t index = 0; index < count; index++) {
 		BTextWidget* widget = fWidgetList.ItemAt(index);
 		if (widget != NULL && widget->IsActive()) {
 			widget->StopEdit(saveChanges, loc, poseView, this, poseIndex);
@@ -209,7 +209,7 @@ inline bool OneMouseUp(BTextWidget* widget, BPose* pose, BPoseView* poseView,
 }
 
 
-void BPose::MouseUp(BPoint poseLoc, BPoseView* poseView, BPoint where, int32)
+void BPose::MouseUp(BPoint poseLoc, BPoseView* poseView, BPoint where, int32_t)
 {
 	WhileEachTextWidget(this, poseView, OneMouseUp, poseLoc, where);
 }
@@ -222,7 +222,7 @@ inline void OneCheckAndUpdate(BTextWidget* widget, BPose*, BPoseView* poseView,
 }
 
 
-void BPose::UpdateAllWidgets(int32, BPoint poseLoc, BPoseView* poseView)
+void BPose::UpdateAllWidgets(int32_t, BPoint poseLoc, BPoseView* poseView)
 {
 	if (poseView->ViewMode() != kListMode)
 		poseLoc = Location(poseView);
@@ -233,7 +233,7 @@ void BPose::UpdateAllWidgets(int32, BPoint poseLoc, BPoseView* poseView)
 
 
 void BPose::UpdateWidgetAndModel(Model* resolvedModel, const char* attrName,
-	uint32 attrType, int32, BPoint poseLoc, BPoseView* poseView, bool visible)
+	uint32_t attrType, int32_t, BPoint poseLoc, BPoseView* poseView, bool visible)
 {
 	if (poseView->ViewMode() != kListMode)
 		poseLoc = Location(poseView);
@@ -247,7 +247,7 @@ void BPose::UpdateWidgetAndModel(Model* resolvedModel, const char* attrName,
 
 		// ToDo: the following code is wrong, because this sort of hashing
 		// may overlap and we get aliasing
-		uint32 attrHash = AttrHashString(attrName, attrType);
+		uint32_t attrHash = AttrHashString(attrName, attrType);
 		BTextWidget* widget = WidgetFor(attrHash);
 		if (widget != NULL) {
 			BColumn* column = poseView->ColumnFor(attrHash);
@@ -256,8 +256,8 @@ void BPose::UpdateWidgetAndModel(Model* resolvedModel, const char* attrName,
 		} else if (attrType == 0) {
 			// attribute got likely removed, so let's search the
 			// column for the matching attribute name
-			int32 count = fWidgetList.CountItems();
-			for (int32 i = 0; i < count; i++) {
+			int32_t count = fWidgetList.CountItems();
+			for (int32_t i = 0; i < count; i++) {
 				BTextWidget* widget = fWidgetList.ItemAt(i);
 				BColumn* column = poseView->ColumnFor(widget->AttrHash());
 				if (column != NULL
@@ -280,7 +280,7 @@ void BPose::UpdateWidgetAndModel(Model* resolvedModel, const char* attrName,
 		}
 
 		// distribute stat changes
-		for (int32 index = 0; ; index++) {
+		for (int32_t index = 0; ; index++) {
 			BColumn* column = poseView->ColumnAt(index);
 			if (column == NULL)
 				break;
@@ -312,7 +312,7 @@ bool BPose::UpdateVolumeSpaceBar(BVolume* volume)
 		return true;
 	}
 
-	int32 percent = CalcFreeSpace(volume);
+	int32_t percent = CalcFreeSpace(volume);
 	if (fPercent != percent) {
 		if (percent > 100)
 			fPercent = 100;
@@ -330,7 +330,7 @@ void BPose::UpdateIcon(BPoint poseLoc, BPoseView* poseView)
 {
 	IconCache::sIconCache->IconChanged(ResolvedModel());
 
-	int32 iconSize = poseView->IconSizeInt();
+	int32_t iconSize = poseView->IconSizeInt();
 
 	BRect rect;
 	if (poseView->ViewMode() == kListMode) {
@@ -387,7 +387,7 @@ void BPose::EditFirstWidget(BPoint poseLoc, BPoseView* poseView)
 {
 	// find first editable widget
 	BColumn* column;
-	for (int32 i = 0; (column = poseView->ColumnAt(i)) != NULL; i++) {
+	for (int32_t i = 0; (column = poseView->ColumnAt(i)) != NULL; i++) {
 		BTextWidget* widget = WidgetFor(column->AttrHash());
 
 		if (widget != NULL && widget->IsEditable()) {
@@ -409,8 +409,8 @@ void BPose::EditFirstWidget(BPoint poseLoc, BPoseView* poseView)
 void BPose::EditPreviousNextWidgetCommon(BPoseView* poseView, bool next)
 {
 	bool found = false;
-	int32 delta = next ? 1 : -1;
-	for (int32 index = next ? 0 : poseView->CountColumns() - 1; ;
+	int32_t delta = next ? 1 : -1;
+	for (int32_t index = next ? 0 : poseView->CountColumns() - 1; ;
 			index += delta) {
 		BColumn* column = poseView->ColumnAt(index);
 		if (column == NULL) {
@@ -433,7 +433,7 @@ void BPose::EditPreviousNextWidgetCommon(BPoseView* poseView, bool next)
 		if (found && column->Editable()) {
 			BRect bounds;
 			if (poseView->ViewMode() == kListMode) {
-				int32 poseIndex = poseView->IndexOfPose(this);
+				int32_t poseIndex = poseView->IndexOfPose(this);
 				BPoint poseLoc(0, poseIndex* poseView->ListElemHeight());
 				bounds = widget->CalcRect(poseLoc, column, poseView);
 			} else
@@ -511,7 +511,7 @@ bool BPose::PointInPose(BPoint loc, const BPoseView* poseView, BPoint where,
 	if (rect.Contains(where))
 		return true;
 
-	for (int32 index = 0; ; index++) {
+	for (int32_t index = 0; ; index++) {
 		BColumn* column = poseView->ColumnAt(index);
 		if (column == NULL)
 			break;
@@ -558,11 +558,11 @@ void BPose::Draw(BRect rect, const BRect& updateRect, BPoseView* poseView,
 		}
 
 		// draw text
-		int32 columnsToDraw = 1;
+		int32_t columnsToDraw = 1;
 		if (fullDraw)
 			columnsToDraw = poseView->CountColumns();
 
-		for (int32 index = 0; index < columnsToDraw; index++) {
+		for (int32_t index = 0; index < columnsToDraw; index++) {
 			BColumn* column = poseView->ColumnAt(index);
 			if (column == NULL)
 				break;
@@ -736,7 +736,7 @@ void BPose::MoveTo(BPoint point, BPoseView* poseView, bool invalidate)
 BTextWidget*
 BPose::ActiveWidget() const
 {
-	for (int32 i = fWidgetList.CountItems(); i-- > 0;) {
+	for (int32_t i = fWidgetList.CountItems(); i-- > 0;) {
 		BTextWidget* widget = fWidgetList.ItemAt(i);
 		if (widget->IsActive())
 			return widget;
@@ -747,10 +747,10 @@ BPose::ActiveWidget() const
 
 
 BTextWidget*
-BPose::WidgetFor(uint32 attr, int32* index) const
+BPose::WidgetFor(uint32_t attr, int32_t* index) const
 {
-	int32 count = fWidgetList.CountItems();
-	for (int32 i = 0; i < count; i++) {
+	int32_t count = fWidgetList.CountItems();
+	for (int32_t i = 0; i < count; i++) {
 		BTextWidget* widget = fWidgetList.ItemAt(i);
 		if (widget->AttrHash() == attr) {
 			if (index != NULL)
@@ -766,7 +766,7 @@ BPose::WidgetFor(uint32 attr, int32* index) const
 
 BTextWidget*
 BPose::WidgetFor(BColumn* column, BPoseView* poseView,
-	ModelNodeLazyOpener &opener, int32* index)
+	ModelNodeLazyOpener &opener, int32_t* index)
 {
 	BTextWidget* widget = WidgetFor(column->AttrHash(), index);
 	if (widget == NULL)
@@ -808,13 +808,13 @@ void BPose::DrawBar(BPoint where, BView* view, icon_size which)
 {
 	view->PushState();
 
-	int32 size;
-	int32 barWidth;
-	int32 barHeight;
-	int32 yOffset;
+	int32_t size;
+	int32_t barWidth;
+	int32_t barHeight;
+	int32_t yOffset;
 	if (which >= B_LARGE_ICON) {
 		size = which - 1;
-		barWidth = (int32)(7.0f / 32.0f * (float)which);
+		barWidth = (int32_t)(7.0f / 32.0f * (float)which);
 		yOffset = 2;
 		barHeight = size - 4 - 2 * yOffset;
 	} else {
@@ -840,8 +840,8 @@ void BPose::DrawBar(BPoint where, BView* view, icon_size which)
 	view->StrokeRect(rect);
 
 	// calculate bar height
-	int32 percent = fPercent > -1 ? fPercent : -2 - fPercent;
-	int32 barPos = int32(barHeight * percent / 100.0);
+	int32_t percent = fPercent > -1 ? fPercent : -2 - fPercent;
+	int32_t barPos = int32_t(barHeight * percent / 100.0);
 	if (barPos < 0)
 		barPos = 0;
 	else if (barPos > barHeight)
@@ -962,7 +962,7 @@ BPose::CalcRect(const BPoseView* poseView) const
 BRect
 BPose::_IconRect(const BPoseView* poseView, BPoint location) const
 {
-	uint32 size = poseView->IconSizeInt();
+	uint32_t size = poseView->IconSizeInt();
 	BRect rect;
 	rect.left = location.x + kListOffset;
 	rect.right = rect.left + size;

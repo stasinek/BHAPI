@@ -35,8 +35,8 @@
 class BHAPI_IMPEXP BScrollView : public BView {
 public:
     BScrollView(BRect frame, const char *name, BView *target,
-             uint32 resizingMode = B_FOLLOW_LEFT | B_FOLLOW_TOP,
-             uint32 flags = 0,
+             uint32_t resizingMode = B_FOLLOW_LEFT | B_FOLLOW_TOP,
+             uint32_t flags = 0,
             bool alwaysShowHorizontal = false,
             bool alwaysShowVertical = false,
             bhapi::border_style border = B_FANCY_BORDER);
@@ -56,7 +56,7 @@ public:
 
     BScrollBar	*ScrollBar(bhapi::orientation direction) const;
 
-    virtual void	SetFlags(uint32 flags); // auto-setting B_WILL_DRAW and B_FRAME_EVENTS
+    virtual void	SetFlags(uint32_t flags); // auto-setting B_WILL_DRAW and B_FRAME_EVENTS
     virtual void	Draw(BRect updateRect);
     virtual void	FrameResized(float new_width, float new_height);
 

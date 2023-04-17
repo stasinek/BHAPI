@@ -27,11 +27,11 @@ typedef struct {
 	uint64		time_base_frequency;
 
 	// page root table
-	uint32	phys_pgroot;
-	uint32	vir_pgroot;
+	uint32_t	phys_pgroot;
+	uint32_t	vir_pgroot;
 	// interrupt vector table (VBR)
-	uint32	phys_vbr;
-	uint32	vir_vbr;
+	uint32_t	phys_vbr;
+	uint32_t	vir_vbr;
 //XXX:
 	addr_range	page_table;		// virtual address and size of the page table
 	addr_range	exception_handlers;
@@ -40,7 +40,7 @@ typedef struct {
 
 	// The virtual ranges we want to keep in the kernel. E.g. those belonging
 	// to the Open Firmware.
-//	uint32		num_virtual_ranges_to_keep;
+//	uint32_t		num_virtual_ranges_to_keep;
 //	addr_range	virtual_ranges_to_keep[MAX_VIRTUAL_RANGES_TO_KEEP];
 
 	// platform specific
@@ -49,10 +49,10 @@ typedef struct {
 			struct {
 				//XXX: are those meant to be used by physical
 				// or virtual address ?
-				uint32 (*nf_get_id)(const char *);
-				int32 (*nf_call)(uint32, ...);
+				uint32_t (*nf_get_id)(const char *);
+				int32_t (*nf_call)(uint32_t, ...);
 				addr_t nf_page;
-				uint32 nf_dprintf_id;
+				uint32_t nf_dprintf_id;
 			} nat_feat;
 		} atari;
 	} plat_args;

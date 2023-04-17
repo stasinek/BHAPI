@@ -19,13 +19,13 @@ struct compound_type {
 
 struct property_info {
     const char*		name;
-    uint32			commands[10];
-    uint32			specifiers[10];
+    uint32_t			commands[10];
+    uint32_t			specifiers[10];
     const char*		usage;
-    uint32			extra_data;
-    uint32			types[10];
+    uint32_t			extra_data;
+    uint32_t			types[10];
     compound_type	ctypes[3];
-    uint32			_reserved[10];
+    uint32_t			_reserved[10];
 };
 
 enum value_kind {
@@ -35,11 +35,11 @@ enum value_kind {
 
 struct value_info {
     const char*		name;
-    uint32			value;
+    uint32_t			value;
     value_kind		kind;
     const char*		usage;
-    uint32			extra_data;
-    uint32			_reserved[10];
+    uint32_t			extra_data;
+    uint32_t			_reserved[10];
 };
 #ifdef __cplusplus
 }
@@ -59,8 +59,8 @@ public:
                                     bool freeOnDelete = false);
     virtual						~BPropertyInfo();
 
-    virtual	int32				FindMatch(BMessage* msg, int32 index,
-                                    BMessage* specifier, int32 form,
+    virtual	int32_t				FindMatch(BMessage* msg, int32_t index,
+                                    BMessage* specifier, int32_t form,
                                     const char* prop, void* data = NULL) const;
 
     virtual	bool				IsFixedSize() const;
@@ -73,15 +73,15 @@ public:
 
         const property_info*	Properties() const;
         const value_info*		Values() const;
-        int32					CountProperties() const;
-        int32					CountValues() const;
+        int32_t					CountProperties() const;
+        int32_t					CountValues() const;
 
         void					PrintToStream() const;
 
 protected:
-    static	bool				FindCommand(uint32 what, int32 index,
+    static	bool				FindCommand(uint32_t what, int32_t index,
                                     property_info* info);
-    static	bool				FindSpecifier(uint32 form, property_info* info);
+    static	bool				FindSpecifier(uint32_t form, property_info* info);
 
 private:
     virtual	void				_ReservedPropertyInfo1();
@@ -95,10 +95,10 @@ private:
 
             property_info*		fPropInfo;
             value_info*			fValueInfo;
-            int32				fPropCount;
+            int32_t				fPropCount;
             bool				fInHeap;
             uint16				fValueCount;
-            uint32				_reserved[4];
+            uint32_t				_reserved[4];
 };
 
 

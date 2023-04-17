@@ -27,7 +27,7 @@ using namespace BPrivate ;
 struct CharsetConversionEntry
 {
 	const char* charset;
-	uint32 flavor;
+	uint32_t flavor;
 };
 
 extern const CharsetConversionEntry mail_charsets[];
@@ -35,13 +35,13 @@ extern const CharsetConversionEntry mail_charsets[];
 
 const char* kHeaderCharsetString = "header-charset";
 const char* kHeaderEncodingString = "header-encoding";
-// Special field names in the headers which specify the character set (int32)
+// Special field names in the headers which specify the character set (int32_t)
 // and encoding (int8) to use when converting the headers from UTF-8 to the
 // output e-mail format (rfc2047).  Since they are numbers, not strings, the
 // extra fields won't be output.
 
 
-BMailComponent::BMailComponent(uint32 defaultCharSet)
+BMailComponent::BMailComponent(uint32_t defaultCharSet)
 	: _charSetForTextDecoding (defaultCharSet)
 {
 }
@@ -52,7 +52,7 @@ BMailComponent::~BMailComponent()
 }
 
 
-uint32 BMailComponent::ComponentType()
+uint32_t BMailComponent::ComponentType()
 {
 	if (NULL != dynamic_cast<BAttributedMailAttachment*> (this))
 		return B_MAIL_ATTRIBUTED_ATTACHMENT;
@@ -116,7 +116,7 @@ bool BMailComponent::IsAttachment()
 
 
 void BMailComponent::SetHeaderField(const char* key, const char* value,
-	uint32 charset, mail_encoding encoding, bool replace_existing)
+	uint32_t charset, mail_encoding encoding, bool replace_existing)
 {
 	if (replace_existing)
 		headers.RemoveName(key);
@@ -139,7 +139,7 @@ void BMailComponent::SetHeaderField(const char* key, const char* value,
 void BMailComponent::SetHeaderField(const char* key, BMessage* structure,
 	bool replace_existing)
 {
-	int32 charset = B_MAIL_NULL_CONVERSION;
+	int32_t charset = B_MAIL_NULL_CONVERSION;
 	int8 encoding = null_encoding;
 	const char* unlabeled = "unlabeled";
 
@@ -153,7 +153,7 @@ void BMailComponent::SetHeaderField(const char* key, BMessage* structure,
 	const char* name;
 	const char* sub_val;
 	type_code type;
-	for (int32 i = 0; structure->GetInfo(B_STRING_TYPE, i,
+	for (int32_t i = 0; structure->GetInfo(B_STRING_TYPE, i,
 #if !defined(HAIKU_TARGET_PLATFORM_DANO)
 		(char**)
 #endif
@@ -177,11 +177,11 @@ void BMailComponent::SetHeaderField(const char* key, BMessage* structure,
 	if (structure->HasInt8(kHeaderEncodingString))
 		structure->FindInt8(kHeaderEncodingString, &encoding);
 
-	SetHeaderField(key, value.String(), (uint32) charset, (mail_encoding) encoding);
+	SetHeaderField(key, value.String(), (uint32_t) charset, (mail_encoding) encoding);
 }
 
 
-const char*  BMailComponent::HeaderField(const char* key, int32 index) const
+const char*  BMailComponent::HeaderField(const char* key, int32_t index) const
 {
 	const char* string = NULL;
 
@@ -191,7 +191,7 @@ const char*  BMailComponent::HeaderField(const char* key, int32 index) const
 
 
 status_t BMailComponent::HeaderField(const char* key, BMessage* structure,
-	int32 index) const
+	int32_t index) const
 {
 	BString string = HeaderField(key, index);
 	if (string == "")
@@ -199,8 +199,8 @@ status_t BMailComponent::HeaderField(const char* key, BMessage* structure,
 
 	BString sub_cat;
 	BString end_piece;
-	int32 i = 0;
-	int32 end = 0;
+	int32_t i = 0;
+	int32_t end = 0;
 
 	// Break the header into parts, they're separated by semicolons, like this:
 	// Content-Type: multipart/mixed;boundary= "----=_NextPart_000_00AA_354DB459.5977A1CA"
@@ -216,20 +216,20 @@ status_t BMailComponent::HeaderField(const char* key, BMessage* structure,
 		i = end + 1;
 
 		//-------Trim spaces off of beginning and end of text
-		for (int32 h = 0; h < sub_cat.Length(); h++) {
+		for (int32_t h = 0; h < sub_cat.Length(); h++) {
 			if (!isspace(sub_cat.ByteAt(h))) {
 				sub_cat.Remove(0, h);
 				break;
 			}
 		}
-		for (int32 h = sub_cat.Length() - 1; h >= 0; h--) {
+		for (int32_t h = sub_cat.Length() - 1; h >= 0; h--) {
 			if (!isspace(sub_cat.ByteAt(h))) {
 				sub_cat.Truncate(h + 1);
 				break;
 			}
 		}
 		//--------Split along '='
-		int32 first_equal = sub_cat.FindFirst('=');
+		int32_t first_equal = sub_cat.FindFirst('=');
 		if (first_equal >= 0) {
 			sub_cat.CopyInto(end_piece, first_equal + 1, sub_cat.Length() - first_equal - 1);
 			sub_cat.Truncate(first_equal);
@@ -258,7 +258,7 @@ status_t BMailComponent::RemoveHeader(const char* key)
 }
 
 
-const char*  BMailComponent::HeaderAt(int32 index) const
+const char*  BMailComponent::HeaderAt(int32_t index) const
 {
 #if defined(HAIKU_TARGET_PLATFORM_DANO)
 	const
@@ -294,7 +294,7 @@ status_t BMailComponent::SetToRFC822(BPositionIO* data, size_t /*length*/, bool 
 
 status_t BMailComponent::RenderToRFC822(BPositionIO* render_to)
 {
-	int32 charset = B_ISO15_CONVERSION;
+	int32_t charset = B_ISO15_CONVERSION;
 	int8 encoding = quoted_printable;
 	const char* key;
 	const char* value;
@@ -302,19 +302,19 @@ status_t BMailComponent::RenderToRFC822(BPositionIO* render_to)
 	ssize_t amountWritten;
 	BString concat;
 	type_code stupidity_personified = B_STRING_TYPE;
-	int32 count = 0;
+	int32_t count = 0;
 
 	if (headers.HasInt32(kHeaderCharsetString))
 		headers.FindInt32(kHeaderCharsetString, &charset);
 	if (headers.HasInt8(kHeaderEncodingString))
 		headers.FindInt8(kHeaderEncodingString, &encoding);
 
-	for (int32 index = 0; headers.GetInfo(B_STRING_TYPE, index,
+	for (int32_t index = 0; headers.GetInfo(B_STRING_TYPE, index,
 #if !defined(HAIKU_TARGET_PLATFORM_DANO)
 			(char**)
 #endif
 			&key, &stupidity_personified, &count) == B_OK; index++) {
-		for (int32 g = 0; g < count; g++) {
+		for (int32_t g = 0; g < count; g++) {
 			headers.FindString(key, g, (const char**)&value);
 			allocd = (char*)malloc(strlen(value) + 1);
 			strcpy(allocd, value);
@@ -410,7 +410,7 @@ void BMailComponent::_ReservedComponent5() {}
 //	#pragma mark -
 
 
-BTextMailComponent::BTextMailComponent(const char* text, uint32 defaultCharSet)
+BTextMailComponent::BTextMailComponent(const char* text, uint32_t defaultCharSet)
 	: BMailComponent(defaultCharSet),
 	encoding(quoted_printable),
 	charset(B_ISO15_CONVERSION),
@@ -428,7 +428,7 @@ BTextMailComponent::~BTextMailComponent()
 }
 
 
-void BTextMailComponent::SetEncoding(mail_encoding encoding, int32 charset)
+void BTextMailComponent::SetEncoding(mail_encoding encoding, int32_t charset)
 {
 	this->encoding = encoding;
 	this->charset = charset;
@@ -580,7 +580,7 @@ status_t BTextMailComponent::ParseRaw()
 	if (buffer == NULL)
 		return B_NO_MEMORY;
 
-	int32 bytes;
+	int32_t bytes;
 	if ((bytes = raw_data->Read(buffer, raw_length)) < 0)
 		return B_IO_ERROR;
 
@@ -613,8 +613,8 @@ status_t BTextMailComponent::ParseRaw()
 			charset = B_ISO15_CONVERSION;
 	}
 
-	int32 state = 0;
-	int32 destLength = bytes * 3 /* in case it grows */ + 1 /* +1 so it isn't zero which crashes */;
+	int32_t state = 0;
+	int32_t destLength = bytes * 3 /* in case it grows */ + 1 /* +1 so it isn't zero which crashes */;
 	string = text.LockBuffer(destLength);
 	mail_convert_to_utf8(charset, decoded.String(), &bytes, string,
 		&destLength, &state);
@@ -641,7 +641,7 @@ status_t BTextMailComponent::RenderToRFC822(BPositionIO* render_to)
 	BString content_type;
 	content_type << type.Type(); // Preserve MIME type (e.g. text/html
 
-	for (uint32 i = 0; mail_charsets[i].charset != NULL; i++) {
+	for (uint32_t i = 0; mail_charsets[i].charset != NULL; i++) {
 		if (mail_charsets[i].flavor == charset) {
 			content_type << "; charset=\"" << mail_charsets[i].charset << "\"";
 			break;
@@ -674,15 +674,15 @@ status_t BTextMailComponent::RenderToRFC822(BPositionIO* render_to)
 	BString modified = this->text;
 	BString alt;
 
-	int32 len = this->text.Length();
+	int32_t len = this->text.Length();
 	if (len > 0) {
-		int32 dest_len = len * 5;
+		int32_t dest_len = len * 5;
 		// Shift-JIS can have a 3 byte escape sequence and a 2 byte code for
 		// each character (which could just be 2 bytes in UTF-8, or even 1 byte
 		// if it's regular ASCII), so it can get quite a bit larger than the
 		// original text.  Multiplying by 5 should make more than enough space.
 		char* raw = alt.LockBuffer(dest_len);
-		int32 state = 0;
+		int32_t state = 0;
 		mail_convert_from_utf8(charset, this->text.String(), &len, raw,
 			&dest_len, &state);
 		alt.UnlockBuffer(dest_len);
@@ -712,7 +712,7 @@ status_t BTextMailComponent::RenderToRFC822(BPositionIO* render_to)
 		// filter them out, shouldn't be any after the encoding stage.
 
 		char* string = modified.LockBuffer(modified.Length());
-		for (int32 i = modified.Length(); i-- > 0;) {
+		for (int32_t i = modified.Length(); i-- > 0;) {
 			if (string[i] != '\0')
 				continue;
 
@@ -725,10 +725,10 @@ status_t BTextMailComponent::RenderToRFC822(BPositionIO* render_to)
 		// and it does it *MUCH* nicer.
 
 //		//------Desperate bid to wrap lines
-//		int32 curr_line_length = 0;
-//		int32 last_space = 0;
+//		int32_t curr_line_length = 0;
+//		int32_t last_space = 0;
 //
-//		for (int32 i = 0; i < modified.Length(); i++) {
+//		for (int32_t i = 0; i < modified.Length(); i++) {
 //			if (isspace(modified.ByteAt(i)))
 //				last_space = i;
 //

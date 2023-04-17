@@ -19,7 +19,7 @@ namespace SchedulingAnalysisTracing {
 
 class WaitObjectTraceEntry : public AbstractTraceEntry {
 public:
-	virtual uint32 Type() const = 0;
+	virtual uint32_t Type() const = 0;
 	virtual void* Object() const = 0;
 	virtual const char* Name() const = 0;
 
@@ -45,7 +45,7 @@ public:
 		out.Print("sem create \"%s\" -> %" B_PRId32 "", fName, fID);
 	}
 
-	virtual uint32 Type() const
+	virtual uint32_t Type() const
 	{
 		return THREAD_BLOCK_TYPE_SEMAPHORE;
 	}
@@ -84,7 +84,7 @@ public:
 			fObject, fObjectType);
 	}
 
-	virtual uint32 Type() const
+	virtual uint32_t Type() const
 	{
 		return THREAD_BLOCK_TYPE_CONDITION_VARIABLE;
 	}
@@ -126,7 +126,7 @@ public:
 		out.Print("mutex init %p: name: \"%s\"", fMutex, fName);
 	}
 
-	virtual uint32 Type() const
+	virtual uint32_t Type() const
 	{
 		return THREAD_BLOCK_TYPE_MUTEX;
 	}
@@ -162,7 +162,7 @@ public:
 		out.Print("rwlock init %p: name: \"%s\"", fLock, fName);
 	}
 
-	virtual uint32 Type() const
+	virtual uint32_t Type() const
 	{
 		return THREAD_BLOCK_TYPE_RW_LOCK;
 	}

@@ -36,9 +36,9 @@ Demangler::Demangle(const BString& mangledName)
 	demangledName << "(";
 
 	size_t length;
-	int32 type;
-	int32 i = 0;
-	uint32 cookie = 0;
+	int32_t type;
+	int32_t i = 0;
+	uint32_t cookie = 0;
 	while (get_next_argument(&cookie, mangledName.String(), buffer,
 			sizeof(buffer), &type, &length) == B_OK) {
 		if (i++ > 0)
@@ -57,7 +57,7 @@ Demangler::Demangle(const BString& mangledName)
 				demangledName << "int64";
 				break;
 			case B_INT32_TYPE:
-				demangledName << "int32";
+				demangledName << "int32_t";
 				break;
 			case B_INT16_TYPE:
 				demangledName << "int16";
@@ -69,7 +69,7 @@ Demangler::Demangle(const BString& mangledName)
 				demangledName << "uint64";
 				break;
 			case B_UINT32_TYPE:
-				demangledName << "uint32";
+				demangledName << "uint32_t";
 				break;
 			case B_UINT16_TYPE:
 				demangledName << "uint16";

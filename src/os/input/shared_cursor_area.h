@@ -13,8 +13,8 @@
 
 
 struct shared_cursor {
-	uint32	pos;
-	int32	read;
+	uint32_t	pos;
+	int32_t	read;
 };
 
 

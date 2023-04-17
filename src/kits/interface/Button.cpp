@@ -79,8 +79,8 @@ BButton::BButton(BRect <emphasis>frame</emphasis>,
                  const char *<emphasis>name</emphasis>,
                  const char *<emphasis>label</emphasis>,
                  BMessage *<emphasis>message</emphasis>,
-                  __be_uint32 <emphasis>resizeMode = B_FOLLOW_LEFT | B_FOLLOW_TOP</emphasis>,
-                  __be_uint32 <emphasis>flags = B_WILL_DRAW | B_NAVIGABLE</emphasis>)
+                  __be_uint32_t <emphasis>resizeMode = B_FOLLOW_LEFT | B_FOLLOW_TOP</emphasis>,
+                  __be_uint32_t <emphasis>flags = B_WILL_DRAW | B_NAVIGABLE</emphasis>)
 virtual BButton::~BButton()
 	</programlisting>
 	<itemizedList.h>
@@ -108,7 +108,7 @@ virtual BButton::~BButton()
 </document>
 -----------------------------------------------------------------------------*/
 BButton::BButton(BRect frame, const char *name, const char *label,
-		 BMessage *message,  __be_uint32 resizeMode,  __be_uint32 flags)
+		 BMessage *message,  __be_uint32_t resizeMode,  __be_uint32_t flags)
 	: BControl(frame, name, label, message, resizeMode, flags), fInsided(false),
 	  fMousePushed(false), fFocusFlash(0), fRunner(NULL)
 {
@@ -318,7 +318,7 @@ BButton::MouseUp(BPoint where)
 
 
 void 
-BButton::MouseMoved(BPoint where,  __be_uint32 code, const BMessage *a_message)
+BButton::MouseMoved(BPoint where,  __be_uint32_t code, const BMessage *a_message)
 {
 	if(!IsEnabled()) return;
 
@@ -363,7 +363,7 @@ BButton::MouseMoved(BPoint where,  __be_uint32 code, const BMessage *a_message)
 
 
 void 
-BButton::KeyDown(const char *bytes,  __be_int32 numBytes)
+BButton::KeyDown(const char *bytes,  __be_int32_t numBytes)
 {
 	if(!IsEnabled() || !IsFocus() || numBytes != 1) return;
 
@@ -392,7 +392,7 @@ BButton::KeyDown(const char *bytes,  __be_int32 numBytes)
 
 
 void 
-BButton::KeyUp(const char *bytes,  __be_int32 numBytes)
+BButton::KeyUp(const char *bytes,  __be_int32_t numBytes)
 {
 	if(Value() != B_CONTROL_ON || fMousePushed) return;
 
@@ -472,7 +472,7 @@ BButton::MakeFocus(bool focusState)
 
 #if 0
 void 
-BButton::SetFlags(__be_uint32 flags)
+BButton::SetFlags(__be_uint32_t flags)
 {
 	flags &= ~B_PULSE_NEEDED;
 	BControl::SetFlags(flags);

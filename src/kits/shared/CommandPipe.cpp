@@ -54,7 +54,7 @@ status_t BCommandPipe::AddArg(const char* arg)
 
 void BCommandPipe::PrintToStream() const
 {
-	for (int32 i = 0L; i < fArgList.CountItems(); i++)
+	for (int32_t i = 0L; i < fArgList.CountItems(); i++)
 		printf("%s ", reinterpret_cast<char*>(fArgList.ItemAtFast(i)));
 
 	printf("\n");
@@ -64,7 +64,7 @@ void BCommandPipe::PrintToStream() const
 void BCommandPipe::FlushArgs()
 {
 	// Delete all arguments from the list
-	for (int32 i = fArgList.CountItems() - 1; i >= 0; i--)
+	for (int32_t i = fArgList.CountItems() - 1; i >= 0; i--)
 		free(fArgList.ItemAtFast(i));
 	fArgList.MakeEmpty();
 
@@ -87,13 +87,13 @@ void BCommandPipe::Close()
 
 
 const char**
-BCommandPipe::Argv(int32& argc) const
+BCommandPipe::Argv(int32_t& argc) const
 {
 	// NOTE: Freeing is left to caller as indicated in the header!
 	argc = fArgList.CountItems();
 	const char** argv = reinterpret_cast<const char**>(
 		malloc((argc + 1) * sizeof(char*)));
-	for (int32 i = 0; i < argc; i++)
+	for (int32_t i = 0; i < argc; i++)
 		argv[i] = reinterpret_cast<const char*>(fArgList.ItemAtFast(i));
 
 	argv[argc] = NULL;
@@ -121,7 +121,7 @@ BCommandPipe::PipeAll(int* stdOutAndErr) const
 	dup2(stdOutAndErr[1], STDERR_FILENO);
 
 	// Construct the argv vector
-	int32 argc;
+	int32_t argc;
 	const char** argv = Argv(argc);
 
 	// Load the app image... and pass the args
@@ -154,7 +154,7 @@ BCommandPipe::Pipe(int* stdOut, int* stdErr) const
 	dup2(stdErr[1], STDERR_FILENO);
 
 	// Construct the argv vector
-	int32 argc;
+	int32_t argc;
 	const char** argv = Argv(argc);
 
 	// Load the app image... and pass the args
@@ -350,9 +350,9 @@ BCommandPipe::operator<<(const BString& arg)
 BCommandPipe&
 BCommandPipe::operator<<(const BCommandPipe& arg)
 {
-	int32 argc;
+	int32_t argc;
 	const char** argv = arg.Argv(argc);
-	for (int32 i = 0; i < argc; i++)
+	for (int32_t i = 0; i < argc; i++)
 		AddArg(argv[i]);
 
 	free(argv);

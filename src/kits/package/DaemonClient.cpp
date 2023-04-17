@@ -56,9 +56,9 @@ status_t BDaemonClient::GetInstallationLocationInfo(
 		return B_ERROR;
 
 	// extract the location info
-	int32 baseDirectoryDevice;
+	int32_t baseDirectoryDevice;
 	int64 baseDirectoryNode;
-	int32 packagesDirectoryDevice;
+	int32_t packagesDirectoryDevice;
 	int64 packagesDirectoryNode;
 	int64 changeCount;
 	BPackageInfoSet latestActivePackages;
@@ -201,7 +201,7 @@ status_t BDaemonClient::_ExtractPackageInfoSet(const BMessage& message,
 {
 	// get the number of items
 	type_code type;
-	int32 count;
+	int32_t count;
 	if (message.GetInfo(field, &type, &count) != B_OK) {
 		// the field is missing
 		return B_OK;
@@ -209,7 +209,7 @@ status_t BDaemonClient::_ExtractPackageInfoSet(const BMessage& message,
 	if (type != B_MESSAGE_TYPE)
 		return B_BAD_DATA;
 
-	for (int32 i = 0; i < count; i++) {
+	for (int32_t i = 0; i < count; i++) {
 		BMessage archive;
 		status_t error = message.FindMessage(field, i, &archive);
 		if (error != B_OK)

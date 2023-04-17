@@ -9,9 +9,9 @@
 #include <Haiku.h>
 
 
-typedef int32 partition_id;
-typedef int32 disk_system_id;
-typedef int32 disk_job_id;
+typedef int32_t partition_id;
+typedef int32_t disk_system_id;
+typedef int32_t disk_job_id;
 
 // partition flags
 enum {
@@ -132,10 +132,10 @@ enum {
 
 // disk device job progress info
 typedef struct disk_device_job_progress_info {
-	uint32	status;
-	uint32	interrupt_properties;
-	int32	task_count;
-	int32	completed_tasks;
+	uint32_t	status;
+	uint32_t	interrupt_properties;
+	int32_t	task_count;
+	int32_t	completed_tasks;
 	float	current_task_progress;
 	char	current_task_description[256];
 } disk_device_job_progress_info;

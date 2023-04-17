@@ -77,7 +77,7 @@ static property_info sProperties[] = {
 
 
 BSpinner::BSpinner(BRect frame, const char* name, const char* label,
-	BMessage* message, uint32 resizingMode, uint32 flags)
+	BMessage* message, uint32_t resizingMode, uint32_t flags)
 	:
 	BAbstractSpinner(frame, name, label, message, resizingMode, flags)
 {
@@ -86,7 +86,7 @@ BSpinner::BSpinner(BRect frame, const char* name, const char* label,
 
 
 BSpinner::BSpinner(const char* name, const char* label,
-	BMessage* message, uint32 flags)
+	BMessage* message, uint32_t flags)
 	:
 	BAbstractSpinner(name, label, message, flags)
 {
@@ -187,7 +187,7 @@ void BSpinner::SetEnabled(bool enable)
 }
 
 
-void BSpinner::SetMaxValue(int32 max)
+void BSpinner::SetMaxValue(int32_t max)
 {
 	fMaxValue = max;
 	if (fValue > fMaxValue)
@@ -195,7 +195,7 @@ void BSpinner::SetMaxValue(int32 max)
 }
 
 
-void BSpinner::SetMinValue(int32 min)
+void BSpinner::SetMinValue(int32_t min)
 {
 	fMinValue = min;
 	if (fValue < fMinValue)
@@ -203,21 +203,21 @@ void BSpinner::SetMinValue(int32 min)
 }
 
 
-void BSpinner::Range(int32* min, int32* max)
+void BSpinner::Range(int32_t* min, int32_t* max)
 {
 	*min = fMinValue;
 	*max = fMaxValue;
 }
 
 
-void BSpinner::SetRange(int32 min, int32 max)
+void BSpinner::SetRange(int32_t min, int32_t max)
 {
 	SetMinValue(min);
 	SetMaxValue(max);
 }
 
 
-void BSpinner::SetValue(int32 value)
+void BSpinner::SetValue(int32_t value)
 {
 	// clip to range
 	if (value < fMinValue)
@@ -261,15 +261,15 @@ void BSpinner::_InitObject()
 	fValue = 0;
 
 	TextView()->SetAlignment(B_ALIGN_RIGHT);
-	for (uint32 c = 0; c <= 42; c++)
+	for (uint32_t c = 0; c <= 42; c++)
 		TextView()->DisallowChar(c);
 
 	TextView()->DisallowChar(',');
 
-	for (uint32 c = 46; c <= 47; c++)
+	for (uint32_t c = 46; c <= 47; c++)
 		TextView()->DisallowChar(c);
 
-	for (uint32 c = 58; c <= 127; c++)
+	for (uint32_t c = 58; c <= 127; c++)
 		TextView()->DisallowChar(c);
 }
 

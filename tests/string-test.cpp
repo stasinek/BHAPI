@@ -160,7 +160,7 @@ int main()
 	else
 	{
 		EString anstring;
-		anstring.SetTo(suStr, (eint32)suLen);
+		anstring.SetTo(suStr, (eint32_t)suLen);
 		ETK_OUTPUT("the fourth char in \"%s\" is %s\n", astring.String(), anstring.String());
 	}
 
@@ -171,7 +171,7 @@ int main()
 	else
 	{
 		EString anstring;
-		anstring.SetTo(suStr, (eint32)suLen);
+		anstring.SetTo(suStr, (eint32_t)suLen);
 		ETK_OUTPUT("the fourth char in \"%s\" is %s\n", astring.String(), anstring.String());
 	}
 

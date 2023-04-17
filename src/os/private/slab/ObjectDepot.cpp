@@ -100,7 +100,7 @@ DepotMagazine::ContainsObject(void* object) const
 
 
 static DepotMagazine*
-alloc_magazine(object_depot* depot, uint32 flags)
+alloc_magazine(object_depot* depot, uint32_t flags)
 {
 	DepotMagazine* magazine = (DepotMagazine*)slab_internal_alloc(
 		sizeof(DepotMagazine) + depot->magazine_capacity * sizeof(void*),
@@ -116,14 +116,14 @@ alloc_magazine(object_depot* depot, uint32 flags)
 
 
 static void
-free_magazine(DepotMagazine* magazine, uint32 flags)
+free_magazine(DepotMagazine* magazine, uint32_t flags)
 {
 	slab_internal_free(magazine, flags);
 }
 
 
 static void
-empty_magazine(object_depot* depot, DepotMagazine* magazine, uint32 flags)
+empty_magazine(object_depot* depot, DepotMagazine* magazine, uint32_t flags)
 {
 	for (uint16 i = 0; i < magazine->current_round; i++)
 		depot->return_object(depot, depot->cookie, magazine->rounds[i], flags);
@@ -199,8 +199,8 @@ object_depot_cpu(object_depot* depot)
 
 status_t
 object_depot_init(object_depot* depot, size_t capacity, size_t maxCount,
-	uint32 flags, void* cookie, void (*return_object)(object_depot* depot,
-		void* cookie, void* object, uint32 flags))
+	uint32_t flags, void* cookie, void (*return_object)(object_depot* depot,
+		void* cookie, void* object, uint32_t flags))
 {
 	depot->full = NULL;
 	depot->empty = NULL;
@@ -232,7 +232,7 @@ object_depot_init(object_depot* depot, size_t capacity, size_t maxCount,
 
 
 void
-object_depot_destroy(object_depot* depot, uint32 flags)
+object_depot_destroy(object_depot* depot, uint32_t flags)
 {
 	object_depot_make_empty(depot, flags);
 
@@ -275,7 +275,7 @@ object_depot_obtain(object_depot* depot)
 
 
 void
-object_depot_store(object_depot* depot, void* object, uint32 flags)
+object_depot_store(object_depot* depot, void* object, uint32_t flags)
 {
 	ReadLocker readLocker(depot->outer_lock);
 	InterruptsLocker interruptsLocker;
@@ -330,7 +330,7 @@ object_depot_store(object_depot* depot, void* object, uint32 flags)
 
 
 void
-object_depot_make_empty(object_depot* depot, uint32 flags)
+object_depot_make_empty(object_depot* depot, uint32_t flags)
 {
 	WriteLocker writeLocker(depot->outer_lock);
 

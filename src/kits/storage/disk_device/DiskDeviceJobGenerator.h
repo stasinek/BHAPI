@@ -80,10 +80,10 @@ private:
 			BDiskDevice*		fDevice;
 			DiskDeviceJobQueue*	fJobQueue;
 			MoveInfo*			fMoveInfos;
-			int32				fPartitionCount;
+			int32_t				fPartitionCount;
 			PartitionRefInfo*	fPartitionRefs;
 			PartitionReference** fContentsToMove;
-			int32				fContentsToMoveCount;
+			int32_t				fContentsToMoveCount;
 };
 
 

@@ -9,7 +9,7 @@
 
 
 port_id
-create_port(int32 capacity, const char *name)
+create_port(int32_t capacity, const char *name)
 {
 	return _kern_create_port(capacity, name);
 }
@@ -23,30 +23,30 @@ find_port(const char *name)
 
 
 status_t
-write_port(port_id port, int32 code, const void *buffer, size_t bufferSize)
+write_port(port_id port, int32_t code, const void *buffer, size_t bufferSize)
 {
 	return _kern_write_port_etc(port, code, buffer, bufferSize, 0, 0);
 }
 
 
 ssize_t
-read_port(port_id port, int32 *code, void *buffer, size_t bufferSize)
+read_port(port_id port, int32_t *code, void *buffer, size_t bufferSize)
 {
 	return _kern_read_port_etc(port, code, buffer, bufferSize, 0, 0);
 }
 
 
 status_t
-write_port_etc(port_id port, int32 code, const void *buffer, size_t bufferSize,
-	uint32 flags, bigtime_t timeout)
+write_port_etc(port_id port, int32_t code, const void *buffer, size_t bufferSize,
+	uint32_t flags, bigtime_t timeout)
 {
 	return _kern_write_port_etc(port, code, buffer, bufferSize, flags, timeout);
 }
 
 
 ssize_t
-read_port_etc(port_id port, int32 *code, void *buffer, size_t bufferSize,
-	uint32 flags, bigtime_t timeout)
+read_port_etc(port_id port, int32_t *code, void *buffer, size_t bufferSize,
+	uint32_t flags, bigtime_t timeout)
 {
 	return _kern_read_port_etc(port, code, buffer, bufferSize, flags, timeout);
 }
@@ -60,7 +60,7 @@ port_buffer_size(port_id port)
 
 
 ssize_t
-port_buffer_size_etc(port_id port, uint32 flags, bigtime_t timeout)
+port_buffer_size_etc(port_id port, uint32_t flags, bigtime_t timeout)
 {
 	return _kern_port_buffer_size_etc(port, flags, timeout);
 }
@@ -95,7 +95,7 @@ delete_port(port_id port)
 
 
 status_t
-_get_next_port_info(team_id team, int32 *cookie, port_info *info, size_t size)
+_get_next_port_info(team_id team, int32_t *cookie, port_info *info, size_t size)
 {
 	// size is not yet used, but may, if port_info changes
 	(void)size;
@@ -113,7 +113,7 @@ _get_port_info(port_id port, port_info *info, size_t size)
 
 status_t
 _get_port_message_info_etc(port_id port, port_message_info *info,
-	size_t infoSize, uint32 flags, bigtime_t timeout)
+	size_t infoSize, uint32_t flags, bigtime_t timeout)
 {
 	return _kern_get_port_message_info_etc(port, info, infoSize, flags,
 		timeout);

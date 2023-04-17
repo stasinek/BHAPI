@@ -56,8 +56,8 @@
 											| X86_PAE_PTE_CACHING_DISABLED)
 
 
-static const uint32 kPAEPageDirEntryCount = 512;
-static const uint32 kPAEPageTableEntryCount = 512;
+static const uint32_t kPAEPageDirEntryCount = 512;
+static const uint32_t kPAEPageTableEntryCount = 512;
 static const size_t kPAEPageTableRange = kPAEPageTableEntryCount * B_PAGE_SIZE;
 static const size_t kPAEPageDirRange
 	= kPAEPageDirEntryCount * kPAEPageTableRange;

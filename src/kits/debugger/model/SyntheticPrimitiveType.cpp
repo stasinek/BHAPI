@@ -11,7 +11,7 @@
 #include <UiUtils.h>
 
 
-SyntheticPrimitiveType::SyntheticPrimitiveType(uint32 typeConstant)
+SyntheticPrimitiveType::SyntheticPrimitiveType(uint32_t typeConstant)
 	:
 	PrimitiveType(),
 	fTypeConstant(typeConstant),
@@ -27,7 +27,7 @@ SyntheticPrimitiveType::~SyntheticPrimitiveType()
 }
 
 
-uint32 SyntheticPrimitiveType::TypeConstant() const
+uint32_t SyntheticPrimitiveType::TypeConstant() const
 {
 	return fTypeConstant;
 }

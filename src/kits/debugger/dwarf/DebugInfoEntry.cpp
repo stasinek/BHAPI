@@ -102,7 +102,7 @@ DebugInfoEntry::GetLocationDescription()
 }
 
 
-bool DebugInfoEntry::GetDeclarationFile(uint32& _file) const
+bool DebugInfoEntry::GetDeclarationFile(uint32_t& _file) const
 {
 	DeclarationLocation* location = const_cast<DebugInfoEntry*>(this)
 		->GetDeclarationLocation();
@@ -114,7 +114,7 @@ bool DebugInfoEntry::GetDeclarationFile(uint32& _file) const
 }
 
 
-bool DebugInfoEntry::GetDeclarationLine(uint32& _line) const
+bool DebugInfoEntry::GetDeclarationLine(uint32_t& _line) const
 {
 	DeclarationLocation* location = const_cast<DebugInfoEntry*>(this)
 		->GetDeclarationLocation();
@@ -126,7 +126,7 @@ bool DebugInfoEntry::GetDeclarationLine(uint32& _line) const
 }
 
 
-bool DebugInfoEntry::GetDeclarationColumn(uint32& _column) const
+bool DebugInfoEntry::GetDeclarationColumn(uint32_t& _column) const
 {
 	DeclarationLocation* location = const_cast<DebugInfoEntry*>(this)
 		->GetDeclarationLocation();

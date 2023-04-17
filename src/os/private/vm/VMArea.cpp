@@ -26,7 +26,7 @@ static area_id sNextAreaID = 1;
 
 // #pragma mark - VMArea
 
-VMArea::VMArea(VMAddressSpace* addressSpace, uint32 wiring, uint32 protection)
+VMArea::VMArea(VMAddressSpace* addressSpace, uint32_t wiring, uint32_t protection)
 	:
 	name(NULL),
 	protection(protection),
@@ -48,7 +48,7 @@ VMArea::VMArea(VMAddressSpace* addressSpace, uint32 wiring, uint32 protection)
 
 VMArea::~VMArea()
 {
-	const uint32 flags = HEAP_DONT_WAIT_FOR_MEMORY
+	const uint32_t flags = HEAP_DONT_WAIT_FOR_MEMORY
 		| HEAP_DONT_LOCK_KERNEL_SPACE;
 		// TODO: This might be stricter than necessary.
 
@@ -58,7 +58,7 @@ VMArea::~VMArea()
 
 
 status_t
-VMArea::Init(const char* name, uint32 allocationFlags)
+VMArea::Init(const char* name, uint32_t allocationFlags)
 {
 	// restrict the area name to B_OS_NAME_LENGTH
 	size_t length = strlen(name) + 1;
@@ -191,7 +191,7 @@ VMArea::AddWaiterIfWired(VMAreaUnwiredWaiter* waiter)
 */
 bool
 VMArea::AddWaiterIfWired(VMAreaUnwiredWaiter* waiter, addr_t base, size_t size,
-	uint32 flags)
+	uint32_t flags)
 {
 	for (VMAreaWiredRangeList::Iterator it = fWiredRanges.GetIterator();
 			VMAreaWiredRange* range = it.Next();) {

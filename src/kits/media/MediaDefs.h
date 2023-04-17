@@ -98,7 +98,7 @@ enum video_orientation {
 enum media_flags
 {
     B_MEDIA_FLAGS_VERSION			= 1,
-                                    /* uint32, greater for newer versions */
+                                    /* uint32_t, greater for newer versions */
     B_MEDIA_FLAGS_PRIVATE			= 0x40000000
                                     /* private to Haiku */
 };
@@ -160,14 +160,14 @@ enum media_multi_matrix {
 #endif // !_MULTI_AUDIO_H
 
 
-typedef int32 media_node_id;
-typedef int32 media_buffer_id;
-typedef int32 media_addon_id;
+typedef int32_t media_node_id;
+typedef int32_t media_buffer_id;
+typedef int32_t media_addon_id;
 
 #if defined(__cplusplus)
 struct media_destination {
                                 media_destination();
-                                media_destination(port_id, int32);
+                                media_destination(port_id, int32_t);
                                 media_destination(
                                     const media_destination& other);
                                 ~media_destination();
@@ -176,28 +176,28 @@ struct media_destination {
 
             port_id				port;	/* can be different from */
                                         /* media_node.port */
-            int32				id;
+            int32_t				id;
     static	media_destination	null;
 
 private:
-            uint32				_reserved_media_destination_[2];
+            uint32_t				_reserved_media_destination_[2];
 };
 
 
 struct media_source {
                                 media_source();
-                                media_source(port_id, int32);
+                                media_source(port_id, int32_t);
                                 media_source(const media_source& other);
                                 ~media_source();
 
             media_source&		operator=(const media_source& other);
             port_id				port;	/* must be the same as */
                                         /* media_node.port for owner */
-            int32				id;
+            int32_t				id;
     static	media_source		null;
 
 private:
-            uint32				_reserved_media_source_[2];
+            uint32_t				_reserved_media_source_[2];
 };
 
 
@@ -265,9 +265,9 @@ struct media_raw_audio_format {
     };
 
     float		frame_rate;
-    uint32		channel_count;
-    uint32		format;			// see possible values above
-    uint32		byte_order;		// B_MEDIA_LITTLE_ENDIAN or B_MEDIA_BIG_ENDIAN
+    uint32_t		channel_count;
+    uint32_t		format;			// see possible values above
+    uint32_t		byte_order;		// B_MEDIA_LITTLE_ENDIAN or B_MEDIA_BIG_ENDIAN
     size_t		buffer_size;	// size of each buffer
 
     static media_multi_audio_format wildcard;
@@ -276,20 +276,20 @@ struct media_raw_audio_format {
 
 struct media_audio_header {
     // TODO: Refine this structure and put actual data at the end
-    int32		_reserved_[14];
+    int32_t		_reserved_[14];
     float       frame_rate;
-    uint32      channel_count;
+    uint32_t      channel_count;
 
 };
 
 
 struct media_multi_audio_info {
-    uint32		channel_mask;	// bitmask
+    uint32_t		channel_mask;	// bitmask
     int16		valid_bits;		// if < 32, for B_AUDIO_INT
     uint16		matrix_mask;	// each of these bits may mean more than one
                                 // channel
 
-    uint32		_reserved_b[3];
+    uint32_t		_reserved_b[3];
 };
 
 
@@ -313,7 +313,7 @@ struct media_encoded_audio_format {
 
     media_multi_audio_info	multi_info;
 
-    uint32					_reserved_[3];
+    uint32_t					_reserved_[3];
 
     static media_encoded_audio_format wildcard;
 };
@@ -321,9 +321,9 @@ struct media_encoded_audio_format {
 
 struct media_encoded_audio_header {
     // NOTE: More data fields need to go to the end
-    int32		_reserved_0[14];
+    int32_t		_reserved_0[14];
 
-    uint32		buffer_flags;
+    uint32_t		buffer_flags;
         // B_MEDIA_KEY_FRAME for key frame chunks
     uchar		unused_mask;
         // mask of unused bits for the last byte of data
@@ -345,18 +345,18 @@ enum media_display_flags {
 
 struct media_video_display_info {
     color_space	format;
-    uint32		line_width;
-    uint32		line_count;		// sum of all interlace fields lines
-    uint32		bytes_per_row;	// bytes_per_row is in format, not header,
+    uint32_t		line_width;
+    uint32_t		line_count;		// sum of all interlace fields lines
+    uint32_t		bytes_per_row;	// bytes_per_row is in format, not header,
                                 // because it's part of SetBuffers
-    uint32		pixel_offset;	// (in pixels) Offset from the start of the
+    uint32_t		pixel_offset;	// (in pixels) Offset from the start of the
                                 // buffer (see below).
-    uint32		line_offset;	// (in lines) Offset to the start of the field.
+    uint32_t		line_offset;	// (in lines) Offset to the start of the field.
                                 // Think "buffer == framebuffer" when the
                                 // window displaying the active field moves
                                 // on screen.
-    uint32		flags;
-    uint32		_reserved_[3];
+    uint32_t		flags;
+    uint32_t		_reserved_[3];
 
     static media_video_display_info wildcard;
 };
@@ -364,13 +364,13 @@ struct media_video_display_info {
 
 struct media_raw_video_format {
     float		field_rate;
-    uint32		interlace;		// Number of fields per frame: 1 means
+    uint32_t		interlace;		// Number of fields per frame: 1 means
                                 // progressive (non-interlaced) frames.
-    uint32		first_active;	// Index of first active line. 0, typically
+    uint32_t		first_active;	// Index of first active line. 0, typically
                                 // (wildcard, or "don't care")
-    uint32		last_active;	// Index of last active line (typically
+    uint32_t		last_active;	// Index of last active line (typically
                                 // line_count - 1, if first_active is 0.
-    uint32		orientation;	// B_VIDEO_TOP_LEFT_RIGHT is preferred.
+    uint32_t		orientation;	// B_VIDEO_TOP_LEFT_RIGHT is preferred.
 
     // This is the display aspect ratio (DAR). Usually, you would reduce the
     // width and height of the intended output frame size as far as possible
@@ -389,18 +389,18 @@ struct media_raw_video_format {
 
 
 struct media_video_header {
-    uint32		_reserved_[8];		// NOTE: Keep reserved data at the top!
+    uint32_t		_reserved_[8];		// NOTE: Keep reserved data at the top!
 
-    uint32      display_line_width; // Number of pixels per display_line
-    uint32      display_line_count;	// Sum of all interlace fields lines
-    uint32      bytes_per_row;		// Number of bytes in a display_line
+    uint32_t      display_line_width; // Number of pixels per display_line
+    uint32_t      display_line_count;	// Sum of all interlace fields lines
+    uint32_t      bytes_per_row;		// Number of bytes in a display_line
                                     // (padding bytes excluded)
     uint16      pixel_width_aspect;	// 1:1 has 1 here, 4:3 has 4 here
                                     // 16:9 has 16 here!
     uint16      pixel_height_aspect;// 1:1 has 1 here, 4:3 has 3 here
                                     // 16:9 has 9 here!
     float		field_gamma;
-    uint32		field_sequence;		// Sequence number since start of capture
+    uint32_t		field_sequence;		// Sequence number since start of capture
                                     // May roll over if machine is on for a
                                     // LONG time.
     uint16		field_number;		// 0 .. {interlace-1}; F1 == 0 ("odd"),
@@ -431,7 +431,7 @@ struct media_encoded_video_format {
     int16					backward_history;	// maximum backward memory
                                                 // required by codec
 
-    uint32					_reserved_[3];		// This structure cannot grow
+    uint32_t					_reserved_[3];		// This structure cannot grow
                                                 // more than this (embedded)
                                                 // in media_format union
 
@@ -441,9 +441,9 @@ struct media_encoded_video_format {
 
 struct media_encoded_video_header {
     // NOTE: More data fields need to go at the end of this structure.
-    int32		_reserved_1[9];
+    int32_t		_reserved_1[9];
 
-    uint32		field_flags;		//	B_MEDIA_KEY_FRAME
+    uint32_t		field_flags;		//	B_MEDIA_KEY_FRAME
 
     int16		forward_history;	// forward memory required by this buffer
                                     // (0 for key frames)
@@ -455,7 +455,7 @@ struct media_encoded_video_header {
                                     // of data
     uchar		_reserved_2[3];
     float		field_gamma;
-    uint32		field_sequence;		// sequence since start of capture
+    uint32_t		field_sequence;		// sequence since start of capture
     uint16		field_number;		// 0 .. {interlace-1};  F1 == 0, F2 == 1
     uint16		pulldown_number;	// 0..2 for pulldown duplicated sequence
     uint16		first_active_line;	// 0 or 1, typically, but could be 10 or
@@ -476,18 +476,18 @@ struct media_multistream_format {
     };
     float		avg_bit_rate;			// 8 * byte rate, on average
     float		max_bit_rate;			// 8 * byte rate, tops
-    uint32		avg_chunk_size;			// == max_chunk_size for fixed-size
+    uint32_t		avg_chunk_size;			// == max_chunk_size for fixed-size
                                         // chunks
-    uint32		max_chunk_size;			// max buffer size
+    uint32_t		max_chunk_size;			// max buffer size
     enum {
         B_HEADER_HAS_FLAGS		= 0x1,	// are flags important?
         B_CLEAN_BUFFERS			= 0x2,	// each buffer represents an integral
                                         // number of "frames"
         B_HOMOGENOUS_BUFFERS	= 0x4	// a buffer has only one format in it
     };
-    uint32		flags;
-    int32		format;
-    uint32		_reserved_[2];
+    uint32_t		flags;
+    int32_t		format;
+    uint32_t		_reserved_[2];
 
     struct vid_info {
         float		frame_rate;
@@ -496,12 +496,12 @@ struct media_multistream_format {
         color_space	space;
 
         float		sampling_rate;
-        uint32		sample_format;
+        uint32_t		sample_format;
         uint16		byte_order;
         uint16		channel_count;
     };
     struct avi_info {
-        uint32		us_per_frame;
+        uint32_t		us_per_frame;
         uint16		width;
         uint16		height;
         uint16		_reserved_;
@@ -519,7 +519,7 @@ struct media_multistream_format {
 
 
 struct media_multistream_header {
-    uint32	_reserved_[14];
+    uint32_t	_reserved_[14];
     uchar	unused_mask;			// mask of unused bits for the last byte
                                     // of data
     uchar	_reserved_2[3];
@@ -528,7 +528,7 @@ struct media_multistream_header {
         B_SUBSTREAM_HEADER	= 0x2,	// for sub-stream header data in buffer
         B_COMPLETE_BUFFER	= 0x4	// data is an integral number of "frames"
     };
-    uint32 	flags;
+    uint32_t 	flags;
 };
 
 
@@ -550,13 +550,13 @@ struct media_format {
     media_type						type;
     type_code						user_data_type;
     uchar							user_data[48];
-    uint32							_reserved_[3];
+    uint32_t							_reserved_[3];
     uint16							require_flags;	//	media_format_flags
     uint16							deny_flags;		//	media_format_flags
 
 private:
     void*							meta_data;
-    int32							meta_data_size;
+    int32_t							meta_data_size;
     area_id							meta_data_area;
     area_id							__unused_was_use_area;
     team_id							__unused_was_team;
@@ -574,27 +574,27 @@ public:
 
     bool 			IsVideo() const;
 
-    uint32  		Width() const;
-    uint32 			Height() const;
+    uint32_t  		Width() const;
+    uint32_t 			Height() const;
     color_space  	ColorSpace() const;
 
-    uint32& 		Width();
-    uint32& 		Height();
+    uint32_t& 		Width();
+    uint32_t& 		Height();
     color_space& 	ColorSpace();
 
     bool 			IsAudio() const;
-    uint32 			AudioFormat() const;
-    uint32& 		AudioFormat();
-    uint32 			AudioFrameSize() const;
+    uint32_t 			AudioFormat() const;
+    uint32_t& 		AudioFormat();
+    uint32_t 			AudioFrameSize() const;
 
-    uint32			Encoding() const;
+    uint32_t			Encoding() const;
 
     bool			Matches(const media_format* other) const;
     void			SpecializeTo(const media_format* other);
 
     status_t		SetMetaData(const void* data, size_t size);
     const void*		MetaData() const;
-    int32			MetaDataSize() const;
+    int32_t			MetaDataSize() const;
 
                     media_format();
                     media_format(const media_format& other);
@@ -664,10 +664,10 @@ struct media_header_time_code {
 struct media_header {
     media_type		type;			// what kind of data (for union)
     media_buffer_id buffer;			//+ what buffer does this header go with?
-    int32			destination;	//+ what 'socket' is this intended for?
+    int32_t			destination;	//+ what 'socket' is this intended for?
     media_node_id	time_source;	// node that encoded start_time
-    uint32			_deprecated_;	// used to be change_tag
-    uint32			size_used;		// size within buffer that is used
+    uint32_t			_deprecated_;	// used to be change_tag
+    uint32_t			size_used;		// size within buffer that is used
     bigtime_t		start_time;		// performance time
     area_id			owner;			//+ buffer owner info area
     enum {
@@ -677,13 +677,13 @@ struct media_header {
     };
     type_code		user_data_type;
     uchar			user_data[64];	// user_data_type indicates what this is
-    int32			source;
+    int32_t			source;
     port_id			source_port;
 
     off_t			file_pos;		// where in a file this data came from
     size_t			orig_size;		// and how big it was.  if unused, zero out
 
-    uint32			data_offset;	// offset within buffer (already reflected in Data())
+    uint32_t			data_offset;	// offset within buffer (already reflected in Data())
 
     union {
         media_audio_header			raw_audio;
@@ -699,7 +699,7 @@ struct media_header {
 struct media_file_format_id {
     ino_t	node;
     dev_t	device;
-    uint32	internal_id;
+    uint32_t	internal_id;
 };
 
 
@@ -738,13 +738,13 @@ struct media_file_format {
         B_KNOWS_OTHER			= 0x1000000, // For example sub-title streams
         B_KNOWS_ANYTHING		= 0x2000000
     };
-    uint32					capabilities;	// Bitmask, see flags above
+    uint32_t					capabilities;	// Bitmask, see flags above
     media_file_format_id	id;				// Opaque id used to construct a
                                             // BMediaFile
     media_format_family		family;			// One of the family enums
-    int32					version;		// 100 for 1.0
+    int32_t					version;		// 100 for 1.0
 
-    uint32					_reserved_[25];
+    uint32_t					_reserved_[25];
 
     char					mime_type[64];
     char					pretty_name[64];	// "QuickTime File Format"
@@ -757,7 +757,7 @@ struct media_file_format {
 
 // Initialize the cookie to 0 and keep calling this function to iterate
 // over all available media file format writers.
-status_t get_next_file_format(int32* cookie, media_file_format* mfi);
+status_t get_next_file_format(int32_t* cookie, media_file_format* mfi);
 
 
 // A buffer of this size is guaranteed to be large enough to hold any
@@ -786,11 +786,11 @@ struct buffer_clone_info;
 // to specify a custom callback for notifications.
 
 // Deprecated
-status_t launch_media_server(uint32 flags);
+status_t launch_media_server(uint32_t flags);
 
 status_t launch_media_server(bigtime_t timeout = B_INFINITE_TIMEOUT,
     bool (*progress)(int stage, const char* message, void* cookie) = NULL,
-    void* cookie = NULL, uint32 flags = 0);
+    void* cookie = NULL, uint32_t flags = 0);
 
 status_t shutdown_media_server(bigtime_t timeout = B_INFINITE_TIMEOUT,
     bool (*progress)(int stage, const char* message, void* cookie) = NULL,
@@ -802,7 +802,7 @@ status_t shutdown_media_server(bigtime_t timeout = B_INFINITE_TIMEOUT,
 // B_MEDIA_REALTIME_DISABLED is returned.
 // If there are not enough system resources to enable real-time performance,
 // B_MEDIA_REALTIME_UNAVAILABLE is returned.
-status_t media_realtime_init_image(image_id image, uint32 flags);
+status_t media_realtime_init_image(image_id image, uint32_t flags);
 
 // Given a thread ID, and an optional indication of what the thread is
 // doing in "flags", prepare the thread for real-time media performance.
@@ -812,7 +812,7 @@ status_t media_realtime_init_image(image_id image, uint32 flags);
 // from profiling the thread; typically in the 32-64kB range.
 // Return values are the same as for media_prepare_realtime_image().
 status_t media_realtime_init_thread(thread_id thread, size_t stack_used,
-    uint32 flags);
+    uint32_t flags);
 
 
 // A teeny bit of legacy preserved for BSoundFile from R3.
@@ -840,16 +840,16 @@ enum {
 
 
 struct media_encode_info {
-    uint32		flags;					// B_MEDIA_KEY_FRAME, set before every
+    uint32_t		flags;					// B_MEDIA_KEY_FRAME, set before every
                                         // use
 
-    int32		used_data_size;			// data size used by other tracks
+    int32_t		used_data_size;			// data size used by other tracks
                                         // add output size used by this encoder
 
     bigtime_t	start_time;				// us from start of file
     bigtime_t	time_to_encode;			// 0 - hurry up, B_INFINITE_TIMEOUT
                                         // - don't care
-    int32		_pad[22];
+    int32_t		_pad[22];
 
     void*		file_format_data;		// file format specific info
     size_t		file_format_data_size;
@@ -864,10 +864,10 @@ struct media_encode_info {
 struct encode_parameters {
     float		quality;				// 0.0-1.0 , 1.0 is high quality
 
-    int32		avg_field_size;			// in bytes
-    int32		max_field_size;			// in bytes
+    int32_t		avg_field_size;			// in bytes
+    int32_t		max_field_size;			// in bytes
 
-    int32		_pad[27];
+    int32_t		_pad[27];
 
     void*		user_data;				// codec specific info
     size_t		user_data_size;
@@ -878,7 +878,7 @@ struct media_decode_info {
     bigtime_t	time_to_decode;			// 0 - hurry up, B_INFINITE_TIMEOUT
                                         // - don't care
 
-    int32		_pad[26];
+    int32_t		_pad[26];
 
     void*		file_format_data;		// file format specific info
     size_t		file_format_data_size;
@@ -899,7 +899,7 @@ inline bool media_format::IsVideo() const
 }
 
 
-inline uint32 media_format::Width() const
+inline uint32_t media_format::Width() const
 {
     return type == B_MEDIA_ENCODED_VIDEO
         ? u.encoded_video.output.display.line_width
@@ -907,7 +907,7 @@ inline uint32 media_format::Width() const
 }
 
 
-inline uint32 media_format::Height() const
+inline uint32_t media_format::Height() const
 {
     return type == B_MEDIA_ENCODED_VIDEO
         ? u.encoded_video.output.display.line_count
@@ -924,7 +924,7 @@ media_format::ColorSpace() const
 }
 
 
-inline uint32&
+inline uint32_t&
 media_format::Width()
 {
     return type == B_MEDIA_ENCODED_VIDEO
@@ -933,7 +933,7 @@ media_format::Width()
 }
 
 
-inline uint32&
+inline uint32_t&
 media_format::Height()
 {
     return type == B_MEDIA_ENCODED_VIDEO
@@ -957,14 +957,14 @@ inline bool media_format::IsAudio() const
 }
 
 
-inline uint32 media_format::AudioFormat() const
+inline uint32_t media_format::AudioFormat() const
 {
     return type == B_MEDIA_ENCODED_AUDIO
         ? u.encoded_audio.output.format : u.raw_audio.format;
 }
 
 
-inline uint32&
+inline uint32_t&
 media_format::AudioFormat()
 {
     return type == B_MEDIA_ENCODED_AUDIO
@@ -972,7 +972,7 @@ media_format::AudioFormat()
 }
 
 
-inline uint32 media_format::AudioFrameSize() const
+inline uint32_t media_format::AudioFrameSize() const
 {
     return type == B_MEDIA_ENCODED_AUDIO
         ? (u.encoded_audio.output.format
@@ -983,7 +983,7 @@ inline uint32 media_format::AudioFrameSize() const
 }
 
 
-inline uint32 media_format::Encoding() const
+inline uint32_t media_format::Encoding() const
 {
     return type == B_MEDIA_ENCODED_VIDEO
         ? u.encoded_video.encoding : type == B_MEDIA_ENCODED_AUDIO

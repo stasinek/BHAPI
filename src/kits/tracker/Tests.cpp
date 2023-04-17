@@ -84,10 +84,10 @@ private:
 	BWindow* target;
 	TNodeWalker* walker;
 	CachedEntryIterator* cachingIterator;
-	int32 searchPathIndex;
+	int32_t searchPathIndex;
 	bigtime_t cycleTime;
 	bigtime_t lastCycleLap;
-	int32 numDrawn;
+	int32_t numDrawn;
 	BStopWatch watch;
 	bool newCache;
 	BPath currentPath;
@@ -160,8 +160,8 @@ void IconSpewer::Quit()
 
 
 const icon_size kIconSize = B_LARGE_ICON;
-const int32 kRowCount = 10;
-const int32 kColumnCount = 10;
+const int32_t kRowCount = 10;
+const int32_t kColumnCount = 10;
 
 
 void IconSpewer::DrawSomeNew()
@@ -192,8 +192,8 @@ void IconSpewer::DrawSomeNew()
 
 	target->Unlock();
 
-	for (int32 row = 0; row < kRowCount; row++) {
-		for (int32 column = 0; column < kColumnCount; column++) {
+	for (int32_t row = 0; row < kRowCount; row++) {
+		for (int32_t column = 0; column < kColumnCount; column++) {
 			BEntry entry(NextRef());
 			Model model(&entry, true);
 
@@ -247,8 +247,8 @@ void IconSpewer::DrawSomeOld()
 
 	target->Unlock();
 
-	for (int32 row = 0; row < kRowCount; row++) {
-		for (int32 column = 0; column < kColumnCount; column++) {
+	for (int32_t row = 0; row < kRowCount; row++) {
+		for (int32_t column = 0; column < kColumnCount; column++) {
 			BEntry entry(NextRef());
 			BModel model(&entry, true);
 

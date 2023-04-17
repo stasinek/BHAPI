@@ -34,15 +34,15 @@ typedef struct {
     direct_driver_state	driver_state;
     void				*bits;
     void				*pci_bits;
-    int32				bytes_per_row;
-    uint32				bits_per_pixel;
+    int32_t				bytes_per_row;
+    uint32_t				bits_per_pixel;
     color_space			pixel_format;
     buffer_layout		layout;
     buffer_orientation	orientation;
-    uint32				_reserved[9];
-    uint32				_dd_type_;
-    uint32				_dd_token_;
-    uint32				clip_list_count;
+    uint32_t				_reserved[9];
+    uint32_t				_dd_type_;
+    uint32_t				_dd_token_;
+    uint32_t				clip_list_count;
     clipping_rect		window_bounds;
     clipping_rect		clip_bounds;
     clipping_rect		clip_list[1];
@@ -51,12 +51,12 @@ typedef struct {
 class BDirectWindow : public BWindow {
 public:
                                 BDirectWindow(BRect frame, const char* title,
-                                    window_type type, uint32 flags,
-                                    uint32 workspace = B_CURRENT_WORKSPACE);
+                                    window_type type, uint32_t flags,
+                                    uint32_t workspace = B_CURRENT_WORKSPACE);
                                 BDirectWindow(BRect frame, const char* title,
                                     window_look look, window_feel feel,
-                                    uint32 flags,
-                                    uint32 workspace = B_CURRENT_WORKSPACE);
+                                    uint32_t flags,
+                                    uint32_t workspace = B_CURRENT_WORKSPACE);
     virtual						~BDirectWindow();
 
     static	BArchivable*		Instantiate(BMessage* data);
@@ -68,9 +68,9 @@ public:
                                     BHandler* handler);
     virtual	void				MessageReceived(BMessage* message);
     virtual	void				FrameMoved(BPoint newPosition);
-    virtual	void				WorkspacesChanged(uint32 oldWorkspaces,
-                                    uint32 newWorkspaces);
-    virtual	void				WorkspaceActivated(int32 workspaceIndex,
+    virtual	void				WorkspacesChanged(uint32_t oldWorkspaces,
+                                    uint32_t newWorkspaces);
+    virtual	void				WorkspaceActivated(int32_t workspaceIndex,
                                     bool state);
     virtual	void				FrameResized(float newWidth, float newHeight);
     virtual	void				Minimize(bool minimize);
@@ -84,14 +84,14 @@ public:
     virtual	void				Show();
     virtual	void				Hide();
     virtual	BHandler*			ResolveSpecifier(BMessage* message,
-                                    int32 index, BMessage* specifier,
-                                    int32 what, const char* property);
+                                    int32_t index, BMessage* specifier,
+                                    int32_t what, const char* property);
     virtual	status_t			GetSupportedSuites(BMessage* data);
     virtual	status_t			Perform(perform_code code, void* arg);
 
 private:
     virtual	void				task_looper();
-    virtual	BMessage*			ConvertToMessage(void* raw, int32 code);
+    virtual	BMessage*			ConvertToMessage(void* raw, int32_t code);
 
     public:
     virtual	void				DirectConnected(direct_buffer_info* info);
@@ -115,8 +115,8 @@ private:
                                 BDirectWindow(BDirectWindow& other);
             BDirectWindow&		operator=(BDirectWindow& other);
 
-    static	int32				_daemon_thread(void* arg);
-            int32				_DirectDaemon();
+    static	int32_t				_daemon_thread(void* arg);
+            int32_t				_DirectDaemon();
             bool				_LockDirect() const;
             void				_UnlockDirect() const;
 
@@ -129,26 +129,26 @@ private:
             bool				_unused;
             bool				fInDirectConnect;
 
-            int32				fDirectLock;
+            int32_t				fDirectLock;
             sem_id				fDirectSem;
-            uint32				fDirectLockCount;
+            uint32_t				fDirectLockCount;
             thread_id			fDirectLockOwner;
             char*				fDirectLockStack;
 
             sem_id				fDisableSem;
             sem_id				fDisableSemAck;
 
-            uint32				fInitStatus;
-            uint32				fInfoAreaSize;
+            uint32_t				fInitStatus;
+            uint32_t				fInfoAreaSize;
 
-            uint32				_reserved[2];
+            uint32_t				_reserved[2];
 
             area_id				fClonedClippingArea;
             area_id				fSourceClippingArea;
             thread_id			fDirectDaemonId;
             direct_buffer_info*	fBufferDesc;
 
-            uint32				_more_reserved_[17];
+            uint32_t				_more_reserved_[17];
 };
 
 

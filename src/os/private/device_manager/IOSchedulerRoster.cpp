@@ -42,7 +42,7 @@ IOSchedulerRoster::RemoveScheduler(IOScheduler* scheduler)
 
 
 void
-IOSchedulerRoster::Notify(uint32 eventCode, const IOScheduler* scheduler,
+IOSchedulerRoster::Notify(uint32_t eventCode, const IOScheduler* scheduler,
 	IORequest* request, IOOperation* operation)
 {
 	AutoLocker<DefaultNotificationService> locker(fNotificationService);
@@ -64,7 +64,7 @@ IOSchedulerRoster::Notify(uint32 eventCode, const IOScheduler* scheduler,
 }
 
 
-int32
+int32_t
 IOSchedulerRoster::NextID()
 {
 	AutoLocker<IOSchedulerRoster> locker(this);

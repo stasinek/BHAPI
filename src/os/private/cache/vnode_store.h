@@ -16,19 +16,19 @@ struct file_cache_ref;
 class VMVnodeCache : public VMCache {
 public:
 			status_t			Init(struct vnode* vnode,
-									uint32 allocationFlags);
+									uint32_t allocationFlags);
 
 	virtual	bool				HasPage(off_t offset);
 
 	virtual	status_t			Read(off_t offset, const generic_io_vec* vecs,
-									size_t count, uint32 flags,
+									size_t count, uint32_t flags,
 									generic_size_t* _numBytes);
 	virtual	status_t			Write(off_t offset, const generic_io_vec* vecs,
-									size_t count, uint32 flags,
+									size_t count, uint32_t flags,
 									generic_size_t* _numBytes);
 	virtual	status_t			WriteAsync(off_t offset,
 									const generic_io_vec* vecs, size_t count,
-									generic_size_t numBytes, uint32 flags,
+									generic_size_t numBytes, uint32_t flags,
 									AsyncIOCallback* callback);
 	virtual	bool				CanWritePage(off_t offset);
 

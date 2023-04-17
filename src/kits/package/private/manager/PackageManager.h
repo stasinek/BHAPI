@@ -73,9 +73,9 @@ public:
 										userInteractionHandler);
 	virtual						~BPackageManager();
 
-			void				Init(uint32 flags);
+			void				Init(uint32_t flags);
 
-			void				SetDebugLevel(int32 level);
+			void				SetDebugLevel(int32_t level);
 									// 0 - 10 (passed to libsolv)
 
 			BSolver*			Solver() const
@@ -137,7 +137,7 @@ private:
 									LocalRepository* repository,
 									BSolverPackage* package,
 							 		const BEntry& entry);
-			int32				_FindBasePackage(const PackageList& packages,
+			int32_t				_FindBasePackage(const PackageList& packages,
 									const BPackageInfo& info);
 
 			void				_AddInstalledRepository(
@@ -158,7 +158,7 @@ private:
 			bool				_NextSpecificInstallationLocation();
 
 protected:
-			int32				fDebugLevel;
+			int32_t				fDebugLevel;
 			BPackageInstallationLocation fLocation;
 			BSolver*			fSolver;
 			InstalledRepository* fSystemRepository;
@@ -219,13 +219,13 @@ public:
 public:
 								InstalledRepository(const char* name,
 									BPackageInstallationLocation location,
-									int32 priority);
+									int32_t priority);
 
 			BPackageInstallationLocation Location() const
 									{ return fLocation; }
 			const char*			InitialName() const
 									{ return fInitialName; }
-			int32				InitialPriority() const
+			int32_t				InitialPriority() const
 									{ return fInitialPriority; }
 
 	virtual	void				GetPackagePath(BSolverPackage* package,
@@ -250,7 +250,7 @@ private:
 			PackageList			fPackagesToDeactivate;
 			const char*			fInitialName;
 			BPackageInstallationLocation fLocation;
-			int32				fInitialPriority;
+			int32_t				fInitialPriority;
 };
 
 

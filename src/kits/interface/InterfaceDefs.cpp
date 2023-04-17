@@ -104,8 +104,8 @@ namespace BPrivate {
     to the window screen's mode.
     Returns \c true if the mode is known.
 */
-bool get_mode_parameter(uint32 mode, int32& width, int32& height,
-    uint32& colorSpace)
+bool get_mode_parameter(uint32_t mode, int32_t& width, int32_t& height,
+    uint32_t& colorSpace)
 {
     switch (mode) {
         case B_8_BIT_640x480:
@@ -195,18 +195,18 @@ bool get_mode_parameter(uint32 mode, int32& width, int32& height,
     return true;
 }
 
-void get_workspaces_layout(uint32* _columns, uint32* _rows)
+void get_workspaces_layout(uint32_t* _columns, uint32_t* _rows)
 {
-    int32 columns = 1;
-    int32 rows = 1;
+    int32_t columns = 1;
+    int32_t rows = 1;
 
     BPrivate::AppServerLink link;
     link.StartMessage(AS_GET_WORKSPACE_LAYOUT);
 
     status_t status;
     if (link.FlushWithReply(status) == B_OK && status == B_OK) {
-        link.Read<int32>(&columns);
-        link.Read<int32>(&rows);
+        link.Read<int32_t>(&columns);
+        link.Read<int32_t>(&rows);
     }
 
     if (_columns != NULL)
@@ -215,15 +215,15 @@ void get_workspaces_layout(uint32* _columns, uint32* _rows)
         *_rows = rows;
 }
 
-void set_workspaces_layout(uint32 columns, uint32 rows)
+void set_workspaces_layout(uint32_t columns, uint32_t rows)
 {
     if (columns < 1 || rows < 1)
         return;
 
     BPrivate::AppServerLink link;
     link.StartMessage(AS_SET_WORKSPACE_LAYOUT);
-    link.Attach<int32>(columns);
-    link.Attach<int32>(rows);
+    link.Attach<int32_t>(columns);
+    link.Attach<int32_t>(rows);
     link.Flush();
 }
 
@@ -243,7 +243,7 @@ status_t get_subpixel_antialiasing(bool* subpix)
     BPrivate::AppServerLink link;
 
     link.StartMessage(AS_GET_SUBPIXEL_ANTIALIASING);
-    int32 status = B_ERROR;
+    int32_t status = B_ERROR;
     if (link.FlushWithReply(status) != B_OK || status < B_OK)
         return status;
     link.Read<bool>(subpix);
@@ -264,7 +264,7 @@ status_t get_hinting_mode(uint8* hinting)
     BPrivate::AppServerLink link;
 
     link.StartMessage(AS_GET_HINTING);
-    int32 status = B_ERROR;
+    int32_t status = B_ERROR;
     if (link.FlushWithReply(status) != B_OK || status < B_OK)
         return status;
     link.Read<uint8>(hinting);
@@ -287,7 +287,7 @@ status_t get_average_weight(uint8* averageWeight)
     BPrivate::AppServerLink link;
 
     link.StartMessage(AS_GET_SUBPIXEL_AVERAGE_WEIGHT);
-    int32 status = B_ERROR;
+    int32_t status = B_ERROR;
     if (link.FlushWithReply(status) != B_OK || status < B_OK)
         return status;
     link.Read<uint8>(averageWeight);
@@ -312,7 +312,7 @@ get_is_subpixel_ordering_regular(bool* subpixelOrdering)
     BPrivate::AppServerLink link;
 
     link.StartMessage(AS_GET_SUBPIXEL_ORDERING);
-    int32 status = B_ERROR;
+    int32_t status = B_ERROR;
     if (link.FlushWithReply(status) != B_OK || status < B_OK)
         return status;
     link.Read<bool>(subpixelOrdering);
@@ -325,11 +325,11 @@ const color_map* system_colors()
 }
 
 
-status_t set_screen_space(int32 index, uint32 space, bool stick)
+status_t set_screen_space(int32_t index, uint32_t space, bool stick)
 {
-    int32 width;
-    int32 height;
-    uint32 depth;
+    int32_t width;
+    int32_t height;
+    uint32_t depth;
     if (!BPrivate::get_mode_parameter(space, width, height, depth))
         return B_BAD_VALUE;
 
@@ -358,7 +358,7 @@ status_t get_scroll_bar_info(scroll_bar_info *info)
     BPrivate::AppServerLink link;
     link.StartMessage(AS_GET_SCROLLBAR_INFO);
 
-    int32 code;
+    int32_t code;
     if (link.FlushWithReply(code) == B_OK
         && code == B_OK) {
         link.Read<scroll_bar_info>(info);
@@ -373,7 +373,7 @@ status_t set_scroll_bar_info(scroll_bar_info *info)
         return B_BAD_VALUE;
 
     BPrivate::AppServerLink link;
-    int32 code;
+    int32_t code;
 
     link.StartMessage(AS_SET_SCROLLBAR_INFO);
     link.Attach<scroll_bar_info>(*info);
@@ -384,7 +384,7 @@ status_t set_scroll_bar_info(scroll_bar_info *info)
 
     return B_ERROR;
 }
-status_t get_mouse_type(int32 *type)
+status_t get_mouse_type(int32_t *type)
 {
     BMessage command(IS_GET_MOUSE_TYPE);
     BMessage reply;
@@ -395,7 +395,7 @@ status_t get_mouse_type(int32 *type)
     return reply.FindInt32("mouse_type", type);
 }
 
-status_t set_mouse_type(int32 type)
+status_t set_mouse_type(int32_t type)
 {
     BMessage command(IS_SET_MOUSE_TYPE);
     BMessage reply;
@@ -460,7 +460,7 @@ status_t set_click_speed(bigtime_t speed)
     return _control_input_server_(&command, &reply);
 }
 
-status_t get_mouse_speed(int32 *speed)
+status_t get_mouse_speed(int32_t *speed)
 {
     BMessage command(IS_GET_MOUSE_SPEED);
     BMessage reply;
@@ -475,7 +475,7 @@ status_t get_mouse_speed(int32 *speed)
     return B_OK;
 }
 
-status_t set_mouse_speed(int32 speed)
+status_t set_mouse_speed(int32_t speed)
 {
     BMessage command(IS_SET_MOUSE_SPEED);
     BMessage reply;
@@ -483,7 +483,7 @@ status_t set_mouse_speed(int32 speed)
     return _control_input_server_(&command, &reply);
 }
 
-status_t get_mouse_acceleration(int32 *speed)
+status_t get_mouse_acceleration(int32_t *speed)
 {
     BMessage command(IS_GET_MOUSE_ACCELERATION);
     BMessage reply;
@@ -496,7 +496,7 @@ status_t get_mouse_acceleration(int32 *speed)
     return B_OK;
 }
 
-status_t set_mouse_acceleration(int32 speed)
+status_t set_mouse_acceleration(int32_t speed)
 {
     BMessage command(IS_SET_MOUSE_ACCELERATION);
     BMessage reply;
@@ -504,7 +504,7 @@ status_t set_mouse_acceleration(int32 speed)
     return _control_input_server_(&command, &reply);
 }
 
-status_t get_key_repeat_rate(int32 *rate)
+status_t get_key_repeat_rate(int32_t *rate)
 {
     BMessage command(IS_GET_KEY_REPEAT_RATE);
     BMessage reply;
@@ -517,7 +517,7 @@ status_t get_key_repeat_rate(int32 *rate)
     return B_OK;
 }
 
-status_t set_key_repeat_rate(int32 rate)
+status_t set_key_repeat_rate(int32_t rate)
 {
     BMessage command(IS_SET_KEY_REPEAT_RATE);
     BMessage reply;
@@ -546,11 +546,11 @@ status_t set_key_repeat_delay(bigtime_t  delay)
     return _control_input_server_(&command, &reply);
 }
 
-uint32 modifiers()
+uint32_t modifiers()
 {
     BMessage command(IS_GET_MODIFIERS);
     BMessage reply;
-    int32 err, modifier;
+    int32_t err, modifier;
 
     _control_input_server_(&command, &reply);
 
@@ -568,7 +568,7 @@ status_t get_key_info(key_info *info)
     BMessage command(IS_GET_KEY_INFO);
     BMessage reply;
     const void *data = 0;
-    int32 err;
+    int32_t err;
     ssize_t count;
 
     _control_input_server_(&command, &reply);
@@ -636,16 +636,16 @@ get_keyboard_id(uint16 *id)
 
 
 status_t
-get_modifier_key(uint32 modifier, uint32 *key)
+get_modifier_key(uint32_t modifier, uint32_t *key)
 {
     BMessage command(IS_GET_MODIFIER_KEY);
     BMessage reply;
-    uint32 rkey;
+    uint32_t rkey;
 
     command.AddInt32("modifier", modifier);
     _control_input_server_(&command, &reply);
 
-    status_t err = reply.FindInt32("key", (int32 *) &rkey);
+    status_t err = reply.FindInt32("key", (int32_t *) &rkey);
     if (err != B_OK)
         return err;
     *key = rkey;
@@ -655,7 +655,7 @@ get_modifier_key(uint32 modifier, uint32 *key)
 
 
 void
-set_modifier_key(uint32 modifier, uint32 key)
+set_modifier_key(uint32_t modifier, uint32_t key)
 {
     BMessage command(IS_SET_MODIFIER_KEY);
     BMessage reply;
@@ -667,7 +667,7 @@ set_modifier_key(uint32 modifier, uint32 key)
 
 
 void
-set_keyboard_locks(uint32 modifiers)
+set_keyboard_locks(uint32_t modifiers)
 {
     BMessage command(IS_SET_KEYBOARD_LOCKS);
     BMessage reply;
@@ -695,10 +695,10 @@ keyboard_navigation_color()
 }
 
 
-int32 count_workspaces()
+int32_t count_workspaces()
 {
-    uint32 columns;
-    uint32 rows;
+    uint32_t columns;
+    uint32_t rows;
     BPrivate::get_workspaces_layout(&columns, &rows);
 
     return columns * rows;
@@ -706,43 +706,43 @@ int32 count_workspaces()
 
 
 void
-set_workspace_count(int32 count)
+set_workspace_count(int32_t count)
 {
-    int32 squareRoot = (int32)sqrt(count);
+    int32_t squareRoot = (int32_t)sqrt(count);
 
-    int32 rows = 1;
-    for (int32 i = 2; i <= squareRoot; i++) {
+    int32_t rows = 1;
+    for (int32_t i = 2; i <= squareRoot; i++) {
         if (count % i == 0)
             rows = i;
     }
 
-    int32 columns = count / rows;
+    int32_t columns = count / rows;
 
     BPrivate::set_workspaces_layout(columns, rows);
 }
 
 
-int32 current_workspace()
+int32_t current_workspace()
 {
-    int32 index = 0;
+    int32_t index = 0;
 
     BPrivate::AppServerLink link;
     link.StartMessage(AS_CURRENT_WORKSPACE);
 
-    int32 status;
+    int32_t status;
     if (link.FlushWithReply(status) == B_OK && status == B_OK)
-        link.Read<int32>(&index);
+        link.Read<int32_t>(&index);
 
     return index;
 }
 
 
 void
-activate_workspace(int32 workspace)
+activate_workspace(int32_t workspace)
 {
     BPrivate::AppServerLink link;
     link.StartMessage(AS_ACTIVATE_WORKSPACE);
-    link.Attach<int32>(workspace);
+    link.Attach<int32_t>(workspace);
     link.Attach<bool>(false);
     link.Flush();
 }
@@ -756,7 +756,7 @@ idle_time()
     BPrivate::AppServerLink link;
     link.StartMessage(AS_IDLE_TIME);
 
-    int32 code;
+    int32_t code;
     if (link.FlushWithReply(code) == B_OK && code == B_OK)
         link.Read<int64>(&idletime);
 
@@ -828,7 +828,7 @@ mouse_mode()
     BPrivate::AppServerLink link;
     link.StartMessage(AS_GET_MOUSE_MODE);
 
-    int32 code;
+    int32_t code;
     if (link.FlushWithReply(code) == B_OK && code == B_OK)
         link.Read<mode_mouse>(&mode);
 
@@ -854,7 +854,7 @@ focus_follows_mouse_mode()
     BPrivate::AppServerLink link;
     link.StartMessage(AS_GET_FOCUS_FOLLOWS_MOUSE_MODE);
 
-    int32 code;
+    int32_t code;
     if (link.FlushWithReply(code) == B_OK && code == B_OK)
         link.Read<mode_focus_follows_mouse>(&mode);
 
@@ -863,7 +863,7 @@ focus_follows_mouse_mode()
 
 
 status_t
-get_mouse(BPoint* screenWhere, uint32* buttons)
+get_mouse(BPoint* screenWhere, uint32_t* buttons)
 {
     if (screenWhere == NULL && buttons == NULL)
         return B_BAD_VALUE;
@@ -871,7 +871,7 @@ get_mouse(BPoint* screenWhere, uint32* buttons)
     BPrivate::AppServerLink link;
     link.StartMessage(AS_GET_CURSOR_POSITION);
 
-    int32 code;
+    int32_t code;
     status_t ret = link.FlushWithReply(code);
     if (ret != B_OK)
         return ret;
@@ -888,10 +888,10 @@ get_mouse(BPoint* screenWhere, uint32* buttons)
         return ret;
 
     if (buttons != NULL)
-        ret = link.Read<uint32>(buttons);
+        ret = link.Read<uint32_t>(buttons);
     else {
-        uint32 dummy;
-        ret = link.Read<uint32>(&dummy);
+        uint32_t dummy;
+        ret = link.Read<uint32_t>(&dummy);
     }
 
     return ret;
@@ -907,22 +907,22 @@ get_mouse_bitmap(BBitmap** bitmap, BPoint* hotspot)
     BPrivate::AppServerLink link;
     link.StartMessage(AS_GET_CURSOR_BITMAP);
 
-    int32 code;
+    int32_t code;
     status_t status = link.FlushWithReply(code);
     if (status != B_OK)
         return status;
     if (code != B_OK)
         return code;
 
-    uint32 size = 0;
-    uint32 cursorWidth = 0;
-    uint32 cursorHeight = 0;
+    uint32_t size = 0;
+    uint32_t cursorWidth = 0;
+    uint32_t cursorHeight = 0;
 
     // if link.Read() returns an error, the same error will be returned on
     // subsequent calls, so we'll check only the return value of the last call
-    link.Read<uint32>(&size);
-    link.Read<uint32>(&cursorWidth);
-    link.Read<uint32>(&cursorHeight);
+    link.Read<uint32_t>(&size);
+    link.Read<uint32_t>(&cursorWidth);
+    link.Read<uint32_t>(&cursorHeight);
     if (hotspot == NULL) {
         BPoint dummy;
         link.Read<BPoint>(&dummy);
@@ -981,7 +981,7 @@ bool accept_first_click()
     BPrivate::AppServerLink link;
     link.StartMessage(AS_GET_ACCEPT_FIRST_CLICK);
 
-    int32 code;
+    int32_t code;
     if (link.FlushWithReply(code) == B_OK && code == B_OK)
         link.Read<bool>(&acceptFirstClick);
 
@@ -991,7 +991,7 @@ bool accept_first_click()
 
 rgb_color bhapi::ui_color(color_which which)
 {
-    int32 index = color_which_to_index(which);
+    int32_t index = color_which_to_index(which);
     if (index < 0 || index >= kColorWhichCount) {
         fprintf(stderr, "ui_color(): unknown color_which %d\n", which);
         return make_color(0, 0, 0);
@@ -1010,7 +1010,7 @@ rgb_color bhapi::ui_color(color_which which)
 
 void set_ui_color(const color_which &which, const rgb_color &color)
 {
-    int32 index = color_which_to_index(which);
+    int32_t index = color_which_to_index(which);
     if (index < 0 || index >= kColorWhichCount) {
         fprintf(stderr, "set_ui_color(): unknown color_which %d\n", which);
         return;
@@ -1129,7 +1129,7 @@ get_decorator(BString& path)
     BPrivate::AppServerLink link;
     link.StartMessage(AS_GET_DECORATOR);
 
-    int32 code;
+    int32_t code;
     if (link.FlushWithReply(code) != B_OK || code != B_OK)
         return false;
 
@@ -1179,23 +1179,23 @@ preview_decorator(const BString& path, BWindow* window)
 
 
 status_t
-get_application_order(int32 workspace, team_id** _applications,
-    int32* _count)
+get_application_order(int32_t workspace, team_id** _applications,
+    int32_t* _count)
 {
     BPrivate::AppServerLink link;
 
     link.StartMessage(AS_GET_APPLICATION_ORDER);
-    link.Attach<int32>(workspace);
+    link.Attach<int32_t>(workspace);
 
-    int32 code;
+    int32_t code;
     status_t status = link.FlushWithReply(code);
     if (status != B_OK)
         return status;
     if (code != B_OK)
         return code;
 
-    int32 count;
-    link.Read<int32>(&count);
+    int32_t count;
+    link.Read<int32_t>(&count);
 
     *_applications = (team_id*)malloc(count * sizeof(team_id));
     if (*_applications == NULL)
@@ -1208,28 +1208,28 @@ get_application_order(int32 workspace, team_id** _applications,
 
 
 status_t
-get_window_order(int32 workspace, int32** _tokens, int32* _count)
+get_window_order(int32_t workspace, int32_t** _tokens, int32_t* _count)
 {
     BPrivate::AppServerLink link;
 
     link.StartMessage(AS_GET_WINDOW_ORDER);
-    link.Attach<int32>(workspace);
+    link.Attach<int32_t>(workspace);
 
-    int32 code;
+    int32_t code;
     status_t status = link.FlushWithReply(code);
     if (status != B_OK)
         return status;
     if (code != B_OK)
         return code;
 
-    int32 count;
-    link.Read<int32>(&count);
+    int32_t count;
+    link.Read<int32_t>(&count);
 
-    *_tokens = (int32*)malloc(count * sizeof(int32));
+    *_tokens = (int32_t*)malloc(count * sizeof(int32_t));
     if (*_tokens == NULL)
         return B_NO_MEMORY;
 
-    link.Read(*_tokens, count * sizeof(int32));
+    link.Read(*_tokens, count * sizeof(int32_t));
     *_count = count;
     return B_OK;
 }
@@ -1244,32 +1244,32 @@ get_window_order(int32 workspace, int32** _tokens, int32* _count)
 // replacements, so we could as well just implement them...
 
 void
-do_window_action(int32 windowToken, int32 action, BRect zoomRect, bool zoom)
+do_window_action(int32_t windowToken, int32_t action, BRect zoomRect, bool zoom)
 {
     BPrivate::AppServerLink link;
 
     link.StartMessage(AS_WINDOW_ACTION);
-    link.Attach<int32>(windowToken);
-    link.Attach<int32>(action);
+    link.Attach<int32_t>(windowToken);
+    link.Attach<int32_t>(action);
         // we don't have any zooming effect
 
     link.Flush();
 }
 
 
-client_window_info* get_window_info(int32 serverToken)
+client_window_info* get_window_info(int32_t serverToken)
 {
     BPrivate::AppServerLink link;
 
     link.StartMessage(AS_GET_WINDOW_INFO);
-    link.Attach<int32>(serverToken);
+    link.Attach<int32_t>(serverToken);
 
-    int32 code;
+    int32_t code;
     if (link.FlushWithReply(code) != B_OK || code != B_OK)
         return NULL;
 
-    int32 size;
-    link.Read<int32>(&size);
+    int32_t size;
+    link.Read<int32_t>(&size);
 
     client_window_info* info = (client_window_info*)malloc(size);
     if (info == NULL)
@@ -1280,25 +1280,25 @@ client_window_info* get_window_info(int32 serverToken)
 }
 
 
-int32* get_token_list(team_id team, int32* _count)
+int32_t* get_token_list(team_id team, int32_t* _count)
 {
     BPrivate::AppServerLink link;
 
     link.StartMessage(AS_GET_WINDOW_LIST);
     link.Attach<team_id>(team);
 
-    int32 code;
+    int32_t code;
     if (link.FlushWithReply(code) != B_OK || code != B_OK)
         return NULL;
 
-    int32 count;
-    link.Read<int32>(&count);
+    int32_t count;
+    link.Read<int32_t>(&count);
 
-    int32* tokens = (int32*)malloc(count * sizeof(int32));
+    int32_t* tokens = (int32_t*)malloc(count * sizeof(int32_t));
     if (tokens == NULL)
         return NULL;
 
-    link.Read(tokens, count * sizeof(int32));
+    link.Read(tokens, count * sizeof(int32_t));
     *_count = count;
     return tokens;
 }
@@ -1334,9 +1334,9 @@ do_minimize_team(BRect zoomRect, team_id team, bool zoom)
 
 
 void
-truncate_string(BString& string, uint32 mode, float width,
+truncate_string(BString& string, uint32_t mode, float width,
     const float* escapementArray, float fontSize, float ellipsisWidth,
-    int32 charCount)
+    int32_t charCount)
 {
     // add a tiny amount to the width to make floating point inaccuracy
     // not drop chars that would actually fit exactly
@@ -1346,7 +1346,7 @@ truncate_string(BString& string, uint32 mode, float width,
         case B_TRUNCATE_BEGINNING:
         {
             float totalWidth = 0;
-            for (int32 i = charCount - 1; i >= 0; i--) {
+            for (int32_t i = charCount - 1; i >= 0; i--) {
                 float charWidth = escapementArray[i] * fontSize;
                 if (totalWidth + charWidth > width) {
                     // we need to truncate
@@ -1377,7 +1377,7 @@ truncate_string(BString& string, uint32 mode, float width,
         case B_TRUNCATE_END:
         {
             float totalWidth = 0;
-            for (int32 i = 0; i < charCount; i++) {
+            for (int32_t i = 0; i < charCount; i++) {
                 float charWidth = escapementArray[i] * fontSize;
                 if (totalWidth + charWidth > width) {
                     // we need to truncate
@@ -1410,11 +1410,11 @@ truncate_string(BString& string, uint32 mode, float width,
         {
             float leftWidth = 0;
             float rightWidth = 0;
-            int32 leftIndex = 0;
-            int32 rightIndex = charCount - 1;
+            int32_t leftIndex = 0;
+            int32_t rightIndex = charCount - 1;
             bool left = true;
 
-            for (int32 i = 0; i < charCount; i++) {
+            for (int32_t i = 0; i < charCount; i++) {
                 float charWidth
                     = escapementArray[left ? leftIndex : rightIndex] * fontSize;
 

@@ -42,7 +42,7 @@ public:
 	// Disk Device / Partition Management
 
 	DefaultUserNotificationService& Notifications();
-	void Notify(const KMessage& event, uint32 eventMask);
+	void Notify(const KMessage& event, uint32_t eventMask);
 
 	// manager must be locked
 	KDiskDevice *FindDevice(const char *path);
@@ -53,7 +53,7 @@ public:
 
 	KDiskDevice *RegisterDevice(const char *path);
 	KDiskDevice *RegisterDevice(partition_id id, bool deviceOnly = true);
-	KDiskDevice *RegisterNextDevice(int32 *cookie);
+	KDiskDevice *RegisterNextDevice(int32_t *cookie);
 	KPartition *RegisterPartition(const char *path);
 	KPartition *RegisterPartition(partition_id id);
 	KFileDiskDevice *RegisterFileDevice(const char *filePath);
@@ -78,8 +78,8 @@ public:
 	status_t DeleteFileDevice(partition_id id);
 
 	// manager must be locked
-	int32 CountDevices();
-	KDiskDevice *NextDevice(int32 *cookie);
+	int32_t CountDevices();
+	KDiskDevice *NextDevice(int32_t *cookie);
 
 	bool PartitionAdded(KPartition *partition);		// implementation internal
 	bool PartitionRemoved(KPartition *partition);	//
@@ -90,12 +90,12 @@ public:
 	// manager must be locked
 	KDiskSystem *FindDiskSystem(const char *name, bool byPrettyName = false);
 	KDiskSystem *FindDiskSystem(disk_system_id id);
-	int32 CountDiskSystems();
-	KDiskSystem *NextDiskSystem(int32 *cookie);
+	int32_t CountDiskSystems();
+	KDiskSystem *NextDiskSystem(int32_t *cookie);
 
 	KDiskSystem *LoadDiskSystem(const char *name, bool byPrettyName = false);
 	KDiskSystem *LoadDiskSystem(disk_system_id id);
-	KDiskSystem *LoadNextDiskSystem(int32 *cookie);
+	KDiskSystem *LoadNextDiskSystem(int32_t *cookie);
 
 	status_t InitialDeviceScan();
 	status_t RescanDiskSystems();
@@ -131,7 +131,7 @@ private:
 
 	status_t _AddRemoveMonitoring(const char *path, bool add);
 
-	void _NotifyDeviceEvent(KDiskDevice* device, int32 event, uint32 mask);
+	void _NotifyDeviceEvent(KDiskDevice* device, int32_t event, uint32_t mask);
 
 	recursive_lock				fLock;
 	DeviceMap					*fDevices;

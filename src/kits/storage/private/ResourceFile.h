@@ -84,11 +84,11 @@ private:
 			void				_ReadHeader(resource_parse_info& parseInfo);
 			void				_ReadIndex(resource_parse_info& parseInfo);
 			bool				_ReadIndexEntry(resource_parse_info& parseInfo,
-									int32 index, uint32 tableOffset,
+									int32_t index, uint32_t tableOffset,
 									bool peekAhead);
 			void				_ReadInfoTable(resource_parse_info& parseInfo);
 			bool				_ReadInfoTableEnd(const void* data,
-									int32 dataSize);
+									int32_t dataSize);
 			const void*			_ReadResourceInfo(
 									resource_parse_info& parseInfo,
 									const MemArea& area,
@@ -100,14 +100,14 @@ private:
 
 	inline	int16				_GetInt(int16 value) const;
 	inline	uint16				_GetInt(uint16 value) const;
-	inline	int32				_GetInt(int32 value) const;
-	inline	uint32				_GetInt(uint32 value) const;
+	inline	int32_t				_GetInt(int32_t value) const;
+	inline	uint32_t				_GetInt(uint32_t value) const;
 	inline	int64				_GetInt(int64 value) const;
 	inline	uint64				_GetInt(uint64 value) const;
 
 private:
 			OffsetFile			fFile;
-			uint32				fFileType;
+			uint32_t				fFileType;
 			bool				fHostEndianess;
 			bool				fEmptyResources;
 };
@@ -127,13 +127,13 @@ ResourceFile::_GetInt(uint16 value) const
 }
 
 
-inline int32 ResourceFile::_GetInt(int32 value) const
+inline int32_t ResourceFile::_GetInt(int32_t value) const
 {
-	return fHostEndianess ? value : (int32)B_SWAP_INT32((uint32)value);
+	return fHostEndianess ? value : (int32_t)B_SWAP_INT32((uint32_t)value);
 }
 
 
-inline uint32 ResourceFile::_GetInt(uint32 value) const
+inline uint32_t ResourceFile::_GetInt(uint32_t value) const
 {
 	return fHostEndianess ? value : B_SWAP_INT32(value);
 }

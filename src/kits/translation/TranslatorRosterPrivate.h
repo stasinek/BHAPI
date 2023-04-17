@@ -33,7 +33,7 @@ typedef std::map<translator_id, translator_item> TranslatorMap;
 typedef std::vector<BMessenger> MessengerList;
 typedef std::vector<node_ref> NodeRefList;
 typedef std::set<entry_ref> EntryRefSet;
-typedef std::map<image_id, int32> ImageMap;
+typedef std::map<image_id, int32_t> ImageMap;
 typedef std::map<BTranslator*, image_id> TranslatorImageMap;
 
 
@@ -46,7 +46,7 @@ public:
 
 			void				AddDefaultPaths();
 			status_t			AddPaths(const char* paths);
-			status_t			AddPath(const char* path, int32* _added = NULL);
+			status_t			AddPath(const char* path, int32_t* _added = NULL);
 			status_t			AddTranslator(BTranslator* translator,
 									image_id image = -1,
 									const entry_ref* ref = NULL,
@@ -58,22 +58,22 @@ public:
 
 			status_t			StoreTranslators(BMessage& archive);
 			status_t			Identify(BPositionIO* source,
-									BMessage* ioExtension, uint32 hintType,
-									const char* hintMIME, uint32 wantType,
+									BMessage* ioExtension, uint32_t hintType,
+									const char* hintMIME, uint32_t wantType,
 									translator_info* _info);
 
 			status_t			GetTranslators(BPositionIO* source,
-									BMessage* ioExtension, uint32 hintType,
-									const char* hintMIME, uint32 wantType,
-									translator_info** _info, int32* _numInfo);
+									BMessage* ioExtension, uint32_t hintType,
+									const char* hintMIME, uint32_t wantType,
+									translator_info** _info, int32_t* _numInfo);
 			status_t			GetAllTranslators(translator_id** _ids,
-									int32* _count);
+									int32_t* _count);
 			status_t			GetRefFor(translator_id id, entry_ref& ref);
 
 			bool				IsActive() const { return Looper(); }
 
 			status_t			CreateTranslators(const entry_ref& ref,
-									int32& count, BMessage* update = NULL);
+									int32_t& count, BMessage* update = NULL);
 			status_t			GetTranslatorData(image_id image,
 									translator_data& data);
 
@@ -87,7 +87,7 @@ private:
 
 			const translation_format* _CheckHints(
 									const translation_format* formats,
-									int32 formatsCount, uint32 hintType,
+									int32_t formatsCount, uint32_t hintType,
 									const char* hintMIME);
 
 			const translator_item* _FindTranslator(translator_id id) const;
@@ -95,7 +95,7 @@ private:
 			const translator_item* _FindTranslator(entry_ref& ref) const;
 			translator_item*	_FindTranslator(node_ref& nodeRef);
 
-			int32				_CompareTranslatorDirectoryPriority(
+			int32_t				_CompareTranslatorDirectoryPriority(
 									const entry_ref& a,
 									const entry_ref& b) const;
 			bool				_IsKnownDirectory(const node_ref& nodeRef)
@@ -117,7 +117,7 @@ private:
 			ImageMap			fKnownImages;
 			TranslatorImageMap	fImageOrigins;
 			const char*			fABISubDirectory;
-			int32				fNextID;
+			int32_t				fNextID;
 			bool				fLazyScanning;
 			bool				fSafeMode;
 };

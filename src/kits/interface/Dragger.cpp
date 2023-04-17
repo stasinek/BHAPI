@@ -47,7 +47,7 @@ using BPrivate::gSystemCatalog;
 	gSystemCatalog.GetString(B_TRANSLATE_MARK(str), "Dragger")
 
 
-static const uint32 kMsgDragStarted = 'Drgs';
+static const uint32_t kMsgDragStarted = 'Drgs';
 
 static const unsigned char kHandBitmap[] = {
 	255, 255,   0,   0,   0, 255, 255, 255,
@@ -113,8 +113,8 @@ DraggerManager* DraggerManager::sDefaultInstance = NULL;
 }	// unnamed namespace
 
 
-BDragger::BDragger(BRect frame, BView* target, uint32 resizingMode,
-	uint32 flags)
+BDragger::BDragger(BRect frame, BView* target, uint32_t resizingMode,
+	uint32_t flags)
 	:
 	BView(frame, "_dragger_", resizingMode, flags),
 	fTarget(target),
@@ -130,7 +130,7 @@ BDragger::BDragger(BRect frame, BView* target, uint32 resizingMode,
 }
 
 
-BDragger::BDragger(BView* target, uint32 flags)
+BDragger::BDragger(BView* target, uint32_t flags)
 	:
 	BView("_dragger_", flags),
 	fTarget(target),
@@ -158,7 +158,7 @@ BDragger::BDragger(BMessage* data)
 	fPopUpIsCustom(false),
 	fPopUp(NULL)
 {
-	data->FindInt32("_rel", (int32*)&fRelation);
+	data->FindInt32("_rel", (int32_t*)&fRelation);
 
 	_InitData();
 
@@ -248,7 +248,7 @@ void BDragger::Draw(BRect update)
 
 	if (AreDraggersDrawn() && (fShelf == NULL || fShelf->AllowsDragging())) {
 		if (Parent() != NULL && (Parent()->Flags() & B_DRAW_ON_CHILDREN) == 0) {
-			uint32 flags = Parent()->Flags();
+			uint32_t flags = Parent()->Flags();
 			Parent()->SetFlags(flags | B_DRAW_ON_CHILDREN);
 			SetHighColor(Parent()->ViewColor());
 			FillRect(Bounds());
@@ -269,7 +269,7 @@ void BDragger::Draw(BRect update)
 	} else if (IsVisibilityChanging()) {
 		if (Parent() != NULL) {
 			if ((Parent()->Flags() & B_DRAW_ON_CHILDREN) == 0) {
-				uint32 flags = Parent()->Flags();
+				uint32_t flags = Parent()->Flags();
 				Parent()->SetFlags(flags | B_DRAW_ON_CHILDREN);
 				Parent()->Invalidate(Frame() & ConvertToParent(update));
 				Parent()->SetFlags(flags);
@@ -287,8 +287,8 @@ void BDragger::MouseDown(BPoint where)
 	if (fTarget == NULL || !AreDraggersDrawn())
 		return;
 
-	uint32 buttons;
-	Window()->CurrentMessage()->FindInt32("buttons", (int32*)&buttons);
+	uint32_t buttons;
+	Window()->CurrentMessage()->FindInt32("buttons", (int32_t*)&buttons);
 
 	if (fShelf != NULL && (buttons & B_SECONDARY_MOUSE_BUTTON) != 0)
 		_ShowPopUp(fTarget, where);
@@ -301,7 +301,7 @@ void BDragger::MouseUp(BPoint point)
 }
 
 
-void BDragger::MouseMoved(BPoint point, uint32 code, const BMessage* msg)
+void BDragger::MouseMoved(BPoint point, uint32_t code, const BMessage* msg)
 {
 	BView::MouseMoved(point, code, msg);
 }
@@ -447,8 +447,8 @@ bool BDragger::AreDraggersDrawn()
 
 
 BHandler*
-BDragger::ResolveSpecifier(BMessage* message, int32 index, BMessage* specifier,
-	int32 form, const char* property)
+BDragger::ResolveSpecifier(BMessage* message, int32_t index, BMessage* specifier,
+	int32_t form, const char* property)
 {
 	return BView::ResolveSpecifier(message, index, specifier, form, property);
 }
@@ -613,7 +613,7 @@ BDragger::operator=(const BDragger&)
 	manager->visibleInitialized = true;
 	manager->visible = visible;
 
-	for (int32 i = manager->list.CountItems(); i-- > 0;) {
+	for (int32_t i = manager->list.CountItems(); i-- > 0;) {
 		BDragger* dragger = (BDragger*)manager->list.ItemAt(i);
 		BMessenger target(dragger);
 		target.SendMessage(_SHOW_DRAG_HANDLES_);

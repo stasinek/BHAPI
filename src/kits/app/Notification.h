@@ -61,12 +61,12 @@ public:
             status_t			SetOnClickFile(const entry_ref* file);
 
             status_t			AddOnClickRef(const entry_ref* ref);
-            int32				CountOnClickRefs() const;
-            const entry_ref*	OnClickRefAt(int32 index) const;
+            int32_t				CountOnClickRefs() const;
+            const entry_ref*	OnClickRefAt(int32_t index) const;
 
             status_t			AddOnClickArg(const BString& arg);
-            int32				CountOnClickArgs() const;
-            const char*			OnClickArgAt(int32 index) const;
+            int32_t				CountOnClickArgs() const;
+            const char*			OnClickArgAt(int32_t index) const;
 
             const BBitmap*		Icon() const;
             status_t			SetIcon(const BBitmap* icon);

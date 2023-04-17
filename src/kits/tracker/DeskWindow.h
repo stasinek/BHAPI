@@ -72,9 +72,9 @@ public:
 
 protected:
 	virtual void AddWindowContextMenus(BMenu*);
-	virtual BPoseView* NewPoseView(Model*, uint32);
+	virtual BPoseView* NewPoseView(Model*, uint32_t);
 
-	virtual void WorkspaceActivated(int32, bool);
+	virtual void WorkspaceActivated(int32_t, bool);
 	virtual void MessageReceived(BMessage*);
 
 private:

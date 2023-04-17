@@ -102,8 +102,8 @@ private:
 			bool				_IOOperationFinished(IOScheduler* scheduler,
 									IORequest* request, IOOperation* operation);
 
-			void				_WaitObjectCreated(addr_t object, uint32 type);
-			void				_WaitObjectUsed(addr_t object, uint32 type);
+			void				_WaitObjectCreated(addr_t object, uint32_t type);
+			void				_WaitObjectUsed(addr_t object, uint32_t type);
 
 	inline	void				_MaybeNotifyProfilerThreadLocked();
 	inline	void				_MaybeNotifyProfilerThread();
@@ -120,7 +120,7 @@ private:
 
 			void				_DoSample();
 
-	static	int32				_ProfilingEvent(struct timer* timer);
+	static	int32_t				_ProfilingEvent(struct timer* timer);
 
 private:
 			struct CPUProfileData {
@@ -132,7 +132,7 @@ private:
 
 			struct WaitObjectKey {
 				addr_t	object;
-				uint32	type;
+				uint32_t	type;
 			};
 
 			struct WaitObject : DoublyLinkedListLinkImpl<WaitObject>,
@@ -176,8 +176,8 @@ private:
 			area_id				fUserArea;
 			area_id				fKernelArea;
 			size_t				fAreaSize;
-			uint32				fFlags;
-			uint32				fStackDepth;
+			uint32_t				fFlags;
+			uint32_t				fStackDepth;
 			bigtime_t			fInterval;
 			system_profiler_buffer_header* fHeader;
 			uint8*				fBufferBase;
@@ -202,7 +202,7 @@ private:
 			bool				fReentered[SMP_MAX_CPUS];
 			CPUProfileData		fCPUData[SMP_MAX_CPUS];
 			WaitObject*			fWaitObjectBuffer;
-			int32				fWaitObjectCount;
+			int32_t				fWaitObjectCount;
 			WaitObjectList		fUsedWaitObjects;
 			WaitObjectList		fFreeWaitObjects;
 			WaitObjectTable		fWaitObjectTable;
@@ -394,7 +394,7 @@ SystemProfiler::Init()
 		if (fWaitObjectBuffer == NULL)
 			return B_NO_MEMORY;
 
-		for (int32 i = 0; i < fWaitObjectCount; i++)
+		for (int32_t i = 0; i < fWaitObjectCount; i++)
 			fFreeWaitObjects.Add(fWaitObjectBuffer + i);
 
 		error = fWaitObjectTable.Init(fWaitObjectCount * 3 / 2);
@@ -512,8 +512,8 @@ SystemProfiler::Init()
 		waitObjectLocker.Unlock();
 
 		// fake schedule events for the initially running threads
-		int32 cpuCount = smp_get_num_cpus();
-		for (int32 i = 0; i < cpuCount; i++) {
+		int32_t cpuCount = smp_get_num_cpus();
+		for (int32_t i = 0; i < cpuCount; i++) {
 			Thread* thread = gCPU[i].running_thread;
 			if (thread != NULL)
 				ThreadScheduled(thread, thread);
@@ -608,7 +608,7 @@ void
 SystemProfiler::EventOccurred(NotificationService& service,
 	const KMessage* event)
 {
-	int32 eventCode;
+	int32_t eventCode;
 	if (event->FindInt32("event", &eventCode) != B_OK)
 		return;
 
@@ -1198,7 +1198,7 @@ SystemProfiler::_IOOperationFinished(IOScheduler* scheduler, IORequest* request,
 
 
 void
-SystemProfiler::_WaitObjectCreated(addr_t object, uint32 type)
+SystemProfiler::_WaitObjectCreated(addr_t object, uint32_t type)
 {
 	SpinLocker locker(fLock);
 
@@ -1219,7 +1219,7 @@ SystemProfiler::_WaitObjectCreated(addr_t object, uint32 type)
 }
 
 void
-SystemProfiler::_WaitObjectUsed(addr_t object, uint32 type)
+SystemProfiler::_WaitObjectUsed(addr_t object, uint32_t type)
 {
 	// look up the object
 	WaitObjectKey key;
@@ -1401,7 +1401,7 @@ SystemProfiler::_DoSample()
 	CPUProfileData& cpuData = fCPUData[cpu];
 
 	// get the samples
-	int32 count = arch_debug_get_stack_trace(cpuData.buffer, fStackDepth, 1,
+	int32_t count = arch_debug_get_stack_trace(cpuData.buffer, fStackDepth, 1,
 		0, STACK_TRACE_KERNEL | STACK_TRACE_USER);
 
 	InterruptsSpinLocker locker(fLock);
@@ -1420,7 +1420,7 @@ SystemProfiler::_DoSample()
 }
 
 
-/*static*/ int32
+/*static*/ int32_t
 SystemProfiler::_ProfilingEvent(struct timer* timer)
 {
 	SystemProfiler* self = (SystemProfiler*)timer->user_data;
@@ -1438,7 +1438,7 @@ SystemProfiler::_ProfilingEvent(struct timer* timer)
 #if SYSTEM_PROFILER
 
 status_t
-start_system_profiler(size_t areaSize, uint32 stackDepth, bigtime_t interval)
+start_system_profiler(size_t areaSize, uint32_t stackDepth, bigtime_t interval)
 {
 	struct ParameterDeleter {
 		ParameterDeleter(area_id area)

@@ -76,10 +76,10 @@ public:
 
 	status_t Insert(const Value &value, bool replace = true);
 
-	int32 Remove(const Value &value);
+	int32_t Remove(const Value &value);
 	Iterator Erase(const Iterator &iterator);
 
-	inline int32 Count() const;
+	inline int32_t Count() const;
 	inline bool IsEmpty() const;
 	void MakeEmpty();
 
@@ -96,7 +96,7 @@ public:
 	ConstIterator FindClose(const Value &value, bool less) const;
 
 private:
-	int32 _FindInsertionIndex(const Value &value, bool &exists) const;
+	int32_t _FindInsertionIndex(const Value &value, bool &exists) const;
 
 private:
 	ElementVector	fElements;
@@ -150,7 +150,7 @@ _VECTOR_SET_TEMPLATE_LIST
 status_t _VECTOR_SET_CLASS_NAME::Insert(const Value &value, bool replace)
 {
 	bool exists = false;
-	int32 index = _FindInsertionIndex(value, exists);
+	int32_t index = _FindInsertionIndex(value, exists);
 	if (exists) {
 		if (replace)
 			fElements[index] = value;
@@ -166,10 +166,10 @@ status_t _VECTOR_SET_CLASS_NAME::Insert(const Value &value, bool replace)
 			contained an element with the value, \c 0 otherwise.
 */
 _VECTOR_SET_TEMPLATE_LIST
-int32 _VECTOR_SET_CLASS_NAME::Remove(const Value &value)
+int32_t _VECTOR_SET_CLASS_NAME::Remove(const Value &value)
 {
 	bool exists = false;
-	int32 index = _FindInsertionIndex(value, exists);
+	int32_t index = _FindInsertionIndex(value, exists);
 	if (!exists)
 		return 0;
 	fElements.Erase(index);
@@ -197,7 +197,7 @@ _VECTOR_SET_CLASS_NAME::Erase(const Iterator &iterator)
 */
 _VECTOR_SET_TEMPLATE_LIST
 inline
-int32 _VECTOR_SET_CLASS_NAME::Count() const
+int32_t _VECTOR_SET_CLASS_NAME::Count() const
 {
 	return fElements.Count();
 }
@@ -330,7 +330,7 @@ _VECTOR_SET_CLASS_TYPE::Iterator
 _VECTOR_SET_CLASS_NAME::Find(const Value &value)
 {
 	bool exists = false;
-	int32 index = _FindInsertionIndex(value, exists);
+	int32_t index = _FindInsertionIndex(value, exists);
 	if (!exists)
 		return fElements.End();
 	return fElements.IteratorForIndex(index);
@@ -348,7 +348,7 @@ _VECTOR_SET_CLASS_TYPE::ConstIterator
 _VECTOR_SET_CLASS_NAME::Find(const Value &value) const
 {
 	bool exists = false;
-	int32 index = _FindInsertionIndex(value, exists);
+	int32_t index = _FindInsertionIndex(value, exists);
 	if (!exists)
 		return fElements.End();
 	return fElements.IteratorForIndex(index);
@@ -382,7 +382,7 @@ _VECTOR_SET_CLASS_TYPE::Iterator
 _VECTOR_SET_CLASS_NAME::FindClose(const Value &value, bool less)
 {
 	bool exists = false;
-	int32 index = _FindInsertionIndex(value, exists);
+	int32_t index = _FindInsertionIndex(value, exists);
 	// If not found, the index _FindInsertionIndex() returns will point to
 	// an element with a greater value or to End(). So, no special handling
 	// is needed for !less.
@@ -423,7 +423,7 @@ _VECTOR_SET_CLASS_TYPE::ConstIterator
 _VECTOR_SET_CLASS_NAME::FindClose(const Value &value, bool less) const
 {
 	bool exists = false;
-	int32 index = _FindInsertionIndex(value, exists);
+	int32_t index = _FindInsertionIndex(value, exists);
 	// If not found, the index _FindInsertionIndex() returns will point to
 	// an element with a greater value or to End(). So, no special handling
 	// is needed for !less.
@@ -446,14 +446,14 @@ _VECTOR_SET_CLASS_NAME::FindClose(const Value &value, bool less) const
 			located or at which it would need to be inserted.
 */
 _VECTOR_SET_TEMPLATE_LIST
-int32 _VECTOR_SET_CLASS_NAME::_FindInsertionIndex(const Value &value,
+int32_t _VECTOR_SET_CLASS_NAME::_FindInsertionIndex(const Value &value,
 											bool &exists) const
 {
 	// binary search
-	int32 lower = 0;
-	int32 upper = Count();
+	int32_t lower = 0;
+	int32_t upper = Count();
 	while (lower < upper) {
-		int32 mid = (lower + upper) / 2;
+		int32_t mid = (lower + upper) / 2;
 		int cmp = fCompare(fElements[mid], value);
 		if (cmp < 0)
 			lower = mid + 1;

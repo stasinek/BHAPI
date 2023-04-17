@@ -113,8 +113,8 @@ M68KVMTranslationMap::Flush()
 			restore_interrupts(state);
 
 			int cpu = smp_get_current_cpu();
-			uint32 cpuMask = PagingStructures()->active_on_cpus
-				& ~((uint32)1 << cpu);
+			uint32_t cpuMask = PagingStructures()->active_on_cpus
+				& ~((uint32_t)1 << cpu);
 			if (cpuMask != 0) {
 				smp_send_multicast_ici(cpuMask, SMP_MSG_USER_INVALIDATE_PAGES,
 					0, 0, 0, NULL, SMP_MSG_FLAG_SYNC);
@@ -132,8 +132,8 @@ M68KVMTranslationMap::Flush()
 				SMP_MSG_FLAG_SYNC);
 		} else {
 			int cpu = smp_get_current_cpu();
-			uint32 cpuMask = PagingStructures()->active_on_cpus
-				& ~((uint32)1 << cpu);
+			uint32_t cpuMask = PagingStructures()->active_on_cpus
+				& ~((uint32_t)1 << cpu);
 			if (cpuMask != 0) {
 				smp_send_multicast_ici(cpuMask, SMP_MSG_INVALIDATE_PAGE_LIST,
 					(addr_t)fInvalidPages, fInvalidPagesCount, 0, NULL,

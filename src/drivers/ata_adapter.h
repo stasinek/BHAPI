@@ -26,7 +26,7 @@
 // (one region must not cross 64K boundary;
 //  the PRD table must not cross a 64K boundary)
 typedef struct prd_entry {
-	uint32 address;				// physical address of block (must be even)
+	uint32_t address;				// physical address of block (must be even)
 	uint16 count;				// size of block, 0 stands for 65536 (must be even)
 	uint8 res6;
 	B_LBITFIELD8_2(
@@ -88,18 +88,18 @@ typedef struct ata_adapter_channel_info {
 	uint16 bus_master_base;
 	int intnum;				// interrupt number
 
-	uint32 lost;			// != 0 if device got removed, i.e. if it must not
+	uint32_t lost;			// != 0 if device got removed, i.e. if it must not
 							// be accessed anymore
 
 	ata_channel ataChannel;
 	device_node *node;
 
-	int32 (*inthand)( void *arg );
+	int32_t (*inthand)( void *arg );
 
 	area_id prd_area;
 	prd_entry *prdt;
-	uint32 prdt_phys;
-	uint32 dmaing;
+	uint32_t prdt_phys;
+	uint32_t dmaing;
 } ata_adapter_channel_info;
 
 
@@ -110,7 +110,7 @@ typedef struct ata_adapter_controller_info {
 
 	uint16 bus_master_base;
 
-	uint32 lost;			// != 0 if device got removed, i.e. if it must not
+	uint32_t lost;			// != 0 if device got removed, i.e. if it must not
 							// be accessed anymore
 
 	device_node *node;
@@ -143,12 +143,12 @@ typedef struct {
 
 	// default functions that should be replaced by a more specific version
 	// (copy them from source code of this library and modify them at will)
-	int32 (*inthand)(void *arg);
+	int32_t (*inthand)(void *arg);
 
 	// functions that must be called by init/uninit etc. of channel driver
 	status_t (*init_channel)(device_node *node,
 					ata_adapter_channel_info **cookie, size_t total_data_size,
-					int32 (*inthand)(void *arg));
+					int32_t (*inthand)(void *arg));
 	void (*uninit_channel)(ata_adapter_channel_info *channel);
 	void (*channel_removed)(ata_adapter_channel_info *channel);
 
@@ -176,20 +176,20 @@ typedef struct {
 	status_t (*publish_controller)(device_node *parent, uint16 bus_master_base,
 					io_resource *resources, const char *controller_driver,
 					const char *controller_driver_type, const char *controller_name,
-					bool can_dma, bool can_cq, uint32 dma_alignment, uint32 dma_boundary,
-					uint32 max_sg_block_size, device_node **node);
+					bool can_dma, bool can_cq, uint32_t dma_alignment, uint32_t dma_boundary,
+					uint32_t max_sg_block_size, device_node **node);
 	// verify controller configuration and publish node on success
 	status_t (*detect_controller)(pci_device_module_info *pci, pci_device *pciDevice,
 					device_node *parent, uint16 bus_master_base,
 					const char *controller_driver, const char *controller_driver_type,
 					const char *controller_name, bool can_dma, bool can_cq,
-					uint32 dma_alignment, uint32 dma_boundary, uint32 max_sg_block_size,
+					uint32_t dma_alignment, uint32_t dma_boundary, uint32_t max_sg_block_size,
 					device_node **node);
 	// standard master probe for controller that registers controller and channel nodes
 	status_t (*probe_controller)(device_node *parent, const char *controller_driver,
 					const char *controller_driver_type, const char *controller_name,
 					const char *channel_module_name, bool can_dma, bool can_cq,
-					uint32 dma_alignment, uint32 dma_boundary, uint32 max_sg_block_size,
+					uint32_t dma_alignment, uint32_t dma_boundary, uint32_t max_sg_block_size,
 					bool supports_compatibility_mode);
 } ata_adapter_interface;
 

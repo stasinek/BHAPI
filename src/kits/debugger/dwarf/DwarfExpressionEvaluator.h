@@ -81,7 +81,7 @@ private:
 			void				_DereferenceAddress(uint8 addressSize);
 			void				_DereferenceAddressSpaceAddress(
 									uint8 addressSize);
-			void				_PushRegister(uint32 reg, target_addr_t offset);
+			void				_PushRegister(uint32_t reg, target_addr_t offset);
 			void				_Call(uint64 offset, uint8 refType);
 
 private:

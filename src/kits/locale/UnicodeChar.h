@@ -326,32 +326,32 @@ enum unicode_east_asian_width
 
 class BUnicodeChar {
 	public:
-		static bool IsAlpha(uint32 c);
-		static bool IsAlNum(uint32 c);
-		static bool IsDigit(uint32 c);
-		static bool IsHexDigit(uint32 c);
-		static bool IsUpper(uint32 c);
-		static bool IsLower(uint32 c);
-		static bool IsSpace(uint32 c);
-		static bool IsWhitespace(uint32 c);
-		static bool IsControl(uint32 c);
-		static bool IsPunctuation(uint32 c);
-		static bool IsPrintable(uint32 c);
-		static bool IsTitle(uint32 c);
-		static bool IsDefined(uint32 c);
-		static bool IsBase(uint32 c);
+		static bool IsAlpha(uint32_t c);
+		static bool IsAlNum(uint32_t c);
+		static bool IsDigit(uint32_t c);
+		static bool IsHexDigit(uint32_t c);
+		static bool IsUpper(uint32_t c);
+		static bool IsLower(uint32_t c);
+		static bool IsSpace(uint32_t c);
+		static bool IsWhitespace(uint32_t c);
+		static bool IsControl(uint32_t c);
+		static bool IsPunctuation(uint32_t c);
+		static bool IsPrintable(uint32_t c);
+		static bool IsTitle(uint32_t c);
+		static bool IsDefined(uint32_t c);
+		static bool IsBase(uint32_t c);
 
-		static int8 Type(uint32 c);
+		static int8 Type(uint32_t c);
 
-		static uint32 ToLower(uint32 c);
-		static uint32 ToUpper(uint32 c);
-		static uint32 ToTitle(uint32 c);
-		static int32 DigitValue(uint32 c);
-		static unicode_east_asian_width EastAsianWidth(uint32 c);
+		static uint32_t ToLower(uint32_t c);
+		static uint32_t ToUpper(uint32_t c);
+		static uint32_t ToTitle(uint32_t c);
+		static int32_t DigitValue(uint32_t c);
+		static unicode_east_asian_width EastAsianWidth(uint32_t c);
 
-		static void ToUTF8(uint32 c, char** out);
-		static uint32 FromUTF8(const char** in);
-		static uint32 FromUTF8(const char* in);
+		static void ToUTF8(uint32_t c, char** out);
+		static uint32_t FromUTF8(const char** in);
+		static uint32_t FromUTF8(const char* in);
 
 		static size_t UTF8StringLength(const char* string);
 		static size_t UTF8StringLength(const char* string, size_t maxLength);
@@ -361,7 +361,7 @@ class BUnicodeChar {
 };
 
 
-inline uint32 BUnicodeChar::FromUTF8(const char* in)
+inline uint32_t BUnicodeChar::FromUTF8(const char* in)
 {
 	const char* string = in;
 	return FromUTF8(&string);

@@ -14,9 +14,9 @@
 #define BIOS32_PCI_SERVICE	'ICP$'
 
 struct bios32_service {
-	uint32	base;
-	uint32	size;
-	uint32	offset;
+	uint32_t	base;
+	uint32_t	size;
+	uint32_t	offset;
 };
 
 
@@ -24,7 +24,7 @@ struct bios32_service {
 extern "C" {
 #endif
 
-status_t get_bios32_service(uint32 identifier, struct bios32_service *service);
+status_t get_bios32_service(uint32_t identifier, struct bios32_service *service);
 status_t bios_init(void);
 
 #ifdef __cplusplus

@@ -336,7 +336,7 @@ BDirectory::Rewind()
 }
 
 
-int32
+int32_t
 BDirectory::CountEntries()
 {
 	if(fName == NULL || fDir == NULL) return 0;
@@ -344,7 +344,7 @@ BDirectory::CountEntries()
 #ifdef HAVE_DIRENT_H
 	rewinddir((DIR*)fDir);
 
-	int32 count = 0;
+	int32_t count = 0;
 	while(true)
 	{
 		struct dirent *dirEntry = readdir((DIR*)fDir);
@@ -369,7 +369,7 @@ BDirectory::CountEntries()
     ((bhapi::win32_dir_t*)fDir)->findHandle = FindFirstFileA(searchName, &(((bhapi::win32_dir_t*)fDir)->findData));
 	if(((bhapi::win32_dir_t*)fDir)->findHandle == INVALID_HANDLE_VALUE) return 0;
 
-	int32 count = 0;
+	int32_t count = 0;
 	do {
 		const char *filename = ((bhapi::win32_dir_t*)fDir)->findData.cFileName;
 		if(strlen(filename) == 1 && filename[0] == '.') continue;

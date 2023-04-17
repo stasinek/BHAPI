@@ -13,10 +13,10 @@
 namespace BPrivate { namespace media {
 
 
-typedef int32 media_client_id;
-typedef int32 media_client_kind;
-typedef int32 media_connection_kind;
-typedef int32 media_connection_id;
+typedef int32_t media_client_id;
+typedef int32_t media_client_kind;
+typedef int32_t media_connection_kind;
+typedef int32_t media_connection_id;
 
 
 enum media_client_kinds {
@@ -44,7 +44,7 @@ private:
 	media_client_kind			kind;
 
 	media_node					node;
-	uint32						padding[16];
+	uint32_t						padding[16];
 
 	friend class BMediaClient;
 	friend class BMediaConnection;
@@ -87,7 +87,7 @@ private:
     char						name[B_MEDIA_NAME_LENGTH];
 
 	media_connection_kind		kind;
-	uint32						padding[16];
+	uint32_t						padding[16];
 
 	friend class BMediaClient;
 	friend class BMediaClientNode;

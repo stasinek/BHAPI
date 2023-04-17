@@ -14,7 +14,7 @@
 
 typedef struct {
 	sem_id	sem;
-	int32	ben;
+	int32_t	ben;
 } benaphore;
 
  

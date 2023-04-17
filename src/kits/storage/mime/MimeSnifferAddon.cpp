@@ -33,7 +33,7 @@ BMimeSnifferAddon::GuessMimeType(const char* fileName, BMimeType* type)
 
 // GuessMimeType
 float
-BMimeSnifferAddon::GuessMimeType(BFile* file, const void* buffer, int32 length,
+BMimeSnifferAddon::GuessMimeType(BFile* file, const void* buffer, int32_t length,
 	BMimeType* type)
 {
 	return -1;

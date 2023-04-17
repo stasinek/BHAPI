@@ -21,7 +21,7 @@
 
 class MediaExtractorChunkWriter : public ChunkWriter {
 public:
-	MediaExtractorChunkWriter(MediaWriter* writer, int32 streamIndex)
+	MediaExtractorChunkWriter(MediaWriter* writer, int32_t streamIndex)
 		:
 		fWriter(writer),
 		fStreamIndex(streamIndex)
@@ -37,7 +37,7 @@ public:
 
 private:
 	MediaWriter*	fWriter;
-	int32			fStreamIndex;
+	int32_t			fStreamIndex;
 };
 
 
@@ -93,7 +93,7 @@ void MediaWriter::GetFileFormatInfo(media_file_format* _fileFormat) const
 
 
 status_t MediaWriter::CreateEncoder(Encoder** _encoder,
-	const media_codec_info* codecInfo, media_format* format, uint32 flags)
+	const media_codec_info* codecInfo, media_format* format, uint32_t flags)
 {
 	CALLED();
 
@@ -117,7 +117,7 @@ status_t MediaWriter::CreateEncoder(Encoder** _encoder,
 		return ret;
 	}
 
-	int32 streamIndex = fStreamInfos.CountItems();
+	int32_t streamIndex = fStreamInfos.CountItems();
 
 	if (!fStreamInfos.Insert(info)) {
 		gPluginManager.DestroyEncoder(encoder);
@@ -151,7 +151,7 @@ status_t MediaWriter::SetCopyright(const char* copyright)
 }
 
 
-status_t MediaWriter::SetCopyright(int32 streamIndex, const char* copyright)
+status_t MediaWriter::SetCopyright(int32_t streamIndex, const char* copyright)
 {
 	if (fWriter == NULL)
 		return B_NO_INIT;
@@ -191,8 +191,8 @@ status_t MediaWriter::Close()
 }
 
 
-status_t MediaWriter::AddTrackInfo(int32 streamIndex, uint32 code,
-	const void* data, size_t size, uint32 flags)
+status_t MediaWriter::AddTrackInfo(int32_t streamIndex, uint32_t code,
+	const void* data, size_t size, uint32_t flags)
 {
 	if (fWriter == NULL)
 		return B_NO_INIT;
@@ -205,7 +205,7 @@ status_t MediaWriter::AddTrackInfo(int32 streamIndex, uint32 code,
 }
 
 
-status_t MediaWriter::WriteChunk(int32 streamIndex, const void* chunkBuffer,
+status_t MediaWriter::WriteChunk(int32_t streamIndex, const void* chunkBuffer,
 	size_t chunkSize, media_encode_info* encodeInfo)
 {
 	if (fWriter == NULL)

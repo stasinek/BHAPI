@@ -42,7 +42,7 @@ private:
     virtual	void				_MissingSymLink5();
     virtual	void				_MissingSymLink6();
 
-            uint32				_reservedData[4];
+            uint32_t				_reservedData[4];
             BEntry*				fSecretEntry;
 
 private:

@@ -78,8 +78,8 @@ static thread_id sNextThreadID = 2;
 
 // some arbitrarily chosen limits -- should probably depend on the available
 // memory (the limit is not yet enforced)
-static int32 sMaxThreads = 4096;
-static int32 sUsedThreads = 0;
+static int32_t sMaxThreads = 4096;
+static int32_t sUsedThreads = 0;
 
 spinlock gThreadCreationLock = B_SPINLOCK_INITIALIZER;
 
@@ -109,7 +109,7 @@ struct UserThreadEntryArguments : ThreadEntryArguments {
 	void*			userlandArgument2;
 	pthread_t		pthread;
 	arch_fork_arg*	forkArgs;
-	uint32			flags;
+	uint32_t			flags;
 };
 
 
@@ -120,7 +120,7 @@ public:
 	{
 	}
 
-	void Notify(uint32 eventCode, team_id teamID, thread_id threadID,
+	void Notify(uint32_t eventCode, team_id teamID, thread_id threadID,
 		Thread* thread = NULL)
 	{
 		char eventBuffer[180];
@@ -135,7 +135,7 @@ public:
 		DefaultNotificationService::Notify(event, eventCode);
 	}
 
-	void Notify(uint32 eventCode, Thread* thread)
+	void Notify(uint32_t eventCode, Thread* thread)
 	{
 		return Notify(eventCode, thread->id, thread->team->id, thread);
 	}
@@ -465,7 +465,7 @@ Thread::RemoveUserTimer(UserTimer* timer)
 void
 Thread::DeleteUserTimers(bool userDefinedOnly)
 {
-	int32 count = fUserTimers.DeleteTimers(userDefinedOnly);
+	int32_t count = fUserTimers.DeleteTimers(userDefinedOnly);
 	if (count > 0)
 		team->UserDefinedTimersRemoved(count);
 }
@@ -515,7 +515,7 @@ ThreadListIterator::Next()
 
 
 ThreadCreationAttributes::ThreadCreationAttributes(thread_func function,
-	const char* name, int32 priority, void* arg, team_id team,
+	const char* name, int32_t priority, void* arg, team_id team,
 	Thread* thread)
 {
 	this->entry = NULL;
@@ -892,9 +892,9 @@ thread_create_thread(const ThreadCreationAttributes& attributes, bool kernel)
 	thread->priority = attributes.priority == -1
 		? B_NORMAL_PRIORITY : attributes.priority;
 	thread->priority = std::max(thread->priority,
-			(int32)THREAD_MIN_SET_PRIORITY);
+			(int32_t)THREAD_MIN_SET_PRIORITY);
 	thread->priority = std::min(thread->priority,
-			(int32)THREAD_MAX_SET_PRIORITY);
+			(int32_t)THREAD_MAX_SET_PRIORITY);
 	thread->state = B_THREAD_SUSPENDED;
 
 	thread->sig_block_mask = attributes.signal_mask;
@@ -990,7 +990,7 @@ thread_create_thread(const ThreadCreationAttributes& attributes, bool kernel)
 		Thread* currentThread = thread_get_current_thread();
 		if (currentThread != NULL && currentThread->team == team) {
 			// inherit all user flags...
-			int32 debugFlags = atomic_get(&currentThread->debug_info.flags)
+			int32_t debugFlags = atomic_get(&currentThread->debug_info.flags)
 				& B_THREAD_DEBUG_USER_FLAG_MASK;
 
 			// ... save the syscall tracing flags, unless explicitely specified
@@ -1045,7 +1045,7 @@ thread_create_thread(const ThreadCreationAttributes& attributes, bool kernel)
 	// or the respective global team debug flag is set. But only, if a
 	// debugger is installed for the team.
 	if (!kernel) {
-		int32 teamDebugFlags = atomic_get(&team->debug_info.flags);
+		int32_t teamDebugFlags = atomic_get(&team->debug_info.flags);
 		debugNewThread |= (teamDebugFlags & B_TEAM_DEBUG_STOP_NEW_THREADS) != 0;
 		if (debugNewThread
 			&& (teamDebugFlags & B_TEAM_DEBUG_DEBUGGER_INSTALLED) != 0) {
@@ -1201,8 +1201,8 @@ fill_thread_info(Thread *thread, thread_info *info, size_t size)
 
 
 static status_t
-send_data_etc(thread_id id, int32 code, const void *buffer, size_t bufferSize,
-	int32 flags)
+send_data_etc(thread_id id, int32_t code, const void *buffer, size_t bufferSize,
+	int32_t flags)
 {
 	// get the thread
 	Thread *target = Thread::Get(id);
@@ -1263,13 +1263,13 @@ send_data_etc(thread_id id, int32 code, const void *buffer, size_t bufferSize,
 }
 
 
-static int32
+static int32_t
 receive_data_etc(thread_id *_sender, void *buffer, size_t bufferSize,
-	int32 flags)
+	int32_t flags)
 {
 	Thread *thread = thread_get_current_thread();
 	size_t size;
-	int32 code;
+	int32_t code;
 
 	status_t status = acquire_sem_etc(thread->msg.read_sem, 1, flags, 0);
 	if (status != B_OK) {
@@ -1357,7 +1357,7 @@ common_setrlimit(int resource, const struct rlimit * rlp)
 
 
 static status_t
-common_snooze_etc(bigtime_t timeout, clockid_t clockID, uint32 flags,
+common_snooze_etc(bigtime_t timeout, clockid_t clockID, uint32_t flags,
 	bigtime_t* _remainingTime)
 {
 	switch (clockID) {
@@ -1419,7 +1419,7 @@ common_snooze_etc(bigtime_t timeout, clockid_t clockID, uint32 flags,
 static int
 make_thread_unreal(int argc, char **argv)
 {
-	int32 id = -1;
+	int32_t id = -1;
 
 	if (argc > 2) {
 		print_debugger_command_usage(argv[0]);
@@ -1447,8 +1447,8 @@ make_thread_unreal(int argc, char **argv)
 static int
 set_thread_prio(int argc, char **argv)
 {
-	int32 id;
-	int32 prio;
+	int32_t id;
+	int32_t prio;
 
 	if (argc > 3 || argc < 2) {
 		print_debugger_command_usage(argv[0]);
@@ -1486,7 +1486,7 @@ set_thread_prio(int argc, char **argv)
 static int
 make_thread_suspended(int argc, char **argv)
 {
-	int32 id;
+	int32_t id;
 
 	if (argc > 2) {
 		print_debugger_command_usage(argv[0]);
@@ -1521,7 +1521,7 @@ make_thread_suspended(int argc, char **argv)
 static int
 make_thread_resumed(int argc, char **argv)
 {
-	int32 id;
+	int32_t id;
 
 	if (argc != 2) {
 		print_debugger_command_usage(argv[0]);
@@ -1556,7 +1556,7 @@ static int
 drop_into_debugger(int argc, char **argv)
 {
 	status_t err;
-	int32 id;
+	int32_t id;
 
 	if (argc > 2) {
 		print_debugger_command_usage(argv[0]);
@@ -1584,7 +1584,7 @@ drop_into_debugger(int argc, char **argv)
 	Only for use in the kernel debugger.
 */
 static const char *
-state_to_text(Thread *thread, int32 state)
+state_to_text(Thread *thread, int32_t state)
 {
 	switch (state) {
 		case B_THREAD_READY:
@@ -1854,7 +1854,7 @@ dump_thread_list(int argc, char **argv)
 	const char *callSymbol = NULL;
 	addr_t callStart = 0;
 	addr_t callEnd = 0;
-	int32 requiredState = 0;
+	int32_t requiredState = 0;
 	team_id team = -1;
 	sem_id sem = -1;
 
@@ -2421,7 +2421,7 @@ thread_map(void (*function)(Thread* thread, void* data), void* data)
 /*!	Kernel private thread creation function.
 */
 thread_id
-spawn_kernel_thread_etc(thread_func function, const char *name, int32 priority,
+spawn_kernel_thread_etc(thread_func function, const char *name, int32_t priority,
 	void *arg, team_id team)
 {
 	return thread_create_thread(
@@ -2431,7 +2431,7 @@ spawn_kernel_thread_etc(thread_func function, const char *name, int32 priority,
 
 
 status_t
-wait_for_thread_etc(thread_id id, uint32 flags, bigtime_t timeout,
+wait_for_thread_etc(thread_id id, uint32_t flags, bigtime_t timeout,
 	status_t *_returnCode)
 {
 	if (id < 0)
@@ -2531,7 +2531,7 @@ wait_for_thread_etc(thread_id id, uint32 flags, bigtime_t timeout,
 
 
 status_t
-select_thread(int32 id, struct select_info* info, bool kernel)
+select_thread(int32_t id, struct select_info* info, bool kernel)
 {
 	// get and lock the thread
 	Thread* thread = Thread::GetAndLock(id);
@@ -2557,7 +2557,7 @@ select_thread(int32 id, struct select_info* info, bool kernel)
 
 
 status_t
-deselect_thread(int32 id, struct select_info* info, bool kernel)
+deselect_thread(int32_t id, struct select_info* info, bool kernel)
 {
 	// get and lock the thread
 	Thread* thread = Thread::GetAndLock(id);
@@ -2585,14 +2585,14 @@ deselect_thread(int32 id, struct select_info* info, bool kernel)
 }
 
 
-int32
+int32_t
 thread_max_threads(void)
 {
 	return sMaxThreads;
 }
 
 
-int32
+int32_t
 thread_used_threads(void)
 {
 	InterruptsSpinLocker threadHashLocker(sThreadHashLock);
@@ -2604,13 +2604,13 @@ thread_used_threads(void)
 	Only for use in the kernel debugger.
 */
 const char*
-thread_state_to_text(Thread* thread, int32 state)
+thread_state_to_text(Thread* thread, int32_t state)
 {
 	return state_to_text(thread, state);
 }
 
 
-int32
+int32_t
 thread_get_io_priority(thread_id id)
 {
 	Thread* thread = Thread::GetAndLock(id);
@@ -2619,7 +2619,7 @@ thread_get_io_priority(thread_id id)
 	BReference<Thread> threadReference(thread, true);
 	ThreadLocker threadLocker(thread, true);
 
-	int32 priority = thread->io_priority;
+	int32_t priority = thread->io_priority;
 	if (priority < 0) {
 		// negative I/O priority means using the (CPU) priority
 		priority = thread->priority;
@@ -2630,7 +2630,7 @@ thread_get_io_priority(thread_id id)
 
 
 void
-thread_set_io_priority(int32 priority)
+thread_set_io_priority(int32_t priority)
 {
 	Thread* thread = thread_get_current_thread();
 	ThreadLocker threadLocker(thread);
@@ -2663,7 +2663,7 @@ thread_init(kernel_args *args)
 	sNextThreadID = B_SYSTEM_TEAM + 1;
 
 	// create an idle thread for each cpu
-	for (uint32 i = 0; i < args->num_cpus; i++) {
+	for (uint32_t i = 0; i < args->num_cpus; i++) {
 		Thread *thread;
 		area_info info;
 		char name[64];
@@ -2783,7 +2783,7 @@ thread_init(kernel_args *args)
 
 
 status_t
-thread_preboot_init_percpu(struct kernel_args *args, int32 cpuNum)
+thread_preboot_init_percpu(struct kernel_args *args, int32_t cpuNum)
 {
 	// set up the cpu pointer in the not yet initialized per-cpu idle thread
 	// so that get_current_cpu and friends will work, which is crucial for
@@ -2879,7 +2879,7 @@ thread_block()
 		client code).
 */
 status_t
-thread_block_with_timeout(uint32 timeoutFlags, bigtime_t timeout)
+thread_block_with_timeout(uint32_t timeoutFlags, bigtime_t timeout)
 {
 	Thread* thread = thread_get_current_thread();
 
@@ -2893,7 +2893,7 @@ thread_block_with_timeout(uint32 timeoutFlags, bigtime_t timeout)
 
 	if (useTimer) {
 		// Timer flags: absolute/relative.
-		uint32 timerFlags;
+		uint32_t timerFlags;
 		if ((timeoutFlags & B_RELATIVE_TIMEOUT) != 0) {
 			timerFlags = B_ONE_SHOT_RELATIVE_TIMER;
 		} else {
@@ -3012,13 +3012,13 @@ kill_thread(thread_id id)
 
 
 status_t
-send_data(thread_id thread, int32 code, const void *buffer, size_t bufferSize)
+send_data(thread_id thread, int32_t code, const void *buffer, size_t bufferSize)
 {
 	return send_data_etc(thread, code, buffer, bufferSize, 0);
 }
 
 
-int32
+int32_t
 receive_data(thread_id *sender, void *buffer, size_t bufferSize)
 {
 	return receive_data_etc(sender, buffer, bufferSize, 0);
@@ -3029,7 +3029,7 @@ bool
 has_data(thread_id thread)
 {
 	// TODO: The thread argument is ignored.
-	int32 count;
+	int32_t count;
 
 	if (get_sem_count(thread_get_current_thread()->msg.read_sem,
 			&count) != B_OK)
@@ -3062,13 +3062,13 @@ _get_thread_info(thread_id id, thread_info *info, size_t size)
 
 
 status_t
-_get_next_thread_info(team_id teamID, int32 *_cookie, thread_info *info,
+_get_next_thread_info(team_id teamID, int32_t *_cookie, thread_info *info,
 	size_t size)
 {
 	if (info == NULL || size != sizeof(thread_info) || teamID < 0)
 		return B_BAD_VALUE;
 
-	int32 lastID = *_cookie;
+	int32_t lastID = *_cookie;
 
 	// get the team
 	Team* team = Team::GetAndLock(teamID);
@@ -3167,7 +3167,7 @@ rename_thread(thread_id id, const char* name)
 
 
 status_t
-set_thread_priority(thread_id id, int32 priority)
+set_thread_priority(thread_id id, int32_t priority)
 {
 	// make sure the passed in priority is within bounds
 	if (priority > THREAD_MAX_SET_PRIORITY)
@@ -3191,7 +3191,7 @@ set_thread_priority(thread_id id, int32 priority)
 
 
 status_t
-snooze_etc(bigtime_t timeout, int timebase, uint32 flags)
+snooze_etc(bigtime_t timeout, int timebase, uint32_t flags)
 {
 	return common_snooze_etc(timeout, timebase, flags, NULL);
 }
@@ -3253,7 +3253,7 @@ resume_thread(thread_id id)
 
 
 thread_id
-spawn_kernel_thread(thread_func function, const char *name, int32 priority,
+spawn_kernel_thread(thread_func function, const char *name, int32_t priority,
 	void *arg)
 {
 	return thread_create_thread(
@@ -3365,8 +3365,8 @@ _user_rename_thread(thread_id thread, const char *userName)
 }
 
 
-int32
-_user_set_thread_priority(thread_id thread, int32 newPriority)
+int32_t
+_user_set_thread_priority(thread_id thread, int32_t newPriority)
 {
 	// TODO: Don't allow setting priority of kernel threads!
 	return set_thread_priority(thread, newPriority);
@@ -3395,7 +3395,7 @@ _user_spawn_thread(thread_creation_attributes* userAttributes)
 
 
 status_t
-_user_snooze_etc(bigtime_t timeout, int timebase, uint32 flags,
+_user_snooze_etc(bigtime_t timeout, int timebase, uint32_t flags,
 	bigtime_t* userRemainingTime)
 {
 	// We need to store more syscall restart parameters than usual and need a
@@ -3404,7 +3404,7 @@ _user_snooze_etc(bigtime_t timeout, int timebase, uint32 flags,
 	struct restart_parameters {
 		bigtime_t	timeout;
 		clockid_t	timebase;
-		uint32		flags;
+		uint32_t		flags;
 	};
 
 	Thread* thread = thread_get_current_thread();
@@ -3424,7 +3424,7 @@ _user_snooze_etc(bigtime_t timeout, int timebase, uint32 flags,
 
 			// Make sure we use the system time base, so real-time clock changes
 			// won't affect our wait.
-			flags &= ~(uint32)B_TIMEOUT_REAL_TIME_BASE;
+			flags &= ~(uint32_t)B_TIMEOUT_REAL_TIME_BASE;
 			if (timebase == CLOCK_REALTIME)
 				timebase = CLOCK_MONOTONIC;
 
@@ -3503,22 +3503,22 @@ _user_get_thread_info(thread_id id, thread_info *userInfo)
 
 
 status_t
-_user_get_next_thread_info(team_id team, int32 *userCookie,
+_user_get_next_thread_info(team_id team, int32_t *userCookie,
 	thread_info *userInfo)
 {
 	status_t status;
 	thread_info info;
-	int32 cookie;
+	int32_t cookie;
 
 	if (!IS_USER_ADDRESS(userCookie) || !IS_USER_ADDRESS(userInfo)
-		|| user_memcpy(&cookie, userCookie, sizeof(int32)) < B_OK)
+		|| user_memcpy(&cookie, userCookie, sizeof(int32_t)) < B_OK)
 		return B_BAD_ADDRESS;
 
 	status = _get_next_thread_info(team, &cookie, &info, sizeof(thread_info));
 	if (status < B_OK)
 		return status;
 
-	if (user_memcpy(userCookie, &cookie, sizeof(int32)) < B_OK
+	if (user_memcpy(userCookie, &cookie, sizeof(int32_t)) < B_OK
 		|| user_memcpy(userInfo, &info, sizeof(thread_info)) < B_OK)
 		return B_BAD_ADDRESS;
 
@@ -3570,7 +3570,7 @@ _user_has_data(thread_id thread)
 
 
 status_t
-_user_send_data(thread_id thread, int32 code, const void *buffer,
+_user_send_data(thread_id thread, int32_t code, const void *buffer,
 	size_t bufferSize)
 {
 	if (!IS_USER_ADDRESS(buffer))
@@ -3604,7 +3604,7 @@ _user_receive_data(thread_id *_userSender, void *buffer, size_t bufferSize)
 
 
 status_t
-_user_block_thread(uint32 flags, bigtime_t timeout)
+_user_block_thread(uint32_t flags, bigtime_t timeout)
 {
 	syscall_restart_handle_timeout_pre(flags, timeout);
 	flags |= B_CAN_INTERRUPT;
@@ -3653,7 +3653,7 @@ _user_unblock_thread(thread_id threadID, status_t status)
 
 
 status_t
-_user_unblock_threads(thread_id* userThreads, uint32 count, status_t status)
+_user_unblock_threads(thread_id* userThreads, uint32_t count, status_t status)
 {
 	enum {
 		MAX_USER_THREADS_TO_UNBLOCK	= 128
@@ -3668,7 +3668,7 @@ _user_unblock_threads(thread_id* userThreads, uint32 count, status_t status)
 	if (user_memcpy(threads, userThreads, count * sizeof(thread_id)) != B_OK)
 		return B_BAD_ADDRESS;
 
-	for (uint32 i = 0; i < count; i++)
+	for (uint32_t i = 0; i < count; i++)
 		user_unblock_thread(threads[i], status);
 
 	scheduler_reschedule_if_necessary();

@@ -26,7 +26,7 @@ switch_to_mode()
 
 
 static void
-set_cpu_enabled(int32 /* cpu */, bool /* enabled */)
+set_cpu_enabled(int32_t /* cpu */, bool /* enabled */)
 {
 }
 
@@ -90,17 +90,17 @@ rebalance(const ThreadData* threadData)
 
 	// Check if the least loaded core is significantly less loaded than
 	// the current one.
-	int32 coreLoad = core->GetLoad();
-	int32 otherLoad = other->GetLoad();
+	int32_t coreLoad = core->GetLoad();
+	int32_t otherLoad = other->GetLoad();
 	if (other == core || otherLoad + kLoadDifference >= coreLoad)
 		return core;
 
 	// Check whether migrating the current thread would result in both core
 	// loads become closer to the average.
-	int32 difference = coreLoad - otherLoad - kLoadDifference;
+	int32_t difference = coreLoad - otherLoad - kLoadDifference;
 	ASSERT(difference > 0);
 
-	int32 threadLoad = threadData->GetLoad() / core->CPUCount();
+	int32_t threadLoad = threadData->GetLoad() / core->CPUCount();
 	return difference >= threadLoad ? other : core;
 }
 
@@ -119,7 +119,7 @@ rebalance_irqs(bool idle)
 	irq_assignment* chosen = NULL;
 	irq_assignment* irq = (irq_assignment*)list_get_first_item(&cpu->irqs);
 
-	int32 totalLoad = 0;
+	int32_t totalLoad = 0;
 	while (irq != NULL) {
 		if (chosen == NULL || chosen->load < irq->load)
 			chosen = irq;
@@ -138,7 +138,7 @@ rebalance_irqs(bool idle)
 		other = gCoreHighLoadHeap.PeekMinimum();
 	coreLocker.Unlock();
 
-	int32 newCPU = other->CPUHeap()->PeekRoot()->ID();
+	int32_t newCPU = other->CPUHeap()->PeekRoot()->ID();
 
 	ASSERT(other != NULL);
 

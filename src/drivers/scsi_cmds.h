@@ -357,13 +357,13 @@ typedef struct scsi_page_block_limits {
 	);
 	uint8	max_cmp_write_length;
 	uint16	opt_transfer_length_grain;
-	uint32	max_transfer_length;
-	uint32	opt_transfer_length;
-	uint32	max_prefetch_length;
-	uint32	max_unmap_lba_count;
-	uint32	max_unmap_blk_count;
-	uint32	opt_unmap_grain;
-	uint32	unmap_grain_align;
+	uint32_t	max_transfer_length;
+	uint32_t	opt_transfer_length;
+	uint32_t	max_prefetch_length;
+	uint32_t	max_unmap_lba_count;
+	uint32_t	max_unmap_blk_count;
+	uint32_t	opt_unmap_grain;
+	uint32_t	unmap_grain_align;
 	uint64	max_write_same_length;
 	uint8	_res44[20];
 } _PACKED scsi_page_block_limits;
@@ -403,7 +403,7 @@ typedef struct scsi_cmd_read_capacity {
 		_res1_1 : 4,
 		lun : 3
 	);
-	uint32	lba;
+	uint32_t	lba;
 	uint8	_res6[2];
 	B_LBITFIELD8_2(
 		pmi : 1,							// partial medium indicator
@@ -413,8 +413,8 @@ typedef struct scsi_cmd_read_capacity {
 } _PACKED scsi_cmd_read_capacity;
 
 typedef struct scsi_res_read_capacity {
-	uint32	lba;					// big endian
-	uint32	block_size;				// in bytes
+	uint32_t	lba;					// big endian
+	uint32_t	block_size;				// in bytes
 } _PACKED scsi_res_read_capacity;
 
 // READ CAPACITY (16)
@@ -423,14 +423,14 @@ typedef struct scsi_cmd_read_capacity_long {
 	uint8	opcode;
 	uint8	service_action;
 	uint64	lba;
-	uint32	alloc_length;
+	uint32_t	alloc_length;
 	uint8	relative_address;
 	uint8	control;
 } _PACKED scsi_cmd_read_capacity_long;
 
 typedef struct scsi_res_read_capacity_long {
 	uint64	lba;					// big endian
-	uint32	block_size;				// in bytes
+	uint32_t	block_size;				// in bytes
 } _PACKED scsi_res_read_capacity_long;
 
 
@@ -460,7 +460,7 @@ typedef struct scsi_cmd_rw_10 {
 		disable_page_out : 1,		// disable page out (1 = not worth caching)
 		lun : 3
 	);
-	uint32	lba;					// big endian
+	uint32_t	lba;					// big endian
 	uint8	_res6;
 	uint16	length;					// 0 = no block
 	uint8	control;
@@ -478,8 +478,8 @@ typedef struct scsi_cmd_rw_12 {
 		disable_page_out : 1,		// disable page out (1 = not worth caching)
 		lun : 3
 	);
-	uint32	lba;					// big endian
-	uint32	length;					// 0 = no block
+	uint32_t	lba;					// big endian
+	uint32_t	length;					// 0 = no block
 	uint8	_res10;
 	uint8	control;
 } _PACKED scsi_cmd_rw_12;
@@ -498,7 +498,7 @@ typedef struct scsi_cmd_rw_16 {
 		read_protect : 3
 	);
 	uint64	lba;					// big endian
-	uint32	length;
+	uint32_t	length;
 	B_LBITFIELD8_3(
 		group_number : 5,
 		_res_14_5 : 2,
@@ -521,7 +521,7 @@ typedef struct scsi_cmd_wsame_16 {
 		write_protect : 3
 	);
 	uint64	lba;
-	uint32	length;
+	uint32_t	length;
 	B_LBITFIELD8_2(
 		group_number : 5,
 		_res14_5 : 3
@@ -538,7 +538,7 @@ typedef struct scsi_cmd_unmap {
 		anchor : 1,
 		_reserved1_7 : 7
 	);
-	uint32	_reserved1;
+	uint32_t	_reserved1;
 	B_LBITFIELD8_2(
 		group_number : 5,
 		_reserved5_7 : 3
@@ -549,14 +549,14 @@ typedef struct scsi_cmd_unmap {
 
 struct scsi_unmap_block_descriptor {
 	uint64	lba;
-	uint32	block_count;
-	uint32	_reserved1;
+	uint32_t	block_count;
+	uint32_t	_reserved1;
 } _PACKED;
 
 struct scsi_unmap_parameter_list {
 	uint16	data_length;
 	uint16	block_data_length;
-	uint32	_reserved1;
+	uint32_t	_reserved1;
 	struct scsi_unmap_block_descriptor blocks[1];
 } _PACKED;
 
@@ -941,7 +941,7 @@ typedef struct scsi_toc_general {
 } _PACKED scsi_toc_general;
 
 // definition of CD-ROM LBA
-typedef uint32 scsi_cd_lba;				// big endian
+typedef uint32_t scsi_cd_lba;				// big endian
 
 // definition of CD-ROM MSF time
 typedef struct scsi_cd_msf {

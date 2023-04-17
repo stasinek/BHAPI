@@ -74,7 +74,7 @@ status_t BNumberFormat::Format(BString& string, const double value) const
 
 
 ssize_t
-BNumberFormat::Format(char* string, size_t maxSize, const int32 value) const
+BNumberFormat::Format(char* string, size_t maxSize, const int32_t value) const
 {
 	BString fullString;
 	status_t status = Format(fullString, value);
@@ -85,7 +85,7 @@ BNumberFormat::Format(char* string, size_t maxSize, const int32 value) const
 }
 
 
-status_t BNumberFormat::Format(BString& string, const int32 value) const
+status_t BNumberFormat::Format(BString& string, const int32_t value) const
 {
 	UErrorCode err = U_ZERO_ERROR;
 	ObjectDeleter<NumberFormat> numberFormatter(NumberFormat::createInstance(
@@ -98,7 +98,7 @@ status_t BNumberFormat::Format(BString& string, const int32 value) const
 		return B_BAD_VALUE;
 
 	UnicodeString icuString;
-	numberFormatter->format((int32_t)value, icuString);
+	numberFormatter->format((int32_t_t)value, icuString);
 
 	string.Truncate(0);
 	BStringByteSink stringConverter(&string);

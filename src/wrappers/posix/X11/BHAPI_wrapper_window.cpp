@@ -39,7 +39,7 @@
 #include <kits/app/Application.h>
 
 
-EXGraphicsWindow::EXGraphicsWindow(EXGraphicsEngine *x11Engine,  int32 x,  int32 y,  uint32 w,  uint32 h)
+EXGraphicsWindow::EXGraphicsWindow(EXGraphicsEngine *x11Engine,  int32_t x,  int32_t y,  uint32_t w,  uint32_t h)
 	: BGraphicsWindow(), fEngine(NULL), fFlags(0)
 {
 	if(w == B_MAXUINT32 || h == B_MAXUINT32)
@@ -225,7 +225,7 @@ EXGraphicsWindow::SetBackgroundColor(bhapi::rgb_color bkColor)
 
 
 status_t 
-EXGraphicsWindow::SetFlags(uint32 flags)
+EXGraphicsWindow::SetFlags(uint32_t flags)
 {
 	if(fEngine == NULL) return B_ERROR;
 
@@ -404,7 +404,7 @@ EXGraphicsWindow::SetTitle(const char *title)
 
 
 status_t 
-EXGraphicsWindow::SetWorkspaces(uint32 workspaces)
+EXGraphicsWindow::SetWorkspaces(uint32_t workspaces)
 {
 	if(fEngine == NULL) return B_ERROR;
 
@@ -426,7 +426,7 @@ EXGraphicsWindow::SetWorkspaces(uint32 workspaces)
 	if(format == 32 && nitems == 1 && prop != NULL) maxWorkspace = *((long*)prop);
 	if(prop != NULL) XFree(prop);
 //	BHAPI_DEBUG("[GRAPHICS]: Max Workspace is %ld", maxWorkspace);
-	if(workspaces != B_ALL_WORKSPACES && workspaces > (uint32)maxWorkspace) return B_ERROR;
+	if(workspaces != B_ALL_WORKSPACES && workspaces > (uint32_t)maxWorkspace) return B_ERROR;
 
 	long desktop = (workspaces == B_ALL_WORKSPACES ? (long)0xFFFFFFFF : (long)(workspaces - 1));
 
@@ -463,7 +463,7 @@ EXGraphicsWindow::SetWorkspaces(uint32 workspaces)
 
 
 status_t 
-EXGraphicsWindow::GetWorkspaces(uint32 *workspaces)
+EXGraphicsWindow::GetWorkspaces(uint32_t *workspaces)
 {
 	if(fEngine == NULL || workspaces == NULL) return B_ERROR;
 
@@ -614,7 +614,7 @@ EXGraphicsWindow::Hide()
 
 
 status_t 
-EXGraphicsWindow::MoveTo(int32 x,  int32 y)
+EXGraphicsWindow::MoveTo(int32_t x,  int32_t y)
 {
 	if(fEngine == NULL) return B_ERROR;
 
@@ -630,7 +630,7 @@ EXGraphicsWindow::MoveTo(int32 x,  int32 y)
 
 
 status_t 
-EXGraphicsWindow::ResizeTo(uint32 w,  uint32 h)
+EXGraphicsWindow::ResizeTo(uint32_t w,  uint32_t h)
 {
 	if(w == B_MAXUINT32 || h == B_MAXUINT32)
 	{
@@ -652,7 +652,7 @@ EXGraphicsWindow::ResizeTo(uint32 w,  uint32 h)
 
 
 status_t 
-EXGraphicsWindow::MoveAndResizeTo(int32 x,  int32 y,  uint32 w,  uint32 h)
+EXGraphicsWindow::MoveAndResizeTo(int32_t x,  int32_t y,  uint32_t w,  uint32_t h)
 {
 	if(w == B_MAXUINT32 || h == B_MAXUINT32)
 	{
@@ -946,7 +946,7 @@ EXGraphicsWindow::UngrabKeyboard()
 
 
 status_t 
-EXGraphicsWindow::SetSizeLimits(uint32 min_w,  uint32 max_w,  uint32 min_h,  uint32 max_h)
+EXGraphicsWindow::SetSizeLimits(uint32_t min_w,  uint32_t max_w,  uint32_t min_h,  uint32_t max_h)
 {
 	if(fEngine == NULL) return B_ERROR;
 
@@ -968,7 +968,7 @@ EXGraphicsWindow::SetSizeLimits(uint32 min_w,  uint32 max_w,  uint32 min_h,  uin
 
 
 status_t 
-EXGraphicsWindow::GetSizeLimits(uint32 *min_w,  uint32 *max_w,  uint32 *min_h,  uint32 *max_h)
+EXGraphicsWindow::GetSizeLimits(uint32_t *min_w,  uint32_t *max_w,  uint32_t *min_h,  uint32_t *max_h)
 {
 	if(min_w == NULL || max_w == NULL || min_h == NULL || max_h == NULL) return B_ERROR;
 
@@ -1004,7 +1004,7 @@ EXGraphicsWindow::GetSizeLimits(uint32 *min_w,  uint32 *max_w,  uint32 *min_h,  
 
 
 status_t 
-EXGraphicsWindow::QueryMouse(int32 *x,  int32 *y,  int32 *buttons)
+EXGraphicsWindow::QueryMouse(int32_t *x,  int32_t *y,  int32_t *buttons)
 {
 	if(x == NULL && y == NULL && buttons == NULL) return B_ERROR;
 
@@ -1035,8 +1035,8 @@ EXGraphicsWindow::QueryMouse(int32 *x,  int32 *y,  int32 *buttons)
 status_t 
 EXGraphicsWindow::CopyTo(BGraphicsContext *_dc_,
 			 BGraphicsDrawable *dstDrawable,
-			  int32 x,  int32 y,  uint32 w,  uint32 h,
-			  int32 dstX,  int32 dstY,  uint32 dstW,  uint32 dstH)
+			  int32_t x,  int32_t y,  uint32_t w,  uint32_t h,
+			  int32_t dstX,  int32_t dstY,  uint32_t dstW,  uint32_t dstH)
 {
 	if(w != dstW || h != dstH)
 	{

@@ -25,78 +25,78 @@
  */
 
 void
-atomic_set(int32 *value, int32 newValue)
+atomic_set(int32_t *value, int32_t newValue)
 {
 	InterruptsLocker locker;
 	*value = newValue;
 }
 
-int32
-atomic_get_and_set(int32 *value, int32 newValue)
+int32_t
+atomic_get_and_set(int32_t *value, int32_t newValue)
 {
 	InterruptsLocker locker;
-	int32 oldValue = *value;
+	int32_t oldValue = *value;
 	atomic_set(value, newValue);
 	return oldValue;
 }
 
-int32
-atomic_test_and_set(int32 *value, int32 newValue, int32 testAgainst)
+int32_t
+atomic_test_and_set(int32_t *value, int32_t newValue, int32_t testAgainst)
 {
 	InterruptsLocker locker;
 
-	int32 oldValue = *value;
+	int32_t oldValue = *value;
 	if (oldValue == testAgainst)
 		*value = newValue;
 	return oldValue;
 }
 
-int32
-atomic_add(int32 *value, int32 addValue)
+int32_t
+atomic_add(int32_t *value, int32_t addValue)
 {
 	InterruptsLocker locker;
 
-	int32 oldValue = *value;
+	int32_t oldValue = *value;
 	*value += addValue;
 	return oldValue;
 }
 
-int32
-atomic_and(int32 *value, int32 andValue)
+int32_t
+atomic_and(int32_t *value, int32_t andValue)
 {
 	InterruptsLocker locker;
 
-	int32 oldValue = *value;
+	int32_t oldValue = *value;
 	*value &= andValue;
 	return oldValue;
 }
 
-int32
-atomic_or(int32 *value, int32 orValue)
+int32_t
+atomic_or(int32_t *value, int32_t orValue)
 {
 	InterruptsLocker locker;
 
-	int32 oldValue = *value;
+	int32_t oldValue = *value;
 	*value |= orValue;
 	return oldValue;
 }
 
-int32
-atomic_get(int32 *value)
+int32_t
+atomic_get(int32_t *value)
 {
 	InterruptsLocker locker;
 
-	int32 oldValue = *value;
+	int32_t oldValue = *value;
 	return oldValue;
 }
 
 void
-_user_atomic_set(int32 *value, int32 newValue)
+_user_atomic_set(int32_t *value, int32_t newValue)
 {
 	if (IS_USER_ADDRESS(value)
-		&& lock_memory((void *)value, sizeof(int32), B_READ_DEVICE) == B_OK) {
+		&& lock_memory((void *)value, sizeof(int32_t), B_READ_DEVICE) == B_OK) {
 		atomic_set(value, newValue);
-		unlock_memory((void *)value, sizeof(int32), B_READ_DEVICE);
+		unlock_memory((void *)value, sizeof(int32_t), B_READ_DEVICE);
 		return;
 	}
 
@@ -105,13 +105,13 @@ access_violation:
 	return;
 }
 
-int32
-_user_atomic_get_and_set(int32 *value, int32 newValue)
+int32_t
+_user_atomic_get_and_set(int32_t *value, int32_t newValue)
 {
 	if (IS_USER_ADDRESS(value)
-		&& lock_memory((void *)value, sizeof(int32), B_READ_DEVICE) == B_OK) {
-		int32 oldValue = atomic_get_and_set(value, newValue);
-		unlock_memory((void *)value, sizeof(int32), B_READ_DEVICE);
+		&& lock_memory((void *)value, sizeof(int32_t), B_READ_DEVICE) == B_OK) {
+		int32_t oldValue = atomic_get_and_set(value, newValue);
+		unlock_memory((void *)value, sizeof(int32_t), B_READ_DEVICE);
 		return oldValue;
 	}
 
@@ -120,13 +120,13 @@ access_violation:
 	return -1;
 }
 
-int32
-_user_atomic_test_and_set(int32 *value, int32 newValue, int32 testAgainst)
+int32_t
+_user_atomic_test_and_set(int32_t *value, int32_t newValue, int32_t testAgainst)
 {
 	if (IS_USER_ADDRESS(value)
-		&& lock_memory((void *)value, sizeof(int32), B_READ_DEVICE) == B_OK) {
-		int32 oldValue = atomic_test_and_set((int32*)value, newValue, testAgainst);
-		unlock_memory((void *)value, sizeof(int32), B_READ_DEVICE);
+		&& lock_memory((void *)value, sizeof(int32_t), B_READ_DEVICE) == B_OK) {
+		int32_t oldValue = atomic_test_and_set((int32_t*)value, newValue, testAgainst);
+		unlock_memory((void *)value, sizeof(int32_t), B_READ_DEVICE);
 		return oldValue;
 	}
 
@@ -135,13 +135,13 @@ access_violation:
 	return -1;
 }
 
-int32
-_user_atomic_add(int32 *value, int32 addValue)
+int32_t
+_user_atomic_add(int32_t *value, int32_t addValue)
 {
 	if (IS_USER_ADDRESS(value)
-		&& lock_memory((void *)value, sizeof(int32), B_READ_DEVICE) == B_OK) {
-		int32 oldValue = atomic_add(value, addValue);
-		unlock_memory((void *)value, sizeof(int32), B_READ_DEVICE);
+		&& lock_memory((void *)value, sizeof(int32_t), B_READ_DEVICE) == B_OK) {
+		int32_t oldValue = atomic_add(value, addValue);
+		unlock_memory((void *)value, sizeof(int32_t), B_READ_DEVICE);
 		return oldValue;
 	}
 
@@ -150,13 +150,13 @@ access_violation:
 	return -1;
 }
 
-int32
-_user_atomic_and(int32 *value, int32 andValue)
+int32_t
+_user_atomic_and(int32_t *value, int32_t andValue)
 {
 	if (IS_USER_ADDRESS(value)
-		&& lock_memory((void *)value, sizeof(int32), B_READ_DEVICE) == B_OK) {
-		int32 oldValue = atomic_and(value, andValue);
-		unlock_memory((void *)value, sizeof(int32), B_READ_DEVICE);
+		&& lock_memory((void *)value, sizeof(int32_t), B_READ_DEVICE) == B_OK) {
+		int32_t oldValue = atomic_and(value, andValue);
+		unlock_memory((void *)value, sizeof(int32_t), B_READ_DEVICE);
 		return oldValue;
 	}
 
@@ -165,13 +165,13 @@ access_violation:
 	return -1;
 }
 
-int32
-_user_atomic_or(int32 *value, int32 orValue)
+int32_t
+_user_atomic_or(int32_t *value, int32_t orValue)
 {
 	if (IS_USER_ADDRESS(value)
-		&& lock_memory((void *)value, sizeof(int32), B_READ_DEVICE) == B_OK) {
-		int32 oldValue = atomic_or(value, orValue);
-		unlock_memory((void *)value, sizeof(int32), B_READ_DEVICE);
+		&& lock_memory((void *)value, sizeof(int32_t), B_READ_DEVICE) == B_OK) {
+		int32_t oldValue = atomic_or(value, orValue);
+		unlock_memory((void *)value, sizeof(int32_t), B_READ_DEVICE);
 		return oldValue;
 	}
 
@@ -180,13 +180,13 @@ access_violation:
 	return -1;
 }
 
-int32
-_user_atomic_get(int32 *value)
+int32_t
+_user_atomic_get(int32_t *value)
 {
 	if (IS_USER_ADDRESS(value)
-		&& lock_memory((void *)value, sizeof(int32), B_READ_DEVICE) == B_OK) {
-		int32 oldValue = atomic_get(value);
-		unlock_memory((void *)value, sizeof(int32), B_READ_DEVICE);
+		&& lock_memory((void *)value, sizeof(int32_t), B_READ_DEVICE) == B_OK) {
+		int32_t oldValue = atomic_get(value);
+		unlock_memory((void *)value, sizeof(int32_t), B_READ_DEVICE);
 		return oldValue;
 	}
 

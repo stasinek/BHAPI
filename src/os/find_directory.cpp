@@ -266,7 +266,7 @@ get_user_home_path(char* buffer, size_t bufferSize)
 
 
 status_t __find_directory(directory_which which, dev_t device, bool createIt,
-	char *returnedPath, int32 _pathLength)
+	char *returnedPath, int32_t _pathLength)
 {
 	if (_pathLength <= 0)
 		return E2BIG;
@@ -506,7 +506,7 @@ status_t __find_directory(directory_which which, dev_t device, bool createIt,
 
 
 extern "C" status_t __find_directory_alpha4(directory_which which, dev_t device, bool createIt,
-	char *returnedPath, int32 pathLength)
+	char *returnedPath, int32_t pathLength)
 {
 	return __find_directory(which, device, createIt, returnedPath, pathLength);
 }
@@ -519,7 +519,7 @@ DEFINE_LIBROOT_KERNEL_SYMBOL_VERSION("__find_directory", "find_directory@@",
     "1_ALPHA5");
 #else // _LOADER_MODE
 status_t __find_directory(directory_which which, dev_t device, bool createIt,
-	char *returnedPath, int32 _pathLength)
+	char *returnedPath, int32_t _pathLength)
 {
 	if (_pathLength <= 0)
 		return E2BIG;
@@ -740,7 +740,7 @@ create_path(const char *path, mode_t mode)
 
 
 status_t find_directory(directory_which which, dev_t device, bool createIt,
-	char *returnedPath, int32 pathLength)
+	char *returnedPath, int32_t pathLength)
 {
 	// we support only the handful of paths we need
 	const char* path;
@@ -778,7 +778,7 @@ status_t find_directory(directory_which which, dev_t device, bool createIt,
 
 
 status_t __find_directory(directory_which which, dev_t device, bool createIt,
-	char *returnedPath, int32 pathLength)
+	char *returnedPath, int32_t pathLength)
 {
 	return find_directory(which, device, createIt, returnedPath, pathLength);
 }

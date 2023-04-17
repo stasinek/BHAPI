@@ -34,11 +34,11 @@ public:
 	virtual void				OnTOCSizeInfo(uint64 uncompressedStringsSize,
 									uint64 uncompressedMainSize,
 									uint64 uncompressedTOCSize) = 0;
-	virtual void				OnPackageAttributesSizeInfo(uint32 stringCount,
-									uint32 uncompressedSize) = 0;
-	virtual void				OnPackageSizeInfo(uint32 headerSize,
+	virtual void				OnPackageAttributesSizeInfo(uint32_t stringCount,
+									uint32_t uncompressedSize) = 0;
+	virtual void				OnPackageSizeInfo(uint32_t headerSize,
 									uint64 heapSize, uint64 tocSize,
-									uint32 packageAttributesSize,
+									uint32_t packageAttributesSize,
 									uint64 totalSize) = 0;
 };
 
@@ -48,19 +48,19 @@ public:
 								BPackageWriterParameters();
 								~BPackageWriterParameters();
 
-			uint32				Flags() const;
-			void				SetFlags(uint32 flags);
+			uint32_t				Flags() const;
+			void				SetFlags(uint32_t flags);
 
-			uint32				Compression() const;
-			void				SetCompression(uint32 compression);
+			uint32_t				Compression() const;
+			void				SetCompression(uint32_t compression);
 
-			int32				CompressionLevel() const;
-			void				SetCompressionLevel(int32 compressionLevel);
+			int32_t				CompressionLevel() const;
+			void				SetCompressionLevel(int32_t compressionLevel);
 
 private:
-			uint32				fFlags;
-			uint32				fCompression;
-			int32				fCompressionLevel;
+			uint32_t				fFlags;
+			uint32_t				fCompression;
+			int32_t				fCompressionLevel;
 };
 
 

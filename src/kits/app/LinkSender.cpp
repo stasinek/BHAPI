@@ -60,7 +60,7 @@ void LinkSender::SetPort(port_id port)
 }
 
 
-status_t LinkSender::StartMessage(int32 code, size_t minSize)
+status_t LinkSender::StartMessage(int32_t code, size_t minSize)
 {
 	// end previous message
 	if (EndMessage() < B_OK)
@@ -192,29 +192,29 @@ status_t LinkSender::Attach(const void *passedData, size_t passedSize)
 }
 
 
-status_t LinkSender::AttachString(const char *string, int32 length)
+status_t LinkSender::AttachString(const char *string, int32_t length)
 {
 	if (string == NULL)
 		string = "";
 
 	size_t maxLength = strlen(string);
 	if (length == -1) {
-		length = (int32)maxLength;
+		length = (int32_t)maxLength;
 
 		// we should report an error here
 		if (maxLength > kMaxStringSize)
 			length = 0;
-	} else if (length > (int32)maxLength)
+	} else if (length > (int32_t)maxLength)
 		length = maxLength;
 
-	status_t status = Attach<int32>(length);
+	status_t status = Attach<int32_t>(length);
 	if (status < B_OK)
 		return status;
 
 	if (length > 0) {
 		status = Attach(string, length);
 		if (status < B_OK)
-			fCurrentEnd -= sizeof(int32);	// rewind the transaction
+			fCurrentEnd -= sizeof(int32_t);	// rewind the transaction
 	}
 
 	return status;
@@ -257,8 +257,8 @@ status_t LinkSender::AdjustBuffer(size_t newSize, char **_oldBuffer)
 status_t LinkSender::FlushCompleted(size_t newBufferSize)
 {
 	// we need to hide the incomplete message so that it's not flushed
-	int32 end = fCurrentEnd;
-	int32 start = fCurrentStart;
+	int32_t end = fCurrentEnd;
+	int32_t start = fCurrentStart;
 	fCurrentEnd = fCurrentStart;
 
 	status_t status = Flush();

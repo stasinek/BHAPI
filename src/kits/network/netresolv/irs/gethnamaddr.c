@@ -125,7 +125,7 @@ static char *__ypdomain;
 static struct hostent host;
 static char *host_aliases[MAXALIASES];
 static char hostbuf[8*1024];
-static u_int32_t host_addr[16 / sizeof(u_int32_t)];	/* IPv4 or IPv6 */
+static u_int32_t_t host_addr[16 / sizeof(u_int32_t_t)];	/* IPv4 or IPv6 */
 static FILE *hostf = NULL;
 static int stayopen = 0;
 
@@ -137,7 +137,7 @@ typedef union {
 } querybuf;
 
 typedef union {
-    int32_t al;
+    int32_t_t al;
     char ac;
 } align;
 

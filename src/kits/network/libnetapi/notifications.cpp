@@ -16,7 +16,7 @@
 
 static status_t check_for_notifications_syscall(void)
 {
-	uint32 version = 0;
+	uint32_t version = 0;
 	return _kern_generic_syscall(NET_NOTIFICATIONS_SYSCALLS, B_SYSCALL_INFO,
 		&version, sizeof(version));
 }
@@ -25,7 +25,7 @@ static status_t check_for_notifications_syscall(void)
 //	#pragma mark -
 
 
-status_t start_watching_network(uint32 flags, const BMessenger& target)
+status_t start_watching_network(uint32_t flags, const BMessenger& target)
 {
 	if (check_for_notifications_syscall() != B_OK)
 		return B_NOT_SUPPORTED;
@@ -42,7 +42,7 @@ status_t start_watching_network(uint32 flags, const BMessenger& target)
 }
 
 
-status_t start_watching_network(uint32 flags, const BHandler* handler,
+status_t start_watching_network(uint32_t flags, const BHandler* handler,
 	const BLooper* looper)
 {
 	const BMessenger target(handler, looper);

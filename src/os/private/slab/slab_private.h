@@ -19,9 +19,9 @@ static const size_t kMinObjectAlignment = 8;
 
 void		request_memory_manager_maintenance();
 
-void*		block_alloc(size_t size, size_t alignment, uint32 flags);
+void*		block_alloc(size_t size, size_t alignment, uint32_t flags);
 void*		block_alloc_early(size_t size);
-void		block_free(void* block, uint32 flags);
+void		block_free(void* block, uint32_t flags);
 void		block_allocator_init_boot();
 void		block_allocator_init_rest();
 
@@ -46,7 +46,7 @@ _push(Type*& head, Type* object)
 
 
 static inline void*
-slab_internal_alloc(size_t size, uint32 flags)
+slab_internal_alloc(size_t size, uint32_t flags)
 {
 	if (flags & CACHE_DURING_BOOT)
 		return block_alloc_early(size);
@@ -56,7 +56,7 @@ slab_internal_alloc(size_t size, uint32 flags)
 
 
 static inline void
-slab_internal_free(void* buffer, uint32 flags)
+slab_internal_free(void* buffer, uint32_t flags)
 {
 	block_free(buffer, flags);
 }

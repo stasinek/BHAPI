@@ -43,8 +43,8 @@ public:
 	virtual	void			MessageReceived(BMessage* message);
 	virtual	void			FrameResized(float newWidth, float newHeight);
 
-	virtual BHandler*		ResolveSpecifier(BMessage* message, int32 index,
-								BMessage* specifier, int32 form,
+	virtual BHandler*		ResolveSpecifier(BMessage* message, int32_t index,
+								BMessage* specifier, int32_t form,
 								const char* property);
 	virtual	status_t		GetSupportedSuites(BMessage* data);
 	virtual status_t		Perform(perform_code d, void* arg);
@@ -59,7 +59,7 @@ protected:
 private:
 			void			AddChild(BView* child, BView* before = NULL);
 			bool			RemoveChild(BView* child);
-			BView*			ChildAt(int32 index) const;
+			BView*			ChildAt(int32_t index) const;
 
 	class	_BPrintPanelFilter_ : public BMessageFilter {
 	public:
@@ -82,7 +82,7 @@ private:
 			sem_id			fPrintPanelSem;
 			status_t		fPrintPanelResult;
 
-			uint32			_reserved[5];
+			uint32_t			_reserved[5];
 };
 
 

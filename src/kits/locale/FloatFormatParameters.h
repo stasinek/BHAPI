@@ -48,7 +48,7 @@ class BFloatFormatParameters : public BNumberFormatParameters {
 		float_format_type				fFloatFormatType;
 		bool							fAlwaysUseFractionSeparator;
 		bool							fKeepTrailingFractionZeros;
-		uint32							fFlags;
+		uint32_t							fFlags;
 };
 
 #endif	// _B_FLOAT_FORMAT_PARAMETERS_H_

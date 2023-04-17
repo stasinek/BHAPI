@@ -37,14 +37,14 @@ public:
 
 class TWindow : public EWindow {
 public:
-	TWindow(ERect frame, const char* title, e_window_type type, euint32 flag);
+	TWindow(ERect frame, const char* title, e_window_type type, euint32_t flag);
 	virtual bool QuitRequested();
 };
 
 
 class TView : public EView {
 public:
-	TView(ERect frame, const char *name, euint32 resizingMode, euint32 flag);
+	TView(ERect frame, const char *name, euint32_t resizingMode, euint32_t flag);
 	virtual void Draw(ERect updateRect);
 };
 
@@ -68,7 +68,7 @@ TApplication::TApplication()
 }
 
 
-TWindow::TWindow(ERect frame, const char* title, e_window_type type, euint32 flag)
+TWindow::TWindow(ERect frame, const char* title, e_window_type type, euint32_t flag)
 	: EWindow(frame, title, type, flag)
 {
 	frame.OffsetTo(0, 0);
@@ -84,7 +84,7 @@ bool TWindow::QuitRequested()
 }
 
 
-TView::TView(ERect frame, const char* title, euint32 resizingMode, euint32 flags)
+TView::TView(ERect frame, const char* title, euint32_t resizingMode, euint32_t flags)
 	: EView(frame, title, resizingMode, flags)
 {
 	SetViewColor(200, 200, 200);

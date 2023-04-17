@@ -220,7 +220,7 @@ static int get_port(const struct addrinfo *, const char *, int,
 static const struct afd *find_afd(int);
 static int addrconfig(uint64_t *);
 #ifdef INET6
-static int ip6_str2scopeid(char *, struct sockaddr_in6 *, u_int32_t *);
+static int ip6_str2scopeid(char *, struct sockaddr_in6 *, u_int32_t_t *);
 #endif
 
 static struct addrinfo *getanswer(const querybuf *, int, const char *, int,
@@ -908,7 +908,7 @@ explore_numeric_scope(const struct addrinfo *pai, const char *hostname,
 
 	error = explore_numeric(pai, addr, servname, res, hostname, svd);
 	if (error == 0) {
-		u_int32_t scopeid;
+		u_int32_t_t scopeid;
 
 		for (cur = *res; cur; cur = cur->ai_next) {
 			if (cur->ai_family != AF_INET6)
@@ -1118,7 +1118,7 @@ addrconfig(uint64_t *mask)
 #ifdef INET6
 /* convert a string to a scope identifier. XXX: IPv6 specific */
 static int
-ip6_str2scopeid(char *scope, struct sockaddr_in6 *sin6, u_int32_t *scopeid)
+ip6_str2scopeid(char *scope, struct sockaddr_in6 *sin6, u_int32_t_t *scopeid)
 {
 	u_long lscopeid;
 	struct in6_addr *a6;
@@ -1158,7 +1158,7 @@ ip6_str2scopeid(char *scope, struct sockaddr_in6 *sin6, u_int32_t *scopeid)
   trynumeric:
 	errno = 0;
 	lscopeid = strtoul(scope, &ep, 10);
-	*scopeid = (u_int32_t)(lscopeid & 0xffffffffUL);
+	*scopeid = (u_int32_t_t)(lscopeid & 0xffffffffUL);
 	if (errno == 0 && ep && *ep == '\0' && *scopeid == lscopeid)
 		return 0;
 	else

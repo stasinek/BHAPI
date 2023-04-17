@@ -120,7 +120,7 @@ struct debugger_module_info {
 	void (*exit_debugger)(void);
 
 	// I/O hooks
-	int (*debugger_puts)(const char *str, int32 length);
+	int (*debugger_puts)(const char *str, int32_t length);
 	int (*debugger_getchar)(void);
 	// TODO: add hooks for tunnelling gdb ?
 
@@ -133,15 +133,15 @@ struct debugger_demangle_module_info {
 
 	const char* (*demangle_symbol)(const char* name, char* buffer,
 		size_t bufferSize, bool* _isObjectMethod);
-	status_t (*get_next_argument)(uint32* _cookie, const char* symbol,
-		char* name, size_t nameSize, int32* _type, size_t* _argumentLength);
+	status_t (*get_next_argument)(uint32_t* _cookie, const char* symbol,
+		char* name, size_t nameSize, int32_t* _type, size_t* _argumentLength);
 };
 
 
 typedef struct debug_page_fault_info {
 	addr_t	fault_address;
 	addr_t	pc;
-	uint32	flags;
+	uint32_t	flags;
 } debug_page_fault_info;
 
 // debug_page_fault_info::flags
@@ -161,18 +161,18 @@ extern void		debug_init_post_vm(struct kernel_args *args);
 extern void		debug_init_post_settings(struct kernel_args *args);
 extern void		debug_init_post_modules(struct kernel_args *args);
 extern void		debug_early_boot_message(const char *string);
-extern void		debug_puts(const char *s, int32 length);
+extern void		debug_puts(const char *s, int32_t length);
 extern bool		debug_debugger_running(void);
 extern bool		debug_screen_output_enabled(void);
 extern void		debug_stop_screen_debug_output(void);
 extern void		debug_set_page_fault_info(addr_t faultAddress, addr_t pc,
-					uint32 flags);
+					uint32_t flags);
 extern debug_page_fault_info* debug_get_page_fault_info();
-extern void		debug_trap_cpu_in_kdl(int32 cpu, bool returnIfHandedOver);
-extern void		debug_double_fault(int32 cpu);
+extern void		debug_trap_cpu_in_kdl(int32_t cpu, bool returnIfHandedOver);
+extern void		debug_double_fault(int32_t cpu);
 extern bool		debug_emergency_key_pressed(char key);
 extern bool		debug_is_kernel_memory_accessible(addr_t address, size_t size,
-					uint32 protection);
+					uint32_t protection);
 extern int		debug_call_with_fault_handler(jmp_buf jumpBuffer,
 					void (*function)(void*), void* parameter);
 extern status_t	debug_memcpy(team_id teamID, void* to, const void* from,
@@ -203,7 +203,7 @@ extern status_t	parse_next_debug_command_argument(const char** expressionString,
 
 extern status_t	add_debugger_command_etc(const char* name,
 					debugger_command_hook func, const char* description,
-					const char* usage, uint32 flags);
+					const char* usage, uint32_t flags);
 extern status_t	add_debugger_command_alias(const char* newName,
 					const char* oldName, const char* description);
 extern bool		print_debugger_command_usage(const char* command);
@@ -211,15 +211,15 @@ extern bool		has_debugger_command(const char* command);
 
 extern const char *debug_demangle_symbol(const char* symbol, char* buffer,
 					size_t bufferSize, bool* _isObjectMethod);
-extern status_t	debug_get_next_demangled_argument(uint32* _cookie,
+extern status_t	debug_get_next_demangled_argument(uint32_t* _cookie,
 					const char* symbol, char* name, size_t nameSize,
-					int32* _type, size_t* _argumentLength);
+					int32_t* _type, size_t* _argumentLength);
 
 extern BKernel_Thread* debug_set_debugged_thread(BKernel_Thread* thread);
 extern BKernel_Thread* debug_get_debugged_thread();
 extern bool debug_is_debugged_team(team_id teamID);
 
-extern struct arch_debug_registers* debug_get_debug_registers(int32 cpu);
+extern struct arch_debug_registers* debug_get_debug_registers(int32_t cpu);
 
 extern status_t _user_kernel_debugger(const char *message);
 extern void _user_register_syslog_daemon(port_id port);

@@ -83,7 +83,7 @@ public:
  	// returned by this function.
 
 			status_t			DecodedFormat(media_format* _format,
-									uint32 flags = 0);
+									uint32_t flags = 0);
 
 	// CountFrames and Duration return the total number of frame and the
 	// total duration (expressed in microseconds) of a track.
@@ -135,13 +135,13 @@ public:
 	// frame or _after_ this frame, pass B_MEDIA_SEEK_CLOSEST_FORWARD or
 	// B_MEDIA_SEEK_CLOSEST_BACKWARD as the flags field.
 
-			status_t			SeekToTime(bigtime_t* _time, int32 flags = 0);
-			status_t			SeekToFrame(int64* _frame, int32 flags = 0);
+			status_t			SeekToTime(bigtime_t* _time, int32_t flags = 0);
+			status_t			SeekToFrame(int64* _frame, int32_t flags = 0);
 
 			status_t			FindKeyFrameForTime(bigtime_t* _time,
-									int32 flags = 0) const;
+									int32_t flags = 0) const;
 			status_t			FindKeyFrameForFrame(int64* _frame,
-									int32 flags = 0) const;
+									int32_t flags = 0) const;
 
 	// ReadChunk returns, in _buffer, the next _size bytes of
 	// data from the track.  The data is not decoded -- it will be
@@ -150,7 +150,7 @@ public:
 	// you access the track raw (i.e. with ReadChunk) or you access
 	// it with ReadFrames.
 
-			status_t			ReadChunk(char** _buffer, int32* _size,
+			status_t			ReadChunk(char** _buffer, int32_t* _size,
 									media_header* _header = NULL);
 
 
@@ -158,16 +158,16 @@ public:
 	// Write-only Functions
 	//
 			status_t			AddCopyright(const char* copyright);
-			status_t			AddTrackInfo(uint32 code, const void* data,
-									size_t size, uint32 flags = 0);
+			status_t			AddTrackInfo(uint32_t code, const void* data,
+									size_t size, uint32_t flags = 0);
 
 	// Write frameCount of data to the track. This data is passed
 	// through the encoder that was specified when the MediaTrack
 	// was constructed.
 	// Pass B_MEDIA_KEY_FRAME for flags if it is.
 
-			status_t			WriteFrames(const void* data, int32 frameCount,
-									int32 flags = 0);
+			status_t			WriteFrames(const void* data, int32_t frameCount,
+									int32_t flags = 0);
 			status_t			WriteFrames(const void* data, int64 frameCount,
 									media_encode_info* info);
 
@@ -176,7 +176,7 @@ public:
 	// Pass B_MEDIA_KEY_FRAME for flags if it is.
 
 			status_t			WriteChunk(const void* data, size_t size,
-									uint32 flags = 0);
+									uint32_t flags = 0);
 			status_t			WriteChunk(const void* data, size_t size,
 									media_encode_info* info);
 
@@ -188,9 +188,9 @@ public:
 	// These are for controlling the underlying encoder and track parameters
 	// returns a copy of the parameter web
 			status_t			GetParameterWeb(BParameterWeb** _web);
-			status_t 			GetParameterValue(int32 id, void* value,
+			status_t 			GetParameterValue(int32_t id, void* value,
 									size_t* size);
-			status_t			SetParameterValue(int32 id, const void* value,
+			status_t			SetParameterValue(int32_t id, const void* value,
 									size_t size);
 			BView*				GetParameterView();
 
@@ -205,7 +205,7 @@ public:
 									encode_parameters* parameters);
 
 
-	virtual	status_t			Perform(int32 code, void* data);
+	virtual	status_t			Perform(int32_t code, void* data);
 
 private:
 	friend class BMediaFile;
@@ -214,18 +214,18 @@ private:
 			BParameterWeb*	Web();
 
 	// Does nothing, returns B_ERROR, for Zeta compatiblity only
-			status_t			ControlCodec(int32 selector, void* _inOutData,
+			status_t			ControlCodec(int32_t selector, void* _inOutData,
 									size_t size);
 
 	// For read-only access to a BMediaTrack
 								BMediaTrack(
 									BPrivate::media::MediaExtractor* extractor,
-									int32 streamIndex);
+									int32_t streamIndex);
 
 	// For write-only access to a BMediaTrack
 								BMediaTrack(
 									BPrivate::media::MediaWriter* writer,
-									int32 streamIndex, media_format* format,
+									int32_t streamIndex, media_format* format,
 									const media_codec_info* codecInfo);
 
 			void				SetupWorkaround();
@@ -239,21 +239,21 @@ private:
 			BPrivate::media::Decoder* fRawDecoder;
 			BPrivate::media::MediaExtractor* fExtractor;
 
-			int32				fStream;
+			int32_t				fStream;
 			int64				fCurrentFrame;
 			bigtime_t			fCurrentTime;
 
 			media_codec_info	fCodecInfo;
 
 			BPrivate::media::Encoder* fEncoder;
-			int32				fEncoderID;
+			int32_t				fEncoderID;
 			BPrivate::media::MediaWriter* fWriter;
 			media_format		fFormat;
 
-			uint32				fWorkaroundFlags;
+			uint32_t				fWorkaroundFlags;
 
 protected:
-			int32				EncoderID() { return fEncoderID; };
+			int32_t				EncoderID() { return fEncoderID; };
 
 private:
 								BMediaTrack();
@@ -264,56 +264,56 @@ private:
 			double				_FrameRate() const;
 
 	// FBC data and virtuals
-			uint32				_reserved_BMediaTrack_[31];
+			uint32_t				_reserved_BMediaTrack_[31];
 
-	virtual	status_t			_Reserved_BMediaTrack_0(int32 arg, ...);
-	virtual	status_t			_Reserved_BMediaTrack_1(int32 arg, ...);
-	virtual	status_t			_Reserved_BMediaTrack_2(int32 arg, ...);
-	virtual	status_t			_Reserved_BMediaTrack_3(int32 arg, ...);
-	virtual	status_t			_Reserved_BMediaTrack_4(int32 arg, ...);
-	virtual	status_t			_Reserved_BMediaTrack_5(int32 arg, ...);
-	virtual	status_t			_Reserved_BMediaTrack_6(int32 arg, ...);
-	virtual	status_t			_Reserved_BMediaTrack_7(int32 arg, ...);
-	virtual	status_t			_Reserved_BMediaTrack_8(int32 arg, ...);
-	virtual	status_t			_Reserved_BMediaTrack_9(int32 arg, ...);
-	virtual	status_t			_Reserved_BMediaTrack_10(int32 arg, ...);
-	virtual	status_t			_Reserved_BMediaTrack_11(int32 arg, ...);
-	virtual	status_t			_Reserved_BMediaTrack_12(int32 arg, ...);
-	virtual	status_t			_Reserved_BMediaTrack_13(int32 arg, ...);
-	virtual	status_t			_Reserved_BMediaTrack_14(int32 arg, ...);
-	virtual	status_t			_Reserved_BMediaTrack_15(int32 arg, ...);
-	virtual	status_t			_Reserved_BMediaTrack_16(int32 arg, ...);
-	virtual	status_t			_Reserved_BMediaTrack_17(int32 arg, ...);
-	virtual	status_t			_Reserved_BMediaTrack_18(int32 arg, ...);
-	virtual	status_t			_Reserved_BMediaTrack_19(int32 arg, ...);
-	virtual	status_t			_Reserved_BMediaTrack_20(int32 arg, ...);
-	virtual	status_t			_Reserved_BMediaTrack_21(int32 arg, ...);
-	virtual	status_t			_Reserved_BMediaTrack_22(int32 arg, ...);
-	virtual	status_t			_Reserved_BMediaTrack_23(int32 arg, ...);
-	virtual	status_t			_Reserved_BMediaTrack_24(int32 arg, ...);
-	virtual	status_t			_Reserved_BMediaTrack_25(int32 arg, ...);
-	virtual	status_t			_Reserved_BMediaTrack_26(int32 arg, ...);
-	virtual	status_t			_Reserved_BMediaTrack_27(int32 arg, ...);
-	virtual	status_t			_Reserved_BMediaTrack_28(int32 arg, ...);
-	virtual	status_t			_Reserved_BMediaTrack_29(int32 arg, ...);
-	virtual	status_t			_Reserved_BMediaTrack_30(int32 arg, ...);
-	virtual	status_t			_Reserved_BMediaTrack_31(int32 arg, ...);
-	virtual	status_t			_Reserved_BMediaTrack_32(int32 arg, ...);
-	virtual	status_t			_Reserved_BMediaTrack_33(int32 arg, ...);
-	virtual	status_t			_Reserved_BMediaTrack_34(int32 arg, ...);
-	virtual	status_t			_Reserved_BMediaTrack_35(int32 arg, ...);
-	virtual	status_t			_Reserved_BMediaTrack_36(int32 arg, ...);
-	virtual	status_t			_Reserved_BMediaTrack_37(int32 arg, ...);
-	virtual	status_t			_Reserved_BMediaTrack_38(int32 arg, ...);
-	virtual	status_t			_Reserved_BMediaTrack_39(int32 arg, ...);
-	virtual	status_t			_Reserved_BMediaTrack_40(int32 arg, ...);
-	virtual	status_t			_Reserved_BMediaTrack_41(int32 arg, ...);
-	virtual	status_t			_Reserved_BMediaTrack_42(int32 arg, ...);
-	virtual	status_t			_Reserved_BMediaTrack_43(int32 arg, ...);
-	virtual	status_t			_Reserved_BMediaTrack_44(int32 arg, ...);
-	virtual	status_t			_Reserved_BMediaTrack_45(int32 arg, ...);
-	virtual	status_t			_Reserved_BMediaTrack_46(int32 arg, ...);
-	virtual	status_t			_Reserved_BMediaTrack_47(int32 arg, ...);
+	virtual	status_t			_Reserved_BMediaTrack_0(int32_t arg, ...);
+	virtual	status_t			_Reserved_BMediaTrack_1(int32_t arg, ...);
+	virtual	status_t			_Reserved_BMediaTrack_2(int32_t arg, ...);
+	virtual	status_t			_Reserved_BMediaTrack_3(int32_t arg, ...);
+	virtual	status_t			_Reserved_BMediaTrack_4(int32_t arg, ...);
+	virtual	status_t			_Reserved_BMediaTrack_5(int32_t arg, ...);
+	virtual	status_t			_Reserved_BMediaTrack_6(int32_t arg, ...);
+	virtual	status_t			_Reserved_BMediaTrack_7(int32_t arg, ...);
+	virtual	status_t			_Reserved_BMediaTrack_8(int32_t arg, ...);
+	virtual	status_t			_Reserved_BMediaTrack_9(int32_t arg, ...);
+	virtual	status_t			_Reserved_BMediaTrack_10(int32_t arg, ...);
+	virtual	status_t			_Reserved_BMediaTrack_11(int32_t arg, ...);
+	virtual	status_t			_Reserved_BMediaTrack_12(int32_t arg, ...);
+	virtual	status_t			_Reserved_BMediaTrack_13(int32_t arg, ...);
+	virtual	status_t			_Reserved_BMediaTrack_14(int32_t arg, ...);
+	virtual	status_t			_Reserved_BMediaTrack_15(int32_t arg, ...);
+	virtual	status_t			_Reserved_BMediaTrack_16(int32_t arg, ...);
+	virtual	status_t			_Reserved_BMediaTrack_17(int32_t arg, ...);
+	virtual	status_t			_Reserved_BMediaTrack_18(int32_t arg, ...);
+	virtual	status_t			_Reserved_BMediaTrack_19(int32_t arg, ...);
+	virtual	status_t			_Reserved_BMediaTrack_20(int32_t arg, ...);
+	virtual	status_t			_Reserved_BMediaTrack_21(int32_t arg, ...);
+	virtual	status_t			_Reserved_BMediaTrack_22(int32_t arg, ...);
+	virtual	status_t			_Reserved_BMediaTrack_23(int32_t arg, ...);
+	virtual	status_t			_Reserved_BMediaTrack_24(int32_t arg, ...);
+	virtual	status_t			_Reserved_BMediaTrack_25(int32_t arg, ...);
+	virtual	status_t			_Reserved_BMediaTrack_26(int32_t arg, ...);
+	virtual	status_t			_Reserved_BMediaTrack_27(int32_t arg, ...);
+	virtual	status_t			_Reserved_BMediaTrack_28(int32_t arg, ...);
+	virtual	status_t			_Reserved_BMediaTrack_29(int32_t arg, ...);
+	virtual	status_t			_Reserved_BMediaTrack_30(int32_t arg, ...);
+	virtual	status_t			_Reserved_BMediaTrack_31(int32_t arg, ...);
+	virtual	status_t			_Reserved_BMediaTrack_32(int32_t arg, ...);
+	virtual	status_t			_Reserved_BMediaTrack_33(int32_t arg, ...);
+	virtual	status_t			_Reserved_BMediaTrack_34(int32_t arg, ...);
+	virtual	status_t			_Reserved_BMediaTrack_35(int32_t arg, ...);
+	virtual	status_t			_Reserved_BMediaTrack_36(int32_t arg, ...);
+	virtual	status_t			_Reserved_BMediaTrack_37(int32_t arg, ...);
+	virtual	status_t			_Reserved_BMediaTrack_38(int32_t arg, ...);
+	virtual	status_t			_Reserved_BMediaTrack_39(int32_t arg, ...);
+	virtual	status_t			_Reserved_BMediaTrack_40(int32_t arg, ...);
+	virtual	status_t			_Reserved_BMediaTrack_41(int32_t arg, ...);
+	virtual	status_t			_Reserved_BMediaTrack_42(int32_t arg, ...);
+	virtual	status_t			_Reserved_BMediaTrack_43(int32_t arg, ...);
+	virtual	status_t			_Reserved_BMediaTrack_44(int32_t arg, ...);
+	virtual	status_t			_Reserved_BMediaTrack_45(int32_t arg, ...);
+	virtual	status_t			_Reserved_BMediaTrack_46(int32_t arg, ...);
+	virtual	status_t			_Reserved_BMediaTrack_47(int32_t arg, ...);
 };
 
 #endif // _MEDIA_TRACK_H

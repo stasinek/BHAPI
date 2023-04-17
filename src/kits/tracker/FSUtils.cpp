@@ -119,18 +119,18 @@ static status_t MoveEntryToTrash(BEntry*, BPoint*, Undo &undo);
 static void LowLevelCopy(BEntry*, StatStruct*, BDirectory*, char* destName,
 	CopyLoopControl*, BPoint*);
 status_t DuplicateTask(BObjectList<entry_ref>* srcList);
-static status_t MoveTask(BObjectList<entry_ref>*, BEntry*, BList*, uint32);
+static status_t MoveTask(BObjectList<entry_ref>*, BEntry*, BList*, uint32_t);
 static status_t _DeleteTask(BObjectList<entry_ref>*, bool);
 static status_t _RestoreTask(BObjectList<entry_ref>*);
 status_t CalcItemsAndSize(CopyLoopControl* loopControl,
-	BObjectList<entry_ref>* refList, ssize_t blockSize, int32* totalCount,
+	BObjectList<entry_ref>* refList, ssize_t blockSize, int32_t* totalCount,
 	off_t* totalSize);
 status_t MoveItem(BEntry* entry, BDirectory* destDir, BPoint* loc,
-	uint32 moveMode, const char* newName, Undo &undo,
+	uint32_t moveMode, const char* newName, Undo &undo,
 	CopyLoopControl* loopControl);
 ConflictCheckResult PreFlightNameCheck(BObjectList<entry_ref>* srcList,
-	const BDirectory* destDir, int32* collisionCount, uint32 moveMode);
-status_t CheckName(uint32 moveMode, const BEntry* srcEntry,
+	const BDirectory* destDir, int32_t* collisionCount, uint32_t moveMode);
+status_t CheckName(uint32_t moveMode, const BEntry* srcEntry,
 	const BDirectory* destDir, bool multipleCollisions,
 	ConflictCheckResult &);
 void CopyAttributes(CopyLoopControl* control, BNode* srcNode,
@@ -213,12 +213,12 @@ CopyLoopControl::~CopyLoopControl()
 }
 
 
-void CopyLoopControl::Init(uint32 jobKind)
+void CopyLoopControl::Init(uint32_t jobKind)
 {
 }
 
 
-void CopyLoopControl::Init(int32 totalItems, off_t totalSize,
+void CopyLoopControl::Init(int32_t totalItems, off_t totalSize,
 	const entry_ref* destDir, bool showCount)
 {
 }
@@ -232,7 +232,7 @@ bool CopyLoopControl::FileError(const char* message, const char* name,
 
 
 void CopyLoopControl::UpdateStatus(const char* name, const entry_ref& ref,
-	int32 count, bool optional)
+	int32_t count, bool optional)
 {
 }
 
@@ -293,7 +293,7 @@ TrackerCopyLoopControl::TrackerCopyLoopControl()
 }
 
 
-TrackerCopyLoopControl::TrackerCopyLoopControl(uint32 jobKind)
+TrackerCopyLoopControl::TrackerCopyLoopControl(uint32_t jobKind)
 	:
 	fThread(find_thread(NULL)),
 	fSourceList(NULL)
@@ -302,7 +302,7 @@ TrackerCopyLoopControl::TrackerCopyLoopControl(uint32 jobKind)
 }
 
 
-TrackerCopyLoopControl::TrackerCopyLoopControl(int32 totalItems,
+TrackerCopyLoopControl::TrackerCopyLoopControl(int32_t totalItems,
 		off_t totalSize)
 	:
 	fThread(find_thread(NULL)),
@@ -319,14 +319,14 @@ TrackerCopyLoopControl::~TrackerCopyLoopControl()
 }
 
 
-void TrackerCopyLoopControl::Init(uint32 jobKind)
+void TrackerCopyLoopControl::Init(uint32_t jobKind)
 {
 	if (gStatusWindow != NULL)
 		gStatusWindow->CreateStatusItem(fThread, (StatusWindowState)jobKind);
 }
 
 
-void TrackerCopyLoopControl::Init(int32 totalItems, off_t totalSize,
+void TrackerCopyLoopControl::Init(int32_t totalItems, off_t totalSize,
 	const entry_ref* destDir, bool showCount)
 {
 	if (gStatusWindow != NULL) {
@@ -359,7 +359,7 @@ bool TrackerCopyLoopControl::FileError(const char* message, const char* name,
 
 
 void TrackerCopyLoopControl::UpdateStatus(const char* name, const entry_ref&,
-	int32 count, bool optional)
+	int32_t count, bool optional)
 {
 	if (gStatusWindow != NULL)
 		gStatusWindow->UpdateStatus(fThread, name, count, optional);
@@ -518,7 +518,7 @@ static void SetUpPoseLocation(ino_t sourceParentIno, ino_t destParentIno,
 
 
 void FSMoveToFolder(BObjectList<entry_ref>* srcList, BEntry* destEntry,
-	uint32 moveMode, BList* pointList)
+	uint32_t moveMode, BList* pointList)
 {
 	if (srcList->IsEmpty()) {
 		delete srcList;
@@ -594,7 +594,7 @@ enum {
 
 bool ConfirmChangeIfWellKnownDirectory(const BEntry* entry,
 	const char* ifYouDoAction, const char* toDoAction,
-	const char* toConfirmAction, bool dontAsk, int32* confirmedAlready)
+	const char* toConfirmAction, bool dontAsk, int32_t* confirmedAlready)
 {
 	// Don't let the user casually move/change important files/folders
 	//
@@ -699,10 +699,10 @@ bool ConfirmChangeIfWellKnownDirectory(const BEntry* entry,
 }
 
 
-static status_t InitCopy(CopyLoopControl* loopControl, uint32 moveMode,
+static status_t InitCopy(CopyLoopControl* loopControl, uint32_t moveMode,
 	BObjectList<entry_ref>* srcList, BVolume* dstVol, BDirectory* destDir,
 	entry_ref* destRef, bool preflightNameCheck, bool needSizeCalculation,
-	int32* collisionCount, ConflictCheckResult* preflightResult)
+	int32_t* collisionCount, ConflictCheckResult* preflightResult)
 {
 	if (dstVol->IsReadOnly()) {
 		BAlert* alert = new BAlert("",
@@ -713,9 +713,9 @@ static status_t InitCopy(CopyLoopControl* loopControl, uint32 moveMode,
 		return B_ERROR;
 	}
 
-	int32 numItems = srcList->CountItems();
-	int32 askOnceOnly = kNotConfirmed;
-	for (int32 index = 0; index < numItems; index++) {
+	int32_t numItems = srcList->CountItems();
+	int32_t askOnceOnly = kNotConfirmed;
+	for (int32_t index = 0; index < numItems; index++) {
 		// we could check for this while iterating through items in each of
 		// the copy loops, except it takes forever to call CalcItemsAndSize
 		BEntry entry((entry_ref*)srcList->ItemAt(index));
@@ -777,7 +777,7 @@ static status_t InitCopy(CopyLoopControl* loopControl, uint32 moveMode,
 				loopControl->Init(moveMode == kMoveSelectionTo ? kMoveState
 					: kCopyState);
 
-				int32 totalItems = 0;
+				int32_t totalItems = 0;
 				off_t totalSize = 0;
 				if (needSizeCalculation) {
 					if (CalcItemsAndSize(loopControl, srcList,
@@ -833,7 +833,7 @@ bool delete_point(void* point)
 
 
 static status_t MoveTask(BObjectList<entry_ref>* srcList, BEntry* destEntry, BList* pointList,
-	uint32 moveMode)
+	uint32_t moveMode)
 {
 	ASSERT(!srcList->IsEmpty());
 
@@ -913,7 +913,7 @@ static status_t MoveTask(BObjectList<entry_ref>* srcList, BEntry* destEntry, BLi
 	TrackerCopyLoopControl loopControl;
 
 	ConflictCheckResult conflictCheckResult = kPrompt;
-	int32 collisionCount = 0;
+	int32_t collisionCount = 0;
 	// TODO: Status item is created in InitCopy(), but it would be kind of
 	// neat to move all that into TrackerCopyLoopControl
 	status_t result = InitCopy(&loopControl, moveMode, srcList,
@@ -923,7 +923,7 @@ static status_t MoveTask(BObjectList<entry_ref>* srcList, BEntry* destEntry, BLi
 	loopControl.SetSourceList(srcList);
 
 	if (result == B_OK) {
-		for (int32 i = 0; i < srcList->CountItems(); i++) {
+		for (int32_t i = 0; i < srcList->CountItems(); i++) {
 			BPoint* loc = (BPoint*)-1;
 				// a loc of -1 forces autoplacement, rather than copying the
 				// position of the original node
@@ -1150,7 +1150,7 @@ void CopyFile(BEntry* srcFile, StatStruct* srcStat, BDirectory* destDir,
 				throw (status_t)err;
 			} else {
 				// user selected continue in spite of error, update status bar
-				loopControl->UpdateStatus(NULL, ref, (int32)srcStat->st_size);
+				loopControl->UpdateStatus(NULL, ref, (int32_t)srcStat->st_size);
 			}
 		}
 	}
@@ -1174,7 +1174,7 @@ static bool CreateFileSystemCompatibleName(const BDirectory* destDir, char* dest
 
 		// it's a FAT32 file system, now check the name
 
-		int32 length = strlen(destName) - 1;
+		int32_t length = strlen(destName) - 1;
 		while (destName[length] == '.') {
 			// invalid name, just cut off the dot at the end
 			destName[length--] = '\0';
@@ -1568,7 +1568,7 @@ status_t RecursiveMove(BEntry* entry, BDirectory* destDir,
 	return B_OK;
 }
 
-status_t MoveItem(BEntry* entry, BDirectory* destDir, BPoint* loc, uint32 moveMode,
+status_t MoveItem(BEntry* entry, BDirectory* destDir, BPoint* loc, uint32_t moveMode,
 	const char* newName, Undo &undo, CopyLoopControl* loopControl)
 {
 	entry_ref ref;
@@ -1951,13 +1951,13 @@ static status_t MoveEntryToTrash(BEntry* entry, BPoint* loc, Undo &undo)
 
 ConflictCheckResult
 PreFlightNameCheck(BObjectList<entry_ref>* srcList, const BDirectory* destDir,
-	int32* collisionCount, uint32 moveMode)
+	int32_t* collisionCount, uint32_t moveMode)
 {
 	// count the number of name collisions in dest folder
 	*collisionCount = 0;
 
-	int32 count = srcList->CountItems();
-	for (int32 i = 0; i < count; i++) {
+	int32_t count = srcList->CountItems();
+	for (int32_t i = 0; i < count; i++) {
 		entry_ref* srcRef = srcList->ItemAt(i);
 		BEntry entry(srcRef);
 		BDirectory parent;
@@ -2004,7 +2004,7 @@ PreFlightNameCheck(BObjectList<entry_ref>* srcList, const BDirectory* destDir,
 }
 
 
-void FileStatToString(StatStruct* stat, char* buffer, int32 length)
+void FileStatToString(StatStruct* stat, char* buffer, int32_t length)
 {
 	tm timeData;
 	localtime_r(&stat->st_mtime, &timeData);
@@ -2013,13 +2013,13 @@ void FileStatToString(StatStruct* stat, char* buffer, int32 length)
 	static BMessageFormat format(
 		B_TRANSLATE("{0, plural, one{# byte} other{# bytes}}"));
 	format.Format(size, stat->st_size);
-	uint32 pos = snprintf(buffer, length, "\n\t(%s ", size.String());
+	uint32_t pos = snprintf(buffer, length, "\n\t(%s ", size.String());
 
 	strftime(buffer + pos, length - pos, "%b %d %Y, %I:%M:%S %p)", &timeData);
 }
 
 
-status_t CheckName(uint32 moveMode, const BEntry* sourceEntry,
+status_t CheckName(uint32_t moveMode, const BEntry* sourceEntry,
 	const BDirectory* destDir, bool multipleCollisions,
 	ConflictCheckResult& conflictResolution)
 {
@@ -2274,7 +2274,7 @@ void FSMakeOriginalName(char* name, BDirectory* destDir, const char* suffix)
 	char		root[B_FILE_NAME_LENGTH];
 	char		copybase[B_FILE_NAME_LENGTH];
 	char		temp_name[B_FILE_NAME_LENGTH + 10];
-	int32		fnum;
+	int32_t		fnum;
 
 	// is this name already original?
 	if (!destDir->Contains(name))
@@ -2288,7 +2288,7 @@ void FSMakeOriginalName(char* name, BDirectory* destDir, const char* suffix)
 	// elsewhere in their name.
 
 	bool copycopy = false;		// are we copying a copy?
-	int32 len = (int32)strlen(name);
+	int32_t len = (int32_t)strlen(name);
 	char* p = name + len - 1;	// get pointer to end os name
 
 	// eat up optional numbers (if were copying "<filename> copy 34")
@@ -2312,7 +2312,7 @@ void FSMakeOriginalName(char* name, BDirectory* destDir, const char* suffix)
 			// save the 'root' name of the file, for possible later use.
 			// that is copy everything but trailing " copy". Need to
 			// NULL terminate after copy
-			strncpy(root, name, (uint32)((p - name) - 4));
+			strncpy(root, name, (uint32_t)((p - name) - 4));
 			root[(p - name) - 4] = '\0';
 		}
 	}
@@ -2356,7 +2356,7 @@ void FSMakeOriginalName(char* name, BDirectory* destDir, const char* suffix)
 
 
 status_t FSRecursiveCalcSize(BInfoWindow* window, CopyLoopControl* loopControl,
-	BDirectory* dir, off_t* _runningSize, int32* _fileCount, int32* _dirCount)
+	BDirectory* dir, off_t* _runningSize, int32_t* _fileCount, int32_t* _dirCount)
 {
 	dir->Rewind();
 	BEntry entry;
@@ -2390,11 +2390,11 @@ status_t FSRecursiveCalcSize(BInfoWindow* window, CopyLoopControl* loopControl,
 
 
 status_t CalcItemsAndSize(CopyLoopControl* loopControl,
-	BObjectList<entry_ref>* refList, ssize_t blockSize, int32* totalCount,
+	BObjectList<entry_ref>* refList, ssize_t blockSize, int32_t* totalCount,
 	off_t* totalSize)
 {
-	int32 fileCount = 0;
-	int32 dirCount = 0;
+	int32_t fileCount = 0;
+	int32_t dirCount = 0;
 
 	// check block size for sanity
 	if (blockSize < 0) {
@@ -2418,8 +2418,8 @@ status_t CalcItemsAndSize(CopyLoopControl* loopControl,
 	if (blockSize > 8192)
 		blockSize = 8192;
 
-	int32 num_items = refList->CountItems();
-	for (int32 i = 0; i < num_items; i++) {
+	int32_t num_items = refList->CountItems();
+	for (int32_t i = 0; i < num_items; i++) {
 		entry_ref* ref = refList->ItemAt(i);
 		BEntry entry(ref);
 		StatStruct statbuf;
@@ -2754,7 +2754,7 @@ status_t empty_trash(void*)
 
 	// calculate the sum total of all items on all volumes in trash
 	BObjectList<entry_ref> srcList;
-	int32 totalCount = 0;
+	int32_t totalCount = 0;
 	off_t totalSize = 0;
 
 	BVolumeRoster volumeRoster;
@@ -2856,7 +2856,7 @@ status_t _DeleteTask(BObjectList<entry_ref>* list, bool confirm)
 	TrackerCopyLoopControl loopControl(kDeleteState);
 
 	// calculate the sum total of all items on all volumes in trash
-	int32 totalItems = 0;
+	int32_t totalItems = 0;
 	int64 totalSize = 0;
 
 	status_t status = CalcItemsAndSize(&loopControl, list, 0, &totalItems,
@@ -2864,8 +2864,8 @@ status_t _DeleteTask(BObjectList<entry_ref>* list, bool confirm)
 	if (status == B_OK) {
 		loopControl.Init(totalItems, totalItems);
 
-		int32 count = list->CountItems();
-		for (int32 index = 0; index < count; index++) {
+		int32_t count = list->CountItems();
+		for (int32_t index = 0; index < count; index++) {
 			entry_ref ref(*list->ItemAt(index));
 			BEntry entry(&ref);
 			loopControl.UpdateStatus(ref.name, ref, 1, true);
@@ -2920,7 +2920,7 @@ status_t _RestoreTask(BObjectList<entry_ref>* list)
 	TrackerCopyLoopControl loopControl(kRestoreFromTrashState);
 
 	// calculate the sum total of all items that will be restored
-	int32 totalItems = 0;
+	int32_t totalItems = 0;
 	int64 totalSize = 0;
 
 	status_t err = CalcItemsAndSize(&loopControl, list, 0, &totalItems,
@@ -2928,8 +2928,8 @@ status_t _RestoreTask(BObjectList<entry_ref>* list)
 	if (err == B_OK) {
 		loopControl.Init(totalItems, totalItems);
 
-		int32 count = list->CountItems();
-		for (int32 index = 0; index < count; index++) {
+		int32_t count = list->CountItems();
+		for (int32_t index = 0; index < count; index++) {
 			entry_ref ref(*list->ItemAt(index));
 			BEntry entry(&ref);
 			BPath originalPath;
@@ -3029,7 +3029,7 @@ status_t FSCreateNewFolderIn(const node_ref* dirNode, entry_ref* newRef,
 		char name[B_FILE_NAME_LENGTH];
 		strlcpy(name, B_TRANSLATE("New folder"), sizeof(name));
 
-		int32 fnum = 1;
+		int32_t fnum = 1;
 		while (dir.Contains(name)) {
 			// if base name already exists then add a number
 			// ToDo:
@@ -3237,7 +3237,7 @@ static bool SniffIfGeneric(const entry_ref* ref)
 static void SniffIfGeneric(const BMessage* refs)
 {
 	entry_ref ref;
-	for (int32 index = 0; ; index++) {
+	for (int32_t index = 0; ; index++) {
 		if (refs->FindRef("refs", index, &ref) != B_OK)
 			break;
 		SniffIfGeneric(&ref);
@@ -3253,7 +3253,7 @@ static void _TrackerLaunchAppWithDocuments(const entry_ref* appRef, const BMessa
 	status_t error = B_ERROR;
 	BString alertString;
 
-	for (int32 mimesetIt = 0; ; mimesetIt++) {
+	for (int32_t mimesetIt = 0; ; mimesetIt++) {
 		error =  __be_roster->Launch(appRef, refs, &team);
 		if (error == B_ALREADY_RUNNING)
 			// app already running, not really an error
@@ -3319,7 +3319,7 @@ static status_t LoaderErrorDetails(const entry_ref* app, BString &details)
 	port_id errorPort = create_port(1, "Tracker loader error");
 
 	// count environment variables
-	int32 envCount = 0;
+	int32_t envCount = 0;
 	while (environ[envCount] != NULL)
 		envCount++;
 
@@ -3372,7 +3372,7 @@ static status_t LoaderErrorDetails(const entry_ref* app, BString &details)
 	if (result != B_OK)
 		return result;
 
-	int32 errorCode = B_ERROR;
+	int32_t errorCode = B_ERROR;
 	result = message.FindInt32("error", &errorCode);
 	if (result != B_OK)
 		return result;
@@ -3392,7 +3392,7 @@ static status_t LoaderErrorDetails(const entry_ref* app, BString &details)
 		return B_ERROR;
 
 	const char* detail;
-	for (int32 i = 0; message.FindString(detailName, i, &detail) == B_OK;
+	for (int32_t i = 0; message.FindString(detailName, i, &detail) == B_OK;
 			i++) {
 		if (i > 0)
 			details += ", ";
@@ -3423,7 +3423,7 @@ static void _TrackerLaunchDocuments(const entry_ref*, const BMessage* refs,
 	BString alertString;
 	const char* alternative = 0;
 
-	for (int32 mimesetIt = 0; ; mimesetIt++) {
+	for (int32_t mimesetIt = 0; ; mimesetIt++) {
 		alertString = "";
 		error =  __be_roster->FindApp(&documentRef, &app);
 
@@ -3443,7 +3443,7 @@ static void _TrackerLaunchDocuments(const entry_ref*, const BMessage* refs,
 			break;
 		} else {
 			BEntry appEntry(&app, true);
-			for (int32 index = 0;;) {
+			for (int32_t index = 0;;) {
 				// remove the app itself from the refs received so we don't
 				// try to open ourselves
 				entry_ref ref;
@@ -3709,7 +3709,7 @@ status_t FSLaunchUsing(const entry_ref* ref, BMessage* listOfRefs)
 }
 
 
-status_t FSLaunchItem(const entry_ref* appRef, BMessage* refs, int32, bool async)
+status_t FSLaunchItem(const entry_ref* appRef, BMessage* refs, int32_t, bool async)
 {
 	if (refs != NULL)
 		refs->what = B_REFS_RECEIVED;
@@ -3721,7 +3721,7 @@ status_t FSLaunchItem(const entry_ref* appRef, BMessage* refs, int32, bool async
 }
 
 
-void FSLaunchItem(const entry_ref* appRef, BMessage* refs, int32 workspace)
+void FSLaunchItem(const entry_ref* appRef, BMessage* refs, int32_t workspace)
 {
 	FSLaunchItem(appRef, refs, workspace, true);
 }
@@ -3821,8 +3821,8 @@ WellKnowEntryList::MatchEntry(const node_ref* node)
 const WellKnowEntryList::WellKnownEntry*
 WellKnowEntryList::MatchEntryCommon(const node_ref* node)
 {
-	uint32 count = entries.size();
-	for (uint32 index = 0; index < count; index++) {
+	uint32_t count = entries.size();
+	for (uint32_t index = 0; index < count; index++) {
 		if (*node == entries[index].node)
 			return &entries[index];
 	}

@@ -42,19 +42,19 @@ extern const char* kSnifferRuleAttr;
 extern const char* kSupportedTypesAttr;
 
 // Attribute Datatypes
-extern const int32 kFileTypeType;
-extern const int32 kTypeType;
-extern const int32 kAppHintType;
-extern const int32 kAttrInfoType;
-extern const int32 kShortDescriptionType;
-extern const int32 kLongDescriptionType;
-extern const int32 kFileExtensionsType;
-extern const int32 kMiniIconType;
-extern const int32 kLargeIconType;
-extern const int32 kIconType;
-extern const int32 kPreferredAppType;
-extern const int32 kSnifferRuleType;
-extern const int32 kSupportedTypesType;
+extern const int32_t kFileTypeType;
+extern const int32_t kTypeType;
+extern const int32_t kAppHintType;
+extern const int32_t kAttrInfoType;
+extern const int32_t kShortDescriptionType;
+extern const int32_t kLongDescriptionType;
+extern const int32_t kFileExtensionsType;
+extern const int32_t kMiniIconType;
+extern const int32_t kLargeIconType;
+extern const int32_t kIconType;
+extern const int32_t kPreferredAppType;
+extern const int32_t kSnifferRuleType;
+extern const int32_t kSupportedTypesType;
 
 // Message fields
 extern const char* kApplicationsField;
@@ -79,7 +79,7 @@ DatabaseLocation* default_database_location();
 // Called by BMimeType to get properly formatted icon data ready
 // to be shipped off to SetIcon*() and written to the database
 status_t get_icon_data(const BBitmap* icon, icon_size size, void** data,
-	int32* dataSize);
+	int32_t* dataSize);
 
 
 } // namespace Mime

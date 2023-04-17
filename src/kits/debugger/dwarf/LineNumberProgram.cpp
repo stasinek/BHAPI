@@ -16,7 +16,7 @@
 
 static const uint8 kLineNumberStandardOpcodeOperands[]
 	= { 0, 1, 1, 1, 1, 0, 0, 0, 1, 0, 0, 1 };
-static const uint32 kLineNumberStandardOpcodeCount = 12;
+static const uint32_t kLineNumberStandardOpcodeCount = 12;
 
 
 LineNumberProgram::LineNumberProgram(uint8 addressSize)
@@ -44,7 +44,7 @@ status_t LineNumberProgram::Init(const void* program, size_t programSize,
 	uint8 lineRange, uint8 opcodeBase, const uint8* standardOpcodeLengths)
 {
 	// first check the operand counts for the standard opcodes
-	uint8 standardOpcodeCount = std::min((uint32)opcodeBase - 1,
+	uint8 standardOpcodeCount = std::min((uint32_t)opcodeBase - 1,
 		kLineNumberStandardOpcodeCount);
 	for (uint8 i = 0; i < standardOpcodeCount; i++) {
 		if (standardOpcodeLengths[i] != kLineNumberStandardOpcodeOperands[i]) {
@@ -145,14 +145,14 @@ bool LineNumberProgram::GetNextRow(State& state) const
 					break;
 				default:
 					WARNING("unsupported standard opcode %u\n", opcode);
-					for (int32 i = 0; i < fStandardOpcodeLengths[opcode - 1];
+					for (int32_t i = 0; i < fStandardOpcodeLengths[opcode - 1];
 							i++) {
 						dataReader.ReadUnsignedLEB128(0);
 					}
 			}
 		} else {
 			// extended opcode
-			uint32 instructionLength = dataReader.ReadUnsignedLEB128(0);
+			uint32_t instructionLength = dataReader.ReadUnsignedLEB128(0);
 			off_t instructionOffset = dataReader.Offset();
 			uint8 extendedOpcode = dataReader.Read<uint8>(0);
 

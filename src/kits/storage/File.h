@@ -41,16 +41,16 @@ class BFile : public BNode, public BPositionIO {
     public:
         BFile();
         BFile(const BFile &file);
-        BFile(const bhapi::entry_ref *ref, uint32 openMode);
-        BFile(const BEntry *entry, uint32 openMode);
-        BFile(const char *path, uint32 openMode);
-        BFile(const BDirectory *dir, const char *path, uint32 openMode);
+        BFile(const bhapi::entry_ref *ref, uint32_t openMode);
+        BFile(const BEntry *entry, uint32_t openMode);
+        BFile(const char *path, uint32_t openMode);
+        BFile(const BDirectory *dir, const char *path, uint32_t openMode);
         virtual ~BFile();
 
-        status_t SetTo(const bhapi::entry_ref *ref, uint32 openMode);
-        status_t SetTo(const BEntry *entry, uint32 openMode);
-        status_t SetTo(const char *path, uint32 openMode);
-        status_t SetTo(const BDirectory *dir, const char *path, uint32 openMode);
+        status_t SetTo(const bhapi::entry_ref *ref, uint32_t openMode);
+        status_t SetTo(const BEntry *entry, uint32_t openMode);
+        status_t SetTo(const char *path, uint32_t openMode);
+        status_t SetTo(const BDirectory *dir, const char *path, uint32_t openMode);
 
         bool IsReadable() const;
         bool IsWritable() const;
@@ -60,7 +60,7 @@ class BFile : public BNode, public BPositionIO {
         virtual ssize_t Write(const void *buffer, size_t size);
         virtual ssize_t WriteAt(off_t location, const void *buffer, size_t size);
 
-        virtual off_t Seek(off_t offset, uint32 seekMode);
+        virtual off_t Seek(off_t offset, uint32_t seekMode);
         virtual off_t Position() const;
 
         virtual status_t SetSize(off_t size);
@@ -76,7 +76,7 @@ class BFile : public BNode, public BPositionIO {
         virtual void _PhiloFile5();
         virtual void _PhiloFile6();
 
-        uint32 _reservedData[8];
+        uint32_t _reservedData[8];
 
     private:
         int get_fd() const;
@@ -84,16 +84,16 @@ class BFile : public BNode, public BPositionIO {
 
     private:
         // The file's open mode.
-        uint32 fMode;
+        uint32_t fMode;
 public:
-    BFile(const char *path,  uint32 open_mode,  uint32 access_mode = bhapi::B_USER_READ | bhapi::B_USER_WRITE);
-    BFile(const BEntry *entry,  uint32 open_mode,  uint32 access_mode = bhapi::B_USER_READ | bhapi::B_USER_WRITE);
-    BFile(const BDirectory *dir, const char *leaf,  uint32 open_mode,  uint32 access_mode = bhapi::B_USER_READ | bhapi::B_USER_WRITE);
+    BFile(const char *path,  uint32_t open_mode,  uint32_t access_mode = bhapi::B_USER_READ | bhapi::B_USER_WRITE);
+    BFile(const BEntry *entry,  uint32_t open_mode,  uint32_t access_mode = bhapi::B_USER_READ | bhapi::B_USER_WRITE);
+    BFile(const BDirectory *dir, const char *leaf,  uint32_t open_mode,  uint32_t access_mode = bhapi::B_USER_READ | bhapi::B_USER_WRITE);
 
     status_t	InitCheck() const;
-    status_t	SetTo(const char *path,  uint32 open_mode,  uint32 access_mode = bhapi::B_USER_READ | bhapi::B_USER_WRITE);
-    status_t	SetTo(const BEntry *entry,  uint32 open_mode,  uint32 access_mode = bhapi::B_USER_READ | bhapi::B_USER_WRITE);
-    status_t	SetTo(const BDirectory *dir, const char *leaf,  uint32 open_mode,  uint32 access_mode = bhapi::B_USER_READ | bhapi::B_USER_WRITE);
+    status_t	SetTo(const char *path,  uint32_t open_mode,  uint32_t access_mode = bhapi::B_USER_READ | bhapi::B_USER_WRITE);
+    status_t	SetTo(const BEntry *entry,  uint32_t open_mode,  uint32_t access_mode = bhapi::B_USER_READ | bhapi::B_USER_WRITE);
+    status_t	SetTo(const BDirectory *dir, const char *leaf,  uint32_t open_mode,  uint32_t access_mode = bhapi::B_USER_READ | bhapi::B_USER_WRITE);
     void		Unset();
 
      ssize_t		ReadAt(int64 pos, void *buffer, size_t size);

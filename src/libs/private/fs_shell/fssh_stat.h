@@ -45,8 +45,8 @@ typedef struct fssh_stat fssh_struct_stat;
 #define FSSH_S_ATTR				02000000000	/* attribute */
 #define FSSH_S_INDEX_DIR		04000000000	/* index (or index directory) */
 #define FSSH_S_STR_INDEX		00100000000	/* string index */
-#define FSSH_S_INT_INDEX		00200000000	/* int32 index */
-#define FSSH_S_UINT_INDEX		00400000000	/* uint32 index */
+#define FSSH_S_INT_INDEX		00200000000	/* int32_t index */
+#define FSSH_S_UINT_INDEX		00400000000	/* uint32_t index */
 #define FSSH_S_LONG_LONG_INDEX	00010000000	/* int64 index */
 #define FSSH_S_ULONG_LONG_INDEX	00020000000	/* uint64 index */
 #define FSSH_S_FLOAT_INDEX		00040000000	/* float index */

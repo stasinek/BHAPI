@@ -21,7 +21,7 @@ media_timed_event::media_timed_event()
 
 
 media_timed_event::media_timed_event(bigtime_t inTime,
-									 int32 inType)
+									 int32_t inType)
 {
 	CALLED();
 	memset(this, 0, sizeof(*this));
@@ -31,9 +31,9 @@ media_timed_event::media_timed_event(bigtime_t inTime,
 
 
 media_timed_event::media_timed_event(bigtime_t inTime,
-									 int32 inType,
+									 int32_t inType,
 									 void *inPointer,
-									 uint32 inCleanup)
+									 uint32_t inCleanup)
 {
 	CALLED();
 	memset(this, 0, sizeof(*this));
@@ -45,10 +45,10 @@ media_timed_event::media_timed_event(bigtime_t inTime,
 
 
 media_timed_event::media_timed_event(bigtime_t inTime,
-									 int32 inType,
+									 int32_t inType,
 									 void *inPointer,
-									 uint32 inCleanup,
-									 int32 inData,
+									 uint32_t inCleanup,
+									 int32_t inData,
 									 int64 inBigdata,
 									 char *inUserData,
 									 size_t dataSize)
@@ -175,7 +175,7 @@ bool BTimedEventQueue::HasEvents() const
 }
 
 
-int32 BTimedEventQueue::EventCount() const
+int32_t BTimedEventQueue::EventCount() const
 {
 	CALLED();
 	return fImp->EventCount();
@@ -218,7 +218,7 @@ const media_timed_event *
 BTimedEventQueue::FindFirstMatch(bigtime_t eventTime,
 								 time_direction direction,
 								 bool inclusive,
-								 int32 eventType)
+								 int32_t eventType)
 {
 	CALLED();
 	return fImp->FindFirstMatch(eventTime, direction, inclusive, eventType);
@@ -230,7 +230,7 @@ status_t BTimedEventQueue::DoForEach(for_each_hook hook,
 							bigtime_t eventTime,
 							time_direction direction,
 							bool inclusive,
-							int32 eventType)
+							int32_t eventType)
 {
 	CALLED();
 	return fImp->DoForEach(hook, context, eventTime, direction, inclusive, eventType);
@@ -248,7 +248,7 @@ void BTimedEventQueue::SetCleanupHook(cleanup_hook hook,
 status_t BTimedEventQueue::FlushEvents(bigtime_t eventTime,
 							  time_direction direction,
 							  bool inclusive,
-							  int32 eventType)
+							  int32_t eventType)
 {
 	CALLED();
 	return fImp->FlushEvents(eventTime, direction, inclusive, eventType);

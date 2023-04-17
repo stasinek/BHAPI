@@ -54,9 +54,9 @@ class BStopWatch {
         bigtime_t	fStart;
         bigtime_t	fSuspendTime;
         bigtime_t	fLaps[10];
-        int32		fLap;
+        int32_t		fLap;
         const char*	fName;
-        uint32		_reserved[2];
+        uint32_t		_reserved[2];
         bool		fSilent;
 };
 #define BSTOPWATCH_DEF

@@ -162,7 +162,7 @@ X86PagingMethod32Bit::PhysicalPageSlotPool::Init(area_id dataArea, void* data,
 	// init slot list
 	fSlots = (PhysicalPageSlot*)(fPageTable + 1024);
 	addr_t slotAddress = virtualBase;
-	for (int32 i = 0; i < 1024; i++, slotAddress += B_PAGE_SIZE) {
+	for (int32_t i = 0; i < 1024; i++, slotAddress += B_PAGE_SIZE) {
 		PhysicalPageSlot* slot = &fSlots[i];
 		slot->next = slot + 1;
 		slot->pool = this;
@@ -229,13 +229,13 @@ X86PagingMethod32Bit::PhysicalPageSlotPool::AllocatePool(
 	phys_addr_t physicalTable;
 	X86VMTranslationMap32Bit* map = static_cast<X86VMTranslationMap32Bit*>(
 		VMAddressSpace::Kernel()->TranslationMap());
-	uint32 dummyFlags;
+	uint32_t dummyFlags;
 	cpu_status state = disable_interrupts();
 	map->QueryInterrupt((addr_t)data, &physicalTable, &dummyFlags);
 	restore_interrupts(state);
 
 	// put the page table into the page directory
-	int32 index = (addr_t)virtualBase / (B_PAGE_SIZE * 1024);
+	int32_t index = (addr_t)virtualBase / (B_PAGE_SIZE * 1024);
 	page_directory_entry* entry
 		= &map->PagingStructures32Bit()->pgdir_virt[index];
 	PutPageTableInPageDir(entry, physicalTable,
@@ -299,10 +299,10 @@ X86PagingMethod32Bit::Init(kernel_args* args,
 	X86PagingStructures32Bit::StaticInit();
 
 	// create the initial pools for the physical page mapper
-	int32 poolCount = _GetInitialPoolCount();
+	int32_t poolCount = _GetInitialPoolCount();
 	PhysicalPageSlotPool* pool = PhysicalPageSlotPool::sInitialPhysicalPagePool;
 
-	for (int32 i = 0; i < poolCount; i++) {
+	for (int32_t i = 0; i < poolCount; i++) {
 		new(&pool[i]) PhysicalPageSlotPool;
 		status_t error = pool[i].InitInitial(args);
 		if (error != B_OK) {
@@ -350,8 +350,8 @@ X86PagingMethod32Bit::InitPostArea(kernel_args* args)
 	if (area < B_OK)
 		return area;
 
-	int32 poolCount = _GetInitialPoolCount();
-	for (int32 i = 0; i < poolCount; i++) {
+	int32_t poolCount = _GetInitialPoolCount();
+	for (int32_t i = 0; i < poolCount; i++) {
 		status_t error = PhysicalPageSlotPool::sInitialPhysicalPagePool[i]
 			.InitInitialPostArea(args);
 		if (error != B_OK)
@@ -431,16 +431,16 @@ X86PagingMethod32Bit::MapEarly(kernel_args* args, addr_t virtualAddress,
 
 bool
 X86PagingMethod32Bit::IsKernelPageAccessible(addr_t virtualAddress,
-	uint32 protection)
+	uint32_t protection)
 {
 	// We only trust the kernel team's page directory. So switch to it first.
 	// Always set it to make sure the TLBs don't contain obsolete data.
-	uint32 physicalPageDirectory = x86_read_cr3();
+	uint32_t physicalPageDirectory = x86_read_cr3();
 	x86_write_cr3(fKernelPhysicalPageDirectory);
 
 	// get the page directory entry for the address
 	page_directory_entry pageDirectoryEntry;
-	uint32 index = VADDR_TO_PDENT(virtualAddress);
+	uint32_t index = VADDR_TO_PDENT(virtualAddress);
 
 	if (physicalPageDirectory == fKernelPhysicalPageDirectory) {
 		pageDirectoryEntry = fKernelVirtualPageDirectory[index];
@@ -493,7 +493,7 @@ X86PagingMethod32Bit::IsKernelPageAccessible(addr_t virtualAddress,
 
 /*static*/ void
 X86PagingMethod32Bit::PutPageTableInPageDir(page_directory_entry* entry,
-	phys_addr_t pgtablePhysical, uint32 attributes)
+	phys_addr_t pgtablePhysical, uint32_t attributes)
 {
 	*entry = (pgtablePhysical & X86_PDE_ADDRESS_MASK)
 		| X86_PDE_PRESENT
@@ -511,7 +511,7 @@ X86PagingMethod32Bit::PutPageTableInPageDir(page_directory_entry* entry,
 
 /*static*/ void
 X86PagingMethod32Bit::PutPageTableEntryInTable(page_table_entry* entry,
-	phys_addr_t physicalAddress, uint32 attributes, uint32 memoryType,
+	phys_addr_t physicalAddress, uint32_t attributes, uint32_t memoryType,
 	bool globalPage)
 {
 	page_table_entry page = (physicalAddress & X86_PTE_ADDRESS_MASK)
@@ -533,10 +533,10 @@ X86PagingMethod32Bit::PutPageTableEntryInTable(page_table_entry* entry,
 }
 
 
-inline int32
+inline int32_t
 X86PagingMethod32Bit::_GetInitialPoolCount()
 {
-	int32 requiredSlots = smp_get_num_cpus() * TOTAL_SLOTS_PER_CPU
+	int32_t requiredSlots = smp_get_num_cpus() * TOTAL_SLOTS_PER_CPU
 			+ EXTRA_SLOTS;
 	return (requiredSlots + 1023) / 1024;
 }

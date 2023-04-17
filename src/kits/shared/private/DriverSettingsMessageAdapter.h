@@ -21,21 +21,21 @@ public:
 
 	virtual	status_t			ConvertFromDriverSettings(
 									const driver_parameter& parameter,
-									const char* name, int32 index, uint32 type,
+									const char* name, int32_t index, uint32_t type,
 									BMessage& target);
 	virtual	status_t			ConvertEmptyFromDriverSettings(
 									const driver_parameter& parameter,
-									const char* name, uint32 type,
+									const char* name, uint32_t type,
 									BMessage& target);
 
 	virtual	status_t			ConvertToDriverSettings(const BMessage& source,
-									const char* name, int32 index,
-									uint32 type, BString& value);
+									const char* name, int32_t index,
+									uint32_t type, BString& value);
 };
 
 
 struct settings_template {
-	uint32		type;
+	uint32_t		type;
 	const char*	name;
 	const settings_template* sub_template;
 	bool		parent_value;
@@ -82,7 +82,7 @@ private:
 									const settings_template* settingsTemplate,
 									BString& settings, const BMessage& message,
 									const char* name, type_code type,
-									int32 count,
+									int32_t count,
 									const char* settingName = NULL);
 
 };

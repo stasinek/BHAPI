@@ -53,7 +53,7 @@ typedef struct b_beos_area_t {
 	char		*name;
 	char		*domain;
 	char		*ipc_name;
-	uint32		prot;
+	uint32_t		prot;
 	size_t		length;
 	void		*addr;
 	area_id		beArea;
@@ -108,7 +108,7 @@ public:
 		{
 //			BHAPI_DEBUG("[KERNEL]: try locking global area.");
 
-			int32 msgCode = 0;
+			int32_t msgCode = 0;
 			char buf = 0;
 			ssize_t readBytes = read_port(iLocker, &msgCode, &buf, 1);
 			if(readBytes < 1) continue;
@@ -143,14 +143,14 @@ static void BHAPI_UNLOCK_AREA()
 
 
 typedef struct b_beos_area_info_t {
-	int32		magic;
+	int32_t		magic;
 	bool		closed;
 	size_t		length;
 } b_beos_area_info_t;
 
 
 BHAPI_IMPEXP void*
-bhapi::create_area(const char *name, void **start_addr, size_t size,  uint32 protection, const char *domain, bhapi::area_access area_access)
+bhapi::create_area(const char *name, void **start_addr, size_t size,  uint32_t protection, const char *domain, bhapi::area_access area_access)
 {
 	if(size <= 0) return NULL;
 
@@ -165,7 +165,7 @@ bhapi::create_area(const char *name, void **start_addr, size_t size,  uint32 pro
 	}
 
 	area->prot = protection;
-	uint32 prot = B_READ_AREA;
+	uint32_t prot = B_READ_AREA;
 	if(protection & B_WRITE_AREA) prot |= B_WRITE_AREA;
 
 //	if(area_access != BHAPI_AREA_ACCESS_OWNER) BHAPI_DEBUG("[KERNEL]: %s --- Access unsupport.", __PRETTY_FUNCTION__);
@@ -180,7 +180,7 @@ bhapi::create_area(const char *name, void **start_addr, size_t size,  uint32 pro
 		return NULL;
 	}
 
-	uint32 requestSize = (size + sizeof(b_beos_area_info_t) + (B_PAGE_SIZE - 1)) & ~(B_PAGE_SIZE - 1);
+	uint32_t requestSize = (size + sizeof(b_beos_area_info_t) + (B_PAGE_SIZE - 1)) & ~(B_PAGE_SIZE - 1);
 	if((area->beArea = create_area(ipc_name, &(area->addr), B_ANY_ADDRESS,
 				       requestSize, B_NO_LOCK, prot)) < 0 || area->addr == NULL)
 	{
@@ -216,7 +216,7 @@ bhapi::create_area(const char *name, void **start_addr, size_t size,  uint32 pro
 
 
 BHAPI_IMPEXP void*
-bhapi::clone_area(const char *name, void **dest_addr,  uint32 protection, const char *domain)
+bhapi::clone_area(const char *name, void **dest_addr,  uint32_t protection, const char *domain)
 {
 	char *ipc_name = b_area_ipc_name(name, domain);
 	if(!ipc_name) return NULL;
@@ -229,7 +229,7 @@ bhapi::clone_area(const char *name, void **dest_addr,  uint32 protection, const 
 	}
 
 	area->prot = protection;
-	uint32 prot = B_READ_AREA;
+	uint32_t prot = B_READ_AREA;
 	if(protection & B_WRITE_AREA) prot |= B_WRITE_AREA;
 
 	BHAPI_LOCK_AREA();
@@ -274,7 +274,7 @@ bhapi::clone_area(const char *name, void **dest_addr,  uint32 protection, const 
 
 
 BHAPI_IMPEXP void*
-bhapi::clone_area_by_source(void *source_data, void **dest_addr,  uint32 protection)
+bhapi::clone_area_by_source(void *source_data, void **dest_addr,  uint32_t protection)
 {
 	b_beos_area_t *source_area = (b_beos_area_t*)source_data;
 	if(!source_area) return NULL;
@@ -396,7 +396,7 @@ b_resize_area(void *data, void **start_addr, size_t new_size)
 	memcpy(&_area_info, area->addr, sizeof(b_beos_area_info_t));
 	_area_info.length = new_size;
 
-	uint32 requestSize = (new_size + sizeof(b_beos_area_info_t) + (B_PAGE_SIZE - 1)) & ~(B_PAGE_SIZE - 1);
+	uint32_t requestSize = (new_size + sizeof(b_beos_area_info_t) + (B_PAGE_SIZE - 1)) & ~(B_PAGE_SIZE - 1);
 	if(resize_area(area->beArea, requestSize) != B_OK)
 	{
 		BHAPI_UNLOCK_AREA();
@@ -419,12 +419,12 @@ b_resize_area(void *data, void **start_addr, size_t new_size)
 
 
 BHAPI_IMPEXP status_t 
-b_set_area_protection(void *data,  uint32 new_protection)
+b_set_area_protection(void *data,  uint32_t new_protection)
 {
 	b_beos_area_t *area = (b_beos_area_t*)data;
 	if(!area) return B_BAD_VALUE;
 
-	uint32 prot = B_READ_AREA;
+	uint32_t prot = B_READ_AREA;
 	if(new_protection & B_WRITE_AREA) prot |= B_WRITE_AREA;
 
 	if(set_area_protection(area->beArea, prot) != B_OK) return B_ERROR;

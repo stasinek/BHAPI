@@ -777,54 +777,54 @@ ns_sprintrrf(const u_char *msg, size_t msglen,
 		while (t > 0) {
 			switch (t) {
 			case 1:
-				tmp[0] = base32hex[(((uint32_t)rdata[0]>>3)&0x1f)];
-				tmp[1] = base32hex[(((uint32_t)rdata[0]<<2)&0x1c)];
+				tmp[0] = base32hex[(((uint32_t_t)rdata[0]>>3)&0x1f)];
+				tmp[1] = base32hex[(((uint32_t_t)rdata[0]<<2)&0x1c)];
 				tmp[2] = tmp[3] = tmp[4] = '=';
 				tmp[5] = tmp[6] = tmp[7] = '=';
 				break;
 			case 2:
-				tmp[0] = base32hex[(((uint32_t)rdata[0]>>3)&0x1f)];
-				tmp[1] = base32hex[(((uint32_t)rdata[0]<<2)&0x1c)|
-						   (((uint32_t)rdata[1]>>6)&0x03)];
-				tmp[2] = base32hex[(((uint32_t)rdata[1]>>1)&0x1f)];
-				tmp[3] = base32hex[(((uint32_t)rdata[1]<<4)&0x10)];
+				tmp[0] = base32hex[(((uint32_t_t)rdata[0]>>3)&0x1f)];
+				tmp[1] = base32hex[(((uint32_t_t)rdata[0]<<2)&0x1c)|
+						   (((uint32_t_t)rdata[1]>>6)&0x03)];
+				tmp[2] = base32hex[(((uint32_t_t)rdata[1]>>1)&0x1f)];
+				tmp[3] = base32hex[(((uint32_t_t)rdata[1]<<4)&0x10)];
 				tmp[4] = tmp[5] = tmp[6] = tmp[7] = '=';
 				break;
 			case 3:
-				tmp[0] = base32hex[(((uint32_t)rdata[0]>>3)&0x1f)];
-				tmp[1] = base32hex[(((uint32_t)rdata[0]<<2)&0x1c)|
-						   (((uint32_t)rdata[1]>>6)&0x03)];
-				tmp[2] = base32hex[(((uint32_t)rdata[1]>>1)&0x1f)];
-				tmp[3] = base32hex[(((uint32_t)rdata[1]<<4)&0x10)|
-						   (((uint32_t)rdata[2]>>4)&0x0f)];
-				tmp[4] = base32hex[(((uint32_t)rdata[2]<<1)&0x1e)];
+				tmp[0] = base32hex[(((uint32_t_t)rdata[0]>>3)&0x1f)];
+				tmp[1] = base32hex[(((uint32_t_t)rdata[0]<<2)&0x1c)|
+						   (((uint32_t_t)rdata[1]>>6)&0x03)];
+				tmp[2] = base32hex[(((uint32_t_t)rdata[1]>>1)&0x1f)];
+				tmp[3] = base32hex[(((uint32_t_t)rdata[1]<<4)&0x10)|
+						   (((uint32_t_t)rdata[2]>>4)&0x0f)];
+				tmp[4] = base32hex[(((uint32_t_t)rdata[2]<<1)&0x1e)];
 				tmp[5] = tmp[6] = tmp[7] = '=';
 				break;
 			case 4:
-				tmp[0] = base32hex[(((uint32_t)rdata[0]>>3)&0x1f)];
-				tmp[1] = base32hex[(((uint32_t)rdata[0]<<2)&0x1c)|
-						   (((uint32_t)rdata[1]>>6)&0x03)];
-				tmp[2] = base32hex[(((uint32_t)rdata[1]>>1)&0x1f)];
-				tmp[3] = base32hex[(((uint32_t)rdata[1]<<4)&0x10)|
-						   (((uint32_t)rdata[2]>>4)&0x0f)];
-				tmp[4] = base32hex[(((uint32_t)rdata[2]<<1)&0x1e)|
-						   (((uint32_t)rdata[3]>>7)&0x01)];
-				tmp[5] = base32hex[(((uint32_t)rdata[3]>>2)&0x1f)];
-				tmp[6] = base32hex[((uint32_t)rdata[3]<<3)&0x18];
+				tmp[0] = base32hex[(((uint32_t_t)rdata[0]>>3)&0x1f)];
+				tmp[1] = base32hex[(((uint32_t_t)rdata[0]<<2)&0x1c)|
+						   (((uint32_t_t)rdata[1]>>6)&0x03)];
+				tmp[2] = base32hex[(((uint32_t_t)rdata[1]>>1)&0x1f)];
+				tmp[3] = base32hex[(((uint32_t_t)rdata[1]<<4)&0x10)|
+						   (((uint32_t_t)rdata[2]>>4)&0x0f)];
+				tmp[4] = base32hex[(((uint32_t_t)rdata[2]<<1)&0x1e)|
+						   (((uint32_t_t)rdata[3]>>7)&0x01)];
+				tmp[5] = base32hex[(((uint32_t_t)rdata[3]>>2)&0x1f)];
+				tmp[6] = base32hex[((uint32_t_t)rdata[3]<<3)&0x18];
 				tmp[7] = '=';
 				break;
 			default:
-				tmp[0] = base32hex[(((uint32_t)rdata[0]>>3)&0x1f)];
-				tmp[1] = base32hex[(((uint32_t)rdata[0]<<2)&0x1c)|
-						   (((uint32_t)rdata[1]>>6)&0x03)];
-				tmp[2] = base32hex[(((uint32_t)rdata[1]>>1)&0x1f)];
-				tmp[3] = base32hex[(((uint32_t)rdata[1]<<4)&0x10)|
-						   (((uint32_t)rdata[2]>>4)&0x0f)];
-				tmp[4] = base32hex[(((uint32_t)rdata[2]<<1)&0x1e)|
-						   (((uint32_t)rdata[3]>>7)&0x01)];
-				tmp[5] = base32hex[(((uint32_t)rdata[3]>>2)&0x1f)];
-				tmp[6] = base32hex[(((uint32_t)rdata[3]<<3)&0x18)|
-						   (((uint32_t)rdata[4]>>5)&0x07)];
+				tmp[0] = base32hex[(((uint32_t_t)rdata[0]>>3)&0x1f)];
+				tmp[1] = base32hex[(((uint32_t_t)rdata[0]<<2)&0x1c)|
+						   (((uint32_t_t)rdata[1]>>6)&0x03)];
+				tmp[2] = base32hex[(((uint32_t_t)rdata[1]>>1)&0x1f)];
+				tmp[3] = base32hex[(((uint32_t_t)rdata[1]<<4)&0x10)|
+						   (((uint32_t_t)rdata[2]>>4)&0x0f)];
+				tmp[4] = base32hex[(((uint32_t_t)rdata[2]<<1)&0x1e)|
+						   (((uint32_t_t)rdata[3]>>7)&0x01)];
+				tmp[5] = base32hex[(((uint32_t_t)rdata[3]>>2)&0x1f)];
+				tmp[6] = base32hex[(((uint32_t_t)rdata[3]<<3)&0x18)|
+						   (((uint32_t_t)rdata[4]>>5)&0x07)];
 				tmp[7] = base32hex[(rdata[4]&0x1f)];
 				break;
 			}

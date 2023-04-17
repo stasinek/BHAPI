@@ -101,19 +101,19 @@ public:
     void                UnlockLooper();
 
     // Observer calls
-    status_t          StartWatching(BMessenger msgr,  uint32 what);
+    status_t          StartWatching(BMessenger msgr,  uint32_t what);
     status_t          StartWatchingAll(BMessenger msgr);
-    status_t          StopWatching(BMessenger msgr,  uint32 what);
+    status_t          StopWatching(BMessenger msgr,  uint32_t what);
     status_t          StopWatchingAll(BMessenger msgr);
 
-    status_t          StartWatching(BHandler *handler,  uint32 what);
+    status_t          StartWatching(BHandler *handler,  uint32_t what);
     status_t          StartWatchingAll(BHandler *handler);
-    status_t          StopWatching(BHandler *handler,  uint32 what);
+    status_t          StopWatching(BHandler *handler,  uint32_t what);
     status_t          StopWatchingAll(BHandler *handler);
 
     // Notifier calls
-    virtual void		SendNotices(uint32 what, const BMessage *msg = NULL);
-    bool                IsWatched(uint32 what = B_OBSERVER_OBSERVE_ALL) const;
+    virtual void		SendNotices(uint32_t what, const BMessage *msg = NULL);
+    bool                IsWatched(uint32_t what = B_OBSERVER_OBSERVE_ALL) const;
 
     // Message Filtering
     virtual bool		AddFilter(BMessageFilter *filter);
@@ -122,7 +122,7 @@ public:
     const BList        *FilterList() const;
 
     // Scripting
-    virtual BHandler   *ResolveSpecifier(BMessage *msg,  int32 index, BMessage *specifier,  int32 what, const char *property);
+    virtual BHandler   *ResolveSpecifier(BMessage *msg,  int32_t index, BMessage *specifier,  int32_t what, const char *property);
     virtual status_t	GetSupportedSuites(BMessage *data);
 
 private:

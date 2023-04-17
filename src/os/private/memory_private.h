@@ -6,6 +6,6 @@
 #define BEOS_MEMORY_PRIVATE_H
 #include <kernel.h>
 //-------------------------------------------------------------------------------------------------
-extern status_t get_memory_properties(bhapi::team_id teamID, const void* address, uint32* _protected, uint32* _lock);
+extern status_t get_memory_properties(bhapi::team_id teamID, const void* address, uint32_t* _protected, uint32_t* _lock);
 //-------------------------------------------------------------------------------------------------
 #endif

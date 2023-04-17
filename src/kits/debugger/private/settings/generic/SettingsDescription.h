@@ -18,8 +18,8 @@ public:
 								SettingsDescription();
 	virtual						~SettingsDescription();
 
-			int32				CountSettings() const;
-			Setting*			SettingAt(int32 index) const;
+			int32_t				CountSettings() const;
+			Setting*			SettingAt(int32_t index) const;
 			Setting*			SettingByID(const char* id) const;
 
 			bool				AddSetting(Setting* setting);

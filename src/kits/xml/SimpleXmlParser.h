@@ -45,18 +45,18 @@ public:
 	const char		*Content() const;
 	void			SetContent(const char *content);
 
-    const char		*AttributeAt(int32 index, const char** attr_content = NULL) const;
+    const char		*AttributeAt(int32_t index, const char** attr_content = NULL) const;
 	bool			AddAttribute(const char *name, const char *content, bool replace_content = true);
 	bool			RemoveAttribute(const char *name);
-     int32			FindAttribute(const char *name,  int32 fromIndex = 0) const;
-     int32			CountAttributes() const;
+     int32_t			FindAttribute(const char *name,  int32_t fromIndex = 0) const;
+     int32_t			CountAttributes() const;
 
-    BSimpleXmlNode		*NodeAt(int32 index) const;
-    bool			AddNode(BSimpleXmlNode *node,  int32 atIndex = -1);
+    BSimpleXmlNode		*NodeAt(int32_t index) const;
+    bool			AddNode(BSimpleXmlNode *node,  int32_t atIndex = -1);
 	bool			RemoveNode(BSimpleXmlNode *node);
 	bool			RemoveSelf();
-     int32			FindNode(const char *name,  int32 fromIndex = 0) const;
-     int32			CountNodes() const;
+     int32_t			FindNode(const char *name,  int32_t fromIndex = 0) const;
+     int32_t			CountNodes() const;
 	BSimpleXmlNode		*SuperNode() const;
 
 	void			PrintToStream() const;

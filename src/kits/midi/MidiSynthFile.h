@@ -6,7 +6,7 @@
 #include <MidiSynth.h>
 #include <Entry.h>
 
-typedef void (*synth_file_hook)(int32 arg);
+typedef void (*synth_file_hook)(int32_t arg);
 
 class BMidiStore;
 
@@ -26,19 +26,19 @@ public:
 	void Pause(void);
 	void Resume(void);
 
-	int32 Duration(void) const;
-	int32 Position(int32 ticks) const;
-	int32 Seek();
+	int32_t Duration(void) const;
+	int32_t Position(int32_t ticks) const;
+	int32_t Seek();
 
 	status_t GetPatches(int16* pArray768, int16* pReturnedCount) const;
 
-	void SetFileHook(synth_file_hook pSongHook, int32 arg);
+	void SetFileHook(synth_file_hook pSongHook, int32_t arg);
 
 	bool IsFinished(void) const;
 
 	void ScaleTempoBy(double tempoFactor);
-	void SetTempo(int32 newTempoBPM);
-	int32 Tempo(void) const;
+	void SetTempo(int32_t newTempoBPM);
+	int32_t Tempo(void) const;
 
 	void EnableLooping(bool loop);
 
@@ -58,7 +58,7 @@ private:
 
 	BMidiStore* fStore;
 	
-	int32 _reserved[3];
+	int32_t _reserved[3];
 };
 
 #endif // _MIDI_SYNTH_FILE

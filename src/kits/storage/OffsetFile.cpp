@@ -90,7 +90,7 @@ OffsetFile::WriteAt(off_t pos, const void *buffer, size_t size)
 
 // Seek
 off_t
-OffsetFile::Seek(off_t position, uint32 seekMode)
+OffsetFile::Seek(off_t position, uint32_t seekMode)
 {
 	off_t result = B_BAD_VALUE;
 	status_t error = InitCheck();

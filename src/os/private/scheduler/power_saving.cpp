@@ -30,7 +30,7 @@ switch_to_mode()
 
 
 static void
-set_cpu_enabled(int32 cpu, bool enabled)
+set_cpu_enabled(int32_t cpu, bool enabled)
 {
 	if (!enabled)
 		sSmallTaskCore = NULL;
@@ -123,8 +123,8 @@ rebalance(const ThreadData* threadData)
 
 	CoreEntry* core = threadData->Core();
 
-	int32 coreLoad = core->GetLoad();
-	int32 threadLoad = threadData->GetLoad() / core->CPUCount();
+	int32_t coreLoad = core->GetLoad();
+	int32_t threadLoad = threadData->GetLoad() / core->CPUCount();
 	if (coreLoad > kHighLoad) {
 		if (sSmallTaskCore == core) {
 			sSmallTaskCore = NULL;
@@ -145,8 +145,8 @@ rebalance(const ThreadData* threadData)
 		coreLocker.Unlock();
 		ASSERT(other != NULL);
 
-		int32 coreNewLoad = coreLoad - threadLoad;
-		int32 otherNewLoad = other->GetLoad() + threadLoad;
+		int32_t coreNewLoad = coreLoad - threadLoad;
+		int32_t otherNewLoad = other->GetLoad() + threadLoad;
 		return coreNewLoad - otherNewLoad >= kLoadDifference / 2 ? other : core;
 	}
 
@@ -179,7 +179,7 @@ pack_irqs()
 		irq_assignment* irq = (irq_assignment*)list_get_first_item(&cpu->irqs);
 		locker.Unlock();
 
-		int32 newCPU = smallTaskCore->CPUHeap()->PeekRoot()->ID();
+		int32_t newCPU = smallTaskCore->CPUHeap()->PeekRoot()->ID();
 
 		if (newCPU != cpu->cpu_num)
 			assign_io_interrupt_to_cpu(irq->irq, newCPU);
@@ -224,7 +224,7 @@ rebalance_irqs(bool idle)
 	coreLocker.Unlock();
 	if (other == NULL)
 		return;
-	int32 newCPU = other->CPUHeap()->PeekRoot()->ID();
+	int32_t newCPU = other->CPUHeap()->PeekRoot()->ID();
 
 	CoreEntry* core = CoreEntry::GetCore(smp_get_current_cpu());
 	if (other == core)

@@ -28,9 +28,9 @@ public:
 	virtual	status_t			SetCopyright(void* cookie,
 									const char* copyright) = 0;
 
-	virtual	status_t			AddTrackInfo(void* cookie, uint32 code,
+	virtual	status_t			AddTrackInfo(void* cookie, uint32_t code,
 									const void* data, size_t size,
-									uint32 flags = 0) = 0;
+									uint32_t flags = 0) = 0;
 
 	virtual	status_t			WriteChunk(void* cookie,
 									const void* chunkBuffer, size_t chunkSize,
@@ -56,7 +56,7 @@ public: // XXX for test programs only
 	friend class PluginManager;
 			MediaPlugin*		fMediaPlugin;
 
-			uint32				fReserved[5];
+			uint32_t				fReserved[5];
 };
 
 

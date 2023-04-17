@@ -80,7 +80,7 @@ BFileIO::WriteAt(off_t position, const void* buffer, size_t size)
 
 
 off_t
-BFileIO::Seek(off_t position, uint32 seekMode)
+BFileIO::Seek(off_t position, uint32_t seekMode)
 {
 	if (fseeko(fFile, position, seekMode) < 0)
 		return errno;
@@ -121,7 +121,7 @@ status_t BFileIO::GetSize(off_t* _size) const
 
 
 off_t
-BFileIO::_Seek(off_t position, uint32 seekMode) const
+BFileIO::_Seek(off_t position, uint32_t seekMode) const
 {
 	// save the current position
 	off_t oldPosition = ftello(fFile);

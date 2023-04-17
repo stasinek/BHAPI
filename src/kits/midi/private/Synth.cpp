@@ -91,13 +91,13 @@ bool BSynth::IsLoaded() const
 }
 
 
-status_t BSynth::SetSamplingRate(int32 sample_rate)
+status_t BSynth::SetSamplingRate(int32_t sample_rate)
 {
 	return fSynth->SetSamplingRate(sample_rate);
 }
 
 
-int32 
+int32_t 
 BSynth::SamplingRate() const
 {
 	return fSynth->SamplingRate();
@@ -203,7 +203,7 @@ BSynth::SampleVolume(void) const
 }
 
 
-status_t BSynth::GetAudio(int16* pLeft, int16* pRight, int32 max_samples) const
+status_t BSynth::GetAudio(int16* pLeft, int16* pRight, int32_t max_samples) const
 {
 	// We don't print a "not supported" message here. That would cause
 	// significant slowdowns because applications ask for this many times.
@@ -214,12 +214,12 @@ status_t BSynth::GetAudio(int16* pLeft, int16* pRight, int32 max_samples) const
 		return max_samples;
 	}
 	
-	int32 nSamples = fSynth->fMonitorSize / sizeof(float)
+	int32_t nSamples = fSynth->fMonitorSize / sizeof(float)
 			/ fSynth->fMonitorChans;
 	if (nSamples > max_samples)
 		nSamples = max_samples;
 	float* sPtr = fSynth->fMonitor;
-	for (int32 i = 0; i < nSamples; i++, sPtr += fSynth->fMonitorChans) {
+	for (int32_t i = 0; i < nSamples; i++, sPtr += fSynth->fMonitorChans) {
 		*pLeft++ = (int16)(*sPtr * 32768);
 		*pRight++ = (int16)(*(sPtr + 1) * 32768);
 	}
@@ -255,7 +255,7 @@ void BSynth::_Init()
 }
 
 
-int32 
+int32_t 
 BSynth::CountClients() const
 {
 	return fClientCount;

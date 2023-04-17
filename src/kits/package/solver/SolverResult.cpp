@@ -81,14 +81,14 @@ bool BSolverResult::IsEmpty() const
 }
 
 
-int32 BSolverResult::CountElements() const
+int32_t BSolverResult::CountElements() const
 {
 	return fElements.CountItems();
 }
 
 
 const BSolverResultElement*
-BSolverResult::ElementAt(int32 index) const
+BSolverResult::ElementAt(int32_t index) const
 {
 	return fElements.ItemAt(index);
 }

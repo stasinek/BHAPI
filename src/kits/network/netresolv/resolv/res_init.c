@@ -124,7 +124,7 @@ static void res_setoptions(res_state, const char *, const char *);
 #ifdef RESOLVSORT
 static const char sort_mask[] = "/&";
 #define ISSORTMASK(ch) (strchr(sort_mask, ch) != NULL)
-static uint32_t net_mask __P((struct in_addr));
+static uint32_t_t net_mask __P((struct in_addr));
 #endif
 
 #if !defined(isascii)	/*%< XXX - could be a function */
@@ -654,10 +654,10 @@ res_setoptions(res_state statp, const char *options, const char *source)
 
 #ifdef RESOLVSORT
 /* XXX - should really support CIDR which means explicit masks always. */
-static uint32_t
+static uint32_t_t
 net_mask(struct in_addr in) /*!< XXX - should really use system's version of this  */
 {
-	register uint32_t i = ntohl(in.s_addr);
+	register uint32_t_t i = ntohl(in.s_addr);
 
 	if (IN_CLASSA(i))
 		return (htonl(IN_CLASSA_NET));
@@ -671,16 +671,16 @@ void
 res_rndinit(res_state statp)
 {
 	struct timeval now;
-	uint32_t u32;
+	uint32_t_t u32;
 	uint16_t u16;
 	u_char *rnd = statp->_rnd;
 
 	gettimeofday(&now, NULL);
-	u32 = (uint32_t)now.tv_sec;
+	u32 = (uint32_t_t)now.tv_sec;
 	memcpy(rnd, &u32, 4);
 	u32 = now.tv_usec;
 	memcpy(rnd + 4, &u32, 4);
-	u32 += (uint32_t)now.tv_sec;
+	u32 += (uint32_t_t)now.tv_sec;
 	memcpy(rnd + 8, &u32, 4);
 	u16 = getpid();
 	memcpy(rnd + 12, &u16, 2);

@@ -14,7 +14,7 @@ extern "C" {
 /* kernel threads */
 
 extern fssh_thread_id	fssh_spawn_kernel_thread(fssh_thread_func function,
-								const char *threadName,  int32_t priority,
+								const char *threadName,  int32_t_t priority,
 								void *arg);
 
 /* misc */
@@ -36,7 +36,7 @@ extern void			fssh_panic(const char *format, ...)
 							__attribute__ ((format (__printf__, 1, 2)));
 
 extern void			fssh_kernel_debugger(const char *message);	/* enter kernel debugger */
-extern uint32_t		fssh_parse_expression(const char *string);	/* utility for debugger cmds */
+extern uint32_t_t		fssh_parse_expression(const char *string);	/* utility for debugger cmds */
 
 typedef int (*fssh_debugger_command_hook)(int argc, char **argv);
 

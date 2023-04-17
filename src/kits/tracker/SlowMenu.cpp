@@ -36,7 +36,7 @@ All rights reserved.
 #include <SlowMenu.h>
 
 
-const int32 kItemsToAddChunk = 20;
+const int32_t kItemsToAddChunk = 20;
 const bigtime_t kMaxTimeBuildingMenu = 200000;
 
 
@@ -67,7 +67,7 @@ bool BSlowMenu::AddDynamicItem(add_state state)
 	}
 
 	bigtime_t timeToBail = system_time() + kMaxTimeBuildingMenu;
-	for (int32 count = 0; count < kItemsToAddChunk; count++) {
+	for (int32_t count = 0; count < kItemsToAddChunk; count++) {
 		if (!AddNextItem()) {
 			fMenuBuilt = true;
 			DoneBuildingItemList();

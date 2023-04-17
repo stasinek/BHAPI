@@ -17,7 +17,7 @@ namespace BHPKG {
 class BBlockBufferPoolNoLock : public BHPKG::BBlockBufferPool {
 public:
 								BBlockBufferPoolNoLock(size_t blockSize,
-									uint32 maxCachedBlocks);
+									uint32_t maxCachedBlocks);
 	virtual						~BBlockBufferPoolNoLock();
 
 	virtual	bool				Lock();

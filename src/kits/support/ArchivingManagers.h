@@ -99,10 +99,10 @@ public:
 								BArchiveManager(const BArchiver* creator);
 
 			status_t			GetTokenForArchivable(BArchivable* archivable,
-									int32& _token);
+									int32_t& _token);
 
 			status_t			ArchiveObject(BArchivable* archivable,
-									bool deep, int32& _token);
+									bool deep, int32_t& _token);
 
 			bool				IsArchived(BArchivable* archivable);
 
@@ -131,11 +131,11 @@ class BUnarchiveManager: public BManagerBase {
 public:
 								BUnarchiveManager(BMessage* topLevelArchive);
 
-			status_t			GetArchivableForToken(int32 token,
+			status_t			GetArchivableForToken(int32_t token,
 									BUnarchiver::ownership_policy owning, 
 									BArchivable*& _archivable);
 
-			bool				IsInstantiated(int32 token);
+			bool				IsInstantiated(int32_t token);
 
 			void				RegisterArchivable(BArchivable* archivable);
 			status_t			UnarchiverLeaving(const BUnarchiver* archiver,
@@ -147,14 +147,14 @@ public:
 private:
 								~BUnarchiveManager();
 
-			status_t			_ExtractArchiveAt(int32 index);
+			status_t			_ExtractArchiveAt(int32_t index);
 
 			struct ArchiveInfo;
 
 			ArchiveInfo*		fObjects;
-			int32				fObjectCount;
-			int32				fTokenInProgress;
-			int32				fRefCount;
+			int32_t				fObjectCount;
+			int32_t				fTokenInProgress;
+			int32_t				fRefCount;
 			status_t			fError;
 };
 

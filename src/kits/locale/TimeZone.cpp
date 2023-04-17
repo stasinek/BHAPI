@@ -26,15 +26,15 @@ const char* BTimeZone::kNameOfGmtZone = "GMT";
 static const BString skEmptyString;
 
 
-static const uint32 skNameField 					= 1U << 0;
-static const uint32 skDaylightSavingNameField 		= 1U << 1;
-static const uint32 skShortNameField 				= 1U << 2;
-static const uint32 skShortDaylightSavingNameField 	= 1U << 3;
-static const uint32 skLongGenericNameField 			= 1U << 4;
-static const uint32 skGenericLocationNameField 		= 1U << 5;
-static const uint32 skShortCommonlyUsedNameField	= 1U << 6;
-static const uint32 skSupportsDaylightSavingField   = 1U << 7;
-static const uint32 skOffsetFromGMTField			= 1U << 8;
+static const uint32_t skNameField 					= 1U << 0;
+static const uint32_t skDaylightSavingNameField 		= 1U << 1;
+static const uint32_t skShortNameField 				= 1U << 2;
+static const uint32_t skShortDaylightSavingNameField 	= 1U << 3;
+static const uint32_t skLongGenericNameField 			= 1U << 4;
+static const uint32_t skGenericLocationNameField 		= 1U << 5;
+static const uint32_t skShortCommonlyUsedNameField	= 1U << 6;
+static const uint32_t skSupportsDaylightSavingField   = 1U << 7;
+static const uint32_t skOffsetFromGMTField			= 1U << 8;
 
 
 BTimeZone::BTimeZone(const char* zoneID, const BLanguage* language)
@@ -192,8 +192,8 @@ int
 BTimeZone::OffsetFromGMT() const
 {
 	if ((fInitializedFields & skOffsetFromGMTField) == 0) {
-		int32_t rawOffset;
-		int32_t dstOffset;
+		int32_t_t rawOffset;
+		int32_t_t dstOffset;
 		UDate nowMillis = 1000 * (double)time(NULL);
 
 		UErrorCode error = U_ZERO_ERROR;

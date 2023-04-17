@@ -87,7 +87,7 @@ status_t LocalTargetHostInterface::Init(Settings* settings)
 	if (error != B_OK)
 		return error;
 
-	int32 cookie = 0;
+	int32_t cookie = 0;
 	while (get_next_team_info(&cookie, &info) == B_OK) {
 		error = fTargetHost->AddTeam(info);
 		if (error != B_OK)
@@ -239,7 +239,7 @@ status_t LocalTargetHostInterface::_PortLoop(void* arg)
 		status_t error;
 		bool addToWaiters;
 		char buffer[2048];
-		int32 messageCode;
+		int32_t messageCode;
 		team_id team;
 
 		ssize_t size = read_port_etc(interface->fDataPort, &messageCode,
@@ -274,7 +274,7 @@ status_t LocalTargetHostInterface::_PortLoop(void* arg)
 		if (message.What() != B_SYSTEM_OBJECT_UPDATE)
 			continue;
 
-		int32 opcode = 0;
+		int32_t opcode = 0;
 		if (message.FindInt32("opcode", &opcode) != B_OK)
 			continue;
 
@@ -299,7 +299,7 @@ status_t LocalTargetHostInterface::_PortLoop(void* arg)
 }
 
 
-status_t LocalTargetHostInterface::_HandleTeamEvent(team_id team, int32 opcode,
+status_t LocalTargetHostInterface::_HandleTeamEvent(team_id team, int32_t opcode,
 	bool& addToWaiters)
 {
 	addToWaiters = false;
@@ -316,7 +316,7 @@ status_t LocalTargetHostInterface::_HandleTeamEvent(team_id team, int32 opcode,
 			else if (error != B_OK)
 				return error;
 			else {
-				int32 cookie = 0;
+				int32_t cookie = 0;
 				image_info imageInfo;
 				addToWaiters = true;
 				while (get_next_image_info(team, &cookie, &imageInfo)

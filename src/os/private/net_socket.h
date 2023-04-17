@@ -32,11 +32,11 @@ typedef struct net_socket {
 
 	int						options;
 	int						linger;
-	uint32					bound_to_device;
+	uint32_t					bound_to_device;
 
 	struct {
-		uint32		buffer_size;
-		uint32		low_water_mark;
+		uint32_t		buffer_size;
+		uint32_t		low_water_mark;
 		bigtime_t	timeout;
 	}						send, receive;
 
@@ -56,7 +56,7 @@ struct net_socket_module_info {
 					size_t vecCount, size_t* _length);
 	status_t	(*writev)(net_socket* socket, const iovec* vecs,
 					size_t vecCount, size_t* _length);
-	status_t	(*control)(net_socket* socket, int32 op, void* data,
+	status_t	(*control)(net_socket* socket, int32_t op, void* data,
 					size_t length);
 
 	ssize_t		(*read_avail)(net_socket* socket);
@@ -64,14 +64,14 @@ struct net_socket_module_info {
 
 	status_t	(*send_data)(net_socket* socket, net_buffer* buffer);
 	status_t	(*receive_data)(net_socket* socket, size_t length,
-					uint32 flags, net_buffer** _buffer);
+					uint32_t flags, net_buffer** _buffer);
 
 	status_t	(*get_option)(net_socket* socket, int level, int option,
 					void* value, int* _length);
 	status_t	(*set_option)(net_socket* socket, int level, int option,
 					const void* value, int length);
 
-	status_t	(*get_next_stat)(uint32* cookie, int family,
+	status_t	(*get_next_stat)(uint32_t* cookie, int family,
 					struct net_stat* stat);
 
 	// connections
@@ -82,7 +82,7 @@ struct net_socket_module_info {
 					net_socket** _socket);
 	status_t	(*dequeue_connected)(net_socket* parent, net_socket** _socket);
 	ssize_t		(*count_connected)(net_socket* parent);
-	status_t	(*set_max_backlog)(net_socket* socket, uint32 backlog);
+	status_t	(*set_max_backlog)(net_socket* socket, uint32_t backlog);
 	bool		(*has_parent)(net_socket* socket);
 	status_t	(*set_connected)(net_socket* socket);
 	status_t	(*set_aborted)(net_socket* socket);
@@ -92,7 +92,7 @@ struct net_socket_module_info {
 					struct selectsync* sync);
 	status_t	(*cancel_notification)(net_socket* socket, uint8 event,
 					struct selectsync* sync);
-	status_t	(*notify)(net_socket* socket, uint8 event, int32 value);
+	status_t	(*notify)(net_socket* socket, uint8 event, int32_t value);
 
 	// standard socket API
 	int			(*accept)(net_socket* socket, struct sockaddr* address,

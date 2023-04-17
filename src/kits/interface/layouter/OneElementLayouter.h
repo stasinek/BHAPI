@@ -15,9 +15,9 @@ public:
 								OneElementLayouter();
 	virtual						~OneElementLayouter();
 
-	virtual	void				AddConstraints(int32 element, int32 length,
+	virtual	void				AddConstraints(int32_t element, int32_t length,
 									float min, float max, float preferred);
-	virtual	void				SetWeight(int32 element, float weight);
+	virtual	void				SetWeight(int32_t element, float weight);
 
 	virtual	float				MinSize();
 	virtual	float				MaxSize();

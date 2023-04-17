@@ -15,7 +15,7 @@
 
 #if ENABLE_SWAP_SUPPORT
 
-typedef uint32 swap_addr_t;
+typedef uint32_t swap_addr_t;
 	// TODO: Should be wider, but RadixBitmap supports only a 32 bit type ATM!
 struct swap_block;
 struct system_memory_info;
@@ -25,8 +25,8 @@ extern "C" {
 	void swap_init(void);
 	void swap_init_post_modules(void);
 	bool swap_free_page_swap_space(vm_page* page);
-	uint32 swap_available_pages(void);
-	uint32 swap_total_swap_pages(void);
+	uint32_t swap_available_pages(void);
+	uint32_t swap_total_swap_pages(void);
 }
 
 
@@ -35,9 +35,9 @@ public:
 	virtual						~VMAnonymousCache();
 
 			status_t			Init(bool canOvercommit,
-									int32 numPrecommittedPages,
-									int32 numGuardPages,
-									uint32 allocationFlags);
+									int32_t numPrecommittedPages,
+									int32_t numGuardPages,
+									uint32_t allocationFlags);
 
 	virtual	status_t			Resize(off_t newSize, int priority);
 
@@ -45,21 +45,21 @@ public:
 	virtual	bool				HasPage(off_t offset);
 	virtual	bool				DebugHasPage(off_t offset);
 
-	virtual	int32				GuardSize()	{ return fGuardedSize; }
+	virtual	int32_t				GuardSize()	{ return fGuardedSize; }
 
 	virtual	status_t			Read(off_t offset, const generic_io_vec* vecs,
-									size_t count, uint32 flags,
+									size_t count, uint32_t flags,
 									generic_size_t* _numBytes);
 	virtual	status_t			Write(off_t offset, const generic_io_vec* vecs,
-									size_t count, uint32 flags,
+									size_t count, uint32_t flags,
 									generic_size_t* _numBytes);
 	virtual	status_t			WriteAsync(off_t offset,
 									const generic_io_vec* vecs, size_t count,
-									generic_size_t numBytes, uint32 flags,
+									generic_size_t numBytes, uint32_t flags,
 									AsyncIOCallback* callback);
 	virtual	bool				CanWritePage(off_t offset);
 
-	virtual	int32				MaxPagesPerAsyncWrite() const;
+	virtual	int32_t				MaxPagesPerAsyncWrite() const;
 
 	virtual	status_t			Fault(struct VMAddressSpace* aspace,
 									off_t offset);
@@ -74,8 +74,8 @@ private:
 			friend class WriteCallback;
 
 			void				_SwapBlockBuild(off_t pageIndex,
-									swap_addr_t slotIndex, uint32 count);
-			void        		_SwapBlockFree(off_t pageIndex, uint32 count);
+									swap_addr_t slotIndex, uint32_t count);
+			void        		_SwapBlockFree(off_t pageIndex, uint32_t count);
 			swap_addr_t			_SwapBlockGetAddress(off_t pageIndex);
 			status_t			_Commit(off_t size, int priority);
 
@@ -91,7 +91,7 @@ private:
 			bool				fCanOvercommit;
 			bool				fHasPrecommitted;
 			uint8				fPrecommittedPages;
-			int32				fGuardedSize;
+			int32_t				fGuardedSize;
 			off_t   			fCommittedSwapSize;
 			off_t   			fAllocatedSwapSize;
 };

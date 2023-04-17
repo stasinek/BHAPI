@@ -86,15 +86,15 @@ public:
 	void StartFresh() {etk_app->PostMessage(START_REFRESH_MSG);}
 	void StopFresh() {etk_app->PostMessage(STOP_REFRESH_MSG);}
 
-	void testFillRects(eint32 count);
+	void testFillRects(eint32_t count);
 	void testStrokePoints();
-	void testStrokeLines(eint32 count);
-	void testStrokeEllipses(eint32 count);
-	void testFillEllipses(eint32 count);
-	void testStrokeArcs(eint32 count);
-	void testFillTriangles(eint32 count);
-	void testStrokePolygons(eint32 count);
-	void testFillPolygons(eint32 count);
+	void testStrokeLines(eint32_t count);
+	void testStrokeEllipses(eint32_t count);
+	void testFillEllipses(eint32_t count);
+	void testStrokeArcs(eint32_t count);
+	void testFillTriangles(eint32_t count);
+	void testStrokePolygons(eint32_t count);
+	void testFillPolygons(eint32_t count);
 
 private:
 	e_status_t fStatus;
@@ -102,10 +102,10 @@ private:
 	ELooper *fLooper;
 
 	virtual e_status_t InitCheck() const;
-	virtual void GetFrame(eint32 *originX, eint32 *originY, euint32 *width, euint32 *height) const;
-	virtual void GetPixel(eint32 x, eint32 y, e_rgb_color &color) const;
-	virtual void PutPixel(eint32 x, eint32 y, e_rgb_color color);
-	virtual void PutRect(eint32 x, eint32 y, euint32 width, euint32 height, e_rgb_color color);
+	virtual void GetFrame(eint32_t *originX, eint32_t *originY, euint32_t *width, euint32_t *height) const;
+	virtual void GetPixel(eint32_t x, eint32_t y, e_rgb_color &color) const;
+	virtual void PutPixel(eint32_t x, eint32_t y, e_rgb_color color);
+	virtual void PutRect(eint32_t x, eint32_t y, euint32_t width, euint32_t height, e_rgb_color color);
 };
 
 
@@ -118,7 +118,7 @@ public:
 
 private:
 	TRender *fRender;
-	eint32 fCount;
+	eint32_t fCount;
 };
 
 
@@ -179,7 +179,7 @@ TRender::InitCheck() const
 
 
 void
-TRender::GetFrame(eint32 *originX, eint32 *originY, euint32 *width, euint32 *height) const
+TRender::GetFrame(eint32_t *originX, eint32_t *originY, euint32_t *width, euint32_t *height) const
 {
 	if(originX) *originX = 0;
 	if(originY) *originY = 0;
@@ -189,11 +189,11 @@ TRender::GetFrame(eint32 *originX, eint32 *originY, euint32 *width, euint32 *hei
 
 
 void
-TRender::GetPixel(eint32 x, eint32 y, e_rgb_color &color) const
+TRender::GetPixel(eint32_t x, eint32_t y, e_rgb_color &color) const
 {
 	if(fScreen == NULL || SDL_LockSurface(fScreen) < 0) return;
 
-	Uint32 sdlColor = 0;
+	Uint32_t sdlColor = 0;
 	Uint8 *p = (Uint8*)fScreen->pixels + y * fScreen->pitch + x * fScreen->format->BytesPerPixel;
 
 	switch(fScreen->format->BytesPerPixel)
@@ -214,7 +214,7 @@ TRender::GetPixel(eint32 x, eint32 y, e_rgb_color &color) const
 			break;
 
 		case 4: // 32-bpp
-			sdlColor = *((Uint32*)p);
+			sdlColor = *((Uint32_t*)p);
 			break;
 
 		default: break;
@@ -227,11 +227,11 @@ TRender::GetPixel(eint32 x, eint32 y, e_rgb_color &color) const
 
 
 void
-TRender::PutPixel(eint32 x, eint32 y, e_rgb_color color)
+TRender::PutPixel(eint32_t x, eint32_t y, e_rgb_color color)
 {
 	if(fScreen == NULL || SDL_LockSurface(fScreen) < 0) return;
 
-	Uint32 sdlColor = SDL_MapRGB(fScreen->format, color.red, color.green, color.blue);
+	Uint32_t sdlColor = SDL_MapRGB(fScreen->format, color.red, color.green, color.blue);
 	Uint8 *p = (Uint8*)fScreen->pixels + y * fScreen->pitch + x * fScreen->format->BytesPerPixel;
 
 	switch(fScreen->format->BytesPerPixel)
@@ -260,7 +260,7 @@ TRender::PutPixel(eint32 x, eint32 y, e_rgb_color color)
 			break;
 
 		case 4: // 32-bpp
-			*((Uint32*)p) = sdlColor;
+			*((Uint32_t*)p) = sdlColor;
 			break;
 
 		default: break;
@@ -271,13 +271,13 @@ TRender::PutPixel(eint32 x, eint32 y, e_rgb_color color)
 
 
 void
-TRender::PutRect(eint32 x, eint32 y, euint32 width, euint32 height, e_rgb_color color)
+TRender::PutRect(eint32_t x, eint32_t y, euint32_t width, euint32_t height, e_rgb_color color)
 {
 	if(fScreen == NULL || width == 0 || height == 0 ||
 	   x > E_MAXINT16 || y > E_MAXINT16 || width >= E_MAXUINT16 || height >= E_MAXUINT16 ||
 	   SDL_LockSurface(fScreen) < 0) return;
 	
-	Uint32 sdlColor = SDL_MapRGB(fScreen->format, color.red, color.green, color.blue);
+	Uint32_t sdlColor = SDL_MapRGB(fScreen->format, color.red, color.green, color.blue);
 
 	SDL_UnlockSurface(fScreen);
 
@@ -293,7 +293,7 @@ TRender::PutRect(eint32 x, eint32 y, euint32 width, euint32 height, e_rgb_color 
 
 
 void
-TRender::testFillRects(eint32 count)
+TRender::testFillRects(eint32_t count)
 {
 #if 1
 	SetDrawingMode(E_OP_COPY);
@@ -305,10 +305,10 @@ TRender::testFillRects(eint32 count)
 
 	StartFresh();
 
-	for(eint32 i = 0; i < count; i++)
+	for(eint32_t i = 0; i < count; i++)
 	{
-		eint32 x = random() % VIDEO_XRES;
-		eint32 y = random() % VIDEO_YRES;
+		eint32_t x = random() % VIDEO_XRES;
+		eint32_t y = random() % VIDEO_YRES;
 		SetHighColor(x & 0xff, y & 0xff, (x * y) & 0xff, x & 0xff);
 		FillRect(x, y, VIDEO_XRES - min_c(2 * x, VIDEO_XRES), VIDEO_YRES - min_c(2 * y, VIDEO_YRES));
 
@@ -330,9 +330,9 @@ TRender::testStrokePoints()
 
 	StartFresh();
 
-	for(eint32 y = 0; y < VIDEO_YRES; y++)
+	for(eint32_t y = 0; y < VIDEO_YRES; y++)
 	{
-		for(eint32 x = 0; x < 128; x++)
+		for(eint32_t x = 0; x < 128; x++)
 		{
 			SetHighColor(x << 1, 0, 0, alpha);
 			StrokePoint(x, y);
@@ -364,7 +364,7 @@ TRender::testStrokePoints()
 
 
 void
-TRender::testStrokeLines(eint32 count)
+TRender::testStrokeLines(eint32_t count)
 {
 #if 1
 	SetDrawingMode(E_OP_COPY);
@@ -376,10 +376,10 @@ TRender::testStrokeLines(eint32 count)
 
 	StartFresh();
 
-	for(eint32 i = 0; i < count; i++)
+	for(eint32_t i = 0; i < count; i++)
 	{
-		eint32 x = random() % VIDEO_XRES;
-		eint32 y = random() % VIDEO_YRES;
+		eint32_t x = random() % VIDEO_XRES;
+		eint32_t y = random() % VIDEO_YRES;
 		SetHighColor(x & 0xff, y & 0xff, (x * y) & 0xff, x & 0xff);
 		StrokeLine(x, y, VIDEO_XRES - x - 1, VIDEO_YRES - y - 1);
 
@@ -394,7 +394,7 @@ TRender::testStrokeLines(eint32 count)
 
 
 void
-TRender::testStrokeEllipses(eint32 count)
+TRender::testStrokeEllipses(eint32_t count)
 {
 #if 1
 	SetDrawingMode(E_OP_COPY);
@@ -406,12 +406,12 @@ TRender::testStrokeEllipses(eint32 count)
 
 	StartFresh();
 
-	for(eint32 i = 0; i < count; i++)
+	for(eint32_t i = 0; i < count; i++)
 	{
-		eint32 x = random() % VIDEO_XRES;
-		eint32 y = random() % VIDEO_YRES;
-		eint32 xr = x % 120;
-		eint32 yr = y % 120;
+		eint32_t x = random() % VIDEO_XRES;
+		eint32_t y = random() % VIDEO_YRES;
+		eint32_t xr = x % 120;
+		eint32_t yr = y % 120;
 		SetHighColor(x & 0xff, y & 0xff, (x * y) & 0xff, x & 0xff);
 		StrokeEllipse(x, y, xr, yr);
 
@@ -426,7 +426,7 @@ TRender::testStrokeEllipses(eint32 count)
 
 
 void
-TRender::testFillEllipses(eint32 count)
+TRender::testFillEllipses(eint32_t count)
 {
 #if 1
 	SetDrawingMode(E_OP_COPY);
@@ -438,12 +438,12 @@ TRender::testFillEllipses(eint32 count)
 
 	StartFresh();
 
-	for(eint32 i = 0; i < count; i++)
+	for(eint32_t i = 0; i < count; i++)
 	{
-		eint32 x = random() % VIDEO_XRES;
-		eint32 y = random() % VIDEO_YRES;
-		eint32 xr = x % 120;
-		eint32 yr = y % 120;
+		eint32_t x = random() % VIDEO_XRES;
+		eint32_t y = random() % VIDEO_YRES;
+		eint32_t xr = x % 120;
+		eint32_t yr = y % 120;
 		SetHighColor(x & 0xff, y & 0xff, (x * y) & 0xff, x & 0xff);
 		FillEllipse(x, y, xr, yr);
 
@@ -458,7 +458,7 @@ TRender::testFillEllipses(eint32 count)
 
 
 void
-TRender::testStrokeArcs(eint32 count)
+TRender::testStrokeArcs(eint32_t count)
 {
 #if 1
 	SetDrawingMode(E_OP_COPY);
@@ -470,12 +470,12 @@ TRender::testStrokeArcs(eint32 count)
 
 	StartFresh();
 
-	for(eint32 i = 0; i < count; i++)
+	for(eint32_t i = 0; i < count; i++)
 	{
-		eint32 x = random() % VIDEO_XRES;
-		eint32 y = random() % VIDEO_YRES;
-		eint32 xr = x % 120;
-		eint32 yr = y % 120;
+		eint32_t x = random() % VIDEO_XRES;
+		eint32_t y = random() % VIDEO_YRES;
+		eint32_t xr = x % 120;
+		eint32_t yr = y % 120;
 		SetHighColor(x & 0xff, y & 0xff, (x * y) & 0xff, x & 0xff);
 		StrokeArc(ERect(x, y, x + xr, y + yr), (x + y) % 360, (x - y) % 360);
 
@@ -490,7 +490,7 @@ TRender::testStrokeArcs(eint32 count)
 
 
 void
-TRender::testFillTriangles(eint32 count)
+TRender::testFillTriangles(eint32_t count)
 {
 #if 1
 	SetDrawingMode(E_OP_COPY);
@@ -502,16 +502,16 @@ TRender::testFillTriangles(eint32 count)
 
 	StartFresh();
 
-	for(eint32 i = 0; i < count; i++)
+	for(eint32_t i = 0; i < count; i++)
 	{
-		eint32 x0 = random() % VIDEO_XRES;
-		eint32 y0 = random() % VIDEO_YRES;
+		eint32_t x0 = random() % VIDEO_XRES;
+		eint32_t y0 = random() % VIDEO_YRES;
 
-		eint32 x1 = random() % VIDEO_XRES;
-		eint32 y1 = random() % VIDEO_YRES;
+		eint32_t x1 = random() % VIDEO_XRES;
+		eint32_t y1 = random() % VIDEO_YRES;
 
-		eint32 x2 = random() % VIDEO_XRES;
-		eint32 y2 = random() % VIDEO_YRES;
+		eint32_t x2 = random() % VIDEO_XRES;
+		eint32_t y2 = random() % VIDEO_YRES;
 
 		SetHighColor(x0 & 0xff, y0 & 0xff, x1 & 0xff, y1 & 0xff);
 		FillTriangle(x0, y0, x1, y1, x2, y2);
@@ -527,7 +527,7 @@ TRender::testFillTriangles(eint32 count)
 
 
 void
-TRender::testStrokePolygons(eint32 count)
+TRender::testStrokePolygons(eint32_t count)
 {
 #if 1
 	SetDrawingMode(E_OP_COPY);
@@ -539,22 +539,22 @@ TRender::testStrokePolygons(eint32 count)
 
 	StartFresh();
 
-	for(eint32 i = 0; i < count; i++)
+	for(eint32_t i = 0; i < count; i++)
 	{
-		eint32 numPts = max_c(random() % 15, 3);
+		eint32_t numPts = max_c(random() % 15, 3);
 
 		EPolygon aPolygon;
 		EPoint pt;
 
-		for(eint32 k = 0; k < numPts; k++)
+		for(eint32_t k = 0; k < numPts; k++)
 		{
-			eint32 x = random() % VIDEO_XRES;
-			eint32 y = random() % VIDEO_YRES;
+			eint32_t x = random() % VIDEO_XRES;
+			eint32_t y = random() % VIDEO_YRES;
 			pt.Set((float)x + 0.5f, (float)y + 0.5f);
 			aPolygon.AddPoints(&pt, 1);
 		}
 
-		SetHighColor((eint32)pt.x & 0xff, (eint32)pt.y & 0xff, numPts << 5, (eint32)pt.y & 0xff);
+		SetHighColor((eint32_t)pt.x & 0xff, (eint32_t)pt.y & 0xff, numPts << 5, (eint32_t)pt.y & 0xff);
 		StrokePolygon(&aPolygon);
 
 		SNOOZE(); // for user could interrupt this
@@ -568,7 +568,7 @@ TRender::testStrokePolygons(eint32 count)
 
 
 void
-TRender::testFillPolygons(eint32 count)
+TRender::testFillPolygons(eint32_t count)
 {
 #if 1
 	SetDrawingMode(E_OP_COPY);
@@ -580,22 +580,22 @@ TRender::testFillPolygons(eint32 count)
 
 	StartFresh();
 
-	for(eint32 i = 0; i < count; i++)
+	for(eint32_t i = 0; i < count; i++)
 	{
-		eint32 numPts = max_c(random() % 15, 3);
+		eint32_t numPts = max_c(random() % 15, 3);
 
 		EPolygon aPolygon;
 		EPoint pt;
 
-		for(eint32 k = 0; k < numPts; k++)
+		for(eint32_t k = 0; k < numPts; k++)
 		{
-			eint32 x = random() % VIDEO_XRES;
-			eint32 y = random() % VIDEO_YRES;
+			eint32_t x = random() % VIDEO_XRES;
+			eint32_t y = random() % VIDEO_YRES;
 			pt.Set((float)x + 0.5f, (float)y + 0.5f);
 			aPolygon.AddPoints(&pt, 1);
 		}
 
-		SetHighColor((eint32)pt.x & 0xff, (eint32)pt.y & 0xff, numPts << 5, (eint32)pt.y & 0xff);
+		SetHighColor((eint32_t)pt.x & 0xff, (eint32_t)pt.y & 0xff, numPts << 5, (eint32_t)pt.y & 0xff);
 		FillPolygon(&aPolygon);
 
 		SNOOZE(); // for user could interrupt this
@@ -712,7 +712,7 @@ TWindow::MessageReceived(EMessage *msg)
 		if(tctrl == NULL) return;
 
 		EString str(tctrl->Text());
-		eint32 count;
+		eint32_t count;
 		if(str.GetInteger(&count) == false) return;
 
 		msg->AddInt32("count", count);

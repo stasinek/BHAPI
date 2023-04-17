@@ -16,7 +16,7 @@
 #include <new>
 
 
-static const int32 kMaxSourceFileSize = 10 * 1024 * 1024;
+static const int32_t kMaxSourceFileSize = 10 * 1024 * 1024;
 
 
 // #pragma mark - SourceFileOwner
@@ -98,12 +98,12 @@ status_t SourceFile::Init(const char* path)
 	}
 
 	// allocate line offset array
-	fLineOffsets = new(std::nothrow) int32[fLineCount + 1];
+	fLineOffsets = new(std::nothrow) int32_t[fLineCount + 1];
 	if (fLineOffsets == NULL)
 		return B_NO_MEMORY;
 
 	// get the line offsets and null-terminate the lines
-	int32 lineIndex = 0;
+	int32_t lineIndex = 0;
 	fLineOffsets[lineIndex++] = 0;
 	for (size_t i = 0; i < fileSize; i++) {
 		if (fFileContent[i] == '\n') {
@@ -117,20 +117,20 @@ status_t SourceFile::Init(const char* path)
 }
 
 
-int32 SourceFile::CountLines() const
+int32_t SourceFile::CountLines() const
 {
 	return fLineCount;
 }
 
 
-const char*  SourceFile::LineAt(int32 index) const
+const char*  SourceFile::LineAt(int32_t index) const
 {
 	return index >= 0 && index < fLineCount
 		? fFileContent + fLineOffsets[index] : NULL;
 }
 
 
-int32 SourceFile::LineLengthAt(int32 index) const
+int32_t SourceFile::LineLengthAt(int32_t index) const
 {
 	return index >= 0 && index < fLineCount
 		? fLineOffsets[index + 1] - fLineOffsets[index] - 1: 0;

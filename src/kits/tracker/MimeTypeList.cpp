@@ -135,8 +135,8 @@ MimeTypeList::EachCommonType(bool (*func)(const ShortMimeInfo*, void*),
 	void* state) const
 {
 	AutoLock<Benaphore> locker(fLock);
-	int32 count = fCommonMimeList.CountItems();
-	for (int32 index = 0; index < count; index++) {
+	int32_t count = fCommonMimeList.CountItems();
+	for (int32_t index = 0; index < count; index++) {
 		if ((func)(fCommonMimeList.ItemAt(index), state))
 			return fCommonMimeList.ItemAt(index);
 	}
@@ -152,11 +152,11 @@ void MimeTypeList::Build()
 	BMessage message;
 	BMimeType::GetInstalledTypes(&message);
 
-	int32 count;
-	uint32 type;
+	int32_t count;
+	uint32_t type;
 	message.GetInfo("types", &type, &count);
 
-	for (int32 index = 0; index < count; index++) {
+	for (int32_t index = 0; index < count; index++) {
 		const char* str;
 		if (message.FindString("types", index, &str) != B_OK)
 			continue;

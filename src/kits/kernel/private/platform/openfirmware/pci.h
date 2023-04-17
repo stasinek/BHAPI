@@ -102,11 +102,11 @@
  * This has the 3 32bit cell values, plus 2 more to make up a 64-bit size.
  */
 struct ofw_pci_register {
-	uint32	phys_hi;
-	uint32	phys_mid;
-	uint32	phys_lo;
-	uint32	size_hi;
-	uint32	size_lo;
+	uint32_t	phys_hi;
+	uint32_t	phys_mid;
+	uint32_t	phys_lo;
+	uint32_t	size_hi;
+	uint32_t	size_lo;
 };
 
 #endif /* _KERNEL_OPEN_FIRMWARE_PCI_H */

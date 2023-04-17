@@ -68,12 +68,12 @@ public:
 			FunctionInstance*	Function() const		{ return fFunction; }
 			void				SetFunction(FunctionInstance* function);
 
-			int32				CountParameters() const;
-			Variable*			ParameterAt(int32 index) const;
+			int32_t				CountParameters() const;
+			Variable*			ParameterAt(int32_t index) const;
 			bool				AddParameter(Variable* parameter);
 
-			int32				CountLocalVariables() const;
-			Variable*			LocalVariableAt(int32 index) const;
+			int32_t				CountLocalVariables() const;
+			Variable*			LocalVariableAt(int32_t index) const;
 			bool				AddLocalVariable(Variable* variable);
 
 			StackFrameValues*	Values() const			{ return fValues; }

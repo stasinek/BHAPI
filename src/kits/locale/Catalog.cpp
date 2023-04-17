@@ -28,7 +28,7 @@ BCatalog::BCatalog()
 
 
 BCatalog::BCatalog(const entry_ref& catalogOwner, const char* language,
-	uint32 fingerprint)
+	uint32_t fingerprint)
 	:
 	fCatalogData(NULL),
 	fLock("Catalog")
@@ -61,7 +61,7 @@ const char*  BCatalog::GetString(const char* string, const char* context,
 }
 
 
-const char*  BCatalog::GetString(uint32 id)
+const char*  BCatalog::GetString(uint32_t id)
 {
 	BAutolock lock(&fLock);
 	if (!lock.IsLocked())
@@ -98,7 +98,7 @@ status_t BCatalog::GetData(const char* name, BMessage* msg)
 }
 
 
-status_t BCatalog::GetData(uint32 id, BMessage* msg)
+status_t BCatalog::GetData(uint32_t id, BMessage* msg)
 {
 	BAutolock lock(&fLock);
 	if (!lock.IsLocked())
@@ -154,7 +154,7 @@ status_t BCatalog::GetLanguage(BString* lang)
 }
 
 
-status_t BCatalog::GetFingerprint(uint32* fp)
+status_t BCatalog::GetFingerprint(uint32_t* fp)
 {
 	BAutolock lock(&fLock);
 	if (!lock.IsLocked())
@@ -173,7 +173,7 @@ status_t BCatalog::GetFingerprint(uint32* fp)
 
 
 status_t BCatalog::SetTo(const entry_ref& catalogOwner, const char* language,
-	uint32 fingerprint)
+	uint32_t fingerprint)
 {
 	BAutolock lock(&fLock);
 	if (!lock.IsLocked())
@@ -197,7 +197,7 @@ status_t BCatalog::InitCheck() const
 }
 
 
-int32 BCatalog::CountItems() const
+int32_t BCatalog::CountItems() const
 {
 	BAutolock lock(&fLock);
 	if (!lock.IsLocked())

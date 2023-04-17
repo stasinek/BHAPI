@@ -9,9 +9,9 @@
 #include <fssh_defs.h>
 
 
-typedef int32_t fssh_partition_id;
-typedef int32_t fssh_disk_system_id;
-typedef int32_t fssh_disk_job_id;
+typedef int32_t_t fssh_partition_id;
+typedef int32_t_t fssh_disk_system_id;
+typedef int32_t_t fssh_disk_job_id;
 
 // partition flags
 enum {
@@ -132,10 +132,10 @@ enum {
 
 // disk device job progress info
 typedef struct fssh_disk_device_job_progress_info {
-	uint32_t	status;
-	uint32_t	interrupt_properties;
-	int32_t		task_count;
-	int32_t		completed_tasks;
+	uint32_t_t	status;
+	uint32_t_t	interrupt_properties;
+	int32_t_t		task_count;
+	int32_t_t		completed_tasks;
 	float		current_task_progress;
 	char		current_task_description[256];
 } fssh_disk_device_job_progress_info;

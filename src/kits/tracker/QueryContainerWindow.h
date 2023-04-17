@@ -52,14 +52,14 @@ class BQueryContainerWindow : public BContainerWindow {
 public:
 								BQueryContainerWindow(
 									LockingList<BWindow>* windowList,
-									uint32 containerWindowFlags);
+									uint32_t containerWindowFlags);
 
 			BQueryPoseView*		PoseView() const;
 			bool				ActiveOnDevice(dev_t) const;
 
 protected:
 	virtual	void				CreatePoseView(Model*);
-	virtual	BPoseView*			NewPoseView(Model* model, uint32 viewMode);
+	virtual	BPoseView*			NewPoseView(Model* model, uint32_t viewMode);
 	virtual	void				AddWindowMenu(BMenu* menu);
 	virtual	void				AddWindowContextMenus(BMenu* menu);
 

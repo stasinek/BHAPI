@@ -40,8 +40,8 @@ struct invoke_command_parameters {
 };
 
 
-static const int32 kMaxInvokeCommandDepth = 5;
-static const int32 kOutputBufferSize = 1024;
+static const int32_t kMaxInvokeCommandDepth = 5;
+static const int32_t kOutputBufferSize = 1024;
 
 
 bool gInvokeCommandDirectly = false;
@@ -51,14 +51,14 @@ static spinlock sSpinlock = B_SPINLOCK_INITIALIZER;
 static struct debugger_command *sCommands;
 
 static jmp_buf sInvokeCommandEnv[kMaxInvokeCommandDepth];
-static int32 sInvokeCommandLevel = 0;
+static int32_t sInvokeCommandLevel = 0;
 static bool sInCommand = false;
 static char sOutputBuffers[MAX_DEBUGGER_COMMAND_PIPE_LENGTH][kOutputBufferSize];
 static debugger_command_pipe* sCurrentPipe;
-static int32 sCurrentPipeSegment;
+static int32_t sCurrentPipeSegment;
 
 
-static int invoke_pipe_segment(debugger_command_pipe* pipe, int32 index,
+static int invoke_pipe_segment(debugger_command_pipe* pipe, int32_t index,
 	char* argument);
 
 
@@ -68,7 +68,7 @@ public:
 	{
 	}
 
-	PipeDebugOutputFilter(debugger_command_pipe* pipe, int32 segment,
+	PipeDebugOutputFilter(debugger_command_pipe* pipe, int32_t segment,
 			char* buffer, size_t bufferSize)
 		:
 		fPipe(pipe),
@@ -157,7 +157,7 @@ private:
 
 private:
 	debugger_command_pipe*	fPipe;
-	int32					fSegment;
+	int32_t					fSegment;
 	char*					fBuffer;
 	size_t					fBufferCapacity;
 	size_t					fBufferSize;
@@ -179,7 +179,7 @@ invoke_command_trampoline(void* _parameters)
 
 
 static int
-invoke_pipe_segment(debugger_command_pipe* pipe, int32 index, char* argument)
+invoke_pipe_segment(debugger_command_pipe* pipe, int32_t index, char* argument)
 {
 	// set debug output
 	DebugOutputFilter* oldFilter = set_debug_output_filter(
@@ -193,7 +193,7 @@ invoke_pipe_segment(debugger_command_pipe* pipe, int32 index, char* argument)
 		segment.argv[segment.argc - 1] = argument;
 
 	// invoke command
-	int32 oldIndex = sCurrentPipeSegment;
+	int32_t oldIndex = sCurrentPipeSegment;
 	sCurrentPipeSegment = index;
 
 	int result = invoke_debugger_command(segment.command, segment.argc,
@@ -365,8 +365,8 @@ invoke_debugger_command_pipe(debugger_command_pipe* pipe)
 
 	// prepare outputs
 	// TODO: If a pipe is invoked in a pipe, outputs will clash.
-	int32 segments = pipe->segment_count;
-	for (int32 i = 0; i < segments - 1; i++) {
+	int32_t segments = pipe->segment_count;
+	for (int32_t i = 0; i < segments - 1; i++) {
 		new(&sPipeOutputFilters[i]) PipeDebugOutputFilter(pipe, i,
 			sOutputBuffers[i], kOutputBufferSize);
 	}
@@ -376,12 +376,12 @@ invoke_debugger_command_pipe(debugger_command_pipe* pipe)
 		result = invoke_pipe_segment(pipe, 0, NULL);
 
 		// perform final rerun for all commands that want it
-		for (int32 i = 1; result != B_KDEBUG_ERROR && i < segments; i++) {
+		for (int32_t i = 1; result != B_KDEBUG_ERROR && i < segments; i++) {
 			debugger_command_pipe_segment& segment = pipe->segments[i];
 			if ((segment.command->flags & B_KDEBUG_PIPE_FINAL_RERUN) != 0) {
 				result = invoke_pipe_segment(pipe, i, NULL);
 				if (result == B_KDEBUG_RESTART_PIPE) {
-					for (int32 j = 0; j < i; j++)
+					for (int32_t j = 0; j < i; j++)
 						pipe->segments[j].invocations = 0;
 					break;
 				}
@@ -448,7 +448,7 @@ sort_debugger_commands()
 
 status_t
 add_debugger_command_etc(const char* name, debugger_command_hook func,
-	const char* description, const char* usage, uint32 flags)
+	const char* description, const char* usage, uint32_t flags)
 {
 	bool ambiguous;
 	debugger_command *cmd = find_debugger_command(name, false, ambiguous);

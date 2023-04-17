@@ -52,8 +52,8 @@ int main(int argc, char **argv)
 	msg->AddInt16("Int16", (eint16)-0x3AFA);
 	if(msg->HasInt16("Int16")) ETK_OUTPUT("Int16 <= %hx -- %hi\n", (eint16)-0x3AFA, (eint16)-0x3AFA);
 
-	msg->AddInt32("Int32", (eint32)-0x3AFAFAFA);
-	if(msg->HasInt32("Int32")) ETK_OUTPUT("Int32 <= %x --- %i\n", (eint32)-0x3AFAFAFA, (eint32)-0x3AFAFAFA);
+	msg->AddInt32("Int32", (eint32_t)-0x3AFAFAFA);
+	if(msg->HasInt32("Int32")) ETK_OUTPUT("Int32 <= %x --- %i\n", (eint32_t)-0x3AFAFAFA, (eint32_t)-0x3AFAFAFA);
 	
 	msg->AddInt64("Int64", E_INT64_CONSTANT(-0x3AFAFAFAFAFAFAFA));
 	if(msg->HasInt64("Int64")) ETK_OUTPUT("Int64 <= %llx -- %lli\n", E_INT64_CONSTANT(-0x3AFAFAFAFAFAFAFA), E_INT64_CONSTANT(-0x3AFAFAFAFAFAFAFA));
@@ -88,8 +88,8 @@ int main(int argc, char **argv)
 	msg->AddInt16("Int16", (eint16)0xFAFA);
 	if(msg->HasInt16("Int16")) ETK_OUTPUT("Int16 <= %hx -- %hi\n", (eint16)0xFAFA, (eint16)0xFAFA);
 
-	msg->AddInt32("Int32", (eint32)0xFAFAFAFA);
-	if(msg->HasInt32("Int32")) ETK_OUTPUT("Int32 <= %x --- %i\n", (eint32)0xFAFAFAFA, (eint32)0xFAFAFAFA);
+	msg->AddInt32("Int32", (eint32_t)0xFAFAFAFA);
+	if(msg->HasInt32("Int32")) ETK_OUTPUT("Int32 <= %x --- %i\n", (eint32_t)0xFAFAFAFA, (eint32_t)0xFAFAFAFA);
 	
 	msg->AddInt64("Int64", E_INT64_CONSTANT(0xFAFAFAFAFAFAFAFA));
 	if(msg->HasInt64("Int64")) ETK_OUTPUT("Int64 <= %llx -- %lli\n", E_INT64_CONSTANT(0xFAFAFAFAFAFAFAFA), E_INT64_CONSTANT(0xFAFAFAFAFAFAFAFA));
@@ -115,7 +115,7 @@ int main(int argc, char **argv)
 	const char *gstr = NULL;
 	eint8 gi8;
 	eint16 gi16;
-	eint32 gi32;
+	eint32_t gi32;
 	eint64 gi64;
 	bool gbool;
 	float gfl;
@@ -196,7 +196,7 @@ int main(int argc, char **argv)
 	msg->ReplaceString("String", 1, "Test again, Test again, do you right?");
 	msg->ReplaceInt8("Int8", 1, (eint8)0xEE);
 	msg->ReplaceInt16("Int16", 1, (eint16)0xEEEE);
-	msg->ReplaceInt32("Int32", 1, (eint32)0xEEEEEEEE);
+	msg->ReplaceInt32("Int32", 1, (eint32_t)0xEEEEEEEE);
 	msg->ReplaceInt64("Int64", 1, E_INT64_CONSTANT(0xEEEEEEEEEEEEEEEE));
 	msg->ReplaceBool("Bool", 1, false);
 	msg->ReplaceFloat("Float", 1, 0.00005);
@@ -294,9 +294,9 @@ int main(int argc, char **argv)
 	ETK_OUTPUT("\n\n\n");	
 	ETK_OUTPUT("=============== msg->BGetInfo ===============\n");
 	char *name;
-	euint32 type;
-	eint32 count;
-	for(eint32 i = 0; msg->BGetInfo(E_ANY_TYPE, i, &name, &type, &count) == E_OK; i++)
+	euint32_t type;
+	eint32_t count;
+	for(eint32_t i = 0; msg->BGetInfo(E_ANY_TYPE, i, &name, &type, &count) == E_OK; i++)
 	{
 		ETK_OUTPUT("[%I32i]: Name: \"%s\", type: \'%c%c%c%c\', count: %I32i\n",
 			   i, name,

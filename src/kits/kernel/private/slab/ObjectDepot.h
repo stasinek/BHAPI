@@ -26,7 +26,7 @@ typedef struct object_depot {
 	void*					cookie;
 
 	void (*return_object)(struct object_depot* depot, void* cookie,
-		void* object, uint32 flags);
+		void* object, uint32_t flags);
 } object_depot;
 
 
@@ -35,15 +35,15 @@ extern "C" {
 #endif
 
 status_t object_depot_init(object_depot* depot, size_t capacity,
-	size_t maxCount, uint32 flags, void* cookie,
+	size_t maxCount, uint32_t flags, void* cookie,
 	void (*returnObject)(object_depot* depot, void* cookie, void* object,
-		uint32 flags));
-void object_depot_destroy(object_depot* depot, uint32 flags);
+		uint32_t flags));
+void object_depot_destroy(object_depot* depot, uint32_t flags);
 
 void* object_depot_obtain(object_depot* depot);
-void object_depot_store(object_depot* depot, void* object, uint32 flags);
+void object_depot_store(object_depot* depot, void* object, uint32_t flags);
 
-void object_depot_make_empty(object_depot* depot, uint32 flags);
+void object_depot_make_empty(object_depot* depot, uint32_t flags);
 
 #if PARANOID_KERNEL_FREE
 bool object_depot_contains_object(object_depot* depot, void* object);

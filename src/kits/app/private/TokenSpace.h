@@ -38,17 +38,17 @@ public:
 								BTokenSpace();
 								~BTokenSpace();
 
-			int32				NewToken(int16 type, void* object);
-			bool				SetToken(int32 token, int16 type, void* object);
+			int32_t				NewToken(int16 type, void* object);
+			bool				SetToken(int32_t token, int16 type, void* object);
 
-			bool				RemoveToken(int32 token);
-			bool				CheckToken(int32 token, int16 type) const;
-			status_t			GetToken(int32 token, int16 type,
+			bool				RemoveToken(int32_t token);
+			bool				CheckToken(int32_t token, int16 type) const;
+			status_t			GetToken(int32_t token, int16 type,
 									void** _object) const;
 
-			status_t			SetHandlerTarget(int32 token,
+			status_t			SetHandlerTarget(int32_t token,
 									BDirectMessageTarget* target);
-			status_t			AcquireHandlerTarget(int32 token,
+			status_t			AcquireHandlerTarget(int32_t token,
 									BDirectMessageTarget** _target);
 
 			void				InitAfterFork();
@@ -59,10 +59,10 @@ private:
 		void*	object;
 		BDirectMessageTarget* target;
 	};
-	typedef std::map<int32, token_info> TokenMap;
+	typedef std::map<int32_t, token_info> TokenMap;
 
 			TokenMap			fTokenMap;
-			int32				fTokenCount;
+			int32_t				fTokenCount;
 };
 
 

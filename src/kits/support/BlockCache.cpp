@@ -57,9 +57,9 @@
 #define MAGIC2		0xa6b3c87d
 
 struct BBlockCache::_FreeBlock {
-	DEBUG_ONLY(	uint32		magic1;	)
+	DEBUG_ONLY(	uint32_t		magic1;	)
 				_FreeBlock *next;
-	DEBUG_ONLY(	uint32		magic2;	)
+	DEBUG_ONLY(	uint32_t		magic2;	)
 };
 
 // The requirements set by the BeBook's description of the destructor,
@@ -68,7 +68,7 @@ struct BBlockCache::_FreeBlock {
 // Thus we need to create multiple small ones.
 // We maintain a list of free blocks.
 
-BBlockCache::BBlockCache(uint32 a_blockCount, size_t a_blockSize,uint32 a_allocationType)
+BBlockCache::BBlockCache(uint32_t a_blockCount, size_t a_blockSize,uint32_t a_allocationType)
 	:
 	fFreeList(0),
     fBlockSize(a_blockSize),
@@ -108,7 +108,7 @@ BBlockCache::BBlockCache(uint32 a_blockCount, size_t a_blockSize,uint32 a_alloca
 		block->next = fFreeList;
 		fFreeList = block;
 		DEBUG_ONLY(block->magic1 = MAGIC1);
-		DEBUG_ONLY(block->magic2 = MAGIC2 + (uint32)(addr_t)block->next);
+		DEBUG_ONLY(block->magic2 = MAGIC2 + (uint32_t)(addr_t)block->next);
 	}
 }
 
@@ -118,7 +118,7 @@ BBlockCache::~BBlockCache()
 	fLocker.Lock();
 	while (fFreeList) {
 		ASSERT(fFreeList->magic1 == MAGIC1);
-		ASSERT(fFreeList->magic2 == MAGIC2 + (uint32)(addr_t)fFreeList->next);
+		ASSERT(fFreeList->magic2 == MAGIC2 + (uint32_t)(addr_t)fFreeList->next);
 		void *pointer = fFreeList;
 		fFreeList = fFreeList->next;
 		DEBUG_ONLY(memset(pointer, 0xCC, sizeof(_FreeBlock)));
@@ -135,7 +135,7 @@ void *BBlockCache::Get(size_t a_blockSize)
     if (a_blockSize == fBlockSize && fFreeList != 0) {
 		// we can take a block from the list
 		ASSERT(fFreeList->magic1 == MAGIC1);
-		ASSERT(fFreeList->magic2 == MAGIC2 + (uint32)(addr_t)fFreeList->next);
+		ASSERT(fFreeList->magic2 == MAGIC2 + (uint32_t)(addr_t)fFreeList->next);
 		pointer = fFreeList;
 		fFreeList = fFreeList->next;
 		fFreeBlocks--;
@@ -161,7 +161,7 @@ void BBlockCache::Save(void *a_pointer, size_t a_blockSize)
 		fFreeList = block;
 		fFreeBlocks++;
 		DEBUG_ONLY(block->magic1 = MAGIC1);
-		DEBUG_ONLY(block->magic2 = MAGIC2 + (uint32)(addr_t)block->next);
+		DEBUG_ONLY(block->magic2 = MAGIC2 + (uint32_t)(addr_t)block->next);
 	} else {
 		DEBUG_ONLY(memset(pointer, 0xCC, sizeof(_FreeBlock)));
         fFree(a_pointer);

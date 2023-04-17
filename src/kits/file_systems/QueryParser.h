@@ -109,8 +109,8 @@ template<typename QueryPolicy>
 union value {
 	int64	Int64;
 	uint64	Uint64;
-	int32	Int32;
-	uint32	Uint32;
+	int32_t	Int32;
+	uint32_t	Uint32_t;
 	float	Float;
 	double	Double;
 	char	String[QueryPolicy::kMaxFileNameLength];
@@ -129,18 +129,18 @@ public:
 public:
 							Query(Context* context,
 								Expression<QueryPolicy>* expression,
-								uint32 flags, port_id port, uint32 token);
+								uint32_t flags, port_id port, uint32_t token);
 							~Query();
 
 	static	status_t		Create(Context* context, const char* queryString,
-								uint32 flags, port_id port, uint32 token,
+								uint32_t flags, port_id port, uint32_t token,
 								Query<QueryPolicy>*& _query);
 
 			status_t		Rewind();
 	inline	status_t		GetNextEntry(struct dirent* dirent, size_t size);
 
 			void			LiveUpdate(Entry* entry, Node* node,
-								const char* attribute, int32 type,
+								const char* attribute, int32_t type,
 								const uint8* oldKey, size_t oldLength,
 								const uint8* newKey, size_t newLength);
 			void			LiveUpdateRenameMove(Entry* entry, Node* node,
@@ -151,13 +151,13 @@ public:
 			Expression<QueryPolicy>* GetExpression() const
 								{ return fExpression; }
 
-			uint32			Flags() const
+			uint32_t			Flags() const
 								{ return fFlags; }
 
 private:
 			status_t		_GetNextEntry(struct dirent* dirent, size_t size);
 			void			_SendEntryNotification(Entry* entry,
-								status_t (*notify)(port_id, int32, dev_t, ino_t,
+								status_t (*notify)(port_id, int32_t, dev_t, ino_t,
 									const char*, ino_t));
 
 private:
@@ -168,9 +168,9 @@ private:
 			Index			fIndex;
 			Stack<Equation<QueryPolicy>*> fStack;
 
-			uint32			fFlags;
+			uint32_t			fFlags;
 			port_id			fPort;
-			int32			fToken;
+			int32_t			fToken;
 			bool			fNeedsEntry;
 };
 
@@ -197,12 +197,12 @@ public:
 			Term<QueryPolicy>* Parent() const { return fParent; }
 
 	virtual	status_t	Match(Entry* entry, Node* node,
-							const char* attribute = NULL, int32 type = 0,
+							const char* attribute = NULL, int32_t type = 0,
 							const uint8* key = NULL, size_t size = 0) = 0;
 	virtual	void		Complement() = 0;
 
 	virtual	void		CalculateScore(Index& index) = 0;
-	virtual	int32		Score() const = 0;
+	virtual	int32_t		Score() const = 0;
 
 	virtual	status_t	InitCheck() = 0;
 
@@ -248,7 +248,7 @@ public:
 			char*		CopyString(char* start, char* end);
 
 	virtual	status_t	Match(Entry* entry, Node* node,
-							const char* attribute = NULL, int32 type = 0,
+							const char* attribute = NULL, int32_t type = 0,
 							const uint8* key = NULL, size_t size = 0);
 	virtual void		Complement();
 
@@ -259,7 +259,7 @@ public:
 							size_t bufferSize);
 
 	virtual	void		CalculateScore(Index &index);
-	virtual	int32		Score() const { return fScore; }
+	virtual	int32_t		Score() const { return fScore; }
 
 	virtual	bool		NeedsEntry();
 
@@ -284,7 +284,7 @@ private:
 			size_t		fSize;
 			bool		fIsPattern;
 
-			int32		fScore;
+			int32_t		fScore;
 			bool		fHasIndex;
 };
 
@@ -310,12 +310,12 @@ public:
 			Term<QueryPolicy>* Right() const { return fRight; }
 
 	virtual	status_t	Match(Entry* entry, Node* node,
-							const char* attribute = NULL, int32 type = 0,
+							const char* attribute = NULL, int32_t type = 0,
 							const uint8* key = NULL, size_t size = 0);
 	virtual	void		Complement();
 
 	virtual	void		CalculateScore(Index& index);
-	virtual	int32		Score() const;
+	virtual	int32_t		Score() const;
 
 	virtual	status_t	InitCheck();
 
@@ -548,7 +548,7 @@ char*  Equation<QueryPolicy>::CopyString(char* start, char* end)
 {
 	// end points to the last character of the string - and the length
 	// also has to include the null-termination
-	int32 length = end + 2 - start;
+	int32_t length = end + 2 - start;
 	// just to make sure; since that's the max. attribute name length and
 	// the max. string in an index, it make sense to have it that way
 	if (length > QueryPolicy::kMaxFileNameLength || length <= 0)
@@ -585,11 +585,11 @@ status_t Equation<QueryPolicy>::ConvertValue(type_code type)
 			break;
 		case B_INT32_TYPE:
 			fValue.Int32 = strtol(string, &string, 0);
-			fSize = sizeof(int32);
+			fSize = sizeof(int32_t);
 			break;
 		case B_UINT32_TYPE:
 			fValue.Int32 = strtoul(string, &string, 0);
-			fSize = sizeof(uint32);
+			fSize = sizeof(uint32_t);
 			break;
 		case B_INT64_TYPE:
 			fValue.Int64 = strtoll(string, &string, 0);
@@ -610,7 +610,7 @@ status_t Equation<QueryPolicy>::ConvertValue(type_code type)
 		default:
 			QUERY_FATAL("query value conversion to 0x%x requested!\n",
 				(int)type);
-			// should we fail here or just do a safety int32 conversion?
+			// should we fail here or just do a safety int32_t conversion?
 			return B_ERROR;
 	}
 
@@ -630,7 +630,7 @@ status_t Equation<QueryPolicy>::ConvertValue(type_code type)
 template<typename QueryPolicy>
 bool Equation<QueryPolicy>::CompareTo(const uint8* value, size_t size)
 {
-	int32 compare;
+	int32_t compare;
 
 	// fIsPattern is only true if it's a string type, and fOp OP_EQUAL, or
 	// OP_UNEQUAL
@@ -701,7 +701,7 @@ status_t Equation<QueryPolicy>::MatchEmptyString()
 */
 template<typename QueryPolicy>
 status_t Equation<QueryPolicy>::Match(Entry* entry, Node* node,
-	const char* attributeName, int32 type, const uint8* key, size_t size)
+	const char* attributeName, int32_t type, const uint8* key, size_t size)
 {
 	// get a pointer to the attribute in question
 	union value<QueryPolicy> value;
@@ -827,7 +827,7 @@ status_t Equation<QueryPolicy>::PrepareQuery(Context* /*context*/, Index& index,
 		&& fHasIndex) {
 		// set iterator to the exact position
 
-		int32 keySize = QueryPolicy::IndexGetKeySize(index);
+		int32_t keySize = QueryPolicy::IndexGetKeySize(index);
 
 		// At this point, fIsPattern is only true if it's a string type, and fOp
 		// is either OP_EQUAL or OP_UNEQUAL
@@ -1000,7 +1000,7 @@ Operator<QueryPolicy>::~Operator()
 
 template<typename QueryPolicy>
 status_t Operator<QueryPolicy>::Match(Entry* entry, Node* node, const char* attribute,
-	int32 type, const uint8* key, size_t size)
+	int32_t type, const uint8* key, size_t size)
 {
 	if (Term<QueryPolicy>::fOp == OP_AND) {
 		status_t status = fLeft->Match(entry, node, attribute, type, key,
@@ -1053,7 +1053,7 @@ void Operator<QueryPolicy>::CalculateScore(Index &index)
 
 
 template<typename QueryPolicy>
-int32 Operator<QueryPolicy>::Score() const
+int32_t Operator<QueryPolicy>::Score() const
 {
 	if (Term<QueryPolicy>::fOp == OP_AND) {
 		// return the one with the better score
@@ -1297,7 +1297,7 @@ status_t Expression<QueryPolicy>::InitCheck()
 
 template<typename QueryPolicy>
 Query<QueryPolicy>::Query(Context* context, Expression<QueryPolicy>* expression,
-	uint32 flags, port_id port, uint32 token)
+	uint32_t flags, port_id port, uint32_t token)
 	:
 	fContext(context),
 	fExpression(expression),
@@ -1334,7 +1334,7 @@ Query<QueryPolicy>::~Query()
 
 template<typename QueryPolicy>
 /*static*/ status_t Query<QueryPolicy>::Create(Context* context, const char* queryString,
-	uint32 flags, port_id port, uint32 token, Query<QueryPolicy>*& _query)
+	uint32_t flags, port_id port, uint32_t token, Query<QueryPolicy>*& _query)
 {
 	Expression<QueryPolicy>* expression
 		= new(std::nothrow) Expression<QueryPolicy>((char*)queryString);
@@ -1419,7 +1419,7 @@ status_t Query<QueryPolicy>::GetNextEntry(struct dirent* dirent, size_t size)
 
 template<typename QueryPolicy>
 void Query<QueryPolicy>::LiveUpdate(Entry* entry, Node* node, const char* attribute,
-	int32 type, const uint8* oldKey, size_t oldLength, const uint8* newKey,
+	int32_t type, const uint8* oldKey, size_t oldLength, const uint8* newKey,
 	size_t newLength)
 {
 	if (fPort < 0 || fExpression == NULL || attribute == NULL)
@@ -1464,7 +1464,7 @@ void Query<QueryPolicy>::LiveUpdate(Entry* entry, Node* node, const char* attrib
 		return;
 
 	// notify query listeners
-	status_t (*notify)(port_id, int32, dev_t, ino_t, const char*, ino_t);
+	status_t (*notify)(port_id, int32_t, dev_t, ino_t, const char*, ino_t);
 
 	if (stillInQuery)
 		notify = notify_query_attr_changed;
@@ -1562,7 +1562,7 @@ status_t Query<QueryPolicy>::_GetNextEntry(struct dirent* dirent, size_t size)
 
 template<typename QueryPolicy>
 void Query<QueryPolicy>::_SendEntryNotification(Entry* entry,
-	status_t (*notify)(port_id, int32, dev_t, ino_t, const char*, ino_t))
+	status_t (*notify)(port_id, int32_t, dev_t, ino_t, const char*, ino_t))
 {
 	char nameBuffer[QueryPolicy::kMaxFileNameLength];
 	const char* name = QueryPolicy::EntryGetNameNoCopy(entry, nameBuffer,

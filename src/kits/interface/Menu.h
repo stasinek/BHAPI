@@ -43,7 +43,7 @@ struct menu_info {
     font_family	f_family;
     font_style	f_style;
     rgb_color	background_color;
-    int32		separator;
+    int32_t		separator;
     bool		click_to_open;
     bool		triggers_always_shown;
 };
@@ -79,25 +79,25 @@ public:
     bhapi::menu_layout		Layout() const;
 
     bool			AddItem(BMenuItem *item);
-    bool			AddItem(BMenuItem *item,  int32 index);
+    bool			AddItem(BMenuItem *item,  int32_t index);
     bool			AddItem(BMenuItem *item, BRect frame);
     bool			AddItem(BMenu *menu);
-    bool			AddItem(BMenu *menu,  int32 index);
+    bool			AddItem(BMenu *menu,  int32_t index);
     bool			AddItem(BMenu *menu, BRect frame);
     bool			AddSeparatorItem();
     bool			RemoveItem(BMenuItem *item);
-    BMenuItem*		RemoveItem(int32 index);
+    BMenuItem*		RemoveItem(int32_t index);
     bool			RemoveItem(BMenu *menu);
 
-    BMenuItem*		ItemAt(int32 index) const;
-    BMenu*			SubmenuAt(int32 index) const;
-     int32			CountItems() const;
-     int32			IndexOf(const BMenuItem *item) const;
-     int32			IndexOf(const BMenu *menu) const;
+    BMenuItem*		ItemAt(int32_t index) const;
+    BMenu*			SubmenuAt(int32_t index) const;
+     int32_t			CountItems() const;
+     int32_t			IndexOf(const BMenuItem *item) const;
+     int32_t			IndexOf(const BMenu *menu) const;
 
-    BMenuItem*		FindItem(uint32 command) const;
+    BMenuItem*		FindItem(uint32_t command) const;
     BMenuItem*		FindItem(const char *name) const;
-    BMenuItem*		FindMarked(int32 *index = NULL) const;
+    BMenuItem*		FindMarked(int32_t *index = NULL) const;
 
     BMenu*			Supermenu() const;
     BMenuItem*		Superitem() const;
@@ -121,9 +121,9 @@ public:
     virtual void		Draw(BRect updateRect);
     virtual void		MouseDown(BPoint where);
     virtual void		MouseUp(BPoint where);
-    virtual void		MouseMoved(BPoint where,  uint32 code, const BMessage *a_message);
-    virtual void		KeyDown(const char *bytes,  int32 numBytes);
-    virtual void		KeyUp(const char *bytes,  int32 numBytes);
+    virtual void		MouseMoved(BPoint where,  uint32_t code, const BMessage *a_message);
+    virtual void		KeyDown(const char *bytes,  int32_t numBytes);
+    virtual void		KeyUp(const char *bytes,  int32_t numBytes);
     virtual void		Hide();
 
     virtual void		GetPreferredSize(float *width, float *height);
@@ -132,13 +132,13 @@ public:
     void			SelectItem(BMenuItem *item, bool showSubmenu = false, bool selectFirstItem = false);
 
 protected:
-    BMenu(BRect frame, const char *title,  uint32 resizeMode,  uint32 flags, bhapi::menu_layout layout, bool resizeToFit);
+    BMenu(BRect frame, const char *title,  uint32_t resizeMode,  uint32_t flags, bhapi::menu_layout layout, bool resizeToFit);
 
     void			SetItemMargins(float left, float top, float right, float bottom);
     void			GetItemMargins(float *left, float *top, float *right, float *bottom) const;
 
-     int32			FindItem(BPoint where);
-    BRect			ItemFrame(int32 index) const;
+     int32_t			FindItem(BPoint where);
+    BRect			ItemFrame(int32_t index) const;
 
     virtual void		ItemInvoked(BMenuItem *item);
 
@@ -156,9 +156,9 @@ private:
 
     bool fRadioMode;
     bool fLabelFromMarked;
-     int32 fSelectedIndex;
-     int32 fTrackingIndex;
-     int32 fMarkedIndex;
+     int32_t fSelectedIndex;
+     int32_t fTrackingIndex;
+     int32_t fMarkedIndex;
     bool fShowSubmenuByKeyDown;
 
     void Refresh();

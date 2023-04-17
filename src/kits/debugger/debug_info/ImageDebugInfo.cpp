@@ -25,7 +25,7 @@ ImageDebugInfo::ImageDebugInfo(const ImageInfo& imageInfo)
 
 ImageDebugInfo::~ImageDebugInfo()
 {
-	for (int32 i = 0; FunctionInstance* function = fFunctions.ItemAt(i); i++)
+	for (int32_t i = 0; FunctionInstance* function = fFunctions.ItemAt(i); i++)
 		function->ReleaseReference();
 }
 
@@ -47,14 +47,14 @@ status_t ImageDebugInfo::FinishInit(DebuggerInterface* interface)
 
 	// get functions -- get them from most expressive debug info first and add
 	// missing functions from less expressive debug infos
-	for (int32 i = 0; SpecificImageDebugInfo* specificInfo
+	for (int32_t i = 0; SpecificImageDebugInfo* specificInfo
 			= fSpecificInfos.ItemAt(i); i++) {
 		BObjectList<FunctionDebugInfo> functions;
 		error = specificInfo->GetFunctions(symbols, functions);
 		if (error != B_OK)
 			return error;
 
-		for (int32 k = 0; FunctionDebugInfo* function = functions.ItemAt(k);
+		for (int32_t k = 0; FunctionDebugInfo* function = functions.ItemAt(k);
 				k++) {
 			if (FunctionAtAddress(function->Address()) != NULL)
 				continue;
@@ -74,7 +74,7 @@ status_t ImageDebugInfo::FinishInit(DebuggerInterface* interface)
 
 		// Remove references returned by the specific debug info -- the
 		// FunctionInstance objects have references, now.
-		for (int32 k = 0; FunctionDebugInfo* function = functions.ItemAt(k);
+		for (int32_t k = 0; FunctionDebugInfo* function = functions.ItemAt(k);
 				k++) {
 			function->ReleaseReference();
 		}
@@ -90,7 +90,7 @@ status_t ImageDebugInfo::FinishInit(DebuggerInterface* interface)
 status_t ImageDebugInfo::GetType(GlobalTypeCache* cache, const BString& name,
 	const TypeLookupConstraints& constraints, Type*& _type)
 {
-	for (int32 i = 0; SpecificImageDebugInfo* specificInfo
+	for (int32_t i = 0; SpecificImageDebugInfo* specificInfo
 			= fSpecificInfos.ItemAt(i); i++) {
 		status_t error = specificInfo->GetType(cache, name, constraints,
 			_type);
@@ -105,7 +105,7 @@ status_t ImageDebugInfo::GetType(GlobalTypeCache* cache, const BString& name,
 bool ImageDebugInfo::HasType(const BString& name,
 	const TypeLookupConstraints& constraints) const
 {
-	for (int32 i = 0; SpecificImageDebugInfo* specificInfo
+	for (int32_t i = 0; SpecificImageDebugInfo* specificInfo
 			= fSpecificInfos.ItemAt(i); i++) {
 		if (specificInfo->HasType(name, constraints))
 			return true;
@@ -119,7 +119,7 @@ AddressSectionType
 ImageDebugInfo::GetAddressSectionType(target_addr_t address) const
 {
 	AddressSectionType type = ADDRESS_SECTION_TYPE_UNKNOWN;
-	for (int32 i = 0; SpecificImageDebugInfo* specificInfo
+	for (int32_t i = 0; SpecificImageDebugInfo* specificInfo
 			= fSpecificInfos.ItemAt(i); i++) {
 		type = specificInfo->GetAddressSectionType(address);
 		if (type != ADDRESS_SECTION_TYPE_UNKNOWN)
@@ -130,14 +130,14 @@ ImageDebugInfo::GetAddressSectionType(target_addr_t address) const
 }
 
 
-int32 ImageDebugInfo::CountFunctions() const
+int32_t ImageDebugInfo::CountFunctions() const
 {
 	return fFunctions.CountItems();
 }
 
 
 FunctionInstance*
-ImageDebugInfo::FunctionAt(int32 index) const
+ImageDebugInfo::FunctionAt(int32_t index) const
 {
 	return fFunctions.ItemAt(index);
 }
@@ -154,7 +154,7 @@ FunctionInstance*
 ImageDebugInfo::FunctionByName(const char* name) const
 {
 	// TODO: Not really optimal.
-	for (int32 i = 0; FunctionInstance* function = fFunctions.ItemAt(i); i++) {
+	for (int32_t i = 0; FunctionInstance* function = fFunctions.ItemAt(i); i++) {
 		if (function->Name() == name)
 			return function;
 	}
@@ -167,7 +167,7 @@ status_t ImageDebugInfo::AddSourceCodeInfo(LocatableFile* file,
 	FileSourceCode* sourceCode) const
 {
 	bool addedAny = false;
-	for (int32 i = 0; SpecificImageDebugInfo* specificInfo
+	for (int32_t i = 0; SpecificImageDebugInfo* specificInfo
 			= fSpecificInfos.ItemAt(i); i++) {
 		status_t error = specificInfo->AddSourceCodeInfo(file, sourceCode);
 		if (error == B_NO_MEMORY)

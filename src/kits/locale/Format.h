@@ -32,9 +32,9 @@ enum {
 
 // structure filled in while formatting
 struct format_field_position {
-    uint32	field_type;
-    int32	start;
-    int32	length;
+    uint32_t	field_type;
+    int32_t	start;
+    int32_t	length;
 };
 
 #ifndef BLOCALE_I

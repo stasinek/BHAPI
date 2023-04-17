@@ -16,7 +16,7 @@ namespace BPackageKit {
 namespace BHPKG {
 
 
-BBlockBufferPool::BBlockBufferPool(size_t blockSize, uint32 maxCachedBlocks)
+BBlockBufferPool::BBlockBufferPool(size_t blockSize, uint32_t maxCachedBlocks)
 	:
 	fImpl(new (std::nothrow) BlockBufferPoolImpl(blockSize, maxCachedBlocks,
 		this))

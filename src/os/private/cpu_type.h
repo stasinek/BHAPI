@@ -21,10 +21,10 @@ extern "C" {
 
 static const char* get_cpu_vendor_string(enum cpu_vendor cpuVendor);
 static const char* get_cpu_model_string(enum cpu_platform platform,
-	enum cpu_vendor cpuVendor, uint32 cpuModel);
+	enum cpu_vendor cpuVendor, uint32_t cpuModel);
 void get_cpu_type(char *vendorBuffer, size_t vendorSize,
 		char *modelBuffer, size_t modelSize);
-int32 get_rounded_cpu_speed(void);
+int32_t get_rounded_cpu_speed(void);
 
 #ifdef __cplusplus
 }
@@ -193,7 +193,7 @@ void get_cpuid_model_string(char *name)
 
 	cpuid_info baseInfo;
 	cpuid_info cpuInfo;
-	int32 maxStandardFunction, maxExtendedFunction = 0;
+	int32_t maxStandardFunction, maxExtendedFunction = 0;
 
 	memset(name, 0, 49 * sizeof(char));
 
@@ -219,7 +219,7 @@ void get_cpuid_model_string(char *name)
 		maxExtendedFunction = cpuInfo.eax_0.max_eax & 0xff;
 
 	if (maxExtendedFunction >= 4) {
-		int32 i;
+		int32_t i;
 
 		for (i = 0; i < 3; i++) {
 			cpuid_info nameInfo;
@@ -237,7 +237,7 @@ void get_cpuid_model_string(char *name)
 
 
 static const char*  get_cpu_model_string(enum cpu_platform platform, enum cpu_vendor cpuVendor,
-	uint32 cpuModel)
+	uint32_t cpuModel)
 {
 #if defined(__INTEL__) || defined(__x86_64__)
 	char cpuidName[49];
@@ -459,7 +459,7 @@ void get_cpu_type(char *vendorBuffer, size_t vendorSize, char *modelBuffer,
 {
 	const char *vendor, *model;
 
-	uint32 topologyNodeCount = 0;
+	uint32_t topologyNodeCount = 0;
 	cpu_topology_node_info* topology = NULL;
 	get_cpu_topology_info(NULL, &topologyNodeCount);
 	if (topologyNodeCount != 0)
@@ -468,8 +468,8 @@ void get_cpu_type(char *vendorBuffer, size_t vendorSize, char *modelBuffer,
 
 	enum cpu_platform platform = B_CPU_UNKNOWN;
 	enum cpu_vendor cpuVendor = B_CPU_VENDOR_UNKNOWN;
-	uint32 cpuModel = 0;
-	for (uint32 i = 0; i < topologyNodeCount; i++) {
+	uint32_t cpuModel = 0;
+	for (uint32_t i = 0; i < topologyNodeCount; i++) {
 		switch (topology[i].type) {
 			case B_TOPOLOGY_ROOT:
 				platform = topology[i].data.root.platform;
@@ -509,9 +509,9 @@ void get_cpu_type(char *vendorBuffer, size_t vendorSize, char *modelBuffer,
 }
 
 
-int32 get_rounded_cpu_speed(void)
+int32_t get_rounded_cpu_speed(void)
 {
-	uint32 topologyNodeCount = 0;
+	uint32_t topologyNodeCount = 0;
 	cpu_topology_node_info* topology = NULL;
 	get_cpu_topology_info(NULL, &topologyNodeCount);
 	if (topologyNodeCount != 0)
@@ -519,7 +519,7 @@ int32 get_rounded_cpu_speed(void)
 	get_cpu_topology_info(topology, &topologyNodeCount);
 
 	uint64 cpuFrequency = 0;
-	for (uint32 i = 0; i < topologyNodeCount; i++) {
+	for (uint32_t i = 0; i < topologyNodeCount; i++) {
 		if (topology[i].type == B_TOPOLOGY_CORE) {
 				cpuFrequency = topology[i].data.core.default_frequency;
 				break;

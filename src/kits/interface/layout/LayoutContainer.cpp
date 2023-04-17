@@ -54,7 +54,7 @@ BLayoutContainer::~BLayoutContainer()
 
 
 bool 
-BLayoutContainer::AddItem(BLayoutItem *item,  __be_int32 index)
+BLayoutContainer::AddItem(BLayoutItem *item,  __be_int32_t index)
 {
 	if(item == NULL || item->fContainer != NULL) return false;
 	if(index < 0 || index > fItems.CountItems()) index = fItems.CountItems();
@@ -62,7 +62,7 @@ BLayoutContainer::AddItem(BLayoutItem *item,  __be_int32 index)
 	if(fItems.AddItem((void*)item, index) == false) return false;
 
 	item->fContainer = this;
-	for(__be_int32 i = index; i < fItems.CountItems(); i++) ((BLayoutItem*)fItems.ItemAt(i))->fIndex = i;
+	for(__be_int32_t i = index; i < fItems.CountItems(); i++) ((BLayoutItem*)fItems.ItemAt(i))->fIndex = i;
 	if(!(item->fHidden || item->fFrame.IsValid() == false))
 	{
 		BRect updateRect = item->fFrame;
@@ -79,14 +79,14 @@ BLayoutContainer::RemoveItem(BLayoutItem *item)
 {
 	if(item == NULL || item->fContainer != this) return false;
 
-	__be_int32 index = item->fIndex;
+	__be_int32_t index = item->fIndex;
 	if(fItems.RemoveItem(index) == NULL) return false;
 
 	item->fContainer = NULL;
 	item->fIndex = -1;
 	item->UpdateVisibleRegion();
 
-	for(__be_int32 i = index; i < fItems.CountItems(); i++) ((BLayoutItem*)fItems.ItemAt(i))->fIndex = i;
+	for(__be_int32_t i = index; i < fItems.CountItems(); i++) ((BLayoutItem*)fItems.ItemAt(i))->fIndex = i;
 	if(!(item->fHidden || item->fFrame.IsValid() == false))
 	{
 		BRect updateRect = item->fFrame;
@@ -99,7 +99,7 @@ BLayoutContainer::RemoveItem(BLayoutItem *item)
 
 
 BLayoutItem*
-BLayoutContainer::RemoveItem(__be_int32 index)
+BLayoutContainer::RemoveItem(__be_int32_t index)
 {
 	BLayoutItem *item = ItemAt(index);
 	return(RemoveItem(item) ? item : NULL);
@@ -107,20 +107,20 @@ BLayoutContainer::RemoveItem(__be_int32 index)
 
 
 BLayoutItem*
-BLayoutContainer::ItemAt(__be_int32 index) const
+BLayoutContainer::ItemAt(__be_int32_t index) const
 {
 	return (BLayoutItem*)fItems.ItemAt(index);
 }
 
 
-__be_int32
+__be_int32_t
 BLayoutContainer::IndexOf(const BLayoutItem *item) const
 {
 	return((item == NULL || item->fContainer != this) ? -1 : item->fIndex);
 }
 
 
-__be_int32
+__be_int32_t
 BLayoutContainer::CountItems() const
 {
 	return fItems.CountItems();

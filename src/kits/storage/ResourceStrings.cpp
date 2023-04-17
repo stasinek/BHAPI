@@ -86,7 +86,7 @@ status_t BResourceStrings::InitCheck()
 	  with ID \a id.
 */
 BString *
-BResourceStrings::NewString(int32 id)
+BResourceStrings::NewString(int32_t id)
 {
 //	_string_lock.Lock();
 	BString *result = NULL;
@@ -108,7 +108,7 @@ BResourceStrings::NewString(int32 id)
 	  with ID \a id.
 */
 const char *
-BResourceStrings::FindString(int32 id)
+BResourceStrings::FindString(int32_t id)
 {
 	_string_lock.Lock();
 	const char *result = NULL;
@@ -156,7 +156,7 @@ status_t BResourceStrings::SetStringFile(const entry_ref *ref)
 	if (error == B_OK) {
 		// count them first
 		fStringCount = 0;
-		int32 id;
+		int32_t id;
 		const char *name;
 		size_t length;
 		while (fResources->GetResourceInfo(RESOURCE_TYPE, fStringCount, &id,
@@ -167,7 +167,7 @@ status_t BResourceStrings::SetStringFile(const entry_ref *ref)
 		// I don't have a heuristic at hand, so let's simply take the count.
 		error = _Rehash(fStringCount);
 		// load the resources
-		for (int32 i = 0; error == B_OK && i < fStringCount; i++) {
+		for (int32_t i = 0; error == B_OK && i < fStringCount; i++) {
 			if (!fResources->GetResourceInfo(RESOURCE_TYPE, i, &id, &name,
 											 &length)) {
 				error = B_ERROR;
@@ -246,7 +246,7 @@ void BResourceStrings::_Cleanup()
 void BResourceStrings::_MakeEmpty()
 {
 	if (fHashTable) {
-		for (int32 i = 0; i < fHashTableSize; i++) {
+		for (int32_t i = 0; i < fHashTableSize; i++) {
 			while (_string_id_hash *entry = fHashTable[i]) {
 				fHashTable[i] = entry->next;
 				delete entry;
@@ -263,7 +263,7 @@ void BResourceStrings::_MakeEmpty()
 	- \c B_OK: Everything went fine.
 	- \c B_NO_MEMORY: Insuffient memory.
 */
-status_t BResourceStrings::_Rehash(int32 newSize)
+status_t BResourceStrings::_Rehash(int32_t newSize)
 {
 	status_t error = B_OK;
 	if (newSize > 0 && newSize != fHashTableSize) {
@@ -274,10 +274,10 @@ status_t BResourceStrings::_Rehash(int32 newSize)
 			memset(newHashTable, 0, sizeof(_string_id_hash*) * newSize);
 			// move the entries to the new table
 			if (fHashTable && fHashTableSize > 0 && fStringCount > 0) {
-				for (int32 i = 0; i < fHashTableSize; i++) {
+				for (int32_t i = 0; i < fHashTableSize; i++) {
 					while (_string_id_hash *entry = fHashTable[i]) {
 						fHashTable[i] = entry->next;
-						int32 newPos = entry->id % newSize;
+						int32_t newPos = entry->id % newSize;
 						entry->next = newHashTable[newPos];
 						newHashTable[newPos] = entry;
 					}
@@ -303,7 +303,7 @@ status_t BResourceStrings::_Rehash(int32 newSize)
 	\return the hash table entry or \c NULL, if something went wrong
 */
 BResourceStrings::_string_id_hash *
-BResourceStrings::_AddString(char *str, int32 id, bool wasMalloced)
+BResourceStrings::_AddString(char *str, int32_t id, bool wasMalloced)
 {
 	_string_id_hash *entry = NULL;
 	if (fHashTable && fHashTableSize > 0)
@@ -312,7 +312,7 @@ BResourceStrings::_AddString(char *str, int32 id, bool wasMalloced)
 		entry->assign_string(str, false);
 		entry->id = id;
 		entry->data_alloced = wasMalloced;
-		int32 pos = id % fHashTableSize;
+		int32_t pos = id % fHashTableSize;
 		entry->next = fHashTable[pos];
 		fHashTable[pos] = entry;
 	}
@@ -325,11 +325,11 @@ BResourceStrings::_AddString(char *str, int32 id, bool wasMalloced)
 	\return the hash table entry or \c NULL, if there is no entry with this ID
 */
 BResourceStrings::_string_id_hash *
-BResourceStrings::_FindString(int32 id)
+BResourceStrings::_FindString(int32_t id)
 {
 	_string_id_hash *entry = NULL;
 	if (fHashTable && fHashTableSize > 0) {
-		int32 pos = id % fHashTableSize;
+		int32_t pos = id % fHashTableSize;
 		entry = fHashTable[pos];
 		while (entry != NULL && entry->id != id)
 			entry = entry->next;

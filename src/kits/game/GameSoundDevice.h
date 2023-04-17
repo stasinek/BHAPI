@@ -77,13 +77,13 @@ protected:
 			gs_audio_format			fFormat;											
 
 private:
-			int32					AllocateSound();
+			int32_t					AllocateSound();
 			
 			status_t				fInitError;
 		
 			bool					fIsConnected;
 			
-			int32					fSoundCount;
+			int32_t					fSoundCount;
 			GameSoundBuffer **		fSounds;
 };
 

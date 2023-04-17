@@ -19,7 +19,7 @@ CfaRuleSet::CfaRuleSet()
 }
 
 
-status_t CfaRuleSet::Init(uint32 registerCount)
+status_t CfaRuleSet::Init(uint32_t registerCount)
 {
 	fRegisterRules = new(std::nothrow) CfaRule[registerCount];
 	if (fRegisterRules == NULL)
@@ -52,7 +52,7 @@ CfaRuleSet::Clone() const
 
 
 CfaRule*
-CfaRuleSet::RegisterRule(uint32 index) const
+CfaRuleSet::RegisterRule(uint32_t index) const
 {
 	return index < fRegisterCount ? fRegisterRules + index : NULL;
 }

@@ -12,18 +12,18 @@
 
 class BootMethod {
 public:
-	BootMethod(const KMessage& bootVolume, int32 method);
+	BootMethod(const KMessage& bootVolume, int32_t method);
 	virtual ~BootMethod();
 
 	virtual status_t Init();
 
 	virtual bool IsBootDevice(KDiskDevice* device, bool strict) = 0;
 	virtual bool IsBootPartition(KPartition* partition, bool& foundForSure) = 0;
-	virtual void SortPartitions(KPartition** partitions, int32 count) = 0;
+	virtual void SortPartitions(KPartition** partitions, int32_t count) = 0;
 
 protected:
 	const KMessage&	fBootVolume;
-	int32			fMethod;
+	int32_t			fMethod;
 };
 
 

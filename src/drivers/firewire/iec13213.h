@@ -128,20 +128,20 @@
 
 struct csrreg {
 #if BYTE_ORDER == BIG_ENDIAN
-	uint32_t key:8,
+	uint32_t_t key:8,
 		 val:24;
 #else
-	uint32_t val:24,
+	uint32_t_t val:24,
 		 key:8;
 #endif
 };
 struct csrhdr {
 #if BYTE_ORDER == BIG_ENDIAN
-	uint32_t info_len:8,
+	uint32_t_t info_len:8,
 		 crc_len:8,
 		 crc:16;
 #else
-	uint32_t crc:16,
+	uint32_t_t crc:16,
 		 crc_len:8,
 		 info_len:8;
 #endif
@@ -153,21 +153,21 @@ struct csrdirectory {
 struct csrtext {
 	BIT16x2(crc_len, crc);
 #if BYTE_ORDER == BIG_ENDIAN
-	uint32_t spec_type:8,
+	uint32_t_t spec_type:8,
 		 spec_id:24;
 #else
-	uint32_t spec_id:24,
+	uint32_t_t spec_id:24,
 		 spec_type:8;
 #endif
-	uint32_t lang_id;
-	uint32_t text[0];
+	uint32_t_t lang_id;
+	uint32_t_t text[0];
 };
 
 struct bus_info {
 #define	CSR_BUS_NAME_IEEE1394	0x31333934
-	uint32_t bus_name;
+	uint32_t_t bus_name;
 #if BYTE_ORDER == BIG_ENDIAN
-	uint32_t irmc:1,		/* iso. resource manager capable */
+	uint32_t_t irmc:1,		/* iso. resource manager capable */
 		 cmc:1,			/* cycle master capable */
 		 isc:1,			/* iso. operation support */
 		 bmc:1,			/* bus manager capable */
@@ -181,7 +181,7 @@ struct bus_info {
 		 :1,
 		 link_spd:3;
 #else
-	uint32_t link_spd:3,
+	uint32_t_t link_spd:3,
 		 :1,
 		 generation:4,
 		 max_rom:2,
@@ -215,13 +215,13 @@ struct crom_context {
 
 __BEGIN_DECLS
 
-void crom_init_context(struct crom_context *, uint32_t *);
+void crom_init_context(struct crom_context *, uint32_t_t *);
 struct csrreg *crom_get(struct crom_context *);
 void crom_next(struct crom_context *);
 void crom_parse_text(struct crom_context *, char *, int);
-uint16_t crom_crc(uint32_t *r, int);
+uint16_t crom_crc(uint32_t_t *r, int);
 struct csrreg *crom_search_key(struct crom_context *, uint8_t);
-int crom_has_specver(uint32_t *, uint32_t, uint32_t);
+int crom_has_specver(uint32_t_t *, uint32_t_t, uint32_t_t);
 
 #if !defined(_KERNEL) && !defined(_BOOT)
 char *crom_desc(struct crom_context *, char *, int);
@@ -243,17 +243,17 @@ struct crom_chunk {
 	int offset;
 	struct {
 		BIT16x2(crc_len, crc);
-		uint32_t buf[CROM_MAX_CHUNK_LEN];
+		uint32_t_t buf[CROM_MAX_CHUNK_LEN];
 	} data;
 };
 
-extern int crom_add_quad(struct crom_chunk *, uint32_t);
+extern int crom_add_quad(struct crom_chunk *, uint32_t_t);
 extern int crom_add_entry(struct crom_chunk *, int, int);
 extern int crom_add_chunk(struct crom_src *src, struct crom_chunk *,
 					struct crom_chunk *, int);
 extern int crom_add_simple_text(struct crom_src *src, struct crom_chunk *,
 					struct crom_chunk *, const char *);
-extern int crom_load(struct crom_src *, uint32_t *, int);
+extern int crom_load(struct crom_src *, uint32_t_t *, int);
 
 #endif
 

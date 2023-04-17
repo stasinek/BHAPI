@@ -22,7 +22,7 @@ class BMediaTheme {
 
         const char* Name();
         const char* Info();
-        int32 ID();
+        int32_t ID();
         bool GetRef(entry_ref* ref);
 
         static BView* ViewFor(BParameterWeb* web, const BRect* hintRect = NULL,
@@ -56,7 +56,7 @@ class BMediaTheme {
 
     protected:
         BMediaTheme(const char* name, const char* info,
-            const entry_ref* addOn = NULL, int32 themeID = 0);
+            const entry_ref* addOn = NULL, int32_t themeID = 0);
 
         virtual	BView* MakeViewFor(BParameterWeb* web,
             const BRect* hintRect = NULL) = 0;
@@ -79,11 +79,11 @@ class BMediaTheme {
 
         char*		fName;
         char*		fInfo;
-        int32		fID;
+        int32_t		fID;
         bool		fIsAddOn;
         entry_ref	fAddOnRef;
 
-        uint32 _reserved[8];
+        uint32_t _reserved[8];
 
         static BMediaTheme* sDefaultTheme;
 };
@@ -91,9 +91,9 @@ class BMediaTheme {
 
 // Theme add-ons should export these functions:
 #if defined(_BUILDING_THEME_ADDON)
-extern "C" BMediaTheme* make_theme(int32 id, image_id you);
-extern "C" status_t get_theme_at(int32 index, const char** _name,
-    const char** _info, int32* _id);
+extern "C" BMediaTheme* make_theme(int32_t id, image_id you);
+extern "C" status_t get_theme_at(int32_t index, const char** _name,
+    const char** _info, int32_t* _id);
 #endif	// _BUILDING_THEME_ADDON
 
 #endif	// _CONTROL_THEME_H

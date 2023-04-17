@@ -35,14 +35,14 @@ status_t BGeolocation::LocateSelf(float& latitude, float& longitude)
 {
 	// Enumerate wifi network and build JSON message
 	BNetworkRoster& roster = BNetworkRoster::Default();
-	uint32 interfaceCookie = 0;
+	uint32_t interfaceCookie = 0;
 	BNetworkInterface interface;
 
 	BString query("{\n\t\"wifiAccessPoints\": [");
-	int32 count = 0;
+	int32_t count = 0;
 
 	while (roster.GetNextInterface(&interfaceCookie, interface) == B_OK) {
-		uint32 networkCookie = 0;
+		uint32_t networkCookie = 0;
 		wireless_network network;
 
 		BNetworkDevice device(interface.Name());

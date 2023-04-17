@@ -22,14 +22,14 @@ const kdebug_alloc_t kdebug_alloc = {};
 
 
 struct allocation_header {
-	uint32	size : 31;	// size in allocation_header units
+	uint32_t	size : 31;	// size in allocation_header units
 	bool	free : 1;
-	uint32	previous;
+	uint32_t	previous;
 };
 
 struct free_entry : allocation_header {
-	uint32	previous_free;
-	uint32	next_free;
+	uint32_t	previous_free;
+	uint32_t	next_free;
 };
 
 
@@ -39,7 +39,7 @@ struct DebugAllocPool {
 		fParent = NULL;
 		fChild = NULL;
 
-		uint32 size = heapSize / 8;
+		uint32_t size = heapSize / 8;
 		fBase = (allocation_header*)heap - 1;
 		fEnd = size + 1;
 		fFirstFree = 0;
@@ -94,7 +94,7 @@ struct DebugAllocPool {
 	void* Allocate(size_t size)
 	{
 		size = (size + 7) / 8;
-		uint32 index = fFirstFree;
+		uint32_t index = fFirstFree;
 		while (index != 0 && fBase[index].size < size)
 			index = ((free_entry*)&fBase[index])->next_free;
 
@@ -105,8 +105,8 @@ struct DebugAllocPool {
 
 		// if the entry is big enough, we split it
 		if (fBase[index].size - size >= 2) {
-			uint32 next = index + 1 + size;
-			uint32 nextNext = index + 1 + fBase[index].size;
+			uint32_t next = index + 1 + size;
+			uint32_t nextNext = index + 1 + fBase[index].size;
 			fBase[next].size = fBase[index].size - size - 1;
 			fBase[next].previous = index;
 			fBase[index].size = size;
@@ -130,17 +130,17 @@ struct DebugAllocPool {
 
 		// get header
 		allocation_header* header = (allocation_header*)address - 1;
-		uint32 index = header - fBase;
+		uint32_t index = header - fBase;
 		if (header->free) {
 			kprintf("DebugAllocPool::Free(%p): double free\n", address);
 			return;
 		}
 
-		uint32 next = index + 1 + header->size;
+		uint32_t next = index + 1 + header->size;
 
 		// join with previous, if possible
 		if (index > 1 && fBase[header->previous].free) {
-			uint32 previous = header->previous;
+			uint32_t previous = header->previous;
 			_RemoveFreeEntry(previous);
 
 			fBase[previous].size += 1 + header->size;
@@ -156,7 +156,7 @@ struct DebugAllocPool {
 
 			header->size += 1 + fBase[next].size;
 
-			uint32 nextNext = index + 1 + header->size;
+			uint32_t nextNext = index + 1 + header->size;
 			if (nextNext < fEnd)
 				fBase[nextNext].previous = index;
 		}
@@ -165,16 +165,16 @@ struct DebugAllocPool {
 	}
 
 private:
-	void _InsertFreeEntry(uint32 index)
+	void _InsertFreeEntry(uint32_t index)
 	{
 		// find the insertion point -- list is sorted by ascending size
-		uint32 size = fBase[index].size;
-		uint32 next = fFirstFree;
+		uint32_t size = fBase[index].size;
+		uint32_t next = fFirstFree;
 		while (next != 0 && size > fBase[next].size)
 			next = ((free_entry*)&fBase[next])->next_free;
 
 		// insert
-		uint32 previous;
+		uint32_t previous;
 		if (next != 0) {
 			previous = ((free_entry*)&fBase[next])->previous_free;
 			((free_entry*)&fBase[next])->previous_free = index;
@@ -194,10 +194,10 @@ private:
 		fBase[index].free = true;
 	}
 
-	void _RemoveFreeEntry(uint32 index)
+	void _RemoveFreeEntry(uint32_t index)
 	{
-		uint32 previous = ((free_entry*)&fBase[index])->previous_free;
-		uint32 next = ((free_entry*)&fBase[index])->next_free;
+		uint32_t previous = ((free_entry*)&fBase[index])->previous_free;
+		uint32_t next = ((free_entry*)&fBase[index])->next_free;
 
 		if (previous != 0)
 			((free_entry*)&fBase[previous])->next_free = next;
@@ -217,9 +217,9 @@ private:
 	DebugAllocPool*		fChild;
 	allocation_header*	fBase;		// actually base - 1, so that index 0 is
 									// invalid
-	uint32				fEnd;
-	uint32				fFirstFree;
-	uint32				fLastFree;
+	uint32_t				fEnd;
+	uint32_t				fFirstFree;
+	uint32_t				fLastFree;
 };
 
 

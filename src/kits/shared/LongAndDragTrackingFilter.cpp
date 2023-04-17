@@ -34,8 +34,8 @@
 #include <new>
 
 
-LongAndDragTrackingFilter::LongAndDragTrackingFilter(uint32 longMessageWhat,
-	uint32 dragMessageWhat, float radiusThreshold,
+LongAndDragTrackingFilter::LongAndDragTrackingFilter(uint32_t longMessageWhat,
+	uint32_t dragMessageWhat, float radiusThreshold,
 	bigtime_t durationThreshold)
 	:
 	BMessageFilter(B_ANY_DELIVERY, B_ANY_SOURCE),
@@ -75,7 +75,7 @@ LongAndDragTrackingFilter::Filter(BMessage* message, BHandler** target)
 	switch (message->what) {
 		case B_MOUSE_DOWN:
 
-			message->FindInt32("buttons", (int32*)&fClickButtons);
+			message->FindInt32("buttons", (int32_t*)&fClickButtons);
 
 			if (fClickButtons != 0) {
 
@@ -96,7 +96,7 @@ LongAndDragTrackingFilter::Filter(BMessage* message, BHandler** target)
 
 		case B_MOUSE_UP:
 			_StopTracking();
-			message->AddInt32("last_buttons", (int32)fClickButtons);
+			message->AddInt32("last_buttons", (int32_t)fClickButtons);
 			return B_DISPATCH_MESSAGE;
 
 		case B_MOUSE_MOVED:
@@ -114,7 +114,7 @@ LongAndDragTrackingFilter::Filter(BMessage* message, BHandler** target)
 						// name it "be:view_where" since BView::DragMessage
 						// positions the dragging frame/bitmap by retrieving
 						// the current message and reading that field
-					dragMessage.AddInt32("buttons", (int32)fClickButtons);
+					dragMessage.AddInt32("buttons", (int32_t)fClickButtons);
 					BMessenger messenger(*target);
 					messenger.SendMessage(&dragMessage);
 

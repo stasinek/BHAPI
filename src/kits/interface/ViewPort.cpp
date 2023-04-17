@@ -146,7 +146,7 @@ private:
 	void _UnsetChild()
 	{
 		if (CountItems() > 0) {
-			BLayoutItem* item = RemoveItem((int32)0);
+			BLayoutItem* item = RemoveItem((int32_t)0);
 			if (fHasViewChild)
 				delete item;
 			fHasViewChild = false;

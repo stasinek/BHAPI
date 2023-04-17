@@ -37,7 +37,7 @@ private:
 	virtual	void				_ReservedInputServerMethod3();
 	virtual	void				_ReservedInputServerMethod4();
 
-			uint32				_reserved[4];
+			uint32_t				_reserved[4];
 
 private:
 			friend class AddOnManager;

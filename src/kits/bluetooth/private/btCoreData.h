@@ -174,7 +174,7 @@ struct bluetooth_core_data_module_info {
 	struct L2capFrame*		(*SignalByIdent)(struct HciConnection* conn,
 								uint8 ident);
 	status_t				(*TimeoutSignal)(struct L2capFrame* frame,
-								uint32 timeo);
+								uint32_t timeo);
 	status_t				(*UnTimeoutSignal)(struct L2capFrame* frame);
 	struct L2capFrame*		(*SpawnFrame)(struct HciConnection* conn,
 								struct L2capChannel* channel,

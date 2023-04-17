@@ -18,8 +18,8 @@ public:
 			bool				AddFrame(StackFrame* frame);
 									// takes over reference (also on error)
 
-			int32				CountFrames() const;
-			StackFrame*			FrameAt(int32 index) const;
+			int32_t				CountFrames() const;
+			StackFrame*			FrameAt(int32_t index) const;
 
 private:
 			typedef BObjectList<StackFrame> StackFrameList;

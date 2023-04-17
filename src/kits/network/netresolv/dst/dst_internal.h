@@ -38,7 +38,7 @@ typedef struct dst_key {
 	int	dk_key_size;    /*%< this is the size of the key in bits */
 	int	dk_proto;       /*%< what protocols this key can be used for */
 	int	dk_alg;         /*%< algorithm number from key record */
-	u_int32_t dk_flags;     /*%< and the flags of the public key */
+	u_int32_t_t dk_flags;     /*%< and the flags of the public key */
 	u_int16_t dk_id;        /*%< identifier of the key */
 	void	*dk_KEY_struct; /*%< pointer to key in crypto pkg fmt */
 	struct dst_func *dk_func; /*%< point to cryptto pgk specific function table */
@@ -136,8 +136,8 @@ FILE      *dst_s_fopen (const char *filename, const char *mode, int perm);
 u_int16_t dst_s_get_int16( const u_int8_t *buf);
 void      dst_s_put_int16( u_int8_t *buf, const u_int16_t val);
 
-u_int32_t dst_s_get_int32( const u_int8_t *buf);
-void      dst_s_put_int32( u_int8_t *buf, const u_int32_t val);
+u_int32_t_t dst_s_get_int32_t( const u_int8_t *buf);
+void      dst_s_put_int32_t( u_int8_t *buf, const u_int32_t_t val);
 
 #ifdef DUMP
 # undef DUMP

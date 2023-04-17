@@ -369,10 +369,10 @@ MultiAddressSpaceLocker::_ResizeIfNeeded()
 }
 
 
-int32
+int32_t
 MultiAddressSpaceLocker::_IndexOfAddressSpace(VMAddressSpace* space) const
 {
-	for (int32 i = 0; i < fCount; i++) {
+	for (int32_t i = 0; i < fCount; i++) {
 		if (fItems[i].space == space)
 			return i;
 	}
@@ -388,7 +388,7 @@ MultiAddressSpaceLocker::_AddAddressSpace(VMAddressSpace* space,
 	if (!space)
 		return B_BAD_VALUE;
 
-	int32 index = _IndexOfAddressSpace(space);
+	int32_t index = _IndexOfAddressSpace(space);
 	if (index < 0) {
 		if (!_ResizeIfNeeded()) {
 			space->Put();
@@ -418,7 +418,7 @@ MultiAddressSpaceLocker::Unset()
 {
 	Unlock();
 
-	for (int32 i = 0; i < fCount; i++)
+	for (int32_t i = 0; i < fCount; i++)
 		fItems[i].space->Put();
 
 	fCount = 0;
@@ -432,7 +432,7 @@ MultiAddressSpaceLocker::Lock()
 
 	qsort(fItems, fCount, sizeof(lock_item), &_CompareItems);
 
-	for (int32 i = 0; i < fCount; i++) {
+	for (int32_t i = 0; i < fCount; i++) {
 		status_t status;
 		if (fItems[i].write_lock)
 			status = fItems[i].space->WriteLock();
@@ -461,7 +461,7 @@ MultiAddressSpaceLocker::Unlock()
 	if (!fLocked)
 		return;
 
-	for (int32 i = 0; i < fCount; i++) {
+	for (int32_t i = 0; i < fCount; i++) {
 		if (fItems[i].write_lock)
 			fItems[i].space->WriteUnlock();
 		else
@@ -556,11 +556,11 @@ MultiAddressSpaceLocker::AddAreaCacheAndLock(area_id areaID,
 		Unlock();
 
 		// Get an additional reference to the original address spaces.
-		for (int32 i = 0; i < originalCount; i++)
+		for (int32_t i = 0; i < originalCount; i++)
 			originalItems[i].space->Get();
 
 		// Release all references to the current address spaces.
-		for (int32 i = 0; i < fCount; i++)
+		for (int32_t i = 0; i < fCount; i++)
 			fItems[i].space->Put();
 
 		// Copy over the original state.

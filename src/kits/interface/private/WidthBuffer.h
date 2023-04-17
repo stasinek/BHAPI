@@ -23,8 +23,8 @@ class TextGapBuffer;
 
 struct _width_table_ {
 	BFont font;				// corresponding font
-	int32 hashCount;		// number of hashed items
-	int32 tableCount;		// size of table
+	int32_t hashCount;		// number of hashed items
+	int32_t tableCount;		// size of table
 	void* widths;			// width table
 };
 
@@ -35,23 +35,23 @@ public:
 	virtual						~WidthBuffer();
 
 			float				StringWidth(const char* inText,
-									int32 fromOffset, int32 length,
+									int32_t fromOffset, int32_t length,
 									const BFont* inStyle);
 			float				StringWidth(TextGapBuffer& gapBuffer,
-									int32 fromOffset, int32 length,
+									int32_t fromOffset, int32_t length,
 									const BFont* inStyle);
 
 private:
-			bool				FindTable(const BFont* font, int32* outIndex);
-			int32				InsertTable(const BFont* font);
+			bool				FindTable(const BFont* font, int32_t* outIndex);
+			int32_t				InsertTable(const BFont* font);
 
-			bool				GetEscapement(uint32 value, int32 index,
+			bool				GetEscapement(uint32_t value, int32_t index,
 									float* escapement);
 			float				HashEscapements(const char* chars,
-									int32 numChars, int32 numBytes,
-									int32 tableIndex, const BFont* font);
+									int32_t numChars, int32_t numBytes,
+									int32_t tableIndex, const BFont* font);
 
-	static	uint32				Hash(uint32);
+	static	uint32_t				Hash(uint32_t);
 
 private:
 			BLocker				fLock;

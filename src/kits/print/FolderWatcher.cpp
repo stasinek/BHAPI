@@ -131,7 +131,7 @@ void FolderWatcher::HandleChangedAttr(BMessage* msg) {
 }
 
 void FolderWatcher::MessageReceived(BMessage* msg) {
-	int32 opcode;
+	int32_t opcode;
 	node_ref folder;
 	ino_t dir;
 	

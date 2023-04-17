@@ -65,7 +65,7 @@ const uint8 DefaultCatalog::kDefaultCatalogAddOnPriority = 1;
 	give an appropriate error-code otherwise.
 */
 DefaultCatalog::DefaultCatalog(const entry_ref &catalogOwner, const char *language,
-	uint32 fingerprint)
+	uint32_t fingerprint)
 	:
 	HashMapCatalog("", language, fingerprint)
 {
@@ -292,7 +292,7 @@ status_t DefaultCatalog::WriteToFile(const char *path)
 		return res;
 
 	BMallocIO mallocIO;
-	mallocIO.SetBlockSize(max(fCatMap.Size() * 20, (int32)256));
+	mallocIO.SetBlockSize(max(fCatMap.Size() * 20, (int32_t)256));
 		// set a largish block-size in order to avoid reallocs
 	res = Flatten(&mallocIO);
 	if (res == B_OK) {
@@ -322,7 +322,7 @@ status_t DefaultCatalog::WriteToAttribute(const entry_ref &appOrAddOnRef)
 		return res;
 
 	BMallocIO mallocIO;
-	mallocIO.SetBlockSize(max(fCatMap.Size() * 20, (int32)256));
+	mallocIO.SetBlockSize(max(fCatMap.Size() * 20, (int32_t)256));
 		// set a largish block-size in order to avoid reallocs
 	res = Flatten(&mallocIO);
 
@@ -352,7 +352,7 @@ status_t DefaultCatalog::WriteToResource(const entry_ref &appOrAddOnRef)
 		return res;
 
 	BMallocIO mallocIO;
-	mallocIO.SetBlockSize(max(fCatMap.Size() * 20, (int32)256));
+	mallocIO.SetBlockSize(max(fCatMap.Size() * 20, (int32_t)256));
 		// set a largish block-size in order to avoid reallocs
 	res = Flatten(&mallocIO);
 
@@ -375,7 +375,7 @@ void DefaultCatalog::UpdateAttributes(BFile& catalogFile)
 {
 	static const int bufSize = 256;
 	char buf[bufSize];
-	uint32 temp;
+	uint32_t temp;
 	if (catalogFile.ReadAttr("BEOS:TYPE", B_MIME_STRING_TYPE, 0, &buf,
 			bufSize) <= 0
 		|| strcmp(kCatMimeType, buf) != 0) {
@@ -395,9 +395,9 @@ void DefaultCatalog::UpdateAttributes(BFile& catalogFile)
 			fSignature.String(), fSignature.Length()+1);
 	}
 	if (catalogFile.ReadAttr(BLocaleRoster::kCatFingerprintAttr, B_UINT32_TYPE,
-		0, &temp, sizeof(uint32)) <= 0) {
+		0, &temp, sizeof(uint32_t)) <= 0) {
 		catalogFile.WriteAttr(BLocaleRoster::kCatFingerprintAttr, B_UINT32_TYPE,
-			0, &fFingerprint, sizeof(uint32));
+			0, &fFingerprint, sizeof(uint32_t));
 	}
 }
 
@@ -409,7 +409,7 @@ status_t DefaultCatalog::Flatten(BDataIO *dataIO)
 
 	status_t res;
 	BMessage archive;
-	int32 count = fCatMap.Size();
+	int32_t count = fCatMap.Size();
 	res = archive.AddString("class", "DefaultCatalog");
 	if (res == B_OK)
 		res = archive.AddInt32("c:sz", count);
@@ -449,7 +449,7 @@ status_t DefaultCatalog::Flatten(BDataIO *dataIO)
 status_t DefaultCatalog::Unflatten(BDataIO *dataIO)
 {
 	fCatMap.Clear();
-	int32 count = 0;
+	int32_t count = 0;
 	int16 version;
 	BMessage archiveMsg;
 	status_t res = archiveMsg.Unflatten(dataIO);
@@ -461,7 +461,7 @@ status_t DefaultCatalog::Unflatten(BDataIO *dataIO)
 	if (res == B_OK) {
 		fLanguageName = archiveMsg.FindString("c:lang");
 		fSignature = archiveMsg.FindString("c:sig");
-		uint32 foundFingerprint = archiveMsg.FindInt32("c:fpr");
+		uint32_t foundFingerprint = archiveMsg.FindInt32("c:fpr");
 
 		// if a specific fingerprint has been requested and the catalog does in
 		// fact have a fingerprint, both are compared. If they mismatch, we do
@@ -492,7 +492,7 @@ status_t DefaultCatalog::Unflatten(BDataIO *dataIO)
 			if (res == B_OK)
 				res = archiveMsg.FindString("c:comt", &keyCmt);
 			if (res == B_OK)
-				res = archiveMsg.FindInt32("c:hash", (int32*)&key.fHashVal);
+				res = archiveMsg.FindInt32("c:hash", (int32_t*)&key.fHashVal);
 			if (res == B_OK)
 				res = archiveMsg.FindString("c:tstr", &translated);
 			if (res == B_OK) {
@@ -502,7 +502,7 @@ status_t DefaultCatalog::Unflatten(BDataIO *dataIO)
 				fCatMap.Put(key, translated);
 			}
 		}
-		uint32 checkFP = ComputeFingerprint();
+		uint32_t checkFP = ComputeFingerprint();
 		if (fFingerprint != checkFP)
 			return B_BAD_DATA;
 	}
@@ -512,7 +512,7 @@ status_t DefaultCatalog::Unflatten(BDataIO *dataIO)
 
 BCatalogData *
 DefaultCatalog::Instantiate(const entry_ref &catalogOwner, const char *language,
-	uint32 fingerprint)
+	uint32_t fingerprint)
 {
 	DefaultCatalog *catalog
 		= new(std::nothrow) DefaultCatalog(catalogOwner, language, fingerprint);
@@ -541,7 +541,7 @@ DefaultCatalog::Create(const char *signature, const char *language)
 
 
 extern "C" status_t default_catalog_get_available_languages(BMessage* availableLanguages,
-	const char* sigPattern, const char* langPattern, int32 fingerprint)
+	const char* sigPattern, const char* langPattern, int32_t fingerprint)
 {
 	if (availableLanguages == NULL || sigPattern == NULL)
 		return B_BAD_DATA;

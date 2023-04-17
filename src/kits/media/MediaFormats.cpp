@@ -29,7 +29,7 @@ static BObjectList<meta_format> sFormats;
 static bigtime_t sLastFormatsUpdate;
 
 
-status_t get_next_encoder(int32* cookie, const media_file_format* fileFormat,
+status_t get_next_encoder(int32_t* cookie, const media_file_format* fileFormat,
 	const media_format* inputFormat, media_format* _outputFormat,
 	media_codec_info* _codecInfo)
 {
@@ -75,7 +75,7 @@ status_t get_next_encoder(int32* cookie, const media_file_format* fileFormat,
 }
 
 
-status_t get_next_encoder(int32* cookie, const media_file_format* fileFormat,
+status_t get_next_encoder(int32_t* cookie, const media_file_format* fileFormat,
 	const media_format* inputFormat, const media_format* outputFormat,
 	media_codec_info* _codecInfo, media_format* _acceptedInputFormat,
 	media_format* _acceptedOutputFormat)
@@ -133,7 +133,7 @@ status_t get_next_encoder(int32* cookie, const media_file_format* fileFormat,
 }
 
 
-status_t get_next_encoder(int32* cookie, media_codec_info* _codecInfo)
+status_t get_next_encoder(int32_t* cookie, media_codec_info* _codecInfo)
 {
 	if (cookie == NULL || _codecInfo == NULL)
 		return B_BAD_VALUE;
@@ -154,7 +154,7 @@ status_t get_next_encoder(int32* cookie, media_codec_info* _codecInfo)
 
 
 bool does_file_accept_format(const media_file_format* _fileFormat,
-	media_format* format, uint32 flags)
+	media_format* format, uint32_t flags)
 {
 	UNIMPLEMENTED();
 	return false;
@@ -285,7 +285,7 @@ meta_format::meta_format()
 
 
 meta_format::meta_format(const media_format_description& description,
-	const media_format& format, int32 id)
+	const media_format& format, int32_t id)
 	:
 	description(description),
 	format(format),
@@ -370,14 +370,14 @@ static status_t update_media_formats()
 
 	// update timestamp and check if the message is okay
 	type_code code;
-	int32 count;
+	int32_t count;
 	if (reply.FindInt64("timestamp", &sLastFormatsUpdate) < B_OK
 		|| reply.GetInfo("formats", &code, &count) < B_OK)
 		return B_ERROR;
 
 	// overwrite already existing formats
 
-	int32 index = 0;
+	int32_t index = 0;
 	for (; index < sFormats.CountItems() && index < count; index++) {
 		meta_format* item = sFormats.ItemAt(index);
 
@@ -440,7 +440,7 @@ status_t BMediaFormats::GetCodeFor(const media_format& format,
 
 	// search for a matching format
 
-	for (int32 index = sFormats.CountItems(); index-- > 0;) {
+	for (int32_t index = sFormats.CountItems(); index-- > 0;) {
 		meta_format* metaFormat = sFormats.ItemAt(index);
 
 		if (metaFormat->Matches(format, family)) {
@@ -485,7 +485,7 @@ status_t BMediaFormats::GetFormatFor(const media_format_description& description
 }
 
 
-status_t BMediaFormats::GetBeOSFormatFor(uint32 format, 
+status_t BMediaFormats::GetBeOSFormatFor(uint32_t format, 
 	media_format* _format, media_type type)
 {
 	BMediaFormats formats;
@@ -505,7 +505,7 @@ status_t BMediaFormats::GetBeOSFormatFor(uint32 format,
 }
 
 
-status_t BMediaFormats::GetAVIFormatFor(uint32 codec,
+status_t BMediaFormats::GetAVIFormatFor(uint32_t codec,
 	media_format* _format, media_type type)
 {
 	UNIMPLEMENTED();
@@ -526,7 +526,7 @@ status_t BMediaFormats::GetAVIFormatFor(uint32 codec,
 }
 
 
-status_t BMediaFormats::GetQuicktimeFormatFor(uint32 vendor, uint32 codec, 
+status_t BMediaFormats::GetQuicktimeFormatFor(uint32_t vendor, uint32_t codec, 
 	media_format* _format, media_type type)
 {
 	BMediaFormats formats;
@@ -596,7 +596,7 @@ void BMediaFormats::Unlock()
 
 
 status_t BMediaFormats::MakeFormatFor(const media_format_description* descriptions,
-	int32 descriptionCount, media_format* format, uint32 flags,
+	int32_t descriptionCount, media_format* format, uint32_t flags,
 	void* _reserved)
 {
 	status_t status = FormatManager::GetInstance()->MakeFormatFor(descriptions,

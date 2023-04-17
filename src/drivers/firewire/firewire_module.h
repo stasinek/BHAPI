@@ -27,7 +27,7 @@ int (*fw_asyreq)(struct firewire_comm *fc, int sub, struct fw_xfer *xfer);
 void (*fw_xferwake)(struct fw_xfer *xfer);
 int (*fw_xferwait)(struct fw_xfer *xfer);
 
-struct fw_bind * (*fw_bindlookup)(struct firewire_comm *fc, uint16_t dest_hi, uint32_t dest_lo);
+struct fw_bind * (*fw_bindlookup)(struct firewire_comm *fc, uint16_t dest_hi, uint32_t_t dest_lo);
 
 int (*fw_bindadd)(struct firewire_comm *fc, struct fw_bind *fwb);
 

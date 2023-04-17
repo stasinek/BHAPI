@@ -24,9 +24,9 @@ public:
 	QueryNode();
 	virtual ~QueryNode();
 
-	virtual uint32 Arity() const = 0;
-	virtual status_t SetChildAt(QueryNode *child, int32 index) = 0;
-	virtual QueryNode *ChildAt(int32 index) = 0;
+	virtual uint32_t Arity() const = 0;
+	virtual status_t SetChildAt(QueryNode *child, int32_t index) = 0;
+	virtual QueryNode *ChildAt(int32_t index) = 0;
 
 	virtual status_t GetString(BString &predicate) = 0;
 };
@@ -37,9 +37,9 @@ public:
 	LeafNode();
 	virtual ~LeafNode();
 
-	virtual uint32 Arity() const;
-	virtual status_t SetChildAt(QueryNode *child, int32 index);
-	virtual QueryNode *ChildAt(int32 index);
+	virtual uint32_t Arity() const;
+	virtual status_t SetChildAt(QueryNode *child, int32_t index);
+	virtual QueryNode *ChildAt(int32_t index);
 };
 
 // UnaryNode
@@ -48,9 +48,9 @@ public:
 	UnaryNode();
 	virtual ~UnaryNode();
 
-	virtual uint32 Arity() const;
-	virtual status_t SetChildAt(QueryNode *child, int32 index);
-	virtual QueryNode *ChildAt(int32 index);
+	virtual uint32_t Arity() const;
+	virtual status_t SetChildAt(QueryNode *child, int32_t index);
+	virtual QueryNode *ChildAt(int32_t index);
 
 protected:
 	QueryNode	*fChild;
@@ -62,9 +62,9 @@ public:
 	BinaryNode();
 	virtual ~BinaryNode();
 
-	virtual uint32 Arity() const;
-	virtual status_t SetChildAt(QueryNode *child, int32 index);
-	virtual QueryNode *ChildAt(int32 index);
+	virtual uint32_t Arity() const;
+	virtual status_t SetChildAt(QueryNode *child, int32_t index);
+	virtual QueryNode *ChildAt(int32_t index);
 
 protected:
 	QueryNode	*fChild1;
@@ -141,8 +141,8 @@ template<> status_t ValueNode<double>::GetString(BString &predicate);
 
 
 // short hands
-typedef ValueNode<int32>	Int32ValueNode;
-typedef ValueNode<uint32>	UInt32ValueNode;
+typedef ValueNode<int32_t>	Int32ValueNode;
+typedef ValueNode<uint32_t>	UInt32ValueNode;
 typedef ValueNode<int64>	Int64ValueNode;
 typedef ValueNode<uint64>	UInt64ValueNode;
 typedef ValueNode<float>	FloatValueNode;

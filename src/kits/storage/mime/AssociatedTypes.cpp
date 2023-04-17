@@ -200,7 +200,7 @@ status_t AssociatedTypes::SetFileExtensions(const char *type, const BMessage *ex
 		// for each extension
 		newExtensions.clear();
 		const char *extension;
-		for (int32 i = 0;
+		for (int32_t i = 0;
 			   extensions->FindString(kTypesField, i, &extension) == B_OK;
 			     i++)
 		{

@@ -141,7 +141,7 @@ public:
     /* calls to ask the sniffer to identify the MIME type of a file or data in
        memory */
     static status_t GuessMimeType(const bhapi::entry_ref* file, BMimeType* type);
-    static status_t GuessMimeType(const void* buffer, int32 length,
+    static status_t GuessMimeType(const void* buffer, int32_t length,
                         BMimeType* type);
     static status_t GuessMimeType(const char* filename, BMimeType* type);
 
@@ -178,7 +178,7 @@ private:
     void*		_unused;
     bhapi::entry_ref	fRef;
     status_t	fCStatus;
-    uint32		_reserved[4];
+    uint32_t		_reserved[4];
 };
 
 

@@ -54,7 +54,7 @@ All rights reserved.
 
 //	#pragma mark - BFilePanel
 BFilePanel::BFilePanel(file_panel_mode mode, BMessenger* target,
-    const entry_ref* ref, uint32 nodeFlavors, bool multipleSelection,
+    const entry_ref* ref, uint32_t nodeFlavors, bool multipleSelection,
     BMessage* message, BRefFilter* filter, bool modal,
     bool hideWhenDone)
 {
@@ -91,8 +91,8 @@ void BFilePanel::Show()
 
     // if the window is already showing, don't jerk the workspaces around,
     // just pull it to us
-    uint32 workspace = 1UL << (uint32)current_workspace();
-    uint32 windowWorkspaces = fWindow->Workspaces();
+    uint32_t workspace = 1UL << (uint32_t)current_workspace();
+    uint32_t windowWorkspaces = fWindow->Workspaces();
     if (!(windowWorkspaces & workspace)) {
         // window in a different workspace, reopen in current
         fWindow->SetWorkspaces(workspace);
@@ -227,7 +227,7 @@ void BFilePanel::SetButtonLabel(file_panel_button button, const char* text)
 }
 
 
-void BFilePanel::SetNodeFlavors(uint32 flavors)
+void BFilePanel::SetNodeFlavors(uint32_t flavors)
 {
     AutoLock<BWindow> lock(fWindow);
     if (!lock)

@@ -63,21 +63,21 @@ public:
 	
 			void				SetColorStops(const BGradient& other);
 	
-			int32				AddColor(const rgb_color& color,
+			int32_t				AddColor(const rgb_color& color,
 									float offset);
 			bool				AddColorStop(const ColorStop& colorStop,
-									int32 index);
+									int32_t index);
 	
-			bool				RemoveColor(int32 index);
+			bool				RemoveColor(int32_t index);
 	
-			bool				SetColorStop(int32 index,
+			bool				SetColorStop(int32_t index,
 									const ColorStop& colorStop);
-			bool				SetColor(int32 index, const rgb_color& color);
-			bool				SetOffset(int32 index, float offset);
+			bool				SetColor(int32_t index, const rgb_color& color);
+			bool				SetOffset(int32_t index, float offset);
 	
-			int32				CountColorStops() const;
-			ColorStop*			ColorStopAt(int32 index) const;
-			ColorStop*			ColorStopAtFast(int32 index) const;
+			int32_t				CountColorStops() const;
+			ColorStop*			ColorStopAt(int32_t index) const;
+			ColorStop*			ColorStopAtFast(int32_t index) const;
 			ColorStop*			ColorStops() const;
 			void				SortColorStopsByOffset();
 	

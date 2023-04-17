@@ -49,10 +49,10 @@
 
 void EDFBGraphicsWindow::AdjustFrameByDecoration()
 {
-	fWidth -= (uint32)(fMargins.left + fMargins.right);
-	fHeight -= (uint32)(fMargins.top + fMargins.bottom);
-	fOriginX += (int32)fMargins.left;
-	fOriginY += (int32)fMargins.top;
+	fWidth -= (uint32_t)(fMargins.left + fMargins.right);
+	fHeight -= (uint32_t)(fMargins.top + fMargins.bottom);
+	fOriginX += (int32_t)fMargins.left;
+	fOriginY += (int32_t)fMargins.top;
 
 	switch(fLook)
 	{
@@ -81,10 +81,10 @@ void EDFBGraphicsWindow::AdjustFrameByDecoration()
 			break;
 	}
 
-	fWidth += (uint32)fMargins.left + (uint32)fMargins.right;
-	fHeight += (uint32)fMargins.top + (uint32)fMargins.bottom;
-	fOriginX -= (int32)fMargins.left;
-	fOriginY -= (int32)fMargins.top;
+	fWidth += (uint32_t)fMargins.left + (uint32_t)fMargins.right;
+	fHeight += (uint32_t)fMargins.top + (uint32_t)fMargins.bottom;
+	fOriginX -= (int32_t)fMargins.left;
+	fOriginY -= (int32_t)fMargins.top;
 }
 
 
@@ -141,7 +141,7 @@ void EDFBGraphicsWindow::RenderDecoration()
 				dfbSurface->DrawLine(dfbSurface, 2, titlebar_height - 1, fWidth - 4, titlebar_height - 1);
 
 				dfbSurface->SetColor(dfbSurface, WINDOW_ACTIVED_BORDER_COLOR);
-				for(int32 i = 0; i < 8; i += 2) dfbSurface->DrawLine(dfbSurface, 2, 3 + i, 10 - i, 3 + i);
+				for(int32_t i = 0; i < 8; i += 2) dfbSurface->DrawLine(dfbSurface, 2, 3 + i, 10 - i, 3 + i);
 
 //				RenderTitle();
 
@@ -264,7 +264,7 @@ bool EDFBGraphicsWindow::HandleMouseEvent(DFBWindowEvent *event)
 	winBounds.right -= fMargins.right;
 	winBounds.bottom -= fMargins.bottom;
 
-	int32 button = 0;
+	int32_t button = 0;
 	if(event->type != DWET_MOTION)
 	{
 		if(event->button == DIBI_LEFT) button = 1;

@@ -49,16 +49,16 @@
 #endif
 
 
-static const int32 kMessageReallocChunkSize = 64;
+static const int32_t kMessageReallocChunkSize = 64;
 static const size_t kMessageBufferAlignment = 4;
 
-const uint32 KMessage::kMessageHeaderMagic = 'kMsG';
+const uint32_t KMessage::kMessageHeaderMagic = 'kMsG';
 
 
 // #pragma mark - Helper Functions
 
-static inline int32
-_Align(int32 offset)
+static inline int32_t
+_Align(int32_t offset)
 {
 	return (offset + kMessageBufferAlignment - 1)
 		& ~(kMessageBufferAlignment - 1);
@@ -66,7 +66,7 @@ _Align(int32 offset)
 
 
 static inline void*
-_Align(void* address, int32 offset = 0)
+_Align(void* address, int32_t offset = 0)
 {
 	return (void*)(((addr_t)address + offset + kMessageBufferAlignment - 1)
 		& ~(kMessageBufferAlignment - 1));
@@ -77,7 +77,7 @@ _Align(void* address, int32 offset = 0)
 
 
 struct KMessage::FieldValueHeader {
-	int32		size;
+	int32_t		size;
 
 	void* Data()
 	{
@@ -96,9 +96,9 @@ struct KMessage::FieldValueHeader {
 
 struct KMessage::FieldHeader {
 	type_code	type;
-	int32		elementSize;	// if < 0: non-fixed size
-	int32		elementCount;
-	int32		fieldSize;
+	int32_t		elementSize;	// if < 0: non-fixed size
+	int32_t		elementCount;
+	int32_t		fieldSize;
 	int16		headerSize;
 	char		name[1];
 
@@ -112,7 +112,7 @@ struct KMessage::FieldHeader {
 		return elementSize >= 0;
 	}
 
-	void* ElementAt(int32 index, int32* size)
+	void* ElementAt(int32_t index, int32_t* size)
 	{
 		if (index < 0 || index >= elementCount)
 			return NULL;
@@ -150,7 +150,7 @@ KMessage::KMessage()
 }
 
 
-KMessage::KMessage(uint32 what)
+KMessage::KMessage(uint32_t what)
 	:
 	fBuffer(NULL),
 	fBufferCapacity(0),
@@ -169,7 +169,7 @@ KMessage::~KMessage()
 
 
 status_t
-KMessage::SetTo(uint32 what, uint32 flags)
+KMessage::SetTo(uint32_t what, uint32_t flags)
 {
 	// There are no flags interesting in this case at the moment.
 	Unset();
@@ -179,7 +179,7 @@ KMessage::SetTo(uint32 what, uint32 flags)
 
 
 status_t
-KMessage::SetTo(void* buffer, int32 bufferSize, uint32 what, uint32 flags)
+KMessage::SetTo(void* buffer, int32_t bufferSize, uint32_t what, uint32_t flags)
 {
 	Unset();
 
@@ -222,7 +222,7 @@ KMessage::SetTo(void* buffer, int32 bufferSize, uint32 what, uint32 flags)
 
 
 status_t
-KMessage::SetTo(const void* buffer, int32 bufferSize, uint32 flags)
+KMessage::SetTo(const void* buffer, int32_t bufferSize, uint32_t flags)
 {
 	return SetTo(const_cast<void*>(buffer), bufferSize, 0,
 		KMESSAGE_INIT_FROM_BUFFER | KMESSAGE_READ_ONLY | flags);
@@ -242,13 +242,13 @@ KMessage::Unset()
 
 
 void
-KMessage::SetWhat(uint32 what)
+KMessage::SetWhat(uint32_t what)
 {
 	_Header()->what = what;
 }
 
 
-uint32
+uint32_t
 KMessage::What() const
 {
 	return _Header()->what;
@@ -262,14 +262,14 @@ KMessage::Buffer() const
 }
 
 
-int32
+int32_t
 KMessage::BufferCapacity() const
 {
 	return fBufferCapacity;
 }
 
 
-int32
+int32_t
 KMessage::ContentSize() const
 {
 	return _Header()->size;
@@ -277,7 +277,7 @@ KMessage::ContentSize() const
 
 
 status_t
-KMessage::AddField(const char* name, type_code type, int32 elementSize,
+KMessage::AddField(const char* name, type_code type, int32_t elementSize,
 	KMessageField* field)
 {
 	if (!name || type == B_ANY_TYPE)
@@ -351,7 +351,7 @@ KMessage::IsEmpty() const
 
 status_t
 KMessage::AddData(const char* name, type_code type, const void* data,
-	int32 numBytes, bool isFixedSize)
+	int32_t numBytes, bool isFixedSize)
 {
 	if (!name || type == B_ANY_TYPE || !data || numBytes < 0)
 		return B_BAD_VALUE;
@@ -373,7 +373,7 @@ KMessage::AddData(const char* name, type_code type, const void* data,
 
 status_t
 KMessage::AddArray(const char* name, type_code type, const void* data,
-	int32 elementSize, int32 elementCount)
+	int32_t elementSize, int32_t elementCount)
 {
 	if (!name || type == B_ANY_TYPE || !data || elementSize < 0
 		|| elementCount < 0) {
@@ -396,7 +396,7 @@ KMessage::AddArray(const char* name, type_code type, const void* data,
 
 status_t
 KMessage::SetData(const char* name, type_code type, const void* data,
-	int32 numBytes)
+	int32_t numBytes)
 {
 	if (fBuffer != &fHeader && (fFlags & KMESSAGE_READ_ONLY))
 		return B_NOT_ALLOWED;
@@ -430,15 +430,15 @@ KMessage::SetData(const char* name, type_code type, const void* data,
 
 status_t
 KMessage::FindData(const char* name, type_code type, const void** data,
-	int32* numBytes) const
+	int32_t* numBytes) const
 {
 	return FindData(name, type, 0, data, numBytes);
 }
 
 
 status_t
-KMessage::FindData(const char* name, type_code type, int32 index,
-	const void** data, int32* numBytes) const
+KMessage::FindData(const char* name, type_code type, int32_t index,
+	const void** data, int32_t* numBytes) const
 {
 	if (!name || !data || !numBytes)
 		return B_BAD_VALUE;
@@ -462,7 +462,7 @@ KMessage::Sender() const
 }
 
 
-int32
+int32_t
 KMessage::TargetToken() const
 {
 	return _Header()->targetToken;
@@ -476,7 +476,7 @@ KMessage::ReplyPort() const
 }
 
 
-int32
+int32_t
 KMessage::ReplyToken() const
 {
 	return _Header()->replyToken;
@@ -484,8 +484,8 @@ KMessage::ReplyToken() const
 
 
 void
-KMessage::SetDeliveryInfo(int32 targetToken, port_id replyPort,
-	int32 replyToken, team_id senderTeam)
+KMessage::SetDeliveryInfo(int32_t targetToken, port_id replyPort,
+	int32_t replyToken, team_id senderTeam)
 {
 	Header* header = _Header();
 	header->sender = senderTeam;
@@ -500,8 +500,8 @@ KMessage::SetDeliveryInfo(int32 targetToken, port_id replyPort,
 
 
 status_t
-KMessage::SendTo(port_id targetPort, int32 targetToken, port_id replyPort,
-	int32 replyToken, bigtime_t timeout, team_id senderTeam)
+KMessage::SendTo(port_id targetPort, int32_t targetToken, port_id replyPort,
+	int32_t replyToken, bigtime_t timeout, team_id senderTeam)
 {
 	// get the sender team
 	if (senderTeam < 0) {
@@ -525,7 +525,7 @@ KMessage::SendTo(port_id targetPort, int32 targetToken, port_id replyPort,
 
 
 status_t
-KMessage::SendTo(port_id targetPort, int32 targetToken, KMessage* reply,
+KMessage::SendTo(port_id targetPort, int32_t targetToken, KMessage* reply,
 	bigtime_t deliveryTimeout, bigtime_t replyTimeout, team_id senderTeam)
 {
 	// get the team the target port belongs to
@@ -580,7 +580,7 @@ KMessage::SendTo(port_id targetPort, int32 targetToken, KMessage* reply,
 
 
 status_t
-KMessage::SendReply(KMessage* message, port_id replyPort, int32 replyToken,
+KMessage::SendReply(KMessage* message, port_id replyPort, int32_t replyToken,
 	bigtime_t timeout, team_id senderTeam)
 {
 	if (!message)
@@ -627,7 +627,7 @@ KMessage::ReceiveFrom(port_id fromPort, bigtime_t timeout,
 		return B_NO_MEMORY;
 
 	// read the message
-	int32 what;
+	int32_t what;
 	ssize_t realSize = read_port_etc(fromPort, &what, buffer, messageInfo->size,
 		B_RELATIVE_TIMEOUT, 0);
 	if (realSize < 0) {
@@ -658,7 +658,7 @@ KMessage::Dump(void (*printFunc)(const char*, ...)) const
 	KMessageField field;
 	while (GetNextField(&field) == B_OK) {
 		type_code type = field.TypeCode();
-		uint32 bigEndianType = B_HOST_TO_BENDIAN_INT32(type);
+		uint32_t bigEndianType = B_HOST_TO_BENDIAN_INT32(type);
 		int nameSpacing = 17 - strlen(field.Name());
 		if (nameSpacing < 0)
 			nameSpacing = 0;
@@ -669,7 +669,7 @@ KMessage::Dump(void (*printFunc)(const char*, ...)) const
 		if (field.CountElements() != 1)
 			printFunc("\n");
 
-		int32 size;
+		int32_t size;
 		for (int i = 0; const void* data = field.ElementAt(i, &size); i++) {
 			if (field.CountElements() != 1)
 				printFunc("    [%2d] ", i);
@@ -690,7 +690,7 @@ KMessage::Dump(void (*printFunc)(const char*, ...)) const
 					break;
 				case B_INT32_TYPE:
 					isIntType = true;
-					intData = *(int32*)data;
+					intData = *(int32_t*)data;
 					break;
 				case B_INT64_TYPE:
 					isIntType = true;
@@ -717,7 +717,7 @@ KMessage::_Header() const
 }
 
 
-int32
+int32_t
 KMessage::_BufferOffsetFor(const void* data) const
 {
 	if (!data)
@@ -741,7 +741,7 @@ KMessage::_LastFieldHeader() const
 
 
 KMessage::FieldHeader*
-KMessage::_FieldHeaderForOffset(int32 offset) const
+KMessage::_FieldHeaderForOffset(int32_t offset) const
 {
 	if (offset <= 0 || offset >= _Header()->size)
 		return NULL;
@@ -750,11 +750,11 @@ KMessage::_FieldHeaderForOffset(int32 offset) const
 
 
 status_t
-KMessage::_AddField(const char* name, type_code type, int32 elementSize,
+KMessage::_AddField(const char* name, type_code type, int32_t elementSize,
 	KMessageField* field)
 {
 	FieldHeader* fieldHeader;
-	int32 alignedSize;
+	int32_t alignedSize;
 	status_t error = _AllocateSpace(sizeof(FieldHeader) + strlen(name), true,
 		true, (void**)&fieldHeader, &alignedSize);
 	if (error != B_OK)
@@ -774,7 +774,7 @@ KMessage::_AddField(const char* name, type_code type, int32 elementSize,
 
 status_t
 KMessage::_AddFieldData(KMessageField* field, const void* data,
-	int32 elementSize, int32 elementCount)
+	int32_t elementSize, int32_t elementCount)
 {
 	if (!field)
 		return B_BAD_VALUE;
@@ -791,7 +791,7 @@ KMessage::_AddFieldData(KMessageField* field, const void* data,
 		if (elementSize != fieldHeader->elementSize)
 			return B_BAD_VALUE;
 		void* address;
-		int32 alignedSize;
+		int32_t alignedSize;
 		status_t error = _AllocateSpace(elementSize * elementCount,
 			(fieldHeader->elementCount == 0), false, &address, &alignedSize);
 		if (error != B_OK)
@@ -805,11 +805,11 @@ KMessage::_AddFieldData(KMessageField* field, const void* data,
 	}
 	// non-fixed size values
 	// add the elements individually (TODO: Optimize!)
-	int32 valueHeaderSize = _Align(sizeof(FieldValueHeader));
-	int32 entrySize = valueHeaderSize + elementSize;
-	for (int32 i = 0; i < elementCount; i++) {
+	int32_t valueHeaderSize = _Align(sizeof(FieldValueHeader));
+	int32_t entrySize = valueHeaderSize + elementSize;
+	for (int32_t i = 0; i < elementCount; i++) {
 		void* address;
-		int32 alignedSize;
+		int32_t alignedSize;
 		status_t error = _AllocateSpace(entrySize, true, false, &address,
 			&alignedSize);
 		if (error != B_OK)
@@ -836,7 +836,7 @@ KMessage::_InitFromBuffer(bool sizeFromBuffer)
 	// clone the buffer, if requested
 	if ((fFlags & KMESSAGE_CLONE_BUFFER) != 0 || _Align(fBuffer) != fBuffer) {
 		if (sizeFromBuffer) {
-			int32 size = fBufferCapacity;
+			int32_t size = fBufferCapacity;
 			memcpy(&size, &_Header()->size, 4);
 			fBufferCapacity = size;
 		}
@@ -851,7 +851,7 @@ KMessage::_InitFromBuffer(bool sizeFromBuffer)
 			free(fBuffer);
 
 		fBuffer = buffer;
-		fFlags &= ~(uint32)(KMESSAGE_READ_ONLY | KMESSAGE_CLONE_BUFFER);
+		fFlags &= ~(uint32_t)(KMESSAGE_READ_ONLY | KMESSAGE_CLONE_BUFFER);
 		fFlags |= KMESSAGE_OWNS_BUFFER;
 	}
 
@@ -875,7 +875,7 @@ KMessage::_InitFromBuffer(bool sizeFromBuffer)
 	// check the fields
 	FieldHeader* fieldHeader = NULL;
 	uint8* data = (uint8*)_FirstFieldHeader();
-	int32 remainingBytes = (uint8*)fBuffer + header->size - data;
+	int32_t remainingBytes = (uint8*)fBuffer + header->size - data;
 	while (remainingBytes > 0) {
 		if (remainingBytes < (int)sizeof(FieldHeader))
 			return B_BAD_DATA;
@@ -893,22 +893,22 @@ KMessage::_InitFromBuffer(bool sizeFromBuffer)
 			|| fieldHeader->headerSize > fieldHeader->fieldSize) {
 			return B_BAD_DATA;
 		}
-		int32 maxNameLen = data + fieldHeader->headerSize
+		int32_t maxNameLen = data + fieldHeader->headerSize
 			- (uint8*)fieldHeader->name;
-		int32 nameLen = strnlen(fieldHeader->name, maxNameLen);
+		int32_t nameLen = strnlen(fieldHeader->name, maxNameLen);
 		if (nameLen == maxNameLen || nameLen == 0)
 			return B_BAD_DATA;
-		int32 fieldSize =  fieldHeader->headerSize;
+		int32_t fieldSize =  fieldHeader->headerSize;
 		if (fieldHeader->HasFixedElementSize()) {
 			// fixed element size
-			int32 dataSize = fieldHeader->elementSize
+			int32_t dataSize = fieldHeader->elementSize
 				* fieldHeader->elementCount;
 			fieldSize = (uint8*)fieldHeader->Data() + dataSize - data;
 		} else {
 			// non-fixed element size
 			FieldValueHeader* valueHeader
 				= (FieldValueHeader*)fieldHeader->Data();
-			for (int32 i = 0; i < fieldHeader->elementCount; i++) {
+			for (int32_t i = 0; i < fieldHeader->elementCount; i++) {
 				remainingBytes = (uint8*)fBuffer + header->size
 					- (uint8*)valueHeader;
 				if (remainingBytes < (int)sizeof(FieldValueHeader))
@@ -932,7 +932,7 @@ KMessage::_InitFromBuffer(bool sizeFromBuffer)
 
 
 void
-KMessage::_InitBuffer(uint32 what)
+KMessage::_InitBuffer(uint32_t what)
 {
 	Header* header = _Header();
 	header->magic = kMessageHeaderMagic;
@@ -949,7 +949,7 @@ KMessage::_InitBuffer(uint32 what)
 void
 KMessage::_CheckBuffer()
 {
-	int32 lastFieldOffset = fLastFieldOffset;
+	int32_t lastFieldOffset = fLastFieldOffset;
 	if (_InitFromBuffer(false) != B_OK) {
 		PANIC("internal data mangled");
 	}
@@ -960,21 +960,21 @@ KMessage::_CheckBuffer()
 
 
 status_t
-KMessage::_AllocateSpace(int32 size, bool alignAddress, bool alignSize,
-	void** address, int32* alignedSize)
+KMessage::_AllocateSpace(int32_t size, bool alignAddress, bool alignSize,
+	void** address, int32_t* alignedSize)
 {
 	if (fBuffer != &fHeader && (fFlags & KMESSAGE_READ_ONLY))
 		return B_NOT_ALLOWED;
 
-	int32 offset = ContentSize();
+	int32_t offset = ContentSize();
 	if (alignAddress)
 		offset = _Align(offset);
-	int32 newSize = offset + size;
+	int32_t newSize = offset + size;
 	if (alignSize)
 		newSize = _Align(newSize);
 	// reallocate if necessary
 	if (fBuffer == &fHeader) {
-		int32 newCapacity = _CapacityFor(newSize);
+		int32_t newCapacity = _CapacityFor(newSize);
 		void* newBuffer = MEMALIGN(kMessageBufferAlignment, newCapacity);
 		if (!newBuffer)
 			return B_NO_MEMORY;
@@ -995,7 +995,7 @@ KMessage::_AllocateSpace(int32 size, bool alignAddress, bool alignSize,
 				return B_BUFFER_OVERFLOW;
 			}
 
-			int32 newCapacity = _CapacityFor(newSize);
+			int32_t newCapacity = _CapacityFor(newSize);
 			void* newBuffer = realloc(fBuffer, newCapacity);
 			if (!newBuffer)
 				return B_NO_MEMORY;
@@ -1010,8 +1010,8 @@ KMessage::_AllocateSpace(int32 size, bool alignAddress, bool alignSize,
 }
 
 
-int32
-KMessage::_CapacityFor(int32 size)
+int32_t
+KMessage::_CapacityFor(int32_t size)
 {
 	return (size + kMessageReallocChunkSize - 1) / kMessageReallocChunkSize
 		* kMessageReallocChunkSize;
@@ -1068,7 +1068,7 @@ KMessageField::HasFixedElementSize() const
 }
 
 
-int32
+int32_t
 KMessageField::ElementSize() const
 {
 	KMessage::FieldHeader* header = _Header();
@@ -1077,7 +1077,7 @@ KMessageField::ElementSize() const
 
 
 status_t
-KMessageField::AddElement(const void* data, int32 size)
+KMessageField::AddElement(const void* data, int32_t size)
 {
 	KMessage::FieldHeader* header = _Header();
 	if (!header || !data)
@@ -1092,7 +1092,7 @@ KMessageField::AddElement(const void* data, int32 size)
 
 
 status_t
-KMessageField::AddElements(const void* data, int32 count, int32 elementSize)
+KMessageField::AddElements(const void* data, int32_t count, int32_t elementSize)
 {
 	KMessage::FieldHeader* header = _Header();
 	if (!header || !data || count < 0)
@@ -1107,14 +1107,14 @@ KMessageField::AddElements(const void* data, int32 count, int32 elementSize)
 
 
 const void*
-KMessageField::ElementAt(int32 index, int32* size) const
+KMessageField::ElementAt(int32_t index, int32_t* size) const
 {
 	KMessage::FieldHeader* header = _Header();
 	return header ? header->ElementAt(index, size) : NULL;
 }
 
 
-int32
+int32_t
 KMessageField::CountElements() const
 {
 	KMessage::FieldHeader* header = _Header();
@@ -1123,7 +1123,7 @@ KMessageField::CountElements() const
 
 
 void
-KMessageField::SetTo(KMessage* message, int32 headerOffset)
+KMessageField::SetTo(KMessage* message, int32_t headerOffset)
 {
 	fMessage = message;
 	fHeaderOffset = headerOffset;

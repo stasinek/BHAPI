@@ -81,7 +81,7 @@ extern "C" int kgets(char* buffer, int length);
 
 void call_modules_hook(bool enter);
 
-static void syslog_write(const char* text, int32 length, bool notify);
+static void syslog_write(const char* text, int32_t length, bool notify);
 
 static arch_debug_registers sDebugRegisters[SMP_MAX_CPUS];
 
@@ -95,7 +95,7 @@ static bool sDebugScreenEnabled = false;
 static bool sBlueScreenOutput = true;
 static bool sEmergencyKeysEnabled = true;
 static spinlock sSpinlock = B_SPINLOCK_INITIALIZER;
-static int32 sDebuggerOnCPU = -1;
+static int32_t sDebuggerOnCPU = -1;
 
 static sem_id sSyslogNotify = -1;
 static thread_id sSyslogWriter = -1;
@@ -131,25 +131,25 @@ static void check_pending_repeats(void* data, int iter);
 
 static int64 sMessageRepeatFirstTime = 0;
 static int64 sMessageRepeatLastTime = 0;
-static int32 sMessageRepeatCount = 0;
+static int32_t sMessageRepeatCount = 0;
 
 static debugger_module_info* sDebuggerModules[8];
-static const uint32 kMaxDebuggerModules = sizeof(sDebuggerModules)
+static const uint32_t kMaxDebuggerModules = sizeof(sDebuggerModules)
 	/ sizeof(sDebuggerModules[0]);
 
 #define LINE_BUFFER_SIZE 1024
 #define HISTORY_SIZE 16
 
 static char sLineBuffer[HISTORY_SIZE][LINE_BUFFER_SIZE] = { "", };
-static int32 sCurrentLine = 0;
+static int32_t sCurrentLine = 0;
 
 static debugger_demangle_module_info* sDemangleModule;
 
 static Thread* sDebuggedThread;
-static int32 sInDebugger = 0;
+static int32_t sInDebugger = 0;
 static bool sPreviousDprintfState;
 static volatile bool sHandOverKDL = false;
-static int32 sHandOverKDLToCPU = -1;
+static int32_t sHandOverKDLToCPU = -1;
 static bool sCPUTrapped[SMP_MAX_CPUS];
 
 
@@ -193,7 +193,7 @@ DefaultDebugOutputFilter::PrintString(const char* string)
 	if (sBlueScreenEnabled || sDebugScreenEnabled)
 		blue_screen_puts(string);
 
-	for (uint32 i = 0; sSerialDebugEnabled && i < kMaxDebuggerModules; i++) {
+	for (uint32_t i = 0; sSerialDebugEnabled && i < kMaxDebuggerModules; i++) {
 		if (sDebuggerModules[i] && sDebuggerModules[i]->debugger_puts)
 			sDebuggerModules[i]->debugger_puts(string, length);
 	}
@@ -228,7 +228,7 @@ kputchar(char c)
 		arch_debug_serial_putchar(c);
 	if (sBlueScreenEnabled || sDebugScreenEnabled)
 		blue_screen_putchar(c);
-	for (uint32 i = 0; sSerialDebugEnabled && i < kMaxDebuggerModules; i++)
+	for (uint32_t i = 0; sSerialDebugEnabled && i < kMaxDebuggerModules; i++)
 		if (sDebuggerModules[i] && sDebuggerModules[i]->debugger_puts)
 			sDebuggerModules[i]->debugger_puts(&c, sizeof(c));
 }
@@ -250,8 +250,8 @@ kputs_unfiltered(const char* s)
 
 
 static void
-insert_chars_into_line(char* buffer, int32& position, int32& length,
-	const char* chars, int32 charCount)
+insert_chars_into_line(char* buffer, int32_t& position, int32_t& length,
+	const char* chars, int32_t charCount)
 {
 	// move the following chars to make room for the ones to insert
 	if (position < length) {
@@ -261,7 +261,7 @@ insert_chars_into_line(char* buffer, int32& position, int32& length,
 
 	// insert chars
 	memcpy(buffer + position, chars, charCount);
-	int32 oldPosition = position;
+	int32_t oldPosition = position;
 	position += charCount;
 	length += charCount;
 
@@ -276,14 +276,14 @@ insert_chars_into_line(char* buffer, int32& position, int32& length,
 
 
 static void
-insert_char_into_line(char* buffer, int32& position, int32& length, char c)
+insert_char_into_line(char* buffer, int32_t& position, int32_t& length, char c)
 {
 	insert_chars_into_line(buffer, position, length, &c, 1);
 }
 
 
 static void
-remove_char_from_line(char* buffer, int32& position, int32& length)
+remove_char_from_line(char* buffer, int32_t& position, int32_t& length)
 {
 	if (position == length)
 		return;
@@ -295,7 +295,7 @@ remove_char_from_line(char* buffer, int32& position, int32& length)
 		memmove(buffer + position, buffer + position + 1, length - position);
 
 		// print the rest of the line again, if necessary
-		for (int32 i = position; i < length; i++)
+		for (int32_t i = position; i < length; i++)
 			kputchar(buffer[i]);
 	}
 
@@ -311,8 +311,8 @@ class LineEditingHelper {
 public:
 	virtual	~LineEditingHelper() {}
 
-	virtual	void TabCompletion(char* buffer, int32 capacity, int32& position,
-		int32& length) = 0;
+	virtual	void TabCompletion(char* buffer, int32_t capacity, int32_t& position,
+		int32_t& length) = 0;
 };
 
 
@@ -324,8 +324,8 @@ public:
 
 	virtual	~CommandLineEditingHelper() {}
 
-	virtual	void TabCompletion(char* buffer, int32 capacity, int32& position,
-		int32& length)
+	virtual	void TabCompletion(char* buffer, int32_t capacity, int32_t& position,
+		int32_t& length)
 	{
 		// find the first space
 		char tmpChar = buffer[position];
@@ -360,15 +360,15 @@ public:
 			// a partial command -- look for completions
 
 			// check for possible completions
-			int32 count = 0;
-			int32 longestName = 0;
+			int32_t count = 0;
+			int32_t longestName = 0;
 			debugger_command* command = NULL;
-			int32 longestCommonPrefix = 0;
+			int32_t longestCommonPrefix = 0;
 			const char* previousCommandName = NULL;
 			while ((command = next_debugger_command(command, buffer, position))
 					!= NULL) {
 				count++;
-				int32 nameLength = strlen(command->name);
+				int32_t nameLength = strlen(command->name);
 				longestName = max_c(longestName, nameLength);
 
 				// updated the length of the longest common prefix of the
@@ -379,7 +379,7 @@ public:
 					longestCommonPrefix = min_c(longestCommonPrefix,
 						nameLength);
 
-					for (int32 i = position; i < longestCommonPrefix; i++) {
+					for (int32_t i = position; i < longestCommonPrefix; i++) {
 						if (previousCommandName[i] != command->name[i]) {
 							longestCommonPrefix = i;
 							break;
@@ -399,7 +399,7 @@ public:
 				command = next_debugger_command(NULL, buffer, position);
 
 				// check for sufficient space in the buffer
-				int32 neededSpace = longestName - position + 1;
+				int32_t neededSpace = longestName - position + 1;
 					// remainder of the name plus one space
 				// also consider the terminating null char
 				if (length + neededSpace + 1 >= capacity)
@@ -413,7 +413,7 @@ public:
 				// -- insert the remainder of the common prefix
 
 				// check for sufficient space in the buffer
-				int32 neededSpace = longestCommonPrefix - position;
+				int32_t neededSpace = longestCommonPrefix - position;
 				// also consider the terminating null char
 				if (length + neededSpace + 1 >= capacity)
 					return;
@@ -453,12 +453,12 @@ public:
 
 
 static int
-read_line(char* buffer, int32 maxLength,
+read_line(char* buffer, int32_t maxLength,
 	LineEditingHelper* editingHelper = NULL)
 {
-	int32 currentHistoryLine = sCurrentLine;
-	int32 position = 0;
-	int32 length = 0;
+	int32_t currentHistoryLine = sCurrentLine;
+	int32_t position = 0;
+	int32_t length = 0;
 	bool done = false;
 	char c = 0;
 
@@ -491,7 +491,7 @@ read_line(char* buffer, int32 maxLength,
 			case 0x1f & 'K':	// CTRL-K -- clear line after current position
 				if (position < length) {
 					// clear chars
-					for (int32 i = position; i < length; i++)
+					for (int32_t i = position; i < length; i++)
 						kputchar(' ');
 
 					// reposition cursor
@@ -545,7 +545,7 @@ read_line(char* buffer, int32 maxLength,
 					case 'A': // up arrow
 					case 'B': // down arrow
 					{
-						int32 historyLine = 0;
+						int32_t historyLine = 0;
 
 						if (c == 'A') {
 							// up arrow
@@ -588,10 +588,10 @@ read_line(char* buffer, int32 maxLength,
 							break;
 
 						// PAGE UP: search backward, PAGE DOWN: forward
-						int32 searchDirection = (c == '5' ? -1 : 1);
+						int32_t searchDirection = (c == '5' ? -1 : 1);
 
 						bool found = false;
-						int32 historyLine = currentHistoryLine;
+						int32_t historyLine = currentHistoryLine;
 						do {
 							historyLine = (historyLine + searchDirection
 								+ HISTORY_SIZE) % HISTORY_SIZE;
@@ -702,7 +702,7 @@ kgetc(void)
 		}
 
 		// give the kernel debugger modules a chance
-		for (uint32 i = 0; i < kMaxDebuggerModules; i++) {
+		for (uint32_t i = 0; i < kMaxDebuggerModules; i++) {
 			if (sDebuggerModules[i] && sDebuggerModules[i]->debugger_getchar) {
 				int getChar = sDebuggerModules[i]->debugger_getchar();
 				if (getChar >= 0)
@@ -810,7 +810,7 @@ stack_trace_trampoline(void*)
 
 static void
 kernel_debugger_loop(const char* messagePrefix, const char* message,
-	va_list args, int32 cpu)
+	va_list args, int32_t cpu)
 {
 	DebugAllocPool* allocPool = create_debug_alloc_pool();
 
@@ -887,7 +887,7 @@ kernel_debugger_loop(const char* messagePrefix, const char* message,
 		blue_screen_set_paging(pagingEnabled);
 	}
 
-	int32 continuableLine = -1;
+	int32_t continuableLine = -1;
 		// Index of the previous command line, if the command returned
 		// B_KDEBUG_CONT, i.e. asked to be repeatable, -1 otherwise.
 
@@ -944,7 +944,7 @@ kernel_debugger_loop(const char* messagePrefix, const char* message,
 
 
 static void
-enter_kernel_debugger(int32 cpu)
+enter_kernel_debugger(int32_t cpu)
 {
 	while (atomic_add(&sInDebugger, 1) > 0) {
 		atomic_add(&sInDebugger, -1);
@@ -1021,7 +1021,7 @@ hand_over_kernel_debugger()
 
 static void
 kernel_debugger_internal(const char* messagePrefix, const char* message,
-	va_list args, int32 cpu)
+	va_list args, int32_t cpu)
 {
 	while (true) {
 		if (sHandOverKDLToCPU == cpu) {
@@ -1031,7 +1031,7 @@ kernel_debugger_internal(const char* messagePrefix, const char* message,
 			enter_kernel_debugger(cpu);
 
 		// If we're called recursively sDebuggerOnCPU will be != -1.
-		int32 previousCPU = sDebuggerOnCPU;
+		int32_t previousCPU = sDebuggerOnCPU;
 		sDebuggerOnCPU = cpu;
 
 		kernel_debugger_loop(messagePrefix, message, args, cpu);
@@ -1170,7 +1170,7 @@ cmd_switch_cpu(int argc, char** argv)
 		return 0;
 	}
 
-	int32 newCPU = parse_expression(argv[1]);
+	int32_t newCPU = parse_expression(argv[1]);
 	if (newCPU < 0 || newCPU >= smp_get_num_cpus()) {
 		kprintf("invalid CPU index\n");
 		return 0;
@@ -1191,7 +1191,7 @@ static status_t
 syslog_sender(void* data)
 {
 	bool bufferPending = false;
-	int32 length = 0;
+	int32_t length = 0;
 
 	while (true) {
 		// wait for syslog data to become available
@@ -1215,7 +1215,7 @@ syslog_sender(void* data)
 
 			length = ring_buffer_readable(sSyslogBuffer)
 				- sSyslogBufferOffset;
-			if (length > (int32)SYSLOG_MAX_MESSAGE_LENGTH)
+			if (length > (int32_t)SYSLOG_MAX_MESSAGE_LENGTH)
 				length = SYSLOG_MAX_MESSAGE_LENGTH;
 
 			length = ring_buffer_peek(sSyslogBuffer, sSyslogBufferOffset,
@@ -1266,7 +1266,7 @@ syslog_sender(void* data)
 
 
 static void
-syslog_write(const char* text, int32 length, bool notify)
+syslog_write(const char* text, int32_t length, bool notify)
 {
 	if (sSyslogBuffer == NULL)
 		return;
@@ -1276,7 +1276,7 @@ syslog_write(const char* text, int32 length, bool notify)
 		length = 6;
 	}
 
-	int32 writable = ring_buffer_writable(sSyslogBuffer);
+	int32_t writable = ring_buffer_writable(sSyslogBuffer);
 	if (writable < length) {
 		// drop old data
 		size_t toDrop = length - writable;
@@ -1332,7 +1332,7 @@ static status_t
 syslog_init_post_vm(struct kernel_args* args)
 {
 	status_t status;
-	int32 length = 0;
+	int32_t length = 0;
 
 	if (!sSyslogOutputEnabled) {
 		sSyslogBuffer = NULL;
@@ -1410,7 +1410,7 @@ syslog_init_post_vm(struct kernel_args* args)
 		"Welcome to syslog debug output!\nHaiku revision: %s\n",
 		get_haiku_revision());
 	syslog_write(revisionBuffer,
-		std::min(length, (int32)sizeof(revisionBuffer) - 1), false);
+		std::min(length, (int32_t)sizeof(revisionBuffer) - 1), false);
 
 	add_debugger_command_etc("syslog", &cmd_dump_syslog,
 		"Dumps the syslog buffer.",
@@ -1486,7 +1486,7 @@ debug_strlcpy_trampoline(void* _parameters)
 void
 call_modules_hook(bool enter)
 {
-	uint32 index = 0;
+	uint32_t index = 0;
 	while (index < kMaxDebuggerModules && sDebuggerModules[index] != NULL) {
 		debugger_module_info* module = sDebuggerModules[index];
 
@@ -1502,7 +1502,7 @@ call_modules_hook(bool enter)
 
 //!	Must be called with the sSpinlock held.
 static void
-debug_output(const char* string, int32 length, bool notifySyslog)
+debug_output(const char* string, int32_t length, bool notifySyslog)
 {
 	if (length >= OUTPUT_BUFFER_SIZE)
 		length = OUTPUT_BUFFER_SIZE - 1;
@@ -1523,7 +1523,7 @@ debug_output(const char* string, int32 length, bool notifySyslog)
 		if (sBlueScreenEnabled || sDebugScreenEnabled)
 			blue_screen_puts(string);
 		if (sSerialDebugEnabled) {
-			for (uint32 i = 0; i < kMaxDebuggerModules; i++) {
+			for (uint32_t i = 0; i < kMaxDebuggerModules; i++) {
 				if (sDebuggerModules[i] && sDebuggerModules[i]->debugger_puts)
 					sDebuggerModules[i]->debugger_puts(string, length);
 			}
@@ -1555,7 +1555,7 @@ flush_pending_repeats(bool notifySyslog)
 		if (sBlueScreenEnabled || sDebugScreenEnabled)
 			blue_screen_puts(temp);
 		if (sSerialDebugEnabled) {
-			for (uint32 i = 0; i < kMaxDebuggerModules; i++) {
+			for (uint32_t i = 0; i < kMaxDebuggerModules; i++) {
 				if (sDebuggerModules[i] && sDebuggerModules[i]->debugger_puts)
 					sDebuggerModules[i]->debugger_puts(temp, length);
 			}
@@ -1571,7 +1571,7 @@ flush_pending_repeats(bool notifySyslog)
 		if (sBlueScreenEnabled || sDebugScreenEnabled)
 			blue_screen_puts(sLastOutputBuffer);
 		if (sSerialDebugEnabled) {
-			for (uint32 i = 0; i < kMaxDebuggerModules; i++) {
+			for (uint32_t i = 0; i < kMaxDebuggerModules; i++) {
 				if (sDebuggerModules[i] && sDebuggerModules[i]->debugger_puts) {
 					sDebuggerModules[i]->debugger_puts(sLastOutputBuffer,
 						length);
@@ -1608,18 +1608,18 @@ dprintf_args(const char* format, va_list args, bool notifySyslog)
 	if (are_interrupts_enabled()) {
 		MutexLocker locker(sOutputLock);
 
-		int32 length = vsnprintf(sOutputBuffer, OUTPUT_BUFFER_SIZE, format,
+		int32_t length = vsnprintf(sOutputBuffer, OUTPUT_BUFFER_SIZE, format,
 			args);
-		length = std::min(length, (int32)OUTPUT_BUFFER_SIZE - 1);
+		length = std::min(length, (int32_t)OUTPUT_BUFFER_SIZE - 1);
 
 		InterruptsSpinLocker _(sSpinlock);
 		debug_output(sOutputBuffer, length, notifySyslog);
 	} else {
 		InterruptsSpinLocker _(sSpinlock);
 
-		int32 length = vsnprintf(sInterruptOutputBuffer, OUTPUT_BUFFER_SIZE,
+		int32_t length = vsnprintf(sInterruptOutputBuffer, OUTPUT_BUFFER_SIZE,
 			format, args);
-		length = std::min(length, (int32)OUTPUT_BUFFER_SIZE - 1);
+		length = std::min(length, (int32_t)OUTPUT_BUFFER_SIZE - 1);
 
 		debug_output(sInterruptOutputBuffer, length, notifySyslog);
 	}
@@ -1651,7 +1651,7 @@ debug_debugger_running(void)
 
 
 void
-debug_puts(const char* string, int32 length)
+debug_puts(const char* string, int32_t length)
 {
 	InterruptsSpinLocker _(sSpinlock);
 	debug_output(string, length, true);
@@ -1746,7 +1746,7 @@ debug_init_post_modules(struct kernel_args* args)
 	static const char* kDemanglePrefix = "debugger/demangle/";
 
 	void* cookie = open_module_list("debugger");
-	uint32 count = 0;
+	uint32_t count = 0;
 	while (count < kMaxDebuggerModules) {
 		char name[B_FILE_NAME_LENGTH];
 		size_t nameLength = sizeof(name);
@@ -1774,7 +1774,7 @@ debug_init_post_modules(struct kernel_args* args)
 
 
 void
-debug_set_page_fault_info(addr_t faultAddress, addr_t pc, uint32 flags)
+debug_set_page_fault_info(addr_t faultAddress, addr_t pc, uint32_t flags)
 {
 	sPageFaultInfo.fault_address = faultAddress;
 	sPageFaultInfo.pc = pc;
@@ -1790,7 +1790,7 @@ debug_get_page_fault_info()
 
 
 void
-debug_trap_cpu_in_kdl(int32 cpu, bool returnIfHandedOver)
+debug_trap_cpu_in_kdl(int32_t cpu, bool returnIfHandedOver)
 {
 	InterruptsLocker locker;
 
@@ -1819,7 +1819,7 @@ debug_trap_cpu_in_kdl(int32 cpu, bool returnIfHandedOver)
 
 
 void
-debug_double_fault(int32 cpu)
+debug_double_fault(int32_t cpu)
 {
 	kernel_debugger_internal("Double Fault!", NULL,
 		sCurrentKernelDebuggerMessageArgs, cpu);
@@ -1839,7 +1839,7 @@ debug_emergency_key_pressed(char key)
 
 	// Broadcast to the kernel debugger modules
 
-	for (uint32 i = 0; i < kMaxDebuggerModules; i++) {
+	for (uint32_t i = 0; i < kMaxDebuggerModules; i++) {
 		if (sDebuggerModules[i] && sDebuggerModules[i]->emergency_key_pressed) {
 			if (sDebuggerModules[i]->emergency_key_pressed(key))
 				return true;
@@ -1864,7 +1864,7 @@ debug_emergency_key_pressed(char key)
 */
 bool
 debug_is_kernel_memory_accessible(addr_t address, size_t size,
-	uint32 protection)
+	uint32_t protection)
 {
 	addr_t endAddress = ROUNDUP(address + size, B_PAGE_SIZE);
 	address = ROUNDDOWN(address, B_PAGE_SIZE);
@@ -2198,8 +2198,8 @@ debug_demangle_symbol(const char* symbol, char* buffer, size_t bufferSize,
 
 
 status_t
-debug_get_next_demangled_argument(uint32* _cookie, const char* symbol,
-	char* name, size_t nameSize, int32* _type, size_t* _argumentLength)
+debug_get_next_demangled_argument(uint32_t* _cookie, const char* symbol,
+	char* name, size_t nameSize, int32_t* _type, size_t* _argumentLength)
 {
 	if (sDemangleModule != NULL && sDemangleModule->get_next_argument != NULL) {
 		return sDemangleModule->get_next_argument(_cookie, symbol, name,
@@ -2211,7 +2211,7 @@ debug_get_next_demangled_argument(uint32* _cookie, const char* symbol,
 
 
 struct arch_debug_registers*
-debug_get_debug_registers(int32 cpu)
+debug_get_debug_registers(int32_t cpu)
 {
 	if (cpu < 0 || cpu > smp_get_num_cpus())
 		return NULL;
@@ -2304,13 +2304,13 @@ _user_debug_output(const char* userString)
 		return;
 
 	char string[512];
-	int32 length;
-	int32 toWrite;
+	int32_t length;
+	int32_t toWrite;
 	do {
 		length = user_strlcpy(string, userString, sizeof(string));
 		if (length <= 0)
 			break;
-		toWrite = std::min(length, (int32)sizeof(string) - 1);
+		toWrite = std::min(length, (int32_t)sizeof(string) - 1);
 		debug_puts(string, toWrite);
 		userString += toWrite;
 	} while (length > toWrite);

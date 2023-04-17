@@ -13,13 +13,13 @@
 extern "C" {
 #endif
 
-void _user_atomic_set(int32 *value, int32 newValue);
-int32 _user_atomic_get_and_set(int32 *value, int32 newValue);
-int32 _user_atomic_test_and_set(int32 *value, int32 newValue, int32 testAgainst);
-int32 _user_atomic_add(int32 *value, int32 addValue);
-int32 _user_atomic_and(int32 *value, int32 andValue);
-int32 _user_atomic_or(int32 *value, int32 orValue);
-int32 _user_atomic_get(int32 *value);
+void _user_atomic_set(int32_t *value, int32_t newValue);
+int32_t _user_atomic_get_and_set(int32_t *value, int32_t newValue);
+int32_t _user_atomic_test_and_set(int32_t *value, int32_t newValue, int32_t testAgainst);
+int32_t _user_atomic_add(int32_t *value, int32_t addValue);
+int32_t _user_atomic_and(int32_t *value, int32_t andValue);
+int32_t _user_atomic_or(int32_t *value, int32_t orValue);
+int32_t _user_atomic_get(int32_t *value);
 
 void _user_atomic_set64(int64 *value, int64 newValue);
 int64 _user_atomic_get_and_set64(int64 *value, int64 newValue);

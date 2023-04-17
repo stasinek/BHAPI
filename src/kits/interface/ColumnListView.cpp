@@ -133,7 +133,7 @@ static const float kTitleSpacing = 1.4;
 static const float kRowSpacing = 1.4;
 static const float kLatchWidth = 15.0;
 
-static const int32 kMaxDepth = 1024;
+static const int32_t kMaxDepth = 1024;
 static const float kLeftMargin = kLatchWidth;
 static const float kRightMargin = 8;
 static const float kOutlineLevelIndent = kLatchWidth;
@@ -143,7 +143,7 @@ static const float kDoubleClickMoveSensitivity = 4.0;
 static const float kSortIndicatorWidth = 9.0;
 static const float kDropHighlightLineHeight = 2.0;
 
-static const uint32 kToggleColumn = 'BTCL';
+static const uint32_t kToggleColumn = 'BTCL';
 
 class BRowContainer : public BObjectList<BRow>
 {
@@ -155,7 +155,7 @@ public:
 								TitleView(BRect frame, OutlineView* outlineView,
 									BList* visibleColumns, BList* sortColumns,
 									BColumnListView* masterView,
-									uint32 resizingMode);
+									uint32_t resizingMode);
 	virtual						~TitleView();
 
 			void				ColumnAdded(BColumn* column);
@@ -166,12 +166,12 @@ public:
 	virtual	void				ScrollTo(BPoint where);
 	virtual	void				MessageReceived(BMessage* message);
 	virtual	void				MouseDown(BPoint where);
-	virtual	void				MouseMoved(BPoint where, uint32 transit,
+	virtual	void				MouseMoved(BPoint where, uint32_t transit,
 									const BMessage* dragMessage);
 	virtual	void				MouseUp(BPoint where);
 	virtual	void				FrameResized(float width, float height);
 
-			void				MoveColumn(BColumn* column, int32 index);
+			void				MoveColumn(BColumn* column, int32_t index);
 			void				SetColumnFlags(column_flags flags);
 
 			void				SetEditMode(bool state)
@@ -181,7 +181,7 @@ public:
 
 private:
 			void				GetTitleRect(BColumn* column, BRect* _rect);
-			int32				FindColumn(BPoint where, float* _leftEdge);
+			int32_t				FindColumn(BPoint where, float* _leftEdge);
 			void				FixScrollBar(bool scrollToFit);
 			void				DragSelectedColumn(BPoint where);
 			void				ResizeSelectedColumn(BPoint where,
@@ -215,7 +215,7 @@ private:
 			BPopUpMenu*			fColumnPop;
 			BColumnListView*	fMasterView;
 			bool				fEditMode;
-			int32				fColumnFlags;
+			int32_t				fColumnFlags;
 
 	// State information for resizing/dragging
 			BColumn*			fSelectedColumn;
@@ -253,7 +253,7 @@ public:
 			void 				StartSorting();
 			float				GetColumnPreferredWidth(BColumn* column);
 
-			void				AddRow(BRow*, int32 index, BRow* TheRow);
+			void				AddRow(BRow*, int32_t index, BRow* TheRow);
 			BRow*				CurrentSelection(BRow* lastSelected) const;
 			void 				ToggleFocusRowSelection(bool selectRange);
 			void 				ToggleFocusRowOpen();
@@ -266,13 +266,13 @@ public:
 			void				UpdateRow(BRow*);
 			bool				FindParent(BRow* row, BRow** _parent,
 									bool* _isVisible);
-			int32				IndexOf(BRow* row);
+			int32_t				IndexOf(BRow* row);
 			void				Deselect(BRow*);
 			void				AddToSelection(BRow*);
 			void				DeselectAll();
 			BRow*				FocusRow() const;
 			void				SetFocusRow(BRow* row, bool select);
-			BRow*				FindRow(float ypos, int32* _indent,
+			BRow*				FindRow(float ypos, int32_t* _indent,
 									float* _top);
 			bool				FindRect(const BRow* row, BRect* _rect);
 			void				ScrollTo(const BRow* row);
@@ -288,17 +288,17 @@ public:
 	virtual void				FrameResized(float width, float height);
 	virtual void				ScrollTo(BPoint where);
 	virtual void				MouseDown(BPoint where);
-	virtual void				MouseMoved(BPoint where, uint32 transit,
+	virtual void				MouseMoved(BPoint where, uint32_t transit,
 									const BMessage* dragMessage);
 	virtual void				MouseUp(BPoint where);
 	virtual void				MessageReceived(BMessage* message);
 
 private:
 			bool				SortList(BRowContainer* list, bool isVisible);
-	static	int32				DeepSortThreadEntry(void* outlineView);
+	static	int32_t				DeepSortThreadEntry(void* outlineView);
 			void				DeepSort();
 			void				SelectRange(BRow* start, BRow* end);
-			int32				CompareRows(BRow* row1, BRow* row2);
+			int32_t				CompareRows(BRow* row1, BRow* row2);
 			void				AddSorted(BRowContainer* list, BRow* row);
 			void				RecursiveDeleteRows(BRowContainer* list,
 									bool owner);
@@ -325,7 +325,7 @@ private:
 			BRow*				fFirstSelectedItem;
 
 			thread_id			fSortThread;
-			int32				fNumSorted;
+			int32_t				fNumSorted;
 			bool				fSortCancelled;
 
 			enum CurrentState {
@@ -346,13 +346,13 @@ private:
 			BColumn*			fCurrentColumn;
 			bool				fMouseDown;
 			BRect				fFieldRect;
-			int32				fCurrentCode;
+			int32_t				fCurrentCode;
 			bool				fEditMode;
 
 	// State information for mouse/keyboard interaction
 			BPoint				fClickPoint;
 			bool				fDragging;
-			int32				fClickCount;
+			int32_t				fClickCount;
 			BRow*				fTargetRow;
 			float				fTargetRowTop;
 			BRect				fLatchRect;
@@ -369,20 +369,20 @@ public:
 									bool openBranchesOnly = true);
 
 			BRow*				CurrentRow() const;
-			int32				CurrentLevel() const;
+			int32_t				CurrentLevel() const;
 			void				GoToNext();
 
 private:
 			struct {
 				BRowContainer* fRowSet;
-				int32 fIndex;
-				int32 fDepth;
+				int32_t fIndex;
+				int32_t fDepth;
 			}					fStack[kMaxDepth];
 
-			int32				fStackIndex;
+			int32_t				fStackIndex;
 			BRowContainer*		fCurrentList;
-			int32				fCurrentListIndex;
-			int32				fCurrentListDepth;
+			int32_t				fCurrentListIndex;
+			int32_t				fCurrentListDepth;
 			bool				fOpenBranchesOnly;
 };
 
@@ -407,14 +407,14 @@ BField::~BField()
 
 void BColumn::MouseMoved(BColumnListView* /*parent*/, BRow* /*row*/,
 	BField* /*field*/, BRect /*field_rect*/, BPoint/*point*/,
-	uint32 /*buttons*/, int32 /*code*/)
+	uint32_t /*buttons*/, int32_t /*code*/)
 {
 }
 
 
 void BColumn::MouseDown(BColumnListView* /*parent*/, BRow* /*row*/,
 	BField* /*field*/, BRect /*field_rect*/, BPoint /*point*/,
-	uint32 /*buttons*/)
+	uint32_t /*buttons*/)
 {
 }
 
@@ -457,7 +457,7 @@ BRow::BRow(float height)
 BRow::~BRow()
 {
 	while (true) {
-		BField* field = (BField*) fFields.RemoveItem((int32)0);
+		BField* field = (BField*) fFields.RemoveItem((int32_t)0);
 		if (field == 0)
 			break;
 
@@ -472,27 +472,27 @@ bool BRow::HasLatch() const
 }
 
 
-int32 BRow::CountFields() const
+int32_t BRow::CountFields() const
 {
 	return fFields.CountItems();
 }
 
 
 BField*
-BRow::GetField(int32 index)
+BRow::GetField(int32_t index)
 {
 	return (BField*)fFields.ItemAt(index);
 }
 
 
 const BField*
-BRow::GetField(int32 index) const
+BRow::GetField(int32_t index) const
 {
 	return (const BField*)fFields.ItemAt(index);
 }
 
 
-void BRow::SetField(BField* field, int32 logicalFieldIndex)
+void BRow::SetField(BField* field, int32_t logicalFieldIndex)
 {
 	if (fFields.ItemAt(logicalFieldIndex) != 0)
 		delete (BField*)fFields.RemoveItem(logicalFieldIndex);
@@ -534,19 +534,19 @@ void BRow::Invalidate()
 
 void BRow::ValidateFields() const
 {
-	for (int32 i = 0; i < CountFields(); i++)
+	for (int32_t i = 0; i < CountFields(); i++)
 		ValidateField(GetField(i), i);
 }
 
 
-void BRow::ValidateField(const BField* field, int32 logicalFieldIndex) const
+void BRow::ValidateField(const BField* field, int32_t logicalFieldIndex) const
 {
 	// The Fields may be moved by the user, but the logicalFieldIndexes
 	// do not change, so we need to map them over when checking the
 	// Field types.
 	BColumn* column = NULL;
-	int32 items = fList->CountColumns();
-	for (int32 i = 0 ; i < items; ++i) {
+	int32_t items = fList->CountColumns();
+	for (int32_t i = 0 ; i < items; ++i) {
 		column = fList->ColumnAt(i);
 		if(column->LogicalFieldNum() == logicalFieldIndex )
 			break;
@@ -697,7 +697,7 @@ void BColumn::SetWantsEvents(bool state)
 }
 
 
-int32 BColumn::LogicalFieldNum() const
+int32_t BColumn::LogicalFieldNum() const
 {
 	return fFieldID;
 }
@@ -713,7 +713,7 @@ bool BColumn::AcceptsField(const BField*) const
 
 
 BColumnListView::BColumnListView(BRect rect, const char* name,
-	uint32 resizingMode, uint32 flags, border_style border,
+	uint32_t resizingMode, uint32_t flags, border_style border,
 	bool showHorizontalScrollbar)
 	:
 	BView(rect, name, resizingMode,
@@ -729,7 +729,7 @@ BColumnListView::BColumnListView(BRect rect, const char* name,
 }
 
 
-BColumnListView::BColumnListView(const char* name, uint32 flags,
+BColumnListView::BColumnListView(const char* name, uint32_t flags,
 	border_style border, bool showHorizontalScrollbar)
 	:
 	BView(name, flags | B_WILL_DRAW | B_FRAME_EVENTS | B_FULL_UPDATE_ON_RESIZE),
@@ -746,7 +746,7 @@ BColumnListView::BColumnListView(const char* name, uint32 flags,
 
 BColumnListView::~BColumnListView()
 {
-	while (BColumn* column = (BColumn*)fColumns.RemoveItem((int32)0))
+	while (BColumn* column = (BColumn*)fColumns.RemoveItem((int32_t)0))
 		delete column;
 }
 
@@ -795,7 +795,7 @@ BMessage*  BColumnListView::InvocationMessage() const
 }
 
 
-uint32 BColumnListView::InvocationCommand() const
+uint32_t BColumnListView::InvocationCommand() const
 {
 	return Command();
 }
@@ -808,7 +808,7 @@ BColumnListView::FocusRow() const
 }
 
 
-void BColumnListView::SetFocusRow(int32 Index, bool Select)
+void BColumnListView::SetFocusRow(int32_t Index, bool Select)
 {
 	SetFocusRow(RowAt(Index), Select);
 }
@@ -881,7 +881,7 @@ BMessage*  BColumnListView::SelectionMessage()
 }
 
 
-uint32 BColumnListView::SelectionCommand() const
+uint32_t BColumnListView::SelectionCommand() const
 {
 	if (fSelectionMessage)
 		return fSelectionMessage->what;
@@ -983,7 +983,7 @@ BColumnListView::RemoveStatusView()
 }
 
 
-void BColumnListView::AddColumn(BColumn* column, int32 logicalFieldIndex)
+void BColumnListView::AddColumn(BColumn* column, int32_t logicalFieldIndex)
 {
 	ASSERT(column != NULL);
 
@@ -991,7 +991,7 @@ void BColumnListView::AddColumn(BColumn* column, int32 logicalFieldIndex)
 	column->fFieldID = logicalFieldIndex;
 
 	// sanity check -- if there is already a field with this ID, remove it.
-	for (int32 index = 0; index < fColumns.CountItems(); index++) {
+	for (int32_t index = 0; index < fColumns.CountItems(); index++) {
 		BColumn* existingColumn = (BColumn*) fColumns.ItemAt(index);
 		if (existingColumn && existingColumn->fFieldID == logicalFieldIndex) {
 			RemoveColumn(existingColumn);
@@ -1009,7 +1009,7 @@ void BColumnListView::AddColumn(BColumn* column, int32 logicalFieldIndex)
 }
 
 
-void BColumnListView::MoveColumn(BColumn* column, int32 index)
+void BColumnListView::MoveColumn(BColumn* column, int32_t index)
 {
 	ASSERT(column != NULL);
 	fTitleView->MoveColumn(column, index);
@@ -1027,14 +1027,14 @@ void BColumnListView::RemoveColumn(BColumn* column)
 }
 
 
-int32 BColumnListView::CountColumns() const
+int32_t BColumnListView::CountColumns() const
 {
 	return fColumns.CountItems();
 }
 
 
 BColumn*
-BColumnListView::ColumnAt(int32 field) const
+BColumnListView::ColumnAt(int32_t field) const
 {
 	return (BColumn*) fColumns.ItemAt(field);
 }
@@ -1066,7 +1066,7 @@ void BColumnListView::SetColumnVisible(BColumn* column, bool visible)
 }
 
 
-void BColumnListView::SetColumnVisible(int32 index, bool isVisible)
+void BColumnListView::SetColumnVisible(int32_t index, bool isVisible)
 {
 	BColumn* column = ColumnAt(index);
 	if (column != NULL)
@@ -1074,7 +1074,7 @@ void BColumnListView::SetColumnVisible(int32 index, bool isVisible)
 }
 
 
-bool BColumnListView::IsColumnVisible(int32 index) const
+bool BColumnListView::IsColumnVisible(int32_t index) const
 {
 	BColumn* column = ColumnAt(index);
 	if (column != NULL)
@@ -1090,7 +1090,7 @@ void BColumnListView::SetColumnFlags(column_flags flags)
 }
 
 
-void BColumnListView::ResizeColumnToPreferred(int32 index)
+void BColumnListView::ResizeColumnToPreferred(int32_t index)
 {
 	BColumn* column = ColumnAt(index);
 	if (column == NULL)
@@ -1110,14 +1110,14 @@ void BColumnListView::ResizeColumnToPreferred(int32 index)
 
 void BColumnListView::ResizeAllColumnsToPreferred()
 {
-	int32 count = CountColumns();
-	for (int32 i = 0; i < count; i++)
+	int32_t count = CountColumns();
+	for (int32_t i = 0; i < count; i++)
 		ResizeColumnToPreferred(i);
 }
 
 
 const BRow*
-BColumnListView::RowAt(int32 Index, BRow* parentRow) const
+BColumnListView::RowAt(int32_t Index, BRow* parentRow) const
 {
 	if (parentRow == 0)
 		return fOutlineView->RowList()->ItemAt(Index);
@@ -1127,7 +1127,7 @@ BColumnListView::RowAt(int32 Index, BRow* parentRow) const
 
 
 BRow*
-BColumnListView::RowAt(int32 Index, BRow* parentRow)
+BColumnListView::RowAt(int32_t Index, BRow* parentRow)
 {
 	if (parentRow == 0)
 		return fOutlineView->RowList()->ItemAt(Index);
@@ -1140,7 +1140,7 @@ const BRow*
 BColumnListView::RowAt(BPoint point) const
 {
 	float top;
-	int32 indent;
+	int32_t indent;
 	return fOutlineView->FindRow(point.y, &indent, &top);
 }
 
@@ -1149,7 +1149,7 @@ BRow*
 BColumnListView::RowAt(BPoint point)
 {
 	float top;
-	int32 indent;
+	int32_t indent;
 	return fOutlineView->FindRow(point.y, &indent, &top);
 }
 
@@ -1166,13 +1166,13 @@ bool BColumnListView::FindParent(BRow* row, BRow** _parent, bool* _isVisible) co
 }
 
 
-int32 BColumnListView::IndexOf(BRow* row)
+int32_t BColumnListView::IndexOf(BRow* row)
 {
 	return fOutlineView->IndexOf(row);
 }
 
 
-int32 BColumnListView::CountRows(BRow* parentRow) const
+int32_t BColumnListView::CountRows(BRow* parentRow) const
 {
 	if (parentRow == 0)
 		return fOutlineView->RowList()->CountItems();
@@ -1189,7 +1189,7 @@ void BColumnListView::AddRow(BRow* row, BRow* parentRow)
 }
 
 
-void BColumnListView::AddRow(BRow* row, int32 index, BRow* parentRow)
+void BColumnListView::AddRow(BRow* row, int32_t index, BRow* parentRow)
 {
 	row->fChildList = 0;
 	row->fList = this;
@@ -1211,7 +1211,7 @@ void BColumnListView::UpdateRow(BRow* row)
 }
 
 
-bool BColumnListView::SwapRows(int32 index1, int32 index2, BRow* parentRow1,
+bool BColumnListView::SwapRows(int32_t index1, int32_t index2, BRow* parentRow1,
 	BRow* parentRow2)
 {
 	BRow* row1 = NULL;
@@ -1291,7 +1291,7 @@ void BColumnListView::InvalidateRow(BRow* row)
 
 
 // This method is deprecated.
-void BColumnListView::SetFont(const BFont* font, uint32 mask)
+void BColumnListView::SetFont(const BFont* font, uint32_t mask)
 {
 	fOutlineView->SetFont(font, mask);
 	fTitleView->SetFont(font, mask);
@@ -1299,7 +1299,7 @@ void BColumnListView::SetFont(const BFont* font, uint32 mask)
 
 
 void BColumnListView::SetFont(ColumnListViewFont font_num, const BFont* font,
-	uint32 mask)
+	uint32_t mask)
 {
 	switch (font_num) {
 		case B_FONT_ROW:
@@ -1474,17 +1474,17 @@ BColumnListView::LatchWidth() const
 
 void BColumnListView::DrawLatch(BView* view, BRect rect, LatchType position, BRow*)
 {
-	const int32 rectInset = 4;
+	const int32_t rectInset = 4;
 
 	// make square
-	int32 sideLen = rect.IntegerWidth();
+	int32_t sideLen = rect.IntegerWidth();
 	if (sideLen > rect.IntegerHeight())
 		sideLen = rect.IntegerHeight();
 
 	// make center
-	int32 halfWidth  = rect.IntegerWidth() / 2;
-	int32 halfHeight = rect.IntegerHeight() / 2;
-	int32 halfSide   = sideLen / 2;
+	int32_t halfWidth  = rect.IntegerWidth() / 2;
+	int32_t halfHeight = rect.IntegerHeight() / 2;
+	int32_t halfSide   = sideLen / 2;
 
 	float left = rect.left + halfWidth  - halfSide;
 	float top  = rect.top  + halfHeight - halfSide;
@@ -1585,7 +1585,7 @@ void BColumnListView::MessageReceived(BMessage* message)
 }
 
 
-void BColumnListView::KeyDown(const char* bytes, int32 numBytes)
+void BColumnListView::KeyDown(const char* bytes, int32_t numBytes)
 {
 	char c = bytes[0];
 	switch (c) {
@@ -1709,7 +1709,7 @@ void BColumnListView::Draw(BRect updateRect)
 {
 	BRect rect = Bounds();
 
-	uint32 flags = 0;
+	uint32_t flags = 0;
 	if (IsFocus() && Window()->IsActive())
 		flags |= BControlLook::B_FOCUSED;
 
@@ -1755,7 +1755,7 @@ void BColumnListView::SaveState(BMessage* message)
 {
 	message->MakeEmpty();
 
-	for (int32 i = 0; BColumn* column = (BColumn*)fColumns.ItemAt(i); i++) {
+	for (int32_t i = 0; BColumn* column = (BColumn*)fColumns.ItemAt(i); i++) {
 		message->AddInt32("ID", column->fFieldID);
 		message->AddFloat("width", column->fWidth);
 		message->AddBool("visible", column->fVisible);
@@ -1764,7 +1764,7 @@ void BColumnListView::SaveState(BMessage* message)
 	message->AddBool("sortingenabled", fSortingEnabled);
 
 	if (fSortingEnabled) {
-		for (int32 i = 0; BColumn* column = (BColumn*)fSortColumns.ItemAt(i);
+		for (int32_t i = 0; BColumn* column = (BColumn*)fSortColumns.ItemAt(i);
 				i++) {
 			message->AddInt32("sortID", column->fFieldID);
 			message->AddBool("sortascending", column->fSortAscending);
@@ -1775,7 +1775,7 @@ void BColumnListView::SaveState(BMessage* message)
 
 void BColumnListView::LoadState(BMessage* message)
 {
-	int32 id;
+	int32_t id;
 	for (int i = 0; message->FindInt32("ID", i, &id) == B_OK; i++) {
 		for (int j = 0; BColumn* column = (BColumn*)fColumns.ItemAt(j); j++) {
 			if (column->fFieldID == id) {
@@ -1850,7 +1850,7 @@ BColumnListView::PreferredSize()
 	size.height += ceilf(__be_plain_font->Size()) * 20;
 
 	// return MinSize().width if there are no columns.
-	int32 count = CountColumns();
+	int32_t count = CountColumns();
 	if (count > 0) {
 		BRect titleRect;
 		BRect outlineRect;
@@ -1865,7 +1865,7 @@ BColumnListView::PreferredSize()
 		// we also need to add the extra margin width that the TitleView
 		// uses to compute its _VirtualWidth() for the horizontal scroll bar.
 		size.width += fTitleView->MarginWidth();
-		for (int32 i = 0; i < count; i++) {
+		for (int32_t i = 0; i < count; i++) {
 			BColumn* column = ColumnAt(i);
 			if (column != NULL)
 				size.width += fOutlineView->GetColumnPreferredWidth(column);
@@ -2066,7 +2066,7 @@ void BColumnListView::_GetChildViewRects(const BRect& bounds, BRect& titleRect,
 
 TitleView::TitleView(BRect rect, OutlineView* horizontalSlave,
 	BList* visibleColumns, BList* sortColumns, BColumnListView* listView,
-	uint32 resizingMode)
+	uint32_t resizingMode)
 	:
 	BView(rect, "title_view", resizingMode, B_WILL_DRAW | B_FRAME_EVENTS),
 	fOutlineView(horizontalSlave),
@@ -2176,7 +2176,7 @@ void TitleView::SetColumnVisible(BColumn* column, bool visible)
 void TitleView::GetTitleRect(BColumn* findColumn, BRect* _rect)
 {
 	float leftEdge = MAX(kLeftMargin, fMasterView->LatchWidth());
-	int32 numColumns = fColumns->CountItems();
+	int32_t numColumns = fColumns->CountItems();
 	for (int index = 0; index < numColumns; index++) {
 		BColumn* column = (BColumn*) fColumns->ItemAt(index);
 		if (!column->IsVisible())
@@ -2195,10 +2195,10 @@ void TitleView::GetTitleRect(BColumn* findColumn, BRect* _rect)
 }
 
 
-int32 TitleView::FindColumn(BPoint position, float* _leftEdge)
+int32_t TitleView::FindColumn(BPoint position, float* _leftEdge)
 {
 	float leftEdge = MAX(kLeftMargin, fMasterView->LatchWidth());
-	int32 numColumns = fColumns->CountItems();
+	int32_t numColumns = fColumns->CountItems();
 	for (int index = 0; index < numColumns; index++) {
 		BColumn* column = (BColumn*) fColumns->ItemAt(index);
 		if (!column->IsVisible())
@@ -2251,7 +2251,7 @@ void TitleView::DragSelectedColumn(BPoint position)
 	float invalidRight = fSelectedColumnRect.right;
 
 	float leftEdge;
-	int32 columnIndex = FindColumn(position, &leftEdge);
+	int32_t columnIndex = FindColumn(position, &leftEdge);
 	fSelectedColumnRect.OffsetTo(leftEdge, 0);
 
 	MoveColumn(fSelectedColumn, columnIndex);
@@ -2272,7 +2272,7 @@ void TitleView::DragSelectedColumn(BPoint position)
 }
 
 
-void TitleView::MoveColumn(BColumn* column, int32 index)
+void TitleView::MoveColumn(BColumn* column, int32_t index)
 {
 	fColumns->RemoveItem((void*) column);
 
@@ -2373,7 +2373,7 @@ void TitleView::ComputeDragBoundries(BColumn* findColumn, BPoint)
 
 	bool foundColumn = false;
 	float leftEdge = MAX(kLeftMargin, fMasterView->LatchWidth());
-	int32 numColumns = fColumns->CountItems();
+	int32_t numColumns = fColumns->CountItems();
 	for (int index = 0; index < numColumns; index++) {
 		BColumn* column = (BColumn*) fColumns->ItemAt(index);
 		if (!column->IsVisible())
@@ -2506,8 +2506,8 @@ TitleView::_VirtualWidth() const
 {
 	float width = MarginWidth();
 
-	int32 count = fColumns->CountItems();
-	for (int32 i = 0; i < count; i++) {
+	int32_t count = fColumns->CountItems();
+	for (int32_t i = 0; i < count; i++) {
 		BColumn* column = reinterpret_cast<BColumn*>(fColumns->ItemAt(i));
 		width += column->Width();
 	}
@@ -2519,7 +2519,7 @@ TitleView::_VirtualWidth() const
 void TitleView::Draw(BRect invalidRect)
 {
 	float columnLeftEdge = MAX(kLeftMargin, fMasterView->LatchWidth());
-	for (int32 columnIndex = 0; columnIndex < fColumns->CountItems();
+	for (int32_t columnIndex = 0; columnIndex < fColumns->CountItems();
 		columnIndex++) {
 
 		BColumn* column = (BColumn*) fColumns->ItemAt(columnIndex);
@@ -2590,7 +2590,7 @@ void TitleView::ScrollTo(BPoint position)
 void TitleView::MessageReceived(BMessage* message)
 {
 	if (message->what == kToggleColumn) {
-		int32 num;
+		int32_t num;
 		if (message->FindInt32("be:field_num", &num) == B_OK) {
 			for (int index = 0; index < fColumns->CountItems(); index++) {
 				BColumn* column = (BColumn*) fColumns->ItemAt(index);
@@ -2613,7 +2613,7 @@ void TitleView::MouseDown(BPoint position)
 	if (fEditMode)
 		return;
 
-	int32 buttons = 1;
+	int32_t buttons = 1;
 	Window()->CurrentMessage()->FindInt32("buttons", &buttons);
 	if (buttons == B_SECONDARY_MOUSE_BUTTON
 		&& (fColumnFlags & B_ALLOW_COLUMN_POPUP)) {
@@ -2665,7 +2665,7 @@ void TitleView::MouseDown(BPoint position)
 				&& column->MaxWidth() > column->MinWidth()
 				&& (fColumnFlags & B_ALLOW_COLUMN_RESIZE) != 0) {
 
-				int32 clicks = 0;
+				int32_t clicks = 0;
 				fSelectedColumn = column;
 				fSelectedColumnRect.Set(leftEdge, 0, rightEdge,
 					fVisibleRect.Height());
@@ -2704,7 +2704,7 @@ void TitleView::MouseDown(BPoint position)
 }
 
 
-void TitleView::MouseMoved(BPoint position, uint32 transit,
+void TitleView::MouseMoved(BPoint position, uint32_t transit,
 	const BMessage* dragMessage)
 {
 	if (fEditMode)
@@ -2717,9 +2717,9 @@ void TitleView::MouseMoved(BPoint position, uint32 transit,
 			break;
 
 		case PRESSING_COLUMN: {
-			if (abs((int32)(position.x - (fClickPoint.x
+			if (abs((int32_t)(position.x - (fClickPoint.x
 					+ fSelectedColumnRect.left))) > kColumnResizeAreaWidth
-				|| abs((int32)(position.y - (fClickPoint.y
+				|| abs((int32_t)(position.y - (fClickPoint.y
 					+ fSelectedColumnRect.top))) > kColumnResizeAreaWidth) {
 				// User has moved the mouse more than the tolerable amount,
 				// initiate a drag.
@@ -2752,7 +2752,7 @@ void TitleView::MouseMoved(BPoint position, uint32 transit,
 						// the mouse.  This minimizes this problem (although
 						// it is currently not possible to completely eliminate
 						// it).
-						uint32 buttons;
+						uint32_t buttons;
 						GetMouse(&position, &buttons, false);
 						dragRect.OffsetTo(position.x - fClickPoint.x,
 							position.y - dragRect.Height() / 2);
@@ -2773,7 +2773,7 @@ void TitleView::MouseMoved(BPoint position, uint32 transit,
 				BRect dragRect(fSelectedColumnRect);
 
 				// See explanation above.
-				uint32 buttons;
+				uint32_t buttons;
 				GetMouse(&position, &buttons, false);
 
 				dragRect.OffsetTo(position.x - fClickPoint.x,
@@ -3220,7 +3220,7 @@ void OutlineView::Draw(BRect invalidBounds)
 
 	float line = 0.0;
 	bool tintedLine = true;
-	int32 numColumns = fColumns->CountItems();
+	int32_t numColumns = fColumns->CountItems();
 	for (RecursiveOutlineIterator iterator(&fRows); iterator.CurrentRow();
 		iterator.GoToNext()) {
 		BRow* row = iterator.CurrentRow();
@@ -3301,7 +3301,7 @@ void OutlineView::Draw(BRect invalidBounds)
 								// holding down a latch while items are added
 								// in the background.
 								BPoint pos;
-								uint32 buttons;
+								uint32_t buttons;
 								GetMouse(&pos, &buttons);
 								if (fLatchRect.Contains(pos)) {
 									fMasterView->DrawLatch(this, fLatchRect,
@@ -3388,7 +3388,7 @@ void OutlineView::Draw(BRect invalidBounds)
 
 
 BRow*
-OutlineView::FindRow(float ypos, int32* _rowIndent, float* _top)
+OutlineView::FindRow(float ypos, int32_t* _rowIndent, float* _top)
 {
 	if (_rowIndent && _top) {
 		float line = 0.0;
@@ -3439,7 +3439,7 @@ void OutlineView::MouseDown(BPoint position)
 	// Check to see if the user is clicking on a widget to open a section
 	// of the list.
 	bool reset_click_count = false;
-	int32 indent;
+	int32_t indent;
 	float rowTop;
 	BRow* row = FindRow(position.y, &indent, &rowTop);
 	if (row != NULL) {
@@ -3454,7 +3454,7 @@ void OutlineView::MouseDown(BPoint position)
 		if (position.y >= 0) {
 			if (position.x >= 0) {
 				float x = 0;
-				for (int32 c = 0; c < fMasterView->CountColumns(); c++) {
+				for (int32_t c = 0; c < fMasterView->CountColumns(); c++) {
 					new_column = fMasterView->ColumnAt(c);
 					if (!new_column->IsVisible())
 						continue;
@@ -3486,7 +3486,7 @@ void OutlineView::MouseDown(BPoint position)
 			fCurrentField = new_field;
 			fCurrentCode = B_INSIDE_VIEW;
 			BMessage* message = Window()->CurrentMessage();
-			int32 buttons = 1;
+			int32_t buttons = 1;
 			message->FindInt32("buttons", &buttons);
 			fCurrentColumn->MouseDown(fMasterView, fCurrentRow,
 				fCurrentField, fFieldRect, position, buttons);
@@ -3592,7 +3592,7 @@ void OutlineView::MouseDown(BPoint position)
 }
 
 
-void OutlineView::MouseMoved(BPoint position, uint32 /*transit*/,
+void OutlineView::MouseMoved(BPoint position, uint32_t /*transit*/,
 	const BMessage* /*dragMessage*/)
 {
 	if (!fMouseDown) {
@@ -3604,11 +3604,11 @@ void OutlineView::MouseMoved(BPoint position, uint32 /*transit*/,
 		BRect new_rect(0,0,0,0);
 		if (position.y >=0 ) {
 			float top;
-			int32 indent;
+			int32_t indent;
 			BRow* row = FindRow(position.y, &indent, &top);
 			if (row && position.x >=0 ) {
 				float x=0;
-				for (int32 c=0;c<fMasterView->CountColumns();c++) {
+				for (int32_t c=0;c<fMasterView->CountColumns();c++) {
 					new_column = fMasterView->ColumnAt(c);
 					if (!new_column->IsVisible())
 						continue;
@@ -3732,7 +3732,7 @@ void OutlineView::MouseMoved(BPoint position, uint32 /*transit*/,
 				if (fTrackMouse /*&& message*/) {
 					if (fVisibleRect.Contains(position)) {
 						float top;
-						int32 indent;
+						int32_t indent;
 						BRow* target = FindRow(position.y, &indent, &top);
 						if (target)
 							SetFocusRow(target, true);
@@ -3747,7 +3747,7 @@ void OutlineView::MouseMoved(BPoint position, uint32 /*transit*/,
 					// Draw a highlight line...
 					if (fVisibleRect.Contains(position)) {
 						float top;
-						int32 indent;
+						int32_t indent;
 						BRow* target = FindRow(position.y, &indent, &top);
 						if (target == fRollOverRow)
 							break;
@@ -3846,7 +3846,7 @@ void OutlineView::MessageReceived(BMessage* message)
 void OutlineView::ChangeFocusRow(bool up, bool updateSelection,
 	bool addToCurrentSelection)
 {
-	int32 indent;
+	int32_t indent;
 	float top;
 	float newRowPos = 0;
 	float verticalScroll = 0;
@@ -4078,7 +4078,7 @@ void OutlineView::RemoveRow(BRow* row)
 	fItemsHeight -= subTreeHeight;
 
 	FixScrollBar(false);
-	int32 indent = 0;
+	int32_t indent = 0;
 	float top = 0.0;
 	if (FindRow(fVisibleRect.top, &indent, &top) == NULL && ScrollBar(B_VERTICAL) != NULL) {
 		// after removing this row, no rows are actually visible any more,
@@ -4143,7 +4143,7 @@ void OutlineView::UpdateRow(BRow* row)
 		BRowContainer* list = (parentRow == NULL) ? &fRows : parentRow->fChildList;
 
 		if(list) {
-			int32 rowIndex = list->IndexOf(row);
+			int32_t rowIndex = list->IndexOf(row);
 			ASSERT(rowIndex >= 0);
 			ASSERT(list->ItemAt(rowIndex) == row);
 
@@ -4169,7 +4169,7 @@ void OutlineView::UpdateRow(BRow* row)
 }
 
 
-void OutlineView::AddRow(BRow* row, int32 Index, BRow* parentRow)
+void OutlineView::AddRow(BRow* row, int32_t Index, BRow* parentRow)
 {
 	if (!row)
 		return;
@@ -4307,11 +4307,11 @@ void OutlineView::AddSorted(BRowContainer* list, BRow* row)
 {
 	if (list && row) {
 		// Find general vicinity with binary search.
-		int32 lower = 0;
-		int32 upper = list->CountItems()-1;
+		int32_t lower = 0;
+		int32_t upper = list->CountItems()-1;
 		while( lower < upper ) {
-			int32 middle = lower + (upper-lower+1)/2;
-			int32 cmp = CompareRows(row, list->ItemAt(middle));
+			int32_t middle = lower + (upper-lower+1)/2;
+			int32_t cmp = CompareRows(row, list->ItemAt(middle));
 			if( cmp < 0 ) upper = middle-1;
 			else if( cmp > 0 ) lower = middle+1;
 			else lower = upper = middle;
@@ -4333,11 +4333,11 @@ void OutlineView::AddSorted(BRowContainer* list, BRow* row)
 }
 
 
-int32 OutlineView::CompareRows(BRow* row1, BRow* row2)
+int32_t OutlineView::CompareRows(BRow* row1, BRow* row2)
 {
-	int32 itemCount (fSortColumns->CountItems());
+	int32_t itemCount (fSortColumns->CountItems());
 	if (row1 && row2) {
-		for (int32 index = 0; index < itemCount; index++) {
+		for (int32_t index = 0; index < itemCount; index++) {
 			BColumn* column = (BColumn*) fSortColumns->ItemAt(index);
 			int comp = 0;
 			BField* field1 = (BField*) row1->GetField(column->fFieldID);
@@ -4508,7 +4508,7 @@ bool OutlineView::SortList(BRowContainer* list, bool isVisible)
 		// Shellsort
 		BRow** items
 			= (BRow**) BObjectList<BRow>::Private(list).AsBList()->Items();
-		int32 numItems = list->CountItems();
+		int32_t numItems = list->CountItems();
 		int h;
 		for (h = 1; h < numItems / 9; h = 3 * h + 1)
 			;
@@ -4545,7 +4545,7 @@ bool OutlineView::SortList(BRowContainer* list, bool isVisible)
 }
 
 
-int32 OutlineView::DeepSortThreadEntry(void* _outlineView)
+int32_t OutlineView::DeepSortThreadEntry(void* _outlineView)
 {
 	((OutlineView*) _outlineView)->DeepSort();
 	return 0;
@@ -4557,9 +4557,9 @@ void OutlineView::DeepSort()
 	struct stack_entry {
 		bool isVisible;
 		BRowContainer* list;
-		int32 listIndex;
+		int32_t listIndex;
 	} stack[kMaxDepth];
-	int32 stackTop = 0;
+	int32_t stackTop = 0;
 
 	stack[stackTop].list = &fRows;
 	stack[stackTop].isVisible = true;
@@ -4589,7 +4589,7 @@ void OutlineView::DeepSort()
 		// next list.
 		bool foundNextList = false;
 		while (!foundNextList && !fSortCancelled) {
-			for (int32 index = currentEntry->listIndex; index < currentEntry->list->CountItems();
+			for (int32_t index = currentEntry->listIndex; index < currentEntry->list->CountItems();
 				index++) {
 				BRow* parentRow = currentEntry->list->ItemAt(index);
 				BRowContainer* childList = parentRow->fChildList;
@@ -4638,7 +4638,7 @@ void OutlineView::StartSorting()
 				Window()->Unlock();
 
 			fSortCancelled = true;
-			int32 status;
+			int32_t status;
 			wait_for_thread(fSortThread, &status);
 
 			while (lockCount--)
@@ -4722,7 +4722,7 @@ bool OutlineView::FindParent(BRow* row, BRow** outParent, bool* outParentIsVisib
 }
 
 
-int32 OutlineView::IndexOf(BRow* row)
+int32_t OutlineView::IndexOf(BRow* row)
 {
 	if (row) {
 		if (row->fParent == 0)
@@ -4837,7 +4837,7 @@ void RecursiveOutlineIterator::GoToNext()
 }
 
 
-int32 RecursiveOutlineIterator::CurrentLevel() const
+int32_t RecursiveOutlineIterator::CurrentLevel() const
 {
 	return fCurrentListDepth;
 }

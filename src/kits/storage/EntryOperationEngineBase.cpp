@@ -154,7 +154,7 @@ status_t BEntryOperationEngineBase::Entry::GetPathOrName(BString& _path) const
 
 			// If we additionally have a relative path, append it.
 			if (!_path.IsEmpty() && fPath != NULL) {
-				int32 length = _path.Length();
+				int32_t length = _path.Length();
 				_path << '/' << fPath;
 				if (_path.Length() < length + 2)
 					return B_NO_MEMORY;

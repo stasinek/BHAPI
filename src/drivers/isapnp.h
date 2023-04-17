@@ -8,11 +8,11 @@ extern "C" {
 #endif
 
 typedef union {
-	uint32 id;
+	uint32_t id;
 	uchar b[4];
 } EISA_PRODUCT_ID;
 
-/* uint32 MAKE_EISA_PRODUCT_ID(EISA_PRODUCT_ID* ptr, char ch0, char ch1, char ch2, uint12 prod_num, uint4 rev) */
+/* uint32_t MAKE_EISA_PRODUCT_ID(EISA_PRODUCT_ID* ptr, char ch0, char ch1, char ch2, uint12 prod_num, uint4 rev) */
 /* example: MAKE_EISA_PRODUCT_ID(&foo_id, 'F','O','O', 0xdb1, 3); */
 /* makes correct little-endian format */
 #define	MAKE_EISA_PRODUCT_ID(ptr, ch0, ch1, ch2, prod_num, rev) \
@@ -36,11 +36,11 @@ struct isa_device_info {
 
 	uchar	csn;
 	uchar	ldn;
-	uint32	vendor_id;
-	uint32	card_id;			/* a.k.a. serial number */
-	uint32	logical_device_id;
-	uint32	num_compatible_ids;
-	uint32	compatible_ids[B_MAX_COMPATIBLE_IDS];
+	uint32_t	vendor_id;
+	uint32_t	card_id;			/* a.k.a. serial number */
+	uint32_t	logical_device_id;
+	uint32_t	num_compatible_ids;
+	uint32_t	compatible_ids[B_MAX_COMPATIBLE_IDS];
 	char	card_name[B_OS_NAME_LENGTH];
 	char	logical_device_name[B_OS_NAME_LENGTH];
 };
@@ -49,11 +49,11 @@ struct isa_device_info {
 struct isa_info {
 	uchar	csn;
 	uchar	ldn;
-	uint32	vendor_id;
-	uint32	card_id;			/* a.k.a. serial number */
-	uint32	logical_device_id;
-	uint32	num_compatible_ids;
-	uint32	compatible_ids[B_MAX_COMPATIBLE_IDS];
+	uint32_t	vendor_id;
+	uint32_t	card_id;			/* a.k.a. serial number */
+	uint32_t	logical_device_id;
+	uint32_t	num_compatible_ids;
+	uint32_t	compatible_ids[B_MAX_COMPATIBLE_IDS];
 	char	card_name[B_OS_NAME_LENGTH];
 	char	logical_device_name[B_OS_NAME_LENGTH];
 };

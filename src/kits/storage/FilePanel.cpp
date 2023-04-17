@@ -103,7 +103,7 @@
 #ifdef BHAPI_OS_WIN32
 extern "C" {
 namespace bhapi {
-extern char* win32_convert_active_to_utf8(const char *str,  int32 length);
+extern char* win32_convert_active_to_utf8(const char *str,  int32_t length);
 }
 }
 #endif
@@ -114,7 +114,7 @@ class BFilePanelWindow;
 
 class BHAPI_LOCAL BFilePanelLabel : public BStringView {
 public:
-    BFilePanelLabel(BRect frame, const char *name, const char *text,  uint32 resizeMode);
+    BFilePanelLabel(BRect frame, const char *name, const char *text,  uint32_t resizeMode);
 
     virtual void	Draw(BRect updateRect);
     virtual void	GetPreferredSize(float *width, float *height);
@@ -140,7 +140,7 @@ private:
     BPath fPath;
     char *fLeaf;
 
-    int32 fFlags;
+    int32_t fFlags;
     int64 fSize;
     bigtime_t fModifiedTime;
 
@@ -160,7 +160,7 @@ public:
 
     virtual void		SelectionChanged();
     virtual status_t	Invoke(const BMessage *msg);
-    virtual void		KeyDown(const char *bytes,  int32 numBytes);
+    virtual void		KeyDown(const char *bytes,  int32_t numBytes);
 };
 
 
@@ -183,16 +183,16 @@ public:
     void		AddColumn(const char *name, float width,
                   void (*draw_func)(BView*, BRect, BFilePanelListItem*),
                   int (*sort_func)(const BFilePanelListItem**, const BFilePanelListItem**));
-    void		RemoveColumn(int32 index);
-    void		SwapColumns(int32 indexA,  int32 indexB);
+    void		RemoveColumn(int32_t index);
+    void		SwapColumns(int32_t indexA,  int32_t indexB);
 
-    int32		CountColumns() const;
-    const char	*GetNameOfColumn(int32 index) const;
-    float		GetWidthOfColumn(int32 index) const;
+    int32_t		CountColumns() const;
+    const char	*GetNameOfColumn(int32_t index) const;
+    float		GetWidthOfColumn(int32_t index) const;
 
     void		DrawItem(BView *owner, BRect itemRect, BFilePanelListItem*);
-    void		SortItems(int32 nColumn);
-    int		GetSortIndex(int32 *index) const;
+    void		SortItems(int32_t nColumn);
+    int		GetSortIndex(int32_t *index) const;
 
     virtual void	FrameResized(float new_width, float new_height);
 
@@ -209,7 +209,7 @@ private:
     BFilePanelListView *fListView;
     BScrollBar *fHSB;
     BScrollBar *fVSB;
-    int32 fSort;
+    int32_t fSort;
 };
 
 
@@ -217,7 +217,7 @@ class BHAPI_LOCAL BFilePanelWindow : public BWindow {
 public:
     BFilePanelWindow(BFilePanel *panel,
              bhapi::file_panel_mode mode,
-              uint32 node_flavors,
+              uint32_t node_flavors,
              bool modal,
              bool allow_multiple_selection);
     virtual ~BFilePanelWindow();
@@ -256,7 +256,7 @@ private:
     BPath fPath;
 
     bhapi::file_panel_mode fMode;
-    uint32 fNodeFlavors;
+    uint32_t fNodeFlavors;
     BMessenger *fTarget;
     BMessage *fMessage;
     BFilePanelFilter *fFilter;
@@ -265,7 +265,7 @@ private:
     BFilePanelView *fPanelView;
     BMenu *fDirMenu;
 
-    int32 fSelIndex;
+    int32_t fSelIndex;
     bool fShowHidden;
 
     static bool	RefreshCallback(const char *path, void *data);
@@ -273,7 +273,7 @@ private:
 };
 
 
-BFilePanelLabel::BFilePanelLabel(BRect frame, const char *name, const char *text,  uint32 resizeMode)
+BFilePanelLabel::BFilePanelLabel(BRect frame, const char *name, const char *text,  uint32_t resizeMode)
     : BStringView(frame, name, text, resizeMode, B_WILL_DRAW)
 {
     SetAlignment(B_ALIGN_CENTER);
@@ -383,7 +383,7 @@ BFilePanelListItem::Update(BView *owner, const BFont *font)
 
     float width = 0;
     GetLeaderSize(&width, NULL);
-    for(int32 i = 0; i < fPanelView->CountColumns(); i++) width += fPanelView->GetWidthOfColumn(i);
+    for(int32_t i = 0; i < fPanelView->CountColumns(); i++) width += fPanelView->GetWidthOfColumn(i);
     SetWidth(width);
 }
 
@@ -455,7 +455,7 @@ BFilePanelListView::SelectionChanged()
         BMenuItem *menuItem = menu->FindItem(win->PanelMode() == B_OPEN_PANEL ? TEXT_OPEN : TEXT_SAVE);
         BFilePanelListItem *item;
 
-        for(int32 i = 0; (item = (BFilePanelListItem*)ItemAt(CurrentSelection(i))) != NULL; i++)
+        for(int32_t i = 0; (item = (BFilePanelListItem*)ItemAt(CurrentSelection(i))) != NULL; i++)
         {
             if(win->fNodeFlavors == B_DIRECTORY_NODE && !item->IsDirectory()) break;
             if(win->fNodeFlavors == B_FILE_NODE && item->IsDirectory()) break;
@@ -483,9 +483,9 @@ BFilePanelListView::Invoke(const BMessage *msg)
 
 
 void
-BFilePanelListView::KeyDown(const char *bytes,  int32 numBytes)
+BFilePanelListView::KeyDown(const char *bytes,  int32_t numBytes)
 {
-    int32 oldPos = Position();
+    int32_t oldPos = Position();
     BListView::KeyDown(bytes, numBytes);
     if(oldPos != Position()) ScrollToItem(Position());
 }
@@ -746,7 +746,7 @@ BFilePanelView::AddColumn(const char *name, float width,
 
 
 void
-BFilePanelView::RemoveColumn(int32 index)
+BFilePanelView::RemoveColumn(int32_t index)
 {
     struct column_data *data = (struct column_data*)fColumns.RemoveItem(index);
     if(data != NULL)
@@ -762,14 +762,14 @@ BFilePanelView::RemoveColumn(int32 index)
 
 
 void
-BFilePanelView::SwapColumns(int32 indexA,  int32 indexB)
+BFilePanelView::SwapColumns(int32_t indexA,  int32_t indexB)
 {
     fColumns.SwapItems(indexA, indexB);
     Invalidate();
 }
 
 
-int32
+int32_t
 BFilePanelView::CountColumns() const
 {
     return fColumns.CountItems();
@@ -777,7 +777,7 @@ BFilePanelView::CountColumns() const
 
 
 const char*
-BFilePanelView::GetNameOfColumn(int32 index) const
+BFilePanelView::GetNameOfColumn(int32_t index) const
 {
     struct column_data *data = (struct column_data*)fColumns.ItemAt(index);
     return(data != NULL ? data->name : NULL);
@@ -785,7 +785,7 @@ BFilePanelView::GetNameOfColumn(int32 index) const
 
 
 float
-BFilePanelView::GetWidthOfColumn(int32 index) const
+BFilePanelView::GetWidthOfColumn(int32_t index) const
 {
     struct column_data *data = (struct column_data*)fColumns.ItemAt(index);
     return(data != NULL ? data->width : 0);
@@ -798,7 +798,7 @@ BFilePanelView::DrawItem(BView *owner, BRect itemRect, BFilePanelListItem *item)
     BRect rect = itemRect;
     rect.right = rect.left;
 
-    for(int32 i = 0; i < fColumns.CountItems(); i++)
+    for(int32_t i = 0; i < fColumns.CountItems(); i++)
     {
         struct column_data *data = (struct column_data*)fColumns.ItemAt(i);
 
@@ -817,7 +817,7 @@ BFilePanelView::DrawItem(BView *owner, BRect itemRect, BFilePanelListItem *item)
 
 
 void
-BFilePanelView::SortItems(int32 nColumn)
+BFilePanelView::SortItems(int32_t nColumn)
 {
     if(nColumn > 0) fSort = ((fSort < 0 ? -fSort : fSort) == nColumn ? -fSort : nColumn);
 
@@ -830,7 +830,7 @@ BFilePanelView::SortItems(int32 nColumn)
 
 
 int
-BFilePanelView::GetSortIndex(int32 *index) const
+BFilePanelView::GetSortIndex(int32_t *index) const
 {
     if(fSort == 0) return 0;
     if(index) *index = (fSort < 0 ? -fSort : fSort) - 1;
@@ -843,8 +843,8 @@ BFilePanelView::FrameResized(float new_width, float new_height)
 {
     float w = 0;
     BRect rect;
-    for(int32 i = 0; i < CountColumns(); i++) w += GetWidthOfColumn(i);
-    for(int32 i = 0; i < fListView->CountItems(); i++) rect |= fListView->ItemFrame(i);
+    for(int32_t i = 0; i < CountColumns(); i++) w += GetWidthOfColumn(i);
+    for(int32_t i = 0; i < fListView->CountItems(); i++) rect |= fListView->ItemFrame(i);
 
     fHSB->SetRange(0, max_c(w - new_width, 0));
     fHSB->SetEnabled(new_width < w);
@@ -870,7 +870,7 @@ void
 BFilePanelTitleView::Draw(BRect updateRect)
 {
     BFilePanelView *parent = (BFilePanelView*)Parent();
-    int32 sortIndex = -1;
+    int32_t sortIndex = -1;
 
     if(parent == NULL) return;
     parent->GetSortIndex(&sortIndex);
@@ -901,7 +901,7 @@ BFilePanelTitleView::Draw(BRect updateRect)
 
     BRect rect = bounds;
     rect.right = rect.left;
-    for(int32 i = 0; i <= parent->CountColumns(); i++)
+    for(int32_t i = 0; i <= parent->CountColumns(); i++)
     {
         if(i == parent->CountColumns())
         {
@@ -952,7 +952,7 @@ BFilePanelTitleView::GetPreferredSize(float *width, float *height)
         *width = 0;
 
         BFilePanelView *parent = (BFilePanelView*)Parent();
-        for(int32 i = 0; i < parent->CountColumns(); i++) *width += parent->GetWidthOfColumn(i);
+        for(int32_t i = 0; i < parent->CountColumns(); i++) *width += parent->GetWidthOfColumn(i);
     }
 
     if(height)
@@ -980,7 +980,7 @@ BFilePanelTitleView::MouseUp(BPoint where)
     BFilePanelView *parent = (BFilePanelView*)Parent();
 
     float left = 0, right = 0;
-    for(int32 i = 0; i < parent->CountColumns(); i++)
+    for(int32_t i = 0; i < parent->CountColumns(); i++)
     {
         left = right + (i == 0 ? 0.f : 1.f);
         right = left + parent->GetWidthOfColumn(i);
@@ -994,7 +994,7 @@ BFilePanelTitleView::MouseUp(BPoint where)
 
 static bhapi::filter_result filter_key_down_hook(BMessage *message, BHandler **target, BMessageFilter *filter)
 {
-    int32 modifiers;
+    int32_t modifiers;
     const char *bytes;
 
     BFilePanelWindow *panelWindow = (BFilePanelWindow*)filter->Looper();
@@ -1016,13 +1016,13 @@ static bhapi::filter_result filter_key_down_hook(BMessage *message, BHandler **t
 
 BFilePanelWindow::BFilePanelWindow(BFilePanel *panel,
                    bhapi::file_panel_mode mode,
-                    uint32 node_flavors,
+                    uint32_t node_flavors,
                    bool modal,
                    bool allow_multiple_selection)
     : BWindow(BRect(0, 0, 600, 400),
           mode == B_OPEN_PANEL ? TEXT_OPEN_FILE : TEXT_SAVE_FILE,
           modal ? B_MODAL_WINDOW : B_TITLED_WINDOW, 0),
-      fPanel(panel), fMode(mode), fNodeFlavors(node_flavors == 0 ? (uint32)B_FILE_NODE : node_flavors),
+      fPanel(panel), fMode(mode), fNodeFlavors(node_flavors == 0 ? (uint32_t)B_FILE_NODE : node_flavors),
       fTarget(NULL), fMessage(NULL), fFilter(NULL), fHidesWhenDone(true),
       fSelIndex(0), fShowHidden(false)
 {
@@ -1048,7 +1048,7 @@ BFilePanelWindow::BFilePanelWindow(BFilePanel *panel,
     menu->AddItem(new BMenuItem(TEXT_SHOW_HIDDEN_FILES, new BMessage(MSG_PANEL_TOGGLE_HIDDEN)));
     menu->AddSeparatorItem();
     menu->AddItem(new BMenuItem(TEXT_CANCEL, new BMessage(B_CANCEL)));
-    for(int32 i = 0; (menuItem = menu->ItemAt(i)) != NULL; i++) menuItem->SetTarget(this);
+    for(int32_t i = 0; (menuItem = menu->ItemAt(i)) != NULL; i++) menuItem->SetTarget(this);
 
     menuBar = new BMenuBar(rect, NULL,
                    B_FOLLOW_LEFT_RIGHT | B_FOLLOW_TOP,
@@ -1137,7 +1137,7 @@ BFilePanelWindow::QuitRequested()
 void
 BFilePanelWindow::MessageReceived(BMessage *msg)
 {
-    int32 index;
+    int32_t index;
     const char *dir;
     const BMessenger *msgr;
     BMessage *aMsg = NULL;
@@ -1211,9 +1211,9 @@ BFilePanelWindow::MessageReceived(BMessage *msg)
 
             msgr = (fTarget == NULL ? &bhapi::__be_app_messenger : fTarget);
             if(fMessage) aMsg = new BMessage(*fMessage);
-            else aMsg = new BMessage(fMode == B_OPEN_PANEL ? (uint32)B_REFS_RECEIVED : (uint32)B_SAVE_REQUESTED);
+            else aMsg = new BMessage(fMode == B_OPEN_PANEL ? (uint32_t)B_REFS_RECEIVED : (uint32_t)B_SAVE_REQUESTED);
             aMsg->AddString("directory", fPath.Path());
-            for(int32 i = 0; (index = listView->CurrentSelection(i)) > 0; i++)
+            for(int32_t i = 0; (index = listView->CurrentSelection(i)) > 0; i++)
             {
                 item = (BFilePanelListItem*)listView->ItemAt(index);
                 aMsg->AddString("name", BPath(item->Path()).Leaf());
@@ -1500,7 +1500,7 @@ BFilePanelWindow::RefreshDirMenu()
         while((menuItem = fDirMenu->ItemAt(0)) != NULL)
         {
             if (is_instance_of(menuItem, BMenuSeparatorItem)) break;
-            fDirMenu->RemoveItem((int32)0);
+            fDirMenu->RemoveItem((int32_t)0);
             delete menuItem;
         }
     }
@@ -1550,7 +1550,7 @@ BFilePanelFilter::~BFilePanelFilter()
 BFilePanel::BFilePanel(bhapi::file_panel_mode mode,
                const BMessenger *target,
                const char *panel_directory,
-                uint32 node_flavors,
+                uint32_t node_flavors,
                bool allow_multiple_selection,
                const BMessage *message,
                BFilePanelFilter *filter,

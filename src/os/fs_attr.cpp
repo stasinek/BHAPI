@@ -51,7 +51,7 @@ open_attr_dir(int file, const char *path, bool traverse)
 
 
 extern "C" ssize_t
-fs_read_attr(int fd, const char* attribute, uint32 /*type*/, off_t pos,
+fs_read_attr(int fd, const char* attribute, uint32_t /*type*/, off_t pos,
 	void* buffer, size_t readBytes)
 {
 	ssize_t bytes = _kern_read_attr(fd, attribute, pos, buffer, readBytes);
@@ -60,7 +60,7 @@ fs_read_attr(int fd, const char* attribute, uint32 /*type*/, off_t pos,
 
 
 extern "C" ssize_t
-fs_write_attr(int fd, const char* attribute, uint32 type, off_t pos,
+fs_write_attr(int fd, const char* attribute, uint32_t type, off_t pos,
 	const void* buffer, size_t writeBytes)
 {
 	// TODO: move this documentation into the Haiku book!
@@ -105,7 +105,7 @@ fs_stat_attr(int fd, const char* attribute, struct attr_info* attrInfo)
 
 
 int
-fs_open_attr(const char *path, const char *attribute, uint32 type, int openMode)
+fs_open_attr(const char *path, const char *attribute, uint32_t type, int openMode)
 {
 	status_t status = _kern_open_attr(-1, path, attribute, type, openMode);
 	RETURN_AND_SET_ERRNO(status);
@@ -113,7 +113,7 @@ fs_open_attr(const char *path, const char *attribute, uint32 type, int openMode)
 
 
 extern "C" int
-fs_fopen_attr(int fd, const char* attribute, uint32 type, int openMode)
+fs_fopen_attr(int fd, const char* attribute, uint32_t type, int openMode)
 {
 	status_t status = _kern_open_attr(fd, NULL, attribute, type, openMode);
 	RETURN_AND_SET_ERRNO(status);

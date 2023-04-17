@@ -71,11 +71,11 @@ void LinkReceiver::SetPort(port_id port)
 }
 
 
-status_t LinkReceiver::GetNextMessage(int32 &code, bigtime_t timeout)
+status_t LinkReceiver::GetNextMessage(int32_t &code, bigtime_t timeout)
 {
 	fReadError = B_OK;
 
-	int32 remaining = fDataSize - (fRecvStart + fReplySize);
+	int32_t remaining = fDataSize - (fRecvStart + fReplySize);
 	STRACE(("info: LinkReceiver GetNextReply() reports %ld bytes remaining in buffer.\n", remaining));
 
 	// find the position of the next message header in the buffer
@@ -93,7 +93,7 @@ status_t LinkReceiver::GetNextMessage(int32 &code, bigtime_t timeout)
 	}
 
 	// check we have a well-formed message
-	if (remaining < (int32)sizeof(message_header)) {
+	if (remaining < (int32_t)sizeof(message_header)) {
 		// we don't have enough data for a complete header
 		STRACE(("error info: LinkReceiver remaining %ld bytes is less than header size.\n", remaining));
 		ResetBuffer();
@@ -101,7 +101,7 @@ status_t LinkReceiver::GetNextMessage(int32 &code, bigtime_t timeout)
 	}
 
 	fReplySize = header->size;
-	if (fReplySize > remaining || fReplySize < (int32)sizeof(message_header)) {
+	if (fReplySize > remaining || fReplySize < (int32_t)sizeof(message_header)) {
 		STRACE(("error info: LinkReceiver message size of %ld bytes smaller than header size.\n", fReplySize));
 		ResetBuffer();
 		return B_ERROR;
@@ -134,7 +134,7 @@ bool LinkReceiver::NeedsReply() const
 }
 
 
-int32 LinkReceiver::Code() const
+int32_t LinkReceiver::Code() const
 {
 	if (fReplySize == 0)
 		return B_ERROR;
@@ -216,7 +216,7 @@ status_t LinkReceiver::ReadFromPort(bigtime_t timeout)
 	if (err < B_OK)
 		return err;
 
-	int32 code;
+	int32_t code;
 	ssize_t bytesRead;
 
 	STRACE(("info: LinkReceiver reading port %ld.\n", fReceivePort));
@@ -307,8 +307,8 @@ status_t LinkReceiver::Read(void *data, ssize_t passedSize)
 
 status_t LinkReceiver::ReadString(char** _string, size_t* _length)
 {
-	int32 length = 0;
-	status_t status = Read<int32>(&length);
+	int32_t length = 0;
+	status_t status = Read<int32_t>(&length);
 
 	if (status < B_OK)
 		return status;
@@ -344,7 +344,7 @@ status_t LinkReceiver::ReadString(char** _string, size_t* _length)
 	return B_OK;
 
 err:
-	fRecvPosition -= sizeof(int32);
+	fRecvPosition -= sizeof(int32_t);
 		// rewind the transaction
 	return status;
 }
@@ -352,8 +352,8 @@ err:
 
 status_t LinkReceiver::ReadString(BString &string, size_t* _length)
 {
-	int32 length = 0;
-	status_t status = Read<int32>(&length);
+	int32_t length = 0;
+	status_t status = Read<int32_t>(&length);
 
 	if (status < B_OK)
 		return status;
@@ -388,7 +388,7 @@ status_t LinkReceiver::ReadString(BString &string, size_t* _length)
 	return B_OK;
 
 err:
-	fRecvPosition -= sizeof(int32);
+	fRecvPosition -= sizeof(int32_t);
 		// rewind the transaction
 	return status;
 }
@@ -396,13 +396,13 @@ err:
 
 status_t LinkReceiver::ReadString(char *buffer, size_t bufferLength)
 {
-	int32 length = 0;
-	status_t status = Read<int32>(&length);
+	int32_t length = 0;
+	status_t status = Read<int32_t>(&length);
 
 	if (status < B_OK)
 		return status;
 
-	if (length >= (int32)bufferLength) {
+	if (length >= (int32_t)bufferLength) {
 		status = B_BUFFER_OVERFLOW;
 		goto err;
 	}
@@ -423,14 +423,14 @@ status_t LinkReceiver::ReadString(char *buffer, size_t bufferLength)
 	return B_OK;
 
 err:
-	fRecvPosition -= sizeof(int32);
+	fRecvPosition -= sizeof(int32_t);
 		// rewind the transaction
 	return status;
 }
 
 status_t LinkReceiver::ReadRegion(BRegion* region)
 {
-	status_t status = Read(&region->fCount, sizeof(int32));
+	status_t status = Read(&region->fCount, sizeof(int32_t));
 	if (status >= B_OK)
 		status = Read(&region->fBounds, sizeof(clipping_rect));
 	if (status >= B_OK) {
@@ -473,9 +473,9 @@ status_t LinkReceiver::ReadGradient(BGradient** _gradient)
 	GTRACE(("LinkReceiver::ReadGradient\n"));
 
 	BGradient::Type gradientType;
-	int32 colorsCount;
+	int32_t colorsCount;
 	Read(&gradientType, sizeof(BGradient::Type));
-	status_t status = Read(&colorsCount, sizeof(int32));
+	status_t status = Read(&colorsCount, sizeof(int32_t));
 	if (status != B_OK)
 		return status;
 

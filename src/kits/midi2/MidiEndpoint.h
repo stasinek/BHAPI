@@ -20,7 +20,7 @@ public:
 	const char *Name() const;
 	void SetName(const char *name);
 	
-	int32 ID() const;
+	int32_t ID() const;
 
 	bool IsProducer() const;
 	bool IsConsumer() const;
@@ -66,16 +66,16 @@ private:
 	bool LockLooper() const;
 	void UnlockLooper() const;
 
-	int32 fId;
+	int32_t fId;
 	BString fName;	
-	int32 fRefCount;
+	int32_t fRefCount;
 	BMessage *fProperties;
 	bool fIsLocal;
 	bool fIsConsumer;
 	bool fIsRegistered;
 	bool fIsAlive;
 
-	uint32 _reserved[4];
+	uint32_t _reserved[4];
 };
 
 #endif // _MIDI_ENDPOINT_H

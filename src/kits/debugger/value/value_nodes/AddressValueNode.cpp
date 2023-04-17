@@ -121,14 +121,14 @@ status_t AddressValueNode::CreateChildren(TeamTypeInformation* info)
 }
 
 
-int32 AddressValueNode::CountChildren() const
+int32_t AddressValueNode::CountChildren() const
 {
 	return fChild != NULL ? 1 : 0;
 }
 
 
 ValueNodeChild*
-AddressValueNode::ChildAt(int32 index) const
+AddressValueNode::ChildAt(int32_t index) const
 {
 	return index == 0 ? fChild : NULL;
 }

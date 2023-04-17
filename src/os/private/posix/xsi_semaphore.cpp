@@ -39,7 +39,7 @@ namespace {
 
 // Queue for holding blocked threads
 struct queued_thread : DoublyLinkedListLinkImpl<queued_thread> {
-	queued_thread(Thread *thread, int32 count)
+	queued_thread(Thread *thread, int32_t count)
 		:
 		thread(thread),
 		count(count),
@@ -48,7 +48,7 @@ struct queued_thread : DoublyLinkedListLinkImpl<queued_thread> {
 	}
 
 	Thread	*thread;
-	int32	count;
+	int32_t	count;
 	bool	queued;
 };
 
@@ -488,7 +488,7 @@ public:
 		return &fSemaphores[nth];
 	}
 
-	uint32 SequenceNumber() const
+	uint32_t SequenceNumber() const
 	{
 		return fSequenceNumber;
 	}
@@ -537,7 +537,7 @@ private:
 	ushort						fNumberOfSemaphores;	// sem_nsems
 	struct ipc_perm				fPermissions;			// sem_perm
 	XsiSemaphore				*fSemaphores;			// array of semaphores
-	uint32						fSequenceNumber;		// used as a second id
+	uint32_t						fSequenceNumber;		// used as a second id
 	UndoList					fUndoList;				// undo list requests
 
 	XsiSemaphoreSet*			fLink;
@@ -643,9 +643,9 @@ static BOpenHashTable<SemaphoreHashTableDefinition> sSemaphoreHashTable;
 static mutex sIpcLock;
 static mutex sXsiSemaphoreSetLock;
 
-static uint32 sGlobalSequenceNumber = 1;
-static int32 sXsiSemaphoreCount = 0;
-static int32 sXsiSemaphoreSetCount = 0;
+static uint32_t sGlobalSequenceNumber = 1;
+static int32_t sXsiSemaphoreCount = 0;
+static int32_t sXsiSemaphoreSetCount = 0;
 
 
 //	#pragma mark -
@@ -1123,7 +1123,7 @@ _user_xsi_semop(int semaphoreID, struct sembuf *ops, size_t numOps)
 		short numberOfSemaphores = semaphoreSet->NumberOfSemaphores();
 		bool goToSleep = false;
 
-		uint32 i = 0;
+		uint32_t i = 0;
 		for (; i < numOps; i++) {
 			short semaphoreNumber = operations[i].sem_num;
 			if (semaphoreNumber >= numberOfSemaphores) {
@@ -1165,7 +1165,7 @@ _user_xsi_semop(int semaphoreID, struct sembuf *ops, size_t numOps)
 		// Either we have to wait or an error occured
 		if (goToSleep || result != 0) {
 			// Undo all previously done operations
-			for (uint32 j = 0; j < i; j++) {
+			for (uint32_t j = 0; j < i; j++) {
 				short semaphoreNumber = operations[j].sem_num;
 				semaphore = semaphoreSet->Semaphore(semaphoreNumber);
 				short operation = operations[j].sem_op;
@@ -1183,10 +1183,10 @@ _user_xsi_semop(int semaphoreID, struct sembuf *ops, size_t numOps)
 				waitOnZero = false;
 
 			Thread *thread = thread_get_current_thread();
-			queued_thread queueEntry(thread, (int32)operations[i].sem_op);
+			queued_thread queueEntry(thread, (int32_t)operations[i].sem_op);
 			semaphore->Enqueue(&queueEntry, waitOnZero);
 
-			uint32 sequenceNumber = semaphoreSet->SequenceNumber();
+			uint32_t sequenceNumber = semaphoreSet->SequenceNumber();
 
 			TRACE(("xsi_semop: thread %d going to sleep\n", (int)thread->id));
 			result = semaphore->BlockAndUnlock(thread, &setLocker);
@@ -1222,7 +1222,7 @@ _user_xsi_semop(int semaphoreID, struct sembuf *ops, size_t numOps)
 			// We acquired the semaphore, now records the sem_undo
 			// requests
 			XsiSemaphore *semaphore = NULL;
-			uint32 i = 0;
+			uint32_t i = 0;
 			for (; i < numOps; i++) {
 				short semaphoreNumber = operations[i].sem_num;
 				semaphore = semaphoreSet->Semaphore(semaphoreNumber);
@@ -1233,7 +1233,7 @@ _user_xsi_semop(int semaphoreID, struct sembuf *ops, size_t numOps)
 						// Unlikely scenario, but we might get here.
 						// Undo everything!
 						// Start with semaphore operations
-						for (uint32 j = 0; j < numOps; j++) {
+						for (uint32_t j = 0; j < numOps; j++) {
 							short semaphoreNumber = operations[j].sem_num;
 							semaphore = semaphoreSet->Semaphore(semaphoreNumber);
 							short operation = operations[j].sem_op;
@@ -1241,7 +1241,7 @@ _user_xsi_semop(int semaphoreID, struct sembuf *ops, size_t numOps)
 								semaphore->Revert(operation);
 						}
 						// Remove all previously registered sem_undo request
-						for (uint32 j = 0; j < i; j++) {
+						for (uint32_t j = 0; j < i; j++) {
 							if (operations[j].sem_flg & SEM_UNDO)
 								semaphoreSet->RevertUndo(operations[j].sem_num,
 									operations[j].sem_op);
@@ -1254,7 +1254,7 @@ _user_xsi_semop(int semaphoreID, struct sembuf *ops, size_t numOps)
 
 	// We did it. Set the pid of all semaphores used
 	if (result == 0) {
-		for (uint32 i = 0; i < numOps; i++) {
+		for (uint32_t i = 0; i < numOps; i++) {
 			short semaphoreNumber = operations[i].sem_num;
 			XsiSemaphore *semaphore = semaphoreSet->Semaphore(semaphoreNumber);
 			semaphore->SetPid(getpid());

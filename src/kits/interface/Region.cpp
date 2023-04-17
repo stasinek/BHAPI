@@ -151,7 +151,7 @@ BRegion::operator=(const BRegion &from)
 
 	if(from.fRects.CountItems() > 0)
 	{
-		for(__be_int32 i = 0; i < from.fRects.CountItems(); i++)
+		for(__be_int32_t i = 0; i < from.fRects.CountItems(); i++)
 		{
 			BRect *r = (BRect*)from.fRects.ItemAt(i);
 			BRect *nr = ((!r || r->IsValid() == false) ? NULL : new BRect(*r));
@@ -195,7 +195,7 @@ BRegion::Frame() const
 <section id="EREGION_FUNCTION_RECT_AT">
 	<title>区域描述的组成矩形</title>
 	<programlisting>
-BRect BRegion::RectAt(__be_int32 <emphasis>index</emphasis>) const
+BRect BRegion::RectAt(__be_int32_t <emphasis>index</emphasis>) const
 	</programlisting>
 	<itemizedList.h>
 		<listitem><para><emphasis>index</emphasis>是组成矩形的位置索引。
@@ -207,7 +207,7 @@ BRect BRegion::RectAt(__be_int32 <emphasis>index</emphasis>) const
 </document>
 -----------------------------------------------------------------------------*/
 BRect
-BRegion::RectAt(__be_int32 index) const
+BRegion::RectAt(__be_int32_t index) const
 {
 	BRect *r = (BRect*)fRects.ItemAt(index);
 	return(r ? *r : BRect());
@@ -219,7 +219,7 @@ BRegion::RectAt(__be_int32 index) const
 <section id="EREGION_FUNCTION_COUNT_RECTS">
 	<title>区域描述的组成矩形数量</title>
 	<programlisting>
-__be_int32 BRegion::CountRects() const
+__be_int32_t BRegion::CountRects() const
 	</programlisting>
 	<para>返回值为该区域描述的组合矩形数量。
 		<footnote><para>一个区域范围描述由多个矩形成员组成，
@@ -229,7 +229,7 @@ __be_int32 BRegion::CountRects() const
 </section>
 </document>
 -----------------------------------------------------------------------------*/
-__be_int32 BRegion::CountRects() const
+__be_int32_t BRegion::CountRects() const
 {
 	return fRects.CountItems();
 }
@@ -315,7 +315,7 @@ void BRegion::Set(BRect rect)
 
 void BRegion::MakeEmpty()
 {
-	for(__be_int32 i = 0; i < fRects.CountItems(); i++)
+	for(__be_int32_t i = 0; i < fRects.CountItems(); i++)
 	{
 		BRect *r = (BRect*)fRects.ItemAt(i);
 		if(r) delete r;
@@ -374,20 +374,20 @@ bool BRegion::Include(BRect rect)
 	if(rect.IsValid() == false) return false;
 
 	BRect *rects = &rect;
-	__be_int32 nRects = 1;
+	__be_int32_t nRects = 1;
 
-	for(__be_int32 i = 0; i < fRects.CountItems(); i++)
+	for(__be_int32_t i = 0; i < fRects.CountItems(); i++)
 	{
 		BRect *r = (BRect*)fRects.ItemAt(i);
 
 		BRect **rs = ((!r || r->IsValid() == false) ? NULL : new BRect*[nRects]);
 		__be_int8 *nrs = ((!r || r->IsValid() == false) ? NULL : new  __be_int8[nRects]);
-		__be_int32 nNeeded = 0;
+		__be_int32_t nNeeded = 0;
 		bool haveNew = false;
 
 		if(rs && nrs)
 		{
-			for(__be_int32 j = 0; j < nRects; j++)
+			for(__be_int32_t j = 0; j < nRects; j++)
 			{
 				if(r->Intersects(rects[j]))
 				{
@@ -414,7 +414,7 @@ bool BRegion::Include(BRect rect)
 
 		if(!rs || !nrs || nNeeded < 0)
 		{
-			if(rs && nrs) for(__be_int32 j = 0; j <= -(nNeeded + 1); j++) if(rs[j] != NULL && rs[j] != &(rects[j])) delete[] rs[j];
+			if(rs && nrs) for(__be_int32_t j = 0; j <= -(nNeeded + 1); j++) if(rs[j] != NULL && rs[j] != &(rects[j])) delete[] rs[j];
 			if(rs) delete[] rs;
 			if(nrs) delete[] nrs;
 
@@ -423,7 +423,7 @@ bool BRegion::Include(BRect rect)
 		}
 		else if(nNeeded == 0 && haveNew)
 		{
-			for(__be_int32 j = 0; j < nRects; j++) if(rs[j] != NULL && rs[j] != &(rects[j])) delete[] rs[j];
+			for(__be_int32_t j = 0; j < nRects; j++) if(rs[j] != NULL && rs[j] != &(rects[j])) delete[] rs[j];
 			delete[] rs;
 			delete[] nrs;
 
@@ -433,7 +433,7 @@ bool BRegion::Include(BRect rect)
 
 		BRect *newRects = ((nNeeded > 0 && haveNew) ? new BRect[nNeeded] : NULL);
 		BRect *tmp = newRects;
-		for(__be_int32 j = 0; j < nRects; j++)
+		for(__be_int32_t j = 0; j < nRects; j++)
 		{
 			if(tmp && nrs[j] > 0)
 			{
@@ -454,10 +454,10 @@ bool BRegion::Include(BRect rect)
 		}
 	}
 
-	__be_int32 oldLength = fRects.CountItems();
+	__be_int32_t oldLength = fRects.CountItems();
 	BRect oldFrame = fFrame;
 
-	for(__be_int32 i = 0; i < nRects; i++)
+	for(__be_int32_t i = 0; i < nRects; i++)
 	{
 		BRect *r = new BRect(rects[i]);
 		if(!r || r->IsValid() == false || fRects.AddItem(r) == false)
@@ -467,7 +467,7 @@ bool BRegion::Include(BRect rect)
 
 			if(fRects.CountItems() > oldLength)
 			{
-                for(__be_int32 j = oldLength; j < fRects.CountItems(); j++)
+                for(__be_int32_t j = oldLength; j < fRects.CountItems(); j++)
 				{
                     r = (BRect*)fRects.ItemAt(j);
 					if(r) delete r;
@@ -490,17 +490,17 @@ bool BRegion::Include(const BRegion *region)
 {
 	if(region == NULL || region->CountRects() <= 0) return false;
 
-	__be_int32 oldLength = fRects.CountItems();
+	__be_int32_t oldLength = fRects.CountItems();
 	BRect oldFrame = fFrame;
 
-	for(__be_int32 i = 0; i < region->CountRects(); i++)
+	for(__be_int32_t i = 0; i < region->CountRects(); i++)
 	{
 		BRect r = region->RectAt(i);
 		if(r.IsValid() == false || Include(r) == false)
 		{
 			if(fRects.CountItems() > oldLength)
 			{
-                for(__be_int32 j = oldLength; j < fRects.CountItems(); j++)
+                for(__be_int32_t j = oldLength; j < fRects.CountItems(); j++)
 				{
 					BRect *ar = (BRect*)fRects.ItemAt(i);
 					if(ar) delete ar;
@@ -520,7 +520,7 @@ bool BRegion::Exclude(BRect r)
 {
 	if(Intersects(r) == false) return true;
 
-	__be_int32 offset = 0;
+	__be_int32_t offset = 0;
 	BRect rect;
 	bool retVal = true;
 
@@ -563,7 +563,7 @@ bool BRegion::Exclude(BRect r)
 	{
 		MakeEmpty();
 		if(fRects.AddList(&(aRegion.fRects))) aRegion.fRects.MakeEmpty();
-		for(__be_int32 i = 0; i < fRects.CountItems(); i++)
+		for(__be_int32_t i = 0; i < fRects.CountItems(); i++)
 		{
             BRect *sr = (BRect*)fRects.ItemAt(i);
             fFrame = (fFrame.IsValid() ? (fFrame | *sr) : *sr);
@@ -583,7 +583,7 @@ bool BRegion::Exclude(const BRegion *region)
 
 	bool retVal = true;
 
-	for(__be_int32 i = 0; i < region->CountRects(); i++)
+	for(__be_int32_t i = 0; i < region->CountRects(); i++)
 	{
 		BRect r = region->RectAt(i);
 		if(aRegion.Exclude(r) == false) {retVal = false; break;}
@@ -593,7 +593,7 @@ bool BRegion::Exclude(const BRegion *region)
 	{
 		MakeEmpty();
 		if(fRects.AddList(&(aRegion.fRects))) aRegion.fRects.MakeEmpty();
-		for(__be_int32 i = 0; i < fRects.CountItems(); i++)
+		for(__be_int32_t i = 0; i < fRects.CountItems(); i++)
 		{
 			BRect *r = (BRect*)fRects.ItemAt(i);
 			fFrame = (fFrame.IsValid() ? (fFrame | *r) : *r);
@@ -608,7 +608,7 @@ void BRegion::OffsetBy(float dx, float dy)
 {
 	if(fRects.CountItems() <= 0) return;
 
-	for(__be_int32 i = 0; i < fRects.CountItems(); i++)
+	for(__be_int32_t i = 0; i < fRects.CountItems(); i++)
 	{
 		BRect *r = (BRect*)fRects.ItemAt(i);
 		r->OffsetBy(dx, dy);
@@ -704,7 +704,7 @@ bool BRegion::Intersects(float l, float t, float r, float b) const
 {
 	if(fFrame.Intersects(l, t, r, b) == false) return false;
 
-	for(__be_int32 i = 0; i < fRects.CountItems(); i++)
+	for(__be_int32_t i = 0; i < fRects.CountItems(); i++)
 	{
 		BRect *rect = (BRect*)fRects.ItemAt(i);
 		if(!rect || rect->IsValid() == false) return false;
@@ -719,12 +719,12 @@ bool BRegion::Intersects(const BRegion *region) const
 {
 	if(!region || fFrame.Intersects(region->fFrame) == false) return false;
 
-	for(__be_int32 i = 0; i < fRects.CountItems(); i++)
+	for(__be_int32_t i = 0; i < fRects.CountItems(); i++)
 	{
 		BRect *rect = (BRect*)fRects.ItemAt(i);
 		if(!rect || rect->IsValid() == false) return false;
 
-		for(__be_int32 j = 0; j < region->fRects.CountItems(); j++)
+		for(__be_int32_t j = 0; j < region->fRects.CountItems(); j++)
 		{
 			BRect *ar = (BRect*)region->fRects.ItemAt(j);
 			if(!ar || ar->IsValid() == false) return false;
@@ -746,7 +746,7 @@ bool BRegion::Contains(float x, float y) const
 {
 	if(fFrame.Contains(x, y) == false) return false;
 
-	for(__be_int32 i = 0; i < fRects.CountItems(); i++)
+	for(__be_int32_t i = 0; i < fRects.CountItems(); i++)
 	{
 		BRect *r = (BRect*)fRects.ItemAt(i);
 		if(!r || r->IsValid() == false) return false;
@@ -787,7 +787,7 @@ void BRegion::PrintToStream() const
 {
 	fFrame.PrintToStream();
 	BHAPI_OUTPUT("\n");
-	for(__be_int32 i = 0; i < fRects.CountItems(); i++)
+	for(__be_int32_t i = 0; i < fRects.CountItems(); i++)
 	{
 		BRect *r = (BRect*)fRects.ItemAt(i);
 		if(r) r->PrintToStream();
@@ -826,7 +826,7 @@ BRegion::operator&=(BRect r)
 	if(fFrame.Intersects(r) == false) MakeEmpty();
 	else
 	{
-		__be_int32 offset = 0;
+		__be_int32_t offset = 0;
 		while(offset < fRects.CountItems())
 		{
 			BRect *rect = (BRect*)fRects.ItemAt(offset);
@@ -846,7 +846,7 @@ BRegion::operator&=(BRect r)
 	}
 
 	fFrame = BRect();
-	for(__be_int32 i = 0; i < fRects.CountItems(); i++)
+	for(__be_int32_t i = 0; i < fRects.CountItems(); i++)
 	{
 		BRect *rect = (BRect*)fRects.ItemAt(i);
 		fFrame = (fFrame.IsValid() ? (fFrame | *rect) : *rect);
@@ -921,7 +921,7 @@ void BRegion::Scale(float scaling)
 
 	if(scaling > 0)
 	{
-		for(__be_int32 i = 0; i < fRects.CountItems(); i++)
+		for(__be_int32_t i = 0; i < fRects.CountItems(); i++)
 		{
 			BRect *r = (BRect*)fRects.ItemAt(i);
 			r->left *= scaling;

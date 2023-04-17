@@ -76,14 +76,14 @@ int			dump_depot_magazine(int argCount, char** args);
 
 #if PARANOID_KERNEL_MALLOC || PARANOID_KERNEL_FREE
 static inline void*
-fill_block(void* buffer, size_t size, uint32 pattern)
+fill_block(void* buffer, size_t size, uint32_t pattern)
 {
 	if (buffer == NULL)
 		return NULL;
 
 	size &= ~(sizeof(pattern) - 1);
 	for (size_t i = 0; i < size / sizeof(pattern); i++)
-		((uint32*)buffer)[i] = pattern;
+		((uint32_t*)buffer)[i] = pattern;
 
 	return buffer;
 }

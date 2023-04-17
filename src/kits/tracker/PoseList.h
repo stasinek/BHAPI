@@ -53,7 +53,7 @@ class Model;
 
 class PoseList : public BObjectList<BPose> {
 public:
-	PoseList(int32 itemsPerBlock = 20, bool owning = false)
+	PoseList(int32_t itemsPerBlock = 20, bool owning = false)
 		:
 		BObjectList<BPose>(itemsPerBlock, owning)
 	{
@@ -65,15 +65,15 @@ public:
 	{
 	}
 
-	BPose* FindPose(const node_ref* node, int32* index = NULL) const;
-	BPose* FindPose(const entry_ref* entry, int32* index = NULL) const;
-	BPose* FindPose(const Model* model, int32* index = NULL) const;
-	BPose* DeepFindPose(const node_ref* node, int32* index = NULL) const;
+	BPose* FindPose(const node_ref* node, int32_t* index = NULL) const;
+	BPose* FindPose(const entry_ref* entry, int32_t* index = NULL) const;
+	BPose* FindPose(const Model* model, int32_t* index = NULL) const;
+	BPose* DeepFindPose(const node_ref* node, int32_t* index = NULL) const;
 		// same as FindPose, node can be a target of the actual
 		// pose if the pose is a symlink
 	PoseList* FindAllPoses(const node_ref* node) const;
 
-	BPose* FindPoseByFileName(const char* name, int32* _index = NULL) const;
+	BPose* FindPoseByFileName(const char* name, int32_t* _index = NULL) const;
 };
 
 
@@ -85,7 +85,7 @@ void EachPoseAndModel(PoseList* list,
 	void (*eachFunction)(BPose*, Model*, EachParam1),
 	EachParam1 eachParam1)
 {
-	for (int32 index = list->CountItems() - 1; index >= 0; index--) {
+	for (int32_t index = list->CountItems() - 1; index >= 0; index--) {
 		BPose* pose = list->ItemAt(index);
 		Model* model = pose->TargetModel();
 		if (model != NULL)
@@ -96,10 +96,10 @@ void EachPoseAndModel(PoseList* list,
 
 template<class EachParam1>
 void EachPoseAndModel(PoseList* list,
-	void (*eachFunction)(BPose*, Model*, int32, EachParam1),
+	void (*eachFunction)(BPose*, Model*, int32_t, EachParam1),
 	EachParam1 eachParam1)
 {
-	for (int32 index = list->CountItems() - 1; index >= 0; index--) {
+	for (int32_t index = list->CountItems() - 1; index >= 0; index--) {
 		BPose* pose = list->ItemAt(index);
 		Model* model = pose->TargetModel();
 		if (model != NULL)
@@ -113,7 +113,7 @@ void EachPoseAndModel(PoseList* list,
 	void (*eachFunction)(BPose*, Model*, EachParam1, EachParam2),
 	EachParam1 eachParam1, EachParam2 eachParam2)
 {
-	for (int32 index = list->CountItems() - 1; index >= 0; index--) {
+	for (int32_t index = list->CountItems() - 1; index >= 0; index--) {
 		BPose* pose = list->ItemAt(index);
 		Model* model = pose->TargetModel();
 		if (model != NULL)
@@ -124,10 +124,10 @@ void EachPoseAndModel(PoseList* list,
 
 template<class EachParam1, class EachParam2>
 void EachPoseAndModel(PoseList* list,
-	void (*eachFunction)(BPose*, Model*, int32, EachParam1, EachParam2),
+	void (*eachFunction)(BPose*, Model*, int32_t, EachParam1, EachParam2),
 	EachParam1 eachParam1, EachParam2 eachParam2)
 {
-	for (int32 index = list->CountItems() - 1; index >= 0; index--) {
+	for (int32_t index = list->CountItems() - 1; index >= 0; index--) {
 		BPose* pose = list->ItemAt(index);
 		Model* model = pose->TargetModel();
 		if (model != NULL)
@@ -140,7 +140,7 @@ template<class EachParam1>
 void EachPoseAndResolvedModel(PoseList* list,
 	void (*eachFunction)(BPose*, Model*, EachParam1), EachParam1 eachParam1)
 {
-	for (int32 index = list->CountItems() - 1; index >= 0; index--) {
+	for (int32_t index = list->CountItems() - 1; index >= 0; index--) {
 		BPose* pose = list->ItemAt(index);
 		Model* model = pose->TargetModel()->ResolveIfLink();
 		if (model != NULL)
@@ -151,10 +151,10 @@ void EachPoseAndResolvedModel(PoseList* list,
 
 template<class EachParam1>
 void EachPoseAndResolvedModel(PoseList* list,
-	void (*eachFunction)(BPose*, Model*, int32 , EachParam1),
+	void (*eachFunction)(BPose*, Model*, int32_t , EachParam1),
 	EachParam1 eachParam1)
 {
-	for (int32 index = list->CountItems() - 1; index >= 0; index--) {
+	for (int32_t index = list->CountItems() - 1; index >= 0; index--) {
 		BPose* pose = list->ItemAt(index);
 		Model* model = pose->TargetModel()->ResolveIfLink();
 		if (model != NULL)
@@ -168,7 +168,7 @@ void EachPoseAndResolvedModel(PoseList* list,
 	void (*eachFunction)(BPose*, Model*, EachParam1, EachParam2),
 	EachParam1 eachParam1, EachParam2 eachParam2)
 {
-	for (int32 index = list->CountItems() - 1; index >= 0; index--) {
+	for (int32_t index = list->CountItems() - 1; index >= 0; index--) {
 		BPose* pose = list->ItemAt(index);
 		Model* model = pose->TargetModel()->ResolveIfLink();
 		if (model != NULL)
@@ -179,10 +179,10 @@ void EachPoseAndResolvedModel(PoseList* list,
 
 template<class EachParam1, class EachParam2>
 void EachPoseAndResolvedModel(PoseList* list,
-	void (*eachFunction)(BPose*, Model*, int32, EachParam1, EachParam2),
+	void (*eachFunction)(BPose*, Model*, int32_t, EachParam1, EachParam2),
 	EachParam1 eachParam1, EachParam2 eachParam2)
 {
-	for (int32 index = list->CountItems() - 1; index >= 0; index--) {
+	for (int32_t index = list->CountItems() - 1; index >= 0; index--) {
 		BPose* pose = list->ItemAt(index);
 		Model* model = pose->TargetModel()->ResolveIfLink();
 		if (model != NULL)

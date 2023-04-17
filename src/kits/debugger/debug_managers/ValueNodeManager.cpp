@@ -67,12 +67,12 @@ status_t ValueNodeManager::SetStackFrame(Thread* thread,
 	fContainer->AddListener(this);
 
 	if (fStackFrame != NULL && fAddFrameNodes) {
-		for (int32 i = 0; Variable* variable = fStackFrame->ParameterAt(i);
+		for (int32_t i = 0; Variable* variable = fStackFrame->ParameterAt(i);
 				i++) {
 			_AddNode(variable);
 		}
 
-		for (int32 i = 0; Variable* variable
+		for (int32_t i = 0; Variable* variable
 				= fStackFrame->LocalVariableAt(i); i++) {
 			_AddNode(variable);
 		}
@@ -102,7 +102,7 @@ void ValueNodeManager::ValueNodeChanged(ValueNodeChild* nodeChild,
 
 	AutoLocker<ValueNodeContainer> containerLocker(fContainer);
 
-	for (int32 i = fListeners.CountItems() - 1; i >= 0; i--)
+	for (int32_t i = fListeners.CountItems() - 1; i >= 0; i--)
 		fListeners.ItemAt(i)->ValueNodeChanged(nodeChild, oldNode, newNode);
 
 	if (oldNode != NULL)
@@ -116,7 +116,7 @@ void ValueNodeManager::ValueNodeChildrenCreated(ValueNode* node)
 	if (fContainer == NULL)
 		return;
 
-	for (int32 i = fListeners.CountItems() - 1; i >= 0; i--)
+	for (int32_t i = fListeners.CountItems() - 1; i >= 0; i--)
 		fListeners.ItemAt(i)->ValueNodeChildrenCreated(node);
 }
 
@@ -126,7 +126,7 @@ void ValueNodeManager::ValueNodeChildrenDeleted(ValueNode* node)
 	if (fContainer == NULL)
 		return;
 
-	for (int32 i = fListeners.CountItems() - 1; i >= 0; i--)
+	for (int32_t i = fListeners.CountItems() - 1; i >= 0; i--)
 		fListeners.ItemAt(i)->ValueNodeChildrenDeleted(node);
 }
 
@@ -148,7 +148,7 @@ void ValueNodeManager::ValueNodeValueChanged(ValueNode* valueNode)
 		status_t error = valueNode->CreateChildren(
 			fThread->GetTeam()->GetTeamTypeInformation());
 		if (error == B_OK) {
-			for (int32 i = 0; i < valueNode->CountChildren(); i++) {
+			for (int32_t i = 0; i < valueNode->CountChildren(); i++) {
 				ValueNodeChild* child = valueNode->ChildAt(i);
 				_CreateValueNode(child);
 				AddChildNodes(child);
@@ -156,7 +156,7 @@ void ValueNodeManager::ValueNodeValueChanged(ValueNode* valueNode)
 		}
 	}
 
-	for (int32 i = fListeners.CountItems() - 1; i >= 0; i--)
+	for (int32_t i = fListeners.CountItems() - 1; i >= 0; i--)
 		fListeners.ItemAt(i)->ValueNodeValueChanged(valueNode);
 }
 

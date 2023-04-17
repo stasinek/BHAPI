@@ -99,38 +99,38 @@ public:
 	virtual	bool				SetRegisterValue(const Register* reg,
 									const BVariant& value);
 
-			uint32				InterruptVector() const
+			uint32_t				InterruptVector() const
 									{ return fInterruptVector; }
 
-			bool				IsRegisterSet(int32 index) const;
+			bool				IsRegisterSet(int32_t index) const;
 
-			uint32				IntRegisterValue(int32 index) const;
-			void				SetIntRegister(int32 index, uint32 value);
+			uint32_t				IntRegisterValue(int32_t index) const;
+			void				SetIntRegister(int32_t index, uint32_t value);
 
-			double				FloatRegisterValue(int32 index) const;
-			void				SetFloatRegister(int32 index, double value);
+			double				FloatRegisterValue(int32_t index) const;
+			void				SetFloatRegister(int32_t index, double value);
 
-			const void*			MMXRegisterValue(int32 index) const;
-			void				SetMMXRegister(int32 index,
+			const void*			MMXRegisterValue(int32_t index) const;
+			void				SetMMXRegister(int32_t index,
 									const uint8* value);
 
-			const void*			XMMRegisterValue(int32 index) const;
-			void				SetXMMRegister(int32 index,
+			const void*			XMMRegisterValue(int32_t index) const;
+			void				SetXMMRegister(int32_t index,
 									const uint8* value);
 
-			void				UnsetRegister(int32 index);
+			void				UnsetRegister(int32_t index);
 
 private:
 	typedef std::bitset<X86_REGISTER_COUNT> RegisterBitSet;
 
 private:
-			uint32				fIntRegisters[X86_INT_REGISTER_COUNT];
+			uint32_t				fIntRegisters[X86_INT_REGISTER_COUNT];
 			double				fFloatRegisters[X86_FP_REGISTER_COUNT];
 			x86_fp_register		fMMXRegisters[X86_MMX_REGISTER_COUNT];
 			x86_xmm_register	fXMMRegisters[X86_XMM_REGISTER_COUNT];
 
 			RegisterBitSet		fSetRegisters;
-			uint32				fInterruptVector;
+			uint32_t				fInterruptVector;
 };
 
 

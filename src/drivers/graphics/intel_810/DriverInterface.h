@@ -25,7 +25,7 @@
 
 struct Benaphore {
 	sem_id	sem;
-	int32	count;
+	int32_t	count;
 
 	status_t Init(const char* name)
 	{
@@ -82,17 +82,17 @@ struct SharedInfo {
 	area_id videoMemArea;		// addr shared with all teams.
 	addr_t	videoMemAddr;		// virtual video memory addr
 	phys_addr_t	videoMemPCI;	// physical video memory addr
-	uint32	videoMemSize; 		// video memory size in bytes (for frame buffer)
+	uint32_t	videoMemSize; 		// video memory size in bytes (for frame buffer)
 
-	uint32	maxFrameBufferSize;	// max available video memory for frame buffer
+	uint32_t	maxFrameBufferSize;	// max available video memory for frame buffer
 
 	// Color spaces supported by current video chip/driver.
 	color_space	colorSpaces[6];
-	uint32	colorSpaceCount;	// number of color spaces in array colorSpaces
+	uint32_t	colorSpaceCount;	// number of color spaces in array colorSpaces
 
 	// List of screen modes.
 	area_id modeArea;			// area containing list of display modes
-	uint32	modeCount;			// number of display modes in the list
+	uint32_t	modeCount;			// number of display modes in the list
 
 	DisplayModeEx displayMode;	// current display mode configuration
 

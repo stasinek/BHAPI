@@ -41,34 +41,34 @@ enum {
 };
 
 typedef struct kernel_args {
-    uint32		kernel_args_size;
-    uint32		version;
+    uint32_t		kernel_args_size;
+    uint32_t		version;
 
     FixedWidthPointer<struct preloaded_image> kernel_image;
     FixedWidthPointer<struct preloaded_image> preloaded_images;
 
-    uint32		num_physical_memory_ranges;
+    uint32_t		num_physical_memory_ranges;
     addr_range	physical_memory_range[MAX_PHYSICAL_MEMORY_RANGE];
-    uint32		num_physical_allocated_ranges;
+    uint32_t		num_physical_allocated_ranges;
     addr_range	physical_allocated_range[MAX_PHYSICAL_ALLOCATED_RANGE];
-    uint32		num_virtual_allocated_ranges;
+    uint32_t		num_virtual_allocated_ranges;
     addr_range	virtual_allocated_range[MAX_VIRTUAL_ALLOCATED_RANGE];
-    uint32		num_kernel_args_ranges;
+    uint32_t		num_kernel_args_ranges;
     addr_range	kernel_args_range[MAX_KERNEL_ARGS_RANGE];
     uint64		ignored_physical_memory;
 
-    uint32		num_cpus;
+    uint32_t		num_cpus;
     addr_range	cpu_kstack[SMP_MAX_CPUS];
 
     // boot volume KMessage data
     FixedWidthPointer<void> boot_volume;
-    int32		boot_volume_size;
+    int32_t		boot_volume_size;
 
     FixedWidthPointer<struct driver_settings_file> driver_settings;
 
     struct {
         addr_range	physical_buffer;
-        uint32	bytes_per_row;
+        uint32_t	bytes_per_row;
         uint16	width;
         uint16	height;
         uint8	depth;
@@ -87,10 +87,10 @@ typedef struct kernel_args {
     FixedWidthPointer<void> previous_debug_output;
         // A flat pointer to a buffer containing the debug output from the
         // previous session. May be NULL.
-    uint32		debug_size;
+    uint32_t		debug_size;
         // If keep_debug_output_buffer, the size of the ring buffer, otherwise
         // the size of the flat buffer debug_output points to.
-    uint32		previous_debug_size;
+    uint32_t		previous_debug_size;
         // The size of the buffer previous_debug_output points to. Used as a
         // boolean indicator whether to save the previous session's debug output
         // until initialized for the kernel.

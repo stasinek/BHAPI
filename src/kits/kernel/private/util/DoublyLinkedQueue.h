@@ -158,7 +158,7 @@ class DoublyLinkedQueue {
 		inline Element *GetPrevious(Element *element) const;
 		inline Element *GetNext(Element *element) const;
 
-		inline int32 Size() const;
+		inline int32_t Size() const;
 			// O(n)!
 
 		inline Iterator GetIterator()				{ return Iterator(this); }
@@ -337,9 +337,9 @@ DOUBLY_LINKED_QUEUE_CLASS_NAME::GetNext(Element *element) const
 
 // Size
 DOUBLY_LINKED_LIST_TEMPLATE_LIST
-int32 DOUBLY_LINKED_QUEUE_CLASS_NAME::Size() const
+int32_t DOUBLY_LINKED_QUEUE_CLASS_NAME::Size() const
 {
-	int32 count = 0;
+	int32_t count = 0;
 	for (Element* element = First(); element; element = GetNext(element))
 		count++;
 	return count;

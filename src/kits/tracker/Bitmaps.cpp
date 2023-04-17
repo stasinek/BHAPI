@@ -103,7 +103,7 @@ status_t BImageResources::FinishResources(BResources* res) const
 }
 
 
-const void*   BImageResources::LoadResource(type_code type, int32 id,
+const void*   BImageResources::LoadResource(type_code type, int32_t id,
 	size_t* out_size) const
 {
 	// Serialize execution.
@@ -137,7 +137,7 @@ const void*   BImageResources::LoadResource(type_code type, const char* name,
 }
 
 
-status_t BImageResources::GetIconResource(int32 id, icon_size size,
+status_t BImageResources::GetIconResource(int32_t id, icon_size size,
 	BBitmap* dest) const
 {
 	size_t length = 0;
@@ -168,12 +168,12 @@ status_t BImageResources::GetIconResource(int32 id, icon_size size,
 			size, dest);
 	}
 
-	dest->SetBits(data, (int32)length, 0, B_CMAP8);
+	dest->SetBits(data, (int32_t)length, 0, B_CMAP8);
 	return B_OK;
 }
 
 
-status_t BImageResources::GetIconResource(int32 id, const uint8** iconData,
+status_t BImageResources::GetIconResource(int32_t id, const uint8** iconData,
 	size_t* iconSize) const
 {
 	// try to load vector icon data from resources
@@ -193,7 +193,7 @@ image_id
 BImageResources::find_image(void* memAddr) const
 {
 	image_info info;
-	int32 cookie = 0;
+	int32_t cookie = 0;
 	while (get_next_image_info(0, &cookie, &info) == B_OK) {
 		if ((info.text <= memAddr
 			&& (((uint8*)info.text)+info.text_size) > memAddr)
@@ -208,7 +208,7 @@ BImageResources::find_image(void* memAddr) const
 }
 
 
-status_t BImageResources::GetBitmapResource(type_code type, int32 id,
+status_t BImageResources::GetBitmapResource(type_code type, int32_t id,
 	BBitmap** out) const
 {
 	*out = NULL;

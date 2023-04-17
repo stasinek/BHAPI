@@ -37,7 +37,7 @@ dev_for_path(const char *path)
 
 
 dev_t
-next_dev(int32 *_cookie)
+next_dev(int32_t *_cookie)
 {
 	return _kern_next_device(_cookie);
 		// For some reason, this one returns its error code directly

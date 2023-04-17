@@ -28,18 +28,18 @@ using std::swap;
 
 namespace {
 	// flags for our state
-	const uint32 B_LAYOUT_INVALID = 0x80000000UL; // needs layout
-	const uint32 B_LAYOUT_CACHE_INVALID = 0x40000000UL; // needs recalculation
-	const uint32 B_LAYOUT_REQUIRED = 0x20000000UL; // needs layout
-	const uint32 B_LAYOUT_IN_PROGRESS = 0x10000000UL;
-	const uint32 B_LAYOUT_ALL_CLEAR = 0UL;
+	const uint32_t B_LAYOUT_INVALID = 0x80000000UL; // needs layout
+	const uint32_t B_LAYOUT_CACHE_INVALID = 0x40000000UL; // needs recalculation
+	const uint32_t B_LAYOUT_REQUIRED = 0x20000000UL; // needs layout
+	const uint32_t B_LAYOUT_IN_PROGRESS = 0x10000000UL;
+	const uint32_t B_LAYOUT_ALL_CLEAR = 0UL;
 
 	// handy masks to check various states
-	const uint32 B_LAYOUT_INVALIDATION_ILLEGAL
+	const uint32_t B_LAYOUT_INVALIDATION_ILLEGAL
 		= B_LAYOUT_CACHE_INVALID | B_LAYOUT_IN_PROGRESS;
-	const uint32 B_LAYOUT_NECESSARY
+	const uint32_t B_LAYOUT_NECESSARY
 		= B_LAYOUT_INVALID | B_LAYOUT_REQUIRED | B_LAYOUT_CACHE_INVALID;
-	const uint32 B_RELAYOUT_NOT_OK
+	const uint32_t B_RELAYOUT_NOT_OK
 		= B_LAYOUT_INVALID | B_LAYOUT_IN_PROGRESS;
 
 	const char* const kLayoutItemField = "BLayout:items";
@@ -80,7 +80,7 @@ BLayout::BLayout(BMessage* from)
 {
 	BUnarchiver unarchiver(from);
 
-	int32 i = 0;
+	int32_t i = 0;
 	while (unarchiver.EnsureUnarchived(kLayoutItemField, i++) == B_OK)
 		;
 }
@@ -130,7 +130,7 @@ BLayout::AddView(BView* child)
 
 
 BLayoutItem*
-BLayout::AddView(int32 index, BView* child)
+BLayout::AddView(int32_t index, BView* child)
 {
 	BLayoutItem* item = child->GetLayout();
 	ObjectDeleter<BLayoutItem> itemDeleter(NULL);
@@ -154,7 +154,7 @@ bool BLayout::AddItem(BLayoutItem* item)
 }
 
 
-bool BLayout::AddItem(int32 index, BLayoutItem* item)
+bool BLayout::AddItem(int32_t index, BLayoutItem* item)
 {
 	if (!fTarget || !item || fItems.HasItem(item))
 		return false;
@@ -198,8 +198,8 @@ bool BLayout::RemoveView(BView* child)
 	bool removed = false;
 
 	// a view can have any number of layout items - we need to remove them all
-	int32 remaining = BView::Private(child).CountLayoutItems();
-	for (int32 i = CountItems() - 1; i >= 0 && remaining > 0; i--) {
+	int32_t remaining = BView::Private(child).CountLayoutItems();
+	for (int32_t i = CountItems() - 1; i >= 0 && remaining > 0; i--) {
 		BLayoutItem* item = ItemAt(i);
 
 		if (item->View() != child)
@@ -219,13 +219,13 @@ bool BLayout::RemoveView(BView* child)
 
 bool BLayout::RemoveItem(BLayoutItem* item)
 {
-	int32 index = IndexOfItem(item);
+	int32_t index = IndexOfItem(item);
 	return (index >= 0 ? RemoveItem(index) != NULL : false);
 }
 
 
 BLayoutItem*
-BLayout::RemoveItem(int32 index)
+BLayout::RemoveItem(int32_t index)
 {
 	if (index < 0 || index >= fItems.CountItems())
 		return NULL;
@@ -247,25 +247,25 @@ BLayout::RemoveItem(int32 index)
 
 
 BLayoutItem*
-BLayout::ItemAt(int32 index) const
+BLayout::ItemAt(int32_t index) const
 {
 	return (BLayoutItem*)fItems.ItemAt(index);
 }
 
 
-int32 BLayout::CountItems() const
+int32_t BLayout::CountItems() const
 {
 	return fItems.CountItems();
 }
 
 
-int32 BLayout::IndexOfItem(const BLayoutItem* item) const
+int32_t BLayout::IndexOfItem(const BLayoutItem* item) const
 {
 	return fItems.IndexOf(item);
 }
 
 
-int32 BLayout::IndexOfView(BView* child) const
+int32_t BLayout::IndexOfView(BView* child) const
 {
 	if (child == NULL)
 		return -1;
@@ -273,8 +273,8 @@ int32 BLayout::IndexOfView(BView* child) const
 	// A BView can have many items, so we just do our best and return the
 	// index of the first one in this layout.
 	BView::Private viewPrivate(child);
-	int32 itemCount = viewPrivate.CountLayoutItems();
-	for (int32 i = 0; i < itemCount; i++) {
+	int32_t itemCount = viewPrivate.CountLayoutItems();
+	for (int32_t i = 0; i < itemCount; i++) {
 		BLayoutItem* item = viewPrivate.LayoutItemAt(i);
 		if (item->Layout() == this)
 			return IndexOfItem(item);
@@ -305,7 +305,7 @@ void BLayout::InvalidateLayout(bool children)
 	LayoutInvalidated(children);
 
 	if (children) {
-		for (int32 i = CountItems() - 1; i >= 0; i--)
+		for (int32_t i = CountItems() - 1; i >= 0; i--)
 			ItemAt(i)->InvalidateLayout(children);
 	}
 
@@ -394,8 +394,8 @@ void BLayout::_LayoutWithinContext(bool force, BLayoutContext* context)
 		// have their layout process triggered by their view, but nested
 		// view-less layouts must have their layout triggered here (if it hasn't
 		// already been triggered).
-		int32 nestedLayoutCount = fNestedLayouts.CountItems();
-		for (int32 i = 0; i < nestedLayoutCount; i++) {
+		int32_t nestedLayoutCount = fNestedLayouts.CountItems();
+		for (int32_t i = 0; i < nestedLayoutCount; i++) {
 			BLayout* layout = (BLayout*)fNestedLayouts.ItemAt(i);
 			if ((layout->fState & B_LAYOUT_NECESSARY) != 0)
 				layout->_LayoutWithinContext(force, context);
@@ -423,8 +423,8 @@ status_t BLayout::Archive(BMessage* into, bool deep) const
 	status_t err = BLayoutItem::Archive(into, deep);
 
 	if (deep) {
-		int32 count = CountItems();
-		for (int32 i = 0; i < count && err == B_OK; i++) {
+		int32_t count = CountItems();
+		for (int32_t i = 0; i < count && err == B_OK; i++) {
 			BLayoutItem* item = ItemAt(i);
 			err = archiver.AddArchivable(kLayoutItemField, item, deep);
 
@@ -453,9 +453,9 @@ status_t BLayout::AllUnarchived(const BMessage* from)
 	if (err != B_OK)
 		return err;
 
-	int32 itemCount = 0;
+	int32_t itemCount = 0;
 	unarchiver.ArchiveMessage()->GetInfo(kLayoutItemField, NULL, &itemCount);
-	for (int32 i = 0; i < itemCount && err == B_OK; i++) {
+	for (int32_t i = 0; i < itemCount && err == B_OK; i++) {
 		BLayoutItem* item;
 		err = unarchiver.FindObject(kLayoutItemField,
 			i, BUnarchiver::B_DONT_ASSUME_OWNERSHIP, item);
@@ -483,25 +483,25 @@ status_t BLayout::AllUnarchived(const BMessage* from)
 }
 
 
-status_t BLayout::ItemArchived(BMessage* into, BLayoutItem* item, int32 index) const
+status_t BLayout::ItemArchived(BMessage* into, BLayoutItem* item, int32_t index) const
 {
 	return B_OK;
 }
 
 
-status_t BLayout::ItemUnarchived(const BMessage* from, BLayoutItem* item, int32 index)
+status_t BLayout::ItemUnarchived(const BMessage* from, BLayoutItem* item, int32_t index)
 {
 	return B_OK;
 }
 
 
-bool BLayout::ItemAdded(BLayoutItem* item, int32 atIndex)
+bool BLayout::ItemAdded(BLayoutItem* item, int32_t atIndex)
 {
 	return true;
 }
 
 
-void BLayout::ItemRemoved(BLayoutItem* item, int32 fromIndex)
+void BLayout::ItemRemoved(BLayoutItem* item, int32_t fromIndex)
 {
 }
 
@@ -549,7 +549,7 @@ void BLayout::VisibilityChanged(bool show)
 	if (fOwner)
 		return;
 
-	for (int32 i = CountItems() - 1; i >= 0; i--)
+	for (int32_t i = CountItems() - 1; i >= 0; i--)
 		ItemAt(i)->AncestorVisibilityChanged(show);
 }
 
@@ -589,7 +589,7 @@ void BLayout::SetTarget(BView* target)
 		fTarget = NULL;
 
 		// remove and delete all items
-		for (int32 i = CountItems() - 1; i >= 0; i--)
+		for (int32_t i = CountItems() - 1; i >= 0; i--)
 			delete RemoveItem(i);
 
 		fTarget = target;

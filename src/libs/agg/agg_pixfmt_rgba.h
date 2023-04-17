@@ -1749,7 +1749,7 @@ namespace agg
 
     
     //=================================================pixfmt_alpha_blend_rgba
-    template<class Blender, class RenBuf, class PixelT = int32u> 
+    template<class Blender, class RenBuf, class PixelT = int32_tu> 
     class pixfmt_alpha_blend_rgba
     {
     public:
@@ -2742,7 +2742,7 @@ namespace agg
 
 
     //-----------------------------------------------------------------------
-    typedef int32u pixel32_type;
+    typedef int32_tu pixel32_type;
     typedef pixfmt_alpha_blend_rgba<blender_rgba32, rendering_buffer, pixel32_type> pixfmt_rgba32; //----pixfmt_rgba32
     typedef pixfmt_alpha_blend_rgba<blender_argb32, rendering_buffer, pixel32_type> pixfmt_argb32; //----pixfmt_argb32
     typedef pixfmt_alpha_blend_rgba<blender_abgr32, rendering_buffer, pixel32_type> pixfmt_abgr32; //----pixfmt_abgr32

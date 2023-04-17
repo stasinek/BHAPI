@@ -33,7 +33,7 @@ public:
 	// Get() and Put() instead.
 
 	static	BPrivateScreen*		Get(BWindow* window);
-	static	BPrivateScreen*		Get(int32 id);
+	static	BPrivateScreen*		Get(int32_t id);
 	static	void				Put(BPrivateScreen* screen);
 
 	static	BPrivateScreen*		GetNext(BPrivateScreen* screen);
@@ -41,8 +41,8 @@ public:
 			bool				IsValid() const;
 			color_space			ColorSpace();
 			BRect				Frame();
-			int32				ID() const { return fID; }
-			status_t			GetNextID(int32& id);
+			int32_t				ID() const { return fID; }
+			status_t			GetNextID(int32_t& id);
 
 			status_t			WaitForRetrace(bigtime_t timeout);
 
@@ -58,37 +58,37 @@ public:
 			status_t			ReadBitmap(BBitmap* bitmap, bool drawCursor,
 									BRect* bounds);
 
-			rgb_color			DesktopColor(uint32 index);
-			void				SetDesktopColor(rgb_color, uint32, bool);
+			rgb_color			DesktopColor(uint32_t index);
+			void				SetDesktopColor(rgb_color, uint32_t, bool);
 
 			status_t			ProposeMode(display_mode* target,
 									const display_mode* low,
 									const display_mode* high);
 
 			status_t			GetModeList(display_mode** _modeList,
-									uint32* _count);
-			status_t			GetMode(uint32 workspace, display_mode* mode);
-			status_t			SetMode(uint32 workspace, display_mode* mode,
+									uint32_t* _count);
+			status_t			GetMode(uint32_t workspace, display_mode* mode);
+			status_t			SetMode(uint32_t workspace, display_mode* mode,
 									bool makeDefault);
 
 			status_t			GetDeviceInfo(accelerant_device_info* info);
 			status_t			GetMonitorInfo(monitor_info* info);
 			status_t			GetPixelClockLimits(display_mode* mode,
-									uint32* _low, uint32* _high);
+									uint32_t* _low, uint32_t* _high);
 			status_t			GetTimingConstraints(
 									display_timing_constraints* constraints);
 
-			status_t			SetDPMS(uint32 dpmsState);
-			uint32				DPMSState();
-			uint32				DPMSCapabilites();
+			status_t			SetDPMS(uint32_t dpmsState);
+			uint32_t				DPMSState();
+			uint32_t				DPMSCapabilites();
 
 			void*				BaseAddress();
-			uint32				BytesPerRow();
+			uint32_t				BytesPerRow();
 
 private:
 	friend class BObjectList<BPrivateScreen>;
 
-								BPrivateScreen(int32 id);
+								BPrivateScreen(int32_t id);
 								~BPrivateScreen();
 
 			void				_Acquire();
@@ -98,12 +98,12 @@ private:
 			status_t			_GetFrameBufferConfig(
 									frame_buffer_config& config);
 
-	static	BPrivateScreen*		_Get(int32 id, bool check);
-	static	bool				_IsValid(int32 id);
+	static	BPrivateScreen*		_Get(int32_t id, bool check);
+	static	bool				_IsValid(int32_t id);
 
 private:
-			int32				fID;
-			int32				fReferenceCount;
+			int32_t				fID;
+			int32_t				fReferenceCount;
 			color_map*			fColorMap;
 			sem_id				fRetraceSem;
 			bool				fRetraceSemValid;

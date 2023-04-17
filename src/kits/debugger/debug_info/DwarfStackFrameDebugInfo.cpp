@@ -60,9 +60,9 @@ struct DwarfStackFrameDebugInfo::DwarfFunctionParameterID
 	}
 
 protected:
-	virtual uint32 ComputeHashValue() const
+	virtual uint32_t ComputeHashValue() const
 	{
-		uint32 hash = fFunctionID->HashValue();
+		uint32_t hash = fFunctionID->HashValue();
 		return hash * 19 + StringUtils::HashValue(fName);
 	}
 
@@ -78,7 +78,7 @@ private:
 struct DwarfStackFrameDebugInfo::DwarfLocalVariableID : public LocalVariableID {
 
 	DwarfLocalVariableID(FunctionID* functionID, const BString& name,
-		int32 line, int32 column)
+		int32_t line, int32_t column)
 		:
 		fFunctionID(functionID),
 		fName(name),
@@ -103,9 +103,9 @@ struct DwarfStackFrameDebugInfo::DwarfLocalVariableID : public LocalVariableID {
 	}
 
 protected:
-	virtual uint32 ComputeHashValue() const
+	virtual uint32_t ComputeHashValue() const
 	{
-		uint32 hash = fFunctionID->HashValue();
+		uint32_t hash = fFunctionID->HashValue();
 		hash = hash * 19 + StringUtils::HashValue(fName);
 		hash = hash * 19 + fLine;
 		hash = hash * 19 + fColumn;
@@ -115,8 +115,8 @@ protected:
 private:
 	FunctionID*		fFunctionID;
 	const BString	fName;
-	int32			fLine;
-	int32			fColumn;
+	int32_t			fLine;
+	int32_t			fColumn;
 };
 
 
@@ -149,9 +149,9 @@ struct DwarfStackFrameDebugInfo::DwarfReturnValueID
 	}
 
 protected:
-	virtual uint32 ComputeHashValue() const
+	virtual uint32_t ComputeHashValue() const
 	{
-		uint32 hash = fFunctionID->HashValue();
+		uint32_t hash = fFunctionID->HashValue();
 		return hash * 25 + StringUtils::HashValue(fName);
 	}
 
@@ -252,8 +252,8 @@ status_t DwarfStackFrameDebugInfo::CreateLocalVariable(FunctionID* functionID,
 		"name: \"%s\"\n", variableEntry, name.String());
 
 	// get the declaration location
-	int32 line = -1;
-	int32 column = -1;
+	int32_t line = -1;
+	int32_t column = -1;
 	const char* file;
 	const char* directory;
 	DwarfUtils::GetDeclarationLocation(fTypeContext->File(), variableEntry,

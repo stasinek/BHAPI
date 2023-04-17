@@ -17,25 +17,25 @@ enum {
 };
 
 struct messaging_area_header {
-	int32	lock_counter;
-	int32	size;				// set to 0, when area is discarded
+	int32_t	lock_counter;
+	int32_t	size;				// set to 0, when area is discarded
 	area_id	kernel_area;
 	area_id	next_kernel_area;
-	int32	command_count;
-	int32	first_command;
-	int32	last_command;
+	int32_t	command_count;
+	int32_t	first_command;
+	int32_t	last_command;
 };
 
 struct messaging_command {
-	int32	next_command;
-	uint32	command;
-	int32	size;			// == sizeof(messaging_command) + dataSize
+	int32_t	next_command;
+	uint32_t	command;
+	int32_t	size;			// == sizeof(messaging_command) + dataSize
 	char	data[0];
 };
 
 struct messaging_command_send_message {
-	int32				message_size;
-	int32				target_count;
+	int32_t				message_size;
+	int32_t				target_count;
 	messaging_target	targets[0];	// [target_count]
 //	char				message[message_size];
 };

@@ -25,7 +25,7 @@ enum {
 	FILE_MAP_CACHE_ALL			= 0x02
 };
 
-typedef void (*transaction_notification_hook)(int32 id, int32 event,
+typedef void (*transaction_notification_hook)(int32_t id, int32_t event,
 	void *data);
 
 #ifdef __cplusplus
@@ -33,26 +33,26 @@ extern "C" {
 #endif
 
 /* transactions */
-extern int32 cache_start_transaction(void *cache);
-extern status_t cache_sync_transaction(void *cache, int32 id);
-extern status_t cache_end_transaction(void *cache, int32 id,
+extern int32_t cache_start_transaction(void *cache);
+extern status_t cache_sync_transaction(void *cache, int32_t id);
+extern status_t cache_end_transaction(void *cache, int32_t id,
 					transaction_notification_hook hook, void *data);
-extern status_t cache_abort_transaction(void *cache, int32 id);
-extern int32 cache_detach_sub_transaction(void *cache, int32 id,
+extern status_t cache_abort_transaction(void *cache, int32_t id);
+extern int32_t cache_detach_sub_transaction(void *cache, int32_t id,
 					transaction_notification_hook hook, void *data);
-extern status_t cache_abort_sub_transaction(void *cache, int32 id);
-extern status_t cache_start_sub_transaction(void *cache, int32 id);
-extern status_t cache_add_transaction_listener(void *cache, int32 id,
-					int32 events, transaction_notification_hook hook,
+extern status_t cache_abort_sub_transaction(void *cache, int32_t id);
+extern status_t cache_start_sub_transaction(void *cache, int32_t id);
+extern status_t cache_add_transaction_listener(void *cache, int32_t id,
+					int32_t events, transaction_notification_hook hook,
 					void *data);
-extern status_t cache_remove_transaction_listener(void *cache, int32 id,
+extern status_t cache_remove_transaction_listener(void *cache, int32_t id,
 					transaction_notification_hook hook, void *data);
-extern status_t cache_next_block_in_transaction(void *cache, int32 id,
+extern status_t cache_next_block_in_transaction(void *cache, int32_t id,
 					bool mainOnly, long *_cookie, off_t *_blockNumber,
 					void **_data, void **_unchangedData);
-extern int32 cache_blocks_in_transaction(void *cache, int32 id);
-extern int32 cache_blocks_in_main_transaction(void *cache, int32 id);
-extern int32 cache_blocks_in_sub_transaction(void *cache, int32 id);
+extern int32_t cache_blocks_in_transaction(void *cache, int32_t id);
+extern int32_t cache_blocks_in_main_transaction(void *cache, int32_t id);
+extern int32_t cache_blocks_in_sub_transaction(void *cache, int32_t id);
 
 /* block cache */
 extern void block_cache_delete(void *cache, bool allowWrites);
@@ -64,18 +64,18 @@ extern status_t block_cache_sync_etc(void *cache, off_t blockNumber,
 extern void block_cache_discard(void *cache, off_t blockNumber,
 					size_t numBlocks);
 extern status_t block_cache_make_writable(void *cache, off_t blockNumber,
-					int32 transaction);
+					int32_t transaction);
 extern void *block_cache_get_writable_etc(void *cache, off_t blockNumber,
-					off_t base, off_t length, int32 transaction);
+					off_t base, off_t length, int32_t transaction);
 extern void *block_cache_get_writable(void *cache, off_t blockNumber,
-					int32 transaction);
+					int32_t transaction);
 extern void *block_cache_get_empty(void *cache, off_t blockNumber,
-					int32 transaction);
+					int32_t transaction);
 extern const void *block_cache_get_etc(void *cache, off_t blockNumber,
 					off_t base, off_t length);
 extern const void *block_cache_get(void *cache, off_t blockNumber);
 extern status_t block_cache_set_dirty(void *cache, off_t blockNumber,
-					bool isDirty, int32 transaction);
+					bool isDirty, int32_t transaction);
 extern void block_cache_put(void *cache, off_t blockNumber);
 
 /* file cache */
@@ -97,7 +97,7 @@ extern void *file_map_create(dev_t mountID, ino_t vnodeID, off_t size);
 extern void file_map_delete(void *map);
 extern void file_map_set_size(void *map, off_t size);
 extern void file_map_invalidate(void *map, off_t offset, off_t size);
-extern status_t file_map_set_mode(void *map, uint32 mode);
+extern status_t file_map_set_mode(void *map, uint32_t mode);
 extern status_t file_map_translate(void *map, off_t offset, size_t size,
 					struct file_io_vec *vecs, size_t *_count, size_t align);
 

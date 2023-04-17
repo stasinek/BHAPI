@@ -45,7 +45,7 @@ public:
 	status_t	GetBootVolume(BVolume *vol);
 
 private:
-     int32 fPos;
+     int32_t fPos;
 };
 
 #endif /* __cplusplus */

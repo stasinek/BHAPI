@@ -45,10 +45,10 @@ namespace BPrivate {
 /* Integer rect used to define a clipping rectangle. All bounds are inclusive. */
 /* Moved from DirectWindow.h */
 typedef struct {
-    int32	left;
-    int32	top;
-    int32	right;
-    int32	bottom;
+    int32_t	left;
+    int32_t	top;
+    int32_t	right;
+    int32_t	bottom;
 } clipping_rect;
 
 class BHAPI_IMPEXP BRegion {
@@ -73,8 +73,8 @@ public:
     BRegion& operator|=(const BRegion &region);
 
     BRect Frame() const;
-    BRect RectAt(int32 index) const;
-     int32 CountRects() const;
+    BRect RectAt(int32_t index) const;
+     int32_t CountRects() const;
 
     void Set(BRect singleBound);
     void MakeEmpty();

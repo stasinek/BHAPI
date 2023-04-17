@@ -73,7 +73,7 @@ All rights reserved.
 #define B_TRANSLATION_CONTEXT "WidgetAttributeText"
 
 
-const int32 kGenericReadBufferSize = 1024;
+const int32_t kGenericReadBufferSize = 1024;
 
 const char* kSizeFormats[] = {
 	"%.2f %s",
@@ -129,7 +129,7 @@ TruncFileSizeBase(BString* outString, int64 value, const View* view,
 			doubleValue = (double)value / kKBSize;
 		}
 
-		for (int32 index = 0; ; index++) {
+		for (int32_t index = 0; ; index++) {
 			if (kSizeFormats[index] == 0)
 				break;
 
@@ -156,14 +156,14 @@ TruncFileSizeBase(BString* outString, int64 value, const View* view,
 	}
 
 	return TruncStringBase(outString, buffer.String(), buffer.Length(), view,
-		width, (uint32)B_TRUNCATE_END);
+		width, (uint32_t)B_TRUNCATE_END);
 }
 
 
 template <class View>
 float
-TruncStringBase(BString* outString, const char* inString, int32 length,
-	const View* view, float width, uint32 truncMode = B_TRUNCATE_MIDDLE)
+TruncStringBase(BString* outString, const char* inString, int32_t length,
+	const View* view, float width, uint32_t truncMode = B_TRUNCATE_MIDDLE)
 {
 	// we are using a template version of this call to make sure
 	// the right StringWidth gets picked up for BView x BPoseView
@@ -361,7 +361,7 @@ bool WidgetAttributeText::CheckSettingsChanged()
 
 float
 WidgetAttributeText::TruncString(BString* outString, const char* inString,
-	int32 length, const BPoseView* view, float width, uint32 truncMode)
+	int32_t length, const BPoseView* view, float width, uint32_t truncMode)
 {
 	return TruncStringBase(outString, inString, length, view, width, truncMode);
 }
@@ -413,7 +413,7 @@ bool WidgetAttributeText::CommitEditedText(BTextView*)
 
 
 status_t WidgetAttributeText::AttrAsString(const Model* model, BString* outString,
-	const char* attrName, int32 attrType, float width, BView* view,
+	const char* attrName, int32_t attrType, float width, BView* view,
 	int64* resultingValue)
 {
 	int64 value;
@@ -1067,7 +1067,7 @@ void ModeAttributeText::ReadValue(BString* outString)
 	else
 		*scanner++ = '-';
 
-	for (int32 index = 0; index < 9; index++) {
+	for (int32_t index = 0; index < 9; index++) {
 		*scanner++ = (mode & baseMask) ? "rwx"[index % 3] : '-';
 		baseMask >>= 1;
 	}
@@ -1346,10 +1346,10 @@ void GenericAttributeText::ReadValue(BString* outString)
 								fValue.int16t = tmp.int16t;
 								break;
 
-							case sizeof(int32):
+							case sizeof(int32_t):
 								// Takes care of time_t too.
 								fValueIsDefined = true;
-								fValue.int32t = tmp.int32t;
+								fValue.int32_tt = tmp.int32_tt;
 								break;
 
 							case sizeof(int64):
@@ -1390,15 +1390,15 @@ void GenericAttributeText::FitValue(BString* outString, const BPoseView* view)
 
 	switch (fColumn->AttrType()) {
 		case B_SIZE_T_TYPE:
-			TruncFileSizeBase(outString, fValue.int32t, view, fOldWidth);
+			TruncFileSizeBase(outString, fValue.int32_tt, view, fOldWidth);
 			return;
 
 		case B_SSIZE_T_TYPE:
-			if (fValue.int32t > 0) {
-				TruncFileSizeBase(outString, fValue.int32t, view, fOldWidth);
+			if (fValue.int32_tt > 0) {
+				TruncFileSizeBase(outString, fValue.int32_tt, view, fOldWidth);
 				return;
 			}
-			sprintf(buffer, "%s", strerror(fValue.int32t));
+			sprintf(buffer, "%s", strerror(fValue.int32_tt));
 			fFullValueText = buffer;
 			break;
 
@@ -1469,12 +1469,12 @@ void GenericAttributeText::FitValue(BString* outString, const BPoseView* view)
 			break;
 
 		case B_INT32_TYPE:
-			sprintf(buffer, "%" B_PRId32, fValue.int32t);
+			sprintf(buffer, "%" B_PRId32, fValue.int32_tt);
 			fFullValueText = buffer;
 			break;
 
 		case B_UINT32_TYPE:
-			sprintf(buffer, "%" B_PRId32, fValue.uint32t);
+			sprintf(buffer, "%" B_PRId32, fValue.uint32_tt);
 			fFullValueText = buffer;
 			break;
 
@@ -1587,13 +1587,13 @@ GenericAttributeText::Compare(WidgetAttributeText& attr, BPoseView*)
 				(fValue.int16t == compareTo->fValue.int16t ? 0 : 1) : -1;
 
 		case B_UINT32_TYPE:
-			return fValue.uint32t >= compareTo->fValue.uint32t ?
-				(fValue.uint32t == compareTo->fValue.uint32t ? 0 : 1) : -1;
+			return fValue.uint32_tt >= compareTo->fValue.uint32_tt ?
+				(fValue.uint32_tt == compareTo->fValue.uint32_tt ? 0 : 1) : -1;
 
 		case B_TIME_TYPE:
-			// time_t typedef'd to a long, i.e. a int32 		case B_INT32_TYPE:
-			return fValue.int32t >= compareTo->fValue.int32t ?
-				(fValue.int32t == compareTo->fValue.int32t ? 0 : 1) : -1;
+			// time_t typedef'd to a long, i.e. a int32_t 		case B_INT32_TYPE:
+			return fValue.int32_tt >= compareTo->fValue.int32_tt ?
+				(fValue.int32_tt == compareTo->fValue.int32_tt ? 0 : 1) : -1;
 
 		case B_OFF_T_TYPE:
 			// off_t typedef'd to a long long, i.e. a int64 		case B_INT64_TYPE:
@@ -1646,7 +1646,7 @@ bool GenericAttributeText::CommitEditedTextFlavor(BTextView* textView)
 	if (node.InitCheck() != B_OK)
 		return false;
 
-	uint32 type = fColumn->AttrType();
+	uint32_t type = fColumn->AttrType();
 
 	if (type != B_STRING_TYPE
 		&& type != B_UINT64_TYPE
@@ -1781,8 +1781,8 @@ bool GenericAttributeText::CommitEditedTextFlavor(BTextView* textView)
 
 				case B_UINT32_TYPE:
 				case B_INT32_TYPE:
-					tmp.int32t = (int32)StringToScalar(textView->Text());
-					scalarSize = sizeof(int32);
+					tmp.int32_tt = (int32_t)StringToScalar(textView->Text());
+					scalarSize = sizeof(int32_t);
 					break;
 
 				case B_UINT16_TYPE:
@@ -1868,7 +1868,7 @@ void DurationAttributeText::FitValue(BString* outString, const BPoseView* view)
 			break;
 
 		case B_INT32_TYPE:
-			time = fValue.int32t * 1000000LL;
+			time = fValue.int32_tt * 1000000LL;
 			break;
 
 		case B_INT64_TYPE:
@@ -1877,15 +1877,15 @@ void DurationAttributeText::FitValue(BString* outString, const BPoseView* view)
 	}
 
 	// TODO: ignores micro seconds for now
-	int32 seconds = time / 1000000LL;
+	int32_t seconds = time / 1000000LL;
 
 	bool negative = seconds < 0;
 	if (negative)
 		seconds = -seconds;
 
-	int32 hours = seconds / 3600;
+	int32_t hours = seconds / 3600;
 	seconds -= hours * 3600;
-	int32 minutes = seconds / 60;
+	int32_t minutes = seconds / 60;
 	seconds = seconds % 60;
 
 	char buffer[256];
@@ -1917,7 +1917,7 @@ CheckboxAttributeText::CheckboxAttributeText(const Model* model,
 	// TODO: better have common data in the column object!
 	if (const char* separator = strchr(column->DisplayAs(), ':')) {
 		BString chars(separator + 1);
-		int32 length;
+		int32_t length;
 		const char* c = chars.CharAt(0, &length);
 		fOnChar.SetTo(c, length);
 		if (c[length]) {
@@ -1971,7 +1971,7 @@ void CheckboxAttributeText::FitValue(BString* outString, const BPoseView* view)
 
 		case B_INT32_TYPE:
 		case B_UINT32_TYPE:
-			checked = fValue.int32t != 0;
+			checked = fValue.int32_tt != 0;
 			break;
 	}
 
@@ -2025,7 +2025,7 @@ void RatingAttributeText::FitValue(BString* ratingString, const BPoseView* view)
 				break;
 
 			case B_INT32_TYPE:
-				rating = fValue.int32t;
+				rating = fValue.int32_tt;
 				break;
 
 			default:
@@ -2041,10 +2041,10 @@ void RatingAttributeText::FitValue(BString* ratingString, const BPoseView* view)
 	if (rating < 0)
 		rating = 0;
 
-	int32 steps = fMax / fCount;
+	int32_t steps = fMax / fCount;
 	fFullValueText = "";
 
-	for (int32 i = 0; i < fCount; i++) {
+	for (int32_t i = 0; i < fCount; i++) {
 		int64 n = i * steps;
 		if (rating > n)
 			fFullValueText += "★";

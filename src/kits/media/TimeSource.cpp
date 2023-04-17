@@ -40,9 +40,9 @@ namespace BPrivate { namespace media {
 // sizeof(TimeSourceTransmit) must be <= TS_AREA_SIZE
 struct TimeSourceTransmit
 {
-	int32 readindex;
-	int32 writeindex;
-	int32 isrunning;
+	int32_t readindex;
+	int32_t writeindex;
+	int32_t isrunning;
 	bigtime_t realtime[TS_INDEX_COUNT];
 	bigtime_t perftime[TS_INDEX_COUNT];
 	float drift[TS_INDEX_COUNT];
@@ -57,7 +57,7 @@ public:
 								SlaveNodes();
 								~SlaveNodes();
 
-	int32						CountSlaves() const;
+	int32_t						CountSlaves() const;
 	bool						GetNextSlave(port_id** id);
 	void						Rewind();
 
@@ -81,7 +81,7 @@ SlaveNodes::~SlaveNodes()
 }
 
 
-int32 SlaveNodes::CountSlaves() const
+int32_t SlaveNodes::CountSlaves() const
 {
 	return fSlaveList.CountItems();
 }
@@ -219,7 +219,7 @@ status_t BTimeSource::GetTime(bigtime_t* performance_time,
 		return B_OK;
 	}
 
-	int32 index;
+	int32_t index;
 	index = _atomic_read(&fBuf->readindex);
 	index &= (TS_INDEX_COUNT - 1);
 	*real_time = fBuf->realtime[index];
@@ -270,7 +270,7 @@ BTimeSource::BTimeSource()
 }
 
 
-status_t BTimeSource::HandleMessage(int32 message, const void* rawdata,
+status_t BTimeSource::HandleMessage(int32_t message, const void* rawdata,
 	size_t size)
 {
 	PRINT(4, "BTimeSource::HandleMessage %#" B_PRIx32 ", node %" B_PRId32 "\n",
@@ -348,7 +348,7 @@ void BTimeSource::PublishTime(bigtime_t performance_time,
 		return;
 	}
 
-	int32 index;
+	int32_t index;
 	index = atomic_add(&fBuf->writeindex, 1);
 	index &= (TS_INDEX_COUNT - 1);
 	fBuf->realtime[index] = real_time;

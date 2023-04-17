@@ -14,20 +14,20 @@ public:
 								ObjectID();
 	virtual						~ObjectID();
 
-	inline	uint32				HashValue() const;
+	inline	uint32_t				HashValue() const;
 
 	virtual	bool				operator==(const ObjectID& other) const = 0;
 	inline	bool				operator!=(const ObjectID& other) const;
 
 protected:
-	virtual	uint32				ComputeHashValue() const = 0;
+	virtual	uint32_t				ComputeHashValue() const = 0;
 
 protected:
-	mutable	uint32				fHashValue;
+	mutable	uint32_t				fHashValue;
 };
 
 
-uint32 ObjectID::HashValue() const
+uint32_t ObjectID::HashValue() const
 {
 	if (fHashValue == 0)
 		fHashValue = ComputeHashValue();

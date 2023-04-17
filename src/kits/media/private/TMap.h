@@ -136,7 +136,7 @@ public:
 	}
 
 private:	
-	bool _Get(int32 index, value **v) const
+	bool _Get(int32_t index, value **v) const
 	{
 		if (index < 0 || index >= item_count)
 			return false;
@@ -144,7 +144,7 @@ private:
 		return true;
 	}
 	
-	bool _Remove(int32 index) 
+	bool _Remove(int32_t index) 
 	{
 		if (index < 0 || index >= item_count)
 			return false;

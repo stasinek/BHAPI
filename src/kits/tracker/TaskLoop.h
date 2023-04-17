@@ -174,7 +174,7 @@ public:
 
     void AccumulatedRunLater(AccumulatingFunctionObject* functor,
         bigtime_t delay, bigtime_t maxAccumulatingTime = 0,
-        int32 maxAccumulateCount = 0);
+        int32_t maxAccumulateCount = 0);
         // will search the delayed task loop for other accumulating functors
         // and will accumulate with them, else will create a new delayed task
         // the task will no longer accumulate if past the

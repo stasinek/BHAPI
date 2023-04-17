@@ -38,14 +38,14 @@ public:
 	TWindow(ERect frame,
 		const char *title,
 		e_window_type type,
-		euint32 flags,
-		euint32 workspace = E_CURRENT_WORKSPACE);
+		euint32_t flags,
+		euint32_t workspace = E_CURRENT_WORKSPACE);
 	TWindow(ERect frame,
 		const char *title,
 		e_window_look look,
 		e_window_feel feel,
-		euint32 flags,
-		euint32 workspace = E_CURRENT_WORKSPACE);
+		euint32_t flags,
+		euint32_t workspace = E_CURRENT_WORKSPACE);
 	virtual ~TWindow();
 
 	virtual bool QuitRequested();
@@ -64,13 +64,13 @@ public:
 };
 
 
-TWindow::TWindow(ERect frame, const char *title, e_window_type type, euint32 flags, euint32 workspace)
+TWindow::TWindow(ERect frame, const char *title, e_window_type type, euint32_t flags, euint32_t workspace)
 	: EWindow(frame, title, type, flags, workspace), quited(false)
 {
 }
 
 
-TWindow::TWindow(ERect frame, const char *title, e_window_look look, e_window_feel feel, euint32 flags, euint32 workspace)
+TWindow::TWindow(ERect frame, const char *title, e_window_look look, e_window_feel feel, euint32_t flags, euint32_t workspace)
 	: EWindow(frame, title, look, feel, flags, workspace), quited(false)
 {
 }

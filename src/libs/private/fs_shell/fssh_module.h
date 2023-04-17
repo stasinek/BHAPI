@@ -17,8 +17,8 @@
 
 typedef struct fssh_module_info {
 	const char		*name;
-	uint32_t		flags;
-	fssh_status_t	(*std_ops)(int32_t, ...);
+	uint32_t_t		flags;
+	fssh_status_t	(*std_ops)(int32_t_t, ...);
 } fssh_module_info;
 
 /* module standard operations */

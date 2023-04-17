@@ -14,7 +14,7 @@ status_t entry_ref_flatten(char* buffer, size_t* size, const entry_ref* ref);
 status_t entry_ref_unflatten(entry_ref* ref, const char* buffer, size_t size);
 status_t entry_ref_swap(char* buffer, size_t size);
 
-uint32 CalculateChecksum(const uint8 *buffer, int32 size);
+uint32_t CalculateChecksum(const uint8 *buffer, int32_t size);
 
 }	// namespace BPrivate
 
@@ -102,7 +102,7 @@ public:
 								fBufPtr += sizeof (T);
 							}
 
-		int32    			CheckSum();
+		int32_t    			CheckSum();
 
 private:
 		uchar				*fBuffer;
@@ -139,16 +139,16 @@ inline void byte_swap(uint64 &data)
 
 
 template<>
-inline void byte_swap(int32 &data)
+inline void byte_swap(int32_t &data)
 {
-	data = __swap_int32(data);
+	data = __swap_int32_t(data);
 }
 
 
 template<>
-inline void byte_swap(uint32 &data)
+inline void byte_swap(uint32_t &data)
 {
-	data = __swap_int32(data);
+	data = __swap_int32_t(data);
 }
 
 

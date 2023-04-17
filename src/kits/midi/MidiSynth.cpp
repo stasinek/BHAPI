@@ -136,15 +136,15 @@ void BMidiSynth::FlushInstrumentCache(bool startStopCache)
 }
 
 
-uint32 
+uint32_t 
 BMidiSynth::Tick() const
 {
-	return (uint32) (system_time() - fCreationTime);
+	return (uint32_t) (system_time() - fCreationTime);
 }
 
 
 void BMidiSynth::NoteOff(
-	uchar channel, uchar note, uchar velocity, uint32 time)
+	uchar channel, uchar note, uchar velocity, uint32_t time)
 {
 	if (fInputEnabled)
 		__be_synth->fSynth->NoteOff(channel, note + fTranspose, velocity, time);
@@ -152,7 +152,7 @@ void BMidiSynth::NoteOff(
 
 
 void BMidiSynth::NoteOn(
-	uchar channel, uchar note, uchar velocity, uint32 time)
+	uchar channel, uchar note, uchar velocity, uint32_t time)
 {
 	if (fInputEnabled)
 		__be_synth->fSynth->NoteOn(channel, note + fTranspose, velocity, time);
@@ -160,7 +160,7 @@ void BMidiSynth::NoteOn(
 
 
 void BMidiSynth::KeyPressure(
-	uchar channel, uchar note, uchar pressure, uint32 time)
+	uchar channel, uchar note, uchar pressure, uint32_t time)
 {
 	if (fInputEnabled)
 		__be_synth->fSynth->KeyPressure(
@@ -169,7 +169,7 @@ void BMidiSynth::KeyPressure(
 
 
 void BMidiSynth::ControlChange(
-	uchar channel, uchar controlNumber, uchar controlValue, uint32 time)
+	uchar channel, uchar controlNumber, uchar controlValue, uint32_t time)
 {
 	if (fInputEnabled)
 		__be_synth->fSynth->ControlChange(
@@ -178,28 +178,28 @@ void BMidiSynth::ControlChange(
 
 
 void BMidiSynth::ProgramChange(
-	uchar channel, uchar programNumber, uint32 time)
+	uchar channel, uchar programNumber, uint32_t time)
 {
 	if (fInputEnabled)
 		__be_synth->fSynth->ProgramChange(channel, programNumber, time);
 }
 
 
-void BMidiSynth::ChannelPressure(uchar channel, uchar pressure, uint32 time)
+void BMidiSynth::ChannelPressure(uchar channel, uchar pressure, uint32_t time)
 {
 	if (fInputEnabled)
 		__be_synth->fSynth->ChannelPressure(channel, pressure, time);
 }
 
 
-void BMidiSynth::PitchBend(uchar channel, uchar lsb, uchar msb, uint32 time)
+void BMidiSynth::PitchBend(uchar channel, uchar lsb, uchar msb, uint32_t time)
 {
 	if (fInputEnabled)
 		__be_synth->fSynth->PitchBend(channel, lsb, msb, time);
 }
 
 
-void BMidiSynth::AllNotesOff(bool justChannel, uint32 time)
+void BMidiSynth::AllNotesOff(bool justChannel, uint32_t time)
 {
 	if (fInputEnabled)
 		__be_synth->fSynth->AllNotesOff(justChannel, time);

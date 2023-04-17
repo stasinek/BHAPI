@@ -73,9 +73,9 @@ BNetworkCookie::BNetworkCookie(BMessage* archive)
 	archive->FindBool(kArchivedCookieHostOnly, &fHostOnly);
 
 	// We store the expiration date as a string, which should not overflow.
-	// But we still parse the old archive format, where an int32 was used.
+	// But we still parse the old archive format, where an int32_t was used.
 	BString expirationString;
-	int32 expiration;
+	int32_t expiration;
 	if (archive->FindString(kArchivedCookieExpirationDate, &expirationString)
 			== B_OK) {
 		BDateTime time = BHttpTime(expirationString).Parse();
@@ -119,7 +119,7 @@ status_t BNetworkCookie::ParseCookieString(const BString& string, const BUrl& ur
 
 	BString name;
 	BString value;
-	int32 index = 0;
+	int32_t index = 0;
 
 	// Parse the name and value of the cookie
 	index = _ExtractNameValuePair(string, name, value, index);
@@ -273,7 +273,7 @@ status_t BNetworkCookie::SetDomain(const BString& domain)
 
 
 BNetworkCookie&
-BNetworkCookie::SetMaxAge(int32 maxAge)
+BNetworkCookie::SetMaxAge(int32_t maxAge)
 {
 	BDateTime expiration = BDateTime::CurrentDateTime(B_LOCAL_TIME);
 	expiration.SetTime_t(expiration.Time_t() + maxAge);
@@ -463,7 +463,7 @@ bool BNetworkCookie::IsValidForDomain(const BString& domain) const
 	// TODO: canonicalize both domains
 	const BString& cookieDomain = Domain();
 
-	int32 difference = domain.Length() - cookieDomain.Length();
+	int32_t difference = domain.Length() - cookieDomain.Length();
 	// If the cookie domain is longer than the domain string it cannot
 	// be valid.
 	if (difference < 0)
@@ -513,7 +513,7 @@ bool BNetworkCookie::_CanBeSetFromDomain(const BString& domain) const
 	// TODO: canonicalize both domains
 	const BString& cookieDomain = Domain();
 
-	int32 difference = domain.Length() - cookieDomain.Length();
+	int32_t difference = domain.Length() - cookieDomain.Length();
 	if (difference < 0) {
 		// Setting a cookie on a subdomain is allowed.
 		const char* suffix = cookieDomain.String() + difference;
@@ -714,7 +714,7 @@ void BNetworkCookie::_Reset()
 }
 
 
-int32 skip_whitespace_forward(const BString& string, int32 index)
+int32_t skip_whitespace_forward(const BString& string, int32_t index)
 {
 	while (index < string.Length() && (string[index] == ' '
 			|| string[index] == '\t'))
@@ -723,7 +723,7 @@ int32 skip_whitespace_forward(const BString& string, int32 index)
 }
 
 
-int32 skip_whitespace_backward(const BString& string, int32 index)
+int32_t skip_whitespace_backward(const BString& string, int32_t index)
 {
 	while (index >= 0 && (string[index] == ' ' || string[index] == '\t'))
 		index--;
@@ -731,12 +731,12 @@ int32 skip_whitespace_backward(const BString& string, int32 index)
 }
 
 
-int32 BNetworkCookie::_ExtractNameValuePair(const BString& cookieString,
-	BString& name, BString& value, int32 index)
+int32_t BNetworkCookie::_ExtractNameValuePair(const BString& cookieString,
+	BString& name, BString& value, int32_t index)
 {
 	// Find our name-value-pair and the delimiter.
-	int32 firstEquals = cookieString.FindFirst('=', index);
-	int32 nameValueEnd = cookieString.FindFirst(';', index);
+	int32_t firstEquals = cookieString.FindFirst('=', index);
+	int32_t nameValueEnd = cookieString.FindFirst(';', index);
 
 	// If the set-cookie-string lacks a semicolon, the name-value-pair
 	// is the whole string.
@@ -747,8 +747,8 @@ int32 BNetworkCookie::_ExtractNameValuePair(const BString& cookieString,
 	if (firstEquals == -1 || firstEquals > nameValueEnd)
 		return -1;
 
-	int32 first = skip_whitespace_forward(cookieString, index);
-	int32 last = skip_whitespace_backward(cookieString, firstEquals - 1);
+	int32_t first = skip_whitespace_forward(cookieString, index);
+	int32_t last = skip_whitespace_backward(cookieString, firstEquals - 1);
 
 	// If we lack a name, fail to parse.
 	if (first > last)
@@ -767,25 +767,25 @@ int32 BNetworkCookie::_ExtractNameValuePair(const BString& cookieString,
 }
 
 
-int32 BNetworkCookie::_ExtractAttributeValuePair(const BString& cookieString,
-	BString& attribute, BString& value, int32 index)
+int32_t BNetworkCookie::_ExtractAttributeValuePair(const BString& cookieString,
+	BString& attribute, BString& value, int32_t index)
 {
 	// Find the end of our cookie-av.
-	int32 cookieAVEnd = cookieString.FindFirst(';', index);
+	int32_t cookieAVEnd = cookieString.FindFirst(';', index);
 
 	// If the unparsed-attributes lacks a semicolon, then the cookie-av is the
 	// whole string.
 	if (cookieAVEnd == -1)
 		cookieAVEnd = cookieString.Length();
 
-	int32 attributeNameEnd = cookieString.FindFirst('=', index);
+	int32_t attributeNameEnd = cookieString.FindFirst('=', index);
 	// If the cookie-av has no equals, the attribute-name is the entire
 	// cookie-av and the attribute-value is empty.
 	if (attributeNameEnd == -1 || attributeNameEnd > cookieAVEnd)
 		attributeNameEnd = cookieAVEnd;
 
-	int32 first = skip_whitespace_forward(cookieString, index);
-	int32 last = skip_whitespace_backward(cookieString, attributeNameEnd - 1);
+	int32_t first = skip_whitespace_forward(cookieString, index);
+	int32_t last = skip_whitespace_backward(cookieString, attributeNameEnd - 1);
 
 	if (first <= last)
 		cookieString.CopyInto(attribute, first, last - first + 1);
@@ -821,7 +821,7 @@ BNetworkCookie::_DefaultPathForUrl(const BUrl& url)
 	if (path.IsEmpty() || path.ByteAt(0) != '/')
 		return "";
 
-	int32 index = path.FindLast('/');
+	int32_t index = path.FindLast('/');
 	if (index == 0)
 		return "";
 

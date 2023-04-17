@@ -30,7 +30,7 @@ public:
 			media_type			ConsumerType();
 
 	static	status_t			RegionToClipData(const BRegion* region,
-									int32* format, int32* size, void* data);
+									int32_t* format, int32_t* size, void* data);
 
 protected:
 	explicit					BBufferConsumer(media_type type);
@@ -41,18 +41,18 @@ protected:
 									bigtime_t performanceTime);
 			status_t			SetVideoClippingFor(const media_source& output,
 									const media_destination& destination,
-									const int16* shorts, int32 shortCount,
+									const int16* shorts, int32_t shortCount,
 									const media_video_display_info& display,
-									void* userData, int32* changeTag,
+									void* userData, int32_t* changeTag,
 									void* _reserved = NULL);
 			status_t			SetOutputEnabled(const media_source& source,
 									const media_destination& destination,
 									bool enabled, void* userData,
-									int32* changeTag, void* _reserved = NULL);
+									int32_t* changeTag, void* _reserved = NULL);
 			status_t			RequestFormatChange(const media_source& source,
 									const media_destination& destination,
 									const media_format& toFormat,
-									void* userData, int32* changeTag,
+									void* userData, int32_t* changeTag,
 									void* _reserved = NULL);
 			status_t			RequestAdditionalBuffer(
 									const media_source& source,
@@ -65,26 +65,26 @@ protected:
 			status_t			SetOutputBuffersFor(const media_source& source,
 									const media_destination& destination,
 									BBufferGroup* group, void* userData,
-									int32* changeTag, bool willReclaim = false,
+									int32_t* changeTag, bool willReclaim = false,
 									void* _reserved = NULL);
 			status_t			SendLatencyChange(const media_source& source,
 									const media_destination& destination,
-									bigtime_t newLatency, uint32 flags = 0);
+									bigtime_t newLatency, uint32_t flags = 0);
 
 protected:
-	virtual	status_t			HandleMessage(int32 message, const void* data,
+	virtual	status_t			HandleMessage(int32_t message, const void* data,
 									size_t size);
 
 	virtual	status_t			AcceptFormat(
 									const media_destination& destination,
 									media_format* format) = 0;
-	virtual	status_t			GetNextInput(int32* cookie,
+	virtual	status_t			GetNextInput(int32_t* cookie,
 									media_input* _input) = 0;
-	virtual	void				DisposeInputCookie(int32 cookie) = 0;
+	virtual	void				DisposeInputCookie(int32_t cookie) = 0;
 	virtual	void				BufferReceived(BBuffer* buffer) = 0;
 	virtual	void				ProducerDataStatus(
 									const media_destination& forWhom,
-									int32 status,
+									int32_t status,
 									bigtime_t atPerformanceTime) = 0;
 	virtual	status_t			GetLatencyFor(const media_destination& forWhom,
 									bigtime_t* _latency,
@@ -97,14 +97,14 @@ protected:
 									const media_destination& where) = 0;
 	virtual	status_t			FormatChanged(const media_source& producer,
 									const media_destination& consumer,
-									int32 changeTag,
+									int32_t changeTag,
 									const media_format& format) = 0;
 
 	virtual	status_t			SeekTagRequested(
 									const media_destination& destination,
-									bigtime_t targetTime, uint32 flags,
+									bigtime_t targetTime, uint32_t flags,
 									media_seek_tag* _seekTag,
-									bigtime_t* _taggedTime, uint32* _flags);
+									bigtime_t* _taggedTime, uint32_t* _flags);
 
 private:
 	friend class BMediaNode;
@@ -118,14 +118,14 @@ private:
 
 	// deprecated methods following
 	static	status_t			SetVideoClippingFor(const media_source& output,
-									const int16* shorts, int32 shortCount,
+									const int16* shorts, int32_t shortCount,
 									const media_video_display_info& display,
-									int32* changeTag);
+									int32_t* changeTag);
 	static	status_t			RequestFormatChange(const media_source& source,
 									const media_destination& destination,
-									media_format* toFormat, int32* changeTag);
+									media_format* toFormat, int32_t* changeTag);
 	static	status_t			SetOutputEnabled(const media_source& source,
-									bool enabled, int32* changeTag);
+									bool enabled, int32_t* changeTag);
 
 			status_t			_Reserved_BufferConsumer_0(void*);
 									// used for SeekTagRequested()
@@ -149,7 +149,7 @@ private:
 			media_type			fConsumerType;
 			BPrivate::BufferCache* fBufferCache;
 			BBufferGroup*		fDeleteBufferGroup;
-			uint32				_reserved[14];
+			uint32_t				_reserved[14];
 };
 
 

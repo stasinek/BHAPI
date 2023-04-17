@@ -161,7 +161,7 @@ status_t BNodeInfo::SetIcon(const BBitmap* icon, icon_size which)
     // set some icon size related variables
     const char* attribute = NULL;
     BRect bounds;
-    uint32 attrType = 0;
+    uint32_t attrType = 0;
     size_t attrSize = 0;
 
     switch (which) {

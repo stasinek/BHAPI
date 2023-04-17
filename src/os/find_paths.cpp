@@ -158,7 +158,7 @@ public:
 	}
 
 private:
-	int32		fReferenceCount;
+	int32_t		fReferenceCount;
 	const char*	fLocations[kCount];
 };
 
@@ -273,7 +273,7 @@ static bool is_in_range(const void* pointer, const void* base, size_t size)
 
 static status_t find_image(const void* codePointer, image_info& _info)
 {
-	int32 cookie = 0;
+	int32_t cookie = 0;
 
 	while (get_next_image_info(B_CURRENT_TEAM, &cookie, &_info) == B_OK) {
 		if (codePointer == NULL ? _info.type == B_APP_IMAGE
@@ -424,7 +424,7 @@ static status_t normalize_dependency(const char* dependency, char* buffer, size_
 
 static ssize_t
 process_path(const char* installationLocation, const char* architecture,
-	const char* relativePath, const char* subPath, uint32 flags,
+	const char* relativePath, const char* subPath, uint32_t flags,
 	char* pathBuffer, size_t bufferSize)
 {
 	// copy the installation location
@@ -485,7 +485,7 @@ process_path(const char* installationLocation, const char* architecture,
 
 status_t internal_path_for_path(char* referencePath, size_t referencePathSize,
 	const char* dependency, const char* architecture,
-	path_base_directory baseDirectory, const char* subPath, uint32 flags,
+	path_base_directory baseDirectory, const char* subPath, uint32_t flags,
 	char* pathBuffer, size_t bufferSize)
 {
 	if (strcmp(architecture, __get_primary_architecture()) == 0)
@@ -582,7 +582,7 @@ status_t __find_path(const void* codePointer, path_base_directory baseDirectory,
 
 status_t __find_path_etc(const void* codePointer, const char* dependency,
 	const char* architecture, path_base_directory baseDirectory,
-	const char* subPath, uint32 flags, char* pathBuffer, size_t bufferSize)
+	const char* subPath, uint32_t flags, char* pathBuffer, size_t bufferSize)
 {
 	if (pathBuffer == NULL)
 		return B_BAD_VALUE;
@@ -612,7 +612,7 @@ status_t __find_path_for_path(const char* path, path_base_directory baseDirector
 
 status_t __find_path_for_path_etc(const char* path, const char* dependency,
 	const char* architecture, path_base_directory baseDirectory,
-	const char* subPath, uint32 flags, char* pathBuffer, size_t bufferSize)
+	const char* subPath, uint32_t flags, char* pathBuffer, size_t bufferSize)
 {
 	if (baseDirectory == B_FIND_PATH_IMAGE_PATH)
 		return B_BAD_VALUE;
@@ -641,7 +641,7 @@ status_t __find_paths(path_base_directory baseDirectory, const char* subPath,
 
 
 status_t __find_paths_etc(const char* architecture, path_base_directory baseDirectory,
-	const char* subPath, uint32 flags, char*** _paths, size_t* _pathCount)
+	const char* subPath, uint32_t flags, char*** _paths, size_t* _pathCount)
 {
 	if (_paths == NULL || _pathCount == NULL)
 		return B_BAD_VALUE;

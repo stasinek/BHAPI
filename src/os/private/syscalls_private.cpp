@@ -62,9 +62,9 @@ typedef struct generic_syscall generic_syscall;
 struct generic_syscall : DoublyLinkedListLinkImpl<generic_syscall> {
 	char				subsystem[B_FILE_NAME_LENGTH];
 	syscall_hook		hook;
-	uint32				version;
-	uint32				flags;
-	int32				use_count;
+	uint32_t				version;
+	uint32_t				flags;
+	int32_t				use_count;
 	bool				valid;
 	ConditionVariable	unused_condition;
 	generic_syscall*	previous;
@@ -105,7 +105,7 @@ find_generic_syscall(const char* subsystem)
 	All other return codes are depending on the generic syscall implementation.
 */
 static inline status_t
-_user_generic_syscall(const char* userSubsystem, uint32 function,
+_user_generic_syscall(const char* userSubsystem, uint32_t function,
 	void* buffer, size_t bufferSize)
 {
 	char subsystem[B_FILE_NAME_LENGTH];
@@ -129,19 +129,19 @@ _user_generic_syscall(const char* userSubsystem, uint32 function,
 		}
 
 		// special info syscall
-		if (bufferSize != sizeof(uint32))
+		if (bufferSize != sizeof(uint32_t))
 			return B_BAD_VALUE;
 
-		uint32 requestedVersion;
+		uint32_t requestedVersion;
 
 		// retrieve old version
-		if (user_memcpy(&requestedVersion, buffer, sizeof(uint32)) != B_OK)
+		if (user_memcpy(&requestedVersion, buffer, sizeof(uint32_t)) != B_OK)
 			return B_BAD_ADDRESS;
 		if (requestedVersion != 0 && requestedVersion < syscall->version)
 			return B_BAD_TYPE;
 
 		// return current version
-		return user_memcpy(buffer, &syscall->version, sizeof(uint32));
+		return user_memcpy(buffer, &syscall->version, sizeof(uint32_t));
 	}
 
 	while (syscall != NULL) {
@@ -185,8 +185,8 @@ _user_is_computer_on(void)
 //	#pragma mark -
 
 
-int32
-syscall_dispatcher(uint32 callIndex, void* args, uint64* _returnValue)
+int32_t
+syscall_dispatcher(uint32_t callIndex, void* args, uint64* _returnValue)
 {
 	bigtime_t startTime;
 
@@ -238,7 +238,7 @@ generic_syscall_init(void)
 
 status_t
 register_generic_syscall(const char* subsystem, syscall_hook hook,
-	uint32 version, uint32 flags)
+	uint32_t version, uint32_t flags)
 {
 	if (hook == NULL)
 		return B_BAD_VALUE;
@@ -278,7 +278,7 @@ register_generic_syscall(const char* subsystem, syscall_hook hook,
 
 
 status_t
-unregister_generic_syscall(const char* subsystem, uint32 version)
+unregister_generic_syscall(const char* subsystem, uint32_t version)
 {
 	// TODO: we should only remove the syscall with the matching version
 
@@ -324,9 +324,9 @@ namespace SyscallTracing {
 
 
 static const char*
-get_syscall_name(uint32 syscall)
+get_syscall_name(uint32_t syscall)
 {
-	if (syscall >= (uint32)kSyscallCount)
+	if (syscall >= (uint32_t)kSyscallCount)
 		return "<invalid syscall number>";
 
 	return kExtendedSyscallInfos[syscall].name;
@@ -335,18 +335,18 @@ get_syscall_name(uint32 syscall)
 
 class PreSyscall : public AbstractTraceEntry {
 	public:
-		PreSyscall(uint32 syscall, const void* parameters)
+		PreSyscall(uint32_t syscall, const void* parameters)
 			:
 			fSyscall(syscall),
 			fParameters(NULL)
 		{
-			if (syscall < (uint32)kSyscallCount) {
+			if (syscall < (uint32_t)kSyscallCount) {
 				fParameters = alloc_tracing_buffer_memcpy(parameters,
 					kSyscallInfos[syscall].parameter_size, false);
 
 				// copy string parameters, if any
 				if (fParameters != NULL && syscall != SYSCALL_KTRACE_OUTPUT) {
-					int32 stringIndex = 0;
+					int32_t stringIndex = 0;
 					const extended_syscall_info& syscallInfo
 						= kExtendedSyscallInfos[fSyscall];
 					for (int i = 0; i < syscallInfo.parameter_count; i++) {
@@ -374,7 +374,7 @@ class PreSyscall : public AbstractTraceEntry {
 			out.Print("syscall pre:  %s(", get_syscall_name(fSyscall));
 
 			if (fParameters != NULL) {
-				int32 stringIndex = 0;
+				int32_t stringIndex = 0;
 				const extended_syscall_info& syscallInfo
 					= kExtendedSyscallInfos[fSyscall];
 				for (int i = 0; i < syscallInfo.parameter_count; i++) {
@@ -391,7 +391,7 @@ class PreSyscall : public AbstractTraceEntry {
 							value = *(uint16*)data;
 							break;
 						case B_INT32_TYPE:
-							value = *(uint32*)data;
+							value = *(uint32_t*)data;
 							break;
 						case B_INT64_TYPE:
 							value = *(uint64*)data;
@@ -422,7 +422,7 @@ class PreSyscall : public AbstractTraceEntry {
 	private:
 		enum { MAX_PARAM_STRINGS = 3 };
 
-		uint32		fSyscall;
+		uint32_t		fSyscall;
 		void*		fParameters;
 		const char*	fParameterStrings[MAX_PARAM_STRINGS];
 };
@@ -430,14 +430,14 @@ class PreSyscall : public AbstractTraceEntry {
 
 class PostSyscall : public AbstractTraceEntry {
 	public:
-		PostSyscall(uint32 syscall, uint64 returnValue)
+		PostSyscall(uint32_t syscall, uint64 returnValue)
 			:
 			fSyscall(syscall),
 			fReturnValue(returnValue)
 		{
 			Initialized();
 #if 0
-			if (syscall < (uint32)kSyscallCount
+			if (syscall < (uint32_t)kSyscallCount
 				&&  returnValue != (returnValue & 0xffffffff)
 				&& kExtendedSyscallInfos[syscall].return_type.size <= 4) {
 				panic("syscall return value 64 bit although it should be 32 "
@@ -453,17 +453,17 @@ class PostSyscall : public AbstractTraceEntry {
 		}
 
 	private:
-		uint32	fSyscall;
+		uint32_t	fSyscall;
 		uint64	fReturnValue;
 };
 
 }	// namespace SyscallTracing
 
 
-extern "C" void trace_pre_syscall(uint32 syscallNumber, const void* parameters);
+extern "C" void trace_pre_syscall(uint32_t syscallNumber, const void* parameters);
 
 void
-trace_pre_syscall(uint32 syscallNumber, const void* parameters)
+trace_pre_syscall(uint32_t syscallNumber, const void* parameters)
 {
 #if SYSCALL_TRACING_IGNORE_KTRACE_OUTPUT
 	if (syscallNumber != SYSCALL_KTRACE_OUTPUT)
@@ -553,7 +553,7 @@ private:
 
 	bool _AddPendingThread(thread_id thread)
 	{
-		int32 index = _PendingThreadIndex(thread);
+		int32_t index = _PendingThreadIndex(thread);
 		if (index >= 0)
 			return true;
 
@@ -568,7 +568,7 @@ private:
 
 	bool _RemovePendingThread(thread_id thread)
 	{
-		int32 index = _PendingThreadIndex(thread);
+		int32_t index = _PendingThreadIndex(thread);
 		if (index < 0)
 			return false;
 
@@ -586,9 +586,9 @@ private:
 		return _PendingThreadIndex(thread) >= 0;
 	}
 
-	int32 _PendingThreadIndex(thread_id thread)
+	int32_t _PendingThreadIndex(thread_id thread)
 	{
-		for (int32 i = 0; i < fPendingThreadCount; i++) {
+		for (int32_t i = 0; i < fPendingThreadCount; i++) {
 			if (fPendingThreads[i] == thread)
 				return i;
 		}
@@ -597,7 +597,7 @@ private:
 
 	TraceFilter*	fFilter;
 	thread_id		fPendingThreads[MAX_PENDING_THREADS];
-	int32			fPendingThreadCount;
+	int32_t			fPendingThreadCount;
 	int				fDirection;
 	bool			fHitThreadLimit;
 };

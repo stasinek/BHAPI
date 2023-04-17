@@ -32,8 +32,8 @@ public:
 	bool Lock();
 	void Unlock();
 
-	int32 CountDevices() const;
-	BDiskDevice *DeviceAt(int32 index) const;
+	int32_t CountDevices() const;
+	BDiskDevice *DeviceAt(int32_t index) const;
 
 	BDiskDevice *VisitEachDevice(BDiskDeviceVisitor *visitor);
 	BPartition *VisitEachPartition(BDiskDeviceVisitor *visitor);
@@ -55,7 +55,7 @@ public:
 		partition_id partitionID);
 	virtual void PartitionDefragmented(BPartition *partition);
 	virtual void PartitionRepaired(BPartition *partition);
-	virtual void PartitionChanged(BPartition *partition, uint32 event);
+	virtual void PartitionChanged(BPartition *partition, uint32_t event);
 	virtual void MediaChanged(BDiskDevice *device);
 	virtual void DeviceAdded(BDiskDevice *device);
 	virtual void DeviceRemoved(BDiskDevice *device);

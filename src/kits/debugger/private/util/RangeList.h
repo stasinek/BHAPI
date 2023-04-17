@@ -11,8 +11,8 @@
 
 
 struct Range {
-	int32 lowerBound;
-	int32 upperBound;
+	int32_t lowerBound;
+	int32_t upperBound;
 
 	Range()
 		:
@@ -21,7 +21,7 @@ struct Range {
 	{
 	}
 
-	Range(int32 lowValue, int32 highValue)
+	Range(int32_t lowValue, int32_t highValue)
 		:
 		lowerBound(lowValue),
 		upperBound(highValue)
@@ -37,19 +37,19 @@ public:
 	virtual					~RangeList();
 
 
-			status_t		AddRange(int32 lowValue, int32 highValue);
+			status_t		AddRange(int32_t lowValue, int32_t highValue);
 			status_t		AddRange(const Range& range);
 
-			void			RemoveRangeAt(int32 index);
+			void			RemoveRangeAt(int32_t index);
 
-			int32			CountRanges() const;
-			const Range*	RangeAt(int32 index) const;
+			int32_t			CountRanges() const;
+			const Range*	RangeAt(int32_t index) const;
 
-			bool			Contains(int32 value) const;
+			bool			Contains(int32_t value) const;
 
 private:
-			void			_CollapseOverlappingRanges(int32 startIndex,
-								int32 highValue);
+			void			_CollapseOverlappingRanges(int32_t startIndex,
+								int32_t highValue);
 };
 
 #endif // RANGE_LIST_H

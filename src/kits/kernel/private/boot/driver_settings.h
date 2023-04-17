@@ -14,7 +14,7 @@ struct driver_settings_file {
 	FixedWidthPointer<struct driver_settings_file> next;
 	char	name[B_OS_NAME_LENGTH];
 	FixedWidthPointer<char> buffer;
-	uint32	size;
+	uint32_t	size;
 } _PACKED;
 
 #endif	/* KERNEL_BOOT_DRIVER_SETTINGS_H */

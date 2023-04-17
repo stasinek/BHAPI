@@ -31,7 +31,7 @@ SyscallInfo::SyscallInfo(const SyscallInfo& other)
 
 
 SyscallInfo::SyscallInfo(bigtime_t startTime, bigtime_t endTime,
-	uint64 returnValue, uint32 syscall, const uint8* args)
+	uint64 returnValue, uint32_t syscall, const uint8* args)
 	:
 	fStartTime(startTime),
 	fEndTime(endTime),
@@ -43,7 +43,7 @@ SyscallInfo::SyscallInfo(bigtime_t startTime, bigtime_t endTime,
 
 
 void SyscallInfo::SetTo(bigtime_t startTime, bigtime_t endTime, uint64 returnValue,
-	uint32 syscall, const uint8* args)
+	uint32_t syscall, const uint8* args)
 {
 	fStartTime = startTime;
 	fEndTime = endTime;

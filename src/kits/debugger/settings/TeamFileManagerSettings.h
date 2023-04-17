@@ -22,11 +22,11 @@ public:
 			status_t			SetTo(const BMessage& archive);
 			status_t			WriteTo(BMessage& archive) const;
 
-			int32				CountSourceMappings() const;
+			int32_t				CountSourceMappings() const;
 			status_t			AddSourceMapping(const BString& sourcePath,
 									const BString& locatedPath);
-			status_t			RemoveSourceMappingAt(int32 index);
-			status_t			GetSourceMappingAt(int32 index,
+			status_t			RemoveSourceMappingAt(int32_t index);
+			status_t			GetSourceMappingAt(int32_t index,
 									BString& sourcePath, BString& locatedPath);
 
 	virtual	TeamFileManagerSettings*

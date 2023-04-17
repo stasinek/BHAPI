@@ -91,9 +91,9 @@ status_t BPartitioningInfo::ExcludeOccupiedSpace(off_t offset, off_t size)
 	TRACE(("%p - BPartitioningInfo::ExcludeOccupiedSpace(offset = %lld, "
 		"size = %lld)\n", this, offset, size));
 
-	int32 leftIndex = -1;
-	int32 rightIndex = -1;
-	for (int32 i = 0; i < fCount; i++) {
+	int32_t leftIndex = -1;
+	int32_t rightIndex = -1;
+	for (int32_t i = 0; i < fCount; i++) {
 		if (leftIndex == -1
 			&& offset < fSpaces[i].offset + fSpaces[i].size) {
 			leftIndex = i;
@@ -144,7 +144,7 @@ status_t BPartitioningInfo::ExcludeOccupiedSpace(off_t offset, off_t size)
 	}
 
 	// check whether the first affected space is eaten completely
-	int32 deleteFirst = leftIndex;
+	int32_t deleteFirst = leftIndex;
 	if (leftSpace.offset < offset) {
 		leftSpace.size = offset - leftSpace.offset;
 
@@ -154,7 +154,7 @@ status_t BPartitioningInfo::ExcludeOccupiedSpace(off_t offset, off_t size)
 	}
 
 	// check whether the last affected space is eaten completely
-	int32 deleteLast = rightIndex;
+	int32_t deleteLast = rightIndex;
 	if (rightSpaceEnd > offset + size) {
 		rightSpace.offset = offset + size;
 		rightSpace.size = rightSpaceEnd - rightSpace.offset;
@@ -185,7 +185,7 @@ BPartitioningInfo::PartitionID() const
 
 
 // GetPartitionableSpaceAt
-status_t BPartitioningInfo::GetPartitionableSpaceAt(int32 index, off_t* offset,
+status_t BPartitioningInfo::GetPartitionableSpaceAt(int32_t index, off_t* offset,
 										   off_t *size) const
 {
 	if (!fSpaces)
@@ -201,7 +201,7 @@ status_t BPartitioningInfo::GetPartitionableSpaceAt(int32 index, off_t* offset,
 
 
 // CountPartitionableSpaces
-int32 BPartitioningInfo::CountPartitionableSpaces() const
+int32_t BPartitioningInfo::CountPartitionableSpaces() const
 {
 	return fCount;
 }
@@ -215,7 +215,7 @@ void BPartitioningInfo::PrintToStream() const
 		return;
 	}
 	printf("BPartitioningInfo has %" B_PRId32 " spaces:\n", fCount);
-	for (int32 i = 0; i < fCount; i++) {
+	for (int32_t i = 0; i < fCount; i++) {
 		printf("  space at %" B_PRId32 ": offset = %" B_PRId64 ", size = %"
 			B_PRId64 "\n", i, fSpaces[i].offset, fSpaces[i].size);
 	}
@@ -226,7 +226,7 @@ void BPartitioningInfo::PrintToStream() const
 
 
 // _InsertSpaces
-status_t BPartitioningInfo::_InsertSpaces(int32 index, int32 count)
+status_t BPartitioningInfo::_InsertSpaces(int32_t index, int32_t count)
 {
 	if (index <= 0 || index > fCount || count <= 0)
 		return B_BAD_VALUE;
@@ -241,7 +241,7 @@ status_t BPartitioningInfo::_InsertSpaces(int32 index, int32 count)
 	}
 
 	// alloc new array
-	int32 capacity = (fCount + count) * 2;
+	int32_t capacity = (fCount + count) * 2;
 		// add a bit room for further resizing
 
 	partitionable_space_data* spaces
@@ -264,13 +264,13 @@ status_t BPartitioningInfo::_InsertSpaces(int32 index, int32 count)
 
 
 // _RemoveSpaces
-void BPartitioningInfo::_RemoveSpaces(int32 index, int32 count)
+void BPartitioningInfo::_RemoveSpaces(int32_t index, int32_t count)
 {
 	if (index < 0 || count <= 0 || index + count > fCount)
 		return;
 
 	if (count < fCount) {
-		int32 endIndex = index + count;
+		int32_t endIndex = index + count;
 		memmove(fSpaces + index, fSpaces + endIndex,
 			(fCount - endIndex) * sizeof(partitionable_space_data));
 	}

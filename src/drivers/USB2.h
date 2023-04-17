@@ -198,7 +198,7 @@ struct usb_module_info {
 	status_t						(*cancel_queued_transfers)(const usb_pipe *pipe);
 
 	/* tuning, timeouts, etc */
-	status_t						(*usb_ioctl)(uint32 opcode, void *buffer,
+	status_t						(*usb_ioctl)(uint32_t opcode, void *buffer,
 										size_t bufferSize);
 };
 

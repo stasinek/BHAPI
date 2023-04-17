@@ -112,7 +112,7 @@ ConditionVariableEntry::Add(const void* object)
 
 
 status_t
-ConditionVariableEntry::Wait(uint32 flags, bigtime_t timeout)
+ConditionVariableEntry::Wait(uint32_t flags, bigtime_t timeout)
 {
 	if (!are_interrupts_enabled()) {
 		panic("ConditionVariableEntry::Wait() called with interrupts "
@@ -153,7 +153,7 @@ ConditionVariableEntry::Wait(uint32 flags, bigtime_t timeout)
 
 
 status_t
-ConditionVariableEntry::Wait(const void* object, uint32 flags,
+ConditionVariableEntry::Wait(const void* object, uint32_t flags,
 	bigtime_t timeout)
 {
 	if (Add(object))
@@ -248,7 +248,7 @@ ConditionVariable::Add(ConditionVariableEntry* entry)
 
 
 status_t
-ConditionVariable::Wait(uint32 flags, bigtime_t timeout)
+ConditionVariable::Wait(uint32_t flags, bigtime_t timeout)
 {
 	ConditionVariableEntry entry;
 	Add(&entry);

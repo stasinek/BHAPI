@@ -203,7 +203,7 @@ status_t LibsolvSolver::Init()
 }
 
 
-void LibsolvSolver::SetDebugLevel(int32 level)
+void LibsolvSolver::SetDebugLevel(int32_t level)
 {
 	fDebugLevel = level;
 
@@ -236,7 +236,7 @@ status_t LibsolvSolver::AddRepository(BSolverRepository* repository)
 }
 
 
-status_t LibsolvSolver::FindPackages(const char* searchString, uint32 flags,
+status_t LibsolvSolver::FindPackages(const char* searchString, uint32_t flags,
 	BObjectList<BSolverPackage>& _packages)
 {
 	// add repositories to pool
@@ -302,7 +302,7 @@ status_t LibsolvSolver::FindPackages(const char* searchString, uint32 flags,
 
 
 status_t LibsolvSolver::FindPackages(const BSolverPackageSpecifierList& packages,
-	uint32 flags, BObjectList<BSolverPackage>& _packages,
+	uint32_t flags, BObjectList<BSolverPackage>& _packages,
 	const BSolverPackageSpecifier** _unmatched)
 {
 	if (_unmatched != NULL)
@@ -460,7 +460,7 @@ status_t LibsolvSolver::FullSync()
 }
 
 
-status_t LibsolvSolver::VerifyInstallation(uint32 flags)
+status_t LibsolvSolver::VerifyInstallation(uint32_t flags)
 {
 	if (_InstalledRepository() == NULL)
 		return B_BAD_VALUE;
@@ -514,8 +514,8 @@ status_t LibsolvSolver::SolveAgain()
 		return B_BAD_VALUE;
 
 	// iterate through all problems and propagate the selected solutions
-	int32 problemCount = fProblems.CountItems();
-	for (int32 i = 0; i < problemCount; i++) {
+	int32_t problemCount = fProblems.CountItems();
+	for (int32_t i = 0; i < problemCount; i++) {
 		Problem* problem = fProblems.ItemAt(i);
 		if (const Solution* solution = problem->SelectedSolution())
 			solver_take_solution(fSolver, problem->Id(), solution->Id(), fJobs);
@@ -525,14 +525,14 @@ status_t LibsolvSolver::SolveAgain()
 }
 
 
-int32 LibsolvSolver::CountProblems() const
+int32_t LibsolvSolver::CountProblems() const
 {
 	return fProblems.CountItems();
 }
 
 
 BSolverProblem*
-LibsolvSolver::ProblemAt(int32 index) const
+LibsolvSolver::ProblemAt(int32_t index) const
 {
 	return fProblems.ItemAt(index);
 }
@@ -658,8 +658,8 @@ void LibsolvSolver::_CleanupPool()
 	fSolvablePackages.clear();
 	fPackageSolvables.clear();
 
-	int32 repositoryCount = fRepositoryInfos.CountItems();
-	for (int32 i = 0; i < repositoryCount; i++)
+	int32_t repositoryCount = fRepositoryInfos.CountItems();
+	for (int32_t i = 0; i < repositoryCount; i++)
 		fRepositoryInfos.ItemAt(i)->SetSolvRepo(NULL);
 
 	// delete the pool
@@ -692,8 +692,8 @@ void LibsolvSolver::_CleanupSolver()
 
 bool LibsolvSolver::_HaveRepositoriesChanged() const
 {
-	int32 repositoryCount = fRepositoryInfos.CountItems();
-	for (int32 i = 0; i < repositoryCount; i++) {
+	int32_t repositoryCount = fRepositoryInfos.CountItems();
+	for (int32_t i = 0; i < repositoryCount; i++) {
 		RepositoryInfo* repositoryInfo = fRepositoryInfos.ItemAt(i);
 		if (repositoryInfo->HasChanged())
 			return true;
@@ -715,8 +715,8 @@ status_t LibsolvSolver::_AddRepositories()
 
 	fInstalledRepository = NULL;
 
-	int32 repositoryCount = fRepositoryInfos.CountItems();
-	for (int32 i = 0; i < repositoryCount; i++) {
+	int32_t repositoryCount = fRepositoryInfos.CountItems();
+	for (int32_t i = 0; i < repositoryCount; i++) {
 		RepositoryInfo* repositoryInfo = fRepositoryInfos.ItemAt(i);
 		BSolverRepository* repository = repositoryInfo->Repository();
 		Repo* repo = repo_create(fPool, repository->Name());
@@ -725,8 +725,8 @@ status_t LibsolvSolver::_AddRepositories()
 		repo->priority = -1 - repository->Priority();
 		repo->appdata = (void*)repositoryInfo;
 
-		int32 packageCount = repository->CountPackages();
-		for (int32 k = 0; k < packageCount; k++) {
+		int32_t packageCount = repository->CountPackages();
+		for (int32_t k = 0; k < packageCount; k++) {
 			BSolverPackage* package = repository->PackageAt(k);
 			Id solvableId = repo_add_haiku_package_info(repo, package->Info(),
 				REPO_REUSE_REPODATA | REPO_NO_INTERNALIZE);
@@ -759,8 +759,8 @@ status_t LibsolvSolver::_AddRepositories()
 LibsolvSolver::RepositoryInfo*
 LibsolvSolver::_InstalledRepository() const
 {
-	int32 repositoryCount = fRepositoryInfos.CountItems();
-	for (int32 i = 0; i < repositoryCount; i++) {
+	int32_t repositoryCount = fRepositoryInfos.CountItems();
+	for (int32_t i = 0; i < repositoryCount; i++) {
 		RepositoryInfo* repositoryInfo = fRepositoryInfos.ItemAt(i);
 		if (repositoryInfo->Repository()->IsInstalled())
 			return repositoryInfo;
@@ -773,8 +773,8 @@ LibsolvSolver::_InstalledRepository() const
 LibsolvSolver::RepositoryInfo*
 LibsolvSolver::_GetRepositoryInfo(BSolverRepository* repository) const
 {
-	int32 repositoryCount = fRepositoryInfos.CountItems();
-	for (int32 i = 0; i < repositoryCount; i++) {
+	int32_t repositoryCount = fRepositoryInfos.CountItems();
+	for (int32_t i = 0; i < repositoryCount; i++) {
 		RepositoryInfo* repositoryInfo = fRepositoryInfos.ItemAt(i);
 		if (repository == repositoryInfo->Repository())
 			return repositoryInfo;
@@ -804,8 +804,8 @@ status_t LibsolvSolver::_AddSpecifiedPackages(
 	const BSolverPackageSpecifierList& packages,
 	const BSolverPackageSpecifier** _unmatched, int additionalFlags)
 {
-	int32 packageCount = packages.CountSpecifiers();
-	for (int32 i = 0; i < packageCount; i++) {
+	int32_t packageCount = packages.CountSpecifiers();
+	for (int32_t i = 0; i < packageCount; i++) {
 		const BSolverPackageSpecifier& specifier = *packages.SpecifierAt(i);
 		switch (specifier.Type()) {
 			case BSolverPackageSpecifier::B_UNSPECIFIED:
@@ -884,7 +884,7 @@ status_t LibsolvSolver::_AddProblem(Id problemId)
 	Id targetId;
 	Id dependencyId;
 	BSolverProblem::BType problemType = BSolverProblem::B_UNSPECIFIED;
-	uint32 needed = 0;
+	uint32_t needed = 0;
 
 	switch (solver_ruleinfo(fSolver, ruleId, &sourceId, &targetId,
 			&dependencyId)) {
@@ -1253,7 +1253,7 @@ status_t LibsolvSolver::_GetResolvableExpression(Id id,
 }
 
 
-status_t LibsolvSolver::_GetFoundPackages(SolvQueue& selection, uint32 flags,
+status_t LibsolvSolver::_GetFoundPackages(SolvQueue& selection, uint32_t flags,
 	BObjectList<BSolverPackage>& _packages)
 {
 	// get solvables

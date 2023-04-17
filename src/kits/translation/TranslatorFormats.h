@@ -67,11 +67,11 @@ enum {
 
 // Bitmap format (always in big endian)
 struct TranslatorBitmap {
-	uint32		magic;		// B_TRANSLATOR_BITMAP
+	uint32_t		magic;		// B_TRANSLATOR_BITMAP
 	BRect		bounds;
-	uint32		rowBytes;
+	uint32_t		rowBytes;
 	color_space	colors;
-	uint32		dataSize;
+	uint32_t		dataSize;
 
 	// actual data follows
 };
@@ -79,10 +79,10 @@ struct TranslatorBitmap {
 
 // Sound format (always in big endian)
 struct TranslatorSound {
-	uint32		magic;		// B_TRANSLATOR_SOUND
-	uint32		channels;
+	uint32_t		magic;		// B_TRANSLATOR_SOUND
+	uint32_t		channels;
 	float		sampleFreq;
-	uint32		numFrames;
+	uint32_t		numFrames;
 
 	// actual data follows
 };
@@ -90,9 +90,9 @@ struct TranslatorSound {
 
 // Text format (always in big endian)
 struct TranslatorStyledTextRecordHeader {
-	uint32		magic;
-	uint32		header_size;
-	uint32		data_size;
+	uint32_t		magic;
+	uint32_t		header_size;
+	uint32_t		data_size;
 };
 
 struct TranslatorStyledTextStreamHeader {
@@ -101,7 +101,7 @@ struct TranslatorStyledTextStreamHeader {
 	};
 
 	TranslatorStyledTextRecordHeader header;
-	int32		version;
+	int32_t		version;
 };
 
 struct TranslatorStyledTextTextHeader {
@@ -110,7 +110,7 @@ struct TranslatorStyledTextTextHeader {
 	};
 
 	TranslatorStyledTextRecordHeader header;
-	int32		charset;
+	int32_t		charset;
 
 	// actual data follows
 };
@@ -121,8 +121,8 @@ struct TranslatorStyledTextStyleHeader {
 	};
 
 	TranslatorStyledTextRecordHeader header;
-	uint32		apply_offset;
-	uint32		apply_length;
+	uint32_t		apply_offset;
+	uint32_t		apply_length;
 
 	// flattened style follows
 };

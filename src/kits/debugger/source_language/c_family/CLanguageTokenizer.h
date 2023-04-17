@@ -79,7 +79,7 @@ enum {
 
 class ParseException {
  public:
-	ParseException(const char* message, int32 position)
+	ParseException(const char* message, int32_t position)
 		: message(message),
 		  position(position)
 	{
@@ -92,21 +92,21 @@ class ParseException {
 	}
 
 	BString	message;
-	int32	position;
+	int32_t	position;
 };
 
 
 struct Token {
 								Token();
 								Token(const Token& other);
-								Token(const char* string, int32 length,
-								int32 position, int32 type);
+								Token(const char* string, int32_t length,
+								int32_t position, int32_t type);
 			Token& 	operator=(const Token& other);
 
 	BString						string;
-	int32						type;
+	int32_t						type;
 	BVariant					value;
-	int32						position;
+	int32_t						position;
 };
 
 
@@ -125,7 +125,7 @@ private:
 	static 	bool 				_IsHexDigit(char c);
 
 			Token& 				_ParseHexOperand();
-			int32 				_CurrentPos() const;
+			int32_t 				_CurrentPos() const;
 
 private:
 	BString						fString;

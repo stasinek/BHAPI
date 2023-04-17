@@ -72,7 +72,7 @@ namespace Mime {
 
 
 MimeInfoUpdater::MimeInfoUpdater(Database* database,
-	DatabaseLocker* databaseLocker, int32 force)
+	DatabaseLocker* databaseLocker, int32_t force)
 	:
 	MimeEntryProcessor(database, databaseLocker, force)
 {
@@ -157,7 +157,7 @@ status_t MimeInfoUpdater::Do(const entry_ref& entry, bool* _entryIsDir)
 			return err;
 
 		// app flags
-		uint32 appFlags;
+		uint32_t appFlags;
 		err = appFileInfoRead.GetAppFlags(&appFlags);
 		if (err == B_OK) {
 			err = appFileInfoWrite.SetAppFlags(appFlags);
@@ -224,7 +224,7 @@ status_t MimeInfoUpdater::Do(const entry_ref& entry, bool* _entryIsDir)
 		// icons for supported types
 		if (hasSupportedTypes) {
 			const char *supportedType;
-			for (int32 i = 0;
+			for (int32_t i = 0;
 				 supportedTypes.FindString("types", i, &supportedType) == B_OK;
 				 i++) {
 				// vector icon

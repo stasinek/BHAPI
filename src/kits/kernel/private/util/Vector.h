@@ -66,16 +66,16 @@ public:
 	void PopBack();
 
 	status_t Add(const Value &value) { return PushBack(value); }
-	status_t Add(const Value &value, int32 index) { return Insert(value, index); }
+	status_t Add(const Value &value, int32_t index) { return Insert(value, index); }
 
-	status_t Insert(const Value &value, int32 index);
+	status_t Insert(const Value &value, int32_t index);
 	status_t Insert(const Value &value, const Iterator &iterator);
 
-	int32 Remove(const Value &value);
-	Iterator Erase(int32 index);
+	int32_t Remove(const Value &value);
+	Iterator Erase(int32_t index);
 	Iterator Erase(const Iterator &iterator);
 
-	inline int32 Count() const;
+	inline int32_t Count() const;
 	inline bool IsEmpty() const;
 	void MakeEmpty();
 
@@ -85,34 +85,34 @@ public:
 	inline ConstIterator End() const;
 	inline Iterator Null();
 	inline ConstIterator Null() const;
-	inline Iterator IteratorForIndex(int32 index);
-	inline ConstIterator IteratorForIndex(int32 index) const;
+	inline Iterator IteratorForIndex(int32_t index);
+	inline ConstIterator IteratorForIndex(int32_t index) const;
 
-	inline const Value &ElementAt(int32 index) const;
-	inline Value &ElementAt(int32 index);
+	inline const Value &ElementAt(int32_t index) const;
+	inline Value &ElementAt(int32_t index);
 
-	int32 IndexOf(const Value &value, int32 start = 0) const;
+	int32_t IndexOf(const Value &value, int32_t start = 0) const;
 	Iterator Find(const Value &value);
 	Iterator Find(const Value &value, const Iterator &start);
 	ConstIterator Find(const Value &value) const;
 	ConstIterator Find(const Value &value, const ConstIterator &start) const;
 
-	inline Value &operator[](int32 index);
-	inline const Value &operator[](int32 index) const;
+	inline Value &operator[](int32_t index);
+	inline const Value &operator[](int32_t index) const;
 
 	// debugging
-	int32 GetCapacity() const	{ return fCapacity; }
+	int32_t GetCapacity() const	{ return fCapacity; }
 
 private:
-	inline static void _MoveItems(Value *values, int32 offset, int32 count);
+	inline static void _MoveItems(Value *values, int32_t offset, int32_t count);
 	bool _Resize(size_t count);
-	inline int32 _IteratorIndex(const Iterator &iterator) const;
-	inline int32 _IteratorIndex(const ConstIterator &iterator) const;
+	inline int32_t _IteratorIndex(const Iterator &iterator) const;
+	inline int32_t _IteratorIndex(const ConstIterator &iterator) const;
 
 private:
 	size_t	fCapacity;
 	size_t	fChunkSize;
-	int32	fItemCount;
+	int32_t	fItemCount;
 	Value	*fItems;
 };
 
@@ -305,7 +305,7 @@ void _VECTOR_CLASS_NAME::PopBack()
 */
 _VECTOR_TEMPLATE_LIST
 inline
-void _VECTOR_CLASS_NAME::_MoveItems(Value* items, int32 offset, int32 count)
+void _VECTOR_CLASS_NAME::_MoveItems(Value* items, int32_t offset, int32_t count)
 {
 	if (count > 0 && offset != 0)
 		memmove(items + offset, items, count * sizeof(Value));
@@ -322,7 +322,7 @@ void _VECTOR_CLASS_NAME::_MoveItems(Value* items, int32 offset, int32 count)
 	- \c B_NO_MEMORY: Insufficient memory for this operation.
 */
 _VECTOR_TEMPLATE_LIST
-status_t _VECTOR_CLASS_NAME::Insert(const Value &value, int32 index)
+status_t _VECTOR_CLASS_NAME::Insert(const Value &value, int32_t index)
 {
 	if (index < 0 || index > fItemCount)
 		return B_BAD_VALUE;
@@ -346,7 +346,7 @@ status_t _VECTOR_CLASS_NAME::Insert(const Value &value, int32 index)
 _VECTOR_TEMPLATE_LIST
 status_t _VECTOR_CLASS_NAME::Insert(const Value &value, const Iterator &iterator)
 {
-	int32 index = _IteratorIndex(iterator);
+	int32_t index = _IteratorIndex(iterator);
 	if (index >= 0)
 		return Insert(value, index);
 	return B_BAD_VALUE;
@@ -358,10 +358,10 @@ status_t _VECTOR_CLASS_NAME::Insert(const Value &value, const Iterator &iterator
 	\return The number of removed occurrences.
 */
 _VECTOR_TEMPLATE_LIST
-int32 _VECTOR_CLASS_NAME::Remove(const Value &value)
+int32_t _VECTOR_CLASS_NAME::Remove(const Value &value)
 {
-	int32 count = 0;
-	for (int32 i = fItemCount - 1; i >= 0; i--) {
+	int32_t count = 0;
+	for (int32_t i = fItemCount - 1; i >= 0; i--) {
 		if (ElementAt(i) == value) {
 			Erase(i);
 			count++;
@@ -379,7 +379,7 @@ int32 _VECTOR_CLASS_NAME::Remove(const Value &value)
 */
 _VECTOR_TEMPLATE_LIST
 _VECTOR_CLASS_TYPE::Iterator
-_VECTOR_CLASS_NAME::Erase(int32 index)
+_VECTOR_CLASS_NAME::Erase(int32_t index)
 {
 	if (index >= 0 && index < fItemCount) {
 		fItems[index].~Value();
@@ -402,7 +402,7 @@ _VECTOR_TEMPLATE_LIST
 _VECTOR_CLASS_TYPE::Iterator
 _VECTOR_CLASS_NAME::Erase(const Iterator &iterator)
 {
-	int32 index = _IteratorIndex(iterator);
+	int32_t index = _IteratorIndex(iterator);
 	if (index >= 0 && index < fItemCount)
 		return Erase(index);
 	return Null();
@@ -414,7 +414,7 @@ _VECTOR_CLASS_NAME::Erase(const Iterator &iterator)
 */
 _VECTOR_TEMPLATE_LIST
 inline
-int32 _VECTOR_CLASS_NAME::Count() const
+int32_t _VECTOR_CLASS_NAME::Count() const
 {
 	return fItemCount;
 }
@@ -436,7 +436,7 @@ bool _VECTOR_CLASS_NAME::IsEmpty() const
 _VECTOR_TEMPLATE_LIST
 void _VECTOR_CLASS_NAME::MakeEmpty()
 {
-	for (int32 i = 0; i < fItemCount; i++)
+	for (int32_t i = 0; i < fItemCount; i++)
 		fItems[i].~Value();
 	_Resize(0);
 }
@@ -545,7 +545,7 @@ _VECTOR_CLASS_NAME::Null() const
 _VECTOR_TEMPLATE_LIST
 inline
 _VECTOR_CLASS_TYPE::Iterator
-_VECTOR_CLASS_NAME::IteratorForIndex(int32 index)
+_VECTOR_CLASS_NAME::IteratorForIndex(int32_t index)
 {
 	if (index >= 0 && index <= fItemCount)
 		return Iterator(fItems + index);
@@ -560,7 +560,7 @@ _VECTOR_CLASS_NAME::IteratorForIndex(int32 index)
 _VECTOR_TEMPLATE_LIST
 inline
 _VECTOR_CLASS_TYPE::ConstIterator
-_VECTOR_CLASS_NAME::IteratorForIndex(int32 index) const
+_VECTOR_CLASS_NAME::IteratorForIndex(int32_t index) const
 {
 	if (index >= 0 && index <= fItemCount)
 		return ConstIterator(fItems + index);
@@ -575,7 +575,7 @@ _VECTOR_CLASS_NAME::IteratorForIndex(int32 index) const
 _VECTOR_TEMPLATE_LIST
 inline
 const Value &
-_VECTOR_CLASS_NAME::ElementAt(int32 index) const
+_VECTOR_CLASS_NAME::ElementAt(int32_t index) const
 {
 	if (index >= 0 && index < fItemCount)
 		return fItems[index];
@@ -592,7 +592,7 @@ _VECTOR_CLASS_NAME::ElementAt(int32 index) const
 _VECTOR_TEMPLATE_LIST
 inline
 Value &
-_VECTOR_CLASS_NAME::ElementAt(int32 index)
+_VECTOR_CLASS_NAME::ElementAt(int32_t index)
 {
 	if (index >= 0 && index < fItemCount)
 		return fItems[index];
@@ -609,10 +609,10 @@ _VECTOR_CLASS_NAME::ElementAt(int32 index)
 			with the given value could be found or \a index is out of range.
 */
 _VECTOR_TEMPLATE_LIST
-int32 _VECTOR_CLASS_NAME::IndexOf(const Value &value, int32 start) const
+int32_t _VECTOR_CLASS_NAME::IndexOf(const Value &value, int32_t start) const
 {
 	if (start >= 0) {
-		for (int32 i = start; i < fItemCount; i++) {
+		for (int32_t i = start; i < fItemCount; i++) {
 			if (fItems[i] == value)
 				return i;
 		}
@@ -649,7 +649,7 @@ _VECTOR_TEMPLATE_LIST
 _VECTOR_CLASS_TYPE::Iterator
 _VECTOR_CLASS_NAME::Find(const Value &value, const Iterator &start)
 {
-	int32 index = IndexOf(value, _IteratorIndex(start));
+	int32_t index = IndexOf(value, _IteratorIndex(start));
 	if (index >= 0)
 		return Iterator(fItems + index);
 	return End();
@@ -684,7 +684,7 @@ _VECTOR_TEMPLATE_LIST
 _VECTOR_CLASS_TYPE::ConstIterator
 _VECTOR_CLASS_NAME::Find(const Value &value, const ConstIterator &start) const
 {
-	int32 index = IndexOf(value, _IteratorIndex(start));
+	int32_t index = IndexOf(value, _IteratorIndex(start));
 	if (index >= 0)
 		return ConstIterator(fItems + index);
 	return End();
@@ -696,7 +696,7 @@ _VECTOR_CLASS_NAME::Find(const Value &value, const ConstIterator &start) const
 _VECTOR_TEMPLATE_LIST
 inline
 Value &
-_VECTOR_CLASS_NAME::operator[](int32 index)
+_VECTOR_CLASS_NAME::operator[](int32_t index)
 {
 	return ElementAt(index);
 }
@@ -707,7 +707,7 @@ _VECTOR_CLASS_NAME::operator[](int32 index)
 _VECTOR_TEMPLATE_LIST
 inline
 const Value &
-_VECTOR_CLASS_NAME::operator[](int32 index) const
+_VECTOR_CLASS_NAME::operator[](int32_t index) const
 {
 	return ElementAt(index);
 }
@@ -730,7 +730,7 @@ bool _VECTOR_CLASS_NAME::_Resize(size_t count)
 {
 	bool result = true;
 	// calculate the new capacity
-	int32 newSize = count;
+	int32_t newSize = count;
 	if (newSize <= 0)
 		newSize = 1;
 	newSize = ((newSize - 1) / fChunkSize + 1) * fChunkSize;
@@ -756,10 +756,10 @@ bool _VECTOR_CLASS_NAME::_Resize(size_t count)
 */
 _VECTOR_TEMPLATE_LIST
 inline
-int32 _VECTOR_CLASS_NAME::_IteratorIndex(const Iterator &iterator) const
+int32_t _VECTOR_CLASS_NAME::_IteratorIndex(const Iterator &iterator) const
 {
 	if (iterator.Element()) {
-		int32 index = iterator.Element() - fItems;
+		int32_t index = iterator.Element() - fItems;
 		if (index >= 0 && index <= fItemCount)
 			return index;
 	}
@@ -774,10 +774,10 @@ int32 _VECTOR_CLASS_NAME::_IteratorIndex(const Iterator &iterator) const
 */
 _VECTOR_TEMPLATE_LIST
 inline
-int32 _VECTOR_CLASS_NAME::_IteratorIndex(const ConstIterator &iterator) const
+int32_t _VECTOR_CLASS_NAME::_IteratorIndex(const ConstIterator &iterator) const
 {
 	if (iterator.Element()) {
-		int32 index = iterator.Element() - fItems;
+		int32_t index = iterator.Element() - fItems;
 		if (index >= 0 && index <= fItemCount)
 			return index;
 	}

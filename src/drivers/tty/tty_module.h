@@ -13,7 +13,7 @@
 struct tty;
 struct tty_cookie;
 
-typedef bool (*tty_service_func)(struct tty *tty, uint32 op, void *buffer,
+typedef bool (*tty_service_func)(struct tty *tty, uint32_t op, void *buffer,
 	size_t length);
 
 // flags
@@ -50,7 +50,7 @@ struct tty_module_info {
 
 	struct tty_cookie *
 				(*tty_create_cookie)(struct tty *masterTTY, struct tty *slaveTTY,
-					uint32 openMode);
+					uint32_t openMode);
 	void		(*tty_close_cookie)(struct tty_cookie *cookie);
 	void		(*tty_destroy_cookie)(struct tty_cookie *cookie);
 
@@ -58,10 +58,10 @@ struct tty_module_info {
 					size_t *_length);
 	status_t	(*tty_write)(struct tty_cookie *cookie, const void *buffer,
 					size_t *length);
-	status_t	(*tty_control)(struct tty_cookie *cookie, uint32 op,
+	status_t	(*tty_control)(struct tty_cookie *cookie, uint32_t op,
 					void *buffer, size_t length);
 	status_t	(*tty_select)(struct tty_cookie *cookie, uint8 event,
-					uint32 ref, selectsync *sync);
+					uint32_t ref, selectsync *sync);
 	status_t	(*tty_deselect)(struct tty_cookie *cookie, uint8 event,
 					selectsync *sync);
 

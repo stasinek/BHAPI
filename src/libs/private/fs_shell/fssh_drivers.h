@@ -14,10 +14,10 @@ extern "C" {
 --- */
 
 typedef fssh_status_t (*fssh_device_open_hook) (const char *name,
-								uint32_t flags, void **cookie);
+								uint32_t_t flags, void **cookie);
 typedef fssh_status_t (*fssh_device_close_hook) (void *cookie);
 typedef fssh_status_t (*fssh_device_free_hook) (void *cookie);
-typedef fssh_status_t (*fssh_device_control_hook) (void *cookie, uint32_t op,
+typedef fssh_status_t (*fssh_device_control_hook) (void *cookie, uint32_t_t op,
 								void *data, fssh_size_t len);
 typedef fssh_status_t  (*fssh_device_read_hook) (void *cookie,
 								fssh_off_t position, void *data,
@@ -26,7 +26,7 @@ typedef fssh_status_t  (*fssh_device_write_hook) (void *cookie,
 								fssh_off_t position, const void *data,
 								fssh_size_t *numBytes);
 typedef fssh_status_t (*fssh_device_select_hook) (void *cookie, uint8_t event,
-								uint32_t ref, fssh_selectsync *sync);
+								uint32_t_t ref, fssh_selectsync *sync);
 typedef fssh_status_t (*fssh_device_deselect_hook) (void *cookie, uint8_t event,
 								fssh_selectsync *sync);
 typedef fssh_status_t (*fssh_device_read_pages_hook)(void *cookie,
@@ -62,7 +62,7 @@ fssh_device_hooks	*fssh_find_device(const char *name);
 fssh_status_t		fssh_init_driver(void);
 void				fssh_uninit_driver(void);
 
-extern int32_t	fssh_api_version;
+extern int32_t_t	fssh_api_version;
 
 enum {
 	FSSH_B_GET_DEVICE_SIZE = 1,			/* get # bytes */
@@ -143,10 +143,10 @@ enum {
 --- */
 
 typedef struct {
-	uint32_t	bytes_per_sector;		/* sector size in bytes */
-	uint32_t	sectors_per_track;		/* # sectors per track */
-	uint32_t	cylinder_count;			/* # cylinders */
-	uint32_t	head_count;				/* # heads */
+	uint32_t_t	bytes_per_sector;		/* sector size in bytes */
+	uint32_t_t	sectors_per_track;		/* # sectors per track */
+	uint32_t_t	cylinder_count;			/* # cylinders */
+	uint32_t_t	head_count;				/* # heads */
 	uint8_t		device_type;			/* type */
 	bool		removable;				/* non-zero if removable */
 	bool		read_only;				/* non-zero if read only */
@@ -180,9 +180,9 @@ enum {
 typedef struct {
 	fssh_off_t	offset;					/* offset (in bytes) */
 	fssh_off_t	size;					/* size (in bytes) */
-	int32_t		logical_block_size;		/* logical block size of partition */
-	int32_t		session;				/* id of session */
-	int32_t		partition;				/* id of partition */
+	int32_t_t		logical_block_size;		/* logical block size of partition */
+	int32_t_t		session;				/* id of session */
+	int32_t_t		partition;				/* id of partition */
 	char		device[256];			/* path to the physical device */
 } fssh_partition_info;
 
@@ -198,7 +198,7 @@ typedef char	fssh_driver_path[256];
 --- */
 
 typedef struct {
-	uint32_t	cookie;			/* must be set to 0 before iterating */
+	uint32_t_t	cookie;			/* must be set to 0 before iterating */
 	char		device[256];	/* device path */
 } fssh_open_device_iterator;
 
@@ -208,14 +208,14 @@ typedef struct {
 --- */
 
 typedef struct {
-	int32_t	icon_size;			/* icon size requested */
+	int32_t_t	icon_size;			/* icon size requested */
 	void	*icon_data;			/* where to put 'em (usually BBitmap->Bits()) */
 } fssh_device_icon;
 
 
 /* B_TRIM_DEVICE data structure */
 typedef struct {
-	uint32_t	range_count;
+	uint32_t_t	range_count;
 	uint64_t	trimmed_size;			/* filled on return */
 	struct range {
 		uint64_t	offset;				/* offset (in bytes) */

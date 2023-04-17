@@ -34,7 +34,7 @@ static color_map sColorMap;
 	\param blue2 Blue component of the second color.
 	\return The distance between the given colors.
 */
-static inline uint32 color_distance(uint8 red1, uint8 green1, uint8 blue1,
+static inline uint32_t color_distance(uint8 red1, uint8 green1, uint8 blue1,
 			   uint8 red2, uint8 green2, uint8 blue2)
 {
 	int rd = (int)red1 - (int)red2;
@@ -56,7 +56,7 @@ FindClosestColor(const rgb_color &color, const rgb_color *palette)
 {
 	uint8 closestIndex = 0;
 	unsigned closestDistance = UINT_MAX;
-	for (int32 i = 0; i < 256; i++) {
+	for (int32_t i = 0; i < 256; i++) {
 		const rgb_color &c = palette[i];
 		unsigned distance = color_distance(color.red, color.green, color.blue,
 										   c.red, c.green, c.blue);
@@ -93,7 +93,7 @@ static void FillColorMap(const rgb_color *palette, color_map *map)
 	memcpy(map->color_list, palette, sizeof(map->color_list));
 	
 	// init index map
-	for (int32 color = 0; color < 32768; color++) {
+	for (int32_t color = 0; color < 32768; color++) {
 		// get components
 		rgb_color rgbColor;
 		rgbColor.red = (color & 0x7c00) >> 7;
@@ -104,7 +104,7 @@ static void FillColorMap(const rgb_color *palette, color_map *map)
 	}
 	
 	// init inversion map
-	for (int32 index = 0; index < 256; index++) {
+	for (int32_t index = 0; index < 256; index++) {
 		rgb_color inverted = InvertColor(map->color_list[index]);
 		map->inversion_map[index] = FindClosestColor(inverted, palette);	
 	}

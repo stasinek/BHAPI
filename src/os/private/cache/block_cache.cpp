@@ -79,8 +79,8 @@ struct cached_block {
 #if BLOCK_CACHE_DEBUG_CHANGED
 	void*			compare;
 #endif
-	int32			ref_count;
-	int32			last_accessed;
+	int32_t			ref_count;
+	int32_t			last_accessed;
 	bool			busy_reading : 1;
 	bool			busy_writing : 1;
 	bool			is_writing : 1;
@@ -105,7 +105,7 @@ struct cached_block {
 		// transaction.
 
 	bool CanBeWritten() const;
-	int32 LastAccess() const
+	int32_t LastAccess() const
 		{ return system_time() / 1000000L - last_accessed; }
 };
 
@@ -114,9 +114,9 @@ typedef DoublyLinkedList<cached_block,
 		&cached_block::link> > block_list;
 
 struct cache_notification : DoublyLinkedListLinkImpl<cache_notification> {
-	int32			transaction_id;
-	int32			events_pending;
-	int32			events;
+	int32_t			transaction_id;
+	int32_t			events_pending;
+	int32_t			events;
 	transaction_notification_hook hook;
 	void*			data;
 	bool			delete_after_event;
@@ -153,7 +153,7 @@ typedef BOpenHashTable<BlockHash> BlockTable;
 
 
 struct TransactionHash {
-	typedef int32				KeyType;
+	typedef int32_t				KeyType;
 	typedef	cache_transaction	ValueType;
 
 	size_t HashKey(KeyType key) const
@@ -175,23 +175,23 @@ struct block_cache : DoublyLinkedListLinkImpl<block_cache> {
 	int				fd;
 	off_t			max_blocks;
 	size_t			block_size;
-	int32			next_transaction_id;
+	int32_t			next_transaction_id;
 	cache_transaction* last_transaction;
 	TransactionTable* transaction_hash;
 
 	object_cache*	buffer_cache;
 	block_list		unused_blocks;
-	uint32			unused_block_count;
+	uint32_t			unused_block_count;
 
 	ConditionVariable busy_reading_condition;
-	uint32			busy_reading_count;
+	uint32_t			busy_reading_count;
 	bool			busy_reading_waiters;
 
 	ConditionVariable busy_writing_condition;
-	uint32			busy_writing_count;
+	uint32_t			busy_writing_count;
 	bool			busy_writing_waiters;
 
-	uint32			num_dirty_blocks;
+	uint32_t			num_dirty_blocks;
 	bool			read_only;
 
 	NotificationList pending_notifications;
@@ -209,13 +209,13 @@ struct block_cache : DoublyLinkedListLinkImpl<block_cache> {
 	cached_block*	NewBlock(off_t blockNumber);
 	void			FreeBlockParentData(cached_block* block);
 
-	void			RemoveUnusedBlocks(int32 count, int32 minSecondsOld = 0);
+	void			RemoveUnusedBlocks(int32_t count, int32_t minSecondsOld = 0);
 	void			RemoveBlock(cached_block* block);
 	void			DiscardBlock(cached_block* block);
 
 private:
-	static void		_LowMemoryHandler(void* data, uint32 resources,
-						int32 level);
+	static void		_LowMemoryHandler(void* data, uint32_t resources,
+						int32_t level);
 	cached_block*	_GetUnusedBlock();
 };
 
@@ -235,17 +235,17 @@ struct cache_transaction {
 	cache_transaction();
 
 	cache_transaction* next;
-	int32			id;
-	int32			num_blocks;
-	int32			main_num_blocks;
-	int32			sub_num_blocks;
+	int32_t			id;
+	int32_t			num_blocks;
+	int32_t			main_num_blocks;
+	int32_t			sub_num_blocks;
 	cached_block*	first_block;
 	block_list		blocks;
 	ListenerList	listeners;
 	bool			open;
 	bool			has_sub_transaction;
 	bigtime_t		last_used;
-	int32			busy_writing_count;
+	int32_t			busy_writing_count;
 };
 
 
@@ -364,8 +364,8 @@ private:
 	bool				fIsDirty;
 	bool				fHasOriginal;
 	bool				fHasParent;
-	int32				fTransactionID;
-	int32				fPreviousID;
+	int32_t				fTransactionID;
+	int32_t				fPreviousID;
 };
 
 class Get : public Action {
@@ -503,7 +503,7 @@ public:
 	}
 #endif
 
-	void DumpBlocks(uint32 which, uint32 offset, uint32 size)
+	void DumpBlocks(uint32_t which, uint32_t offset, uint32_t size)
 	{
 		if ((which & kCurrent) != 0)
 			DumpBlock(kCurrent, offset, size);
@@ -513,7 +513,7 @@ public:
 			DumpBlock(kOriginal, offset, size);
 	}
 
-	void DumpBlock(uint32 which, uint32 offset, uint32 size)
+	void DumpBlock(uint32_t which, uint32_t offset, uint32_t size)
 	{
 		if (offset > fSize) {
 			kprintf("invalid offset (block size %" B_PRIu32 ")\n", fSize);
@@ -539,10 +539,10 @@ public:
 
 		kprintf("%s: offset %" B_PRIu32 ", %" B_PRIu32 " bytes\n", label, offset, size);
 
-		static const uint32 kBlockSize = 16;
+		static const uint32_t kBlockSize = 16;
 		data += offset;
 
-		for (uint32 i = 0; i < size;) {
+		for (uint32_t i = 0; i < size;) {
 			int start = i;
 
 			kprintf("  %04" B_PRIx32 " ", i);
@@ -572,7 +572,7 @@ private:
 	}
 
 	block_cache*	fCache;
-	uint32			fSize;
+	uint32_t			fSize;
 	uint64			fBlockNumber;
 	const char*		fMessage;
 	uint8*			fCurrent;
@@ -628,10 +628,10 @@ private:
 	char				fLabel[12];
 	block_cache*		fCache;
 	cache_transaction*	fTransaction;
-	int32				fID;
+	int32_t				fID;
 	bool				fSub;
-	int32				fNumBlocks;
-	int32				fSubNumBlocks;
+	int32_t				fNumBlocks;
+	int32_t				fSubNumBlocks;
 };
 
 class Detach : public AbstractTraceEntry {
@@ -660,10 +660,10 @@ public:
 private:
 	block_cache*		fCache;
 	cache_transaction*	fTransaction;
-	int32				fID;
+	int32_t				fID;
 	bool				fSub;
 	cache_transaction*	fNewTransaction;
-	int32				fNewID;
+	int32_t				fNewID;
 };
 
 class Abort : public AbstractTraceEntry {
@@ -681,7 +681,7 @@ public:
 		fBlocks = (off_t*)alloc_tracing_buffer(fNumBlocks * sizeof(off_t));
 		if (fBlocks != NULL) {
 			cached_block* block = transaction->first_block;
-			for (int32 i = 0; block != NULL && i < fNumBlocks;
+			for (int32_t i = 0; block != NULL && i < fNumBlocks;
 					block = block->transaction_next) {
 				fBlocks[i++] = block->block_number;
 			}
@@ -700,7 +700,7 @@ public:
 	{
 		out.Print("block cache %p, abort transaction "
 			"%p (id %" B_PRId32 "), blocks", fCache, fTransaction, fID);
-		for (int32 i = 0; i < fNumBlocks && !out.IsFull(); i++)
+		for (int32_t i = 0; i < fNumBlocks && !out.IsFull(); i++)
 			out.Print(" %" B_PRIdOFF, fBlocks[i]);
 	}
 
@@ -714,9 +714,9 @@ public:
 private:
 	block_cache*		fCache;
 	cache_transaction*	fTransaction;
-	int32				fID;
+	int32_t				fID;
 	off_t*				fBlocks;
-	int32				fNumBlocks;
+	int32_t				fNumBlocks;
 #if KTRACE_PRINTF_STACK_TRACE
 	tracing_stack_trace* fStackTrace;
 #endif
@@ -749,14 +749,14 @@ static object_cache* sBlockCache;
 
 /*!	Checks whether or not this is an event that closes a transaction. */
 static inline bool
-is_closing_event(int32 event)
+is_closing_event(int32_t event)
 {
 	return (event & (TRANSACTION_ABORTED | TRANSACTION_ENDED)) != 0;
 }
 
 
 static inline bool
-is_written_event(int32 event)
+is_written_event(int32_t event)
 {
 	return (event & TRANSACTION_WRITTEN) != 0;
 }
@@ -767,10 +767,10 @@ is_written_event(int32 event)
 	If there is no pending event anymore, it will return \c false.
 */
 static bool
-get_next_pending_event(cache_notification* notification, int32* _event)
+get_next_pending_event(cache_notification* notification, int32_t* _event)
 {
-	for (int32 eventMask = 1; eventMask <= TRANSACTION_IDLE; eventMask <<= 1) {
-		int32 pending = atomic_and(&notification->events_pending,
+	for (int32_t eventMask = 1; eventMask <= TRANSACTION_IDLE; eventMask <<= 1) {
+		int32_t pending = atomic_and(&notification->events_pending,
 			~eventMask);
 
 		bool more = (pending & ~eventMask) != 0;
@@ -798,7 +798,7 @@ flush_pending_notifications(block_cache* cache)
 			return;
 
 		bool deleteAfterEvent = false;
-		int32 event = -1;
+		int32_t event = -1;
 		if (!get_next_pending_event(notification, &event)) {
 			// remove the notification if this was the last pending event
 			cache->pending_notifications.Remove(notification);
@@ -843,7 +843,7 @@ flush_pending_notifications()
 /*!	Initializes the \a notification as specified. */
 static void
 set_notification(cache_transaction* transaction,
-	cache_notification &notification, int32 events,
+	cache_notification &notification, int32_t events,
 	transaction_notification_hook hook, void* data)
 {
 	notification.transaction_id = transaction != NULL ? transaction->id : -1;
@@ -878,12 +878,12 @@ delete_notification(cache_notification* notification)
 */
 static void
 add_notification(block_cache* cache, cache_notification* notification,
-	int32 event, bool deleteNotification)
+	int32_t event, bool deleteNotification)
 {
 	if (notification->hook == NULL)
 		return;
 
-	int32 pending = atomic_or(&notification->events_pending, event);
+	int32_t pending = atomic_or(&notification->events_pending, event);
 	if (pending == 0) {
 		// not yet part of the notification list
 		MutexLocker locker(sNotificationsLock);
@@ -908,7 +908,7 @@ add_notification(block_cache* cache, cache_notification* notification,
 */
 static void
 notify_transaction_listeners(block_cache* cache, cache_transaction* transaction,
-	int32 event)
+	int32_t event)
 {
 	T(Action("notify", cache, transaction));
 
@@ -950,7 +950,7 @@ remove_transaction_listeners(block_cache* cache, cache_transaction* transaction)
 
 static status_t
 add_transaction_listener(block_cache* cache, cache_transaction* transaction,
-	int32 events, transaction_notification_hook hookFunction, void* data)
+	int32_t events, transaction_notification_hook hookFunction, void* data)
 {
 	ListenerList::Iterator iterator = transaction->listeners.GetIterator();
 	while (iterator.HasNext()) {
@@ -1001,7 +1001,7 @@ delete_transaction(block_cache* cache, cache_transaction* transaction)
 
 
 static cache_transaction*
-lookup_transaction(block_cache* cache, int32 id)
+lookup_transaction(block_cache* cache, int32_t id)
 {
 	return cache->transaction_hash->Lookup(id);
 }
@@ -1013,7 +1013,7 @@ size_t TransactionHash::Hash(cache_transaction* transaction) const
 }
 
 
-bool TransactionHash::Compare(int32 key, cache_transaction* transaction) const
+bool TransactionHash::Compare(int32_t key, cache_transaction* transaction) const
 {
 	return transaction->id == key;
 }
@@ -1180,7 +1180,7 @@ BlockWriter::Write(cache_transaction* transaction, bool canUnlock)
 	qsort(fBlocks, fCount, sizeof(void*), &_CompareBlocks);
 	fDeletedTransaction = false;
 
-	for (uint32 i = 0; i < fCount; i++) {
+	for (uint32_t i = 0; i < fCount; i++) {
 		status_t status = _WriteBlock(fBlocks[i]);
 		if (status != B_OK) {
 			// propagate to global error handling
@@ -1196,7 +1196,7 @@ BlockWriter::Write(cache_transaction* transaction, bool canUnlock)
 	if (canUnlock)
 		mutex_lock(&fCache->lock);
 
-	for (uint32 i = 0; i < fCount; i++)
+	for (uint32_t i = 0; i < fCount; i++)
 		_BlockDone(fBlocks[i], transaction);
 
 	fCount = 0;
@@ -1524,7 +1524,7 @@ block_cache::FreeBlockParentData(cached_block* block)
 
 
 void
-block_cache::RemoveUnusedBlocks(int32 count, int32 minSecondsOld)
+block_cache::RemoveUnusedBlocks(int32_t count, int32_t minSecondsOld)
 {
 	TRACE(("block_cache: remove up to %" B_PRId32 " unused blocks\n", count));
 
@@ -1590,7 +1590,7 @@ block_cache::DiscardBlock(cached_block* block)
 
 
 void
-block_cache::_LowMemoryHandler(void* data, uint32 resources, int32 level)
+block_cache::_LowMemoryHandler(void* data, uint32_t resources, int32_t level)
 {
 	TRACE(("block_cache: low memory handler called with level %" B_PRId32 "\n", level));
 
@@ -1598,8 +1598,8 @@ block_cache::_LowMemoryHandler(void* data, uint32 resources, int32 level)
 	// (if there is enough memory left, we don't free any)
 
 	block_cache* cache = (block_cache*)data;
-	int32 free = 0;
-	int32 secondsOld = 0;
+	int32_t free = 0;
+	int32_t secondsOld = 0;
 	switch (level) {
 		case B_NO_LOW_RESOURCE:
 			return;
@@ -1627,7 +1627,7 @@ block_cache::_LowMemoryHandler(void* data, uint32 resources, int32 level)
 	}
 
 #ifdef TRACE_BLOCK_CACHE
-	uint32 oldUnused = cache->unused_block_count;
+	uint32_t oldUnused = cache->unused_block_count;
 #endif
 
 	cache->RemoveUnusedBlocks(free, secondsOld);
@@ -1895,7 +1895,7 @@ retry:
 
 	if (*_allocated && readBlock) {
 		// read block into cache
-		int32 blockSize = cache->block_size;
+		int32_t blockSize = cache->block_size;
 
 		mark_block_busy_reading(cache, block);
 		mutex_unlock(&cache->lock);
@@ -1933,7 +1933,7 @@ retry:
 */
 static void*
 get_writable_cached_block(block_cache* cache, off_t blockNumber, off_t base,
-	off_t length, int32 transactionID, bool cleared)
+	off_t length, int32_t transactionID, bool cleared)
 {
 	TRACE(("get_writable_cached_block(blockNumber = %" B_PRIdOFF ", transaction = %" B_PRId32 ")\n",
 		blockNumber, transactionID));
@@ -2160,7 +2160,7 @@ dump_cache(int argc, char** argv)
 {
 	bool showTransactions = false;
 	bool showBlocks = false;
-	int32 i = 1;
+	int32_t i = 1;
 	while (argv[i] != NULL && argv[i][0] == '-') {
 		for (char* arg = &argv[i][1]; arg[0]; arg++) {
 			switch (arg[0]) {
@@ -2248,10 +2248,10 @@ dump_cache(int argc, char** argv)
 			"flags transact prev. trans\n");
 	}
 
-	uint32 referenced = 0;
-	uint32 count = 0;
-	uint32 dirty = 0;
-	uint32 discarded = 0;
+	uint32_t referenced = 0;
+	uint32_t count = 0;
+	uint32_t dirty = 0;
+	uint32_t discarded = 0;
 	BlockTable::Iterator iterator(cache->hash);
 	while (iterator.HasNext()) {
 		cached_block* block = iterator.Next();
@@ -2297,7 +2297,7 @@ dump_transaction(int argc, char** argv)
 		transaction = (cache_transaction*)(addr_t)parse_expression(argv[i]);
 	} else {
 		block_cache* cache = (block_cache*)(addr_t)parse_expression(argv[i]);
-		int32 id = parse_expression(argv[i + 1]);
+		int32_t id = parse_expression(argv[i + 1]);
 		transaction = lookup_transaction(cache, id);
 		if (transaction == NULL) {
 			kprintf("No transaction with ID %" B_PRId32 " found.\n", id);
@@ -2377,8 +2377,8 @@ dump_block_data(int argc, char** argv)
 	// Determine which blocks to show
 
 	bool printStackTrace = true;
-	uint32 which = 0;
-	int32 i = 1;
+	uint32_t which = 0;
+	int32_t i = 1;
 	while (i < argc && argv[i][0] == '-') {
 		char* arg = &argv[i][1];
 		while (arg[0]) {
@@ -2420,8 +2420,8 @@ dump_block_data(int argc, char** argv)
 	if (to < from)
 		to = from;
 
-	uint32 offset = 0;
-	uint32 size = LONG_MAX;
+	uint32_t offset = 0;
+	uint32_t size = LONG_MAX;
 	if (argc > i + 2)
 		offset = parse_expression(argv[i + 2]);
 	if (argc > i + 3)
@@ -2434,7 +2434,7 @@ dump_block_data(int argc, char** argv)
 	LazyTraceOutput out(sBuffer, sizeof(sBuffer), TRACE_OUTPUT_TEAM_ID);
 
 	while (TraceEntry* entry = iterator.Next()) {
-		int32 index = iterator.Index();
+		int32_t index = iterator.Index();
 		if (index > to)
 			break;
 
@@ -2594,7 +2594,7 @@ block_notifier_and_writer(void* /*data*/)
 
 /*!	Notify function for wait_for_notifications(). */
 static void
-notify_sync(int32 transactionID, int32 event, void* _cache)
+notify_sync(int32_t transactionID, int32_t event, void* _cache)
 {
 	block_cache* cache = (block_cache*)_cache;
 
@@ -2715,7 +2715,7 @@ block_cache_used_memory(void)
 //	#pragma mark - public transaction API
 
 
-int32
+int32_t
 cache_start_transaction(void* _cache)
 {
 	block_cache* cache = (block_cache*)_cache;
@@ -2743,7 +2743,7 @@ cache_start_transaction(void* _cache)
 
 
 status_t
-cache_sync_transaction(void* _cache, int32 id)
+cache_sync_transaction(void* _cache, int32_t id)
 {
 	block_cache* cache = (block_cache*)_cache;
 	bool hadBusy;
@@ -2793,7 +2793,7 @@ cache_sync_transaction(void* _cache, int32 id)
 
 
 status_t
-cache_end_transaction(void* _cache, int32 id,
+cache_end_transaction(void* _cache, int32_t id,
 	transaction_notification_hook hook, void* data)
 {
 	block_cache* cache = (block_cache*)_cache;
@@ -2860,7 +2860,7 @@ cache_end_transaction(void* _cache, int32 id,
 
 
 status_t
-cache_abort_transaction(void* _cache, int32 id)
+cache_abort_transaction(void* _cache, int32_t id)
 {
 	block_cache* cache = (block_cache*)_cache;
 	TransactionLocker locker(cache);
@@ -2911,8 +2911,8 @@ cache_abort_transaction(void* _cache, int32 id)
 	from its sub transaction.
 	The new transaction also gets a new transaction ID.
 */
-int32
-cache_detach_sub_transaction(void* _cache, int32 id,
+int32_t
+cache_detach_sub_transaction(void* _cache, int32_t id,
 	transaction_notification_hook hook, void* data)
 {
 	block_cache* cache = (block_cache*)_cache;
@@ -3016,7 +3016,7 @@ cache_detach_sub_transaction(void* _cache, int32 id,
 
 
 status_t
-cache_abort_sub_transaction(void* _cache, int32 id)
+cache_abort_sub_transaction(void* _cache, int32_t id)
 {
 	block_cache* cache = (block_cache*)_cache;
 	TransactionLocker locker(cache);
@@ -3101,7 +3101,7 @@ cache_abort_sub_transaction(void* _cache, int32 id)
 
 
 status_t
-cache_start_sub_transaction(void* _cache, int32 id)
+cache_start_sub_transaction(void* _cache, int32_t id)
 {
 	block_cache* cache = (block_cache*)_cache;
 	TransactionLocker locker(cache);
@@ -3163,7 +3163,7 @@ cache_start_sub_transaction(void* _cache, int32 id)
 	The listener gets automatically removed when the transaction ends.
 */
 status_t
-cache_add_transaction_listener(void* _cache, int32 id, int32 events,
+cache_add_transaction_listener(void* _cache, int32_t id, int32_t events,
 	transaction_notification_hook hook, void* data)
 {
 	block_cache* cache = (block_cache*)_cache;
@@ -3178,7 +3178,7 @@ cache_add_transaction_listener(void* _cache, int32 id, int32 events,
 
 
 status_t
-cache_remove_transaction_listener(void* _cache, int32 id,
+cache_remove_transaction_listener(void* _cache, int32_t id,
 	transaction_notification_hook hookFunction, void* data)
 {
 	block_cache* cache = (block_cache*)_cache;
@@ -3209,7 +3209,7 @@ cache_remove_transaction_listener(void* _cache, int32 id,
 
 
 status_t
-cache_next_block_in_transaction(void* _cache, int32 id, bool mainOnly,
+cache_next_block_in_transaction(void* _cache, int32_t id, bool mainOnly,
 	long* _cookie, off_t* _blockNumber, void** _data, void** _unchangedData)
 {
 	cached_block* block = (cached_block*)*_cookie;
@@ -3252,8 +3252,8 @@ cache_next_block_in_transaction(void* _cache, int32 id, bool mainOnly,
 }
 
 
-int32
-cache_blocks_in_transaction(void* _cache, int32 id)
+int32_t
+cache_blocks_in_transaction(void* _cache, int32_t id)
 {
 	block_cache* cache = (block_cache*)_cache;
 	TransactionLocker locker(cache);
@@ -3270,8 +3270,8 @@ cache_blocks_in_transaction(void* _cache, int32 id)
 	transaction does not have a sub transaction yet, this is the same value as
 	cache_blocks_in_transaction() would return.
 */
-int32
-cache_blocks_in_main_transaction(void* _cache, int32 id)
+int32_t
+cache_blocks_in_main_transaction(void* _cache, int32_t id)
 {
 	block_cache* cache = (block_cache*)_cache;
 	TransactionLocker locker(cache);
@@ -3287,8 +3287,8 @@ cache_blocks_in_main_transaction(void* _cache, int32 id)
 }
 
 
-int32
-cache_blocks_in_sub_transaction(void* _cache, int32 id)
+int32_t
+cache_blocks_in_sub_transaction(void* _cache, int32_t id)
 {
 	block_cache* cache = (block_cache*)_cache;
 	TransactionLocker locker(cache);
@@ -3484,7 +3484,7 @@ block_cache_discard(void* _cache, off_t blockNumber, size_t numBlocks)
 
 
 status_t
-block_cache_make_writable(void* _cache, off_t blockNumber, int32 transaction)
+block_cache_make_writable(void* _cache, off_t blockNumber, int32_t transaction)
 {
 	block_cache* cache = (block_cache*)_cache;
 	MutexLocker locker(&cache->lock);
@@ -3508,7 +3508,7 @@ block_cache_make_writable(void* _cache, off_t blockNumber, int32 transaction)
 
 void*
 block_cache_get_writable_etc(void* _cache, off_t blockNumber, off_t base,
-	off_t length, int32 transaction)
+	off_t length, int32_t transaction)
 {
 	block_cache* cache = (block_cache*)_cache;
 	MutexLocker locker(&cache->lock);
@@ -3524,7 +3524,7 @@ block_cache_get_writable_etc(void* _cache, off_t blockNumber, off_t base,
 
 
 void*
-block_cache_get_writable(void* _cache, off_t blockNumber, int32 transaction)
+block_cache_get_writable(void* _cache, off_t blockNumber, int32_t transaction)
 {
 	return block_cache_get_writable_etc(_cache, blockNumber,
 		blockNumber, 1, transaction);
@@ -3532,7 +3532,7 @@ block_cache_get_writable(void* _cache, off_t blockNumber, int32 transaction)
 
 
 void*
-block_cache_get_empty(void* _cache, off_t blockNumber, int32 transaction)
+block_cache_get_empty(void* _cache, off_t blockNumber, int32_t transaction)
 {
 	block_cache* cache = (block_cache*)_cache;
 	MutexLocker locker(&cache->lock);
@@ -3586,7 +3586,7 @@ block_cache_get(void* _cache, off_t blockNumber)
 */
 status_t
 block_cache_set_dirty(void* _cache, off_t blockNumber, bool dirty,
-	int32 transaction)
+	int32_t transaction)
 {
 	block_cache* cache = (block_cache*)_cache;
 	MutexLocker locker(&cache->lock);

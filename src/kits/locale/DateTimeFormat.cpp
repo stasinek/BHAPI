@@ -47,7 +47,7 @@ BDateTimeFormat::~BDateTimeFormat()
 
 
 void BDateTimeFormat::SetDateTimeFormat(BDateFormatStyle dateStyle,
-	BTimeFormatStyle timeStyle, int32 elements) {
+	BTimeFormatStyle timeStyle, int32_t elements) {
 	UErrorCode error = U_ZERO_ERROR;
 	DateTimePatternGenerator* generator
 		= DateTimePatternGenerator::createInstance(

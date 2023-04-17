@@ -956,7 +956,7 @@ void BUrl::SetAuthority(const BString& authority)
 	if (fAuthority.IsEmpty())
 		return;
 
-	int32 userInfoEnd = fAuthority.FindFirst('@');
+	int32_t userInfoEnd = fAuthority.FindFirst('@');
 
 	// URL contains userinfo field
 	if (userInfoEnd != -1) {
@@ -1017,7 +1017,7 @@ BUrl::_DoUrlEncodeChunk(const BString& chunk, bool strict, bool directory)
 {
 	BString result;
 
-	for (int32 i = 0; i < chunk.Length(); i++) {
+	for (int32_t i = 0; i < chunk.Length(); i++) {
 		if (_IsUnreserved(chunk[i])
 				|| (directory && (chunk[i] == '/' || chunk[i] == '\\'))) {
 			result << chunk[i];
@@ -1043,7 +1043,7 @@ BUrl::_DoUrlDecodeChunk(const BString& chunk, bool strict)
 {
 	BString result;
 
-	for (int32 i = 0; i < chunk.Length(); i++) {
+	for (int32_t i = 0; i < chunk.Length(); i++) {
 		if (chunk[i] == '+' && !strict)
 			result << ' ';
 		else {

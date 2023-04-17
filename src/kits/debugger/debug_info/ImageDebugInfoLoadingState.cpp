@@ -50,7 +50,7 @@ bool ImageDebugInfoLoadingState::UserInputRequired() const
 }
 
 
-void ImageDebugInfoLoadingState::SetSpecificInfoIndex(int32 index)
+void ImageDebugInfoLoadingState::SetSpecificInfoIndex(int32_t index)
 {
 	fSpecificInfoIndex = index;
 }

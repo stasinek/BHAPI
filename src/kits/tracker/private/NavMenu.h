@@ -74,9 +74,9 @@ struct TrackingHookData {
 
 class BNavMenu : public BSlowMenu {
 public:
-	BNavMenu(const char* title, uint32 message, const BHandler*,
+	BNavMenu(const char* title, uint32_t message, const BHandler*,
 		BWindow* parentWindow = NULL, const BObjectList<BString>* list = NULL);
-	BNavMenu(const char* title, uint32 message, const BMessenger&,
+	BNavMenu(const char* title, uint32_t message, const BMessenger&,
 		BWindow* parentWindow = NULL, const BObjectList<BString>* list = NULL);
 		// parentWindow, if specified, will be closed if nav menu item invoked
 		// with option held down
@@ -98,15 +98,15 @@ public:
 	void SetTypesList(const BObjectList<BString>* list);
 	const BObjectList<BString>* TypesList() const;
 
-	void AddNavDir(const Model* model, uint32 what, BHandler* target,
+	void AddNavDir(const Model* model, uint32_t what, BHandler* target,
 		bool populateSubmenu);
 
-	void AddNavParentDir(const char* name, const Model* model, uint32 what,
+	void AddNavParentDir(const char* name, const Model* model, uint32_t what,
 		BHandler* target);
-	void AddNavParentDir(const Model* model, uint32 what, BHandler* target);
+	void AddNavParentDir(const Model* model, uint32_t what, BHandler* target);
 	void SetShowParent(bool show);
 
-	static int32 GetMaxMenuWidth();
+	static int32_t GetMaxMenuWidth();
 
 	static int CompareFolderNamesFirstOne(const BMenuItem*, const BMenuItem*);
 	static int CompareOne(const BMenuItem*, const BMenuItem*);

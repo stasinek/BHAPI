@@ -33,7 +33,7 @@ public:
 			BNetworkCookie&		SetValue(const BString& value);
 			status_t			SetDomain(const BString& domain);
 			status_t			SetPath(const BString& path);
-			BNetworkCookie&		SetMaxAge(int32 maxAge);
+			BNetworkCookie&		SetMaxAge(int32_t maxAge);
 			BNetworkCookie&		SetExpirationDate(time_t expireDate);
 			BNetworkCookie&		SetExpirationDate(BDateTime& expireDate);
 			BNetworkCookie& 	SetSecure(bool secure);
@@ -78,12 +78,12 @@ public:
 			bool				operator!=(const BNetworkCookie& other);
 private:
 			void				_Reset();
-			int32				_ExtractNameValuePair(const BString& string,
+			int32_t				_ExtractNameValuePair(const BString& string,
 									BString& name, BString& value,
-									int32 index);
-			int32				_ExtractAttributeValuePair(
+									int32_t index);
+			int32_t				_ExtractAttributeValuePair(
 									const BString& string, BString& name,
-									BString& value,	int32 index);
+									BString& value,	int32_t index);
 			BString				_DefaultPathForUrl(const BUrl& url);
 
 			bool				_CanBeSetFromUrl(const BUrl& url) const;

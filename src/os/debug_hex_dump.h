@@ -45,8 +45,8 @@ private:
 
 
 void	print_hex_dump(HexDumpDataProvider& data, size_t maxBytes,
-			uint32 flags = 0);
-void	print_hex_dump(const void* data, size_t maxBytes, uint32 flags = 0);
+			uint32_t flags = 0);
+void	print_hex_dump(const void* data, size_t maxBytes, uint32_t flags = 0);
 
 
 }	// namespace BKernel

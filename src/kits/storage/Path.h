@@ -101,7 +101,7 @@ private:
             status_t		_SetPath(const char* path);
     static	bool			_MustNormalize(const char* path, status_t* _error);
 
-            uint32			_reserved[4];
+            uint32_t			_reserved[4];
 
             char*			fName;
                                 // Pointer to the path string of the object.

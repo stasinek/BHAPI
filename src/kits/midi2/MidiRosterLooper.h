@@ -32,10 +32,10 @@ public:
 	bool Init(BMidiRoster* roster);
 
 	// Does the work for BMidiRoster::NextEndpoint().
-	BMidiEndpoint* NextEndpoint(int32* id);
+	BMidiEndpoint* NextEndpoint(int32_t* id);
 
 	// Finds an endpoint in our list of endpoints.
-	BMidiEndpoint* FindEndpoint(int32 id);
+	BMidiEndpoint* FindEndpoint(int32_t id);
 
 	// Adds an endpoint to our list.
 	void AddEndpoint(BMidiEndpoint* endp);
@@ -107,8 +107,8 @@ private:
 	void ConnectionEvent(
 		BMidiProducer* prod, BMidiConsumer* cons, bool mustConnect);
 
-	int32 CountEndpoints();
-	BMidiEndpoint* EndpointAt(int32 index);
+	int32_t CountEndpoints();
+	BMidiEndpoint* EndpointAt(int32_t index);
 
 	BMidiRoster* fRoster;
 

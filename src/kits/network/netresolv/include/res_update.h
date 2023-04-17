@@ -38,7 +38,7 @@ struct ns_updrec {
 	char *		r_dname;	/*%< owner of the RR */
 	ns_class	r_class;	/*%< class number */
 	ns_type		r_type;		/*%< type number */
-	u_int32_t	r_ttl;		/*%< time to live */
+	u_int32_t_t	r_ttl;		/*%< time to live */
 	u_char *	r_data;		/*%< rdata fields as text string */
 	u_int		r_size;		/*%< size of r_data field */
 	int		r_opcode;	/*%< type of operation */

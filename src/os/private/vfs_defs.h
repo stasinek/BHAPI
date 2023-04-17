@@ -18,7 +18,7 @@
 
 struct fd_info {
 	int		number;
-	int32	open_mode;
+	int32_t	open_mode;
 	dev_t	device;
 	ino_t	node;
 };

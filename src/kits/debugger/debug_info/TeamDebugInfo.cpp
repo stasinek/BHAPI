@@ -45,10 +45,10 @@ struct TeamDebugInfo::FunctionHashDefinition {
 	{
 		// Instances without source file only equal themselves.
 		if (key->SourceFile() == NULL)
-			return (uint32)(addr_t)key;
+			return (uint32_t)(addr_t)key;
 
-		uint32 hash = StringUtils::HashValue(key->Name());
-		hash = hash * 17 + (uint32)(addr_t)key->SourceFile();
+		uint32_t hash = StringUtils::HashValue(key->Name());
+		hash = hash * 17 + (uint32_t)(addr_t)key->SourceFile();
 		SourceLocation location = key->GetSourceLocation();
 		hash = hash * 17 + location.Line();
 		hash = hash * 17 + location.Column();
@@ -146,7 +146,7 @@ struct TeamDebugInfo::SourceFileEntry {
 
 	void RemoveFunction(Function* function)
 	{
-		int32 index = fFunctions.BinarySearchIndex(*function,
+		int32_t index = fFunctions.BinarySearchIndex(*function,
 			&_CompareFunctions);
 		if (index >= 0)
 			fFunctions.RemoveItemAt(index);
@@ -154,7 +154,7 @@ struct TeamDebugInfo::SourceFileEntry {
 
 	Function* FunctionAtLocation(const SourceLocation& location) const
 	{
-		int32 index = fFunctions.BinarySearchIndexByKey(location,
+		int32_t index = fFunctions.BinarySearchIndexByKey(location,
 			&_CompareLocationFunction);
 		if (index >= 0)
 			return fFunctions.ItemAt(index);
@@ -169,7 +169,7 @@ struct TeamDebugInfo::SourceFileEntry {
 		return fFunctions.ItemAt(index - 1);
 	}
 
-	Function* FunctionAt(int32 index) const
+	Function* FunctionAt(int32_t index) const
 	{
 		return fFunctions.ItemAt(index);
 	}
@@ -177,7 +177,7 @@ struct TeamDebugInfo::SourceFileEntry {
 	Function* FunctionByName(const BString& name) const
 	{
 		// TODO: That's not exactly optimal.
-		for (int32 i = 0; Function* function = fFunctions.ItemAt(i); i++) {
+		for (int32_t i = 0; Function* function = fFunctions.ItemAt(i); i++) {
 			if (name == function->Name())
 				return function;
 		}
@@ -407,7 +407,7 @@ status_t TeamDebugInfo::GetType(GlobalTypeCache* cache, const BString& name,
 	AutoLocker<BLocker> locker(fLock);
 
 	ImageList images;
-	for (int32 i = 0; ImageDebugInfo* imageDebugInfo = fImages.ItemAt(i); i++) {
+	for (int32_t i = 0; ImageDebugInfo* imageDebugInfo = fImages.ItemAt(i); i++) {
 		if (images.AddItem(imageDebugInfo))
 			imageDebugInfo->AcquireReference();
 	}
@@ -416,7 +416,7 @@ status_t TeamDebugInfo::GetType(GlobalTypeCache* cache, const BString& name,
 
 	// get the type
 	status_t error = B_ENTRY_NOT_FOUND;
-	for (int32 i = 0; ImageDebugInfo* imageDebugInfo = images.ItemAt(i); i++) {
+	for (int32_t i = 0; ImageDebugInfo* imageDebugInfo = images.ItemAt(i); i++) {
 		error = imageDebugInfo->GetType(cache, name, constraints, type);
 		if (error == B_OK) {
 			_type = type;
@@ -425,7 +425,7 @@ status_t TeamDebugInfo::GetType(GlobalTypeCache* cache, const BString& name,
 	}
 
 	// release the references
-	for (int32 i = 0; ImageDebugInfo* imageDebugInfo = images.ItemAt(i); i++)
+	for (int32_t i = 0; ImageDebugInfo* imageDebugInfo = images.ItemAt(i); i++)
 		imageDebugInfo->ReleaseReference();
 
 	return error;
@@ -449,7 +449,7 @@ bool TeamDebugInfo::HasType(GlobalTypeCache* cache, const BString& name,
 	AutoLocker<BLocker> locker(fLock);
 
 	ImageList images;
-	for (int32 i = 0; ImageDebugInfo* imageDebugInfo = fImages.ItemAt(i); i++) {
+	for (int32_t i = 0; ImageDebugInfo* imageDebugInfo = fImages.ItemAt(i); i++) {
 		if (images.AddItem(imageDebugInfo))
 			imageDebugInfo->AcquireReference();
 	}
@@ -457,7 +457,7 @@ bool TeamDebugInfo::HasType(GlobalTypeCache* cache, const BString& name,
 	locker.Unlock();
 
 	bool found = false;
-	for (int32 i = 0; ImageDebugInfo* imageDebugInfo = images.ItemAt(i); i++) {
+	for (int32_t i = 0; ImageDebugInfo* imageDebugInfo = images.ItemAt(i); i++) {
 		if (imageDebugInfo->HasType(name, constraints)) {
 			found = true;
 			break;
@@ -465,7 +465,7 @@ bool TeamDebugInfo::HasType(GlobalTypeCache* cache, const BString& name,
 	}
 
 	// release the references
-	for (int32 i = 0; ImageDebugInfo* imageDebugInfo = images.ItemAt(i); i++)
+	for (int32_t i = 0; ImageDebugInfo* imageDebugInfo = images.ItemAt(i); i++)
 		imageDebugInfo->ReleaseReference();
 
 	return found;
@@ -509,7 +509,7 @@ status_t TeamDebugInfo::GetActiveSourceCode(FunctionDebugInfo* info, SourceCode*
 		}
 	}
 
-	for (int32 i = 0; i < fImages.CountItems(); i++) {
+	for (int32_t i = 0; i < fImages.CountItems(); i++) {
 		ImageDebugInfo* imageInfo = fImages.ItemAt(i);
 		FunctionInstance* instance = imageInfo->FunctionAtAddress(
 			info->Address());
@@ -535,7 +535,7 @@ status_t TeamDebugInfo::LoadImageDebugInfo(const ImageInfo& imageInfo,
 		return B_NO_MEMORY;
 	BReference<ImageDebugInfo> imageDebugInfoReference(imageDebugInfo, true);
 
-	for (int32 i = 0; SpecificTeamDebugInfo* specificTeamInfo
+	for (int32_t i = 0; SpecificTeamDebugInfo* specificTeamInfo
 			= fSpecificInfos.ItemAt(i); i++) {
 		SpecificImageDebugInfo* specificImageInfo;
 		status_t error = specificTeamInfo->CreateImageDebugInfo(imageInfo,
@@ -631,7 +631,7 @@ status_t TeamDebugInfo::LoadSourceCode(LocatableFile* file, FileSourceCode*& _so
 	// Iterate through all images that know the source file and ask them to add
 	// information.
 	bool anyInfo = false;
-	for (int32 i = 0; ImageDebugInfo* imageDebugInfo = fImages.ItemAt(i); i++)
+	for (int32_t i = 0; ImageDebugInfo* imageDebugInfo = fImages.ItemAt(i); i++)
 		anyInfo |= imageDebugInfo->AddSourceCodeInfo(file, sourceCode) == B_OK;
 
 	if (!anyInfo)
@@ -690,7 +690,7 @@ status_t TeamDebugInfo::AddImageDebugInfo(ImageDebugInfo* imageDebugInfo)
 
 	// Match all of the image debug info's functions instances with functions.
 	BObjectList<SourceFileEntry> sourceFileEntries;
-	for (int32 i = 0;
+	for (int32_t i = 0;
 		FunctionInstance* instance = imageDebugInfo->FunctionAt(i); i++) {
 		// lookup the function or create it, if it doesn't exist yet
 		Function* function = fFunctions->Lookup(instance);
@@ -729,7 +729,7 @@ status_t TeamDebugInfo::AddImageDebugInfo(ImageDebugInfo* imageDebugInfo)
 	}
 
 	// update the source files the image debug info knows about
-	for (int32 i = 0; SourceFileEntry* entry = sourceFileEntries.ItemAt(i);
+	for (int32_t i = 0; SourceFileEntry* entry = sourceFileEntries.ItemAt(i);
 			i++) {
 		FileSourceCode* sourceCode = entry->GetSourceCode();
 		sourceCode->Lock();
@@ -753,7 +753,7 @@ void TeamDebugInfo::RemoveImageDebugInfo(ImageDebugInfo* imageDebugInfo)
 
 	// Remove the functions from all of the image debug info's functions
 	// instances.
-	for (int32 i = 0;
+	for (int32_t i = 0;
 		FunctionInstance* instance = imageDebugInfo->FunctionAt(i); i++) {
 		if (Function* function = instance->GetFunction()) {
 // TODO: Also update possible user breakpoints in this function!
@@ -784,7 +784,7 @@ void TeamDebugInfo::RemoveImageDebugInfo(ImageDebugInfo* imageDebugInfo)
 ImageDebugInfo*
 TeamDebugInfo::ImageDebugInfoByName(const char* name) const
 {
-	for (int32 i = 0; ImageDebugInfo* imageDebugInfo = fImages.ItemAt(i); i++) {
+	for (int32_t i = 0; ImageDebugInfo* imageDebugInfo = fImages.ItemAt(i); i++) {
 		if (imageDebugInfo->GetImageInfo().Name() == name)
 			return imageDebugInfo;
 	}

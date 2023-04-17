@@ -33,7 +33,7 @@ public:
 		VMKernelArea* 								area;
 		struct {
 			addr_t									base;
-			uint32									flags;
+			uint32_t									flags;
 		} reserved;
 		DoublyLinkedListLink<VMKernelAddressRange>	freeListLink;
 	};
@@ -111,13 +111,13 @@ struct VMKernelAddressRangeGetFreeListLink {
 
 struct VMKernelArea : VMArea, AVLTreeNode {
 								VMKernelArea(VMAddressSpace* addressSpace,
-									uint32 wiring, uint32 protection);
+									uint32_t wiring, uint32_t protection);
 								~VMKernelArea();
 
 	static	VMKernelArea*		Create(VMAddressSpace* addressSpace,
-									const char* name, uint32 wiring,
-									uint32 protection, ObjectCache* objectCache,
-									uint32 allocationFlags);
+									const char* name, uint32_t wiring,
+									uint32_t protection, ObjectCache* objectCache,
+									uint32_t allocationFlags);
 
 			VMKernelAddressRange* Range() const
 									{ return fRange; }

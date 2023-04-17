@@ -112,7 +112,7 @@ typedef struct {
 	uint8	descriptor_subtype; 	// USB_AUDIO_AC_HEADER
 	uint16	bcd_release_no;
 	uint16	total_length;
-	uint32	clock_frequency;
+	uint32_t	clock_frequency;
 	uint8	in_collection;
 	uint8	interface_numbers[0];
 } _PACKED usb_videocontrol_header_descriptor;
@@ -179,18 +179,18 @@ struct usb_video_frame_descriptor {
 	uint8	capabilities;
 	uint16	width;
 	uint16	height;
-	uint32	min_bit_rate;
-	uint32	max_bit_rate;
-	uint32	max_video_frame_buffer_size;
-	uint32	default_frame_interval;
+	uint32_t	min_bit_rate;
+	uint32_t	max_bit_rate;
+	uint32_t	max_video_frame_buffer_size;
+	uint32_t	default_frame_interval;
 	uint8	frame_interval_type;
 	union {
 		struct {
-			uint32	min_frame_interval;
-			uint32	max_frame_tnterval;
-			uint32	frame_interval_step;
+			uint32_t	min_frame_interval;
+			uint32_t	max_frame_tnterval;
+			uint32_t	frame_interval_step;
 		} continuous;
-		uint32	discrete_frame_intervals[0];
+		uint32_t	discrete_frame_intervals[0];
 	};
 } _PACKED;
 

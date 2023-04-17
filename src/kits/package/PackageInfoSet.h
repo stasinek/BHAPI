@@ -27,7 +27,7 @@ public:
 			status_t			AddInfo(const BPackageInfo& info);
 			void				MakeEmpty();
 
-			uint32				CountInfos() const;
+			uint32_t				CountInfos() const;
 			Iterator			GetIterator() const;
 
 			BPackageInfoSet&	operator=(const BPackageInfoSet& other);

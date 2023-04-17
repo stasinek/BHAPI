@@ -73,8 +73,8 @@ typedef struct {
 	driver_module_info info;
 
 	void (*set_sim)(void* cookie, virtio_sim sim);
-	status_t (*read_host_features)(void* cookie, uint32* features);
-	status_t (*write_guest_features)(void* cookie, uint32 features);
+	status_t (*read_host_features)(void* cookie, uint32_t* features);
+	status_t (*write_guest_features)(void* cookie, uint32_t features);
 	uint8 (*get_status)(void* cookie);
 	void (*set_status)(void* cookie, uint8 status);
 	status_t (*read_device_config)(void* cookie, uint8 offset, void* buffer,
@@ -93,8 +93,8 @@ typedef struct {
 typedef struct {
 	driver_module_info info;
 
-	status_t (*negociate_features)(virtio_device cookie, uint32 supported,
-		uint32* negociated, const char* (*get_feature_name)(uint32));
+	status_t (*negociate_features)(virtio_device cookie, uint32_t supported,
+		uint32_t* negociated, const char* (*get_feature_name)(uint32_t));
 
 	status_t (*read_device_config)(virtio_device cookie, uint8 offset,
 		void* buffer, size_t bufferSize);

@@ -34,9 +34,9 @@
 
 static const char* kPartialDownloadLimit = "partial_download_limit";
 
-static const uint32 kMsgLeaveOnServer = 'lmos';
-static const uint32 kMsgNoPassword = 'none';
-static const uint32 kMsgNeedPassword = 'some';
+static const uint32_t kMsgLeaveOnServer = 'lmos';
+static const uint32_t kMsgNoPassword = 'none';
+static const uint32_t kMsgNeedPassword = 'some';
 
 
 namespace BPrivate {
@@ -64,14 +64,14 @@ BodyDownloadConfigView::BodyDownloadConfigView()
 
 void BodyDownloadConfigView::SetTo(const BMailProtocolSettings& settings)
 {
-	int32 limit = settings.GetInt32(kPartialDownloadLimit, -1);
+	int32_t limit = settings.GetInt32(kPartialDownloadLimit, -1);
 	if (limit < 0) {
 		fPartialBox->SetValue(B_CONTROL_OFF);
 		fSizeControl->SetText("0");
 		fSizeControl->SetEnabled(false);
 	} else {
 		BString kb;
-		kb << int32(limit / 1024);
+		kb << int32_t(limit / 1024);
 		fSizeControl->SetText(kb);
 		fPartialBox->SetValue(B_CONTROL_ON);
 		fSizeControl->SetEnabled(true);
@@ -109,7 +109,7 @@ void BodyDownloadConfigView::AttachedToWindow()
 // #pragma mark -
 
 
-MailProtocolConfigView::MailProtocolConfigView(uint32 optionsMask)
+MailProtocolConfigView::MailProtocolConfigView(uint32_t optionsMask)
 	:
 	BMailSettingsView("protocol_config_view"),
 	fHostControl(NULL),
@@ -263,7 +263,7 @@ MailProtocolConfigView::Layout() const
 status_t MailProtocolConfigView::SaveInto(BMailAddOnSettings& settings) const
 {
 	if (fHostControl != NULL) {
-		int32 port = -1;
+		int32_t port = -1;
 		BString hostName = fHostControl->Text();
 		if (hostName.FindFirst(':') > -1) {
 			port = atol(hostName.String() + hostName.FindFirst(':') + 1);
@@ -344,7 +344,7 @@ MailProtocolConfigView::_AddTextControl(BGridLayout* layout, const char* name,
 	BTextControl* control = new BTextControl(name, label, "", NULL);
 	control->SetAlignment(B_ALIGN_RIGHT, B_ALIGN_LEFT);
 
-	int32 row = layout->CountRows();
+	int32_t row = layout->CountRows();
 	layout->AddItem(control->CreateLabelLayoutItem(), 0, row);
 	layout->AddItem(control->CreateTextViewLayoutItem(), 1, row);
 	return control;
@@ -359,7 +359,7 @@ MailProtocolConfigView::_AddMenuField(BGridLayout* layout, const char* name,
 	BMenuField* field = new BMenuField(name, label, menu);
 	field->SetAlignment(B_ALIGN_RIGHT);
 
-	int32 row = layout->CountRows();
+	int32_t row = layout->CountRows();
 	layout->AddItem(field->CreateLabelLayoutItem(), 0, row);
 	layout->AddItem(field->CreateMenuBarLayoutItem(), 1, row);
 	return field;
@@ -369,7 +369,7 @@ MailProtocolConfigView::_AddMenuField(BGridLayout* layout, const char* name,
 void MailProtocolConfigView::_StoreIndexOfMarked(BMessage& message, const char* name,
 	BMenuField* field) const
 {
-	int32 index = -1;
+	int32_t index = -1;
 	if (field != NULL && field->Menu() != NULL) {
 		BMenuItem* item = field->Menu()->FindMarked();
 		if (item != NULL)

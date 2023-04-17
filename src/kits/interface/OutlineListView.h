@@ -38,27 +38,27 @@ public:
     BOutlineListView(BRect frame,
              const char *name,
              bhapi::list_view_type type = B_SINGLE_SELECTION_LIST,
-              uint32 resizingMode = B_FOLLOW_LEFT | B_FOLLOW_TOP,
-              uint32 flags = B_WILL_DRAW | B_NAVIGABLE | B_FRAME_EVENTS);
+              uint32_t resizingMode = B_FOLLOW_LEFT | B_FOLLOW_TOP,
+              uint32_t flags = B_WILL_DRAW | B_NAVIGABLE | B_FRAME_EVENTS);
     virtual ~BOutlineListView();
 
     virtual bool		AddUnder(BListItem *item, BListItem *superitem);
 
     virtual bool		AddItem(BListItem *item);
-    virtual bool		AddItem(BListItem *item,  int32 fullListIndex);
+    virtual bool		AddItem(BListItem *item,  int32_t fullListIndex);
     virtual bool		RemoveItem(BListItem *item, bool auto_destruct_item_and_subitems = true);
-    virtual bool		RemoveItems(int32 fullListIndex,  int32 count, bool auto_destruct_items = true);
+    virtual bool		RemoveItems(int32_t fullListIndex,  int32_t count, bool auto_destruct_items = true);
 
-    virtual BListItem	*RemoveItem(int32 fullListIndex, bool auto_destruct_subitems,  int32 *count);
-    virtual BListItem	*RemoveItem(int32 fullListIndex); // same as RemoveItem(fullListIndex, true, NULL)
+    virtual BListItem	*RemoveItem(int32_t fullListIndex, bool auto_destruct_subitems,  int32_t *count);
+    virtual BListItem	*RemoveItem(int32_t fullListIndex); // same as RemoveItem(fullListIndex, true, NULL)
 
-    BListItem		*FullListItemAt(int32 fullListIndex) const;
-     int32			FullListIndexOf(const BListItem *item) const;
+    BListItem		*FullListItemAt(int32_t fullListIndex) const;
+     int32_t			FullListIndexOf(const BListItem *item) const;
     BListItem		*FullListFirstItem() const;
     BListItem		*FullListLastItem() const;
     bool			FullListHasItem(const BListItem *item) const;
-     int32			FullListCountItems() const;
-     int32			FullListCurrentSelection(int32 index = 0) const;
+     int32_t			FullListCountItems() const;
+     int32_t			FullListCurrentSelection(int32_t index = 0) const;
     virtual void		MakeEmpty();
     bool			FullListIsEmpty() const;
 
@@ -68,23 +68,23 @@ public:
     BListItem		*Superitem(const BListItem *item) const;
     bool			HasSubitems(const BListItem *item) const;
 
-     int32			CountItemsUnder(BListItem *item, bool oneLevelOnly) const;
+     int32_t			CountItemsUnder(BListItem *item, bool oneLevelOnly) const;
     BListItem		*EachItemUnder(BListItem *item, bool oneLevelOnly,
                            BListItem *(*eachFunc)(BListItem *item, void *user_data), void *user_data);
-    BListItem		*ItemUnderAt(BListItem *item, bool oneLevelOnly,  int32 index) const;
+    BListItem		*ItemUnderAt(BListItem *item, bool oneLevelOnly,  int32_t index) const;
 
     void			Expand(BListItem *item);
     void			Collapse(BListItem *item);
-    bool			IsExpanded(int32 fullListIndex) const;
+    bool			IsExpanded(int32_t fullListIndex) const;
 
     // FullListItems(): return the list, use it carefully please
     const BListItem		**FullListItems() const;
 
     virtual void		MouseDown(BPoint where);
     virtual void		MouseUp(BPoint where);
-    virtual void		MouseMoved(BPoint where,  uint32 code, const BMessage *a_message);
-    virtual void		KeyDown(const char *bytes,  int32 numBytes);
-    virtual void		KeyUp(const char *bytes,  int32 numBytes);
+    virtual void		MouseMoved(BPoint where,  uint32_t code, const BMessage *a_message);
+    virtual void		KeyDown(const char *bytes,  int32_t numBytes);
+    virtual void		KeyUp(const char *bytes,  int32_t numBytes);
 
 private:
     BList fFullItems;

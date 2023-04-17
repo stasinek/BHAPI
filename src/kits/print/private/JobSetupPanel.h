@@ -37,18 +37,18 @@ enum print_range {
 };
 
 
-const uint32 B_NO_OPTIONS			= 0x00000000;
-const uint32 B_PRINT_TO_FILE		= 0x00000001;
-const uint32 B_PRINT_SELECTION		= 0x00000002;
-const uint32 B_PRINT_PAGE_RANGE		= 0x00000004;
-const uint32 B_PRINT_COLLATE_COPIES	= 0x00000008;
+const uint32_t B_NO_OPTIONS			= 0x00000000;
+const uint32_t B_PRINT_TO_FILE		= 0x00000001;
+const uint32_t B_PRINT_SELECTION		= 0x00000002;
+const uint32_t B_PRINT_PAGE_RANGE		= 0x00000004;
+const uint32_t B_PRINT_COLLATE_COPIES	= 0x00000008;
 
 
 
 class BJobSetupPanel : public BPrintPanel {
 public:
 								BJobSetupPanel(BPrinter* printer);
-								BJobSetupPanel(BPrinter* printer, uint32 flags);
+								BJobSetupPanel(BPrinter* printer, uint32_t flags);
 	virtual						~BJobSetupPanel();
 
 								BJobSetupPanel(BMessage* data);
@@ -64,12 +64,12 @@ public:
 			print_range			PrintRange() const;
 			void				SetPrintRange(print_range range);
 
-			int32				FirstPage() const;
-			int32				LastPage() const;
-			void				SetPageRange(int32 firstPage, int32 lastPage);
+			int32_t				FirstPage() const;
+			int32_t				LastPage() const;
+			void				SetPageRange(int32_t firstPage, int32_t lastPage);
 
-			uint32				OptionFlags() const;
-			void				SetOptionFlags(uint32 flags);
+			uint32_t				OptionFlags() const;
+			void				SetOptionFlags(uint32_t flags);
 
 private:
 			void				_InitObject();
@@ -81,7 +81,7 @@ private:
 			BPrinterRoster*		fPrinterRoster;
 
 			print_range			fPrintRange;
-			uint32				fJobPanelFlags;
+			uint32_t				fJobPanelFlags;
 
 			BPopUpMenu*			fPrinterPopUp;
 			BMenuField*			fPrinterMenuField;

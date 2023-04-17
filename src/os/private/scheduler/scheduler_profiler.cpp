@@ -38,7 +38,7 @@ Profiler::Profiler()
 	}
 	memset(fFunctionData, 0, sizeof(FunctionData) * kMaxFunctionEntries);
 
-	for (int32 i = 0; i < smp_get_num_cpus(); i++) {
+	for (int32_t i = 0; i < smp_get_num_cpus(); i++) {
 		fFunctionStacks[i]
 			= new(std::nothrow) FunctionEntry[kMaxFunctionStackEntries];
 		if (fFunctionStacks[i] == NULL) {
@@ -48,19 +48,19 @@ Profiler::Profiler()
 		memset(fFunctionStacks[i], 0,
 			sizeof(FunctionEntry) * kMaxFunctionStackEntries);
 	}
-	memset(fFunctionStackPointers, 0, sizeof(int32) * smp_get_num_cpus());
+	memset(fFunctionStackPointers, 0, sizeof(int32_t) * smp_get_num_cpus());
 }
 
 
 void
-Profiler::EnterFunction(int32 cpu, const char* functionName)
+Profiler::EnterFunction(int32_t cpu, const char* functionName)
 {
 	nanotime_t start = system_time_nsecs();
 
 	FunctionData* function = _FindFunction(functionName);
 	if (function == NULL)
 		return;
-	atomic_add((int32*)&function->fCalled, 1);
+	atomic_add((int32_t*)&function->fCalled, 1);
 
 	FunctionEntry* stackEntry
 		= &fFunctionStacks[cpu][fFunctionStackPointers[cpu]];
@@ -78,7 +78,7 @@ Profiler::EnterFunction(int32 cpu, const char* functionName)
 
 
 void
-Profiler::ExitFunction(int32 cpu, const char* functionName)
+Profiler::ExitFunction(int32_t cpu, const char* functionName)
 {
 	nanotime_t start = system_time_nsecs();
 
@@ -107,12 +107,12 @@ Profiler::ExitFunction(int32 cpu, const char* functionName)
 
 
 void
-Profiler::DumpCalled(uint32 maxCount)
+Profiler::DumpCalled(uint32_t maxCount)
 {
-	uint32 count = _FunctionCount();
+	uint32_t count = _FunctionCount();
 
 	qsort(fFunctionData, count, sizeof(FunctionData),
-		&_CompareFunctions<uint32, &FunctionData::fCalled>);
+		&_CompareFunctions<uint32_t, &FunctionData::fCalled>);
 
 	if (maxCount > 0)
 		count = std::min(count, maxCount);
@@ -121,9 +121,9 @@ Profiler::DumpCalled(uint32 maxCount)
 
 
 void
-Profiler::DumpTimeInclusive(uint32 maxCount)
+Profiler::DumpTimeInclusive(uint32_t maxCount)
 {
-	uint32 count = _FunctionCount();
+	uint32_t count = _FunctionCount();
 
 	qsort(fFunctionData, count, sizeof(FunctionData),
 		&_CompareFunctions<nanotime_t, &FunctionData::fTimeInclusive>);
@@ -135,9 +135,9 @@ Profiler::DumpTimeInclusive(uint32 maxCount)
 
 
 void
-Profiler::DumpTimeExclusive(uint32 maxCount)
+Profiler::DumpTimeExclusive(uint32_t maxCount)
 {
-	uint32 count = _FunctionCount();
+	uint32_t count = _FunctionCount();
 
 	qsort(fFunctionData, count, sizeof(FunctionData),
 		&_CompareFunctions<nanotime_t, &FunctionData::fTimeExclusive>);
@@ -149,9 +149,9 @@ Profiler::DumpTimeExclusive(uint32 maxCount)
 
 
 void
-Profiler::DumpTimeInclusivePerCall(uint32 maxCount)
+Profiler::DumpTimeInclusivePerCall(uint32_t maxCount)
 {
-	uint32 count = _FunctionCount();
+	uint32_t count = _FunctionCount();
 
 	qsort(fFunctionData, count, sizeof(FunctionData),
 		&_CompareFunctionsPerCall<nanotime_t, &FunctionData::fTimeInclusive>);
@@ -163,9 +163,9 @@ Profiler::DumpTimeInclusivePerCall(uint32 maxCount)
 
 
 void
-Profiler::DumpTimeExclusivePerCall(uint32 maxCount)
+Profiler::DumpTimeExclusivePerCall(uint32_t maxCount)
 {
-	uint32 count = _FunctionCount();
+	uint32_t count = _FunctionCount();
 
 	qsort(fFunctionData, count, sizeof(FunctionData),
 		&_CompareFunctionsPerCall<nanotime_t, &FunctionData::fTimeExclusive>);
@@ -202,10 +202,10 @@ Profiler::Initialize()
 }
 
 
-uint32
+uint32_t
 Profiler::_FunctionCount() const
 {
-	uint32 count;
+	uint32_t count;
 	for (count = 0; count < kMaxFunctionEntries; count++) {
 		if (fFunctionData[count].fFunction == NULL)
 			break;
@@ -215,12 +215,12 @@ Profiler::_FunctionCount() const
 
 
 void
-Profiler::_Dump(uint32 count)
+Profiler::_Dump(uint32_t count)
 {
 	kprintf("Function calls (%" B_PRId32 " functions):\n", count);
 	kprintf("    called time-inclusive per-call time-exclusive per-call "
 		"function\n");
-	for (uint32 i = 0; i < count; i++) {
+	for (uint32_t i = 0; i < count; i++) {
 		FunctionData* function = &fFunctionData[i];
 		kprintf("%10" B_PRId32 " %14" B_PRId64 " %8" B_PRId64 " %14" B_PRId64
 			" %8" B_PRId64 " %s\n", function->fCalled,
@@ -235,7 +235,7 @@ Profiler::_Dump(uint32 count)
 Profiler::FunctionData*
 Profiler::_FindFunction(const char* function)
 {
-	for (uint32 i = 0; i < kMaxFunctionEntries; i++) {
+	for (uint32_t i = 0; i < kMaxFunctionEntries; i++) {
 		if (fFunctionData[i].fFunction == NULL)
 			break;
 		if (!strcmp(fFunctionData[i].fFunction, function))
@@ -243,7 +243,7 @@ Profiler::_FindFunction(const char* function)
 	}
 
 	SpinLocker _(fFunctionLock);
-	for (uint32 i = 0; i < kMaxFunctionEntries; i++) {
+	for (uint32_t i = 0; i < kMaxFunctionEntries; i++) {
 		if (fFunctionData[i].fFunction == NULL) {
 			fFunctionData[i].fFunction = function;
 			return fFunctionData + i;
@@ -297,10 +297,10 @@ dump_profiler(int argc, char** argv)
 		return 0;
 	}
 
-	int32 count = 0;
+	int32_t count = 0;
 	if (argc >= 3)
 		count = parse_expression(argv[2]);
-	count = std::max(count, int32(0));
+	count = std::max(count, int32_t(0));
 
 	if (!strcmp(argv[1], "called"))
 		Profiler::Get()->DumpCalled(count);

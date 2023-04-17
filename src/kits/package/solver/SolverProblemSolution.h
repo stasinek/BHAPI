@@ -71,8 +71,8 @@ public:
 								BSolverProblemSolution();
 								~BSolverProblemSolution();
 
-			int32				CountElements() const;
-			const Element*		ElementAt(int32 index) const;
+			int32_t				CountElements() const;
+			const Element*		ElementAt(int32_t index) const;
 
 			bool				AppendElement(const Element& element);
 

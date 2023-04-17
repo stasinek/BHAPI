@@ -29,7 +29,7 @@ Encoder::~Encoder()
 // #pragma mark - Convenience stubs
 
 
-status_t Encoder::AddTrackInfo(uint32 code, const void* data, size_t size, uint32 flags)
+status_t Encoder::AddTrackInfo(uint32_t code, const void* data, size_t size, uint32_t flags)
 {
 	return B_NOT_SUPPORTED;
 }
@@ -49,13 +49,13 @@ Encoder::ParameterWeb()
 }
 
 
-status_t Encoder::GetParameterValue(int32 id, void* value, size_t* size) const
+status_t Encoder::GetParameterValue(int32_t id, void* value, size_t* size) const
 {
 	return B_NOT_SUPPORTED;
 }
 
 
-status_t Encoder::SetParameterValue(int32 id, const void* value, size_t size)
+status_t Encoder::SetParameterValue(int32_t id, const void* value, size_t size)
 {
 	return B_NOT_SUPPORTED;
 }

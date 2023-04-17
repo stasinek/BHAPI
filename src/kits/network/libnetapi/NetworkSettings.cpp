@@ -45,11 +45,11 @@ class InterfaceAddressFamilyConverter : public DriverSettingsConverter {
 public:
 	virtual	status_t			ConvertFromDriverSettings(
 									const driver_parameter& parameter,
-									const char* name, int32 index, uint32 type,
+									const char* name, int32_t index, uint32_t type,
 									BMessage& target);
 	virtual	status_t			ConvertToDriverSettings(const BMessage& source,
-									const char* name, int32 index,
-									uint32 type, BString& value);
+									const char* name, int32_t index,
+									uint32_t type, BString& value);
 };
 
 
@@ -164,7 +164,7 @@ static const address_family kFamilies[] = {
 
 static const char*  get_family_name(int family)
 {
-	for (int32 i = 0; kFamilies[i].family >= 0; i++) {
+	for (int32_t i = 0; kFamilies[i].family >= 0; i++) {
 		if (kFamilies[i].family == family)
 			return kFamilies[i].name;
 	}
@@ -175,8 +175,8 @@ static const char*  get_family_name(int family)
 static int
 get_address_family(const char* argument)
 {
-	for (int32 i = 0; kFamilies[i].family >= 0; i++) {
-		for (int32 j = 0; kFamilies[i].identifiers[j]; j++) {
+	for (int32_t i = 0; kFamilies[i].family >= 0; i++) {
+		for (int32_t j = 0; kFamilies[i].identifiers[j]; j++) {
 			if (!strcmp(argument, kFamilies[i].identifiers[j])) {
 				// found a match
 				return kFamilies[i].family;
@@ -192,7 +192,7 @@ get_address_family(const char* argument)
 	If \a family is \c AF_UNSPEC, \a family will be overwritten with the family
 	of the successfully parsed address.
 */
-static bool parse_address(int32& family, const char* argument, BNetworkAddress& address)
+static bool parse_address(int32_t& family, const char* argument, BNetworkAddress& address)
 {
 	if (argument == NULL) {
 		if (family != AF_UNSPEC)
@@ -209,7 +209,7 @@ static bool parse_address(int32& family, const char* argument, BNetworkAddress& 
 		// Test if we support the resulting address family
 		bool supported = false;
 
-		for (int32 i = 0; kFamilies[i].family >= 0; i++) {
+		for (int32_t i = 0; kFamilies[i].family >= 0; i++) {
 			if (kFamilies[i].family == address.Family()) {
 				supported = true;
 				break;
@@ -266,17 +266,17 @@ type_for_protocol(int protocol)
 
 
 status_t InterfaceAddressFamilyConverter::ConvertFromDriverSettings(
-	const driver_parameter& parameter, const char* name, int32 index,
-	uint32 type, BMessage& target)
+	const driver_parameter& parameter, const char* name, int32_t index,
+	uint32_t type, BMessage& target)
 {
 	return B_NOT_SUPPORTED;
 }
 
 
 status_t InterfaceAddressFamilyConverter::ConvertToDriverSettings(const BMessage& source,
-	const char* name, int32 index, uint32 type, BString& value)
+	const char* name, int32_t index, uint32_t type, BString& value)
 {
-	int32 family;
+	int32_t family;
 	if (source.FindInt32("family", &family) == B_OK) {
 		const char* familyName = get_family_name(family);
 		if (familyName != NULL)
@@ -305,7 +305,7 @@ BNetworkSettings::~BNetworkSettings()
 }
 
 
-status_t BNetworkSettings::GetNextInterface(uint32& cookie, BMessage& interface)
+status_t BNetworkSettings::GetNextInterface(uint32_t& cookie, BMessage& interface)
 {
 	status_t status = fInterfaces.FindMessage("interface", cookie, &interface);
 	if (status != B_OK)
@@ -318,7 +318,7 @@ status_t BNetworkSettings::GetNextInterface(uint32& cookie, BMessage& interface)
 
 status_t BNetworkSettings::GetInterface(const char* name, BMessage& interface) const
 {
-	int32 index;
+	int32_t index;
 	return _GetItem(fInterfaces, "interface", "device", name, index, interface);
 }
 
@@ -364,9 +364,9 @@ BNetworkSettings::Interface(const char* name) const
 }
 
 
-int32 BNetworkSettings::CountNetworks() const
+int32_t BNetworkSettings::CountNetworks() const
 {
-	int32 count = 0;
+	int32_t count = 0;
 	if (fNetworks.GetInfo("network", NULL, &count) != B_OK)
 		return 0;
 
@@ -374,7 +374,7 @@ int32 BNetworkSettings::CountNetworks() const
 }
 
 
-status_t BNetworkSettings::GetNextNetwork(uint32& cookie, BMessage& network) const
+status_t BNetworkSettings::GetNextNetwork(uint32_t& cookie, BMessage& network) const
 {
 	status_t status = fNetworks.FindMessage("network", cookie, &network);
 	if (status != B_OK)
@@ -387,7 +387,7 @@ status_t BNetworkSettings::GetNextNetwork(uint32& cookie, BMessage& network) con
 
 status_t BNetworkSettings::GetNetwork(const char* name, BMessage& network) const
 {
-	int32 index;
+	int32_t index;
 	return _GetItem(fNetworks, "network", "name", name, index, network);
 }
 
@@ -422,7 +422,7 @@ BNetworkSettings::Services() const
 }
 
 
-status_t BNetworkSettings::GetNextService(uint32& cookie, BMessage& service)
+status_t BNetworkSettings::GetNextService(uint32_t& cookie, BMessage& service)
 {
 	status_t status = fServices.FindMessage("service", cookie, &service);
 	if (status != B_OK)
@@ -435,7 +435,7 @@ status_t BNetworkSettings::GetNextService(uint32& cookie, BMessage& service)
 
 status_t BNetworkSettings::GetService(const char* name, BMessage& service) const
 {
-	int32 index;
+	int32_t index;
 	return _GetItem(fServices, "service", "name", name, index, service);
 }
 
@@ -511,7 +511,7 @@ status_t BNetworkSettings::StopMonitoring(const BMessenger& target)
 status_t BNetworkSettings::Update(BMessage* message)
 {
 	const char* pathName;
-	int32 opcode;
+	int32_t opcode;
 	if (message->FindInt32("opcode", &opcode) != B_OK
 		|| message->FindString("path", &pathName) != B_OK)
 		return B_BAD_VALUE;
@@ -529,7 +529,7 @@ status_t BNetworkSettings::Update(BMessage* message)
 		return B_OK;
 	}
 
-	int32 fields;
+	int32_t fields;
 	if (opcode == B_STAT_CHANGED
 		&& message->FindInt32("fields", &fields) == B_OK
 		&& (fields & (B_STAT_MODIFICATION_TIME | B_STAT_SIZE)) == 0) {
@@ -538,7 +538,7 @@ status_t BNetworkSettings::Update(BMessage* message)
 	}
 
 	BPath path(pathName);
-	uint32 type;
+	uint32_t type;
 	if (_Load(path.Leaf(), &type) == B_OK) {
 		BMessage update(type);
 		fListener.SendMessage(&update);
@@ -551,7 +551,7 @@ status_t BNetworkSettings::Update(BMessage* message)
 // #pragma mark - private
 
 
-status_t BNetworkSettings::_Load(const char* name, uint32* _type)
+status_t BNetworkSettings::_Load(const char* name, uint32_t* _type)
 {
 	BPath path;
 	status_t status = _GetPath(NULL, path);
@@ -575,7 +575,7 @@ status_t BNetworkSettings::_Load(const char* name, uint32* _type)
 		if (status == B_OK) {
 			// Convert settings for simpler consumption
 			BMessage network;
-			for (int32 index = 0; fNetworks.FindMessage("network", index,
+			for (int32_t index = 0; fNetworks.FindMessage("network", index,
 					&network); index++) {
 				if (_ConvertNetworkFromSettings(network) == B_OK)
 					fNetworks.ReplaceMessage("network", index, &network);
@@ -616,7 +616,7 @@ status_t BNetworkSettings::_Save(const char* name)
 		// Convert settings to storage format
 		BMessage networks = fNetworks;
 		BMessage network;
-		for (int32 index = 0; networks.FindMessage("network", index,
+		for (int32_t index = 0; networks.FindMessage("network", index,
 				&network); index++) {
 			if (_ConvertNetworkToSettings(network) == B_OK)
 				networks.ReplaceMessage("network", index, &network);
@@ -697,7 +697,7 @@ status_t BNetworkSettings::_ConvertNetworkToSettings(BMessage& message)
 			message.AddString("mac", formatted);
 	}
 
-	uint32 authentication = 0;
+	uint32_t authentication = 0;
 	result = message.FindUInt32("authentication_mode", &authentication);
 	if (result == B_OK) {
 		message.RemoveName("authentication_mode");
@@ -722,7 +722,7 @@ status_t BNetworkSettings::_ConvertNetworkToSettings(BMessage& message)
 			message.AddString("authentication", authenticationString);
 	}
 
-	uint32 cipher = 0;
+	uint32_t cipher = 0;
 	result = message.FindUInt32("cipher", &cipher);
 	if (result == B_OK) {
 		message.RemoveName("cipher");
@@ -735,7 +735,7 @@ status_t BNetworkSettings::_ConvertNetworkToSettings(BMessage& message)
 			message.AddString("cipher", "ccmp");
 	}
 
-	uint32 groupCipher = 0;
+	uint32_t groupCipher = 0;
 	result = message.FindUInt32("group_cipher", &groupCipher);
 	if (result == B_OK) {
 		message.RemoveName("group_cipher");
@@ -787,8 +787,8 @@ status_t BNetworkSettings::_ConvertNetworkFromSettings(BMessage& message)
 		}
 	}
 
-	int32 index = 0;
-	uint32 cipher = 0;
+	int32_t index = 0;
+	uint32_t cipher = 0;
 	const char* cipherString = NULL;
 	while (message.FindString("cipher", index++, &cipherString) == B_OK) {
 		if (strcasecmp(cipherString, "none") == 0)
@@ -831,10 +831,10 @@ status_t BNetworkSettings::_ConvertNetworkFromSettings(BMessage& message)
 
 
 status_t BNetworkSettings::_GetItem(const BMessage& container, const char* itemField,
-	const char* nameField, const char* name, int32& _index,
+	const char* nameField, const char* name, int32_t& _index,
 	BMessage& item) const
 {
-	int32 index = 0;
+	int32_t index = 0;
 	while (container.FindMessage(itemField, index, &item) == B_OK) {
 		const char* itemName = NULL;
 		if (item.FindString(nameField, &itemName) == B_OK
@@ -854,7 +854,7 @@ status_t BNetworkSettings::_RemoveItem(BMessage& container, const char* itemFiel
 	const char* nameField, const char* name, const char* store)
 {
 	BMessage item;
-	int32 index;
+	int32_t index;
 	if (_GetItem(container, itemField, nameField, name, index, item) == B_OK) {
 		container.RemoveData(itemField, index);
 		if (store != NULL)
@@ -1081,7 +1081,7 @@ BNetworkInterfaceSettings::BNetworkInterfaceSettings(const BMessage& message)
 	fMetric = message.GetInt32("metric", 0);
 
 	BMessage addressData;
-	for (int32 index = 0; message.FindMessage("address", index,
+	for (int32_t index = 0; message.FindMessage("address", index,
 			&addressData) == B_OK; index++) {
 		BNetworkInterfaceAddressSettings address(addressData);
 		fAddresses.push_back(address);
@@ -1106,65 +1106,65 @@ void BNetworkInterfaceSettings::SetName(const char* name)
 }
 
 
-int32 BNetworkInterfaceSettings::Flags() const
+int32_t BNetworkInterfaceSettings::Flags() const
 {
 	return fFlags;
 }
 
 
-void BNetworkInterfaceSettings::SetFlags(int32 flags)
+void BNetworkInterfaceSettings::SetFlags(int32_t flags)
 {
 	fFlags = flags;
 }
 
 
-int32 BNetworkInterfaceSettings::MTU() const
+int32_t BNetworkInterfaceSettings::MTU() const
 {
 	return fMTU;
 }
 
 
-void BNetworkInterfaceSettings::SetMTU(int32 mtu)
+void BNetworkInterfaceSettings::SetMTU(int32_t mtu)
 {
 	fMTU = mtu;
 }
 
 
-int32 BNetworkInterfaceSettings::Metric() const
+int32_t BNetworkInterfaceSettings::Metric() const
 {
 	return fMetric;
 }
 
 
-void BNetworkInterfaceSettings::SetMetric(int32 metric)
+void BNetworkInterfaceSettings::SetMetric(int32_t metric)
 {
 	fMetric = metric;
 }
 
 
-int32 BNetworkInterfaceSettings::CountAddresses() const
+int32_t BNetworkInterfaceSettings::CountAddresses() const
 {
 	return fAddresses.size();
 }
 
 
 const BNetworkInterfaceAddressSettings&
-BNetworkInterfaceSettings::AddressAt(int32 index) const
+BNetworkInterfaceSettings::AddressAt(int32_t index) const
 {
 	return fAddresses[index];
 }
 
 
 BNetworkInterfaceAddressSettings&
-BNetworkInterfaceSettings::AddressAt(int32 index)
+BNetworkInterfaceSettings::AddressAt(int32_t index)
 {
 	return fAddresses[index];
 }
 
 
-int32 BNetworkInterfaceSettings::FindFirstAddress(int family) const
+int32_t BNetworkInterfaceSettings::FindFirstAddress(int family) const
 {
-	for (int32 index = 0; index < CountAddresses(); index++) {
+	for (int32_t index = 0; index < CountAddresses(); index++) {
 		const BNetworkInterfaceAddressSettings address = AddressAt(index);
 		if (address.Family() == family)
 			return index;
@@ -1180,7 +1180,7 @@ void BNetworkInterfaceSettings::AddAddress(
 }
 
 
-void BNetworkInterfaceSettings::RemoveAddress(int32 index)
+void BNetworkInterfaceSettings::RemoveAddress(int32_t index)
 {
 	fAddresses.erase(fAddresses.begin() + index);
 }
@@ -1203,7 +1203,7 @@ bool BNetworkInterfaceSettings::IsAutoConfigure(int family) const
 	BNetworkInterfaceAddress address;
 	status_t status = B_ERROR;
 
-	int32 index = interface.FindFirstAddress(family);
+	int32_t index = interface.FindFirstAddress(family);
 	if (index >= 0)
 		status = interface.GetAddressAt(index, address);
 	if (index < 0 || status != B_OK || address.Address().IsEmpty()) {
@@ -1211,7 +1211,7 @@ bool BNetworkInterfaceSettings::IsAutoConfigure(int family) const
 			// Check persistent settings for the mode -- the address
 			// can also be empty if the automatic configuration hasn't
 			// started yet (for example, because there is no link).
-			int32 index = FindFirstAddress(family);
+			int32_t index = FindFirstAddress(family);
 			if (index < 0)
 				index = FindFirstAddress(AF_UNSPEC);
 			if (index >= 0) {
@@ -1236,7 +1236,7 @@ status_t BNetworkInterfaceSettings::GetMessage(BMessage& data) const
 	if (status == B_OK && fMetric != 0)
 		status = data.SetInt32("metric", fMetric);
 
-	for (int32 i = 0; i < CountAddresses(); i++) {
+	for (int32_t i = 0; i < CountAddresses(); i++) {
 		BMessage address;
 		status = AddressAt(i).GetMessage(address);
 		if (status == B_OK)
@@ -1438,7 +1438,7 @@ BNetworkServiceSettings::BNetworkServiceSettings(const BMessage& message)
 	}
 
 	BMessage addressData;
-	int32 i = 0;
+	int32_t i = 0;
 	for (; message.FindMessage("address", i, &addressData) == B_OK; i++) {
 		BNetworkServiceAddressSettings address(addressData, fFamily,
 			fType, fProtocol, fPort);
@@ -1566,13 +1566,13 @@ void BNetworkServiceSettings::SetPort(int port)
 }
 
 
-int32 BNetworkServiceSettings::CountArguments() const
+int32_t BNetworkServiceSettings::CountArguments() const
 {
 	return fArguments.CountStrings();
 }
 
 
-const char*  BNetworkServiceSettings::ArgumentAt(int32 index) const
+const char*  BNetworkServiceSettings::ArgumentAt(int32_t index) const
 {
 	return fArguments.StringAt(index);
 }
@@ -1584,20 +1584,20 @@ void BNetworkServiceSettings::AddArgument(const char* argument)
 }
 
 
-void BNetworkServiceSettings::RemoveArgument(int32 index)
+void BNetworkServiceSettings::RemoveArgument(int32_t index)
 {
 	fArguments.Remove(index);
 }
 
 
-int32 BNetworkServiceSettings::CountAddresses() const
+int32_t BNetworkServiceSettings::CountAddresses() const
 {
 	return fAddresses.size();
 }
 
 
 const BNetworkServiceAddressSettings&
-BNetworkServiceSettings::AddressAt(int32 index) const
+BNetworkServiceSettings::AddressAt(int32_t index) const
 {
 	return fAddresses[index];
 }
@@ -1610,7 +1610,7 @@ void BNetworkServiceSettings::AddAddress(
 }
 
 
-void BNetworkServiceSettings::RemoveAddress(int32 index)
+void BNetworkServiceSettings::RemoveAddress(int32_t index)
 {
 	fAddresses.erase(fAddresses.begin() + index);
 }
@@ -1651,14 +1651,14 @@ status_t BNetworkServiceSettings::GetMessage(BMessage& data) const
 	if (fPort != -1)
 		status = data.SetInt32("port", fPort);
 
-	for (int32 i = 0; i < fArguments.CountStrings(); i++) {
+	for (int32_t i = 0; i < fArguments.CountStrings(); i++) {
 		if (status == B_OK)
 			status = data.AddString("launch", fArguments.StringAt(i));
 		if (status != B_OK)
 			break;
 	}
 
-	for (int32 i = 0; i < CountAddresses(); i++) {
+	for (int32_t i = 0; i < CountAddresses(); i++) {
 		BNetworkServiceAddressSettings address = AddressAt(i);
 		if (address.Family() == Family()
 			&& address.Type() == Type()

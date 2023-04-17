@@ -13,9 +13,9 @@ struct iovec;
 
 
 struct ring_buffer {
-	int32		first;
-	int32		in;
-	int32		size;
+	int32_t		first;
+	int32_t		in;
+	int32_t		size;
 	uint8		buffer[0];
 };
 
@@ -30,7 +30,7 @@ extern "C" {
 
 struct ring_buffer *create_ring_buffer(size_t size);
 struct ring_buffer *create_ring_buffer_etc(void *memory, size_t size,
-			uint32 flags);
+			uint32_t flags);
 void delete_ring_buffer(struct ring_buffer *buffer);
 
 void ring_buffer_clear(struct ring_buffer *buffer);
@@ -43,7 +43,7 @@ ssize_t ring_buffer_user_read(struct ring_buffer *buffer, uint8 *data, ssize_t l
 ssize_t ring_buffer_user_write(struct ring_buffer *buffer, const uint8 *data, ssize_t length);
 size_t ring_buffer_peek(struct ring_buffer *buffer, size_t offset, void *data,
 			size_t length);
-int32 ring_buffer_get_vecs(struct ring_buffer *buffer, struct iovec *vecs);
+int32_t ring_buffer_get_vecs(struct ring_buffer *buffer, struct iovec *vecs);
 
 #ifdef __cplusplus
 }

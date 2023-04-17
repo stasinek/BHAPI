@@ -881,7 +881,7 @@ FT_BEGIN_HEADER
    *   USHORT   item_type    The item type.  Possible values are
    *                            0 => string (e.g., COMMENT)
    *                            1 => atom   (e.g., FONT or even SIZE)
-   *                            2 => int32    *                            3 => uint32    *                         0x10 => A flag to indicate a properties.  This
+   *                            2 => int32_t    *                            3 => uint32_t    *                         0x10 => A flag to indicate a properties.  This
    *                                 is ORed with the above values.
    *   ULONG    item_value   For strings  => Offset into string table without
    *                                         the corresponding double quotes.

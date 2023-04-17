@@ -21,8 +21,8 @@
 // ElementLayoutInfo
 class SimpleLayouter::ElementLayoutInfo {
 public:
-	int32	size;
-	int32	location;
+	int32_t	size;
+	int32_t	location;
 
 	ElementLayoutInfo()
 		: size(0),
@@ -34,10 +34,10 @@ public:
 // ElementInfo
 class SimpleLayouter::ElementInfo {
 public:
-	int32	index;
-	int32	min;
-	int32	max;
-	int32	preferred;
+	int32_t	index;
+	int32_t	min;
+	int32_t	max;
+	int32_t	preferred;
 	float	weight;
 	int64	tempWeight;
 
@@ -74,11 +74,11 @@ public:
 // MyLayoutInfo
 class SimpleLayouter::MyLayoutInfo : public LayoutInfo {
 public:
-	int32				fSize;
+	int32_t				fSize;
 	ElementLayoutInfo*	fElements;
-	int32				fElementCount;
+	int32_t				fElementCount;
 
-	MyLayoutInfo(int32 elementCount)
+	MyLayoutInfo(int32_t elementCount)
 		: fSize(0),
 		  fElementCount(elementCount)
 	{
@@ -90,7 +90,7 @@ public:
 		delete[] fElements;
 	}
 	
-	virtual float ElementLocation(int32 element)
+	virtual float ElementLocation(int32_t element)
 	{
 		if (element < 0 || element >= fElementCount) {
 			// error
@@ -100,7 +100,7 @@ public:
 		return fElements[element].location;
 	}
 
-	virtual float ElementSize(int32 element)
+	virtual float ElementSize(int32_t element)
 	{
 		if (element < 0 || element >= fElementCount) {
 			// error
@@ -113,9 +113,9 @@ public:
 
 
 // constructor
-SimpleLayouter::SimpleLayouter(int32 elementCount, float spacing)
+SimpleLayouter::SimpleLayouter(int32_t elementCount, float spacing)
 	: fElementCount(elementCount),
-	  fSpacing((int32)spacing),
+	  fSpacing((int32_t)spacing),
 	  fMin(0),
 	  fMax(B_SIZE_UNLIMITED),
 	  fPreferred(0),
@@ -134,7 +134,7 @@ SimpleLayouter::~SimpleLayouter()
 }
 
 // AddConstraints
-void SimpleLayouter::AddConstraints(int32 element, int32 length,
+void SimpleLayouter::AddConstraints(int32_t element, int32_t length,
 	float _min, float _max, float _preferred)
 {
 	if (element < 0 || element >= fElementCount) {
@@ -146,9 +146,9 @@ void SimpleLayouter::AddConstraints(int32 element, int32 length,
 		return;
 	}
 
-	int32 min = (int32)_min + 1;
-	int32 max = (int32)_max + 1;
-//	int32 preferred = (int32)_preferred + 1;
+	int32_t min = (int32_t)_min + 1;
+	int32_t max = (int32_t)_max + 1;
+//	int32_t preferred = (int32_t)_preferred + 1;
 	
 	ElementInfo& info = fElements[element];
 	info.min = max_c(info.min, min);
@@ -159,7 +159,7 @@ void SimpleLayouter::AddConstraints(int32 element, int32 length,
 }
 
 // SetWeight
-void SimpleLayouter::SetWeight(int32 element, float weight)
+void SimpleLayouter::SetWeight(int32_t element, float weight)
 {
 	if (element < 0 || element >= fElementCount) {
 		// error
@@ -203,7 +203,7 @@ SimpleLayouter::CreateLayoutInfo()
 // Layout
 void SimpleLayouter::Layout(LayoutInfo* layoutInfo, float _size)
 {
-	int32 size = int32(_size + 1);
+	int32_t size = int32_t(_size + 1);
 
 	fLayoutInfo = (MyLayoutInfo*)layoutInfo;
 	
@@ -245,12 +245,12 @@ SimpleLayouter::CloneLayouter()
 }
 
 // DistributeSize
-void SimpleLayouter::DistributeSize(int32 size, float weights[], int32 sizes[],
-	int32 count)
+void SimpleLayouter::DistributeSize(int32_t size, float weights[], int32_t sizes[],
+	int32_t count)
 {
 	// create element infos
 	BList elementInfos(count);
-	for (int32 i = 0; i < count; i++) {
+	for (int32_t i = 0; i < count; i++) {
 		ElementInfo* info = new ElementInfo(i);
 		info->weight = weights[i];
 		elementInfos.AddItem(info);
@@ -261,12 +261,12 @@ void SimpleLayouter::DistributeSize(int32 size, float weights[], int32 sizes[],
 
 	// distribute the size
 	int64 weight = 0;
-	int32 sumSize = 0;
-	for (int32 i = 0; i < count; i++) {
+	int32_t sumSize = 0;
+	for (int32_t i = 0; i < count; i++) {
 		ElementInfo* info = (ElementInfo*)elementInfos.ItemAt(i);
 		weight += info->tempWeight;
-		int32 oldSumSize = sumSize;
-		sumSize = (int32)(size * weight / sumWeight);
+		int32_t oldSumSize = sumSize;
+		sumSize = (int32_t)(size * weight / sumWeight);
 		sizes[i] = sumSize - oldSumSize;
 
 		delete info;
@@ -279,11 +279,11 @@ SimpleLayouter::_CalculateSumWeight(BList& elementInfos)
 {
 	if (elementInfos.IsEmpty())
 		return 0;
-	int32 count = elementInfos.CountItems();
+	int32_t count = elementInfos.CountItems();
 	
 	// sum up the floating point weight, so we get a scale
 	double scale = 0;
-	for (int32 i = 0; i < count; i++) {
+	for (int32_t i = 0; i < count; i++) {
 		ElementInfo* info = (ElementInfo*)elementInfos.ItemAt(i);
 		scale += info->weight;
 	}
@@ -292,7 +292,7 @@ SimpleLayouter::_CalculateSumWeight(BList& elementInfos)
 
 	if (scale == 0) {
 		// The weight sum is 0: We assign each info a temporary weight of 1.
-		for (int32 i = 0; i < count; i++) {
+		for (int32_t i = 0; i < count; i++) {
 			ElementInfo* info = (ElementInfo*)elementInfos.ItemAt(i);
 			info->tempWeight = 1;
 			weight += info->tempWeight;
@@ -306,7 +306,7 @@ SimpleLayouter::_CalculateSumWeight(BList& elementInfos)
 		else
 			scale = 100000 / scale;
 
-		for (int32 i = 0; i < count; i++) {
+		for (int32_t i = 0; i < count; i++) {
 			ElementInfo* info = (ElementInfo*)elementInfos.ItemAt(i);
 			info->tempWeight = (int64)(info->weight * scale);
 			weight += info->tempWeight;
@@ -358,11 +358,11 @@ void SimpleLayouter::_ValidateMinMax()
 void SimpleLayouter::_LayoutMax()
 {
 	ElementInfo* infos = fElements;
-	int32 count = fElementCount;
+	int32_t count = fElementCount;
 	if (count == 0)
 		return;
 
-	int32 additionalSpace = fLayoutInfo->fSize - fMax;
+	int32_t additionalSpace = fLayoutInfo->fSize - fMax;
 
 	// layout to the maximum first
 	for (int i = 0; i < count; i++)
@@ -386,14 +386,14 @@ void SimpleLayouter::_LayoutMax()
 		int64 oldSumSize = sumSize;
 		sumSize = additionalSpace * (i + 1) / count;
 		fLayoutInfo->fElements[infos[i].index].size
-			+= int32(sumSize - oldSumSize);
+			+= int32_t(sumSize - oldSumSize);
 	}
 }
 
 // _LayoutStandard
 void SimpleLayouter::_LayoutStandard()
 {
-	int32 space = fLayoutInfo->fSize - (fElementCount - 1) * fSpacing;
+	int32_t space = fLayoutInfo->fSize - (fElementCount - 1) * fSpacing;
 
 	BList infosToLayout(fElementCount);
 	for (int i = 0; i < fElementCount; i++) {
@@ -404,13 +404,13 @@ void SimpleLayouter::_LayoutStandard()
 	BList infosUnderMax(fElementCount);
 	BList infosOverMin(fElementCount);
 	while (infosToLayout.CountItems() > 0) {
-		int32 remainingSpace = 0;
-		int32 infoCount = infosToLayout.CountItems();
+		int32_t remainingSpace = 0;
+		int32_t infoCount = infosToLayout.CountItems();
 		int64 sumWeight = _CalculateSumWeight(infosToLayout);
 		int64 assignedWeight = 0;
-		int32 assignedSize = 0;
+		int32_t assignedSize = 0;
 
-		for (int32 i = 0; i < infoCount; i++) {
+		for (int32_t i = 0; i < infoCount; i++) {
 			ElementInfo* info = (ElementInfo*)infosToLayout.ItemAt(i);
 			ElementLayoutInfo& layoutInfo = fLayoutInfo->fElements[info->index];
 			// The simple algorithm is this:
@@ -420,8 +420,8 @@ void SimpleLayouter::_LayoutStandard()
 			// assign the difference of total assignment for all infos including
 			// the current one minus the total excluding the current one.
 			assignedWeight += info->tempWeight;
-			int32 oldAssignedSize = assignedSize;
-			assignedSize = (int32)(space * assignedWeight / sumWeight);
+			int32_t oldAssignedSize = assignedSize;
+			assignedSize = (int32_t)(space * assignedWeight / sumWeight);
 			layoutInfo.size += assignedSize - oldAssignedSize;
 
 			if (layoutInfo.size < info->min) {

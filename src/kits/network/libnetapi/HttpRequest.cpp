@@ -30,7 +30,7 @@
 #include <ZlibCompressionAlgorithm.h>
 
 
-static const int32 kHttpBufferSize = 4096;
+static const int32_t kHttpBufferSize = 4096;
 
 
 namespace BPrivate {
@@ -588,7 +588,7 @@ status_t BHttpRequest::_MakeRequest()
 
 				// Parse received cookies
 				if (fContext != NULL) {
-					for (int32 i = 0;  i < fHeaders.CountHeaders(); i++) {
+					for (int32_t i = 0;  i < fHeaders.CountHeaders(); i++) {
 						if (fHeaders.HeaderAt(i).NameIs("Set-Cookie")) {
 							fContext->GetCookieJar().AddCookie(
 								fHeaders.HeaderAt(i).Value(), fUrl);
@@ -615,7 +615,7 @@ status_t BHttpRequest::_MakeRequest()
 					decompressingStreamDeleter.SetTo(decompressingStream);
 				}
 
-				int32 index = fHeaders.HasHeader("Content-Length");
+				int32_t index = fHeaders.HasHeader("Content-Length");
 				if (index != B_ERROR)
 					bytesTotal = atoi(fHeaders.HeaderAt(index).Value());
 				else
@@ -658,7 +658,7 @@ status_t BHttpRequest::_MakeRequest()
 					} else {
 						// Format of a chunk header:
 						// <chunk size in hex>[; optional data]
-						int32 semiColonIndex = chunkHeader.FindFirst(';', 0);
+						int32_t semiColonIndex = chunkHeader.FindFirst(';', 0);
 
 						// Cut-off optional data if present
 						if (semiColonIndex != -1) {
@@ -917,10 +917,10 @@ void BHttpRequest::_SendHeaders()
 
 	// Optional headers specified by the user
 	if (fOptHeaders != NULL) {
-		for (int32 headerIndex = 0; headerIndex < fOptHeaders->CountHeaders();
+		for (int32_t headerIndex = 0; headerIndex < fOptHeaders->CountHeaders();
 				headerIndex++) {
 			BHttpHeader& optHeader = (*fOptHeaders)[headerIndex];
-			int32 replaceIndex = outputHeaders.HasHeader(optHeader.Name());
+			int32_t replaceIndex = outputHeaders.HasHeader(optHeader.Name());
 
 			// Add or replace the current option header to the
 			// output header list
@@ -954,7 +954,7 @@ void BHttpRequest::_SendHeaders()
 	// Write output headers to output stream
 	BString headerData;
 
-	for (int32 headerIndex = 0; headerIndex < outputHeaders.CountHeaders();
+	for (int32_t headerIndex = 0; headerIndex < outputHeaders.CountHeaders();
 			headerIndex++) {
 		const char* header = outputHeaders.HeaderAt(headerIndex).Header();
 
@@ -1072,7 +1072,7 @@ BHttpRequest::_ResultHeaders()
 }
 
 
-void BHttpRequest::_SetResultStatusCode(int32 statusCode)
+void BHttpRequest::_SetResultStatusCode(int32_t statusCode)
 {
 	fResult.fStatusCode = statusCode;
 }

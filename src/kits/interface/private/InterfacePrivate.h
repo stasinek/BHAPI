@@ -19,12 +19,12 @@ extern "C" status_t _fini_interface_kit_();
 
 namespace BPrivate {
 
-bool		get_mode_parameter(uint32 mode, int32& width, int32& height,
-				uint32& colorSpace);
-int32		get_bytes_per_row(color_space colorSpace, int32 width);
+bool		get_mode_parameter(uint32_t mode, int32_t& width, int32_t& height,
+				uint32_t& colorSpace);
+int32_t		get_bytes_per_row(color_space colorSpace, int32_t width);
 
-void		get_workspaces_layout(uint32* _columns, uint32* _rows);
-void		set_workspaces_layout(uint32 columns, uint32 rows);
+void		get_workspaces_layout(uint32_t* _columns, uint32_t* _rows);
+void		set_workspaces_layout(uint32_t columns, uint32_t rows);
 
 }	// namespace BPrivate
 

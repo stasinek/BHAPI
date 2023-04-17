@@ -41,25 +41,25 @@ All rights reserved.
 
 namespace BPrivate {
 
-const int32 kColumnStateArchiveVersion = 22;
+const int32_t kColumnStateArchiveVersion = 22;
 	// bump version when layout or size changes
 
 class BColumn {
 public:
 	BColumn(const char* title, float offset, float width,
-		alignment align, const char* attributeName, uint32 attrType,
+		alignment align, const char* attributeName, uint32_t attrType,
 		const char* displayAs, bool statField, bool editable);
 	BColumn(const char* title, float offset, float width,
-		alignment align, const char* attributeName, uint32 attrType,
+		alignment align, const char* attributeName, uint32_t attrType,
 		bool statField, bool editable);
 	~BColumn();
 
-	BColumn(BMallocIO* stream, int32 version, bool endianSwap = false);
-	BColumn(const BMessage &, int32 index = 0);
+	BColumn(BMallocIO* stream, int32_t version, bool endianSwap = false);
+	BColumn(const BMessage &, int32_t index = 0);
 	static BColumn* InstantiateFromStream(BMallocIO* stream,
 		bool endianSwap = false);
 	static BColumn* InstantiateFromMessage(const BMessage &archive,
-		int32 index = 0);
+		int32_t index = 0);
 	void ArchiveToStream(BMallocIO* stream) const;
 	void ArchiveToMessage(BMessage &) const;
 
@@ -68,9 +68,9 @@ public:
 	float Width() const;
 	alignment Alignment() const;
 	const char* AttrName() const;
-	uint32 AttrType() const;
+	uint32_t AttrType() const;
 	const char* DisplayAs() const;
-	uint32 AttrHash() const;
+	uint32_t AttrHash() const;
 	bool StatField() const;
 	bool Editable() const;
 
@@ -79,7 +79,7 @@ public:
 
 private:
 	void _Init(const char* title, float offset, float width,
-		alignment align, const char* attributeName, uint32 attrType,
+		alignment align, const char* attributeName, uint32_t attrType,
 		const char* displayAs, bool statField, bool editable);
 	static BColumn* _Sanitize(BColumn* column);
 
@@ -89,14 +89,14 @@ private:
 	alignment fAlignment;
 	BString fAttrName;
 	BString fDisplayAs;
-	uint32 fAttrHash;
-	uint32 fAttrType;
+	uint32_t fAttrHash;
+	uint32_t fAttrType;
 	bool fStatField;
 	bool fEditable;
 };
 
 
-const int32 kViewStateArchiveVersion = 11;
+const int32_t kViewStateArchiveVersion = 11;
 	// bump version when layout or size changes
 
 class BViewState {
@@ -111,28 +111,28 @@ public:
 	void ArchiveToStream(BMallocIO* stream) const;
 	void ArchiveToMessage(BMessage &message) const;
 
-	uint32 ViewMode() const;
-	uint32 LastIconMode() const;
-	uint32 IconSize() const;
-	uint32 LastIconSize() const;
+	uint32_t ViewMode() const;
+	uint32_t LastIconMode() const;
+	uint32_t IconSize() const;
+	uint32_t LastIconSize() const;
 	BPoint ListOrigin() const;
 	BPoint IconOrigin() const;
-	uint32 PrimarySort() const;
-	uint32 SecondarySort() const;
-	uint32 PrimarySortType() const;
-	uint32 SecondarySortType() const;
+	uint32_t PrimarySort() const;
+	uint32_t SecondarySort() const;
+	uint32_t PrimarySortType() const;
+	uint32_t SecondarySortType() const;
 	bool ReverseSort() const;
 
-	void SetViewMode(uint32);
-	void SetLastIconMode(uint32);
-	void SetIconSize(uint32);
-	void SetLastIconSize(uint32);
+	void SetViewMode(uint32_t);
+	void SetLastIconMode(uint32_t);
+	void SetIconSize(uint32_t);
+	void SetLastIconSize(uint32_t);
 	void SetListOrigin(BPoint);
 	void SetIconOrigin(BPoint);
-	void SetPrimarySort(uint32);
-	void SetSecondarySort(uint32);
-	void SetPrimarySortType(uint32);
-	void SetSecondarySortType(uint32);
+	void SetPrimarySort(uint32_t);
+	void SetSecondarySort(uint32_t);
+	void SetPrimarySortType(uint32_t);
+	void SetSecondarySortType(uint32_t);
 	void SetReverseSort(bool);
 
 	bool StateNeedsSaving();
@@ -140,31 +140,31 @@ public:
 private:
 	static BViewState* _Sanitize(BViewState* state, bool fixOnly = false);
 
-	uint32 fViewMode;
-	uint32 fLastIconMode;
-	uint32 fIconSize;
-	uint32 fLastIconSize;
+	uint32_t fViewMode;
+	uint32_t fLastIconMode;
+	uint32_t fIconSize;
+	uint32_t fLastIconSize;
 	BPoint fListOrigin;
 	BPoint fIconOrigin;
-	uint32 fPrimarySortAttr;
-	uint32 fSecondarySortAttr;
-	uint32 fPrimarySortType;
-	uint32 fSecondarySortType;
+	uint32_t fPrimarySortAttr;
+	uint32_t fSecondarySortAttr;
+	uint32_t fPrimarySortType;
+	uint32_t fSecondarySortType;
 	bool fReverseSort;
 
 	void _Init();
 	void _StorePreviousState();
 
-	uint32 fPreviousViewMode;
-	uint32 fPreviousLastIconMode;
-	uint32 fPreviousIconSize;
-	uint32 fPreviousLastIconSize;
+	uint32_t fPreviousViewMode;
+	uint32_t fPreviousLastIconMode;
+	uint32_t fPreviousIconSize;
+	uint32_t fPreviousLastIconSize;
 	BPoint fPreviousListOrigin;
 	BPoint fPreviousIconOrigin;
-	uint32 fPreviousPrimarySortAttr;
-	uint32 fPreviousSecondarySortAttr;
-	uint32 fPreviousPrimarySortType;
-	uint32 fPreviousSecondarySortType;
+	uint32_t fPreviousPrimarySortAttr;
+	uint32_t fPreviousSecondarySortAttr;
+	uint32_t fPreviousPrimarySortType;
+	uint32_t fPreviousSecondarySortType;
 	bool fPreviousReverseSort;
 };
 
@@ -202,13 +202,13 @@ inline const char*  BColumn::AttrName() const
 }
 
 
-inline uint32 BColumn::AttrHash() const
+inline uint32_t BColumn::AttrHash() const
 {
 	return fAttrHash;
 }
 
 
-inline uint32 BColumn::AttrType() const
+inline uint32_t BColumn::AttrType() const
 {
 	return fAttrType;
 }
@@ -244,25 +244,25 @@ inline void BColumn::SetOffset(float o)
 }
 
 
-inline uint32 BViewState::ViewMode() const
+inline uint32_t BViewState::ViewMode() const
 {
 	return fViewMode;
 }
 
 
-inline uint32 BViewState::LastIconMode() const
+inline uint32_t BViewState::LastIconMode() const
 {
 	return fLastIconMode;
 }
 
 
-inline uint32 BViewState::IconSize() const
+inline uint32_t BViewState::IconSize() const
 {
 	return fIconSize;
 }
 
 
-inline uint32 BViewState::LastIconSize() const
+inline uint32_t BViewState::LastIconSize() const
 {
 	return fLastIconSize;
 }
@@ -282,24 +282,24 @@ BViewState::IconOrigin() const
 }
 
 
-inline uint32 BViewState::PrimarySort() const
+inline uint32_t BViewState::PrimarySort() const
 {
 	return fPrimarySortAttr;
 }
 
 
-inline uint32 BViewState::SecondarySort() const
+inline uint32_t BViewState::SecondarySort() const
 {
 	return fSecondarySortAttr;
 }
 
 
-inline uint32 BViewState::PrimarySortType() const
+inline uint32_t BViewState::PrimarySortType() const
 {
 	return fPrimarySortType;
 }
 
-inline uint32 BViewState::SecondarySortType() const
+inline uint32_t BViewState::SecondarySortType() const
 {
 	return fSecondarySortType;
 }
@@ -310,25 +310,25 @@ inline bool BViewState::ReverseSort() const
 }
 
 
-inline void BViewState::SetViewMode(uint32 mode)
+inline void BViewState::SetViewMode(uint32_t mode)
 {
 	fViewMode = mode;
 }
 
 
-inline void BViewState::SetLastIconMode(uint32 mode)
+inline void BViewState::SetLastIconMode(uint32_t mode)
 {
 	fLastIconMode = mode;
 }
 
 
-inline void BViewState::SetIconSize(uint32 size)
+inline void BViewState::SetIconSize(uint32_t size)
 {
 	fIconSize = size;
 }
 
 
-inline void BViewState::SetLastIconSize(uint32 size)
+inline void BViewState::SetLastIconSize(uint32_t size)
 {
 	fLastIconSize = size;
 }
@@ -344,25 +344,25 @@ inline void BViewState::SetIconOrigin(BPoint newOrigin)
 	fIconOrigin = newOrigin;
 }
 
-inline void BViewState::SetPrimarySort(uint32 attr)
+inline void BViewState::SetPrimarySort(uint32_t attr)
 {
 	fPrimarySortAttr = attr;
 }
 
 
-inline void BViewState::SetSecondarySort(uint32 attr)
+inline void BViewState::SetSecondarySort(uint32_t attr)
 {
 	fSecondarySortAttr = attr;
 }
 
 
-inline void BViewState::SetPrimarySortType(uint32 type)
+inline void BViewState::SetPrimarySortType(uint32_t type)
 {
 	fPrimarySortType = type;
 }
 
 
-inline void BViewState::SetSecondarySortType(uint32 type)
+inline void BViewState::SetSecondarySortType(uint32_t type)
 {
 	fSecondarySortType = type;
 }

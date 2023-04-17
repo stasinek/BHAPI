@@ -72,7 +72,7 @@ status_t TestForAddonExistence(const char* name, directory_which which, const ch
 
 // Implementation of AutoReply
 
-AutoReply::AutoReply(BMessage* sender, uint32 what)
+AutoReply::AutoReply(BMessage* sender, uint32_t what)
 	: fSender(sender)
 	, fReply(what) 
 {

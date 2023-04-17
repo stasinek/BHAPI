@@ -31,7 +31,7 @@
 
 #include <os/debug.h>
 
-BPolygon::BPolygon(const BPoint *pts,  __be_int32 nPts)
+BPolygon::BPolygon(const BPoint *pts,  __be_int32_t nPts)
 	: fCount(0), fPts(NULL), fNeededToUpdateFrame(false)
 {
 	AddPoints(pts, nPts);
@@ -83,7 +83,7 @@ void BPolygon::UpdateFrame()
 	fFrame = BRect();
 	BPoint *pts = fPts;
 
-	for(__be_int32 i = 0; i < fCount; i++, pts++)
+	for(__be_int32_t i = 0; i < fCount; i++, pts++)
 	{
 		if(i > 0)
 		{
@@ -101,7 +101,7 @@ void BPolygon::UpdateFrame()
 }
 
 
-bool BPolygon::AddPoints(const BPoint *pts,  __be_int32 nPts, bool updateFrame)
+bool BPolygon::AddPoints(const BPoint *pts,  __be_int32_t nPts, bool updateFrame)
 {
 	if(pts == NULL || nPts <= 0 || B_MAXINT32 - nPts < fCount) return false;
 
@@ -122,7 +122,7 @@ bool BPolygon::AddPoints(const BPoint *pts,  __be_int32 nPts, bool updateFrame)
 		UpdateFrame();
 
 		BPoint *destPts = fPts + fCount;
-		__be_int32 i = fCount;
+		__be_int32_t i = fCount;
 		fCount += nPts;
 
 		for(; i < fCount; i++, destPts++, pts++)
@@ -147,7 +147,7 @@ bool BPolygon::AddPoints(const BPoint *pts,  __be_int32 nPts, bool updateFrame)
 }
 
 
-void BPolygon::RemovePoints(__be_int32 fromIndex,  __be_int32 toIndex, bool updateFrame)
+void BPolygon::RemovePoints(__be_int32_t fromIndex,  __be_int32_t toIndex, bool updateFrame)
 {
 	if(fPts == NULL || fromIndex < 0 || fromIndex >= fCount || fromIndex > toIndex) return;
 
@@ -162,13 +162,13 @@ void BPolygon::RemovePoints(__be_int32 fromIndex,  __be_int32 toIndex, bool upda
 
 
 const BPoint&
-BPolygon::operator[](__be_int32 index) const
+BPolygon::operator[](__be_int32_t index) const
 {
 	return(*(fPts + index));
 }
 
 
-__be_int32 BPolygon::CountPoints() const
+__be_int32_t BPolygon::CountPoints() const
 {
 	return fCount;
 }
@@ -187,7 +187,7 @@ bool BPolygon::MapTo(BRect srcRect, BRect dstRect)
 	fNeededToUpdateFrame = false;
 
 	BPoint *pts = fPts;
-	for(__be_int32 i = 0; i < fCount; i++, pts++)
+	for(__be_int32_t i = 0; i < fCount; i++, pts++)
 	{
 		pts->x = dstRect.left + (pts->x - srcRect.left) * xScale;
 		pts->y = dstRect.top + (pts->y - srcRect.top) * yScale;
@@ -220,7 +220,7 @@ BPolygon::Points() const
 void BPolygon::PrintToStream() const
 {
 	const BPoint *pts = fPts;
-	for(__be_int32 i = 0; i < fCount; i++, pts++)
+	for(__be_int32_t i = 0; i < fCount; i++, pts++)
 	{
 		pts->PrintToStream();
 		if(i < fCount - 1) BHAPI_OUTPUT(", ");

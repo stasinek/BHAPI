@@ -65,7 +65,7 @@ public:
     BFilePanel(bhapi::file_panel_mode mode = bhapi::B_OPEN_PANEL,
            const BMessenger *target = NULL,
 		   const char *panel_directory = NULL,
-            uint32 node_flavors = 0,
+            uint32_t node_flavors = 0,
 		   bool allow_multiple_selection = true,
            const BMessage *message = NULL,
 		   BFilePanelFilter *filter = NULL,

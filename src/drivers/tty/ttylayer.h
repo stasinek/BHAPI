@@ -117,7 +117,7 @@ struct tty_module_info_dano {
 	status_t	(*ttyread)(struct ttyfile *, struct ddrover *, char *, size_t *);
 	status_t	(*ttywrite)(struct ttyfile *, struct ddrover *, const char *, size_t *);
 	status_t	(*ttycontrol)(struct ttyfile *, struct ddrover *, ulong, void *, size_t);
-	status_t	(*ttyselect)(struct ttyfile *, struct ddrover *, uint8, uint32, selectsync *);
+	status_t	(*ttyselect)(struct ttyfile *, struct ddrover *, uint8, uint32_t, selectsync *);
 	status_t	(*ttydeselect)(struct ttyfile *, struct ddrover *, uint8, selectsync *);
 
 	void	(*ttyinit)(struct tty *, bool);

@@ -189,7 +189,7 @@ status_t PrintAddOnServer::SendRequest(BMessage& request, BMessage& reply)
 
 status_t PrintAddOnServer::GetResult(BMessage& reply)
 {
-	int32 status;
+	int32_t status;
 	status_t result = reply.FindInt32(kPrintAddOnServerStatusAttribute,
 		&status);
 	if (result != B_OK)

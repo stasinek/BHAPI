@@ -39,7 +39,7 @@ public:
 
 			void				SetDateTimeFormat(BDateFormatStyle dateStyle,
 									BTimeFormatStyle timeStyle,
-									int32 elements);
+									int32_t elements);
 
 								// formatting
 

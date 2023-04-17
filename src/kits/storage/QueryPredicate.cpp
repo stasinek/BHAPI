@@ -47,20 +47,20 @@ LeafNode::~LeafNode()
 }
 
 
-uint32 LeafNode::Arity() const
+uint32_t LeafNode::Arity() const
 {
 	return 0;
 }
 
 
-status_t LeafNode::SetChildAt(QueryNode *child, int32 index)
+status_t LeafNode::SetChildAt(QueryNode *child, int32_t index)
 {
 	return B_BAD_VALUE;
 }
 
 
 QueryNode *
-LeafNode::ChildAt(int32 index)
+LeafNode::ChildAt(int32_t index)
 {
 	return NULL;
 }
@@ -82,13 +82,13 @@ UnaryNode::~UnaryNode()
 }
 
 
-uint32 UnaryNode::Arity() const
+uint32_t UnaryNode::Arity() const
 {
 	return 1;
 }
 
 
-status_t UnaryNode::SetChildAt(QueryNode *child, int32 index)
+status_t UnaryNode::SetChildAt(QueryNode *child, int32_t index)
 {
 	status_t error = B_OK;
 	if (index == 0) {
@@ -101,7 +101,7 @@ status_t UnaryNode::SetChildAt(QueryNode *child, int32 index)
 
 
 QueryNode *
-UnaryNode::ChildAt(int32 index)
+UnaryNode::ChildAt(int32_t index)
 {
 	QueryNode *result = NULL;
 	if (index == 0)
@@ -128,13 +128,13 @@ BinaryNode::~BinaryNode()
 }
 
 
-uint32 BinaryNode::Arity() const
+uint32_t BinaryNode::Arity() const
 {
 	return 2;
 }
 
 
-status_t BinaryNode::SetChildAt(QueryNode *child, int32 index)
+status_t BinaryNode::SetChildAt(QueryNode *child, int32_t index)
 {
 	status_t error = B_OK;
 	if (index == 0) {
@@ -150,7 +150,7 @@ status_t BinaryNode::SetChildAt(QueryNode *child, int32 index)
 
 
 QueryNode *
-BinaryNode::ChildAt(int32 index)
+BinaryNode::ChildAt(int32_t index)
 {
 	QueryNode *result = NULL;
 	if (index == 0)
@@ -187,12 +187,12 @@ StringNode::StringNode(const char *value, bool caseInsensitive)
 		return;
 
 	if (caseInsensitive) {
-		while (uint32 codePoint = BUnicodeChar::FromUTF8(&value)) {
+		while (uint32_t codePoint = BUnicodeChar::FromUTF8(&value)) {
 			char utf8Buffer[4];
 			char *utf8 = utf8Buffer;
 			if (BUnicodeChar::IsAlpha(codePoint)) {
-				uint32 lower = BUnicodeChar::ToLower(codePoint);
-				uint32 upper = BUnicodeChar::ToUpper(codePoint);
+				uint32_t lower = BUnicodeChar::ToLower(codePoint);
+				uint32_t upper = BUnicodeChar::ToUpper(codePoint);
 				if (lower == upper) {
 					BUnicodeChar::ToUTF8(codePoint, &utf8);
 					fValue.Append(utf8Buffer, utf8 - utf8Buffer);
@@ -257,11 +257,11 @@ status_t ValueNode<float>::GetString(BString &predicate)
 {
 	char buffer[32];
 	union {
-		int32 asInteger;
+		int32_t asInteger;
 		float asFloat;
 	} value;
 	value.asFloat = fValue;
-//	int32 value = *reinterpret_cast<int32*>(&fValue);
+//	int32_t value = *reinterpret_cast<int32_t*>(&fValue);
 	sprintf(buffer, "0x%08" B_PRIx32, value.asInteger);
 	predicate.SetTo(buffer);
 	return B_OK;
@@ -432,7 +432,7 @@ QueryStack::QueryStack()
 
 QueryStack::~QueryStack()
 {
-	for (int32 i = 0; QueryNode *node = (QueryNode*)fNodes.ItemAt(i); i++)
+	for (int32_t i = 0; QueryNode *node = (QueryNode*)fNodes.ItemAt(i); i++)
 		delete node;
 }
 
@@ -472,8 +472,8 @@ status_t QueryStack::_GetSubTree(QueryNode *&rootNode)
 	QueryNode *node = PopNode();
 	status_t error = (node ? B_OK : B_BAD_VALUE);
 	if (error == B_OK) {
-		uint32 arity = node->Arity();
-		for (int32 i = (int32)arity - 1; error == B_OK && i >= 0; i--) {
+		uint32_t arity = node->Arity();
+		for (int32_t i = (int32_t)arity - 1; error == B_OK && i >= 0; i--) {
 			QueryNode *child = NULL;
 			error = _GetSubTree(child);
 			if (error == B_OK) {

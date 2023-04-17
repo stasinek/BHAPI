@@ -110,10 +110,10 @@ DPCQueue::DefaultQueue(int priority)
 
 
 status_t
-DPCQueue::Init(const char* name, int32 priority, uint32 reservedSlots)
+DPCQueue::Init(const char* name, int32_t priority, uint32_t reservedSlots)
 {
 	// create function callbacks
-	for (uint32 i = 0; i < reservedSlots; i++) {
+	for (uint32_t i = 0; i < reservedSlots; i++) {
 		FunctionDPCCallback* callback
 			= new(std::nothrow) FunctionDPCCallback(this);
 		if (callback == NULL)

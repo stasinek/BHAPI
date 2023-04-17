@@ -71,8 +71,8 @@ public:
 
 	virtual	BVariant			DefaultValue() const;
 
-	virtual	int32				CountOptions() const = 0;
-	virtual	SettingsOption*		OptionAt(int32 index) const = 0;
+	virtual	int32_t				CountOptions() const = 0;
+	virtual	SettingsOption*		OptionAt(int32_t index) const = 0;
 	virtual	SettingsOption*		OptionByID(const char* id) const = 0;
 
 	virtual	SettingsOption*		DefaultOption() const = 0;
@@ -152,8 +152,8 @@ public:
 
 	virtual	SettingsOption*		DefaultOption() const;
 
-	virtual	int32				CountOptions() const;
-	virtual	SettingsOption*		OptionAt(int32 index) const;
+	virtual	int32_t				CountOptions() const;
+	virtual	SettingsOption*		OptionAt(int32_t index) const;
 	virtual	SettingsOption*		OptionByID(const char* id) const;
 
 			bool				AddOption(SettingsOption* option);

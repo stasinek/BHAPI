@@ -30,7 +30,7 @@ static const size_t kMaxStackCapacity			= 1024;
 
 // maximum number of operations we allow to be performed for a single expression
 // (to avoid running infinite loops forever)
-static const uint32 kMaxOperationCount			= 10000;
+static const uint32_t kMaxOperationCount			= 10000;
 
 
 // #pragma mark - DwarfExpressionEvaluationContext
@@ -265,13 +265,13 @@ status_t DwarfExpressionEvaluator::_Evaluate(ValuePieceLocation* _piece)
 		TRACE_EXPR("DwarfExpressionEvaluator::_Evaluate(%p, %" B_PRIdOFF ")\n",
 			fDataReader.Data(), fDataReader.BytesRemaining());
 		const uint8* data = (const uint8*)fDataReader.Data();
-		int32 count = fDataReader.BytesRemaining();
-		for (int32 i = 0; i < count; i++)
+		int32_t count = fDataReader.BytesRemaining();
+		for (int32_t i = 0; i < count; i++)
 			TRACE_EXPR(" %02x", data[i]);
 		TRACE_EXPR("\n");
 	})
 
-	uint32 operationsExecuted = 0;
+	uint32_t operationsExecuted = 0;
 
 	while (fDataReader.BytesRemaining() > 0) {
 		uint8 opcode = fDataReader.Read<uint8>(0);
@@ -299,11 +299,11 @@ status_t DwarfExpressionEvaluator::_Evaluate(ValuePieceLocation* _piece)
 				break;
 			case DW_OP_const4u:
 				TRACE_EXPR("  DW_OP_const4u\n");
-				_Push(fDataReader.Read<uint32>(0));
+				_Push(fDataReader.Read<uint32_t>(0));
 				break;
 			case DW_OP_const4s:
 				TRACE_EXPR("  DW_OP_const4s\n");
-				_Push(fDataReader.Read<int32>(0));
+				_Push(fDataReader.Read<int32_t>(0));
 				break;
 			case DW_OP_const8u:
 				TRACE_EXPR("  DW_OP_const8u\n");
@@ -383,7 +383,7 @@ status_t DwarfExpressionEvaluator::_Evaluate(ValuePieceLocation* _piece)
 				TRACE_EXPR("  DW_OP_abs\n");
 				target_addr_t value = _Pop();
 				if (fContext->AddressSize() == 4) {
-					int32 signedValue = (int32)value;
+					int32_t signedValue = (int32_t)value;
 					_Push(signedValue >= 0 ? signedValue : -signedValue);
 				} else {
 					int64 signedValue = (int64)value;
@@ -428,7 +428,7 @@ status_t DwarfExpressionEvaluator::_Evaluate(ValuePieceLocation* _piece)
 			{
 				TRACE_EXPR("  DW_OP_neg\n");
 				if (fContext->AddressSize() == 4)
-					_Push(-(int32)_Pop());
+					_Push(-(int32_t)_Pop());
 				else
 					_Push(-(int64)_Pop());
 				break;
@@ -578,7 +578,7 @@ status_t DwarfExpressionEvaluator::_Evaluate(ValuePieceLocation* _piece)
 					throw EvaluationException(
 						"DW_OP_regx in non-location expression");
 				}
-				uint32 reg = fDataReader.ReadUnsignedLEB128(0);
+				uint32_t reg = fDataReader.ReadUnsignedLEB128(0);
 				if (fDataReader.HasOverflow())
 					throw EvaluationException("unexpected end of expression");
 				_piece->SetToRegister(reg);
@@ -588,7 +588,7 @@ status_t DwarfExpressionEvaluator::_Evaluate(ValuePieceLocation* _piece)
 			case DW_OP_bregx:
 			{
 				TRACE_EXPR("  DW_OP_bregx\n");
-				uint32 reg = fDataReader.ReadUnsignedLEB128(0);
+				uint32_t reg = fDataReader.ReadUnsignedLEB128(0);
 				_PushRegister(reg, fDataReader.ReadSignedLEB128(0));
 				break;
 			}
@@ -599,12 +599,12 @@ status_t DwarfExpressionEvaluator::_Evaluate(ValuePieceLocation* _piece)
 				break;
 			case DW_OP_call4:
 				TRACE_EXPR("  DW_OP_call4\n");
-				_Call(fDataReader.Read<uint32>(0), dwarf_reference_type_local);
+				_Call(fDataReader.Read<uint32_t>(0), dwarf_reference_type_local);
 				break;
 			case DW_OP_call_ref:
 				TRACE_EXPR("  DW_OP_call_ref\n");
 				if (fContext->AddressSize() == 4) {
-					_Call(fDataReader.Read<uint32>(0),
+					_Call(fDataReader.Read<uint32_t>(0),
 						dwarf_reference_type_global);
 				} else {
 					_Call(fDataReader.Read<uint64>(0),
@@ -633,7 +633,7 @@ status_t DwarfExpressionEvaluator::_Evaluate(ValuePieceLocation* _piece)
 					throw EvaluationException(
 						"DW_OP_implicit_value in non-location expression");
 				}
-				uint32 length = fDataReader.ReadUnsignedLEB128(0);
+				uint32_t length = fDataReader.ReadUnsignedLEB128(0);
 				if (length == 0)
 					return B_BAD_DATA;
 
@@ -697,7 +697,7 @@ status_t DwarfExpressionEvaluator::_Evaluate(ValuePieceLocation* _piece)
 
 void DwarfExpressionEvaluator::_DereferenceAddress(uint8 addressSize)
 {
-	uint32 valueType;
+	uint32_t valueType;
 	switch (addressSize) {
 		case 1:
 			valueType = B_UINT8_TYPE;
@@ -731,7 +731,7 @@ void DwarfExpressionEvaluator::_DereferenceAddress(uint8 addressSize)
 
 void DwarfExpressionEvaluator::_DereferenceAddressSpaceAddress(uint8 addressSize)
 {
-	uint32 valueType;
+	uint32_t valueType;
 	switch (addressSize) {
 		case 1:
 			valueType = B_UINT8_TYPE;
@@ -764,7 +764,7 @@ void DwarfExpressionEvaluator::_DereferenceAddressSpaceAddress(uint8 addressSize
 }
 
 
-void DwarfExpressionEvaluator::_PushRegister(uint32 reg, target_addr_t offset)
+void DwarfExpressionEvaluator::_PushRegister(uint32_t reg, target_addr_t offset)
 {
 	BVariant value;
 	if (!fContext->TargetInterface()->GetRegisterValue(reg, value))

@@ -85,16 +85,16 @@
 
 
 struct ioapic_registers {
-	volatile uint32	io_register_select;
-	uint32			reserved[3];
-	volatile uint32	io_window_register;
+	volatile uint32_t	io_register_select;
+	uint32_t			reserved[3];
+	volatile uint32_t	io_window_register;
 };
 
 
 struct ioapic {
 	uint8				number;
 	uint8				apic_id;
-	uint32				version;
+	uint32_t				version;
 	uint8				max_redirection_entry;
 	uint8				global_interrupt_base;
 	uint8				global_interrupt_last;
@@ -109,7 +109,7 @@ struct ioapic {
 
 
 static ioapic* sIOAPICs = NULL;
-static int32 sSourceOverrides[ISA_INTERRUPT_COUNT];
+static int32_t sSourceOverrides[ISA_INTERRUPT_COUNT];
 
 
 // #pragma mark - I/O APIC
@@ -126,7 +126,7 @@ print_ioapic(struct ioapic& ioapic)
 
 
 static inline struct ioapic*
-find_ioapic(int32 gsi)
+find_ioapic(int32_t gsi)
 {
 	if (gsi < 0)
 		return NULL;
@@ -145,7 +145,7 @@ find_ioapic(int32 gsi)
 }
 
 
-static inline uint32
+static inline uint32_t
 ioapic_read_32(struct ioapic& ioapic, uint8 registerSelect)
 {
 	ioapic.registers->io_register_select = registerSelect;
@@ -154,7 +154,7 @@ ioapic_read_32(struct ioapic& ioapic, uint8 registerSelect)
 
 
 static inline void
-ioapic_write_32(struct ioapic& ioapic, uint8 registerSelect, uint32 value)
+ioapic_write_32(struct ioapic& ioapic, uint8 registerSelect, uint32_t value)
 {
 	ioapic.registers->io_register_select = registerSelect;
 	ioapic.registers->io_window_register = value;
@@ -180,11 +180,11 @@ ioapic_write_64(struct ioapic& ioapic, uint8 registerSelect, uint64 value,
 	ioapic.registers->io_register_select
 		= registerSelect + (maskFirst ? 0 : 1);
 	ioapic.registers->io_window_register
-		= (uint32)(value >> (maskFirst ? 0 : 32));
+		= (uint32_t)(value >> (maskFirst ? 0 : 32));
 	ioapic.registers->io_register_select
 		= registerSelect + (maskFirst ? 1 : 0);
 	ioapic.registers->io_window_register
-		= (uint32)(value >> (maskFirst ? 32 : 0));
+		= (uint32_t)(value >> (maskFirst ? 32 : 0));
 }
 
 
@@ -216,7 +216,7 @@ ioapic_configure_pin(struct ioapic& ioapic, uint8 pin, uint8 vector,
 
 
 static bool
-ioapic_is_spurious_interrupt(int32 gsi)
+ioapic_is_spurious_interrupt(int32_t gsi)
 {
 	// the spurious interrupt vector is initialized to the max value in smp
 	return gsi == 0xff - ARCH_INTERRUPT_BASE;
@@ -224,7 +224,7 @@ ioapic_is_spurious_interrupt(int32 gsi)
 
 
 static bool
-ioapic_is_level_triggered_interrupt(int32 gsi)
+ioapic_is_level_triggered_interrupt(int32_t gsi)
 {
 	struct ioapic* ioapic = find_ioapic(gsi);
 	if (ioapic == NULL)
@@ -236,7 +236,7 @@ ioapic_is_level_triggered_interrupt(int32 gsi)
 
 
 static bool
-ioapic_end_of_interrupt(int32 num)
+ioapic_end_of_interrupt(int32_t num)
 {
 	apic_end_of_interrupt();
 	return true;
@@ -244,7 +244,7 @@ ioapic_end_of_interrupt(int32 num)
 
 
 static void
-ioapic_assign_interrupt_to_cpu(int32 gsi, int32 cpu)
+ioapic_assign_interrupt_to_cpu(int32_t gsi, int32_t cpu)
 {
 	if (gsi < ISA_INTERRUPT_COUNT && sSourceOverrides[gsi] != 0)
 		gsi = sSourceOverrides[gsi];
@@ -253,7 +253,7 @@ ioapic_assign_interrupt_to_cpu(int32 gsi, int32 cpu)
 	if (ioapic == NULL)
 		return;
 
-	uint32 apicid = x86_get_cpu_apic_id(cpu);
+	uint32_t apicid = x86_get_cpu_apic_id(cpu);
 
 	uint8 pin = gsi - ioapic->global_interrupt_base;
 	TRACE("ioapic_assign_interrupt_to_cpu: gsi %ld (io-apic %u pin %u) to"
@@ -268,7 +268,7 @@ ioapic_assign_interrupt_to_cpu(int32 gsi, int32 cpu)
 
 
 static void
-ioapic_enable_io_interrupt(int32 gsi)
+ioapic_enable_io_interrupt(int32_t gsi)
 {
 	// If enabling an overriden source is attempted, enable the override entry
 	// instead. An interrupt handler was installed at the override GSI to relay
@@ -293,7 +293,7 @@ ioapic_enable_io_interrupt(int32 gsi)
 
 
 static void
-ioapic_disable_io_interrupt(int32 gsi)
+ioapic_disable_io_interrupt(int32_t gsi)
 {
 	struct ioapic* ioapic = find_ioapic(gsi);
 	if (ioapic == NULL)
@@ -310,7 +310,7 @@ ioapic_disable_io_interrupt(int32 gsi)
 
 
 static void
-ioapic_configure_io_interrupt(int32 gsi, uint32 config)
+ioapic_configure_io_interrupt(int32_t gsi, uint32_t config)
 {
 	struct ioapic* ioapic = find_ioapic(gsi);
 	if (ioapic == NULL)
@@ -409,10 +409,10 @@ ioapic_initialize_ioapic(struct ioapic& ioapic, uint8 targetAPIC)
 }
 
 
-static int32
+static int32_t
 ioapic_source_override_handler(void* data)
 {
-	int32 vector = (addr_t)data;
+	int32_t vector = (addr_t)data;
 	bool levelTriggered = ioapic_is_level_triggered_interrupt(vector);
 	return int_io_interrupt_handler(vector, levelTriggered);
 }
@@ -433,7 +433,7 @@ acpi_enumerate_ioapics(acpi_table_madt* madt)
 				acpi_madt_io_apic* info = (acpi_madt_io_apic*)apicEntry;
 				dprintf("found io-apic with address 0x%08" B_PRIx32 ", global "
 					"interrupt base %" B_PRIu32 ", apic-id %u\n",
-					(uint32)info->Address, (uint32)info->GlobalIrqBase,
+					(uint32_t)info->Address, (uint32_t)info->GlobalIrqBase,
 					info->Id);
 
 				struct ioapic* ioapic
@@ -452,7 +452,7 @@ acpi_enumerate_ioapics(acpi_table_madt* madt)
 				ioapic->next = NULL;
 
 				dprintf("mapping io-apic %u at physical address %#" B_PRIx32
-					"\n", ioapic->number, (uint32)info->Address);
+					"\n", ioapic->number, (uint32_t)info->Address);
 				status_t status = ioapic_map_ioapic(*ioapic, info->Address);
 				if (status != B_OK) {
 					free(ioapic);
@@ -475,7 +475,7 @@ acpi_enumerate_ioapics(acpi_table_madt* madt)
 				acpi_madt_nmi_source* info
 					= (acpi_madt_nmi_source*)apicEntry;
 				dprintf("found nmi source global irq %" B_PRIu32 ", flags "
-					"0x%04x\n", (uint32)info->GlobalIrq,
+					"0x%04x\n", (uint32_t)info->GlobalIrq,
 					(uint16)info->IntiFlags);
 
 				struct ioapic* ioapic = find_ioapic(info->GlobalIrq);
@@ -499,10 +499,10 @@ acpi_enumerate_ioapics(acpi_table_madt* madt)
 }
 
 
-static inline uint32
+static inline uint32_t
 acpi_madt_convert_inti_flags(uint16 flags)
 {
-	uint32 config = 0;
+	uint32_t config = 0;
 	switch (flags & ACPI_MADT_POLARITY_MASK) {
 		case ACPI_MADT_POLARITY_ACTIVE_LOW:
 			config = B_LOW_ACTIVE_POLARITY;
@@ -547,8 +547,8 @@ acpi_configure_source_overrides(acpi_table_madt* madt)
 					= (acpi_madt_interrupt_override*)apicEntry;
 				dprintf("found interrupt override for bus %u, source irq %u, "
 					"global irq %" B_PRIu32 ", flags 0x%08" B_PRIx32 "\n",
-					info->Bus, info->SourceIrq, (uint32)info->GlobalIrq,
-					(uint32)info->IntiFlags);
+					info->Bus, info->SourceIrq, (uint32_t)info->GlobalIrq,
+					(uint32_t)info->IntiFlags);
 
 				if (info->SourceIrq >= ISA_INTERRUPT_COUNT) {
 					dprintf("source override exceeds isa interrupt count\n");
@@ -565,7 +565,7 @@ acpi_configure_source_overrides(acpi_table_madt* madt)
 				}
 
 				// configure non-standard polarity/trigger modes
-				uint32 config = acpi_madt_convert_inti_flags(info->IntiFlags);
+				uint32_t config = acpi_madt_convert_inti_flags(info->IntiFlags);
 				ioapic_configure_io_interrupt(info->GlobalIrq, config);
 				break;
 			}
@@ -575,7 +575,7 @@ acpi_configure_source_overrides(acpi_table_madt* madt)
 				acpi_madt_nmi_source* info
 					= (acpi_madt_nmi_source*)apicEntry;
 				dprintf("found nmi source global irq %" B_PRIu32 ", flags "
-					"0x%04x\n", (uint32)info->GlobalIrq,
+					"0x%04x\n", (uint32_t)info->GlobalIrq,
 					(uint16)info->IntiFlags);
 
 				struct ioapic* ioapic = find_ioapic(info->GlobalIrq);
@@ -583,7 +583,7 @@ acpi_configure_source_overrides(acpi_table_madt* madt)
 					break;
 
 				uint8 pin = info->GlobalIrq - ioapic->global_interrupt_base;
-				uint32 config = acpi_madt_convert_inti_flags(info->IntiFlags);
+				uint32_t config = acpi_madt_convert_inti_flags(info->IntiFlags);
 				ioapic_configure_pin(*ioapic, pin, info->GlobalIrq, config,
 					IO_APIC_DELIVERY_MODE_NMI);
 				break;
@@ -596,7 +596,7 @@ acpi_configure_source_overrides(acpi_table_madt* madt)
 				acpi_madt_local_apic* info = (acpi_madt_local_apic*)apicEntry;
 				dprintf("found local apic with id %u, processor id %u, "
 					"flags 0x%08lx\n", info->Id, info->ProcessorId,
-					(uint32)info->LapicFlags);
+					(uint32_t)info->LapicFlags);
 				break;
 			}
 
@@ -635,7 +635,7 @@ acpi_configure_source_overrides(acpi_table_madt* madt)
 
 
 static status_t
-acpi_set_interrupt_model(acpi_module_info* acpiModule, uint32 interruptModel)
+acpi_set_interrupt_model(acpi_module_info* acpiModule, uint32_t interruptModel)
 {
 	acpi_object_type model;
 	model.object_type = ACPI_TYPE_INTEGER;
@@ -656,7 +656,7 @@ acpi_set_interrupt_model(acpi_module_info* acpiModule, uint32 interruptModel)
 
 
 bool
-ioapic_is_interrupt_available(int32 gsi)
+ioapic_is_interrupt_available(int32_t gsi)
 {
 	struct ioapic* ioapic = find_ioapic(gsi);
 	if (ioapic == NULL)
@@ -804,7 +804,7 @@ ioapic_init(kernel_args* args)
 		reserve_io_interrupt_vectors(current->max_redirection_entry + 1,
 			current->global_interrupt_base, INTERRUPT_TYPE_IRQ);
 
-		for (int32 i = 0; i < current->max_redirection_entry + 1; i++) {
+		for (int32_t i = 0; i < current->max_redirection_entry + 1; i++) {
 			x86_set_irq_source(current->global_interrupt_base + i,
 				IRQ_SOURCE_IOAPIC);
 		}

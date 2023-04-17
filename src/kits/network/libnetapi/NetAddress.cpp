@@ -54,7 +54,7 @@ BNetAddress::BNetAddress(in_addr addr, int port)
 }
 
 
-BNetAddress::BNetAddress(uint32 addr, int port)
+BNetAddress::BNetAddress(uint32_t addr, int port)
 	:
 	fInit(B_NO_INIT)
 {
@@ -411,7 +411,7 @@ status_t BNetAddress::SetTo(in_addr addr, int port)
 
 	\return B_OK.
 */
-status_t BNetAddress::SetTo(uint32 addr, int port)
+status_t BNetAddress::SetTo(uint32_t addr, int port)
 {
 	fFamily = AF_INET;
 	fPort = htons((short)port);

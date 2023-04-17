@@ -16,7 +16,7 @@
 
 typedef struct debug_string_entry {
 	const char	*string;
-	uint32		code;
+	uint32_t		code;
 } debug_string_entry;
 
 static const debug_string_entry sDebugMessageStrings[] = {
@@ -131,7 +131,7 @@ clear_debugger_breakpoint(void *address)
 
 
 status_t
-set_debugger_watchpoint(void *address, uint32 type, int32 length)
+set_debugger_watchpoint(void *address, uint32_t type, int32_t length)
 {
 	return _kern_set_debugger_breakpoint(address, type, length, true);
 }
@@ -146,7 +146,7 @@ clear_debugger_watchpoint(void *address)
 
 static void
 get_debug_string(const debug_string_entry *stringEntries,
-	const char *defaultString, uint32 code, char *buffer, int32 bufferSize)
+	const char *defaultString, uint32_t code, char *buffer, int32_t bufferSize)
 {
 	int i;
 
@@ -166,19 +166,19 @@ get_debug_string(const debug_string_entry *stringEntries,
 
 void
 get_debug_message_string(debug_debugger_message message, char *buffer,
-	int32 bufferSize)
+	int32_t bufferSize)
 {
 	get_debug_string(sDebugMessageStrings, "Unknown message %lu",
-		(uint32)message, buffer, bufferSize);
+		(uint32_t)message, buffer, bufferSize);
 }
 
 
 void
 get_debug_exception_string(debug_exception_type exception, char *buffer,
-	int32 bufferSize)
+	int32_t bufferSize)
 {
 	get_debug_string(sDebugExceptionTypeStrings, "Unknown exception %lu",
-		(uint32)exception, buffer, bufferSize);
+		(uint32_t)exception, buffer, bufferSize);
 }
 
 

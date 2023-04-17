@@ -266,12 +266,12 @@ res_dnok(const char *dn) {
 #pragma weak    putshort        =       __putshort
 #endif /* SOLARIS2 */
 
-void __putlong(u_int32_t src, u_char *dst) { ns_put32(src, dst); }
+void __putlong(u_int32_t_t src, u_char *dst) { ns_put32(src, dst); }
 void __putshort(u_int16_t src, u_char *dst) { ns_put16(src, dst); }
 #endif /*BIND_4_COMPAT*/
 
 #ifndef __ultrix__
-u_int32_t _getlong(const u_char *src) { return (ns_get32(src)); }
+u_int32_t_t _getlong(const u_char *src) { return (ns_get32(src)); }
 u_int16_t _getshort(const u_char *src) { return (ns_get16(src)); }
 #endif /*__ultrix__*/
 

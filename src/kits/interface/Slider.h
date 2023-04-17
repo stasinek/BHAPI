@@ -27,28 +27,28 @@ class BSlider : public BControl {
 public:
                                 BSlider(BRect frame, const char* name,
                                     const char* label, BMessage* message,
-                                    int32 minValue, int32 maxValue,
+                                    int32_t minValue, int32_t maxValue,
                                     thumb_style thumbType = B_BLOCK_THUMB,
-                                    uint32 resizingMode
+                                    uint32_t resizingMode
                                         = B_FOLLOW_LEFT | B_FOLLOW_TOP,
-                                    uint32 flags = B_NAVIGABLE | B_WILL_DRAW
+                                    uint32_t flags = B_NAVIGABLE | B_WILL_DRAW
                                         | B_FRAME_EVENTS);
 
                                 BSlider(BRect frame, const char* name,
                                     const char* label, BMessage* message,
-                                    int32 minValue, int32 maxValue,
+                                    int32_t minValue, int32_t maxValue,
                                     orientation posture,
                                     thumb_style thumbType = B_BLOCK_THUMB,
-                                    uint32 resizingMode
+                                    uint32_t resizingMode
                                         = B_FOLLOW_LEFT | B_FOLLOW_TOP,
-                                    uint32 flags = B_NAVIGABLE | B_WILL_DRAW
+                                    uint32_t flags = B_NAVIGABLE | B_WILL_DRAW
                                         | B_FRAME_EVENTS);
 
                                 BSlider(const char* name, const char* label,
-                                    BMessage* message, int32 minValue,
-                                    int32 maxValue, orientation posture,
+                                    BMessage* message, int32_t minValue,
+                                    int32_t maxValue, orientation posture,
                                     thumb_style thumbType = B_BLOCK_THUMB,
-                                    uint32 flags = B_NAVIGABLE | B_WILL_DRAW
+                                    uint32_t flags = B_NAVIGABLE | B_WILL_DRAW
                                         | B_FRAME_EVENTS);
 
                                 BSlider(BMessage* archive);
@@ -68,11 +68,11 @@ public:
     virtual	void				MessageReceived(BMessage* message);
     virtual void				FrameMoved(BPoint newPosition);
     virtual void				FrameResized(float width, float height);
-    virtual void				KeyDown(const char* bytes, int32 numBytes);
-    virtual void				KeyUp(const char* bytes, int32 numBytes);
+    virtual void				KeyDown(const char* bytes, int32_t numBytes);
+    virtual void				KeyUp(const char* bytes, int32_t numBytes);
     virtual void				MouseDown(BPoint point);
     virtual void				MouseUp(BPoint point);
-    virtual void				MouseMoved(BPoint point, uint32 transit,
+    virtual void				MouseMoved(BPoint point, uint32_t transit,
                                     const BMessage* dragMessage);
     virtual	void				Pulse();
 
@@ -81,12 +81,12 @@ public:
                                     const char* maxLabel);
             const char*			MinLimitLabel() const;
             const char*			MaxLimitLabel() const;
-    virtual	void				SetValue(int32 value);
-    virtual int32				ValueForPoint(BPoint point) const;
+    virtual	void				SetValue(int32_t value);
+    virtual int32_t				ValueForPoint(BPoint point) const;
     virtual void				SetPosition(float);
             float				Position() const;
     virtual void				SetEnabled(bool on);
-            void				GetLimits(int32* minimum, int32* maximum) const;
+            void				GetLimits(int32_t* minimum, int32_t* maximum) const;
 
     virtual	void				Draw(BRect updateRect);
     virtual void				DrawSlider();
@@ -102,8 +102,8 @@ public:
     virtual BRect				HashMarksFrame() const;
     virtual BRect				ThumbFrame() const;
 
-    virtual	void				SetFlags(uint32 flags);
-    virtual	void				SetResizingMode(uint32 mode);
+    virtual	void				SetFlags(uint32_t flags);
+    virtual	void				SetResizingMode(uint32_t mode);
 
     virtual void				GetPreferredSize(float* _width,
                                     float* _height);
@@ -111,21 +111,21 @@ public:
 
     virtual status_t			Invoke(BMessage* message = NULL);
     virtual BHandler*			ResolveSpecifier(BMessage* message,
-                                    int32 index, BMessage* specifier,
-                                    int32 form, const char* property);
+                                    int32_t index, BMessage* specifier,
+                                    int32_t form, const char* property);
     virtual	status_t			GetSupportedSuites(BMessage* data);
 
     virtual	void				SetModificationMessage(BMessage* message);
             BMessage*			ModificationMessage() const;
 
-    virtual void				SetSnoozeAmount(int32 microSeconds);
-            int32				SnoozeAmount() const;
+    virtual void				SetSnoozeAmount(int32_t microSeconds);
+            int32_t				SnoozeAmount() const;
 
-    virtual	void				SetKeyIncrementValue(int32 value);
-            int32				KeyIncrementValue()	const;
+    virtual	void				SetKeyIncrementValue(int32_t value);
+            int32_t				KeyIncrementValue()	const;
 
-    virtual	void				SetHashMarkCount(int32 count);
-            int32				HashMarkCount() const;
+    virtual	void				SetHashMarkCount(int32_t count);
+            int32_t				HashMarkCount() const;
 
     virtual	void				SetHashMarks(hash_mark_location where);
             hash_mark_location	HashMarks() const;
@@ -148,9 +148,9 @@ public:
     virtual void				SetBarThickness(float thickness);
 
     virtual void				SetFont(const BFont* font,
-                                    uint32 properties = B_FONT_ALL);
+                                    uint32_t properties = B_FONT_ALL);
 
-    virtual void				SetLimits(int32 minimum, int32 maximum);
+    virtual void				SetLimits(int32_t minimum, int32_t maximum);
 
     virtual	float				MaxUpdateTextWidth();
 
@@ -158,7 +158,7 @@ public:
     virtual	BSize				MaxSize();
     virtual	BSize				PreferredSize();
 
-    virtual	status_t			SetIcon(const BBitmap* icon, uint32 flags = 0);
+    virtual	status_t			SetIcon(const BBitmap* icon, uint32_t flags = 0);
 
 protected:
     virtual	void				LayoutInvalidated(bool descendants);
@@ -168,7 +168,7 @@ private:
             void				_DrawTriangleThumb();
 
             BPoint				_Location() const;
-            void				_SetLocationForValue(int32 value);
+            void				_SetLocationForValue(int32_t value);
 
             float				_MinPosition() const;
             float				_MaxPosition() const;
@@ -194,7 +194,7 @@ private:
 
 private:
             BMessage*			fModificationMessage;
-            int32				fSnoozeAmount;
+            int32_t				fSnoozeAmount;
 
             rgb_color 			fBarColor;
             rgb_color 			fFillColor;
@@ -204,11 +204,11 @@ private:
             char*				fMaxLimitLabel;
             const char*			fUpdateText;
 
-            int32 				fMinValue;
-            int32 				fMaxValue;
-            int32 				fKeyIncrementValue;
+            int32_t 				fMinValue;
+            int32_t 				fMaxValue;
+            int32_t 				fKeyIncrementValue;
 
-            int32 				fHashMarkCount;
+            int32_t 				fHashMarkCount;
             hash_mark_location 	fHashMarks;
 
             BBitmap*			fOffScreenBits;
@@ -226,7 +226,7 @@ private:
 
             float				fMaxUpdateTextWidth;
 
-            uint32				_reserved[4];
+            uint32_t				_reserved[4];
 };
 
 

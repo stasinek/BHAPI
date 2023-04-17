@@ -64,8 +64,8 @@ class CopyLoopControl {
 public:
 	virtual						~CopyLoopControl();
 
-	virtual	void				Init(uint32 jobKind);
-	virtual	void				Init(int32 totalItems, off_t totalSize,
+	virtual	void				Init(uint32_t jobKind);
+	virtual	void				Init(int32_t totalItems, off_t totalSize,
 									const entry_ref* destDir = NULL,
 									bool showCount = true);
 
@@ -76,7 +76,7 @@ public:
 									bool allowContinue);
 
 	virtual	void				UpdateStatus(const char* name,
-									const entry_ref& ref, int32 count,
+									const entry_ref& ref, int32_t count,
 									bool optional = false);
 
 	//! \return \c true if canceled
@@ -119,13 +119,13 @@ public:
 class TrackerCopyLoopControl : public CopyLoopControl {
 public:
 								TrackerCopyLoopControl();
-								TrackerCopyLoopControl(uint32 jobKind);
-								TrackerCopyLoopControl(int32 totalItems,
+								TrackerCopyLoopControl(uint32_t jobKind);
+								TrackerCopyLoopControl(int32_t totalItems,
 									off_t totalSize);
 	virtual						~TrackerCopyLoopControl();
 
-	virtual	void				Init(uint32 state);
-	virtual	void				Init(int32 totalItems, off_t totalSize,
+	virtual	void				Init(uint32_t state);
+	virtual	void				Init(int32_t totalItems, off_t totalSize,
 									const entry_ref* destDir = NULL,
 									bool showCount = true);
 
@@ -134,7 +134,7 @@ public:
 									bool allowContinue);
 
 	virtual	void				UpdateStatus(const char* name,
-									const entry_ref& ref, int32 count,
+									const entry_ref& ref, int32_t count,
 									bool optional = false);
 
 	virtual	bool				CheckUserCanceled();
@@ -170,7 +170,7 @@ _IMPEXP_TRACKER status_t FSCopyAttributesAndStats(BNode*, BNode*);
 _IMPEXP_TRACKER void FSDuplicate(BObjectList<entry_ref>* srcList,
 	BList* pointList);
 _IMPEXP_TRACKER void FSMoveToFolder(BObjectList<entry_ref>* srcList, BEntry*,
-	uint32 moveMode, BList* pointList = NULL);
+	uint32_t moveMode, BList* pointList = NULL);
 _IMPEXP_TRACKER void FSMakeOriginalName(char* name, BDirectory* destDir,
 	const char* suffix);
 _IMPEXP_TRACKER bool FSIsTrashDir(const BEntry*);
@@ -205,7 +205,7 @@ _IMPEXP_TRACKER status_t FSGetTrashDir(BDirectory* trashDir, dev_t volume);
 _IMPEXP_TRACKER status_t FSGetDeskDir(BDirectory* deskDir);
 _IMPEXP_TRACKER status_t FSRecursiveCalcSize(BInfoWindow*,
 	CopyLoopControl* loopControl, BDirectory*, off_t* runningSize,
-	int32* fileCount, int32* dirCount);
+	int32_t* fileCount, int32_t* dirCount);
 
 bool FSInTrashDir(const entry_ref*);
 
@@ -261,15 +261,15 @@ bool FSIsDeskDir(const BEntry*);
 bool ConfirmChangeIfWellKnownDirectory(const BEntry* entry,
 	const char* ifYouDoAction, const char* toDoAction,
 	const char* toConfirmAction, bool dontAsk = false,
-	int32* confirmedAlready = NULL);
+	int32_t* confirmedAlready = NULL);
 
 bool CheckDevicesEqual(const entry_ref* entry, const Model* targetModel);
 
 // Deprecated calls use newer calls above instead
 _IMPEXP_TRACKER void FSLaunchItem(const entry_ref* appRef,
-	BMessage* refs = NULL, int32 workspace = -1);
+	BMessage* refs = NULL, int32_t workspace = -1);
 _IMPEXP_TRACKER status_t FSLaunchItem(const entry_ref* appRef,
-	BMessage* refs, int32 workspace, bool asynch);
+	BMessage* refs, int32_t workspace, bool asynch);
 _IMPEXP_TRACKER void FSOpenWithDocuments(const entry_ref* executableToLaunch,
 	BMessage* documentEntryRefs);
 _IMPEXP_TRACKER status_t FSLaunchUsing(const entry_ref* ref,
@@ -278,14 +278,14 @@ _IMPEXP_TRACKER status_t FSLaunchUsing(const entry_ref* ref,
 
 // some extra directory_which values
 // move these to FindDirectory.h
-const uint32 B_USER_MAIL_DIRECTORY = 3500;
-const uint32 B_USER_QUERIES_DIRECTORY = 3501;
-const uint32 B_USER_PEOPLE_DIRECTORY = 3502;
-const uint32 B_USER_DOWNLOADS_DIRECTORY = 3503;
-const uint32 B_USER_DESKBAR_APPS_DIRECTORY = 3504;
-const uint32 B_USER_DESKBAR_PREFERENCES_DIRECTORY = 3505;
-const uint32 B_USER_DESKBAR_DEVELOP_DIRECTORY = 3506;
-const uint32 B_BOOT_DISK = 3507;
+const uint32_t B_USER_MAIL_DIRECTORY = 3500;
+const uint32_t B_USER_QUERIES_DIRECTORY = 3501;
+const uint32_t B_USER_PEOPLE_DIRECTORY = 3502;
+const uint32_t B_USER_DOWNLOADS_DIRECTORY = 3503;
+const uint32_t B_USER_DESKBAR_APPS_DIRECTORY = 3504;
+const uint32_t B_USER_DESKBAR_PREFERENCES_DIRECTORY = 3505;
+const uint32_t B_USER_DESKBAR_DEVELOP_DIRECTORY = 3506;
+const uint32_t B_BOOT_DISK = 3507;
 	// map /boot into the directory_which enum for convenience
 
 class WellKnowEntryList {

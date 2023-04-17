@@ -105,7 +105,7 @@ struct arch_team_debug_info {
 };
 
 struct arch_thread_debug_info {
-	uint32	flags;
+	uint32_t	flags;
 };
 
 // The software breakpoint instruction (int3).

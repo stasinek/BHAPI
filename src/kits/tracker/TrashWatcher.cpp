@@ -76,8 +76,8 @@ BTrashWatcher::~BTrashWatcher()
 
 bool BTrashWatcher::IsTrashNode(const node_ref* testNode) const
 {
-	int32 count = fTrashNodeList.CountItems();
-	for (int32 index = 0; index < count; index++) {
+	int32_t count = fTrashNodeList.CountItems();
+	for (int32_t index = 0; index < count; index++) {
 		node_ref* nref = fTrashNodeList.ItemAt(index);
 		if (nref->node == testNode->node && nref->device == testNode->device)
 			return true;

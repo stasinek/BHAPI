@@ -46,9 +46,9 @@ status_t ValueWriter::WriteValue(ValueLocation* location, BVariant& value)
 	if (!location->IsWritable())
 		return B_BAD_VALUE;
 
-	int32 count = location->CountPieces();
+	int32_t count = location->CountPieces();
 	if (fCpuState == NULL) {
-		for (int32 i = 0; i < count; i++) {
+		for (int32_t i = 0; i < count; i++) {
 			const ValuePieceLocation piece = location->PieceAt(i);
 			if (piece.type == VALUE_PIECE_LOCATION_REGISTER) {
 				TRACE_LOCALS("  -> asked to write value with register piece, "
@@ -62,10 +62,10 @@ status_t ValueWriter::WriteValue(ValueLocation* location, BVariant& value)
 	size_t byteOffset = 0;
 	bool bigEndian = fArchitecture->IsBigEndian();
 	const Register* registers = fArchitecture->Registers();
-	for (int32 i = 0; i < count; i++) {
+	for (int32_t i = 0; i < count; i++) {
 		ValuePieceLocation piece = location->PieceAt(
 			bigEndian ? i : count - i - 1);
-		uint32 bytesToWrite = piece.size;
+		uint32_t bytesToWrite = piece.size;
 
 		uint8* targetData = (uint8*)value.Bytes() + byteOffset;
 
@@ -83,7 +83,7 @@ status_t ValueWriter::WriteValue(ValueLocation* location, BVariant& value)
 
 				if (bytesWritten < 0)
 					return bytesWritten;
-				if ((uint32)bytesWritten != bytesToWrite)
+				if ((uint32_t)bytesWritten != bytesToWrite)
 					return B_BAD_ADDRESS;
 
 				break;
@@ -103,7 +103,7 @@ status_t ValueWriter::WriteValue(ValueLocation* location, BVariant& value)
 						pieceValue.SetTo(*(uint16*)targetData);
 						break;
 					case 4:
-						pieceValue.SetTo(*(uint32*)targetData);
+						pieceValue.SetTo(*(uint32_t*)targetData);
 						break;
 					case 8:
 						pieceValue.SetTo(*(uint64*)targetData);

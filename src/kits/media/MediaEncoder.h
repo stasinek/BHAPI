@@ -37,29 +37,29 @@ protected:
 	virtual	status_t			WriteChunk(const void* buffer, size_t size,
 									media_encode_info* info) = 0;
 
-	virtual	status_t			AddTrackInfo(uint32 code, const char* data,
+	virtual	status_t			AddTrackInfo(uint32_t code, const char* data,
 									size_t size);
 
 	// TODO: Needs Perform() method for FBC!
 
 private:
 	// FBC padding and forbidden methods
-	virtual	status_t			_Reserved_BMediaEncoder_0(int32 arg, ...);
-	virtual	status_t			_Reserved_BMediaEncoder_1(int32 arg, ...);
-	virtual	status_t			_Reserved_BMediaEncoder_2(int32 arg, ...);
-	virtual	status_t			_Reserved_BMediaEncoder_3(int32 arg, ...);
-	virtual	status_t			_Reserved_BMediaEncoder_4(int32 arg, ...);
-	virtual	status_t			_Reserved_BMediaEncoder_5(int32 arg, ...);
-	virtual	status_t			_Reserved_BMediaEncoder_6(int32 arg, ...);
-	virtual	status_t			_Reserved_BMediaEncoder_7(int32 arg, ...);
-	virtual	status_t			_Reserved_BMediaEncoder_8(int32 arg, ...);
-	virtual	status_t			_Reserved_BMediaEncoder_9(int32 arg, ...);
-	virtual	status_t			_Reserved_BMediaEncoder_10(int32 arg, ...);
-	virtual	status_t			_Reserved_BMediaEncoder_11(int32 arg, ...);
-	virtual	status_t			_Reserved_BMediaEncoder_12(int32 arg, ...);
-	virtual	status_t			_Reserved_BMediaEncoder_13(int32 arg, ...);
-	virtual	status_t			_Reserved_BMediaEncoder_14(int32 arg, ...);
-	virtual	status_t			_Reserved_BMediaEncoder_15(int32 arg, ...);
+	virtual	status_t			_Reserved_BMediaEncoder_0(int32_t arg, ...);
+	virtual	status_t			_Reserved_BMediaEncoder_1(int32_t arg, ...);
+	virtual	status_t			_Reserved_BMediaEncoder_2(int32_t arg, ...);
+	virtual	status_t			_Reserved_BMediaEncoder_3(int32_t arg, ...);
+	virtual	status_t			_Reserved_BMediaEncoder_4(int32_t arg, ...);
+	virtual	status_t			_Reserved_BMediaEncoder_5(int32_t arg, ...);
+	virtual	status_t			_Reserved_BMediaEncoder_6(int32_t arg, ...);
+	virtual	status_t			_Reserved_BMediaEncoder_7(int32_t arg, ...);
+	virtual	status_t			_Reserved_BMediaEncoder_8(int32_t arg, ...);
+	virtual	status_t			_Reserved_BMediaEncoder_9(int32_t arg, ...);
+	virtual	status_t			_Reserved_BMediaEncoder_10(int32_t arg, ...);
+	virtual	status_t			_Reserved_BMediaEncoder_11(int32_t arg, ...);
+	virtual	status_t			_Reserved_BMediaEncoder_12(int32_t arg, ...);
+	virtual	status_t			_Reserved_BMediaEncoder_13(int32_t arg, ...);
+	virtual	status_t			_Reserved_BMediaEncoder_14(int32_t arg, ...);
+	virtual	status_t			_Reserved_BMediaEncoder_15(int32_t arg, ...);
 
 								BMediaEncoder(const BMediaEncoder& other);
 			BMediaEncoder&		operator=(const BMediaEncoder& other);
@@ -72,15 +72,15 @@ private:
 			void				Init();
 			void				ReleaseEncoder();
 
-			uint32				_reserved_was_fEncoderMgr;
-			uint32				_reserved_was_fEncoder;
+			uint32_t				_reserved_was_fEncoderMgr;
+			uint32_t				_reserved_was_fEncoder;
 
-			int32				fEncoderID;
+			int32_t				fEncoderID;
 			bool				fFormatValid;
 			bool				fEncoderStarted;
 			status_t			fInitStatus;
 
-			uint32				_reserved_BMediaEncoder_[32];
+			uint32_t				_reserved_BMediaEncoder_[32];
 };
 
 
@@ -102,7 +102,7 @@ protected:
 
 protected:
 			void*				fBuffer;
-			int32				fBufferSize;
+			int32_t				fBufferSize;
 };
 
 #endif // _MEDIA_ENCODER_H

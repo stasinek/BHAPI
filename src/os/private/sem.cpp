@@ -71,7 +71,7 @@
 
 
 struct queued_thread : DoublyLinkedListLinkImpl<queued_thread> {
-	queued_thread(Thread *thread, int32 count)
+	queued_thread(Thread *thread, int32_t count)
 		:
 		thread(thread),
 		count(count),
@@ -80,7 +80,7 @@ struct queued_thread : DoublyLinkedListLinkImpl<queued_thread> {
 	}
 
 	Thread	*thread;
-	int32	count;
+	int32_t	count;
 	bool	queued;
 };
 
@@ -91,8 +91,8 @@ struct sem_entry {
 		// when slot in use
 		struct {
 			struct list_link	team_link;
-			int32				count;
-			int32				net_count;
+			int32_t				count;
+			int32_t				net_count;
 									// count + acquisition count of all blocked
 									// threads
 			char*				name;
@@ -100,9 +100,9 @@ struct sem_entry {
 			select_info*		select_infos;
 			thread_id			last_acquirer;
 #if DEBUG_SEM_LAST_ACQUIRER
-			int32				last_acquire_count;
+			int32_t				last_acquire_count;
 			thread_id			last_releaser;
-			int32				last_release_count;
+			int32_t				last_release_count;
 #endif
 		} used;
 
@@ -118,10 +118,10 @@ struct sem_entry {
 	ThreadQueue			queue;	// should be in u.used, but has a constructor
 };
 
-static const int32 kMaxSemaphores = 65536;
-static int32 sMaxSems = 4096;
+static const int32_t kMaxSemaphores = 65536;
+static int32_t sMaxSems = 4096;
 	// Final value is computed based on the amount of available memory
-static int32 sUsedSems = 0;
+static int32_t sUsedSems = 0;
 
 static struct sem_entry *sSems = NULL;
 static bool sSemsActive = false;
@@ -141,7 +141,7 @@ dump_sem_list(int argc, char** argv)
 	const char* name = NULL;
 	team_id owner = -1;
 	thread_id last = -1;
-	int32 i;
+	int32_t i;
 
 	if (argc > 2) {
 		if (!strcmp(argv[1], "team") || !strcmp(argv[1], "owner"))
@@ -228,7 +228,7 @@ dump_sem_info(int argc, char **argv)
 {
 	bool found = false;
 	addr_t num;
-	int32 i;
+	int32_t i;
 
 	if (argc < 2) {
 		print_debugger_command_usage(argv[0]);
@@ -241,7 +241,7 @@ dump_sem_info(int argc, char **argv)
 		dump_sem((struct sem_entry *)num);
 		return 0;
 	} else if (num >= 0) {
-		uint32 slot = num % sMaxSems;
+		uint32_t slot = num % sMaxSems;
 		if (sSems[slot].id != (int)num) {
 			kprintf("sem %ld (%#lx) doesn't exist!\n", num, num);
 			return 0;
@@ -335,7 +335,7 @@ uninit_sem_locked(struct sem_entry& sem, char** _name)
 		thread_unblock(entry->thread, B_BAD_SEM_ID);
 	}
 
-	int32 id = sem.id;
+	int32_t id = sem.id;
 	sem.id = -1;
 	*_name = sem.u.used.name;
 	sem.u.used.name = NULL;
@@ -358,7 +358,7 @@ delete_sem_internal(sem_id id, bool checkPermission)
 	if (id < 0)
 		return B_BAD_SEM_ID;
 
-	int32 slot = id % sMaxSems;
+	int32_t slot = id % sMaxSems;
 
 	cpu_status state = disable_interrupts();
 	GRAB_SEM_LIST_LOCK();
@@ -412,7 +412,7 @@ status_t
 haiku_sem_init(kernel_args *args)
 {
 	area_id area;
-	int32 i;
+	int32_t i;
 
 	TRACE(("sem_init: entry\n"));
 
@@ -474,7 +474,7 @@ haiku_sem_init(kernel_args *args)
 	completely (and have only create_sem() exported).
 */
 sem_id
-create_sem_etc(int32 count, const char* name, team_id owner)
+create_sem_etc(int32_t count, const char* name, team_id owner)
 {
 	struct sem_entry* sem = NULL;
 	cpu_status state;
@@ -550,10 +550,10 @@ create_sem_etc(int32 count, const char* name, team_id owner)
 
 
 status_t
-select_sem(int32 id, struct select_info* info, bool kernel)
+select_sem(int32_t id, struct select_info* info, bool kernel)
 {
 	cpu_status state;
-	int32 slot;
+	int32_t slot;
 	status_t error = B_OK;
 
 	if (id < 0)
@@ -591,10 +591,10 @@ select_sem(int32 id, struct select_info* info, bool kernel)
 
 
 status_t
-deselect_sem(int32 id, struct select_info* info, bool kernel)
+deselect_sem(int32_t id, struct select_info* info, bool kernel)
 {
 	cpu_status state;
-	int32 slot;
+	int32_t slot;
 
 	if (id < 0)
 		return B_BAD_SEM_ID;
@@ -699,14 +699,14 @@ sem_delete_owned_sems(Team* team)
 }
 
 
-int32
+int32_t
 sem_max_sems(void)
 {
 	return sMaxSems;
 }
 
 
-int32
+int32_t
 sem_used_sems(void)
 {
 	return sUsedSems;
@@ -717,7 +717,7 @@ sem_used_sems(void)
 
 
 sem_id
-create_sem(int32 count, const char* name)
+create_sem(int32_t count, const char* name)
 {
 	return create_sem_etc(count, name, team_get_kernel_team_id());
 }
@@ -738,7 +738,7 @@ acquire_sem(sem_id id)
 
 
 status_t
-acquire_sem_etc(sem_id id, int32 count, uint32 flags, bigtime_t timeout)
+acquire_sem_etc(sem_id id, int32_t count, uint32_t flags, bigtime_t timeout)
 {
 	return switch_sem_etc(-1, id, count, flags, timeout);
 }
@@ -752,8 +752,8 @@ switch_sem(sem_id toBeReleased, sem_id toBeAcquired)
 
 
 status_t
-switch_sem_etc(sem_id semToBeReleased, sem_id id, int32 count,
-	uint32 flags, bigtime_t timeout)
+switch_sem_etc(sem_id semToBeReleased, sem_id id, int32_t count,
+	uint32_t flags, bigtime_t timeout)
 {
 	int slot = id % sMaxSems;
 	int state;
@@ -913,9 +913,9 @@ release_sem(sem_id id)
 
 
 status_t
-release_sem_etc(sem_id id, int32 count, uint32 flags)
+release_sem_etc(sem_id id, int32_t count, uint32_t flags)
 {
-	int32 slot = id % sMaxSems;
+	int32_t slot = id % sMaxSems;
 
 	if (gKernelStartup)
 		return B_OK;
@@ -1019,7 +1019,7 @@ release_sem_etc(sem_id id, int32 count, uint32 flags)
 
 
 status_t
-get_sem_count(sem_id id, int32 *_count)
+get_sem_count(sem_id id, int32_t *_count)
 {
 	int slot;
 	int state;
@@ -1087,7 +1087,7 @@ _get_sem_info(sem_id id, struct sem_info *info, size_t size)
 
 /*!	Called by the get_next_sem_info() macro. */
 status_t
-_get_next_sem_info(team_id teamID, int32 *_cookie, struct sem_info *info,
+_get_next_sem_info(team_id teamID, int32_t *_cookie, struct sem_info *info,
 	size_t size)
 {
 	if (!sSemsActive)
@@ -1106,8 +1106,8 @@ _get_next_sem_info(team_id teamID, int32 *_cookie, struct sem_info *info,
 
 	// TODO: find a way to iterate the list that is more reliable
 	sem_entry* sem = (sem_entry*)list_get_first_item(&team->sem_list);
-	int32 newIndex = *_cookie;
-	int32 index = 0;
+	int32_t newIndex = *_cookie;
+	int32_t index = 0;
 	bool found = false;
 
 	while (!found) {
@@ -1151,7 +1151,7 @@ set_sem_owner(sem_id id, team_id newTeamID)
 	if (newTeamID < 0)
 		return B_BAD_TEAM_ID;
 
-	int32 slot = id % sMaxSems;
+	int32_t slot = id % sMaxSems;
 
 	// get the new team
 	Team* newTeam = Team::Get(newTeamID);
@@ -1194,7 +1194,7 @@ sem_get_name_unsafe(sem_id id)
 
 
 sem_id
-_user_create_sem(int32 count, const char *userName)
+_user_create_sem(int32_t count, const char *userName)
 {
 	char name[B_OS_NAME_LENGTH];
 
@@ -1227,7 +1227,7 @@ _user_acquire_sem(sem_id id)
 
 
 status_t
-_user_acquire_sem_etc(sem_id id, int32 count, uint32 flags, bigtime_t timeout)
+_user_acquire_sem_etc(sem_id id, int32_t count, uint32_t flags, bigtime_t timeout)
 {
 	syscall_restart_handle_timeout_pre(flags, timeout);
 
@@ -1252,7 +1252,7 @@ _user_switch_sem(sem_id releaseSem, sem_id id)
 
 
 status_t
-_user_switch_sem_etc(sem_id releaseSem, sem_id id, int32 count, uint32 flags,
+_user_switch_sem_etc(sem_id releaseSem, sem_id id, int32_t count, uint32_t flags,
 	bigtime_t timeout)
 {
 	if (releaseSem < 0)
@@ -1276,23 +1276,23 @@ _user_release_sem(sem_id id)
 
 
 status_t
-_user_release_sem_etc(sem_id id, int32 count, uint32 flags)
+_user_release_sem_etc(sem_id id, int32_t count, uint32_t flags)
 {
 	return release_sem_etc(id, count, flags | B_CHECK_PERMISSION);
 }
 
 
 status_t
-_user_get_sem_count(sem_id id, int32 *userCount)
+_user_get_sem_count(sem_id id, int32_t *userCount)
 {
 	status_t status;
-	int32 count;
+	int32_t count;
 
 	if (userCount == NULL || !IS_USER_ADDRESS(userCount))
 		return B_BAD_ADDRESS;
 
 	status = get_sem_count(id, &count);
-	if (status == B_OK && user_memcpy(userCount, &count, sizeof(int32)) < B_OK)
+	if (status == B_OK && user_memcpy(userCount, &count, sizeof(int32_t)) < B_OK)
 		return B_BAD_ADDRESS;
 
 	return status;
@@ -1317,23 +1317,23 @@ _user_get_sem_info(sem_id id, struct sem_info *userInfo, size_t size)
 
 
 status_t
-_user_get_next_sem_info(team_id team, int32 *userCookie, struct sem_info *userInfo,
+_user_get_next_sem_info(team_id team, int32_t *userCookie, struct sem_info *userInfo,
 	size_t size)
 {
 	struct sem_info info;
-	int32 cookie;
+	int32_t cookie;
 	status_t status;
 
 	if (userCookie == NULL || userInfo == NULL
 		|| !IS_USER_ADDRESS(userCookie) || !IS_USER_ADDRESS(userInfo)
-		|| user_memcpy(&cookie, userCookie, sizeof(int32)) < B_OK)
+		|| user_memcpy(&cookie, userCookie, sizeof(int32_t)) < B_OK)
 		return B_BAD_ADDRESS;
 
 	status = _get_next_sem_info(team, &cookie, &info, size);
 
 	if (status == B_OK) {
 		if (user_memcpy(userInfo, &info, size) < B_OK
-			|| user_memcpy(userCookie, &cookie, sizeof(int32)) < B_OK)
+			|| user_memcpy(userCookie, &cookie, sizeof(int32_t)) < B_OK)
 			return B_BAD_ADDRESS;
 	}
 

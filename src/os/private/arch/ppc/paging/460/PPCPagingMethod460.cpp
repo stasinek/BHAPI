@@ -50,7 +50,7 @@ static addr_t sIOSpaceBase;
 
 
 static status_t
-map_iospace_chunk(addr_t va, phys_addr_t pa, uint32 flags)
+map_iospace_chunk(addr_t va, phys_addr_t pa, uint32_t flags)
 {
 	pa &= ~(B_PAGE_SIZE - 1); // make sure it's page aligned
 	va &= ~(B_PAGE_SIZE - 1); // make sure it's page aligned
@@ -239,12 +239,12 @@ PPCPagingMethod460::MapEarly(kernel_args* args, addr_t virtualAddress,
 	phys_addr_t physicalAddress, uint8 attributes,
 	page_num_t (*get_free_page)(kernel_args*))
 {
-	uint32 virtualSegmentID = get_sr((void *)virtualAddress) & 0xffffff;
+	uint32_t virtualSegmentID = get_sr((void *)virtualAddress) & 0xffffff;
 
-	uint32 hash = page_table_entry::PrimaryHash(virtualSegmentID, (uint32)virtualAddress);
+	uint32_t hash = page_table_entry::PrimaryHash(virtualSegmentID, (uint32_t)virtualAddress);
 	page_table_entry_group *group = &fPageTable[hash & fPageTableHashMask];
 
-	for (int32 i = 0; i < 8; i++) {
+	for (int32_t i = 0; i < 8; i++) {
 		// 8 entries in a group
 		if (group->entry[i].valid)
 			continue;
@@ -257,7 +257,7 @@ PPCPagingMethod460::MapEarly(kernel_args* args, addr_t virtualAddress,
 	hash = page_table_entry::SecondaryHash(hash);
 	group = &fPageTable[hash & fPageTableHashMask];
 
-	for (int32 i = 0; i < 8; i++) {
+	for (int32_t i = 0; i < 8; i++) {
 		if (group->entry[i].valid)
 			continue;
 
@@ -272,7 +272,7 @@ PPCPagingMethod460::MapEarly(kernel_args* args, addr_t virtualAddress,
 
 bool
 PPCPagingMethod460::IsKernelPageAccessible(addr_t virtualAddress,
-	uint32 protection)
+	uint32_t protection)
 {
 	// TODO:factor out to baseclass
 	VMAddressSpace *addressSpace = VMAddressSpace::Kernel();
@@ -285,7 +285,7 @@ PPCPagingMethod460::IsKernelPageAccessible(addr_t virtualAddress,
 		addressSpace->TranslationMap());
 
 	phys_addr_t physicalAddress;
-	uint32 flags;
+	uint32_t flags;
 	if (map->Query(virtualAddress, &physicalAddress, &flags) != B_OK)
 		return false;
 
@@ -300,8 +300,8 @@ PPCPagingMethod460::IsKernelPageAccessible(addr_t virtualAddress,
 
 void
 PPCPagingMethod460::FillPageTableEntry(page_table_entry *entry,
-	uint32 virtualSegmentID, addr_t virtualAddress, phys_addr_t physicalAddress,
-	uint8 protection, uint32 memoryType, bool secondaryHash)
+	uint32_t virtualSegmentID, addr_t virtualAddress, phys_addr_t physicalAddress,
+	uint8 protection, uint32_t memoryType, bool secondaryHash)
 {
 	// lower 32 bit - set at once
 	entry->physical_page_number = physicalAddress / B_PAGE_SIZE;
@@ -331,7 +331,7 @@ PPCPagingMethod460::FillPageTableEntry(page_table_entry *entry,
 #if 0//X86
 /*static*/ void
 PPCPagingMethod460::PutPageTableInPageDir(page_directory_entry* entry,
-	phys_addr_t pgtablePhysical, uint32 attributes)
+	phys_addr_t pgtablePhysical, uint32_t attributes)
 {
 	*entry = (pgtablePhysical & PPC_PDE_ADDRESS_MASK)
 		| PPC_PDE_PRESENT
@@ -349,7 +349,7 @@ PPCPagingMethod460::PutPageTableInPageDir(page_directory_entry* entry,
 
 /*static*/ void
 PPCPagingMethod460::PutPageTableEntryInTable(page_table_entry* entry,
-	phys_addr_t physicalAddress, uint32 attributes, uint32 memoryType,
+	phys_addr_t physicalAddress, uint32_t attributes, uint32_t memoryType,
 	bool globalPage)
 {
 	page_table_entry page = (physicalAddress & PPC_PTE_ADDRESS_MASK)

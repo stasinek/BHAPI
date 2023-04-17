@@ -150,11 +150,11 @@
 typedef struct {
 	uint8	flags;             /* reserved for future use */
 	uint8	service_type;      /* service type */
-	uint32	token_rate;        /* bytes per second */
-	uint32	token_bucket_size; /* bytes */
-	uint32	peak_bandwidth;    /* bytes per second */
-	uint32	latency;           /* microseconds */
-	uint32	delay_variation;   /* microseconds */
+	uint32_t	token_rate;        /* bytes per second */
+	uint32_t	token_bucket_size; /* bytes */
+	uint32_t	peak_bandwidth;    /* bytes per second */
+	uint32_t	latency;           /* microseconds */
+	uint32_t	delay_variation;   /* microseconds */
 } __attribute__ ((packed)) l2cap_flow_t;
 
 

@@ -110,7 +110,7 @@ inet_nsap_ntoa(int binlen, const u_char *binary, char *ascii) {
 		binlen = 255;
 
 	for (i = 0; i < binlen; i++) {
-		nib = (u_int32_t)*binary >> 4;
+		nib = (u_int32_t_t)*binary >> 4;
 		*ascii++ = nib + (nib < 10 ? '0' : '7');
 		nib = *binary++ & 0x0f;
 		*ascii++ = nib + (nib < 10 ? '0' : '7');

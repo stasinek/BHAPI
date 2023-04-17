@@ -140,11 +140,11 @@ const char * const B_SIMPLE_TRANSPORT	 = "SimpleTransport";
 }
 using namespace bhapi;
 // Flattened data
-static const int32   kCurrentParameterWebVersion = 1;
-static const uint32  kParameterWebMagic = 0x01030506;
-static const uint32  kBufferGroupMagic = 0x03040509;
-static const uint32  kBufferGroupMagicNoFlags = 0x03040507;
-static const uint32  kParameterMagic = 0x02040607;
+static const int32_t   kCurrentParameterWebVersion = 1;
+static const uint32_t  kParameterWebMagic = 0x01030506;
+static const uint32_t  kBufferGroupMagic = 0x03040509;
+static const uint32_t  kBufferGroupMagicNoFlags = 0x03040507;
+static const uint32_t  kParameterMagic = 0x02040607;
 static const ssize_t kAdditionalParameterGroupSize = 12;
 static const ssize_t kAdditionalParameterSize = 23 + 3 * sizeof(ssize_t);
 
@@ -224,7 +224,7 @@ template<class Type> void write_to_buffer(void **_buffer, Type value)
 void write_string_to_buffer(void **_buffer, const char *string)
 {
     uint8 *buffer = static_cast<uint8 *>(*_buffer);
-    uint32 length = string ? strlen(string) : 0;
+    uint32_t length = string ? strlen(string) : 0;
     if (length > 255)
         length = 255;
 
@@ -238,7 +238,7 @@ void write_string_to_buffer(void **_buffer, const char *string)
 }
 
 
-static void skip_in_buffer(const void **_buffer, uint32 bytes)
+static void skip_in_buffer(const void **_buffer, uint32_t bytes)
 {
     const uint8 *buffer = static_cast<const uint8 *>(*_buffer);
 
@@ -249,7 +249,7 @@ static void skip_in_buffer(const void **_buffer, uint32 bytes)
 
 
 static void inline
-skip_in_buffer(void **_buffer, uint32 bytes)
+skip_in_buffer(void **_buffer, uint32_t bytes)
 {
     // This actually shouldn't be necessary, but I believe it's a
     // bug in Be's gcc - it complains about "adds cv-quals without intervening `const'"
@@ -266,7 +266,7 @@ swap32(Type value, bool doSwap)
     STATIC_ASSERT(sizeof(Type) == 4);
 
     if (doSwap)
-        return (Type)B_SWAP_INT32((int32)value);
+        return (Type)B_SWAP_INT32((int32_t)value);
 
     return value;
 }
@@ -331,7 +331,7 @@ BParameterWeb::~BParameterWeb()
 {
     CALLED();
 
-    for (int32 i = fGroups->CountItems(); i-- > 0;) {
+    for (int32_t i = fGroups->CountItems(); i-- > 0;) {
         delete static_cast<BParameterGroup*>(fGroups->ItemAt(i));
     }
 
@@ -366,20 +366,20 @@ BParameterWeb::MakeGroup(const char* name)
 }
 
 
-int32 BParameterWeb::CountGroups()
+int32_t BParameterWeb::CountGroups()
 {
     return fGroups->CountItems();
 }
 
 
 BParameterGroup*
-BParameterWeb::GroupAt(int32 index)
+BParameterWeb::GroupAt(int32_t index)
 {
     return static_cast<BParameterGroup*>(fGroups->ItemAt(index));
 }
 
 
-int32 BParameterWeb::CountParameters()
+int32_t BParameterWeb::CountParameters()
 {
     CALLED();
 
@@ -387,9 +387,9 @@ int32 BParameterWeb::CountParameters()
     // The "groups" list is used as count stack
 
     BList groups(*fGroups);
-    int32 count = 0;
+    int32_t count = 0;
 
-    for (int32 i = 0; i < groups.CountItems(); i++) {
+    for (int32_t i = 0; i < groups.CountItems(); i++) {
         BParameterGroup* group
             = static_cast<BParameterGroup*>(groups.ItemAt(i));
 
@@ -404,7 +404,7 @@ int32 BParameterWeb::CountParameters()
 
 
 BParameter*
-BParameterWeb::ParameterAt(int32 index)
+BParameterWeb::ParameterAt(int32_t index)
 {
     CALLED();
 
@@ -414,10 +414,10 @@ BParameterWeb::ParameterAt(int32 index)
 
     BList groups(*fGroups);
 
-    for (int32 i = 0; i < groups.CountItems(); i++) {
+    for (int32_t i = 0; i < groups.CountItems(); i++) {
         BParameterGroup* group
             = static_cast<BParameterGroup*>(groups.ItemAt(i));
-        int32 count = group->CountParameters();
+        int32_t count = group->CountParameters();
         if (index < count)
             return group->ParameterAt(index);
 
@@ -468,9 +468,9 @@ BParameterWeb::FlattenedSize() const
     //---------END-CORE-BPARAMETERWEB-STRUCT--------------
 */
     //36 guaranteed bytes, variable after that.
-    ssize_t size = sizeof(int32) + 2 * sizeof(int32) + sizeof(media_node);
+    ssize_t size = sizeof(int32_t) + 2 * sizeof(int32_t) + sizeof(media_node);
 
-    for (int32 i = fGroups->CountItems(); i-- > 0;) {
+    for (int32_t i = fGroups->CountItems(); i-- > 0;) {
         BParameterGroup* group
             = static_cast<BParameterGroup*>(fGroups->ItemAt(i));
         if (group != NULL) {
@@ -495,17 +495,17 @@ status_t BParameterWeb::Flatten(void* buffer, ssize_t size) const
 
     void* bufferStart = buffer;
 
-    write_to_buffer<int32>(&buffer, kParameterWebMagic);
-    write_to_buffer<int32>(&buffer, kCurrentParameterWebVersion);
+    write_to_buffer<int32_t>(&buffer, kParameterWebMagic);
+    write_to_buffer<int32_t>(&buffer, kCurrentParameterWebVersion);
 
     // flatten all groups into this buffer
 
-    int32 count = fGroups->CountItems();
-    write_to_buffer<int32>(&buffer, count);
+    int32_t count = fGroups->CountItems();
+    write_to_buffer<int32_t>(&buffer, count);
 
     write_to_buffer<media_node>(&buffer, fNode);
 
-    for (int32 i = 0; i < count; i++) {
+    for (int32_t i = 0; i < count; i++) {
         BParameterGroup* group
             = static_cast<BParameterGroup*>(fGroups->ItemAt(i));
         if (group == NULL) {
@@ -555,7 +555,7 @@ status_t BParameterWeb::Unflatten(type_code code, const void* buffer, ssize_t si
 
     // if the buffer is smaller than the size needed to read the
     // signature field, the mystery field, the group count, and the Node, then there is a problem
-    if (size < static_cast<ssize_t>(sizeof(int32) + sizeof(int32)
+    if (size < static_cast<ssize_t>(sizeof(int32_t) + sizeof(int32_t)
             + sizeof(ssize_t) + sizeof(media_node))) {
         ERROR("BParameterWeb::Unflatten(): size to small\n");
         return B_ERROR;
@@ -563,7 +563,7 @@ status_t BParameterWeb::Unflatten(type_code code, const void* buffer, ssize_t si
 
     const void* bufferStart = buffer;
 
-    uint32 magic = read_from_buffer<uint32>(&buffer);
+    uint32_t magic = read_from_buffer<uint32_t>(&buffer);
     bool isSwapped = false;
 
     if (magic == B_SWAP_INT32(kParameterWebMagic)) {
@@ -575,25 +575,25 @@ status_t BParameterWeb::Unflatten(type_code code, const void* buffer, ssize_t si
 
     // Note, it's not completely sure that this field is the version
     // information - but it doesn't seem to have another purpose
-    int32 version = read_from_buffer_swap32<int32>(&buffer, isSwapped);
+    int32_t version = read_from_buffer_swap32<int32_t>(&buffer, isSwapped);
     if (version != kCurrentParameterWebVersion) {
         ERROR("BParameterWeb::Unflatten(): wrong version %" B_PRId32 " (%"
             B_PRIx32 ")?!\n", version, version);
         return B_ERROR;
     }
 
-    for (int32 i = 0; i < fGroups->CountItems(); i++) {
+    for (int32_t i = 0; i < fGroups->CountItems(); i++) {
         delete static_cast<BParameterGroup*>(fGroups->ItemAt(i));
     }
     fGroups->MakeEmpty();
 
-    int32 count = read_from_buffer_swap32<int32>(&buffer, isSwapped);
+    int32_t count = read_from_buffer_swap32<int32_t>(&buffer, isSwapped);
 
     fNode = read_from_buffer<media_node>(&buffer);
     if (isSwapped)
         swap_data(B_INT32_TYPE, &fNode, sizeof(media_node), B_SWAP_ALWAYS);
 
-    for (int32 i = 0; i < count; i++) {
+    for (int32_t i = 0; i < count; i++) {
         ssize_t groupSize
             = read_pointer_from_buffer_swap<ssize_t>(&buffer, isSwapped);
         if (groupSize > size_left(size, bufferStart, buffer)) {
@@ -619,11 +619,11 @@ status_t BParameterWeb::Unflatten(type_code code, const void* buffer, ssize_t si
 
     BList groups(*fGroups);
 
-    for (int32 i = 0; i < groups.CountItems(); i++) {
+    for (int32_t i = 0; i < groups.CountItems(); i++) {
         BParameterGroup* group
             = static_cast<BParameterGroup*>(groups.ItemAt(i));
 
-        for (int32 index = group->CountParameters(); index-- > 0;) {
+        for (int32_t index = group->CountParameters(); index-- > 0;) {
             BParameter* parameter
                 = static_cast<BParameter*>(group->ParameterAt(index));
 
@@ -697,20 +697,20 @@ const char*  BParameterGroup::Name() const
 }
 
 
-void BParameterGroup::SetFlags(uint32 flags)
+void BParameterGroup::SetFlags(uint32_t flags)
 {
     fFlags = flags;
 }
 
 
-uint32 BParameterGroup::Flags() const
+uint32_t BParameterGroup::Flags() const
 {
     return fFlags;
 }
 
 
 BNullParameter*
-BParameterGroup::MakeNullParameter(int32 id, media_type mediaType,
+BParameterGroup::MakeNullParameter(int32_t id, media_type mediaType,
     const char* name, const char* kind)
 {
     CALLED();
@@ -728,7 +728,7 @@ BParameterGroup::MakeNullParameter(int32 id, media_type mediaType,
 
 
 BContinuousParameter*
-BParameterGroup::MakeContinuousParameter(int32 id, media_type mediaType,
+BParameterGroup::MakeContinuousParameter(int32_t id, media_type mediaType,
     const char* name, const char* kind, const char* unit,
     float minimum, float maximum, float stepping)
 {
@@ -748,7 +748,7 @@ BParameterGroup::MakeContinuousParameter(int32 id, media_type mediaType,
 
 
 BDiscreteParameter*
-BParameterGroup::MakeDiscreteParameter(int32 id, media_type mediaType,
+BParameterGroup::MakeDiscreteParameter(int32_t id, media_type mediaType,
     const char* name, const char* kind)
 {
     CALLED();
@@ -766,7 +766,7 @@ BParameterGroup::MakeDiscreteParameter(int32 id, media_type mediaType,
 
 
 BTextParameter*
-BParameterGroup::MakeTextParameter(int32 id, media_type mediaType,
+BParameterGroup::MakeTextParameter(int32_t id, media_type mediaType,
     const char* name, const char* kind, size_t maxBytes)
 {
     CALLED();
@@ -796,27 +796,27 @@ BParameterGroup::MakeGroup(const char* name)
 }
 
 
-int32 BParameterGroup::CountParameters()
+int32_t BParameterGroup::CountParameters()
 {
     return fControls->CountItems();
 }
 
 
 BParameter*
-BParameterGroup::ParameterAt(int32 index)
+BParameterGroup::ParameterAt(int32_t index)
 {
     return static_cast<BParameter*>(fControls->ItemAt(index));
 }
 
 
-int32 BParameterGroup::CountGroups()
+int32_t BParameterGroup::CountGroups()
 {
     return fGroups->CountItems();
 }
 
 
 BParameterGroup*
-BParameterGroup::GroupAt(int32 index)
+BParameterGroup::GroupAt(int32_t index)
 {
     return static_cast<BParameterGroup*>(fGroups->ItemAt(index));
 }
@@ -867,7 +867,7 @@ BParameterGroup::FlattenedSize() const
     ssize_t size = 13;
 
     if (fFlags != 0)
-        size += sizeof(uint32);
+        size += sizeof(uint32_t);
 
     if (fName != NULL)
         size += min_c(strlen(fName), 255);
@@ -915,17 +915,17 @@ status_t BParameterGroup::Flatten(void* buffer, ssize_t size) const
     }
 
     if (fFlags != 0) {
-        write_to_buffer<int32>(&buffer, kBufferGroupMagic);
-        write_to_buffer<uint32>(&buffer, fFlags);
+        write_to_buffer<int32_t>(&buffer, kBufferGroupMagic);
+        write_to_buffer<uint32_t>(&buffer, fFlags);
     } else
-        write_to_buffer<int32>(&buffer, kBufferGroupMagicNoFlags);
+        write_to_buffer<int32_t>(&buffer, kBufferGroupMagicNoFlags);
 
     write_string_to_buffer(&buffer, fName);
 
-    int32 count = fControls->CountItems();
-    write_to_buffer<int32>(&buffer, count);
+    int32_t count = fControls->CountItems();
+    write_to_buffer<int32_t>(&buffer, count);
 
-    for (int32 i = 0; i < count; i++) {
+    for (int32_t i = 0; i < count; i++) {
         BParameter* parameter = static_cast<BParameter*>(fControls->ItemAt(i));
         if (parameter == NULL) {
             ERROR("BParameterGroup::Flatten(): NULL parameter\n");
@@ -950,9 +950,9 @@ status_t BParameterGroup::Flatten(void* buffer, ssize_t size) const
     }
 
     count = fGroups->CountItems();
-    write_to_buffer<int32>(&buffer, count);
+    write_to_buffer<int32_t>(&buffer, count);
 
-    for (int32 i = 0; i < count; i++) {
+    for (int32_t i = 0; i < count; i++) {
         BParameterGroup* group
             = static_cast<BParameterGroup*>(fGroups->ItemAt(i));
         if (group == NULL) {
@@ -1002,7 +1002,7 @@ status_t BParameterGroup::Unflatten(type_code code, const void* buffer, ssize_t 
 
     // if the buffer is smaller than the size needed to read the
     // signature field, then there is a problem
-    if (size < static_cast<ssize_t>(sizeof(int32))) {
+    if (size < static_cast<ssize_t>(sizeof(int32_t))) {
         ERROR("BParameterGroup::Unflatten() size to small\n");
         return B_ERROR;
     }
@@ -1010,7 +1010,7 @@ status_t BParameterGroup::Unflatten(type_code code, const void* buffer, ssize_t 
     const void* bufferStart = buffer;
         // used to compute the rest length of the buffer when needed
 
-    uint32 magic = read_from_buffer<uint32>(&buffer);
+    uint32_t magic = read_from_buffer<uint32_t>(&buffer);
     bool isSwapped = false;
 
     if (magic == B_SWAP_INT32(kBufferGroupMagic)
@@ -1020,7 +1020,7 @@ status_t BParameterGroup::Unflatten(type_code code, const void* buffer, ssize_t 
     }
 
     if (magic == kBufferGroupMagic)
-        fFlags = read_from_buffer_swap32<int32>(&buffer, isSwapped);
+        fFlags = read_from_buffer_swap32<int32_t>(&buffer, isSwapped);
     else if (magic == kBufferGroupMagicNoFlags)
         fFlags = 0;
     else
@@ -1031,24 +1031,24 @@ status_t BParameterGroup::Unflatten(type_code code, const void* buffer, ssize_t 
         return B_BAD_VALUE;
 
     // Clear all existing parameters/subgroups
-    for (int32 i = 0; i < fControls->CountItems(); i++) {
+    for (int32_t i = 0; i < fControls->CountItems(); i++) {
         delete static_cast<BParameter*>(fControls->ItemAt(i));
     }
     fControls->MakeEmpty();
 
-    for (int32 i = 0; i < fGroups->CountItems(); i++) {
+    for (int32_t i = 0; i < fGroups->CountItems(); i++) {
         delete static_cast<BParameterGroup*>(fGroups->ItemAt(i));
     }
     fGroups->MakeEmpty();
 
     // unflatten parameter list
 
-    int32 count = read_from_buffer_swap32<int32>(&buffer, isSwapped);
+    int32_t count = read_from_buffer_swap32<int32_t>(&buffer, isSwapped);
     if (count < 0 || count * kAdditionalParameterSize
             > size_left(size, bufferStart, buffer))
         return B_BAD_VALUE;
 
-    for (int32 i = 0; i < count; i++) {
+    for (int32_t i = 0; i < count; i++) {
         // make sure we can read as many bytes
         if (size_left(size, bufferStart, buffer) < (ssize_t)(
                 sizeof(BParameter*) + sizeof(BParameter::media_parameter_type)
@@ -1095,12 +1095,12 @@ status_t BParameterGroup::Unflatten(type_code code, const void* buffer, ssize_t 
 
     // unflatten sub groups
 
-    count = read_from_buffer_swap32<int32>(&buffer, isSwapped);
+    count = read_from_buffer_swap32<int32_t>(&buffer, isSwapped);
     if (count < 0 || count * kAdditionalParameterGroupSize
             > size_left(size, bufferStart, buffer))
         return B_BAD_VALUE;
 
-    for (int32 i = 0; i < count; i++) {
+    for (int32_t i = 0; i < count; i++) {
         // make sure we can read as many bytes
         if (size_left(size, bufferStart, buffer) < (ssize_t)(
                 sizeof(BParameterGroup*) + sizeof(type_code)
@@ -1148,7 +1148,7 @@ status_t BParameterGroup::Unflatten(type_code code, const void* buffer, ssize_t 
     method does not add the parameter to this group automatically.
 */
 BParameter*
-BParameterGroup::MakeControl(int32 type)
+BParameterGroup::MakeControl(int32_t type)
 {
     CALLED();
 
@@ -1217,19 +1217,19 @@ const char*  BParameter::Unit() const
 }
 
 
-int32 BParameter::ID() const
+int32_t BParameter::ID() const
 {
     return fID;
 }
 
 
-void BParameter::SetFlags(uint32 flags)
+void BParameter::SetFlags(uint32_t flags)
 {
     fFlags = flags;
 }
 
 
-uint32 BParameter::Flags() const
+uint32_t BParameter::Flags() const
 {
     return fFlags;
 }
@@ -1366,13 +1366,13 @@ status_t BParameter::SetValue(const void* buffer, size_t size, bigtime_t when)
 }
 
 
-int32 BParameter::CountChannels()
+int32_t BParameter::CountChannels()
 {
     return fChannels;
 }
 
 
-void BParameter::SetChannelCount(int32 count)
+void BParameter::SetChannelCount(int32_t count)
 {
     fChannels = count;
 }
@@ -1391,14 +1391,14 @@ void BParameter::SetMediaType(media_type type)
 }
 
 
-int32 BParameter::CountInputs()
+int32_t BParameter::CountInputs()
 {
     return fInputs->CountItems();
 }
 
 
 BParameter*
-BParameter::InputAt(int32 index)
+BParameter::InputAt(int32_t index)
 {
     return static_cast<BParameter*>(fInputs->ItemAt(index));
 }
@@ -1423,14 +1423,14 @@ void BParameter::AddInput(BParameter* input)
 }
 
 
-int32 BParameter::CountOutputs()
+int32_t BParameter::CountOutputs()
 {
     return fOutputs->CountItems();
 }
 
 
 BParameter*
-BParameter::OutputAt(int32 index)
+BParameter::OutputAt(int32_t index)
 {
     return static_cast<BParameter*>(fOutputs->ItemAt(index));
 }
@@ -1524,9 +1524,9 @@ status_t BParameter::Flatten(void* buffer, ssize_t size) const
         return B_NO_MEMORY;
     }
 
-    write_to_buffer<uint32>(&buffer, kParameterMagic);
+    write_to_buffer<uint32_t>(&buffer, kParameterMagic);
     write_to_buffer<ssize_t>(&buffer, actualSize);
-    write_to_buffer<int32>(&buffer, fID);
+    write_to_buffer<int32_t>(&buffer, fID);
 
     write_string_to_buffer(&buffer, fName);
     write_string_to_buffer(&buffer, fKind);
@@ -1551,8 +1551,8 @@ status_t BParameter::Flatten(void* buffer, ssize_t size) const
     }
 
     write_to_buffer<media_type>(&buffer, fMediaType);
-    write_to_buffer<int32>(&buffer, fChannels);
-    write_to_buffer<uint32>(&buffer, fFlags);
+    write_to_buffer<int32_t>(&buffer, fChannels);
+    write_to_buffer<uint32_t>(&buffer, fFlags);
 
     return B_OK;
 }
@@ -1580,7 +1580,7 @@ status_t BParameter::Unflatten(type_code code, const void* buffer, ssize_t size)
 
     // if the buffer is smaller than the size needed to read the
     // signature and struct size fields, then there is a problem
-    if (size < static_cast<ssize_t>(sizeof(int32) + sizeof(ssize_t))) {
+    if (size < static_cast<ssize_t>(sizeof(int32_t) + sizeof(ssize_t))) {
         ERROR("BParameter::Unflatten() size too small\n");
         return B_BAD_VALUE;
     }
@@ -1589,7 +1589,7 @@ status_t BParameter::Unflatten(type_code code, const void* buffer, ssize_t size)
 
     // check magic
 
-    uint32 magic = read_from_buffer<uint32>(&buffer);
+    uint32_t magic = read_from_buffer<uint32_t>(&buffer);
     if (magic == B_SWAP_INT32(kParameterMagic))
         fSwapDetected = true;
     else if (magic == kParameterMagic)
@@ -1626,7 +1626,7 @@ status_t BParameter::Unflatten(type_code code, const void* buffer, ssize_t size)
         return B_ERROR;
     }
 
-    fID = read_from_buffer_swap32<int32>(&buffer, fSwapDetected);
+    fID = read_from_buffer_swap32<int32_t>(&buffer, fSwapDetected);
 
     if (read_string_from_buffer(&buffer, &fName,
                 size_left(size, bufferStart, buffer)) < B_OK
@@ -1661,14 +1661,14 @@ status_t BParameter::Unflatten(type_code code, const void* buffer, ssize_t size)
     }
 
     fMediaType = read_from_buffer_swap32<media_type>(&buffer, fSwapDetected);
-    fChannels = read_from_buffer_swap32<int32>(&buffer, fSwapDetected);
-    fFlags = read_from_buffer_swap32<uint32>(&buffer, fSwapDetected);
+    fChannels = read_from_buffer_swap32<int32_t>(&buffer, fSwapDetected);
+    fFlags = read_from_buffer_swap32<uint32_t>(&buffer, fSwapDetected);
 
     return B_OK;
 }
 
 
-BParameter::BParameter(int32 id, media_type mediaType,
+BParameter::BParameter(int32_t id, media_type mediaType,
         media_parameter_type type, BParameterWeb* web, const char* name,
         const char* kind, const char* unit)
     :
@@ -1722,10 +1722,10 @@ void BParameter::FixRefs(BList& old, BList& updated)
     // update inputs
 
     void** items = static_cast<void**>(fInputs->Items());
-    int32 count = fInputs->CountItems();
+    int32_t count = fInputs->CountItems();
 
-    for (int32 i = 0; i < count; i++) {
-        int32 index = old.IndexOf(items[i]);
+    for (int32_t i = 0; i < count; i++) {
+        int32_t index = old.IndexOf(items[i]);
         if (index >= 0)
             items[i] = updated.ItemAt(index);
         else {
@@ -1736,7 +1736,7 @@ void BParameter::FixRefs(BList& old, BList& updated)
 
     // remove all NULL inputs (those which couldn't be mapped)
 
-    for (int32 i = count; i-- > 0;) {
+    for (int32_t i = count; i-- > 0;) {
         if (items[i] == NULL)
             fInputs->RemoveItem(i);
     }
@@ -1746,8 +1746,8 @@ void BParameter::FixRefs(BList& old, BList& updated)
     items = static_cast<void **>(fOutputs->Items());
     count = fOutputs->CountItems();
 
-    for (int32 i = 0; i < count; i++) {
-        int32 index = old.IndexOf(items[i]);
+    for (int32_t i = 0; i < count; i++) {
+        int32_t index = old.IndexOf(items[i]);
         if (index >= 0)
             items[i] = updated.ItemAt(index);
         else {
@@ -1758,7 +1758,7 @@ void BParameter::FixRefs(BList& old, BList& updated)
 
     // remove all NULL outputs (those which couldn't be mapped)
 
-    for (int32 i = count; i-- > 0;) {
+    for (int32_t i = count; i-- > 0;) {
         if (items[i] == NULL)
             fOutputs->RemoveItem(i);
     }
@@ -1881,7 +1881,7 @@ status_t BContinuousParameter::Unflatten(type_code code, const void* buffer,
 
     // if the buffer is smaller than the size needed to read the
     // signature and struct size fields, then there is a problem
-    if (size < static_cast<ssize_t>(sizeof(int32) + sizeof(ssize_t))) {
+    if (size < static_cast<ssize_t>(sizeof(int32_t) + sizeof(ssize_t))) {
         ERROR("BContinuousParameter::Unflatten size too small\n");
         return B_ERROR;
     }
@@ -1912,7 +1912,7 @@ status_t BContinuousParameter::Unflatten(type_code code, const void* buffer,
 }
 
 
-BContinuousParameter::BContinuousParameter(int32 id, media_type mediaType,
+BContinuousParameter::BContinuousParameter(int32_t id, media_type mediaType,
         BParameterWeb* web, const char* name, const char* kind,
         const char* unit, float minimum, float maximum, float stepping)
     : BParameter(id, mediaType, B_CONTINUOUS_PARAMETER, web, name, kind, unit),
@@ -1943,21 +1943,21 @@ BDiscreteParameter::ValueType()
 }
 
 
-int32 BDiscreteParameter::CountItems()
+int32_t BDiscreteParameter::CountItems()
 {
     return fValues->CountItems();
 }
 
 
-const char*  BDiscreteParameter::ItemNameAt(int32 index)
+const char*  BDiscreteParameter::ItemNameAt(int32_t index)
 {
     return reinterpret_cast<const char*>(fSelections->ItemAt(index));
 }
 
 
-int32 BDiscreteParameter::ItemValueAt(int32 index)
+int32_t BDiscreteParameter::ItemValueAt(int32_t index)
 {
-    int32* item = static_cast<int32*>(fValues->ItemAt(index));
+    int32_t* item = static_cast<int32_t*>(fValues->ItemAt(index));
     if (item == NULL)
         return 0;
 
@@ -1965,11 +1965,11 @@ int32 BDiscreteParameter::ItemValueAt(int32 index)
 }
 
 
-status_t BDiscreteParameter::AddItem(int32 value, const char* name)
+status_t BDiscreteParameter::AddItem(int32_t value, const char* name)
 {
     CALLED();
 
-    int32* valueCopy = new(std::nothrow) int32(value);
+    int32_t* valueCopy = new(std::nothrow) int32_t(value);
     if (valueCopy == NULL)
         return B_NO_MEMORY;
     char* nameCopy = strndup(name, 255);
@@ -1997,8 +1997,8 @@ status_t BDiscreteParameter::MakeItemsFromInputs()
 {
     CALLED();
 
-    int32 count = fInputs->CountItems();
-    for (int32 i = 0; i < count; i++) {
+    int32_t count = fInputs->CountItems();
+    for (int32_t i = 0; i < count; i++) {
         BParameter* parameter = static_cast<BParameter*>(fInputs->ItemAt(i));
         AddItem(i, parameter->Name());
     }
@@ -2011,8 +2011,8 @@ status_t BDiscreteParameter::MakeItemsFromOutputs()
 {
     CALLED();
 
-    int32 count = fOutputs->CountItems();
-    for (int32 i = 0; i < count; i++) {
+    int32_t count = fOutputs->CountItems();
+    for (int32_t i = 0; i < count; i++) {
         BParameter* parameter = static_cast<BParameter*>(fOutputs->ItemAt(i));
         AddItem(i, parameter->Name());
     }
@@ -2025,12 +2025,12 @@ void BDiscreteParameter::MakeEmpty()
 {
     CALLED();
 
-    for (int32 i = fValues->CountItems(); i-- > 0;) {
-        delete static_cast<int32*>(fValues->ItemAt(i));
+    for (int32_t i = fValues->CountItems(); i-- > 0;) {
+        delete static_cast<int32_t*>(fValues->ItemAt(i));
     }
     fValues->MakeEmpty();
 
-    for (int32 i = fSelections->CountItems(); i-- > 0;) {
+    for (int32_t i = fSelections->CountItems(); i-- > 0;) {
         free(static_cast<char*>(fSelections->ItemAt(i)));
     }
     fSelections->MakeEmpty();
@@ -2045,8 +2045,8 @@ BDiscreteParameter::FlattenedSize() const
     ssize_t size = BParameter::FlattenedSize()
         + kAdditionalDiscreteParameterSize;
 
-    int32 count = fValues->CountItems();
-    for (int32 i = 0; i < count; i++) {
+    int32_t count = fValues->CountItems();
+    for (int32_t i = 0; i < count; i++) {
         char* selection = static_cast<char*>(fSelections->ItemAt(i));
 
         if (selection != NULL)
@@ -2084,16 +2084,16 @@ status_t BDiscreteParameter::Flatten(void* buffer, ssize_t size) const
 
     skip_in_buffer(&buffer, parameterSize);
 
-    int32 count = fValues->CountItems();
-    write_to_buffer<int32>(&buffer, count);
+    int32_t count = fValues->CountItems();
+    write_to_buffer<int32_t>(&buffer, count);
 
     // write out all value/name pairs
-    for (int32 i = 0; i < count; i++) {
+    for (int32_t i = 0; i < count; i++) {
         const char* selection = static_cast<char*>(fSelections->ItemAt(i));
-        const int32* value = static_cast<int32*>(fValues->ItemAt(i));
+        const int32_t* value = static_cast<int32_t*>(fValues->ItemAt(i));
 
         write_string_to_buffer(&buffer, selection);
-        write_to_buffer<int32>(&buffer, value ? *value : 0);
+        write_to_buffer<int32_t>(&buffer, value ? *value : 0);
     }
 
     return B_OK;
@@ -2116,7 +2116,7 @@ status_t BDiscreteParameter::Unflatten(type_code code, const void* buffer, ssize
 
     // if the buffer is smaller than the size needed to read the
     // signature and struct size fields, then there is a problem
-    if (size < static_cast<ssize_t>(sizeof(int32) + sizeof(ssize_t))) {
+    if (size < static_cast<ssize_t>(sizeof(int32_t) + sizeof(ssize_t))) {
         ERROR("BDiscreteParameter::Unflatten(): size too small\n");
         return B_ERROR;
     }
@@ -2137,23 +2137,23 @@ status_t BDiscreteParameter::Unflatten(type_code code, const void* buffer, ssize
         return B_BAD_VALUE;
     }
 
-    int32 count = read_from_buffer_swap32<int32>(&buffer, SwapOnUnflatten());
+    int32_t count = read_from_buffer_swap32<int32_t>(&buffer, SwapOnUnflatten());
 
     // clear any existing name/value pairs
     MakeEmpty();
 
-    for (int32 i = 0; i < count; i++) {
+    for (int32_t i = 0; i < count; i++) {
         char* name;
         if (read_string_from_buffer(&buffer, &name, size_left(size, bufferStart,
                 buffer)) < B_OK)
             return B_BAD_DATA;
 
-        if (size_left(size, bufferStart, buffer) < (int)sizeof(int32)) {
+        if (size_left(size, bufferStart, buffer) < (int)sizeof(int32_t)) {
             free(name);
             return B_BAD_DATA;
         }
 
-        int32 value = read_from_buffer_swap32<int32>(&buffer,
+        int32_t value = read_from_buffer_swap32<int32_t>(&buffer,
             SwapOnUnflatten());
 
         AddItem(value, name);
@@ -2164,7 +2164,7 @@ status_t BDiscreteParameter::Unflatten(type_code code, const void* buffer, ssize
 }
 
 
-BDiscreteParameter::BDiscreteParameter(int32 id, media_type mediaType,
+BDiscreteParameter::BDiscreteParameter(int32_t id, media_type mediaType,
     BParameterWeb* web, const char* name, const char* kind)
     :	BParameter(id, mediaType, B_DISCRETE_PARAMETER, web, name, kind, NULL)
 {
@@ -2233,7 +2233,7 @@ status_t BTextParameter::Flatten(void* buffer, ssize_t size) const
 
     skip_in_buffer(&buffer, parameterSize);
 
-    write_to_buffer<uint32>(&buffer, fMaxBytes);
+    write_to_buffer<uint32_t>(&buffer, fMaxBytes);
 
     return B_OK;
 }
@@ -2273,13 +2273,13 @@ status_t BTextParameter::Unflatten(type_code code, const void* buffer, ssize_t s
         return B_BAD_VALUE;
     }
 
-    fMaxBytes = read_from_buffer_swap32<uint32>(&buffer, SwapOnUnflatten());
+    fMaxBytes = read_from_buffer_swap32<uint32_t>(&buffer, SwapOnUnflatten());
 
     return B_OK;
 }
 
 
-BTextParameter::BTextParameter(int32 id, media_type mediaType,
+BTextParameter::BTextParameter(int32_t id, media_type mediaType,
         BParameterWeb* web, const char* name, const char* kind,
         size_t maxBytes)
     : BParameter(id, mediaType, B_TEXT_PARAMETER, web, name, kind, NULL)
@@ -2323,7 +2323,7 @@ status_t BNullParameter::Unflatten(type_code code, const void* buffer, ssize_t s
 }
 
 
-BNullParameter::BNullParameter(int32 id, media_type mediaType,
+BNullParameter::BNullParameter(int32_t id, media_type mediaType,
         BParameterWeb* web, const char* name, const char* kind)
     : BParameter(id, mediaType, B_NULL_PARAMETER, web, name, kind, NULL)
 {

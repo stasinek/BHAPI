@@ -29,27 +29,27 @@ public:
                                 BCatalog();
                                 BCatalog(const entry_ref& catalogOwner,
                                     const char* language = NULL,
-                                    uint32 fingerprint = 0);
+                                    uint32_t fingerprint = 0);
     virtual						~BCatalog();
 
             const char*			GetString(const char* string,
                                     const char* context = NULL,
                                     const char* comment = NULL);
-            const char*			GetString(uint32 id);
+            const char*			GetString(uint32_t id);
 
             status_t			GetData(const char* name, BMessage* msg);
-            status_t			GetData(uint32 id, BMessage* msg);
+            status_t			GetData(uint32_t id, BMessage* msg);
 
             status_t			GetSignature(BString* signature);
             status_t			GetLanguage(BString* language);
-            status_t			GetFingerprint(uint32* fingerprint);
+            status_t			GetFingerprint(uint32_t* fingerprint);
 
             status_t			SetTo(const entry_ref& catalogOwner,
                                     const char* language = NULL,
-                                    uint32 fingerprint = 0);
+                                    uint32_t fingerprint = 0);
 
             status_t			InitCheck() const;
-            int32				CountItems() const;
+            int32_t				CountItems() const;
 
 protected:
                                 BCatalog(const BCatalog&);

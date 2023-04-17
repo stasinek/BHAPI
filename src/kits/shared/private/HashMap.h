@@ -49,7 +49,7 @@ public:
 		fNext = -1;
 	}
 
-	inline uint32 Hash() const
+	inline uint32_t Hash() const
 	{
 		return fKey.GetHashCode();
 	}
@@ -159,7 +159,7 @@ public:
 				return;
 			}
 			fElement = NULL;
-			int32 arraySize = fMap->fTable.ArraySize();
+			int32_t arraySize = fMap->fTable.ArraySize();
 			for (; !fElement && fIndex < arraySize; fIndex++)
 				fElement = fMap->fTable.FindFirst(fIndex);
 		}
@@ -168,7 +168,7 @@ public:
 		friend class HashMap<Key, Value>;
 
 		HashMap<Key, Value>*	fMap;
-		int32					fIndex;
+		int32_t					fIndex;
 		Element*				fElement;
 		Element*				fLastElement;
 	};
@@ -186,7 +186,7 @@ public:
 
 	bool ContainsKey(const Key& key) const;
 
-	int32 Size() const;
+	int32_t Size() const;
 
 	Iterator GetIterator() const;
 
@@ -257,7 +257,7 @@ public:
 		return fMap.ContainsKey(key);
 	}
 
-	int32 Size() const
+	int32_t Size() const
 	{
 		const BLocker* lock = this;
 		MapLocker locker(const_cast<BLocker*>(lock));
@@ -285,9 +285,9 @@ struct HashKey32 {
 	HashKey32() {}
 	HashKey32(const Value& value) : value(value) {}
 
-	uint32 GetHashCode() const
+	uint32_t GetHashCode() const
 	{
-		return (uint32)value;
+		return (uint32_t)value;
 	}
 
 	HashKey32<Value> operator=(const HashKey32<Value>& other)
@@ -316,10 +316,10 @@ struct HashKey64 {
 	HashKey64() {}
 	HashKey64(const Value& value) : value(value) {}
 
-	uint32 GetHashCode() const
+	uint32_t GetHashCode() const
 	{
 		uint64 v = (uint64)value;
-		return (uint32)(v >> 32) ^ (uint32)v;
+		return (uint32_t)(v >> 32) ^ (uint32_t)v;
 	}
 
 	HashKey64<Value> operator=(const HashKey64<Value>& other)
@@ -437,7 +437,7 @@ bool HashMap<Key, Value>::ContainsKey(const Key& key) const
 
 // Size
 template<typename Key, typename Value>
-int32 HashMap<Key, Value>::Size() const
+int32_t HashMap<Key, Value>::Size() const
 {
 	return fTable.CountElements();
 }

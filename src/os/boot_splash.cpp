@@ -45,10 +45,10 @@ blit8_cropped(const uint8 *data, uint16 imageLeft, uint16 imageTop,
 	uint8* start = (uint8*)(sInfo->frame_buffer
 		+ sInfo->bytes_per_row * (top + imageTop) + 1 * (left + imageLeft));
 
-	for (int32 y = imageTop; y < imageBottom; y++) {
+	for (int32_t y = imageTop; y < imageBottom; y++) {
 		const uint8* src = data;
 		uint8* dst = start;
-		for (int32 x = imageLeft; x < imageRight; x++) {
+		for (int32_t x = imageLeft; x < imageRight; x++) {
 			dst[0] = src[0];
 			dst++;
 			src++;
@@ -70,10 +70,10 @@ blit15_cropped(const uint8 *data, uint16 imageLeft, uint16 imageTop,
 		+ sInfo->bytes_per_row * (top + imageTop)
 		+ 2 * (left + imageLeft));
 
-	for (int32 y = imageTop; y < imageBottom; y++) {
+	for (int32_t y = imageTop; y < imageBottom; y++) {
 		const uint8* src = data;
 		uint16* dst = start;
-		for (int32 x = imageLeft; x < imageRight; x++) {
+		for (int32_t x = imageLeft; x < imageRight; x++) {
 			dst[0] = ((src[2] >> 3) << 10)
 				| ((src[1] >> 3) << 5)
 				| ((src[0] >> 3));
@@ -97,10 +97,10 @@ blit16_cropped(const uint8 *data, uint16 imageLeft, uint16 imageTop,
 	uint16* start = (uint16*)(sInfo->frame_buffer
 		+ sInfo->bytes_per_row * (top + imageTop) + 2 * (left + imageLeft));
 
-	for (int32 y = imageTop; y < imageBottom; y++) {
+	for (int32_t y = imageTop; y < imageBottom; y++) {
 		const uint8* src = data;
 		uint16* dst = start;
-		for (int32 x = imageLeft; x < imageRight; x++) {
+		for (int32_t x = imageLeft; x < imageRight; x++) {
 			dst[0] = ((src[2] >> 3) << 11)
 				| ((src[1] >> 2) << 5)
 				| ((src[0] >> 3));
@@ -124,10 +124,10 @@ blit24_cropped(const uint8 *data, uint16 imageLeft, uint16 imageTop,
 	uint8* start = (uint8*)(sInfo->frame_buffer
 		+ sInfo->bytes_per_row * (top + imageTop) + 3 * (left + imageLeft));
 
-	for (int32 y = imageTop; y < imageBottom; y++) {
+	for (int32_t y = imageTop; y < imageBottom; y++) {
 		const uint8* src = data;
 		uint8* dst = start;
-		for (int32 x = imageLeft; x < imageRight; x++) {
+		for (int32_t x = imageLeft; x < imageRight; x++) {
 			dst[0] = src[0];
 			dst[1] = src[1];
 			dst[2] = src[2];
@@ -147,20 +147,20 @@ blit32_cropped(const uint8 *data, uint16 imageLeft, uint16 imageTop,
 	uint16 left, uint16 top)
 {
 	data += (imageWidth * imageTop + imageLeft) * 3;
-	uint32* start = (uint32*)(sInfo->frame_buffer
+	uint32_t* start = (uint32_t*)(sInfo->frame_buffer
 		+ sInfo->bytes_per_row * (top + imageTop) + 4 * (left + imageLeft));
 
-	for (int32 y = imageTop; y < imageBottom; y++) {
+	for (int32_t y = imageTop; y < imageBottom; y++) {
 		const uint8* src = data;
-		uint32* dst = start;
-		for (int32 x = imageLeft; x < imageRight; x++) {
+		uint32_t* dst = start;
+		for (int32_t x = imageLeft; x < imageRight; x++) {
 			dst[0] = (src[2] << 16) | (src[1] << 8) | (src[0]);
 			dst++;
 			src += 3;
 		}
 
 		data += imageWidth * 3;
-		start = (uint32*)((addr_t)start + sInfo->bytes_per_row);
+		start = (uint32_t*)((addr_t)start + sInfo->bytes_per_row);
 	}
 }
 

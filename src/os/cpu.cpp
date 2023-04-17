@@ -27,7 +27,7 @@
 /* global per-cpu structure */
 cpu_ent gCPU[SMP_MAX_CPUS];
 
-uint32 gCPUCacheLevelCount;
+uint32_t gCPUCacheLevelCount;
 static cpu_topology_node sCPUTopology;
 
 static cpufreq_module_info* sCPUPerformanceModule;
@@ -154,13 +154,13 @@ cpu_preboot_init_percpu(kernel_args *args, int curr_cpu)
 
 
 bigtime_t
-cpu_get_active_time(int32 cpu)
+cpu_get_active_time(int32_t cpu)
 {
 	if (cpu < 0 || cpu > smp_get_num_cpus())
 		return 0;
 
 	bigtime_t activeTime;
-	uint32 count;
+	uint32_t count;
 
 	do {
 		count = acquire_read_seqlock(&gCPU[cpu].active_time_lock);
@@ -172,14 +172,14 @@ cpu_get_active_time(int32 cpu)
 
 
 void
-clear_caches(void *address, size_t length, uint32 flags)
+clear_caches(void *address, size_t length, uint32_t flags)
 {
 	// ToDo: implement me!
 }
 
 
 static status_t
-cpu_create_topology_node(cpu_topology_node* node, int32* maxID, int32 id)
+cpu_create_topology_node(cpu_topology_node* node, int32_t* maxID, int32_t id)
 {
 	cpu_topology_level level = static_cast<cpu_topology_level>(node->level - 1);
 	ASSERT(level >= 0);
@@ -209,13 +209,13 @@ cpu_create_topology_node(cpu_topology_node* node, int32* maxID, int32 id)
 
 
 static void
-cpu_rebuild_topology_tree(cpu_topology_node* node, int32* lastID)
+cpu_rebuild_topology_tree(cpu_topology_node* node, int32_t* lastID)
 {
 	if (node->children == NULL)
 		return;
 
-	int32 count = 0;
-	for (int32 i = 0; i < node->children_count; i++) {
+	int32_t count = 0;
+	for (int32_t i = 0; i < node->children_count; i++) {
 		if (node->children[i] == NULL)
 			continue;
 
@@ -237,16 +237,16 @@ cpu_build_topology_tree(void)
 {
 	sCPUTopology.level = CPU_TOPOLOGY_LEVELS;
 
-	int32 maxID[CPU_TOPOLOGY_LEVELS];
+	int32_t maxID[CPU_TOPOLOGY_LEVELS];
 	memset(&maxID, 0, sizeof(maxID));
 
-	const int32 kCPUCount = smp_get_num_cpus();
-	for (int32 i = 0; i < kCPUCount; i++) {
-		for (int32 j = 0; j < CPU_TOPOLOGY_LEVELS; j++)
+	const int32_t kCPUCount = smp_get_num_cpus();
+	for (int32_t i = 0; i < kCPUCount; i++) {
+		for (int32_t j = 0; j < CPU_TOPOLOGY_LEVELS; j++)
 			maxID[j] = max_c(maxID[j], gCPU[i].topology_id[j]);
 	}
 
-	for (int32 j = 0; j < CPU_TOPOLOGY_LEVELS; j++)
+	for (int32_t j = 0; j < CPU_TOPOLOGY_LEVELS; j++)
 		maxID[j]++;
 
 	sCPUTopology.children_count = maxID[CPU_TOPOLOGY_LEVELS - 1];
@@ -257,10 +257,10 @@ cpu_build_topology_tree(void)
 	memset(sCPUTopology.children, 0,
 		maxID[CPU_TOPOLOGY_LEVELS - 1] * sizeof(cpu_topology_node*));
 
-	for (int32 i = 0; i < kCPUCount; i++) {
+	for (int32_t i = 0; i < kCPUCount; i++) {
 		cpu_topology_node* node = &sCPUTopology;
-		for (int32 j = CPU_TOPOLOGY_LEVELS - 1; j >= 0; j--) {
-			int32 id = gCPU[i].topology_id[j];
+		for (int32_t j = CPU_TOPOLOGY_LEVELS - 1; j >= 0; j--) {
+			int32_t id = gCPU[i].topology_id[j];
 			if (node->children[id] == NULL) {
 				status_t result = cpu_create_topology_node(node, maxID, id);
 				if (result != B_OK)
@@ -274,7 +274,7 @@ cpu_build_topology_tree(void)
 		node->id = i;
 	}
 
-	int32 lastID[CPU_TOPOLOGY_LEVELS];
+	int32_t lastID[CPU_TOPOLOGY_LEVELS];
 	memset(&lastID, 0, sizeof(lastID));
 	cpu_rebuild_topology_tree(&sCPUTopology, lastID);
 
@@ -333,7 +333,7 @@ cpu_idle(void)
 
 
 void
-cpu_wait(int32* variable, int32 test)
+cpu_wait(int32_t* variable, int32_t test)
 {
 	if (sCPUIdleModule != NULL)
 		sCPUIdleModule->cpuidle_wait(variable, test);
@@ -346,14 +346,14 @@ cpu_wait(int32* variable, int32 test)
 
 
 void
-_user_clear_caches(void *address, size_t length, uint32 flags)
+_user_clear_caches(void *address, size_t length, uint32_t flags)
 {
 	clear_caches(address, length, flags);
 }
 
 
 bool
-_user_cpu_enabled(int32 cpu)
+_user_cpu_enabled(int32_t cpu)
 {
 	if (cpu < 0 || cpu >= smp_get_num_cpus())
 		return false;
@@ -363,9 +363,9 @@ _user_cpu_enabled(int32 cpu)
 
 
 status_t
-_user_set_cpu_enabled(int32 cpu, bool enabled)
+_user_set_cpu_enabled(int32_t cpu, bool enabled)
 {
-	int32 i, count;
+	int32_t i, count;
 
 	if (cpu < 0 || cpu >= smp_get_num_cpus())
 		return B_BAD_VALUE;

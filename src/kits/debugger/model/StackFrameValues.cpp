@@ -23,7 +23,7 @@ struct StackFrameValues::Key {
 	{
 	}
 
-	uint32 HashValue() const
+	uint32_t HashValue() const
 	{
 		return variable->HashValue() ^ path->HashValue();
 	}

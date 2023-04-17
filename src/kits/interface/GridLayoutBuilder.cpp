@@ -66,8 +66,8 @@ BGridLayoutBuilder::GetView(BView** _view)
 
 // Add
 BGridLayoutBuilder&
-BGridLayoutBuilder::Add(BView* view, int32 column, int32 row,
-	int32 columnCount, int32 rowCount)
+BGridLayoutBuilder::Add(BView* view, int32_t column, int32_t row,
+	int32_t columnCount, int32_t rowCount)
 {
 	fLayout->AddView(view, column, row, columnCount, rowCount);
 	return *this;
@@ -75,8 +75,8 @@ BGridLayoutBuilder::Add(BView* view, int32 column, int32 row,
 
 // Add
 BGridLayoutBuilder&
-BGridLayoutBuilder::Add(BLayoutItem* item, int32 column, int32 row,
-	int32 columnCount, int32 rowCount)
+BGridLayoutBuilder::Add(BLayoutItem* item, int32_t column, int32_t row,
+	int32_t columnCount, int32_t rowCount)
 {
 	fLayout->AddItem(item, column, row, columnCount, rowCount);
 	return *this;
@@ -84,7 +84,7 @@ BGridLayoutBuilder::Add(BLayoutItem* item, int32 column, int32 row,
 
 // SetColumnWeight
 BGridLayoutBuilder&
-BGridLayoutBuilder::SetColumnWeight(int32 column, float weight)
+BGridLayoutBuilder::SetColumnWeight(int32_t column, float weight)
 {
 	fLayout->SetColumnWeight(column, weight);
 	return *this;
@@ -92,7 +92,7 @@ BGridLayoutBuilder::SetColumnWeight(int32 column, float weight)
 
 // SetRowWeight
 BGridLayoutBuilder&
-BGridLayoutBuilder::SetRowWeight(int32 row, float weight)
+BGridLayoutBuilder::SetRowWeight(int32_t row, float weight)
 {
 	fLayout->SetRowWeight(row, weight);
 	return *this;

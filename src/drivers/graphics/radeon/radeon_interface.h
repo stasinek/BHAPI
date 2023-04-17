@@ -60,9 +60,9 @@ enum {
 #define INDIRECT_BUFFER_SIZE (4096/4)
 
 typedef struct {
-	uint32	loginfo;
-	uint32	logflow;
-	uint32	logerror;
+	uint32_t	loginfo;
+	uint32_t	logflow;
+	uint32_t	logerror;
 	bool	switchhead;
 	bool	force_lcd;
 	bool	dynamic_clocks; // power saving / management for mobility chips
@@ -272,8 +272,8 @@ typedef struct {
 	uint16	y;
 	uint16	width;
 	uint16	height;
-	uint32 	mem_handle;	// memory handle
-	uint32	fb_offset;	// offset in frame buffer
+	uint32_t 	mem_handle;	// memory handle
+	uint32_t	fb_offset;	// offset in frame buffer
 	bool	is_visible;	// official flag whether cursor is visible
 } cursor_info;
 
@@ -308,7 +308,7 @@ typedef struct {
 	display_device_e active_displays; // currently driven displays
 	display_device_e chosen_displays; // displays to be driven after next mode switch
 	sem_id		vblank;				// vertical blank interrupt semaphore
-	uint32		rel_x, rel_y;	// relative position in multi-monitor mode
+	uint32_t		rel_x, rel_y;	// relative position in multi-monitor mode
 	display_mode mode;				// display mode of this head
 } crtc_info;
 
@@ -316,11 +316,11 @@ typedef struct {
 // info about PLLs on graphics card as retrieved from BIOS
 // all values are in 10kHz
 typedef struct {
-	uint32 max_pll_freq;		// maximum PLL output frequency
-	uint32 min_pll_freq;		// minimum PLL output frequency
-	uint32 xclk;				// core frequency
-	uint32 ref_div;				// default reference divider
-	uint32 ref_freq;			// PLL reference frequency
+	uint32_t max_pll_freq;		// maximum PLL output frequency
+	uint32_t min_pll_freq;		// minimum PLL output frequency
+	uint32_t xclk;				// core frequency
+	uint32_t ref_div;				// default reference divider
+	uint32_t ref_freq;			// PLL reference frequency
 } general_pll_info;
 
 
@@ -336,26 +336,26 @@ typedef struct {
 typedef struct {
 	pll_divider_map *post_divs;	// list of possible post dividers
 	pll_divider_map *extra_post_divs; // list of possible extra post dividers
-	uint32 ref_freq;			// reference frequency
-	uint32 vco_min, vco_max;	// VCO frequency range
-	uint32 min_ref_div, max_ref_div; // reference divider range
-	uint32 pll_in_min, pll_in_max; // PLL input frequency range
-	uint32 extra_feedback_div;	// hardwired divider before feedback divider
-	uint32 min_feedback_div, max_feedback_div; // feedback divider range
-	uint32 best_vco;			// preferred VCO frequency (0 for don't care)
+	uint32_t ref_freq;			// reference frequency
+	uint32_t vco_min, vco_max;	// VCO frequency range
+	uint32_t min_ref_div, max_ref_div; // reference divider range
+	uint32_t pll_in_min, pll_in_max; // PLL input frequency range
+	uint32_t extra_feedback_div;	// hardwired divider before feedback divider
+	uint32_t min_feedback_div, max_feedback_div; // feedback divider range
+	uint32_t best_vco;			// preferred VCO frequency (0 for don't care)
 } pll_info;
 
 // info for ext tmds pll
 typedef struct {
-	uint32 freq;
-	uint32 value;
+	uint32_t freq;
+	uint32_t value;
 } tmds_pll_info;
 
 // one overlay buffer
 typedef struct overlay_buffer_node {
 	struct overlay_buffer_node *next, *prev;
-	uint32 mem_handle;
-	uint32 mem_offset;
+	uint32_t mem_handle;
+	uint32_t mem_offset;
 	uint ati_space;				// colour space according to ATI
 	uint test_reg;				// content of test reg
 	overlay_buffer buffer;
@@ -374,7 +374,7 @@ typedef struct {
 	overlay_buffer_node *on;	// current buffer
 	overlay_buffer_node *prev_on; // previous buffer (for temporal deinterlace, currently unused)
 	int				crtc_idx;	// crtc where the overlay is shown on
-	uint32			rel_offset;	// offset of overlay source due to clipping
+	uint32_t			rel_offset;	// offset of overlay source due to clipping
 } overlay_info;
 
 
@@ -382,7 +382,7 @@ typedef struct {
 // can have independant accelerants for each head
 // (this is an ongoing project ;)
 typedef struct {
-	uint32		id;				// identifier used to know which card the 2D accelerator
+	uint32_t		id;				// identifier used to know which card the 2D accelerator
 								// is prepared for (we use area_id of this structure)
 	bool		assigned_crtc[2];	// mask of heads assigned to virtual card
 	bool		used_crtc[2];	// mask of heads assigned to virtual card
@@ -394,13 +394,13 @@ typedef struct {
 	int8		different_heads;	// number of heads showing different parts of framebuffer
 	bool		scroll;			// scrolling in virtual area enabled
 
-	uint32		datatype;		// Radeon code for pixel format
+	uint32_t		datatype;		// Radeon code for pixel format
 	uint		bpp;			// bytes per pixel
-	uint32		pitch;			// byte offset between two lines
+	uint32_t		pitch;			// byte offset between two lines
 
-	uint32		eff_width, eff_height;	// size of visible area (including both monitors)
-	uint32		fb_mem_handle;	// memory handle
-	uint32		fb_offset;		// offset of frame buffer in graphics mem
+	uint32_t		eff_width, eff_height;	// size of visible area (including both monitors)
+	uint32_t		fb_mem_handle;	// memory handle
+	uint32_t		fb_offset;		// offset of frame buffer in graphics mem
 
 	cursor_info	cursor;
 
@@ -426,18 +426,18 @@ typedef struct {
 
 // status of overlay
 typedef struct {
-	int32	inuse;				// one, if someone allocated overlay head
+	int32_t	inuse;				// one, if someone allocated overlay head
 								// (this doesn't necessarily mean that an overlay is shown)
 	uintptr_t	token;			// arbitrarily chosen token to identify overlay owner
 								// (increased by 1 whenever there is a new owner)
-	uint32	auto_flip_reg;		// content of auto_flip_reg
+	uint32_t	auto_flip_reg;		// content of auto_flip_reg
 } overlay_mgr_info;
 
 
 // info about indirect CP buffer
 typedef struct {
 	int		next;				// next used/free buffer (-1 for EOL)
-	int32	send_tag;			// tag assigned when buffer was submitted
+	int32_t	send_tag;			// tag assigned when buffer was submitted
 } indirect_buffer;
 
 
@@ -448,30 +448,30 @@ typedef struct {
 
 	// ring buffer (in non-local memory)
 	struct {
-		uint32	mem_offset;			// offset in non-local memory
-		uint32	vm_base;			// base of ring buffer as seen by graphics card
-		uint32	tail, tail_mask;	// next write position in dwords; mask for wrap-arounds
-		uint32	size;				// size in dwords
-		//uint32	head_offset;	// offset for automatically updates head in DMA buffer
+		uint32_t	mem_offset;			// offset in non-local memory
+		uint32_t	vm_base;			// base of ring buffer as seen by graphics card
+		uint32_t	tail, tail_mask;	// next write position in dwords; mask for wrap-arounds
+		uint32_t	size;				// size in dwords
+		//uint32_t	head_offset;	// offset for automatically updates head in DMA buffer
 
-		//uint32			start_offset;
+		//uint32_t			start_offset;
 		memory_type_e	mem_type;
-		//uint32	*start;			// pointer to ring buffer
-		//vuint32	*head;			// pointer to automatically updated read position
+		//uint32_t	*start;			// pointer to ring buffer
+		//vuint32_t	*head;			// pointer to automatically updated read position
 		
-		uint32	space;			// known space in ring buffer
-		uint32 	mem_handle;		// handle of memory of indirect buffers
+		uint32_t	space;			// known space in ring buffer
+		uint32_t 	mem_handle;		// handle of memory of indirect buffers
 	} ring;
 	
 	// feedback registers (in PCI memory)
 	struct {
-		//vuint32 *ptr;			// pointer to scratch registers
-		uint32			scratch_mem_offset;	// offset of scratch registers in feedback memory
-		uint32			head_mem_offset;	// offset of head register in feedback memory
-		uint32			scratch_vm_start;	// virtual address of scratch as seen by GC
-		uint32			head_vm_address;	// virtual address of head as seen by GC
+		//vuint32_t *ptr;			// pointer to scratch registers
+		uint32_t			scratch_mem_offset;	// offset of scratch registers in feedback memory
+		uint32_t			head_mem_offset;	// offset of head register in feedback memory
+		uint32_t			scratch_vm_start;	// virtual address of scratch as seen by GC
+		uint32_t			head_vm_address;	// virtual address of head as seen by GC
 		memory_type_e	mem_type;		// memory type of feedback memory
-		uint32 			mem_handle;		// handle of feedback memory
+		uint32_t 			mem_handle;		// handle of feedback memory
 	} feedback;
 	
 
@@ -485,11 +485,11 @@ typedef struct {
 		uint64		cur_tag;		// tag of last submitted indirect buffer
 
 		memory_type_e mem_type;		
-		uint32		mem_offset;		// offset of indirect buffers in non-local memory		
-		uint32		vm_start;		// start of indirect buffers as seen by graphics card
+		uint32_t		mem_offset;		// offset of indirect buffers in non-local memory		
+		uint32_t		vm_start;		// start of indirect buffers as seen by graphics card
 		
 		indirect_buffer	buffers[NUM_INDIRECT_BUFFERS];	// info about buffers
-		uint32 		mem_handle;		// handle of memory of indirect buffers
+		uint32_t 		mem_handle;		// handle of memory of indirect buffers
 	} buffers;
 } CP_info;
 
@@ -498,9 +498,9 @@ typedef struct {
 // (see memory_type_e)
 typedef struct {
 	area_id		area;				// area to memory
-	uint32		size;				// usable size in bytes
-	uint32		virtual_addr_start;	// virtual address (for graphics card!)
-	uint32		virtual_size;		// reserved virtual address space in bytes
+	uint32_t		size;				// usable size in bytes
+	uint32_t		virtual_addr_start;	// virtual address (for graphics card!)
+	uint32_t		virtual_size;		// reserved virtual address space in bytes
 } memory_type_info;
 
 
@@ -556,11 +556,11 @@ typedef struct {
 	area_id	mode_list_area;		// area containing display mode list
 	uint	mode_count;
 	
-	uint32	active_vc;			// currently selected virtual card in terms of 2D acceleration
+	uint32_t	active_vc;			// currently selected virtual card in terms of 2D acceleration
 		
-	uint32	dac_cntl2;			// content of dac_cntl2 register
-	uint32	tmds_pll_cntl;			// undocumented here be dragons
-	uint32	tmds_transmitter_cntl;		// undocumented here be dragons
+	uint32_t	dac_cntl2;			// content of dac_cntl2 register
+	uint32_t	tmds_pll_cntl;			// undocumented here be dragons
+	uint32_t	tmds_transmitter_cntl;		// undocumented here be dragons
 
 	overlay_info	pending_overlay;	// overlay to be shown
 	overlay_info	active_overlay;		// overlay shown
@@ -581,113 +581,113 @@ typedef struct {
 
 // retrieve the area_id of the kernel/accelerant shared info
 typedef struct {
-	uint32	magic;				// magic number
+	uint32_t	magic;				// magic number
 	area_id	shared_info_area;
 	area_id	virtual_card_area;
 } radeon_get_private_data;
 
 // get devie name (used to clone accelerant)
 typedef struct {
-	uint32	magic;				// magic number
+	uint32_t	magic;				// magic number
 	char	*name;				// pointer to buffer containing name (in)
 } radeon_device_name;
 
 // alloc (non-)local memory
 typedef struct {
-	uint32			magic;
+	uint32_t			magic;
 	memory_type_e	memory_type;// type of memory
-	uint32			size;		// size in bytes
-	uint32			offset;		// offset in memory
-	uint32			handle;		// handle (needed to free memory)
+	uint32_t			size;		// size in bytes
+	uint32_t			offset;		// offset in memory
+	uint32_t			handle;		// handle (needed to free memory)
 	bool			global;		// set this to true if memory should persist even
 								// if client gets terminated
 } radeon_alloc_mem;
 
 // free (non-)local memory
 typedef struct {
-	uint32 			magic;
+	uint32_t 			magic;
 	memory_type_e	memory_type;// type of memory
-	uint32			handle;		// memory handle 
+	uint32_t			handle;		// memory handle 
 	bool			global;		// must be same as on alloc_local_mem
 } radeon_free_mem;
 
 // wait for idle
 typedef struct {
-	uint32 			magic;
+	uint32_t 			magic;
 	bool			keep_lock;	// keep lock after engine is idle
 } radeon_wait_for_idle;
 
 // wait for idle
 typedef struct {
-	uint32 			magic;
+	uint32_t 			magic;
 	int				entries;	// keep lock after engine is idle
 } radeon_wait_for_fifo;
 
 // read VIP register
 typedef struct {
-	uint32 			magic;
+	uint32_t 			magic;
 	uint 			channel;	// channel, i.e. device
 	uint 			address;	// address
-	uint32 			data;		// read data
+	uint32_t 			data;		// read data
 	bool			lock;		// true, if CP lock must be acquired
 } radeon_vip_read;
 
 // write VIP register
 typedef struct {
-	uint32 			magic;
+	uint32_t 			magic;
 	uint 			channel;	// channel, i.e. device
 	uint 			address;	// address
-	uint32 			data;		// data to write
+	uint32_t 			data;		// data to write
 	bool			lock;		// true, if CP lock must be acquired
 } radeon_vip_write;
 
 // read VIP fifo
 typedef struct {
-	uint32 			magic;
+	uint32_t 			magic;
 	uint 			channel;	// channel, i.e. device
 	uint 			address;	// address
-	uint32			count;		// size of buffer
+	uint32_t			count;		// size of buffer
 	uint8 			*data;		// read data
 	bool			lock;		// true, if CP lock must be acquired
 } radeon_vip_fifo_read;
 
 // write VIP fifo
 typedef struct {
-	uint32 			magic;
+	uint32_t 			magic;
 	uint 			channel;	// channel, i.e. device
 	uint 			address;	// address
-	uint32			count;		// size of buffer
+	uint32_t			count;		// size of buffer
 	uint8 			*data;		// data to write
 	bool			lock;		// true, if CP lock must be acquired
 } radeon_vip_fifo_write;
 
 // find channel of device with given ID
 typedef struct {
-	uint32 			magic;
-	uint32 			device_id;	// id of device
+	uint32_t 			magic;
+	uint32_t 			device_id;	// id of device
 	uint 			channel;	// channel of device (-1 if not found)
 } radeon_find_vip_device;
 
 // reset / init VIP
 typedef struct {
-	uint32 			magic;
+	uint32_t 			magic;
 	bool			lock;
 } radeon_vip_reset;
 
 
 // wait for capture interrupt and get status about
 typedef struct {
-	uint32 			magic;
+	uint32_t 			magic;
 	bigtime_t		timeout;	// timeout to wait for irq
 	bigtime_t		timestamp;	// timestamp when last capturing was finished
-	uint32			int_status;	// content of RADEON_CAP_INT_STATUS
-	uint32			counter;	// number of capture interrupts so far
+	uint32_t			int_status;	// content of RADEON_CAP_INT_STATUS
+	uint32_t			counter;	// number of capture interrupts so far
 } radeon_wait_for_cap_irq;
 
 // copy data from frame buffer to some memory location
 typedef struct {
-	uint32 			magic;
-	uint32			src;		// offset of source data in frame buffer
+	uint32_t 			magic;
+	uint32_t			src;		// offset of source data in frame buffer
 	void			*target;	// target buffer
 	size_t			size;		// number of bytes to copy
 	bool			lock_mem;	// true, if target needs to be locked
@@ -696,7 +696,7 @@ typedef struct {
 
 // parameter for ioctl without further arguments
 typedef struct {
-	uint32			magic;
+	uint32_t			magic;
 } radeon_no_arg;
 
 #endif

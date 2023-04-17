@@ -53,15 +53,15 @@ namespace BPrivate {
 class OverrideAlert : public BAlert {
 public:
 	OverrideAlert(const char* title, const char* text,
-		const char* button1, uint32 modifiers1,
-		const char* button2, uint32 modifiers2,
-		const char* button3, uint32 modifiers3,
+		const char* button1, uint32_t modifiers1,
+		const char* button2, uint32_t modifiers2,
+		const char* button3, uint32_t modifiers3,
 		button_width width = B_WIDTH_AS_USUAL,
 		alert_type type = B_INFO_ALERT);
 	OverrideAlert(const char* title, const char* text,
-		const char* button1, uint32 modifiers1,
-		const char* button2, uint32 modifiers2,
-		const char* button3, uint32 modifiers3,
+		const char* button1, uint32_t modifiers1,
+		const char* button2, uint32_t modifiers2,
+		const char* button3, uint32_t modifiers3,
 		button_width width, button_spacing spacing,
 		alert_type type = B_INFO_ALERT);
 	virtual ~OverrideAlert();
@@ -71,10 +71,10 @@ public:
 	static BPoint OverPosition(float width, float height);
 
 private:
-	void UpdateButtons(uint32 modifiers, bool force = false);
+	void UpdateButtons(uint32_t modifiers, bool force = false);
 
-	uint32 fCurModifiers;
-	uint32 fButtonModifiers[3];
+	uint32_t fCurModifiers;
+	uint32_t fButtonModifiers[3];
 };
 
 } // namespace BPrivate

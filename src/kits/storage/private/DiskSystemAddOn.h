@@ -20,11 +20,11 @@ class BPartitioningInfo;
 class BDiskSystemAddOn {
 public:
 								BDiskSystemAddOn(const char* name,
-									uint32 flags);
+									uint32_t flags);
 	virtual						~BDiskSystemAddOn();
 
 			const char*			Name() const;
-			uint32				Flags() const;
+			uint32_t				Flags() const;
 
 	virtual	status_t			CreatePartitionHandle(
 									BMutablePartition* partition,
@@ -48,7 +48,7 @@ public:
 
 private:
 			BString				fName;
-			uint32				fFlags;
+			uint32_t				fFlags;
 };
 
 
@@ -59,10 +59,10 @@ public:
 
 			BMutablePartition*	Partition() const;
 
-	virtual	uint32				SupportedOperations(uint32 mask);
-	virtual	uint32				SupportedChildOperations(
+	virtual	uint32_t				SupportedOperations(uint32_t mask);
+	virtual	uint32_t				SupportedChildOperations(
 									const BMutablePartition* child,
-									uint32 mask);
+									uint32_t mask);
 
 	virtual	bool				SupportsInitializingChild(
 									const BMutablePartition* child,
@@ -70,7 +70,7 @@ public:
 
 	virtual	status_t			GetNextSupportedType(
 									const BMutablePartition* child,
-									int32* cookie, BString* type);
+									int32_t* cookie, BString* type);
 									// child can be NULL
 
 	virtual	status_t			GetPartitioningInfo(BPartitioningInfo* info);

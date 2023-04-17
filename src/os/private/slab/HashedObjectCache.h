@@ -26,14 +26,14 @@ struct HashedObjectCache : ObjectCache {
 									size_t alignment, size_t maximum,
 									size_t magazineCapacity,
 									size_t maxMagazineCount,
-									uint32 flags, void* cookie,
+									uint32_t flags, void* cookie,
 									object_cache_constructor constructor,
 									object_cache_destructor destructor,
 									object_cache_reclaimer reclaimer);
 	virtual	void				Delete();
 
-	virtual	slab*				CreateSlab(uint32 flags);
-	virtual	void				ReturnSlab(slab* slab, uint32 flags);
+	virtual	slab*				CreateSlab(uint32_t flags);
+	virtual	void				ReturnSlab(slab* slab, uint32_t flags);
 	virtual slab*				ObjectSlab(void* object) const;
 
 private:
@@ -96,7 +96,7 @@ private:
 			friend class Definition;
 
 private:
-			void				_ResizeHashTableIfNeeded(uint32 flags);
+			void				_ResizeHashTableIfNeeded(uint32_t flags);
 
 private:
 			HashTable hash_table;

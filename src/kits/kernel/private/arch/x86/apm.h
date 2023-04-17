@@ -40,7 +40,7 @@ typedef struct apm_info {
 	uint16	version;
 	uint16	flags;
 	uint16	code32_segment_base;
-	uint32	code32_segment_offset;
+	uint32_t	code32_segment_offset;
 	uint16	code32_segment_length;
 	uint16	code16_segment_base;
 	uint16	code16_segment_length;

@@ -3156,7 +3156,7 @@
   /*                                                                       */
   /* SPVTL[a]:     Set PVector To Line                                     */
   /* Opcode range: 0x06-0x07                                               */
-  /* Stack:        uint32 uint32 -->                                       */
+  /* Stack:        uint32_t uint32_t -->                                       */
   /*                                                                       */
   static void
   Ins_SPVTL( INS_ARG )
@@ -3169,7 +3169,7 @@
   /*                                                                       */
   /* SFVTL[a]:     Set FVector To Line                                     */
   /* Opcode range: 0x08-0x09                                               */
-  /* Stack:        uint32 uint32 -->                                       */
+  /* Stack:        uint32_t uint32_t -->                                       */
   /*                                                                       */
   static void
   Ins_SFVTL( INS_ARG )
@@ -3246,7 +3246,7 @@
   /*                                                                       */
   /* SRP0[]:       Set Reference Point 0                                   */
   /* Opcode range: 0x10                                                    */
-  /* Stack:        uint32 -->                                              */
+  /* Stack:        uint32_t -->                                              */
   /*                                                                       */
   static void
   Ins_SRP0( INS_ARG )
@@ -3259,7 +3259,7 @@
   /*                                                                       */
   /* SRP1[]:       Set Reference Point 1                                   */
   /* Opcode range: 0x11                                                    */
-  /* Stack:        uint32 -->                                              */
+  /* Stack:        uint32_t -->                                              */
   /*                                                                       */
   static void
   Ins_SRP1( INS_ARG )
@@ -3272,7 +3272,7 @@
   /*                                                                       */
   /* SRP2[]:       Set Reference Point 2                                   */
   /* Opcode range: 0x12                                                    */
-  /* Stack:        uint32 -->                                              */
+  /* Stack:        uint32_t -->                                              */
   /*                                                                       */
   static void
   Ins_SRP2( INS_ARG )
@@ -3374,7 +3374,7 @@
   /*                                                                       */
   /* S45ROUND[]:   Super ROUND 45 degrees                                  */
   /* Opcode range: 0x77                                                    */
-  /* Stack:        uint32 -->                                              */
+  /* Stack:        uint32_t -->                                              */
   /*                                                                       */
   static void
   Ins_S45ROUND( INS_ARG )
@@ -3387,7 +3387,7 @@
   /*                                                                       */
   /* SLOOP[]:      Set LOOP variable                                       */
   /* Opcode range: 0x17                                                    */
-  /* Stack:        int32? -->                                              */
+  /* Stack:        int32_t? -->                                              */
   /*                                                                       */
   static void
   Ins_SLOOP( INS_ARG )
@@ -3439,7 +3439,7 @@
   /*                                                                       */
   /* SSW[]:        Set Single Width                                        */
   /* Opcode range: 0x1F                                                    */
-  /* Stack:        int32? -->                                              */
+  /* Stack:        int32_t? -->                                              */
   /*                                                                       */
   static void
   Ins_SSW( INS_ARG )
@@ -3478,7 +3478,7 @@
   /*                                                                       */
   /* SANGW[]:      Set ANGle Weight                                        */
   /* Opcode range: 0x7E                                                    */
-  /* Stack:        uint32 -->                                              */
+  /* Stack:        uint32_t -->                                              */
   /*                                                                       */
   static void
   Ins_SANGW( INS_ARG )
@@ -3491,7 +3491,7 @@
   /*                                                                       */
   /* SDB[]:        Set Delta Base                                          */
   /* Opcode range: 0x5E                                                    */
-  /* Stack:        uint32 -->                                              */
+  /* Stack:        uint32_t -->                                              */
   /*                                                                       */
   static void
   Ins_SDB( INS_ARG )
@@ -3504,7 +3504,7 @@
   /*                                                                       */
   /* SDS[]:        Set Delta Shift                                         */
   /* Opcode range: 0x5F                                                    */
-  /* Stack:        uint32 -->                                              */
+  /* Stack:        uint32_t -->                                              */
   /*                                                                       */
   static void
   Ins_SDS( INS_ARG )
@@ -3595,7 +3595,7 @@
   /*                                                                       */
   /* DEPTH[]:      return the stack DEPTH                                  */
   /* Opcode range: 0x24                                                    */
-  /* Stack:        --> uint32                                              */
+  /* Stack:        --> uint32_t                                              */
   /*                                                                       */
   static void
   Ins_DEPTH( INS_ARG )
@@ -3608,7 +3608,7 @@
   /*                                                                       */
   /* CINDEX[]:     Copy INDEXed element                                    */
   /* Opcode range: 0x25                                                    */
-  /* Stack:        int32 --> StkElt                                        */
+  /* Stack:        int32_t --> StkElt                                        */
   /*                                                                       */
   static void
   Ins_CINDEX( INS_ARG )
@@ -3634,7 +3634,7 @@
   /*                                                                       */
   /* JROT[]:       Jump Relative On True                                   */
   /* Opcode range: 0x78                                                    */
-  /* Stack:        StkElt int32 -->                                        */
+  /* Stack:        StkElt int32_t -->                                        */
   /*                                                                       */
   static void
   Ins_JROT( INS_ARG )
@@ -3647,7 +3647,7 @@
   /*                                                                       */
   /* JMPR[]:       JuMP Relative                                           */
   /* Opcode range: 0x1C                                                    */
-  /* Stack:        int32 -->                                               */
+  /* Stack:        int32_t -->                                               */
   /*                                                                       */
   static void
   Ins_JMPR( INS_ARG )
@@ -3660,7 +3660,7 @@
   /*                                                                       */
   /* JROF[]:       Jump Relative On False                                  */
   /* Opcode range: 0x79                                                    */
-  /* Stack:        StkElt int32 -->                                        */
+  /* Stack:        StkElt int32_t -->                                        */
   /*                                                                       */
   static void
   Ins_JROF( INS_ARG )
@@ -3673,7 +3673,7 @@
   /*                                                                       */
   /* LT[]:         Less Than                                               */
   /* Opcode range: 0x50                                                    */
-  /* Stack:        int32? int32? --> bool                                  */
+  /* Stack:        int32_t? int32_t? --> bool                                  */
   /*                                                                       */
   static void
   Ins_LT( INS_ARG )
@@ -3686,7 +3686,7 @@
   /*                                                                       */
   /* LTEQ[]:       Less Than or EQual                                      */
   /* Opcode range: 0x51                                                    */
-  /* Stack:        int32? int32? --> bool                                  */
+  /* Stack:        int32_t? int32_t? --> bool                                  */
   /*                                                                       */
   static void
   Ins_LTEQ( INS_ARG )
@@ -3699,7 +3699,7 @@
   /*                                                                       */
   /* GT[]:         Greater Than                                            */
   /* Opcode range: 0x52                                                    */
-  /* Stack:        int32? int32? --> bool                                  */
+  /* Stack:        int32_t? int32_t? --> bool                                  */
   /*                                                                       */
   static void
   Ins_GT( INS_ARG )
@@ -3712,7 +3712,7 @@
   /*                                                                       */
   /* GTEQ[]:       Greater Than or EQual                                   */
   /* Opcode range: 0x53                                                    */
-  /* Stack:        int32? int32? --> bool                                  */
+  /* Stack:        int32_t? int32_t? --> bool                                  */
   /*                                                                       */
   static void
   Ins_GTEQ( INS_ARG )
@@ -3777,7 +3777,7 @@
   /*                                                                       */
   /* AND[]:        logical AND                                             */
   /* Opcode range: 0x5A                                                    */
-  /* Stack:        uint32 uint32 --> uint32                                */
+  /* Stack:        uint32_t uint32_t --> uint32_t                                */
   /*                                                                       */
   static void
   Ins_AND( INS_ARG )
@@ -3790,7 +3790,7 @@
   /*                                                                       */
   /* OR[]:         logical OR                                              */
   /* Opcode range: 0x5B                                                    */
-  /* Stack:        uint32 uint32 --> uint32                                */
+  /* Stack:        uint32_t uint32_t --> uint32_t                                */
   /*                                                                       */
   static void
   Ins_OR( INS_ARG )
@@ -3803,7 +3803,7 @@
   /*                                                                       */
   /* NOT[]:        logical NOT                                             */
   /* Opcode range: 0x5C                                                    */
-  /* Stack:        StkElt --> uint32                                       */
+  /* Stack:        StkElt --> uint32_t                                       */
   /*                                                                       */
   static void
   Ins_NOT( INS_ARG )
@@ -3920,7 +3920,7 @@
   /*                                                                       */
   /* RS[]:         Read Store                                              */
   /* Opcode range: 0x43                                                    */
-  /* Stack:        uint32 --> uint32                                       */
+  /* Stack:        uint32_t --> uint32_t                                       */
   /*                                                                       */
   static void
   Ins_RS( INS_ARG )
@@ -3933,7 +3933,7 @@
   /*                                                                       */
   /* WS[]:         Write Store                                             */
   /* Opcode range: 0x42                                                    */
-  /* Stack:        uint32 uint32 -->                                       */
+  /* Stack:        uint32_t uint32_t -->                                       */
   /*                                                                       */
   static void
   Ins_WS( INS_ARG )
@@ -3946,7 +3946,7 @@
   /*                                                                       */
   /* WCVTP[]:      Write CVT in Pixel units                                */
   /* Opcode range: 0x44                                                    */
-  /* Stack:        f26.6 uint32 -->                                        */
+  /* Stack:        f26.6 uint32_t -->                                        */
   /*                                                                       */
   static void
   Ins_WCVTP( INS_ARG )
@@ -3959,7 +3959,7 @@
   /*                                                                       */
   /* WCVTF[]:      Write CVT in Funits                                     */
   /* Opcode range: 0x70                                                    */
-  /* Stack:        uint32 uint32 -->                                       */
+  /* Stack:        uint32_t uint32_t -->                                       */
   /*                                                                       */
   static void
   Ins_WCVTF( INS_ARG )
@@ -3972,7 +3972,7 @@
   /*                                                                       */
   /* RCVT[]:       Read CVT                                                */
   /* Opcode range: 0x45                                                    */
-  /* Stack:        uint32 --> f26.6                                        */
+  /* Stack:        uint32_t --> f26.6                                        */
   /*                                                                       */
   static void
   Ins_RCVT( INS_ARG )
@@ -3985,7 +3985,7 @@
   /*                                                                       */
   /* AA[]:         Adjust Angle                                            */
   /* Opcode range: 0x7F                                                    */
-  /* Stack:        uint32 -->                                              */
+  /* Stack:        uint32_t -->                                              */
   /*                                                                       */
   static void
   Ins_AA( INS_ARG )
@@ -3998,7 +3998,7 @@
   /*                                                                       */
   /* DEBUG[]:      DEBUG.  Unsupported.                                    */
   /* Opcode range: 0x4F                                                    */
-  /* Stack:        uint32 -->                                              */
+  /* Stack:        uint32_t -->                                              */
   /*                                                                       */
   /* Note: The original instruction pops a value from the stack.           */
   /*                                                                       */
@@ -4039,7 +4039,7 @@
   /*                                                                       */
   /* MAX[]:        MAXimum                                                 */
   /* Opcode range: 0x68                                                    */
-  /* Stack:        int32? int32? --> int32                                 */
+  /* Stack:        int32_t? int32_t? --> int32_t                                 */
   /*                                                                       */
   static void
   Ins_MAX( INS_ARG )
@@ -4052,7 +4052,7 @@
   /*                                                                       */
   /* MIN[]:        MINimum                                                 */
   /* Opcode range: 0x69                                                    */
-  /* Stack:        int32? int32? --> int32                                 */
+  /* Stack:        int32_t? int32_t? --> int32_t                                 */
   /*                                                                       */
   static void
   Ins_MIN( INS_ARG )
@@ -4075,7 +4075,7 @@
   /*                                                                       */
   /* MINDEX[]:     Move INDEXed element                                    */
   /* Opcode range: 0x26                                                    */
-  /* Stack:        int32? --> StkElt                                       */
+  /* Stack:        int32_t? --> StkElt                                       */
   /*                                                                       */
   static void
   Ins_MINDEX( INS_ARG )
@@ -4252,7 +4252,7 @@
   /*                                                                       */
   /* FDEF[]:       Function DEFinition                                     */
   /* Opcode range: 0x2C                                                    */
-  /* Stack:        uint32 -->                                              */
+  /* Stack:        uint32_t -->                                              */
   /*                                                                       */
   static void
   Ins_FDEF( INS_ARG )
@@ -4365,7 +4365,7 @@
   /*                                                                       */
   /* CALL[]:       CALL function                                           */
   /* Opcode range: 0x2B                                                    */
-  /* Stack:        uint32? -->                                             */
+  /* Stack:        uint32_t? -->                                             */
   /*                                                                       */
   static void
   Ins_CALL( INS_ARG )
@@ -4442,7 +4442,7 @@
   /*                                                                       */
   /* LOOPCALL[]:   LOOP and CALL function                                  */
   /* Opcode range: 0x2A                                                    */
-  /* Stack:        uint32? Eint16? -->                                     */
+  /* Stack:        uint32_t? Eint16? -->                                     */
   /*                                                                       */
   static void
   Ins_LOOPCALL( INS_ARG )
@@ -4588,7 +4588,7 @@
   /*                                                                       */
   /* NPUSHB[]:     PUSH N Bytes                                            */
   /* Opcode range: 0x40                                                    */
-  /* Stack:        --> uint32...                                           */
+  /* Stack:        --> uint32_t...                                           */
   /*                                                                       */
   static void
   Ins_NPUSHB( INS_ARG )
@@ -4615,7 +4615,7 @@
   /*                                                                       */
   /* NPUSHW[]:     PUSH N Words                                            */
   /* Opcode range: 0x41                                                    */
-  /* Stack:        --> int32...                                            */
+  /* Stack:        --> int32_t...                                            */
   /*                                                                       */
   static void
   Ins_NPUSHW( INS_ARG )
@@ -4645,7 +4645,7 @@
   /*                                                                       */
   /* PUSHB[abc]:   PUSH Bytes                                              */
   /* Opcode range: 0xB0-0xB7                                               */
-  /* Stack:        --> uint32...                                           */
+  /* Stack:        --> uint32_t...                                           */
   /*                                                                       */
   static void
   Ins_PUSHB( INS_ARG )
@@ -4670,7 +4670,7 @@
   /*                                                                       */
   /* PUSHW[abc]:   PUSH Words                                              */
   /* Opcode range: 0xB8-0xBF                                               */
-  /* Stack:        --> int32...                                            */
+  /* Stack:        --> int32_t...                                            */
   /*                                                                       */
   static void
   Ins_PUSHW( INS_ARG )
@@ -4708,7 +4708,7 @@
   /*                                                                       */
   /* GC[a]:        Get Coordinate projected onto                           */
   /* Opcode range: 0x46-0x47                                               */
-  /* Stack:        uint32 --> f26.6                                        */
+  /* Stack:        uint32_t --> f26.6                                        */
   /*                                                                       */
   /* BULLSHIT: Measures from the original glyph must be taken along the    */
   /*           dual projection vector!                                     */
@@ -4748,7 +4748,7 @@
   /*                                                                       */
   /* SCFS[]:       Set Coordinate From Stack                               */
   /* Opcode range: 0x48                                                    */
-  /* Stack:        f26.6 uint32 -->                                        */
+  /* Stack:        f26.6 uint32_t -->                                        */
   /*                                                                       */
   /* Formula:                                                              */
   /*                                                                       */
@@ -4785,7 +4785,7 @@
   /*                                                                       */
   /* MD[a]:        Measure Distance                                        */
   /* Opcode range: 0x49-0x4A                                               */
-  /* Stack:        uint32 uint32 --> f26.6                                 */
+  /* Stack:        uint32_t uint32_t --> f26.6                                 */
   /*                                                                       */
   /* BULLSHIT: Measure taken in the original glyph must be along the dual  */
   /*           projection vector.                                          */
@@ -4853,7 +4853,7 @@
   /*                                                                       */
   /* SDPVTL[a]:    Set Dual PVector to Line                                */
   /* Opcode range: 0x86-0x87                                               */
-  /* Stack:        uint32 uint32 -->                                       */
+  /* Stack:        uint32_t uint32_t -->                                       */
   /*                                                                       */
   static void
   Ins_SDPVTL( INS_ARG )
@@ -4919,7 +4919,7 @@
   /*                                                                       */
   /* SZP0[]:       Set Zone Pointer 0                                      */
   /* Opcode range: 0x13                                                    */
-  /* Stack:        uint32 -->                                              */
+  /* Stack:        uint32_t -->                                              */
   /*                                                                       */
   static void
   Ins_SZP0( INS_ARG )
@@ -4948,7 +4948,7 @@
   /*                                                                       */
   /* SZP1[]:       Set Zone Pointer 1                                      */
   /* Opcode range: 0x14                                                    */
-  /* Stack:        uint32 -->                                              */
+  /* Stack:        uint32_t -->                                              */
   /*                                                                       */
   static void
   Ins_SZP1( INS_ARG )
@@ -4977,7 +4977,7 @@
   /*                                                                       */
   /* SZP2[]:       Set Zone Pointer 2                                      */
   /* Opcode range: 0x15                                                    */
-  /* Stack:        uint32 -->                                              */
+  /* Stack:        uint32_t -->                                              */
   /*                                                                       */
   static void
   Ins_SZP2( INS_ARG )
@@ -5006,7 +5006,7 @@
   /*                                                                       */
   /* SZPS[]:       Set Zone PointerS                                       */
   /* Opcode range: 0x16                                                    */
-  /* Stack:        uint32 -->                                              */
+  /* Stack:        uint32_t -->                                              */
   /*                                                                       */
   static void
   Ins_SZPS( INS_ARG )
@@ -5040,7 +5040,7 @@
   /*                                                                       */
   /* INSTCTRL[]:   INSTruction ConTRoL                                     */
   /* Opcode range: 0x8e                                                    */
-  /* Stack:        int32 int32 -->                                         */
+  /* Stack:        int32_t int32_t -->                                         */
   /*                                                                       */
   static void
   Ins_INSTCTRL( INS_ARG )
@@ -5070,7 +5070,7 @@
   /*                                                                       */
   /* SCANCTRL[]:   SCAN ConTRoL                                            */
   /* Opcode range: 0x85                                                    */
-  /* Stack:        uint32? -->                                             */
+  /* Stack:        uint32_t? -->                                             */
   /*                                                                       */
   static void
   Ins_SCANCTRL( INS_ARG )
@@ -5116,7 +5116,7 @@
   /*                                                                       */
   /* SCANTYPE[]:   SCAN TYPE                                               */
   /* Opcode range: 0x8D                                                    */
-  /* Stack:        uint32? -->                                             */
+  /* Stack:        uint32_t? -->                                             */
   /*                                                                       */
   static void
   Ins_SCANTYPE( INS_ARG )
@@ -5139,7 +5139,7 @@
   /*                                                                       */
   /* FLIPPT[]:     FLIP PoinT                                              */
   /* Opcode range: 0x80                                                    */
-  /* Stack:        uint32... -->                                           */
+  /* Stack:        uint32_t... -->                                           */
   /*                                                                       */
   static void
   Ins_FLIPPT( INS_ARG )
@@ -5184,7 +5184,7 @@
   /*                                                                       */
   /* FLIPRGON[]:   FLIP RanGe ON                                           */
   /* Opcode range: 0x81                                                    */
-  /* Stack:        uint32 uint32 -->                                       */
+  /* Stack:        uint32_t uint32_t -->                                       */
   /*                                                                       */
   static void
   Ins_FLIPRGON( INS_ARG )
@@ -5212,7 +5212,7 @@
   /*                                                                       */
   /* FLIPRGOFF:    FLIP RanGe OFF                                          */
   /* Opcode range: 0x82                                                    */
-  /* Stack:        uint32 uint32 -->                                       */
+  /* Stack:        uint32_t uint32_t -->                                       */
   /*                                                                       */
   static void
   Ins_FLIPRGOFF( INS_ARG )
@@ -5345,7 +5345,7 @@
   /*                                                                       */
   /* SHP[a]:       SHift Point by the last point                           */
   /* Opcode range: 0x32-0x33                                               */
-  /* Stack:        uint32... -->                                           */
+  /* Stack:        uint32_t... -->                                           */
   /*                                                                       */
   static void
   Ins_SHP( INS_ARG )
@@ -5398,7 +5398,7 @@
   /*                                                                       */
   /* SHC[a]:       SHift Contour                                           */
   /* Opcode range: 0x34-35                                                 */
-  /* Stack:        uint32 -->                                              */
+  /* Stack:        uint32_t -->                                              */
   /*                                                                       */
   static void
   Ins_SHC( INS_ARG )
@@ -5456,7 +5456,7 @@
   /*                                                                       */
   /* SHZ[a]:       SHift Zone                                              */
   /* Opcode range: 0x36-37                                                 */
-  /* Stack:        uint32 -->                                              */
+  /* Stack:        uint32_t -->                                              */
   /*                                                                       */
   static void
   Ins_SHZ( INS_ARG )
@@ -5503,7 +5503,7 @@
   /*                                                                       */
   /* SHPIX[]:      SHift points by a PIXel amount                          */
   /* Opcode range: 0x38                                                    */
-  /* Stack:        f26.6 uint32... -->                                     */
+  /* Stack:        f26.6 uint32_t... -->                                     */
   /*                                                                       */
   static void
   Ins_SHPIX( INS_ARG )
@@ -5568,7 +5568,7 @@
   /*                                                                       */
   /* MSIRP[a]:     Move Stack Indirect Relative Position                   */
   /* Opcode range: 0x3A-0x3B                                               */
-  /* Stack:        f26.6 uint32 -->                                        */
+  /* Stack:        f26.6 uint32_t -->                                        */
   /*                                                                       */
   static void
   Ins_MSIRP( INS_ARG )
@@ -5613,7 +5613,7 @@
   /*                                                                       */
   /* MDAP[a]:      Move Direct Absolute Point                              */
   /* Opcode range: 0x2E-0x2F                                               */
-  /* Stack:        uint32 -->                                              */
+  /* Stack:        uint32_t -->                                              */
   /*                                                                       */
   static void
   Ins_MDAP( INS_ARG )
@@ -5654,7 +5654,7 @@
   /*                                                                       */
   /* MIAP[a]:      Move Indirect Absolute Point                            */
   /* Opcode range: 0x3E-0x3F                                               */
-  /* Stack:        uint32 uint32 -->                                       */
+  /* Stack:        uint32_t uint32_t -->                                       */
   /*                                                                       */
   static void
   Ins_MIAP( INS_ARG )
@@ -5728,7 +5728,7 @@
   /*                                                                       */
   /* MDRP[abcde]:  Move Direct Relative Point                              */
   /* Opcode range: 0xC0-0xDF                                               */
-  /* Stack:        uint32 -->                                              */
+  /* Stack:        uint32_t -->                                              */
   /*                                                                       */
   static void
   Ins_MDRP( INS_ARG )
@@ -5841,7 +5841,7 @@
   /*                                                                       */
   /* MIRP[abcde]:  Move Indirect Relative Point                            */
   /* Opcode range: 0xE0-0xFF                                               */
-  /* Stack:        int32? uint32 -->                                       */
+  /* Stack:        int32_t? uint32_t -->                                       */
   /*                                                                       */
   static void
   Ins_MIRP( INS_ARG )
@@ -5963,7 +5963,7 @@
   /*                                                                       */
   /* ALIGNRP[]:    ALIGN Relative Point                                    */
   /* Opcode range: 0x3C                                                    */
-  /* Stack:        uint32 uint32... -->                                    */
+  /* Stack:        uint32_t uint32_t... -->                                    */
   /*                                                                       */
   static void
   Ins_ALIGNRP( INS_ARG )
@@ -6016,7 +6016,7 @@
   /*                                                                       */
   /* ISECT[]:      moves point to InterSECTion                             */
   /* Opcode range: 0x0F                                                    */
-  /* Stack:        5 * uint32 -->                                          */
+  /* Stack:        5 * uint32_t -->                                          */
   /*                                                                       */
   static void
   Ins_ISECT( INS_ARG )
@@ -6098,7 +6098,7 @@
   /*                                                                       */
   /* ALIGNPTS[]:   ALIGN PoinTS                                            */
   /* Opcode range: 0x27                                                    */
-  /* Stack:        uint32 uint32 -->                                       */
+  /* Stack:        uint32_t uint32_t -->                                       */
   /*                                                                       */
   static void
   Ins_ALIGNPTS( INS_ARG )
@@ -6130,7 +6130,7 @@
   /*                                                                       */
   /* IP[]:         Interpolate Point                                       */
   /* Opcode range: 0x39                                                    */
-  /* Stack:        uint32... -->                                           */
+  /* Stack:        uint32_t... -->                                           */
   /*                                                                       */
 
   /* SOMETIMES, DUMBER CODE IS BETTER CODE */
@@ -6237,7 +6237,7 @@
   /*                                                                       */
   /* UTP[a]:       UnTouch Point                                           */
   /* Opcode range: 0x29                                                    */
-  /* Stack:        uint32 -->                                              */
+  /* Stack:        uint32_t -->                                              */
   /*                                                                       */
   static void
   Ins_UTP( INS_ARG )
@@ -6501,7 +6501,7 @@
   /*                                                                       */
   /* DELTAPn[]:    DELTA exceptions P1, P2, P3                             */
   /* Opcode range: 0x5D,0x71,0x72                                          */
-  /* Stack:        uint32 (2 * uint32)... -->                              */
+  /* Stack:        uint32_t (2 * uint32_t)... -->                              */
   /*                                                                       */
   static void
   Ins_DELTAP( INS_ARG )
@@ -6596,7 +6596,7 @@
   /*                                                                       */
   /* DELTACn[]:    DELTA exceptions C1, C2, C3                             */
   /* Opcode range: 0x73,0x74,0x75                                          */
-  /* Stack:        uint32 (2 * uint32)... -->                              */
+  /* Stack:        uint32_t (2 * uint32_t)... -->                              */
   /*                                                                       */
   static void
   Ins_DELTAC( INS_ARG )
@@ -6695,7 +6695,7 @@
   /*                                                                       */
   /* GETINFO[]:    GET INFOrmation                                         */
   /* Opcode range: 0x88                                                    */
-  /* Stack:        uint32 --> uint32                                       */
+  /* Stack:        uint32_t --> uint32_t                                       */
   /*                                                                       */
   static void
   Ins_GETINFO( INS_ARG )

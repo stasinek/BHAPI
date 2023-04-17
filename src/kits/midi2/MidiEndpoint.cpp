@@ -59,7 +59,7 @@ void BMidiEndpoint::SetName(const char* newName)
 }
 
 
-int32 BMidiEndpoint::ID() const
+int32_t BMidiEndpoint::ID() const
 {
 	return fId;
 }
@@ -107,7 +107,7 @@ bool BMidiEndpoint::IsValid() const
 
 status_t BMidiEndpoint::Release()
 {
-	int32 old = atomic_add(&fRefCount, -1);
+	int32_t old = atomic_add(&fRefCount, -1);
 
 	TRACE(("BMidiEndpoint::Release refCount is now %" B_PRId32, old - 1))
 
@@ -131,7 +131,7 @@ status_t BMidiEndpoint::Release()
 status_t BMidiEndpoint::Acquire()
 {
 #ifdef DEBUG
-	int32 old = 
+	int32_t old = 
 #endif
 	atomic_add(&fRefCount, 1);
 

@@ -59,7 +59,7 @@ hpet_get_priority()
 }
 
 
-static int32
+static int32_t
 hpet_timer_interrupt(void *arg)
 {
 	//dprintf_no_syslog("HPET timer_interrupt!!!!\n");
@@ -143,7 +143,7 @@ hpet_dump_timer(volatile struct hpet_timer *timer)
 	dprintf("HPET Timer %ld:\n", (timer - sHPETRegs->timer));
 
 	dprintf("\troutable IRQs: ");
-	uint32 interrupts = (uint32)HPET_GET_CAP_TIMER_ROUTE(timer);
+	uint32_t interrupts = (uint32_t)HPET_GET_CAP_TIMER_ROUTE(timer);
 	for (int i = 0; i < 32; i++) {
 		if (interrupts & (1 << i))
 			dprintf("%d ", i);
@@ -175,7 +175,7 @@ hpet_init_timer(volatile struct hpet_timer *timer)
 {
 	sTimer = timer;
 
-	uint32 interrupt = 0;
+	uint32_t interrupt = 0;
 
 	sTimer->config |= (interrupt << HPET_CONF_TIMER_INT_ROUTE_SHIFT)
 		& HPET_CONF_TIMER_INT_ROUTE_MASK;
@@ -246,7 +246,7 @@ hpet_init(struct kernel_args *args)
 	if (status != B_OK)
 		return status;
 
-	uint32 numTimers = HPET_GET_NUM_TIMERS(sHPETRegs) + 1;
+	uint32_t numTimers = HPET_GET_NUM_TIMERS(sHPETRegs) + 1;
 
 	TRACE(("hpet_init: HPET supports %lu timers, and is %s bits wide.\n",
 		numTimers, HPET_IS_64BIT(sHPETRegs) ? "64" : "32"));
@@ -260,7 +260,7 @@ hpet_init(struct kernel_args *args)
 	}
 
 #ifdef TRACE_HPET
-	for (uint32 c = 0; c < numTimers; c++)
+	for (uint32_t c = 0; c < numTimers; c++)
 		hpet_dump_timer(&sHPETRegs->timer[c]);
 #endif
 
@@ -276,7 +276,7 @@ hpet_init(struct kernel_args *args)
 		return status;
 #endif
 
-	int32 configuredIRQ = HPET_GET_CONF_TIMER_INT_ROUTE(sTimer);
+	int32_t configuredIRQ = HPET_GET_CONF_TIMER_INT_ROUTE(sTimer);
 
 	install_io_interrupt_handler(configuredIRQ, &hpet_timer_interrupt,
 		NULL, B_NO_LOCK_VECTOR);

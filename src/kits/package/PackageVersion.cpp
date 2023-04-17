@@ -39,7 +39,7 @@ BPackageVersion::BPackageVersion(const BString& versionString,
 
 
 BPackageVersion::BPackageVersion(const BString& major, const BString& minor,
-	const BString& micro, const BString& preRelease, uint32 revision)
+	const BString& micro, const BString& preRelease, uint32_t revision)
 {
 	SetTo(major, minor, micro, preRelease, revision);
 }
@@ -79,7 +79,7 @@ BPackageVersion::PreRelease() const
 }
 
 
-uint32 BPackageVersion::Revision() const
+uint32_t BPackageVersion::Revision() const
 {
 	return fRevision;
 }
@@ -144,7 +144,7 @@ BPackageVersion::ToString() const
 
 
 void BPackageVersion::SetTo(const BString& major, const BString& minor,
-	const BString& micro, const BString& preRelease, uint32 revision)
+	const BString& micro, const BString& preRelease, uint32_t revision)
 {
 	fMajor = major;
 	fMinor = minor;

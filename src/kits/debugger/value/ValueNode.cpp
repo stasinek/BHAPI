@@ -57,8 +57,8 @@ void ValueNode::SetContainer(ValueNodeContainer* container)
 		fContainer->AcquireReference();
 
 	// propagate to children
-	int32 childCount = CountChildren();
-	for (int32 i = 0; i < childCount; i++)
+	int32_t childCount = CountChildren();
+	for (int32_t i = 0; i < childCount; i++)
 		ChildAt(i)->SetContainer(fContainer);
 }
 
@@ -81,14 +81,14 @@ void ValueNode::ClearChildren()
 }
 
 
-status_t ValueNode::CreateChildrenInRange(TeamTypeInformation* info, int32 lowIndex,
-	int32 highIndex)
+status_t ValueNode::CreateChildrenInRange(TeamTypeInformation* info, int32_t lowIndex,
+	int32_t highIndex)
 {
 	return B_NOT_SUPPORTED;
 }
 
 
-status_t ValueNode::SupportedChildRange(int32& lowIndex, int32& highIndex) const
+status_t ValueNode::SupportedChildRange(int32_t& lowIndex, int32_t& highIndex) const
 {
 	return B_NOT_SUPPORTED;
 }
@@ -239,14 +239,14 @@ status_t ChildlessValueNode::CreateChildren(TeamTypeInformation* info)
 	return B_OK;
 }
 
-int32 ChildlessValueNode::CountChildren() const
+int32_t ChildlessValueNode::CountChildren() const
 {
 	return 0;
 }
 
 
 ValueNodeChild*
-ChildlessValueNode::ChildAt(int32 index) const
+ChildlessValueNode::ChildAt(int32_t index) const
 {
 	return NULL;
 }

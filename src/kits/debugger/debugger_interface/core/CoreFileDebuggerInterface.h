@@ -34,7 +34,7 @@ public:
 
 	virtual	status_t			GetNextDebugEvent(DebugEvent*& _event);
 
-	virtual	status_t			SetTeamDebuggingFlags(uint32 flags);
+	virtual	status_t			SetTeamDebuggingFlags(uint32_t flags);
 
 	virtual	status_t			ContinueThread(thread_id thread);
 	virtual	status_t			StopThread(thread_id thread);
@@ -44,7 +44,7 @@ public:
 	virtual	status_t			UninstallBreakpoint(target_addr_t address);
 
 	virtual status_t			InstallWatchpoint(target_addr_t address,
-									uint32 type, int32 length);
+									uint32_t type, int32_t length);
 	virtual status_t			UninstallWatchpoint(target_addr_t address);
 
 	virtual	status_t			GetSystemInfo(SystemInfo& info);
@@ -57,7 +57,7 @@ public:
 	virtual	status_t			GetSymbolInfos(team_id team, image_id image,
 									BObjectList<SymbolInfo>& infos);
 	virtual	status_t			GetSymbolInfo(team_id team, image_id image,
-									const char* name, int32 symbolType,
+									const char* name, int32_t symbolType,
 									SymbolInfo& info);
 
 	virtual	status_t			GetThreadInfo(thread_id thread,
@@ -68,13 +68,13 @@ public:
 	virtual	status_t			SetCpuState(thread_id thread,
 									const CpuState* state);
 
-	virtual	status_t			GetCpuFeatures(uint32& flags);
+	virtual	status_t			GetCpuFeatures(uint32_t& flags);
 
 	virtual	status_t			WriteCoreFile(const char* path);
 
 	// TeamMemory
 	virtual	status_t			GetMemoryProperties(target_addr_t address,
-									uint32& protection, uint32& locking);
+									uint32_t& protection, uint32_t& locking);
 
 	virtual	ssize_t				ReadMemory(target_addr_t address, void* buffer,
 									size_t size);

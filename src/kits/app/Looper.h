@@ -83,8 +83,8 @@ namespace BPrivate {
 class BHAPI_IMPEXP BLooper : public BHandler {
 public:
                             BLooper(const char* name = NULL,
-                                int32 priority = B_NORMAL_PRIORITY,
-                                int32 portCapacity
+                                int32_t priority = B_NORMAL_PRIORITY,
+                                int32_t portCapacity
                                     = B_LOOPER_PORT_DEFAULT_CAPACITY);
     virtual					~BLooper();
 
@@ -94,9 +94,9 @@ public:
     virtual	status_t		Archive(const BMessage* data, bool deep = true) const;
 
     // Message transmission
-            status_t		PostMessage(uint32 command);
+            status_t		PostMessage(uint32_t command);
             status_t		PostMessage(BMessage* message);
-            status_t		PostMessage(uint32 command, BHandler* handler,
+            status_t		PostMessage(uint32_t command, BHandler* handler,
                                 BHandler* replyTo = NULL);
             status_t		PostMessage(BMessage* message, BHandler* handler,
                                 BHandler* replyTo = NULL);
@@ -114,9 +114,9 @@ public:
     // Message handlers
             void			AddHandler(BHandler* handler);
             bool			RemoveHandler(BHandler* handler);
-            int32			CountHandlers() const;
-            BHandler*		HandlerAt(int32 index) const;
-            int32			IndexOf(BHandler* handler) const;
+            int32_t			CountHandlers() const;
+            BHandler*		HandlerAt(int32_t index) const;
+            int32_t			IndexOf(BHandler* handler) const;
 
             BHandler*		PreferredHandler() const;
             void			SetPreferredHandler(BHandler* handler);
@@ -135,13 +135,13 @@ public:
 
     // Loop debugging
             thread_id		LockingThread() const;
-            int32			CountLocks() const;
-            int32			CountLockRequests() const;
+            int32_t			CountLocks() const;
+            int32_t			CountLockRequests() const;
             sem_id			Sem() const;
 
     // Scripting
-    virtual BHandler*		ResolveSpecifier(BMessage* message, int32 index,
-                                BMessage* specifier, int32 what,
+    virtual BHandler*		ResolveSpecifier(BMessage* message, int32_t index,
+                                BMessage* specifier, int32_t what,
                                 const char* property);
     virtual status_t		GetSupportedSuites(BMessage* data);
 
@@ -178,7 +178,7 @@ private:
                             BLooper(const BLooper&);
             BLooper&		operator=(const BLooper&);
 
-                            BLooper(int32 priority, port_id port,
+                            BLooper(int32_t priority, port_id port,
                                 const char* name);
 
             status_t		_PostMessage(BMessage* msg, BHandler* handler,
@@ -186,20 +186,20 @@ private:
 
     static	status_t		_Lock(BLooper* loop, port_id port,
                                 bigtime_t timeout);
-    static	status_t		_LockComplete(BLooper* loop, int32 old,
+    static	status_t		_LockComplete(BLooper* loop, int32_t old,
                                 thread_id this_tid, sem_id sem,
                                 bigtime_t timeout);
-            void			_InitData(const char* name, int32 priority,
-                                port_id port, int32 capacity);
+            void			_InitData(const char* name, int32_t priority,
+                                port_id port, int32_t capacity);
             void			AddMessage(BMessage* msg);
             void			_AddMessagePriv(BMessage* msg);
     static	status_t		_task0_(void* arg);
 
-            void*			ReadRawFromPort(int32* code,
+            void*			ReadRawFromPort(int32_t* code,
                                 bigtime_t timeout = B_INFINITE_TIMEOUT);
             BMessage*		ReadMessageFromPort(
                                 bigtime_t timeout = B_INFINITE_TIMEOUT);
-    virtual	BMessage*		ConvertToMessage(void* raw, int32 code);
+    virtual	BMessage*		ConvertToMessage(void* raw, int32_t code);
     virtual	void			task_looper();
             void			_QuitRequested(BMessage* msg);
             bool			AssertLocked() const;
@@ -214,22 +214,22 @@ private:
             ::BPrivate::BDirectMessageTarget* fDirectTarget;
             BMessage*		fLastMessage;
             port_id			fMsgPort;
-            int32			fAtomicCount;
+            int32_t			fAtomicCount;
             sem_id			fLockSem;
-            int32			fOwnerCount;
+            int32_t			fOwnerCount;
             thread_id		fOwner;
             void*		fThread;
             addr_t			fCachedStack;
-            int32			fInitPriority;
+            int32_t			fInitPriority;
             BHandler*		fPreferred;
             BList			fHandlers;
             BList*			fCommonFilters;
             bool			fTerminating;
             bool			fRunCalled;
             bool			fOwnsPort;
-            uint32			_reserved[11];
+            uint32_t			_reserved[11];
 public:
-    void Init(const char *name,  int32 priority);
+    void Init(const char *name,  int32_t priority);
     // Archiving
     bool		IsRunning() const;
     BLooper*	Proxy() const;
@@ -273,9 +273,9 @@ private:
     BLooper *fProxy;
     BList fClients;
 
-     int32 fThreadPriority;
+     int32_t fThreadPriority;
 
-     int32 fHandlersCount;
+     int32_t fHandlersCount;
     BHandler *fPreferredHandler;
 
     void *fLocker;

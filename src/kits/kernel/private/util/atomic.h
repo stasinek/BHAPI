@@ -20,8 +20,8 @@ atomic_pointer_test_and_set(PointerType** _pointer, const PointerType* set,
 	const PointerType* test)
 {
 #if LONG_MAX == INT_MAX
-	return (PointerType*)atomic_test_and_set((int32*)_pointer, (int32)set,
-		(int32)test);
+	return (PointerType*)atomic_test_and_set((int32_t*)_pointer, (int32_t)set,
+		(int32_t)test);
 #else
 	return (PointerType*)atomic_test_and_set64((int64*)_pointer, (int64)set,
 		(int64)test);
@@ -33,7 +33,7 @@ template<typename PointerType> PointerType*
 atomic_pointer_get_and_set(PointerType** _pointer, const PointerType* set)
 {
 #if LONG_MAX == INT_MAX
-	return (PointerType*)atomic_get_and_set((int32*)_pointer, (int32)set);
+	return (PointerType*)atomic_get_and_set((int32_t*)_pointer, (int32_t)set);
 #else
 	return (PointerType*)atomic_get_and_set64((int64*)_pointer, (int64)set);
 #endif
@@ -44,7 +44,7 @@ template<typename PointerType> void atomic_pointer_set(PointerType** _pointer, c
 {
 	ASSERT((addr_t(_pointer) & (sizeof(PointerType*) - 1)) == 0);
 #if LONG_MAX == INT_MAX
-	atomic_set((int32*)_pointer, (int32)set);
+	atomic_set((int32_t*)_pointer, (int32_t)set);
 #else
 	atomic_set64((int64*)_pointer, (int64)set);
 #endif
@@ -56,7 +56,7 @@ atomic_pointer_get(PointerType** _pointer)
 {
 	ASSERT((addr_t(_pointer) & (sizeof(PointerType*) - 1)) == 0);
 #if LONG_MAX == INT_MAX
-	return (PointerType*)atomic_get((int32*)_pointer);
+	return (PointerType*)atomic_get((int32_t*)_pointer);
 #else
 	return (PointerType*)atomic_get64((int64*)_pointer);
 #endif

@@ -18,7 +18,7 @@ extern "C" {
 #endif
 
 status_t arch_system_info_init(struct kernel_args *args);
-void arch_fill_topology_node(cpu_topology_node_info* node, int32 cpu);
+void arch_fill_topology_node(cpu_topology_node_info* node, int32_t cpu);
 
 #ifdef __cplusplus
 }

@@ -60,7 +60,7 @@ private:
 	friend class PluginManager;
 			MediaPlugin*		fMediaPlugin;
 
-			uint32				fReserved[5];
+			uint32_t				fReserved[5];
 };
 
 

@@ -61,7 +61,7 @@ using std::nothrow_t;
 #endif
 
 // Don't rename this one, it's used and exported for binary compatibility
-int32 BMediaNode::_m_changeTag = 0;
+int32_t BMediaNode::_m_changeTag = 0;
 
 // media_node
 
@@ -308,7 +308,7 @@ status_t BMediaNode::NodeStopped(bigtime_t whenPerformance)
  * call that requested the timer to return to the caller with an appropriate
  * value.
  */
-void BMediaNode::TimerExpired(bigtime_t notifyPoint, int32 cookie, status_t error)
+void BMediaNode::TimerExpired(bigtime_t notifyPoint, int32_t cookie, status_t error)
 {
 	CALLED();
 	if (write_port((port_id)cookie, 0, &error, sizeof(error)) < 0) {
@@ -325,7 +325,7 @@ BMediaNode::BMediaNode(const char* name)
 }
 
 
-status_t BMediaNode::WaitForMessage(bigtime_t waitUntil, uint32 flags,
+status_t BMediaNode::WaitForMessage(bigtime_t waitUntil, uint32_t flags,
 	void* _reserved_)
 {
 	TRACE("entering: BMediaNode::WaitForMessage()\n");
@@ -335,7 +335,7 @@ status_t BMediaNode::WaitForMessage(bigtime_t waitUntil, uint32 flags,
 	// The flags are currently unused and should be 0.
 	// Note: about 16 KByte stack used
 	char data[B_MEDIA_MESSAGE_SIZE];
-	int32 message;
+	int32_t message;
 	ssize_t size;
 
 	// TODO: Investigate on this issue
@@ -539,7 +539,7 @@ void BMediaNode::SetTimeSource(BTimeSource* time_source)
 }
 
 
-status_t BMediaNode::HandleMessage(int32 message, const void* data, size_t size)
+status_t BMediaNode::HandleMessage(int32_t message, const void* data, size_t size)
 {
 	TRACE("BMediaNode::HandleMessage %#lx, node %ld\n", message, fNodeID);
 	switch (message) {
@@ -755,7 +755,7 @@ status_t BMediaNode::HandleMessage(int32 message, const void* data, size_t size)
 }
 
 
-void BMediaNode::HandleBadMessage(int32 code, const void* buffer, size_t size)
+void BMediaNode::HandleBadMessage(int32_t code, const void* buffer, size_t size)
 {
 	CALLED();
 
@@ -856,7 +856,7 @@ status_t BMediaNode::GetNodeAttributes(media_node_attribute* outAttributes,
 }
 
 
-status_t BMediaNode::AddTimer(bigtime_t at_performance_time, int32 cookie)
+status_t BMediaNode::AddTimer(bigtime_t at_performance_time, int32_t cookie)
 {
 	CALLED();
 	return B_ERROR;
@@ -917,7 +917,7 @@ void BMediaNode::_InitObject(const char* name, media_node_id id, uint64 kinds)
 }
 
 
-BMediaNode::BMediaNode(const char* name, media_node_id id, uint32 kinds)
+BMediaNode::BMediaNode(const char* name, media_node_id id, uint32_t kinds)
 {
 	TRACE("BMediaNode::BMediaNode: name '%s', nodeid %ld, kinds %#lx\n",
 		name, id, kinds);
@@ -925,7 +925,7 @@ BMediaNode::BMediaNode(const char* name, media_node_id id, uint32 kinds)
 }
 
 
-int32 BMediaNode::NewChangeTag()
+int32_t BMediaNode::NewChangeTag()
 {
 	CALLED();
 	// Change tags have been used in BeOS R4 to match up
@@ -942,7 +942,7 @@ int32 BMediaNode::NewChangeTag()
 
 // BeOS R4 deprecated API
 
-int32 BMediaNode::IncrementChangeTag()
+int32_t BMediaNode::IncrementChangeTag()
 {
 	CALLED();
 	// Only present in BeOS R4
@@ -954,7 +954,7 @@ int32 BMediaNode::IncrementChangeTag()
 }
 
 
-int32 BMediaNode::ChangeTag()
+int32_t BMediaNode::ChangeTag()
 {
 	UNIMPLEMENTED();
 	// Only present in BeOS R4
@@ -965,7 +965,7 @@ int32 BMediaNode::ChangeTag()
 }
 
 
-int32 BMediaNode::MintChangeTag()
+int32_t BMediaNode::MintChangeTag()
 {
 	UNIMPLEMENTED();
 	// Only present in BeOS R4
@@ -977,7 +977,7 @@ int32 BMediaNode::MintChangeTag()
 }
 
 
-status_t BMediaNode::ApplyChangeTag(int32 previously_reserved)
+status_t BMediaNode::ApplyChangeTag(int32_t previously_reserved)
 {
 	UNIMPLEMENTED();
 	// Only present in BeOS R4

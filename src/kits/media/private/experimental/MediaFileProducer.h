@@ -25,7 +25,7 @@ public:
 virtual port_id ControlPort() const;
 
 virtual	BMediaAddOn* AddOn(
-				int32 * internal_id) const = 0;	/* Who instantiated you -- or NULL for app class */
+				int32_t * internal_id) const = 0;	/* Who instantiated you -- or NULL for app class */
 
 protected:
 		/* These don't return errors; instead, they use the global error condition reporter. */
@@ -52,7 +52,7 @@ virtual	void SetTimeSource(
 
 public:
 virtual	status_t HandleMessage(
-				int32 message,
+				int32_t message,
 				const void * data,
 				size_t size);
 				
@@ -75,7 +75,7 @@ virtual		status_t GetNodeAttributes(	/* reserved 3 */
 
 virtual		status_t AddTimer(
 					bigtime_t at_performance_time,
-					int32 cookie);
+					int32_t cookie);
 
 /* end from BMediaNode */
 /***********************/
@@ -85,15 +85,15 @@ virtual		status_t AddTimer(
 protected:
 //included from BMediaNode
 //virtual	status_t HandleMessage(
-//                int32 message,
+//                int32_t message,
 //				const void * data,
 //				size_t size);
 
 virtual	status_t GetNextFileFormat(
-				int32 * cookie,
+				int32_t * cookie,
 				media_file_format * out_format) = 0;
 virtual	void DisposeFileFormatCookie(
-				int32 cookie) = 0;
+				int32_t cookie) = 0;
 
 virtual	status_t GetDuration(
 				bigtime_t * out_time) = 0;
@@ -117,7 +117,7 @@ protected:
 	/* functionality of BBufferProducer */
 virtual	status_t FormatSuggestionRequested(
 				media_type type,
-				int32 quality,
+				int32_t quality,
 				media_format * format) = 0;
 virtual	status_t FormatProposal(
 				const media_source & output,
@@ -131,12 +131,12 @@ virtual	status_t FormatChangeRequested(
 				const media_source & source,
 				const media_destination & destination,
 				media_format * io_format,
-				int32 * _deprecated_) = 0;
+				int32_t * _deprecated_) = 0;
 virtual	status_t GetNextOutput(	/* cookie starts as 0 */
-				int32 * cookie,
+				int32_t * cookie,
 				media_output * out_output) = 0;
 virtual	status_t DisposeOutputCookie(
-				int32 cookie) = 0;
+				int32_t cookie) = 0;
 	/* In this function, you should either pass on the group to your upstream guy, */
 	/* or delete your current group and hang on to this group. Deleting the previous */
 	/* group (unless you passed it on with the reclaim flag set to false) is very */
@@ -158,7 +158,7 @@ virtual	status_t VideoClippingChanged(
 				int16 num_shorts,
 				int16 * clip_data,
 				const media_video_display_info & display,
-				int32 * _deprecated_);
+				int32_t * _deprecated_);
 	/* Iterates over all outputs and maxes the latency found */
 virtual	status_t GetLatency(
 				bigtime_t * out_lantency);
@@ -184,13 +184,13 @@ virtual	void LateNoticeReceived(
 virtual	void EnableOutput(
 				const media_source & what,
 				bool enabled,
-				int32 * _deprecated_) = 0;
+				int32_t * _deprecated_) = 0;
 virtual	status_t SetPlayRate(
-				int32 numer,
-				int32 denom);
+				int32_t numer,
+				int32_t denom);
 
 virtual	status_t HandleMessage(	/* call this from the thread that listens to the port */
-				int32 message,
+				int32_t message,
 				const void * data,
 				size_t size);
 
@@ -204,7 +204,7 @@ virtual	void LatencyChanged(					//	used to be Reserved 1
 				const media_source & source,
 				const media_destination & destination,
 				bigtime_t new_latency,
-				uint32 flags);
+				uint32_t flags);
 
 /* end from BBufferProducer */
 /****************************/
@@ -234,7 +234,7 @@ virtual		status_t _Reserved_MediaFileProducer_13(void *);
 virtual		status_t _Reserved_MediaFileProducer_14(void *);
 virtual		status_t _Reserved_MediaFileProducer_15(void *);
 
-		uint32 _reserved_media_file_node_[16];
+		uint32_t _reserved_media_file_node_[16];
 
 };
 

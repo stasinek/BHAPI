@@ -21,8 +21,8 @@ namespace BPrivate {
 class _BTextInput_ : public BTextView {
 public:
 						_BTextInput_(BRect frame, BRect textRect,
-							uint32 resizeMask,
-							uint32 flags = B_WILL_DRAW | B_PULSE_NEEDED);
+							uint32_t resizeMask,
+							uint32_t flags = B_WILL_DRAW | B_PULSE_NEEDED);
 						_BTextInput_(BMessage *data);
 virtual					~_BTextInput_();
 
@@ -31,7 +31,7 @@ virtual	status_t		Archive(BMessage *data, bool deep = true) const;
 
 virtual	void			MouseDown(BPoint where);
 virtual	void			FrameResized(float width, float height);
-virtual	void			KeyDown(const char *bytes, int32 numBytes);
+virtual	void			KeyDown(const char *bytes, int32_t numBytes);
 virtual	void			MakeFocus(bool focusState = true);
 
 virtual	BSize			MinSize();
@@ -43,9 +43,9 @@ virtual	void			Paste(BClipboard *clipboard);
 
 protected:
 
-virtual	void			InsertText(const char *inText, int32 inLength,
-								   int32 inOffset, const text_run_array *inRuns);
-virtual	void			DeleteText(int32 fromOffset, int32 toOffset);
+virtual	void			InsertText(const char *inText, int32_t inLength,
+								   int32_t inOffset, const text_run_array *inRuns);
+virtual	void			DeleteText(int32_t fromOffset, int32_t toOffset);
 
 private:
 

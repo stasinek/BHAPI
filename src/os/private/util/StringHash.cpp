@@ -10,10 +10,10 @@
 #include <util/StringHash.h>
 
 
-uint32
+uint32_t
 hash_hash_string(const char* string)
 {
-	uint32 hash = 0;
+	uint32_t hash = 0;
 	char c;
 
 	// we assume hash to be at least 32 bits
@@ -27,10 +27,10 @@ hash_hash_string(const char* string)
 }
 
 
-uint32
+uint32_t
 hash_hash_string_part(const char* string, size_t maxLength)
 {
-	uint32 hash = 0;
+	uint32_t hash = 0;
 	char c;
 
 	// we assume hash to be at least 32 bits

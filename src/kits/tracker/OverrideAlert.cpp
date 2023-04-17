@@ -42,9 +42,9 @@ All rights reserved.
 
 
 OverrideAlert::OverrideAlert(const char* title, const char* text,
-	const char* button1, uint32 modifiers1,
-	const char* button2, uint32 modifiers2,
-	const char* button3, uint32 modifiers3,
+	const char* button1, uint32_t modifiers1,
+	const char* button2, uint32_t modifiers2,
+	const char* button3, uint32_t modifiers3,
 	button_width width, alert_type type)
 	:
 	BAlert(title, text, button1, button2, button3, width, type),
@@ -61,9 +61,9 @@ OverrideAlert::OverrideAlert(const char* title, const char* text,
 
 
 OverrideAlert::OverrideAlert(const char* title, const char* text,
-	const char* button1, uint32 modifiers1,
-	const char* button2, uint32 modifiers2,
-	const char* button3, uint32 modifiers3,
+	const char* button1, uint32_t modifiers1,
+	const char* button2, uint32_t modifiers2,
+	const char* button3, uint32_t modifiers3,
 	button_width width, button_spacing spacing, alert_type type)
 	:
 	BAlert(title, text, button1, button2, button3, width, spacing, type),
@@ -89,8 +89,8 @@ void OverrideAlert::DispatchMessage(BMessage* message, BHandler* handler)
 	if (message->what == B_KEY_DOWN || message->what == B_KEY_UP
 		|| message->what == B_UNMAPPED_KEY_DOWN
 		|| message->what == B_UNMAPPED_KEY_UP) {
-		uint32 modifiers;
-		if (message->FindInt32("modifiers", (int32*)&modifiers) == B_OK)
+		uint32_t modifiers;
+		if (message->FindInt32("modifiers", (int32_t*)&modifiers) == B_OK)
 			UpdateButtons(modifiers);
 	}
 	BAlert::DispatchMessage(message, handler);
@@ -139,13 +139,13 @@ OverrideAlert::OverPosition(float width, float height)
 }
 
 
-void OverrideAlert::UpdateButtons(uint32 modifiers, bool force)
+void OverrideAlert::UpdateButtons(uint32_t modifiers, bool force)
 {
 	if (modifiers == fCurModifiers && !force)
 		return;
 
 	fCurModifiers = modifiers;
-	for (int32 i = 0; i < 3; i++) {
+	for (int32_t i = 0; i < 3; i++) {
 		BButton* button = ButtonAt(i);
 		if (button != NULL) {
 			button->SetEnabled(((fButtonModifiers[i] & fCurModifiers)

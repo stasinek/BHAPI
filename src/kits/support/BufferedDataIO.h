@@ -70,7 +70,7 @@ private:
 			size_t				fPosition;
 			size_t				fSize;
 
-			uint32				_reserved_ints[4];
+			uint32_t				_reserved_ints[4];
 
 			bool				fDirty;
 			bool				fOwnsStream;

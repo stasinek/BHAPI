@@ -162,7 +162,7 @@ ARMPagingMethod32Bit::PhysicalPageSlotPool::Init(area_id dataArea, void* data,
 	// init slot list
 	fSlots = (PhysicalPageSlot*)(fPageTable + 1024);
 	addr_t slotAddress = virtualBase;
-	for (int32 i = 0; i < 1024; i++, slotAddress += B_PAGE_SIZE) {
+	for (int32_t i = 0; i < 1024; i++, slotAddress += B_PAGE_SIZE) {
 		PhysicalPageSlot* slot = &fSlots[i];
 		slot->next = slot + 1;
 		slot->pool = this;
@@ -230,13 +230,13 @@ ARMPagingMethod32Bit::PhysicalPageSlotPool::AllocatePool(
 	phys_addr_t physicalTable;
 	ARMVMTranslationMap32Bit* map = static_cast<ARMVMTranslationMap32Bit*>(
 		VMAddressSpace::Kernel()->TranslationMap());
-	uint32 dummyFlags;
+	uint32_t dummyFlags;
 	cpu_status state = disable_interrupts();
 	map->QueryInterrupt((addr_t)data, &physicalTable, &dummyFlags);
 	restore_interrupts(state);
 
 	// put the page table into the page directory
-	int32 index = VADDR_TO_PDENT((addr_t)virtualBase);
+	int32_t index = VADDR_TO_PDENT((addr_t)virtualBase);
 	page_directory_entry* entry
 		= &map->PagingStructures32Bit()->pgdir_virt[index];
 	PutPageTableInPageDir(entry, physicalTable,
@@ -287,10 +287,10 @@ ARMPagingMethod32Bit::Init(kernel_args* args,
 	ARMPagingStructures32Bit::StaticInit();
 
 	// create the initial pools for the physical page mapper
-	int32 poolCount = _GetInitialPoolCount();
+	int32_t poolCount = _GetInitialPoolCount();
 	PhysicalPageSlotPool* pool = PhysicalPageSlotPool::sInitialPhysicalPagePool;
 
-	for (int32 i = 0; i < poolCount; i++) {
+	for (int32_t i = 0; i < poolCount; i++) {
 		new(&pool[i]) PhysicalPageSlotPool;
 		status_t error = pool[i].InitInitial(args);
 		if (error != B_OK) {
@@ -331,8 +331,8 @@ ARMPagingMethod32Bit::InitPostArea(kernel_args* args)
 		B_ALREADY_WIRED, B_KERNEL_READ_AREA | B_KERNEL_WRITE_AREA);
 	ASSERT_PRINT(area >= 0, "Failed mapping the kernel page directory: 0x%08lx!", area);
 
-	int32 poolCount = _GetInitialPoolCount();
-	for (int32 i = 0; i < poolCount; i++) {
+	int32_t poolCount = _GetInitialPoolCount();
+	for (int32_t i = 0; i < poolCount; i++) {
 		status_t error = PhysicalPageSlotPool::sInitialPhysicalPagePool[i]
 			.InitInitialPostArea(args);
 		if (error != B_OK)
@@ -414,17 +414,17 @@ ARMPagingMethod32Bit::MapEarly(kernel_args* args, addr_t virtualAddress,
 
 bool
 ARMPagingMethod32Bit::IsKernelPageAccessible(addr_t virtualAddress,
-	uint32 protection)
+	uint32_t protection)
 {
 #if 0
 	// We only trust the kernel team's page directory. So switch to it first.
 	// Always set it to make sure the TLBs don't contain obsolete data.
-	uint32 physicalPageDirectory = x86_read_cr3();
+	uint32_t physicalPageDirectory = x86_read_cr3();
 	x86_write_cr3(fKernelPhysicalPageDirectory);
 
 	// get the page directory entry for the address
 	page_directory_entry pageDirectoryEntry;
-	uint32 index = VADDR_TO_PDENT(virtualAddress);
+	uint32_t index = VADDR_TO_PDENT(virtualAddress);
 
 	if (physicalPageDirectory == fKernelPhysicalPageDirectory) {
 		pageDirectoryEntry = fKernelVirtualPageDirectory[index];
@@ -480,7 +480,7 @@ ARMPagingMethod32Bit::IsKernelPageAccessible(addr_t virtualAddress,
 
 /*static*/ void
 ARMPagingMethod32Bit::PutPageTableInPageDir(page_directory_entry* entry,
-	phys_addr_t pgtablePhysical, uint32 attributes)
+	phys_addr_t pgtablePhysical, uint32_t attributes)
 {
 	*entry = (pgtablePhysical & ARM_PDE_ADDRESS_MASK) | ARM_MMU_L1_TYPE_COARSE;
 		// TODO: we ignore the attributes of the page table - for compatibility
@@ -495,7 +495,7 @@ ARMPagingMethod32Bit::PutPageTableInPageDir(page_directory_entry* entry,
 
 /*static*/ void
 ARMPagingMethod32Bit::PutPageTableEntryInTable(page_table_entry* entry,
-	phys_addr_t physicalAddress, uint32 attributes, uint32 memoryType,
+	phys_addr_t physicalAddress, uint32_t attributes, uint32_t memoryType,
 	bool globalPage)
 {
 	page_table_entry page = (physicalAddress & ARM_PTE_ADDRESS_MASK)
@@ -519,10 +519,10 @@ ARMPagingMethod32Bit::PutPageTableEntryInTable(page_table_entry* entry,
 }
 
 
-inline int32
+inline int32_t
 ARMPagingMethod32Bit::_GetInitialPoolCount()
 {
-	int32 requiredSlots = smp_get_num_cpus() * TOTAL_SLOTS_PER_CPU
+	int32_t requiredSlots = smp_get_num_cpus() * TOTAL_SLOTS_PER_CPU
 			+ EXTRA_SLOTS;
 	return (requiredSlots + 1023) / 1024;
 }

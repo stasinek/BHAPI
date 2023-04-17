@@ -38,7 +38,7 @@ public:
 		B_WILL_SEEK,				// performance_time media_time
 		B_WILL_TIMEWARP,			// real_time performance_time
 
-		B_FORMAT_SUGGESTION,		// media_type type, int32 quality,
+		B_FORMAT_SUGGESTION,		// media_type type, int32_t quality,
 									// media_format* format
 	};
 
@@ -113,11 +113,11 @@ public:
 	// a single connection use BMediaConnection::Disconnect().
 	virtual status_t				Disconnect();
 
-			int32					CountInputs() const;
-			int32					CountOutputs() const;
+			int32_t					CountInputs() const;
+			int32_t					CountOutputs() const;
 
-			BMediaInput*			InputAt(int32 index) const;
-			BMediaOutput*			OutputAt(int32 index) const;
+			BMediaInput*			InputAt(int32_t index) const;
+			BMediaOutput*			OutputAt(int32_t index) const;
 
 			BMediaInput*			FindInput(
 										const media_connection& input) const;
@@ -160,7 +160,7 @@ public:
 
 	// This is supplied to support using this class in a BMediaAddOn.
 	// Default version just return NULL.
-	virtual	BMediaAddOn*			AddOn(int32* id) const;
+	virtual	BMediaAddOn*			AddOn(int32_t* id) const;
 
 	void							SetNotificationHook(notify_hook notifyHook = NULL,
 										void* cookie = NULL);
@@ -222,7 +222,7 @@ private:
 	virtual	void					_ReservedMediaClient8();
 	virtual	void					_ReservedMediaClient9();
 	virtual	void					_ReservedMediaClient10();
-			uint32					fPadding[64];
+			uint32_t					fPadding[64];
 
 	friend class BMediaClientNode;
 	friend class BMediaConnection;

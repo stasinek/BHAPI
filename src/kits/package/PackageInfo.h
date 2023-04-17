@@ -74,7 +74,7 @@ public:
 									// the explicitly set file name, if any, or
 									// CanonicalFileName() otherwise
 
-			uint32				Flags() const;
+			uint32_t				Flags() const;
 
 			BPackageArchitecture	Architecture() const;
 			const char*			ArchitectureName() const;
@@ -123,7 +123,7 @@ public:
 			void				SetInstallPath(const BString& installPath);
 			void				SetFileName(const BString& fileName);
 
-			void				SetFlags(uint32 flags);
+			void				SetFlags(uint32_t flags);
 
 			void				SetArchitecture(
 									BPackageArchitecture architecture);
@@ -252,7 +252,7 @@ private:
 									const UserList& users);
 
 	static	status_t			_ExtractVersion(BMessage* archive,
-									const char* field, int32 index,
+									const char* field, int32_t index,
 									BPackageVersion& _version);
 	static	status_t			_ExtractStringList(BMessage* archive,
 									const char* field, BStringList& _list);
@@ -279,7 +279,7 @@ private:
 			BString				fPackager;
 			BString				fBasePackage;
 
-			uint32				fFlags;
+			uint32_t				fFlags;
 
 			BPackageArchitecture fArchitecture;
 

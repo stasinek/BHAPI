@@ -24,7 +24,7 @@ private:
 	virtual	void				_ReservedLayoutContextListener4();
 	virtual	void				_ReservedLayoutContextListener5();
 
-			uint32				_reserved[3];
+			uint32_t				_reserved[3];
 };
 
 
@@ -39,7 +39,7 @@ public:
 
 private:
 			BList				fListeners;
-			uint32				_reserved[5];
+			uint32_t				_reserved[5];
 };
 
 #endif	//	_LAYOUT_CONTEXT_H

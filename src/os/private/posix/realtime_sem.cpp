@@ -42,7 +42,7 @@ public:
 
 	sem_id SemaphoreID() const			{ return fSemaphoreID; }
 
-	status_t Init(int32 semCount, const char* name)
+	status_t Init(int32_t semCount, const char* name)
 	{
 		fSemaphoreID = create_sem(semCount, name);
 		if (fSemaphoreID < 0)
@@ -76,7 +76,7 @@ public:
 
 	const char* Name() const		{ return fName; }
 
-	status_t Init(const char* name, mode_t mode, int32 semCount)
+	status_t Init(const char* name, mode_t mode, int32_t semCount)
 	{
 		status_t error = SemInfo::Init(semCount, name);
 		if (error != B_OK)
@@ -143,7 +143,7 @@ public:
 
 private:
 	char*		fName;
-	int32		fRefCount;
+	int32_t		fRefCount;
 	uid_t		fUID;
 	gid_t		fGID;
 	mode_t		fPermissions;
@@ -198,7 +198,7 @@ public:
 	}
 
 	status_t OpenNamedSem(const char* name, int openFlags, mode_t mode,
-		uint32 semCount, NamedSem*& _sem, bool& _created)
+		uint32_t semCount, NamedSem*& _sem, bool& _created)
 	{
 		MutexLocker _(fLock);
 
@@ -273,7 +273,7 @@ private:
 
 	mutex			fLock;
 	NamedSemTable	fNamedSemaphores;
-	int32			fSemaphoreCount;
+	int32_t			fSemaphoreCount;
 };
 
 
@@ -335,7 +335,7 @@ public:
 private:
 	SemInfo*		fSemaphore;
 	sem_t*			fUserSemaphore;
-	int32			fOpenCount;
+	int32_t			fOpenCount;
 
 	TeamSemInfo*	fHashLink;
 };
@@ -430,7 +430,7 @@ struct realtime_sem_context {
 	}
 
 	status_t OpenSem(const char* name, int openFlags, mode_t mode,
-		uint32 semCount, sem_t* userSem, sem_t*& _usedUserSem, int32_t& _id,
+		uint32_t semCount, sem_t* userSem, sem_t*& _usedUserSem, int32_t_t& _id,
 		bool& _created)
 	{
 		NamedSem* sem = NULL;
@@ -560,7 +560,7 @@ struct realtime_sem_context {
 
 		locker.Unlock();
 
-		int32 count;
+		int32_t count;
 		status_t error = get_sem_count(id, &count);
 		if (error != B_OK)
 			return error;
@@ -587,7 +587,7 @@ private:
 
 	mutex		fLock;
 	SemTable	fSemaphores;
-	int32		fSemaphoreCount;
+	int32_t		fSemaphoreCount;
 	sem_id		fNextPrivateSemID;
 };
 
@@ -683,7 +683,7 @@ clone_realtime_sem_context(realtime_sem_context* context)
 
 status_t
 _user_realtime_sem_open(const char* userName, int openFlagsOrShared,
-	mode_t mode, uint32 semCount, sem_t* userSem, sem_t** _usedUserSem)
+	mode_t mode, uint32_t semCount, sem_t* userSem, sem_t** _usedUserSem)
 {
 	realtime_sem_context* context = get_current_team_context();
 	if (context == NULL)
@@ -714,14 +714,14 @@ _user_realtime_sem_open(const char* userName, int openFlagsOrShared,
 	// open the semaphore
 	sem_t* usedUserSem;
 	bool created = false;
-	int32_t id;
+	int32_t_t id;
 	error = context->OpenSem(name, openFlagsOrShared, mode, semCount, userSem,
 		usedUserSem, id, created);
 	if (error != B_OK)
 		return error;
 
 	// copy results back to userland
-	if (user_memcpy(&userSem->u.named_sem_id, &id, sizeof(int32_t)) != B_OK
+	if (user_memcpy(&userSem->u.named_sem_id, &id, sizeof(int32_t_t)) != B_OK
 		|| user_memcpy(_usedUserSem, &usedUserSem, sizeof(sem_t*)) != B_OK) {
 		if (created)
 			sSemTable.UnlinkNamedSem(name);

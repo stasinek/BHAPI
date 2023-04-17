@@ -111,14 +111,14 @@ void BMutablePartition::SetBlockSize(off_t blockSize)
 
 
 // Status
-uint32 BMutablePartition::Status() const
+uint32_t BMutablePartition::Status() const
 {
 	return fData->status;
 }
 
 
 // SetStatus
-void BMutablePartition::SetStatus(uint32 status)
+void BMutablePartition::SetStatus(uint32_t status)
 {
 	if (fData->status != status) {
 		fData->status = status;
@@ -128,14 +128,14 @@ void BMutablePartition::SetStatus(uint32 status)
 
 
 // Flags
-uint32 BMutablePartition::Flags() const
+uint32_t BMutablePartition::Flags() const
 {
 	return fData->flags;
 }
 
 
 // SetFlags
-void BMutablePartition::SetFlags(uint32 flags)
+void BMutablePartition::SetFlags(uint32_t flags)
 {
 	if (fData->flags != flags) {
 		fData->flags = flags;
@@ -145,7 +145,7 @@ void BMutablePartition::SetFlags(uint32 flags)
 
 
 // ClearFlags
-void BMutablePartition::ClearFlags(uint32 flags)
+void BMutablePartition::ClearFlags(uint32_t flags)
 {
 	if (flags & fData->flags) {
 		fData->flags &= ~flags;
@@ -173,7 +173,7 @@ void BMutablePartition::SetVolumeID(dev_t volumeID)
 
 
 // Index
-int32 BMutablePartition::Index() const
+int32_t BMutablePartition::Index() const
 {
 	return fData->index;
 }
@@ -307,7 +307,7 @@ status_t BMutablePartition::SetContentParameters(const char* parameters)
 
 
 // CreateChild
-status_t BMutablePartition::CreateChild(int32 index, BMutablePartition** _child)
+status_t BMutablePartition::CreateChild(int32_t index, BMutablePartition** _child)
 {
 	if (index < 0)
 		index = fChildren.CountItems();
@@ -358,7 +358,7 @@ status_t BMutablePartition::CreateChild(int32 index, BMutablePartition** _child)
 
 
 // CreateChild
-status_t BMutablePartition::CreateChild(int32 index, const char* type, const char* name,
+status_t BMutablePartition::CreateChild(int32_t index, const char* type, const char* name,
 	const char* parameters, BMutablePartition** _child)
 {
 	// create the child
@@ -388,7 +388,7 @@ status_t BMutablePartition::CreateChild(int32 index, const char* type, const cha
 
 
 // DeleteChild
-status_t BMutablePartition::DeleteChild(int32 index)
+status_t BMutablePartition::DeleteChild(int32_t index)
 {
 	BMutablePartition* child = (BMutablePartition*)fChildren.RemoveItem(index);
 	if (!child)
@@ -414,8 +414,8 @@ status_t BMutablePartition::DeleteChild(BMutablePartition* child)
 // DeleteAllChildren
 void BMutablePartition::DeleteAllChildren()
 {
-	int32 count = CountChildren();
-	for (int32 i = count - 1; i >= 0; i--)
+	int32_t count = CountChildren();
+	for (int32_t i = count - 1; i >= 0; i--)
 		DeleteChild(i);
 }
 
@@ -430,21 +430,21 @@ BMutablePartition::Parent() const
 
 // ChildAt
 BMutablePartition*
-BMutablePartition::ChildAt(int32 index) const
+BMutablePartition::ChildAt(int32_t index) const
 {
 	return (BMutablePartition*)fChildren.ItemAt(index);
 }
 
 
 // CountChildren
-int32 BMutablePartition::CountChildren() const
+int32_t BMutablePartition::CountChildren() const
 {
 	return fChildren.CountItems();
 }
 
 
 // IndexOfChild
-int32 BMutablePartition::IndexOfChild(BMutablePartition* child) const
+int32_t BMutablePartition::IndexOfChild(BMutablePartition* child) const
 {
 	if (!child)
 		return -1;
@@ -453,21 +453,21 @@ int32 BMutablePartition::IndexOfChild(BMutablePartition* child) const
 
 
 // SetChangeFlags
-void BMutablePartition::SetChangeFlags(uint32 flags)
+void BMutablePartition::SetChangeFlags(uint32_t flags)
 {
 	fChangeFlags = flags;
 }
 
 
 // ChangeFlags
-uint32 BMutablePartition::ChangeFlags() const
+uint32_t BMutablePartition::ChangeFlags() const
 {
 	return fChangeFlags;
 }
 
 
 // Changed
-void BMutablePartition::Changed(uint32 flags, uint32 clearFlags)
+void BMutablePartition::Changed(uint32_t flags, uint32_t clearFlags)
 {
 	fChangeFlags &= ~clearFlags;
 	fChangeFlags |= flags;

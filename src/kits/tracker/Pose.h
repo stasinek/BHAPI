@@ -55,7 +55,7 @@ enum {
 
 class BPose {
 public:
-	BPose(Model* adopt, BPoseView*, uint32 clipboardMode,
+	BPose(Model* adopt, BPoseView*, uint32_t clipboardMode,
 		bool selected = false);
 	virtual ~BPose();
 
@@ -80,7 +80,7 @@ public:
 	void DrawIcon(BPoint where, BView* view, icon_size which, bool direct,
 		bool drawUnselected = false);
 	void DrawToggleSwitch(BRect, BPoseView*);
-	void MouseUp(BPoint poseLoc, BPoseView*, BPoint where, int32 index);
+	void MouseUp(BPoint poseLoc, BPoseView*, BPoint where, int32_t index);
 	Model* TargetModel() const;
 	Model* ResolvedModel() const;
 	void Select(bool selected);
@@ -89,9 +89,9 @@ public:
 	bigtime_t SelectionTime() const;
 
 	BTextWidget* ActiveWidget() const;
-	BTextWidget* WidgetFor(uint32 hashAttr, int32* index = 0) const;
+	BTextWidget* WidgetFor(uint32_t hashAttr, int32_t* index = 0) const;
 	BTextWidget* WidgetFor(BColumn* column, BPoseView* poseView,
-		ModelNodeLazyOpener &opener, int32* index = NULL);
+		ModelNodeLazyOpener &opener, int32_t* index = NULL);
 		// adds the widget if needed
 
 	bool PointInPose(BPoint poseLoc, const BPoseView*, BPoint where,
@@ -100,9 +100,9 @@ public:
 	BRect CalcRect(BPoint loc, const BPoseView*,
 		bool minimal_rect = false) const;
 	BRect CalcRect(const BPoseView*) const;
-	void UpdateAllWidgets(int32 poseIndex, BPoint poseLoc, BPoseView*);
+	void UpdateAllWidgets(int32_t poseIndex, BPoint poseLoc, BPoseView*);
 	void UpdateWidgetAndModel(Model* resolvedModel, const char* attrName,
-			uint32 attrType, int32 poseIndex, BPoint poseLoc,
+			uint32_t attrType, int32_t poseIndex, BPoint poseLoc,
 			BPoseView* view, bool visible);
 	bool UpdateVolumeSpaceBar(BVolume* volume);
 	void UpdateIcon(BPoint poseLoc, BPoseView*);
@@ -111,7 +111,7 @@ public:
 	void UpdateBrokenSymLink(BPoint poseLoc, BPoseView*);
 	void UpdateWasBrokenSymlink(BPoint poseLoc, BPoseView* poseView);
 
-	void Commit(bool saveChanges, BPoint loc, BPoseView*, int32 index);
+	void Commit(bool saveChanges, BPoint loc, BPoseView*, int32_t index);
 	void EditFirstWidget(BPoint poseLoc, BPoseView*);
 	void EditNextWidget(BPoseView*);
 	void EditPreviousWidget(BPoseView*);
@@ -126,8 +126,8 @@ public:
 	bool WasAutoPlaced() const;
 	void SetAutoPlaced(bool);
 
-	uint32 ClipboardMode() const;
-	void SetClipboardMode(uint32 clipboardMode);
+	uint32_t ClipboardMode() const;
+	void SetClipboardMode(uint32_t clipboardMode);
 #if DEBUG
 	void PrintToStream();
 #endif
@@ -144,8 +144,8 @@ private:
 	BObjectList<BTextWidget> fWidgetList;
 	BPoint fLocation;
 
-	uint32 fClipboardMode;
-	int32 fPercent;
+	uint32_t fClipboardMode;
+	int32_t fPercent;
 	bigtime_t fSelectionTime;
 
 	bool fIsSelected : 1;
@@ -240,13 +240,13 @@ inline void BPose::Draw(BRect poseRect, const BRect& updateRect, BPoseView* view
 }
 
 
-inline uint32 BPose::ClipboardMode() const
+inline uint32_t BPose::ClipboardMode() const
 {
 	return fClipboardMode;
 }
 
 
-inline void BPose::SetClipboardMode(uint32 clipboardMode)
+inline void BPose::SetClipboardMode(uint32_t clipboardMode)
 {
 	fClipboardMode = clipboardMode;
 }

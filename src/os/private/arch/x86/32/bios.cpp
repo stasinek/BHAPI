@@ -19,7 +19,7 @@
 
 
 struct smbios {
-	uint32		anchor_string;
+	uint32_t		anchor_string;
 	uint8		entry_point_checksum;
 	uint8		entry_point_length;
 	struct {
@@ -33,14 +33,14 @@ struct smbios {
 	uint8		dmi_anchor_string[5];
 	uint8		intermediate_checksum;
 	uint16		structure_table_size;
-	uint32		structure_table;
+	uint32_t		structure_table;
 	uint16		num_structures;
 	uint8		bcd_revision;
 } _PACKED;
 
 struct bios32 {
-	uint32		anchor_string;
-	uint32		service_directory;
+	uint32_t		anchor_string;
+	uint32_t		service_directory;
 	uint8		revision;
 	uint8		size;	// in "paragraph" (16 byte) units
 	uint8		checksum;
@@ -64,7 +64,7 @@ check_checksum(addr_t base, size_t length)
 	uint8 *bytes = (uint8 *)base;
 	uint8 sum = 0;
 
-	for (uint32 i = 0; i < length; i++)
+	for (uint32_t i = 0; i < length; i++)
 		sum += bytes[i];
 
 	return sum == 0;
@@ -83,14 +83,14 @@ check_checksum(addr_t base, size_t length)
  */
 
 extern "C" status_t
-get_bios32_service(uint32 identifier, struct bios32_service *service)
+get_bios32_service(uint32_t identifier, struct bios32_service *service)
 {
 	TRACE(("get_bios32_service(identifier = %#lx)\n", identifier));
 
 	if (sBios32ServiceDirectory == 0)
 		return B_ERROR;
 
-	uint32 eax = 0, ebx = 0, ecx = 0, edx = 0;
+	uint32_t eax = 0, ebx = 0, ecx = 0, edx = 0;
 
 	asm("movl	%4, %%eax;		"	// set service parameters
 		"xorl	%%ebx, %%ebx;	"
@@ -136,7 +136,7 @@ bios_init(void)
 	addr_t end = base + 0x20000;
 
 	while (base < end) {
-		switch (*(uint32 *)base) {
+		switch (*(uint32_t *)base) {
 			case BIOS32:
 				if (check_checksum(base, sizeof(struct bios32))) {
 					struct bios32 *bios32 = (struct bios32 *)base;

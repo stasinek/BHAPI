@@ -58,13 +58,13 @@ typedef struct {
 
 
 typedef struct {
-	int32			index;
+	int32_t			index;
 	rgb_color		color;
 } indexed_color;
 
 
 typedef struct {
-	uint32			space;
+	uint32_t			space;
 	float			refresh_rate;
 	uchar			h_position;
 	uchar			v_position;
@@ -83,10 +83,10 @@ typedef struct {
 typedef struct {
 	void*			screen_base;
 	void*			io_base;
-	uint32			vendor_id;
-	uint32			device_id;
-	uint32			_reserved1_;
-	uint32			_reserved2_;
+	uint32_t			vendor_id;
+	uint32_t			device_id;
+	uint32_t			_reserved1_;
+	uint32_t			_reserved2_;
 } graphics_card_spec;
 
 
@@ -139,7 +139,7 @@ typedef void (*graphics_card_hook) ();
 extern "C" {
 #endif
 
-int32 control_graphics_card(uint32, void*);	
+int32_t control_graphics_card(uint32_t, void*);	
 
 #ifdef __cplusplus
 }

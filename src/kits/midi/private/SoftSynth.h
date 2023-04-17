@@ -49,8 +49,8 @@ public:
 	void SetVolume(double volume);
 	double Volume(void) const;
 
-	status_t SetSamplingRate(int32 rate);
-	int32 SamplingRate() const;
+	status_t SetSamplingRate(int32_t rate);
+	int32_t SamplingRate() const;
 
 	status_t SetInterpolation(interpolation_mode mode);
 	interpolation_mode Interpolation() const;
@@ -60,27 +60,27 @@ public:
 	void SetReverb(reverb_mode mode);
 	reverb_mode Reverb() const;
 
-	status_t SetMaxVoices(int32 max);
+	status_t SetMaxVoices(int32_t max);
 	int16 MaxVoices(void) const;
 
-	status_t SetLimiterThreshold(int32 threshold);
+	status_t SetLimiterThreshold(int32_t threshold);
 	int16 LimiterThreshold(void) const;
 
 	void Pause(void);
 	void Resume(void);
 
-	void NoteOff(uchar, uchar, uchar, uint32);
-	void NoteOn(uchar, uchar, uchar, uint32);
-	void KeyPressure(uchar, uchar, uchar, uint32);
-	void ControlChange(uchar, uchar, uchar, uint32);
-	void ProgramChange(uchar, uchar, uint32);
- 	void ChannelPressure(uchar, uchar, uint32);
-	void PitchBend(uchar, uchar, uchar, uint32);
-	void SystemExclusive(void*, size_t, uint32);
-	void SystemCommon(uchar, uchar, uchar, uint32);
-	void SystemRealTime(uchar, uint32);
-	void TempoChange(int32, uint32);
-	void AllNotesOff(bool, uint32);
+	void NoteOff(uchar, uchar, uchar, uint32_t);
+	void NoteOn(uchar, uchar, uchar, uint32_t);
+	void KeyPressure(uchar, uchar, uchar, uint32_t);
+	void ControlChange(uchar, uchar, uchar, uint32_t);
+	void ProgramChange(uchar, uchar, uint32_t);
+ 	void ChannelPressure(uchar, uchar, uint32_t);
+	void PitchBend(uchar, uchar, uchar, uint32_t);
+	void SystemExclusive(void*, size_t, uint32_t);
+	void SystemCommon(uchar, uchar, uchar, uint32_t);
+	void SystemRealTime(uchar, uint32_t);
+	void TempoChange(int32_t, uint32_t);
+	void AllNotesOff(bool, uint32_t);
 
 private:
 
@@ -97,7 +97,7 @@ private:
 	
 	bool fInitCheck;
 	char* fInstrumentsFile;
-	int32 fSampleRate;
+	int32_t fSampleRate;
 	interpolation_mode fInterpMode;
 	int16 fMaxVoices;
 	int16 fLimiterThreshold;

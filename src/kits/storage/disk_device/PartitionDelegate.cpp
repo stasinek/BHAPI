@@ -110,7 +110,7 @@ BPartition::Delegate::PartitionData() const
 
 // ChildAt
 BPartition::Delegate*
-BPartition::Delegate::ChildAt(int32 index) const
+BPartition::Delegate::ChildAt(int32_t index) const
 {
 	BMutablePartition* child = fMutablePartition.ChildAt(index);
 	return child ? child->GetDelegate() : NULL;
@@ -118,7 +118,7 @@ BPartition::Delegate::ChildAt(int32 index) const
 
 
 // CountChildren
-int32 BPartition::Delegate::CountChildren() const
+int32_t BPartition::Delegate::CountChildren() const
 {
 	return fMutablePartition.CountChildren();
 }
@@ -132,7 +132,7 @@ bool BPartition::Delegate::IsModified() const
 
 
 // SupportedOperations
-uint32 BPartition::Delegate::SupportedOperations(uint32 mask)
+uint32_t BPartition::Delegate::SupportedOperations(uint32_t mask)
 {
 	if (!fPartitionHandle)
 		return 0;
@@ -142,8 +142,8 @@ uint32 BPartition::Delegate::SupportedOperations(uint32 mask)
 
 
 // SupportedChildOperations
-uint32 BPartition::Delegate::SupportedChildOperations(Delegate* child,
-	uint32 mask)
+uint32_t BPartition::Delegate::SupportedChildOperations(Delegate* child,
+	uint32_t mask)
 {
 	if (!fPartitionHandle)
 		return 0;
@@ -336,7 +336,7 @@ status_t BPartition::Delegate::SetParameters(Delegate* child, const char* parame
 
 // GetNextSupportedChildType
 status_t BPartition::Delegate::GetNextSupportedChildType(Delegate* child,
-	int32* cookie, BString* type) const
+	int32_t* cookie, BString* type) const
 {
 	TRACE("%p->BPartition::Delegate::GetNextSupportedChildType(child: %p, "
 		"cookie: %ld)\n", this, child, *cookie);

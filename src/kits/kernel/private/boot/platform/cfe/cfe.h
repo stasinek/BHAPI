@@ -30,7 +30,7 @@ extern "C" {
 
 int cfe_init(uint64 handle, uint64 entry);
 
-int cfe_exit(int32 warm, int32 status);
+int cfe_exit(int32_t warm, int32_t status);
 uint64 cfe_getticks(void);
 
 int cfe_enumdev(int idx, char *name, int namelen);
@@ -45,7 +45,7 @@ int cfe_writeblk(int handle, int64 offset, const void *buffer, int length);
 #define CFE_OK			0
 #define CFE_ERR			-1
 
-status_t cfe_error(int32 err);
+status_t cfe_error(int32_t err);
 
 #ifdef __cplusplus
 }

@@ -90,7 +90,7 @@ UserDataWriter::AllocatePartitionData(size_t childCount)
 {
 	return (user_partition_data*)AllocateData(
 		sizeof(user_partition_data)
-		+ sizeof(user_partition_data*) * ((int32)childCount - 1),
+		+ sizeof(user_partition_data*) * ((int32_t)childCount - 1),
 		sizeof(int));
 }
 
@@ -100,7 +100,7 @@ UserDataWriter::AllocateDeviceData(size_t childCount)
 {
 	return (user_disk_device_data*)AllocateData(
 		sizeof(user_disk_device_data)
-		+ sizeof(user_partition_data*) * ((int32)childCount - 1),
+		+ sizeof(user_partition_data*) * ((int32_t)childCount - 1),
 		sizeof(int));
 }
 
@@ -141,8 +141,8 @@ UserDataWriter::Relocate(void *address)
 {
 	if (!fRelocationEntries || !fBuffer)
 		return B_BAD_VALUE;
-	int32 count = fRelocationEntries->Count();
-	for (int32 i = 0; i < count; i++) {
+	int32_t count = fRelocationEntries->Count();
+	for (int32_t i = 0; i < count; i++) {
 		addr *entry = fRelocationEntries->ElementAt(i);
 		if (*entry)
 			*entry += (addr)address - (addr)fBuffer;

@@ -30,16 +30,16 @@ bigtime_t rtc_boot_time(void);
 
 // Both functions use the passed struct tm only partially
 // (no tm_wday, tm_yday, tm_isdst).
-uint32 rtc_tm_to_secs(const struct tm *t);
-void rtc_secs_to_tm(uint32 seconds, struct tm *t);
+uint32_t rtc_tm_to_secs(const struct tm *t);
+void rtc_secs_to_tm(uint32_t seconds, struct tm *t);
 
-uint32 get_timezone_offset(void);
+uint32_t get_timezone_offset(void);
 
 bigtime_t _user_system_time(void);
 status_t _user_set_real_time_clock(bigtime_t time);
-status_t _user_set_timezone(int32 timezoneOffset, const char *name,
+status_t _user_set_timezone(int32_t timezoneOffset, const char *name,
 			size_t nameLength);
-status_t _user_get_timezone(int32 *_timezoneOffset, char* name,
+status_t _user_get_timezone(int32_t *_timezoneOffset, char* name,
 			size_t nameLength);
 status_t _user_set_real_time_clock_is_gmt(bool isGMT);
 status_t _user_get_real_time_clock_is_gmt(bool *_isGMT);

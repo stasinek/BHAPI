@@ -70,17 +70,17 @@ bool ArrayIndexPath::GetPathString(BString& path) const
 {
 	path.Truncate(0);
 
-	int32 count = CountIndices();
-	for (int32 i = 0; i < count; i++) {
+	int32_t count = CountIndices();
+	for (int32_t i = 0; i < count; i++) {
 		// append separator for all but the first index
 		if (i > 0) {
-			int32 oldLength = path.Length();
+			int32_t oldLength = path.Length();
 			if (path.Append(kIndexSeparator, 1).Length() != oldLength + 1)
 				return false;
 		}
 
 		// append index
-		int32 oldLength = path.Length();
+		int32_t oldLength = path.Length();
 		if ((path << IndexAt(i)).Length() == oldLength)
 			return false;
 	}

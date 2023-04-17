@@ -27,7 +27,7 @@ private:
 	virtual void				_ReservedStreamer5();
 
 			MediaPlugin*		fMediaPlugin;
-			uint32				fReserved[5];
+			uint32_t				fReserved[5];
 
 	friend class PluginManager;
 };

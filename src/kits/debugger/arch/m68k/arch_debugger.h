@@ -6,26 +6,26 @@
 #define _ARCH_M68K_DEBUGGER_H
 
 struct m68k_debug_cpu_state {
-	uint32	d0;
-	uint32	d1;
-	uint32	d2;
-	uint32	d3;
-	uint32	d4;
-	uint32	d5;
-	uint32	d6;
-	uint32	d7;
-	uint32	a0;
-	uint32	a1;
-	uint32	a2;
-	uint32	a3;
-	uint32	a4;
-	uint32	a5;
-	uint32	a6;
-	uint32	a7;
-	uint32	pc;
+	uint32_t	d0;
+	uint32_t	d1;
+	uint32_t	d2;
+	uint32_t	d3;
+	uint32_t	d4;
+	uint32_t	d5;
+	uint32_t	d6;
+	uint32_t	d7;
+	uint32_t	a0;
+	uint32_t	a1;
+	uint32_t	a2;
+	uint32_t	a3;
+	uint32_t	a4;
+	uint32_t	a5;
+	uint32_t	a6;
+	uint32_t	a7;
+	uint32_t	pc;
 	uint16	sr;
 //#warning M68K: missing members!
-	uint32	dummy;
+	uint32_t	dummy;
 } __attribute__((aligned(8)));
 
 #endif	// _ARCH_M68K_DEBUGGER_H

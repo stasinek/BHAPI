@@ -53,7 +53,7 @@ struct perform_data_get_tool_tip_at {
 
 struct perform_data_set_icon {
 	const BBitmap*	icon;
-	uint32			flags;
+	uint32_t			flags;
 };
 
 

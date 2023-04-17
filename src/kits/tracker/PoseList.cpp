@@ -41,10 +41,10 @@ All rights reserved.
 
 
 BPose*
-PoseList::FindPose(const node_ref* node, int32* resultingIndex) const
+PoseList::FindPose(const node_ref* node, int32_t* resultingIndex) const
 {
-	int32 count = CountItems();
-	for (int32 index = 0; index < count; index++) {
+	int32_t count = CountItems();
+	for (int32_t index = 0; index < count; index++) {
 		BPose* pose = ItemAt(index);
 		ASSERT(pose->TargetModel());
 		if (*pose->TargetModel()->node_ref() == *node) {
@@ -60,10 +60,10 @@ PoseList::FindPose(const node_ref* node, int32* resultingIndex) const
 
 
 BPose*
-PoseList::FindPose(const entry_ref* entry, int32* resultingIndex) const
+PoseList::FindPose(const entry_ref* entry, int32_t* resultingIndex) const
 {
-	int32 count = CountItems();
-	for (int32 index = 0; index < count; index++) {
+	int32_t count = CountItems();
+	for (int32_t index = 0; index < count; index++) {
 		BPose* pose = ItemAt(index);
 		ASSERT(pose->TargetModel());
 		if (*pose->TargetModel()->EntryRef() == *entry) {
@@ -78,17 +78,17 @@ PoseList::FindPose(const entry_ref* entry, int32* resultingIndex) const
 
 
 BPose*
-PoseList::FindPose(const Model* model, int32* resultingIndex) const
+PoseList::FindPose(const Model* model, int32_t* resultingIndex) const
 {
 	return FindPose(model->node_ref(), resultingIndex);
 }
 
 
 BPose*
-PoseList::DeepFindPose(const node_ref* node, int32* resultingIndex) const
+PoseList::DeepFindPose(const node_ref* node, int32_t* resultingIndex) const
 {
-	int32 count = CountItems();
-	for (int32 index = 0; index < count; index++) {
+	int32_t count = CountItems();
+	for (int32_t index = 0; index < count; index++) {
 		BPose* pose = ItemAt(index);
 		Model* model = pose->TargetModel();
 		if (*model->node_ref() == *node) {
@@ -117,9 +117,9 @@ PoseList::DeepFindPose(const node_ref* node, int32* resultingIndex) const
 PoseList*
 PoseList::FindAllPoses(const node_ref* node) const
 {
-	int32 count = CountItems();
+	int32_t count = CountItems();
 	PoseList *result = new PoseList(5, false);
-	for (int32 index = 0; index < count; index++) {
+	for (int32_t index = 0; index < count; index++) {
 		BPose *pose = ItemAt(index);
 		Model *model = pose->TargetModel();
 		if (*model->node_ref() == *node) {
@@ -148,10 +148,10 @@ PoseList::FindAllPoses(const node_ref* node) const
 
 
 BPose*
-PoseList::FindPoseByFileName(const char* name, int32* _index) const
+PoseList::FindPoseByFileName(const char* name, int32_t* _index) const
 {
-	int32 count = CountItems();
-	for (int32 index = 0; index < count; index++) {
+	int32_t count = CountItems();
+	for (int32_t index = 0; index < count; index++) {
 		BPose* pose = ItemAt(index);
 		ASSERT(pose->TargetModel());
 		if (strcmp(pose->TargetModel()->EntryRef()->name, name) == 0) {

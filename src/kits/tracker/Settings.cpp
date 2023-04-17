@@ -122,7 +122,7 @@ void EnumeratedStringValueSetting::ValueChanged(const char* newValue)
 #if DEBUG
 	// must be one of the enumerated values
 	bool found = false;
-	for (int32 index = 0; ; index++) {
+	for (int32_t index = 0; ; index++) {
 		if (fValues[index] == NULL)
 			break;
 
@@ -144,7 +144,7 @@ const char*  EnumeratedStringValueSetting::Handle(const char* const* argv)
 		return fValueExpectedErrorString;
 
 	bool found = false;
-	for (int32 index = 0; ; index++) {
+	for (int32_t index = 0; ; index++) {
 		if (fValues[index] == NULL)
 			break;
 
@@ -166,9 +166,9 @@ const char*  EnumeratedStringValueSetting::Handle(const char* const* argv)
 //	#pragma mark - ScalarValueSetting
 
 
-ScalarValueSetting::ScalarValueSetting(const char* name, int32 defaultValue,
+ScalarValueSetting::ScalarValueSetting(const char* name, int32_t defaultValue,
 	const char* valueExpectedErrorString, const char* wrongValueErrorString,
-	int32 min, int32 max)
+	int32_t min, int32_t max)
 	:
 	SettingsArgvDispatcher(name),
 	fDefaultValue(defaultValue),
@@ -181,7 +181,7 @@ ScalarValueSetting::ScalarValueSetting(const char* name, int32 defaultValue,
 }
 
 
-void ScalarValueSetting::ValueChanged(int32 newValue)
+void ScalarValueSetting::ValueChanged(int32_t newValue)
 {
 	ASSERT(newValue > fMin);
 	ASSERT(newValue < fMax);
@@ -189,7 +189,7 @@ void ScalarValueSetting::ValueChanged(int32 newValue)
 }
 
 
-int32 ScalarValueSetting::Value() const
+int32_t ScalarValueSetting::Value() const
 {
 	return fValue;
 }
@@ -206,7 +206,7 @@ const char*  ScalarValueSetting::Handle(const char* const* argv)
 	if (!*++argv)
 		return fValueExpectedErrorString;
 
-	int32 newValue;
+	int32_t newValue;
 	if ((*argv)[0] == '0' && (*argv)[1] == 'x')
 		sscanf(*argv, "%" B_PRIx32, &newValue);
 	else
@@ -236,8 +236,8 @@ bool ScalarValueSetting::NeedsSaving() const
 
 
 HexScalarValueSetting::HexScalarValueSetting(const char* name,
-	int32 defaultValue, const char* valueExpectedErrorString,
-	const char* wrongValueErrorString, int32 min, int32 max)
+	int32_t defaultValue, const char* valueExpectedErrorString,
+	const char* wrongValueErrorString, int32_t min, int32_t max)
 	:
 	ScalarValueSetting(name, defaultValue, valueExpectedErrorString,
 		wrongValueErrorString, min, max)

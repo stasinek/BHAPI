@@ -44,10 +44,10 @@ BPropertyInfo::~BPropertyInfo()
 }
 
 
-int32 BPropertyInfo::FindMatch(BMessage* message, int32 index,
-	BMessage* specifier, int32 form, const char* property, void* data) const
+int32_t BPropertyInfo::FindMatch(BMessage* message, int32_t index,
+	BMessage* specifier, int32_t form, const char* property, void* data) const
 {
-	int32 propertyIndex = 0;
+	int32_t propertyIndex = 0;
 
 	while (fPropInfo != NULL && fPropInfo[propertyIndex].name != NULL) {
 		property_info* propertyInfo = fPropInfo + propertyIndex;
@@ -56,7 +56,7 @@ int32 BPropertyInfo::FindMatch(BMessage* message, int32 index,
 			&& FindCommand(message->what, index, propertyInfo)
 			&& FindSpecifier(form, propertyInfo)) {
 			if (data)
-				*((uint32*)data) = propertyInfo->extra_data;
+				*((uint32_t*)data) = propertyInfo->extra_data;
 
 			return propertyIndex;
 		}
@@ -83,11 +83,11 @@ BPropertyInfo::TypeCode() const
 ssize_t
 BPropertyInfo::FlattenedSize() const
 {
-	size_t size = (2 * sizeof(int32)) + 1;
+	size_t size = (2 * sizeof(int32_t)) + 1;
 
 	if (fPropInfo) {
 		// Main chunks
-		for (int32 pi = 0; fPropInfo[pi].name != NULL; pi++) {
+		for (int32_t pi = 0; fPropInfo[pi].name != NULL; pi++) {
 			size += strlen(fPropInfo[pi].name) + 1;
 
 			if (fPropInfo[pi].usage)
@@ -95,31 +95,31 @@ BPropertyInfo::FlattenedSize() const
 			else
 				size += sizeof(char);
 
-			size += sizeof(int32);
+			size += sizeof(int32_t);
 
-			for (int32 i = 0; i < 10 && fPropInfo[pi].commands[i] != 0; i++)
-				size += sizeof(int32);
-			size += sizeof(int32);
+			for (int32_t i = 0; i < 10 && fPropInfo[pi].commands[i] != 0; i++)
+				size += sizeof(int32_t);
+			size += sizeof(int32_t);
 
-			for (int32 i = 0; i < 10 && fPropInfo[pi].specifiers[i] != 0; i++)
-				size += sizeof(int32);
-			size += sizeof(int32);
+			for (int32_t i = 0; i < 10 && fPropInfo[pi].specifiers[i] != 0; i++)
+				size += sizeof(int32_t);
+			size += sizeof(int32_t);
 		}
 
 		// Type chunks
-		for (int32 pi = 0; fPropInfo[pi].name != NULL; pi++) {
-			for (int32 i = 0; i < 10 && fPropInfo[pi].types[i] != 0; i++)
-				size += sizeof(int32);
-			size += sizeof(int32);
+		for (int32_t pi = 0; fPropInfo[pi].name != NULL; pi++) {
+			for (int32_t i = 0; i < 10 && fPropInfo[pi].types[i] != 0; i++)
+				size += sizeof(int32_t);
+			size += sizeof(int32_t);
 
-			for (int32 i = 0; i < 3 && fPropInfo[pi].ctypes[i].pairs[0].name != 0; i++) {
-				for (int32 j = 0; j < 5 && fPropInfo[pi].ctypes[i].pairs[j].name != 0; j++) {
+			for (int32_t i = 0; i < 3 && fPropInfo[pi].ctypes[i].pairs[0].name != 0; i++) {
+				for (int32_t j = 0; j < 5 && fPropInfo[pi].ctypes[i].pairs[j].name != 0; j++) {
 					size += strlen(fPropInfo[pi].ctypes[i].pairs[j].name) + 1;
-					size += sizeof(int32);
+					size += sizeof(int32_t);
 				}
-				size += sizeof(int32);
+				size += sizeof(int32_t);
 			}
-			size += sizeof(int32);
+			size += sizeof(int32_t);
 		}
 	}
 
@@ -127,9 +127,9 @@ BPropertyInfo::FlattenedSize() const
 		size += sizeof(int16);
 
 		// Chunks
-		for (int32 vi = 0; fValueInfo[vi].name != NULL; vi++) {
-			size += sizeof(int32);
-			size += sizeof(int32);
+		for (int32_t vi = 0; fValueInfo[vi].name != NULL; vi++) {
+			size += sizeof(int32_t);
+			size += sizeof(int32_t);
 
 			size += strlen(fValueInfo[vi].name) + 1;
 
@@ -138,7 +138,7 @@ BPropertyInfo::FlattenedSize() const
 			else
 				size += sizeof(char);
 
-			size += sizeof(int32);
+			size += sizeof(int32_t);
 		}
 	}
 
@@ -157,7 +157,7 @@ status_t BPropertyInfo::Flatten(void* buffer, ssize_t numBytes) const
 	BMemoryIO flatData(buffer, numBytes);
 
 	char tmpChar = B_HOST_IS_BENDIAN;
-	int32 tmpInt;
+	int32_t tmpInt;
 
 	flatData.Write(&tmpChar, sizeof(tmpChar));
 	flatData.Write(&fPropCount, sizeof(fPropCount));
@@ -166,7 +166,7 @@ status_t BPropertyInfo::Flatten(void* buffer, ssize_t numBytes) const
 
 	if (fPropInfo) {
 		// Main chunks
-		for (int32 pi = 0; fPropInfo[pi].name != NULL; pi++) {
+		for (int32_t pi = 0; fPropInfo[pi].name != NULL; pi++) {
 			flatData.Write(fPropInfo[pi].name, strlen(fPropInfo[pi].name) + 1);
 			if (fPropInfo[pi].usage != NULL) {
 				flatData.Write(fPropInfo[pi].usage, strlen(fPropInfo[pi].usage) + 1);
@@ -177,13 +177,13 @@ status_t BPropertyInfo::Flatten(void* buffer, ssize_t numBytes) const
 
 			flatData.Write(&fPropInfo[pi].extra_data, sizeof(fPropInfo[pi].extra_data));
 
-			for (int32 i = 0; i < 10 && fPropInfo[pi].commands[i] != 0; i++) {
+			for (int32_t i = 0; i < 10 && fPropInfo[pi].commands[i] != 0; i++) {
 				flatData.Write(&fPropInfo[pi].commands[i], sizeof(fPropInfo[pi].commands[i]));
 			}
 			tmpInt = 0;
 			flatData.Write(&tmpInt, sizeof(tmpInt));
 
-			for (int32 i = 0; i < 10 && fPropInfo[pi].specifiers[i] != 0; i++) {
+			for (int32_t i = 0; i < 10 && fPropInfo[pi].specifiers[i] != 0; i++) {
 				flatData.Write(&fPropInfo[pi].specifiers[i], sizeof(fPropInfo[pi].specifiers[i]));
 			}
 			tmpInt = 0;
@@ -191,15 +191,15 @@ status_t BPropertyInfo::Flatten(void* buffer, ssize_t numBytes) const
 		}
 
 		// Type chunks
-		for (int32 pi = 0; fPropInfo[pi].name != NULL; pi++) {
-			for (int32 i = 0; i < 10 && fPropInfo[pi].types[i] != 0; i++) {
+		for (int32_t pi = 0; fPropInfo[pi].name != NULL; pi++) {
+			for (int32_t i = 0; i < 10 && fPropInfo[pi].types[i] != 0; i++) {
 				flatData.Write(&fPropInfo[pi].types[i], sizeof(fPropInfo[pi].types[i]));
 			}
 			tmpInt = 0;
 			flatData.Write(&tmpInt, sizeof(tmpInt));
 
-			for (int32 i = 0; i < 3 && fPropInfo[pi].ctypes[i].pairs[0].name != 0; i++) {
-				for (int32 j = 0; j < 5 && fPropInfo[pi].ctypes[i].pairs[j].name != 0; j++) {
+			for (int32_t i = 0; i < 3 && fPropInfo[pi].ctypes[i].pairs[0].name != 0; i++) {
+				for (int32_t j = 0; j < 5 && fPropInfo[pi].ctypes[i].pairs[j].name != 0; j++) {
 					flatData.Write(fPropInfo[pi].ctypes[i].pairs[j].name,
 						strlen(fPropInfo[pi].ctypes[i].pairs[j].name) + 1);
 					flatData.Write(&fPropInfo[pi].ctypes[i].pairs[j].type,
@@ -216,7 +216,7 @@ status_t BPropertyInfo::Flatten(void* buffer, ssize_t numBytes) const
 	if (fValueInfo) {
 		// Value Chunks
 		flatData.Write(&fValueCount, sizeof(fValueCount));
-		for (int32 vi = 0; fValueInfo[vi].name != NULL; vi++) {
+		for (int32_t vi = 0; fValueInfo[vi].name != NULL; vi++) {
 			flatData.Write(&fValueInfo[vi].kind, sizeof(fValueInfo[vi].kind));
 			flatData.Write(&fValueInfo[vi].value, sizeof(fValueInfo[vi].value));
 			flatData.Write(fValueInfo[vi].name, strlen(fValueInfo[vi].name) + 1);
@@ -253,14 +253,14 @@ status_t BPropertyInfo::Unflatten(type_code code, const void* buffer,
 
 	BMemoryIO flatData(buffer, numBytes);
 	char tmpChar = B_HOST_IS_BENDIAN;
-	int32 tmpInt;
+	int32_t tmpInt;
 
 	flatData.Read(&tmpChar, sizeof(tmpChar));
 	bool swapRequired = (tmpChar != B_HOST_IS_BENDIAN);
 
 	flatData.Read(&fPropCount, sizeof(fPropCount));
 
-	int32 flags;
+	int32_t flags;
 	flatData.Read(&flags, sizeof(flags));
 	if (swapRequired) {
 		fPropCount = B_SWAP_INT32(fPropCount);
@@ -272,7 +272,7 @@ status_t BPropertyInfo::Unflatten(type_code code, const void* buffer,
 		memset(fPropInfo, 0, (fPropCount + 1) * sizeof(property_info));
 
 		// Main chunks
-		for (int32 pi = 0; pi < fPropCount; pi++) {
+		for (int32_t pi = 0; pi < fPropCount; pi++) {
 			fPropInfo[pi].name = strdup(static_cast<const char*>(buffer) + flatData.Position());
 			flatData.Seek(strlen(fPropInfo[pi].name) + 1, SEEK_CUR);
 
@@ -285,7 +285,7 @@ status_t BPropertyInfo::Unflatten(type_code code, const void* buffer,
 			}
 
 			flatData.Read(&tmpInt, sizeof(tmpInt));
-			for (int32 i = 0; tmpInt != 0; i++) {
+			for (int32_t i = 0; tmpInt != 0; i++) {
 				if (swapRequired) {
 					tmpInt = B_SWAP_INT32(tmpInt);
 				}
@@ -294,7 +294,7 @@ status_t BPropertyInfo::Unflatten(type_code code, const void* buffer,
 			}
 
 			flatData.Read(&tmpInt, sizeof(tmpInt));
-			for (int32 i = 0; tmpInt != 0; i++) {
+			for (int32_t i = 0; tmpInt != 0; i++) {
 				if (swapRequired) {
 					tmpInt = B_SWAP_INT32(tmpInt);
 				}
@@ -304,9 +304,9 @@ status_t BPropertyInfo::Unflatten(type_code code, const void* buffer,
 		}
 
 		// Type chunks
-		for (int32 pi = 0; pi < fPropCount; pi++) {
+		for (int32_t pi = 0; pi < fPropCount; pi++) {
 			flatData.Read(&tmpInt, sizeof(tmpInt));
-			for (int32 i = 0; tmpInt != 0; i++) {
+			for (int32_t i = 0; tmpInt != 0; i++) {
 				if (swapRequired) {
 					tmpInt = B_SWAP_INT32(tmpInt);
 				}
@@ -315,8 +315,8 @@ status_t BPropertyInfo::Unflatten(type_code code, const void* buffer,
 			}
 
 			flatData.Read(&tmpInt, sizeof(tmpInt));
-			for (int32 i = 0; tmpInt != 0; i++) {
-				for (int32 j = 0; tmpInt != 0; j++) {
+			for (int32_t i = 0; tmpInt != 0; i++) {
+				for (int32_t j = 0; tmpInt != 0; j++) {
 					flatData.Seek(-sizeof(tmpInt), SEEK_CUR);
 					fPropInfo[pi].ctypes[i].pairs[j].name =
 						strdup(static_cast<const char *>(buffer) + flatData.Position());
@@ -344,7 +344,7 @@ status_t BPropertyInfo::Unflatten(type_code code, const void* buffer,
 		fValueInfo = static_cast<value_info *>(malloc(sizeof(value_info) * (fValueCount + 1)));
 		memset(fValueInfo, 0, (fValueCount + 1) * sizeof(value_info));
 
-		for (int32 vi = 0; vi < fValueCount; vi++) {
+		for (int32_t vi = 0; vi < fValueCount; vi++) {
 			flatData.Read(&fValueInfo[vi].kind, sizeof(fValueInfo[vi].kind));
 			flatData.Read(&fValueInfo[vi].value, sizeof(fValueInfo[vi].value));
 
@@ -381,13 +381,13 @@ BPropertyInfo::Values() const
 }
 
 
-int32 BPropertyInfo::CountProperties() const
+int32_t BPropertyInfo::CountProperties() const
 {
 	return fPropCount;
 }
 
 
-int32 BPropertyInfo::CountValues() const
+int32_t BPropertyInfo::CountValues() const
 {
 	return fValueCount;
 }
@@ -398,27 +398,27 @@ void BPropertyInfo::PrintToStream() const
 	printf("      property   commands                       types                specifiers\n");
 	printf("--------------------------------------------------------------------------------\n");
 
-	for (int32 pi = 0; fPropInfo[pi].name != 0; pi++) {
+	for (int32_t pi = 0; fPropInfo[pi].name != 0; pi++) {
 		// property
 		printf("%14s", fPropInfo[pi].name);
 		// commands
-		for (int32 i = 0; i < 10 && fPropInfo[pi].commands[i] != 0; i++) {
-			uint32 command = fPropInfo[pi].commands[i];
+		for (int32_t i = 0; i < 10 && fPropInfo[pi].commands[i] != 0; i++) {
+			uint32_t command = fPropInfo[pi].commands[i];
 
 			printf("   %c%c%c%-28c", int(command & 0xFF000000) >> 24,
 				int(command & 0xFF0000) >> 16, int(command & 0xFF00) >> 8,
 				int(command) & 0xFF);
 		}
 		// types
-		for (int32 i = 0; i < 10 && fPropInfo[pi].types[i] != 0; i++) {
-			uint32 type = fPropInfo[pi].types[i];
+		for (int32_t i = 0; i < 10 && fPropInfo[pi].types[i] != 0; i++) {
+			uint32_t type = fPropInfo[pi].types[i];
 
 			printf("%c%c%c%c", int(type & 0xFF000000) >> 24,
 				int(type & 0xFF0000) >> 16, int(type & 0xFF00) >> 8, (int)type & 0xFF);
 		}
 		// specifiers
-		for (int32 i = 0; i < 10 && fPropInfo[pi].specifiers[i] != 0; i++) {
-			uint32 spec = fPropInfo[pi].specifiers[i];
+		for (int32_t i = 0; i < 10 && fPropInfo[pi].specifiers[i] != 0; i++) {
+			uint32_t spec = fPropInfo[pi].specifiers[i];
 			printf("%" B_PRIu32, spec);
 		}
 		printf("\n");
@@ -426,14 +426,14 @@ void BPropertyInfo::PrintToStream() const
 }
 
 
-bool BPropertyInfo::FindCommand(uint32 what, int32 index, property_info *propertyInfo)
+bool BPropertyInfo::FindCommand(uint32_t what, int32_t index, property_info *propertyInfo)
 {
 	bool result = false;
 
 	if (propertyInfo->commands[0] == 0) {
 		result = true;
 	} else if (index == 0) {
-		for (int32 i = 0; i < 10 && propertyInfo->commands[i] != 0; i++) {
+		for (int32_t i = 0; i < 10 && propertyInfo->commands[i] != 0; i++) {
 			if (propertyInfo->commands[i] == what) {
 				result = true;
 				break;
@@ -445,14 +445,14 @@ bool BPropertyInfo::FindCommand(uint32 what, int32 index, property_info *propert
 }
 
 
-bool BPropertyInfo::FindSpecifier(uint32 form, property_info *propertyInfo)
+bool BPropertyInfo::FindSpecifier(uint32_t form, property_info *propertyInfo)
 {
 	bool result = false;
 
 	if (propertyInfo->specifiers[0] == 0) {
 		result = true;
 	} else {
-		for (int32 i = 0; i < 10 && propertyInfo->specifiers[i] != 0; i++) {
+		for (int32_t i = 0; i < 10 && propertyInfo->specifiers[i] != 0; i++) {
 			if (propertyInfo->specifiers[i] == form) {
 				result = true;
 				break;

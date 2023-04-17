@@ -65,7 +65,7 @@ private:
 			BRepositoryInfo*	fRepositoryInfo;
 
 			BPackageInfo		fPackageInfo;
-			uint32				fPackageCount;
+			uint32_t				fPackageCount;
 			PackageNameSet*		fPackageNames;
 };
 

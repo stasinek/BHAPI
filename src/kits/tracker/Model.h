@@ -164,7 +164,7 @@ public:
 	status_t GetLongVersionString(BString &, version_kind);
 	status_t GetVersionString(BString &, version_kind);
 	status_t AttrAsString(BString &, int64* value,
-		const char* attributeName, uint32 attributeType);
+		const char* attributeName, uint32_t attributeType);
 
 	// Node monitor update call
 	void UpdateEntryRef(const node_ref* dirRef, const char* name);
@@ -174,7 +174,7 @@ public:
 	bool StatChanged();
 		// returns true if pose needs to update it's icon
 
-	status_t WatchVolumeAndMountPoint(uint32, BHandler*);
+	status_t WatchVolumeAndMountPoint(uint32_t, BHandler*);
 		// correctly handles boot volume name watching
 
 	bool IsDropTarget(const Model* forDocument = 0,
@@ -188,12 +188,12 @@ public:
 		// by model
 
 #if DEBUG
-	void PrintToStream(int32 level = 1, bool deep = false);
+	void PrintToStream(int32_t level = 1, bool deep = false);
 	void TrackIconSource(icon_size);
 #endif
 
 	bool IsSuperHandler() const;
-	int32 SupportsMimeType(const char* type,
+	int32_t SupportsMimeType(const char* type,
 		const BObjectList<BString>* list, bool exactReason = false) const;
 		// pass in one string in <type> or a bunch in <List.h>
 		// if <exactReason> false, returns as soon as it figures out that

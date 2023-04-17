@@ -82,8 +82,8 @@ status_t Pattern::SetTo(const std::string &string, const std::string &mask) {
 	false if not.
 */
 bool Pattern::Sniff(Range range, BPositionIO *data, bool caseInsensitive) const {
-	int32 start = range.Start();
-	int32 end = range.End();
+	int32_t start = range.Start();
+	int32_t end = range.End();
 	off_t size = data->Seek(0, SEEK_END);
 	if (end >= size)
 		end = size-1;	// Don't bother searching beyond the end of the stream

@@ -36,7 +36,7 @@ typedef struct {
 
 typedef struct _midi_parser_module_info {
 	module_info	minfo;
-	int			(*parse)(uint32* state, uchar byte, size_t maxSize);
+	int			(*parse)(uint32_t* state, uchar byte, size_t maxSize);
 	int			_reserved_;
 } midi_parser_module_info;
 
@@ -50,13 +50,13 @@ enum {
 
 typedef struct _generic_mpu401_module {
 	module_info	minfo;
-	status_t	(*create_device)(int port, void** _handle, uint32 workArounds,
-					void (*interruptOp)(int32 op, void* card), void* card);
+	status_t	(*create_device)(int port, void** _handle, uint32_t workArounds,
+					void (*interruptOp)(int32_t op, void* card), void* card);
 	status_t	(*delete_device)(void* handle);
-	status_t	(*open_hook)(void* storage, uint32 flags, void** _cookie);
+	status_t	(*open_hook)(void* storage, uint32_t flags, void** _cookie);
 	status_t	(*close_hook)(void* cookie);
 	status_t	(*free_hook)(void* cookie);
-	status_t	(*control_hook)(void* cookie, uint32 op, void* data,
+	status_t	(*control_hook)(void* cookie, uint32_t op, void* data,
 					size_t length);
 	status_t	(*read_hook)(void* cookie, off_t pos, void* data,
 					size_t* _length);

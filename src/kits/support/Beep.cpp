@@ -63,7 +63,7 @@ status_t bhapi::beep()
 }
 
 
-status_t bhapi::add_system_beep_event(const char* name, uint32 flags)
+status_t bhapi::add_system_beep_event(const char* name, uint32_t flags)
 {
     BMessenger messenger("application/x-vnd.Be.media-server");
     if (!messenger.IsValid())

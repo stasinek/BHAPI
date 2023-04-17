@@ -13,7 +13,7 @@ class BDebugMessageHandler {
 public:
 	virtual						~BDebugMessageHandler();
 
-	virtual	bool				HandleDebugMessage(int32 messageCode,
+	virtual	bool				HandleDebugMessage(int32_t messageCode,
 									const debug_debugger_message_data& message);
 
 	virtual	bool				HandleThreadDebugged(
@@ -53,7 +53,7 @@ public:
 	virtual	bool				HandleHandedOver(
 									const debug_handed_over& message);
 
-	virtual	bool				UnhandledDebugMessage(int32 messageCode,
+	virtual	bool				UnhandledDebugMessage(int32_t messageCode,
 									const debug_debugger_message_data& message);
 };
 

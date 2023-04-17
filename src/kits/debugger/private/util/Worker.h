@@ -52,10 +52,10 @@ public:
 
 struct SimpleJobKey : public JobKey {
 			const void*			object;
-			uint32				type;
+			uint32_t				type;
 
 public:
-								SimpleJobKey(const void* object, uint32 type);
+								SimpleJobKey(const void* object, uint32_t type);
 								SimpleJobKey(const SimpleJobKey& other);
 
 	virtual	size_t				HashValue() const;

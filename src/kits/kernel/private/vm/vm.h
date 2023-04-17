@@ -64,7 +64,7 @@ void vm_free_kernel_args(struct kernel_args *args);
 void vm_free_unused_boot_loader_range(addr_t start, addr_t end);
 page_num_t vm_allocate_early_physical_page(kernel_args *args);
 addr_t vm_allocate_early(struct kernel_args *args, size_t virtualSize,
-			size_t physicalSize, uint32 attributes, addr_t alignment);
+			size_t physicalSize, uint32_t attributes, addr_t alignment);
 
 void slab_init(struct kernel_args *args);
 void slab_init_post_area();
@@ -76,59 +76,59 @@ void permit_page_faults(void);
 void forbid_page_faults(void);
 
 // private kernel only extension (should be moved somewhere else):
-area_id create_area_etc(team_id team, const char *name, uint32 size,
-			uint32 lock, uint32 protection, uint32 flags, uint32 guardSize,
+area_id create_area_etc(team_id team, const char *name, uint32_t size,
+			uint32_t lock, uint32_t protection, uint32_t flags, uint32_t guardSize,
 			const virtual_address_restrictions* virtualAddressRestrictions,
 			const physical_address_restrictions* physicalAddressRestrictions,
 			void **_address);
-area_id transfer_area(area_id id, void** _address, uint32 addressSpec,
+area_id transfer_area(area_id id, void** _address, uint32_t addressSpec,
 			team_id target, bool kernel);
 
-const char* vm_cache_type_to_string(int32 type);
+const char* vm_cache_type_to_string(int32_t type);
 
 status_t vm_prepare_kernel_area_debug_protection(area_id id, void** cookie);
 status_t vm_set_kernel_area_debug_protection(void* cookie, void* _address,
-			size_t size, uint32 protection);
+			size_t size, uint32_t protection);
 
 status_t vm_block_address_range(const char* name, void* address, addr_t size);
 status_t vm_unreserve_address_range(team_id team, void *address, addr_t size);
 status_t vm_reserve_address_range(team_id team, void **_address,
-			uint32 addressSpec, addr_t size, uint32 flags);
+			uint32_t addressSpec, addr_t size, uint32_t flags);
 area_id vm_create_anonymous_area(team_id team, const char* name, addr_t size,
-			uint32 wiring, uint32 protection, uint32 flags, addr_t guardSize,
+			uint32_t wiring, uint32_t protection, uint32_t flags, addr_t guardSize,
 			const virtual_address_restrictions* virtualAddressRestrictions,
 			const physical_address_restrictions* physicalAddressRestrictions,
 			bool kernel, void** _address);
 area_id vm_map_physical_memory(team_id team, const char *name, void **address,
-			uint32 addressSpec, addr_t size, uint32 protection,
+			uint32_t addressSpec, addr_t size, uint32_t protection,
 			phys_addr_t physicalAddress, bool alreadyWired);
 area_id vm_map_physical_memory_vecs(team_id team, const char* name,
-	void** _address, uint32 addressSpec, addr_t* _size, uint32 protection,
-	struct generic_io_vec* vecs, uint32 vecCount);
+	void** _address, uint32_t addressSpec, addr_t* _size, uint32_t protection,
+	struct generic_io_vec* vecs, uint32_t vecCount);
 area_id vm_map_file(team_id aid, const char *name, void **address,
-			uint32 addressSpec, addr_t size, uint32 protection, uint32 mapping,
+			uint32_t addressSpec, addr_t size, uint32_t protection, uint32_t mapping,
 			bool unmapAddressRange, int fd, off_t offset);
 struct VMCache *vm_area_get_locked_cache(struct VMArea *area);
 void vm_area_put_locked_cache(struct VMCache *cache);
 area_id vm_create_null_area(team_id team, const char *name, void **address,
-			uint32 addressSpec, addr_t size, uint32 flags);
+			uint32_t addressSpec, addr_t size, uint32_t flags);
 area_id vm_copy_area(team_id team, const char *name, void **_address,
-			uint32 addressSpec, uint32 protection, area_id sourceID);
+			uint32_t addressSpec, uint32_t protection, area_id sourceID);
 area_id vm_clone_area(team_id team, const char *name, void **address,
-			uint32 addressSpec, uint32 protection, uint32 mapping,
+			uint32_t addressSpec, uint32_t protection, uint32_t mapping,
 			area_id sourceArea, bool kernel);
 status_t vm_delete_area(team_id teamID, area_id areaID, bool kernel);
 status_t vm_create_vnode_cache(struct vnode *vnode, struct VMCache **_cache);
 status_t vm_set_area_memory_type(area_id id, phys_addr_t physicalBase,
-			uint32 type);
+			uint32_t type);
 status_t vm_set_area_protection(team_id team, area_id areaID,
-			uint32 newProtection, bool kernel);
+			uint32_t newProtection, bool kernel);
 status_t vm_get_page_mapping(team_id team, addr_t vaddr, phys_addr_t *paddr);
 bool vm_test_map_modification(struct vm_page *page);
-void vm_clear_map_flags(struct vm_page *page, uint32 flags);
+void vm_clear_map_flags(struct vm_page *page, uint32_t flags);
 void vm_remove_all_page_mappings(struct vm_page *page);
-int32 vm_clear_page_mapping_accessed_flags(struct vm_page *page);
-int32 vm_remove_all_page_mappings_if_unaccessed(struct vm_page *page);
+int32_t vm_clear_page_mapping_accessed_flags(struct vm_page *page);
+int32_t vm_remove_all_page_mappings_if_unaccessed(struct vm_page *page);
 status_t vm_wire_page(team_id team, addr_t address, bool writable,
 			struct VMPageWiringInfo* info);
 void vm_unwire_page(struct VMPageWiringInfo* info);
@@ -143,7 +143,7 @@ status_t vm_get_physical_page_debug(phys_addr_t paddr, addr_t* vaddr,
 status_t vm_put_physical_page_debug(addr_t vaddr, void* handle);
 
 void vm_get_info(system_info *info);
-uint32 vm_num_page_faults(void);
+uint32_t vm_num_page_faults(void);
 off_t vm_available_memory(void);
 off_t vm_available_not_needed_memory(void);
 off_t vm_available_not_needed_memory_debug(void);
@@ -160,32 +160,32 @@ status_t vm_debug_copy_page_memory(team_id teamID, void* unsafeMemory,
 			void* buffer, size_t size, bool copyToUnsafe);
 
 // user syscalls
-area_id _user_create_area(const char *name, void **address, uint32 addressSpec,
-			size_t size, uint32 lock, uint32 protection);
+area_id _user_create_area(const char *name, void **address, uint32_t addressSpec,
+			size_t size, uint32_t lock, uint32_t protection);
 status_t _user_delete_area(area_id area);
 
-area_id _user_map_file(const char *uname, void **uaddress, uint32 addressSpec,
-			size_t size, uint32 protection, uint32 mapping,
+area_id _user_map_file(const char *uname, void **uaddress, uint32_t addressSpec,
+			size_t size, uint32_t protection, uint32_t mapping,
 			bool unmapAddressRange, int fd, off_t offset);
 status_t _user_unmap_memory(void *address, size_t size);
 status_t _user_set_memory_protection(void* address, size_t size,
-			uint32 protection);
-status_t _user_sync_memory(void *address, size_t size, uint32 flags);
-status_t _user_memory_advice(void* address, size_t size, uint32 advice);
+			uint32_t protection);
+status_t _user_sync_memory(void *address, size_t size, uint32_t flags);
+status_t _user_memory_advice(void* address, size_t size, uint32_t advice);
 status_t _user_get_memory_properties(team_id teamID, const void *address,
-			uint32 *_protected, uint32 *_lock);
+			uint32_t *_protected, uint32_t *_lock);
 
 area_id _user_area_for(void *address);
 area_id _user_find_area(const char *name);
 status_t _user_get_area_info(area_id area, area_info *info);
 status_t _user_get_next_area_info(team_id team, ssize_t *cookie, area_info *info);
 status_t _user_resize_area(area_id area, size_t newSize);
-area_id _user_transfer_area(area_id area, void **_address, uint32 addressSpec,
+area_id _user_transfer_area(area_id area, void **_address, uint32_t addressSpec,
 			team_id target);
-status_t _user_set_area_protection(area_id area, uint32 newProtection);
-area_id _user_clone_area(const char *name, void **_address, uint32 addressSpec,
-			uint32 protection, area_id sourceArea);
-status_t _user_reserve_address_range(addr_t* userAddress, uint32 addressSpec,
+status_t _user_set_area_protection(area_id area, uint32_t newProtection);
+area_id _user_clone_area(const char *name, void **_address, uint32_t addressSpec,
+			uint32_t protection, area_id sourceArea);
+status_t _user_reserve_address_range(addr_t* userAddress, uint32_t addressSpec,
 			addr_t size);
 status_t _user_unreserve_address_range(addr_t address, addr_t size);
 

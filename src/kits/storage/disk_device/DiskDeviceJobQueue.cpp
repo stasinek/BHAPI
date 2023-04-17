@@ -43,8 +43,8 @@ status_t DiskDeviceJobQueue::AddJob(DiskDeviceJob* job)
 // Execute
 status_t DiskDeviceJobQueue::Execute()
 {
-	int32 count = fJobs.CountItems();
-	for (int32 i = 0; i < count; i++) {
+	int32_t count = fJobs.CountItems();
+	for (int32_t i = 0; i < count; i++) {
 		DiskDeviceJob* job = fJobs.ItemAt(i);
 
 		TRACE("DiskDeviceJobQueue::Execute(): executing job: %s\n",

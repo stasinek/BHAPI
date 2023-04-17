@@ -25,7 +25,7 @@ public:
 	virtual	float				GuessMimeType(const char* fileName,
 									BMimeType* type);
 	virtual	float				GuessMimeType(BFile* file,
-									const void* buffer, int32 length,
+									const void* buffer, int32_t length,
 									BMimeType* type);
 };
 

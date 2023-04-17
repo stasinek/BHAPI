@@ -43,7 +43,7 @@ __get_system_time_offset()
 //	#pragma mark - public API
 
 
-uint32 real_time_clock(void)
+uint32_t real_time_clock(void)
 {
 	return (__arch_get_system_time_offset(sRealTimeData) + system_time())
 		/ 1000000;
@@ -57,7 +57,7 @@ real_time_clock_usecs(void)
 }
 
 
-void set_real_time_clock(uint32 secs)
+void set_real_time_clock(uint32_t secs)
 {
 	_kern_set_real_time_clock((bigtime_t)secs * 1000000);
 }
@@ -75,11 +75,11 @@ status_t set_timezone(const char* /*timezone*/)
 
 
 bigtime_t
-set_alarm(bigtime_t when, uint32 mode)
+set_alarm(bigtime_t when, uint32_t mode)
 {
 	// prepare the values to be passed to the kernel
 	bigtime_t interval = 0;
-	uint32 flags = B_RELATIVE_TIMEOUT;
+	uint32_t flags = B_RELATIVE_TIMEOUT;
 
 	if (when == B_INFINITE_TIMEOUT) {
 		when = B_INFINITE_TIMEOUT;

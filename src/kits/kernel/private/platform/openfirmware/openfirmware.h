@@ -19,7 +19,7 @@ extern int gChosen;
 template<typename AddressType>
 struct of_region {
 	AddressType base;
-	uint32 size;
+	uint32_t size;
 } _PACKED;
 
 struct of_arguments {

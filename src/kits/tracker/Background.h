@@ -48,14 +48,14 @@ All rights reserved.
 #define B_BACKGROUND_IMAGE			"be:bgndimginfopath"
 	// string path
 #define B_BACKGROUND_MODE			"be:bgndimginfomode"
-	// int32, the enum below
+	// int32_t, the enum below
 #define B_BACKGROUND_ORIGIN			"be:bgndimginfooffset"
 	// BPoint
 #define B_BACKGROUND_TEXT_OUTLINE	"be:bgndimginfoerasetext"
 	// bool 	// NOTE: the actual attribute name is kept for backwards
 	//       compatible settings
 #define B_BACKGROUND_WORKSPACES		"be:bgndimginfoworkspaces"
-	// uint32 
+	// uint32_t 
 /*----------------------------------------------------------------*/
 /*-----  Background mode values  ---------------------------------*/
 
@@ -69,7 +69,7 @@ enum {
 /*----------------------------------------------------------------*/
 /*----------------------------------------------------------------*/
 
-const int32 B_RESTORE_BACKGROUND_IMAGE = 'Tbgr';
+const int32_t B_RESTORE_BACKGROUND_IMAGE = 'Tbgr';
 	// force a Tracker window to use a new background image
 
 

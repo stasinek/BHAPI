@@ -91,8 +91,8 @@ bool BDiskSystem::SupportsDefragmenting(bool* whileMounted) const
 // SupportsRepairing
 bool BDiskSystem::SupportsRepairing(bool checkOnly, bool* whileMounted) const
 {
-	uint32 mainBit = B_DISK_SYSTEM_SUPPORTS_REPAIRING;
-	uint32 mountedBit = B_DISK_SYSTEM_SUPPORTS_REPAIRING_WHILE_MOUNTED;
+	uint32_t mainBit = B_DISK_SYSTEM_SUPPORTS_REPAIRING;
+	uint32_t mountedBit = B_DISK_SYSTEM_SUPPORTS_REPAIRING_WHILE_MOUNTED;
 
 	if (checkOnly) {
 		mainBit = B_DISK_SYSTEM_SUPPORTS_CHECKING;
@@ -237,7 +237,7 @@ bool BDiskSystem::SupportsSettingContentParameters(bool* whileMounted) const
 	}
 
 	if (whileMounted) {
-		uint32 whileMountedFlag
+		uint32_t whileMountedFlag
 			= B_DISK_SYSTEM_SUPPORTS_SETTING_CONTENT_PARAMETERS_WHILE_MOUNTED;
 		*whileMounted = (IsFileSystem() && (fFlags & whileMountedFlag));
 	}

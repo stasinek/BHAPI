@@ -14,14 +14,14 @@ int compare_image_boot(const void *_a, const void *_b);
 
 class NetBootMethod : public BootMethod {
 public:
-	NetBootMethod(const KMessage& bootVolume, int32 method);
+	NetBootMethod(const KMessage& bootVolume, int32_t method);
 	virtual ~NetBootMethod();
 
 	virtual status_t Init();
 
 	virtual bool IsBootDevice(KDiskDevice* device, bool strict);
 	virtual bool IsBootPartition(KPartition* partition, bool& foundForSure);
-	virtual void SortPartitions(KPartition** partitions, int32 count);
+	virtual void SortPartitions(KPartition** partitions, int32_t count);
 };
 
 

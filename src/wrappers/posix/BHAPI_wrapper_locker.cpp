@@ -68,7 +68,7 @@ typedef struct b_posix_locker_t {
 
 	bool			created;
 
-	uint32			refCount;
+	uint32_t			refCount;
 } b_posix_locker_t;
 
 
@@ -89,7 +89,7 @@ BHAPI_IMPEXP void* bhapi::create_locker(void)
 	b_posix_locker_t *locker = new b_posix_locker_t();
 	if(!locker) return NULL;
 
-	uint32 successFlags = 0;
+	uint32_t successFlags = 0;
 
 	if(pthread_mutex_init(&(locker->iLocker), NULL) != 0) successFlags |= (1 << 1);
 	if(pthread_mutex_init(&(locker->Locker), NULL) != 0) successFlags |= (1 << 2);
@@ -138,7 +138,7 @@ BHAPI_IMPEXP status_t bhapi::delete_locker(void *data)
 	if(!locker) return B_BAD_VALUE;
 
 	bhapi::lock_locker_inter(locker);
-	uint32 count = --(locker->refCount);
+	uint32_t count = --(locker->refCount);
 #if 0
 	bool showWarning = (locker->HolderThreadIsCurrent() && locker->closed == false && count > 0);
 #endif
@@ -200,7 +200,7 @@ BHAPI_IMPEXP status_t bhapi::lock_locker(void *data)
 }
 
 
-BHAPI_IMPEXP status_t bhapi::lock_locker_etc(void *data,  uint32 flags, bigtime_t microseconds_timeout)
+BHAPI_IMPEXP status_t bhapi::lock_locker_etc(void *data,  uint32_t flags, bigtime_t microseconds_timeout)
 {
 	b_posix_locker_t *locker = (b_posix_locker_t*)data;
 	if(!locker) return B_BAD_VALUE;

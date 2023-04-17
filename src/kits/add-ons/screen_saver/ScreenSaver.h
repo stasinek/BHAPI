@@ -24,11 +24,11 @@ class BScreenSaver {
 		virtual status_t StartSaver(BView* view, bool preview);
 		virtual void StopSaver();
 
-		virtual void Draw(BView* view, int32 frame);
+		virtual void Draw(BView* view, int32_t frame);
 
 		// direct screen access
 		virtual void DirectConnected(direct_buffer_info* info);
-		virtual void DirectDraw(int32 frame);
+		virtual void DirectDraw(int32_t frame);
 
 		// configuration dialog methods
 		virtual void StartConfig(BView* configView);
@@ -49,9 +49,9 @@ class BScreenSaver {
 		bigtime_t TickSize() const;
 
 		// These methods can be used to control animation loop cycles
-		void SetLoop(int32 onCount, int32 offCount);
-		int32 LoopOnCount() const;
-		int32 LoopOffCount() const;
+		void SetLoop(int32_t onCount, int32_t offCount);
+		int32_t LoopOnCount() const;
+		int32_t LoopOffCount() const;
 
 	private:
 		virtual	void _ReservedScreenSaver1();
@@ -64,10 +64,10 @@ class BScreenSaver {
 		virtual	void _ReservedScreenSaver8();
 
 		bigtime_t	fTickSize;
-		int32		fLoopOnCount;
-		int32		fLoopOffCount;
+		int32_t		fLoopOnCount;
+		int32_t		fLoopOffCount;
 
-		uint32		_reserved[6];
+		uint32_t		_reserved[6];
 };
 
 extern "C" _EXPORT BScreenSaver *instantiate_screen_saver(BMessage *msg, image_id id);

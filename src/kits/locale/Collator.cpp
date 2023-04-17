@@ -53,7 +53,7 @@ BCollator::BCollator(BMessage* archive)
 	fDefaultStrength(B_COLLATE_PRIMARY),
 	fIgnorePunctuation(true)
 {
-	int32 data;
+	int32_t data;
 	if (archive->FindInt32("loc:strength", &data) == B_OK)
 		fDefaultStrength = (uint8)data;
 	else

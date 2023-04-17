@@ -24,7 +24,7 @@ class FileControl : public BView {
 public:
 								FileControl(const char* name, const char* label,
 									const char* pathOfFile = NULL,
-									uint32 flavors = B_DIRECTORY_NODE);
+									uint32_t flavors = B_DIRECTORY_NODE);
 	virtual						~FileControl();
 
 	virtual	void				AttachedToWindow();
@@ -41,7 +41,7 @@ private:
 
 			BFilePanel*			fPanel;
 
-			uint32				_reserved[5];
+			uint32_t				_reserved[5];
 };
 
 
@@ -50,7 +50,7 @@ public:
 								MailFileConfigView(const char* label,
 									const char* name, bool useMeta = false,
 									const char* defaultPath = NULL,
-									uint32 flavors = B_DIRECTORY_NODE);
+									uint32_t flavors = B_DIRECTORY_NODE);
 
 			void				SetTo(const BMessage* archive,
 									BMessage* metadata);
@@ -61,7 +61,7 @@ private:
 			bool				fUseMeta;
 			const char*			fName;
 
-			uint32				_reserved[5];
+			uint32_t				_reserved[5];
 };
 
 

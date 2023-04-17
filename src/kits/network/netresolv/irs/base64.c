@@ -155,11 +155,11 @@ b64_ntop(u_char const *src, size_t srclength, char *target, size_t targsize) {
 		input[2] = *src++;
 		srclength -= 3;
 
-		output[0] = (u_int32_t)input[0] >> 2;
-		output[1] = ((u_int32_t)(input[0] & 0x03) << 4) +
-		    ((u_int32_t)input[1] >> 4);
-		output[2] = ((u_int32_t)(input[1] & 0x0f) << 2) +
-		    ((u_int32_t)input[2] >> 6);
+		output[0] = (u_int32_t_t)input[0] >> 2;
+		output[1] = ((u_int32_t_t)(input[0] & 0x03) << 4) +
+		    ((u_int32_t_t)input[1] >> 4);
+		output[2] = ((u_int32_t_t)(input[1] & 0x0f) << 2) +
+		    ((u_int32_t_t)input[2] >> 6);
 		output[3] = input[2] & 0x3f;
 		Assert(output[0] < 64);
 		Assert(output[1] < 64);
@@ -181,11 +181,11 @@ b64_ntop(u_char const *src, size_t srclength, char *target, size_t targsize) {
 		for (i = 0; i < srclength; i++)
 			input[i] = *src++;
 	
-		output[0] = (u_int32_t)input[0] >> 2;
-		output[1] = ((u_int32_t)(input[0] & 0x03) << 4) +
-		    ((u_int32_t)input[1] >> 4);
-		output[2] = ((u_int32_t)(input[1] & 0x0f) << 2) +
-		    ((u_int32_t)input[2] >> 6);
+		output[0] = (u_int32_t_t)input[0] >> 2;
+		output[1] = ((u_int32_t_t)(input[0] & 0x03) << 4) +
+		    ((u_int32_t_t)input[1] >> 4);
+		output[2] = ((u_int32_t_t)(input[1] & 0x0f) << 2) +
+		    ((u_int32_t_t)input[2] >> 6);
 		Assert(output[0] < 64);
 		Assert(output[1] < 64);
 		Assert(output[2] < 64);
@@ -252,7 +252,7 @@ b64_pton(char const *src, u_char *target, size_t targsize)
 				if ((size_t)tarindex + 1 >= targsize)
 					return (-1);
 				target[tarindex] |= 
-				    (u_int32_t)(pos - Base64) >> 4;
+				    (u_int32_t_t)(pos - Base64) >> 4;
 				target[tarindex+1]  = 
 				    (unsigned char)
 				    (((pos - Base64) & 0x0f) << 4);
@@ -265,7 +265,7 @@ b64_pton(char const *src, u_char *target, size_t targsize)
 				if ((size_t)tarindex + 1 >= targsize)
 					return (-1);
 				target[tarindex] |= 
-					(u_int32_t)(pos - Base64) >> 2;
+					(u_int32_t_t)(pos - Base64) >> 2;
 				target[tarindex+1] =
 				    (unsigned char)
 				    (((pos - Base64) & 0x03) << 6);

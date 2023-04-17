@@ -12,7 +12,7 @@
 status_t
 system_shutdown(bool reboot)
 {
-	int32 cookie = 0;
+	int32_t cookie = 0;
 	team_info info;
 	
 	gKernelShutdown = true;

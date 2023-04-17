@@ -238,9 +238,9 @@ of_package_to_path(int package, char *pathBuffer, int bufferSize)
 +   in the reg property
 + */
 
-int32
+int32_t
 of_address_cells(int package) {
-	uint32 address_cells;
+	uint32_t address_cells;
 	if (of_getprop(package, "#address-cells",
 		&address_cells, sizeof(address_cells)) == OF_FAILED)
 		return OF_FAILED;
@@ -249,9 +249,9 @@ of_address_cells(int package) {
 }
 
 
-int32
+int32_t
 of_size_cells(int package) {
-	uint32 size_cells;
+	uint32_t size_cells;
 	if (of_getprop(package, "#size-cells",
 		&size_cells, sizeof(size_cells)) == OF_FAILED)
 		return OF_FAILED;

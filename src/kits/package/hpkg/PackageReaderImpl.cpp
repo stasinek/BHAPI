@@ -315,7 +315,7 @@ PackageReaderImpl::~PackageReaderImpl()
 }
 
 
-status_t PackageReaderImpl::Init(const char* fileName, uint32 flags)
+status_t PackageReaderImpl::Init(const char* fileName, uint32_t flags)
 {
 	// open file
 	int fd = open(fileName, O_RDONLY);
@@ -329,7 +329,7 @@ status_t PackageReaderImpl::Init(const char* fileName, uint32 flags)
 }
 
 
-status_t PackageReaderImpl::Init(int fd, bool keepFD, uint32 flags)
+status_t PackageReaderImpl::Init(int fd, bool keepFD, uint32_t flags)
 {
 	BFdIO* file = new(std::nothrow) BFdIO(fd, keepFD);
 	if (file == NULL) {
@@ -342,7 +342,7 @@ status_t PackageReaderImpl::Init(int fd, bool keepFD, uint32 flags)
 }
 
 
-status_t PackageReaderImpl::Init(BPositionIO* file, bool keepFile, uint32 flags,
+status_t PackageReaderImpl::Init(BPositionIO* file, bool keepFile, uint32_t flags,
 	hpkg_header* _header)
 {
 	hpkg_header header;

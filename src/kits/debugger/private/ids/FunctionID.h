@@ -27,7 +27,7 @@ public:
 			const BString&		FunctionName() const { return fFunctionName; }
 
 protected:
-	virtual	uint32				ComputeHashValue() const;
+	virtual	uint32_t				ComputeHashValue() const;
 
 			bool				IsValid() const;
 

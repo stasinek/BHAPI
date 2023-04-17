@@ -27,7 +27,7 @@ public:
 									bool revisionIsOptional = true);
 								BPackageVersion(const BString& major,
 									const BString& minor, const BString& micro,
-									const BString& preRelease, uint32 revision);
+									const BString& preRelease, uint32_t revision);
 
 			status_t			InitCheck() const;
 
@@ -36,13 +36,13 @@ public:
 			const BString&		Micro() const;
 			const BString&		PreRelease() const;
 									// "alpha3", "beta2", "rc1" or "" if final
-			uint32				Revision() const;
+			uint32_t				Revision() const;
 
 			BString				ToString() const;
 
 			void				SetTo(const BString& major,
 									const BString& minor, const BString& micro,
-									const BString& preRelease, uint32 revision);
+									const BString& preRelease, uint32_t revision);
 			status_t			SetTo(const BString& versionString,
 									bool revisionIsOptional = true);
 			void				Clear();
@@ -63,7 +63,7 @@ private:
 			BString				fMinor;
 			BString				fMicro;
 			BString				fPreRelease;
-			uint32				fRevision;
+			uint32_t				fRevision;
 };
 
 

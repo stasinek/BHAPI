@@ -233,8 +233,8 @@ status_t DebugReportGenerator::_GenerateReportHeader(BFile& _output)
 
 	cpu_platform platform = B_CPU_UNKNOWN;
 	cpu_vendor cpuVendor = B_CPU_VENDOR_UNKNOWN;
-	uint32 cpuModel = 0;
-	uint32 topologyNodeCount = 0;
+	uint32_t cpuModel = 0;
+	uint32_t topologyNodeCount = 0;
 	cpu_topology_node_info* topology = NULL;
 	get_cpu_topology_info(NULL, &topologyNodeCount);
 	if (topologyNodeCount != 0) {
@@ -245,7 +245,7 @@ status_t DebugReportGenerator::_GenerateReportHeader(BFile& _output)
 		BPrivate::ArrayDeleter<cpu_topology_node_info> deleter(topology);
 		get_cpu_topology_info(topology, &topologyNodeCount);
 
-		for (uint32 i = 0; i < topologyNodeCount; i++) {
+		for (uint32_t i = 0; i < topologyNodeCount; i++) {
 			switch (topology[i].type) {
 				case B_TOPOLOGY_ROOT:
 					platform = topology[i].data.root.platform;
@@ -315,7 +315,7 @@ status_t DebugReportGenerator::_DumpLoadedImages(BFile& _output)
 	data.Append('-', 80);
 	data.Append("\n");
 	WRITE_AND_CHECK(_output, data);
-	for (int32 i = 0; (image = images.ItemAt(i)) != NULL; i++) {
+	for (int32_t i = 0; (image = images.ItemAt(i)) != NULL; i++) {
 		const ImageInfo& info = image->Info();
 		char buffer[32];
 		try {
@@ -359,7 +359,7 @@ status_t DebugReportGenerator::_DumpAreas(BFile& _output)
 	AreaInfo* info;
 	BString protectionBuffer;
 	char lockingBuffer[32];
-	for (int32 i = 0; (info = areas.ItemAt(i)) != NULL; i++) {
+	for (int32_t i = 0; (info = areas.ItemAt(i)) != NULL; i++) {
 		try {
 			data.SetToFormat("\t%" B_PRId32 "\t0x%08" B_PRIx64 "\t"
 				"0x%08" B_PRIx64 "\t%10" B_PRId64 "\t%-11s\t%-14s\t%s\n",
@@ -402,7 +402,7 @@ status_t DebugReportGenerator::_DumpSemaphores(BFile& _output)
 	data.Append("\n");
 	WRITE_AND_CHECK(_output, data);
 	SemaphoreInfo* info;
-	for (int32 i = 0; (info = semaphores.ItemAt(i)) != NULL; i++) {
+	for (int32_t i = 0; (info = semaphores.ItemAt(i)) != NULL; i++) {
 		try {
 			data.SetToFormat("\t%" B_PRId32 "\t%5" B_PRId32 "\t%11" B_PRId32
 				"\t%s\n", info->SemID(), info->Count(),
@@ -432,7 +432,7 @@ status_t DebugReportGenerator::_DumpRunningThreads(BFile& _output)
 	}
 
 	threads.SortItems(&_CompareThreads);
-	for (int32 i = 0; (thread = threads.ItemAt(i)) != NULL; i++) {
+	for (int32_t i = 0; (thread = threads.ItemAt(i)) != NULL; i++) {
 		try {
 			data.SetToFormat("\tthread %" B_PRId32 ": %s %s\n", thread->ID(),
 					thread->Name(), thread->IsMainThread()
@@ -498,7 +498,7 @@ status_t DebugReportGenerator::_DumpDebuggedThreadInfo(BFile& _output,
 	WRITE_AND_CHECK(_output, data);
 	data = "\t\t-----------------------------------------------\n";
 	WRITE_AND_CHECK(_output, data);
-	for (int32 i = 0; StackFrame* frame = trace->FrameAt(i); i++) {
+	for (int32_t i = 0; StackFrame* frame = trace->FrameAt(i); i++) {
 		char functionName[512];
 		BString sourcePath;
 
@@ -509,7 +509,7 @@ status_t DebugReportGenerator::_DumpDebuggedThreadInfo(BFile& _output,
 				functionInstance, statement) == B_OK) {
 			BReference<Statement> statementReference(statement, true);
 
-			int32 line = statement->StartSourceLocation().Line();
+			int32_t line = statement->StartSourceLocation().Line();
 			LocatableFile* sourceFile = functionInstance->GetFunction()
 				->SourceFile();
 			if (sourceFile != NULL) {
@@ -552,7 +552,7 @@ status_t DebugReportGenerator::_DumpDebuggedThreadInfo(BFile& _output,
 
 		ValueNodeContainer* container = fNodeManager->GetContainer();
 		AutoLocker<ValueNodeContainer> containerLocker(container);
-		for (int32 i = 0; i < container->CountChildren(); i++) {
+		for (int32_t i = 0; i < container->CountChildren(); i++) {
 			data.Truncate(0L);
 			ValueNodeChild* child = container->ChildAt(i);
 			containerLocker.Unlock();
@@ -571,7 +571,7 @@ status_t DebugReportGenerator::_DumpDebuggedThreadInfo(BFile& _output,
 	CpuState* state = thread->GetCpuState();
 	BVariant value;
 	const Register* reg = NULL;
-	for (int32 i = 0; i < fArchitecture->CountRegisters(); i++) {
+	for (int32_t i = 0; i < fArchitecture->CountRegisters(); i++) {
 		reg = fArchitecture->Registers() + i;
 		state->GetRegisterValue(reg, value);
 
@@ -650,7 +650,7 @@ status_t DebugReportGenerator::_DumpFunctionDisassembly(BFile& _output,
 
 	data = "\t\t\tDisassembly:\n";
 	WRITE_AND_CHECK(_output, data);
-	for (int32 i = 0; i <= location.Line(); i++) {
+	for (int32_t i = 0; i <= location.Line(); i++) {
 		data = "\t\t\t\t";
 		data << code->LineAt(i);
 		if (i == location.Line())
@@ -708,7 +708,7 @@ status_t DebugReportGenerator::_DumpStackFrameMemory(BFile& _output,
 
 
 status_t DebugReportGenerator::_ResolveValueIfNeeded(ValueNode* node, StackFrame* frame,
-	int32 maxDepth)
+	int32_t maxDepth)
 {
 	status_t result = B_OK;
 	if (node->LocationAndValueResolutionState() == VALUE_NODE_UNRESOLVED) {
@@ -723,7 +723,7 @@ status_t DebugReportGenerator::_ResolveValueIfNeeded(ValueNode* node, StackFrame
 	if (node->LocationAndValueResolutionState() == B_OK && maxDepth > 0) {
 		AutoLocker<ValueNodeContainer> containerLocker(
 			fNodeManager->GetContainer());
-		for (int32 i = 0; i < node->CountChildren(); i++) {
+		for (int32_t i = 0; i < node->CountChildren(); i++) {
 			ValueNodeChild* child = node->ChildAt(i);
 			containerLocker.Unlock();
 			result = fNodeManager->AddChildNodes(child);

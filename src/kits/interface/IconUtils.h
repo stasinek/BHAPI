@@ -42,12 +42,12 @@ public:
 									BBitmap* result);
 
 	static	status_t			ConvertFromCMAP8(const uint8* data,
-									uint32 width, uint32 height,
-									uint32 bytesPerRow, BBitmap* result);
+									uint32_t width, uint32_t height,
+									uint32_t bytesPerRow, BBitmap* result);
 
 	static	status_t			ConvertToCMAP8(const uint8* data,
-									uint32 width, uint32 height,
-									uint32 bytesPerRow, BBitmap* result);
+									uint32_t width, uint32_t height,
+									uint32_t bytesPerRow, BBitmap* result);
 };
 
 #endif	// _ICON_UTILS_H

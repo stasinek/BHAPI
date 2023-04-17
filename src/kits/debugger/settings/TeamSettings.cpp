@@ -106,7 +106,7 @@ status_t TeamSettings::SetTo(const BMessage& archive,
 
 	// add breakpoints
 	BMessage childArchive;
-	for (int32 i = 0; archive.FindMessage("breakpoints", i, &childArchive)
+	for (int32_t i = 0; archive.FindMessage("breakpoints", i, &childArchive)
 			== B_OK; i++) {
 		BreakpointSetting* breakpointSetting
 			= new(std::nothrow) BreakpointSetting;
@@ -123,7 +123,7 @@ status_t TeamSettings::SetTo(const BMessage& archive,
 	}
 
 	// add UI settings
-	for (int32 i = 0; archive.FindMessage("uisettings", i, &childArchive)
+	for (int32_t i = 0; archive.FindMessage("uisettings", i, &childArchive)
 		== B_OK; i++) {
 		TeamUiSettings* setting = NULL;
 		error = factory.Create(childArchive, setting);
@@ -158,7 +158,7 @@ status_t TeamSettings::WriteTo(BMessage& archive) const
 		return error;
 
 	BMessage childArchive;
-	for (int32 i = 0; BreakpointSetting* breakpoint = fBreakpoints.ItemAt(i);
+	for (int32_t i = 0; BreakpointSetting* breakpoint = fBreakpoints.ItemAt(i);
 			i++) {
 		error = breakpoint->WriteTo(childArchive);
 		if (error != B_OK)
@@ -169,7 +169,7 @@ status_t TeamSettings::WriteTo(BMessage& archive) const
 			return error;
 	}
 
-	for (int32 i = 0; TeamUiSettings* uiSetting = fUiSettings.ItemAt(i);
+	for (int32_t i = 0; TeamUiSettings* uiSetting = fUiSettings.ItemAt(i);
 			i++) {
 		error = uiSetting->WriteTo(childArchive);
 		if (error != B_OK)
@@ -200,27 +200,27 @@ status_t TeamSettings::WriteTo(BMessage& archive) const
 }
 
 
-int32 TeamSettings::CountBreakpoints() const
+int32_t TeamSettings::CountBreakpoints() const
 {
 	return fBreakpoints.CountItems();
 }
 
 
 const BreakpointSetting*
-TeamSettings::BreakpointAt(int32 index) const
+TeamSettings::BreakpointAt(int32_t index) const
 {
 	return fBreakpoints.ItemAt(index);
 }
 
 
-int32 TeamSettings::CountUiSettings() const
+int32_t TeamSettings::CountUiSettings() const
 {
 	return fUiSettings.CountItems();
 }
 
 
 const TeamUiSettings*
-TeamSettings::UiSettingAt(int32 index) const
+TeamSettings::UiSettingAt(int32_t index) const
 {
 	return fUiSettings.ItemAt(index);
 }
@@ -229,7 +229,7 @@ TeamSettings::UiSettingAt(int32 index) const
 const TeamUiSettings*
 TeamSettings::UiSettingFor(const char* id) const
 {
-	for (int32 i = 0; i < fUiSettings.CountItems(); i++) {
+	for (int32_t i = 0; i < fUiSettings.CountItems(); i++) {
 		TeamUiSettings* settings = fUiSettings.ItemAt(i);
 		if (strcmp(settings->ID(), id) == 0)
 			return settings;
@@ -258,7 +258,7 @@ TeamSettings::operator=(const TeamSettings& other)
 
 	fTeamName = other.fTeamName;
 
-	for (int32 i = 0; BreakpointSetting* breakpoint
+	for (int32_t i = 0; BreakpointSetting* breakpoint
 			= other.fBreakpoints.ItemAt(i); i++) {
 		BreakpointSetting* clonedBreakpoint
 			= new BreakpointSetting(*breakpoint);
@@ -268,7 +268,7 @@ TeamSettings::operator=(const TeamSettings& other)
 		}
 	}
 
-	for (int32 i = 0; TeamUiSettings* uiSetting
+	for (int32_t i = 0; TeamUiSettings* uiSetting
 			= other.fUiSettings.ItemAt(i); i++) {
 		TeamUiSettings* clonedSetting
 			= uiSetting->Clone();
@@ -326,12 +326,12 @@ status_t TeamSettings::SetSignalSettings(TeamSignalSettings* settings)
 
 void TeamSettings::_Unset()
 {
-	for (int32 i = 0; BreakpointSetting* breakpoint = fBreakpoints.ItemAt(i);
+	for (int32_t i = 0; BreakpointSetting* breakpoint = fBreakpoints.ItemAt(i);
 			i++) {
 		delete breakpoint;
 	}
 
-	for (int32 i = 0; TeamUiSettings* uiSetting = fUiSettings.ItemAt(i); i++)
+	for (int32_t i = 0; TeamUiSettings* uiSetting = fUiSettings.ItemAt(i); i++)
 		delete uiSetting;
 
 	fBreakpoints.MakeEmpty();

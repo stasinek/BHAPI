@@ -86,7 +86,7 @@ struct ether_header {
 
 // Address Resolution Protocol (ARP)
 
-typedef uint32 ip_addr_t;
+typedef uint32_t ip_addr_t;
 
 // ARP protocol opcodes
 #define ARPOP_REQUEST   1               /* ARP request.  */
@@ -182,8 +182,8 @@ struct udp_header {
 struct tcp_header {
 	uint16	source;			// source port
 	uint16	destination;	// destination port
-	uint32	seqNumber;		// sequence number
-	uint32	ackNumber;		// acknowledgment number
+	uint32_t	seqNumber;		// sequence number
+	uint32_t	ackNumber;		// acknowledgment number
 #if __BYTE_ORDER == __BIG_ENDIAN
 	uint8	dataOffset : 4;	// data offset
 	uint8	reserved : 4;	// reserved

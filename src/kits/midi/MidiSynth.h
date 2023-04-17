@@ -36,31 +36,31 @@ public:
 
 	void FlushInstrumentCache(bool startStopCache);
 
-	uint32 Tick(void) const;
+	uint32_t Tick(void) const;
 
 	virtual void NoteOff(
-		uchar channel, uchar note, uchar velocity, uint32 time = B_NOW);
+		uchar channel, uchar note, uchar velocity, uint32_t time = B_NOW);
 
 	virtual void NoteOn(
-		uchar channel, uchar note, uchar velocity, uint32 time = B_NOW);
+		uchar channel, uchar note, uchar velocity, uint32_t time = B_NOW);
 
 	virtual void KeyPressure(
-		uchar channel, uchar note, uchar pressure, uint32 time = B_NOW);
+		uchar channel, uchar note, uchar pressure, uint32_t time = B_NOW);
 
 	virtual void ControlChange(
 		uchar channel, uchar controlNumber, uchar controlValue, 
-		uint32 time = B_NOW);
+		uint32_t time = B_NOW);
 
 	virtual void ProgramChange(
-		uchar channel, uchar programNumber, uint32 time = B_NOW);
+		uchar channel, uchar programNumber, uint32_t time = B_NOW);
 
 	virtual void ChannelPressure(
-		uchar channel, uchar pressure, uint32 time = B_NOW);
+		uchar channel, uchar pressure, uint32_t time = B_NOW);
 
 	virtual void PitchBend(
-		uchar channel, uchar lsb, uchar msb, uint32 time = B_NOW);
+		uchar channel, uchar lsb, uchar msb, uint32_t time = B_NOW);
 
-	virtual void AllNotesOff(bool justChannel, uint32 time = B_NOW);
+	virtual void AllNotesOff(bool justChannel, uint32_t time = B_NOW);
 
 protected:
 

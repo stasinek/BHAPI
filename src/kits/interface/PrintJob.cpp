@@ -94,9 +94,9 @@ using BPrivate::gSystemCatalog;
 
 
 struct _page_header_ {
-	int32 number_of_pictures;
+	int32_t number_of_pictures;
 	off_t next_page;
-	int32 reserved[10];
+	int32_t reserved[10];
 };
 
 
@@ -116,7 +116,7 @@ namespace BPrivate {
 
 class PrintServerMessenger {
 public:
-							PrintServerMessenger(uint32 what, BMessage* input);
+							PrintServerMessenger(uint32_t what, BMessage* input);
 							~PrintServerMessenger();
 
 			BMessage*		Request();
@@ -133,7 +133,7 @@ private:
 			void			DeleteSemaphore();
 	static	status_t		MessengerThread(void* data);
 
-			uint32			fWhat;
+			uint32_t			fWhat;
 			BMessage*		fInput;
 			BMessage*		fRequest;
 			BMessage*		fResult;
@@ -311,7 +311,7 @@ void BPrintJob::CommitJob()
 	info.SetType(PSRV_SPOOL_FILETYPE);
 
 	fSpoolFile->WriteAttr(PSRV_SPOOL_ATTR_PAGECOUNT, B_INT32_TYPE, 0,
-		&fSpoolFileHeader.page_count, sizeof(int32));
+		&fSpoolFileHeader.page_count, sizeof(int32_t));
 	fSpoolFile->WriteAttr(PSRV_SPOOL_ATTR_DESCRIPTION, B_STRING_TYPE, 0,
 		fPrintJobName, strlen(fPrintJobName) + 1);
 	fSpoolFile->WriteAttr(PSRV_SPOOL_ATTR_PRINTER, B_STRING_TYPE, 0,
@@ -455,7 +455,7 @@ BPrintJob::PrintableRect()
 }
 
 
-void BPrintJob::GetResolution(int32* xdpi, int32* ydpi)
+void BPrintJob::GetResolution(int32_t* xdpi, int32_t* ydpi)
 {
 	if (fDefaultSetupMessage == NULL)
 		_LoadDefaultSettings();
@@ -468,19 +468,19 @@ void BPrintJob::GetResolution(int32* xdpi, int32* ydpi)
 }
 
 
-int32 BPrintJob::FirstPage()
+int32_t BPrintJob::FirstPage()
 {
 	return fFirstPage;
 }
 
 
-int32 BPrintJob::LastPage()
+int32_t BPrintJob::LastPage()
 {
 	return fLastPage;
 }
 
 
-int32 BPrintJob::PrinterType(void*) const
+int32_t BPrintJob::PrinterType(void*) const
 {
 	BMessenger printServer;
 	if (PrintServerMessenger::GetPrintServerMessenger(printServer) != B_OK)
@@ -490,7 +490,7 @@ int32 BPrintJob::PrinterType(void*) const
 	BMessage message(PSRV_GET_ACTIVE_PRINTER);
 	printServer.SendMessage(&message, &reply);
 
-	int32 type;
+	int32_t type;
 	if (reply.FindInt32("color", &type) != B_OK)
 		return B_COLOR_PRINTER; // default
 
@@ -696,7 +696,7 @@ void BPrintJob::_ReservedPrintJob4() {}
 namespace BPrivate {
 
 
-PrintServerMessenger::PrintServerMessenger(uint32 what, BMessage *input)
+PrintServerMessenger::PrintServerMessenger(uint32_t what, BMessage *input)
 	:
 	fWhat(what),
 	fInput(input),

@@ -34,16 +34,16 @@ Image::~Image()
 }
 
 
-status_t Image::GetSymbol(const char* name, int32 symbolType, void** _symbolLocation,
-	size_t* _symbolSize, int32* _symbolType) const
+status_t Image::GetSymbol(const char* name, int32_t symbolType, void** _symbolLocation,
+	size_t* _symbolSize, int32_t* _symbolType) const
 {
 	// TODO: At least for ImageFile we could do hash lookups!
-	int32 iterator = 0;
+	int32_t iterator = 0;
 	const char* foundName;
 	size_t foundNameLen;
 	addr_t foundAddress;
 	size_t foundSize;
-	int32 foundType;
+	int32_t foundType;
 	while (NextSymbol(iterator, &foundName, &foundNameLen, &foundAddress,
 			&foundSize, &foundType) == B_OK) {
 		if ((symbolType == B_SYMBOL_TYPE_ANY || symbolType == foundType)
@@ -90,7 +90,7 @@ SymbolTableBasedImage::LookupSymbol(addr_t address, addr_t* _baseAddress,
 	bool exactMatch = false;
 	addr_t deltaFound = ~(addr_t)0;
 
-	for (int32 i = 0; i < fSymbolCount; i++) {
+	for (int32_t i = 0; i < fSymbolCount; i++) {
 		const elf_sym* symbol = &fSymbolTable[i];
 
 		if (symbol->st_value == 0
@@ -131,9 +131,9 @@ SymbolTableBasedImage::LookupSymbol(addr_t address, addr_t* _baseAddress,
 }
 
 
-status_t SymbolTableBasedImage::NextSymbol(int32& iterator, const char** _symbolName,
+status_t SymbolTableBasedImage::NextSymbol(int32_t& iterator, const char** _symbolName,
 	size_t* _symbolNameLen, addr_t* _symbolAddress, size_t* _symbolSize,
-	int32* _symbolType) const
+	int32_t* _symbolType) const
 {
 	while (true) {
 		if (++iterator >= fSymbolCount)
@@ -279,7 +279,7 @@ status_t ImageFile::_LoadFile(const char* path, addr_t* _textAddress, size_t* _t
 		return B_NOT_AN_EXECUTABLE;
 
 	// verify the location of the program headers
-	int32 programHeaderCount = elfHeader->e_phnum;
+	int32_t programHeaderCount = elfHeader->e_phnum;
 	if (elfHeader->e_phoff < sizeof(elf_ehdr)
 		|| elfHeader->e_phentsize < sizeof(elf_phdr)
 		|| (off_t)(elfHeader->e_phoff + programHeaderCount
@@ -292,7 +292,7 @@ status_t ImageFile::_LoadFile(const char* path, addr_t* _textAddress, size_t* _t
 		= (elf_phdr*)(fMappedFile + elfHeader->e_phoff);
 
 	// verify the location of the section headers
-	int32 sectionCount = elfHeader->e_shnum;
+	int32_t sectionCount = elfHeader->e_shnum;
 	if (elfHeader->e_shoff < sizeof(elf_ehdr)
 		|| elfHeader->e_shentsize < sizeof(elf_shdr)
 		|| (off_t)(elfHeader->e_shoff + sectionCount * elfHeader->e_shentsize)
@@ -305,7 +305,7 @@ status_t ImageFile::_LoadFile(const char* path, addr_t* _textAddress, size_t* _t
 	*_textSize = 0;
 	*_dataAddress = 0;
 	*_dataSize = 0;
-	for (int32 i = 0; i < programHeaderCount; i++) {
+	for (int32_t i = 0; i < programHeaderCount; i++) {
 		elf_phdr* header = (elf_phdr*)
 			((uint8*)programHeaders + i * elfHeader->e_phentsize);
 		if (header->p_type == PT_LOAD) {
@@ -334,7 +334,7 @@ status_t ImageFile::_FindTableInSection(elf_ehdr* elfHeader, uint16 sectionType)
 		= (elf_shdr*)(fMappedFile + elfHeader->e_shoff);
 
 	// find the symbol table
-	for (int32 i = 0; i < elfHeader->e_shnum; i++) {
+	for (int32_t i = 0; i < elfHeader->e_shnum; i++) {
 		elf_shdr* sectionHeader = (elf_shdr*)
 			((uint8*)sectionHeaders + i * elfHeader->e_shentsize);
 
@@ -424,7 +424,7 @@ status_t CommPageImage::Init(const image_info& info)
 	image_id commPageID = -1;
 	image_info commPageInfo;
 
-	int32 cookie = 0;
+	int32_t cookie = 0;
 	while (_kern_get_next_image_info(B_SYSTEM_TEAM, &cookie, &commPageInfo,
 			sizeof(image_info)) == B_OK) {
 		if (!strcmp("commpage", commPageInfo.name)) {

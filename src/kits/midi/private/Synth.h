@@ -48,8 +48,8 @@ public:
 	void Unload(void);
 	bool IsLoaded(void) const;
 
-	status_t SetSamplingRate(int32 sample_rate);
-	int32 SamplingRate() const;
+	status_t SetSamplingRate(int32_t sample_rate);
+	int32_t SamplingRate() const;
 
 	status_t SetInterpolation(interpolation_mode interp_mode);
 	interpolation_mode Interpolation() const;
@@ -75,14 +75,14 @@ public:
 	double SampleVolume(void) const;
 
 	status_t GetAudio(
-		int16* pLeft, int16* pRight, int32 max_samples) const;
+		int16* pLeft, int16* pRight, int32_t max_samples) const;
 
 	void Pause(void);
 	void Resume(void);
 
 	void SetControllerHook(int16 controller, synth_controller_hook cback);
 
-	int32 CountClients(void) const;
+	int32_t CountClients(void) const;
 
 private:
 
@@ -98,9 +98,9 @@ private:
 	
 	BPrivate::BSoftSynth* fSynth;
 	synth_mode fSynthMode;
-	int32 fClientCount;
+	int32_t fClientCount;
 
-	uint32 _reserved[10];
+	uint32_t _reserved[10];
 };
 
 extern BSynth*  __be_synth;

@@ -120,8 +120,8 @@ void BTextView::CutUndoBuffer::RedoSelf(BClipboard* clipboard)
 
 
 BTextView::PasteUndoBuffer::PasteUndoBuffer(BTextView* textView,
-		const char* text, int32 textLen, text_run_array* runArray,
-		int32 runArrayLen)
+		const char* text, int32_t textLen, text_run_array* runArray,
+		int32_t runArrayLen)
 	: BTextView::UndoBuffer(textView, B_UNDO_PASTE),
 	fPasteText(NULL),
 	fPasteTextLength(textLen),
@@ -185,8 +185,8 @@ void BTextView::ClearUndoBuffer::RedoSelf(BClipboard* clipboard)
 
 
 BTextView::DropUndoBuffer::DropUndoBuffer(BTextView* textView,
-		char const* text, int32 textLen, text_run_array* runArray,
-		int32 runArrayLen, int32 location, bool internalDrop)
+		char const* text, int32_t textLen, text_run_array* runArray,
+		int32_t runArrayLen, int32_t location, bool internalDrop)
 	: BTextView::UndoBuffer(textView, B_UNDO_DROP),
 	fDropText(NULL),
 	fDropTextLength(textLen),
@@ -258,7 +258,7 @@ BTextView::TypingUndoBuffer::~TypingUndoBuffer()
 
 void BTextView::TypingUndoBuffer::UndoSelf(BClipboard* clipboard)
 {
-	int32 len = fTypedEnd - fTypedStart;
+	int32_t len = fTypedEnd - fTypedStart;
 	
 	free(fTypedText);
 	fTypedText = NULL;
@@ -282,9 +282,9 @@ void BTextView::TypingUndoBuffer::RedoSelf(BClipboard* clipboard)
 }
 
 
-void BTextView::TypingUndoBuffer::InputCharacter(int32 len)
+void BTextView::TypingUndoBuffer::InputCharacter(int32_t len)
 {
-	int32 start, end;
+	int32_t start, end;
 	fTextView->GetSelection(&start, &end);
 	
 	if (start != fTypedEnd || end != fTypedEnd)
@@ -314,11 +314,11 @@ void BTextView::TypingUndoBuffer::_Reset()
 
 void BTextView::TypingUndoBuffer::BackwardErase()
 {
-	int32 start, end;
+	int32_t start, end;
 	fTextView->GetSelection(&start, &end);
 	
 	const char* text = fTextView->Text();
-	int32 charLen = UTF8PreviousCharLen(text + start, text);
+	int32_t charLen = UTF8PreviousCharLen(text + start, text);
 	
 	if (start != fTypedEnd || end != fTypedEnd) {
 		_Reset();
@@ -332,7 +332,7 @@ void BTextView::TypingUndoBuffer::BackwardErase()
 	
 	fTypedStart = start - charLen;
 	start = fTypedStart;
-	for (int32 x = 0; x < charLen; x++)
+	for (int32_t x = 0; x < charLen; x++)
 		buffer[x] = fTextView->ByteAt(start + x);
 	free(fTextData);
 	fTextData = buffer;
@@ -345,11 +345,11 @@ void BTextView::TypingUndoBuffer::BackwardErase()
 void BTextView::TypingUndoBuffer::ForwardErase()
 {
 	// TODO: Cleanup
-	int32 start, end;
+	int32_t start, end;
 
 	fTextView->GetSelection(&start, &end);
 	
-	int32 charLen = UTF8NextCharLen(fTextView->Text() + start);	
+	int32_t charLen = UTF8NextCharLen(fTextView->Text() + start);	
 	
 	if (start != fTypedEnd || end != fTypedEnd || fUndone > 0) {
 		_Reset();
@@ -360,7 +360,7 @@ void BTextView::TypingUndoBuffer::ForwardErase()
 			fTextData = (char*)malloc(fTextLength);
 			
 			// store the erased character
-			for (int32 x = 0; x < charLen; x++)
+			for (int32_t x = 0; x < charLen; x++)
 				fTextData[x] = fTextView->ByteAt(start + x);
 		}
 	} else {	
@@ -369,7 +369,7 @@ void BTextView::TypingUndoBuffer::ForwardErase()
 		// a realloc + memmove would maybe be cleaner, but that way we spare a
 		// copy (malloc + memcpy vs realloc + memmove).
 		
-		int32 newLength = fTextLength + charLen;
+		int32_t newLength = fTextLength + charLen;
 		char* buffer = (char*)malloc(newLength);
 		
 		// copy the already stored data
@@ -377,7 +377,7 @@ void BTextView::TypingUndoBuffer::ForwardErase()
 		
 		if (fTextLength < newLength) {
 			// store the erased character
-			for (int32 x = 0; x < charLen; x++)
+			for (int32_t x = 0; x < charLen; x++)
 				buffer[fTextLength + x] = fTextView->ByteAt(start + x);
 		}
 

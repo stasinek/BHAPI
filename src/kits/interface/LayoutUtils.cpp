@@ -40,7 +40,7 @@
 
 
 // AddSizesInt32
-int32 BLayoutUtils::AddSizesInt32(int32 a, int32 b)
+int32_t BLayoutUtils::AddSizesInt32(int32_t a, int32_t b)
 {
 	if (a >= B_SIZE_UNLIMITED - b)
 		return B_SIZE_UNLIMITED;
@@ -49,7 +49,7 @@ int32 BLayoutUtils::AddSizesInt32(int32 a, int32 b)
 
 
 // AddSizesInt32
-int32 BLayoutUtils::AddSizesInt32(int32 a, int32 b, int32 c)
+int32_t BLayoutUtils::AddSizesInt32(int32_t a, int32_t b, int32_t c)
 {
 	return AddSizesInt32(AddSizesInt32(a, b), c);
 }
@@ -86,7 +86,7 @@ BLayoutUtils::AddDistances(float a, float b, float c)
 
 
 // SubtractSizesInt32
-int32 BLayoutUtils::SubtractSizesInt32(int32 a, int32 b)
+int32_t BLayoutUtils::SubtractSizesInt32(int32_t a, int32_t b)
 {
 	if (a < b)
 		return 0;
@@ -301,8 +301,8 @@ BLayoutUtils::GetLayoutTreeDump(BLayoutItem* item)
 		return;
 	}
 
-	int32 count = view->CountChildren();
-	for (int32 i = 0; i < count; i++) {
+	int32_t count = view->CountChildren();
+	for (int32_t i = 0; i < count; i++) {
 		_output << indent << "  ---\n";
 		_GetLayoutTreeDump(view->ChildAt(i), level + 1, _output);
 	}
@@ -350,8 +350,8 @@ BLayoutUtils::GetLayoutTreeDump(BLayoutItem* item)
 	if (layout == NULL)
 		return;
 
-	int32 count = layout->CountItems();
-	for (int32 i = 0; i < count; i++) {
+	int32_t count = layout->CountItems();
+	for (int32_t i = 0; i < count; i++) {
 		_output << indent << "  ---\n";
 		_GetLayoutTreeDump(layout->ItemAt(i), level + 1, false, _output);
 	}

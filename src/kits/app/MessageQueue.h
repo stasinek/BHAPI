@@ -55,12 +55,12 @@ public:
     // return the FIRST message and detach from the queue, you should "delete" by yourself
     BMessage	*NextMessage();
 
-    BMessage	*FindMessage(int32 index) const;
-    BMessage	*FindMessage(uint32 what,  int32 fromIndex = 0) const;
-    BMessage	*FindMessage(uint32 what,  int32 fromIndex,  int32 count) const;
-     int32		IndexOfMessage(BMessage *an_event) const;
+    BMessage	*FindMessage(int32_t index) const;
+    BMessage	*FindMessage(uint32_t what,  int32_t fromIndex = 0) const;
+    BMessage	*FindMessage(uint32_t what,  int32_t fromIndex,  int32_t count) const;
+     int32_t		IndexOfMessage(BMessage *an_event) const;
 
-     int32		CountMessages() const;
+     int32_t		CountMessages() const;
     bool		IsEmpty() const;
 
     bool		Lock();

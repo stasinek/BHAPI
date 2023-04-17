@@ -23,9 +23,9 @@ extern "C" {
 
 extern fssh_dev_t		fssh_fs_mount_volume(const char *where,
 							const char *device, const char *filesystem,
-							uint32_t flags, const char *parameters);
+							uint32_t_t flags, const char *parameters);
 extern fssh_status_t	fssh_fs_unmount_volume(const char *path,
-							uint32_t flags);
+							uint32_t_t flags);
 
 #ifdef  __cplusplus
 }

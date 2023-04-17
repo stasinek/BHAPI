@@ -93,8 +93,8 @@ virtual	void		_ReservedSubscriber3();
 	thread_id			fBackThread;
 	sem_id				fSynchLock;
 
-	int32				fFileID;		/* reserved for future use */
-	uint32				_reserved[4];
+	int32_t				fFileID;		/* reserved for future use */
+	uint32_t				_reserved[4];
 };
 
 #endif	// #ifdef _SUBSCRIBER_H

@@ -27,7 +27,7 @@ struct ExpressionValues::Key {
 	{
 	}
 
-	uint32 HashValue() const
+	uint32_t HashValue() const
 	{
 		return function->HashValue() ^ thread->ID()
 			^ StringUtils::HashValue(expression);

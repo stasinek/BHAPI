@@ -22,12 +22,12 @@ CoreEntry* gCoreEntries;
 CoreLoadHeap gCoreLoadHeap;
 CoreLoadHeap gCoreHighLoadHeap;
 rw_spinlock gCoreHeapsLock = B_RW_SPINLOCK_INITIALIZER;
-int32 gCoreCount;
+int32_t gCoreCount;
 
 PackageEntry* gPackageEntries;
 IdlePackageList gIdlePackageList;
 rw_spinlock gIdlePackageLock = B_RW_SPINLOCK_INITIALIZER;
-int32 gPackageCount;
+int32_t gPackageCount;
 
 
 }	// namespace Scheduler
@@ -45,7 +45,7 @@ public:
 private:
 	struct CoreThreadsData {
 			CoreEntry*	fCore;
-			int32		fLoad;
+			int32_t		fLoad;
 	};
 
 	static	void		_AnalyzeCoreThreads(Thread* thread, void* data);
@@ -90,7 +90,7 @@ CPUEntry::CPUEntry()
 
 
 void
-CPUEntry::Init(int32 id, CoreEntry* core)
+CPUEntry::Init(int32_t id, CoreEntry* core)
 {
 	fCPUNumber = id;
 	fCore = core;
@@ -127,7 +127,7 @@ CPUEntry::Stop()
 
 
 void
-CPUEntry::PushFront(ThreadData* thread, int32 priority)
+CPUEntry::PushFront(ThreadData* thread, int32_t priority)
 {
 	SCHEDULER_ENTER_FUNCTION();
 	fRunQueue.PushFront(thread, priority);
@@ -135,7 +135,7 @@ CPUEntry::PushFront(ThreadData* thread, int32 priority)
 
 
 void
-CPUEntry::PushBack(ThreadData* thread, int32 priority)
+CPUEntry::PushBack(ThreadData* thread, int32_t priority)
 {
 	SCHEDULER_ENTER_FUNCTION();
 	fRunQueue.PushBack(thread, priority);
@@ -177,13 +177,13 @@ CPUEntry::PeekIdleThread() const
 
 
 void
-CPUEntry::UpdatePriority(int32 priority)
+CPUEntry::UpdatePriority(int32_t priority)
 {
 	SCHEDULER_ENTER_FUNCTION();
 
 	ASSERT(!gCPU[fCPUNumber].disabled);
 
-	int32 oldPriority = CPUPriorityHeap::GetKey(this);
+	int32_t oldPriority = CPUPriorityHeap::GetKey(this);
 	if (oldPriority == priority)
 		return;
 	fCore->CPUHeap()->ModifyKey(this, priority);
@@ -219,14 +219,14 @@ CPUEntry::ChooseNextThread(ThreadData* oldThread, bool putAtBack)
 {
 	SCHEDULER_ENTER_FUNCTION();
 
-	int32 oldPriority = -1;
+	int32_t oldPriority = -1;
 	if (oldThread != NULL)
 		oldPriority = oldThread->GetEffectivePriority();
 
 	CPURunQueueLocker cpuLocker(this);
 
 	ThreadData* pinnedThread = fRunQueue.PeekMaximum();
-	int32 pinnedPriority = -1;
+	int32_t pinnedPriority = -1;
 	if (pinnedThread != NULL)
 		pinnedPriority = pinnedThread->GetEffectivePriority();
 
@@ -235,11 +235,11 @@ CPUEntry::ChooseNextThread(ThreadData* oldThread, bool putAtBack)
 	ThreadData* sharedThread = fCore->PeekThread();
 	ASSERT(sharedThread != NULL || pinnedThread != NULL || oldThread != NULL);
 
-	int32 sharedPriority = -1;
+	int32_t sharedPriority = -1;
 	if (sharedThread != NULL)
 		sharedPriority = sharedThread->GetEffectivePriority();
 
-	int32 rest = std::max(pinnedPriority, sharedPriority);
+	int32_t rest = std::max(pinnedPriority, sharedPriority);
 	if (oldPriority > rest || (!putAtBack && oldPriority == rest))
 		return oldThread;
 
@@ -325,18 +325,18 @@ CPUEntry::_RequestPerformanceLevel(ThreadData* threadData)
 		return;
 	}
 
-	int32 load = std::max(threadData->GetLoad(), fCore->GetLoad());
+	int32_t load = std::max(threadData->GetLoad(), fCore->GetLoad());
 	ASSERT(load >= 0 && load <= kMaxLoad);
 
 	if (load < kTargetLoad) {
-		int32 delta = kTargetLoad - load;
+		int32_t delta = kTargetLoad - load;
 
 		delta *= kTargetLoad;
 		delta /= kCPUPerformanceScaleMax;
 
 		decrease_cpu_performance(delta);
 	} else {
-		int32 delta = load - kTargetLoad;
+		int32_t delta = load - kTargetLoad;
 		delta *= kMaxLoad - kTargetLoad;
 		delta /= kCPUPerformanceScaleMax;
 
@@ -345,7 +345,7 @@ CPUEntry::_RequestPerformanceLevel(ThreadData* threadData)
 }
 
 
-/* static */ int32
+/* static */ int32_t
 CPUEntry::_RescheduleEvent(timer* /* unused */)
 {
 	get_cpu_struct()->invoke_scheduler = true;
@@ -354,7 +354,7 @@ CPUEntry::_RescheduleEvent(timer* /* unused */)
 }
 
 
-/* static */ int32
+/* static */ int32_t
 CPUEntry::_UpdateLoadEvent(timer* /* unused */)
 {
 	CoreEntry::GetCore(smp_get_current_cpu())->ChangeLoad(0);
@@ -363,9 +363,9 @@ CPUEntry::_UpdateLoadEvent(timer* /* unused */)
 }
 
 
-CPUPriorityHeap::CPUPriorityHeap(int32 cpuCount)
+CPUPriorityHeap::CPUPriorityHeap(int32_t cpuCount)
 	:
-	Heap<CPUEntry, int32>(cpuCount)
+	Heap<CPUEntry, int32_t>(cpuCount)
 {
 }
 
@@ -376,8 +376,8 @@ CPUPriorityHeap::Dump()
 	kprintf("cpu priority load\n");
 	CPUEntry* entry = PeekRoot();
 	while (entry) {
-		int32 cpu = entry->ID();
-		int32 key = GetKey(entry);
+		int32_t cpu = entry->ID();
+		int32_t key = GetKey(entry);
 		kprintf("%3" B_PRId32 " %8" B_PRId32 " %3" B_PRId32 "%%\n", cpu, key,
 			entry->GetLoad() / 10);
 
@@ -389,7 +389,7 @@ CPUPriorityHeap::Dump()
 
 	entry = sDebugCPUHeap.PeekRoot();
 	while (entry) {
-		int32 key = GetKey(entry);
+		int32_t key = GetKey(entry);
 		sDebugCPUHeap.RemoveRoot();
 		Insert(entry, key);
 		entry = sDebugCPUHeap.PeekRoot();
@@ -417,7 +417,7 @@ CoreEntry::CoreEntry()
 
 
 void
-CoreEntry::Init(int32 id, PackageEntry* package)
+CoreEntry::Init(int32_t id, PackageEntry* package)
 {
 	fCoreID = id;
 	fPackage = package;
@@ -425,7 +425,7 @@ CoreEntry::Init(int32 id, PackageEntry* package)
 
 
 void
-CoreEntry::PushFront(ThreadData* thread, int32 priority)
+CoreEntry::PushFront(ThreadData* thread, int32_t priority)
 {
 	SCHEDULER_ENTER_FUNCTION();
 
@@ -435,7 +435,7 @@ CoreEntry::PushFront(ThreadData* thread, int32 priority)
 
 
 void
-CoreEntry::PushBack(ThreadData* thread, int32 priority)
+CoreEntry::PushBack(ThreadData* thread, int32_t priority)
 {
 	SCHEDULER_ENTER_FUNCTION();
 
@@ -543,7 +543,7 @@ CoreEntry::_UpdateLoad(bool forceUpdate)
 
 	WriteSpinLocker coreLocker(gCoreHeapsLock);
 
-	int32 newKey;
+	int32_t newKey;
 	if (intervalEnded) {
 		WriteSpinLocker locker(fLoadLock);
 
@@ -558,7 +558,7 @@ CoreEntry::_UpdateLoad(bool forceUpdate)
 	} else
 		newKey = GetLoad();
 
-	int32 oldKey = CoreLoadHeap::GetKey(this);
+	int32_t oldKey = CoreLoadHeap::GetKey(this);
 
 	ASSERT(oldKey >= 0);
 	ASSERT(newKey >= 0);
@@ -608,9 +608,9 @@ CoreEntry::_UnassignThread(Thread* thread, void* data)
 }
 
 
-CoreLoadHeap::CoreLoadHeap(int32 coreCount)
+CoreLoadHeap::CoreLoadHeap(int32_t coreCount)
 	:
-	MinMaxHeap<CoreEntry, int32>(coreCount)
+	MinMaxHeap<CoreEntry, int32_t>(coreCount)
 {
 }
 
@@ -620,7 +620,7 @@ CoreLoadHeap::Dump()
 {
 	CoreEntry* entry = PeekMinimum();
 	while (entry) {
-		int32 key = GetKey(entry);
+		int32_t key = GetKey(entry);
 
 		DebugDumper::DumpCoreLoadHeapEntry(entry);
 
@@ -632,7 +632,7 @@ CoreLoadHeap::Dump()
 
 	entry = sDebugCoreHeap.PeekMinimum();
 	while (entry) {
-		int32 key = GetKey(entry);
+		int32_t key = GetKey(entry);
 		sDebugCoreHeap.RemoveMinimum();
 		Insert(entry, key);
 		entry = sDebugCoreHeap.PeekMinimum();
@@ -650,7 +650,7 @@ PackageEntry::PackageEntry()
 
 
 void
-PackageEntry::Init(int32 id)
+PackageEntry::Init(int32_t id)
 {
 	fPackageID = id;
 }
@@ -746,15 +746,15 @@ DebugDumper::_AnalyzeCoreThreads(Thread* thread, void* data)
 static int
 dump_run_queue(int /* argc */, char** /* argv */)
 {
-	int32 cpuCount = smp_get_num_cpus();
-	int32 coreCount = gCoreCount;
+	int32_t cpuCount = smp_get_num_cpus();
+	int32_t coreCount = gCoreCount;
 
-	for (int32 i = 0; i < coreCount; i++) {
+	for (int32_t i = 0; i < coreCount; i++) {
 		kprintf("%sCore %" B_PRId32 " run queue:\n", i > 0 ? "\n" : "", i);
 		DebugDumper::DumpCoreRunQueue(&gCoreEntries[i]);
 	}
 
-	for (int32 i = 0; i < cpuCount; i++)
+	for (int32_t i = 0; i < cpuCount; i++)
 		DebugDumper::DumpCPURunQueue(&gCPUEntries[i]);
 
 	return 0;
@@ -769,7 +769,7 @@ dump_cpu_heap(int /* argc */, char** /* argv */)
 	kprintf("\n");
 	gCoreHighLoadHeap.Dump();
 
-	for (int32 i = 0; i < gCoreCount; i++) {
+	for (int32_t i = 0; i < gCoreCount; i++) {
 		if (gCoreEntries[i].CPUCount() < 2)
 			continue;
 

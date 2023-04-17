@@ -29,7 +29,7 @@
 
 #include <Layout.h>
 
-BLayoutForm::BLayoutForm(BRect frame,  __be_uint32 resizingMode,  __be_int32 rows,  __be_int32 columns)
+BLayoutForm::BLayoutForm(BRect frame,  __be_uint32_t resizingMode,  __be_int32_t rows,  __be_int32_t columns)
 	: BLayoutItem(frame, resizingMode), fData(NULL)
 {
 }

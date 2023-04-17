@@ -72,7 +72,7 @@ struct devfs_stream {
 			struct devfs_vnode*		dir_head;
 			struct list				cookies;
 			mutex					scan_lock;
-			int32					scanned;
+			int32_t					scanned;
 		} dir;
 		struct stream_dev {
 			BaseDevice*				device;
@@ -132,7 +132,7 @@ struct devfs {
 	dev_t				id;
 	fs_volume*			volume;
 	recursive_lock		lock;
-	int32				next_vnode_id;
+	int32_t				next_vnode_id;
 	NodeTable*			vnode_hash;
 	struct devfs_vnode*	root_vnode;
 };
@@ -140,7 +140,7 @@ struct devfs {
 struct devfs_dir_cookie {
 	struct list_link	link;
 	struct devfs_vnode*	current;
-	int32				state;	// iteration state
+	int32_t				state;	// iteration state
 };
 
 struct devfs_cookie {
@@ -196,7 +196,7 @@ current_timespec()
 }
 
 
-static int32
+static int32_t
 scan_mode(void)
 {
 	// We may scan every device twice:
@@ -228,7 +228,7 @@ scan_for_drivers_if_needed(devfs_vnode* dir)
 		path.Path()));
 
 	// scan for drivers at this path
-	static int32 updateCycle = 1;
+	static int32_t updateCycle = 1;
 	device_manager_probe(path.Path(), updateCycle++);
 	legacy_driver_probe(path.Path());
 
@@ -563,7 +563,7 @@ publish_directory(struct devfs* fs, const char* path)
 	struct devfs_vnode* dir = fs->root_vnode;
 	struct devfs_vnode* vnode = NULL;
 	status_t status = B_OK;
-	int32 i = 0, last = 0;
+	int32_t i = 0, last = 0;
 
 	while (temp[last]) {
 		if (temp[i] == '/') {
@@ -628,7 +628,7 @@ new_node(struct devfs* fs, const char* path, struct devfs_vnode** _node,
 	struct devfs_vnode* dir = fs->root_vnode;
 	struct devfs_vnode* vnode = NULL;
 	status_t status = B_OK;
-	int32 i = 0, last = 0;
+	int32_t i = 0, last = 0;
 	bool atLeaf = false;
 
 	for (;;) {
@@ -870,7 +870,7 @@ dump_cookie(int argc, char** argv)
 
 
 static status_t
-devfs_mount(fs_volume* volume, const char* devfs, uint32 flags,
+devfs_mount(fs_volume* volume, const char* devfs, uint32_t flags,
 	const char* args, ino_t* _rootNodeID)
 {
 	struct devfs_vnode* vnode;
@@ -1024,7 +1024,7 @@ devfs_get_vnode_name(fs_volume* _volume, fs_vnode* _vnode, char* buffer,
 
 static status_t
 devfs_get_vnode(fs_volume* _volume, ino_t id, fs_vnode* _vnode, int* _type,
-	uint32* _flags, bool reenter)
+	uint32_t* _flags, bool reenter)
 {
 	struct devfs* fs = (struct devfs*)_volume->private_volume;
 
@@ -1321,7 +1321,7 @@ devfs_free_dir_cookie(fs_volume* _volume, fs_vnode* _vnode, void* _cookie)
 
 static status_t
 devfs_read_dir(fs_volume* _volume, fs_vnode* _vnode, void* _cookie,
-	struct dirent* dirent, size_t bufferSize, uint32* _num)
+	struct dirent* dirent, size_t bufferSize, uint32_t* _num)
 {
 	struct devfs_vnode* vnode = (devfs_vnode*)_vnode->private_node;
 	struct devfs_dir_cookie* cookie = (devfs_dir_cookie*)_cookie;
@@ -1330,7 +1330,7 @@ devfs_read_dir(fs_volume* _volume, fs_vnode* _vnode, void* _cookie,
 	struct devfs_vnode* childNode = NULL;
 	const char* name = NULL;
 	struct devfs_vnode* nextChildNode = NULL;
-	int32 nextState = cookie->state;
+	int32_t nextState = cookie->state;
 
 	TRACE(("devfs_read_dir: vnode %p, cookie %p, buffer %p, size %ld\n",
 		_vnode, cookie, dirent, bufferSize));
@@ -1412,7 +1412,7 @@ devfs_rewind_dir(fs_volume* _volume, fs_vnode* _vnode, void* _cookie)
 	specific functionality, like partitions.
 */
 static status_t
-devfs_ioctl(fs_volume* _volume, fs_vnode* _vnode, void* _cookie, uint32 op,
+devfs_ioctl(fs_volume* _volume, fs_vnode* _vnode, void* _cookie, uint32_t op,
 	void* buffer, size_t length)
 {
 	struct devfs_vnode* vnode = (struct devfs_vnode*)_vnode->private_node;
@@ -1804,7 +1804,7 @@ devfs_read_stat(fs_volume* _volume, fs_vnode* _vnode, struct stat* stat)
 
 static status_t
 devfs_write_stat(fs_volume* _volume, fs_vnode* _vnode, const struct stat* stat,
-	uint32 statMask)
+	uint32_t statMask)
 {
 	struct devfs* fs = (struct devfs*)_volume->private_volume;
 	struct devfs_vnode* vnode = (struct devfs_vnode*)_vnode->private_node;
@@ -1839,7 +1839,7 @@ devfs_write_stat(fs_volume* _volume, fs_vnode* _vnode, const struct stat* stat,
 
 
 static status_t
-devfs_std_ops(int32 op, ...)
+devfs_std_ops(int32_t op, ...)
 {
 	switch (op) {
 		case B_MODULE_INIT:
@@ -2174,7 +2174,7 @@ devfs_put_device(BaseDevice* device)
 
 void
 devfs_compute_geometry_size(device_geometry* geometry, uint64 blockCount,
-	uint32 blockSize)
+	uint32_t blockSize)
 {
 	if (blockCount > UINT32_MAX)
 		geometry->head_count = (blockCount + UINT32_MAX - 1) / UINT32_MAX;

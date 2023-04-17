@@ -12,7 +12,7 @@
 #include <kits/support/String.h>
 
 
-BUSBEndpoint::BUSBEndpoint(BUSBInterface *interface, uint32 index, int rawFD)
+BUSBEndpoint::BUSBEndpoint(BUSBInterface *interface, uint32_t index, int rawFD)
 	:	fInterface(interface),
 		fIndex(index),
 		fRawFD(rawFD)
@@ -34,7 +34,7 @@ BUSBEndpoint::~BUSBEndpoint()
 }
 
 
-uint32 BUSBEndpoint::Index() const
+uint32_t BUSBEndpoint::Index() const
 {
 	return fIndex;
 }
@@ -189,7 +189,7 @@ BUSBEndpoint::BulkTransfer(void *data, size_t length) const
 
 ssize_t
 BUSBEndpoint::IsochronousTransfer(void *data, size_t length,
-	usb_iso_packet_descriptor *packetDescriptors, uint32 packetCount) const
+	usb_iso_packet_descriptor *packetDescriptors, uint32_t packetCount) const
 {
 	if (length > 0 && data == NULL)
 		return B_BAD_VALUE;

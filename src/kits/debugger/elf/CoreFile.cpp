@@ -34,7 +34,7 @@ CoreFileTeamInfo::CoreFileTeamInfo()
 }
 
 
-void CoreFileTeamInfo::Init(int32 id, int32 uid, int32 gid, const BString& args)
+void CoreFileTeamInfo::Init(int32_t id, int32_t uid, int32_t gid, const BString& args)
 {
 	fId = id;
 	fUid = uid;
@@ -46,9 +46,9 @@ void CoreFileTeamInfo::Init(int32 id, int32 uid, int32 gid, const BString& args)
 // pragma mark - CoreFileAreaInfo
 
 
-CoreFileAreaInfo::CoreFileAreaInfo(ElfSegment* segment, int32 id,
-	uint64 baseAddress, uint64 size, uint64 ramSize, uint32 locking,
-	uint32 protection, const BString& name)
+CoreFileAreaInfo::CoreFileAreaInfo(ElfSegment* segment, int32_t id,
+	uint64 baseAddress, uint64 size, uint64 ramSize, uint32_t locking,
+	uint32_t protection, const BString& name)
 	:
 	fSegment(segment),
 	fBaseAddress(baseAddress),
@@ -64,9 +64,9 @@ CoreFileAreaInfo::CoreFileAreaInfo(ElfSegment* segment, int32 id,
 // pragma mark - CoreFileImageInfo
 
 
-CoreFileImageInfo::CoreFileImageInfo(int32 id, int32 type, uint64 initRoutine,
+CoreFileImageInfo::CoreFileImageInfo(int32_t id, int32_t type, uint64 initRoutine,
 	uint64 termRoutine, uint64 textBase, uint64 textSize, int64 textDelta,
-	uint64 dataBase, uint64 dataSize, int32 deviceId, int64 nodeId,
+	uint64 dataBase, uint64 dataSize, int32_t deviceId, int64 nodeId,
 	uint64 symbolTable, uint64 symbolHash, uint64 stringTable,
 	CoreFileAreaInfo* textArea, CoreFileAreaInfo* dataArea, const BString& name)
 	:
@@ -127,9 +127,9 @@ CoreFileSymbolsInfo::~CoreFileSymbolsInfo()
 }
 
 
-bool CoreFileSymbolsInfo::Init(const void* symbolTable, uint32 symbolCount,
-	uint32 symbolTableEntrySize, const char* stringTable,
-	uint32 stringTableSize)
+bool CoreFileSymbolsInfo::Init(const void* symbolTable, uint32_t symbolCount,
+	uint32_t symbolTableEntrySize, const char* stringTable,
+	uint32_t stringTableSize)
 {
 	fSymbolTable = malloc(symbolCount * symbolTableEntrySize);
 	fStringTable = (char*)malloc(stringTableSize);
@@ -151,7 +151,7 @@ bool CoreFileSymbolsInfo::Init(const void* symbolTable, uint32 symbolCount,
 // pragma mark - CoreFileThreadInfo
 
 
-CoreFileThreadInfo::CoreFileThreadInfo(int32 id, int32 state, int32 priority,
+CoreFileThreadInfo::CoreFileThreadInfo(int32_t id, int32_t state, int32_t priority,
 	uint64 stackBase, uint64 stackEnd, const BString& name)
 	:
 	fId(id),
@@ -222,10 +222,10 @@ status_t CoreFile::Init(const char* fileName)
 
 
 const CoreFileThreadInfo*
-CoreFile::ThreadInfoForId(int32 id) const
+CoreFile::ThreadInfoForId(int32_t id) const
 {
-	int32 count = fThreadInfos.CountItems();
-	for (int32 i = 0; i < count; i++) {
+	int32_t count = fThreadInfos.CountItems();
+	for (int32_t i = 0; i < count; i++) {
 		CoreFileThreadInfo* info = fThreadInfos.ItemAt(i);
 		if (info->Id() == id)
 			return info;
@@ -288,8 +288,8 @@ B_PRId32 " threads\n", CountAreaInfos(), CountImageInfos(), CountThreadInfos());
 template<typename ElfClass>
 status_t CoreFile::_ReadNotes()
 {
-	int32 count = fElfFile.CountSegments();
-	for (int32 i = 0; i < count; i++) {
+	int32_t count = fElfFile.CountSegments();
+	for (int32_t i = 0; i < count; i++) {
 		ElfSegment* segment = fElfFile.SegmentAt(i);
 		if (segment->Type() == PT_NOTE) {
 			status_t error = _ReadNotes<ElfClass>(segment);
@@ -338,9 +338,9 @@ status_t CoreFile::_ReadNotes(ElfSegment* segment)
 		}
 
 		const Nhdr* header = (const Nhdr*)notes;
-		uint32 nameSize = Get(header->n_namesz);
-		uint32 dataSize = Get(header->n_descsz);
-		uint32 type = Get(header->n_type);
+		uint32_t nameSize = Get(header->n_namesz);
+		uint32_t dataSize = Get(header->n_descsz);
+		uint32_t type = Get(header->n_type);
 
 		notes += sizeof(Nhdr);
 		notesSize -= sizeof(Nhdr);
@@ -380,8 +380,8 @@ status_t CoreFile::_ReadNotes(ElfSegment* segment)
 
 
 template<typename ElfClass>
-status_t CoreFile::_ReadNote(const char* name, uint32 type, const void* data,
-	uint32 dataSize)
+status_t CoreFile::_ReadNote(const char* name, uint32_t type, const void* data,
+	uint32_t dataSize)
 {
 	if (strcmp(name, ELF_NOTE_CORE) == 0) {
 		switch (type) {
@@ -411,17 +411,17 @@ status_t CoreFile::_ReadNote(const char* name, uint32 type, const void* data,
 
 
 template<typename ElfClass>
-status_t CoreFile::_ReadTeamNote(const void* data, uint32 dataSize)
+status_t CoreFile::_ReadTeamNote(const void* data, uint32_t dataSize)
 {
 	typedef typename ElfClass::NoteTeam NoteTeam;
 
-	if (dataSize < sizeof(uint32)) {
+	if (dataSize < sizeof(uint32_t)) {
 		WARNING("Team note too short\n");
 		return B_BAD_DATA;
 	}
-	uint32 entrySize = Get(*(const uint32*)data);
-	data = (const uint32*)data + 1;
-	dataSize -= sizeof(uint32);
+	uint32_t entrySize = Get(*(const uint32_t*)data);
+	data = (const uint32_t*)data + 1;
+	dataSize -= sizeof(uint32_t);
 
 	if (entrySize == 0 || dataSize == 0 || dataSize - 1 < entrySize) {
 		WARNING("Team note: too short or invalid entry size (%" B_PRIu32 ")\n",
@@ -440,9 +440,9 @@ status_t CoreFile::_ReadTeamNote(const void* data, uint32 dataSize)
 		return B_BAD_DATA;
 	}
 
-	int32 id = Get(note.nt_id);
-	int32 uid = Get(note.nt_uid);
-	int32 gid = Get(note.nt_gid);
+	int32_t id = Get(note.nt_id);
+	int32_t uid = Get(note.nt_uid);
+	int32_t gid = Get(note.nt_gid);
 
 	BString copiedArgs(args);
 	if (args[0] != '\0' && copiedArgs.Length() == 0)
@@ -454,14 +454,14 @@ status_t CoreFile::_ReadTeamNote(const void* data, uint32 dataSize)
 
 
 template<typename ElfClass>
-status_t CoreFile::_ReadAreasNote(const void* data, uint32 dataSize)
+status_t CoreFile::_ReadAreasNote(const void* data, uint32_t dataSize)
 {
-	if (dataSize < 2 * sizeof(uint32)) {
+	if (dataSize < 2 * sizeof(uint32_t)) {
 		WARNING("Areas note too short\n");
 		return B_BAD_DATA;
 	}
-	uint32 areaCount = _ReadValue<uint32>(data, dataSize);
-	uint32 entrySize = _ReadValue<uint32>(data, dataSize);
+	uint32_t areaCount = _ReadValue<uint32_t>(data, dataSize);
+	uint32_t entrySize = _ReadValue<uint32_t>(data, dataSize);
 
 	typedef typename ElfClass::NoteAreaEntry Entry;
 
@@ -489,12 +489,12 @@ status_t CoreFile::_ReadAreasNote(const void* data, uint32 dataSize)
 		Entry entry = {};
 		_ReadEntry(data, dataSize, entry, entrySize);
 
-		int32 id = Get(entry.na_id);
+		int32_t id = Get(entry.na_id);
 		uint64 baseAddress = Get(entry.na_base);
 		uint64 size = Get(entry.na_size);
 		uint64 ramSize = Get(entry.na_ram_size);
-		uint32 lock = Get(entry.na_lock);
-		uint32 protection = Get(entry.na_protection);
+		uint32_t lock = Get(entry.na_lock);
+		uint32_t protection = Get(entry.na_protection);
 
 		// get name
 		if (stringsSize == 0) {
@@ -526,14 +526,14 @@ status_t CoreFile::_ReadAreasNote(const void* data, uint32 dataSize)
 
 
 template<typename ElfClass>
-status_t CoreFile::_ReadImagesNote(const void* data, uint32 dataSize)
+status_t CoreFile::_ReadImagesNote(const void* data, uint32_t dataSize)
 {
-	if (dataSize < 2 * sizeof(uint32)) {
+	if (dataSize < 2 * sizeof(uint32_t)) {
 		WARNING("Images note too short\n");
 		return B_BAD_DATA;
 	}
-	uint32 imageCount = _ReadValue<uint32>(data, dataSize);
-	uint32 entrySize = _ReadValue<uint32>(data, dataSize);
+	uint32_t imageCount = _ReadValue<uint32_t>(data, dataSize);
+	uint32_t entrySize = _ReadValue<uint32_t>(data, dataSize);
 
 	typedef typename ElfClass::NoteImageEntry Entry;
 
@@ -561,8 +561,8 @@ status_t CoreFile::_ReadImagesNote(const void* data, uint32 dataSize)
 		Entry entry = {};
 		_ReadEntry(data, dataSize, entry, entrySize);
 
-		int32 id = Get(entry.ni_id);
-		int32 type = Get(entry.ni_type);
+		int32_t id = Get(entry.ni_id);
+		int32_t type = Get(entry.ni_type);
 		uint64 initRoutine = Get(entry.ni_init_routine);
 		uint64 termRoutine = Get(entry.ni_term_routine);
 		uint64 textBase = Get(entry.ni_text_base);
@@ -570,7 +570,7 @@ status_t CoreFile::_ReadImagesNote(const void* data, uint32 dataSize)
 		int64 textDelta = Get(entry.ni_text_delta);
 		uint64 dataBase = Get(entry.ni_data_base);
 		uint64 dataSize = Get(entry.ni_data_size);
-		int32 deviceId = Get(entry.ni_device);
+		int32_t deviceId = Get(entry.ni_device);
 		int64 nodeId = Get(entry.ni_node);
 		uint64 symbolTable = Get(entry.ni_symbol_table);
 		uint64 symbolHash = Get(entry.ni_symbol_hash);
@@ -609,15 +609,15 @@ status_t CoreFile::_ReadImagesNote(const void* data, uint32 dataSize)
 
 
 template<typename ElfClass>
-status_t CoreFile::_ReadSymbolsNote(const void* data, uint32 dataSize)
+status_t CoreFile::_ReadSymbolsNote(const void* data, uint32_t dataSize)
 {
-	if (dataSize < 3 * sizeof(uint32)) {
+	if (dataSize < 3 * sizeof(uint32_t)) {
 		WARNING("Symbols note too short\n");
 		return B_BAD_DATA;
 	}
-	int32 imageId = _ReadValue<int32>(data, dataSize);
-	uint32 symbolCount = _ReadValue<uint32>(data, dataSize);
-	uint32 entrySize = _ReadValue<uint32>(data, dataSize);
+	int32_t imageId = _ReadValue<int32_t>(data, dataSize);
+	uint32_t symbolCount = _ReadValue<uint32_t>(data, dataSize);
+	uint32_t entrySize = _ReadValue<uint32_t>(data, dataSize);
 
 	typedef typename ElfClass::Sym Sym;
 
@@ -641,8 +641,8 @@ status_t CoreFile::_ReadSymbolsNote(const void* data, uint32 dataSize)
 		return B_BAD_DATA;
 	}
 
-	uint32 symbolTableSize = symbolCount * entrySize;
-	uint32 stringTableSize = dataSize - symbolTableSize;
+	uint32_t symbolTableSize = symbolCount * entrySize;
+	uint32_t stringTableSize = dataSize - symbolTableSize;
 
 	// check, if the string table is null-terminated
 	const char* stringTable = (const char*)data + symbolTableSize;
@@ -666,15 +666,15 @@ status_t CoreFile::_ReadSymbolsNote(const void* data, uint32 dataSize)
 
 
 template<typename ElfClass>
-status_t CoreFile::_ReadThreadsNote(const void* data, uint32 dataSize)
+status_t CoreFile::_ReadThreadsNote(const void* data, uint32_t dataSize)
 {
-	if (dataSize < 3 * sizeof(uint32)) {
+	if (dataSize < 3 * sizeof(uint32_t)) {
 		WARNING("Threads note too short\n");
 		return B_BAD_DATA;
 	}
-	uint32 threadCount = _ReadValue<uint32>(data, dataSize);
-	uint32 entrySize = _ReadValue<uint32>(data, dataSize);
-	uint32 cpuStateSize = _ReadValue<uint32>(data, dataSize);
+	uint32_t threadCount = _ReadValue<uint32_t>(data, dataSize);
+	uint32_t entrySize = _ReadValue<uint32_t>(data, dataSize);
+	uint32_t cpuStateSize = _ReadValue<uint32_t>(data, dataSize);
 
 	if (cpuStateSize > 1024 * 1024) {
 		WARNING("Threads note: unreasonable CPU state size: %" B_PRIu32 "\n",
@@ -712,9 +712,9 @@ status_t CoreFile::_ReadThreadsNote(const void* data, uint32 dataSize)
 		Entry entry = {};
 		_ReadEntry(data, dataSize, entry, entrySize);
 
-		int32 id = Get(entry.nth_id);
-		int32 state = Get(entry.nth_state);
-		int32 priority = Get(entry.nth_priority);
+		int32_t id = Get(entry.nth_id);
+		int32_t state = Get(entry.nth_state);
+		int32_t priority = Get(entry.nth_priority);
 		uint64 stackBase = Get(entry.nth_stack_base);
 		uint64 stackEnd = Get(entry.nth_stack_end);
 
@@ -754,8 +754,8 @@ status_t CoreFile::_ReadThreadsNote(const void* data, uint32 dataSize)
 CoreFileAreaInfo*
 CoreFile::_FindArea(uint64 address) const
 {
-	int32 count = fAreaInfos.CountItems();
-	for (int32 i = 0; i < count; i++) {
+	int32_t count = fAreaInfos.CountItems();
+	for (int32_t i = 0; i < count; i++) {
 		CoreFileAreaInfo* area = fAreaInfos.ItemAt(i);
 		if (address >= area->BaseAddress()
 				&& address < area->EndAddress()) {
@@ -770,8 +770,8 @@ CoreFile::_FindArea(uint64 address) const
 ElfSegment*
 CoreFile::_FindAreaSegment(uint64 address) const
 {
-	int32 count = fElfFile.CountSegments();
-	for (int32 i = 0; i < count; i++) {
+	int32_t count = fElfFile.CountSegments();
+	for (int32_t i = 0; i < count; i++) {
 		ElfSegment* segment = fElfFile.SegmentAt(i);
 		if (segment->Type() == PT_LOAD && segment->LoadAddress() == address)
 			return segment;
@@ -782,10 +782,10 @@ CoreFile::_FindAreaSegment(uint64 address) const
 
 
 CoreFileImageInfo*
-CoreFile::_ImageInfoForId(int32 id) const
+CoreFile::_ImageInfoForId(int32_t id) const
 {
-	int32 count = fImageInfos.CountItems();
-	for (int32 i = 0; i < count; i++) {
+	int32_t count = fImageInfos.CountItems();
+	for (int32_t i = 0; i < count; i++) {
 		CoreFileImageInfo* info = fImageInfos.ItemAt(i);
 		if (info->Id() == id)
 			return info;
@@ -797,7 +797,7 @@ CoreFile::_ImageInfoForId(int32 id) const
 
 template<typename Type>
 Type
-CoreFile::_ReadValue(const void*& data, uint32& dataSize)
+CoreFile::_ReadValue(const void*& data, uint32_t& dataSize)
 {
 	Type value = Get(*(const Type*)data);
 	_Advance(data, dataSize, sizeof(Type));
@@ -806,7 +806,7 @@ CoreFile::_ReadValue(const void*& data, uint32& dataSize)
 
 
 template<typename Entry>
-void CoreFile::_ReadEntry(const void*& data, uint32& dataSize, Entry& entry,
+void CoreFile::_ReadEntry(const void*& data, uint32_t& dataSize, Entry& entry,
 	size_t entrySize)
 {
 	memcpy(&entry, data, std::min(sizeof(entry), entrySize));
@@ -814,7 +814,7 @@ void CoreFile::_ReadEntry(const void*& data, uint32& dataSize, Entry& entry,
 }
 
 
-void CoreFile::_Advance(const void*& data, uint32& dataSize, size_t by)
+void CoreFile::_Advance(const void*& data, uint32_t& dataSize, size_t by)
 {
 	data = (const uint8*)data + by;
 	dataSize -= by;

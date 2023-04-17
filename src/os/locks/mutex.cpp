@@ -21,7 +21,7 @@
 #define MAX_UNSUCCESSFUL_SPINS	100
 
 
-extern int32 __gCPUCount;
+extern int32_t __gCPUCount;
 
 
 // #pragma mark - mutex
@@ -35,14 +35,14 @@ void __mutex_init(mutex *lock, const char *name)
 }
 
 
-void __mutex_init_etc(mutex *lock, const char *name, uint32 flags)
+void __mutex_init_etc(mutex *lock, const char *name, uint32_t flags)
 {
 	lock->name = (flags & MUTEX_FLAG_CLONE_NAME) != 0 ? strdup(name) : name;
 	lock->lock = 0;
 	lock->flags = flags;
 
 	if (__gCPUCount < 2)
-		lock->flags &= ~uint32(MUTEX_FLAG_ADAPTIVE);
+		lock->flags &= ~uint32_t(MUTEX_FLAG_ADAPTIVE);
 }
 
 
@@ -55,11 +55,11 @@ void __mutex_destroy(mutex *lock)
 
 status_t __mutex_lock(mutex *lock)
 {
-	uint32 count = 0;
-	const uint32 kMaxCount
+	uint32_t count = 0;
+	const uint32_t kMaxCount
 		= (lock->flags & MUTEX_FLAG_ADAPTIVE) != 0 ? MAX_UNSUCCESSFUL_SPINS : 1;
 
-	int32 oldValue;
+	int32_t oldValue;
 	do {
 		// set the locked flag
 		oldValue = atomic_or(&lock->lock, B_USER_MUTEX_LOCKED);
@@ -85,7 +85,7 @@ status_t __mutex_lock(mutex *lock)
 void __mutex_unlock(mutex *lock)
 {
 	// clear the locked flag
-	int32 oldValue = atomic_and(&lock->lock, ~(int32)B_USER_MUTEX_LOCKED);
+	int32_t oldValue = atomic_and(&lock->lock, ~(int32_t)B_USER_MUTEX_LOCKED);
 	if ((oldValue & B_USER_MUTEX_WAITING) != 0
 			&& (oldValue & B_USER_MUTEX_DISABLED) == 0) {
 		_kern_mutex_unlock(&lock->lock, 0);

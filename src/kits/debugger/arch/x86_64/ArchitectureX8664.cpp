@@ -30,7 +30,7 @@
 #include <disasm/DisassemblerX8664.h>
 
 
-static const int32 kFromDwarfRegisters[] = {
+static const int32_t kFromDwarfRegisters[] = {
 	X86_64_REGISTER_RAX,
 	X86_64_REGISTER_RDX,
 	X86_64_REGISTER_RCX,
@@ -89,7 +89,7 @@ static const int32 kFromDwarfRegisters[] = {
 	X86_64_REGISTER_GS,
 };
 
-static const int32 kFromDwarfRegisterCount = sizeof(kFromDwarfRegisters) / 4;
+static const int32_t kFromDwarfRegisterCount = sizeof(kFromDwarfRegisters) / 4;
 static const uint16 kFunctionPrologueSize = 4;
 
 
@@ -101,24 +101,24 @@ struct ArchitectureX8664::ToDwarfRegisterMap : RegisterMap {
 	{
 		// init the index array from the reverse map
 		memset(fIndices, -1, sizeof(fIndices));
-		for (int32 i = 0; i < kFromDwarfRegisterCount; i++) {
+		for (int32_t i = 0; i < kFromDwarfRegisterCount; i++) {
 			if (kFromDwarfRegisters[i] >= 0)
 				fIndices[kFromDwarfRegisters[i]] = i;
 		}
 	}
 
-	virtual int32 CountRegisters() const
+	virtual int32_t CountRegisters() const
 	{
 		return X86_64_REGISTER_COUNT;
 	}
 
-	virtual int32 MapRegisterIndex(int32 index) const
+	virtual int32_t MapRegisterIndex(int32_t index) const
 	{
 		return index >= 0 && index < X86_64_REGISTER_COUNT ? fIndices[index] : -1;
 	}
 
 private:
-	int32	fIndices[X86_64_REGISTER_COUNT];
+	int32_t	fIndices[X86_64_REGISTER_COUNT];
 };
 
 
@@ -126,12 +126,12 @@ private:
 
 
 struct ArchitectureX8664::FromDwarfRegisterMap : RegisterMap {
-	virtual int32 CountRegisters() const
+	virtual int32_t CountRegisters() const
 	{
 		return kFromDwarfRegisterCount;
 	}
 
-	virtual int32 MapRegisterIndex(int32 index) const
+	virtual int32_t MapRegisterIndex(int32_t index) const
 	{
 		return index >= 0 && index < kFromDwarfRegisterCount
 			? kFromDwarfRegisters[index] : -1;
@@ -286,13 +286,13 @@ status_t ArchitectureX8664::Init()
 }
 
 
-int32 ArchitectureX8664::StackGrowthDirection() const
+int32_t ArchitectureX8664::StackGrowthDirection() const
 {
 	return STACK_GROWTH_DIRECTION_NEGATIVE;
 }
 
 
-int32 ArchitectureX8664::CountRegisters() const
+int32_t ArchitectureX8664::CountRegisters() const
 {
 	return fRegisters.Count();
 }
@@ -336,7 +336,7 @@ status_t ArchitectureX8664::GetDwarfRegisterMaps(RegisterMap** _toDwarf,
 }
 
 
-status_t ArchitectureX8664::GetCpuFeatures(uint32& flags)
+status_t ArchitectureX8664::GetCpuFeatures(uint32_t& flags)
 {
 	// TODO: implement if/when it winds up being needed.
 	flags = 0;
@@ -552,7 +552,7 @@ void ArchitectureX8664::UpdateStackFrameCpuState(const StackFrame* frame,
 }
 
 
-status_t ArchitectureX8664::ReadValueFromMemory(target_addr_t address, uint32 valueType,
+status_t ArchitectureX8664::ReadValueFromMemory(target_addr_t address, uint32_t valueType,
 	BVariant& _value) const
 {
 	uint8 buffer[64];
@@ -582,10 +582,10 @@ status_t ArchitectureX8664::ReadValueFromMemory(target_addr_t address, uint32 va
 			_value.SetTo(*(uint16*)buffer);
 			return B_OK;
 		case B_INT32_TYPE:
-			_value.SetTo(*(int32*)buffer);
+			_value.SetTo(*(int32_t*)buffer);
 			return B_OK;
 		case B_UINT32_TYPE:
-			_value.SetTo(*(uint32*)buffer);
+			_value.SetTo(*(uint32_t*)buffer);
 			return B_OK;
 		case B_INT64_TYPE:
 			_value.SetTo(*(int64*)buffer);
@@ -608,7 +608,7 @@ status_t ArchitectureX8664::ReadValueFromMemory(target_addr_t address, uint32 va
 
 
 status_t ArchitectureX8664::ReadValueFromMemory(target_addr_t addressSpace,
-	target_addr_t address, uint32 valueType, BVariant& _value) const
+	target_addr_t address, uint32_t valueType, BVariant& _value) const
 {
 	// n/a on this architecture
 	return B_BAD_VALUE;
@@ -729,8 +729,8 @@ status_t ArchitectureX8664::ResolvePICFunctionAddress(target_addr_t instructionA
 }
 
 
-status_t ArchitectureX8664::GetWatchpointDebugCapabilities(int32& _maxRegisterCount,
-	int32& _maxBytesPerRegister, uint8& _watchpointCapabilityFlags)
+status_t ArchitectureX8664::GetWatchpointDebugCapabilities(int32_t& _maxRegisterCount,
+	int32_t& _maxBytesPerRegister, uint8& _watchpointCapabilityFlags)
 {
 	// Have 4 debug registers, 1 is required for breakpoint support, which
 	// leaves 3 available for watchpoints.
@@ -780,8 +780,8 @@ status_t ArchitectureX8664::GetReturnAddressLocation(StackFrame* frame,
 }
 
 
-void ArchitectureX8664::_AddRegister(int32 index, const char* name,
-	uint32 bitSize, uint32 valueType, register_type type, bool calleePreserved)
+void ArchitectureX8664::_AddRegister(int32_t index, const char* name,
+	uint32_t bitSize, uint32_t valueType, register_type type, bool calleePreserved)
 {
 	if (!fRegisters.Add(Register(index, name, bitSize, valueType, type,
 			calleePreserved))) {
@@ -790,23 +790,23 @@ void ArchitectureX8664::_AddRegister(int32 index, const char* name,
 }
 
 
-void ArchitectureX8664::_AddIntegerRegister(int32 index, const char* name,
-	uint32 valueType, register_type type, bool calleePreserved)
+void ArchitectureX8664::_AddIntegerRegister(int32_t index, const char* name,
+	uint32_t valueType, register_type type, bool calleePreserved)
 {
 	_AddRegister(index, name, 8 * BVariant::SizeOfType(valueType), valueType,
 		type, calleePreserved);
 }
 
 
-void ArchitectureX8664::_AddFPRegister(int32 index, const char* name)
+void ArchitectureX8664::_AddFPRegister(int32_t index, const char* name)
 {
 	_AddRegister(index, name, 8 * BVariant::SizeOfType(B_DOUBLE_TYPE),
 		B_DOUBLE_TYPE, REGISTER_TYPE_GENERAL_PURPOSE, true);
 }
 
 
-void ArchitectureX8664::_AddSIMDRegister(int32 index, const char* name,
-	uint32 byteSize)
+void ArchitectureX8664::_AddSIMDRegister(int32_t index, const char* name,
+	uint32_t byteSize)
 {
 	_AddRegister(index, name, byteSize * 8, B_RAW_TYPE,
 		REGISTER_TYPE_GENERAL_PURPOSE, true);

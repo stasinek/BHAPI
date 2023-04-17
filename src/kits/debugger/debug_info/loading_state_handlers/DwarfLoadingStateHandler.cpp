@@ -74,7 +74,7 @@ void DwarfLoadingStateHandler::HandleState(
 	// in case package installation fails, e.g. due to transient download
 	// issues.
 	for (;;) {
-		int32 choice;
+		int32_t choice;
 		BString message;
 		if (interface->IsInteractive()) {
 			if (requiredPackage.IsEmpty()) {
@@ -165,7 +165,7 @@ status_t DwarfLoadingStateHandler::_GetMatchingDebugInfoPackage(
 	else if (packages.CountItems() == 0)
 		return B_ENTRY_NOT_FOUND;
 
-	for (int32 i = 0; i < packages.CountItems(); i++) {
+	for (int32_t i = 0; i < packages.CountItems(); i++) {
 		BSolverPackage* package = packages.ItemAt(i);
 		if (requiredVersion.Compare(package->Version()) == 0) {
 			_packageName = package->Name();
@@ -184,8 +184,8 @@ status_t DwarfLoadingStateHandler::_GetResolvableName(const BString& debugFileNa
 	BString packageName;
 	BString packageVersion;
 
-	int32 startIndex = 0;
-	int32 endIndex = debugFileName.FindFirst('(');
+	int32_t startIndex = 0;
+	int32_t endIndex = debugFileName.FindFirst('(');
 	if (endIndex < 0)
 		return B_BAD_VALUE;
 

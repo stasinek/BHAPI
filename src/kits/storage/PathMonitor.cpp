@@ -73,7 +73,7 @@ static BString
 make_path(const BString& parent, const char* subPath)
 {
 	BString path = parent;
-	int32 length = path.Length();
+	int32_t length = path.Length();
 	if (length == 0 || subPath[0] == '\0')
 		return BString();
 
@@ -154,7 +154,7 @@ public:
 		return fIsDirectory;
 	}
 
-	status_t StartWatching(uint32 pathFlags, BHandler* target)
+	status_t StartWatching(uint32_t pathFlags, BHandler* target)
 	{
 		// init entry ref
 		BEntry entry;
@@ -180,7 +180,7 @@ public:
 		fIsDirectory = S_ISDIR(st.st_mode);
 
 		// start watching
-		uint32 flags = fChild == NULL ? pathFlags : B_WATCH_DIRECTORY;
+		uint32_t flags = fChild == NULL ? pathFlags : B_WATCH_DIRECTORY;
 			// In theory B_WATCH_NAME would suffice for all existing ancestors,
 			// plus B_WATCH_DIRECTORY for the parent of the first not existing
 			// ancestor. In practice this complicates the transitions when an
@@ -223,7 +223,7 @@ private:
 	BString				fPath;
 	NotOwningEntryRef	fEntryRef;
 	node_ref			fNodeRef;
-	uint32				fWatchingFlags;
+	uint32_t				fWatchingFlags;
 	bool				fIsDirectory;
 };
 
@@ -533,7 +533,7 @@ Entry::EntryRef() const
 
 class PathHandler : public BHandler {
 public:
-								PathHandler(const char* path, uint32 flags,
+								PathHandler(const char* path, uint32_t flags,
 									const BMessenger& target, BLooper* looper);
 	virtual						~PathHandler();
 
@@ -542,7 +542,7 @@ public:
 
 			const BString&		OriginalPath() const
 									{ return fOriginalPath; }
-			uint32				Flags() const	{ return fFlags; }
+			uint32_t				Flags() const	{ return fFlags; }
 
 	virtual	void				MessageReceived(BMessage* message);
 
@@ -567,7 +567,7 @@ private:
 									const node_ref& nodeRef, bool dryRun,
 									bool notify, Entry** _keepEntry);
 
-			bool				_CheckDuplicateEntryNotification(int32 opcode,
+			bool				_CheckDuplicateEntryNotification(int32_t opcode,
 									const entry_ref& toEntryRef,
 									const node_ref& nodeRef,
 									const entry_ref* fromEntryRef = NULL);
@@ -590,13 +590,13 @@ private:
 									Entry* entry, bool notify);
 
 			void				_NotifyFilesCreatedOrRemoved(Entry* entry,
-									int32 opcode) const;
+									int32_t opcode) const;
 			void				_NotifyEntryCreatedOrRemoved(Entry* entry,
-									int32 opcode) const;
+									int32_t opcode) const;
 			void				_NotifyEntryCreatedOrRemoved(
 									const entry_ref& entryRef,
 									const node_ref& nodeRef, const char* path,
-									bool isDirectory, int32 opcode) const;
+									bool isDirectory, int32_t opcode) const;
 			void				_NotifyEntryMoved(const entry_ref& fromEntryRef,
 									const entry_ref& toEntryRef,
 									const node_ref& nodeRef,
@@ -616,7 +616,7 @@ private:
 
 private:
 			BMessenger			fTarget;
-			uint32				fFlags;
+			uint32_t				fFlags;
 			status_t			fStatus;
 			BString				fOriginalPath;
 			BString				fPath;
@@ -626,7 +626,7 @@ private:
 			AncestorMap			fAncestors;
 			NodeMap				fNodes;
 			PathHandler*		fHashNext;
-			int32				fDuplicateEntryNotificationOpcode;
+			int32_t				fDuplicateEntryNotificationOpcode;
 			node_ref			fDuplicateEntryNotificationNodeRef;
 			entry_ref			fDuplicateEntryNotificationToEntryRef;
 			entry_ref			fDuplicateEntryNotificationFromEntryRef;
@@ -728,7 +728,7 @@ struct WatcherHashDefinition {
 //	#pragma mark - PathHandler
 
 
-PathHandler::PathHandler(const char* path, uint32 flags,
+PathHandler::PathHandler(const char* path, uint32_t flags,
 	const BMessenger& target, BLooper* looper)
 	:
 	BHandler(path),
@@ -760,11 +760,11 @@ PathHandler::PathHandler(const char* path, uint32 flags,
 	if ((fFlags & B_WATCH_RECURSIVELY) != 0) {
 		// We add B_WATCH_NAME and B_WATCH_DIRECTORY as needed, so clear them
 		// here.
-		fFlags &= ~uint32(B_WATCH_NAME | B_WATCH_DIRECTORY);
+		fFlags &= ~uint32_t(B_WATCH_NAME | B_WATCH_DIRECTORY);
 	} else {
 		// The B_WATCH_*_ONLY flags are only valid for the recursive mode.
 		// B_WATCH_NAME is implied (we watch the parent directory).
-		fFlags &= ~uint32(B_WATCH_FILES_ONLY | B_WATCH_DIRECTORIES_ONLY
+		fFlags &= ~uint32_t(B_WATCH_FILES_ONLY | B_WATCH_DIRECTORIES_ONLY
 			| B_WATCH_NAME);
 	}
 
@@ -814,13 +814,13 @@ PathHandler::PathHandler(const char* path, uint32 flags,
 			}
 		}
 
-		int32 normalizedPathLength = normalizedPath.Length();
+		int32_t normalizedPathLength = normalizedPath.Length();
 		if (normalizedPath.ByteAt(normalizedPathLength - 1) != '/') {
 			normalizedPath << '/';
 			normalizedPathLength++;
 		}
 		normalizedPath.Append(path, componentEnd - path);
-		normalizedPathLength += int32(componentEnd - path);
+		normalizedPathLength += int32_t(componentEnd - path);
 
 		if (normalizedPath.Length() != normalizedPathLength) {
 			fStatus = B_NO_MEMORY;
@@ -884,7 +884,7 @@ void PathHandler::MessageReceived(BMessage* message)
 	switch (message->what) {
 		case B_NODE_MONITOR:
 		{
-			int32 opcode;
+			int32_t opcode;
 			if (message->FindInt32("opcode", &opcode) != B_OK)
 				return;
 
@@ -964,7 +964,7 @@ status_t PathHandler::_StartWatchingAncestors(Ancestor* startAncestor, bool noti
 
 	// The watch flags for the path (if it exists). Recursively implies
 	// directory, since we need to watch the entries.
-	uint32 watchFlags = (fFlags & WATCH_NODE_FLAG_MASK)
+	uint32_t watchFlags = (fFlags & WATCH_NODE_FLAG_MASK)
 		| (_WatchRecursively() ? B_WATCH_DIRECTORY : 0);
 
 	for (Ancestor* ancestor = startAncestor; ancestor != NULL;
@@ -1588,7 +1588,7 @@ bool PathHandler::_EntryRemoved(const NotOwningEntryRef& entryRef,
 }
 
 
-bool PathHandler::_CheckDuplicateEntryNotification(int32 opcode,
+bool PathHandler::_CheckDuplicateEntryNotification(int32_t opcode,
 	const entry_ref& toEntryRef, const node_ref& nodeRef,
 	const entry_ref* fromEntryRef)
 {
@@ -1660,7 +1660,7 @@ status_t PathHandler::_AddNode(const node_ref& nodeRef, bool isDirectory, bool n
 	// start watching (don't do that for the base node, since we watch it
 	// already via fBaseAncestor)
 	if (nodeRef != fBaseAncestor->node_ref()) {
-		uint32 flags = (fFlags & WATCH_NODE_FLAG_MASK) | B_WATCH_DIRECTORY;
+		uint32_t flags = (fFlags & WATCH_NODE_FLAG_MASK) | B_WATCH_DIRECTORY;
 		status_t error = sWatchingInterface->WatchNode(&nodeRef, flags, this);
 		if (error != B_OK)
 			return error;
@@ -1792,7 +1792,7 @@ void PathHandler::_DeleteEntryAlreadyRemovedFromParent(Entry* entry, bool notify
 }
 
 
-void PathHandler::_NotifyFilesCreatedOrRemoved(Entry* entry, int32 opcode) const
+void PathHandler::_NotifyFilesCreatedOrRemoved(Entry* entry, int32_t opcode) const
 {
 	Directory* directory = entry->Node()->ToDirectory();
 	if (directory == NULL) {
@@ -1805,7 +1805,7 @@ void PathHandler::_NotifyFilesCreatedOrRemoved(Entry* entry, int32 opcode) const
 }
 
 
-void PathHandler::_NotifyEntryCreatedOrRemoved(Entry* entry, int32 opcode) const
+void PathHandler::_NotifyEntryCreatedOrRemoved(Entry* entry, int32_t opcode) const
 {
 	Node* node = entry->Node();
 	_NotifyEntryCreatedOrRemoved(
@@ -1815,7 +1815,7 @@ void PathHandler::_NotifyEntryCreatedOrRemoved(Entry* entry, int32 opcode) const
 
 
 void PathHandler::_NotifyEntryCreatedOrRemoved(const entry_ref& entryRef,
-	const node_ref& nodeRef, const char* path, bool isDirectory, int32 opcode)
+	const node_ref& nodeRef, const char* path, bool isDirectory, int32_t opcode)
 	const
 {
 	if (isDirectory ? _WatchFilesOnly() : _WatchDirectoriesOnly())
@@ -1946,7 +1946,7 @@ BPathMonitor::~BPathMonitor()
 }
 
 
-/*static*/ status_t BPathMonitor::StartWatching(const char* path, uint32 flags,
+/*static*/ status_t BPathMonitor::StartWatching(const char* path, uint32_t flags,
 	const BMessenger& target)
 {
 	TRACE("BPathMonitor::StartWatching(%s, %" B_PRIx32 ")\n", path, flags);
@@ -1973,11 +1973,11 @@ BPathMonitor::~BPathMonitor()
 		// add its flags.
 		if (PathHandler* handler = watcher->Lookup(path)) {
 			// keep old flags save for conflicting mutually exclusive ones
-			uint32 oldFlags = handler->Flags();
-			const uint32 kMutuallyExclusiveFlags
+			uint32_t oldFlags = handler->Flags();
+			const uint32_t kMutuallyExclusiveFlags
 				= B_WATCH_FILES_ONLY | B_WATCH_DIRECTORIES_ONLY;
 			if ((flags & kMutuallyExclusiveFlags) != 0)
-				oldFlags &= ~(uint32)kMutuallyExclusiveFlags;
+				oldFlags &= ~(uint32_t)kMutuallyExclusiveFlags;
 			flags |= oldFlags;
 
 			watcher->Remove(handler);
@@ -2120,14 +2120,14 @@ BPathMonitor::BWatchingInterface::~BWatchingInterface()
 }
 
 
-status_t BPathMonitor::BWatchingInterface::WatchNode(const node_ref* node, uint32 flags,
+status_t BPathMonitor::BWatchingInterface::WatchNode(const node_ref* node, uint32_t flags,
 	const BMessenger& target)
 {
 	return watch_node(node, flags, target);
 }
 
 
-status_t BPathMonitor::BWatchingInterface::WatchNode(const node_ref* node, uint32 flags,
+status_t BPathMonitor::BWatchingInterface::WatchNode(const node_ref* node, uint32_t flags,
 	const BHandler* handler, const BLooper* looper)
 {
 	return watch_node(node, flags, handler, looper);

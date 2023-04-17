@@ -60,7 +60,7 @@ _BMCItem_::Instantiate(BMessage *data) {
 //	#pragma mark - _BMCFilter_
 
 
-_BMCFilter_::_BMCFilter_(BMenuField* menuField, uint32 what)
+_BMCFilter_::_BMCFilter_(BMenuField* menuField, uint32_t what)
 	:
 	BMessageFilter(B_ANY_DELIVERY, B_ANY_SOURCE, what),
 	fMenuField(menuField)
@@ -190,7 +190,7 @@ void _BMCMenuBar_::Draw(BRect updateRect)
 
 	BRect rect(Bounds());
 	rgb_color base = ui_color(B_MENU_BACKGROUND_COLOR);
-	uint32 flags = 0;
+	uint32_t flags = 0;
 	if (!IsEnabled())
 		flags |= BControlLook::B_DISABLED;
 	if (IsFocus())

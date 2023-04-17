@@ -23,7 +23,7 @@ enum {
 
 // ACPI Battery:
 // magic id returned by IDENTIFY_DEVICE
-const uint32 kMagicACPIBatteryID = 17822;
+const uint32_t kMagicACPIBatteryID = 17822;
 
 
 // Our known battery states

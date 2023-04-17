@@ -80,7 +80,7 @@ class UserBreakpoint;
 class Value;
 
 
-typedef std::map<int32, int32> SignalDispositionMappings;
+typedef std::map<int32_t, int32_t> SignalDispositionMappings;
 
 
 class Team {
@@ -155,13 +155,13 @@ public:
 			bool				StopImageNameListEnabled() const
 									{ return fStopImageNameListEnabled; }
 
-			void				SetDefaultSignalDisposition(int32 disposition);
-			int32				DefaultSignalDisposition() const
+			void				SetDefaultSignalDisposition(int32_t disposition);
+			int32_t				DefaultSignalDisposition() const
 									{ return fDefaultSignalDisposition; }
-			bool				SetCustomSignalDisposition(int32 signal,
-									int32 disposition);
-			void				RemoveCustomSignalDisposition(int32 signal);
-			int32				SignalDispositionFor(int32 signal) const;
+			bool				SetCustomSignalDisposition(int32_t signal,
+									int32_t disposition);
+			void				RemoveCustomSignalDisposition(int32_t signal);
+			int32_t				SignalDispositionFor(int32_t signal) const;
 									// if no custom disposition is found,
 									// returns default
 			const SignalDispositionMappings&
@@ -173,8 +173,8 @@ public:
 									// takes over reference (also on error)
 			void				RemoveBreakpoint(Breakpoint* breakpoint);
 									// releases its own reference
-			int32				CountBreakpoints() const;
-			Breakpoint*			BreakpointAt(int32 index) const;
+			int32_t				CountBreakpoints() const;
+			Breakpoint*			BreakpointAt(int32_t index) const;
 			Breakpoint*			BreakpointAtAddress(
 									target_addr_t address) const;
 			void				GetBreakpointsInAddressRange(
@@ -197,8 +197,8 @@ public:
 									// takes over reference (also on error)
 			void				RemoveWatchpoint(Watchpoint* watchpoint);
 									// releases its own reference
-			int32				CountWatchpoints() const;
-			Watchpoint*			WatchpointAt(int32 index) const;
+			int32_t				CountWatchpoints() const;
+			Watchpoint*			WatchpointAt(int32_t index) const;
 			Watchpoint*			WatchpointAtAddress(
 									target_addr_t address) const;
 			void				GetWatchpointsInAddressRange(
@@ -245,15 +245,15 @@ public:
 
 			// service methods for Signal Disposition settings
 			void				NotifyDefaultSignalDispositionChanged(
-									int32 newDisposition);
+									int32_t newDisposition);
 			void				NotifyCustomSignalDispositionChanged(
-									int32 signal, int32 disposition);
+									int32_t signal, int32_t disposition);
 			void				NotifyCustomSignalDispositionRemoved(
-									int32 signal);
+									int32_t signal);
 
 			// service methods for console output
 			void				NotifyConsoleOutputReceived(
-									int32 fd, const BString& output);
+									int32_t fd, const BString& output);
 
 			// breakpoint related service methods
 			void				NotifyUserBreakpointChanged(
@@ -303,7 +303,7 @@ private:
 			bool				fStopOnImageLoad;
 			bool				fStopImageNameListEnabled;
 			BStringList			fStopImageNames;
-			int32				fDefaultSignalDisposition;
+			int32_t				fDefaultSignalDisposition;
 			SignalDispositionMappings
 								fCustomSignalDispositions;
 			BreakpointList		fBreakpoints;
@@ -315,20 +315,20 @@ private:
 
 class Team::Event {
 public:
-								Event(uint32 type, Team* team);
+								Event(uint32_t type, Team* team);
 
-			uint32				EventType() const	{ return fEventType; }
+			uint32_t				EventType() const	{ return fEventType; }
 			Team*				GetTeam() const		{ return fTeam; }
 
 protected:
-			uint32				fEventType;
+			uint32_t				fEventType;
 			Team*				fTeam;
 };
 
 
 class Team::ThreadEvent : public Event {
 public:
-								ThreadEvent(uint32 type, ::Thread* thread);
+								ThreadEvent(uint32_t type, ::Thread* thread);
 
 			::Thread*			GetThread() const	{ return fThread; }
 
@@ -339,7 +339,7 @@ protected:
 
 class Team::ImageEvent : public Event {
 public:
-								ImageEvent(uint32 type, Image* image);
+								ImageEvent(uint32_t type, Image* image);
 
 			Image*				GetImage() const	{ return fImage; }
 
@@ -350,7 +350,7 @@ protected:
 
 class Team::ImageLoadEvent : public Event {
 public:
-								ImageLoadEvent(uint32 type, Team* team,
+								ImageLoadEvent(uint32_t type, Team* team,
 									bool stopOnImageLoad,
 									bool stopImageNameListEnabled);
 
@@ -367,7 +367,7 @@ private:
 
 class Team::ImageLoadNameEvent : public Event {
 public:
-								ImageLoadNameEvent(uint32 type, Team* team,
+								ImageLoadNameEvent(uint32_t type, Team* team,
 									const BString& name);
 
 			const BString&		ImageName() const { return fImageName; }
@@ -379,35 +379,35 @@ private:
 
 class Team::DefaultSignalDispositionEvent : public Event {
 public:
-								DefaultSignalDispositionEvent(uint32 type,
-									Team* team, int32 disposition);
+								DefaultSignalDispositionEvent(uint32_t type,
+									Team* team, int32_t disposition);
 
-			int32				DefaultDisposition() const
+			int32_t				DefaultDisposition() const
 									{ return fDefaultDisposition; }
 
 private:
-			int32				fDefaultDisposition;
+			int32_t				fDefaultDisposition;
 };
 
 
 class Team::CustomSignalDispositionEvent : public Event {
 public:
-								CustomSignalDispositionEvent(uint32 type,
-									Team* team, int32 signal,
-									int32 disposition);
+								CustomSignalDispositionEvent(uint32_t type,
+									Team* team, int32_t signal,
+									int32_t disposition);
 
-			int32				Signal() const { return fSignal; }
-			int32				Disposition() const { return fDisposition; }
+			int32_t				Signal() const { return fSignal; }
+			int32_t				Disposition() const { return fDisposition; }
 
 private:
-			int32				fSignal;
-			int32				fDisposition;
+			int32_t				fSignal;
+			int32_t				fDisposition;
 };
 
 
 class Team::BreakpointEvent : public Event {
 public:
-								BreakpointEvent(uint32 type, Team* team,
+								BreakpointEvent(uint32_t type, Team* team,
 									Breakpoint* breakpoint);
 
 			Breakpoint*			GetBreakpoint() const	{ return fBreakpoint; }
@@ -419,21 +419,21 @@ protected:
 
 class Team::ConsoleOutputEvent : public Event {
 public:
-								ConsoleOutputEvent(uint32 type, Team* team,
-									int32 fd, const BString& output);
+								ConsoleOutputEvent(uint32_t type, Team* team,
+									int32_t fd, const BString& output);
 
-			int32				Descriptor() const	{ return fDescriptor; }
+			int32_t				Descriptor() const	{ return fDescriptor; }
 			const BString&		Output() const		{ return fOutput; }
 
 protected:
-			int32				fDescriptor;
+			int32_t				fDescriptor;
 			BString				fOutput;
 };
 
 
 class Team::DebugReportEvent : public Event {
 public:
-								DebugReportEvent(uint32 type, Team* team,
+								DebugReportEvent(uint32_t type, Team* team,
 									const char* reportPath);
 
 			const char*			GetReportPath() const	{ return fReportPath; }
@@ -443,7 +443,7 @@ protected:
 
 class Team::CoreFileChangedEvent : public Event {
 public:
-								CoreFileChangedEvent(uint32 type, Team* team,
+								CoreFileChangedEvent(uint32_t type, Team* team,
 									const char* targetPath);
 			const char*			GetTargetPath() const	{ return fTargetPath; }
 protected:
@@ -453,7 +453,7 @@ protected:
 
 class Team::MemoryChangedEvent : public Event {
 public:
-								MemoryChangedEvent(uint32 type, Team* team,
+								MemoryChangedEvent(uint32_t type, Team* team,
 									target_addr_t address, target_size_t size);
 
 			target_addr_t		GetTargetAddress() const
@@ -468,7 +468,7 @@ protected:
 
 class Team::WatchpointEvent : public Event {
 public:
-								WatchpointEvent(uint32 type, Team* team,
+								WatchpointEvent(uint32_t type, Team* team,
 									Watchpoint* watchpoint);
 
 			Watchpoint*			GetWatchpoint() const	{ return fWatchpoint; }
@@ -480,7 +480,7 @@ protected:
 
 class Team::UserBreakpointEvent : public Event {
 public:
-								UserBreakpointEvent(uint32 type, Team* team,
+								UserBreakpointEvent(uint32_t type, Team* team,
 									UserBreakpoint* breakpoint);
 
 			UserBreakpoint*		GetBreakpoint() const	{ return fBreakpoint; }

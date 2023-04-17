@@ -38,7 +38,7 @@ public:
 											media_buffer_id id) const;
 
 			status_t					RequestBuffer(sem_id groupReclaimSem,
-											int32 buffersInGroup, size_t size,
+											int32_t buffersInGroup, size_t size,
 											media_buffer_id wantID,
 											BBuffer** _buffer,
 											bigtime_t timeout);
@@ -46,7 +46,7 @@ public:
 			status_t					RecycleBuffer(BBuffer* buffer);
 
 			status_t					GetBufferList(sem_id groupReclaimSem,
-											int32 bufferCount,
+											int32_t bufferCount,
 											BBuffer** buffers);
 private:
 	struct _shared_buffer_info {
@@ -68,10 +68,10 @@ private:
 
 private:
 			sem_id						fSemaphore;
-			int32						fAtom;
+			int32_t						fAtom;
 
 			_shared_buffer_info			fInfos[kMaxBuffers];
-			int32						fCount;
+			int32_t						fCount;
 };
 
 

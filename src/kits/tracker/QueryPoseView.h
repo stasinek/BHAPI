@@ -70,11 +70,11 @@ protected:
 	virtual void RestoreState(const BMessage&);
 	virtual void SavePoseLocations(BRect* = NULL);
 	virtual void SetUpDefaultColumnsIfNeeded();
-	virtual void SetViewMode(uint32);
+	virtual void SetViewMode(uint32_t);
 	virtual void OpenParent();
 	virtual void EditQueries();
 	virtual EntryListBase* InitDirentIterator(const entry_ref*);
-	virtual uint32 WatchNewNodeMask();
+	virtual uint32_t WatchNewNodeMask();
 	virtual bool ShouldShowPose(const Model*, const PoseInfo*);
 	virtual void AddPosesCompleted();
 
@@ -135,9 +135,9 @@ class QueryEntryListCollection : public EntryListBase {
 		}
 
 		BObjectList<BQuery>* fQueryList;
-		int32 fRefCount;
+		int32_t fRefCount;
 		bool fShowResultsFromTrash;
-		int32 fQueryListIndex;
+		int32_t fQueryListIndex;
 		bool fDynamicDateQuery;
 		bool fRefreshEveryHour;
 		bool fRefreshEveryMinute;
@@ -168,11 +168,11 @@ public:
 
 	virtual status_t GetNextEntry(BEntry* entry, bool traverse = false);
 	virtual status_t GetNextRef(entry_ref* ref);
-	virtual int32 GetNextDirents(struct dirent* buffer, size_t length,
-		int32 count = INT_MAX);
+	virtual int32_t GetNextDirents(struct dirent* buffer, size_t length,
+		int32_t count = INT_MAX);
 
 	virtual status_t Rewind();
-	virtual int32 CountEntries();
+	virtual int32_t CountEntries();
 
 	bool ShowResultsFromTrash() const;
 	bool DynamicDateQuery() const;

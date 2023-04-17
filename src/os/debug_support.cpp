@@ -71,8 +71,8 @@ void destroy_debug_context(debug_context *context)
 }
 
 // send_debug_message
-status_t send_debug_message(debug_context *context, int32 messageCode,
-	const void *message, int32 messageSize, void *reply, int32 replySize)
+status_t send_debug_message(debug_context *context, int32_t messageCode,
+	const void *message, int32_t messageSize, void *reply, int32_t replySize)
 {
 	if (!context)
 		return B_BAD_VALUE;
@@ -92,7 +92,7 @@ status_t send_debug_message(debug_context *context, int32 messageCode,
 
 	// read reply
 	while (true) {
-		int32 code;
+		int32_t code;
 		ssize_t bytesRead = read_port(context->reply_port, &code, reply,
 			replySize);
 		if (bytesRead > 0)
@@ -386,8 +386,8 @@ void debug_delete_symbol_lookup_context(debug_symbol_lookup_context *lookupConte
 
 // debug_get_symbol
 status_t debug_get_symbol(debug_symbol_lookup_context* lookupContext, image_id image,
-	const char* name, int32 symbolType, void** _symbolLocation,
-	size_t* _symbolSize, int32* _symbolType)
+	const char* name, int32_t symbolType, void** _symbolLocation,
+	size_t* _symbolSize, int32_t* _symbolType)
 {
 	if (!lookupContext || !lookupContext->lookup)
 		return B_BAD_VALUE;
@@ -401,7 +401,7 @@ status_t debug_get_symbol(debug_symbol_lookup_context* lookupContext, image_id i
 // debug_lookup_symbol_address
 status_t debug_lookup_symbol_address(debug_symbol_lookup_context *lookupContext,
 	const void *address, void **baseAddress, char *symbolName,
-	int32 symbolNameSize, char *imageName, int32 imageNameSize,
+	int32_t symbolNameSize, char *imageName, int32_t imageNameSize,
 	bool *exactMatch)
 {
 	if (!lookupContext || !lookupContext->lookup)
@@ -535,7 +535,7 @@ void debug_delete_symbol_iterator(debug_symbol_iterator* iterator)
 
 // debug_next_image_symbol
 status_t debug_next_image_symbol(debug_symbol_iterator* iterator, char* nameBuffer,
-	size_t nameBufferLength, int32* _symbolType, void** _symbolLocation,
+	size_t nameBufferLength, int32_t* _symbolType, void** _symbolLocation,
 	size_t* _symbolSize)
 {
 	if (iterator == NULL || iterator->image == NULL)

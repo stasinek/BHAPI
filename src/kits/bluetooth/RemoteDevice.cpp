@@ -142,11 +142,11 @@ bool RemoteDevice::Authenticate()
 	createConnection->pscan_mode = fScanMode; // Reserved in spec 2.1
 	createConnection->clock_offset = fClockOffset | 0x8000; // substract!
 
-	uint32 roleSwitch;
+	uint32_t roleSwitch;
 	fDiscovererLocalDevice->GetProperty("role_switch_capable", &roleSwitch);
 	createConnection->role_switch = (uint8)roleSwitch;
 
-	uint32 packetType;
+	uint32_t packetType;
 	fDiscovererLocalDevice->GetProperty("packet_type", &packetType);
 	createConnection->pkt_type = (uint16)packetType;
 
@@ -322,7 +322,7 @@ RemoteDevice::GetProperty(const char* property) /* Throwing */
 }
 
 
-status_t RemoteDevice::GetProperty(const char* property, uint32* value) /* Throwing */
+status_t RemoteDevice::GetProperty(const char* property, uint32_t* value) /* Throwing */
 {
 	CALLED();
 	return B_ERROR;

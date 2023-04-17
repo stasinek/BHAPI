@@ -49,7 +49,7 @@ public:
 		return *this;
 	}
 
-	inline Checksum& operator<<(uint32 value)
+	inline Checksum& operator<<(uint32_t value)
 	{
 		fSum += (value & 0xffff) + (value >> 16);
 		return *this;
@@ -78,7 +78,7 @@ public:
 		uint16 protocol);
 
 private:
-	uint32 fSum;
+	uint32_t fSum;
 };
 
 

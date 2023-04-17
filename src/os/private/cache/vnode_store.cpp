@@ -18,7 +18,7 @@
 
 
 status_t
-VMVnodeCache::Init(struct vnode* vnode, uint32 allocationFlags)
+VMVnodeCache::Init(struct vnode* vnode, uint32_t allocationFlags)
 {
 	status_t error = VMCache::Init(CACHE_TYPE_VNODE, allocationFlags);
 	if (error != B_OK)
@@ -44,7 +44,7 @@ VMVnodeCache::HasPage(off_t offset)
 
 status_t
 VMVnodeCache::Read(off_t offset, const generic_io_vec* vecs, size_t count,
-	uint32 flags, generic_size_t* _numBytes)
+	uint32_t flags, generic_size_t* _numBytes)
 {
 	generic_size_t bytesUntouched = *_numBytes;
 
@@ -66,7 +66,7 @@ VMVnodeCache::Read(off_t offset, const generic_io_vec* vecs, size_t count,
 	// Clear out any leftovers that were not touched by the above read - we're
 	// doing this here so that not every file system/device has to implement
 	// this
-	for (int32 i = count; i-- > 0 && bytesUntouched != 0;) {
+	for (int32_t i = count; i-- > 0 && bytesUntouched != 0;) {
 		generic_size_t length = min_c(bytesUntouched, vecs[i].length);
 
 		generic_addr_t address = vecs[i].base + vecs[i].length - length;
@@ -84,7 +84,7 @@ VMVnodeCache::Read(off_t offset, const generic_io_vec* vecs, size_t count,
 
 status_t
 VMVnodeCache::Write(off_t offset, const generic_io_vec* vecs, size_t count,
-	uint32 flags, generic_size_t* _numBytes)
+	uint32_t flags, generic_size_t* _numBytes)
 {
 	return vfs_write_pages(fVnode, NULL, offset, vecs, count, flags, _numBytes);
 }
@@ -92,7 +92,7 @@ VMVnodeCache::Write(off_t offset, const generic_io_vec* vecs, size_t count,
 
 status_t
 VMVnodeCache::WriteAsync(off_t offset, const generic_io_vec* vecs, size_t count,
-	generic_size_t numBytes, uint32 flags, AsyncIOCallback* callback)
+	generic_size_t numBytes, uint32_t flags, AsyncIOCallback* callback)
 {
 	return vfs_asynchronous_write_pages(fVnode, NULL, offset, vecs, count,
 		numBytes, flags, callback);

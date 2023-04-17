@@ -30,7 +30,7 @@ public:
 public:
 								MimeEntryProcessor(Database* database,
 									DatabaseLocker* databaseLocker,
-						   			int32 force);
+						   			int32_t force);
 	virtual						~MimeEntryProcessor();
 
 	virtual	status_t			Do(const entry_ref& entry, bool* _entryIsDir)
@@ -41,7 +41,7 @@ public:
 protected:
 			Database*			fDatabase;
 			DatabaseLocker*		fDatabaseLocker;
-			int32				fForce;
+			int32_t				fForce;
 
 };
 

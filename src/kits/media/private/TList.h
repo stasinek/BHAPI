@@ -54,7 +54,7 @@ public:
 		return true;
 	}
 	
-	bool Get(int32 index, value **v) const
+	bool Get(int32_t index, value **v) const
 	{
 		if (index < 0 || index >= item_count)
 			return false;
@@ -62,7 +62,7 @@ public:
 		return true;
 	}
 	
-	bool Remove(int32 index) 
+	bool Remove(int32_t index) 
 	{
 		if (index < 0 || index >= item_count)
 			return false;

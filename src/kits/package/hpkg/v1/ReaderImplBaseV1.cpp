@@ -334,7 +334,7 @@ status_t ReaderImplBase::PackageAttributeHandler::HandleAttribute(
 
 		case B_HPKG_ATTRIBUTE_ID_PACKAGE_FLAGS:
 			fPackageInfoValue.SetTo(B_PACKAGE_INFO_FLAGS,
-				(uint32)value.unsignedInt);
+				(uint32_t)value.unsignedInt);
 			break;
 
 		case B_HPKG_ATTRIBUTE_ID_PACKAGE_ARCHITECTURE:
@@ -608,7 +608,7 @@ status_t ReaderImplBase::ParseStrings()
 	char* position
 		= (char*)fCurrentSection->data + fCurrentSection->currentOffset;
 	char* sectionEnd = position + fCurrentSection->stringsLength;
-	uint32 index = 0;
+	uint32_t index = 0;
 	while (true) {
 		if (position >= sectionEnd) {
 			fErrorOutput->PrintError("Error: Malformed %s strings section\n",
@@ -839,7 +839,7 @@ status_t ReaderImplBase::ReadAttributeValue(uint8 type, uint8 encoding,
 				}
 				case B_HPKG_ATTRIBUTE_ENCODING_INT_32_BIT:
 				{
-					uint32 value;
+					uint32_t value;
 					error = _Read(value);
 					intValue = B_BENDIAN_TO_HOST_INT32(value);
 					break;
@@ -994,7 +994,7 @@ status_t ReaderImplBase::ReadBuffer(off_t offset, void* buffer, size_t size)
 
 status_t ReaderImplBase::ReadCompressedBuffer(const SectionInfo& section)
 {
-	uint32 compressedSize = section.compressedLength;
+	uint32_t compressedSize = section.compressedLength;
 	uint64 offset = section.offset;
 
 	switch (section.compression) {

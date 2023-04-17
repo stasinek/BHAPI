@@ -49,7 +49,7 @@ struct _gs_ramp
 
 _gs_ramp* InitRamp(float* value, float set, float frames, bigtime_t duration);
 bool ChangeRamp(_gs_ramp* ramp);
-size_t get_sample_size(int32 format);
+size_t get_sample_size(int32_t format);
 void media_to_gs_format(gs_audio_format* dest,
 	media_raw_audio_format* source);
 

@@ -38,7 +38,7 @@ void CfaContext::SetLocation(target_addr_t targetLocation,
 }
 
 
-status_t CfaContext::Init(uint32 registerCount)
+status_t CfaContext::Init(uint32_t registerCount)
 {
 	fRuleSet = new(std::nothrow) CfaRuleSet;
 	if (fRuleSet == NULL)
@@ -88,25 +88,25 @@ void CfaContext::SetLocation(target_addr_t location)
 }
 
 
-void CfaContext::SetCodeAlignment(uint32 alignment)
+void CfaContext::SetCodeAlignment(uint32_t alignment)
 {
 	fCodeAlignment = alignment;
 }
 
 
-void CfaContext::SetDataAlignment(int32 alignment)
+void CfaContext::SetDataAlignment(int32_t alignment)
 {
 	fDataAlignment = alignment;
 }
 
 
-void CfaContext::SetReturnAddressRegister(uint32 reg)
+void CfaContext::SetReturnAddressRegister(uint32_t reg)
 {
 	fReturnAddressRegister = reg;
 }
 
 
-void CfaContext::RestoreRegisterRule(uint32 reg)
+void CfaContext::RestoreRegisterRule(uint32_t reg)
 {
 	if (CfaRule* rule = RegisterRule(reg)) {
 		if (fInitialRuleSet != NULL)

@@ -827,7 +827,7 @@ status_t BMimeType::SetIconForType(const char* type, const BBitmap* icon, icon_s
 	status_t result;
 
 	void* data = NULL;
-	int32 dataSize;
+	int32_t dataSize;
 
 	// Build and send the message, read the reply
 	if (err == B_OK)
@@ -1016,7 +1016,7 @@ status_t BMimeType::GuessMimeType(const entry_ref* file, BMimeType* type)
 
 
 // Guesses a MIME type for the supplied chunk of data.
-status_t BMimeType::GuessMimeType(const void* buffer, int32 length, BMimeType* type)
+status_t BMimeType::GuessMimeType(const void* buffer, int32_t length, BMimeType* type)
 {
 	status_t err = buffer && type ? B_OK : B_BAD_VALUE;
 

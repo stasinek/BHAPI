@@ -52,7 +52,7 @@ class BMenu;
 
 class BRecentItemsList {
 public:
-	BRecentItemsList(int32 maxItems, bool navMenuFolders);
+	BRecentItemsList(int32_t maxItems, bool navMenuFolders);
 		// if <navMenuFolders> passed, folder items get NavMenu-style
 		// subdirectories attached to them
 
@@ -77,8 +77,8 @@ public:
 
 protected:
 	BMessage fItems;
-	int32 fIndex;
-	int32 fMaxItems;
+	int32_t fIndex;
+	int32_t fMaxItems;
 	bool fNavMenuFolders;
 
 private:
@@ -93,17 +93,17 @@ private:
 	virtual void _r9();
 	virtual void _r10();
 
-	uint32 _reserved[20];
+	uint32_t _reserved[20];
 };
 
 
 class BRecentFilesList : public BRecentItemsList {
 public:
 	// use one of the two constructors to set up next item iteration
-	BRecentFilesList(int32 maxItems = 10, bool navMenuFolders = false,
+	BRecentFilesList(int32_t maxItems = 10, bool navMenuFolders = false,
 		const char* ofType = NULL, const char* openedByAppSig = NULL);
-	BRecentFilesList(int32 maxItems, bool navMenuFolders,
-		const char* ofTypeList[], int32 ofTypeListCount,
+	BRecentFilesList(int32_t maxItems, bool navMenuFolders,
+		const char* ofTypeList[], int32_t ofTypeListCount,
 		const char* openedByAppSig = NULL);
 	virtual ~BRecentFilesList();
 
@@ -111,14 +111,14 @@ public:
 	static BMenu* NewFileListMenu(const char* title,
 		BMessage* openFileMessage = NULL, BMessage* openFolderMessage = NULL,
 		BHandler* target = NULL,
-		int32 maxItems = 10, bool navMenuFolders = false,
+		int32_t maxItems = 10, bool navMenuFolders = false,
 		const char* ofType = NULL, const char* openedByAppSig = NULL);
 
 	static BMenu* NewFileListMenu(const char* title,
 		BMessage* openFileMessage, BMessage* openFolderMessage,
 		BHandler* target,
-		int32 maxItems, bool navMenuFolders,
-		const char* ofTypeList[], int32 ofTypeListCount,
+		int32_t maxItems, bool navMenuFolders,
+		const char* ofTypeList[], int32_t ofTypeListCount,
 		const char* openedByAppSig);
 
 	virtual status_t GetNextRef(entry_ref*);
@@ -126,7 +126,7 @@ public:
 protected:
 	BString fType;
 	char** fTypes;
-	int32 fTypeCount;
+	int32_t fTypeCount;
 	BString fAppSig;
 
 private:
@@ -141,20 +141,20 @@ private:
 	virtual void _r19();
 	virtual void _r110();
 
-	uint32 _reserved[20];
+	uint32_t _reserved[20];
 };
 
 
 class BRecentFoldersList : public BRecentItemsList {
 public:
 	// use the constructor to set up next item iteration
-	BRecentFoldersList(int32 maxItems, bool navMenuFolders = false,
+	BRecentFoldersList(int32_t maxItems, bool navMenuFolders = false,
 		const char* openedByAppSig = NULL);
 
 	// use NewFolderListMenu to get an entire menu
 	static BMenu* NewFolderListMenu(const char* title,
 		BMessage* openMessage = NULL, BHandler* target = NULL,
-		int32 maxItems = 10, bool navMenuFolders = false,
+		int32_t maxItems = 10, bool navMenuFolders = false,
 		const char* openedByAppSig = NULL);
 
 	virtual status_t GetNextRef(entry_ref*);
@@ -174,19 +174,19 @@ private:
 	virtual void _r29();
 	virtual void _r210();
 
-	uint32 _reserved[20];
+	uint32_t _reserved[20];
 };
 
 
 class BRecentAppsList : public BRecentItemsList {
 public:
 	// use the constructor to set up next item iteration
-	BRecentAppsList(int32 maxItems);
+	BRecentAppsList(int32_t maxItems);
 
 	// use NewFolderListMenu to get an entire menu
 	static BMenu* NewAppListMenu(const char* title,
 		BMessage* openMessage = NULL, BHandler* target = NULL,
-		int32 maxItems = 10);
+		int32_t maxItems = 10);
 
 	virtual status_t GetNextRef(entry_ref*);
 
@@ -202,7 +202,7 @@ private:
 	virtual void _r39();
 	virtual void _r310();
 
-	uint32 _reserved[20];
+	uint32_t _reserved[20];
 };
 
 

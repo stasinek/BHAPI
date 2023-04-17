@@ -27,15 +27,15 @@ class BNetworkServiceSettings;
 
 class BNetworkSettings {
 public:
-	static	const uint32		kMsgInterfaceSettingsUpdated = 'SUif';
-	static	const uint32		kMsgNetworkSettingsUpdated = 'SUnw';
-	static	const uint32		kMsgServiceSettingsUpdated = 'SUsv';
+	static	const uint32_t		kMsgInterfaceSettingsUpdated = 'SUif';
+	static	const uint32_t		kMsgNetworkSettingsUpdated = 'SUnw';
+	static	const uint32_t		kMsgServiceSettingsUpdated = 'SUsv';
 
 public:
 								BNetworkSettings();
 								~BNetworkSettings();
 
-			status_t			GetNextInterface(uint32& cookie,
+			status_t			GetNextInterface(uint32_t& cookie,
 									BMessage& interface);
 			status_t			GetInterface(const char* name,
 									BMessage& interface) const;
@@ -46,8 +46,8 @@ public:
 			const BNetworkInterfaceSettings
 								Interface(const char* name) const;
 
-			int32				CountNetworks() const;
-			status_t			GetNextNetwork(uint32& cookie,
+			int32_t				CountNetworks() const;
+			status_t			GetNextNetwork(uint32_t& cookie,
 									BMessage& network) const;
 			status_t			GetNetwork(const char* name,
 									BMessage& network) const;
@@ -55,7 +55,7 @@ public:
 			status_t			RemoveNetwork(const char* name);
 
 			const BMessage&		Services() const;
-			status_t			GetNextService(uint32& cookie,
+			status_t			GetNextService(uint32_t& cookie,
 									BMessage& service);
 			status_t			GetService(const char* name,
 									BMessage& service) const;
@@ -73,7 +73,7 @@ public:
 
 private:
 			status_t			_Load(const char* name = NULL,
-									uint32* _type = NULL);
+									uint32_t* _type = NULL);
 			status_t			_Save(const char* name = NULL);
 			BPath				_Path(BPath& parent, const char* name);
 			status_t			_GetPath(const char* name, BPath& path);
@@ -92,7 +92,7 @@ private:
 			status_t			_GetItem(const BMessage& container,
 									const char* itemField,
 									const char* nameField, const char* name,
-									int32& _index, BMessage& item) const;
+									int32_t& _index, BMessage& item) const;
 			status_t			_RemoveItem(BMessage& container,
 									const char* itemField,
 									const char* nameField, const char* name,
@@ -145,7 +145,7 @@ public:
 										other);
 
 private:
-			int32				fFamily;
+			int32_t				fFamily;
 			bool				fAutoConfigure;
 			BNetworkAddress		fAddress;
 			BNetworkAddress		fMask;
@@ -165,22 +165,22 @@ public:
 			const char*			Name() const;
 			void				SetName(const char* name);
 
-			int32				Flags() const;
-			void				SetFlags(int32 flags);
-			int32				MTU() const;
-			void				SetMTU(int32 mtu);
-			int32				Metric() const;
-			void				SetMetric(int32 metric);
+			int32_t				Flags() const;
+			void				SetFlags(int32_t flags);
+			int32_t				MTU() const;
+			void				SetMTU(int32_t mtu);
+			int32_t				Metric() const;
+			void				SetMetric(int32_t metric);
 
-			int32				CountAddresses() const;
+			int32_t				CountAddresses() const;
 			const BNetworkInterfaceAddressSettings&
-								AddressAt(int32 index) const;
+								AddressAt(int32_t index) const;
 			BNetworkInterfaceAddressSettings&
-								AddressAt(int32 index);
-			int32				FindFirstAddress(int family) const;
+								AddressAt(int32_t index);
+			int32_t				FindFirstAddress(int family) const;
 			void				AddAddress(const
 									BNetworkInterfaceAddressSettings& address);
-			void				RemoveAddress(int32 index);
+			void				RemoveAddress(int32_t index);
 
 			bool				IsAutoConfigure(int family) const;
 
@@ -188,9 +188,9 @@ public:
 
 private:
 			BString				fName;
-			int32				fFlags;
-			int32				fMTU;
-			int32				fMetric;
+			int32_t				fFlags;
+			int32_t				fMTU;
+			int32_t				fMetric;
 			std::vector<BNetworkInterfaceAddressSettings>
 								fAddresses;
 };
@@ -223,7 +223,7 @@ public:
 										const;
 
 private:
-			int32				fFamily;
+			int32_t				fFamily;
 			int					fProtocol;
 			int					fType;
 			BNetworkAddress		fAddress;
@@ -255,17 +255,17 @@ public:
 			int					Port() const;
 			void				SetPort(int port);
 
-			int32				CountArguments() const;
-			const char*			ArgumentAt(int32 index) const;
+			int32_t				CountArguments() const;
+			const char*			ArgumentAt(int32_t index) const;
 			void				AddArgument(const char* argument);
-			void				RemoveArgument(int32 index);
+			void				RemoveArgument(int32_t index);
 
-			int32				CountAddresses() const;
+			int32_t				CountAddresses() const;
 			const BNetworkServiceAddressSettings&
-								AddressAt(int32 index) const;
+								AddressAt(int32_t index) const;
 			void				AddAddress(const
 									BNetworkServiceAddressSettings& address);
-			void				RemoveAddress(int32 index);
+			void				RemoveAddress(int32_t index);
 
 			bool				IsRunning() const;
 
@@ -273,10 +273,10 @@ public:
 
 private:
 			BString				fName;
-			int32				fFamily;
-			int32				fType;
-			int32				fProtocol;
-			int32				fPort;
+			int32_t				fFamily;
+			int32_t				fType;
+			int32_t				fProtocol;
+			int32_t				fPort;
 			bool				fEnabled;
 			bool				fStandAlone;
 			BStringList			fArguments;

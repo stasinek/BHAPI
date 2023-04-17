@@ -92,21 +92,21 @@ public:
 
     static	float				ComposeSpacing(float spacing);
 
-    /*virtual*/ uint32			Flags(BControl* control) const;
+    /*virtual*/ uint32_t			Flags(BControl* control) const;
 
     virtual	void				DrawButtonFrame(BView* view, BRect& rect,
                                     const BRect& updateRect,
                                     const rgb_color& base,
                                     const rgb_color& background,
-                                    uint32 flags = 0,
-                                    uint32 borders = B_ALL_BORDERS);
+                                    uint32_t flags = 0,
+                                    uint32_t borders = B_ALL_BORDERS);
     /*virtual*/	void			DrawButtonFrame(BView* view, BRect& rect,
                                     const BRect& updateRect,
                                     float radius,
                                     const rgb_color& base,
                                     const rgb_color& background,
-                                    uint32 flags = 0,
-                                    uint32 borders = B_ALL_BORDERS);
+                                    uint32_t flags = 0,
+                                    uint32_t borders = B_ALL_BORDERS);
     /*virtual*/	void			DrawButtonFrame(BView* view, BRect& rect,
                                     const BRect& updateRect,
                                     float leftTopRadius,
@@ -115,21 +115,21 @@ public:
                                     float rightBottomRadius,
                                     const rgb_color& base,
                                     const rgb_color& background,
-                                    uint32 flags = 0,
-                                    uint32 borders = B_ALL_BORDERS);
+                                    uint32_t flags = 0,
+                                    uint32_t borders = B_ALL_BORDERS);
 
     virtual	void				DrawButtonBackground(BView* view, BRect& rect,
                                     const BRect& updateRect,
                                     const rgb_color& base,
-                                    uint32 flags = 0,
-                                    uint32 borders = B_ALL_BORDERS,
+                                    uint32_t flags = 0,
+                                    uint32_t borders = B_ALL_BORDERS,
                                     orientation orientation = B_HORIZONTAL);
     /*virtual*/	void			DrawButtonBackground(BView* view, BRect& rect,
                                     const BRect& updateRect,
                                     float radius,
                                     const rgb_color& base,
-                                    uint32 flags = 0,
-                                    uint32 borders = B_ALL_BORDERS,
+                                    uint32_t flags = 0,
+                                    uint32_t borders = B_ALL_BORDERS,
                                     orientation orientation = B_HORIZONTAL);
     /*virtual*/	void			DrawButtonBackground(BView* view, BRect& rect,
                                     const BRect& updateRect,
@@ -138,29 +138,29 @@ public:
                                     float leftBottomRadius,
                                     float rightBottomRadius,
                                     const rgb_color& base,
-                                    uint32 flags = 0,
-                                    uint32 borders = B_ALL_BORDERS,
+                                    uint32_t flags = 0,
+                                    uint32_t borders = B_ALL_BORDERS,
                                     orientation orientation = B_HORIZONTAL);
 
     virtual	void				DrawMenuBarBackground(BView* view, BRect& rect,
                                     const BRect& updateRect,
                                     const rgb_color& base,
-                                    uint32 flags = 0,
-                                    uint32 borders = B_ALL_BORDERS);
+                                    uint32_t flags = 0,
+                                    uint32_t borders = B_ALL_BORDERS);
 
     virtual	void				DrawMenuFieldFrame(BView* view, BRect& rect,
                                     const BRect& updateRect,
                                     const rgb_color& base,
                                     const rgb_color& background,
-                                    uint32 flags = 0,
-                                    uint32 borders = B_ALL_BORDERS);
+                                    uint32_t flags = 0,
+                                    uint32_t borders = B_ALL_BORDERS);
     /*virtual*/	void			DrawMenuFieldFrame(BView* view, BRect& rect,
                                     const BRect& updateRect,
                                     float radius,
                                     const rgb_color& base,
                                     const rgb_color& background,
-                                    uint32 flags = 0,
-                                    uint32 borders = B_ALL_BORDERS);
+                                    uint32_t flags = 0,
+                                    uint32_t borders = B_ALL_BORDERS);
     /*virtual*/	void			DrawMenuFieldFrame(BView* view, BRect& rect,
                                     const BRect& updateRect,
                                     float leftTopRadius,
@@ -169,17 +169,17 @@ public:
                                     float rightBottomRadius,
                                     const rgb_color& base,
                                     const rgb_color& background,
-                                    uint32 flags = 0,
-                                    uint32 borders = B_ALL_BORDERS);
+                                    uint32_t flags = 0,
+                                    uint32_t borders = B_ALL_BORDERS);
 
     virtual	void				DrawMenuFieldBackground(BView* view,
                                     BRect& rect, const BRect& updateRect,
                                     const rgb_color& base, bool popupIndicator,
-                                    uint32 flags = 0);
+                                    uint32_t flags = 0);
     /*virtual*/	void			DrawMenuFieldBackground(BView* view,
                                     BRect& rect, const BRect& updateRect,
                                     float radius, const rgb_color& base,
-                                    bool popupIndicator, uint32 flags = 0);
+                                    bool popupIndicator, uint32_t flags = 0);
     /*virtual*/	void			DrawMenuFieldBackground(BView* view,
                                     BRect& rect, const BRect& updateRect,
                                     float leftTopRadius,
@@ -187,21 +187,21 @@ public:
                                     float leftBottomRadius,
                                     float rightBottomRadius,
                                     const rgb_color& base,
-                                    bool popupIndicator, uint32 flags = 0);
+                                    bool popupIndicator, uint32_t flags = 0);
     virtual	void				DrawMenuFieldBackground(BView* view,
                                     BRect& rect, const BRect& updateRect,
-                                    const rgb_color& base, uint32 flags = 0,
-                                    uint32 borders = B_ALL_BORDERS);
+                                    const rgb_color& base, uint32_t flags = 0,
+                                    uint32_t borders = B_ALL_BORDERS);
 
     virtual	void				DrawMenuBackground(BView* view,
                                     BRect& rect, const BRect& updateRect,
-                                    const rgb_color& base, uint32 flags = 0,
-                                    uint32 borders = B_ALL_BORDERS);
+                                    const rgb_color& base, uint32_t flags = 0,
+                                    uint32_t borders = B_ALL_BORDERS);
 
     virtual	void				DrawMenuItemBackground(BView* view,
                                     BRect& rect, const BRect& updateRect,
-                                    const rgb_color& base, uint32 flags = 0,
-                                    uint32 borders = B_ALL_BORDERS);
+                                    const rgb_color& base, uint32_t flags = 0,
+                                    uint32_t borders = B_ALL_BORDERS);
 
     virtual	void				DrawStatusBar(BView* view, BRect& rect,
                                     const BRect& updateRect,
@@ -212,21 +212,21 @@ public:
     virtual	void				DrawCheckBox(BView* view, BRect& rect,
                                     const BRect& updateRect,
                                     const rgb_color& base,
-                                    uint32 flags = 0);
+                                    uint32_t flags = 0);
 
     virtual	void				DrawRadioButton(BView* view, BRect& rect,
                                     const BRect& updateRect,
                                     const rgb_color& base,
-                                    uint32 flags = 0);
+                                    uint32_t flags = 0);
 
     virtual	void				DrawScrollBarBackground(BView* view,
                                     BRect& rect1, BRect& rect2,
                                     const BRect& updateRect,
-                                    const rgb_color& base, uint32 flags,
+                                    const rgb_color& base, uint32_t flags,
                                     orientation orientation);
     virtual	void				DrawScrollBarBackground(BView* view,
                                     BRect& rect, const BRect& updateRect,
-                                    const rgb_color& base, uint32 flags,
+                                    const rgb_color& base, uint32_t flags,
                                     orientation orientation);
 
     /*virtual*/	void			DrawScrollViewFrame(BView* view,
@@ -235,13 +235,13 @@ public:
                                     BRect horizontalScrollBarFrame,
                                     const rgb_color& base,
                                     border_style border,
-                                    uint32 flags = 0,
-                                    uint32 borders = B_ALL_BORDERS);
+                                    uint32_t flags = 0,
+                                    uint32_t borders = B_ALL_BORDERS);
 
     /*virtual*/	void			DrawArrowShape(BView* view,
                                     BRect& rect, const BRect& updateRect,
-                                    const rgb_color& base, uint32 direction,
-                                    uint32 flags = 0,
+                                    const rgb_color& base, uint32_t direction,
+                                    uint32_t flags = 0,
                                     float tint = B_DARKEN_MAX_TINT);
 
     virtual	rgb_color			SliderBarColor(const rgb_color& base);
@@ -251,124 +251,124 @@ public:
                                     const rgb_color& base,
                                     rgb_color leftFillColor,
                                     rgb_color rightFillColor,
-                                    float sliderScale, uint32 flags,
+                                    float sliderScale, uint32_t flags,
                                     orientation orientation);
     virtual	void				DrawSliderBar(BView* view, BRect rect,
                                     const BRect& updateRect,
                                     const rgb_color& base, rgb_color fillColor,
-                                    uint32 flags, orientation orientation);
+                                    uint32_t flags, orientation orientation);
 
     virtual	void				DrawSliderThumb(BView* view, BRect& rect,
                                     const BRect& updateRect,
-                                    const rgb_color& base, uint32 flags,
+                                    const rgb_color& base, uint32_t flags,
                                     orientation orientation);
 
     /*virtual*/	void			DrawSliderTriangle(BView* view, BRect& rect,
                                     const BRect& updateRect,
-                                    const rgb_color& base, uint32 flags,
+                                    const rgb_color& base, uint32_t flags,
                                     orientation orientation);
     virtual	void				DrawSliderTriangle(BView* view, BRect& rect,
                                     const BRect& updateRect,
                                     const rgb_color& base,
-                                    const rgb_color& fill, uint32 flags,
+                                    const rgb_color& fill, uint32_t flags,
                                     orientation orientation);
 
     virtual	void				DrawSliderHashMarks(BView* view, BRect& rect,
                                     const BRect& updateRect,
-                                    const rgb_color& base, int32 count,
+                                    const rgb_color& base, int32_t count,
                                     hash_mark_location location,
-                                    uint32 flags, orientation orientation);
+                                    uint32_t flags, orientation orientation);
 
     virtual	void				DrawActiveTab(BView* view, BRect& rect,
                                     const BRect& updateRect,
-                                    const rgb_color& base, uint32 flags = 0,
-                                    uint32 borders = B_ALL_BORDERS);
+                                    const rgb_color& base, uint32_t flags = 0,
+                                    uint32_t borders = B_ALL_BORDERS);
 
     virtual	void				DrawInactiveTab(BView* view, BRect& rect,
                                     const BRect& updateRect,
-                                    const rgb_color& base, uint32 flags = 0,
-                                    uint32 borders = B_ALL_BORDERS);
+                                    const rgb_color& base, uint32_t flags = 0,
+                                    uint32_t borders = B_ALL_BORDERS);
 
     /*virtual*/	void			DrawSplitter(BView* view, BRect& rect,
                                     const BRect& updateRect,
                                     const rgb_color& base,
                                     orientation orientation,
-                                    uint32 flags = 0,
-                                    uint32 borders = B_ALL_BORDERS);
+                                    uint32_t flags = 0,
+                                    uint32_t borders = B_ALL_BORDERS);
 
     // various borders
 
     virtual	void				DrawBorder(BView* view, BRect& rect,
                                     const BRect& updateRect,
                                     const rgb_color& base,
-                                    border_style border, uint32 flags = 0,
-                                    uint32 borders = B_ALL_BORDERS);
+                                    border_style border, uint32_t flags = 0,
+                                    uint32_t borders = B_ALL_BORDERS);
 
     virtual	void				DrawRaisedBorder(BView* view, BRect& rect,
                                     const BRect& updateRect,
-                                    const rgb_color& base, uint32 flags = 0,
-                                    uint32 borders = B_ALL_BORDERS);
+                                    const rgb_color& base, uint32_t flags = 0,
+                                    uint32_t borders = B_ALL_BORDERS);
 
     virtual	void				DrawGroupFrame(BView* view, BRect& rect,
                                     const BRect& updateRect,
                                     const rgb_color& base,
-                                    uint32 borders = B_ALL_BORDERS);
+                                    uint32_t borders = B_ALL_BORDERS);
 
     virtual	void				DrawTextControlBorder(BView* view, BRect& rect,
                                     const BRect& updateRect,
-                                    const rgb_color& base, uint32 flags = 0,
-                                    uint32 borders = B_ALL_BORDERS);
+                                    const rgb_color& base, uint32_t flags = 0,
+                                    uint32_t borders = B_ALL_BORDERS);
 
     // aligned labels
 
     /*virtual*/	void			DrawLabel(BView* view, const char* label,
                                     BRect rect, const BRect& updateRect,
-                                    const rgb_color& base, uint32 flags);
+                                    const rgb_color& base, uint32_t flags);
     virtual	void				DrawLabel(BView* view, const char* label,
                                     BRect rect, const BRect& updateRect,
-                                    const rgb_color& base, uint32 flags,
+                                    const rgb_color& base, uint32_t flags,
                                     const BAlignment& alignment);
     // TODO: Would be nice to have a (non-virtual) version of this method
     // which takes an array of labels and locations. That would save some
     // setup with the view graphics state.
     /*virtual*/	void			DrawLabel(BView* view, const char* label,
-                                    const rgb_color& base, uint32 flags,
+                                    const rgb_color& base, uint32_t flags,
                                     const BPoint& where);
 
             void				DrawLabel(BView* view, const char* label,
                                     const BBitmap* icon, BRect rect,
                                     const BRect& updateRect,
-                                    const rgb_color& base, uint32 flags);
+                                    const rgb_color& base, uint32_t flags);
     virtual	void				DrawLabel(BView* view, const char* label,
                                     const BBitmap* icon, BRect rect,
                                     const BRect& updateRect,
-                                    const rgb_color& base, uint32 flags,
+                                    const rgb_color& base, uint32_t flags,
                                     const BAlignment& alignment);
 
     virtual	void				GetFrameInsets(frame_type frameType,
-                                    uint32 flags, float& _left, float& _top,
+                                    uint32_t flags, float& _left, float& _top,
                                     float& _right, float& _bottom);
     virtual	void				GetBackgroundInsets(
                                     background_type backgroundType,
-                                    uint32 flags, float& _left, float& _top,
+                                    uint32_t flags, float& _left, float& _top,
                                     float& _right, float& _bottom);
             void				GetInsets(frame_type frameType,
                                     background_type backgroundType,
-                                    uint32 flags, float& _left, float& _top,
+                                    uint32_t flags, float& _left, float& _top,
                                     float& _right, float& _bottom);
 
     virtual	void				DrawButtonWithPopUpBackground(BView* view,
                                     BRect& rect, const BRect& updateRect,
                                     const rgb_color& base,
-                                    uint32 flags = 0,
-                                    uint32 borders = B_ALL_BORDERS,
+                                    uint32_t flags = 0,
+                                    uint32_t borders = B_ALL_BORDERS,
                                     orientation orientation = B_HORIZONTAL);
     virtual	void				DrawButtonWithPopUpBackground(BView* view,
                                     BRect& rect, const BRect& updateRect,
                                     float radius,
                                     const rgb_color& base,
-                                    uint32 flags = 0,
-                                    uint32 borders = B_ALL_BORDERS,
+                                    uint32_t flags = 0,
+                                    uint32_t borders = B_ALL_BORDERS,
                                     orientation orientation = B_HORIZONTAL);
     virtual	void				DrawButtonWithPopUpBackground(BView* view,
                                     BRect& rect, const BRect& updateRect,
@@ -377,8 +377,8 @@ public:
                                     float leftBottomRadius,
                                     float rightBottomRadius,
                                     const rgb_color& base,
-                                    uint32 flags = 0,
-                                    uint32 borders = B_ALL_BORDERS,
+                                    uint32_t flags = 0,
+                                    uint32_t borders = B_ALL_BORDERS,
                                     orientation orientation = B_HORIZONTAL);
 
             void				SetBackgroundInfo(
@@ -394,22 +394,22 @@ protected:
                                     const rgb_color& base,
                                     const rgb_color& background,
                                     float contrast, float brightness = 1.0,
-                                    uint32 flags = 0,
-                                    uint32 borders = B_ALL_BORDERS);
+                                    uint32_t flags = 0,
+                                    uint32_t borders = B_ALL_BORDERS);
 
             void				_DrawOuterResessedFrame(BView* view,
                                     BRect& rect, const rgb_color& base,
                                     float contrast = 1.0f,
                                     float brightness = 1.0f,
-                                    uint32 flags = 0,
-                                    uint32 borders = B_ALL_BORDERS);
+                                    uint32_t flags = 0,
+                                    uint32_t borders = B_ALL_BORDERS);
 
             void				_DrawFrame(BView* view, BRect& rect,
                                     const rgb_color& left,
                                     const rgb_color& top,
                                     const rgb_color& right,
                                     const rgb_color& bottom,
-                                    uint32 borders = B_ALL_BORDERS);
+                                    uint32_t borders = B_ALL_BORDERS);
             void				_DrawFrame(BView* view, BRect& rect,
                                     const rgb_color& left,
                                     const rgb_color& top,
@@ -417,7 +417,7 @@ protected:
                                     const rgb_color& bottom,
                                     const rgb_color& rightTop,
                                     const rgb_color& leftBottom,
-                                    uint32 borders = B_ALL_BORDERS);
+                                    uint32_t borders = B_ALL_BORDERS);
 
             void				_DrawButtonBackground(BView* view, BRect& rect,
                                     const BRect& updateRect,
@@ -427,15 +427,15 @@ protected:
                                     float rightBottomRadius,
                                     const rgb_color& base,
                                     bool popupIndicator = false,
-                                    uint32 flags = 0,
-                                    uint32 borders = B_ALL_BORDERS,
+                                    uint32_t flags = 0,
+                                    uint32_t borders = B_ALL_BORDERS,
                                     orientation orientation = B_HORIZONTAL);
             void				_DrawFlatButtonBackground(BView* view,
                                     BRect& rect, const BRect& updateRect,
                                     const rgb_color& base,
                                     bool popupIndicator = false,
-                                    uint32 flags = 0,
-                                    uint32 borders = B_ALL_BORDERS,
+                                    uint32_t flags = 0,
+                                    uint32_t borders = B_ALL_BORDERS,
                                     orientation orientation = B_HORIZONTAL);
             void				_DrawNonFlatButtonBackground(BView* view,
                                     BRect& rect, const BRect& updateRect,
@@ -446,12 +446,12 @@ protected:
                                     float rightBottomRadius,
                                     const rgb_color& base,
                                     bool popupIndicator = false,
-                                    uint32 flags = 0,
-                                    uint32 borders = B_ALL_BORDERS,
+                                    uint32_t flags = 0,
+                                    uint32_t borders = B_ALL_BORDERS,
                                     orientation orientation = B_HORIZONTAL);
 
             void				_DrawPopUpMarker(BView* view, const BRect& rect,
-                                    const rgb_color& base, uint32 flags);
+                                    const rgb_color& base, uint32_t flags);
 
             void				_DrawMenuFieldBackgroundOutside(BView* view,
                                     BRect& rect, const BRect& updateRect,
@@ -461,7 +461,7 @@ protected:
                                     float rightBottomRadius,
                                     const rgb_color& base,
                                     bool popupIndicator = false,
-                                    uint32 flags = 0);
+                                    uint32_t flags = 0);
 
             void				_DrawMenuFieldBackgroundInside(BView* view,
                                     BRect& rect, const BRect& updateRect,
@@ -469,8 +469,8 @@ protected:
                                     float rightTopRadius,
                                     float leftBottomRadius,
                                     float rightBottomRadius,
-                                    const rgb_color& base, uint32 flags = 0,
-                                    uint32 borders = B_ALL_BORDERS);
+                                    const rgb_color& base, uint32_t flags = 0,
+                                    uint32_t borders = B_ALL_BORDERS);
 
     // Rounded corner methods
             void				_DrawRoundCornerLeftTop(BView* view,
@@ -577,23 +577,23 @@ protected:
     // Border color methods
             rgb_color			_EdgeLightColor(const rgb_color& base,
                                     float contrast, float brightness,
-                                    uint32 flags);
+                                    uint32_t flags);
 
             rgb_color			_EdgeShadowColor(const rgb_color& base,
                                     float contrast, float brightness,
-                                    uint32 flags);
+                                    uint32_t flags);
 
             rgb_color			_FrameLightColor(const rgb_color& base,
-                                    uint32 flags);
+                                    uint32_t flags);
 
             rgb_color			_FrameShadowColor(const rgb_color& base,
-                                    uint32 flags);
+                                    uint32_t flags);
 
             rgb_color			_BevelLightColor(const rgb_color& base,
-                                    uint32 flags);
+                                    uint32_t flags);
 
             rgb_color			_BevelShadowColor(const rgb_color& base,
-                                    uint32 flags);
+                                    uint32_t flags);
 
     // Background gradient methods
             void				_FillGradient(BView* view, const BRect& rect,
@@ -620,18 +620,18 @@ protected:
 
             void				_MakeButtonGradient(BGradientLinear& gradient,
                                     BRect& rect, const rgb_color& base,
-                                    uint32 flags, orientation orientation = B_HORIZONTAL) const;
+                                    uint32_t flags, orientation orientation = B_HORIZONTAL) const;
 
             bool				_RadioButtonAndCheckBoxMarkColor(
                                     const rgb_color& base, rgb_color& color,
-                                    uint32 flags) const;
+                                    uint32_t flags) const;
 
 private:
             bool				fCachedOutline;
-            int32				fCachedWorkspace;
+            int32_t				fCachedWorkspace;
             BMessage			fBackgroundInfo;
 
-            uint32				_reserved[20];
+            uint32_t				_reserved[20];
 };
 
 extern BControlLook*  be_control_look;

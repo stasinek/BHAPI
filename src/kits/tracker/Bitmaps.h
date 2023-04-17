@@ -59,7 +59,7 @@ public:
 
 	status_t FinishResources(BResources*) const;
 
-	const void* LoadResource(type_code type, int32 id,
+	const void* LoadResource(type_code type, int32_t id,
 		size_t* outSize) const;
 	const void* LoadResource(type_code type, const char* name,
 		size_t* outSize) const;
@@ -67,18 +67,18 @@ public:
 		// corresponding functions in BResources.  These methods are
 		// thread-safe.
 
-	status_t GetIconResource(int32 id, icon_size size, BBitmap* dest) const;
+	status_t GetIconResource(int32_t id, icon_size size, BBitmap* dest) const;
 		// this is a wrapper around LoadResource(), for retrieving
 		// B_LARGE_ICON and B_MINI_ICON ('ICON' and 'MICN' respectively)
 		// resources.  this does sanity checking on the found data,
 		// and if all is okay blasts it into the 'dest' bitmap.
 
-	status_t GetIconResource(int32 id, const uint8** iconData,
+	status_t GetIconResource(int32_t id, const uint8** iconData,
 							 size_t* iconSize) const;
 		// this is a wrapper around LoadResource(), for retrieving
 		// the vector icon data
 
- 	status_t GetBitmapResource(type_code type, int32 id, BBitmap** out) const;
+ 	status_t GetBitmapResource(type_code type, int32_t id, BBitmap** out) const;
  		// this is a wrapper around LoadResource(), for retrieving
  		// arbitrary bitmaps.  the resource with the given type and
  		// id is looked up, and a BBitmap created from it and returned

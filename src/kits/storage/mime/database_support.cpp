@@ -52,19 +52,19 @@ const char *kSnifferRuleAttr		= ATTR_PREFIX "SNIFF_RULE";
 const char *kSupportedTypesAttr		= ATTR_PREFIX "FILE_TYPES";
 
 // attribute data types (as used in the R5 database)
-const int32 kFileTypeType			= 'MIMS';	// B_MIME_STRING_TYPE
-const int32 kTypeType				= B_STRING_TYPE;
-const int32 kAppHintType			= 'MPTH';
-const int32 kAttrInfoType			= B_MESSAGE_TYPE;
-const int32 kShortDescriptionType	= 'MSDC';
-const int32 kLongDescriptionType	= 'MLDC';
-const int32 kFileExtensionsType		= B_MESSAGE_TYPE;
-const int32 kMiniIconType			= B_MINI_ICON_TYPE;
-const int32 kLargeIconType			= B_LARGE_ICON_TYPE;
-const int32 kIconType				= B_VECTOR_ICON_TYPE;
-const int32 kPreferredAppType		= 'MSIG';
-const int32 kSnifferRuleType		= B_STRING_TYPE;
-const int32 kSupportedTypesType		= B_MESSAGE_TYPE;
+const int32_t kFileTypeType			= 'MIMS';	// B_MIME_STRING_TYPE
+const int32_t kTypeType				= B_STRING_TYPE;
+const int32_t kAppHintType			= 'MPTH';
+const int32_t kAttrInfoType			= B_MESSAGE_TYPE;
+const int32_t kShortDescriptionType	= 'MSDC';
+const int32_t kLongDescriptionType	= 'MLDC';
+const int32_t kFileExtensionsType		= B_MESSAGE_TYPE;
+const int32_t kMiniIconType			= B_MINI_ICON_TYPE;
+const int32_t kLargeIconType			= B_LARGE_ICON_TYPE;
+const int32_t kIconType				= B_VECTOR_ICON_TYPE;
+const int32_t kPreferredAppType		= 'MSIG';
+const int32_t kSnifferRuleType		= B_STRING_TYPE;
+const int32_t kSupportedTypesType		= B_MESSAGE_TYPE;
 
 // Message fields
 const char *kApplicationsField				= "applications";
@@ -160,7 +160,7 @@ default_database_location()
 	responsibility to \c delete[] it when you're finished.
 */
 status_t get_icon_data(const BBitmap *icon, icon_size which, void **data,
-	int32 *dataSize)
+	int32_t *dataSize)
 {
 	if (icon == NULL || data == NULL || dataSize == 0
 		|| icon->InitCheck() != B_OK)

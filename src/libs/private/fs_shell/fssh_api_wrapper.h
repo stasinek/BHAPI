@@ -125,7 +125,7 @@
 // Private implementations
 #define __swap_double		__fssh_swap_double
 #define __swap_float		__fssh_swap_float
-#define __swap_int64		__fssh_swap_int64 #define __swap_int32		__fssh_swap_int32 #define __swap_int16		__fssh_swap_int16
+#define __swap_int64		__fssh_swap_int64 #define __swap_int32_t		__fssh_swap_int32_t #define __swap_int16		__fssh_swap_int16
 
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -1692,12 +1692,12 @@
 #define uint8	uint8_t
 #define int16	int16_t
 #define uint16	uint16_t
-#define int32	int32_t
-#define uint32	uint32_t
+#define int32_t	int32_t_t
+#define uint32_t	uint32_t_t
 #define int64	int64_t
 #define uint64	uint64_t
 
-#define vint32	vint32_t
+#define vint32_t	vint32_t_t
 
 
 #endif	// _FSSH_API_WRAPPER_H

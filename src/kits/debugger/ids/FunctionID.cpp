@@ -51,7 +51,7 @@ status_t FunctionID::Archive(BMessage* archive, bool deep) const
 }
 
 
-uint32 FunctionID::ComputeHashValue() const
+uint32_t FunctionID::ComputeHashValue() const
 {
 	return StringUtils::HashValue(fPath) * 17
 		+ StringUtils::HashValue(fFunctionName);

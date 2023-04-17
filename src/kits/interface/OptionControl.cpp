@@ -23,7 +23,7 @@
 	\param flags View flags, passed to the base class's constructor.
 */
 BOptionControl::BOptionControl(BRect frame, const char *name, const char *label,
-								BMessage *message, uint32 resize, uint32 flags)
+								BMessage *message, uint32_t resize, uint32_t flags)
 	:
 	BControl(frame, name, label, message, resize, flags)
 {
@@ -31,7 +31,7 @@ BOptionControl::BOptionControl(BRect frame, const char *name, const char *label,
 
 
 BOptionControl::BOptionControl(const char *name, const char *label,
-								BMessage *message, uint32 flags)
+								BMessage *message, uint32_t flags)
 	:
 	BControl(name, label, message, flags)
 {
@@ -49,13 +49,13 @@ BOptionControl::~BOptionControl()
 /*! \brief Overrides the base version to take special actions.
 	\param message The received message.
 	Calls SetValue() if receives a B_OPTION_CONTROL_VALUE message
-	which contains a "be:value" int32 */
+	which contains a "be:value" int32_t */
 void BOptionControl::MessageReceived(BMessage *message)
 {
 	switch (message->what) {
 		case B_OPTION_CONTROL_VALUE:
 		{
-			int32 value;
+			int32_t value;
 			if (message->FindInt32("be:value", &value) == B_OK) {
 				SetValue(value);
 				Invoke();				
@@ -75,9 +75,9 @@ void BOptionControl::MessageReceived(BMessage *message)
 	\return \c B_OK if the option was added succesfully,
 		an error code otherwise.
 */
-status_t BOptionControl::AddOption(const char *name, int32 value)
+status_t BOptionControl::AddOption(const char *name, int32_t value)
 {
-	int32 numOptions = CountOptions();
+	int32_t numOptions = CountOptions();
 	return AddOptionAt(name, value, numOptions);
 }
 
@@ -88,16 +88,16 @@ status_t BOptionControl::AddOption(const char *name, int32 value)
 		and it was correctly selected, an error code otherwise.
 	It works like SetValue(value);
 */
-status_t BOptionControl::SelectOptionFor(int32 value)
+status_t BOptionControl::SelectOptionFor(int32_t value)
 {
 	// XXX: I wonder why this method was created in the first place,
 	// since you can obtain the same result simply by calling SetValue().
 	// The only difference I can see is that this method iterates over 
 	// all the options contained in the control, and then selects the right one.
-	int32 numOptions = CountOptions();
-	for (int32 c = 0; c < numOptions; c++) {
+	int32_t numOptions = CountOptions();
+	for (int32_t c = 0; c < numOptions; c++) {
 		const char *name = NULL;
-		int32 optionValue;
+		int32_t optionValue;
 		if (GetOptionAt(c, &name, &optionValue) && optionValue == value) {
 			SetValue(optionValue);
 			return B_OK;
@@ -115,10 +115,10 @@ status_t BOptionControl::SelectOptionFor(int32 value)
 */
 status_t BOptionControl::SelectOptionFor(const char *name)
 {
-	int32 numOptions = CountOptions();
-	for (int32 c = 0; c < numOptions; c++) {
+	int32_t numOptions = CountOptions();
+	for (int32_t c = 0; c < numOptions; c++) {
 		const char *optionName = NULL;
-		int32 optionValue;
+		int32_t optionValue;
 		if (GetOptionAt(c, &optionName, &optionValue)
 						&& !strcmp(name, optionName)) {
 			SetValue(optionValue);
@@ -135,7 +135,7 @@ status_t BOptionControl::SelectOptionFor(const char *name)
 	\return A pointer to a BMessage, NULL if something went wrong.
 */
 BMessage *
-BOptionControl::MakeValueMessage(int32 value)
+BOptionControl::MakeValueMessage(int32_t value)
 {
 	BMessage *message = new BMessage(B_OPTION_CONTROL_VALUE);	
 	if (message->AddInt32("be:value", value) != B_OK) {

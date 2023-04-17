@@ -135,14 +135,14 @@ struct device_node : DoublyLinkedListLinkImpl<device_node> {
 			void			DeviceRemoved();
 
 			status_t		Register(device_node* parent);
-			status_t		Probe(const char* devicePath, uint32 updateCycle);
+			status_t		Probe(const char* devicePath, uint32_t updateCycle);
 			status_t		Reprobe();
 			status_t		Rescan();
 
 			bool			IsRegistered() const { return fRegistered; }
 			bool			IsInitialized() const { return fInitialized > 0; }
 			bool			IsProbed() const { return fLastUpdateCycle != 0; }
-			uint32			Flags() const { return fFlags; }
+			uint32_t			Flags() const { return fFlags; }
 
 			void			Acquire();
 			bool			Release();
@@ -155,12 +155,12 @@ struct device_node : DoublyLinkedListLinkImpl<device_node> {
 			device_node*	FindChild(const device_attr* attributes) const;
 			device_node*	FindChild(const char* moduleName) const;
 
-			int32			Priority();
+			int32_t			Priority();
 
-			void			Dump(int32 level = 0);
+			void			Dump(int32_t level = 0);
 
 private:
-			status_t		_RegisterFixed(uint32& registered);
+			status_t		_RegisterFixed(uint32_t& registered);
 			bool			_AlwaysRegisterDynamic();
 			status_t		_AddPath(Stack<KPath*>& stack, const char* path,
 								const char* subPath = NULL);
@@ -180,12 +180,12 @@ private:
 
 	device_node*			fParent;
 	NodeList				fChildren;
-	int32					fRefCount;
-	int32					fInitialized;
+	int32_t					fRefCount;
+	int32_t					fInitialized;
 	bool					fRegistered;
-	uint32					fFlags;
+	uint32_t					fFlags;
 	float					fSupportsParent;
-	uint32					fLastUpdateCycle;
+	uint32_t					fLastUpdateCycle;
 
 	const char*				fModuleName;
 
@@ -242,7 +242,7 @@ find_attr(const device_node* node, const char* name, bool recursive,
 
 
 static void
-put_level(int32 level)
+put_level(int32_t level)
 {
 	while (level-- > 0)
 		kprintf("   ");
@@ -250,7 +250,7 @@ put_level(int32 level)
 
 
 static void
-dump_attribute(device_attr* attr, int32 level)
+dump_attribute(device_attr* attr, int32_t level)
 {
 	if (attr == NULL)
 		return;
@@ -273,7 +273,7 @@ dump_attribute(device_attr* attr, int32 level)
 			break;
 		case B_INT32_TYPE:
 		case B_UINT32_TYPE:
-			kprintf("uint32 : %" B_PRIu32 " (%#" B_PRIx32 ")", attr->value.ui32,
+			kprintf("uint32_t : %" B_PRIu32 " (%#" B_PRIx32 ")", attr->value.ui32,
 				attr->value.ui32);
 			break;
 		case B_INT64_TYPE:
@@ -422,7 +422,7 @@ publish_directories(const char* subPath)
 
 
 static status_t
-control_device_manager(const char* subsystem, uint32 function, void* buffer,
+control_device_manager(const char* subsystem, uint32_t function, void* buffer,
 	size_t bufferSize)
 {
 	// TODO: this function passes pointers to userland, and uses pointers
@@ -804,7 +804,7 @@ get_attr_uint16(const device_node* node, const char* name, uint16* _value,
 
 
 static status_t
-get_attr_uint32(const device_node* node, const char* name, uint32* _value,
+get_attr_uint32_t(const device_node* node, const char* name, uint32_t* _value,
 	bool recursive)
 {
 	if (node == NULL || name == NULL || _value == NULL)
@@ -923,7 +923,7 @@ struct device_manager_info gDeviceManagerModule = {
 	// attributes
 	get_attr_uint8,
 	get_attr_uint16,
-	get_attr_uint32,
+	get_attr_uint32_t,
 	get_attr_uint64,
 	get_attr_string,
 	get_attr_raw,
@@ -1204,7 +1204,7 @@ device_node::device_node(const char* moduleName, const device_attr* attrs)
 		attrs++;
 	}
 
-	get_attr_uint32(this, B_DEVICE_FLAGS, &fFlags, false);
+	get_attr_uint32_t(this, B_DEVICE_FLAGS, &fFlags, false);
 	fFlags &= NODE_FLAG_PUBLIC_MASK;
 }
 
@@ -1261,7 +1261,7 @@ device_node::AcquireResources(const io_resource* resources)
 	if (resources == NULL)
 		return B_OK;
 
-	for (uint32 i = 0; resources[i].type != 0; i++) {
+	for (uint32_t i = 0; resources[i].type != 0; i++) {
 		io_resource_private* resource = new(std::nothrow) io_resource_private;
 		if (resource == NULL)
 			return B_NO_MEMORY;
@@ -1360,7 +1360,7 @@ device_node::AddChild(device_node* node)
 	Acquire();
 	node->fParent = this;
 
-	int32 priority = node->Priority();
+	int32_t priority = node->Priority();
 
 	// Enforce an order in which the children are traversed - from most
 	// specific to least specific child.
@@ -1413,7 +1413,7 @@ device_node::Register(device_node* parent)
 		// We don't uninitialize the driver - this is done by the caller
 		// in order to save reinitializing during driver loading.
 
-	uint32 registeredFixedCount;
+	uint32_t registeredFixedCount;
 	status = _RegisterFixed(registeredFixedCount);
 	if (status != B_OK) {
 		UninitUnusedDriver();
@@ -1460,7 +1460,7 @@ device_node::Register(device_node* parent)
 	don't remove children we already registered up to this point in this case).
 */
 status_t
-device_node::_RegisterFixed(uint32& registered)
+device_node::_RegisterFixed(uint32_t& registered)
 {
 	AttributeList::Iterator iterator = fAttributes.GetIterator();
 	registered = 0;
@@ -1707,7 +1707,7 @@ device_node::_RegisterPath(const char* path)
 {
 	void* list = open_module_list_etc(path, "driver_v1");
 	driver_module_info* driver;
-	uint32 count = 0;
+	uint32_t count = 0;
 
 	while (_GetNextDriver(list, driver) == B_OK) {
 		float support = driver->supports_device(this);
@@ -1863,7 +1863,7 @@ device_node::_Probe()
 
 
 status_t
-device_node::Probe(const char* devicePath, uint32 updateCycle)
+device_node::Probe(const char* devicePath, uint32_t updateCycle)
 {
 	if ((fFlags & NODE_FLAG_DEVICE_REMOVED) != 0
 		|| updateCycle == fLastUpdateCycle)
@@ -2161,7 +2161,7 @@ device_node::FindChild(const char* moduleName) const
 	it might make sense to be able to directly set the priority via an
 	attribute.
 */
-int32
+int32_t
 device_node::Priority()
 {
 	return (fFlags & B_FIND_MULTIPLE_CHILDREN) != 0 ? 0 : 100;
@@ -2169,7 +2169,7 @@ device_node::Priority()
 
 
 void
-device_node::Dump(int32 level)
+device_node::Dump(int32_t level)
 {
 	put_level(level);
 	kprintf("(%" B_PRId32 ") @%p \"%s\" (ref %" B_PRId32 ", init %" B_PRId32
@@ -2253,7 +2253,7 @@ driver_module_info gDeviceGenericModule = {
 
 
 status_t
-device_manager_probe(const char* path, uint32 updateCycle)
+device_manager_probe(const char* path, uint32_t updateCycle)
 {
 	TRACE(("device_manager_probe(\"%s\")\n", path));
 	RecursiveLocker _(sLock);

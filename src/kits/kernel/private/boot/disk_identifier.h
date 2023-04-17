@@ -28,8 +28,8 @@ enum device_types {
 #define NUM_DISK_CHECK_SUMS 5
 
 typedef struct disk_identifier {
-	int32				bus_type;
-	int32				device_type;
+	int32_t				bus_type;
+	int32_t				device_type;
 
 	union {
 		struct {
@@ -65,7 +65,7 @@ typedef struct disk_identifier {
 			off_t		size;
 			struct {
 				off_t	offset;
-				uint32	sum;
+				uint32_t	sum;
 			} _PACKED check_sums[NUM_DISK_CHECK_SUMS];
 		} _PACKED unknown;
 	} device;

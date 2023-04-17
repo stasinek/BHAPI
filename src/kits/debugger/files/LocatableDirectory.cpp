@@ -23,7 +23,7 @@ LocatableDirectory::~LocatableDirectory()
 
 const char*  LocatableDirectory::Name() const
 {
-	int32 lastSlash = fPath.FindLast('/');
+	int32_t lastSlash = fPath.FindLast('/');
 		// return -1, if not found
 	return fPath.String() + (lastSlash + 1);
 }

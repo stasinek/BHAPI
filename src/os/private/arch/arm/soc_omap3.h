@@ -25,8 +25,8 @@ protected:
 	void SoftReset();
 
 	area_id fRegArea;
-	uint32 *fRegBase;
-	uint32 fNumPending;
+	uint32_t *fRegBase;
+	uint32_t fNumPending;
 };
 
 class OMAP3Timer : public HardwareTimer {
@@ -50,12 +50,12 @@ public:
 private:
 	OMAP3Timer(fdt_module_info *fdtModule, fdt_device_node node);
 
-	static int32 _InterruptWrapper(void *data);
-	int32 HandleInterrupt();
+	static int32_t _InterruptWrapper(void *data);
+	int32_t HandleInterrupt();
 
 	bigtime_t fSystemTime;
 	area_id fRegArea;
-	uint32 *fRegBase;
+	uint32_t *fRegBase;
 	int fInterrupt;
 };
 

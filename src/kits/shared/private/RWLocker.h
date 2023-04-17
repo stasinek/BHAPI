@@ -99,7 +99,7 @@ class RWLocker {
 	struct	ReadLockInfo;
 	struct	Benaphore {
 			sem_id	semaphore;
-			int32	counter;
+			int32_t	counter;
 	};
 
  private:
@@ -107,12 +107,12 @@ class RWLocker {
 			status_t			_ReadLock(bigtime_t timeout);
 			status_t			_WriteLock(bigtime_t timeout);
 
-			int32				_AddReadLockInfo(ReadLockInfo* info);
-			int32				_NewReadLockInfo(thread_id thread,
-												 int32 count = 1);
-			void				_DeleteReadLockInfo(int32 index);
-			ReadLockInfo*		_ReadLockInfoAt(int32 index) const;
-			int32				_IndexOf(thread_id thread) const;
+			int32_t				_AddReadLockInfo(ReadLockInfo* info);
+			int32_t				_NewReadLockInfo(thread_id thread,
+												 int32_t count = 1);
+			void				_DeleteReadLockInfo(int32_t index);
+			ReadLockInfo*		_ReadLockInfoAt(int32_t index) const;
+			int32_t				_IndexOf(thread_id thread) const;
 
 	static	status_t			_AcquireBenaphore(Benaphore& benaphore,
 												  bigtime_t timeout);
@@ -122,12 +122,12 @@ class RWLocker {
 	mutable	BLocker				fLock;				// data lock
 			Benaphore			fMutex;				// critical code mutex
 			Benaphore			fQueue;				// queueing semaphore
-			int32				fReaderCount;		// total count...
-			int32				fWriterCount;		// total count...
+			int32_t				fReaderCount;		// total count...
+			int32_t				fWriterCount;		// total count...
 			BList				fReadLockInfos;
 			thread_id			fWriter;			// current write lock owner
-			int32				fWriterWriterCount;	// write lock owner count
-			int32				fWriterReaderCount;	// writer read lock owner
+			int32_t				fWriterWriterCount;	// write lock owner count
+			int32_t				fWriterReaderCount;	// writer read lock owner
 													// count
 };
 

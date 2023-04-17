@@ -106,7 +106,7 @@ BPopUpMenuWindow::BPopUpMenuWindow(BPoint where, BPopUpMenu *menu, bool delivers
 
 	fMenu = menu;
 
-	__be_uint32 oldResizingMode = fMenu->ResizingMode();
+	__be_uint32_t oldResizingMode = fMenu->ResizingMode();
 
 	fMenu->SetResizingMode(B_FOLLOW_NONE);
 	fMenu->ResizeToPreferred();
@@ -205,7 +205,7 @@ BPopUpMenu::MessageReceived(BMessage *msg)
 				BPopUpMenuWindow *win = cast_as(Window(), BPopUpMenuWindow);
 				if(win == NULL || win->fOpenAnyway == true) break;
 
-				__be_int32 buttons;
+				__be_int32_t buttons;
 				BPoint where;
 
 				if(!(msg->FindInt32("buttons", &buttons) == false || buttons > 0))
@@ -245,8 +245,8 @@ BPopUpMenu::MessageReceived(BMessage *msg)
 				fSelectedItem = item;
 				if(win->fDeliversMessage)
 				{
-					__be_uint32 what;
-					if(msg->FindInt32("BHAPI:menu_orig_what", (__be_int32*)&what))
+					__be_uint32_t what;
+					if(msg->FindInt32("BHAPI:menu_orig_what", (__be_int32_t*)&what))
 					{
 						BMessage aMsg = *msg;
 						aMsg.what = what;
@@ -308,7 +308,7 @@ BPopUpMenu::MouseUp(BPoint where)
 
 	if(!(win == NULL || win->fOpenAnyway == true || msg == NULL || msg->what != B_MOUSE_UP))
 	{
-		__be_int32 buttons;
+		__be_int32_t buttons;
 		if(msg->FindInt32("buttons", &buttons) == false) return;
 		if(buttons > 0) return;
 

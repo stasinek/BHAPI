@@ -48,7 +48,7 @@ typedef struct {
     boot_entry bd_entry[BOOTDIR_MAX_ENTRIES];
 } boot_dir;
 
-/* void _start(uint32 mem, char *params, boot_dir *bd); */
+/* void _start(uint32_t mem, char *params, boot_dir *bd); */
 
 #define BE_TYPE_NONE         0  /* empty entry                              */
 #define BE_TYPE_DIRECTORY    1  /* directory (entry 0)                      */

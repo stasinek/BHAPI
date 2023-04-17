@@ -38,7 +38,7 @@ public:
 
 	virtual	BGameSound*			Clone() const;
 
-	virtual	status_t 			Perform(int32 selector, void* data);
+	virtual	status_t 			Perform(int32_t selector, void* data);
 
 protected:
 								BPushGameSound(BGameSoundDevice* device);
@@ -62,30 +62,30 @@ private:
 
 			bool				BytesReady(size_t* bytes);
 
-	virtual	status_t			_Reserved_BPushGameSound_0(int32 arg, ...);
-	virtual	status_t			_Reserved_BPushGameSound_1(int32 arg, ...);
-	virtual	status_t			_Reserved_BPushGameSound_2(int32 arg, ...);
-	virtual	status_t			_Reserved_BPushGameSound_3(int32 arg, ...);
-	virtual	status_t			_Reserved_BPushGameSound_4(int32 arg, ...);
-	virtual	status_t			_Reserved_BPushGameSound_5(int32 arg, ...);
-	virtual	status_t			_Reserved_BPushGameSound_6(int32 arg, ...);
-	virtual	status_t			_Reserved_BPushGameSound_7(int32 arg, ...);
-	virtual	status_t			_Reserved_BPushGameSound_8(int32 arg, ...);
-	virtual	status_t			_Reserved_BPushGameSound_9(int32 arg, ...);
-	virtual	status_t			_Reserved_BPushGameSound_10(int32 arg, ...);
-	virtual	status_t			_Reserved_BPushGameSound_11(int32 arg, ...);
-	virtual	status_t			_Reserved_BPushGameSound_12(int32 arg, ...);
-	virtual	status_t			_Reserved_BPushGameSound_13(int32 arg, ...);
-	virtual	status_t			_Reserved_BPushGameSound_14(int32 arg, ...);
-	virtual	status_t			_Reserved_BPushGameSound_15(int32 arg, ...);
-	virtual	status_t			_Reserved_BPushGameSound_16(int32 arg, ...);
-	virtual	status_t			_Reserved_BPushGameSound_17(int32 arg, ...);
-	virtual	status_t			_Reserved_BPushGameSound_18(int32 arg, ...);
-	virtual	status_t			_Reserved_BPushGameSound_19(int32 arg, ...);
-	virtual	status_t			_Reserved_BPushGameSound_20(int32 arg, ...);
-	virtual	status_t			_Reserved_BPushGameSound_21(int32 arg, ...);
-	virtual	status_t			_Reserved_BPushGameSound_22(int32 arg, ...);
-	virtual	status_t			_Reserved_BPushGameSound_23(int32 arg, ...);
+	virtual	status_t			_Reserved_BPushGameSound_0(int32_t arg, ...);
+	virtual	status_t			_Reserved_BPushGameSound_1(int32_t arg, ...);
+	virtual	status_t			_Reserved_BPushGameSound_2(int32_t arg, ...);
+	virtual	status_t			_Reserved_BPushGameSound_3(int32_t arg, ...);
+	virtual	status_t			_Reserved_BPushGameSound_4(int32_t arg, ...);
+	virtual	status_t			_Reserved_BPushGameSound_5(int32_t arg, ...);
+	virtual	status_t			_Reserved_BPushGameSound_6(int32_t arg, ...);
+	virtual	status_t			_Reserved_BPushGameSound_7(int32_t arg, ...);
+	virtual	status_t			_Reserved_BPushGameSound_8(int32_t arg, ...);
+	virtual	status_t			_Reserved_BPushGameSound_9(int32_t arg, ...);
+	virtual	status_t			_Reserved_BPushGameSound_10(int32_t arg, ...);
+	virtual	status_t			_Reserved_BPushGameSound_11(int32_t arg, ...);
+	virtual	status_t			_Reserved_BPushGameSound_12(int32_t arg, ...);
+	virtual	status_t			_Reserved_BPushGameSound_13(int32_t arg, ...);
+	virtual	status_t			_Reserved_BPushGameSound_14(int32_t arg, ...);
+	virtual	status_t			_Reserved_BPushGameSound_15(int32_t arg, ...);
+	virtual	status_t			_Reserved_BPushGameSound_16(int32_t arg, ...);
+	virtual	status_t			_Reserved_BPushGameSound_17(int32_t arg, ...);
+	virtual	status_t			_Reserved_BPushGameSound_18(int32_t arg, ...);
+	virtual	status_t			_Reserved_BPushGameSound_19(int32_t arg, ...);
+	virtual	status_t			_Reserved_BPushGameSound_20(int32_t arg, ...);
+	virtual	status_t			_Reserved_BPushGameSound_21(int32_t arg, ...);
+	virtual	status_t			_Reserved_BPushGameSound_22(int32_t arg, ...);
+	virtual	status_t			_Reserved_BPushGameSound_23(int32_t arg, ...);
 
 private:
 			sem_id				fLock;
@@ -96,10 +96,10 @@ private:
 			
 			char*				fBuffer;
 			size_t				fPageSize;
-			int32				fPageCount;
+			int32_t				fPageCount;
 			size_t				fBufferSize;
 
-			uint32				_reserved[12];
+			uint32_t				_reserved[12];
 };
 
 

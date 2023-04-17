@@ -9,10 +9,10 @@
 #include <new>
 
 
-static const int32 kEntriesPerGeneration = 1024;
+static const int32_t kEntriesPerGeneration = 1024;
 
-static const int32 kEntryNotInArray = -1;
-static const int32 kEntryRemoved = -2;
+static const int32_t kEntryNotInArray = -1;
+static const int32_t kEntryRemoved = -2;
 
 
 // #pragma mark - EntryCacheGeneration
@@ -79,7 +79,7 @@ EntryCache::Init()
 	if (error != B_OK)
 		return error;
 
-	for (int32 i = 0; i < kGenerationCount; i++) {
+	for (int32_t i = 0; i < kGenerationCount; i++) {
 		error = fGenerations[i].Init();
 		if (error != B_OK)
 			return error;
@@ -168,7 +168,7 @@ EntryCache::Lookup(ino_t dirID, const char* name, ino_t& _nodeID,
 	if (entry == NULL)
 		return false;
 
-	int32 oldGeneration = atomic_get_and_set(&entry->generation,
+	int32_t oldGeneration = atomic_get_and_set(&entry->generation,
 			fCurrentGeneration);
 	if (oldGeneration == fCurrentGeneration || entry->index < 0) {
 		// The entry is already in the current generation or is being moved to
@@ -183,7 +183,7 @@ EntryCache::Lookup(ino_t dirID, const char* name, ino_t& _nodeID,
 	entry->index = kEntryNotInArray;
 
 	// add to the current generation
-	int32 index = atomic_add(&fGenerations[oldGeneration].next_index, 1);
+	int32_t index = atomic_add(&fGenerations[oldGeneration].next_index, 1);
 	if (index < kEntriesPerGeneration) {
 		fGenerations[fCurrentGeneration].entries[index] = entry;
 		entry->index = index;
@@ -231,7 +231,7 @@ void
 EntryCache::_AddEntryToCurrentGeneration(EntryCacheEntry* entry)
 {
 	// the generation might not be full yet
-	int32 index = fGenerations[fCurrentGeneration].next_index++;
+	int32_t index = fGenerations[fCurrentGeneration].next_index++;
 	if (index < kEntriesPerGeneration) {
 		fGenerations[fCurrentGeneration].entries[index] = entry;
 		entry->generation = fCurrentGeneration;
@@ -240,8 +240,8 @@ EntryCache::_AddEntryToCurrentGeneration(EntryCacheEntry* entry)
 	}
 
 	// we have to clear the oldest generation
-	int32 newGeneration = (fCurrentGeneration + 1) % kGenerationCount;
-	for (int32 i = 0; i < kEntriesPerGeneration; i++) {
+	int32_t newGeneration = (fCurrentGeneration + 1) % kGenerationCount;
+	for (int32_t i = 0; i < kEntriesPerGeneration; i++) {
 		EntryCacheEntry* otherEntry = fGenerations[newGeneration].entries[i];
 		if (otherEntry == NULL)
 			continue;

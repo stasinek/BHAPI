@@ -44,12 +44,12 @@ public:
 
             media_node_id		node;
             port_id				port;
-            uint32				kind;
+            uint32_t				kind;
 
     static	media_node			null;
 
 private:
-            uint32				_reserved_[3];
+            uint32_t				_reserved_[3];
 };
 
 
@@ -64,7 +64,7 @@ struct media_input {
             char				name[B_MEDIA_NAME_LENGTH];
 
 private:
-            uint32				_reserved_media_input_[4];
+            uint32_t				_reserved_media_input_[4];
 };
 
 
@@ -79,7 +79,7 @@ struct media_output {
             char				name[B_MEDIA_NAME_LENGTH];
 
 private:
-            uint32				_reserved_media_output_[4];
+            uint32_t				_reserved_media_output_[4];
 };
 
 
@@ -107,7 +107,7 @@ struct media_request_info {
             };
 
             what_code			what;
-            int32				change_tag;
+            int32_t				change_tag;
             status_t			status;
             void*				cookie;
             void*				user_data;
@@ -115,7 +115,7 @@ struct media_request_info {
             media_destination	destination;
             media_format		format;
 
-            uint32				_reserved_[32];
+            uint32_t				_reserved_[32];
 };
 
 
@@ -126,8 +126,8 @@ struct media_node_attribute {
                 B_FIRST_USER_ATTRIBUTE
             };
 
-            uint32				what;
-            uint32				flags;
+            uint32_t				what;
+            uint32_t				flags;
             int64				data;
 };
 
@@ -179,7 +179,7 @@ public:
     virtual	port_id				ControlPort() const;
 
     // Who instantiated this node or NULL for application internal class.
-    virtual	BMediaAddOn*		AddOn(int32* internalID) const = 0;
+    virtual	BMediaAddOn*		AddOn(int32_t* internalID) const = 0;
 
     // Message constants which will be sent to anyone watching the
     // MediaRoster. The message field "be:node_id" will contain the node ID.
@@ -209,13 +209,13 @@ protected:
     // Especially important for offline capable Nodes.
             status_t			NodeStopped(bigtime_t performanceTime);
             void				TimerExpired(bigtime_t notifyPerformanceTime,
-                                    int32 cookie, status_t error = B_OK);
+                                    int32_t cookie, status_t error = B_OK);
 
     // NOTE: Constructor initializes the reference count to 1.
     explicit					BMediaNode(const char* name);
 
                 status_t		WaitForMessage(bigtime_t waitUntil,
-                                    uint32 flags = 0, void* _reserved_ = 0);
+                                    uint32_t flags = 0, void* _reserved_ = 0);
 
     // These don't return errors; instead, they use the global error condition
     // reporter. A node is required to have a queue of at least one pending
@@ -235,11 +235,11 @@ protected:
     virtual	void				SetTimeSource(BTimeSource* timeSource);
 
 public:
-    virtual	status_t			HandleMessage(int32 message, const void* data,
+    virtual	status_t			HandleMessage(int32_t message, const void* data,
                                     size_t size);
 
     // Call this with messages you and your superclasses don't recognize.
-            void				HandleBadMessage(int32 code,
+            void				HandleBadMessage(int32_t code,
                                     const void* buffer, size_t size);
 
     // Called from derived system classes; you don't need to
@@ -271,7 +271,7 @@ public:
                                     size_t inMaxCount);
 
     virtual	status_t			AddTimer(bigtime_t atPerformanceTime,
-                                    int32 cookie);
+                                    int32_t cookie);
 
 private:
             friend class BTimeSource;
@@ -282,10 +282,10 @@ private:
             friend class BPrivate::media::BMediaRosterEx;
 
             // Deprecated in BeOS R4.1
-            int32				IncrementChangeTag();
-            int32				ChangeTag();
-            int32				MintChangeTag();
-            status_t			ApplyChangeTag(int32 previouslyReserved);
+            int32_t				IncrementChangeTag();
+            int32_t				ChangeTag();
+            int32_t				MintChangeTag();
+            status_t			ApplyChangeTag(int32_t previouslyReserved);
 
 private:
     // FBC padding and forbidden methods
@@ -317,7 +317,7 @@ private:
 
 private:
                                 BMediaNode(const char* name,
-                                    media_node_id id, uint32 kinds);
+                                    media_node_id id, uint32_t kinds);
 
             void				_InitObject(const char* name,
                                     media_node_id id, uint64 kinds);
@@ -325,11 +325,11 @@ private:
 private:
             media_node_id		fNodeID;
             BTimeSource*		fTimeSource;
-            int32				fRefCount;
+            int32_t				fRefCount;
             char				fName[B_MEDIA_NAME_LENGTH];
             run_mode			fRunMode;
 
-            int32				_reserved[2];
+            int32_t				_reserved[2];
 
             uint64				fKinds;
             media_node_id		fTimeSourceID;
@@ -344,16 +344,16 @@ private:
 
     mutable	port_id				fControlPort;
 
-            uint32				_reserved_media_node_[8];
+            uint32_t				_reserved_media_node_[8];
 
 protected:
-    static	int32				NewChangeTag();
+    static	int32_t				NewChangeTag();
         // for use by BBufferConsumer, mostly
 
 private:
     // NOTE: Dont' rename this one, it's static and needed for binary
     // compatibility
-    static	int32 _m_changeTag;
+    static	int32_t _m_changeTag;
         // not to be confused with _mChangeCount
 };
 

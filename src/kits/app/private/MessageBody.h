@@ -70,8 +70,8 @@ public:
     bool		AddItem(const char *name, type_code type, BMessageItem *item);
     void		RemoveItem(BMessageItem *item);
 
-     int32		CountNames() const;
-     int32		CountTypes() const;
+     int32_t		CountNames() const;
+     int32_t		CountTypes() const;
 
 	size_t		FlattenedSize() const;
 	bool		Flatten(char *buffer, size_t size) const;

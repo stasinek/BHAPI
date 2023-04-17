@@ -30,11 +30,11 @@ extern struct iframe_stack gBootFrameStack;
 
 
 static bool
-already_visited(uint32 *visited, int32 *_last, int32 *_num, uint32 fp)
+already_visited(uint32_t *visited, int32_t *_last, int32_t *_num, uint32_t fp)
 {
-	int32 last = *_last;
-	int32 num = *_num;
-	int32 i;
+	int32_t last = *_last;
+	int32_t num = *_num;
+	int32_t i;
 
 	for (i = 0; i < num; i++) {
 		if (visited[(NUM_PREVIOUS_LOCATIONS + last - i)
@@ -99,7 +99,7 @@ lookup_symbol(Thread* thread, addr_t address, addr_t* _baseAddress,
 
 
 static void
-set_debug_argument_variable(int32 index, uint64 value)
+set_debug_argument_variable(int32_t index, uint64 value)
 {
 	char name[8];
 	snprintf(name, sizeof(name), "_arg%ld", index);
@@ -139,7 +139,7 @@ print_demangled_call(const char* image, const char* symbol, addr_t args,
 		return B_ERROR;
 	}
 
-	uint32* arg = (uint32*)args;
+	uint32_t* arg = (uint32_t*)args;
 
 	if (noObjectMethod)
 		isObjectMethod = false;
@@ -147,7 +147,7 @@ print_demangled_call(const char* image, const char* symbol, addr_t args,
 		const char* lastName = strrchr(name, ':') - 1;
 		int namespaceLength = lastName - name;
 
-		uint32 argValue = 0;
+		uint32_t argValue = 0;
 		if (debug_memcpy(B_CURRENT_TEAM, &argValue, arg, 4) == B_OK) {
 			kprintf("<%s> %.*s<\33[32m%#" B_PRIx32 "\33[0m>%s", image,
 				namespaceLength, name, argValue, lastName);
@@ -163,8 +163,8 @@ print_demangled_call(const char* image, const char* symbol, addr_t args,
 	kprintf("(");
 
 	size_t length;
-	int32 type, i = 0;
-	uint32 cookie = 0;
+	int32_t type, i = 0;
+	uint32_t cookie = 0;
 	while (debug_get_next_demangled_argument(&cookie, symbol, buffer,
 			kBufferSize, &type, &length) == B_OK) {
 		if (i++ > 0)
@@ -182,9 +182,9 @@ print_demangled_call(const char* image, const char* symbol, addr_t args,
 					kprintf("int64: \33[34m%Ld\33[0m", value);
 				break;
 			case B_INT32_TYPE:
-				value = read_function_argument_value<int32>(arg, valueKnown);
+				value = read_function_argument_value<int32_t>(arg, valueKnown);
 				if (valueKnown)
-					kprintf("int32: \33[34m%ld\33[0m", (int32)value);
+					kprintf("int32_t: \33[34m%ld\33[0m", (int32_t)value);
 				break;
 			case B_INT16_TYPE:
 				value = read_function_argument_value<int16>(arg, valueKnown);
@@ -205,11 +205,11 @@ print_demangled_call(const char* image, const char* symbol, addr_t args,
 				}
 				break;
 			case B_UINT32_TYPE:
-				value = read_function_argument_value<uint32>(arg, valueKnown);
+				value = read_function_argument_value<uint32_t>(arg, valueKnown);
 				if (valueKnown) {
-					kprintf("uint32: \33[34m%#lx\33[0m", (uint32)value);
+					kprintf("uint32_t: \33[34m%#lx\33[0m", (uint32_t)value);
 					if (value < 0x100000)
-						kprintf(" (\33[34m%lu\33[0m)", (uint32)value);
+						kprintf(" (\33[34m%lu\33[0m)", (uint32_t)value);
 				}
 				break;
 			case B_UINT16_TYPE:
@@ -236,14 +236,14 @@ print_demangled_call(const char* image, const char* symbol, addr_t args,
 					kprintf("%s: ", buffer);
 
 				if (length == 4) {
-					value = read_function_argument_value<uint32>(arg,
+					value = read_function_argument_value<uint32_t>(arg,
 						valueKnown);
 					if (valueKnown) {
 						if (value == 0
 							&& (type == B_POINTER_TYPE || type == B_REF_TYPE))
 							kprintf("NULL");
 						else
-							kprintf("\33[34m%#lx\33[0m", (uint32)value);
+							kprintf("\33[34m%#lx\33[0m", (uint32_t)value);
 					}
 					break;
 				}
@@ -275,7 +275,7 @@ print_demangled_call(const char* image, const char* symbol, addr_t args,
 
 		if (addDebugVariables)
 			set_debug_argument_variable(i, value);
-		arg = (uint32*)((uint8*)arg + length);
+		arg = (uint32_t*)((uint8*)arg + length);
 	}
 
 	debug_free(buffer);
@@ -288,7 +288,7 @@ print_demangled_call(const char* image, const char* symbol, addr_t args,
 
 static void
 print_stack_frame(Thread *thread, addr_t ip, addr_t fp, addr_t next,
-	int32 callIndex, bool demangle)
+	int32_t callIndex, bool demangle)
 {
 	const char* symbol;
 	const char* image;
@@ -348,7 +348,7 @@ stack_trace(int argc, char **argv)
 		"  <thread id>  -  The ID of the thread for which to print the stack\n"
 		"                  trace.\n";
 	bool demangle = true;
-	int32 threadIndex = 1;
+	int32_t threadIndex = 1;
 	if (argc > 1 && !strcmp(argv[1], "-d")) {
 		demangle = false;
 		threadIndex++;
@@ -364,7 +364,7 @@ stack_trace(int argc, char **argv)
 	Thread* thread = NULL;
 	phys_addr_t oldPageDirectory = 0;
 	addr_t fp = arm_get_fp();
-	int32 num = 0, last = 0;
+	int32_t num = 0, last = 0;
 	struct iframe_stack *frameStack;
 
 	// We don't have a thread pointer early in the boot process
@@ -373,7 +373,7 @@ stack_trace(int argc, char **argv)
 	else
 		frameStack = &gBootFrameStack;
 
-	int32 i;
+	int32_t i;
 	for (i = 0; i < frameStack->index; i++) {
 		kprintf("iframe %p (end = %p)\n",
 			frameStack->frames[i], frameStack->frames[i] + 1);
@@ -395,7 +395,7 @@ stack_trace(int argc, char **argv)
 
 	kprintf("frame            caller     <image>:function + offset\n");
 
-	for (int32 callIndex = 0;; callIndex++) {
+	for (int32_t callIndex = 0;; callIndex++) {
 		// see if the frame pointer matches the iframe
 		struct iframe *frame = NULL;
 		for (i = 0; i < frameStack->index; i++) {
@@ -479,9 +479,9 @@ arch_debug_get_caller(void)
 }
 
 
-int32
-arch_debug_get_stack_trace(addr_t* returnAddresses, int32 maxCount,
-	int32 skipIframes, int32 skipFrames, uint32 flags)
+int32_t
+arch_debug_get_stack_trace(addr_t* returnAddresses, int32_t maxCount,
+	int32_t skipIframes, int32_t skipFrames, uint32_t flags)
 {
 	// TODO: Implement!
 	return 0;

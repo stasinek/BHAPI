@@ -45,22 +45,22 @@ struct TextTable::Column {
 		return fCanBeTruncated;
 	}
 
-	int32 NeededWidth() const
+	int32_t NeededWidth() const
 	{
 		return fNeededWidth;
 	}
 
-	int32 MinWidth() const
+	int32_t MinWidth() const
 	{
 		return fMinWidth;
 	}
 
-	int32 Width() const
+	int32_t Width() const
 	{
 		return fWidth;
 	}
 
-	void SetWidth(int32 width)
+	void SetWidth(int32_t width)
 	{
 		fWidth = width;
 	}
@@ -68,7 +68,7 @@ struct TextTable::Column {
 	void UpdateNeededWidth(const BString& text)
 	{
 		// TODO: Full-width character support.
-		int32 textWidth = text.CountChars();
+		int32_t textWidth = text.CountChars();
 		if (textWidth > fNeededWidth)
 			fNeededWidth = textWidth;
 	}
@@ -76,7 +76,7 @@ struct TextTable::Column {
 	BString Format(const BString& text)
 	{
 		// TODO: Full-width character support.
-		int32 textWidth = text.CountChars();
+		int32_t textWidth = text.CountChars();
 		if (textWidth == fWidth)
 			return text;
 
@@ -88,7 +88,7 @@ struct TextTable::Column {
 		}
 
 		// align, if too short
-		int32 missing = fWidth - textWidth;
+		int32_t missing = fWidth - textWidth;
 		switch (fAlignment) {
 			case B_ALIGN_LEFT:
 			default:
@@ -121,9 +121,9 @@ private:
 	BString			fTitle;
 	enum alignment fAlignment;
 	bool			fCanBeTruncated;
-	int32			fNeededWidth;
-	int32			fMinWidth;
-	int32			fWidth;
+	int32_t			fNeededWidth;
+	int32_t			fMinWidth;
+	int32_t			fWidth;
 };
 
 
@@ -143,7 +143,7 @@ TextTable::~TextTable()
 }
 
 
-int32 TextTable::CountColumns() const
+int32_t TextTable::CountColumns() const
 {
 	return fColumns.CountItems();
 }
@@ -160,14 +160,14 @@ void TextTable::AddColumn(const BString& title, enum alignment align,
 }
 
 
-int32 TextTable::CountRows() const
+int32_t TextTable::CountRows() const
 {
 	return fRows.CountItems();
 }
 
 
 BString
-TextTable::TextAt(int32 rowIndex, int32 columnIndex) const
+TextTable::TextAt(int32_t rowIndex, int32_t columnIndex) const
 {
 	BStringList* row = fRows.ItemAt(rowIndex);
 	if (row == NULL)
@@ -176,7 +176,7 @@ TextTable::TextAt(int32 rowIndex, int32 columnIndex) const
 }
 
 
-void TextTable::SetTextAt(int32 rowIndex, int32 columnIndex, const BString& text)
+void TextTable::SetTextAt(int32_t rowIndex, int32_t columnIndex, const BString& text)
 {
 	// If necessary append empty rows up to the specified row index.
 	while (rowIndex >= fRows.CountItems()) {
@@ -200,36 +200,36 @@ void TextTable::SetTextAt(int32 rowIndex, int32 columnIndex, const BString& text
 }
 
 
-void TextTable::Print(int32 maxWidth)
+void TextTable::Print(int32_t maxWidth)
 {
-	int32 columnCount = fColumns.CountItems();
+	int32_t columnCount = fColumns.CountItems();
 	if (columnCount == 0)
 		return;
 
 	// determine the column widths
-	int32 rowCount = fRows.CountItems();
-	for (int32 rowIndex = 0; rowIndex < rowCount; rowIndex++) {
+	int32_t rowCount = fRows.CountItems();
+	for (int32_t rowIndex = 0; rowIndex < rowCount; rowIndex++) {
 		BStringList* row = fRows.ItemAt(rowIndex);
-		int32 rowColumnCount = std::min(row->CountStrings(), columnCount);
-		for (int32 columnIndex = 0; columnIndex < rowColumnCount;
+		int32_t rowColumnCount = std::min(row->CountStrings(), columnCount);
+		for (int32_t columnIndex = 0; columnIndex < rowColumnCount;
 			columnIndex++) {
 			fColumns.ItemAt(columnIndex)->UpdateNeededWidth(
 				row->StringAt(columnIndex));
 		}
 	}
 
-	int32 neededWidth = (columnCount - 1) * 2;
+	int32_t neededWidth = (columnCount - 1) * 2;
 		// spacing
-	for (int32 i = 0; i < columnCount; i++)
+	for (int32_t i = 0; i < columnCount; i++)
 		neededWidth += fColumns.ItemAt(i)->NeededWidth();
 
-	int32 width = neededWidth;
-	int32 missingWidth = neededWidth - std::min(maxWidth, neededWidth);
+	int32_t width = neededWidth;
+	int32_t missingWidth = neededWidth - std::min(maxWidth, neededWidth);
 
-	for (int32 i = 0; i < columnCount; i++) {
+	for (int32_t i = 0; i < columnCount; i++) {
 		Column* column = fColumns.ItemAt(i);
 		if (missingWidth > 0 && column->CanBeTruncated()) {
-			int32 truncateBy = std::min(missingWidth,
+			int32_t truncateBy = std::min(missingWidth,
 				column->NeededWidth() - column->MinWidth());
 			column->SetWidth(column->NeededWidth() - truncateBy);
 			missingWidth -= truncateBy;
@@ -240,7 +240,7 @@ void TextTable::Print(int32 maxWidth)
 
 	// print the header
 	BString line;
-	for (int32 i = 0; i < columnCount; i++) {
+	for (int32_t i = 0; i < columnCount; i++) {
 		if (i > 0)
 			line << "  ";
 
@@ -255,10 +255,10 @@ void TextTable::Print(int32 maxWidth)
 	fputs(line.String(), stdout);
 
 	// print the rows
-	for (int32 rowIndex = 0; rowIndex < rowCount; rowIndex++) {
+	for (int32_t rowIndex = 0; rowIndex < rowCount; rowIndex++) {
 		line.Truncate(0);
 		BStringList* row = fRows.ItemAt(rowIndex);
-		for (int32 columnIndex = 0; columnIndex < columnCount; columnIndex++) {
+		for (int32_t columnIndex = 0; columnIndex < columnCount; columnIndex++) {
 			if (columnIndex > 0)
 				line << "  ";
 

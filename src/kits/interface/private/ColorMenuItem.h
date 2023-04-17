@@ -18,7 +18,7 @@ public:
 								BColorMenuItem(const char* label,
 									BMessage* message, rgb_color color,
 									char shortcut = 0,
-									uint32 modifiers = 0);
+									uint32_t modifiers = 0);
 								BColorMenuItem(BMenu* menu, rgb_color color,
 									BMessage* message = NULL);
 								BColorMenuItem(BMessage* data);
@@ -64,7 +64,7 @@ private:
 private:
 			rgb_color			fColor;
 
-			uint32				_reserved[30];
+			uint32_t				_reserved[30];
 };
 
 

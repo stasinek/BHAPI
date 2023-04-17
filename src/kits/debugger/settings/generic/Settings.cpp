@@ -72,8 +72,8 @@ bool Settings::SetValue(Setting* setting, const BVariant& value)
 	bool success = value.AddToMessage(fValues, fieldName) == B_OK;
 
 	// notify the listeners
-	int32 count = fListeners.CountItems();
-	for (int32 i = count - 1; i >= 0; i--)
+	int32_t count = fListeners.CountItems();
+	for (int32_t i = count - 1; i >= 0; i--)
 		fListeners.ItemAt(i)->SettingValueChanged(setting);
 
 	return success;
@@ -84,7 +84,7 @@ bool Settings::RestoreValues(const BMessage& message)
 {
 	AutoLocker<BLocker> locker(fLock);
 
-	for (int32 i = 0; i < fDescription->CountSettings(); i++) {
+	for (int32_t i = 0; i < fDescription->CountSettings(); i++) {
 		Setting* setting = fDescription->SettingAt(i);
 		BVariant value;
 		if (value.SetFromMessage(message, setting->ID()) == B_OK) {

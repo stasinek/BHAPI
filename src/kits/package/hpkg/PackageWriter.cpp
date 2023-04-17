@@ -33,37 +33,37 @@ BPackageWriterParameters::~BPackageWriterParameters()
 }
 
 
-uint32 BPackageWriterParameters::Flags() const
+uint32_t BPackageWriterParameters::Flags() const
 {
 	return fFlags;
 }
 
 
-void BPackageWriterParameters::SetFlags(uint32 flags)
+void BPackageWriterParameters::SetFlags(uint32_t flags)
 {
 	fFlags = flags;
 }
 
 
-uint32 BPackageWriterParameters::Compression() const
+uint32_t BPackageWriterParameters::Compression() const
 {
 	return fCompression;
 }
 
 
-void BPackageWriterParameters::SetCompression(uint32 compression)
+void BPackageWriterParameters::SetCompression(uint32_t compression)
 {
 	fCompression = compression;
 }
 
 
-int32 BPackageWriterParameters::CompressionLevel() const
+int32_t BPackageWriterParameters::CompressionLevel() const
 {
 	return fCompressionLevel;
 }
 
 
-void BPackageWriterParameters::SetCompressionLevel(int32 compressionLevel)
+void BPackageWriterParameters::SetCompressionLevel(int32_t compressionLevel)
 {
 	fCompressionLevel = compressionLevel;
 }

@@ -31,7 +31,7 @@ status_t arch_vm_translation_map_early_map(struct kernel_args *args, addr_t va,
 	phys_addr_t (*get_free_page)(struct kernel_args *));
 
 bool arch_vm_translation_map_is_kernel_page_accessible(addr_t virtualAddress,
-	uint32 protection);
+	uint32_t protection);
 
 #ifdef __cplusplus
 }

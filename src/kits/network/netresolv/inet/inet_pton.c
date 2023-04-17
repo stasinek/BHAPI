@@ -94,7 +94,7 @@ inet_pton(int af, const char *src, void *dst)
 static int
 inet_pton4(const char *src, u_char *dst, int pton)
 {
-	u_int32_t val;
+	u_int32_t_t val;
 	u_int digit, base;
 	ptrdiff_t n;
 	unsigned char c;

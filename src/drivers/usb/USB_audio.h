@@ -98,7 +98,7 @@ typedef struct {
 		struct {
 			uint8	clock_source_id;
 			uint8	num_channels;
-			uint32	channel_config;
+			uint32_t	channel_config;
 			uint8	channel_names;
 			uint16	bm_controls;
 			uint8	terminal;
@@ -141,7 +141,7 @@ typedef struct {
 
 typedef struct {
 	uint8	num_output_pins; 		// number of mixer output pins
-	uint32	channel_config;		 	// location of logical channels
+	uint32_t	channel_config;		 	// location of logical channels
 	uint8	channel_names;		 	// id of name string of first logical channel
 } _PACKED usb_audio_output_channels_descriptor;
 
@@ -188,7 +188,7 @@ typedef struct {
 		} _PACKED r1;
 
 		struct {
-			uint32	bma_controls[1];
+			uint32_t	bma_controls[1];
 		//	uint8	feature_string;	
 		} _PACKED r2;
 	};
@@ -246,9 +246,9 @@ typedef struct {
 		struct {
 			uint8	bm_controls;
 			uint8	format_type;
-			uint32	bm_formats;	
+			uint32_t	bm_formats;	
 			uint8	num_output_pins;
-			uint32	channel_config;
+			uint32_t	channel_config;
 			uint8	channel_names;
 		} _PACKED r2;
 	};

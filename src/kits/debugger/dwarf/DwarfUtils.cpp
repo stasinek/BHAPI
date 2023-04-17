@@ -229,11 +229,11 @@
 
 /*static*/ bool DwarfUtils::GetDeclarationLocation(DwarfFile* dwarfFile,
 	const DebugInfoEntry* entry, const char*& _directory, const char*& _file,
-	int32& _line, int32& _column)
+	int32_t& _line, int32_t& _column)
 {
-	uint32 file = 0;
-	uint32 line = 0;
-	uint32 column = 0;
+	uint32_t file = 0;
+	uint32_t line = 0;
+	uint32_t column = 0;
 	bool fileSet = entry->GetDeclarationFile(file);
 	bool lineSet = entry->GetDeclarationLine(line);
 	bool columnSet = entry->GetDeclarationColumn(column);
@@ -279,7 +279,7 @@
 
 	_directory = directoryName;
 	_file = fileName;
-	_line = (int32)line - 1;
-	_column = (int32)column - 1;
+	_line = (int32_t)line - 1;
+	_column = (int32_t)column - 1;
 	return true;
 }

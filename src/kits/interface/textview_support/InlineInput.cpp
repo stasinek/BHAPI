@@ -17,8 +17,8 @@
 
 struct clause
 {
-	int32 start;
-	int32 end;
+	int32_t start;
+	int32_t end;
 };
 
 /*! \brief Constructs a InlineInput object.
@@ -64,7 +64,7 @@ void BTextView::InlineInput::SetActive(bool active)
 
 /*! \brief Return the length of the inputted text.
 */
-int32 BTextView::InlineInput::Length() const
+int32_t BTextView::InlineInput::Length() const
 {
 	return fLength;
 }
@@ -73,14 +73,14 @@ int32 BTextView::InlineInput::Length() const
 	\param len The length of the text, extracted from the
 	B_INPUT_METHOD_CHANGED BMessage.
 */
-void BTextView::InlineInput::SetLength(int32 len)
+void BTextView::InlineInput::SetLength(int32_t len)
 {
 	fLength = len;
 }
 
 /*! \brief Returns the offset into the BTextView of the text.
 */
-int32 BTextView::InlineInput::Offset() const
+int32_t BTextView::InlineInput::Offset() const
 {
 	return fOffset;
 }
@@ -88,14 +88,14 @@ int32 BTextView::InlineInput::Offset() const
 /*! \brief Sets the offset into the BTextView of the text.
 	\param offset The offset where the text has been inserted.
 */
-void BTextView::InlineInput::SetOffset(int32 offset)
+void BTextView::InlineInput::SetOffset(int32_t offset)
 {
 	fOffset = offset;
 }
 
 /*! \brief Returns the length of the selection, if any.
 */
-int32 BTextView::InlineInput::SelectionLength() const
+int32_t BTextView::InlineInput::SelectionLength() const
 {
 	return fSelectionLength;
 }
@@ -103,14 +103,14 @@ int32 BTextView::InlineInput::SelectionLength() const
 /*! \brief Sets the length of the selection.
 	\param length The length of the selection.
 */
-void BTextView::InlineInput::SetSelectionLength(int32 length)
+void BTextView::InlineInput::SetSelectionLength(int32_t length)
 {
 	fSelectionLength = length;
 }
 
 /*! \brief Returns the offset into the method string of the selection.
 */
-int32 BTextView::InlineInput::SelectionOffset() const
+int32_t BTextView::InlineInput::SelectionOffset() const
 {
 	return fSelectionOffset;
 }
@@ -118,7 +118,7 @@ int32 BTextView::InlineInput::SelectionOffset() const
 /*! \brief Sets the offset into the method string of the selection.
 	\param offset The offset where the selection starts.
 */
-void BTextView::InlineInput::SetSelectionOffset(int32 offset)
+void BTextView::InlineInput::SetSelectionOffset(int32_t offset)
 {
 	fSelectionOffset = offset;
 }
@@ -127,7 +127,7 @@ void BTextView::InlineInput::SetSelectionOffset(int32 offset)
 	\param start The offset into the string where the clause starts.
 	\param end The offset into the string where the clause finishes.
 */
-bool BTextView::InlineInput::AddClause(int32 start, int32 end)
+bool BTextView::InlineInput::AddClause(int32_t start, int32_t end)
 {
 	void *newData = realloc(fClauses, (fNumClauses + 1) * sizeof(clause));
 	if (newData == NULL)
@@ -146,7 +146,7 @@ bool BTextView::InlineInput::AddClause(int32 start, int32 end)
 	\param end A pointer to an integer which will contain the clause's end offset.
 	\return \c true if the clause exists, \c false if not.
 */
-bool BTextView::InlineInput::GetClause(int32 index, int32 *start, int32 *end) const
+bool BTextView::InlineInput::GetClause(int32_t index, int32_t *start, int32_t *end) const
 {
 	bool result = false;
 	if (index >= 0 && index < fNumClauses) {
@@ -161,7 +161,7 @@ bool BTextView::InlineInput::GetClause(int32 index, int32 *start, int32 *end) co
 	return result;
 }
 
-int32 BTextView::InlineInput::CountClauses() const
+int32_t BTextView::InlineInput::CountClauses() const
 {
 	return fNumClauses;
 }

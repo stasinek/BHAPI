@@ -33,13 +33,13 @@ enum interrupt_type {
 struct irq_assignment {
     list_link	link;
 
-    uint32		irq;
-    uint32		count;
+    uint32_t		irq;
+    uint32_t		count;
 
-    int32		handlers_count;
+    int32_t		handlers_count;
 
-    int32		load;
-    int32		cpu;
+    int32_t		load;
+    int32_t		cpu;
 };
 
 
@@ -81,6 +81,6 @@ status_t allocate_io_interrupt_vectors(long count, long *startVector,
     enum interrupt_type type);
 void free_io_interrupt_vectors(long count, long startVector);
 
-void assign_io_interrupt_to_cpu(long vector, int32 cpu);
+void assign_io_interrupt_to_cpu(long vector, int32_t cpu);
 
 #endif /* _KERNEL_INT_H */

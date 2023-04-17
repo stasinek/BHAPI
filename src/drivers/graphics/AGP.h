@@ -18,9 +18,9 @@ typedef struct agp_info {
 	uchar	class_sub;			/* specific device function */
 	uchar	class_base;			/* device type (display vs host bridge) */
 	struct {
-		uint32	capability_id;	/* AGP capability register */
-		uint32	status;			/* AGP status register */
-		uint32	command;		/* AGP command register */
+		uint32_t	capability_id;	/* AGP capability register */
+		uint32_t	status;			/* AGP status register */
+		uint32_t	command;		/* AGP command register */
 	} interface;
 } agp_info;
 
@@ -37,17 +37,17 @@ enum {
 	B_APERTURE_NEED_PHYSICAL	= 0x02,
 };
 
-typedef int32 aperture_id;
+typedef int32_t aperture_id;
 typedef struct gart_bus_module_info gart_bus_module_info;
 
 typedef struct agp_gart_module_info {
 	bus_manager_info info;
 
 	/* AGP functionality */
-	status_t	(*get_nth_agp_info)(uint32 index, agp_info *info);
+	status_t	(*get_nth_agp_info)(uint32_t index, agp_info *info);
 	status_t	(*acquire_agp)(void);
 	void		(*release_agp)(void);
-	uint32		(*set_agp_mode)(uint32 command);
+	uint32_t		(*set_agp_mode)(uint32_t command);
 
 	/* GART functionality */
 	aperture_id	(*map_aperture)(uint8 bus, uint8 device, uint8 function,
@@ -58,7 +58,7 @@ typedef struct agp_gart_module_info {
 	status_t	(*get_aperture_info)(aperture_id id, aperture_info *info);
 
 	status_t	(*allocate_memory)(aperture_id id, size_t size,
-					size_t alignment, uint32 flags, addr_t *_apertureBase,
+					size_t alignment, uint32_t flags, addr_t *_apertureBase,
 					phys_addr_t *_physicalBase);
 	status_t	(*free_memory)(aperture_id id, addr_t apertureBase);
 	status_t	(*reserve_aperture)(aperture_id id, size_t size,
@@ -89,9 +89,9 @@ struct agp_gart_bus_module_info {
 
 	status_t	(*get_aperture_info)(void *aperture, aperture_info *info);
 	status_t	(*set_aperture_size)(void *aperture, size_t size);
-	status_t	(*bind_page)(void *aperture, uint32 offset,
+	status_t	(*bind_page)(void *aperture, uint32_t offset,
 					phys_addr_t physicalAddress);
-	status_t	(*unbind_page)(void *aperture, uint32 offset);
+	status_t	(*unbind_page)(void *aperture, uint32_t offset);
 	void		(*flush_tlbs)(void *aperture);
 };
 

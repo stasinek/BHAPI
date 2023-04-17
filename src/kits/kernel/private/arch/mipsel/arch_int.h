@@ -26,7 +26,7 @@ struct mipsel_cpu_exception_context {
 										// structure
 	void	*kernel_stack;				// kernel stack for the current thread
 
-	uint32	scratch[8];					// scratch memory for free use in the
+	uint32_t	scratch[8];					// scratch memory for free use in the
 										// early exception handling code
 };
 

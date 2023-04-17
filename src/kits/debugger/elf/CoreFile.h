@@ -13,32 +13,32 @@
 
 struct CoreFileTeamInfo {
 								CoreFileTeamInfo();
-			void				Init(int32 id, int32 uid, int32 gid,
+			void				Init(int32_t id, int32_t uid, int32_t gid,
 									const BString& args);
 
-			int32				Id() const			{ return fId; }
+			int32_t				Id() const			{ return fId; }
 			const BString&		Arguments() const	{ return fArgs; }
 
 private:
-			int32				fId;
-			int32				fUid;
-			int32				fGid;
+			int32_t				fId;
+			int32_t				fUid;
+			int32_t				fGid;
 			BString				fArgs;
 };
 
 
 struct CoreFileAreaInfo {
-								CoreFileAreaInfo(ElfSegment* segment, int32 id,
+								CoreFileAreaInfo(ElfSegment* segment, int32_t id,
 									uint64 baseAddress, uint64 size,
-									uint64 ramSize, uint32 locking,
-									uint32 protection, const BString& name);
+									uint64 ramSize, uint32_t locking,
+									uint32_t protection, const BString& name);
 
 			uint64				BaseAddress() const	{ return fBaseAddress; }
 			uint64				Size() const		{ return fSize; }
 			uint64				EndAddress() const
 									{ return fBaseAddress + fSize; }
-			uint32				Locking() const		{ return fLocking; }
-			uint32				Protection() const	{ return fProtection; }
+			uint32_t				Locking() const		{ return fLocking; }
+			uint32_t				Protection() const	{ return fProtection; }
 
 			ElfSegment*			Segment() const		{ return fSegment; }
 
@@ -47,9 +47,9 @@ private:
 			uint64				fBaseAddress;
 			uint64				fSize;
 			uint64				fRamSize;
-			uint32				fLocking;
-			uint32				fProtection;
-			int32				fId;
+			uint32_t				fLocking;
+			uint32_t				fProtection;
+			int32_t				fId;
 			BString				fName;
 };
 
@@ -59,35 +59,35 @@ struct CoreFileSymbolsInfo {
 								~CoreFileSymbolsInfo();
 
 			bool				Init(const void* symbolTable,
-									uint32 symbolCount,
-									uint32 symbolTableEntrySize,
+									uint32_t symbolCount,
+									uint32_t symbolTableEntrySize,
 									const char* stringTable,
-									uint32 stringTableSize);
+									uint32_t stringTableSize);
 
 			const void*			SymbolTable() const	{ return fSymbolTable; }
 			const char*			StringTable() const	{ return fStringTable; }
-			uint32				SymbolCount() const	{ return fSymbolCount; }
-			uint32				SymbolTableEntrySize() const
+			uint32_t				SymbolCount() const	{ return fSymbolCount; }
+			uint32_t				SymbolTableEntrySize() const
 									{ return fSymbolTableEntrySize; }
-			uint32				StringTableSize() const
+			uint32_t				StringTableSize() const
 									{ return fStringTableSize; }
 
 private:
 			void*				fSymbolTable;
 			char*				fStringTable;
-			uint32				fSymbolCount;
-			uint32				fSymbolTableEntrySize;
-			uint32				fStringTableSize;
+			uint32_t				fSymbolCount;
+			uint32_t				fSymbolTableEntrySize;
+			uint32_t				fStringTableSize;
 };
 
 
 struct CoreFileImageInfo {
-								CoreFileImageInfo(int32 id, int32 type,
+								CoreFileImageInfo(int32_t id, int32_t type,
 									uint64 initRoutine, uint64 termRoutine,
 									uint64 textBase, uint64 textSize,
 									int64 textDelta,
 									uint64 dataBase, uint64 dataSize,
-									int32 deviceId, int64 nodeId,
+									int32_t deviceId, int64 nodeId,
 									uint64 symbolTable, uint64 symbolHash,
 									uint64 stringTable,
 									CoreFileAreaInfo* textArea,
@@ -95,8 +95,8 @@ struct CoreFileImageInfo {
 									const BString& name);
 								~CoreFileImageInfo();
 
-			int32				Id() const			{ return fId; }
-			int32				Type() const		{ return fType; }
+			int32_t				Id() const			{ return fId; }
+			int32_t				Type() const		{ return fType; }
 			uint64				TextBase() const	{ return fTextBase; }
 			uint64				TextSize() const	{ return fTextSize; }
 			int64				TextDelta() const	{ return fTextDelta; }
@@ -115,8 +115,8 @@ struct CoreFileImageInfo {
 									CoreFileSymbolsInfo* symbolsInfo);
 
 private:
-			int32				fId;
-			int32				fType;
+			int32_t				fId;
+			int32_t				fType;
 			uint64				fInitRoutine;
 			uint64				fTermRoutine;
 			uint64				fTextBase;
@@ -124,7 +124,7 @@ private:
 			int64				fTextDelta;
 			uint64				fDataBase;
 			uint64				fDataSize;
-			int32				fDeviceId;
+			int32_t				fDeviceId;
 			int64				fNodeId;
 			uint64				fSymbolTable;
 			uint64				fSymbolHash;
@@ -137,8 +137,8 @@ private:
 
 
 struct CoreFileThreadInfo {
-								CoreFileThreadInfo(int32 id, int32 state,
-									int32 priority, uint64 stackBase,
+								CoreFileThreadInfo(int32_t id, int32_t state,
+									int32_t priority, uint64 stackBase,
 									uint64 stackEnd, const BString& name);
 								~CoreFileThreadInfo();
 
@@ -148,13 +148,13 @@ struct CoreFileThreadInfo {
 			size_t				CpuStateSize() const
 									{ return fCpuStateSize; }
 
-			int32				Id() const		{ return fId; }
+			int32_t				Id() const		{ return fId; }
 			const BString&		Name() const	{ return fName; }
 
 private:
-			int32				fId;
-			int32				fState;
-			int32				fPriority;
+			int32_t				fId;
+			int32_t				fState;
+			int32_t				fPriority;
 			uint64				fStackBase;
 			uint64				fStackEnd;
 			BString				fName;
@@ -176,25 +176,25 @@ public:
 			const CoreFileTeamInfo& GetTeamInfo() const
 									{ return fTeamInfo; }
 
-			int32				CountAreaInfos() const
+			int32_t				CountAreaInfos() const
 									{ return fAreaInfos.CountItems(); }
-			const CoreFileAreaInfo* AreaInfoAt(int32 index) const
+			const CoreFileAreaInfo* AreaInfoAt(int32_t index) const
 									{ return fAreaInfos.ItemAt(index); }
 			const CoreFileAreaInfo* AreaInfoForAddress(uint64 address) const
 									{ return _FindArea(address); }
 
-			int32				CountImageInfos() const
+			int32_t				CountImageInfos() const
 									{ return fImageInfos.CountItems(); }
-			const CoreFileImageInfo* ImageInfoAt(int32 index) const
+			const CoreFileImageInfo* ImageInfoAt(int32_t index) const
 									{ return fImageInfos.ItemAt(index); }
-			const CoreFileImageInfo* ImageInfoForId(int32 id) const
+			const CoreFileImageInfo* ImageInfoForId(int32_t id) const
 									{ return _ImageInfoForId(id); }
 
-			int32				CountThreadInfos() const
+			int32_t				CountThreadInfos() const
 									{ return fThreadInfos.CountItems(); }
-			const CoreFileThreadInfo* ThreadInfoAt(int32 index) const
+			const CoreFileThreadInfo* ThreadInfoAt(int32_t index) const
 									{ return fThreadInfos.ItemAt(index); }
-			const CoreFileThreadInfo* ThreadInfoForId(int32 id) const;
+			const CoreFileThreadInfo* ThreadInfoForId(int32_t id) const;
 
 			status_t			CreateSymbolLookup(
 									const CoreFileImageInfo* imageInfo,
@@ -214,35 +214,35 @@ private:
 			template<typename ElfClass>
 			status_t			_ReadNotes(ElfSegment* segment);
 			template<typename ElfClass>
-			status_t			_ReadNote(const char* name, uint32 type,
-									const void* data, uint32 dataSize);
+			status_t			_ReadNote(const char* name, uint32_t type,
+									const void* data, uint32_t dataSize);
 			template<typename ElfClass>
 			status_t			_ReadTeamNote(const void* data,
-									uint32 dataSize);
+									uint32_t dataSize);
 			template<typename ElfClass>
 			status_t			_ReadAreasNote(const void* data,
-									uint32 dataSize);
+									uint32_t dataSize);
 			template<typename ElfClass>
 			status_t			_ReadImagesNote(const void* data,
-									uint32 dataSize);
+									uint32_t dataSize);
 			template<typename ElfClass>
 			status_t			_ReadSymbolsNote(const void* data,
-									uint32 dataSize);
+									uint32_t dataSize);
 			template<typename ElfClass>
 			status_t			_ReadThreadsNote(const void* data,
-									uint32 dataSize);
+									uint32_t dataSize);
 
 			CoreFileAreaInfo*	_FindArea(uint64 address) const;
 			ElfSegment*			_FindAreaSegment(uint64 address) const;
 
-			CoreFileImageInfo*	_ImageInfoForId(int32 id) const;
+			CoreFileImageInfo*	_ImageInfoForId(int32_t id) const;
 
 			template<typename Type>
-			Type				_ReadValue(const void*& data, uint32& dataSize);
+			Type				_ReadValue(const void*& data, uint32_t& dataSize);
 			template<typename Entry>
-			void				_ReadEntry(const void*& data, uint32& dataSize,
+			void				_ReadEntry(const void*& data, uint32_t& dataSize,
 									Entry& entry, size_t entrySize);
-			void				_Advance(const void*& data, uint32& dataSize,
+			void				_Advance(const void*& data, uint32_t& dataSize,
 									size_t by);
 
 			template<typename Value>

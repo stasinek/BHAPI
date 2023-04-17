@@ -130,12 +130,12 @@ register_elf_image(struct elf_image_info *image)
 		if (symbol != NULL && symbol->st_shndx != SHN_UNDEF
 			&& symbol->st_value > 0
 			&& symbol->Type() == STT_OBJECT
-			&& symbol->st_size >= sizeof(uint32)) {
+			&& symbol->st_size >= sizeof(uint32_t)) {
 			addr_t symbolAddress = symbol->st_value + image->text_region.delta;
 			if (symbolAddress >= image->text_region.start
-				&& symbolAddress - image->text_region.start + sizeof(uint32)
+				&& symbolAddress - image->text_region.start + sizeof(uint32_t)
 					<= image->text_region.size) {
-				imageInfo.api_version = *(uint32*)symbolAddress;
+				imageInfo.api_version = *(uint32_t*)symbolAddress;
 			}
 		}
 
@@ -146,12 +146,12 @@ register_elf_image(struct elf_image_info *image)
 		if (symbol != NULL && symbol->st_shndx != SHN_UNDEF
 			&& symbol->st_value > 0
 			&& symbol->Type() == STT_OBJECT
-			&& symbol->st_size >= sizeof(uint32)) {
+			&& symbol->st_size >= sizeof(uint32_t)) {
 			addr_t symbolAddress = symbol->st_value + image->text_region.delta;
 			if (symbolAddress >= image->text_region.start
-				&& symbolAddress - image->text_region.start + sizeof(uint32)
+				&& symbolAddress - image->text_region.start + sizeof(uint32_t)
 					<= image->text_region.size) {
-				imageInfo.api_version = *(uint32*)symbolAddress;
+				imageInfo.api_version = *(uint32_t*)symbolAddress;
 			}
 		}
 	} else {
@@ -290,11 +290,11 @@ delete_elf_image(struct elf_image_info *image)
 }
 
 
-static uint32
+static uint32_t
 elf_hash(const char *name)
 {
-	uint32 hash = 0;
-	uint32 temp;
+	uint32_t hash = 0;
+	uint32_t temp;
 
 	while (*name) {
 		hash = (hash << 4) + (uint8)*name++;
@@ -357,7 +357,7 @@ dump_symbol(int argc, char **argv)
 		image = iterator.Next();
 		if (image->num_debug_symbols > 0) {
 			// search extended debug symbol table (contains static symbols)
-			for (uint32 i = 0; i < image->num_debug_symbols; i++) {
+			for (uint32_t i = 0; i < image->num_debug_symbols; i++) {
 				elf_sym *symbol = &image->debug_symbols[i];
 				const char *name = image->debug_string_table + symbol->st_name;
 
@@ -370,8 +370,8 @@ dump_symbol(int argc, char **argv)
 			}
 		} else {
 			// search standard symbol lookup table
-			for (uint32 i = 0; i < HASHTABSIZE(image); i++) {
-				for (uint32 j = HASHBUCKETS(image)[i]; j != STN_UNDEF;
+			for (uint32_t i = 0; i < HASHTABSIZE(image); i++) {
+				for (uint32_t j = HASHBUCKETS(image)[i]; j != STN_UNDEF;
 						j = HASHCHAINS(image)[j]) {
 					elf_sym *symbol = &image->syms[j];
 					const char *name = SYMNAME(image, symbol);
@@ -398,7 +398,7 @@ static int
 dump_symbols(int argc, char **argv)
 {
 	struct elf_image_info *image = NULL;
-	uint32 i;
+	uint32_t i;
 
 	// if the argument looks like a hex number, treat it as such
 	if (argc > 1) {
@@ -472,7 +472,7 @@ dump_symbols(int argc, char **argv)
 				symbol->st_size, image->debug_string_table + symbol->st_name);
 		}
 	} else {
-		int32 j;
+		int32_t j;
 
 		// search standard symbol lookup table
 		for (i = 0; i < HASHTABSIZE(image); i++) {
@@ -594,10 +594,10 @@ elf_find_symbol(struct elf_image_info *image, const char *name,
 		return NULL;
 
 	elf_sym* versionedSymbol = NULL;
-	uint32 versionedSymbolCount = 0;
+	uint32_t versionedSymbolCount = 0;
 
-	uint32 hash = elf_hash(name) % HASHTABSIZE(image);
-	for (uint32 i = HASHBUCKETS(image)[hash]; i != STN_UNDEF;
+	uint32_t hash = elf_hash(name) % HASHTABSIZE(image);
+	for (uint32_t i = HASHBUCKETS(image)[hash]; i != STN_UNDEF;
 			i = HASHCHAINS(image)[i]) {
 		elf_sym* symbol = &image->syms[i];
 
@@ -628,8 +628,8 @@ elf_find_symbol(struct elf_image_info *image, const char *name,
 		}
 
 		// The image has version information. Let's see what we've got.
-		uint32 versionID = image->symbol_versions[i];
-		uint32 versionIndex = VER_NDX(versionID);
+		uint32_t versionID = image->symbol_versions[i];
+		uint32_t versionIndex = VER_NDX(versionID);
 		elf_version_info& version = image->versions[versionIndex];
 
 		// skip local versions
@@ -710,13 +710,13 @@ elf_parse_dynamic_section(struct elf_image_info *image)
 	if (!d)
 		return B_ERROR;
 
-	for (int32 i = 0; d[i].d_tag != DT_NULL; i++) {
+	for (int32_t i = 0; d[i].d_tag != DT_NULL; i++) {
 		switch (d[i].d_tag) {
 			case DT_NEEDED:
 				neededOffset = d[i].d_un.d_ptr + image->text_region.delta;
 				break;
 			case DT_HASH:
-				image->symhash = (uint32 *)(d[i].d_un.d_ptr
+				image->symhash = (uint32_t *)(d[i].d_un.d_ptr
 					+ image->text_region.delta);
 				break;
 			case DT_STRTAB:
@@ -774,7 +774,7 @@ elf_parse_dynamic_section(struct elf_image_info *image)
 				break;
 			case DT_FLAGS:
 			{
-				uint32 flags = d[i].d_un.d_val;
+				uint32_t flags = d[i].d_un.d_val;
 				if ((flags & DF_SYMBOLIC) != 0)
 					image->symbolic = true;
 				break;
@@ -813,8 +813,8 @@ assert_defined_image_version(elf_image_info* dependentImage,
 
 	// iterate through the defined versions to find the given one
 	elf_verdef* definition = image->version_definitions;
-	for (uint32 i = 0; i < image->num_version_definitions; i++) {
-		uint32 versionIndex = VER_NDX(definition->vd_ndx);
+	for (uint32_t i = 0; i < image->num_version_definitions; i++) {
+		uint32_t versionIndex = VER_NDX(definition->vd_ndx);
 		elf_version_info& info = image->versions[versionIndex];
 
 		if (neededVersion.hash == info.hash
@@ -843,18 +843,18 @@ init_image_version_infos(elf_image_info* image)
 	// First find out how many version infos we need -- i.e. get the greatest
 	// version index from the defined and needed versions (they use the same
 	// index namespace).
-	uint32 maxIndex = 0;
+	uint32_t maxIndex = 0;
 
 	if (image->version_definitions != NULL) {
 		elf_verdef* definition = image->version_definitions;
-		for (uint32 i = 0; i < image->num_version_definitions; i++) {
+		for (uint32_t i = 0; i < image->num_version_definitions; i++) {
 			if (definition->vd_version != 1) {
 				dprintf("Unsupported version definition revision: %u\n",
 					definition->vd_version);
 				return B_BAD_VALUE;
 			}
 
-			uint32 versionIndex = VER_NDX(definition->vd_ndx);
+			uint32_t versionIndex = VER_NDX(definition->vd_ndx);
 			if (versionIndex > maxIndex)
 				maxIndex = versionIndex;
 
@@ -865,7 +865,7 @@ init_image_version_infos(elf_image_info* image)
 
 	if (image->needed_versions != NULL) {
 		elf_verneed* needed = image->needed_versions;
-		for (uint32 i = 0; i < image->num_needed_versions; i++) {
+		for (uint32_t i = 0; i < image->num_needed_versions; i++) {
 			if (needed->vn_version != 1) {
 				dprintf("Unsupported version needed revision: %u\n",
 					needed->vn_version);
@@ -874,8 +874,8 @@ init_image_version_infos(elf_image_info* image)
 
 			elf_vernaux* vernaux
 				= (elf_vernaux*)((uint8*)needed + needed->vn_aux);
-			for (uint32 k = 0; k < needed->vn_cnt; k++) {
-				uint32 versionIndex = VER_NDX(vernaux->vna_other);
+			for (uint32_t k = 0; k < needed->vn_cnt; k++) {
+				uint32_t versionIndex = VER_NDX(vernaux->vna_other);
 				if (versionIndex > maxIndex)
 					maxIndex = versionIndex;
 
@@ -903,13 +903,13 @@ init_image_version_infos(elf_image_info* image)
 	// version definitions
 	if (image->version_definitions != NULL) {
 		elf_verdef* definition = image->version_definitions;
-		for (uint32 i = 0; i < image->num_version_definitions; i++) {
+		for (uint32_t i = 0; i < image->num_version_definitions; i++) {
 			if (definition->vd_cnt > 0
 				&& (definition->vd_flags & VER_FLG_BASE) == 0) {
 				elf_verdaux* verdaux
 					= (elf_verdaux*)((uint8*)definition + definition->vd_aux);
 
-				uint32 versionIndex = VER_NDX(definition->vd_ndx);
+				uint32_t versionIndex = VER_NDX(definition->vd_ndx);
 				elf_version_info& info = image->versions[versionIndex];
 				info.hash = definition->vd_hash;
 				info.name = STRING(image, verdaux->vda_name);
@@ -924,13 +924,13 @@ init_image_version_infos(elf_image_info* image)
 	// needed versions
 	if (image->needed_versions != NULL) {
 		elf_verneed* needed = image->needed_versions;
-		for (uint32 i = 0; i < image->num_needed_versions; i++) {
+		for (uint32_t i = 0; i < image->num_needed_versions; i++) {
 			const char* fileName = STRING(image, needed->vn_file);
 
 			elf_vernaux* vernaux
 				= (elf_vernaux*)((uint8*)needed + needed->vn_aux);
-			for (uint32 k = 0; k < needed->vn_cnt; k++) {
-				uint32 versionIndex = VER_NDX(vernaux->vna_other);
+			for (uint32_t k = 0; k < needed->vn_cnt; k++) {
+				uint32_t versionIndex = VER_NDX(vernaux->vna_other);
 				elf_version_info& info = image->versions[versionIndex];
 				info.hash = vernaux->vna_hash;
 				info.name = STRING(image, vernaux->vna_name);
@@ -954,13 +954,13 @@ check_needed_image_versions(elf_image_info* image)
 		return B_OK;
 
 	elf_verneed* needed = image->needed_versions;
-	for (uint32 i = 0; i < image->num_needed_versions; i++) {
+	for (uint32_t i = 0; i < image->num_needed_versions; i++) {
 		elf_image_info* dependency = sKernelImage;
 
 		elf_vernaux* vernaux
 			= (elf_vernaux*)((uint8*)needed + needed->vn_aux);
-		for (uint32 k = 0; k < needed->vn_cnt; k++) {
-			uint32 versionIndex = VER_NDX(vernaux->vna_other);
+		for (uint32_t k = 0; k < needed->vn_cnt; k++) {
+			uint32_t versionIndex = VER_NDX(vernaux->vna_other);
 			elf_version_info& info = image->versions[versionIndex];
 
 			status_t error = assert_defined_image_version(image, dependency,
@@ -1003,8 +1003,8 @@ elf_resolve_symbol(struct elf_image_info *image, elf_sym *symbol,
 	// get the version info
 	const elf_version_info* versionInfo = NULL;
 	if (image->symbol_versions != NULL) {
-		uint32 index = symbol - image->syms;
-		uint32 versionIndex = VER_NDX(image->symbol_versions[index]);
+		uint32_t index = symbol - image->syms;
+		uint32_t versionIndex = VER_NDX(image->symbol_versions[index]);
 		if (versionIndex >= VER_NDX_INITIAL)
 			versionInfo = image->versions + versionIndex;
 	}
@@ -1141,11 +1141,11 @@ load_elf_symbol_table(int fd, struct elf_image_info *image)
 	elf_ehdr *elfHeader = image->elf_header;
 	elf_sym *symbolTable = NULL;
 	elf_shdr *stringHeader = NULL;
-	uint32 numSymbols = 0;
+	uint32_t numSymbols = 0;
 	char *stringTable;
 	status_t status;
 	ssize_t length;
-	int32 i;
+	int32_t i;
 
 	// get section headers
 
@@ -1284,7 +1284,7 @@ insert_preloaded_image(preloaded_elf_image *preloadedImage, bool kernel)
 
 	// copy debug symbols to the kernel heap
 	if (preloadedImage->debug_symbols != NULL) {
-		int32 debugSymbolsSize = sizeof(elf_sym)
+		int32_t debugSymbolsSize = sizeof(elf_sym)
 			* preloadedImage->num_debug_symbols;
 		image->debug_symbols = (elf_sym*)malloc(debugSymbolsSize);
 		if (image->debug_symbols != NULL) {
@@ -1391,13 +1391,13 @@ public:
 		strlcpy(fImageName, image.name, sizeof(fImageName));
 
 		// symbol hash table size
-		uint32 hashTabSize;
+		uint32_t hashTabSize;
 		if (!_Read(image.symhash, hashTabSize))
 			return B_BAD_ADDRESS;
 
 		// remote pointers to hash buckets and chains
-		const uint32* hashBuckets = image.symhash + 2;
-		const uint32* hashChains = image.symhash + 2 + hashTabSize;
+		const uint32_t* hashBuckets = image.symhash + 2;
+		const uint32_t* hashChains = image.symhash + 2 + hashTabSize;
 
 		const elf_region_t& textRegion = image.regions[0];
 
@@ -1410,12 +1410,12 @@ public:
 		symbolFound.st_name = 0;
 		symbolFound.st_value = 0;
 
-		for (uint32 i = 0; i < hashTabSize; i++) {
-			uint32 bucket;
+		for (uint32_t i = 0; i < hashTabSize; i++) {
+			uint32_t bucket;
 			if (!_Read(&hashBuckets[i], bucket))
 				return B_BAD_ADDRESS;
 
-			for (uint32 j = bucket; j != STN_UNDEF;
+			for (uint32_t j = bucket; j != STN_UNDEF;
 					_Read(&hashChains[j], j) ? 0 : j = STN_UNDEF) {
 
 				elf_sym symbol;
@@ -1507,7 +1507,7 @@ public:
 		return B_ENTRY_NOT_FOUND;
 	}
 
-	bool _ReadString(const image_t& image, uint32 offset, char* buffer,
+	bool _ReadString(const image_t& image, uint32_t offset, char* buffer,
 		size_t bufferSize)
 	{
 		const char* address = image.strtab + offset;
@@ -1555,7 +1555,7 @@ UserSymbolLookup UserSymbolLookup::sLookup;
 
 
 status_t
-get_image_symbol(image_id id, const char *name, int32 symbolClass,
+get_image_symbol(image_id id, const char *name, int32_t symbolClass,
 	void **_symbol)
 {
 	struct elf_image_info *image;
@@ -1622,8 +1622,8 @@ elf_debug_lookup_symbol_address(addr_t address, addr_t *_baseAddress,
 
 	if (image != NULL) {
 		addr_t symbolDelta;
-		uint32 i;
-		int32 j;
+		uint32_t i;
+		int32_t j;
 
 		TRACE((" image %p, base = %p, size = %p\n", image,
 			(void *)image->text_region.start, (void *)image->text_region.size));
@@ -1761,7 +1761,7 @@ elf_debug_lookup_symbol(const char* searchName)
 		image = iterator.Next();
 		if (image->num_debug_symbols > 0) {
 			// search extended debug symbol table (contains static symbols)
-			for (uint32 i = 0; i < image->num_debug_symbols; i++) {
+			for (uint32_t i = 0; i < image->num_debug_symbols; i++) {
 				elf_sym *symbol = &image->debug_symbols[i];
 				const char *name = image->debug_string_table + symbol->st_name;
 
@@ -1770,8 +1770,8 @@ elf_debug_lookup_symbol(const char* searchName)
 			}
 		} else {
 			// search standard symbol lookup table
-			for (uint32 i = 0; i < HASHTABSIZE(image); i++) {
-				for (uint32 j = HASHBUCKETS(image)[i]; j != STN_UNDEF;
+			for (uint32_t i = 0; i < HASHTABSIZE(image); i++) {
+				for (uint32_t j = HASHBUCKETS(image)[i]; j != STN_UNDEF;
 						j = HASHCHAINS(image)[j]) {
 					elf_sym *symbol = &image->syms[j];
 					const char *name = SYMNAME(image, symbol);
@@ -1812,7 +1812,7 @@ elf_load_user_image(const char *path, Team *team, int flags, addr_t *entry)
 	int fd;
 	int i;
 	addr_t delta = 0;
-	uint32 addressSpec = B_RANDOMIZED_BASE_ADDRESS;
+	uint32_t addressSpec = B_RANDOMIZED_BASE_ADDRESS;
 	area_id* mappedAreas = NULL;
 
 	TRACE(("elf_load: entry path '%s', team %p\n", path, team));
@@ -1878,7 +1878,7 @@ elf_load_user_image(const char *path, Team *team, int flags, addr_t *entry)
 
 	// construct a nice name for the region we have to create below
 	{
-		int32 length;
+		int32_t length;
 
 		const char *leaf = strrchr(path, '/');
 		if (leaf == NULL)
@@ -2037,7 +2037,7 @@ elf_load_user_image(const char *path, Team *team, int flags, addr_t *entry)
 		if (mappedAreas[i] == -1)
 			continue;
 
-		uint32 protection = 0;
+		uint32_t protection = 0;
 
 		if (programHeaders[i].p_flags & PF_EXECUTE)
 			protection |= B_EXECUTE_AREA;
@@ -2189,7 +2189,7 @@ load_kernel_add_on(const char *path)
 	reservedSize = 0;
 	length = 0;
 
-	for (int32 i = 0; i < elfHeader->e_phnum; i++) {
+	for (int32_t i = 0; i < elfHeader->e_phnum; i++) {
 		size_t end;
 
 		if (programHeaders[i].p_type != PT_LOAD)
@@ -2224,7 +2224,7 @@ load_kernel_add_on(const char *path)
 	image->data_region.size = 0;
 	image->text_region.size = 0;
 
-	for (int32 i = 0; i < elfHeader->e_phnum; i++) {
+	for (int32_t i = 0; i < elfHeader->e_phnum; i++) {
 		char regionName[B_OS_NAME_LENGTH];
 		elf_region *region;
 
@@ -2497,7 +2497,7 @@ elf_create_memory_image(const char* imageName, addr_t text, size_t textSize,
 
 status_t
 elf_add_memory_image_symbol(image_id id, const char* name, addr_t address,
-	size_t size, int32 type)
+	size_t size, int32_t type)
 {
 	MutexLocker _(sImageMutex);
 
@@ -2509,8 +2509,8 @@ elf_add_memory_image_symbol(image_id id, const char* name, addr_t address,
 	// get the current string table size
 	size_t stringTableSize = 1;
 	if (image->num_debug_symbols > 0) {
-		for (int32 i = image->num_debug_symbols - 1; i >= 0; i--) {
-			int32 nameIndex = image->debug_symbols[i].st_name;
+		for (int32_t i = image->num_debug_symbols - 1; i >= 0; i--) {
+			int32_t nameIndex = image->debug_symbols[i].st_name;
 			if (nameIndex != 0) {
 				stringTableSize = nameIndex
 					+ strlen(image->debug_string_table + nameIndex) + 1;
@@ -2535,7 +2535,7 @@ elf_add_memory_image_symbol(image_id id, const char* name, addr_t address,
 	}
 
 	// resize the symbol table
-	int32 symbolCount = image->num_debug_symbols + 1;
+	int32_t symbolCount = image->num_debug_symbols + 1;
 	elf_sym* symbolTable = (elf_sym*)realloc(
 		(elf_sym*)image->debug_symbols, sizeof(elf_sym) * symbolCount);
 	if (symbolTable == NULL)
@@ -2612,7 +2612,7 @@ elf_init(kernel_args *args)
 */
 status_t
 _user_read_kernel_image_symbols(image_id id, elf_sym* symbolTable,
-	int32* _symbolCount, char* stringTable, size_t* _stringTableSize,
+	int32_t* _symbolCount, char* stringTable, size_t* _stringTableSize,
 	addr_t* _imageDelta)
 {
 	// check params
@@ -2626,7 +2626,7 @@ _user_read_kernel_image_symbols(image_id id, elf_sym* symbolTable,
 	}
 
 	// get buffer sizes
-	int32 maxSymbolCount;
+	int32_t maxSymbolCount;
 	size_t maxStringTableSize;
 	if (user_memcpy(&maxSymbolCount, _symbolCount, sizeof(maxSymbolCount))
 			!= B_OK
@@ -2644,7 +2644,7 @@ _user_read_kernel_image_symbols(image_id id, elf_sym* symbolTable,
 	// get the tables and infos
 	addr_t imageDelta = image->text_region.delta;
 	const elf_sym* symbols;
-	int32 symbolCount;
+	int32_t symbolCount;
 	const char* strings;
 
 	if (image->debug_symbols != NULL) {
@@ -2660,7 +2660,7 @@ _user_read_kernel_image_symbols(image_id id, elf_sym* symbolTable,
 	// The string table size isn't stored in the elf_image_info structure. Find
 	// out by iterating through all symbols.
 	size_t stringTableSize = 0;
-	for (int32 i = 0; i < symbolCount; i++) {
+	for (int32_t i = 0; i < symbolCount; i++) {
 		size_t index = symbols[i].st_name;
 		if (index > stringTableSize)
 			stringTableSize = index;
@@ -2669,7 +2669,7 @@ _user_read_kernel_image_symbols(image_id id, elf_sym* symbolTable,
 		// add size of the last string
 
 	// copy symbol table
-	int32 symbolsToCopy = min_c(symbolCount, maxSymbolCount);
+	int32_t symbolsToCopy = min_c(symbolCount, maxSymbolCount);
 	if (symbolTable != NULL && symbolsToCopy > 0) {
 		if (user_memcpy(symbolTable, symbols, sizeof(elf_sym) * symbolsToCopy)
 				!= B_OK) {

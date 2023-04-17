@@ -21,7 +21,7 @@ class MimeInfoUpdater : public MimeEntryProcessor {
 public:
 								MimeInfoUpdater(Database* database,
 									DatabaseLocker* databaseLocker,
-						   			int32 force);
+						   			int32_t force);
 	virtual						~MimeInfoUpdater();
 
 	virtual	status_t			Do(const entry_ref& entry, bool* _entryIsDir);

@@ -46,7 +46,7 @@ struct rw_lock_waiter {
 #define RW_LOCK_FLAG_OWNS_NAME	RW_LOCK_FLAG_CLONE_NAME
 
 
-int32
+int32_t
 recursive_lock_get_recursion(recursive_lock *lock)
 {
 	if (RECURSIVE_LOCK_HOLDER(lock) == thread_get_current_thread_id())
@@ -66,7 +66,7 @@ recursive_lock_init(recursive_lock *lock, const char *name)
 
 
 void
-recursive_lock_init_etc(recursive_lock *lock, const char *name, uint32 flags)
+recursive_lock_init_etc(recursive_lock *lock, const char *name, uint32_t flags)
 {
 	mutex_init_etc(&lock->lock, name != NULL ? name : "recursive lock", flags);
 	RECURSIVE_LOCK_HOLDER(lock) = -1;
@@ -175,7 +175,7 @@ rw_lock_wait(rw_lock* lock, bool writer, InterruptsSpinLocker& locker)
 }
 
 
-static int32
+static int32_t
 rw_lock_unblock(rw_lock* lock)
 {
 	// Check whether there are any waiting threads at all and whether anyone
@@ -204,7 +204,7 @@ rw_lock_unblock(rw_lock* lock)
 	}
 
 	// wake up one or more readers
-	uint32 readerCount = 0;
+	uint32_t readerCount = 0;
 	do {
 		// dequeue reader
 		lock->waiters = waiter->next;
@@ -245,7 +245,7 @@ rw_lock_init(rw_lock* lock, const char* name)
 
 
 void
-rw_lock_init_etc(rw_lock* lock, const char* name, uint32 flags)
+rw_lock_init_etc(rw_lock* lock, const char* name, uint32_t flags)
 {
 	lock->name = (flags & RW_LOCK_FLAG_CLONE_NAME) != 0 ? strdup(name) : name;
 	lock->waiters = NULL;
@@ -334,7 +334,7 @@ _rw_lock_read_lock(rw_lock* lock)
 
 
 status_t
-_rw_lock_read_lock_with_timeout(rw_lock* lock, uint32 timeoutFlags,
+_rw_lock_read_lock_with_timeout(rw_lock* lock, uint32_t timeoutFlags,
 	bigtime_t timeout)
 {
 	InterruptsSpinLocker locker(lock->lock);
@@ -460,7 +460,7 @@ rw_lock_write_lock(rw_lock* lock)
 	}
 
 	// announce our claim
-	int32 oldCount = atomic_add(&lock->count, RW_LOCK_WRITER_COUNT_BASE);
+	int32_t oldCount = atomic_add(&lock->count, RW_LOCK_WRITER_COUNT_BASE);
 
 	if (oldCount == 0) {
 		// No-one else held a read or write lock, so it's ours now.
@@ -502,11 +502,11 @@ _rw_lock_write_unlock(rw_lock* lock)
 		return;
 
 	// We gave up our last write lock -- clean up and unblock waiters.
-	int32 readerCount = lock->owner_count;
+	int32_t readerCount = lock->owner_count;
 	lock->holder = -1;
 	lock->owner_count = 0;
 
-	int32 oldCount = atomic_add(&lock->count, -RW_LOCK_WRITER_COUNT_BASE);
+	int32_t oldCount = atomic_add(&lock->count, -RW_LOCK_WRITER_COUNT_BASE);
 	oldCount -= RW_LOCK_WRITER_COUNT_BASE;
 
 	if (oldCount != 0) {
@@ -589,7 +589,7 @@ mutex_init(mutex* lock, const char *name)
 
 
 void
-mutex_init_etc(mutex* lock, const char *name, uint32 flags)
+mutex_init_etc(mutex* lock, const char *name, uint32_t flags)
 {
 	lock->name = (flags & MUTEX_FLAG_CLONE_NAME) != 0 ? strdup(name) : name;
 	lock->waiters = NULL;
@@ -678,7 +678,7 @@ mutex_switch_from_read_lock(rw_lock* from, mutex* to)
 #if KDEBUG_RW_LOCK_DEBUG
 	_rw_lock_write_unlock(from);
 #else
-	int32 oldCount = atomic_add(&from->count, -1);
+	int32_t oldCount = atomic_add(&from->count, -1);
 	if (oldCount >= RW_LOCK_WRITER_COUNT_BASE)
 		_rw_lock_read_unlock(from);
 #endif
@@ -817,7 +817,7 @@ _mutex_trylock(mutex* lock)
 
 
 status_t
-_mutex_lock_with_timeout(mutex* lock, uint32 timeoutFlags, bigtime_t timeout)
+_mutex_lock_with_timeout(mutex* lock, uint32_t timeoutFlags, bigtime_t timeout)
 {
 #if KDEBUG
 	if (!gKernelStartup && !are_interrupts_enabled()) {

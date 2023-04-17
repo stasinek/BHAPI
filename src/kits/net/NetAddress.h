@@ -47,7 +47,7 @@ public:
     BNetAddress(const char *hostname, const char *protocol, const char *service);
     BNetAddress(const struct sockaddr_in &sa);
     BNetAddress(const struct in_addr addr,  uint16 port = 0);
-    BNetAddress(uint32 addr,  uint16 port = 0);
+    BNetAddress(uint32_t addr,  uint16 port = 0);
     BNetAddress(const BNetAddress &from);
     virtual ~BNetAddress();
 
@@ -64,7 +64,7 @@ public:
     status_t	SetTo(const char *hostname, const char *protocol, const char *service);
     status_t	SetTo(const struct sockaddr_in &sa);
     status_t	SetTo(const struct in_addr addr,  uint16 port = 0);
-    status_t	SetTo(uint32 addr = INADDR_ANY,  uint16 port = 0);
+    status_t	SetTo(uint32_t addr = INADDR_ANY,  uint16 port = 0);
 
     status_t	GetAddr(char *hostname, size_t hostname_len,  uint16 *port = NULL) const;
     status_t	GetAddr(struct sockaddr_in &sa) const;

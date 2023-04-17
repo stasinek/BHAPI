@@ -275,7 +275,7 @@ static int
 _files_getnetbyaddr(void *cbrv, void *cbdata, va_list ap)
 {
 	struct netent	**retval = va_arg(ap, struct netent **);
-	uint32_t	  net	 = va_arg(ap, uint32_t);
+	uint32_t_t	  net	 = va_arg(ap, uint32_t_t);
 	int		  type	 = va_arg(ap, int);
 
 	struct netent	 *np;
@@ -301,14 +301,14 @@ static int
 _dns_getnetbyaddr(void *cbrv, void *cbdata, va_list ap)
 {
 	struct netent	**retval = va_arg(ap, struct netent **);
-	uint32_t	  net	 = va_arg(ap, uint32_t);
+	uint32_t_t	  net	 = va_arg(ap, uint32_t_t);
 	int		  type	 = va_arg(ap, int);
 
 	unsigned int	 netbr[4];
 	int		 nn, anslen;
 	querybuf	*buf;
 	char		 qbuf[MAXDNAME];
-	uint32_t	 net2;
+	uint32_t_t	 net2;
 	struct netent	*np;
 	res_state	 res;
 
@@ -362,7 +362,7 @@ _dns_getnetbyaddr(void *cbrv, void *cbdata, va_list ap)
 	free(buf);
 	if (np) {
 		/* maybe net should be unsigned? */
-		uint32_t u_net = net;
+		uint32_t_t u_net = net;
 
 		/* Strip trailing zeros */
 		while ((u_net & 0xff) == 0 && u_net != 0)
@@ -380,7 +380,7 @@ _dns_getnetbyaddr(void *cbrv, void *cbdata, va_list ap)
 }
 
 struct netent *
-getnetbyaddr(uint32_t net, int net_type)
+getnetbyaddr(uint32_t_t net, int net_type)
 {
 	int		 rv;
 	struct netent	*retval;
@@ -514,13 +514,13 @@ static int
 _yp_getnetbyaddr(void *cbrv, void *cb_data, va_list ap)
 {
 	struct netent	**retval = va_arg(ap, struct netent **);
-	uint32_t	  net	 = va_arg(ap, uint32_t);
+	uint32_t_t	  net	 = va_arg(ap, uint32_t_t);
 	int		  type	 = va_arg(ap, int);
 
 	struct netent	*np;
 	char		 qbuf[MAXDNAME];
 	unsigned int	 netbr[4];
-	uint32_t	 net2;
+	uint32_t_t	 net2;
 	int		 r;
 
 	if (type != AF_INET)

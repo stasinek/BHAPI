@@ -87,7 +87,7 @@ AbstractModuleDevice::IO(void* cookie, io_request* request)
 
 
 status_t
-AbstractModuleDevice::Control(void* cookie, int32 op, void* buffer, size_t length)
+AbstractModuleDevice::Control(void* cookie, int32_t op, void* buffer, size_t length)
 {
 	return Module()->control(cookie, op, buffer, length);
 }

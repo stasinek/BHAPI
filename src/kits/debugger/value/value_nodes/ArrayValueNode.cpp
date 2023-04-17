@@ -27,7 +27,7 @@ static const uint64 kMaxArrayElementCount = 10;
 
 
 AbstractArrayValueNode::AbstractArrayValueNode(ValueNodeChild* nodeChild,
-	ArrayType* type, int32 dimension)
+	ArrayType* type, int32_t dimension)
 	:
 	ValueNode(nodeChild),
 	fType(type),
@@ -44,7 +44,7 @@ AbstractArrayValueNode::~AbstractArrayValueNode()
 {
 	fType->ReleaseReference();
 
-	for (int32 i = 0; AbstractArrayValueNodeChild* child = fChildren.ItemAt(i);
+	for (int32_t i = 0; AbstractArrayValueNodeChild* child = fChildren.ItemAt(i);
 			i++) {
 		child->ReleaseReference();
 	}
@@ -82,14 +82,14 @@ status_t AbstractArrayValueNode::CreateChildren(TeamTypeInformation* info)
 }
 
 
-int32 AbstractArrayValueNode::CountChildren() const
+int32_t AbstractArrayValueNode::CountChildren() const
 {
 	return fChildren.CountItems();
 }
 
 
 ValueNodeChild*
-AbstractArrayValueNode::ChildAt(int32 index) const
+AbstractArrayValueNode::ChildAt(int32_t index) const
 {
 	return fChildren.ItemAt(index);
 }
@@ -112,18 +112,18 @@ void AbstractArrayValueNode::ClearChildren()
 
 
 status_t AbstractArrayValueNode::CreateChildrenInRange(TeamTypeInformation* info,
-	int32 lowIndex, int32 highIndex)
+	int32_t lowIndex, int32_t highIndex)
 {
 	// TODO: ensure that we don't already have children in the specified
 	// index range. These need to be skipped if so.
 	TRACE_LOCALS("TYPE_ARRAY\n");
 
-	int32 dimensionCount = fType->CountDimensions();
+	int32_t dimensionCount = fType->CountDimensions();
 	bool isFinalDimension = fDimension + 1 == dimensionCount;
 	status_t error = B_OK;
 
 	if (!fBoundsInitialized) {
-		int32 lowerBound, upperBound;
+		int32_t lowerBound, upperBound;
 		error = SupportedChildRange(lowerBound, upperBound);
 		if (error != B_OK)
 			return error;
@@ -139,7 +139,7 @@ status_t AbstractArrayValueNode::CreateChildrenInRange(TeamTypeInformation* info
 		highIndex = fUpperBound;
 
 	// create children for the array elements
-	for (int32 i = lowIndex; i <= highIndex; i++) {
+	for (int32_t i = lowIndex; i <= highIndex; i++) {
 		BString name(Name());
 		name << '[' << i << ']';
 		if (name.Length() <= Name().Length())
@@ -169,8 +169,8 @@ status_t AbstractArrayValueNode::CreateChildrenInRange(TeamTypeInformation* info
 }
 
 
-status_t AbstractArrayValueNode::SupportedChildRange(int32& lowIndex,
-	int32& highIndex) const
+status_t AbstractArrayValueNode::SupportedChildRange(int32_t& lowIndex,
+	int32_t& highIndex) const
 {
 	if (!fBoundsInitialized) {
 		ArrayDimension* dimension = fType->DimensionAt(fDimension);
@@ -211,7 +211,7 @@ ArrayValueNode::~ArrayValueNode()
 
 
 InternalArrayValueNode::InternalArrayValueNode(ValueNodeChild* nodeChild,
-	ArrayType* type, int32 dimension)
+	ArrayType* type, int32_t dimension)
 	:
 	AbstractArrayValueNode(nodeChild, type, dimension)
 {
@@ -291,18 +291,18 @@ status_t ArrayValueNodeChild::ResolveLocation(ValueLoader* valueLoader,
 
 	// create an array index path
 	ArrayType* arrayType = fParent->GetArrayType();
-	int32 dimensionCount = arrayType->CountDimensions();
+	int32_t dimensionCount = arrayType->CountDimensions();
 
 	// add dummy indices first -- we'll replace them on our way back through
 	// our ancestors
 	ArrayIndexPath indexPath;
-	for (int32 i = 0; i < dimensionCount; i++) {
+	for (int32_t i = 0; i < dimensionCount; i++) {
 		if (!indexPath.AddIndex(0))
 			return B_NO_MEMORY;
 	}
 
 	AbstractArrayValueNodeChild* child = this;
-	for (int32 i = dimensionCount - 1; i >= 0; i--) {
+	for (int32_t i = dimensionCount - 1; i >= 0; i--) {
 		indexPath.SetIndexAt(i, child->ElementIndex());
 
 		child = dynamic_cast<AbstractArrayValueNodeChild*>(

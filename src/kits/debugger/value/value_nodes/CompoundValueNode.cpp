@@ -163,7 +163,7 @@ CompoundValueNode::~CompoundValueNode()
 {
 	fType->ReleaseReference();
 
-	for (int32 i = 0; Child* child = fChildren.ItemAt(i); i++)
+	for (int32_t i = 0; Child* child = fChildren.ItemAt(i); i++)
 		child->ReleaseReference();
 }
 
@@ -196,7 +196,7 @@ status_t CompoundValueNode::CreateChildren(TeamTypeInformation* info)
 		return B_OK;
 
 	// base types
-	for (int32 i = 0; BaseType* baseType = fType->BaseTypeAt(i); i++) {
+	for (int32_t i = 0; BaseType* baseType = fType->BaseTypeAt(i); i++) {
 		TRACE_LOCALS("  base %" B_PRId32 "\n", i);
 
 		BaseTypeChild* child = new(std::nothrow) BaseTypeChild(this, baseType);
@@ -209,7 +209,7 @@ status_t CompoundValueNode::CreateChildren(TeamTypeInformation* info)
 	}
 
 	// members
-	for (int32 i = 0; DataMember* member = fType->DataMemberAt(i); i++) {
+	for (int32_t i = 0; DataMember* member = fType->DataMemberAt(i); i++) {
 		TRACE_LOCALS("  member %" B_PRId32 ": \"%s\"\n", i, member->Name());
 
 		MemberChild* child = new(std::nothrow) MemberChild(this, member);
@@ -228,14 +228,14 @@ status_t CompoundValueNode::CreateChildren(TeamTypeInformation* info)
 }
 
 
-int32 CompoundValueNode::CountChildren() const
+int32_t CompoundValueNode::CountChildren() const
 {
 	return fChildren.CountItems();
 }
 
 
 ValueNodeChild*
-CompoundValueNode::ChildAt(int32 index) const
+CompoundValueNode::ChildAt(int32_t index) const
 {
 	return fChildren.ItemAt(index);
 }

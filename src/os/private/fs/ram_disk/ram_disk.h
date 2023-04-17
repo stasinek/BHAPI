@@ -27,18 +27,18 @@ struct ram_disk_ioctl_register {
 	char	path[B_PATH_NAME_LENGTH];
 
 	// return value
-	int32	id;
+	int32_t	id;
 };
 
 
 struct ram_disk_ioctl_unregister {
-	int32	id;
+	int32_t	id;
 };
 
 
 struct ram_disk_ioctl_info {
 	// return values
-	int32	id;
+	int32_t	id;
 	uint64	size;
 	char	path[B_PATH_NAME_LENGTH];
 };

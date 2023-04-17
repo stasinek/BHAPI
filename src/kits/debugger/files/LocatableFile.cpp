@@ -94,7 +94,7 @@ void LocatableFile::RemoveListener(Listener* listener)
 
 void LocatableFile::_NotifyListeners()
 {
-	for (int32 i = fListeners.CountItems() - 1; i >= 0; i--)
+	for (int32_t i = fListeners.CountItems() - 1; i >= 0; i--)
 		fListeners.ItemAt(i)->LocatableFileChanged(this);
 }
 

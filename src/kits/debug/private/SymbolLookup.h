@@ -48,7 +48,7 @@ private:
 // Area
 class Area : public DoublyLinkedListLinkImpl<Area> {
 public:
-	Area(area_id id, const void *address, int32 size)
+	Area(area_id id, const void *address, int32_t size)
 		: fRemoteID(id),
 		  fLocalID(-1),
 		  fRemoteAddress(address),
@@ -65,9 +65,9 @@ public:
 
 	const void* RemoteAddress() const	{ return fRemoteAddress; }
 	const void* LocalAddress() const	{ return fLocalAddress; }
-	int32 Size() const					{ return fSize; }
+	int32_t Size() const					{ return fSize; }
 
-	bool ContainsAddress(const void *address, int32 size) const
+	bool ContainsAddress(const void *address, int32_t size) const
 	{
 		return ((addr_t)fRemoteAddress <= (addr_t)address
 			&& (addr_t)address + size <= (addr_t)fRemoteAddress + fSize);
@@ -86,7 +86,7 @@ private:
 	area_id		fLocalID;
 	const void	*fRemoteAddress;
 	void		*fLocalAddress;
-	int32		fSize;
+	int32_t		fSize;
 };
 
 
@@ -98,9 +98,9 @@ public:
 
 	status_t Init();
 
-	const void *PrepareAddress(const void *remoteAddress, int32 size) const;
+	const void *PrepareAddress(const void *remoteAddress, int32_t size) const;
 	const void *PrepareAddressNoThrow(const void *remoteAddress,
-		int32 size) const;
+		int32_t size) const;
 
 	template<typename Type> inline const Type &Read(
 		const Type &remoteData) const
@@ -114,8 +114,8 @@ public:
 	Area* AreaForLocalAddress(const void* address) const;
 
 private:
-	Area &_FindArea(const void *address, int32 size) const;
-	Area* _FindAreaNoThrow(const void *address, int32 size) const;
+	Area &_FindArea(const void *address, int32_t size) const;
+	Area* _FindAreaNoThrow(const void *address, int32_t size) const;
 
 	typedef DoublyLinkedList<Area>	AreaList;
 
@@ -130,7 +130,7 @@ private:
 // SymbolIterator
 struct SymbolIterator {
 	const Image*		image;
-	int32				currentIndex;
+	int32_t				currentIndex;
 };
 
 
@@ -152,10 +152,10 @@ public:
 		SymbolIterator& iterator) const;
 	status_t NextSymbol(SymbolIterator& iterator, const char** _symbolName,
 		size_t* _symbolNameLen, addr_t* _symbolAddress, size_t* _symbolSize,
-		int32* _symbolType) const;
+		int32_t* _symbolType) const;
 
-	status_t GetSymbol(image_id imageID, const char* name, int32 symbolType,
-		void** _symbolLocation, size_t* _symbolSize, int32* _symbolType) const;
+	status_t GetSymbol(image_id imageID, const char* name, int32_t symbolType,
+		void** _symbolLocation, size_t* _symbolSize, int32_t* _symbolType) const;
 
 private:
 	class LoadedImage;

@@ -25,8 +25,8 @@
 // #pragma mark - ElfSection
 
 
-ElfSection::ElfSection(const char* name, uint32 type, int fd, uint64 offset,
-	uint64 size, target_addr_t loadAddress, uint32 flags, uint32 linkIndex)
+ElfSection::ElfSection(const char* name, uint32_t type, int fd, uint64 offset,
+	uint64 size, target_addr_t loadAddress, uint32_t flags, uint32_t linkIndex)
 	:
 	fName(name),
 	fType(type),
@@ -86,8 +86,8 @@ void ElfSection::Unload()
 // #pragma mark - ElfSegment
 
 
-ElfSegment::ElfSegment(uint32 type, uint64 fileOffset, uint64 fileSize,
-	target_addr_t loadAddress, target_size_t loadSize, uint32 flags)
+ElfSegment::ElfSegment(uint32_t type, uint64 fileOffset, uint64 fileSize,
+	target_addr_t loadAddress, target_size_t loadSize, uint32_t flags)
 	:
 	fFileOffset(fileOffset),
 	fFileSize(fileSize),
@@ -128,7 +128,7 @@ struct ElfFile::SymbolLookupSource : public ElfSymbolLookupSource {
 
 	virtual ssize_t Read(uint64 address, void* buffer, size_t size)
 	{
-		for (int32 i = 0; Segment* segment = fSegments.ItemAt(i); i++) {
+		for (int32_t i = 0; Segment* segment = fSegments.ItemAt(i); i++) {
 			if (address < segment->fMemoryAddress
 					|| address - segment->fMemoryAddress
 						> segment->fFileLength) {
@@ -271,8 +271,8 @@ void ElfFile::PutSection(ElfSection* section)
 ElfSection*
 ElfFile::FindSection(const char* name) const
 {
-	int32 count = fSections.CountItems();
-	for (int32 i = 0; i < count; i++) {
+	int32_t count = fSections.CountItems();
+	for (int32_t i = 0; i < count; i++) {
 		ElfSection* section = fSections.ItemAt(i);
 		if (strcmp(section->Name(), name) == 0)
 			return section;
@@ -283,10 +283,10 @@ ElfFile::FindSection(const char* name) const
 
 
 ElfSection*
-ElfFile::FindSection(uint32 type) const
+ElfFile::FindSection(uint32_t type) const
 {
-	int32 count = fSections.CountItems();
-	for (int32 i = 0; i < count; i++) {
+	int32_t count = fSections.CountItems();
+	for (int32_t i = 0; i < count; i++) {
 		ElfSection* section = fSections.ItemAt(i);
 		if (section->Type() == type)
 			return section;
@@ -299,8 +299,8 @@ ElfFile::FindSection(uint32 type) const
 ElfSegment*
 ElfFile::TextSegment() const
 {
-	int32 count = fSegments.CountItems();
-	for (int32 i = 0; i < count; i++) {
+	int32_t count = fSegments.CountItems();
+	for (int32_t i = 0; i < count; i++) {
 		ElfSegment* segment = fSegments.ItemAt(i);
 		if (segment->Type() == PT_LOAD && !segment->IsWritable())
 			return segment;
@@ -313,8 +313,8 @@ ElfFile::TextSegment() const
 ElfSegment*
 ElfFile::DataSegment() const
 {
-	int32 count = fSegments.CountItems();
-	for (int32 i = 0; i < count; i++) {
+	int32_t count = fSegments.CountItems();
+	for (int32_t i = 0; i < count; i++) {
 		ElfSegment* segment = fSegments.ItemAt(i);
 		if (segment->Type() == PT_LOAD && segment->IsWritable())
 			return segment;
@@ -368,7 +368,7 @@ status_t ElfFile::CreateSymbolLookup(uint64 textDelta, ElfSymbolLookup*& _lookup
 	// create the lookup
 	size_t symbolTableEntrySize = Is64Bit()
 		? sizeof(ElfClass64::Sym) : sizeof(ElfClass32::Sym);
-	uint32 symbolCount = uint32(symbolSection->Size() / symbolTableEntrySize);
+	uint32_t symbolCount = uint32_t(symbolSection->Size() / symbolTableEntrySize);
 
 	return ElfSymbolLookup::Create(source, symbolSection->Offset(), 0,
 		stringSection->Offset(), symbolCount, symbolTableEntrySize, textDelta,
@@ -529,7 +529,7 @@ status_t ElfFile::_LoadFile(const char* fileName)
 
 
 bool ElfFile::_FindSymbolSections(ElfSection*& _symbolSection,
-	ElfSection*& _stringSection, uint32 type) const
+	ElfSection*& _stringSection, uint32_t type) const
 {
 	// get the symbol table section
 	ElfSection* symbolSection = FindSection(type);

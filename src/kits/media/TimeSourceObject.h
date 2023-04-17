@@ -23,7 +23,7 @@ protected:
 	virtual	status_t			TimeSourceOp(const time_source_op_info& op,
 									void* _reserved);
 
-	virtual	BMediaAddOn*		AddOn(int32* _id) const;
+	virtual	BMediaAddOn*		AddOn(int32_t* _id) const;
 
 	// override from BMediaNode
 	virtual status_t			DeleteHook(BMediaNode* node);

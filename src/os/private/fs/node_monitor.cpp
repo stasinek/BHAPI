@@ -48,7 +48,7 @@ struct monitor_listener {
 	list_link			context_link;
 	DoublyLinkedListLink<monitor_listener> monitor_link;
 	NotificationListener *listener;
-	uint32				flags;
+	uint32_t				flags;
 	node_monitor		*monitor;
 };
 
@@ -64,14 +64,14 @@ struct node_monitor {
 
 struct interested_monitor_listener_list {
 	MonitorListenerList::Iterator iterator;
-	uint32				flags;
+	uint32_t				flags;
 };
 
 static UserMessagingMessageSender sNodeMonitorSender;
 
 class UserNodeListener : public UserMessagingListener {
 	public:
-		UserNodeListener(port_id port, int32 token)
+		UserNodeListener(port_id port, int32_t token)
 			: UserMessagingListener(sNodeMonitorSender, port, token)
 		{
 		}
@@ -92,14 +92,14 @@ class NodeMonitorService : public NotificationService {
 
 		status_t InitCheck();
 
-		status_t NotifyEntryCreatedOrRemoved(int32 opcode, dev_t device,
+		status_t NotifyEntryCreatedOrRemoved(int32_t opcode, dev_t device,
 			ino_t directory, const char *name, ino_t node);
 		status_t NotifyEntryMoved(dev_t device, ino_t fromDirectory,
 			const char *fromName, ino_t toDirectory, const char *toName,
 			ino_t node);
-		status_t NotifyStatChanged(dev_t device, ino_t node, uint32 statFields);
+		status_t NotifyStatChanged(dev_t device, ino_t node, uint32_t statFields);
 		status_t NotifyAttributeChanged(dev_t device, ino_t node,
-			const char *attribute, int32 cause);
+			const char *attribute, int32_t cause);
 		status_t NotifyUnmount(dev_t device);
 		status_t NotifyMount(dev_t device, dev_t parentDevice,
 			ino_t parentDirectory);
@@ -114,19 +114,19 @@ class NodeMonitorService : public NotificationService {
 			NotificationListener &listener);
 
 		status_t AddListener(io_context *context, dev_t device, ino_t node,
-			uint32 flags, NotificationListener &notificationListener);
+			uint32_t flags, NotificationListener &notificationListener);
 		status_t RemoveListener(io_context *context, dev_t device, ino_t node,
 			NotificationListener &notificationListener);
 
 		status_t RemoveUserListeners(struct io_context *context,
-			port_id port, uint32 token);
+			port_id port, uint32_t token);
 		status_t UpdateUserListener(io_context *context, dev_t device,
-			ino_t node, uint32 flags, UserNodeListener &userListener);
+			ino_t node, uint32_t flags, UserNodeListener &userListener);
 
 		virtual const char* Name() { return "node monitor"; }
 
 	private:
-		void _RemoveMonitor(node_monitor *monitor, uint32 flags);
+		void _RemoveMonitor(node_monitor *monitor, uint32_t flags);
 		status_t _RemoveListener(io_context *context, dev_t device, ino_t node,
 			NotificationListener& notificationListener, bool isVolumeListener);
 		void _RemoveListener(monitor_listener *listener);
@@ -138,20 +138,20 @@ class NodeMonitorService : public NotificationService {
 		monitor_listener *_MonitorListenerFor(node_monitor* monitor,
 			NotificationListener& notificationListener);
 		status_t _AddMonitorListener(io_context *context,
-			node_monitor* monitor, uint32 flags,
+			node_monitor* monitor, uint32_t flags,
 			NotificationListener& notificationListener);
 		status_t _UpdateListener(io_context *context, dev_t device, ino_t node,
-			uint32 flags, bool addFlags,
+			uint32_t flags, bool addFlags,
 			NotificationListener &notificationListener);
 		void _GetInterestedMonitorListeners(dev_t device, ino_t node,
-			uint32 flags, interested_monitor_listener_list *interestedListeners,
-			int32 &interestedListenerCount);
-		void _GetInterestedVolumeListeners(dev_t device, uint32 flags,
+			uint32_t flags, interested_monitor_listener_list *interestedListeners,
+			int32_t &interestedListenerCount);
+		void _GetInterestedVolumeListeners(dev_t device, uint32_t flags,
 			interested_monitor_listener_list *interestedListeners,
-			int32 &interestedListenerCount);
+			int32_t &interestedListenerCount);
 		status_t _SendNotificationMessage(KMessage &message,
 			interested_monitor_listener_list *interestedListeners,
-			int32 interestedListenerCount);
+			int32_t interestedListenerCount);
 
 		struct monitor_hash_key {
 			dev_t	device;
@@ -176,9 +176,9 @@ class NodeMonitorService : public NotificationService {
 			node_monitor*& GetLink(node_monitor* monitor) const
 				{ return monitor->hash_link; }
 
-			uint32 _Hash(dev_t device, ino_t node) const
+			uint32_t _Hash(dev_t device, ino_t node) const
 			{
-				return ((uint32)(node >> 32) + (uint32)node) ^ (uint32)device;
+				return ((uint32_t)(node >> 32) + (uint32_t)node) ^ (uint32_t)device;
 			}
 		};
 
@@ -201,9 +201,9 @@ class NodeMonitorService : public NotificationService {
 			node_monitor*& GetLink(node_monitor* monitor) const
 				{ return monitor->hash_link; }
 
-			uint32 _Hash(dev_t device) const
+			uint32_t _Hash(dev_t device) const
 			{
-				return (uint32)(device >> 16) + (uint16)device;
+				return (uint32_t)(device >> 16) + (uint16)device;
 			}
 		};
 
@@ -232,7 +232,7 @@ static NodeMonitorService sNodeMonitorService;
   	- another error code otherwise.
 */
 static status_t
-notify_query_entry_event(int32 opcode, port_id port, int32 token,
+notify_query_entry_event(int32_t opcode, port_id port, int32_t token,
 	dev_t device, ino_t directory, const char *name, ino_t node)
 {
 	if (!name)
@@ -284,7 +284,7 @@ NodeMonitorService::InitCheck()
 	Must be called with monitors lock hold.
 */
 void
-NodeMonitorService::_RemoveMonitor(node_monitor *monitor, uint32 flags)
+NodeMonitorService::_RemoveMonitor(node_monitor *monitor, uint32_t flags)
 {
 	if ((flags & B_WATCH_VOLUME) != 0)
 		fVolumeMonitors.Remove(monitor);
@@ -330,7 +330,7 @@ NodeMonitorService::_RemoveListener(io_context *context, dev_t device,
 void
 NodeMonitorService::_RemoveListener(monitor_listener *listener)
 {
-	uint32 flags = listener->flags;
+	uint32_t flags = listener->flags;
 	node_monitor *monitor = listener->monitor;
 
 	// remove it from the listener and I/O context lists
@@ -436,7 +436,7 @@ NodeMonitorService::_MonitorListenerFor(node_monitor* monitor,
 
 status_t
 NodeMonitorService::_AddMonitorListener(io_context *context,
-	node_monitor* monitor, uint32 flags,
+	node_monitor* monitor, uint32_t flags,
 	NotificationListener& notificationListener)
 {
 	monitor_listener *listener = new(std::nothrow) monitor_listener;
@@ -463,7 +463,7 @@ NodeMonitorService::_AddMonitorListener(io_context *context,
 
 status_t
 NodeMonitorService::AddListener(io_context *context, dev_t device, ino_t node,
-	uint32 flags, NotificationListener& notificationListener)
+	uint32_t flags, NotificationListener& notificationListener)
 {
 	TRACE(("%s(dev = %ld, node = %Ld, flags = %ld, listener = %p\n",
 		__PRETTY_FUNCTION__, device, node, flags, &notificationListener));
@@ -484,7 +484,7 @@ NodeMonitorService::AddListener(io_context *context, dev_t device, ino_t node,
 
 status_t
 NodeMonitorService::_UpdateListener(io_context *context, dev_t device,
-	ino_t node, uint32 flags, bool addFlags,
+	ino_t node, uint32_t flags, bool addFlags,
 	NotificationListener& notificationListener)
 {
 	TRACE(("%s(dev = %ld, node = %Ld, flags = %ld, listener = %p\n",
@@ -536,8 +536,8 @@ NodeMonitorService::_UpdateListener(io_context *context, dev_t device,
 */
 void
 NodeMonitorService::_GetInterestedMonitorListeners(dev_t device, ino_t node,
-	uint32 flags, interested_monitor_listener_list *interestedListeners,
-	int32 &interestedListenerCount)
+	uint32_t flags, interested_monitor_listener_list *interestedListeners,
+	int32_t &interestedListenerCount)
 {
 	// get the monitor for the node
 	node_monitor *monitor = _MonitorFor(device, node, false);
@@ -559,9 +559,9 @@ NodeMonitorService::_GetInterestedMonitorListeners(dev_t device, ino_t node,
 
 
 void
-NodeMonitorService::_GetInterestedVolumeListeners(dev_t device, uint32 flags,
+NodeMonitorService::_GetInterestedVolumeListeners(dev_t device, uint32_t flags,
 	interested_monitor_listener_list *interestedListeners,
-	int32 &interestedListenerCount)
+	int32_t &interestedListenerCount)
 {
 	// get the monitor for the node
 	node_monitor *monitor = _MonitorFor(device, -1, true);
@@ -594,11 +594,11 @@ NodeMonitorService::_GetInterestedVolumeListeners(dev_t device, uint32 flags,
 status_t
 NodeMonitorService::_SendNotificationMessage(KMessage &message,
 	interested_monitor_listener_list *interestedListeners,
-	int32 interestedListenerCount)
+	int32_t interestedListenerCount)
 {
 	// iterate through the lists
 	interested_monitor_listener_list *list = interestedListeners;
-	for (int32 i = 0; i < interestedListenerCount; i++, list++) {
+	for (int32_t i = 0; i < interestedListenerCount; i++, list++) {
 		// iterate through the listeners
 		MonitorListenerList::Iterator iterator = list->iterator;
 		do {
@@ -609,7 +609,7 @@ NodeMonitorService::_SendNotificationMessage(KMessage &message,
 	}
 
 	list = interestedListeners;
-	for (int32 i = 0; i < interestedListenerCount; i++, list++) {
+	for (int32_t i = 0; i < interestedListenerCount; i++, list++) {
 		// iterate through the listeners
 		do {
 			monitor_listener *listener = list->iterator.Current();
@@ -634,7 +634,7 @@ NodeMonitorService::_SendNotificationMessage(KMessage &message,
 	- another error code otherwise.
 */
 status_t
-NodeMonitorService::NotifyEntryCreatedOrRemoved(int32 opcode, dev_t device,
+NodeMonitorService::NotifyEntryCreatedOrRemoved(int32_t opcode, dev_t device,
 	ino_t directory, const char *name, ino_t node)
 {
 	if (!name)
@@ -644,7 +644,7 @@ NodeMonitorService::NotifyEntryCreatedOrRemoved(int32 opcode, dev_t device,
 
 	// get the lists of all interested listeners
 	interested_monitor_listener_list interestedListeners[3];
-	int32 interestedListenerCount = 0;
+	int32_t interestedListenerCount = 0;
 	// ... for the volume
 	_GetInterestedVolumeListeners(device, B_WATCH_NAME,
 		interestedListeners, interestedListenerCount);
@@ -692,7 +692,7 @@ NodeMonitorService::NotifyEntryMoved(dev_t device, ino_t fromDirectory,
 
 	// get the lists of all interested listeners
 	interested_monitor_listener_list interestedListeners[4];
-	int32 interestedListenerCount = 0;
+	int32_t interestedListenerCount = 0;
 	// ... for the volume
 	_GetInterestedVolumeListeners(device, B_WATCH_NAME,
 		interestedListeners, interestedListenerCount);
@@ -731,13 +731,13 @@ NodeMonitorService::NotifyEntryMoved(dev_t device, ino_t fromDirectory,
 
 inline status_t
 NodeMonitorService::NotifyStatChanged(dev_t device, ino_t node,
-	uint32 statFields)
+	uint32_t statFields)
 {
 	RecursiveLocker locker(fRecursiveLock);
 
 	// get the lists of all interested listeners
 	interested_monitor_listener_list interestedListeners[3];
-	int32 interestedListenerCount = 0;
+	int32_t interestedListenerCount = 0;
 	// ... for the volume
 	_GetInterestedVolumeListeners(device, B_WATCH_STAT,
 		interestedListeners, interestedListenerCount);
@@ -776,7 +776,7 @@ NodeMonitorService::NotifyStatChanged(dev_t device, ino_t node,
 */
 status_t
 NodeMonitorService::NotifyAttributeChanged(dev_t device, ino_t node,
-	const char *attribute, int32 cause)
+	const char *attribute, int32_t cause)
 {
 	if (!attribute)
 		return B_BAD_VALUE;
@@ -785,7 +785,7 @@ NodeMonitorService::NotifyAttributeChanged(dev_t device, ino_t node,
 
 	// get the lists of all interested listeners
 	interested_monitor_listener_list interestedListeners[3];
-	int32 interestedListenerCount = 0;
+	int32_t interestedListenerCount = 0;
 	// ... for the volume
 	_GetInterestedVolumeListeners(device, B_WATCH_ATTR,
 		interestedListeners, interestedListenerCount);
@@ -820,7 +820,7 @@ NodeMonitorService::NotifyUnmount(dev_t device)
 
 	// get the lists of all interested listeners
 	interested_monitor_listener_list interestedListeners[3];
-	int32 interestedListenerCount = 0;
+	int32_t interestedListenerCount = 0;
 	_GetInterestedMonitorListeners(-1, -1, B_WATCH_MOUNT,
 		interestedListeners, interestedListenerCount);
 
@@ -850,7 +850,7 @@ NodeMonitorService::NotifyMount(dev_t device, dev_t parentDevice,
 
 	// get the lists of all interested listeners
 	interested_monitor_listener_list interestedListeners[3];
-	int32 interestedListenerCount = 0;
+	int32_t interestedListenerCount = 0;
 	_GetInterestedMonitorListeners(-1, -1, B_WATCH_MOUNT,
 		interestedListeners, interestedListenerCount);
 
@@ -899,7 +899,7 @@ NodeMonitorService::AddListener(const KMessage* eventSpecifier,
 
 	dev_t device = eventSpecifier->GetInt32("device", -1);
 	ino_t node = eventSpecifier->GetInt64("node", -1);
-	uint32 flags = eventSpecifier->GetInt32("flags", 0);
+	uint32_t flags = eventSpecifier->GetInt32("flags", 0);
 
 	return AddListener(context, device, node, flags, listener);
 }
@@ -917,7 +917,7 @@ NodeMonitorService::UpdateListener(const KMessage* eventSpecifier,
 
 	dev_t device = eventSpecifier->GetInt32("device", -1);
 	ino_t node = eventSpecifier->GetInt64("node", -1);
-	uint32 flags = eventSpecifier->GetInt32("flags", 0);
+	uint32_t flags = eventSpecifier->GetInt32("flags", 0);
 	bool addFlags = eventSpecifier->GetBool("add flags", false);
 
 	return _UpdateListener(context, device, node, flags, addFlags, listener);
@@ -960,11 +960,11 @@ NodeMonitorService::RemoveListener(io_context *context, dev_t device,
 
 inline status_t
 NodeMonitorService::RemoveUserListeners(struct io_context *context,
-	port_id port, uint32 token)
+	port_id port, uint32_t token)
 {
 	UserNodeListener userListener(port, token);
 	monitor_listener *listener = NULL;
-	int32 count = 0;
+	int32_t count = 0;
 
 	RecursiveLocker _(fRecursiveLock);
 
@@ -991,7 +991,7 @@ NodeMonitorService::RemoveUserListeners(struct io_context *context,
 
 status_t
 NodeMonitorService::UpdateUserListener(io_context *context, dev_t device,
-	ino_t node, uint32 flags, UserNodeListener& userListener)
+	ino_t node, uint32_t flags, UserNodeListener& userListener)
 {
 	TRACE(("%s(dev = %ld, node = %Ld, flags = %ld, listener = %p\n",
 		__PRETTY_FUNCTION__, device, node, flags, &userListener));
@@ -1075,7 +1075,7 @@ remove_node_listener(dev_t device, ino_t node, NotificationListener& listener)
 
 
 status_t
-add_node_listener(dev_t device, ino_t node, uint32 flags,
+add_node_listener(dev_t device, ino_t node, uint32_t flags,
 	NotificationListener& listener)
 {
 	return sNodeMonitorService.AddListener(get_current_io_context(true),
@@ -1155,7 +1155,7 @@ notify_entry_moved(dev_t device, ino_t fromDirectory,
   	- another error code otherwise.
 */
 status_t
-notify_stat_changed(dev_t device, ino_t node, uint32 statFields)
+notify_stat_changed(dev_t device, ino_t node, uint32_t statFields)
 {
 	return sNodeMonitorService.NotifyStatChanged(device, node, statFields);
 }
@@ -1173,7 +1173,7 @@ notify_stat_changed(dev_t device, ino_t node, uint32 statFields)
 */
 status_t
 notify_attribute_changed(dev_t device, ino_t node, const char *attribute,
-	int32 cause)
+	int32_t cause)
 {
 	return sNodeMonitorService.NotifyAttributeChanged(device, node, attribute,
 		cause);
@@ -1193,7 +1193,7 @@ notify_attribute_changed(dev_t device, ino_t node, const char *attribute,
   	- another error code otherwise.
 */
 status_t
-notify_query_entry_created(port_id port, int32 token, dev_t device,
+notify_query_entry_created(port_id port, int32_t token, dev_t device,
 	ino_t directory, const char *name, ino_t node)
 {
 	return notify_query_entry_event(B_ENTRY_CREATED, port, token,
@@ -1214,7 +1214,7 @@ notify_query_entry_created(port_id port, int32 token, dev_t device,
   	- another error code otherwise.
 */
 status_t
-notify_query_entry_removed(port_id port, int32 token, dev_t device,
+notify_query_entry_removed(port_id port, int32_t token, dev_t device,
 	ino_t directory, const char *name, ino_t node)
 {
 	return notify_query_entry_event(B_ENTRY_REMOVED, port, token,
@@ -1235,7 +1235,7 @@ notify_query_entry_removed(port_id port, int32 token, dev_t device,
   	- another error code otherwise.
 */
 status_t
-notify_query_attr_changed(port_id port, int32 token, dev_t device,
+notify_query_attr_changed(port_id port, int32_t token, dev_t device,
 	ino_t directory, const char* name, ino_t node)
 {
 	return notify_query_entry_event(B_ATTR_CHANGED, port, token,
@@ -1253,7 +1253,7 @@ notify_query_attr_changed(port_id port, int32 token, dev_t device,
 
 
 status_t
-_user_stop_notifying(port_id port, uint32 token)
+_user_stop_notifying(port_id port, uint32_t token)
 {
 	io_context *context = get_current_io_context(false);
 
@@ -1262,8 +1262,8 @@ _user_stop_notifying(port_id port, uint32 token)
 
 
 status_t
-_user_start_watching(dev_t device, ino_t node, uint32 flags, port_id port,
-	uint32 token)
+_user_start_watching(dev_t device, ino_t node, uint32_t flags, port_id port,
+	uint32_t token)
 {
 	io_context *context = get_current_io_context(false);
 
@@ -1274,7 +1274,7 @@ _user_start_watching(dev_t device, ino_t node, uint32 flags, port_id port,
 
 
 status_t
-_user_stop_watching(dev_t device, ino_t node, port_id port, uint32 token)
+_user_stop_watching(dev_t device, ino_t node, port_id port, uint32_t token)
 {
 	io_context *context = get_current_io_context(false);
 

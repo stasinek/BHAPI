@@ -581,7 +581,7 @@ BSoundPlayer::VolumeDB(bool forcePoll)
 	if (!forcePoll && system_time() - fLastVolumeUpdate < 500000)
 		return fVolumeDB;
 
-	int32 count = fVolumeSlider->CountChannels();
+	int32_t count = fVolumeSlider->CountChannels();
 	float values[count];
 	size_t size = count * sizeof(float);
 	fVolumeSlider->GetValue(&values, &size, NULL);
@@ -616,7 +616,7 @@ void BSoundPlayer::SetVolumeDB(float volumeDB)
 }
 
 
-status_t BSoundPlayer::GetVolumeInfo(media_node* _node, int32* _parameterID,
+status_t BSoundPlayer::GetVolumeInfo(media_node* _node, int32_t* _parameterID,
 	float* _minDB, float* _maxDB)
 {
 	CALLED();
@@ -743,8 +743,8 @@ void BSoundPlayer::_Init(const media_node* node,
 
 	media_output _output;
 	media_input _input;
-	int32 inputCount;
-	int32 outputCount;
+	int32_t inputCount;
+	int32_t outputCount;
 	media_format tryFormat;
 
 	// Create the player node and register it

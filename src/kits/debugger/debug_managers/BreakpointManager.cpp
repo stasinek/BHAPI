@@ -62,7 +62,7 @@ status_t BreakpointManager::InstallUserBreakpoint(UserBreakpoint* userBreakpoint
 	TRACE_CONTROL("  creating breakpoints for breakpoint instances\n");
 
 	status_t error = B_OK;
-	for (int32 i = 0;
+	for (int32_t i = 0;
 		UserBreakpointInstance* instance = userBreakpoint->InstanceAt(i); i++) {
 
 		TRACE_CONTROL("    breakpoint instance %p\n", instance);
@@ -113,7 +113,7 @@ status_t BreakpointManager::InstallUserBreakpoint(UserBreakpoint* userBreakpoint
 	TRACE_CONTROL("  updating breakpoints\n");
 
 	if (error == B_OK) {
-		for (int32 i = 0;
+		for (int32_t i = 0;
 			UserBreakpointInstance* instance = userBreakpoint->InstanceAt(i);
 			i++) {
 			TRACE_CONTROL("    breakpoint instance %p\n", instance);
@@ -146,7 +146,7 @@ status_t BreakpointManager::InstallUserBreakpoint(UserBreakpoint* userBreakpoint
 		teamLocker.Unlock();
 
 		if (!oldEnabled || !userBreakpoint->IsValid()) {
-			for (int32 i = 0;  UserBreakpointInstance* instance
+			for (int32_t i = 0;  UserBreakpointInstance* instance
 					= userBreakpoint->InstanceAt(i);
 				i++) {
 				Breakpoint* breakpoint = instance->GetBreakpoint();
@@ -195,7 +195,7 @@ void BreakpointManager::UninstallUserBreakpoint(UserBreakpoint* userBreakpoint)
 	teamLocker.Unlock();
 
 	// uninstall the breakpoints as needed
-	for (int32 i = 0;
+	for (int32_t i = 0;
 		UserBreakpointInstance* instance = userBreakpoint->InstanceAt(i); i++) {
 		if (Breakpoint* breakpoint = instance->GetBreakpoint())
 			_UpdateBreakpointInstallation(breakpoint);
@@ -204,7 +204,7 @@ void BreakpointManager::UninstallUserBreakpoint(UserBreakpoint* userBreakpoint)
 	teamLocker.Lock();
 
 	// detach the breakpoints from the user breakpoint instances
-	for (int32 i = 0;
+	for (int32_t i = 0;
 		UserBreakpointInstance* instance = userBreakpoint->InstanceAt(i); i++) {
 		if (Breakpoint* breakpoint = instance->GetBreakpoint()) {
 			instance->SetBreakpoint(NULL);
@@ -330,8 +330,8 @@ void BreakpointManager::_UpdateImageBreakpoints(Image* image, bool removeOnly)
 	for (UserBreakpointList::ConstIterator it
 			= fTeam->UserBreakpoints().GetIterator();
 		UserBreakpoint* userBreakpoint = it.Next();) {
-		int32 instanceCount = userBreakpoint->CountInstances();
-		for (int32 i = instanceCount - 1; i >= 0; i--) {
+		int32_t instanceCount = userBreakpoint->CountInstances();
+		for (int32_t i = instanceCount - 1; i >= 0; i--) {
 			UserBreakpointInstance* instance = userBreakpoint->InstanceAt(i);
 			Breakpoint* breakpoint = instance->GetBreakpoint();
 			if (breakpoint == NULL || breakpoint->GetImage() != image)
@@ -352,13 +352,13 @@ void BreakpointManager::_UpdateImageBreakpoints(Image* image, bool removeOnly)
 
 	// update breakpoints
 	teamLocker.Unlock();
-	for (int32 i = 0; Breakpoint* breakpoint = breakpointsToUpdate.ItemAt(i);
+	for (int32_t i = 0; Breakpoint* breakpoint = breakpointsToUpdate.ItemAt(i);
 			i++) {
 		_UpdateBreakpointInstallation(breakpoint);
 	}
 
 	teamLocker.Lock();
-	for (int32 i = 0; Breakpoint* breakpoint = breakpointsToUpdate.ItemAt(i);
+	for (int32_t i = 0; Breakpoint* breakpoint = breakpointsToUpdate.ItemAt(i);
 			i++) {
 		if (breakpoint->IsUnused())
 			fTeam->RemoveBreakpoint(breakpoint);
@@ -451,7 +451,7 @@ void BreakpointManager::_UpdateImageBreakpoints(Image* image, bool removeOnly)
 
 	// install the breakpoints for the new user breakpoint instances
 	teamLocker.Unlock();
-	for (int32 i = 0; UserBreakpointInstance* instance = newInstances.ItemAt(i);
+	for (int32_t i = 0; UserBreakpointInstance* instance = newInstances.ItemAt(i);
 			i++) {
 		Breakpoint* breakpoint = instance->GetBreakpoint();
 		if (breakpoint == NULL

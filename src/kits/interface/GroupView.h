@@ -46,7 +46,7 @@ private:
 								BGroupView(const BGroupView&);
 			void				operator =(const BGroupView&);
 
-			uint32				_reserved[2];
+			uint32_t				_reserved[2];
 };
 
 

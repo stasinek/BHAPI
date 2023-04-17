@@ -665,8 +665,8 @@ dst_dnskey_to_key(const char *in_name, const u_char *rdata, const int len)
 	key_st->dk_flags = dst_s_get_int16(rdata);
 	key_st->dk_proto = (u_int16_t) rdata[DST_KEY_PROT];
 	if (key_st->dk_flags & DST_EXTEND_FLAG) {
-		u_int32_t ext_flags;
-		ext_flags = (u_int32_t) dst_s_get_int16(&rdata[DST_EXT_FLAG]);
+		u_int32_t_t ext_flags;
+		ext_flags = (u_int32_t_t) dst_s_get_int16(&rdata[DST_EXT_FLAG]);
 		key_st->dk_flags = key_st->dk_flags | (ext_flags << 16);
 		start += 2;
 	}

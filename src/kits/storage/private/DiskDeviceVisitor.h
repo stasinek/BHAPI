@@ -19,7 +19,7 @@ public:
 
 	// return true to abort iteration
 	virtual bool Visit(BDiskDevice *device);
-	virtual bool Visit(BPartition *partition, int32 level);
+	virtual bool Visit(BPartition *partition, int32_t level);
 };
 
 #endif	// _DISK_DEVICE_VISITOR_H

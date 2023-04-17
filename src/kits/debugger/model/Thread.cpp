@@ -61,7 +61,7 @@ void Thread::SetName(const BString& name)
 }
 
 
-void Thread::SetState(uint32 state, uint32 reason, const BString& info)
+void Thread::SetState(uint32_t state, uint32_t reason, const BString& info)
 {
 	if (state == fState && reason == fStoppedReason)
 		return;
@@ -133,7 +133,7 @@ status_t Thread::AddReturnValueInfo(ReturnValueInfo* info)
 
 void Thread::ClearReturnValueInfos()
 {
-	for (int32 i = 0; i < fReturnValueInfos->CountItems(); i++)
+	for (int32_t i = 0; i < fReturnValueInfos->CountItems(); i++)
 		fReturnValueInfos->ItemAt(i)->ReleaseReference();
 
 	fReturnValueInfos->MakeEmpty();

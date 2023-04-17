@@ -39,14 +39,14 @@ bool TargetAddressRangeList::AddRange(const TargetAddressRange& range)
 }
 
 
-int32 TargetAddressRangeList::CountRanges() const
+int32_t TargetAddressRangeList::CountRanges() const
 {
 	return fRanges.Size();
 }
 
 
 TargetAddressRange
-TargetAddressRangeList::RangeAt(int32 index) const
+TargetAddressRangeList::RangeAt(int32_t index) const
 {
 	return index >= 0 && index < fRanges.Size()
 		? fRanges[index] : TargetAddressRange();
@@ -56,12 +56,12 @@ TargetAddressRangeList::RangeAt(int32 index) const
 target_addr_t
 TargetAddressRangeList::LowestAddress() const
 {
-	int32 count = fRanges.Size();
+	int32_t count = fRanges.Size();
 	if (count == 0)
 		return 0;
 
 	target_addr_t lowest = fRanges[0].Start();
-	for (int32 i = 0; i < count; i++)
+	for (int32_t i = 0; i < count; i++)
 		lowest = std::min(lowest, fRanges[i].Start());
 
 	return lowest;
@@ -72,8 +72,8 @@ TargetAddressRange
 TargetAddressRangeList::CoveringRange() const
 {
 	TargetAddressRange range;
-	int32 count = fRanges.Size();
-	for (int32 i = 0; i < count; i++)
+	int32_t count = fRanges.Size();
+	for (int32_t i = 0; i < count; i++)
 		range |= fRanges[i];
 
 	return range;
@@ -82,8 +82,8 @@ TargetAddressRangeList::CoveringRange() const
 
 bool TargetAddressRangeList::Contains(target_addr_t address) const
 {
-	int32 count = fRanges.Size();
-	for (int32 i = 0; i < count; i++) {
+	int32_t count = fRanges.Size();
+	for (int32_t i = 0; i < count; i++) {
 		if (fRanges[i].Contains(address))
 			return true;
 	}

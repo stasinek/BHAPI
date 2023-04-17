@@ -1192,6 +1192,18 @@ SOURCES += \
 #    src/os/team.c \
 #    src/os/thread.c \
 #    src/wrappers/BHAPI_wrapper_port.cpp
+    src/wrappers/win32/BHAPI_wrapper_area.cpp \
+    src/wrappers/win32/BHAPI_wrapper_image.cpp \
+    src/wrappers/win32/BHAPI_wrapper_locker.cpp \
+    src/wrappers/win32/BHAPI_wrapper_os.cpp \
+    src/wrappers/win32/BHAPI_wrapper_semaphore.cpp \
+    src/wrappers/win32/BHAPI_wrapper_thread.cpp \
+    src/wrappers/win32/BHAPI_wrapper_timefuncs.cpp \
+    src/wrappers/win32/GDI/BHAPI_wrapper_application.cpp \
+    src/wrappers/win32/GDI/BHAPI_wrapper_drawing.cpp \
+    src/wrappers/win32/GDI/BHAPI_wrapper_pixmap.cpp \
+    src/wrappers/win32/GDI/BHAPI_wrapper_win32-font.cpp \
+    src/wrappers/win32/GDI/BHAPI_wrapper_window.cpp
 
 
 HEADERS +=  \
@@ -1997,7 +2009,10 @@ HEADERS +=  \
     src/HaikuTypes.h \
     src/Haiku.h \
     src/HaikuDefs.h \
-    src/HaikuConfig.h
+    src/HaikuConfig.h \
+    src/wrappers/win32/syscalls.h \
+    src/wrappers/win32/GDI/BHAPI_wrapper_GDI.h \
+    src/HaikuByteOrder.h
 
 LIBS -= -lfreetype
 LIBS += -L"../freetype/lib/debug" -libfreetype

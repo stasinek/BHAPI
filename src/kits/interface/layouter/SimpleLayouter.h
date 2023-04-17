@@ -18,13 +18,13 @@ namespace Layout {
 
 class SimpleLayouter : public Layouter {
 public:
-								SimpleLayouter(int32 elementCount,
+								SimpleLayouter(int32_t elementCount,
 									float spacing);
 	virtual						~SimpleLayouter();
 
-	virtual	void				AddConstraints(int32 element, int32 length,
+	virtual	void				AddConstraints(int32_t element, int32_t length,
 									float min, float max, float preferred);
-	virtual	void				SetWeight(int32 element, float weight);
+	virtual	void				SetWeight(int32_t element, float weight);
 
 	virtual	float				MinSize();
 	virtual	float				MaxSize();
@@ -36,8 +36,8 @@ public:
 
 	virtual	Layouter*			CloneLayouter();
 
-	static	void				DistributeSize(int32 size, float weights[],
-									int32 sizes[], int32 count);
+	static	void				DistributeSize(int32_t size, float weights[],
+									int32_t sizes[], int32_t count);
 
 private:
 	static	long				_CalculateSumWeight(BList& elementInfos);
@@ -51,13 +51,13 @@ private:
 			class ElementInfo;
 			class MyLayoutInfo;
 
-			int32				fElementCount;
-			int32				fSpacing;
+			int32_t				fElementCount;
+			int32_t				fSpacing;
 			ElementInfo*		fElements;
 
-			int32				fMin;
-			int32				fMax;
-			int32				fPreferred;
+			int32_t				fMin;
+			int32_t				fMax;
+			int32_t				fPreferred;
 
 			bool				fMinMaxValid;
 

@@ -65,7 +65,7 @@ struct EnvironmentFilter {
 		return fBufferSize + fAdditionalEnvCount * sizeof(char*);
 	}
 
-	size_t PrepareSlot(const char* env, int32 index, char* buffer)
+	size_t PrepareSlot(const char* env, int32_t index, char* buffer)
 	{
 		if (fNextEntryIndex < fEntryCount
 			&& fEntries[fNextEntryIndex].index == index) {
@@ -158,7 +158,7 @@ private:
 		}
 	}
 
-	int32 _FindEnvEntry(const char* const* env, size_t envCount,
+	int32_t _FindEnvEntry(const char* const* env, size_t envCount,
 		const char* variable, size_t variableLength)
 	{
 		for (size_t i = 0; i < envCount; i++) {
@@ -181,7 +181,7 @@ private:
 private:
 	struct Entry {
 		char*	replacement;
-		int32	index;
+		int32_t	index;
 
 		bool operator<(const Entry& other) const
 		{
@@ -200,11 +200,11 @@ private:
 
 
 thread_id
-load_image(int32 argCount, const char **args, const char **environ)
+load_image(int32_t argCount, const char **args, const char **environ)
 {
 	char invoker[B_FILE_NAME_LENGTH];
 	char **newArgs = NULL;
-	int32 envCount = 0;
+	int32_t envCount = 0;
 	thread_id thread;
 
 	if (argCount < 1 || environ == NULL)
@@ -262,7 +262,7 @@ status_t unload_add_on(image_id id)
 }
 
 
-status_t get_image_symbol(image_id id, char const *symbolName, int32 symbolType,
+status_t get_image_symbol(image_id id, char const *symbolName, int32_t symbolType,
 	void **_location)
 {
 	return __gRuntimeLoader->get_image_symbol(id, symbolName, symbolType,
@@ -270,7 +270,7 @@ status_t get_image_symbol(image_id id, char const *symbolName, int32 symbolType,
 }
 
 
-status_t get_image_symbol_etc(image_id id, char const *symbolName, int32 symbolType,
+status_t get_image_symbol_etc(image_id id, char const *symbolName, int32_t symbolType,
 	bool recursive, image_id *_inImage, void **_location)
 {
 	return __gRuntimeLoader->get_image_symbol(id, symbolName, symbolType,
@@ -278,8 +278,8 @@ status_t get_image_symbol_etc(image_id id, char const *symbolName, int32 symbolT
 }
 
 
-status_t get_nth_image_symbol(image_id id, int32 num, char *nameBuffer, int32 *_nameLength,
-	int32 *_symbolType, void **_location)
+status_t get_nth_image_symbol(image_id id, int32_t num, char *nameBuffer, int32_t *_nameLength,
+	int32_t *_symbolType, void **_location)
 {
 	return __gRuntimeLoader->get_nth_image_symbol(id, num, nameBuffer, _nameLength, _symbolType, _location);
 }
@@ -291,13 +291,13 @@ status_t _get_image_info(image_id id, image_info *info, size_t infoSize)
 }
 
 
-status_t _get_next_image_info(team_id team, int32 *cookie, image_info *info, size_t infoSize)
+status_t _get_next_image_info(team_id team, int32_t *cookie, image_info *info, size_t infoSize)
 {
 	return _kern_get_next_image_info(team, cookie, info, infoSize);
 }
 
 
-void clear_caches(void *address, size_t length, uint32 flags)
+void clear_caches(void *address, size_t length, uint32_t flags)
 {
 	_kern_clear_caches(address, length, flags);
 }
@@ -311,7 +311,7 @@ next_argument(char **_start, bool separate)
 {
 	char *line = *_start;
 	char quote = 0;
-	int32 i;
+	int32_t i;
 
 	// eliminate leading spaces
 	while (line[0] == ' ')
@@ -347,9 +347,9 @@ next_argument(char **_start, bool separate)
 
 
 status_t __parse_invoke_line(char *invoker, char ***_newArgs,
-	char * const **_oldArgs, int32 *_argCount, const char *arg0)
+	char * const **_oldArgs, int32_t *_argCount, const char *arg0)
 {
-	int32 i, count = 0;
+	int32_t i, count = 0;
 	char *arg = invoker;
 	char **newArgs;
 
@@ -386,7 +386,7 @@ status_t __parse_invoke_line(char *invoker, char ***_newArgs,
 }
 
 
-status_t __get_next_image_dependency(image_id id, uint32 *cookie, const char **_name)
+status_t __get_next_image_dependency(image_id id, uint32_t *cookie, const char **_name)
 {
 	return __gRuntimeLoader->get_next_image_dependency(id, cookie, _name);
 }
@@ -407,25 +407,25 @@ status_t __test_executable(const char *path, char *invoker)
 	executed. If the executable file specifies changes to environment variable
 	values, those will be performed.
 */
-status_t __flatten_process_args(const char* const* args, int32 argCount,
-	const char* const* env, int32* _envCount, const char* executablePath,
+status_t __flatten_process_args(const char* const* args, int32_t argCount,
+	const char* const* env, int32_t* _envCount, const char* executablePath,
 	char*** _flatArgs, size_t* _flatSize)
 {
 	if (args == NULL || _envCount == NULL || (env == NULL && *_envCount != 0))
 		return B_BAD_VALUE;
 
-	int32 envCount = *_envCount;
+	int32_t envCount = *_envCount;
 
 	// determine total needed size
-	int32 argSize = 0;
-	for (int32 i = 0; i < argCount; i++) {
+	int32_t argSize = 0;
+	for (int32_t i = 0; i < argCount; i++) {
 		if (args[i] == NULL)
 			return B_BAD_VALUE;
 		argSize += strlen(args[i]) + 1;
 	}
 
-	int32 envSize = 0;
-	for (int32 i = 0; i < envCount; i++) {
+	int32_t envSize = 0;
+	for (int32_t i = 0; i < envCount; i++) {
 		if (env[i] == NULL)
 			return B_BAD_VALUE;
 		envSize += strlen(env[i]) + 1;
@@ -435,9 +435,9 @@ status_t __flatten_process_args(const char* const* args, int32 argCount,
 	if (executablePath != NULL)
 		envFilter.Init(executablePath, env, envCount);
 
-	int32 totalSlotCount = argCount + envCount + 2
+	int32_t totalSlotCount = argCount + envCount + 2
 		+ envFilter.AdditionalSlotsNeeded();
-	int32 size = totalSlotCount * sizeof(char*) + argSize + envSize
+	int32_t size = totalSlotCount * sizeof(char*) + argSize + envSize
 		+ envFilter.AdditionalSizeNeeded();
 	if (size > MAX_PROCESS_ARGS_SIZE)
 		return B_TOO_MANY_ARGS;
@@ -451,8 +451,8 @@ status_t __flatten_process_args(const char* const* args, int32 argCount,
 	char* stringSpace = (char*)(flatArgs + totalSlotCount);
 
 	// copy arguments and environment
-	for (int32 i = 0; i < argCount; i++) {
-		int32 argSize = strlen(args[i]) + 1;
+	for (int32_t i = 0; i < argCount; i++) {
+		int32_t argSize = strlen(args[i]) + 1;
 		memcpy(stringSpace, args[i], argSize);
 		*slot++ = stringSpace;
 		stringSpace += argSize;
@@ -460,7 +460,7 @@ status_t __flatten_process_args(const char* const* args, int32 argCount,
 
 	*slot++ = NULL;
 
-	for (int32 i = 0; i < envCount; i++) {
+	for (int32_t i = 0; i < envCount; i++) {
 		size_t envSize = envFilter.PrepareSlot(env[i], i, stringSpace);
 		*slot++ = stringSpace;
 		stringSpace += envSize;

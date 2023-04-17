@@ -33,12 +33,12 @@ void RADEONPllErrataAfterData( vuint8 *regs, radeon_type asic );
 
 
 // read value "val" from PLL-register "addr"
-uint32 Radeon_INPLL( vuint8 *regs, radeon_type asic, int addr );
+uint32_t Radeon_INPLL( vuint8 *regs, radeon_type asic, int addr );
 
 // write value "val" to PLL-register "addr" 
-void Radeon_OUTPLL( vuint8 *regs, radeon_type asic, uint8 addr, uint32 val );
+void Radeon_OUTPLL( vuint8 *regs, radeon_type asic, uint8 addr, uint32_t val );
 
 // write "val" to PLL-register "addr" keeping bits "mask"
-void Radeon_OUTPLLP( vuint8 *regs, radeon_type asic, uint8 addr, uint32 val, uint32 mask );
+void Radeon_OUTPLLP( vuint8 *regs, radeon_type asic, uint8 addr, uint32_t val, uint32_t mask );
 
 #endif

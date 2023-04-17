@@ -287,7 +287,7 @@ namespace agg
     public:
         typedef scanline32_u8 self_type;
         typedef int8u         cover_type;
-        typedef int32         coord_type;
+        typedef int32_t         coord_type;
 
         //--------------------------------------------------------------------
         struct span

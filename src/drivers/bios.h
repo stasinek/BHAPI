@@ -38,18 +38,18 @@ typedef struct BIOSState bios_state;
 
 // Registers to pass to a BIOS interrupt.
 struct bios_regs {
-	uint32	eax;
-	uint32	ebx;
-	uint32	ecx;
-	uint32	edx;
-	uint32	edi;
-	uint32	esi;
-	uint32	ebp;
-	uint32	eflags;
-	uint32	ds;
-	uint32	es;
-	uint32	fs;
-	uint32	gs;
+	uint32_t	eax;
+	uint32_t	ebx;
+	uint32_t	ecx;
+	uint32_t	edx;
+	uint32_t	edi;
+	uint32_t	esi;
+	uint32_t	ebp;
+	uint32_t	eflags;
+	uint32_t	ds;
+	uint32_t	es;
+	uint32_t	fs;
+	uint32_t	gs;
 };
 
 
@@ -62,8 +62,8 @@ struct bios_module_info {
 
 	// Memory management methods.
 	void*		(*allocate_mem)(bios_state* state, size_t size);
-	uint32		(*physical_address)(bios_state* state, void* virtualAddress);
-	void*		(*virtual_address)(bios_state* state, uint32 physicalAddress);
+	uint32_t		(*physical_address)(bios_state* state, void* virtualAddress);
+	void*		(*virtual_address)(bios_state* state, uint32_t physicalAddress);
 };
 
 

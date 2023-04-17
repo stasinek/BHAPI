@@ -54,7 +54,7 @@ X86VMTranslationMap32Bit::~X86VMTranslationMap32Bit()
 
 	if (fPagingStructures->pgdir_virt != NULL) {
 		// cycle through and free all of the user space pgtables
-		for (uint32 i = VADDR_TO_PDENT(USER_BASE);
+		for (uint32_t i = VADDR_TO_PDENT(USER_BASE);
 				i <= VADDR_TO_PDENT(USER_BASE + (USER_SIZE - 1)); i++) {
 			if ((fPagingStructures->pgdir_virt[i] & X86_PDE_PRESENT) != 0) {
 				addr_t address = fPagingStructures->pgdir_virt[i]
@@ -136,8 +136,8 @@ X86VMTranslationMap32Bit::MaxPagesNeededToMap(addr_t start, addr_t end) const
 
 
 status_t
-X86VMTranslationMap32Bit::Map(addr_t va, phys_addr_t pa, uint32 attributes,
-	uint32 memoryType, vm_page_reservation* reservation)
+X86VMTranslationMap32Bit::Map(addr_t va, phys_addr_t pa, uint32_t attributes,
+	uint32_t memoryType, vm_page_reservation* reservation)
 {
 	TRACE("map_tmap: entry pa 0x%lx va 0x%lx\n", pa, va);
 
@@ -152,7 +152,7 @@ X86VMTranslationMap32Bit::Map(addr_t va, phys_addr_t pa, uint32 attributes,
 	page_directory_entry* pd = fPagingStructures->pgdir_virt;
 
 	// check to see if a page table exists for this range
-	uint32 index = VADDR_TO_PDENT(va);
+	uint32_t index = VADDR_TO_PDENT(va);
 	if ((pd[index] & X86_PDE_PRESENT) == 0) {
 		phys_addr_t pgtable;
 		vm_page *page;
@@ -496,7 +496,7 @@ X86VMTranslationMap32Bit::UnmapPages(VMArea* area, addr_t base, size_t size,
 
 	// free removed mappings
 	bool isKernelSpace = area->address_space == VMAddressSpace::Kernel();
-	uint32 freeFlags = CACHE_DONT_WAIT_FOR_MEMORY
+	uint32_t freeFlags = CACHE_DONT_WAIT_FOR_MEMORY
 		| (isKernelSpace ? CACHE_DONT_LOCK_KERNEL_SPACE : 0);
 	while (vm_page_mapping* mapping = queue.RemoveHead())
 		object_cache_free(gPageMappingsObjectCache, mapping, freeFlags);
@@ -598,7 +598,7 @@ X86VMTranslationMap32Bit::UnmapArea(VMArea* area, bool deletingAddressSpace,
 	locker.Unlock();
 
 	bool isKernelSpace = area->address_space == VMAddressSpace::Kernel();
-	uint32 freeFlags = CACHE_DONT_WAIT_FOR_MEMORY
+	uint32_t freeFlags = CACHE_DONT_WAIT_FOR_MEMORY
 		| (isKernelSpace ? CACHE_DONT_LOCK_KERNEL_SPACE : 0);
 	while (vm_page_mapping* mapping = mappings.RemoveHead())
 		object_cache_free(gPageMappingsObjectCache, mapping, freeFlags);
@@ -607,7 +607,7 @@ X86VMTranslationMap32Bit::UnmapArea(VMArea* area, bool deletingAddressSpace,
 
 status_t
 X86VMTranslationMap32Bit::Query(addr_t va, phys_addr_t *_physical,
-	uint32 *_flags)
+	uint32_t *_flags)
 {
 	// default the flags to not present
 	*_flags = 0;
@@ -651,7 +651,7 @@ X86VMTranslationMap32Bit::Query(addr_t va, phys_addr_t *_physical,
 
 status_t
 X86VMTranslationMap32Bit::QueryInterrupt(addr_t va, phys_addr_t *_physical,
-	uint32 *_flags)
+	uint32_t *_flags)
 {
 	*_flags = 0;
 	*_physical = 0;
@@ -688,8 +688,8 @@ X86VMTranslationMap32Bit::QueryInterrupt(addr_t va, phys_addr_t *_physical,
 
 
 status_t
-X86VMTranslationMap32Bit::Protect(addr_t start, addr_t end, uint32 attributes,
-	uint32 memoryType)
+X86VMTranslationMap32Bit::Protect(addr_t start, addr_t end, uint32_t attributes,
+	uint32_t memoryType)
 {
 	start = ROUNDDOWN(start, B_PAGE_SIZE);
 	if (start >= end)
@@ -699,7 +699,7 @@ X86VMTranslationMap32Bit::Protect(addr_t start, addr_t end, uint32 attributes,
 		attributes);
 
 	// compute protection flags
-	uint32 newProtectionFlags = 0;
+	uint32_t newProtectionFlags = 0;
 	if ((attributes & B_USER_PROTECTION) != 0) {
 		newProtectionFlags = X86_PTE_USER;
 		if ((attributes & B_WRITE_AREA) != 0)
@@ -765,7 +765,7 @@ X86VMTranslationMap32Bit::Protect(addr_t start, addr_t end, uint32 attributes,
 
 
 status_t
-X86VMTranslationMap32Bit::ClearFlags(addr_t va, uint32 flags)
+X86VMTranslationMap32Bit::ClearFlags(addr_t va, uint32_t flags)
 {
 	int index = VADDR_TO_PDENT(va);
 	page_directory_entry* pd = fPagingStructures->pgdir_virt;
@@ -774,7 +774,7 @@ X86VMTranslationMap32Bit::ClearFlags(addr_t va, uint32 flags)
 		return B_OK;
 	}
 
-	uint32 flagsToClear = ((flags & PAGE_MODIFIED) ? X86_PTE_DIRTY : 0)
+	uint32_t flagsToClear = ((flags & PAGE_MODIFIED) ? X86_PTE_DIRTY : 0)
 		| ((flags & PAGE_ACCESSED) ? X86_PTE_ACCESSED : 0);
 
 	Thread* thread = thread_get_current_thread();

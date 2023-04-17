@@ -80,7 +80,7 @@ SoundPlayNode::Format() const
 
 
 BMediaAddOn*
-SoundPlayNode::AddOn(int32* _internalID) const
+SoundPlayNode::AddOn(int32_t* _internalID) const
 {
 	CALLED();
 	// This only gets called if we are in an add-on.
@@ -96,7 +96,7 @@ void SoundPlayNode::Preroll()
 }
 
 
-status_t SoundPlayNode::HandleMessage(int32 message, const void* data, size_t size)
+status_t SoundPlayNode::HandleMessage(int32_t message, const void* data, size_t size)
 {
 	CALLED();
 	return B_ERROR;
@@ -150,7 +150,7 @@ void SoundPlayNode::SetRunMode(run_mode mode)
 // #pragma mark - implementation for BBufferProducer
 
 
-status_t SoundPlayNode::FormatSuggestionRequested(media_type type, int32 /*quality*/,
+status_t SoundPlayNode::FormatSuggestionRequested(media_type type, int32_t /*quality*/,
 	media_format* format)
 {
 	// FormatSuggestionRequested() is not necessarily part of the format
@@ -206,7 +206,7 @@ status_t SoundPlayNode::FormatProposal(const media_source& output, media_format*
 
 status_t SoundPlayNode::FormatChangeRequested(const media_source& source,
 	const media_destination& destination, media_format* _format,
-	int32* /* deprecated */)
+	int32_t* /* deprecated */)
 {
 	CALLED();
 
@@ -215,7 +215,7 @@ status_t SoundPlayNode::FormatChangeRequested(const media_source& source,
 }
 
 
-status_t SoundPlayNode::GetNextOutput(int32* cookie, media_output* _output)
+status_t SoundPlayNode::GetNextOutput(int32_t* cookie, media_output* _output)
 {
 	CALLED();
 
@@ -229,7 +229,7 @@ status_t SoundPlayNode::GetNextOutput(int32* cookie, media_output* _output)
 }
 
 
-status_t SoundPlayNode::DisposeOutputCookie(int32 cookie)
+status_t SoundPlayNode::DisposeOutputCookie(int32_t cookie)
 {
 	CALLED();
 	// do nothing because we don't use the cookie for anything special
@@ -329,12 +329,12 @@ status_t SoundPlayNode::PrepareToConnect(const media_source& what,
 	#define FORMAT_USER_DATA_TYPE 		0x7294a8f3
 	#define FORMAT_USER_DATA_MAGIC_1	0xc84173bd
 	#define FORMAT_USER_DATA_MAGIC_2	0x4af62b7d
-	uint32 channel_count = 0;
+	uint32_t channel_count = 0;
 	float frame_rate = 0;
 	if (format->user_data_type == FORMAT_USER_DATA_TYPE
-		&& *(uint32 *)&format->user_data[0] == FORMAT_USER_DATA_MAGIC_1
-		&& *(uint32 *)&format->user_data[44] == FORMAT_USER_DATA_MAGIC_2) {
-		channel_count = *(uint32 *)&format->user_data[4];
+		&& *(uint32_t *)&format->user_data[0] == FORMAT_USER_DATA_MAGIC_1
+		&& *(uint32_t *)&format->user_data[44] == FORMAT_USER_DATA_MAGIC_2) {
+		channel_count = *(uint32_t *)&format->user_data[4];
 		frame_rate = *(float *)&format->user_data[20];
 		TRACE("SoundPlayNode::PrepareToConnect: found mixer info: "
 			"channel_count %ld, frame_rate %.1f\n", channel_count, frame_rate);
@@ -410,7 +410,7 @@ void SoundPlayNode::Connect(status_t error, const media_source& source,
 		/ ((fOutput.format.u.raw_audio.format
 				& media_raw_audio_format::B_AUDIO_SIZE_MASK)
 			* fOutput.format.u.raw_audio.channel_count))
-		/ (int32)fOutput.format.u.raw_audio.frame_rate;
+		/ (int32_t)fOutput.format.u.raw_audio.frame_rate;
 	SetBufferDuration(duration);
 	TRACE("SoundPlayNode::Connect: buffer duration is %Ld\n", duration);
 
@@ -501,7 +501,7 @@ void SoundPlayNode::LateNoticeReceived(const media_source& what, bigtime_t howMu
 
 
 void SoundPlayNode::EnableOutput(const media_source& what, bool enabled,
-	int32* /* deprecated */)
+	int32_t* /* deprecated */)
 {
 	CALLED();
 
@@ -532,7 +532,7 @@ void SoundPlayNode::AdditionalBufferRequested(const media_source& source,
 
 
 void SoundPlayNode::LatencyChanged(const media_source& source,
-	const media_destination& destination, bigtime_t newLatency, uint32 flags)
+	const media_destination& destination, bigtime_t newLatency, uint32_t flags)
 {
 	CALLED();
 
@@ -667,7 +667,7 @@ status_t SoundPlayNode::SendNewBuffer(const media_timed_event* event,
 	// nextEvent is the time at which the buffer should arrive at it's
 	// destination
 	bigtime_t nextEvent = fStartTime + bigtime_t((1000000LL * fFramesSent)
-		/ (int32)fOutput.format.u.raw_audio.frame_rate);
+		/ (int32_t)fOutput.format.u.raw_audio.frame_rate);
 	media_timed_event nextBufferEvent(nextEvent, SEND_NEW_BUFFER_EVENT);
 	EventQueue()->AddEvent(nextBufferEvent);
 
@@ -764,7 +764,7 @@ status_t SoundPlayNode::AllocateBuffers()
 
 	// allocate enough buffers to span our downstream latency, plus one
 	size_t size = fOutput.format.u.raw_audio.buffer_size;
-	int32 count = int32(fLatency / BufferDuration() + 1 + 1);
+	int32_t count = int32_t(fLatency / BufferDuration() + 1 + 1);
 
 	TRACE("SoundPlayNode::AllocateBuffers: latency = %" B_PRId64 ", buffer "
 		"duration = %" B_PRId64 ", count %" B_PRId32 "\n", fLatency,

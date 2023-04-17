@@ -33,8 +33,8 @@ class BFloatFormat : public BNumberFormat, public BFloatFormatParameters {
 		// make them all fit).
 		status_t Format(double number, BString *buffer,
 						format_field_position *positions,
-						int32 positionCount = 1,
-						int32 *fieldCount = NULL,
+						int32_t positionCount = 1,
+						int32_t *fieldCount = NULL,
 						bool allFieldPositions = false) const;
 
 		// TODO: Format() versions for (char* buffer, size_t bufferSize)

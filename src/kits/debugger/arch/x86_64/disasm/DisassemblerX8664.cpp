@@ -19,7 +19,7 @@
 #include <InstructionInfo.h>
 
 
-static uint8 RegisterNumberFromUdisIndex(int32 udisIndex)
+static uint8 RegisterNumberFromUdisIndex(int32_t udisIndex)
 {
 	switch (udisIndex) {
 		case UD_R_RIP: return X86_64_REGISTER_RIP;

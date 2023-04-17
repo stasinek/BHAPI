@@ -15,10 +15,10 @@ public:
 								LayoutInfo();
 	virtual						~LayoutInfo();
 
-	virtual	float				ElementLocation(int32 element) = 0;
-	virtual	float				ElementSize(int32 element) = 0;
+	virtual	float				ElementLocation(int32_t element) = 0;
+	virtual	float				ElementSize(int32_t element) = 0;
 
-	virtual	float				ElementRangeSize(int32 position, int32 length);
+	virtual	float				ElementRangeSize(int32_t position, int32_t length);
 };
 
 
@@ -27,9 +27,9 @@ public:
 								Layouter();
 	virtual						~Layouter();
 
-	virtual	void				AddConstraints(int32 element, int32 length,
+	virtual	void				AddConstraints(int32_t element, int32_t length,
 									float min, float max, float preferred) = 0;
-	virtual	void				SetWeight(int32 element, float weight) = 0;
+	virtual	void				SetWeight(int32_t element, float weight) = 0;
 
 	virtual	float				MinSize() = 0;
 	virtual	float				MaxSize() = 0;

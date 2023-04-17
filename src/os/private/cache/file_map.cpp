@@ -76,16 +76,16 @@ public:
 								file_io_vec* vecs, size_t* _count,
 								size_t align);
 
-			file_extent*	ExtentAt(uint32 index);
+			file_extent*	ExtentAt(uint32_t index);
 
 			size_t			Count() const { return fCount; }
 			struct vnode*	Vnode() const { return fVnode; }
 			off_t			Size() const { return fSize; }
 
-			status_t		SetMode(uint32 mode);
+			status_t		SetMode(uint32_t mode);
 
 private:
-			file_extent*	_FindExtent(off_t offset, uint32* _index);
+			file_extent*	_FindExtent(off_t offset, uint32_t* _index);
 			status_t		_MakeSpace(size_t count);
 			status_t		_Add(file_io_vec* vecs, size_t vecCount,
 								off_t& lastOffset);
@@ -141,7 +141,7 @@ FileMap::~FileMap()
 
 
 file_extent*
-FileMap::ExtentAt(uint32 index)
+FileMap::ExtentAt(uint32_t index)
 {
 	if (index >= fCount)
 		return NULL;
@@ -154,13 +154,13 @@ FileMap::ExtentAt(uint32 index)
 
 
 file_extent*
-FileMap::_FindExtent(off_t offset, uint32 *_index)
+FileMap::_FindExtent(off_t offset, uint32_t *_index)
 {
-	int32 left = 0;
-	int32 right = fCount - 1;
+	int32_t left = 0;
+	int32_t right = fCount - 1;
 
 	while (left <= right) {
-		int32 index = (left + right) / 2;
+		int32_t index = (left + right) / 2;
 		file_extent* extent = ExtentAt(index);
 
 		if (extent->offset > offset) {
@@ -234,7 +234,7 @@ FileMap::_Add(file_io_vec* vecs, size_t vecCount, off_t& lastOffset)
 {
 	TRACE("FileMap@%p::Add(vecCount = %ld)\n", this, vecCount);
 
-	uint32 start = fCount;
+	uint32_t start = fCount;
 	off_t offset = 0;
 
 	status_t status = _MakeSpace(fCount + vecCount);
@@ -247,7 +247,7 @@ FileMap::_Add(file_io_vec* vecs, size_t vecCount, off_t& lastOffset)
 		offset = lastExtent->offset + lastExtent->disk.length;
 	}
 
-	for (uint32 i = 0; i < vecCount; i++) {
+	for (uint32_t i = 0; i < vecCount; i++) {
 		if (lastExtent != NULL) {
 			if (lastExtent->disk.offset + lastExtent->disk.length
 					== vecs[i].offset
@@ -276,7 +276,7 @@ FileMap::_Add(file_io_vec* vecs, size_t vecCount, off_t& lastOffset)
 	}
 
 #ifdef TRACE_FILE_MAP
-	for (uint32 i = 0; i < fCount; i++) {
+	for (uint32_t i = 0; i < fCount; i++) {
 		file_extent* extent = ExtentAt(i);
 		TRACE("[%ld] extent offset %Ld, disk offset %Ld, length %Ld\n",
 			i, extent->offset, extent->disk.offset, extent->disk.length);
@@ -291,10 +291,10 @@ FileMap::_Add(file_io_vec* vecs, size_t vecCount, off_t& lastOffset)
 void
 FileMap::_InvalidateAfter(off_t offset)
 {
-	uint32 index;
+	uint32_t index;
 	file_extent* extent = _FindExtent(offset, &index);
 	if (extent != NULL) {
-		uint32 resizeTo = index + 1;
+		uint32_t resizeTo = index + 1;
 
 		if (extent->offset + extent->disk.length > offset) {
 			extent->disk.length = offset - extent->offset;
@@ -379,7 +379,7 @@ FileMap::_Cache(off_t offset, off_t size)
 
 
 status_t
-FileMap::SetMode(uint32 mode)
+FileMap::SetMode(uint32_t mode)
 {
 	if (mode != FILE_MAP_CACHE_ALL && mode != FILE_MAP_CACHE_ON_DEMAND)
 		return B_BAD_VALUE;
@@ -438,7 +438,7 @@ FileMap::Translate(off_t offset, size_t size, file_io_vec* vecs, size_t* _count,
 	// We now have cached the map of this file as far as we need it, now
 	// we need to translate it for the requested access.
 
-	uint32 index;
+	uint32_t index;
 	file_extent* fileExtent = _FindExtent(offset, &index);
 
 	offset -= fileExtent->offset;
@@ -457,7 +457,7 @@ FileMap::Translate(off_t offset, size_t size, file_io_vec* vecs, size_t* _count,
 	// copy the rest of the vecs
 
 	size -= vecs[0].length;
-	uint32 vecIndex = 1;
+	uint32_t vecIndex = 1;
 
 	while (true) {
 		fileExtent++;
@@ -512,7 +512,7 @@ dump_file_map(int argc, char** argv)
 	if (!printExtents)
 		return 0;
 
-	for (uint32 i = 0; i < map->Count(); i++) {
+	for (uint32_t i = 0; i < map->Count(); i++) {
 		file_extent* extent = map->ExtentAt(i);
 
 		kprintf("  [%" B_PRIu32 "] offset %" B_PRIdOFF ", disk offset %"
@@ -540,9 +540,9 @@ dump_file_map_stats(int argc, char** argv)
 	FileMapList::Iterator iterator = sList.GetIterator();
 	off_t size = 0;
 	off_t mapSize = 0;
-	uint32 extents = 0;
-	uint32 count = 0;
-	uint32 emptyCount = 0;
+	uint32_t extents = 0;
+	uint32_t count = 0;
+	uint32_t emptyCount = 0;
 
 	while (iterator.HasNext()) {
 		FileMap* map = iterator.Next();
@@ -650,7 +650,7 @@ file_map_invalidate(void* _map, off_t offset, off_t size)
 
 
 extern "C" status_t
-file_map_set_mode(void* _map, uint32 mode)
+file_map_set_mode(void* _map, uint32_t mode)
 {
 	FileMap* map = (FileMap*)_map;
 	if (map == NULL)

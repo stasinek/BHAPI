@@ -47,9 +47,9 @@ All rights reserved.
 #define B_TRANSLATION_CONTEXT "FilePermissionsView"
 
 
-const uint32 kPermissionsChanged = 'prch';
-const uint32 kNewOwnerEntered = 'nwow';
-const uint32 kNewGroupEntered = 'nwgr';
+const uint32_t kPermissionsChanged = 'prch';
+const uint32_t kNewOwnerEntered = 'nwow';
+const uint32_t kNewGroupEntered = 'nwgr';
 
 
 //	#pragma mark - FilePermissionsView
@@ -153,8 +153,8 @@ FilePermissionsView::FilePermissionsView(BRect rect, Model* model)
 		}
 	};
 
-	for (int32 x = 0; x < 3; x++) {
-		for (int32 y = 0; y < 3; y++) {
+	for (int32_t x = 0; x < 3; x++) {
+		for (int32_t y = 0; y < 3; y++) {
 			*checkBoxArray[y][x] =
 				new BCheckBox(BRect(kLeftMargin + kHorizontalSpacing * x,
 						kTopMargin + kVerticalSpacing * y,
@@ -235,15 +235,15 @@ void FilePermissionsView::ModelChanged(Model* model)
 			}
 
 			if (node.GetPermissions(&perms) == B_OK) {
-				fReadUserCheckBox->SetValue((int32)(perms & S_IRUSR));
-				fReadGroupCheckBox->SetValue((int32)(perms & S_IRGRP));
-				fReadOtherCheckBox->SetValue((int32)(perms & S_IROTH));
-				fWriteUserCheckBox->SetValue((int32)(perms & S_IWUSR));
-				fWriteGroupCheckBox->SetValue((int32)(perms & S_IWGRP));
-				fWriteOtherCheckBox->SetValue((int32)(perms & S_IWOTH));
-				fExecuteUserCheckBox->SetValue((int32)(perms & S_IXUSR));
-				fExecuteGroupCheckBox->SetValue((int32)(perms & S_IXGRP));
-				fExecuteOtherCheckBox->SetValue((int32)(perms & S_IXOTH));
+				fReadUserCheckBox->SetValue((int32_t)(perms & S_IRUSR));
+				fReadGroupCheckBox->SetValue((int32_t)(perms & S_IRGRP));
+				fReadOtherCheckBox->SetValue((int32_t)(perms & S_IROTH));
+				fWriteUserCheckBox->SetValue((int32_t)(perms & S_IWUSR));
+				fWriteGroupCheckBox->SetValue((int32_t)(perms & S_IWGRP));
+				fWriteOtherCheckBox->SetValue((int32_t)(perms & S_IWOTH));
+				fExecuteUserCheckBox->SetValue((int32_t)(perms & S_IXUSR));
+				fExecuteGroupCheckBox->SetValue((int32_t)(perms & S_IXGRP));
+				fExecuteOtherCheckBox->SetValue((int32_t)(perms & S_IXOTH));
 			} else
 				hideCheckBoxes = true;
 

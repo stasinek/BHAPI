@@ -20,14 +20,14 @@ public:
 
 			status_t			Init(off_t offset,
 									PartitionReference** contents,
-									int32 contentsCount);
+									int32_t contentsCount);
 
 	virtual	status_t			Do();
 
 protected:
 			off_t				fOffset;
 			PartitionReference** fContents;
-			int32				fContentsCount;
+			int32_t				fContentsCount;
 };
 
 

@@ -41,7 +41,7 @@ DisassembledCode::DisassembledCode(SourceLanguage* language)
 
 DisassembledCode::~DisassembledCode()
 {
-	for (int32 i = 0; Statement* statement = fStatements.ItemAt(i); i++)
+	for (int32_t i = 0; Statement* statement = fStatements.ItemAt(i); i++)
 		statement->ReleaseReference();
 
 	fLanguage->ReleaseReference();
@@ -67,20 +67,20 @@ DisassembledCode::GetSourceLanguage() const
 }
 
 
-int32 DisassembledCode::CountLines() const
+int32_t DisassembledCode::CountLines() const
 {
 	return fLines.CountItems();
 }
 
 
-const char*  DisassembledCode::LineAt(int32 index) const
+const char*  DisassembledCode::LineAt(int32_t index) const
 {
 	Line* line = fLines.ItemAt(index);
 	return line != NULL ? line->line.String() : NULL;
 }
 
 
-int32 DisassembledCode::LineLengthAt(int32 index) const
+int32_t DisassembledCode::LineLengthAt(int32_t index) const
 {
 	Line* line = fLines.ItemAt(index);
 	return line != NULL ? line->line.Length() : 0;
@@ -146,7 +146,7 @@ bool DisassembledCode::AddCommentLine(const BString& line)
 bool DisassembledCode::AddInstructionLine(const BString& line, target_addr_t address,
 	target_size_t size)
 {
-	int32 lineIndex = fLines.CountItems();
+	int32_t lineIndex = fLines.CountItems();
 
 	ContiguousStatement* statement = new(std::nothrow) ContiguousStatement(
 		SourceLocation(lineIndex), TargetAddressRange(address, size));

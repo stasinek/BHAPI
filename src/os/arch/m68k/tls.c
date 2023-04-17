@@ -16,13 +16,13 @@
 #include <tls.h>
 
 
-static int32 gNextSlot = TLS_FIRST_FREE_SLOT;
+static int32_t gNextSlot = TLS_FIRST_FREE_SLOT;
 static void *gSlots[TLS_MAX_KEYS];
 
 
-int32 tls_allocate(void)
+int32_t tls_allocate(void)
 {
-	int32 next = atomic_add(&gNextSlot, 1);
+	int32_t next = atomic_add(&gNextSlot, 1);
 	if (next >= TLS_MAX_KEYS)
 		return B_NO_MEMORY;
 
@@ -31,21 +31,21 @@ int32 tls_allocate(void)
 
 
 void *
-tls_get(int32 index)
+tls_get(int32_t index)
 {
 	return gSlots[index];
 }
 
 
 void **
-tls_address(int32 index)
+tls_address(int32_t index)
 {
 	return &gSlots[index];
 }
 
 
 void
-tls_set(int32 index, void *value)
+tls_set(int32_t index, void *value)
 {
 	gSlots[index] = value;
 }

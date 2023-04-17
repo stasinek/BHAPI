@@ -72,7 +72,7 @@ private:
 			FileSourceCode*		fSourceCode;
 			function_source_state fSourceCodeState;
 			ListenerList		fListeners;
-			int32				fNotificationsDisabled;
+			int32_t				fNotificationsDisabled;
 
 public:
 			// BOpenHashTable support

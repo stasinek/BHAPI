@@ -54,7 +54,7 @@ struct BPackageInfo::StringBuilder {
 		return *this;
 	}
 
-	StringBuilder& WriteFlags(const char* attribute, uint32 flags)
+	StringBuilder& WriteFlags(const char* attribute, uint32_t flags)
 	{
 		if ((flags & B_PACKAGE_FLAG_APPROVE_LICENSE) == 0
 			&& (flags & B_PACKAGE_FLAG_SYSTEM_PACKAGE) == 0) {
@@ -106,14 +106,14 @@ private:
 
 	void _WriteValue(const BStringList& value)
 	{
-		int32 count = value.CountStrings();
+		int32_t count = value.CountStrings();
 		if (count == 1) {
 			_WriteMaybeQuoted(value.StringAt(0));
 		} else {
 			_Write("{\n", 2);
 
-			int32 count = value.CountStrings();
-			for (int32 i = 0; i < count; i++) {
+			int32_t count = value.CountStrings();
+			for (int32_t i = 0; i < count; i++) {
 				_Write('\t');
 				_WriteMaybeQuoted(value.StringAt(i));
 				_Write('\n');
@@ -132,8 +132,8 @@ private:
 
 		_Write("{\n", 2);
 
-		int32 count = value.CountItems();
-		for (int32 i = 0; i < count; i++) {
+		int32_t count = value.CountItems();
+		for (int32_t i = 0; i < count; i++) {
 			_Write('\t');
 			_WriteListElement(value.ItemAt(i));
 			_Write('\n');

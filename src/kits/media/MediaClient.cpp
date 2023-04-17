@@ -169,10 +169,10 @@ status_t BMediaClient::Disconnect()
 {
 	CALLED();
 
-	for (int32 i = 0; i < CountInputs(); i++)
+	for (int32_t i = 0; i < CountInputs(); i++)
 		InputAt(i)->Disconnect();
 
-	for (int32 i = 0; i < CountOutputs(); i++)
+	for (int32_t i = 0; i < CountOutputs(); i++)
 		OutputAt(i)->Disconnect();
 
 	return B_OK;
@@ -195,7 +195,7 @@ status_t BMediaClient::ReleaseConnection(BMediaConnection* conn)
 }
 
 
-int32 BMediaClient::CountInputs() const
+int32_t BMediaClient::CountInputs() const
 {
 	CALLED();
 
@@ -203,7 +203,7 @@ int32 BMediaClient::CountInputs() const
 }
 
 
-int32 BMediaClient::CountOutputs() const
+int32_t BMediaClient::CountOutputs() const
 {
 	CALLED();
 
@@ -212,7 +212,7 @@ int32 BMediaClient::CountOutputs() const
 
 
 BMediaInput*
-BMediaClient::InputAt(int32 index) const
+BMediaClient::InputAt(int32_t index) const
 {
 	CALLED();
 
@@ -221,7 +221,7 @@ BMediaClient::InputAt(int32 index) const
 
 
 BMediaOutput*
-BMediaClient::OutputAt(int32 index) const
+BMediaClient::OutputAt(int32_t index) const
 {
 	CALLED();
 
@@ -258,7 +258,7 @@ BMediaClient::FindInput(const media_destination& dest) const
 {
 	CALLED();
 
-	for (int32 i = 0; i < CountInputs(); i++) {
+	for (int32_t i = 0; i < CountInputs(); i++) {
 		if (dest.id == InputAt(i)->Destination().id)
 			return InputAt(i);
 	}
@@ -271,7 +271,7 @@ BMediaClient::FindOutput(const media_source& source) const
 {
 	CALLED();
 
-	for (int32 i = 0; i < CountOutputs(); i++) {
+	for (int32_t i = 0; i < CountOutputs(); i++) {
 		if (source.id == OutputAt(i)->Source().id)
 			return OutputAt(i);
 	}
@@ -292,7 +292,7 @@ status_t BMediaClient::Start(bool force)
 	CALLED();
 
 	status_t err = B_OK;
-	for (int32 i = 0; i < CountOutputs(); i++) {
+	for (int32_t i = 0; i < CountOutputs(); i++) {
 		media_node remoteNode = OutputAt(i)->Connection().RemoteNode();
 		if (remoteNode.kind & B_TIME_SOURCE)
 			err = BMediaRoster::CurrentRoster()->StartTimeSource(
@@ -436,7 +436,7 @@ void BMediaClient::AddOutput(BMediaOutput* output)
 
 
 BMediaAddOn*
-BMediaClient::AddOn(int32* id) const
+BMediaClient::AddOn(int32_t* id) const
 {
 	CALLED();
 

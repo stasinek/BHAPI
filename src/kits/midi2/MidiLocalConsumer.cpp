@@ -16,7 +16,7 @@
 #include <protocol.h>
 
 
-int32 
+int32_t 
 _midi_event_thread(void* data)
 {
 	return ((BMidiLocalConsumer*) data)->EventThread();
@@ -76,7 +76,7 @@ void BMidiLocalConsumer::SetLatency(bigtime_t latency_)
 }
 
 
-int32 
+int32_t 
 BMidiLocalConsumer::GetProducerID()
 {
 	return fCurrentProducer;
@@ -207,7 +207,7 @@ void BMidiLocalConsumer::Data(uchar* data, size_t length, bool atomic, bigtime_t
 							SystemRealTime(data[0], time);
 						} else if ((length == 6) && (data[1] == 0x51) 
 								&& (data[2] == 0x03)) {
-							int32 tempo = 
+							int32_t tempo = 
 								(data[3] << 16) | (data[4] << 8) | data[5];
 
 							TempoChange(60000000/tempo, time);
@@ -283,7 +283,7 @@ void BMidiLocalConsumer::SystemRealTime(uchar statusByte, bigtime_t time)
 }
 
 
-void BMidiLocalConsumer::TempoChange(int32 beatsPerMinute, bigtime_t time)
+void BMidiLocalConsumer::TempoChange(int32_t beatsPerMinute, bigtime_t time)
 {
 	// Do nothing.
 }
@@ -305,10 +305,10 @@ void BMidiLocalConsumer::_Reserved7() { }
 void BMidiLocalConsumer::_Reserved8() { }
 
 
-int32 
+int32_t 
 BMidiLocalConsumer::EventThread()
 {
-	int32 msg_code;
+	int32_t msg_code;
 	ssize_t msg_size;
 	ssize_t buf_size = 100;
 	uint8* buffer = (uint8*) malloc(buf_size);
@@ -339,14 +339,14 @@ BMidiLocalConsumer::EventThread()
 		if (msg_size > 20) { // minimum valid size
 			#ifdef DEBUG
 			printf("*** received: ");
-			for (int32 t = 0; t < msg_size; ++t) {
+			for (int32_t t = 0; t < msg_size; ++t) {
 				printf("%02X, ", ((uint8*) buffer)[t]);
 			}
 			printf("\n");
 			#endif
 
-			fCurrentProducer = *((uint32*)    (buffer +  0));
-			int32 targetId  = *((uint32*)    (buffer +  4));
+			fCurrentProducer = *((uint32_t*)    (buffer +  0));
+			int32_t targetId  = *((uint32_t*)    (buffer +  4));
 			bigtime_t time  = *((bigtime_t*) (buffer +  8));
 			bool atomic     = *((bool*)      (buffer + 16));
 

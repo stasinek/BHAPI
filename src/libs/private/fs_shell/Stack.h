@@ -68,15 +68,15 @@ template<class T> class Stack {
 			return fArray;
 		}
 
-		int32_t CountItems() const
+		int32_t_t CountItems() const
 		{
 			return fUsed;
 		}
 
 	private:
 		T		*fArray;
-		int32_t	fUsed;
-		int32_t	fMax;
+		int32_t_t	fUsed;
+		int32_t_t	fMax;
 };
 
 }	// namespace FSShell

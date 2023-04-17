@@ -22,14 +22,14 @@ public:
 
 			bool				IsRunning();
 
-			status_t			CheckMail(int32 accountID = -1);
-			status_t			CheckAndSendQueuedMail(int32 accountID = -1);
+			status_t			CheckMail(int32_t accountID = -1);
+			status_t			CheckAndSendQueuedMail(int32_t accountID = -1);
 
 			status_t			SendQueuedMail();
 
-			int32				CountNewMessages(
+			int32_t				CountNewMessages(
 									bool waitForFetchCompletion = false);
-			status_t			MarkAsRead(int32 account, const entry_ref& ref,
+			status_t			MarkAsRead(int32_t account, const entry_ref& ref,
 									read_flags flag = B_READ);
 			status_t			FetchBody(const entry_ref& ref,
 									BMessenger* listener = NULL);

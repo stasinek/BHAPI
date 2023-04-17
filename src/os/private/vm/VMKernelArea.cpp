@@ -11,8 +11,8 @@
 #include <vm/vm_priv.h>
 
 
-VMKernelArea::VMKernelArea(VMAddressSpace* addressSpace, uint32 wiring,
-	uint32 protection)
+VMKernelArea::VMKernelArea(VMAddressSpace* addressSpace, uint32_t wiring,
+	uint32_t protection)
 	:
 	VMArea(addressSpace, wiring, protection)
 {
@@ -26,8 +26,8 @@ VMKernelArea::~VMKernelArea()
 
 /*static*/ VMKernelArea*
 VMKernelArea::Create(VMAddressSpace* addressSpace, const char* name,
-	uint32 wiring, uint32 protection, ObjectCache* objectCache,
-	uint32 allocationFlags)
+	uint32_t wiring, uint32_t protection, ObjectCache* objectCache,
+	uint32_t allocationFlags)
 {
 	VMKernelArea* area = new(objectCache, allocationFlags) VMKernelArea(
 		addressSpace, wiring, protection);

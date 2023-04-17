@@ -26,7 +26,7 @@ extern "C" {
 
 typedef struct {
 	sem_id	sem;
-	int32	ben;
+	int32_t	ben;
 } benaphore;
 
 #define INIT_BEN(x)		x.sem = create_sem(0, "NM "#x" benaphore");  x.ben = 0;
@@ -76,7 +76,7 @@ enum {
 typedef	struct
 {
 	uint16 slopspace;
-	uint32 size;
+	uint32_t size;
 } int_buf_info;
 
 typedef struct settings {  // apsed, see comments in nm.settings
@@ -84,8 +84,8 @@ typedef struct settings {  // apsed, see comments in nm.settings
 	char   accelerant[B_FILE_NAME_LENGTH];
 	bool   dumprom;
 	// for accelerant
-	uint32 logmask;
-	uint32 memory;
+	uint32_t logmask;
+	uint32_t memory;
 	bool   usebios;
 	bool   hardcursor;
 } settings;
@@ -101,9 +101,9 @@ typedef struct {
 	bool	accelerant_in_use;
 
   /* bug workaround for 4.5.0 */
-	uint32 use_clone_bugfix;	/*for 4.5.0, cloning of physical memory does not work*/
-	uint32 * clone_bugfix_regs;
-	uint32 * clone_bugfix_regs2;
+	uint32_t use_clone_bugfix;	/*for 4.5.0, cloning of physical memory does not work*/
+	uint32_t * clone_bugfix_regs;
+	uint32_t * clone_bugfix_regs2;
 
 	/* old cards have their registers mapped inside the framebuffer area */
 	bool regs_in_fb;
@@ -127,10 +127,10 @@ typedef struct {
 
   /*screenmode list*/
 	area_id	mode_area;              /* Contains the list of display modes the driver supports */
-	uint32	mode_count;             /* Number of display modes in the list */
+	uint32_t	mode_count;             /* Number of display modes in the list */
 
   /*flags - used by driver*/
-	uint32 flags;
+	uint32_t flags;
 
   /*vblank semaphore*/
 	sem_id	vblank;	                /* The vertical blank semaphore. Ownership will be
@@ -151,7 +151,7 @@ typedef struct {
 
   /*more display mode stuff*/
 	display_mode dm;		/* current display mode configuration: head1 */
-	uint32 dpms_flags;		/* current DPMS mode */
+	uint32_t dpms_flags;		/* current DPMS mode */
 	bool acc_mode;			/* signals (non)accelerated mode */
 
   /*frame buffer config - for BDirectScreen*/
@@ -160,10 +160,10 @@ typedef struct {
 
   /*acceleration engine*/
 	struct {
-		uint32		count;		/* last dwgsync slot used */
-		uint32		last_idle;	/* last dwgsync slot we *know* the engine was idle after */ 
+		uint32_t		count;		/* last dwgsync slot used */
+		uint32_t		last_idle;	/* last dwgsync slot we *know* the engine was idle after */ 
 		benaphore	lock;		/* for serializing access to the acceleration engine */
-		uint32		control;	/* colordepth, memory pitch and other config stuff */
+		uint32_t		control;	/* colordepth, memory pitch and other config stuff */
 		uint8		depth;		/* bytes per pixel used */
 	} engine;
 
@@ -185,22 +185,22 @@ typedef struct {
 		/* specialised registers for predefined cardspecs */
 
 		/* general card information */
-		uint32 card_type;           /* see card_type enum above */
+		uint32_t card_type;           /* see card_type enum above */
 		bool int_assigned;			/* card has a useable INT assigned to it */
 
 		/* PINS */
 		float f_ref;				/* PLL reference-oscillator frequency (Mhz) */
-		uint32 max_system_vco;		/* graphics engine PLL VCO limits (Mhz) */
-		uint32 min_system_vco;
-		uint32 max_pixel_vco;		/* dac1 PLL VCO limits (Mhz) */
-		uint32 min_pixel_vco;
-		uint32 std_engine_clock;	/* graphics engine clock speed needed (Mhz) */
-		uint32 max_dac1_clock;		/* dac1 limits (Mhz) */
-		uint32 max_dac1_clock_8;	/* dac1 limits correlated to RAMspeed limits (Mhz) */
-		uint32 max_dac1_clock_16;
-		uint32 max_dac1_clock_24;
-		uint32 memory_size;			/* memory (Kbytes) */
-		uint32 curmem_size;			/* memory (bytes) */
+		uint32_t max_system_vco;		/* graphics engine PLL VCO limits (Mhz) */
+		uint32_t min_system_vco;
+		uint32_t max_pixel_vco;		/* dac1 PLL VCO limits (Mhz) */
+		uint32_t min_pixel_vco;
+		uint32_t std_engine_clock;	/* graphics engine clock speed needed (Mhz) */
+		uint32_t max_dac1_clock;		/* dac1 limits (Mhz) */
+		uint32_t max_dac1_clock_8;	/* dac1 limits correlated to RAMspeed limits (Mhz) */
+		uint32_t max_dac1_clock_16;
+		uint32_t max_dac1_clock_24;
+		uint32_t memory_size;			/* memory (Kbytes) */
+		uint32_t curmem_size;			/* memory (bytes) */
 		uint16 max_crtc_width;		/* CRTC max constraints */
 		uint16 max_crtc_height;
 		uint8 panel_type;			/* panel type */
@@ -226,22 +226,22 @@ typedef struct {
 		overlay_window ow;					/* current position of overlay output window */
 		overlay_buffer ob;					/* current inputbuffer in use */
 		overlay_view my_ov;					/* current corrected view in inputbuffer */
-		uint32 h_ifactor;					/* current 'unclipped' horizontal inverse scaling factor */
-		uint32 v_ifactor;					/* current 'unclipped' vertical inverse scaling factor */
+		uint32_t h_ifactor;					/* current 'unclipped' horizontal inverse scaling factor */
+		uint32_t v_ifactor;					/* current 'unclipped' vertical inverse scaling factor */
 	} overlay;
 } shared_info;
 
 /* Read or write a value in PCI configuration space */
 typedef struct {
-	uint32	magic;		/* magic number to make sure the caller groks us */
-	uint32	offset;		/* Offset to read/write */
-	uint32	size;		/* Number of bytes to transfer */
-	uint32	value;		/* The value read or written */
+	uint32_t	magic;		/* magic number to make sure the caller groks us */
+	uint32_t	offset;		/* Offset to read/write */
+	uint32_t	size;		/* Number of bytes to transfer */
+	uint32_t	value;		/* The value read or written */
 } nm_get_set_pci;
 
 /* Read or write a value in ISA I/O space */
 typedef struct {
-	uint32	magic;		/* magic number to make sure the caller groks us */
+	uint32_t	magic;		/* magic number to make sure the caller groks us */
 	uint16	adress;		/* Offset to read/write */
 	uint8	size;		/* Number of bytes to transfer */
 	uint16	data;		/* The value read or written */
@@ -249,20 +249,20 @@ typedef struct {
 
 /* move_overlay related info */
 typedef struct {
-	uint32 hcoordv;		/* left and right edges of video output window */
-	uint32 vcoordv;		/* top and bottom edges of video output window */
-	uint32 hsrcendv;	/* horizontal source end in source buffer (clipping) */
-	uint32 a1orgv;		/* vertical source clipping via startadress of source buffer */
+	uint32_t hcoordv;		/* left and right edges of video output window */
+	uint32_t vcoordv;		/* top and bottom edges of video output window */
+	uint32_t hsrcendv;	/* horizontal source end in source buffer (clipping) */
+	uint32_t a1orgv;		/* vertical source clipping via startadress of source buffer */
 } move_overlay_info;
 
 /* setup ISA BES registers for overlay on ISA cards */
 typedef struct {
-	uint32	magic;		/* magic number to make sure the caller groks us */
-	uint32  card_type;  /* see card_type enum above */
-	uint32  hiscalv;
-	uint32  viscalv;
-	uint32  globctlv;
-	uint32  weight;
+	uint32_t	magic;		/* magic number to make sure the caller groks us */
+	uint32_t  card_type;  /* see card_type enum above */
+	uint32_t  hiscalv;
+	uint32_t  viscalv;
+	uint32_t  globctlv;
+	uint32_t  weight;
 	uint8	colkey_r;
 	uint8	colkey_g;
 	uint8	colkey_b;
@@ -273,20 +273,20 @@ typedef struct {
 
 /* Set some boolean condition (like enabling or disabling interrupts) */
 typedef struct {
-	uint32	magic;		/* magic number to make sure the caller groks us */
+	uint32_t	magic;		/* magic number to make sure the caller groks us */
 	bool	do_it;		/* state to set */
 } nm_set_bool_state;
 
 /* Retrieve the area_id of the kernel/accelerant shared info */
 typedef struct {
-	uint32	magic;		/* magic number to make sure the caller groks us */
+	uint32_t	magic;		/* magic number to make sure the caller groks us */
 	area_id	shared_info_area;	/* area_id containing the shared information */
 } nm_get_private_data;
 
 /* Retrieve the device name.  Usefull for when we have a file handle, but want
 to know the device name (like when we are cloning the accelerant) */
 typedef struct {
-	uint32	magic;		/* magic number to make sure the caller groks us */
+	uint32_t	magic;		/* magic number to make sure the caller groks us */
 	char	*name;		/* The name of the device, less the /dev root */
 } nm_device_name;
 

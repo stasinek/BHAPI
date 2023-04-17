@@ -29,7 +29,7 @@ public:
 
 			BPoint			AboutPosition(float width, float height);
 			void			AddDescription(const char* description);
-			void			AddCopyright(int32 firstCopyrightYear,
+			void			AddCopyright(int32_t firstCopyrightYear,
 								const char* copyrightHolder,
 								const char** extraCopyrights = NULL);
 			void			AddAuthors(const char** authors);
@@ -75,7 +75,7 @@ private:
 			AboutView*		fAboutView;
 
 			// FBC Padding
-			uint32			_reserved[20];
+			uint32_t			_reserved[20];
 };
 
 

@@ -35,7 +35,7 @@ struct JobQueue::JobPriorityLess {
 */
 bool JobQueue::JobPriorityLess::operator()(const BJob* left, const BJob* right) const
 {
-	int32 difference = left->CountDependencies() - right->CountDependencies();
+	int32_t difference = left->CountDependencies() - right->CountDependencies();
 	if (difference < 0)
 		return true;
 	if (difference > 0)

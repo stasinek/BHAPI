@@ -98,14 +98,14 @@ private:
             status_t			_SetTo(int fd, const char* path, bool traverse);
             status_t			_SetTo(const bhapi::entry_ref* ref, bool traverse);
 
-    virtual	status_t			set_stat(struct stat& stat, uint32 what);
+    virtual	status_t			set_stat(struct stat& stat, uint32_t what);
 
             status_t			_GetStat(struct stat* stat) const;
     virtual	status_t			_GetStat(struct stat_beos* stat) const;
             status_t			InitAttrDir();
 
 private:
-            uint32				rudeData[4];
+            uint32_t				rudeData[4];
             int					fFd;
                 // Ffile descriptor for the given node
             int					fAttrFd;

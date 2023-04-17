@@ -53,8 +53,8 @@ public:
 			AddressSectionType	GetAddressSectionType(target_addr_t address)
 									const;
 
-			int32				CountFunctions() const;
-			FunctionInstance*	FunctionAt(int32 index) const;
+			int32_t				CountFunctions() const;
+			FunctionInstance*	FunctionAt(int32_t index) const;
 			FunctionInstance*	FunctionAtAddress(target_addr_t address) const;
 			FunctionInstance*	FunctionByName(const char* name) const;
 

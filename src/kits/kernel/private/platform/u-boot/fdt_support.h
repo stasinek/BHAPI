@@ -14,7 +14,7 @@
 
 void dump_fdt(const void *fdt);
 status_t fdt_get_cell_count(const void* fdt, int node,
-	int32 &addressCells, int32 &sizeCells);
+	int32_t &addressCells, int32_t &sizeCells);
 
 phys_addr_t fdt_get_device_reg(const void* fdt, int node);
 phys_addr_t fdt_get_device_reg_byname(const void* fdt, const char* name);

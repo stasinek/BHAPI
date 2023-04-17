@@ -19,7 +19,7 @@
  * public BAudioEvent
  *************************************************************/
 
-BAudioEvent::BAudioEvent(int32 frames, bool stereo, float *samples)
+BAudioEvent::BAudioEvent(int32_t frames, bool stereo, float *samples)
 {
 	UNIMPLEMENTED();
 }
@@ -55,7 +55,7 @@ BAudioEvent::Duration()
 }
 
 
-int32 BAudioEvent::Frames()
+int32_t BAudioEvent::Frames()
 {
 	UNIMPLEMENTED();
 
@@ -71,7 +71,7 @@ BAudioEvent::Samples()
 }
 
 
-int32 BAudioEvent::ChannelCount()
+int32_t BAudioEvent::ChannelCount()
 {
 	UNIMPLEMENTED();
 
@@ -94,7 +94,7 @@ void BAudioEvent::SetGain(float)
 }
 
 
-int32 BAudioEvent::Destination()
+int32_t BAudioEvent::Destination()
 {
 	UNIMPLEMENTED();
 
@@ -102,13 +102,13 @@ int32 BAudioEvent::Destination()
 }
 
 
-void BAudioEvent::SetDestination(int32)
+void BAudioEvent::SetDestination(int32_t)
 {
 	UNIMPLEMENTED();
 }
 
 
-bool BAudioEvent::MixIn(float *dst, int32 frames, mk_time time)
+bool BAudioEvent::MixIn(float *dst, int32_t frames, mk_time time)
 {
 	UNIMPLEMENTED();
 
@@ -242,7 +242,7 @@ BDACRenderer::Channel()
  *************************************************************/
 
 
-bool BDACRenderer::_WriteDAC(void *arg, char *buf, uint32 bytes, void *header)
+bool BDACRenderer::_WriteDAC(void *arg, char *buf, uint32_t bytes, void *header)
 {
 	UNIMPLEMENTED();
 
@@ -250,7 +250,7 @@ bool BDACRenderer::_WriteDAC(void *arg, char *buf, uint32 bytes, void *header)
 }
 
 
-bool BDACRenderer::WriteDAC(short *buf, int32 frames, audio_buffer_header *header)
+bool BDACRenderer::WriteDAC(short *buf, int32_t frames, audio_buffer_header *header)
 {
 	UNIMPLEMENTED();
 
@@ -394,7 +394,7 @@ BADCSource::Channel()
  * private BADCSource
  *************************************************************/
 
-bool BADCSource::_ReadADC(void *arg, char *buf, uint32 bytes, void *header)
+bool BADCSource::_ReadADC(void *arg, char *buf, uint32_t bytes, void *header)
 {
 	UNIMPLEMENTED();
 
@@ -402,7 +402,7 @@ bool BADCSource::_ReadADC(void *arg, char *buf, uint32 bytes, void *header)
 }
 
 
-void BADCSource::ReadADC(short *buf, int32 frames, audio_buffer_header *header)
+void BADCSource::ReadADC(short *buf, int32_t frames, audio_buffer_header *header)
 {
 	UNIMPLEMENTED();
 }

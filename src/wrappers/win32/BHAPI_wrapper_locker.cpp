@@ -76,7 +76,7 @@ typedef struct bhapi::win32_locker_t {
 
 	bool			created;
 
-	uint32			refCount;
+	uint32_t			refCount;
 } bhapi::win32_locker_t;
 
 
@@ -152,7 +152,7 @@ BHAPI_EXPORT status_t bhapi::delete_locker(void *data)
 		bhapi::unlock_locker_inter(locker);
 		return B_ERROR;
 	}
-	uint32 count = --(locker->refCount);
+	uint32_t count = --(locker->refCount);
 #if 0
 	bool locked = locker->HolderThreadIsCurrent();
 #endif
@@ -259,7 +259,7 @@ BHAPI_EXPORT status_t bhapi::lock_locker(void *data)
 }
 
 
-BHAPI_EXPORT status_t bhapi::lock_locker_etc(void *data,  uint32 flags, bigtime_t microseconds_timeout)
+BHAPI_EXPORT status_t bhapi::lock_locker_etc(void *data,  uint32_t flags, bigtime_t microseconds_timeout)
 {
 	bhapi::win32_locker_t *locker = (bhapi::win32_locker_t*)data;
 	if(!locker) return B_BAD_VALUE;

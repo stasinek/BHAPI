@@ -101,14 +101,14 @@ status_t TargetHostInterfaceRoster::RegisterInterfaceInfos()
 }
 
 
-int32 TargetHostInterfaceRoster::CountInterfaceInfos() const
+int32_t TargetHostInterfaceRoster::CountInterfaceInfos() const
 {
 	return fInterfaceInfos.CountItems();
 }
 
 
 TargetHostInterfaceInfo*
-TargetHostInterfaceRoster::InterfaceInfoAt(int32 index) const
+TargetHostInterfaceRoster::InterfaceInfoAt(int32_t index) const
 {
 	return fInterfaceInfos.ItemAt(index);
 }
@@ -139,14 +139,14 @@ status_t TargetHostInterfaceRoster::CreateInterface(TargetHostInterfaceInfo* inf
 }
 
 
-int32 TargetHostInterfaceRoster::CountActiveInterfaces() const
+int32_t TargetHostInterfaceRoster::CountActiveInterfaces() const
 {
 	return fActiveInterfaces.CountItems();
 }
 
 
 TargetHostInterface*
-TargetHostInterfaceRoster::ActiveInterfaceAt(int32 index) const
+TargetHostInterfaceRoster::ActiveInterfaceAt(int32_t index) const
 {
 	return fActiveInterfaces.ItemAt(index);
 }
@@ -182,6 +182,6 @@ TargetHostInterfaceRoster::Listener::~Listener()
 }
 
 
-void TargetHostInterfaceRoster::Listener::TeamDebuggerCountChanged(int32 count)
+void TargetHostInterfaceRoster::Listener::TeamDebuggerCountChanged(int32_t count)
 {
 }

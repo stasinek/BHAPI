@@ -26,21 +26,21 @@ public:
 			status_t			SetToDefault();
 			void				Unset();
 
-			bool				IsModifierKey(uint32 keyCode) const;
-			uint32				Modifier(uint32 keyCode) const;
-			uint32				KeyForModifier(uint32 modifier) const;
-			uint8				ActiveDeadKey(uint32 keyCode,
-									uint32 modifiers) const;
-			uint8				DeadKey(uint32 keyCode, uint32 modifiers,
+			bool				IsModifierKey(uint32_t keyCode) const;
+			uint32_t				Modifier(uint32_t keyCode) const;
+			uint32_t				KeyForModifier(uint32_t modifier) const;
+			uint8				ActiveDeadKey(uint32_t keyCode,
+									uint32_t modifiers) const;
+			uint8				DeadKey(uint32_t keyCode, uint32_t modifiers,
 									bool* isEnabled = NULL) const;
-			bool				IsDeadSecondKey(uint32 keyCode,
-									uint32 modifiers,
+			bool				IsDeadSecondKey(uint32_t keyCode,
+									uint32_t modifiers,
 									uint8 activeDeadKey) const;
-			void				GetChars(uint32 keyCode, uint32 modifiers,
+			void				GetChars(uint32_t keyCode, uint32_t modifiers,
 									uint8 activeDeadKey, char** chars,
-									int32* numBytes) const;
+									int32_t* numBytes) const;
 			status_t			GetModifiedCharacters(const char* in,
-									int32 inModifiers, int32 outModifiers,
+									int32_t inModifiers, int32_t outModifiers,
 									BObjectList<const char>* _outList);
 
 			const key_map&		Map() const { return fKeys; }
@@ -51,14 +51,14 @@ public:
 			BKeymap&			operator=(const BKeymap& other);
 
 protected:
-			int32				Offset(uint32 keyCode, uint32 modifiers,
-									uint32* _table = NULL) const;
-			uint8				DeadKeyIndex(int32 offset) const;
+			int32_t				Offset(uint32_t keyCode, uint32_t modifiers,
+									uint32_t* _table = NULL) const;
+			uint8				DeadKeyIndex(int32_t offset) const;
 
 protected:
 			char*				fChars;
 			key_map				fKeys;
-			uint32				fCharsSize;
+			uint32_t				fCharsSize;
 };
 
 

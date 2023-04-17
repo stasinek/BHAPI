@@ -38,7 +38,7 @@ enum dead_key_index {
 };
 
 
-static const uint32 kModifierKeys = B_SHIFT_KEY | B_CAPS_LOCK | B_CONTROL_KEY
+static const uint32_t kModifierKeys = B_SHIFT_KEY | B_CAPS_LOCK | B_CONTROL_KEY
 	| B_OPTION_KEY | B_COMMAND_KEY | B_MENU_KEY;
 
 
@@ -60,7 +60,7 @@ BKeymap::~BKeymap()
 /*!	Load a map from a file.
 	File format in big endian:
 		struct key_map
-		uint32 size of following charset
+		uint32_t size of following charset
 		charset (offsets go into this with size of character followed by
 		  character)
 */
@@ -81,14 +81,14 @@ status_t BKeymap::SetTo(BDataIO& stream)
 		return B_IO_ERROR;
 
 	// convert from big-endian
-	for (uint32 i = 0; i < sizeof(fKeys) / 4; i++) {
-		((uint32*)&fKeys)[i] = B_BENDIAN_TO_HOST_INT32(((uint32*)&fKeys)[i]);
+	for (uint32_t i = 0; i < sizeof(fKeys) / 4; i++) {
+		((uint32_t*)&fKeys)[i] = B_BENDIAN_TO_HOST_INT32(((uint32_t*)&fKeys)[i]);
 	}
 
 	if (fKeys.version != 3)
 		return B_BAD_DATA;
 
-	if (stream.Read(&fCharsSize, sizeof(uint32)) < 1)
+	if (stream.Read(&fCharsSize, sizeof(uint32_t)) < 1)
 		return B_IO_ERROR;
 
 	fCharsSize = B_BENDIAN_TO_HOST_INT32(fCharsSize);
@@ -161,7 +161,7 @@ void BKeymap::Unset()
 /*!	We need to know if a key is a modifier key to choose
 	a valid key when several are pressed together
 */
-bool BKeymap::IsModifierKey(uint32 keyCode) const
+bool BKeymap::IsModifierKey(uint32_t keyCode) const
 {
 	return keyCode == fKeys.caps_key
 		|| keyCode == fKeys.num_key
@@ -179,7 +179,7 @@ bool BKeymap::IsModifierKey(uint32 keyCode) const
 
 
 //! We need to know a modifier for a key
-uint32 BKeymap::Modifier(uint32 keyCode) const
+uint32_t BKeymap::Modifier(uint32_t keyCode) const
 {
 	if (keyCode == fKeys.caps_key)
 		return B_CAPS_LOCK;
@@ -210,7 +210,7 @@ uint32 BKeymap::Modifier(uint32 keyCode) const
 }
 
 
-uint32 BKeymap::KeyForModifier(uint32 modifier) const
+uint32_t BKeymap::KeyForModifier(uint32_t modifier) const
 {
 	if (modifier == B_CAPS_LOCK)
 		return fKeys.caps_key;
@@ -244,7 +244,7 @@ uint32 BKeymap::KeyForModifier(uint32 modifier) const
 /*! Checks whether a key is an active dead key.
 */
 uint8
-BKeymap::ActiveDeadKey(uint32 keyCode, uint32 modifiers) const
+BKeymap::ActiveDeadKey(uint32_t keyCode, uint32_t modifiers) const
 {
 	bool enabled;
 	uint8 deadKey = DeadKey(keyCode, modifiers, &enabled);
@@ -260,13 +260,13 @@ BKeymap::ActiveDeadKey(uint32 keyCode, uint32 modifiers) const
 	out via isEnabled (isEnabled is not touched for non-dead keys).
 */
 uint8
-BKeymap::DeadKey(uint32 keyCode, uint32 modifiers, bool* _isEnabled) const
+BKeymap::DeadKey(uint32_t keyCode, uint32_t modifiers, bool* _isEnabled) const
 {
-	uint32 tableMask = 0;
-	int32 offset = Offset(keyCode, modifiers, &tableMask);
+	uint32_t tableMask = 0;
+	int32_t offset = Offset(keyCode, modifiers, &tableMask);
 	uint8 deadKeyIndex = DeadKeyIndex(offset);
 	if (deadKeyIndex > 0 && _isEnabled != NULL) {
-		uint32 deadTables[] = {
+		uint32_t deadTables[] = {
 			fKeys.acute_tables,
 			fKeys.grave_tables,
 			fKeys.circumflex_tables,
@@ -281,21 +281,21 @@ BKeymap::DeadKey(uint32 keyCode, uint32 modifiers, bool* _isEnabled) const
 
 
 //! Tell if a key is a dead second key.
-bool BKeymap::IsDeadSecondKey(uint32 keyCode, uint32 modifiers,
+bool BKeymap::IsDeadSecondKey(uint32_t keyCode, uint32_t modifiers,
 	uint8 activeDeadKey) const
 {
 	if (!activeDeadKey)
 		return false;
 
-	int32 offset = Offset(keyCode, modifiers);
+	int32_t offset = Offset(keyCode, modifiers);
 	if (offset < 0)
 		return false;
 
-	uint32 numBytes = fChars[offset];
+	uint32_t numBytes = fChars[offset];
 	if (!numBytes)
 		return false;
 
-	const int32* deadOffsets[] = {
+	const int32_t* deadOffsets[] = {
 		fKeys.acute_dead_key,
 		fKeys.grave_dead_key,
 		fKeys.circumflex_dead_key,
@@ -303,13 +303,13 @@ bool BKeymap::IsDeadSecondKey(uint32 keyCode, uint32 modifiers,
 		fKeys.tilde_dead_key
 	};
 
-	const int32* deadOffset = deadOffsets[activeDeadKey - 1];
+	const int32_t* deadOffset = deadOffsets[activeDeadKey - 1];
 
-	for (int32 i = 0; i < 32; i++) {
+	for (int32_t i = 0; i < 32; i++) {
 		if (offset == deadOffset[i])
 			return true;
 
-		uint32 deadNumBytes = fChars[deadOffset[i]];
+		uint32_t deadNumBytes = fChars[deadOffset[i]];
 
 		if (!deadNumBytes)
 			continue;
@@ -324,8 +324,8 @@ bool BKeymap::IsDeadSecondKey(uint32 keyCode, uint32 modifiers,
 
 
 //! Get the char for a key given modifiers and active dead key
-void BKeymap::GetChars(uint32 keyCode, uint32 modifiers, uint8 activeDeadKey,
-	char** chars, int32* numBytes) const
+void BKeymap::GetChars(uint32_t keyCode, uint32_t modifiers, uint8 activeDeadKey,
+	char** chars, int32_t* numBytes) const
 {
 	*numBytes = 0;
 	*chars = NULL;
@@ -351,7 +351,7 @@ void BKeymap::GetChars(uint32 keyCode, uint32 modifiers, uint8 activeDeadKey,
 		}
 	}
 
-	int32 offset = Offset(keyCode, modifiers);
+	int32_t offset = Offset(keyCode, modifiers);
 	if (offset < 0)
 		return;
 
@@ -372,7 +372,7 @@ void BKeymap::GetChars(uint32 keyCode, uint32 modifiers, uint8 activeDeadKey,
 	}
 
 	// here we take an potential active dead key
-	const int32* deadKey;
+	const int32_t* deadKey;
 	switch (activeDeadKey) {
 		case kDeadKeyAcute:
 			deadKey = fKeys.acute_dead_key;
@@ -401,7 +401,7 @@ void BKeymap::GetChars(uint32 keyCode, uint32 modifiers, uint8 activeDeadKey,
 
 	// if dead key, we search for our current offset char in the dead key
 	// offset table string comparison is needed
-	for (int32 i = 0; i < 32; i++) {
+	for (int32_t i = 0; i < 32; i++) {
 		if (strncmp(&fChars[offset + 1], &fChars[deadKey[i] + 1], *numBytes)
 				== 0) {
 			*numBytes = fChars[deadKey[i + 1]];
@@ -435,16 +435,16 @@ void BKeymap::GetChars(uint32 keyCode, uint32 modifiers, uint8 activeDeadKey,
 /*!	Get a list of characters translated from a given character and
 	set of modifiers to another set of modifiers.
 */
-status_t BKeymap::GetModifiedCharacters(const char* in, int32 inModifiers,
-	int32 outModifiers, BObjectList<const char>* _outList)
+status_t BKeymap::GetModifiedCharacters(const char* in, int32_t inModifiers,
+	int32_t outModifiers, BObjectList<const char>* _outList)
 {
 	if (in == NULL || *in == '\0' || _outList == NULL)
 		return B_BAD_VALUE;
 
-	int32 inOffset;
-	int32 outOffset;
+	int32_t inOffset;
+	int32_t outOffset;
 
-	for(uint32 i = 0; i < 128; i++) {
+	for(uint32_t i = 0; i < 128; i++) {
 		if (inModifiers == 0)
 			inOffset = fKeys.normal_map[i];
 		else if (inModifiers == B_SHIFT_KEY)
@@ -536,10 +536,10 @@ BKeymap::operator=(const BKeymap& other)
 }
 
 
-int32 BKeymap::Offset(uint32 keyCode, uint32 modifiers, uint32* _table) const
+int32_t BKeymap::Offset(uint32_t keyCode, uint32_t modifiers, uint32_t* _table) const
 {
-	int32 offset;
-	uint32 table;
+	int32_t offset;
+	uint32_t table;
 
 	if (keyCode >= 128)
 		return -1;
@@ -586,7 +586,7 @@ int32 BKeymap::Offset(uint32 keyCode, uint32 modifiers, uint32* _table) const
 	if (_table != NULL)
 		*_table = table;
 
-	if (offset >= (int32)fCharsSize)
+	if (offset >= (int32_t)fCharsSize)
 		return -1;
 
 	return offset;
@@ -594,12 +594,12 @@ int32 BKeymap::Offset(uint32 keyCode, uint32 modifiers, uint32* _table) const
 
 
 uint8
-BKeymap::DeadKeyIndex(int32 offset) const
+BKeymap::DeadKeyIndex(int32_t offset) const
 {
 	if (fChars == NULL || offset <= 0)
 		return 0;
 
-	uint32 numBytes = fChars[offset];
+	uint32_t numBytes = fChars[offset];
 	if (!numBytes || numBytes > 4)
 		return 0;
 
@@ -607,7 +607,7 @@ BKeymap::DeadKeyIndex(int32 offset) const
 	strncpy(chars, &fChars[offset + 1], numBytes);
 	chars[numBytes] = 0;
 
-	const int32 deadOffsets[] = {
+	const int32_t deadOffsets[] = {
 		fKeys.acute_dead_key[1],
 		fKeys.grave_dead_key[1],
 		fKeys.circumflex_dead_key[1],
@@ -616,11 +616,11 @@ BKeymap::DeadKeyIndex(int32 offset) const
 	};
 
 	uint8 result = 0;
-	for (int32 i = 0; i < 5; i++) {
+	for (int32_t i = 0; i < 5; i++) {
 		if (offset == deadOffsets[i])
 			return i + 1;
 
-		uint32 deadNumBytes = fChars[deadOffsets[i]];
+		uint32_t deadNumBytes = fChars[deadOffsets[i]];
 		if (!deadNumBytes)
 			continue;
 

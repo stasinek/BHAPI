@@ -172,7 +172,7 @@ status_t BRepositoryCache::SetTo(const BEntry& entry)
 }
 
 
-uint32 BRepositoryCache::CountPackages() const
+uint32_t BRepositoryCache::CountPackages() const
 {
 	return fPackages.CountInfos();
 }

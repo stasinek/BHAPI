@@ -43,11 +43,11 @@ public:
 								~GameProducer();
 
 	// BMediaNode methods
-			BMediaAddOn*		AddOn(int32* internal_id) const;
+			BMediaAddOn*		AddOn(int32_t* internal_id) const;
 
 	// BBufferProducer methods
 			status_t			FormatSuggestionRequested(media_type type,
-									int32 quality, media_format* format);
+									int32_t quality, media_format* format);
 
 			status_t			FormatProposal(const media_source& output,
 									media_format* format);
@@ -55,12 +55,12 @@ public:
 			status_t	 		FormatChangeRequested(const media_source& source,
 									const media_destination& destination,
 									media_format* io_format,
-									int32* _deprecated_);
+									int32_t* _deprecated_);
 
-			status_t			GetNextOutput(int32* cookie,
+			status_t			GetNextOutput(int32_t* cookie,
 									media_output* _output);
 
-			status_t			DisposeOutputCookie(int32 cookie);
+			status_t			DisposeOutputCookie(int32_t cookie);
 
 			status_t			SetBufferGroup(const media_source& forSource,
 									BBufferGroup* group);
@@ -88,11 +88,11 @@ public:
 									bigtime_t performanceDuration);
 
 			void				EnableOutput(const media_source & what,
-									bool enabled, int32* _deprecated_);
+									bool enabled, int32_t* _deprecated_);
 
-			status_t			SetPlayRate(int32 numerator, int32 denominator);
+			status_t			SetPlayRate(int32_t numerator, int32_t denominator);
 
-			status_t			HandleMessage(int32 message, const void* data,
+			status_t			HandleMessage(int32_t message, const void* data,
 									size_t size);
 
 			void				AdditionalBufferRequested(const media_source& source,
@@ -103,7 +103,7 @@ public:
 			void 				LatencyChanged(const media_source& source,
 									const media_destination& destination,
 									bigtime_t new_latency,
-									uint32 flags);
+									uint32_t flags);
 
 	// BMediaEventLooper methods
 			void 				NodeRegistered();
@@ -117,7 +117,7 @@ public:
 			status_t			StopPlaying(GameSoundBuffer* sound);
 			bool				IsPlaying(GameSoundBuffer* sound) const;
 
-			int32				SoundCount() const;
+			int32_t				SoundCount() const;
 
 private:
 			BBuffer* 			FillNextBuffer(bigtime_t event_time);

@@ -11,7 +11,7 @@
 
 
 static BCatalog sCatalog;
-static int32 sCatalogInitOnce = INIT_ONCE_UNINITIALIZED;
+static int32_t sCatalogInitOnce = INIT_ONCE_UNINITIALIZED;
 
 
 BCatalog*

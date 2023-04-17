@@ -11,10 +11,10 @@
 #define _DMA_REGS_H
 
 typedef struct DMA_descriptor {
-	uint32	src_address;
-	uint32	dest_address;
-	uint32	command;
-	uint32	res;
+	uint32_t	src_address;
+	uint32_t	dest_address;
+	uint32_t	command;
+	uint32_t	res;
 } DMA_descriptor;
 
 #define RADEON_DMA_COMMAND_EOL		(1 << 31)

@@ -165,7 +165,7 @@ enum {
 //
 
 const char* kMeta = "^$.[()|?+*\\";
-const int32 kMaxSize = 32767L;
+const int32_t kMaxSize = 32767L;
 	// Probably could be 65535L.
 
 
@@ -198,7 +198,7 @@ const char* kRegExpErrorStringArray[] = {
 
 
 #ifdef DEBUG
-int32 regnarrate = 0;
+int32_t regnarrate = 0;
 #endif
 
 
@@ -308,8 +308,8 @@ RegExp::Compile(const char* exp)
 	regexp* r;
 	const char* scan;
 	const char* longest;
-	int32 len;
-	int32 flags;
+	int32_t len;
+	int32_t flags;
 
 	if (exp == NULL) {
 		SetError(B_BAD_VALUE);
@@ -378,9 +378,9 @@ RegExp::Compile(const char* exp)
 			len = 0;
 			for (; scan != NULL; scan = Next((char*)scan)) {
 				if (*scan == kRegExpExactly
-					&& (int32)strlen(Operand(scan)) >= len) {
+					&& (int32_t)strlen(Operand(scan)) >= len) {
 					longest = Operand(scan);
-					len = (int32)strlen(Operand(scan));
+					len = (int32_t)strlen(Operand(scan));
 				}
 			}
 			r->regmust = longest;
@@ -425,13 +425,13 @@ void RegExp::SetError(status_t error) const
 // is a trifle forced, but the need to tie the tails of the branches to what
 // follows makes it hard to avoid.
 //
-char*  RegExp::Reg(int32 paren, int32* flagp)
+char*  RegExp::Reg(int32_t paren, int32_t* flagp)
 {
 	char* ret;
 	char* br;
 	char* ender;
-	int32 parno = 0;
-	int32 flags;
+	int32_t parno = 0;
+	int32_t flags;
 
 	*flagp = kHasWidth;
 		// Tentatively.
@@ -509,12 +509,12 @@ char*  RegExp::Reg(int32 paren, int32* flagp)
 //
 // Implements the concatenation operator.
 //
-char*  RegExp::Branch(int32* flagp)
+char*  RegExp::Branch(int32_t* flagp)
 {
 	char* ret;
 	char* chain;
 	char* latest;
-	int32 flags;
+	int32_t flags;
 
 	*flagp = kWorst;
 		// Tentatively.
@@ -556,12 +556,12 @@ char*  RegExp::Branch(int32* flagp)
 // branch. It might seem that this node could be dispensed with entirely,
 // but the endmarker role is not redundant.
 //
-char*  RegExp::Piece(int32* flagp)
+char*  RegExp::Piece(int32_t* flagp)
 {
 	char* ret;
 	char op;
 	char* next;
-	int32 flags;
+	int32_t flags;
 
 	ret = Atom(&flags);
 	if (ret == NULL)
@@ -636,10 +636,10 @@ char*  RegExp::Piece(int32* flagp)
 // faster to run.  Backslashed characters are exceptions, each becoming a
 // separate node; the code is simpler that way and it's not worth fixing.
 //
-char*  RegExp::Atom(int32* flagp)
+char*  RegExp::Atom(int32_t* flagp)
 {
 	char* ret;
-	int32 flags;
+	int32_t flags;
 
 	*flagp = kWorst;
 		// tentatively
@@ -660,8 +660,8 @@ char*  RegExp::Atom(int32* flagp)
 
 		case '[':
 		{
-			int32 cclass;
-			int32 classend;
+			int32_t cclass;
+			int32_t classend;
 
 			if (*fInputScanPointer == '^') {
 				// complement of range
@@ -735,11 +735,11 @@ char*  RegExp::Atom(int32* flagp)
 
 		default:
 		{
-			int32 len;
+			int32_t len;
 			char ender;
 
 			fInputScanPointer--;
-			len = (int32)strcspn(fInputScanPointer, kMeta);
+			len = (int32_t)strcspn(fInputScanPointer, kMeta);
 			if (len <= 0) {
 				SetError(REGEXP_INTERNAL_ERROR);
 				return NULL;
@@ -846,7 +846,7 @@ void RegExp::Tail(char* p, char* val)
 {
 	char* scan;
 	char* temp;
-	int32 offset;
+	int32_t offset;
 
 	if (p == &fDummy)
 		return;
@@ -890,7 +890,7 @@ void RegExp::OpTail(char* p, char* val)
 //
 // - RunMatcher - match a regexp against a string
 //
-int32 RegExp::RunMatcher(regexp* prog, const char* string) const
+int32_t RegExp::RunMatcher(regexp* prog, const char* string) const
 {
 	const char* s;
 
@@ -956,9 +956,9 @@ int32 RegExp::RunMatcher(regexp* prog, const char* string) const
 //
 // Returns 0 on failure, 1 on success.
 //
-int32 RegExp::Try(regexp* prog, const char* string) const
+int32_t RegExp::Try(regexp* prog, const char* string) const
 {
-	int32 i;
+	int32_t i;
 	const char **sp;
 	const char **ep;
 
@@ -992,7 +992,7 @@ int32 RegExp::Try(regexp* prog, const char* string) const
 //
 // Returns 0 on failure, 1 on success.
 //
-int32 RegExp::Match(const char* prog) const
+int32_t RegExp::Match(const char* prog) const
 {
 	const char* scan;	// Current node.
 	const char* next;		// Next node.
@@ -1033,7 +1033,7 @@ int32 RegExp::Match(const char* prog) const
 				if (*opnd != *fStringInputPointer)
 					return 0;
 
-				uint32 len = strlen(opnd);
+				uint32_t len = strlen(opnd);
 				if (len > 1
 					&& strncmp(opnd, fStringInputPointer, len) != 0) {
 					return 0;
@@ -1075,7 +1075,7 @@ int32 RegExp::Match(const char* prog) const
 			case kRegExpOpen + 8:
 			case kRegExpOpen + 9:
 			{
-				int32 no;
+				int32_t no;
 				const char* save;
 
 				no = *scan - kRegExpOpen;
@@ -1105,7 +1105,7 @@ int32 RegExp::Match(const char* prog) const
 			case kRegExpClose + 8:
 			case kRegExpClose + 9:
 			{
-				int32 no;
+				int32_t no;
 				const char* save;
 
 				no = *scan - kRegExpClose;
@@ -1151,9 +1151,9 @@ int32 RegExp::Match(const char* prog) const
 			case kRegExpPlus:
 				{
 					char nextch;
-					int32 no;
+					int32_t no;
 					const char* save;
-					int32 min;
+					int32_t min;
 
 					//
 					// Lookahead to avoid useless match attempts
@@ -1204,9 +1204,9 @@ int32 RegExp::Match(const char* prog) const
 //
 // - Repeat - repeatedly match something simple, report how many
 //
-int32 RegExp::Repeat(const char* p) const
+int32_t RegExp::Repeat(const char* p) const
 {
-	int32 count = 0;
+	int32_t count = 0;
 	const char* scan;
 	const char* opnd;
 
@@ -1214,7 +1214,7 @@ int32 RegExp::Repeat(const char* p) const
 	opnd = Operand(p);
 	switch (*p) {
 		case kRegExpAny:
-			count = (int32)strlen(scan);
+			count = (int32_t)strlen(scan);
 			scan += count;
 			break;
 
@@ -1257,7 +1257,7 @@ int32 RegExp::Repeat(const char* p) const
 //
 char*  RegExp::Next(char* p)
 {
-	int32 offset;
+	int32_t offset;
 
 	if (p == &fDummy)
 		return NULL;
@@ -1275,7 +1275,7 @@ char*  RegExp::Next(char* p)
 
 const char*  RegExp::Next(const char* p) const
 {
-	int32 offset;
+	int32_t offset;
 
 	if (p == &fDummy)
 		return NULL;
@@ -1291,9 +1291,9 @@ const char*  RegExp::Next(const char* p) const
 }
 
 
-inline int32 RegExp::UCharAt(const char* p) const
+inline int32_t RegExp::UCharAt(const char* p) const
 {
-	return (int32)*(unsigned char *)p;
+	return (int32_t)*(unsigned char *)p;
 }
 
 

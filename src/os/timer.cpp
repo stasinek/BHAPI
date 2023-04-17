@@ -29,7 +29,7 @@ struct per_cpu_timer_data {
 	spinlock		lock;
 	timer* volatile	events;
 	timer* volatile	current_event;
-	int32			current_event_in_progress;
+	int32_t			current_event_in_progress;
 	bigtime_t		real_time_offset;
 };
 
@@ -110,7 +110,7 @@ per_cpu_real_time_clock_changed(void*, int cpu)
 	timer* firstEvent = *it;
 	while (timer* event = *it) {
 		// check whether it's an absolute real-time timer
-		uint32 flags = event->flags;
+		uint32_t flags = event->flags;
 		if ((flags & ~B_TIMER_FLAGS) != B_ONE_SHOT_ABSOLUTE_TIMER
 			|| (flags & B_TIMER_REAL_TIME_BASE) == 0) {
 			it = &event->next;
@@ -161,8 +161,8 @@ per_cpu_real_time_clock_changed(void*, int cpu)
 static int
 dump_timers(int argc, char** argv)
 {
-	int32 cpuCount = smp_get_num_cpus();
-	for (int32 i = 0; i < cpuCount; i++) {
+	int32_t cpuCount = smp_get_num_cpus();
+	for (int32_t i = 0; i < cpuCount; i++) {
 		kprintf("CPU %" B_PRId32 ":\n", i);
 
 		if (sPerCPU[i].events == NULL) {
@@ -229,8 +229,8 @@ timer_init_post_rtc(void)
 {
 	bigtime_t realTimeOffset = rtc_boot_time();
 
-	int32 cpuCount = smp_get_num_cpus();
-	for (int32 i = 0; i < cpuCount; i++)
+	int32_t cpuCount = smp_get_num_cpus();
+	for (int32_t i = 0; i < cpuCount; i++)
 		sPerCPU[i].real_time_offset = realTimeOffset;
 }
 
@@ -242,13 +242,13 @@ timer_real_time_clock_changed()
 }
 
 
-int32
+int32_t
 timer_interrupt()
 {
 	timer* event;
 	spinlock* spinlock;
 	per_cpu_timer_data& cpuData = sPerCPU[smp_get_current_cpu()];
-	int32 rc = B_HANDLED_INTERRUPT;
+	int32_t rc = B_HANDLED_INTERRUPT;
 
 	TRACE(("timer_interrupt: time %lld, cpu %ld\n", system_time(),
 		smp_get_current_cpu()));
@@ -317,7 +317,7 @@ timer_interrupt()
 
 
 status_t
-add_timer(timer* event, timer_hook hook, bigtime_t period, int32 flags)
+add_timer(timer* event, timer_hook hook, bigtime_t period, int32_t flags)
 {
 	bigtime_t currentTime = system_time();
 	cpu_status state;

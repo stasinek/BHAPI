@@ -61,7 +61,7 @@ static void third(void *data)
 	ETK_OUTPUT("third etk_on_exit_thread()\n");
 }
 
-static eint32 thread(void *data)
+static eint32_t thread(void *data)
 {
 	ETK_OUTPUT("Thread going...\n");
 #ifdef HAVE_ON_EXIT

@@ -50,43 +50,43 @@ public:
 
 	virtual	status_t			Identify(BPositionIO* source,
 									BMessage* ioExtension,
-									translator_info* _info, uint32 hintType = 0,
+									translator_info* _info, uint32_t hintType = 0,
 									const char* hintMIME = NULL,
-									uint32 wantType = 0);
+									uint32_t wantType = 0);
 
 	virtual	status_t			GetTranslators(BPositionIO* source,
 									BMessage* ioExtension,
-									translator_info** _info, int32* _numInfo,
-									uint32 hintType = 0,
+									translator_info** _info, int32_t* _numInfo,
+									uint32_t hintType = 0,
 									const char* hintMIME = NULL,
-									uint32 wantType = 0);
+									uint32_t wantType = 0);
 
 	virtual	status_t			GetAllTranslators(translator_id** _list,
-									int32* _count);
+									int32_t* _count);
 
 	virtual	status_t			GetTranslatorInfo(translator_id translatorID,
 									const char** _name, const char** _info,
-									int32* _version);
+									int32_t* _version);
 
 	virtual	status_t			GetInputFormats(translator_id translatorID,
 									const translation_format** _formats,
-									int32* _numFormats);
+									int32_t* _numFormats);
 
 	virtual	status_t			GetOutputFormats(translator_id translatorID,
 									const translation_format** _formats,
-									int32* _numFormats);
+									int32_t* _numFormats);
 
 	virtual	status_t			Translate(BPositionIO* source,
 									const translator_info* info,
 									BMessage* ioExtension,
 									BPositionIO* destination,
-									uint32 wantOutType, uint32 hintType = 0,
+									uint32_t wantOutType, uint32_t hintType = 0,
 									const char* hintMIME = NULL);
 
 	virtual	status_t			Translate(translator_id translatorID,
 									BPositionIO* source, BMessage* ioExtension,
 									BPositionIO* destination,
-									uint32 wantOutType);
+									uint32_t wantOutType);
 
 	virtual	status_t			MakeConfigurationView(
 									translator_id translatorID,
@@ -97,7 +97,7 @@ public:
 									translator_id translatorID,
 									BMessage* ioExtension);
 
-			BTranslatorReleaseDelegate*	AcquireTranslator(int32 translatorID);
+			BTranslatorReleaseDelegate*	AcquireTranslator(int32_t translatorID);
 
 			status_t			GetRefFor(translator_id translatorID,
 									entry_ref* ref);
@@ -123,16 +123,16 @@ private:
 
 			void					_Initialize();
 
-	static	const char*				Version(int32* outCurVersion,
-										int32* outMinVersion,
-										int32 inAppVersion);
+	static	const char*				Version(int32_t* outCurVersion,
+										int32_t* outMinVersion,
+										int32_t inAppVersion);
 				// for backward compatiblity only
 
 private:
 			friend class Private;
 
 			Private*				fPrivate;
-			int32					fUnused[6];
+			int32_t					fUnused[6];
 
 	static	BTranslatorRoster*		sDefaultRoster;
 };

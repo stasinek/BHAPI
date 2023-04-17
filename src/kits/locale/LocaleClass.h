@@ -39,7 +39,7 @@ public:
 			void				SetLanguage(const BLanguage& newLanguage);
 
 			// see definitions in LocaleStrings.h
-			const char*			GetString(uint32 id) const;
+			const char*			GetString(uint32_t id) const;
 
 			// Collator short-hands
 			int					StringCompare(const char* s1,

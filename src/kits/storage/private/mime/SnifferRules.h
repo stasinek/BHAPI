@@ -36,7 +36,7 @@ public:
 	~SnifferRules();
 	
 	status_t GuessMimeType(const entry_ref *ref, BString *type);
-	status_t GuessMimeType(const void *buffer, int32 length, BString *type);
+	status_t GuessMimeType(const void *buffer, int32_t length, BString *type);
 	
 	status_t SetSnifferRule(const char *type, const char *rule);
 	status_t DeleteSnifferRule(const char *type);
@@ -53,7 +53,7 @@ public:
 	};		
 private:
 	status_t BuildRuleList();
-	status_t GuessMimeType(BFile* file, const void *buffer, int32 length,
+	status_t GuessMimeType(BFile* file, const void *buffer, int32_t length,
 		BString *type);
 	ssize_t MaxBytesNeeded();
 	status_t ProcessType(const char *type, ssize_t *bytesNeeded);

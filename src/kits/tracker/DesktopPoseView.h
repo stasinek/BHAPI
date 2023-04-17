@@ -47,7 +47,7 @@ namespace BPrivate {
 class DesktopPoseView : public BPoseView {
 	// overrides BPoseView to add desktop-view specific code
 public:
-	DesktopPoseView(Model*, uint32 viewMode);
+	DesktopPoseView(Model*, uint32_t viewMode);
 
 	static EntryListBase* InitDesktopDirentIterator(BPoseView*,
 		const entry_ref*);

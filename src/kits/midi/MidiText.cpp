@@ -31,7 +31,7 @@ BMidiText::~BMidiText()
 
 
 void BMidiText::NoteOff(
-	uchar channel, uchar note, uchar velocity, uint32 time)
+	uchar channel, uchar note, uchar velocity, uint32_t time)
 {
 	_WaitAndPrint(time);
 	printf(
@@ -41,7 +41,7 @@ void BMidiText::NoteOff(
 
 
 void BMidiText::NoteOn(
-	uchar channel, uchar note, uchar velocity, uint32 time)
+	uchar channel, uchar note, uchar velocity, uint32_t time)
 {
 	_WaitAndPrint(time);
 	printf(
@@ -51,7 +51,7 @@ void BMidiText::NoteOn(
 
 
 void BMidiText::KeyPressure(
-	uchar channel, uchar note, uchar pressure, uint32 time)
+	uchar channel, uchar note, uchar pressure, uint32_t time)
 {
 	_WaitAndPrint(time);
 	printf(
@@ -61,7 +61,7 @@ void BMidiText::KeyPressure(
 
 
 void BMidiText::ControlChange(
-	uchar channel, uchar controlNumber, uchar controlValue, uint32 time)
+	uchar channel, uchar controlNumber, uchar controlValue, uint32_t time)
 {
 	_WaitAndPrint(time);
 	printf(
@@ -71,7 +71,7 @@ void BMidiText::ControlChange(
 
 
 void BMidiText::ProgramChange(
-	uchar channel, uchar programNumber, uint32 time)
+	uchar channel, uchar programNumber, uint32_t time)
 {
 	_WaitAndPrint(time);
 	printf(
@@ -80,7 +80,7 @@ void BMidiText::ProgramChange(
 }
 
 
-void BMidiText::ChannelPressure(uchar channel, uchar pressure, uint32 time)
+void BMidiText::ChannelPressure(uchar channel, uchar pressure, uint32_t time)
 {
 	_WaitAndPrint(time);
 	printf(
@@ -89,7 +89,7 @@ void BMidiText::ChannelPressure(uchar channel, uchar pressure, uint32 time)
 }
 
 
-void BMidiText::PitchBend(uchar channel, uchar lsb, uchar msb, uint32 time)
+void BMidiText::PitchBend(uchar channel, uchar lsb, uchar msb, uint32_t time)
 {
 	_WaitAndPrint(time);
 	printf(
@@ -98,7 +98,7 @@ void BMidiText::PitchBend(uchar channel, uchar lsb, uchar msb, uint32 time)
 }
 
 
-void BMidiText::SystemExclusive(void* data, size_t length, uint32 time)
+void BMidiText::SystemExclusive(void* data, size_t length, uint32_t time)
 {
 	_WaitAndPrint(time);
 
@@ -110,7 +110,7 @@ void BMidiText::SystemExclusive(void* data, size_t length, uint32 time)
 
 
 void BMidiText::SystemCommon(
-	uchar status, uchar data1, uchar data2, uint32 time)
+	uchar status, uchar data1, uchar data2, uint32_t time)
 {
 	_WaitAndPrint(time);
 	printf(
@@ -119,7 +119,7 @@ void BMidiText::SystemCommon(
 }
 
 
-void BMidiText::SystemRealTime(uchar status, uint32 time)
+void BMidiText::SystemRealTime(uchar status, uint32_t time)
 {
 	_WaitAndPrint(time);
 	printf("SYSTEM REAL TIME; status = %d\n", status);
@@ -144,7 +144,7 @@ void BMidiText::Run()
 }
 
 
-void BMidiText::_WaitAndPrint(uint32 time) 
+void BMidiText::_WaitAndPrint(uint32_t time) 
 {
 	if (fStartTime == 0) 
 		fStartTime = time;

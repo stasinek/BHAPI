@@ -64,7 +64,7 @@ public:
 	void ShowPage(SettingsPage page);
 
 private:
-	SettingsView* _ViewAt(int32 i);
+	SettingsView* _ViewAt(int32_t i);
 
 	void _HandleChangedContents();
 	void _HandlePressedDefaultsButton();

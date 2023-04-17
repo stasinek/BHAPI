@@ -432,26 +432,26 @@ status_t BAbstractLayout::AllUnarchived(const BMessage* from)
 
 
 status_t BAbstractLayout::ItemArchived(BMessage* into, BLayoutItem* item,
-	int32 index) const
+	int32_t index) const
 {
 	return BLayout::ItemArchived(into, item, index);
 }
 
 
 status_t BAbstractLayout::ItemUnarchived(const BMessage* from, BLayoutItem* item,
-	int32 index)
+	int32_t index)
 {
 	return BLayout::ItemUnarchived(from, item, index);
 }
 
 
-bool BAbstractLayout::ItemAdded(BLayoutItem* item, int32 atIndex)
+bool BAbstractLayout::ItemAdded(BLayoutItem* item, int32_t atIndex)
 {
 	return BLayout::ItemAdded(item, atIndex);
 }
 
 
-void BAbstractLayout::ItemRemoved(BLayoutItem* item, int32 fromIndex)
+void BAbstractLayout::ItemRemoved(BLayoutItem* item, int32_t fromIndex)
 {
 	BLayout::ItemRemoved(item, fromIndex);
 }

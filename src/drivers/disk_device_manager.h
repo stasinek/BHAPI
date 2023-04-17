@@ -24,11 +24,11 @@ typedef struct partition_data {
 	off_t			offset;
 	off_t			size;
 	off_t			content_size;
-	uint32			block_size;
-	int32			child_count;
-	int32			index;			// [sys]
-	uint32			status;
-	uint32			flags;
+	uint32_t			block_size;
+	int32_t			child_count;
+	int32_t			index;			// [sys]
+	uint32_t			status;
+	uint32_t			flags;
 	dev_t			volume;			// [sys]
 	void			*mount_cookie;	// [sys]
 	char			*name;			// max: B_OS_NAME_LENGTH
@@ -44,7 +44,7 @@ typedef struct partition_data {
 // C API disk device representation
 typedef struct disk_device_data {
 	partition_id	id;				// equal to that of the root partition
-	uint32			flags;
+	uint32_t			flags;
 	char			*path;
 	device_geometry	geometry;
 } disk_device_data;
@@ -91,21 +91,21 @@ void read_unlock_disk_device(partition_id partitionID);
 
 // getting disk devices/partitions by path
 // (no locking required)
-int32 find_disk_device(const char *path);
-int32 find_partition(const char *path);
+int32_t find_disk_device(const char *path);
+int32_t find_partition(const char *path);
 
 // disk device/partition read access
 // (read lock required)
 disk_device_data *get_disk_device(partition_id partitionID);
 partition_data *get_partition(partition_id partitionID);
 partition_data *get_parent_partition(partition_id partitionID);
-partition_data *get_child_partition(partition_id partitionID, int32 index);
+partition_data *get_child_partition(partition_id partitionID, int32_t index);
 
 int open_partition(partition_id partitionID, int openMode);
 
 // partition write access
 // (write lock required)
-partition_data *create_child_partition(partition_id partitionID, int32 index,
+partition_data *create_child_partition(partition_id partitionID, int32_t index,
 		off_t offset, off_t size, partition_id childID);
 	// childID is an optional input parameter -- -1 to be ignored
 bool delete_partition(partition_id partitionID);
@@ -129,8 +129,8 @@ disk_system_id find_disk_system(const char *name);
 bool update_disk_device_job_progress(disk_job_id jobID, float progress);
 bool update_disk_device_job_extra_progress(disk_job_id jobID, const char *info);
 bool set_disk_device_job_error_message(disk_job_id jobID, const char *message);
-uint32 update_disk_device_jobe_interrupt_properties(disk_job_id jobID,
-		uint32 interruptProperties);
+uint32_t update_disk_device_jobe_interrupt_properties(disk_job_id jobID,
+		uint32_t interruptProperties);
 	// returns one of B_DISK_DEVICE_JOB_{CONTINUE,CANCEL,REVERSE}
 
 #ifdef __cplusplus

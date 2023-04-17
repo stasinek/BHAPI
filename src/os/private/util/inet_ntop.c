@@ -113,7 +113,7 @@ inet_ntop6(src, dst, size)
 	size_t size;
 {
 	/*
-	 * Note that int32_t and int16_t need only be "at least" large enough
+	 * Note that int32_t_t and int16_t need only be "at least" large enough
 	 * to contain a value of the specified size.  On some systems, like
 	 * Crays, there is no such thing as an integer variable with 16 bits.
 	 * Keep this in mind if you think this function should have been coded

@@ -73,7 +73,7 @@ their respective holders. All rights reserved.
 
 namespace BPrivate {
 
-const int32 kMinMenuWidth = 150;
+const int32_t kMinMenuWidth = 150;
 
 enum nav_flags {
 	kVolumesOnly = 1,
@@ -88,7 +88,7 @@ bool SpringLoadedFolderCompareMessages(const BMessage* incoming,
 		return false;
 
 	bool refsMatch = false;
-	for (int32 inIndex = 0; incoming->HasRef("refs", inIndex); inIndex++) {
+	for (int32_t inIndex = 0; incoming->HasRef("refs", inIndex); inIndex++) {
 		entry_ref inRef;
 		if (incoming->FindRef("refs", inIndex, &inRef) != B_OK) {
 			refsMatch = false;
@@ -96,7 +96,7 @@ bool SpringLoadedFolderCompareMessages(const BMessage* incoming,
 		}
 
 		bool inRefMatch = false;
-		for (int32 dragIndex = 0; dragMessage->HasRef("refs", dragIndex);
+		for (int32_t dragIndex = 0; dragMessage->HasRef("refs", dragIndex);
 			dragIndex++) {
 			entry_ref dragRef;
 			if (dragMessage->FindRef("refs", dragIndex, &dragRef) != B_OK) {
@@ -139,8 +139,8 @@ void SpringLoadedFolderSetMenuStates(const BMenu* menu,
 
 	// If a types list exists iterate through the list and see if each item
 	// can support any item in the list and set the enabled state of the item.
-	int32 count = menu->CountItems();
-	for (int32 index = 0 ; index < count ; index++) {
+	int32_t count = menu->CountItems();
+	for (int32_t index = 0 ; index < count ; index++) {
 		ModelMenuItem* item = dynamic_cast<ModelMenuItem*>(menu->ItemAt(index));
 		if (item == NULL)
 			continue;
@@ -159,7 +159,7 @@ void SpringLoadedFolderSetMenuStates(const BMenu* menu,
 				} else {
 					// other, check its support
 					Model resolvedModel(&entry);
-					int32 supported
+					int32_t supported
 						= resolvedModel.SupportsMimeType(NULL, typeslist);
 					item->SetEnabled(supported != kDoesNotSupportType);
 				}
@@ -171,7 +171,7 @@ void SpringLoadedFolderSetMenuStates(const BMenu* menu,
 			// always enabled if a container
 			item->SetEnabled(true);
 		else if (model->IsFile() || model->IsExecutable()) {
-			int32 supported = model->SupportsMimeType(NULL, typeslist);
+			int32_t supported = model->SupportsMimeType(NULL, typeslist);
 			item->SetEnabled(supported != kDoesNotSupportType);
 		} else
 			item->SetEnabled(false);
@@ -209,8 +209,8 @@ void SpringLoadedFolderAddUniqueTypeToList(entry_ref* ref,
 		}
 		// scan the current list, don't add dups
 		bool isUnique = true;
-		int32 count = typeslist->CountItems();
-		for (int32 index = 0 ; index < count ; index++) {
+		int32_t count = typeslist->CountItems();
+		for (int32_t index = 0 ; index < count ; index++) {
 			if (typeslist->ItemAt(index)->Compare(mimestr) == 0) {
 				isUnique = false;
 				break;
@@ -235,7 +235,7 @@ void SpringLoadedFolderCacheDragData(const BMessage* incoming, BMessage** messag
 	BMessage* localMessage = new BMessage(*incoming);
 	BObjectList<BString>* localTypesList = new BObjectList<BString>(10, true);
 
-	for (int32 index = 0; incoming->HasRef("refs", index); index++) {
+	for (int32_t index = 0; incoming->HasRef("refs", index); index++) {
 		entry_ref ref;
 		if (incoming->FindRef("refs", index, &ref) != B_OK)
 			continue;
@@ -257,7 +257,7 @@ void SpringLoadedFolderCacheDragData(const BMessage* incoming, BMessage** messag
 #define B_TRANSLATION_CONTEXT "NavMenu"
 
 
-BNavMenu::BNavMenu(const char* title, uint32 message, const BHandler* target,
+BNavMenu::BNavMenu(const char* title, uint32_t message, const BHandler* target,
 	BWindow* parentWindow, const BObjectList<BString>* list)
 	:
 	BSlowMenu(title),
@@ -291,7 +291,7 @@ BNavMenu::BNavMenu(const char* title, uint32 message, const BHandler* target,
 }
 
 
-BNavMenu::BNavMenu(const char* title, uint32 message,
+BNavMenu::BNavMenu(const char* title, uint32_t message,
 	const BMessenger& messenger, BWindow* parentWindow,
 	const BObjectList<BString>* list)
 	:
@@ -385,8 +385,8 @@ void BNavMenu::ClearMenuBuildingState()
 	// item list is non-owning, need to delete the items because
 	// they didn't get added to the menu
 	if (fItemList != NULL) {
-		int32 count = fItemList->CountItems();
-		for (int32 index = count - 1; index >= 0; index--)
+		int32_t count = fItemList->CountItems();
+		for (int32_t index = count - 1; index >= 0; index--)
 			delete RemoveItem(index);
 
 		delete fItemList;
@@ -748,8 +748,8 @@ void BNavMenu::DoneBuildingItemList()
 		}
 	}
 
-	int32 count = fItemList->CountItems();
-	for (int32 index = 0; index < count; index++)
+	int32_t count = fItemList->CountItems();
+	for (int32_t index = 0; index < count; index++)
 		AddItem(fItemList->ItemAt(index));
 
 	fItemList->MakeEmpty();
@@ -764,16 +764,16 @@ void BNavMenu::DoneBuildingItemList()
 }
 
 
-int32 BNavMenu::GetMaxMenuWidth(void)
+int32_t BNavMenu::GetMaxMenuWidth(void)
 {
-	return std::max((int32)(BScreen().Frame().Width() / 4), kMinMenuWidth);
+	return std::max((int32_t)(BScreen().Frame().Width() / 4), kMinMenuWidth);
 }
 
 
-void BNavMenu::AddNavDir(const Model* model, uint32 what, BHandler* target,
+void BNavMenu::AddNavDir(const Model* model, uint32_t what, BHandler* target,
 	bool populateSubmenu)
 {
-	BMessage* message = new BMessage((uint32)what);
+	BMessage* message = new BMessage((uint32_t)what);
 	message->AddRef("refs", model->EntryRef());
 	ModelMenuItem* item = NULL;
 
@@ -792,7 +792,7 @@ void BNavMenu::AddNavDir(const Model* model, uint32 what, BHandler* target,
 
 
 void BNavMenu::AddNavParentDir(const char* name,const Model* model,
-	uint32 what, BHandler* target)
+	uint32_t what, BHandler* target)
 {
 	BNavMenu* menu = new BNavMenu(name, what, target);
 	menu->SetNavDir(model->EntryRef());
@@ -809,7 +809,7 @@ void BNavMenu::AddNavParentDir(const char* name,const Model* model,
 }
 
 
-void BNavMenu::AddNavParentDir(const Model* model, uint32 what, BHandler* target)
+void BNavMenu::AddNavParentDir(const Model* model, uint32_t what, BHandler* target)
 {
 	AddNavParentDir(B_TRANSLATE("parent folder"),model, what, target);
 }
@@ -869,8 +869,8 @@ void BNavMenu::SetTrackingHookDeep(BMenu* menu, bool (*func)(BMenu*, void*),
 	void* state)
 {
 	menu->SetTrackingHook(func, state);
-	int32 count = menu->CountItems();
-	for (int32 index = 0 ; index < count; index++) {
+	int32_t count = menu->CountItems();
+	for (int32_t index = 0 ; index < count; index++) {
 		BMenuItem* item = menu->ItemAt(index);
 		if (item == NULL)
 			continue;

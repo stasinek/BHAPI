@@ -32,8 +32,8 @@ public:
     inline	void				SetWidth(float width);
     inline	void				SetHeight(float height);
 
-    inline	int32				IntegerWidth() const;
-    inline	int32				IntegerHeight() const;
+    inline	int32_t				IntegerWidth() const;
+    inline	int32_t				IntegerHeight() const;
 
     inline	bool				IsWidthSet() const;
     inline	bool				IsHeightSet() const;
@@ -101,15 +101,15 @@ inline void BSize::SetHeight(float height)
 }
 
 
-inline int32 BSize::IntegerWidth() const
+inline int32_t BSize::IntegerWidth() const
 {
-    return (int32)width;
+    return (int32_t)width;
 }
 
 
-inline int32 BSize::IntegerHeight() const
+inline int32_t BSize::IntegerHeight() const
 {
-    return (int32)height;
+    return (int32_t)height;
 }
 
 

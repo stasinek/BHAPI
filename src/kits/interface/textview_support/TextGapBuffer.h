@@ -24,52 +24,52 @@ public:
 								TextGapBuffer();
 								~TextGapBuffer();
 
-			void				InsertText(const char* inText, int32 inNumItems,
-									int32 inAtIndex);
-			void				InsertText(BFile* file, int32 fileOffset,
-									int32 amount, int32 atIndex);
-			void				RemoveRange(int32 start, int32 end);
+			void				InsertText(const char* inText, int32_t inNumItems,
+									int32_t inAtIndex);
+			void				InsertText(BFile* file, int32_t fileOffset,
+									int32_t amount, int32_t atIndex);
+			void				RemoveRange(int32_t start, int32_t end);
 
-			bool				FindChar(char inChar, int32 fromIndex,
-									int32* ioDelta);
+			bool				FindChar(char inChar, int32_t fromIndex,
+									int32_t* ioDelta);
 
 			const char*			Text();
 			const char*			RealText();
-			int32				Length() const;
+			int32_t				Length() const;
 
-			const char*			GetString(int32 fromOffset, int32* numBytes);
-			void				GetString(int32 offset, int32 length,
+			const char*			GetString(int32_t fromOffset, int32_t* numBytes);
+			void				GetString(int32_t offset, int32_t length,
 									char* buffer);
 
-			char				RealCharAt(int32 offset) const;
+			char				RealCharAt(int32_t offset) const;
 
 			bool				PasswordMode() const;
 			void				SetPasswordMode(bool);
 
 private:
-			void				_MoveGapTo(int32 toIndex);
-			void				_EnlargeGapTo(int32 inCount);
-			void				_ShrinkGapTo(int32 inCount);
+			void				_MoveGapTo(int32_t toIndex);
+			void				_EnlargeGapTo(int32_t inCount);
+			void				_ShrinkGapTo(int32_t inCount);
 
-			int32				fItemCount;			// logical count
+			int32_t				fItemCount;			// logical count
 			char*				fBuffer;			// allocated memory
-			int32				fBufferCount;		// physical count
-			int32				fGapIndex;			// gap position
-			int32				fGapCount;			// gap count
+			int32_t				fBufferCount;		// physical count
+			int32_t				fGapIndex;			// gap position
+			int32_t				fGapCount;			// gap count
 			char*				fScratchBuffer;		// for GetString
-			int32				fScratchSize;		// scratch size
+			int32_t				fScratchSize;		// scratch size
 			bool				fPasswordMode;
 };
 
 
-inline int32 TextGapBuffer::Length() const
+inline int32_t TextGapBuffer::Length() const
 {
 	return fItemCount;
 }
 
 
 inline char
-TextGapBuffer::RealCharAt(int32 index) const
+TextGapBuffer::RealCharAt(int32_t index) const
 {
 	if (index < 0 || index >= fItemCount) {
 		if (index != fItemCount)

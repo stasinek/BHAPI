@@ -108,10 +108,10 @@ static bool IsLanguageKeyword(const Token& token)
 
 
 struct CLanguageFamilySyntaxHighlightInfo::SyntaxPair {
-	int32 column;
+	int32_t column;
 	syntax_highlight_type type;
 
-	SyntaxPair(int32 column, syntax_highlight_type type)
+	SyntaxPair(int32_t column, syntax_highlight_type type)
 		:
 		column(column),
 		type(type)
@@ -125,24 +125,24 @@ struct CLanguageFamilySyntaxHighlightInfo::SyntaxPair {
 
 class CLanguageFamilySyntaxHighlightInfo::LineInfo {
 public:
-	LineInfo(int32 line)
+	LineInfo(int32_t line)
 		:
 		fLine(line),
 		fPairs(5, true)
 	{
 	}
 
-	inline int32 CountPairs() const
+	inline int32_t CountPairs() const
 	{
 		return fPairs.CountItems();
 	}
 
-	SyntaxPair* PairAt(int32 index) const
+	SyntaxPair* PairAt(int32_t index) const
 	{
 		return fPairs.ItemAt(index);
 	}
 
-	bool AddPair(int32 column, syntax_highlight_type type)
+	bool AddPair(int32_t column, syntax_highlight_type type)
 	{
 		SyntaxPair* pair = new(std::nothrow) SyntaxPair(column, type);
 		if (pair == NULL)
@@ -160,7 +160,7 @@ private:
 	typedef BObjectList<SyntaxPair> SyntaxPairList;
 
 private:
-	int32 fLine;
+	int32_t fLine;
 	SyntaxPairList fPairs;
 };
 
@@ -189,8 +189,8 @@ CLanguageFamilySyntaxHighlightInfo::~CLanguageFamilySyntaxHighlightInfo()
 }
 
 
-int32 CLanguageFamilySyntaxHighlightInfo::GetLineHighlightRanges(int32 line,
-	int32* _columns, syntax_highlight_type* _types, int32 maxCount)
+int32_t CLanguageFamilySyntaxHighlightInfo::GetLineHighlightRanges(int32_t line,
+	int32_t* _columns, syntax_highlight_type* _types, int32_t maxCount)
 {
 	if (line >= fHighlightSource->CountLines())
 		return 0;
@@ -206,7 +206,7 @@ int32 CLanguageFamilySyntaxHighlightInfo::GetLineHighlightRanges(int32 line,
 	if (info == NULL)
 		return 0;
 
-	int32 count = 0;
+	int32_t count = 0;
 	for (; count < info->CountPairs(); count++) {
 		if (count == maxCount - 1)
 			break;
@@ -227,7 +227,7 @@ status_t CLanguageFamilySyntaxHighlightInfo::_ParseLines()
 {
 	syntax_highlight_type type = SYNTAX_HIGHLIGHT_NONE;
 
-	for (int32 i = 0; i < fHighlightSource->CountLines(); i++) {
+	for (int32_t i = 0; i < fHighlightSource->CountLines(); i++) {
 		const char* line = fHighlightSource->LineAt(i);
 		fTokenizer->SetTo(line);
 		LineInfo* info = NULL;
@@ -247,7 +247,7 @@ status_t CLanguageFamilySyntaxHighlightInfo::_ParseLines()
 }
 
 
-status_t CLanguageFamilySyntaxHighlightInfo::_ParseLine(int32 line,
+status_t CLanguageFamilySyntaxHighlightInfo::_ParseLine(int32_t line,
 	syntax_highlight_type& _lastType, LineInfo*& _info)
 {
 	bool inCommentBlock = (_lastType == SYNTAX_HIGHLIGHT_COMMENT);

@@ -55,7 +55,7 @@ dump_info(int argc, char **argv)
 
 	kprintf("cpu count: %" B_PRId32 "\n", smp_get_num_cpus());
 
-	for (int32 i = 0; i < smp_get_num_cpus(); i++)
+	for (int32_t i = 0; i < smp_get_num_cpus(); i++)
 		kprintf("  [%" B_PRId32 "] active time: %10" B_PRId64 ", interrupt"
 			" time: %10" B_PRId64 ", irq time: %10" B_PRId64 "\n", i + 1,
 			gCPU[i].active_time, gCPU[i].interrupt_time, gCPU[i].irq_time);
@@ -106,15 +106,15 @@ public:
 		return B_OK;
 	}
 
-	status_t StartListening(int32 object, uint32 flags, port_id port,
-		int32 token)
+	status_t StartListening(int32_t object, uint32_t flags, port_id port,
+		int32_t token)
 	{
 		// check the parameters
 		if ((object < 0 && object != -1) || port < 0)
 			return B_BAD_VALUE;
 
 		if ((flags & B_WATCH_SYSTEM_ALL) == 0
-			|| (flags & ~(uint32)B_WATCH_SYSTEM_ALL) != 0) {
+			|| (flags & ~(uint32_t)B_WATCH_SYSTEM_ALL) != 0) {
 			return B_BAD_VALUE;
 		}
 
@@ -159,8 +159,8 @@ public:
 		return B_OK;
 	}
 
-	status_t StopListening(int32 object, uint32 flags, port_id port,
-		int32 token)
+	status_t StopListening(int32_t object, uint32_t flags, port_id port,
+		int32_t token)
 	{
 		MutexLocker locker(fLock);
 
@@ -189,8 +189,8 @@ private:
 		DoublyLinkedListLink<Listener>	listLink;
 		ListenerList*					list;
 		port_id							port;
-		int32							token;
-		uint32							flags;
+		int32_t							token;
+		uint32_t							flags;
 
 		virtual void OwnerDeleted(AssociatedDataOwner* owner);
 	};
@@ -203,14 +203,14 @@ private:
 
 		ListenerList*	hashNext;
 		List			listeners;
-		int32			object;
+		int32_t			object;
 	};
 
 	struct ListenerHashDefinition {
-		typedef int32			KeyType;
+		typedef int32_t			KeyType;
 		typedef	ListenerList	ValueType;
 
-		size_t HashKey(int32 key) const
+		size_t HashKey(int32_t key) const
 		{
 			return key;
 		}
@@ -220,7 +220,7 @@ private:
 			return HashKey(value->object);
 		}
 
-		bool Compare(int32 key, const ListenerList* value) const
+		bool Compare(int32_t key, const ListenerList* value) const
 		{
 			return value->object == key;
 		}
@@ -239,16 +239,16 @@ private:
 	{
 		MutexLocker locker(fLock);
 
-		int32 eventCode;
-		int32 teamID = 0;
+		int32_t eventCode;
+		int32_t teamID = 0;
 		if (event->FindInt32("event", &eventCode) != B_OK
 			|| event->FindInt32("team", &teamID) != B_OK) {
 			return;
 		}
 
-		int32 object;
-		uint32 opcode;
-		uint32 flags;
+		int32_t object;
+		uint32_t opcode;
+		uint32_t flags;
 
 		// translate the event
 		if (event->What() == TEAM_MONITOR) {
@@ -296,7 +296,7 @@ private:
 
 		// find matching listeners
 		messaging_target targets[kMaxMessagingTargetCount];
-		int32 targetCount = 0;
+		int32_t targetCount = 0;
 
 		_AddTargets(fTeamListeners.Lookup(teamID), flags, targets,
 			targetCount, object, opcode);
@@ -308,9 +308,9 @@ private:
 			_SendMessage(targets, targetCount, object, opcode);
 	}
 
-	void _AddTargets(ListenerList* listenerList, uint32 flags,
-		messaging_target* targets, int32& targetCount, int32 object,
-		uint32 opcode)
+	void _AddTargets(ListenerList* listenerList, uint32_t flags,
+		messaging_target* targets, int32_t& targetCount, int32_t object,
+		uint32_t opcode)
 	{
 		if (listenerList == NULL)
 			return;
@@ -333,8 +333,8 @@ private:
 		}
 	}
 
-	void _SendMessage(messaging_target* targets, int32 targetCount,
-		int32 object, uint32 opcode)
+	void _SendMessage(messaging_target* targets, int32_t targetCount,
+		int32_t object, uint32_t opcode)
 	{
 		// prepare the message
 		char buffer[128];
@@ -351,7 +351,7 @@ private:
 			targetCount);
 	}
 
-	Listener* _FindListener(int32 object, port_id port, int32 token,
+	Listener* _FindListener(int32_t object, port_id port, int32_t token,
 		ListenerList*& _listenerList)
 	{
 		_listenerList = fTeamListeners.Lookup(object);
@@ -390,7 +390,7 @@ private:
 	}
 
 private:
-	static const int32 kMaxMessagingTargetCount = 8;
+	static const int32_t kMaxMessagingTargetCount = 8;
 
 	mutex			fLock;
 	ListenerHash	fTeamListeners;
@@ -410,15 +410,15 @@ SystemNotificationService::Listener::OwnerDeleted(AssociatedDataOwner* owner)
 
 
 static void
-count_topology_nodes(const cpu_topology_node* node, uint32& count)
+count_topology_nodes(const cpu_topology_node* node, uint32_t& count)
 {
 	count++;
-	for (int32 i = 0; i < node->children_count; i++)
+	for (int32_t i = 0; i < node->children_count; i++)
 		count_topology_nodes(node->children[i], count);
 }
 
 
-static int32
+static int32_t
 get_logical_processor(const cpu_topology_node* node)
 {
 	while (node->level != CPU_TOPOLOGY_SMT) {
@@ -432,7 +432,7 @@ get_logical_processor(const cpu_topology_node* node)
 
 static cpu_topology_node_info*
 generate_topology_array(cpu_topology_node_info* topology,
-	const cpu_topology_node* node, uint32& count)
+	const cpu_topology_node* node, uint32_t& count)
 {
 	if (count == 0)
 		return topology;
@@ -451,7 +451,7 @@ generate_topology_array(cpu_topology_node_info* topology,
 
 	count--;
 	topology++;
-	for (int32 i = 0; i < node->children_count && count > 0; i++)
+	for (int32_t i = 0; i < node->children_count && count > 0; i++)
 		topology = generate_topology_array(topology, node->children[i], count);
 	return topology;
 }
@@ -491,17 +491,17 @@ get_system_info(system_info* info)
 
 
 status_t
-get_cpu_info(uint32 firstCPU, uint32 cpuCount, cpu_info* info)
+get_cpu_info(uint32_t firstCPU, uint32_t cpuCount, cpu_info* info)
 {
-	if (firstCPU >= (uint32)smp_get_num_cpus())
+	if (firstCPU >= (uint32_t)smp_get_num_cpus())
 		return B_BAD_VALUE;
 	if (cpuCount == 0)
 		return B_OK;
 
-	uint32 count = std::min(cpuCount, smp_get_num_cpus() - firstCPU);
+	uint32_t count = std::min(cpuCount, smp_get_num_cpus() - firstCPU);
 
 	memset(info, 0, sizeof(cpu_info) * count);
-	for (uint32 i = 0; i < count; i++) {
+	for (uint32_t i = 0; i < count; i++) {
 		info[i].active_time = cpu_get_active_time(firstCPU + i);
 		info[i].enabled = !gCPU[firstCPU + i].disabled;
 	}
@@ -557,16 +557,16 @@ _user_get_system_info(system_info* userInfo)
 
 
 status_t
-_user_get_cpu_info(uint32 firstCPU, uint32 cpuCount, cpu_info* userInfo)
+_user_get_cpu_info(uint32_t firstCPU, uint32_t cpuCount, cpu_info* userInfo)
 {
 	if (userInfo == NULL || !IS_USER_ADDRESS(userInfo))
 		return B_BAD_ADDRESS;
-	if (firstCPU >= (uint32)smp_get_num_cpus())
+	if (firstCPU >= (uint32_t)smp_get_num_cpus())
 		return B_BAD_VALUE;
 	if (cpuCount == 0)
 		return B_OK;
 
-	uint32 count = std::min(cpuCount, smp_get_num_cpus() - firstCPU);
+	uint32_t count = std::min(cpuCount, smp_get_num_cpus() - firstCPU);
 
 	cpu_info* cpuInfos = new(std::nothrow) cpu_info[count];
 	if (cpuInfos == NULL)
@@ -583,23 +583,23 @@ _user_get_cpu_info(uint32 firstCPU, uint32 cpuCount, cpu_info* userInfo)
 
 status_t
 _user_get_cpu_topology_info(cpu_topology_node_info* topologyInfos,
-	uint32* topologyInfoCount)
+	uint32_t* topologyInfoCount)
 {
 	if (topologyInfoCount == NULL || !IS_USER_ADDRESS(topologyInfoCount))
 		return B_BAD_ADDRESS;
 
 	const cpu_topology_node* node = get_cpu_topology();
 
-	uint32 count = 0;
+	uint32_t count = 0;
 	count_topology_nodes(node, count);
 
 	if (topologyInfos == NULL)
-		return user_memcpy(topologyInfoCount, &count, sizeof(uint32));
+		return user_memcpy(topologyInfoCount, &count, sizeof(uint32_t));
 	else if (!IS_USER_ADDRESS(topologyInfoCount))
 		return B_BAD_ADDRESS;
 
-	uint32 userCount;
-	status_t error = user_memcpy(&userCount, topologyInfoCount, sizeof(uint32));
+	uint32_t userCount;
+	status_t error = user_memcpy(&userCount, topologyInfoCount, sizeof(uint32_t));
 	if (error != B_OK)
 		return error;
 	if (userCount == 0)
@@ -613,7 +613,7 @@ _user_get_cpu_topology_info(cpu_topology_node_info* topologyInfos,
 	ArrayDeleter<cpu_topology_node_info> _(topology);
 	memset(topology, 0, sizeof(cpu_topology_node_info) * count);
 
-	uint32 nodesLeft = count;
+	uint32_t nodesLeft = count;
 	generate_topology_array(topology, node, nodesLeft);
 	ASSERT(nodesLeft == 0);
 
@@ -621,13 +621,13 @@ _user_get_cpu_topology_info(cpu_topology_node_info* topologyInfos,
 		sizeof(cpu_topology_node_info) * count);
 	if (error != B_OK)
 		return error;
-	return user_memcpy(topologyInfoCount, &count, sizeof(uint32));
+	return user_memcpy(topologyInfoCount, &count, sizeof(uint32_t));
 }
 
 
 status_t
-_user_start_watching_system(int32 object, uint32 flags, port_id port,
-	int32 token)
+_user_start_watching_system(int32_t object, uint32_t flags, port_id port,
+	int32_t token)
 {
 	return sSystemNotificationService.StartListening(object, flags, port,
 		token);
@@ -635,8 +635,8 @@ _user_start_watching_system(int32 object, uint32 flags, port_id port,
 
 
 status_t
-_user_stop_watching_system(int32 object, uint32 flags, port_id port,
-	int32 token)
+_user_stop_watching_system(int32_t object, uint32_t flags, port_id port,
+	int32_t token)
 {
 	return sSystemNotificationService.StopListening(object, flags, port, token);
 }

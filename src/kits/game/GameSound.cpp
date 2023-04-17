@@ -174,7 +174,7 @@ status_t BGameSound::GetAttributes(gs_attribute *outAttributes, size_t inAttribu
 }
 
 
-status_t BGameSound::Perform(int32 selector,
+status_t BGameSound::Perform(int32_t selector,
 					void *data)
 {
 	return B_ERROR;
@@ -222,7 +222,7 @@ status_t BGameSound::LockMemoryPool(bool in_lockInCore)
 }
 
 
-int32 BGameSound::SetMaxSoundCount(int32 in_maxCount)
+int32_t BGameSound::SetMaxSoundCount(int32_t in_maxCount)
 {
 	return in_maxCount;
 }
@@ -267,289 +267,289 @@ BGameSound::operator=(const BGameSound &other)
  */
 
 
-status_t BGameSound::_Reserved_BGameSound_0(int32 arg, ...)
+status_t BGameSound::_Reserved_BGameSound_0(int32_t arg, ...)
 {
 	return B_ERROR;
 }
 
 
-status_t BGameSound::_Reserved_BGameSound_1(int32 arg, ...)
+status_t BGameSound::_Reserved_BGameSound_1(int32_t arg, ...)
 {
 	return B_ERROR;
 }
 
 
-status_t BGameSound::_Reserved_BGameSound_2(int32 arg, ...)
+status_t BGameSound::_Reserved_BGameSound_2(int32_t arg, ...)
 {
 	return B_ERROR;
 }
 
 
-status_t BGameSound::_Reserved_BGameSound_3(int32 arg, ...)
+status_t BGameSound::_Reserved_BGameSound_3(int32_t arg, ...)
 {
 	return B_ERROR;
 }
 
 
-status_t BGameSound::_Reserved_BGameSound_4(int32 arg, ...)
+status_t BGameSound::_Reserved_BGameSound_4(int32_t arg, ...)
 {
 	return B_ERROR;
 }
 
 
-status_t BGameSound::_Reserved_BGameSound_5(int32 arg, ...)
+status_t BGameSound::_Reserved_BGameSound_5(int32_t arg, ...)
 {
 	return B_ERROR;
 }
 
 
-status_t BGameSound::_Reserved_BGameSound_6(int32 arg, ...)
+status_t BGameSound::_Reserved_BGameSound_6(int32_t arg, ...)
 {
 	return B_ERROR;
 }
 
 
-status_t BGameSound::_Reserved_BGameSound_7(int32 arg, ...)
+status_t BGameSound::_Reserved_BGameSound_7(int32_t arg, ...)
 {
 	return B_ERROR;
 }
 
 
-status_t BGameSound::_Reserved_BGameSound_8(int32 arg, ...)
+status_t BGameSound::_Reserved_BGameSound_8(int32_t arg, ...)
 {
 	return B_ERROR;
 }
 
 
-status_t BGameSound::_Reserved_BGameSound_9(int32 arg, ...)
+status_t BGameSound::_Reserved_BGameSound_9(int32_t arg, ...)
 {
 	return B_ERROR;
 }
 
 
-status_t BGameSound::_Reserved_BGameSound_10(int32 arg, ...)
+status_t BGameSound::_Reserved_BGameSound_10(int32_t arg, ...)
 {
 	return B_ERROR;
 }
 
 
-status_t BGameSound::_Reserved_BGameSound_11(int32 arg, ...)
+status_t BGameSound::_Reserved_BGameSound_11(int32_t arg, ...)
 {
 	return B_ERROR;
 }
 
 
-status_t BGameSound::_Reserved_BGameSound_12(int32 arg, ...)
+status_t BGameSound::_Reserved_BGameSound_12(int32_t arg, ...)
 {
 	return B_ERROR;
 }
 
 
-status_t BGameSound::_Reserved_BGameSound_13(int32 arg, ...)
+status_t BGameSound::_Reserved_BGameSound_13(int32_t arg, ...)
 {
 	return B_ERROR;
 }
 
 
-status_t BGameSound::_Reserved_BGameSound_14(int32 arg, ...)
+status_t BGameSound::_Reserved_BGameSound_14(int32_t arg, ...)
 {
 	return B_ERROR;
 }
 
 
-status_t BGameSound::_Reserved_BGameSound_15(int32 arg, ...)
+status_t BGameSound::_Reserved_BGameSound_15(int32_t arg, ...)
 {
 	return B_ERROR;
 }
 
 
-status_t BGameSound::_Reserved_BGameSound_16(int32 arg, ...)
+status_t BGameSound::_Reserved_BGameSound_16(int32_t arg, ...)
 {
 	return B_ERROR;
 }
 
 
-status_t BGameSound::_Reserved_BGameSound_17(int32 arg, ...)
+status_t BGameSound::_Reserved_BGameSound_17(int32_t arg, ...)
 {
 	return B_ERROR;
 }
 
 
-status_t BGameSound::_Reserved_BGameSound_18(int32 arg, ...)
+status_t BGameSound::_Reserved_BGameSound_18(int32_t arg, ...)
 {
 	return B_ERROR;
 }
 
 
-status_t BGameSound::_Reserved_BGameSound_19(int32 arg, ...)
+status_t BGameSound::_Reserved_BGameSound_19(int32_t arg, ...)
 {
 	return B_ERROR;
 }
 
 
-status_t BGameSound::_Reserved_BGameSound_20(int32 arg, ...)
+status_t BGameSound::_Reserved_BGameSound_20(int32_t arg, ...)
 {
 	return B_ERROR;
 }
 
 
-status_t BGameSound::_Reserved_BGameSound_21(int32 arg, ...)
+status_t BGameSound::_Reserved_BGameSound_21(int32_t arg, ...)
 {
 	return B_ERROR;
 }
 
 
-status_t BGameSound::_Reserved_BGameSound_22(int32 arg, ...)
+status_t BGameSound::_Reserved_BGameSound_22(int32_t arg, ...)
 {
 	return B_ERROR;
 }
 
 
-status_t BGameSound::_Reserved_BGameSound_23(int32 arg, ...)
+status_t BGameSound::_Reserved_BGameSound_23(int32_t arg, ...)
 {
 	return B_ERROR;
 }
 
 
-status_t BGameSound::_Reserved_BGameSound_24(int32 arg, ...)
+status_t BGameSound::_Reserved_BGameSound_24(int32_t arg, ...)
 {
 	return B_ERROR;
 }
 
 
-status_t BGameSound::_Reserved_BGameSound_25(int32 arg, ...)
+status_t BGameSound::_Reserved_BGameSound_25(int32_t arg, ...)
 {
 	return B_ERROR;
 }
 
 
-status_t BGameSound::_Reserved_BGameSound_26(int32 arg, ...)
+status_t BGameSound::_Reserved_BGameSound_26(int32_t arg, ...)
 {
 	return B_ERROR;
 }
 
 
-status_t BGameSound::_Reserved_BGameSound_27(int32 arg, ...)
+status_t BGameSound::_Reserved_BGameSound_27(int32_t arg, ...)
 {
 	return B_ERROR;
 }
 
 
-status_t BGameSound::_Reserved_BGameSound_28(int32 arg, ...)
+status_t BGameSound::_Reserved_BGameSound_28(int32_t arg, ...)
 {
 	return B_ERROR;
 }
 
 
-status_t BGameSound::_Reserved_BGameSound_29(int32 arg, ...)
+status_t BGameSound::_Reserved_BGameSound_29(int32_t arg, ...)
 {
 	return B_ERROR;
 }
 
 
-status_t BGameSound::_Reserved_BGameSound_30(int32 arg, ...)
+status_t BGameSound::_Reserved_BGameSound_30(int32_t arg, ...)
 {
 	return B_ERROR;
 }
 
 
-status_t BGameSound::_Reserved_BGameSound_31(int32 arg, ...)
+status_t BGameSound::_Reserved_BGameSound_31(int32_t arg, ...)
 {
 	return B_ERROR;
 }
 
 
-status_t BGameSound::_Reserved_BGameSound_32(int32 arg, ...)
+status_t BGameSound::_Reserved_BGameSound_32(int32_t arg, ...)
 {
 	return B_ERROR;
 }
 
 
-status_t BGameSound::_Reserved_BGameSound_33(int32 arg, ...)
+status_t BGameSound::_Reserved_BGameSound_33(int32_t arg, ...)
 {
 	return B_ERROR;
 }
 
 
-status_t BGameSound::_Reserved_BGameSound_34(int32 arg, ...)
+status_t BGameSound::_Reserved_BGameSound_34(int32_t arg, ...)
 {
 	return B_ERROR;
 }
 
 
-status_t BGameSound::_Reserved_BGameSound_35(int32 arg, ...)
+status_t BGameSound::_Reserved_BGameSound_35(int32_t arg, ...)
 {
 	return B_ERROR;
 }
 
 
-status_t BGameSound::_Reserved_BGameSound_36(int32 arg, ...)
+status_t BGameSound::_Reserved_BGameSound_36(int32_t arg, ...)
 {
 	return B_ERROR;
 }
 
 
-status_t BGameSound::_Reserved_BGameSound_37(int32 arg, ...)
+status_t BGameSound::_Reserved_BGameSound_37(int32_t arg, ...)
 {
 	return B_ERROR;
 }
 
 
-status_t BGameSound::_Reserved_BGameSound_38(int32 arg, ...)
+status_t BGameSound::_Reserved_BGameSound_38(int32_t arg, ...)
 {
 	return B_ERROR;
 }
 
 
-status_t BGameSound::_Reserved_BGameSound_39(int32 arg, ...)
+status_t BGameSound::_Reserved_BGameSound_39(int32_t arg, ...)
 {
 	return B_ERROR;
 }
 
 
-status_t BGameSound::_Reserved_BGameSound_40(int32 arg, ...)
+status_t BGameSound::_Reserved_BGameSound_40(int32_t arg, ...)
 {
 	return B_ERROR;
 }
 
 
-status_t BGameSound::_Reserved_BGameSound_41(int32 arg, ...)
+status_t BGameSound::_Reserved_BGameSound_41(int32_t arg, ...)
 {
 	return B_ERROR;
 }
 
 
-status_t BGameSound::_Reserved_BGameSound_42(int32 arg, ...)
+status_t BGameSound::_Reserved_BGameSound_42(int32_t arg, ...)
 {
 	return B_ERROR;
 }
 
 
-status_t BGameSound::_Reserved_BGameSound_43(int32 arg, ...)
+status_t BGameSound::_Reserved_BGameSound_43(int32_t arg, ...)
 {
 	return B_ERROR;
 }
 
 
-status_t BGameSound::_Reserved_BGameSound_44(int32 arg, ...)
+status_t BGameSound::_Reserved_BGameSound_44(int32_t arg, ...)
 {
 	return B_ERROR;
 }
 
 
-status_t BGameSound::_Reserved_BGameSound_45(int32 arg, ...)
+status_t BGameSound::_Reserved_BGameSound_45(int32_t arg, ...)
 {
 	return B_ERROR;
 }
 
 
-status_t BGameSound::_Reserved_BGameSound_46(int32 arg, ...)
+status_t BGameSound::_Reserved_BGameSound_46(int32_t arg, ...)
 {
 	return B_ERROR;
 }
 
 
-status_t BGameSound::_Reserved_BGameSound_47(int32 arg, ...)
+status_t BGameSound::_Reserved_BGameSound_47(int32_t arg, ...)
 {
 	return B_ERROR;
 }

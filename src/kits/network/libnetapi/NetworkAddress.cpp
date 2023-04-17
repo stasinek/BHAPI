@@ -25,7 +25,7 @@
 #	define addr_bitcount(bitfield) __builtin_popcount(bitfield)
 #else
 static ssize_t
-addr_bitcount(uint32 bitfield)
+addr_bitcount(uint32_t bitfield)
 {
 	ssize_t result = 0;
 	for (uint8 i = 32; i > 0; i--) {
@@ -57,28 +57,28 @@ BNetworkAddress::BNetworkAddress()
 }
 
 
-BNetworkAddress::BNetworkAddress(const char* host, uint16 port, uint32 flags)
+BNetworkAddress::BNetworkAddress(const char* host, uint16 port, uint32_t flags)
 {
 	fStatus = SetTo(host, port, flags);
 }
 
 
 BNetworkAddress::BNetworkAddress(const char* host, const char* service,
-	uint32 flags)
+	uint32_t flags)
 {
 	fStatus = SetTo(host, service, flags);
 }
 
 
 BNetworkAddress::BNetworkAddress(int family, const char* host, uint16 port,
-	uint32 flags)
+	uint32_t flags)
 {
 	fStatus = SetTo(family, host, port, flags);
 }
 
 
 BNetworkAddress::BNetworkAddress(int family, const char* host,
-	const char* service, uint32 flags)
+	const char* service, uint32_t flags)
 {
 	fStatus = SetTo(family, host, service, flags);
 }
@@ -153,7 +153,7 @@ void BNetworkAddress::Unset()
 }
 
 
-status_t BNetworkAddress::SetTo(const char* host, uint16 port, uint32 flags)
+status_t BNetworkAddress::SetTo(const char* host, uint16 port, uint32_t flags)
 {
 	BReference<const BNetworkAddressResolver> resolver
 		= BNetworkAddressResolver::Resolve(host, port, flags);
@@ -165,7 +165,7 @@ status_t BNetworkAddress::SetTo(const char* host, uint16 port, uint32 flags)
 
 	// Prefer IPv6 addresses
 
-	uint32 cookie = 0;
+	uint32_t cookie = 0;
 	status = resolver->GetNextAddress(AF_INET6, &cookie, *this);
 	if (status == B_OK) {
 		fStatus = B_OK;
@@ -181,7 +181,7 @@ status_t BNetworkAddress::SetTo(const char* host, uint16 port, uint32 flags)
 }
 
 
-status_t BNetworkAddress::SetTo(const char* host, const char* service, uint32 flags)
+status_t BNetworkAddress::SetTo(const char* host, const char* service, uint32_t flags)
 {
 	BReference<const BNetworkAddressResolver> resolver
 		= BNetworkAddressResolver::Resolve(host, service, flags);
@@ -193,7 +193,7 @@ status_t BNetworkAddress::SetTo(const char* host, const char* service, uint32 fl
 
 	// Prefer IPv6 addresses
 
-	uint32 cookie = 0;
+	uint32_t cookie = 0;
 	status = resolver->GetNextAddress(AF_INET6, &cookie, *this);
 	if (status == B_OK) {
 		fStatus = B_OK;
@@ -209,7 +209,7 @@ status_t BNetworkAddress::SetTo(const char* host, const char* service, uint32 fl
 }
 
 
-status_t BNetworkAddress::SetTo(int family, const char* host, uint16 port, uint32 flags)
+status_t BNetworkAddress::SetTo(int family, const char* host, uint16 port, uint32_t flags)
 {
 	if (family == AF_LINK) {
 		if (port != 0)
@@ -226,7 +226,7 @@ status_t BNetworkAddress::SetTo(int family, const char* host, uint16 port, uint3
 	if (status != B_OK)
 		return status;
 
-	uint32 cookie = 0;
+	uint32_t cookie = 0;
 	status = resolver->GetNextAddress(&cookie, *this);
 	if (status != B_OK)
 		Unset();
@@ -236,7 +236,7 @@ status_t BNetworkAddress::SetTo(int family, const char* host, uint16 port, uint3
 
 
 status_t BNetworkAddress::SetTo(int family, const char* host, const char* service,
-	uint32 flags)
+	uint32_t flags)
 {
 	if (family == AF_LINK) {
 		if (service != NULL)
@@ -253,7 +253,7 @@ status_t BNetworkAddress::SetTo(int family, const char* host, const char* servic
 	if (status != B_OK)
 		return status;
 
-	uint32 cookie = 0;
+	uint32_t cookie = 0;
 	status = resolver->GetNextAddress(&cookie, *this);
 	if (status != B_OK)
 		Unset();
@@ -398,7 +398,7 @@ status_t BNetworkAddress::SetToLoopback(int family, uint16 port)
 }
 
 
-status_t BNetworkAddress::SetToMask(int family, uint32 prefixLength)
+status_t BNetworkAddress::SetToMask(int family, uint32_t prefixLength)
 {
 	switch (family) {
 		case AF_INET:
@@ -411,7 +411,7 @@ status_t BNetworkAddress::SetToMask(int family, uint32 prefixLength)
 			mask.sin_family = AF_INET;
 			mask.sin_len = sizeof(sockaddr_in);
 
-			uint32 hostMask = 0;
+			uint32_t hostMask = 0;
 			for (uint8 i = 32; i > 32 - prefixLength; i--)
 				hostMask |= 1 << (i - 1);
 
@@ -547,7 +547,7 @@ void BNetworkAddress::SetToLinkLevel(const char* name)
 }
 
 
-void BNetworkAddress::SetToLinkLevel(uint32 index)
+void BNetworkAddress::SetToLinkLevel(uint32_t index)
 {
 	sockaddr_dl& link = (sockaddr_dl&)fAddress;
 	memset(&link, 0, sizeof(sockaddr_dl));
@@ -560,7 +560,7 @@ void BNetworkAddress::SetToLinkLevel(uint32 index)
 }
 
 
-void BNetworkAddress::SetLinkLevelIndex(uint32 index)
+void BNetworkAddress::SetLinkLevelIndex(uint32_t index)
 {
 	sockaddr_dl& link = (sockaddr_dl&)fAddress;
 	link.sdl_index = index;
@@ -792,11 +792,11 @@ bool BNetworkAddress::IsLocal() const
 	BNetworkRoster& roster = BNetworkRoster::Default();
 
 	BNetworkInterface interface;
-	uint32 cookie = 0;
+	uint32_t cookie = 0;
 
 	while (roster.GetNextInterface(&cookie, interface) == B_OK) {
-		int32 count = interface.CountAddresses();
-		for (int32 j = 0; j < count; j++) {
+		int32_t count = interface.CountAddresses();
+		for (int32_t j = 0; j < count; j++) {
 			BNetworkInterfaceAddress address;
 			if (interface.GetAddressAt(j, address) != B_OK)
 				break;
@@ -818,7 +818,7 @@ BNetworkAddress::PrefixLength() const
 		{
 			sockaddr_in& mask = (sockaddr_in&)fAddress;
 
-			uint32 hostMask = ntohl(mask.sin_addr.s_addr);
+			uint32_t hostMask = ntohl(mask.sin_addr.s_addr);
 			return addr_bitcount(hostMask);
 		}
 
@@ -845,7 +845,7 @@ BNetworkAddress::PrefixLength() const
 }
 
 
-uint32 BNetworkAddress::LinkLevelIndex() const
+uint32_t BNetworkAddress::LinkLevelIndex() const
 {
 	return ((sockaddr_dl&)fAddress).sdl_index;
 }
@@ -1224,7 +1224,7 @@ status_t BNetworkAddress::_ParseLinkAddress(const char* address)
 		return B_BAD_VALUE;
 
 	uint8 linkAddress[128];
-	uint32 length = 0;
+	uint32_t length = 0;
 	while (length < sizeof(linkAddress)) {
 		if (!isxdigit(address[0]) || !isxdigit(address[1]))
 			return B_BAD_VALUE;

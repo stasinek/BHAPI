@@ -33,7 +33,7 @@ public:
 
 protected:
 	file_descriptor*		fDescriptor;
-	int32					fReferenceCount;
+	int32_t					fReferenceCount;
 };
 
 
@@ -149,7 +149,7 @@ public:
 private:
 	io_context*			fContext;
 	file_descriptor*	fEvictedDescriptor;
-	int32				fEvictedReferenceCount;
+	int32_t				fEvictedReferenceCount;
 	int					fOldFD;
 	int					fNewFD;
 };
@@ -266,7 +266,7 @@ public:
 
 class ResizeIOContext : public IOContextTraceEntry {
 public:
-	ResizeIOContext(io_context* context, uint32 newTableSize)
+	ResizeIOContext(io_context* context, uint32_t newTableSize)
 		:
 		IOContextTraceEntry(context),
 		fOldTableSize(context->table_size),
@@ -282,8 +282,8 @@ public:
 	}
 
 private:
-	uint32	fOldTableSize;
-	uint32	fNewTableSize;
+	uint32_t	fOldTableSize;
+	uint32_t	fNewTableSize;
 };
 
 

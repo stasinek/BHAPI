@@ -114,9 +114,9 @@ struct sockaddr_in6 {
 	u_int16_t       sin6_family;    /* AF_INET6 */
 #endif
 	u_int16_t       sin6_port;      /* transport layer port # */
-	u_int32_t       sin6_flowinfo;  /* IPv6 flow information */
+	u_int32_t_t       sin6_flowinfo;  /* IPv6 flow information */
 	struct in6_addr sin6_addr;      /* IPv6 address */
-	u_int32_t       sin6_scope_id;  /* set of interfaces for a scope */
+	u_int32_t_t       sin6_scope_id;  /* set of interfaces for a scope */
 };
 #endif  /* HAS_INET6_STRUCTS */
 

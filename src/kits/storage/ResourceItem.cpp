@@ -56,14 +56,14 @@ status_t ResourceItem::SetSize(off_t size)
 }
 
 // SetLocation
-void ResourceItem::SetLocation(int32 offset, size_t initialSize)
+void ResourceItem::SetLocation(int32_t offset, size_t initialSize)
 {
 	SetOffset(offset);
 	fInitialSize = initialSize;
 }
 
 // SetIdentity
-void ResourceItem::SetIdentity(type_code type, int32 id, const char *name)
+void ResourceItem::SetIdentity(type_code type, int32_t id, const char *name)
 {
 	fType = type;
 	fID = id;
@@ -71,13 +71,13 @@ void ResourceItem::SetIdentity(type_code type, int32 id, const char *name)
 }
 
 // SetOffset
-void ResourceItem::SetOffset(int32 offset)
+void ResourceItem::SetOffset(int32_t offset)
 {
 	fOffset = offset;
 }
 
 // Offset
-int32 ResourceItem::Offset() const
+int32_t ResourceItem::Offset() const
 {
 	return fOffset;
 }
@@ -112,13 +112,13 @@ ResourceItem::Type() const
 }
 
 // SetID
-void ResourceItem::SetID(int32 id)
+void ResourceItem::SetID(int32_t id)
 {
 	fID = id;
 }
 
 // ID
-int32 ResourceItem::ID() const
+int32_t ResourceItem::ID() const
 {
 	return fID;
 }

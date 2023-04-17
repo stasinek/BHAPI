@@ -40,7 +40,7 @@ status_t DiscoveryAgent::StartInquiry(int accessCode, DiscoveryListener* listene
 }
 
 
-status_t DiscoveryAgent::StartInquiry(uint32 accessCode, DiscoveryListener* listener, bigtime_t secs)
+status_t DiscoveryAgent::StartInquiry(uint32_t accessCode, DiscoveryListener* listener, bigtime_t secs)
 {
 	CALLED();
     size_t size;

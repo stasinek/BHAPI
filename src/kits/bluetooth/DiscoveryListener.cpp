@@ -77,7 +77,7 @@ void DiscoveryListener::MessageReceived(BMessage* message)
 			if (message->FindData("info", B_ANY_TYPE, 0,
 					(const void**)&inquiryInfo, &size) == B_OK) {
 				// Skip duplicated replies
-				for (int32 index = 0 ; index < fRemoteDevicesList.CountItems();
+				for (int32_t index = 0 ; index < fRemoteDevicesList.CountItems();
 					index++) {
 					bdaddr_t b1 = fRemoteDevicesList.ItemAt(index)
 						->GetBluetoothAddress();

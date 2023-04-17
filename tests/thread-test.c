@@ -41,17 +41,17 @@ static void* threads[TEST_THREAD_NUM];
 
 static void exit_func(void *arg)
 {
-	eint32 *index = (eint32*)arg;
+	eint32_t *index = (eint32_t*)arg;
 
 	ETK_OUTPUT("[Thread %ld][etk_on_exit_thread end]\n", *index);
 	free(index);
 }
 
 
-eint32 test_func(void *arg)
+eint32_t test_func(void *arg)
 {
-	eint32 index = *((eint32*)arg);
-	eint32 count = 0;
+	eint32_t index = *((eint32_t*)arg);
+	eint32_t count = 0;
 
 	if(etk_on_exit_thread(exit_func, arg) != E_OK)
 	{
@@ -76,15 +76,15 @@ eint32 test_func(void *arg)
 
 int main(int argc, char **argv)
 {
-	eint32 i;
+	eint32_t i;
 
 	for(i = 0; i < TEST_THREAD_NUM; i++)
 	{
 		char name[512];
-		eint32 *index;
+		eint32_t *index;
 
 		sprintf(name, "Thread %d", i);
-		index = (eint32*)malloc(sizeof(eint32));
+		index = (eint32_t*)malloc(sizeof(eint32_t));
 		*index = i;
 
 		if((threads[i] = etk_create_thread(test_func, E_NORMAL_PRIORITY, (void*)index, NULL)) != NULL)

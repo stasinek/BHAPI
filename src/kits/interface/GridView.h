@@ -45,7 +45,7 @@ private:
 								BGridView(const BGridView&);
 			void				operator =(const BGridView&);
 
-			uint32				_reserved[2];
+			uint32_t				_reserved[2];
 };
 
 

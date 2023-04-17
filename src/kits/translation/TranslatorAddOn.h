@@ -19,7 +19,7 @@ class BPositionIO;
 
 extern char translatorName[];
 extern char translatorInfo[];
-extern int32 translatorVersion;
+extern int32_t translatorVersion;
 
 extern translation_format inputFormats[];	// optional
 extern	translation_format outputFormats[];	// optional
@@ -28,9 +28,9 @@ extern	translation_format outputFormats[];	// optional
 extern "C" {
 
 extern status_t	Identify(BPositionIO* source, const translation_format* format,
-					BMessage* extension, translator_info* info, uint32 outType);
+					BMessage* extension, translator_info* info, uint32_t outType);
 extern status_t	Translate(BPositionIO* source, const translator_info* info,
-					BMessage* extension, uint32 outType,
+					BMessage* extension, uint32_t outType,
 					BPositionIO* destination);
 extern status_t	MakeConfig(BMessage* extension, BView** _view, BRect* _frame);
 extern status_t	GetConfigMessage(BMessage* extension);

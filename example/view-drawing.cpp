@@ -52,7 +52,7 @@
 
 class TView : public EView {
 public:
-	TView(ERect frame, const char *name, euint32 resizingMode, euint32 flags);
+	TView(ERect frame, const char *name, euint32_t resizingMode, euint32_t flags);
 	virtual ~TView();
 
 	virtual void Draw(ERect updateRect);
@@ -61,7 +61,7 @@ public:
 
 class TWindow : public EWindow {
 public:
-	TWindow(ERect frame, const char *title, e_window_type type, euint32 flags, euint32 workspace = E_CURRENT_WORKSPACE);
+	TWindow(ERect frame, const char *title, e_window_type type, euint32_t flags, euint32_t workspace = E_CURRENT_WORKSPACE);
 	virtual ~TWindow();
 
 	virtual bool QuitRequested();
@@ -77,7 +77,7 @@ public:
 };
 
 
-TView::TView(ERect frame, const char *name, euint32 resizingMode, euint32 flags)
+TView::TView(ERect frame, const char *name, euint32_t resizingMode, euint32_t flags)
 	: EView(frame, name, resizingMode, flags)
 {
 }
@@ -98,7 +98,7 @@ TView::Draw(ERect updateRect)
 		PushState();
 		SetDrawingMode(E_OP_COPY);
 		float point_test_x = 0;
-		for(eint32 i = 0; i < 26; i++)
+		for(eint32_t i = 0; i < 26; i++)
 		{
 			SetHighColor(200, 50, 200);
 			SetPenSize(i);
@@ -130,7 +130,7 @@ TView::Draw(ERect updateRect)
 		SetDrawingMode(E_OP_COPY);
 		SetHighColor(255, 0, 0);
 		SetPenSize(17);
-		for(eint32 i = 0; i < 4; i++) pts[i].x += 100;
+		for(eint32_t i = 0; i < 4; i++) pts[i].x += 100;
 		StrokePoints(pts, 4, alpha, pat);
 
 		PopState();
@@ -146,18 +146,18 @@ TView::Draw(ERect updateRect)
 		SetPenSize(7);
 		EPoint pt(0, 50);
 		MovePenTo(pt);
-		for(eint32 i = 0; i < 6; i++) StrokeLine(pt += EPoint(30, (i % 2 == 0 ? 30 : -30)), pat);
+		for(eint32_t i = 0; i < 6; i++) StrokeLine(pt += EPoint(30, (i % 2 == 0 ? 30 : -30)), pat);
 
 		SetHighColor(0, 0, 0);
 		SetPenSize(0);
 		pt.x = 0; pt.y = 50;
 		MovePenTo(pt);
-		for(eint32 i = 0; i < 6; i++) StrokeLine(pt += EPoint(30, (i % 2 == 0 ? 30 : -30)));
+		for(eint32_t i = 0; i < 6; i++) StrokeLine(pt += EPoint(30, (i % 2 == 0 ? 30 : -30)));
 
 		SetHighColor(255, 255, 0);
 		SetPenSize(0);
 		pt.x = 0; pt.y = 50;
-		for(eint32 i = -1; i < 6; i++) StrokePoint(i < 0 ? pt : pt += EPoint(30, (i % 2 == 0 ? 30 : -30)));
+		for(eint32_t i = -1; i < 6; i++) StrokePoint(i < 0 ? pt : pt += EPoint(30, (i % 2 == 0 ? 30 : -30)));
 
 		PopState();
 	}
@@ -166,7 +166,7 @@ TView::Draw(ERect updateRect)
 	{
 		EPolygon poly;
 		EPoint pt(220, 50);
-		for(eint32 i = -1; i < 6; i++)
+		for(eint32_t i = -1; i < 6; i++)
 		{
 			if(i >= 0) pt += EPoint(30, (i % 2 == 0 ? 30 : -30));
 			poly.AddPoints(&pt, 1);
@@ -187,7 +187,7 @@ TView::Draw(ERect updateRect)
 		SetHighColor(255, 255, 0);
 		SetPenSize(0);
 		const EPoint *polyPts = poly.Points();
-		for(eint32 i = 0; i < poly.CountPoints(); i++) StrokePoint(*polyPts++);
+		for(eint32_t i = 0; i < poly.CountPoints(); i++) StrokePoint(*polyPts++);
 
 		EPolygon aPoly(poly.Points(), 3);
 		SetHighColor(0, 255, 0);
@@ -336,7 +336,7 @@ TView::Draw(ERect updateRect)
 }
 
 
-TWindow::TWindow(ERect frame, const char *title, e_window_type type, euint32 flags, euint32 workspace)
+TWindow::TWindow(ERect frame, const char *title, e_window_type type, euint32_t flags, euint32_t workspace)
 	: EWindow(frame, title, type, flags, workspace)
 {
 	EView *view_top = new TView(frame.OffsetToCopy(E_ORIGIN), NULL, E_FOLLOW_ALL, E_WILL_DRAW);
@@ -389,13 +389,13 @@ TApplication::ReadyToRun()
 	win->Show();
 
 #if TEST_FONT == 1
-	for(eint32 i = 0; i < etk_count_font_families(); i++)
+	for(eint32_t i = 0; i < etk_count_font_families(); i++)
 	{
 		const char *family = NULL;
 		if(!(etk_get_font_family(i, &family) != E_OK || family == NULL))
 		{
 			ETK_OUTPUT("Font[%d]:(%s)", i, family);
-			for(eint32 j = 0; j < etk_count_font_styles(i); j++)
+			for(eint32_t j = 0; j < etk_count_font_styles(i); j++)
 			{
 				const char *style = NULL;
 				if(etk_get_font_style(family, j, &style) == E_OK)
@@ -404,12 +404,12 @@ TApplication::ReadyToRun()
 					if(engine)
 					{
 						ETK_OUTPUT(" (%s[%s]", style, engine->IsScalable() ? "Scalable" : "Not Scalable");
-						eint32 fixedCount = 0;
+						eint32_t fixedCount = 0;
 						if(engine->HasFixedSize(&fixedCount))
 						{
 							ETK_OUTPUT(":");
 							float size = 0;
-							for(eint32 k = 0; k < fixedCount; k++)
+							for(eint32_t k = 0; k < fixedCount; k++)
 							{
 								engine->GetFixedSize(&size, k);
 								ETK_OUTPUT("%s%g", (k == 0 ? "" : "/"), size);

@@ -47,13 +47,13 @@ typedef struct heap_leak_check_info_s {
 
 struct caller_info {
 	addr_t		caller;
-	uint32		count;
-	uint32		size;
+	uint32_t		count;
+	uint32_t		size;
 };
 
-static const int32 kCallerInfoTableSize = 1024;
+static const int32_t kCallerInfoTableSize = 1024;
 static caller_info sCallerInfoTable[kCallerInfoTableSize];
-static int32 sCallerInfoCount = 0;
+static int32_t sCallerInfoCount = 0;
 #endif	// KERNEL_HEAP_LEAK_CHECK
 
 
@@ -66,8 +66,8 @@ typedef struct heap_area_s {
 	addr_t			base;
 	size_t			size;
 
-	uint32			page_count;
-	uint32			free_page_count;
+	uint32_t			page_count;
+	uint32_t			free_page_count;
 
 	heap_page *		free_pages;
 	heap_page *		page_table;
@@ -98,7 +98,7 @@ typedef struct heap_page_s {
 
 typedef struct heap_bin_s {
 	mutex		lock;
-	uint32		element_size;
+	uint32_t		element_size;
 	uint16		max_free_count;
 	heap_page *	page_list; // sorted so that the desired page is always first
 } heap_bin;
@@ -109,12 +109,12 @@ struct heap_allocator_s {
 	mutex		page_lock;
 
 	const char *name;
-	uint32		bin_count;
-	uint32		page_size;
+	uint32_t		bin_count;
+	uint32_t		page_size;
 
-	uint32		total_pages;
-	uint32		total_free_pages;
-	uint32		empty_areas;
+	uint32_t		total_pages;
+	uint32_t		total_free_pages;
+	uint32_t		empty_areas;
 
 #if KERNEL_HEAP_LEAK_CHECK
 	addr_t		(*get_caller)();
@@ -126,11 +126,11 @@ struct heap_allocator_s {
 };
 
 
-static const uint32 kAreaAllocationMagic = 'AAMG';
+static const uint32_t kAreaAllocationMagic = 'AAMG';
 typedef struct area_allocation_info_s {
 	area_id		area;
 	void *		base;
-	uint32		magic;
+	uint32_t		magic;
 	size_t		size;
 	size_t		allocation_size;
 	size_t		allocation_alignment;
@@ -186,10 +186,10 @@ static const heap_class sHeapClasses[HEAP_CLASS_COUNT] = {
 };
 
 
-static uint32 sHeapCount;
+static uint32_t sHeapCount;
 static heap_allocator *sHeaps[HEAP_CLASS_COUNT * SMP_MAX_CPUS];
-static uint32 *sLastGrowRequest[HEAP_CLASS_COUNT * SMP_MAX_CPUS];
-static uint32 *sLastHandledGrowRequest[HEAP_CLASS_COUNT * SMP_MAX_CPUS];
+static uint32_t *sLastGrowRequest[HEAP_CLASS_COUNT * SMP_MAX_CPUS];
+static uint32_t *sLastHandledGrowRequest[HEAP_CLASS_COUNT * SMP_MAX_CPUS];
 
 static heap_allocator *sVIPHeap;
 static heap_allocator *sGrowHeap = NULL;
@@ -291,9 +291,9 @@ get_caller()
 	// this makes certain assumptions about how the code for the functions
 	// ends up in the kernel object.
 	addr_t returnAddresses[5];
-	int32 depth = arch_debug_get_stack_trace(returnAddresses, 5, 0, 1,
+	int32_t depth = arch_debug_get_stack_trace(returnAddresses, 5, 0, 1,
 		STACK_TRACE_KERNEL);
-	for (int32 i = 0; i < depth; i++) {
+	for (int32_t i = 0; i < depth; i++) {
 		if (returnAddresses[i] < (addr_t)&get_caller
 			|| returnAddresses[i] > (addr_t)&malloc_referenced_release) {
 			return returnAddresses[i];
@@ -308,7 +308,7 @@ get_caller()
 static void
 dump_page(heap_page *page)
 {
-	uint32 count = 0;
+	uint32_t count = 0;
 	for (addr_t *temp = page->free_list; temp != NULL; temp = (addr_t *)*temp)
 		count++;
 
@@ -322,7 +322,7 @@ dump_page(heap_page *page)
 static void
 dump_bin(heap_bin *bin)
 {
-	uint32 count = 0;
+	uint32_t count = 0;
 	for (heap_page *page = bin->page_list; page != NULL; page = page->next)
 		count++;
 
@@ -338,7 +338,7 @@ dump_bin(heap_bin *bin)
 static void
 dump_bin_list(heap_allocator *heap)
 {
-	for (uint32 i = 0; i < heap->bin_count; i++)
+	for (uint32_t i = 0; i < heap->bin_count; i++)
 		dump_bin(&heap->bins[i]);
 	kprintf("\n");
 }
@@ -406,7 +406,7 @@ dump_heap_list(int argc, char **argv)
 	if (heapAddress == 0) {
 #if USE_DEBUG_HEAP_FOR_MALLOC
 		// dump default kernel heaps
-		for (uint32 i = 0; i < sHeapCount; i++)
+		for (uint32_t i = 0; i < sHeapCount; i++)
 			dump_allocator(sHeaps[i], !stats, !stats);
 #else
 		print_debugger_command_usage(argv[0]);
@@ -427,7 +427,7 @@ dump_allocations(int argc, char **argv)
 {
 	uint64 heapAddress = 0;
 	bool statsOnly = false;
-	for (int32 i = 1; i < argc; i++) {
+	for (int32_t i = 1; i < argc; i++) {
 		if (strcmp(argv[i], "stats") == 0)
 			statsOnly = true;
 		else if (!evaluate_debug_expression(argv[i], &heapAddress, true)) {
@@ -437,9 +437,9 @@ dump_allocations(int argc, char **argv)
 	}
 
 	size_t totalSize = 0;
-	uint32 totalCount = 0;
+	uint32_t totalCount = 0;
 #if USE_DEBUG_HEAP_FOR_MALLOC
-	for (uint32 heapIndex = 0; heapIndex < sHeapCount; heapIndex++) {
+	for (uint32_t heapIndex = 0; heapIndex < sHeapCount; heapIndex++) {
 		heap_allocator *heap = sHeaps[heapIndex];
 		if (heapAddress != 0)
 			heap = (heap_allocator *)(addr_t)heapAddress;
@@ -458,7 +458,7 @@ dump_allocations(int argc, char **argv)
 		// go through all the pages in all the areas
 		heap_area *area = heap->all_areas;
 		while (area) {
-			for (uint32 i = 0; i < area->page_count; i++) {
+			for (uint32_t i = 0; i < area->page_count; i++) {
 				heap_page *page = &area->page_table[i];
 				if (!page->in_use)
 					continue;
@@ -466,10 +466,10 @@ dump_allocations(int argc, char **argv)
 				addr_t base = area->base + i * heap->page_size;
 				if (page->bin_index < heap->bin_count) {
 					// page is used by a small allocation bin
-					uint32 elementCount = page->empty_index;
+					uint32_t elementCount = page->empty_index;
 					size_t elementSize
 						= heap->bins[page->bin_index].element_size;
-					for (uint32 j = 0; j < elementCount;
+					for (uint32_t j = 0; j < elementCount;
 							j++, base += elementSize) {
 						// walk the free list to see if this element is in use
 						bool elementInUse = true;
@@ -494,7 +494,7 @@ dump_allocations(int argc, char **argv)
 					}
 				} else {
 					// page is used by a big allocation, find the page count
-					uint32 pageCount = 1;
+					uint32_t pageCount = 1;
 					while (i + pageCount < area->page_count
 						&& area->page_table[i + pageCount].in_use
 						&& area->page_table[i + pageCount].bin_index
@@ -540,7 +540,7 @@ dump_allocations(int argc, char **argv)
 	addr_t address = 0;
 	bool statsOnly = false;
 
-	for (int32 i = 1; i < argc; i++) {
+	for (int32_t i = 1; i < argc; i++) {
 		if (strcmp(argv[i], "team") == 0)
 			team = parse_expression(argv[++i]);
 		else if (strcmp(argv[i], "thread") == 0)
@@ -558,15 +558,15 @@ dump_allocations(int argc, char **argv)
 	}
 
 	size_t totalSize = 0;
-	uint32 totalCount = 0;
-	for (uint32 heapIndex = 0; heapIndex < sHeapCount; heapIndex++) {
+	uint32_t totalCount = 0;
+	for (uint32_t heapIndex = 0; heapIndex < sHeapCount; heapIndex++) {
 		heap_allocator *heap = sHeaps[heapIndex];
 
 		// go through all the pages in all the areas
 		heap_area *area = heap->all_areas;
 		while (area) {
 			heap_leak_check_info *info = NULL;
-			for (uint32 i = 0; i < area->page_count; i++) {
+			for (uint32_t i = 0; i < area->page_count; i++) {
 				heap_page *page = &area->page_table[i];
 				if (!page->in_use)
 					continue;
@@ -574,10 +574,10 @@ dump_allocations(int argc, char **argv)
 				addr_t base = area->base + i * heap->page_size;
 				if (page->bin_index < heap->bin_count) {
 					// page is used by a small allocation bin
-					uint32 elementCount = page->empty_index;
+					uint32_t elementCount = page->empty_index;
 					size_t elementSize
 						= heap->bins[page->bin_index].element_size;
-					for (uint32 j = 0; j < elementCount;
+					for (uint32_t j = 0; j < elementCount;
 							j++, base += elementSize) {
 						// walk the free list to see if this element is in use
 						bool elementInUse = true;
@@ -613,7 +613,7 @@ dump_allocations(int argc, char **argv)
 					}
 				} else {
 					// page is used by a big allocation, find the page count
-					uint32 pageCount = 1;
+					uint32_t pageCount = 1;
 					while (i + pageCount < area->page_count
 						&& area->page_table[i + pageCount].in_use
 						&& area->page_table[i + pageCount].bin_index
@@ -660,7 +660,7 @@ static caller_info*
 get_caller_info(addr_t caller)
 {
 	// find the caller info
-	for (int32 i = 0; i < sCallerInfoCount; i++) {
+	for (int32_t i = 0; i < sCallerInfoCount; i++) {
 		if (caller == sCallerInfoTable[i].caller)
 			return &sCallerInfoTable[i];
 	}
@@ -703,7 +703,7 @@ analyze_allocation_callers(heap_allocator *heap)
 	heap_area *area = heap->all_areas;
 	while (area) {
 		heap_leak_check_info *info = NULL;
-		for (uint32 i = 0; i < area->page_count; i++) {
+		for (uint32_t i = 0; i < area->page_count; i++) {
 			heap_page *page = &area->page_table[i];
 			if (!page->in_use)
 				continue;
@@ -711,9 +711,9 @@ analyze_allocation_callers(heap_allocator *heap)
 			addr_t base = area->base + i * heap->page_size;
 			if (page->bin_index < heap->bin_count) {
 				// page is used by a small allocation bin
-				uint32 elementCount = page->empty_index;
+				uint32_t elementCount = page->empty_index;
 				size_t elementSize = heap->bins[page->bin_index].element_size;
-				for (uint32 j = 0; j < elementCount; j++, base += elementSize) {
+				for (uint32_t j = 0; j < elementCount; j++, base += elementSize) {
 					// walk the free list to see if this element is in use
 					bool elementInUse = true;
 					for (addr_t *temp = page->free_list; temp != NULL;
@@ -741,7 +741,7 @@ analyze_allocation_callers(heap_allocator *heap)
 				}
 			} else {
 				// page is used by a big allocation, find the page count
-				uint32 pageCount = 1;
+				uint32_t pageCount = 1;
 				while (i + pageCount < area->page_count
 					&& area->page_table[i + pageCount].in_use
 					&& area->page_table[i + pageCount].bin_index
@@ -781,7 +781,7 @@ dump_allocations_per_caller(int argc, char **argv)
 	bool sortBySize = true;
 	heap_allocator *heap = NULL;
 
-	for (int32 i = 1; i < argc; i++) {
+	for (int32_t i = 1; i < argc; i++) {
 		if (strcmp(argv[i], "-c") == 0) {
 			sortBySize = false;
 		} else if (strcmp(argv[i], "-h") == 0) {
@@ -805,7 +805,7 @@ dump_allocations_per_caller(int argc, char **argv)
 		if (!analyze_allocation_callers(heap))
 			return 0;
 	} else {
-		for (uint32 heapIndex = 0; heapIndex < sHeapCount; heapIndex++) {
+		for (uint32_t heapIndex = 0; heapIndex < sHeapCount; heapIndex++) {
 			if (!analyze_allocation_callers(sHeaps[heapIndex]))
 				return 0;
 		}
@@ -820,7 +820,7 @@ dump_allocations_per_caller(int argc, char **argv)
 
 	kprintf("     count        size      caller\n");
 	kprintf("----------------------------------\n");
-	for (int32 i = 0; i < sCallerInfoCount; i++) {
+	for (int32_t i = 0; i < sCallerInfoCount; i++) {
 		caller_info& info = sCallerInfoTable[i];
 		kprintf("%10ld  %10ld  %#08lx", info.count, info.size, info.caller);
 
@@ -849,16 +849,16 @@ static void
 heap_validate_heap(heap_allocator *heap)
 {
 	ReadLocker areaReadLocker(heap->area_lock);
-	for (uint32 i = 0; i < heap->bin_count; i++)
+	for (uint32_t i = 0; i < heap->bin_count; i++)
 		mutex_lock(&heap->bins[i].lock);
 	MutexLocker pageLocker(heap->page_lock);
 
-	uint32 totalPageCount = 0;
-	uint32 totalFreePageCount = 0;
+	uint32_t totalPageCount = 0;
+	uint32_t totalFreePageCount = 0;
 	heap_area *area = heap->all_areas;
 	while (area != NULL) {
 		// validate the free pages list
-		uint32 freePageCount = 0;
+		uint32_t freePageCount = 0;
 		heap_page *lastPage = NULL;
 		heap_page *page = area->free_pages;
 		while (page) {
@@ -889,8 +889,8 @@ heap_validate_heap(heap_allocator *heap)
 			panic("free page count doesn't match free page list\n");
 
 		// validate the page table
-		uint32 usedPageCount = 0;
-		for (uint32 i = 0; i < area->page_count; i++) {
+		uint32_t usedPageCount = 0;
+		for (uint32_t i = 0; i < area->page_count; i++) {
 			if (area->page_table[i].in_use)
 				usedPageCount++;
 		}
@@ -907,7 +907,7 @@ heap_validate_heap(heap_allocator *heap)
 	// validate the areas
 	area = heap->areas;
 	heap_area *lastArea = NULL;
-	uint32 lastFreeCount = 0;
+	uint32_t lastFreeCount = 0;
 	while (area != NULL) {
 		if (area->free_page_count < lastFreeCount)
 			panic("size ordering of area list broken\n");
@@ -931,7 +931,7 @@ heap_validate_heap(heap_allocator *heap)
 	}
 
 	// validate the bins
-	for (uint32 i = 0; i < heap->bin_count; i++) {
+	for (uint32_t i = 0; i < heap->bin_count; i++) {
 		heap_bin *bin = &heap->bins[i];
 		heap_page *lastPage = NULL;
 		heap_page *page = bin->page_list;
@@ -977,7 +977,7 @@ heap_validate_heap(heap_allocator *heap)
 				panic("ordering of bin page list broken\n");
 
 			// validate the free list
-			uint32 freeSlotsCount = 0;
+			uint32_t freeSlotsCount = 0;
 			addr_t *element = page->free_list;
 			addr_t pageBase = area->base + page->index * heap->page_size;
 			while (element) {
@@ -992,7 +992,7 @@ heap_validate_heap(heap_allocator *heap)
 				freeSlotsCount++;
 			}
 
-			uint32 slotCount = bin->max_free_count;
+			uint32_t slotCount = bin->max_free_count;
 			if (page->empty_index > slotCount) {
 				panic("empty index beyond slot count (%u with %lu slots)\n",
 					page->empty_index, slotCount);
@@ -1009,7 +1009,7 @@ heap_validate_heap(heap_allocator *heap)
 	}
 
 	pageLocker.Unlock();
-	for (uint32 i = 0; i < heap->bin_count; i++)
+	for (uint32_t i = 0; i < heap->bin_count; i++)
 		mutex_unlock(&heap->bins[i].lock);
 	areaReadLocker.Unlock();
 }
@@ -1028,7 +1028,7 @@ heap_add_area(heap_allocator *heap, area_id areaID, addr_t base, size_t size)
 	base += sizeof(heap_area);
 	size -= sizeof(heap_area);
 
-	uint32 pageCount = size / heap->page_size;
+	uint32_t pageCount = size / heap->page_size;
 	size_t pageTableSize = pageCount * sizeof(heap_page);
 	area->page_table = (heap_page *)base;
 	base += pageTableSize;
@@ -1044,13 +1044,13 @@ heap_add_area(heap_allocator *heap, area_id areaID, addr_t base, size_t size)
 
 	// zero out the page table and fill in page indexes
 	memset((void *)area->page_table, 0, pageTableSize);
-	for (uint32 i = 0; i < pageCount; i++) {
+	for (uint32_t i = 0; i < pageCount; i++) {
 		area->page_table[i].area = area;
 		area->page_table[i].index = i;
 	}
 
 	// add all pages up into the free pages list
-	for (uint32 i = 1; i < pageCount; i++) {
+	for (uint32_t i = 1; i < pageCount; i++) {
 		area->page_table[i - 1].next = &area->page_table[i];
 		area->page_table[i].prev = &area->page_table[i - 1];
 	}
@@ -1182,7 +1182,7 @@ heap_create_allocator(const char *name, addr_t base, size_t size,
 
 	heap->bin_count = 0;
 	size_t binSize = 0, lastSize = 0;
-	uint32 count = heap->page_size / heapClass->min_bin_size;
+	uint32_t count = heap->page_size / heapClass->min_bin_size;
 	for (; count >= heapClass->min_count_per_page; count--, lastSize = binSize) {
 		if (heap->bin_count >= MAX_BIN_COUNT)
 			panic("heap configuration invalid - max bin count reached\n");
@@ -1215,7 +1215,7 @@ heap_create_allocator(const char *name, addr_t base, size_t size,
 
 
 static inline void
-heap_free_pages_added(heap_allocator *heap, heap_area *area, uint32 pageCount)
+heap_free_pages_added(heap_allocator *heap, heap_area *area, uint32_t pageCount)
 {
 	area->free_page_count += pageCount;
 	heap->total_free_pages += pageCount;
@@ -1257,7 +1257,7 @@ heap_free_pages_added(heap_allocator *heap, heap_area *area, uint32 pageCount)
 
 
 static inline void
-heap_free_pages_removed(heap_allocator *heap, heap_area *area, uint32 pageCount)
+heap_free_pages_removed(heap_allocator *heap, heap_area *area, uint32_t pageCount)
 {
 	if (area->free_page_count == area->page_count && area->area >= 0) {
 		// this area was completely empty
@@ -1329,7 +1329,7 @@ heap_unlink_page(heap_page *page, heap_page **list)
 
 
 static heap_page *
-heap_allocate_contiguous_pages(heap_allocator *heap, uint32 pageCount,
+heap_allocate_contiguous_pages(heap_allocator *heap, uint32_t pageCount,
 	size_t alignment)
 {
 	MutexLocker pageLocker(heap->page_lock);
@@ -1340,9 +1340,9 @@ heap_allocate_contiguous_pages(heap_allocator *heap, uint32 pageCount,
 			continue;
 		}
 
-		uint32 step = 1;
-		uint32 firstValid = 0;
-		const uint32 lastValid = area->page_count - pageCount + 1;
+		uint32_t step = 1;
+		uint32_t firstValid = 0;
+		const uint32_t lastValid = area->page_count - pageCount + 1;
 
 		if (alignment > heap->page_size) {
 			firstValid = (ROUNDUP(area->base, alignment) - area->base)
@@ -1350,14 +1350,14 @@ heap_allocate_contiguous_pages(heap_allocator *heap, uint32 pageCount,
 			step = alignment / heap->page_size;
 		}
 
-		int32 first = -1;
-		for (uint32 i = firstValid; i < lastValid; i += step) {
+		int32_t first = -1;
+		for (uint32_t i = firstValid; i < lastValid; i += step) {
 			if (area->page_table[i].in_use)
 				continue;
 
 			first = i;
 
-			for (uint32 j = 1; j < pageCount; j++) {
+			for (uint32_t j = 1; j < pageCount; j++) {
 				if (area->page_table[i + j].in_use) {
 					first = -1;
 					i += j / step * step;
@@ -1374,7 +1374,7 @@ heap_allocate_contiguous_pages(heap_allocator *heap, uint32 pageCount,
 			continue;
 		}
 
-		for (uint32 i = first; i < first + pageCount; i++) {
+		for (uint32_t i = first; i < first + pageCount; i++) {
 			heap_page *page = &area->page_table[i];
 			page->in_use = 1;
 			page->bin_index = heap->bin_count;
@@ -1415,7 +1415,7 @@ heap_raw_alloc(heap_allocator *heap, size_t size, size_t alignment)
 	TRACE(("heap %p: allocate %lu bytes from raw pages with alignment %lu\n",
 		heap, size, alignment));
 
-	uint32 pageCount = (size + heap->page_size - 1) / heap->page_size;
+	uint32_t pageCount = (size + heap->page_size - 1) / heap->page_size;
 	heap_page *firstPage = heap_allocate_contiguous_pages(heap, pageCount,
 		alignment);
 	if (firstPage == NULL) {
@@ -1433,7 +1433,7 @@ heap_raw_alloc(heap_allocator *heap, size_t size, size_t alignment)
 
 
 static void *
-heap_allocate_from_bin(heap_allocator *heap, uint32 binIndex, size_t size)
+heap_allocate_from_bin(heap_allocator *heap, uint32_t binIndex, size_t size)
 {
 	heap_bin *bin = &heap->bins[binIndex];
 	TRACE(("heap %p: allocate %lu bytes from bin %lu with element_size %lu\n",
@@ -1543,7 +1543,7 @@ heap_memalign(heap_allocator *heap, size_t alignment, size_t size)
 			// check if there is an aligned block in the free list or if a new
 			// (page aligned) page has to be allocated anyway.
 			size = ROUNDUP(size, alignment);
-			for (uint32 i = 0; i < heap->bin_count; i++) {
+			for (uint32_t i = 0; i < heap->bin_count; i++) {
 				if (size <= heap->bins[i].element_size
 					&& is_valid_alignment(heap->bins[i].element_size)) {
 					address = heap_allocate_from_bin(heap, i, size);
@@ -1551,7 +1551,7 @@ heap_memalign(heap_allocator *heap, size_t alignment, size_t size)
 				}
 			}
 		} else {
-			for (uint32 i = 0; i < heap->bin_count; i++) {
+			for (uint32_t i = 0; i < heap->bin_count; i++) {
 				if (size <= heap->bins[i].element_size) {
 					address = heap_allocate_from_bin(heap, i, size);
 					break;
@@ -1581,8 +1581,8 @@ heap_memalign(heap_allocator *heap, size_t alignment, size_t size)
 #if PARANOID_KERNEL_FREE
 	// make sure 0xdeadbeef is cleared if we do not overwrite the memory
 	// and the user does not clear it
-	if (((uint32 *)address)[1] == 0xdeadbeef)
-		((uint32 *)address)[1] = 0xcccccccc;
+	if (((uint32_t *)address)[1] == 0xdeadbeef)
+		((uint32_t *)address)[1] = 0xcccccccc;
 #endif
 
 	return address;
@@ -1638,7 +1638,7 @@ heap_free(heap_allocator *heap, void *address)
 		heap_bin *bin = &heap->bins[page->bin_index];
 
 #if PARANOID_KERNEL_FREE
-		if (((uint32 *)address)[1] == 0xdeadbeef) {
+		if (((uint32_t *)address)[1] == 0xdeadbeef) {
 			// This block looks like it was freed already, walk the free list
 			// on this page to make sure this address doesn't exist.
 			MutexLocker binLocker(bin->lock);
@@ -1654,8 +1654,8 @@ heap_free(heap_allocator *heap, void *address)
 
 		// the first 4 bytes are overwritten with the next free list pointer
 		// later
-		uint32 *dead = (uint32 *)address;
-		for (uint32 i = 1; i < bin->element_size / sizeof(uint32); i++)
+		uint32_t *dead = (uint32_t *)address;
+		for (uint32_t i = 1; i < bin->element_size / sizeof(uint32_t); i++)
 			dead[i] = 0xdeadbeef;
 #endif
 
@@ -1702,12 +1702,12 @@ heap_free(heap_allocator *heap, void *address)
 		}
 	} else {
 		// large allocation, just return the pages to the page free list
-		uint32 allocationID = page->allocation_id;
-		uint32 maxPages = area->page_count - page->index;
-		uint32 pageCount = 0;
+		uint32_t allocationID = page->allocation_id;
+		uint32_t maxPages = area->page_count - page->index;
+		uint32_t pageCount = 0;
 
 		MutexLocker pageLocker(heap->page_lock);
-		for (uint32 i = 0; i < maxPages; i++) {
+		for (uint32_t i = 0; i < maxPages; i++) {
 			// loop until we find the end of this allocation
 			if (!page[i].in_use || page[i].bin_index != heap->bin_count
 				|| page[i].allocation_id != allocationID)
@@ -1733,7 +1733,7 @@ heap_free(heap_allocator *heap, void *address)
 		MutexLocker pageLocker(heap->page_lock);
 
 		area_id areasToDelete[heap->empty_areas - 1];
-		int32 areasToDeleteIndex = 0;
+		int32_t areasToDeleteIndex = 0;
 
 		area = heap->areas;
 		while (area != NULL && heap->empty_areas > 1) {
@@ -1751,7 +1751,7 @@ heap_free(heap_allocator *heap, void *address)
 		pageLocker.Unlock();
 		areaWriteLocker.Unlock();
 
-		for (int32 i = 0; i < areasToDeleteIndex; i++)
+		for (int32_t i = 0; i < areasToDeleteIndex; i++)
 			delete_area(areasToDelete[i]);
 	}
 
@@ -1822,12 +1822,12 @@ heap_realloc(heap_allocator *heap, void *address, void **newAddress,
 			minSize = heap->bins[page->bin_index - 1].element_size + 1;
 	} else {
 		// this was a large allocation
-		uint32 allocationID = page->allocation_id;
-		uint32 maxPages = area->page_count - page->index;
+		uint32_t allocationID = page->allocation_id;
+		uint32_t maxPages = area->page_count - page->index;
 		maxSize = heap->page_size;
 
 		MutexLocker pageLocker(heap->page_lock);
-		for (uint32 i = 1; i < maxPages; i++) {
+		for (uint32_t i = 1; i < maxPages; i++) {
 			if (!page[i].in_use || page[i].bin_index != heap->bin_count
 				|| page[i].allocation_id != allocationID)
 				break;
@@ -1878,15 +1878,15 @@ heap_realloc(heap_allocator *heap, void *address, void **newAddress,
 }
 
 
-inline uint32
-heap_index_for(size_t size, int32 cpu)
+inline uint32_t
+heap_index_for(size_t size, int32_t cpu)
 {
 #if KERNEL_HEAP_LEAK_CHECK
 	// take the extra info size into account
 	size += sizeof(heap_leak_check_info_s);
 #endif
 
-	uint32 index = 0;
+	uint32_t index = 0;
 	for (; index < HEAP_CLASS_COUNT - 1; index++) {
 		if (size <= sHeapClasses[index].max_allocation_size)
 			break;
@@ -1916,11 +1916,11 @@ memalign_nogrow(size_t alignment, size_t size)
 
 	// try public memory, there might be something available
 	void *result = NULL;
-	int32 cpuCount = MIN(smp_get_num_cpus(),
-		(int32)sHeapCount / HEAP_CLASS_COUNT);
-	int32 cpuNumber = smp_get_current_cpu();
-	for (int32 i = 0; i < cpuCount; i++) {
-		uint32 heapIndex = heap_index_for(size, cpuNumber++ % cpuCount);
+	int32_t cpuCount = MIN(smp_get_num_cpus(),
+		(int32_t)sHeapCount / HEAP_CLASS_COUNT);
+	int32_t cpuNumber = smp_get_current_cpu();
+	for (int32_t i = 0; i < cpuCount; i++) {
+		uint32_t heapIndex = heap_index_for(size, cpuNumber++ % cpuCount);
 		heap_allocator *heap = sHeaps[heapIndex];
 		result = heap_memalign(heap, alignment, size);
 		if (result != NULL)
@@ -1957,7 +1957,7 @@ heap_create_new_heap_area(heap_allocator *heap, const char *name, size_t size)
 }
 
 
-static int32
+static int32_t
 heap_grow_thread(void *)
 {
 	while (true) {
@@ -1974,7 +1974,7 @@ heap_grow_thread(void *)
 				dprintf("heap_grower: failed to create new grow heap area\n");
 		}
 
-		for (uint32 i = 0; i < sHeapCount; i++) {
+		for (uint32_t i = 0; i < sHeapCount; i++) {
 			heap_allocator *heap = sHeaps[i];
 			if (sLastGrowRequest[i] > sLastHandledGrowRequest[i]
 				|| heap_should_grow(heap)) {
@@ -2035,7 +2035,7 @@ deferred_deleter(void *arg, int iteration)
 status_t
 heap_init(addr_t base, size_t size)
 {
-	for (uint32 i = 0; i < HEAP_CLASS_COUNT; i++) {
+	for (uint32_t i = 0; i < HEAP_CLASS_COUNT; i++) {
 		size_t partSize = size * sHeapClasses[i].initial_percentage / 100;
 		sHeaps[i] = heap_create_allocator(sHeapClasses[i].name, base, partSize,
 			&sHeapClasses[i], false);
@@ -2172,9 +2172,9 @@ heap_init_post_thread()
 	}
 
 	// create per-cpu heaps if there's enough memory
-	int32 heapCount = MIN(smp_get_num_cpus(),
-		(int32)vm_page_num_pages() / 60 / 1024);
-	for (int32 i = 1; i < heapCount; i++) {
+	int32_t heapCount = MIN(smp_get_num_cpus(),
+		(int32_t)vm_page_num_pages() / 60 / 1024);
+	for (int32_t i = 1; i < heapCount; i++) {
 		addr_t base = 0;
 		size_t size = HEAP_GROW_SIZE * HEAP_CLASS_COUNT;
 		area_id perCPUHeapArea = create_area("per cpu initial heap",
@@ -2183,8 +2183,8 @@ heap_init_post_thread()
 		if (perCPUHeapArea < 0)
 			break;
 
-		for (uint32 j = 0; j < HEAP_CLASS_COUNT; j++) {
-			int32 heapIndex = i * HEAP_CLASS_COUNT + j;
+		for (uint32_t j = 0; j < HEAP_CLASS_COUNT; j++) {
+			int32_t heapIndex = i * HEAP_CLASS_COUNT + j;
 			size_t partSize = size * sHeapClasses[j].initial_percentage / 100;
 			sHeaps[heapIndex] = heap_create_allocator(sHeapClasses[j].name,
 				base, partSize, &sHeapClasses[j], false);
@@ -2282,11 +2282,11 @@ memalign(size_t alignment, size_t size)
 
 	void *result = NULL;
 	bool shouldGrow = false;
-	int32 cpuCount = MIN(smp_get_num_cpus(),
-		(int32)sHeapCount / HEAP_CLASS_COUNT);
-	int32 cpuNumber = smp_get_current_cpu();
-	for (int32 i = 0; i < cpuCount; i++) {
-		uint32 heapIndex = heap_index_for(size, cpuNumber++ % cpuCount);
+	int32_t cpuCount = MIN(smp_get_num_cpus(),
+		(int32_t)sHeapCount / HEAP_CLASS_COUNT);
+	int32_t cpuNumber = smp_get_current_cpu();
+	for (int32_t i = 0; i < cpuCount; i++) {
+		uint32_t heapIndex = heap_index_for(size, cpuNumber++ % cpuCount);
 		heap_allocator *heap = sHeaps[heapIndex];
 		result = heap_memalign(heap, alignment, size);
 		if (result != NULL) {
@@ -2304,7 +2304,7 @@ memalign(size_t alignment, size_t size)
 		// serialize growing through the grow thread, as otherwise multiple
 		// threads hitting this situation (likely when memory ran out) would
 		// all add areas
-		uint32 heapIndex = heap_index_for(size, smp_get_current_cpu());
+		uint32_t heapIndex = heap_index_for(size, smp_get_current_cpu());
 		sLastGrowRequest[heapIndex]++;
 		switch_sem(sHeapGrowSem, sHeapGrownNotify);
 
@@ -2322,7 +2322,7 @@ memalign(size_t alignment, size_t size)
 
 
 void *
-memalign_etc(size_t alignment, size_t size, uint32 flags)
+memalign_etc(size_t alignment, size_t size, uint32_t flags)
 {
 	if ((flags & HEAP_PRIORITY_VIP) != 0)
 		return heap_memalign(sVIPHeap, alignment, size);
@@ -2337,7 +2337,7 @@ memalign_etc(size_t alignment, size_t size, uint32 flags)
 
 
 void
-free_etc(void *address, uint32 flags)
+free_etc(void *address, uint32_t flags)
 {
 	if ((flags & HEAP_PRIORITY_VIP) != 0)
 		heap_free(sVIPHeap, address);
@@ -2361,8 +2361,8 @@ free(void *address)
 		return;
 	}
 
-	int32 offset = smp_get_current_cpu() * HEAP_CLASS_COUNT;
-	for (uint32 i = 0; i < sHeapCount; i++) {
+	int32_t offset = smp_get_current_cpu() * HEAP_CLASS_COUNT;
+	for (uint32_t i = 0; i < sHeapCount; i++) {
 		heap_allocator *heap = sHeaps[(i + offset) % sHeapCount];
 		if (heap_free(heap, address) == B_OK) {
 #if PARANOID_HEAP_VALIDATION
@@ -2418,8 +2418,8 @@ realloc(void *address, size_t newSize)
 	}
 
 	void *newAddress = NULL;
-	int32 offset = smp_get_current_cpu() * HEAP_CLASS_COUNT;
-	for (uint32 i = 0; i < sHeapCount; i++) {
+	int32_t offset = smp_get_current_cpu() * HEAP_CLASS_COUNT;
+	for (uint32_t i = 0; i < sHeapCount; i++) {
 		heap_allocator *heap = sHeaps[(i + offset) % sHeapCount];
 		if (heap_realloc(heap, address, &newAddress, newSize) == B_OK) {
 #if PARANOID_HEAP_VALIDATION
@@ -2506,7 +2506,7 @@ deferred_free(void *block)
 void *
 malloc_referenced(size_t size)
 {
-	int32 *referencedData = (int32 *)malloc(size + 4);
+	int32_t *referencedData = (int32_t *)malloc(size + 4);
 	if (referencedData == NULL)
 		return NULL;
 
@@ -2519,7 +2519,7 @@ void *
 malloc_referenced_acquire(void *data)
 {
 	if (data != NULL) {
-		int32 *referencedData = (int32 *)data - 1;
+		int32_t *referencedData = (int32_t *)data - 1;
 		atomic_add(referencedData, 1);
 	}
 
@@ -2533,7 +2533,7 @@ malloc_referenced_release(void *data)
 	if (data == NULL)
 		return;
 
-	int32 *referencedData = (int32 *)data - 1;
+	int32_t *referencedData = (int32_t *)data - 1;
 	if (atomic_add(referencedData, -1) < 1)
 		free(referencedData);
 }

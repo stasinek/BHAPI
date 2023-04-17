@@ -33,7 +33,7 @@ typedef struct fssh_recursive_lock {
 typedef struct fssh_rw_lock {
 	fssh_sem_id		sem;
 	fssh_thread_id	holder;
-	int32_t			count;
+	int32_t_t			count;
 } fssh_rw_lock;
 
 #define FSSH_RW_LOCK_FLAG_CLONE_NAME	0x1
@@ -55,17 +55,17 @@ extern "C" {
 extern void	fssh_recursive_lock_init(fssh_recursive_lock *lock, const char *name);
 	// name is *not* cloned nor freed in recursive_lock_destroy()
 extern void fssh_recursive_lock_init_etc(fssh_recursive_lock *lock, const char *name,
-	uint32_t flags);
+	uint32_t_t flags);
 extern void fssh_recursive_lock_destroy(fssh_recursive_lock *lock);
 extern fssh_status_t fssh_recursive_lock_lock(fssh_recursive_lock *lock);
 extern fssh_status_t fssh_recursive_lock_trylock(fssh_recursive_lock *lock);
 extern void fssh_recursive_lock_unlock(fssh_recursive_lock *lock);
-extern int32_t fssh_recursive_lock_get_recursion(fssh_recursive_lock *lock);
+extern int32_t_t fssh_recursive_lock_get_recursion(fssh_recursive_lock *lock);
 extern void fssh_recursive_lock_transfer_lock(fssh_recursive_lock *lock, fssh_thread_id thread);
 
 extern void fssh_rw_lock_init(fssh_rw_lock* lock, const char* name);
 	// name is *not* cloned nor freed in rw_lock_destroy()
-extern void fssh_rw_lock_init_etc(fssh_rw_lock* lock, const char* name, uint32_t flags);
+extern void fssh_rw_lock_init_etc(fssh_rw_lock* lock, const char* name, uint32_t_t flags);
 extern void fssh_rw_lock_destroy(fssh_rw_lock* lock);
 extern fssh_status_t fssh_rw_lock_read_lock(fssh_rw_lock* lock);
 extern fssh_status_t fssh_rw_lock_read_unlock(fssh_rw_lock* lock);
@@ -74,7 +74,7 @@ extern fssh_status_t fssh_rw_lock_write_unlock(fssh_rw_lock* lock);
 
 extern void fssh_mutex_init(fssh_mutex* lock, const char* name);
 	// name is *not* cloned nor freed in mutex_destroy()
-extern void fssh_mutex_init_etc(fssh_mutex* lock, const char* name, uint32_t flags);
+extern void fssh_mutex_init_etc(fssh_mutex* lock, const char* name, uint32_t_t flags);
 extern void fssh_mutex_destroy(fssh_mutex* lock);
 extern fssh_status_t fssh_mutex_lock(fssh_mutex* lock);
 extern fssh_status_t fssh_mutex_trylock(fssh_mutex* lock);

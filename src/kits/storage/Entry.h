@@ -123,7 +123,7 @@ private:
     virtual	void				_PennyEntry6();
 
     // BEntry implementation of BStatable::set_stat()
-    virtual	status_t			set_stat(struct stat& stat, uint32 what);
+    virtual	status_t			set_stat(struct stat& stat, uint32_t what);
             status_t			_SetTo(int dir, const char* path,
                                     bool traverse);
             status_t			_SetName(const char* name);
@@ -140,7 +140,7 @@ private:
             char*				fName;
             status_t			fCStatus;
 
-            uint32				_reserved[4];
+            uint32_t				_reserved[4];
 public:
     status_t	SetTo(const char *dir, const char *leaf, bool traverse = false);
     bool		IsHidden() const;

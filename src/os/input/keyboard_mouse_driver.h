@@ -73,7 +73,7 @@ enum {
 
 typedef struct {
 	bigtime_t	timestamp;
-	uint32		keycode;
+	uint32_t		keycode;
 	bool		is_keydown;
 } raw_key_info;
 
@@ -86,29 +86,29 @@ typedef struct {
 
 
 typedef struct {
-	int32		cookie;
-	uint32		buttons;
-	int32		xdelta;
-	int32		ydelta;
-	int32		clicks;
-	int32		modifiers;
+	int32_t		cookie;
+	uint32_t		buttons;
+	int32_t		xdelta;
+	int32_t		ydelta;
+	int32_t		clicks;
+	int32_t		modifiers;
 	bigtime_t	timestamp;
-	int32		wheel_ydelta;
-	int32		wheel_xdelta;
+	int32_t		wheel_ydelta;
+	int32_t		wheel_xdelta;
 } mouse_movement;
 
 
 typedef struct {
-	uint32		buttons;
+	uint32_t		buttons;
 	float		xpos;
 	float		ypos;
 	bool		has_contact;
 	float		pressure;
-	int32		clicks;
+	int32_t		clicks;
 	bool		eraser;
 	bigtime_t	timestamp;
-	int32		wheel_ydelta;
-	int32		wheel_xdelta;
+	int32_t		wheel_ydelta;
+	int32_t		wheel_xdelta;
 	float		tilt_x;
 	float		tilt_y;
 } tablet_movement;
@@ -122,8 +122,8 @@ typedef struct {
 
 typedef struct {
 	uint8		buttons;
-	uint32		xPosition;
-	uint32		yPosition;
+	uint32_t		xPosition;
+	uint32_t		yPosition;
 	uint8		zPressure;
 	uint8		fingers;
 	bool		gesture;

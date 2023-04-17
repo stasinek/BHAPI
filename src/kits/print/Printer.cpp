@@ -412,7 +412,7 @@ BPrinter::_DriverPath() const
 
 	BPath path;
 	driverName.Prepend("Print/");
-	for (int32 i = 0; i < sizeof(directories) / sizeof(directories[0]); ++i) {
+	for (int32_t i = 0; i < sizeof(directories) / sizeof(directories[0]); ++i) {
 		if (find_directory(directories[i], &path) == B_OK) {
 			path.Append(driverName.String());
 

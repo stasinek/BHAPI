@@ -226,7 +226,7 @@ set_breakpoint(arch_team_debug_info& info, void* address, size_t type,
 {
 	// check, if there is already a breakpoint at that address
 	bool alreadySet = false;
-	for (int32 i = 0; i < X86_BREAKPOINT_COUNT; i++) {
+	for (int32_t i = 0; i < X86_BREAKPOINT_COUNT; i++) {
 		if (info.breakpoints[i].address == address
 			&& info.breakpoints[i].type == type) {
 			alreadySet = true;
@@ -236,8 +236,8 @@ set_breakpoint(arch_team_debug_info& info, void* address, size_t type,
 
 	if (!alreadySet) {
 		// find a free slot
-		int32 slot = -1;
-		for (int32 i = 0; i < X86_BREAKPOINT_COUNT; i++) {
+		int32_t slot = -1;
+		for (int32_t i = 0; i < X86_BREAKPOINT_COUNT; i++) {
 			if (!info.breakpoints[i].address) {
 				slot = i;
 				break;
@@ -274,8 +274,8 @@ static inline status_t
 clear_breakpoint(arch_team_debug_info& info, void* address, bool watchpoint)
 {
 	// find the breakpoint
-	int32 slot = -1;
-	for (int32 i = 0; i < X86_BREAKPOINT_COUNT; i++) {
+	int32_t slot = -1;
+	for (int32_t i = 0; i < X86_BREAKPOINT_COUNT; i++) {
 		if (info.breakpoints[i].address == address
 			&& (watchpoint
 				!= (info.breakpoints[i].type == X86_INSTRUCTION_BREAKPOINT))) {
@@ -412,7 +412,7 @@ clear_kernel_breakpoint(void* address, bool watchpoint)
 
 
 static inline status_t
-check_watch_point_parameters(void* address, uint32 type, int32 length,
+check_watch_point_parameters(void* address, uint32_t type, int32_t length,
 	size_t& archType, size_t& archLength)
 {
 	// check type
@@ -463,7 +463,7 @@ debugger_breakpoints(int argc, char** argv)
 	Team* kernelTeam = team_get_kernel_team();
 	arch_team_debug_info& info = kernelTeam->debug_info.arch_info;
 
-	for (int32 i = 0; i < X86_BREAKPOINT_COUNT; i++) {
+	for (int32_t i = 0; i < X86_BREAKPOINT_COUNT; i++) {
 		kprintf("breakpoint[%" B_PRId32 "] ", i);
 
 		if (info.breakpoints[i].address != NULL) {
@@ -591,7 +591,7 @@ debugger_watchpoint(int argc, char** argv)
 	if (clear) {
 		error = clear_breakpoint(info, (void*)address, true);
 	} else {
-		uint32 type = readWrite ? B_DATA_READ_WRITE_WATCHPOINT
+		uint32_t type = readWrite ? B_DATA_READ_WRITE_WATCHPOINT
 			: B_DATA_WRITE_WATCHPOINT;
 
 		size_t archType, archLength;
@@ -640,7 +640,7 @@ debugger_single_step(int argc, char** argv)
 void
 arch_clear_team_debug_info(arch_team_debug_info* info)
 {
-	for (int32 i = 0; i < X86_BREAKPOINT_COUNT; i++)
+	for (int32_t i = 0; i < X86_BREAKPOINT_COUNT; i++)
 		info->breakpoints[i].address = NULL;
 
 	info->dr7 = X86_BREAKPOINTS_DISABLED_DR7;
@@ -770,7 +770,7 @@ arch_clear_breakpoint(void* address)
 
 
 status_t
-arch_set_watchpoint(void* address, uint32 type, int32 length)
+arch_set_watchpoint(void* address, uint32_t type, int32_t length)
 {
 	size_t archType, archLength;
 	status_t error = check_watch_point_parameters(address, type, length,
@@ -830,7 +830,7 @@ arch_clear_kernel_breakpoint(void* address)
 
 
 status_t
-arch_set_kernel_watchpoint(void* address, uint32 type, int32 length)
+arch_set_kernel_watchpoint(void* address, uint32_t type, int32_t length)
 {
 	size_t archType, archLength;
 	status_t error = check_watch_point_parameters(address, type, length,
@@ -960,7 +960,7 @@ x86_handle_debug_exception(iframe* frame)
 
 		// check which breakpoint was taken
 		bool watchpoint = true;
-		for (int32 i = 0; i < X86_BREAKPOINT_COUNT; i++) {
+		for (int32_t i = 0; i < X86_BREAKPOINT_COUNT; i++) {
 			if (dr6 & (1 << sDR6B[i])) {
 				size_t type = (dr7 >> sDR7RW[i]) & 0x3;
 				if (type == X86_INSTRUCTION_BREAKPOINT)
@@ -1032,7 +1032,7 @@ x86_handle_debug_exception(iframe* frame)
 				// B_THREAD_DEBUG_STOP flags, so that the thread will be
 				// stopped when it is going to leave the kernel and notify the
 				// debugger about the single-step event.
-				int32 teamDebugFlags
+				int32_t teamDebugFlags
 					= atomic_get(&thread->team->debug_info.flags);
 				if (teamDebugFlags & B_TEAM_DEBUG_DEBUGGER_INSTALLED) {
 					atomic_or(&thread->debug_info.flags,

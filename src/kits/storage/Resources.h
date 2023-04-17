@@ -53,7 +53,7 @@ public:
 
     const	BFile				&File() const;
 
-    const	void*				LoadResource(type_code type, int32 id,
+    const	void*				LoadResource(type_code type, int32_t id,
                                     size_t* _size);
     const	void*				LoadResource(type_code type, const char* name,
                                     size_t* _size);
@@ -64,45 +64,45 @@ public:
             status_t			MergeFrom(BFile* fromFile);
             status_t			WriteTo(BFile* file);
 
-            status_t			AddResource(type_code type, int32 id,
+            status_t			AddResource(type_code type, int32_t id,
                                     const void* data, size_t length,
                                     const char* name = NULL);
 
-            bool				HasResource(type_code type, int32 id);
+            bool				HasResource(type_code type, int32_t id);
             bool				HasResource(type_code type, const char* name);
 
-            bool				GetResourceInfo(int32 byIndex,
-                                    type_code* typeFound, int32* idFound,
+            bool				GetResourceInfo(int32_t byIndex,
+                                    type_code* typeFound, int32_t* idFound,
                                     const char** nameFound,
                                     size_t* lengthFound);
             bool				GetResourceInfo(type_code byType,
-                                    int32 andIndex, int32* idFound,
+                                    int32_t andIndex, int32_t* idFound,
                                     const char** nameFound,
                                     size_t* lengthFound);
-            bool				GetResourceInfo(type_code byType, int32 andID,
+            bool				GetResourceInfo(type_code byType, int32_t andID,
                                     const char **nameFound,
                                     size_t* lengthFound);
             bool				GetResourceInfo(type_code byType,
-                                    const char* andName, int32* idFound,
+                                    const char* andName, int32_t* idFound,
                                     size_t* lengthFound);
             bool				GetResourceInfo(const void* byPointer,
                                     type_code* typeFound,
-                                    int32* idFound, size_t* lengthFound,
+                                    int32_t* idFound, size_t* lengthFound,
                                     const char** nameFound);
 
             status_t			RemoveResource(const void *resource);
-            status_t			RemoveResource(type_code type, int32 id);
+            status_t			RemoveResource(type_code type, int32_t id);
 
                                 // deprecated
-            status_t			WriteResource(type_code type, int32 id,
+            status_t			WriteResource(type_code type, int32_t id,
                                     const void* data, off_t offset,
                                     size_t length);
 
-            status_t			ReadResource(type_code type, int32 id,
+            status_t			ReadResource(type_code type, int32_t id,
                                     void* data, off_t offset,
                                     size_t length);
 
-            void*				FindResource(type_code type, int32 id,
+            void*				FindResource(type_code type, int32_t id,
                                     size_t* lengthFound);
             void*				FindResource(type_code type, const char* name,
                                     size_t *lengthFound);
@@ -125,7 +125,7 @@ private:
             bool				fReadOnly;
             bool				_pad[3];
                                 // FBC
-            uint32				_reserved[3];
+            uint32_t				_reserved[3];
 };
 
 

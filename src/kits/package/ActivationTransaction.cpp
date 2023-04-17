@@ -39,7 +39,7 @@ BActivationTransaction::BActivationTransaction(BMessage* archive,
 	fPackagesToDeactivate()
 {
 	status_t error;
-	int32 location;
+	int32_t location;
 	if ((error = archive->FindInt32("location", &location)) == B_OK
 		&& (error = archive->FindInt64("change count", &fChangeCount)) == B_OK
 		&& (error = archive->FindString("transaction",

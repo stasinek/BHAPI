@@ -167,8 +167,8 @@ namespace agg
         //---------------------------------------------------------------
         struct span_data
         {
-            int32 x;
-            int32 len;       // If negative, it's a solid span, covers is valid
+            int32_t x;
+            int32_t len;       // If negative, it's a solid span, covers is valid
             int   covers_id; // The index of the cells in the scanline_cell_storage
         };
 
@@ -192,8 +192,8 @@ namespace agg
             public:
                 struct span
                 {
-                    int32    x;
-                    int32    len; // If negative, it's a solid span, covers is valid
+                    int32_t    x;
+                    int32_t    len; // If negative, it's a solid span, covers is valid
                     const T* covers;
                 };
 
@@ -397,11 +397,11 @@ namespace agg
         unsigned byte_size() const
         {
             unsigned i;
-            unsigned size = sizeof(int32) * 4; // min_x, min_y, max_x, max_y
+            unsigned size = sizeof(int32_t) * 4; // min_x, min_y, max_x, max_y
 
             for(i = 0; i < m_scanlines.size(); ++i)
             {
-                size += sizeof(int32) * 3; // scanline size in bytes, Y, num_spans
+                size += sizeof(int32_t) * 3; // scanline size in bytes, Y, num_spans
 
                 const scanline_data& sl_this = m_scanlines[i];
 
@@ -411,7 +411,7 @@ namespace agg
                 {
                     const span_data& sp = m_spans[span_idx++];
 
-                    size += sizeof(int32) * 2;                // X, span_len
+                    size += sizeof(int32_t) * 2;                // X, span_len
                     if(sp.len < 0)
                     {
                         size += sizeof(T);                    // cover
@@ -428,7 +428,7 @@ namespace agg
 
 
         //---------------------------------------------------------------
-        static void write_int32(int8u* dst, int32 val)
+        static void write_int32_t(int8u* dst, int32_t val)
         {
             dst[0] = ((const int8u*)&val)[0];
             dst[1] = ((const int8u*)&val)[1];
@@ -442,27 +442,27 @@ namespace agg
         {
             unsigned i;
 
-            write_int32(data, min_x()); // min_x
-            data += sizeof(int32);
-            write_int32(data, min_y()); // min_y
-            data += sizeof(int32);
-            write_int32(data, max_x()); // max_x
-            data += sizeof(int32);
-            write_int32(data, max_y()); // max_y
-            data += sizeof(int32);
+            write_int32_t(data, min_x()); // min_x
+            data += sizeof(int32_t);
+            write_int32_t(data, min_y()); // min_y
+            data += sizeof(int32_t);
+            write_int32_t(data, max_x()); // max_x
+            data += sizeof(int32_t);
+            write_int32_t(data, max_y()); // max_y
+            data += sizeof(int32_t);
 
             for(i = 0; i < m_scanlines.size(); ++i)
             {
                 const scanline_data& sl_this = m_scanlines[i];
                 
                 int8u* size_ptr = data;
-                data += sizeof(int32);  // Reserve space for scanline size in bytes
+                data += sizeof(int32_t);  // Reserve space for scanline size in bytes
 
-                write_int32(data, sl_this.y);            // Y
-                data += sizeof(int32);
+                write_int32_t(data, sl_this.y);            // Y
+                data += sizeof(int32_t);
 
-                write_int32(data, sl_this.num_spans);    // num_spans
-                data += sizeof(int32);
+                write_int32_t(data, sl_this.num_spans);    // num_spans
+                data += sizeof(int32_t);
 
                 unsigned num_spans = sl_this.num_spans;
                 unsigned span_idx  = sl_this.start_span;
@@ -471,11 +471,11 @@ namespace agg
                     const span_data& sp = m_spans[span_idx++];
                     const T* covers = covers_by_index(sp.covers_id);
 
-                    write_int32(data, sp.x);            // X
-                    data += sizeof(int32);
+                    write_int32_t(data, sp.x);            // X
+                    data += sizeof(int32_t);
 
-                    write_int32(data, sp.len);          // span_len
-                    data += sizeof(int32);
+                    write_int32_t(data, sp.len);          // span_len
+                    data += sizeof(int32_t);
 
                     if(sp.len < 0)
                     {
@@ -489,7 +489,7 @@ namespace agg
                     }
                 }
                 while(--num_spans);
-                write_int32(size_ptr, int32(unsigned(data - size_ptr)));
+                write_int32_t(size_ptr, int32_t(unsigned(data - size_ptr)));
             }
         }
 
@@ -528,7 +528,7 @@ namespace agg
 
     typedef scanline_storage_aa<int8u>  scanline_storage_aa8;  //--------scanline_storage_aa8
     typedef scanline_storage_aa<int16u> scanline_storage_aa16; //--------scanline_storage_aa16
-    typedef scanline_storage_aa<int32u> scanline_storage_aa32; //--------scanline_storage_aa32
+    typedef scanline_storage_aa<int32_tu> scanline_storage_aa32; //--------scanline_storage_aa32
 
 
 
@@ -551,8 +551,8 @@ namespace agg
             public:
                 struct span
                 {
-                    int32    x;
-                    int32    len; // If negative, it's a solid span, "covers" is valid
+                    int32_t    x;
+                    int32_t    len; // If negative, it's a solid span, "covers" is valid
                     const T* covers; 
                 };
 
@@ -581,9 +581,9 @@ namespace agg
                 }
 
             private:
-                int read_int32()
+                int read_int32_t()
                 {
-                    int32 val;
+                    int32_t val;
                     ((int8u*)&val)[0] = *m_ptr++;
                     ((int8u*)&val)[1] = *m_ptr++;
                     ((int8u*)&val)[2] = *m_ptr++;
@@ -593,8 +593,8 @@ namespace agg
 
                 void init_span()
                 {
-                    m_span.x      = read_int32() + m_dx;
-                    m_span.len    = read_int32();
+                    m_span.x      = read_int32_t() + m_dx;
+                    m_span.len    = read_int32_t();
                     m_span.covers = m_ptr;
                 }
 
@@ -618,9 +618,9 @@ namespace agg
 
         private:
             //-----------------------------------------------------------------
-            int read_int32()
+            int read_int32_t()
             {
-                int32 val;
+                int32_t val;
                 ((int8u*)&val)[0] = *m_ptr++;
                 ((int8u*)&val)[1] = *m_ptr++;
                 ((int8u*)&val)[2] = *m_ptr++;
@@ -633,8 +633,8 @@ namespace agg
             void init(const int8u* ptr, int dx, int dy)
             {
                 m_ptr       = ptr;
-                m_y         = read_int32() + dy;
-                m_num_spans = unsigned(read_int32());
+                m_y         = read_int32_t() + dy;
+                m_num_spans = unsigned(read_int32_t());
                 m_dx        = dx;
             }
 
@@ -691,9 +691,9 @@ namespace agg
 
     private:
         //--------------------------------------------------------------------
-        int read_int32()
+        int read_int32_t()
         {
-            int32 val;
+            int32_t val;
             ((int8u*)&val)[0] = *m_ptr++;
             ((int8u*)&val)[1] = *m_ptr++;
             ((int8u*)&val)[2] = *m_ptr++;
@@ -702,9 +702,9 @@ namespace agg
         }
 
         //--------------------------------------------------------------------
-        unsigned read_int32u()
+        unsigned read_int32_tu()
         {
-            int32u val;
+            int32_tu val;
             ((int8u*)&val)[0] = *m_ptr++;
             ((int8u*)&val)[1] = *m_ptr++;
             ((int8u*)&val)[2] = *m_ptr++;
@@ -720,10 +720,10 @@ namespace agg
             m_ptr = m_data;
             if(m_ptr < m_end)
             {
-                m_min_x = read_int32() + m_dx; 
-                m_min_y = read_int32() + m_dy;
-                m_max_x = read_int32() + m_dx;
-                m_max_y = read_int32() + m_dy;
+                m_min_x = read_int32_t() + m_dx; 
+                m_min_y = read_int32_t() + m_dy;
+                m_max_x = read_int32_t() + m_dx;
+                m_max_y = read_int32_t() + m_dy;
             }
             return m_ptr < m_end;
         }
@@ -742,14 +742,14 @@ namespace agg
             {
                 if(m_ptr >= m_end) return false;
 
-                read_int32();      // Skip scanline size in bytes
-                int y = read_int32() + m_dy;
-                unsigned num_spans = read_int32();
+                read_int32_t();      // Skip scanline size in bytes
+                int y = read_int32_t() + m_dy;
+                unsigned num_spans = read_int32_t();
 
                 do
                 {
-                    int x = read_int32() + m_dx;
-                    int len = read_int32();
+                    int x = read_int32_t() + m_dx;
+                    int len = read_int32_t();
 
                     if(len < 0)
                     {
@@ -782,9 +782,9 @@ namespace agg
             {
                 if(m_ptr >= m_end) return false;
 
-                unsigned byte_size = read_int32u();
+                unsigned byte_size = read_int32_tu();
                 sl.init(m_ptr, m_dx, m_dy);
-                m_ptr += byte_size - sizeof(int32);
+                m_ptr += byte_size - sizeof(int32_t);
             }
             while(sl.num_spans() == 0);
             return true;
@@ -806,7 +806,7 @@ namespace agg
 
     typedef serialized_scanlines_adaptor_aa<int8u>  serialized_scanlines_adaptor_aa8;  //----serialized_scanlines_adaptor_aa8
     typedef serialized_scanlines_adaptor_aa<int16u> serialized_scanlines_adaptor_aa16; //----serialized_scanlines_adaptor_aa16
-    typedef serialized_scanlines_adaptor_aa<int32u> serialized_scanlines_adaptor_aa32; //----serialized_scanlines_adaptor_aa32
+    typedef serialized_scanlines_adaptor_aa<int32_tu> serialized_scanlines_adaptor_aa32; //----serialized_scanlines_adaptor_aa32
 
 }
 

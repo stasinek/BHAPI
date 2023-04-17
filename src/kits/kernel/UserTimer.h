@@ -30,25 +30,25 @@ struct UserTimer : DoublyLinkedListLinkImpl<UserTimer> {
 								UserTimer();
 	virtual						~UserTimer();
 
-			int32				ID() const
+			int32_t				ID() const
 									{ return fID; }
-			void				SetID(int32 id)
+			void				SetID(int32_t id)
 									{ fID = id; }
 
 			void				SetEvent(UserEvent* event)
 									{ fEvent = event; }
 
 	virtual	void				Schedule(bigtime_t nextTime, bigtime_t interval,
-									uint32 flags, bigtime_t& _oldRemainingTime,
+									uint32_t flags, bigtime_t& _oldRemainingTime,
 									bigtime_t& _oldInterval) = 0;
 			void				Cancel();
 
 	virtual	void				GetInfo(bigtime_t& _remainingTime,
 									bigtime_t& _interval,
-									uint32& _overrunCount) = 0;
+									uint32_t& _overrunCount) = 0;
 
 protected:
-	static	int32				HandleTimerHook(struct timer* timer);
+	static	int32_t				HandleTimerHook(struct timer* timer);
 	virtual	void				HandleTimer();
 
 	inline	void				UpdatePeriodicStartTime();
@@ -57,24 +57,24 @@ protected:
 	inline	void				CancelTimer();
 
 protected:
-			int32				fID;
+			int32_t				fID;
 			timer				fTimer;
 			UserEvent*			fEvent;
 			bigtime_t			fNextTime;
 			bigtime_t			fInterval;
-			uint32				fOverrunCount;
+			uint32_t				fOverrunCount;
 			bool				fScheduled;	// fTimer scheduled
-			int32				fSkip;
+			int32_t				fSkip;
 };
 
 
 struct SystemTimeUserTimer : public UserTimer {
 	virtual	void				Schedule(bigtime_t nextTime, bigtime_t interval,
-									uint32 flags, bigtime_t& _oldRemainingTime,
+									uint32_t flags, bigtime_t& _oldRemainingTime,
 									bigtime_t& _oldInterval);
 	virtual	void				GetInfo(bigtime_t& _remainingTime,
 									bigtime_t& _interval,
-									uint32& _overrunCount);
+									uint32_t& _overrunCount);
 
 protected:
 	virtual	void				HandleTimer();
@@ -86,7 +86,7 @@ protected:
 
 struct RealTimeUserTimer : public SystemTimeUserTimer {
 	virtual	void				Schedule(bigtime_t nextTime, bigtime_t interval,
-									uint32 flags, bigtime_t& _oldRemainingTime,
+									uint32_t flags, bigtime_t& _oldRemainingTime,
 									bigtime_t& _oldInterval);
 
 			void				TimeWarped();
@@ -109,11 +109,11 @@ struct TeamTimeUserTimer : public UserTimer {
 								~TeamTimeUserTimer();
 
 	virtual	void				Schedule(bigtime_t nextTime, bigtime_t interval,
-									uint32 flags, bigtime_t& _oldRemainingTime,
+									uint32_t flags, bigtime_t& _oldRemainingTime,
 									bigtime_t& _oldInterval);
 	virtual	void				GetInfo(bigtime_t& _remainingTime,
 									bigtime_t& _interval,
-									uint32& _overrunCount);
+									uint32_t& _overrunCount);
 
 			void				Deactivate();
 
@@ -131,7 +131,7 @@ private:
 private:
 			team_id				fTeamID;
 			Team*				fTeam;
-			int32				fRunningThreads;
+			int32_t				fRunningThreads;
 			bool				fAbsolute;
 
 public:
@@ -145,11 +145,11 @@ struct TeamUserTimeUserTimer : public UserTimer {
 								~TeamUserTimeUserTimer();
 
 	virtual	void				Schedule(bigtime_t nextTime, bigtime_t interval,
-									uint32 flags, bigtime_t& _oldRemainingTime,
+									uint32_t flags, bigtime_t& _oldRemainingTime,
 									bigtime_t& _oldInterval);
 	virtual	void				GetInfo(bigtime_t& _remainingTime,
 									bigtime_t& _interval,
-									uint32& _overrunCount);
+									uint32_t& _overrunCount);
 
 			void				Deactivate();
 			void				Check();
@@ -169,11 +169,11 @@ struct ThreadTimeUserTimer : public UserTimer {
 								~ThreadTimeUserTimer();
 
 	virtual	void				Schedule(bigtime_t nextTime, bigtime_t interval,
-									uint32 flags, bigtime_t& _oldRemainingTime,
+									uint32_t flags, bigtime_t& _oldRemainingTime,
 									bigtime_t& _oldInterval);
 	virtual	void				GetInfo(bigtime_t& _remainingTime,
 									bigtime_t& _interval,
-									uint32& _overrunCount);
+									uint32_t& _overrunCount);
 
 			void				Deactivate();
 
@@ -199,11 +199,11 @@ struct UserTimerList {
 								UserTimerList();
 								~UserTimerList();
 
-			UserTimer*			TimerFor(int32 id) const;
+			UserTimer*			TimerFor(int32_t id) const;
 			void				AddTimer(UserTimer* timer);
 			void				RemoveTimer(UserTimer* timer)
 									{ fTimers.Remove(timer); }
-			int32				DeleteTimers(bool userDefinedOnly);
+			int32_t				DeleteTimers(bool userDefinedOnly);
 
 private:
 			typedef DoublyLinkedList<UserTimer> TimerList;
@@ -262,14 +262,14 @@ void		user_timer_check_team_user_timers(Team* team);
 status_t	_user_get_clock(clockid_t clockID, bigtime_t* _time);
 status_t	_user_set_clock(clockid_t clockID, bigtime_t time);
 
-int32		_user_create_timer(clockid_t clockID, thread_id threadID,
-				uint32 flags, const struct sigevent* event,
+int32_t		_user_create_timer(clockid_t clockID, thread_id threadID,
+				uint32_t flags, const struct sigevent* event,
 				const thread_creation_attributes* threadAttributes);
-status_t	_user_delete_timer(int32 timerID, thread_id threadID);
-status_t	_user_get_timer(int32 timerID, thread_id threadID,
+status_t	_user_delete_timer(int32_t timerID, thread_id threadID);
+status_t	_user_get_timer(int32_t timerID, thread_id threadID,
 				struct user_timer_info* info);
-status_t	_user_set_timer(int32 timerID, thread_id threadID,
-				bigtime_t startTime, bigtime_t interval, uint32 flags,
+status_t	_user_set_timer(int32_t timerID, thread_id threadID,
+				bigtime_t startTime, bigtime_t interval, uint32_t flags,
 				struct user_timer_info* oldInfo);
 
 __END_DECLS

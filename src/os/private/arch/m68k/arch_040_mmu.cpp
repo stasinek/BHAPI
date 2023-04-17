@@ -17,8 +17,8 @@
 static void
 set_pgdir(void *rt)
 {
-	uint32 rp;
-	rp = (uint32)rt & ~((1 << 9) - 1);
+	uint32_t rp;
+	rp = (uint32_t)rt & ~((1 << 9) - 1);
 
 	asm volatile(          \
 		"movec %0,%%srp\n" \

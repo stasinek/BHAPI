@@ -30,7 +30,7 @@ status_t devfs_publish_directory(const char* path);
 status_t devfs_rescan_driver(const char* driverName);
 
 void devfs_compute_geometry_size(device_geometry* geometry, uint64 blockCount,
-	uint32 blockSize);
+	uint32_t blockSize);
 
 #ifdef __cplusplus
 }

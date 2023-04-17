@@ -87,7 +87,7 @@ struct TypeComponent {
 
 	bool HasPrefix(const TypeComponent& other) const;
 
-	uint32 HashValue() const;
+	uint32_t HashValue() const;
 
 	void Dump() const;
 
@@ -117,17 +117,17 @@ public:
 									const TypeComponentPath& other);
 	virtual						~TypeComponentPath();
 
-			int32				CountComponents() const;
-			TypeComponent		ComponentAt(int32 index) const;
+			int32_t				CountComponents() const;
+			TypeComponent		ComponentAt(int32_t index) const;
 
 			bool				AddComponent(const TypeComponent& component);
 			void				Clear();
 
-			TypeComponentPath*	CreateSubPath(int32 componentCount) const;
+			TypeComponentPath*	CreateSubPath(int32_t componentCount) const;
 									// returns a new object (or NULL when out
 									// of memory)
 
-			uint32				HashValue() const;
+			uint32_t				HashValue() const;
 
 			void				Dump() const;
 

@@ -64,8 +64,8 @@ BBufferConsumer::ConsumerType()
 }
 
 
-/*static*/ status_t BBufferConsumer::RegionToClipData(const BRegion* region, int32* _format,
-	int32 *_size, void* data)
+/*static*/ status_t BBufferConsumer::RegionToClipData(const BRegion* region, int32_t* _format,
+	int32_t *_size, void* data)
 {
 	CALLED();
 
@@ -114,8 +114,8 @@ BBufferConsumer::BBufferConsumer(media_type consumerType)
 
 
 status_t BBufferConsumer::SetVideoClippingFor(const media_source& output,
-	const media_destination& destination, const int16* shorts, int32 shortCount,
-	const media_video_display_info& display, void* userData, int32* _changeTag,
+	const media_destination& destination, const int16* shorts, int32_t shortCount,
+	const media_video_display_info& display, void* userData, int32_t* _changeTag,
 	void *_reserved_)
 {
 	CALLED();
@@ -159,7 +159,7 @@ status_t BBufferConsumer::SetOutputEnabled(const media_source &source,
 								  const media_destination &destination,
 								  bool enabled,
 								  void *user_data,
-								  int32 *change_tag,
+								  int32_t *change_tag,
 								  void *_reserved_)
 {
 	CALLED();
@@ -186,7 +186,7 @@ status_t BBufferConsumer::RequestFormatChange(const media_source &source,
 									 const media_destination &destination,
 									 const media_format &to_format,
 									 void *user_data,
-									 int32 *change_tag,
+									 int32_t *change_tag,
 									 void *_reserved_)
 {
 	CALLED();
@@ -250,7 +250,7 @@ status_t BBufferConsumer::RequestAdditionalBuffer(const media_source& source,
 
 status_t BBufferConsumer::SetOutputBuffersFor(const media_source &source,
 	const media_destination &destination, BBufferGroup *group, void *user_data,
-	int32 *change_tag, bool will_reclaim, void *_reserved_)
+	int32_t *change_tag, bool will_reclaim, void *_reserved_)
 {
 	CALLED();
 
@@ -259,7 +259,7 @@ status_t BBufferConsumer::SetOutputBuffersFor(const media_source &source,
 	if (IS_INVALID_DESTINATION(destination))
 		return B_MEDIA_BAD_DESTINATION;
 
-	int32 buffer_count = 0;
+	int32_t buffer_count = 0;
 
 	if (group > 0) {
 		if (group->CountBuffers(&buffer_count) != B_OK)
@@ -282,7 +282,7 @@ status_t BBufferConsumer::SetOutputBuffersFor(const media_source &source,
 	if (buffer_count != 0) {
 		if (group->GetBufferList(buffer_count, buffers) != B_OK)
 			return B_ERROR;
-		for (int32 i = 0; i < buffer_count; i++)
+		for (int32_t i = 0; i < buffer_count; i++)
 			command->buffers[i] = buffers[i]->ID();
 	}
 
@@ -304,7 +304,7 @@ status_t BBufferConsumer::SetOutputBuffersFor(const media_source &source,
 
 
 status_t BBufferConsumer::SendLatencyChange(const media_source& source,
-	const media_destination& destination, bigtime_t newLatency, uint32 flags)
+	const media_destination& destination, bigtime_t newLatency, uint32_t flags)
 {
 	CALLED();
 	if (IS_INVALID_SOURCE(source))
@@ -328,7 +328,7 @@ status_t BBufferConsumer::SendLatencyChange(const media_source& source,
 }
 
 
-status_t BBufferConsumer::HandleMessage(int32 message, const void* data, size_t size)
+status_t BBufferConsumer::HandleMessage(int32_t message, const void* data, size_t size)
 {
 	PRINT(4, "BBufferConsumer::HandleMessage %#lx, node %ld\n", message, ID());
 	status_t rv;
@@ -456,10 +456,10 @@ status_t BBufferConsumer::HandleMessage(int32 message, const void* data, size_t 
 
 status_t BBufferConsumer::SeekTagRequested(const media_destination &destination,
 								  bigtime_t in_target_time,
-								  uint32 in_flags,
+								  uint32_t in_flags,
 								  media_seek_tag *out_seek_tag,
 								  bigtime_t *out_tagged_time,
-								  uint32 *out_flags)
+								  uint32_t *out_flags)
 {
 	CALLED();
 	// may be implemented by derived classes
@@ -482,9 +482,9 @@ BBufferConsumer & BBufferConsumer::operator=(const BBufferConsumer &clone)
 */
 /* static */ status_t BBufferConsumer::SetVideoClippingFor(const media_source &output,
 									 const int16 *shorts,
-									 int32 short_count,
+									 int32_t short_count,
 									 const media_video_display_info &display,
-									 int32 *change_tag)
+									 int32_t *change_tag)
 {
 	CALLED();
 	if (IS_INVALID_SOURCE(output))
@@ -518,7 +518,7 @@ BBufferConsumer & BBufferConsumer::operator=(const BBufferConsumer &clone)
 */
 /*static*/ status_t BBufferConsumer::RequestFormatChange(const media_source& source,
 	const media_destination& destination, media_format* format,
-	int32* _changeTag)
+	int32_t* _changeTag)
 {
 	CALLED();
 	if (IS_INVALID_SOURCE(source))
@@ -544,7 +544,7 @@ BBufferConsumer & BBufferConsumer::operator=(const BBufferConsumer &clone)
 /*!	Deprecated function for BeOS R4.
 */
 /*static*/ status_t BBufferConsumer::SetOutputEnabled(const media_source& source, bool enabled,
-	int32* _changeTag)
+	int32_t* _changeTag)
 {
 	CALLED();
 	if (IS_INVALID_SOURCE(source))

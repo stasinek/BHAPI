@@ -193,7 +193,7 @@ EMIT_FETCH_OP_N(N, uintN_t, fetch_xor, ^=)
 
 EMIT_ALL_OPS_N(1, uint8_t)
 EMIT_ALL_OPS_N(2, uint16_t)
-EMIT_ALL_OPS_N(4, uint32_t)
+EMIT_ALL_OPS_N(4, uint32_t_t)
 EMIT_ALL_OPS_N(8, uint64_t)
 #undef	EMIT_ALL_OPS_N
 
@@ -225,7 +225,7 @@ __atomic_store_##N(uintN_t *mem, uintN_t val, int model __unused)	\
 uintN_t									\
 __atomic_exchange_##N(uintN_t *mem, uintN_t val, int model __unused)	\
 {									\
-	uint32_t old, temp, ras_start;					\
+	uint32_t_t old, temp, ras_start;					\
 									\
 	ras_start = ARM_RAS_START;					\
 	__asm volatile (						\
@@ -255,7 +255,7 @@ _Bool									\
 __atomic_compare_exchange_##N(uintN_t *mem, uintN_t *pexpected,		\
     uintN_t desired, int success __unused, int failure __unused)	\
 {									\
-	uint32_t expected, old, temp, ras_start;			\
+	uint32_t_t expected, old, temp, ras_start;			\
 									\
 	expected = *pexpected;						\
 	ras_start = ARM_RAS_START;					\
@@ -292,7 +292,7 @@ __atomic_compare_exchange_##N(uintN_t *mem, uintN_t *pexpected,		\
 uintN_t									\
 __atomic_##name##_##N(uintN_t *mem, uintN_t val, int model __unused)	\
 {									\
-	uint32_t old, temp, ras_start;					\
+	uint32_t_t old, temp, ras_start;					\
 									\
 	ras_start = ARM_RAS_START;					\
 	__asm volatile (						\
@@ -331,7 +331,7 @@ EMIT_FETCH_OP_N(N, uintN_t, ldr, str, fetch_xor, "eor")
 
 EMIT_ALL_OPS_N(1, uint8_t, "ldrb", "strb", "strbeq")
 EMIT_ALL_OPS_N(2, uint16_t, "ldrh", "strh", "strheq")
-EMIT_ALL_OPS_N(4, uint32_t, "ldr", "str", "streq")
+EMIT_ALL_OPS_N(4, uint32_t_t, "ldr", "str", "streq")
 #undef	EMIT_ALL_OPS_N
 
 #endif /* _KERNEL */
@@ -378,7 +378,7 @@ EMIT_ALL_OPS_N(4, uint32_t, "ldr", "str", "streq")
 
 typedef union {
 	uint8_t		v8[4];
-	uint32_t	v32;
+	uint32_t_t	v32;
 } reg_t;
 
 /*
@@ -386,11 +386,11 @@ typedef union {
  * the address of the 32-bit word containing it.
  */
 
-static inline uint32_t *
+static inline uint32_t_t *
 round_to_word(void *ptr)
 {
 
-	return ((uint32_t *)((intptr_t)ptr & ~3));
+	return ((uint32_t_t *)((intptr_t)ptr & ~3));
 }
 
 /*
@@ -458,9 +458,9 @@ get_2(const reg_t *r, const uint16_t *offset_ptr)
 uintN_t									\
 __sync_lock_test_and_set_##N##_c(uintN_t *mem, uintN_t val)			\
 {									\
-	uint32_t *mem32;						\
+	uint32_t_t *mem32;						\
 	reg_t val32, negmask, old;					\
-	uint32_t temp1, temp2;						\
+	uint32_t_t temp1, temp2;						\
 									\
 	mem32 = round_to_word(mem);					\
 	val32.v32 = 0x00000000;						\
@@ -491,9 +491,9 @@ uintN_t									\
 __sync_val_compare_and_swap_##N##_c(uintN_t *mem, uintN_t expected,		\
     uintN_t desired)							\
 {									\
-	uint32_t *mem32;						\
+	uint32_t_t *mem32;						\
 	reg_t expected32, desired32, posmask, old;			\
-	uint32_t negmask, temp1, temp2;					\
+	uint32_t_t negmask, temp1, temp2;					\
 									\
 	mem32 = round_to_word(mem);					\
 	expected32.v32 = 0x00000000;					\
@@ -531,9 +531,9 @@ EMIT_VAL_COMPARE_AND_SWAP_N(2, uint16_t)
 uintN_t									\
 __sync_##name##_##N##_c(uintN_t *mem, uintN_t val)				\
 {									\
-	uint32_t *mem32;						\
+	uint32_t_t *mem32;						\
 	reg_t val32, posmask, old;					\
-	uint32_t negmask, temp1, temp2;					\
+	uint32_t_t negmask, temp1, temp2;					\
 									\
 	mem32 = round_to_word(mem);					\
 	val32.v32 = 0x00000000;						\
@@ -569,9 +569,9 @@ EMIT_ARITHMETIC_FETCH_AND_OP_N(2, uint16_t, fetch_and_sub, "sub")
 uintN_t									\
 __sync_##name##_##N##_c(uintN_t *mem, uintN_t val)				\
 {									\
-	uint32_t *mem32;						\
+	uint32_t_t *mem32;						\
 	reg_t val32, old;						\
-	uint32_t temp1, temp2;						\
+	uint32_t_t temp1, temp2;						\
 									\
 	mem32 = round_to_word(mem);					\
 	val32.v32 = idempotence ? 0xffffffff : 0x00000000;		\
@@ -602,10 +602,10 @@ EMIT_BITWISE_FETCH_AND_OP_N(2, uint16_t, fetch_and_xor, "eor", 0)
  * 32-bit routines.
  */
 
-uint32_t
-__sync_lock_test_and_set_4_c(uint32_t *mem, uint32_t val)
+uint32_t_t
+__sync_lock_test_and_set_4_c(uint32_t_t *mem, uint32_t_t val)
 {
-	uint32_t old, temp;
+	uint32_t_t old, temp;
 
 	do_sync();
 	__asm volatile (
@@ -619,11 +619,11 @@ __sync_lock_test_and_set_4_c(uint32_t *mem, uint32_t val)
 	return (old);
 }
 
-uint32_t
-__sync_val_compare_and_swap_4_c(uint32_t *mem, uint32_t expected,
-    uint32_t desired)
+uint32_t_t
+__sync_val_compare_and_swap_4_c(uint32_t_t *mem, uint32_t_t expected,
+    uint32_t_t desired)
 {
-	uint32_t old, temp;
+	uint32_t_t old, temp;
 
 	do_sync();
 	__asm volatile (
@@ -641,10 +641,10 @@ __sync_val_compare_and_swap_4_c(uint32_t *mem, uint32_t expected,
 }
 
 #define	EMIT_FETCH_AND_OP_4(name, op)					\
-uint32_t								\
-__sync_##name##_4##_c(uint32_t *mem, uint32_t val)				\
+uint32_t_t								\
+__sync_##name##_4##_c(uint32_t_t *mem, uint32_t_t val)				\
 {									\
-	uint32_t old, temp1, temp2;					\
+	uint32_t_t old, temp1, temp2;					\
 									\
 	do_sync();							\
 	__asm volatile (						\
@@ -740,7 +740,7 @@ EMIT_FETCH_AND_OP_N(N, uintN_t, fetch_and_xor, ^=)
 
 EMIT_ALL_OPS_N(1, uint8_t)
 EMIT_ALL_OPS_N(2, uint16_t)
-EMIT_ALL_OPS_N(4, uint32_t)
+EMIT_ALL_OPS_N(4, uint32_t_t)
 EMIT_ALL_OPS_N(8, uint64_t)
 #undef	EMIT_ALL_OPS_N
 
@@ -756,7 +756,7 @@ EMIT_ALL_OPS_N(8, uint64_t)
 uintN_t									\
 __sync_lock_test_and_set_##N##_c(uintN_t *mem, uintN_t val)			\
 {									\
-	uint32_t old, temp, ras_start;					\
+	uint32_t_t old, temp, ras_start;					\
 									\
 	ras_start = ARM_RAS_START;					\
 	__asm volatile (						\
@@ -786,7 +786,7 @@ uintN_t									\
 __sync_val_compare_and_swap_##N##_c(uintN_t *mem, uintN_t expected,		\
     uintN_t desired)							\
 {									\
-	uint32_t old, temp, ras_start;					\
+	uint32_t_t old, temp, ras_start;					\
 									\
 	ras_start = ARM_RAS_START;					\
 	__asm volatile (						\
@@ -817,7 +817,7 @@ __sync_val_compare_and_swap_##N##_c(uintN_t *mem, uintN_t expected,		\
 uintN_t									\
 __sync_##name##_##N##_c(uintN_t *mem, uintN_t val)				\
 {									\
-	uint32_t old, temp, ras_start;					\
+	uint32_t_t old, temp, ras_start;					\
 									\
 	ras_start = ARM_RAS_START;					\
 	__asm volatile (						\
@@ -854,7 +854,7 @@ EMIT_FETCH_AND_OP_N(N, uintN_t, ldr, str, fetch_and_xor, "eor")
 
 EMIT_ALL_OPS_N(1, uint8_t, "ldrb", "strb", "streqb")
 EMIT_ALL_OPS_N(2, uint16_t, "ldrh", "strh", "streqh")
-EMIT_ALL_OPS_N(4, uint32_t, "ldr", "str", "streq")
+EMIT_ALL_OPS_N(4, uint32_t_t, "ldr", "str", "streq")
 
 #ifndef __clang__
 __strong_reference(__sync_lock_test_and_set_1_c, __sync_lock_test_and_set_1);

@@ -23,7 +23,7 @@
 namespace BPrivate {
 
 
-static const int32 kTextGapBufferBlockSize = 2048;
+static const int32_t kTextGapBufferBlockSize = 2048;
 
 
 TextGapBuffer::TextGapBuffer()
@@ -49,7 +49,7 @@ TextGapBuffer::~TextGapBuffer()
 }
 
 
-void TextGapBuffer::InsertText(const char* inText, int32 inNumItems, int32 inAtIndex)
+void TextGapBuffer::InsertText(const char* inText, int32_t inNumItems, int32_t inAtIndex)
 {
 	if (inNumItems < 1)
 		return;
@@ -71,8 +71,8 @@ void TextGapBuffer::InsertText(const char* inText, int32 inNumItems, int32 inAtI
 }
 
 
-void TextGapBuffer::InsertText(BFile* file, int32 fileOffset, int32 inNumItems,
-	int32 inAtIndex)
+void TextGapBuffer::InsertText(BFile* file, int32_t fileOffset, int32_t inNumItems,
+	int32_t inAtIndex)
 {
 	off_t fileSize;
 
@@ -107,10 +107,10 @@ void TextGapBuffer::InsertText(BFile* file, int32 fileOffset, int32 inNumItems,
 }
 
 
-void TextGapBuffer::RemoveRange(int32 start, int32 end)
+void TextGapBuffer::RemoveRange(int32_t start, int32_t end)
 {
-	int32 inAtIndex = start;
-	int32 inNumItems = end - start;
+	int32_t inAtIndex = start;
+	int32_t inNumItems = end - start;
 
 	if (inNumItems < 1)
 		return;
@@ -128,13 +128,13 @@ void TextGapBuffer::RemoveRange(int32 start, int32 end)
 }
 
 
-const char*  TextGapBuffer::GetString(int32 fromOffset, int32* _numBytes)
+const char*  TextGapBuffer::GetString(int32_t fromOffset, int32_t* _numBytes)
 {
 	const char* result = "";
 	if (_numBytes == NULL)
 		return result;
 
-	int32 numBytes = *_numBytes;
+	int32_t numBytes = *_numBytes;
 	if (numBytes < 1)
 		return result;
 
@@ -151,7 +151,7 @@ const char*  TextGapBuffer::GetString(int32 fromOffset, int32* _numBytes)
 			fScratchSize = numBytes;
 		}
 
-		for (int32 i = 0; i < numBytes; i++)
+		for (int32_t i = 0; i < numBytes; i++)
 			fScratchBuffer[i] = RealCharAt(fromOffset + i);
 
 		result = fScratchBuffer;
@@ -160,18 +160,18 @@ const char*  TextGapBuffer::GetString(int32 fromOffset, int32* _numBytes)
 	// TODO: this could be improved. We are overwriting what we did some lines
 	// ago, we could just avoid to do that.
 	if (fPasswordMode) {
-		uint32 numChars = UTF8CountChars(result, numBytes);
-		uint32 charLen = UTF8CountBytes(B_UTF8_BULLET, 1);
-		uint32 newSize = numChars * charLen;
+		uint32_t numChars = UTF8CountChars(result, numBytes);
+		uint32_t charLen = UTF8CountBytes(B_UTF8_BULLET, 1);
+		uint32_t newSize = numChars * charLen;
 
-		if ((uint32)fScratchSize < newSize) {
+		if ((uint32_t)fScratchSize < newSize) {
 			fScratchBuffer = (char*)realloc(fScratchBuffer, newSize);
 			fScratchSize = newSize;
 		}
 		result = fScratchBuffer;
 
 		char* scratchPtr = fScratchBuffer;
-		for (uint32 i = 0; i < numChars; i++) {
+		for (uint32_t i = 0; i < numChars; i++) {
 			memcpy(scratchPtr, B_UTF8_BULLET, charLen);
 			scratchPtr += charLen;
 		}
@@ -183,10 +183,10 @@ const char*  TextGapBuffer::GetString(int32 fromOffset, int32* _numBytes)
 }
 
 
-bool TextGapBuffer::FindChar(char inChar, int32 fromIndex, int32* ioDelta)
+bool TextGapBuffer::FindChar(char inChar, int32_t fromIndex, int32_t* ioDelta)
 {
-	int32 numChars = *ioDelta;
-	for (int32 i = 0; i < numChars; i++) {
+	int32_t numChars = *ioDelta;
+	for (int32_t i = 0; i < numChars; i++) {
 		char realChar = RealCharAt(fromIndex + i);
 		if ((realChar & 0xc0) == 0x80)
 			continue;
@@ -205,17 +205,17 @@ const char*  TextGapBuffer::Text()
 	const char* realText = RealText();
 
 	if (fPasswordMode) {
-		const uint32 numChars = UTF8CountChars(realText, Length());
-		const uint32 bulletCharLen = UTF8CountBytes(B_UTF8_BULLET, 1);
-		uint32 newSize = numChars * bulletCharLen + 1;
+		const uint32_t numChars = UTF8CountChars(realText, Length());
+		const uint32_t bulletCharLen = UTF8CountBytes(B_UTF8_BULLET, 1);
+		uint32_t newSize = numChars * bulletCharLen + 1;
 
-		if ((uint32)fScratchSize < newSize) {
+		if ((uint32_t)fScratchSize < newSize) {
 			fScratchBuffer = (char*)realloc(fScratchBuffer, newSize);
 			fScratchSize = newSize;
 		}
 
 		char* scratchPtr = fScratchBuffer;
-		for (uint32 i = 0; i < numChars; i++) {
+		for (uint32_t i = 0; i < numChars; i++) {
 			memcpy(scratchPtr, B_UTF8_BULLET, bulletCharLen);
 			scratchPtr += bulletCharLen;
 		}
@@ -240,12 +240,12 @@ const char*  TextGapBuffer::RealText()
 }
 
 
-void TextGapBuffer::GetString(int32 offset, int32 length, char* buffer)
+void TextGapBuffer::GetString(int32_t offset, int32_t length, char* buffer)
 {
 	if (buffer == NULL)
 		return;
 
-	int32 textLen = Length();
+	int32_t textLen = Length();
 
 	if (offset < 0 || offset > (textLen - 1) || length < 1) {
 		buffer[0] = '\0';
@@ -268,8 +268,8 @@ void TextGapBuffer::GetString(int32 offset, int32 length, char* buffer)
 		// if we are here, it can only be that start is before gap,
 		// and the end is after gap.
 
-		int32 beforeLen = fGapIndex - offset;
-		int32 afterLen = length - beforeLen;
+		int32_t beforeLen = fGapIndex - offset;
+		int32_t afterLen = length - beforeLen;
 
 		memcpy(buffer, fBuffer + offset, beforeLen);
 		memcpy(buffer + beforeLen, fBuffer + fGapIndex + fGapCount, afterLen);
@@ -292,7 +292,7 @@ void TextGapBuffer::SetPasswordMode(bool state)
 }
 
 
-void TextGapBuffer::_MoveGapTo(int32 toIndex)
+void TextGapBuffer::_MoveGapTo(int32_t toIndex)
 {
 	if (toIndex == fGapIndex)
 		return;
@@ -301,9 +301,9 @@ void TextGapBuffer::_MoveGapTo(int32 toIndex)
 		return;
 	}
 
-	int32 srcIndex = 0;
-	int32 dstIndex = 0;
-	int32 count = 0;
+	int32_t srcIndex = 0;
+	int32_t dstIndex = 0;
+	int32_t count = 0;
 	if (toIndex > fGapIndex) {
 		srcIndex = fGapIndex + fGapCount;
 		dstIndex = fGapIndex;
@@ -321,7 +321,7 @@ void TextGapBuffer::_MoveGapTo(int32 toIndex)
 }
 
 
-void TextGapBuffer::_EnlargeGapTo(int32 inCount)
+void TextGapBuffer::_EnlargeGapTo(int32_t inCount)
 {
 	if (inCount == fGapCount)
 		return;
@@ -335,7 +335,7 @@ void TextGapBuffer::_EnlargeGapTo(int32 inCount)
 }
 
 
-void TextGapBuffer::_ShrinkGapTo(int32 inCount)
+void TextGapBuffer::_ShrinkGapTo(int32_t inCount)
 {
 	if (inCount == fGapCount)
 		return;

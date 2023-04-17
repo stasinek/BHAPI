@@ -100,9 +100,9 @@ status_t DebuggerInterface::GetElfSymbols(const char* filePath, int64 textDelta,
 }
 
 
-status_t DebuggerInterface::GetElfSymbols(const void* symbolTable, uint32 symbolCount,
-	uint32 symbolTableEntrySize, const char* stringTable,
-	uint32 stringTableSize, bool is64Bit, bool swappedByteOrder,
+status_t DebuggerInterface::GetElfSymbols(const void* symbolTable, uint32_t symbolCount,
+	uint32_t symbolTableEntrySize, const char* stringTable,
+	uint32_t stringTableSize, bool is64Bit, bool swappedByteOrder,
 	int64 textDelta, BObjectList<SymbolInfo>& infos)
 {
 	size_t symbolTableSize = symbolCount * symbolTableEntrySize;
@@ -130,7 +130,7 @@ status_t DebuggerInterface::GetElfSymbols(ElfSymbolLookup* symbolLookup,
 	BObjectList<SymbolInfo>& infos)
 {
 	SymbolInfo symbolInfo;
-	uint32 index = 0;
+	uint32_t index = 0;
 	while (symbolLookup->NextSymbolInfo(index, symbolInfo) == B_OK) {
 		SymbolInfo* info = new(std::nothrow) SymbolInfo(symbolInfo);
 		if (info == NULL || !infos.AddItem(info)) {

@@ -41,7 +41,7 @@ private:
 								BCardView(const BCardView&);
 			void				operator =(const BCardView&);
 
-			uint32				_reserved[10];
+			uint32_t				_reserved[10];
 };
 
 #endif // _CARD_VIEW_H

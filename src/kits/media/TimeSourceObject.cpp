@@ -70,7 +70,7 @@ status_t TimeSourceObject::TimeSourceOp(const time_source_op_info& op, void* _re
 
 
 BMediaAddOn*
-TimeSourceObject::AddOn(int32* _id) const
+TimeSourceObject::AddOn(int32_t* _id) const
 {
 	if (_id != NULL)
 		*_id = 0;

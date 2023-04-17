@@ -50,8 +50,8 @@ public:
 			status_t		PushAttr(const char* attrName);
 			status_t		PushOp(query_op op);
 
-			status_t		PushUInt32(uint32 value);
-			status_t		PushInt32(int32 value);
+			status_t		PushUInt32(uint32_t value);
+			status_t		PushInt32(int32_t value);
 			status_t		PushUInt64(uint64 value);
 			status_t		PushInt64(int64 value);
 			status_t		PushFloat(float value);
@@ -77,10 +77,10 @@ public:
 	// BEntryList interface
 	virtual	status_t		GetNextEntry(BEntry* entry, bool traverse = false);
 	virtual	status_t		GetNextRef(entry_ref* ref);
-	virtual	int32			GetNextDirents(struct dirent* buffer, size_t length,
-								 int32 count = INT_MAX);
+	virtual	int32_t			GetNextDirents(struct dirent* buffer, size_t length,
+								 int32_t count = INT_MAX);
 	virtual	status_t		Rewind();
-	virtual	int32			CountEntries();
+	virtual	int32_t			CountEntries();
 
 private:
 			bool			_HasFetched() const;
@@ -106,7 +106,7 @@ private:
 			port_id			fPort;
 			long			fToken;
 			int				fQueryFd;
-			int32			_reservedData[4];
+			int32_t			_reservedData[4];
 };
 
 #endif	// _QUERY_H

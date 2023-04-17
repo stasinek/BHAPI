@@ -33,18 +33,18 @@ public:
 			status_t			Init(Listener* listener);
 			status_t			RegisterInterfaceInfos();
 
-			int32				CountInterfaceInfos() const;
+			int32_t				CountInterfaceInfos() const;
 			TargetHostInterfaceInfo*
-								InterfaceInfoAt(int32 index) const;
+								InterfaceInfoAt(int32_t index) const;
 
 			status_t			CreateInterface(TargetHostInterfaceInfo* info,
 									Settings* settings,
 									TargetHostInterface*& _interface);
 
-			int32				CountActiveInterfaces() const;
-			TargetHostInterface* ActiveInterfaceAt(int32 index) const;
+			int32_t				CountActiveInterfaces() const;
+			TargetHostInterface* ActiveInterfaceAt(int32_t index) const;
 
-			int32				CountRunningTeamDebuggers() const
+			int32_t				CountRunningTeamDebuggers() const
 									{ return fRunningTeamDebuggers; }
 
 	// TargetHostInterface::Listener
@@ -61,7 +61,7 @@ private:
 			BLocker				fLock;
 	static	TargetHostInterfaceRoster* sDefaultInstance;
 
-			int32				fRunningTeamDebuggers;
+			int32_t				fRunningTeamDebuggers;
 			InfoList			fInterfaceInfos;
 			InterfaceList		fActiveInterfaces;
 			Listener*			fListener;
@@ -72,7 +72,7 @@ class TargetHostInterfaceRoster::Listener {
 public:
 	virtual						~Listener();
 
-	virtual	void				TeamDebuggerCountChanged(int32 newCount);
+	virtual	void				TeamDebuggerCountChanged(int32_t newCount);
 };
 
 

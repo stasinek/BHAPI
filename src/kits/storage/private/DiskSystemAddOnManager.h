@@ -28,8 +28,8 @@ public:
 			void				UnloadDiskSystems();
 
 			// manager must be locked
-			int32				CountAddOns() const;
-			BDiskSystemAddOn*	AddOnAt(int32 index) const;
+			int32_t				CountAddOns() const;
+			BDiskSystemAddOn*	AddOnAt(int32_t index) const;
 
 			// manager will be locked
 			BDiskSystemAddOn*	GetAddOn(const char* name);
@@ -44,8 +44,8 @@ private:
 
 	static	void				_InitSingleton();
 
-			AddOn*				_AddOnAt(int32 index) const;
-			void				_PutAddOn(int32 index);
+			AddOn*				_AddOnAt(int32_t index) const;
+			void				_PutAddOn(int32_t index);
 
 			status_t			_LoadAddOns(StringSet& alreadyLoaded,
 									directory_which directory);
@@ -54,7 +54,7 @@ private:
 			mutable BLocker		fLock;
 			BList				fAddOns;
 			BList				fAddOnsToBeUnloaded;
-			int32				fLoadCount;
+			int32_t				fLoadCount;
 
 	static	DiskSystemAddOnManager* sManager;
 };

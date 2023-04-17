@@ -49,7 +49,7 @@ protected:
 
 private:
 			BView*				fView;
-			int32				fAncestorsVisible;
+			int32_t				fAncestorsVisible;
 };
 
 #endif	//	_VIEW_LAYOUT_ITEM_H

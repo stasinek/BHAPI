@@ -54,7 +54,7 @@ int main()
 		bzero(buffer, len + 1);
 		if(buffer)
 		{
-			eint32 code;
+			eint32_t code;
 			if(etk_read_port(fPort, &code, buffer, len + 1) == E_NO_ERROR)
 				ETK_OUTPUT("Read[%ld]: \"%s\"\n", code, buffer);
 

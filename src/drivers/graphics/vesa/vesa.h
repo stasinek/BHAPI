@@ -16,23 +16,23 @@
 
 struct vbe_info_block {
 	// VBE 1.x fields
-	uint32		signature;
+	uint32_t		signature;
 	struct {
 		uint8	minor;
 		uint8	major;
 	} version;
-	uint32		oem_string;
-	uint32		capabilities;
-	uint32		mode_list;
+	uint32_t		oem_string;
+	uint32_t		capabilities;
+	uint32_t		mode_list;
 	uint16		total_memory;	// in 64k blocks
 	// VBE 2.0+ fields only
 	// Note, the block is 256 bytes in size for VBE 1.x as well,
 	// but doesn't define these fields. VBE 3 doesn't define
 	// any additional fields.
 	uint16		oem_software_revision;
-	uint32		oem_vendor_name_string;
-	uint32		oem_product_name_string;
-	uint32		oem_product_revision_string;
+	uint32_t		oem_vendor_name_string;
+	uint32_t		oem_product_name_string;
+	uint32_t		oem_product_revision_string;
 	uint8		reserved[222];
 	uint8		oem_data[256];
 } _PACKED;
@@ -52,7 +52,7 @@ struct vbe_mode_info {
 	uint16		window_size;
 	uint16		window_a_segment;
 	uint16		window_b_segment;
-	uint32		window_function;	// real mode pointer
+	uint32_t		window_function;	// real mode pointer
 	uint16		bytes_per_row;
 
 	// VBE 1.2 and above
@@ -80,8 +80,8 @@ struct vbe_mode_info {
 	uint8		direct_color_mode_info;
 
 	// VBE 2.0 and above
-	uint32		physical_base;
-	uint32		_reserved1;
+	uint32_t		physical_base;
+	uint32_t		_reserved1;
 	uint16		_reserved2;
 
 	// VBE 3.0 and above
@@ -98,7 +98,7 @@ struct vbe_mode_info {
 	uint8		linear_reserved_mask_size;
 	uint8		linear_reserved_field_position;
 
-	uint32		max_pixel_clock;		// in Hz
+	uint32_t		max_pixel_clock;		// in Hz
 
 	uint8		_reserved[189];
 } _PACKED;
@@ -133,7 +133,7 @@ struct crtc_info_block {
 	uint16	vertical_sync_start;
 	uint16	vertical_sync_end;
 	uint8	flags;
-	uint32	pixel_clock;		// in Hz
+	uint32_t	pixel_clock;		// in Hz
 	uint16	refresh_rate;		// in 0.01 Hz
 
 	uint8	_reserved[40];
@@ -162,7 +162,7 @@ struct crtc_info_block {
 #define VBE_PM_SIGNATURE 'DIMP'
 
 struct vbe_protected_mode_info {
-	uint32		signature;
+	uint32_t		signature;
 	int16		entry_offset;
 	int16		init_offset;
 	uint16		data_selector;

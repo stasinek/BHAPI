@@ -141,11 +141,11 @@ namespace BPrivate {
 class BHAPI_IMPEXP BWindow : public BLooper {
 public:
                                 BWindow(BRect frame, const char* title,
-                                    window_type type, uint32 flags,
-                                    uint32 workspace = B_CURRENT_WORKSPACE);
+                                    window_type type, uint32_t flags,
+                                    uint32_t workspace = B_CURRENT_WORKSPACE);
                                 BWindow(BRect frame, const char* title,
                                     window_look look, window_feel feel,
-                                    uint32 flags, uint32 workspace
+                                    uint32_t flags, uint32_t workspace
                                         = B_CURRENT_WORKSPACE);
     virtual						~BWindow();
 
@@ -160,16 +160,16 @@ public:
             void				AddChild(BView* child, BView* before = NULL);
             void				AddChild(BLayoutItem* child);
             bool				RemoveChild(BView* child);
-            int32				CountChildren() const;
-            BView*				ChildAt(int32 index) const;
+            int32_t				CountChildren() const;
+            BView*				ChildAt(int32_t index) const;
 
     virtual	void				DispatchMessage(BMessage* message,
                                     BHandler* handler);
     virtual	void				MessageReceived(BMessage* message);
     virtual	void				FrameMoved(BPoint newPosition);
-    virtual void				WorkspacesChanged(uint32 oldWorkspaces,
-                                    uint32 newWorkspaces);
-    virtual void				WorkspaceActivated(int32 workspace,
+    virtual void				WorkspacesChanged(uint32_t oldWorkspaces,
+                                    uint32_t newWorkspaces);
+    virtual void				WorkspaceActivated(int32_t workspace,
                                     bool state);
     virtual	void				FrameResized(float newWidth, float newHeight);
     virtual void				Minimize(bool minimize);
@@ -182,12 +182,12 @@ public:
             void				SetPulseRate(bigtime_t rate);
             bigtime_t			PulseRate() const;
 
-            void				AddShortcut(uint32 key, uint32 modifiers,
+            void				AddShortcut(uint32_t key, uint32_t modifiers,
                                     BMessage* message);
-            void				AddShortcut(uint32 key, uint32 modifiers,
+            void				AddShortcut(uint32_t key, uint32_t modifiers,
                                     BMessage* message, BHandler* target);
-            bool				HasShortcut(uint32 key, uint32 modifiers);
-            void				RemoveShortcut(uint32 key, uint32 modifiers);
+            bool				HasShortcut(uint32_t key, uint32_t modifiers);
+            void				RemoveShortcut(uint32_t key, uint32_t modifiers);
 
             void				SetDefaultButton(BButton* button);
             BButton*			DefaultButton() const;
@@ -224,7 +224,7 @@ public:
             void				CenterIn(const BRect& rect);
             void				CenterOnScreen();
             void				CenterOnScreen(screen_id id);
-            void				MoveOnScreen(uint32 flags = 0);
+            void				MoveOnScreen(uint32_t flags = 0);
 
     virtual	void				Show();
     virtual	void				Hide();
@@ -268,14 +268,14 @@ public:
             status_t			SetDecoratorSettings(const BMessage& settings);
             status_t			GetDecoratorSettings(BMessage* settings) const;
 
-            uint32				Workspaces() const;
-            void				SetWorkspaces(uint32);
+            uint32_t				Workspaces() const;
+            void				SetWorkspaces(uint32_t);
 
             BView*				LastMouseMovedView() const;
 
     virtual BHandler*			ResolveSpecifier(BMessage* message,
-                                    int32 index, BMessage* specifier,
-                                    int32 what, const char* property);
+                                    int32_t index, BMessage* specifier,
+                                    int32_t what, const char* property);
     virtual status_t			GetSupportedSuites(BMessage* data);
 
             status_t			AddToSubset(BWindow* window);
@@ -292,25 +292,25 @@ public:
             status_t			SetFeel(window_feel feel);
             window_feel			Feel() const;
 
-            status_t			SetFlags(uint32);
-            uint32				Flags() const;
+            status_t			SetFlags(uint32_t);
+            uint32_t				Flags() const;
 
             bool				IsModal() const;
             bool				IsFloating() const;
 
             status_t			SetWindowAlignment(window_alignment mode,
-                                    int32 h, int32 hOffset = 0,
-                                    int32 width = 0, int32 widthOffset = 0,
-                                    int32 v = 0, int32 vOffset = 0,
-                                    int32 height = 0, int32 heightOffset = 0);
+                                    int32_t h, int32_t hOffset = 0,
+                                    int32_t width = 0, int32_t widthOffset = 0,
+                                    int32_t v = 0, int32_t vOffset = 0,
+                                    int32_t height = 0, int32_t heightOffset = 0);
             status_t			GetWindowAlignment(
                                     window_alignment* mode = NULL,
-                                    int32* h = NULL, int32* hOffset = NULL,
-                                    int32* width = NULL,
-                                    int32* widthOffset = NULL,
-                                    int32* v = NULL, int32* vOffset = NULL,
-                                    int32* height = NULL,
-                                    int32* heightOffset = NULL) const;
+                                    int32_t* h = NULL, int32_t* hOffset = NULL,
+                                    int32_t* width = NULL,
+                                    int32_t* widthOffset = NULL,
+                                    int32_t* v = NULL, int32_t* vOffset = NULL,
+                                    int32_t* height = NULL,
+                                    int32_t* heightOffset = NULL) const;
 
     virtual	bool				QuitRequested();
     virtual	void				SetLayout(BLayout* layout);
@@ -349,20 +349,20 @@ private:
     friend class BWindowStack;
 
     friend void _set_menu_sem_(BWindow* w, sem_id sem);
-    friend status_t _safe_get_server_token_(const BLooper*, int32*);
+    friend status_t _safe_get_server_token_(const BLooper*, int32_t*);
 
-                                BWindow(BRect frame, int32 bitmapToken);
+                                BWindow(BRect frame, int32_t bitmapToken);
             void				_InitData(BRect frame, const char* title,
                                     window_look look, window_feel feel,
-                                    uint32 flags, uint32 workspace,
-                                    int32 bitmapToken = -1);
+                                    uint32_t flags, uint32_t workspace,
+                                    int32_t bitmapToken = -1);
 
     virtual	void				task_looper();
 
             BPoint				AlertPosition(const BRect& frame);
-    virtual BMessage*			ConvertToMessage(void* raw, int32 code);
+    virtual BMessage*			ConvertToMessage(void* raw, int32_t code);
 
-            void				AddShortcut(uint32 key, uint32 modifiers,
+            void				AddShortcut(uint32_t key, uint32_t modifiers,
                                     BMenuItem* item);
             BHandler*			_DetermineTarget(BMessage* message,
                                     BHandler* target);
@@ -374,7 +374,7 @@ private:
                                     BHandler* target, bool usePreferred);
             bool				_StealMouseMessage(BMessage* message,
                                     bool& deleteMessage);
-            uint32				_TransitForMouseMoved(BView* view,
+            uint32_t				_TransitForMouseMoved(BView* view,
                                     BView* viewUnderMouse) const;
 
             bool				InUpdate();
@@ -394,15 +394,15 @@ private:
                                     bool notifyIputServer = false);
             void				_SetName(const char* title);
 
-            Shortcut*			_FindShortcut(uint32 key, uint32 modifiers);
+            Shortcut*			_FindShortcut(uint32_t key, uint32_t modifiers);
             BView*				_FindView(BView* view, BPoint point) const;
-            BView*				_FindView(int32 token);
+            BView*				_FindView(int32_t token);
             BView*				_LastViewChild(BView* parent);
 
-            BView*				_FindNextNavigable(BView* focus, uint32 flags);
+            BView*				_FindNextNavigable(BView* focus, uint32_t flags);
             BView*				_FindPreviousNavigable(BView* focus,
-                                    uint32 flags);
-            void				_Switcher(int32 rawKey, uint32 modifiers,
+                                    uint32_t flags);
+            void				_Switcher(int32_t rawKey, uint32_t modifiers,
                                     bool repeat);
             bool				_HandleKeyDown(BMessage* event);
             bool				_HandleUnmappedKeyDown(BMessage* event);
@@ -414,20 +414,20 @@ private:
 
 private:
             char*				fTitle;
-            int32				_unused0;
+            int32_t				_unused0;
             bool				fInTransaction;
             bool				fActive;
             short				fShowLevel;
-            uint32				fFlags;
+            uint32_t				fFlags;
 
             BView*				fTopView;
             BView*				fFocus;
             BView*				fLastMouseMovedView;
-            uint32				_unused1;
+            uint32_t				_unused1;
             BMenuBar*			fKeyMenuBar;
             BButton*			fDefaultButton;
             BList				fShortcuts;
-            int32				fTopViewToken;
+            int32_t				fTopViewToken;
             bool				fUpdateRequested;
             bool				fOffscreen;
             bool				fIsFilePanel;
@@ -447,12 +447,12 @@ private:
             BRect				fFrame;
             window_look			fLook;
             window_feel			fFeel;
-            int32				fLastViewToken;
+            int32_t				fLastViewToken;
             ::BPrivate::PortLink* fLink;
             BMessageRunner*		fPulseRunner;
             BRect				fPreviousFrame;
 
-            uint32				_reserved[9];
+            uint32_t				_reserved[9];
 public:
     bool		IsActivate() const;
 
@@ -491,8 +491,8 @@ private:
     char *fWindowTitle;
     bhapi::window_look fWindowLook;
     bhapi::window_feel fWindowFeel;
-     uint32 fWindowFlags;
-     uint32 fWindowWorkspaces;
+     uint32_t fWindowFlags;
+     uint32_t fWindowWorkspaces;
 
     BList fMouseInterestedViews;
     BList fKeyboardInterestedViews;
@@ -520,8 +520,8 @@ private:
     bigtime_t fPositionChangedTimeStamp;
     bigtime_t fSizeChangedTimeStamp;
 
-     uint32 fMouseGrabCount;
-     uint32 fKeyboardGrabCount;
+     uint32_t fMouseGrabCount;
+     uint32_t fKeyboardGrabCount;
     bool _GrabMouse();
     bool _GrabKeyboard();
     void _UngrabMouse();
@@ -530,7 +530,7 @@ private:
     bool fBrokeOnExpose;
     BList fNeededToPulseViews;
 
-    void InitSelf(BRect, const char*, bhapi::window_look, bhapi::window_feel,  uint32,  uint32);
+    void InitSelf(BRect, const char*, bhapi::window_look, bhapi::window_feel,  uint32_t,  uint32_t);
 };
 
 #endif /* __cplusplus */

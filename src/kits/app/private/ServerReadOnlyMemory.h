@@ -17,7 +17,7 @@
 // B_SUCCESS_COLOR and B_FAILURE_COLOR.
 // If you add a constant with index greater than 100 you'll have to add
 // to the second operand.
-static const int32 kColorWhichCount = B_SCROLL_BAR_THUMB_COLOR + 3;
+static const int32_t kColorWhichCount = B_SCROLL_BAR_THUMB_COLOR + 3;
 
 
 struct server_read_only_memory {
@@ -25,7 +25,7 @@ struct server_read_only_memory {
 };
 
 
-static inline int32 color_which_to_index(color_which which)
+static inline int32_t color_which_to_index(color_which which)
 {
 	if (which <= kColorWhichCount - 3)
 		return which - 1;
@@ -37,7 +37,7 @@ static inline int32 color_which_to_index(color_which which)
 
 
 static inline color_which
-index_to_color_which(int32 index)
+index_to_color_which(int32_t index)
 {
 	if (index >= 0 && index < kColorWhichCount) {
 		if ((color_which)index < kColorWhichCount - 3)

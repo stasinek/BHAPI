@@ -33,14 +33,14 @@ status_t ValueNodeContainer::Init()
 }
 
 
-int32 ValueNodeContainer::CountChildren() const
+int32_t ValueNodeContainer::CountChildren() const
 {
 	return fChildren.CountItems();
 }
 
 
 ValueNodeChild*
-ValueNodeContainer::ChildAt(int32 index) const
+ValueNodeContainer::ChildAt(int32_t index) const
 {
 	return fChildren.ItemAt(index);
 }
@@ -72,7 +72,7 @@ void ValueNodeContainer::RemoveChild(ValueNodeChild* child)
 
 void ValueNodeContainer::RemoveAllChildren()
 {
-	for (int32 i = 0; ValueNodeChild* child = ChildAt(i); i++) {
+	for (int32_t i = 0; ValueNodeChild* child = ChildAt(i); i++) {
 		child->SetContainer(NULL);
 		child->ReleaseReference();
 	}
@@ -96,28 +96,28 @@ void ValueNodeContainer::RemoveListener(Listener* listener)
 void ValueNodeContainer::NotifyValueNodeChanged(ValueNodeChild* nodeChild,
 	ValueNode* oldNode, ValueNode* newNode)
 {
-	for (int32 i = fListeners.CountItems() - 1; i >= 0; i--)
+	for (int32_t i = fListeners.CountItems() - 1; i >= 0; i--)
 		fListeners.ItemAt(i)->ValueNodeChanged(nodeChild, oldNode, newNode);
 }
 
 
 void ValueNodeContainer::NotifyValueNodeChildrenCreated(ValueNode* node)
 {
-	for (int32 i = fListeners.CountItems() - 1; i >= 0; i--)
+	for (int32_t i = fListeners.CountItems() - 1; i >= 0; i--)
 		fListeners.ItemAt(i)->ValueNodeChildrenCreated(node);
 }
 
 
 void ValueNodeContainer::NotifyValueNodeChildrenDeleted(ValueNode* node)
 {
-	for (int32 i = fListeners.CountItems() - 1; i >= 0; i--)
+	for (int32_t i = fListeners.CountItems() - 1; i >= 0; i--)
 		fListeners.ItemAt(i)->ValueNodeChildrenDeleted(node);
 }
 
 
 void ValueNodeContainer::NotifyValueNodeValueChanged(ValueNode* node)
 {
-	for (int32 i = fListeners.CountItems() - 1; i >= 0; i--)
+	for (int32_t i = fListeners.CountItems() - 1; i >= 0; i--)
 		fListeners.ItemAt(i)->ValueNodeValueChanged(node);
 }
 

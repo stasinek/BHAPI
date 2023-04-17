@@ -42,8 +42,8 @@ status_t DatabaseDirectory::Init(DatabaseLocation* databaseLocation,
 		return error;
 
 	const BStringList& directories = databaseLocation->Directories();
-	int32 count = directories.CountStrings();
-	for (int32 i = 0; i < count; i++) {
+	int32_t count = directories.CountStrings();
+	for (int32_t i = 0; i < count; i++) {
 		BString directory = directories.StringAt(i);
 		if (superType != NULL)
 			directory << '/' << superType;
@@ -55,8 +55,8 @@ status_t DatabaseDirectory::Init(DatabaseLocation* databaseLocation,
 }
 
 
-bool DatabaseDirectory::ShallPreferFirstEntry(const entry_ref& entry1, int32 index1,
-	const entry_ref& entry2, int32 index2)
+bool DatabaseDirectory::ShallPreferFirstEntry(const entry_ref& entry1, int32_t index1,
+	const entry_ref& entry2, int32_t index2)
 {
 	return _IsValidMimeTypeEntry(entry1) || !_IsValidMimeTypeEntry(entry2);
 }

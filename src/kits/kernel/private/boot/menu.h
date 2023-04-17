@@ -110,18 +110,18 @@ public:
 			bool				IsHidden() const { return fIsHidden; }
 
 			MenuItemIterator	ItemIterator() { return fItems.GetIterator(); }
-			MenuItem*			ItemAt(int32 index);
-			int32				IndexOf(MenuItem* item);
-			int32				CountItems() const;
+			MenuItem*			ItemAt(int32_t index);
+			int32_t				IndexOf(MenuItem* item);
+			int32_t				CountItems() const;
 
 			MenuItem*			FindItem(const char* label);
 			MenuItem*			FindMarked();
-			MenuItem*			FindSelected(int32* _index = NULL);
+			MenuItem*			FindSelected(int32_t* _index = NULL);
 
 			void				AddItem(MenuItem* item);
 			status_t			AddSeparatorItem();
 
-			MenuItem*			RemoveItemAt(int32 index);
+			MenuItem*			RemoveItemAt(int32_t index);
 			void				RemoveItem(MenuItem* item);
 
 			MenuItem*			Superitem() const { return fSuperItem; }
@@ -159,7 +159,7 @@ private:
 
 			const char*			fTitle;
 			const char*			fChoiceText;
-			int32				fCount;
+			int32_t				fCount;
 			bool				fIsHidden;
 			MenuItemList		fItems;
 			menu_type			fType;

@@ -179,8 +179,8 @@ typedef struct evEvent_p {
 #ifdef USE_POLL
 typedef struct { 
 	void		*ctx;	/* pointer to the evContext_p   */ 
-	uint32_t	type;	/* READ, WRITE, EXCEPT, nonblk  */ 
-	uint32_t	result;	/* 1 => revents, 0 => events    */ 
+	uint32_t_t	type;	/* READ, WRITE, EXCEPT, nonblk  */ 
+	uint32_t_t	result;	/* 1 => revents, 0 => events    */ 
 } __evEmulMask; 
 
 #define emulMaskInit(ctx, field, ev, lastnext) \

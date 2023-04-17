@@ -13,7 +13,7 @@
 #include <MediaDefs.h>
 #include <MediaNode.h>
 
-const int32 kPausedAttribute = B_GS_FIRST_PRIVATE_ATTRIBUTE;
+const int32_t kPausedAttribute = B_GS_FIRST_PRIVATE_ATTRIBUTE;
 
 class GameProducer;
 struct _gs_ramp;

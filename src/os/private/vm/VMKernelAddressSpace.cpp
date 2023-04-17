@@ -140,8 +140,8 @@ VMKernelAddressSpace::NextArea(VMArea* _area) const
 
 
 VMArea*
-VMKernelAddressSpace::CreateArea(const char* name, uint32 wiring,
-	uint32 protection, uint32 allocationFlags)
+VMKernelAddressSpace::CreateArea(const char* name, uint32_t wiring,
+	uint32_t protection, uint32_t allocationFlags)
 {
 	return VMKernelArea::Create(this, name, wiring, protection,
 		fAreaObjectCache, allocationFlags);
@@ -149,7 +149,7 @@ VMKernelAddressSpace::CreateArea(const char* name, uint32 wiring,
 
 
 void
-VMKernelAddressSpace::DeleteArea(VMArea* _area, uint32 allocationFlags)
+VMKernelAddressSpace::DeleteArea(VMArea* _area, uint32_t allocationFlags)
 {
 	TRACE("VMKernelAddressSpace::DeleteArea(%p)\n", _area);
 
@@ -179,7 +179,7 @@ VMKernelAddressSpace::LookupArea(addr_t address) const
 status_t
 VMKernelAddressSpace::InsertArea(VMArea* _area, size_t size,
 	const virtual_address_restrictions* addressRestrictions,
-	uint32 allocationFlags, void** _address)
+	uint32_t allocationFlags, void** _address)
 {
 	TRACE("VMKernelAddressSpace::InsertArea(%p, %" B_PRIu32 ", %#" B_PRIxSIZE
 		", %p \"%s\")\n", addressRestrictions->address,
@@ -212,7 +212,7 @@ VMKernelAddressSpace::InsertArea(VMArea* _area, size_t size,
 
 //! You must hold the address space's write lock.
 void
-VMKernelAddressSpace::RemoveArea(VMArea* _area, uint32 allocationFlags)
+VMKernelAddressSpace::RemoveArea(VMArea* _area, uint32_t allocationFlags)
 {
 	TRACE("VMKernelAddressSpace::RemoveArea(%p)\n", _area);
 
@@ -251,7 +251,7 @@ VMKernelAddressSpace::CanResizeArea(VMArea* area, size_t newSize)
 
 status_t
 VMKernelAddressSpace::ResizeArea(VMArea* _area, size_t newSize,
-	uint32 allocationFlags)
+	uint32_t allocationFlags)
 {
 	TRACE("VMKernelAddressSpace::ResizeArea(%p, %#" B_PRIxSIZE ")\n", _area,
 		newSize);
@@ -319,7 +319,7 @@ VMKernelAddressSpace::ResizeArea(VMArea* _area, size_t newSize,
 
 status_t
 VMKernelAddressSpace::ShrinkAreaHead(VMArea* _area, size_t newSize,
-	uint32 allocationFlags)
+	uint32_t allocationFlags)
 {
 	TRACE("VMKernelAddressSpace::ShrinkAreaHead(%p, %#" B_PRIxSIZE ")\n", _area,
 		newSize);
@@ -366,7 +366,7 @@ VMKernelAddressSpace::ShrinkAreaHead(VMArea* _area, size_t newSize,
 
 status_t
 VMKernelAddressSpace::ShrinkAreaTail(VMArea* area, size_t newSize,
-	uint32 allocationFlags)
+	uint32_t allocationFlags)
 {
 	return ResizeArea(area, newSize, allocationFlags);
 }
@@ -375,7 +375,7 @@ VMKernelAddressSpace::ShrinkAreaTail(VMArea* area, size_t newSize,
 status_t
 VMKernelAddressSpace::ReserveAddressRange(size_t size,
 	const virtual_address_restrictions* addressRestrictions,
-	uint32 flags, uint32 allocationFlags, void** _address)
+	uint32_t flags, uint32_t allocationFlags, void** _address)
 {
 	TRACE("VMKernelAddressSpace::ReserveAddressRange(%p, %" B_PRIu32 ", %#"
 		B_PRIxSIZE ", %#" B_PRIx32 ")\n", addressRestrictions->address,
@@ -407,7 +407,7 @@ VMKernelAddressSpace::ReserveAddressRange(size_t size,
 
 status_t
 VMKernelAddressSpace::UnreserveAddressRange(addr_t address, size_t size,
-	uint32 allocationFlags)
+	uint32_t allocationFlags)
 {
 	TRACE("VMKernelAddressSpace::UnreserveAddressRange(%#" B_PRIxADDR ", %#"
 		B_PRIxSIZE ")\n", address, size);
@@ -442,7 +442,7 @@ VMKernelAddressSpace::UnreserveAddressRange(addr_t address, size_t size,
 
 
 void
-VMKernelAddressSpace::UnreserveAllAddressRanges(uint32 allocationFlags)
+VMKernelAddressSpace::UnreserveAllAddressRanges(uint32_t allocationFlags)
 {
 	Range* range = fRangeList.Head();
 	while (range != NULL) {
@@ -551,7 +551,7 @@ VMKernelAddressSpace::_RemoveRange(Range* range)
 status_t
 VMKernelAddressSpace::_AllocateRange(
 	const virtual_address_restrictions* addressRestrictions,
-	size_t size, bool allowReservedRange, uint32 allocationFlags,
+	size_t size, bool allowReservedRange, uint32_t allocationFlags,
 	Range*& _range)
 {
 	TRACE("  VMKernelAddressSpace::_AllocateRange(address: %p, size: %#"
@@ -672,7 +672,7 @@ VMKernelAddressSpace::_AllocateRange(
 
 VMKernelAddressSpace::Range*
 VMKernelAddressSpace::_FindFreeRange(addr_t start, size_t size,
-	size_t alignment, uint32 addressSpec, bool allowReservedRange,
+	size_t alignment, uint32_t addressSpec, bool allowReservedRange,
 	addr_t& _foundAddress)
 {
 	TRACE("  VMKernelAddressSpace::_FindFreeRange(start: %#" B_PRIxADDR
@@ -714,7 +714,7 @@ VMKernelAddressSpace::_FindFreeRange(addr_t start, size_t size,
 			// unless there are constraints (min base address, alignment).
 			int freeListIndex = ld((size * 2 - 1) >> PAGE_SHIFT);
 
-			for (int32 i = freeListIndex; i < fFreeListCount; i++) {
+			for (int32_t i = freeListIndex; i < fFreeListCount; i++) {
 				RangeFreeList& freeList = fFreeLists[i];
 				if (freeList.IsEmpty())
 					continue;
@@ -789,7 +789,7 @@ TRACE("    -> reserved range not allowed\n");
 
 
 void
-VMKernelAddressSpace::_FreeRange(Range* range, uint32 allocationFlags)
+VMKernelAddressSpace::_FreeRange(Range* range, uint32_t allocationFlags)
 {
 	TRACE("  VMKernelAddressSpace::_FreeRange(%p (%#" B_PRIxADDR ", %#"
 		B_PRIxSIZE ", %d))\n", range, range->base, range->size, range->type);

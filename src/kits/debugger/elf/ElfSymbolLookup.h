@@ -21,24 +21,24 @@ public:
 
 class ElfSymbolLookup {
 public:
-	static	const uint32		kGetSymbolCountFromHash = ~(uint32)0;
+	static	const uint32_t		kGetSymbolCountFromHash = ~(uint32_t)0;
 
 public:
 	virtual						~ElfSymbolLookup();
 
 	static	status_t			Create(ElfSymbolLookupSource* source,
 									uint64 symbolTable, uint64 symbolHash,
-									uint64 stringTable, uint32 symbolCount,
-									uint32 symbolTableEntrySize,
+									uint64 stringTable, uint32_t symbolCount,
+									uint32_t symbolTableEntrySize,
 									uint64 textDelta, bool is64Bit,
 									bool swappedByteOrder, bool cacheSource,
 									ElfSymbolLookup*& _lookup);
 
 	virtual	status_t			Init(bool cacheSource) = 0;
-	virtual	status_t			NextSymbolInfo(uint32& index,
+	virtual	status_t			NextSymbolInfo(uint32_t& index,
 									SymbolInfo& _info) = 0;
 	virtual	status_t			GetSymbolInfo(const char* name,
-									uint32 symbolType, SymbolInfo& _info) = 0;
+									uint32_t symbolType, SymbolInfo& _info) = 0;
 };
 
 

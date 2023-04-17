@@ -16,7 +16,7 @@ typedef struct partition_module_info {
 	module_info									module;
 	const char*									short_name;
 	const char*									pretty_name;
-	uint32										flags;
+	uint32_t										flags;
 
 	// scanning
 	// (the device is write locked)
@@ -32,9 +32,9 @@ typedef struct partition_module_info {
 
 	// querying
 	// (the device is read locked)
-	uint32 (*get_supported_operations)(partition_data* partition, uint32 mask);
-	uint32 (*get_supported_child_operations)(partition_data* partition,
-				partition_data* child, uint32 mask);
+	uint32_t (*get_supported_operations)(partition_data* partition, uint32_t mask);
+	uint32_t (*get_supported_child_operations)(partition_data* partition,
+				partition_data* child, uint32_t mask);
 
 	bool (*supports_initializing_child)(partition_data* partition,
 				const char* system);
@@ -58,21 +58,21 @@ typedef struct partition_module_info {
 				const char* parameters);
 	bool (*validate_create_child)(partition_data* partition, off_t* start,
 				off_t* size, const char* type, const char* name,
-				const char* parameters, int32* index);
+				const char* parameters, int32_t* index);
 	status_t (*get_partitionable_spaces)(partition_data* partition,
-				partitionable_space_data* buffer, int32 count,
-				int32* actualCount);
+				partitionable_space_data* buffer, int32_t count,
+				int32_t* actualCount);
 		// When not implemented, a standard algorithm is used.
 
 	status_t (*get_next_supported_type)(partition_data* partition,
-				int32* cookie, char* type);
+				int32_t* cookie, char* type);
 	status_t (*get_type_for_content_type)(const char* contentType, char* type);
 
 
 	// shadow partition modification
 	// (device is write locked)
 	status_t (*shadow_changed)(partition_data* partition,
-				partition_data *child, uint32 operation);
+				partition_data *child, uint32_t operation);
 
 
 	// writing
@@ -100,7 +100,7 @@ typedef struct partition_module_info {
 	status_t (*initialize)(int fd, partition_id partition, const char* name,
 				const char *parameters, off_t partitionSize, disk_job_id job);
 	status_t (*uninitialize)(int fd, partition_id partition,
-				off_t partitionSize, uint32 blockSize, disk_job_id job);
+				off_t partitionSize, uint32_t blockSize, disk_job_id job);
 	status_t (*create_child)(int fd, partition_id partition, off_t offset,
 				off_t size, const char* type, const char* name,
 				const char* parameters, disk_job_id job,

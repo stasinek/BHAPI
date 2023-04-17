@@ -57,9 +57,9 @@ All rights reserved.
 #define B_TRANSLATION_CONTEXT "AutoMounterSettings"
 
 
-const uint32 kAutomountSettingsChanged = 'achg';
-const uint32 kBootMountSettingsChanged = 'bchg';
-const uint32 kEjectWhenUnmountingChanged = 'ejct';
+const uint32_t kAutomountSettingsChanged = 'achg';
+const uint32_t kBootMountSettingsChanged = 'bchg';
+const uint32_t kEjectWhenUnmountingChanged = 'ejct';
 
 
 //	#pragma mark - AutomountSettingsPanel

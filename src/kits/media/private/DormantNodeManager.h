@@ -50,7 +50,7 @@ private:
 			struct loaded_add_on_info {
 				BMediaAddOn*	add_on;
 				image_id		image;
-				int32			use_count;
+				int32_t			use_count;
 			};
 
 	// returns the addon or NULL if it needs to be loaded

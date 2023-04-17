@@ -36,10 +36,10 @@ _kfind_thread_(const char *name)
 }
 
 
-extern thread_id _kget_thread_stacks_(thread_id thread, uint32 *stacks);
+extern thread_id _kget_thread_stacks_(thread_id thread, uint32_t *stacks);
 
 status_t
-_kget_thread_stacks_(thread_id thread, uint32 *stacks)
+_kget_thread_stacks_(thread_id thread, uint32_t *stacks)
 {
 	// This one is obviously called from the R4.5 startup code. I am not
 	// exactly sure how it returns its infos, but just returning an

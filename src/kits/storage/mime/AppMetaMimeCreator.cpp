@@ -33,7 +33,7 @@ namespace Mime {
 
 
 AppMetaMimeCreator::AppMetaMimeCreator(Database* database,
-	DatabaseLocker* databaseLocker, int32 force)
+	DatabaseLocker* databaseLocker, int32_t force)
 	:
 	MimeEntryProcessor(database, databaseLocker, force)
 {
@@ -152,7 +152,7 @@ status_t AppMetaMimeCreator::Do(const entry_ref& entry, bool* _entryIsDir)
 
 	// defer notifications for supported types
 	const char* type;
-	for (int32 i = 0; supportedTypes.FindString("types", i, &type) == B_OK; i++)
+	for (int32_t i = 0; supportedTypes.FindString("types", i, &type) == B_OK; i++)
 		fDatabase->DeferInstallNotification(type);
 
 	// set supported types
@@ -162,7 +162,7 @@ status_t AppMetaMimeCreator::Do(const entry_ref& entry, bool* _entryIsDir)
 	}
 
 	// Icons for supported types
-	for (int32 i = 0; supportedTypes.FindString("types", i, &type) == B_OK;
+	for (int32_t i = 0; supportedTypes.FindString("types", i, &type) == B_OK;
 		 i++) {
 		// vector icon
 		uint8* data = NULL;
@@ -190,7 +190,7 @@ status_t AppMetaMimeCreator::Do(const entry_ref& entry, bool* _entryIsDir)
 	}
 
 	// undefer notifications for supported types
-	for (int32 i = 0; supportedTypes.FindString("types", i, &type) == B_OK; i++)
+	for (int32_t i = 0; supportedTypes.FindString("types", i, &type) == B_OK; i++)
 		fDatabase->UndeferInstallNotification(type);
 
 	return status;

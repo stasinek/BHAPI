@@ -43,7 +43,7 @@ public:
 			status_t			GetName(BString& name,
 									const BLanguage* displayLanguage = NULL
 									) const;
-			const char*			GetString(uint32 id) const;
+			const char*			GetString(uint32_t id) const;
 			status_t			GetIcon(BBitmap* result) const;
 
 			const char*			Code() const;

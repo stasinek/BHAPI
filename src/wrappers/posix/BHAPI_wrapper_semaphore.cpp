@@ -117,7 +117,7 @@ typedef struct b_posix_sem_info {
 	sem_t			isem;
 	sem_t			sem;
 #endif
-	uint32			refCount;
+	uint32_t			refCount;
 } b_posix_sem_info;
 
 
@@ -341,7 +341,7 @@ static void* bhapi::create_sem_for_IPC(int64 count, const char *name, bhapi::are
 	sem->remoteiSem = &(sem_info->isem);
 	sem->remoteSem = &(sem_info->sem);
 #else // BHAPI_PTHREAD_SHARED
-	uint32 successFlags = 0;
+	uint32_t successFlags = 0;
 
 	pthread_mutexattr_t mattr;
 	pthread_condattr_t cattr;
@@ -485,7 +485,7 @@ static void* bhapi::create_sem_for_local(int64 count)
 		return NULL;
 	}
 
-	uint32 successFlags = 0;
+	uint32_t successFlags = 0;
 
 	if(pthread_mutex_init(sem->iMutex, NULL) != 0) successFlags |= (1 << 1);
 	if(pthread_cond_init(sem->iCond, NULL) != 0) successFlags |= (1 << 2);
@@ -546,7 +546,7 @@ BHAPI_IMPEXP status_t bhapi::delete_sem(void *data)
 	if(bhapi::is_sem_for_IPC(sem)) BHAPI_LOCK_IPC_SEMAPHORE();
 	else BHAPI_LOCKBHAPI_LOCAL_SEMAPHORE();
 
-	uint32 count = --(sem->semInfo->refCount);
+	uint32_t count = --(sem->semInfo->refCount);
 
 	if(bhapi::is_sem_for_IPC(sem)) BHAPI_UNLOCK_IPC_SEMAPHORE();
 	else BHAPI_UNLOCKBHAPI_LOCAL_SEMAPHORE();
@@ -595,7 +595,7 @@ BHAPI_IMPEXP status_t bhapi::delete_sem_etc(void *data, bool no_clone)
 	else BHAPI_LOCKBHAPI_LOCAL_SEMAPHORE();
 
 	if(!bhapi::is_sem_for_IPC(sem) && no_clone) sem->no_clone = true;
-	uint32 count = --(sem->semInfo->refCount);
+	uint32_t count = --(sem->semInfo->refCount);
 
 	if(bhapi::is_sem_for_IPC(sem)) BHAPI_UNLOCK_IPC_SEMAPHORE();
 	else BHAPI_UNLOCKBHAPI_LOCAL_SEMAPHORE();
@@ -665,7 +665,7 @@ BHAPI_IMPEXP status_t bhapi::close_sem(void *data)
 }
 
 
-BHAPI_IMPEXP status_t bhapi::acquire_sem_etc(void *data,  int64 count,  uint32 flags, bigtime_t microseconds_timeout)
+BHAPI_IMPEXP status_t bhapi::acquire_sem_etc(void *data,  int64 count,  uint32_t flags, bigtime_t microseconds_timeout)
 {
 	b_posix_sem_t *sem = (b_posix_sem_t*)data;
 	if(!sem) return B_BAD_VALUE;
@@ -802,7 +802,7 @@ BHAPI_IMPEXP status_t bhapi::acquire_sem(void *data)
 }
 
 
-BHAPI_IMPEXP status_t bhapi::release_sem_etc(void *data,  int64 count,  uint32 flags)
+BHAPI_IMPEXP status_t bhapi::release_sem_etc(void *data,  int64 count,  uint32_t flags)
 {
 	b_posix_sem_t *sem = (b_posix_sem_t*)data;
 	if(!sem || count < B_INT64_CONSTANT(0)) return B_BAD_VALUE;

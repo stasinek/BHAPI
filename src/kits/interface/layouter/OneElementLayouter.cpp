@@ -17,12 +17,12 @@ public:
 	{
 	}
 	
-	virtual float ElementLocation(int32 element)
+	virtual float ElementLocation(int32_t element)
 	{
 		return 0;
 	}
 
-	virtual float ElementSize(int32 element)
+	virtual float ElementSize(int32_t element)
 	{
 		return fSize;
 	}
@@ -43,7 +43,7 @@ OneElementLayouter::~OneElementLayouter()
 }
 
 // AddConstraints
-void OneElementLayouter::AddConstraints(int32 element, int32 length,
+void OneElementLayouter::AddConstraints(int32_t element, int32_t length,
 	float min, float max, float preferred)
 {
 	fMin = max_c(fMin, min);
@@ -55,7 +55,7 @@ void OneElementLayouter::AddConstraints(int32 element, int32 length,
 }
 
 // SetWeight
-void OneElementLayouter::SetWeight(int32 element, float weight)
+void OneElementLayouter::SetWeight(int32_t element, float weight)
 {
 	// not needed
 }

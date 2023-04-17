@@ -43,7 +43,7 @@ NodeMonitorHandler::~NodeMonitorHandler()
 {
 	status_t status = B_MESSAGE_NOT_UNDERSTOOD;
 	if (msg->what == B_NODE_MONITOR) {
-		int32 opcode;
+		int32_t opcode;
 		if (msg->FindInt32("opcode", &opcode) == B_OK) {
 			switch (opcode) {
 			case B_ENTRY_CREATED:
@@ -103,7 +103,7 @@ NodeMonitorHandler::~NodeMonitorHandler()
 }
 
 
-/* virtual */ void NodeMonitorHandler::StatChanged(ino_t node, dev_t device, int32 statFields)
+/* virtual */ void NodeMonitorHandler::StatChanged(ino_t node, dev_t device, int32_t statFields)
 {
 	// ignore
 }
@@ -194,7 +194,7 @@ status_t NodeMonitorHandler::HandleStatChanged(BMessage * msg)
 {
 	ino_t node;
 	dev_t device;
-	int32 statFields;
+	int32_t statFields;
 	if ((msg->FindInt64("node", &node) != B_OK) ||
 		(msg->FindInt32("device", &device) != B_OK) ||
 		(msg->FindInt32("fields", &statFields) != B_OK)) {

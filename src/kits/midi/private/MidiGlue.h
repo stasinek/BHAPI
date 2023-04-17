@@ -56,7 +56,7 @@ public:
 
 	virtual void SystemRealTime(uchar status, bigtime_t time);
 
-	virtual void TempoChange(int32 beatsPerMinute, bigtime_t time);
+	virtual void TempoChange(int32_t beatsPerMinute, bigtime_t time);
 
 private:
 	BMidi* fMidiObject;
@@ -98,7 +98,7 @@ public:
 
 	virtual void SystemRealTime(uchar status, bigtime_t time);
 
-	virtual void TempoChange(int32 beatsPerMinute, bigtime_t time);
+	virtual void TempoChange(int32_t beatsPerMinute, bigtime_t time);
 
 private:
 	BMidiPort* fMidiObject;

@@ -35,7 +35,7 @@
 #include <BHAPI_wrapper_dfb.h>
 
 
-EDFBGraphicsWindow::EDFBGraphicsWindow(EDFBGraphicsEngine *dfbEngine,  int32 x,  int32 y,  uint32 w,  uint32 h)
+EDFBGraphicsWindow::EDFBGraphicsWindow(EDFBGraphicsEngine *dfbEngine,  int32_t x,  int32_t y,  uint32_t w,  uint32_t h)
 	: BGraphicsWindow(), fFlags(0), fEngine(NULL), fTitle(NULL),
 	  fHandlingMove(false), fHandlingResize(false)
 {
@@ -182,7 +182,7 @@ EDFBGraphicsWindow::SetBackgroundColor(bhapi::rgb_color bkColor)
 
 
 status_t 
-EDFBGraphicsWindow::SetFlags(uint32 flags)
+EDFBGraphicsWindow::SetFlags(uint32_t flags)
 {
 	if(fEngine == NULL) return B_ERROR;
 
@@ -271,14 +271,14 @@ EDFBGraphicsWindow::SetTitle(const char *title)
 
 
 status_t 
-EDFBGraphicsWindow::SetWorkspaces(uint32 workspaces)
+EDFBGraphicsWindow::SetWorkspaces(uint32_t workspaces)
 {
 	return B_ERROR;
 }
 
 
 status_t 
-EDFBGraphicsWindow::GetWorkspaces(uint32 *workspaces)
+EDFBGraphicsWindow::GetWorkspaces(uint32_t *workspaces)
 {
 	return B_ERROR;
 }
@@ -425,15 +425,15 @@ EDFBGraphicsWindow::GetActivatedState(bool *state) const
 
 
 status_t 
-EDFBGraphicsWindow::MoveTo(int32 x,  int32 y)
+EDFBGraphicsWindow::MoveTo(int32_t x,  int32_t y)
 {
 	if(fEngine == NULL) return B_ERROR;
 
 	BAutolock <EDFBGraphicsEngine> autolock(fEngine);
 	if(autolock.IsLocked() == false || fEngine->InitCheck() != B_OK) return B_ERROR;
 
-	fOriginX = x - (int32)fMargins.left;
-	fOriginY = y - (int32)fMargins.top;
+	fOriginX = x - (int32_t)fMargins.left;
+	fOriginY = y - (int32_t)fMargins.top;
 
 	if(!fHidden)
 	{
@@ -455,7 +455,7 @@ EDFBGraphicsWindow::MoveTo(int32 x,  int32 y)
 
 
 status_t 
-EDFBGraphicsWindow::ResizeTo(uint32 w,  uint32 h)
+EDFBGraphicsWindow::ResizeTo(uint32_t w,  uint32_t h)
 {
 	if(w >= B_MAXINT32 || h >= B_MAXINT32)
 	{
@@ -468,8 +468,8 @@ EDFBGraphicsWindow::ResizeTo(uint32 w,  uint32 h)
 	BAutolock <EDFBGraphicsEngine> autolock(fEngine);
 	if(autolock.IsLocked() == false || fEngine->InitCheck() != B_OK) return B_ERROR;
 
-	fWidth = w + 1 + (uint32)fMargins.left + (uint32)fMargins.right;
-	fHeight = h + 1 + (uint32)fMargins.top + (uint32)fMargins.bottom;
+	fWidth = w + 1 + (uint32_t)fMargins.left + (uint32_t)fMargins.right;
+	fHeight = h + 1 + (uint32_t)fMargins.top + (uint32_t)fMargins.bottom;
 
 	dfbWindow->DisableEvents(dfbWindow, DWET_POSITION_SIZE);
 	dfbWindow->Resize(dfbWindow, (int)fWidth, (int)fHeight);
@@ -499,7 +499,7 @@ EDFBGraphicsWindow::ResizeTo(uint32 w,  uint32 h)
 
 
 status_t 
-EDFBGraphicsWindow::MoveAndResizeTo(int32 x,  int32 y,  uint32 w,  uint32 h)
+EDFBGraphicsWindow::MoveAndResizeTo(int32_t x,  int32_t y,  uint32_t w,  uint32_t h)
 {
 	if(w >= B_MAXINT32 || h >= B_MAXINT32)
 	{
@@ -512,10 +512,10 @@ EDFBGraphicsWindow::MoveAndResizeTo(int32 x,  int32 y,  uint32 w,  uint32 h)
 	BAutolock <EDFBGraphicsEngine> autolock(fEngine);
 	if(autolock.IsLocked() == false || fEngine->InitCheck() != B_OK) return B_ERROR;
 
-	fOriginX = x - (int32)fMargins.left;
-	fOriginY = y - (int32)fMargins.top;
-	fWidth = w + 1 + (uint32)fMargins.left + (uint32)fMargins.right;
-	fHeight = h + 1 + (uint32)fMargins.top + (uint32)fMargins.bottom;
+	fOriginX = x - (int32_t)fMargins.left;
+	fOriginY = y - (int32_t)fMargins.top;
+	fWidth = w + 1 + (uint32_t)fMargins.left + (uint32_t)fMargins.right;
+	fHeight = h + 1 + (uint32_t)fMargins.top + (uint32_t)fMargins.bottom;
 
 	dfbWindow->DisableEvents(dfbWindow, DWET_POSITION_SIZE);
 	dfbWindow->Resize(dfbWindow, (int)fWidth, (int)fHeight);
@@ -545,14 +545,14 @@ EDFBGraphicsWindow::MoveAndResizeTo(int32 x,  int32 y,  uint32 w,  uint32 h)
 
 
 status_t 
-EDFBGraphicsWindow::SetSizeLimits(uint32 min_w,  uint32 max_w,  uint32 min_h,  uint32 max_h)
+EDFBGraphicsWindow::SetSizeLimits(uint32_t min_w,  uint32_t max_w,  uint32_t min_h,  uint32_t max_h)
 {
 	return B_ERROR;
 }
 
 
 status_t 
-EDFBGraphicsWindow::GetSizeLimits(uint32 *min_w,  uint32 *max_w,  uint32 *min_h,  uint32 *max_h)
+EDFBGraphicsWindow::GetSizeLimits(uint32_t *min_w,  uint32_t *max_w,  uint32_t *min_h,  uint32_t *max_h)
 {
 	return B_ERROR;
 }
@@ -625,7 +625,7 @@ EDFBGraphicsWindow::UngrabKeyboard()
 
 
 status_t 
-EDFBGraphicsWindow::QueryMouse(int32 *x,  int32 *y,  int32 *buttons)
+EDFBGraphicsWindow::QueryMouse(int32_t *x,  int32_t *y,  int32_t *buttons)
 {
 	return B_ERROR;
 }
@@ -634,8 +634,8 @@ EDFBGraphicsWindow::QueryMouse(int32 *x,  int32 *y,  int32 *buttons)
 status_t 
 EDFBGraphicsWindow::CopyTo(BGraphicsContext *dc,
 		           BGraphicsDrawable *dstDrawable,
-			    int32 x,  int32 y,  uint32 w,  uint32 h,
-			    int32 dstX,  int32 dstY,  uint32 dstW,  uint32 dstH)
+			    int32_t x,  int32_t y,  uint32_t w,  uint32_t h,
+			    int32_t dstX,  int32_t dstY,  uint32_t dstW,  uint32_t dstH)
 {
 	if(w >= B_MAXINT32 || h >= B_MAXINT32 || dstW >= B_MAXINT32 || dstH >= B_MAXINT32)
 	{
@@ -698,8 +698,8 @@ EDFBGraphicsWindow::CopyTo(BGraphicsContext *dc,
 
 status_t 
 EDFBGraphicsWindow::DrawPixmap(BGraphicsContext *dc, const BPixmap *pix,
-			        int32 x,  int32 y,  uint32 w,  uint32 h,
-			        int32 dstX,  int32 dstY,  uint32 dstW,  uint32 dstH)
+			        int32_t x,  int32_t y,  uint32_t w,  uint32_t h,
+			        int32_t dstX,  int32_t dstY,  uint32_t dstW,  uint32_t dstH)
 {
 	if(fEngine == NULL) return B_ERROR;
 
@@ -712,7 +712,7 @@ EDFBGraphicsWindow::DrawPixmap(BGraphicsContext *dc, const BPixmap *pix,
 
 status_t 
 EDFBGraphicsWindow::StrokePoint(BGraphicsContext *dc,
-				int32 x,  int32 y)
+				int32_t x,  int32_t y)
 {
 	if(fEngine == NULL) return B_ERROR;
 
@@ -725,7 +725,7 @@ EDFBGraphicsWindow::StrokePoint(BGraphicsContext *dc,
 
 status_t 
 EDFBGraphicsWindow::StrokePoints(BGraphicsContext *dc,
-				 const  int32 *pts,  int32 count)
+				 const  int32_t *pts,  int32_t count)
 {
 	if(fEngine == NULL) return B_ERROR;
 
@@ -738,7 +738,7 @@ EDFBGraphicsWindow::StrokePoints(BGraphicsContext *dc,
 
 status_t 
 EDFBGraphicsWindow::StrokePoints_Colors(BGraphicsContext *dc,
-					const BList *ptsArrayLists,  int32 arrayCount,
+					const BList *ptsArrayLists,  int32_t arrayCount,
 					const bhapi::rgb_color *highColors)
 {
 	if(fEngine == NULL) return B_ERROR;
@@ -752,7 +752,7 @@ EDFBGraphicsWindow::StrokePoints_Colors(BGraphicsContext *dc,
 
 status_t 
 EDFBGraphicsWindow::StrokePoints_Alphas(BGraphicsContext *dc,
-					const  int32 *pts, const  uint8 *alpha,  int32 count)
+					const  int32_t *pts, const  uint8 *alpha,  int32_t count)
 {
 	if(fEngine == NULL) return B_ERROR;
 
@@ -765,7 +765,7 @@ EDFBGraphicsWindow::StrokePoints_Alphas(BGraphicsContext *dc,
 
 status_t 
 EDFBGraphicsWindow::StrokeLine(BGraphicsContext *dc,
-			        int32 x0,  int32 y0,  int32 x1,  int32 y1)
+			        int32_t x0,  int32_t y0,  int32_t x1,  int32_t y1)
 {
 	if(fEngine == NULL) return B_ERROR;
 
@@ -778,7 +778,7 @@ EDFBGraphicsWindow::StrokeLine(BGraphicsContext *dc,
 
 status_t 
 EDFBGraphicsWindow::StrokePolygon(BGraphicsContext *dc,
-				  const  int32 *pts,  int32 count, bool closed)
+				  const  int32_t *pts,  int32_t count, bool closed)
 {
 	if(fEngine == NULL) return B_ERROR;
 
@@ -791,7 +791,7 @@ EDFBGraphicsWindow::StrokePolygon(BGraphicsContext *dc,
 
 status_t 
 EDFBGraphicsWindow::FillPolygon(BGraphicsContext *dc,
-				const  int32 *pts,  int32 count)
+				const  int32_t *pts,  int32_t count)
 {
 	if(fEngine == NULL) return B_ERROR;
 
@@ -804,7 +804,7 @@ EDFBGraphicsWindow::FillPolygon(BGraphicsContext *dc,
 
 status_t 
 EDFBGraphicsWindow::StrokeRect(BGraphicsContext *dc,
-			        int32 x,  int32 y,  uint32 w,  uint32 h)
+			        int32_t x,  int32_t y,  uint32_t w,  uint32_t h)
 {
 	if(fEngine == NULL) return B_ERROR;
 
@@ -817,7 +817,7 @@ EDFBGraphicsWindow::StrokeRect(BGraphicsContext *dc,
 
 status_t 
 EDFBGraphicsWindow::FillRect(BGraphicsContext *dc,
-			      int32 x,  int32 y,  uint32 w,  uint32 h)
+			      int32_t x,  int32_t y,  uint32_t w,  uint32_t h)
 {
 	if(fEngine == NULL) return B_ERROR;
 
@@ -830,7 +830,7 @@ EDFBGraphicsWindow::FillRect(BGraphicsContext *dc,
 
 status_t 
 EDFBGraphicsWindow::StrokeRects(BGraphicsContext *dc,
-				const  int32 *rects,  int32 count)
+				const  int32_t *rects,  int32_t count)
 {
 	if(fEngine == NULL) return B_ERROR;
 
@@ -843,7 +843,7 @@ EDFBGraphicsWindow::StrokeRects(BGraphicsContext *dc,
 
 status_t 
 EDFBGraphicsWindow::FillRects(BGraphicsContext *dc,
-			      const  int32 *rects,  int32 count)
+			      const  int32_t *rects,  int32_t count)
 {
 	if(fEngine == NULL) return B_ERROR;
 
@@ -869,7 +869,7 @@ EDFBGraphicsWindow::FillRegion(BGraphicsContext *dc,
 
 status_t 
 EDFBGraphicsWindow::StrokeRoundRect(BGraphicsContext *dc,
-				     int32 x,  int32 y,  uint32 w,  uint32 h,  uint32 xRadius,  uint32 yRadius)
+				     int32_t x,  int32_t y,  uint32_t w,  uint32_t h,  uint32_t xRadius,  uint32_t yRadius)
 {
 	if(fEngine == NULL) return B_ERROR;
 
@@ -882,7 +882,7 @@ EDFBGraphicsWindow::StrokeRoundRect(BGraphicsContext *dc,
 
 status_t 
 EDFBGraphicsWindow::FillRoundRect(BGraphicsContext *dc,
-				   int32 x,  int32 y,  uint32 w,  uint32 h,  uint32 xRadius,  uint32 yRadius)
+				   int32_t x,  int32_t y,  uint32_t w,  uint32_t h,  uint32_t xRadius,  uint32_t yRadius)
 {
 	if(fEngine == NULL) return B_ERROR;
 
@@ -895,7 +895,7 @@ EDFBGraphicsWindow::FillRoundRect(BGraphicsContext *dc,
 
 status_t 
 EDFBGraphicsWindow::StrokeArc(BGraphicsContext *dc,
-			       int32 x,  int32 y,  uint32 w,  uint32 h, float startAngle, float endAngle)
+			       int32_t x,  int32_t y,  uint32_t w,  uint32_t h, float startAngle, float endAngle)
 {
 	if(fEngine == NULL) return B_ERROR;
 
@@ -908,7 +908,7 @@ EDFBGraphicsWindow::StrokeArc(BGraphicsContext *dc,
 
 status_t 
 EDFBGraphicsWindow::FillArc(BGraphicsContext *dc,
-			     int32 x,  int32 y,  uint32 w,  uint32 h, float startAngle, float endAngle)
+			     int32_t x,  int32_t y,  uint32_t w,  uint32_t h, float startAngle, float endAngle)
 {
 	if(fEngine == NULL) return B_ERROR;
 

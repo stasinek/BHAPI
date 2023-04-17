@@ -56,7 +56,7 @@ enum mail_protocol_config_options {
 
 class MailProtocolConfigView : public BMailSettingsView {
 public:
-								MailProtocolConfigView(uint32 optionsMask
+								MailProtocolConfigView(uint32_t optionsMask
 										= B_MAIL_PROTOCOL_HAS_FLAVORS
 											| B_MAIL_PROTOCOL_HAS_USERNAME
 											| B_MAIL_PROTOCOL_HAS_PASSWORD

@@ -17,14 +17,14 @@ class BChannelControl : public BControl {
 public:
 								BChannelControl(BRect frame, const char* name,
 									const char* label, BMessage* model,
-									int32 channelCount = 1,
-									uint32 resizingMode
+									int32_t channelCount = 1,
+									uint32_t resizingMode
 										= B_FOLLOW_LEFT | B_FOLLOW_TOP,
-									uint32 flags = B_WILL_DRAW);
+									uint32_t flags = B_WILL_DRAW);
 								BChannelControl(const char* name,
 									const char* label, BMessage* model,
-									int32 channelCount = 1,
-									uint32 flags = B_WILL_DRAW);
+									int32_t channelCount = 1,
+									uint32_t flags = B_WILL_DRAW);
 								BChannelControl(BMessage* archive);
 	virtual						~BChannelControl();
 
@@ -32,11 +32,11 @@ public:
 
 	virtual	void				Draw(BRect updateRect) = 0;
 	virtual	void				MouseDown(BPoint where) = 0;
-	virtual	void				KeyDown(const char* bytes, int32 numBytes) = 0;
+	virtual	void				KeyDown(const char* bytes, int32_t numBytes) = 0;
 
 	virtual	void				FrameResized(float newWidth, float newHeight);
 	virtual	void				SetFont(const BFont* font,
-									uint32 mask = B_FONT_ALL);
+									uint32_t mask = B_FONT_ALL);
 
 	virtual	void				AttachedToWindow();
 	virtual	void				DetachedFromWindow();
@@ -46,8 +46,8 @@ public:
 
 	virtual	void				MessageReceived(BMessage* message);
 
-	virtual	BHandler*			ResolveSpecifier(BMessage* message, int32 index,
-									BMessage* specifier, int32 what,
+	virtual	BHandler*			ResolveSpecifier(BMessage* message, int32_t index,
+									BMessage* specifier, int32_t what,
 									const char* property);
 	virtual	status_t			GetSupportedSuites(BMessage* data);
 
@@ -59,56 +59,56 @@ public:
 	//! These methods are similar to Invoke() Invoke() and InvokeNotify(), but
 	// include additional information about all of the channels in the control.
 	virtual	status_t			InvokeChannel(BMessage* message = NULL,
-									int32 fromChannel = 0,
-									int32 channelCount = -1,
+									int32_t fromChannel = 0,
+									int32_t channelCount = -1,
 									const bool* _mask = NULL);
 			status_t			InvokeNotifyChannel(BMessage* message = NULL,
-									uint32 kind = B_CONTROL_INVOKED,
-									int32 fromChannel = 0,
-									int32 channelCount = -1,
+									uint32_t kind = B_CONTROL_INVOKED,
+									int32_t fromChannel = 0,
+									int32_t channelCount = -1,
 									const bool* _mask = NULL);
 
-	virtual	void				SetValue(int32 value);
+	virtual	void				SetValue(int32_t value);
 		// SetCurrentChannel() determines which channel
-	virtual	status_t			SetCurrentChannel(int32 index);
-			int32				CurrentChannel() const;
+	virtual	status_t			SetCurrentChannel(int32_t index);
+			int32_t				CurrentChannel() const;
 
-	virtual	int32				CountChannels() const;
-	virtual	int32				MaxChannelCount() const = 0;
-	virtual	status_t			SetChannelCount(int32 count);
-			int32				ValueFor(int32 channel) const;
-	virtual	int32				GetValue(int32* _values, int32 fromChannel,
-									int32 channelCount) const;
-			status_t			SetValueFor(int32 channel, int32 value);
-	virtual	status_t			SetValue(int32 fromChannel, int32 channelCount,
-									const int32* values);
-			status_t			SetAllValue(int32 values);
-			status_t			SetLimitsFor(int32 channel, int32 minimum,
-									int32 maximum);
-			status_t			GetLimitsFor(int32 channel, int32* _minimum,
-									int32* _maximum) const ;
-	virtual	status_t			SetLimitsFor(int32 fromChannel,
-									int32 channelCount, const int32* minima,
-									const int32* maxima);
-	virtual	status_t			GetLimitsFor(int32 fromChannel,
-									int32 channelCount, int32* minima,
-									int32* maxima) const;
-			status_t			SetLimits(int32 minimum, int32 maximum);
-			status_t			GetLimits(int32* _minimum,
-									int32* _maximum) const;
+	virtual	int32_t				CountChannels() const;
+	virtual	int32_t				MaxChannelCount() const = 0;
+	virtual	status_t			SetChannelCount(int32_t count);
+			int32_t				ValueFor(int32_t channel) const;
+	virtual	int32_t				GetValue(int32_t* _values, int32_t fromChannel,
+									int32_t channelCount) const;
+			status_t			SetValueFor(int32_t channel, int32_t value);
+	virtual	status_t			SetValue(int32_t fromChannel, int32_t channelCount,
+									const int32_t* values);
+			status_t			SetAllValue(int32_t values);
+			status_t			SetLimitsFor(int32_t channel, int32_t minimum,
+									int32_t maximum);
+			status_t			GetLimitsFor(int32_t channel, int32_t* _minimum,
+									int32_t* _maximum) const ;
+	virtual	status_t			SetLimitsFor(int32_t fromChannel,
+									int32_t channelCount, const int32_t* minima,
+									const int32_t* maxima);
+	virtual	status_t			GetLimitsFor(int32_t fromChannel,
+									int32_t channelCount, int32_t* minima,
+									int32_t* maxima) const;
+			status_t			SetLimits(int32_t minimum, int32_t maximum);
+			status_t			GetLimits(int32_t* _minimum,
+									int32_t* _maximum) const;
 
 	virtual	bool				SupportsIndividualLimits() const = 0;
 	virtual	status_t			SetLimitLabels(const char* minLabel,
 									const char* maxLabel);
 			const char* 		MinLimitLabel() const;
 			const char* 		MaxLimitLabel() const;
-	virtual	status_t			SetLimitLabelsFor(int32 channel,
+	virtual	status_t			SetLimitLabelsFor(int32_t channel,
 									const char* minLabel, const char* maxLabel);
-	virtual	status_t			SetLimitLabelsFor(int32 fromChannel,
-									int32 channelCount, const char* minLabel,
+	virtual	status_t			SetLimitLabelsFor(int32_t fromChannel,
+									int32_t channelCount, const char* minLabel,
 									const char* maxLabel);
-			const char*			MinLimitLabelFor(int32 channel) const;
-			const char*			MaxLimitLabelFor(int32 channel) const;
+			const char*			MinLimitLabelFor(int32_t channel) const;
+			const char*			MaxLimitLabelFor(int32_t channel) const;
 private:
 	// Forbidden (and unimplemented)
 								BChannelControl(const BChannelControl& other);
@@ -128,16 +128,16 @@ private:
 	virtual	void				_Reserverd_ChannelControl_11(void*, ...);
 
 protected:
-	inline	int32* const&		MinLimitList() const;
-	inline	int32* const&		MaxLimitList() const;
-	inline	int32* const&		ValueList() const;
+	inline	int32_t* const&		MinLimitList() const;
+	inline	int32_t* const&		MaxLimitList() const;
+	inline	int32_t* const&		ValueList() const;
 
 private:
-			int32				fChannelCount;
-			int32				fCurrentChannel;
-			int32*				fChannelMin;
-			int32*				fChannelMax;
-			int32*				fChannelValues;
+			int32_t				fChannelCount;
+			int32_t				fCurrentChannel;
+			int32_t*				fChannelMin;
+			int32_t*				fChannelMax;
+			int32_t*				fChannelValues;
 
 			BString				fMinLabel;
 			BString				fMaxLabel;
@@ -146,28 +146,28 @@ private:
 
 			BMessage*			fModificationMsg;
 
-			uint32				_reserved_[15];
+			uint32_t				_reserved_[15];
 
-			status_t			StuffValues(int32 fromChannel,
-									int32 channelCount, const int32* values);
+			status_t			StuffValues(int32_t fromChannel,
+									int32_t channelCount, const int32_t* values);
 };
 
 
-inline int32* const&
+inline int32_t* const&
 BChannelControl::MinLimitList() const
 {
 	return fChannelMin;
 }
 
 
-inline int32* const&
+inline int32_t* const&
 BChannelControl::MaxLimitList() const
 {
 	return fChannelMax;
 }
 
 
-inline int32* const&
+inline int32_t* const&
 BChannelControl::ValueList() const
 {
 	return fChannelValues;

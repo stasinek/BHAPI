@@ -34,7 +34,7 @@ private:
 	port_id fPort;
 	bigtime_t fLatency;
 	
-	uint32 _reserved[2];
+	uint32_t _reserved[2];
 };
 
 class BMidiLocalConsumer : public BMidiConsumer
@@ -44,7 +44,7 @@ public:
 	BMidiLocalConsumer(const char *name = NULL);
 	
 	void SetLatency(bigtime_t latency);
-	int32 GetProducerID();
+	int32_t GetProducerID();
 	
 	void SetTimeout(bigtime_t when, void *data);	
 	virtual void Timeout(void *data);
@@ -82,7 +82,7 @@ public:
 
 	virtual	void SystemRealTime(uchar status, bigtime_t time);
 
-	virtual	void TempoChange(int32 beatsPerMinute, bigtime_t time);
+	virtual	void TempoChange(int32_t beatsPerMinute, bigtime_t time);
 
 	virtual void AllNotesOff(bool justChannel, bigtime_t time);
 
@@ -93,7 +93,7 @@ protected:
 private:
 
 	friend class BMidiRoster;
-	friend int32 _midi_event_thread(void *);
+	friend int32_t _midi_event_thread(void *);
 	
 	virtual void _Reserved1();
 	virtual void _Reserved2();
@@ -104,14 +104,14 @@ private:
 	virtual void _Reserved7();
 	virtual void _Reserved8();
 
-	int32 EventThread();
+	int32_t EventThread();
 
 	bigtime_t fTimeout;
 	void* fTimeoutData;
-	int32 fCurrentProducer;
+	int32_t fCurrentProducer;
 	thread_id fThread;
 
-	uint32 _reserved[1];
+	uint32_t _reserved[1];
 };
 
 #endif // _MIDI_CONSUMER_H

@@ -40,7 +40,7 @@ All rights reserved.
 #include <TrackerSettings.h>
 
 
-const uint32 kSettingsContentsModified = 'Scmo';
+const uint32_t kSettingsContentsModified = 'Scmo';
 
 
 class BButton;
@@ -155,7 +155,7 @@ private:
 	BCheckBox*		fSpaceBarShowCheckBox;
 	BColorControl*	fColorControl;
 	BMenuField*		fColorPicker;
-	int32			fCurrentColor;
+	int32_t			fCurrentColor;
 
 	bool			fSpaceBarShow;
 	rgb_color		fUsedSpaceColor;

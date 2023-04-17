@@ -79,7 +79,7 @@ void BToolBar::Hide()
 }
 
 
-void BToolBar::AddAction(uint32 command, BHandler* target, const BBitmap* icon,
+void BToolBar::AddAction(uint32_t command, BHandler* target, const BBitmap* icon,
 	const char* toolTipText, const char* text, bool lockable)
 {
 	AddAction(new BMessage(command), target, icon, toolTipText, text, lockable);
@@ -126,26 +126,26 @@ void BToolBar::AddView(BView* view)
 }
 
 
-void BToolBar::SetActionEnabled(uint32 command, bool enabled)
+void BToolBar::SetActionEnabled(uint32_t command, bool enabled)
 {
 	if (BButton* button = FindButton(command))
 		button->SetEnabled(enabled);
 }
 
 
-void BToolBar::SetActionPressed(uint32 command, bool pressed)
+void BToolBar::SetActionPressed(uint32_t command, bool pressed)
 {
 	if (BButton* button = FindButton(command))
 		button->SetValue(pressed);
 }
 
 
-void BToolBar::SetActionVisible(uint32 command, bool visible)
+void BToolBar::SetActionVisible(uint32_t command, bool visible)
 {
 	BButton* button = FindButton(command);
 	if (button == NULL)
 		return;
-	for (int32 i = 0; BLayoutItem* item = GroupLayout()->ItemAt(i); i++) {
+	for (int32_t i = 0; BLayoutItem* item = GroupLayout()->ItemAt(i); i++) {
 		if (item->View() != button)
 			continue;
 		item->SetVisible(visible);
@@ -155,9 +155,9 @@ void BToolBar::SetActionVisible(uint32 command, bool visible)
 
 
 BButton*
-BToolBar::FindButton(uint32 command) const
+BToolBar::FindButton(uint32_t command) const
 {
-	for (int32 i = 0; BView* view = ChildAt(i); i++) {
+	for (int32_t i = 0; BView* view = ChildAt(i); i++) {
 		BButton* button = dynamic_cast<BButton*>(view);
 		if (button == NULL)
 			continue;
@@ -206,7 +206,7 @@ void BToolBar::_Init()
 
 void BToolBar::_HideToolTips() const
 {
-	for (int32 i = 0; BView* view = ChildAt(i); i++)
+	for (int32_t i = 0; BView* view = ChildAt(i); i++)
 		view->HideToolTip();
 }
 

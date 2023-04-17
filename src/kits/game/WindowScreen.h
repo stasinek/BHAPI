@@ -12,7 +12,7 @@
 #include <kits/kernel/Image.h>
 #include <Haiku.h>
 
-void set_mouse_position(int32 x, int32 y);
+void set_mouse_position(int32_t x, int32_t y);
     // Controls the mouse cursor position on screen
 
 enum {
@@ -22,10 +22,10 @@ enum {
 
 class BHAPI_IMPEXP BWindowScreen : public BWindow {
     public:
-                            BWindowScreen(const char* title, uint32 space,
+                            BWindowScreen(const char* title, uint32_t space,
                                 status_t* _error, bool debugMode = false);
-                            BWindowScreen(const char* title, uint32 space,
-                                uint32 attributes, status_t* _error);
+                            BWindowScreen(const char* title, uint32_t space,
+                                uint32_t attributes, status_t* _error);
         virtual				~BWindowScreen();
 
         virtual void		Quit();
@@ -33,23 +33,23 @@ class BHAPI_IMPEXP BWindowScreen : public BWindow {
         void				Disconnect();
 
         virtual	void		WindowActivated(bool active);
-        virtual void		WorkspaceActivated(int32 workspace, bool active);
+        virtual void		WorkspaceActivated(int32_t workspace, bool active);
         virtual void		ScreenChanged(BRect screenSize, color_space depth);
 
         virtual void		Hide();
         virtual void		Show();
 
-        void				SetColorList(rgb_color* list, int32 firstIndex = 0,
-                                int32 lastIndex = 255);
-        status_t			SetSpace(uint32 space);
+        void				SetColorList(rgb_color* list, int32_t firstIndex = 0,
+                                int32_t lastIndex = 255);
+        status_t			SetSpace(uint32_t space);
 
         bool				CanControlFrameBuffer();
-        status_t			SetFrameBuffer(int32 width, int32 height);
-        status_t			MoveDisplayArea(int32 x, int32 y);
+        status_t			SetFrameBuffer(int32_t width, int32_t height);
+        status_t			MoveDisplayArea(int32_t x, int32_t y);
 
         rgb_color*			ColorList();
         frame_buffer_info*	FrameBufferInfo();
-        graphics_card_hook	CardHookAt(int32 index);
+        graphics_card_hook	CardHookAt(int32_t index);
         graphics_card_info*	CardInfo();
 
         void				RegisterThread(thread_id thread);
@@ -74,7 +74,7 @@ class BHAPI_IMPEXP BWindowScreen : public BWindow {
                             BWindowScreen(BWindowScreen& other);
                             BWindowScreen &operator=(BWindowScreen& other);
 
-        status_t			_InitData(uint32 space, uint32 attributes);
+        status_t			_InitData(uint32_t space, uint32_t attributes);
         void				_DisposeData();
 
         status_t			_LockScreen(bool lock);
@@ -87,7 +87,7 @@ class BHAPI_IMPEXP BWindowScreen : public BWindow {
         status_t			_GetCardInfo();
         void				_Suspend();
         void				_Resume();
-        status_t			_GetModeFromSpace(uint32 space, display_mode* mode);
+        status_t			_GetModeFromSpace(uint32_t space, display_mode* mode);
         status_t			_InitClone();
         status_t			_AssertDisplayMode(display_mode* mode);
 
@@ -96,14 +96,14 @@ class BHAPI_IMPEXP BWindowScreen : public BWindow {
         bool				fWorkState;
         bool				fWindowState;
         bool				fActivateState;
-        int32				fLockState;
-        int32				fWorkspaceIndex;
+        int32_t				fLockState;
+        int32_t				fWorkspaceIndex;
 
         display_mode*		fOriginalDisplayMode;
         display_mode*		fDisplayMode;
         sem_id				fDebugSem;
         image_id			fAddonImage;
-        uint32				fAttributes;
+        uint32_t				fAttributes;
 
         rgb_color			fPalette[256];
 
@@ -113,17 +113,17 @@ class BHAPI_IMPEXP BWindowScreen : public BWindow {
         char*				fDebugFrameBuffer;
         bool				fDebugState;
         bool				fDebugFirst;
-        int32				fDebugWorkspace;
-        int32				fDebugThreadCount;
+        int32_t				fDebugWorkspace;
+        int32_t				fDebugThreadCount;
         thread_id*			fDebugThreads;
 
-        uint32				fModeCount;
+        uint32_t				fModeCount;
         display_mode*		fModeList;
 
         GetAccelerantHook	fGetAccelerantHook;
         wait_engine_idle	fWaitEngineIdle;
 
-        uint32				_reserved[163];
+        uint32_t				_reserved[163];
 };
 
 #define BWINDOWSCREEN_I

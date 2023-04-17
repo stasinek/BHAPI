@@ -43,7 +43,7 @@ All rights reserved.
 #include <Window.h>
 
 
-const uint32 kValueChanged = 'swch';
+const uint32_t kValueChanged = 'swch';
 
 const rgb_color kNormalColor = {150, 150, 150, 255};
 const rgb_color kHighlightColor = {100, 100, 0, 255};
@@ -70,8 +70,8 @@ void ViewList::AddAll(BView* toParent)
 //	#pragma mark - DialogPane
 
 
-DialogPane::DialogPane(BRect mode1Frame, BRect mode2Frame, int32 initialMode,
-	const char* name, uint32 followFlags, uint32 flags)
+DialogPane::DialogPane(BRect mode1Frame, BRect mode2Frame, int32_t initialMode,
+	const char* name, uint32_t followFlags, uint32_t flags)
 	:
 	BView(FrameForMode(initialMode, mode1Frame, mode2Frame, mode2Frame),
 		name, followFlags, flags),
@@ -85,7 +85,7 @@ DialogPane::DialogPane(BRect mode1Frame, BRect mode2Frame, int32 initialMode,
 
 
 DialogPane::DialogPane(BRect mode1Frame, BRect mode2Frame, BRect mode3Frame,
-	int32 initialMode, const char* name, uint32 followFlags, uint32 flags)
+	int32_t initialMode, const char* name, uint32_t followFlags, uint32_t flags)
 	:
 	BView(FrameForMode(initialMode, mode1Frame, mode2Frame, mode3Frame),
 		name, followFlags, flags),
@@ -105,14 +105,14 @@ DialogPane::~DialogPane()
 }
 
 
-void DialogPane::SetMode(int32 mode, bool initialSetup)
+void DialogPane::SetMode(int32_t mode, bool initialSetup)
 {
 	ASSERT(mode < 3 && mode >= 0);
 
 	if (!initialSetup && mode == fMode)
 		return;
 
-	int32 oldMode = fMode;
+	int32_t oldMode = fMode;
 	fMode = mode;
 
 	bool followBottom = (ResizingMode() & B_FOLLOW_BOTTOM) != 0;
@@ -205,7 +205,7 @@ void DialogPane::AttachedToWindow()
 }
 
 
-void DialogPane::ResizeParentWindow(int32 from, int32 to)
+void DialogPane::ResizeParentWindow(int32_t from, int32_t to)
 {
 	if (Window() == NULL)
 		return;
@@ -219,7 +219,7 @@ void DialogPane::ResizeParentWindow(int32 from, int32 to)
 }
 
 
-void DialogPane::AddItem(BView* view, int32 toMode)
+void DialogPane::AddItem(BView* view, int32_t toMode)
 {
 	if (toMode == 1)
 		fMode2Items.AddItem(view);
@@ -232,7 +232,7 @@ void DialogPane::AddItem(BView* view, int32 toMode)
 
 
 BRect
-DialogPane::FrameForMode(int32 mode)
+DialogPane::FrameForMode(int32_t mode)
 {
 	switch (mode) {
 		case 0:
@@ -250,7 +250,7 @@ DialogPane::FrameForMode(int32 mode)
 
 
 BRect
-DialogPane::BoundsForMode(int32 mode)
+DialogPane::BoundsForMode(int32_t mode)
 {
 	BRect result;
 	switch (mode) {
@@ -273,7 +273,7 @@ DialogPane::BoundsForMode(int32 mode)
 
 
 BRect
-DialogPane::FrameForMode(int32 mode, BRect mode1Frame, BRect mode2Frame,
+DialogPane::FrameForMode(int32_t mode, BRect mode1Frame, BRect mode2Frame,
 	BRect mode3Frame)
 {
 	switch (mode) {
@@ -302,7 +302,7 @@ void DialogPane::SetSwitch(BControl* control)
 void DialogPane::MessageReceived(BMessage* message)
 {
 	if (message->what == kValueChanged) {
-		int32 value;
+		int32_t value;
 		if (message->FindInt32("be:value", &value) == B_OK)
 			SetMode(value);
 	} else
@@ -314,7 +314,7 @@ void DialogPane::MessageReceived(BMessage* message)
 
 
 PaneSwitch::PaneSwitch(BRect frame, const char* name, bool leftAligned,
-		uint32 resizeMask, uint32 flags)
+		uint32_t resizeMask, uint32_t flags)
 	:
 	BControl(frame, name, "", 0, resizeMask, flags),
 	fLeftAligned(leftAligned),
@@ -325,7 +325,7 @@ PaneSwitch::PaneSwitch(BRect frame, const char* name, bool leftAligned,
 }
 
 
-PaneSwitch::PaneSwitch(const char* name, bool leftAligned, uint32 flags)
+PaneSwitch::PaneSwitch(const char* name, bool leftAligned, uint32_t flags)
 	:
 	BControl(name, "", 0, flags),
 	fLeftAligned(leftAligned),
@@ -483,7 +483,7 @@ void PaneSwitch::DoneTracking(BPoint point)
 }
 
 
-void PaneSwitch::Track(BPoint point, uint32)
+void PaneSwitch::Track(BPoint point, uint32_t)
 {
 	BRect bounds(Bounds());
 	bounds.InsetBy(-3, -3);
@@ -502,7 +502,7 @@ void PaneSwitch::DrawInState(PaneSwitch::State state)
 	rect.OffsetBy(1, 1);
 
 	rgb_color arrowColor = state == kPressed ? kHighlightColor : kNormalColor;
-	int32 arrowDirection = BControlLook::B_RIGHT_ARROW;
+	int32_t arrowDirection = BControlLook::B_RIGHT_ARROW;
 	float tint = IsEnabled() && Window()->IsActive() ? B_DARKEN_3_TINT
 		: B_DARKEN_1_TINT;
 

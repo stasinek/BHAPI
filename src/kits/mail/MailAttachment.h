@@ -77,7 +77,7 @@ class BSimpleMailAttachment : public BMailAttachment {
 		bool _we_own_data;
 		mail_encoding _encoding;
 		
-		uint32 _reserved[5];
+		uint32_t _reserved[5];
 };
 
 class BAttributedMailAttachment : public BMailAttachment {
@@ -123,7 +123,7 @@ class BAttributedMailAttachment : public BMailAttachment {
 		BSimpleMailAttachment *_data, *_attributes_attach;
 		BMessage _attributes;
 
-		uint32 _reserved[5];
+		uint32_t _reserved[5];
 };
 
 #endif	/* ZOIDBERG_MAIL_ATTACHMENT_H */

@@ -28,17 +28,17 @@ public:
 			off_t				BlockSize() const;
 			void				SetBlockSize(off_t blockSize);
 
-			uint32				Status() const;
-			void				SetStatus(uint32 status);
+			uint32_t				Status() const;
+			void				SetStatus(uint32_t status);
 
-			uint32				Flags() const;
-			void				SetFlags(uint32 flags);
-			void				ClearFlags(uint32 flags);
+			uint32_t				Flags() const;
+			void				SetFlags(uint32_t flags);
+			void				ClearFlags(uint32_t flags);
 
 			dev_t				VolumeID() const;
 			void				SetVolumeID(dev_t volumeID);
 
-			int32				Index() const;
+			int32_t				Index() const;
 
 			const char*			Name() const;
 			status_t			SetName(const char* name);
@@ -58,23 +58,23 @@ public:
 			const char*			ContentParameters() const;
 			status_t			SetContentParameters(const char* parameters);
 
-			status_t			CreateChild(int32 index,
+			status_t			CreateChild(int32_t index,
 									BMutablePartition** child);
-			status_t			CreateChild(int32 index, const char* type,
+			status_t			CreateChild(int32_t index, const char* type,
 									const char* name, const char* parameters,
 									BMutablePartition** child);
-			status_t			DeleteChild(int32 index);
+			status_t			DeleteChild(int32_t index);
 			status_t			DeleteChild(BMutablePartition* child);
 			void				DeleteAllChildren();
 
 			BMutablePartition*	Parent() const;
-			BMutablePartition*	ChildAt(int32 index) const;
-			int32				CountChildren() const;
-			int32				IndexOfChild(BMutablePartition* child) const;
+			BMutablePartition*	ChildAt(int32_t index) const;
+			int32_t				CountChildren() const;
+			int32_t				IndexOfChild(BMutablePartition* child) const;
 
-			void				SetChangeFlags(uint32 flags);
-			uint32				ChangeFlags() const;
-			void				Changed(uint32 flags, uint32 clearFlags = 0);
+			void				SetChangeFlags(uint32_t flags);
+			uint32_t				ChangeFlags() const;
+			void				Changed(uint32_t flags, uint32_t clearFlags = 0);
 
 			// for the partitioning system managing the parent
 			void*				ChildCookie() const;
@@ -99,7 +99,7 @@ private:
 			user_partition_data* fData;
 			BMutablePartition*	fParent;
 			BList				fChildren;
-			uint32				fChangeFlags;
+			uint32_t				fChangeFlags;
 			void*				fChildCookie;
 };
 

@@ -50,9 +50,9 @@ public:
 	virtual bool IsScalable() const;
 	virtual void ForceFontAliasing(bool enable);
 
-	virtual float StringWidth(const char *string, float size, float spacing, float shear, bool bold,  int32 length) const;
+	virtual float StringWidth(const char *string, float size, float spacing, float shear, bool bold,  int32_t length) const;
 	virtual void GetHeight(bhapi::font_height *height, float size, float shear, bool bold) const;
-	virtual BRect RenderString(BHandler *view, const char *string, float size, float spacing, float shear, bool bold,  int32 length);
+	virtual BRect RenderString(BHandler *view, const char *string, float size, float spacing, float shear, bool bold,  int32_t length);
 
 	virtual bhapi::font_detach_callback* Attach(void (*callback)(void*), void *data);
 	virtual bool Detach(bhapi::font_detach_callback *callback);
@@ -81,12 +81,12 @@ BFontBe::BFontBe(EBeGraphicsEngine *beEngine, const font_family family, const fo
 /*
 	if(fBeFont.FileFormat() == B_TRUETYPE_WINDOWS) fScalable = true;
 
-	int32 nTuned = fBeFont.CountTuned();
+	int32_t nTuned = fBeFont.CountTuned();
 
 	float *fontSizes = (nTuned > 0 ? new float[nTuned] : NULL);
-	int32 nFontSizes = 0;
+	int32_t nFontSizes = 0;
 
-	for(int32 i = 0; i < nTuned && fontSizes != NULL; i++)
+	for(int32_t i = 0; i < nTuned && fontSizes != NULL; i++)
 	{
 		tuned_font_info fontInfo;
 		fBeFont.GetTunedInfo(i, &fontInfo);
@@ -94,7 +94,7 @@ BFontBe::BFontBe(EBeGraphicsEngine *beEngine, const font_family family, const fo
 		fBeFont.SetSize(fontInfo.size);
 
 		bool isFixed = fBeFont.IsFixed();
-		for(int32 j = 0; j < nFontSizes; j++)
+		for(int32_t j = 0; j < nFontSizes; j++)
 			if(fontSizes[j] == fontInfo.size) {isFixed = false; break;}
 		if(isFixed == false) continue;
 
@@ -167,7 +167,7 @@ BFontBe::ForceFontAliasing(bool enable)
 
 
 float
-BFontBe::StringWidth(const char *string, float size, float spacing, float shear, bool bold,  int32 length) const
+BFontBe::StringWidth(const char *string, float size, float spacing, float shear, bool bold,  int32_t length) const
 {
 	if(fBeEngine == NULL) return 0;
 	if((int)size <= 0 || string == NULL || *string == 0 || length == 0 || !IsAttached()) return 0;
@@ -186,7 +186,7 @@ BFontBe::StringWidth(const char *string, float size, float spacing, float shear,
 	aFont.GetHeight(&fontHeight);
 
 	float width = 0;
-	if(length < 0 || (size_t)length > strlen(string)) length = (int32)strlen(string);
+	if(length < 0 || (size_t)length > strlen(string)) length = (int32_t)strlen(string);
 	float height = fontHeight.ascent + fontHeight.descent;
 	float delta = (float)ceil((double)(spacing * size));
 
@@ -195,7 +195,7 @@ BFontBe::StringWidth(const char *string, float size, float spacing, float shear,
 	const char *tmp = str;
 	while(!(tmp == NULL || bytes == 0 || (size_t)(tmp - string) > (size_t)length - (size_t)bytes))
 	{
-		BString aStr(tmp, (int32)bytes);
+		BString aStr(tmp, (int32_t)bytes);
 		float bWidth = aFont.StringWidth(aStr.String());
 		width += (bWidth > 0 ? bWidth : height) + (tmp == str ? 0.f : delta);
 		tmp = bhapi::utf8_next(tmp, &bytes);
@@ -234,7 +234,7 @@ BFontBe::GetHeight(bhapi::font_height *height, float size, float shear, bool bol
 
 
 BRect
-BFontBe::RenderString(BHandler *_view, const char *string, float size, float spacing, float shear, bool bold,  int32 length)
+BFontBe::RenderString(BHandler *_view, const char *string, float size, float spacing, float shear, bool bold,  int32_t length)
 {
 	if(fBeEngine == NULL || (int)size <= 0 || string == NULL || *string == 0 || length == 0) return BRect();
 
@@ -272,7 +272,7 @@ BFontBe::RenderString(BHandler *_view, const char *string, float size, float spa
 	fBeFont.GetHeight(&fontHeight);
 
 	float width = 0;
-	if(length < 0 || (size_t)length > strlen(string)) length = (int32)strlen(string);
+	if(length < 0 || (size_t)length > strlen(string)) length = (int32_t)strlen(string);
 	float height = fontHeight.ascent + fontHeight.descent;
 	float delta = (float)ceil((double)(spacing * size));
 	BPoint pt = view->ConvertToWindow(view->PenLocation());
@@ -283,7 +283,7 @@ BFontBe::RenderString(BHandler *_view, const char *string, float size, float spa
 	const char *tmp = str;
 	while(!(tmp == NULL || bytes == 0 || (size_t)(tmp - string) > (size_t)length - (size_t)bytes))
 	{
-		BString aStr(tmp, (int32)bytes);
+		BString aStr(tmp, (int32_t)bytes);
 		float bWidth = fBeFont.StringWidth(aStr.String());
 
 		if(bWidth > 0) bView->DrawString(aStr.String(), bPt);
@@ -338,13 +338,13 @@ EBeGraphicsEngine::UpdateFonts(bool check_only)
 
 	BHAPI_DEBUG("[GRAPHICS]: Updating BeOS fonts ...");
 
-	for(int32 i = 0; i < count_font_families(); i++)
+	for(int32_t i = 0; i < count_font_families(); i++)
 	{
 		font_family family;
 		if(get_font_family(i, &family) != B_OK) continue;
 
-		int32 nStyles = count_font_styles(family);
-		for(int32 j = 0; j < nStyles; j++)
+		int32_t nStyles = count_font_styles(family);
+		for(int32_t j = 0; j < nStyles; j++)
 		{
 			font_style style;
 			if(get_font_style(family, j, &style) != B_OK) continue;

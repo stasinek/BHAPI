@@ -39,7 +39,7 @@ static BLocker sPictureListLock;
 void reconnect_pictures_to_app_server()
 {
 	BAutolock _(sPictureListLock);
-	for (int32 i = 0; i < sPictureList.CountItems(); i++) {
+	for (int32_t i = 0; i < sPictureList.CountItems(); i++) {
 		BPicture::Private picture(sPictureList.ItemAt(i));
 		picture.ReconnectToAppServer();
 	}
@@ -60,35 +60,35 @@ void BPicture::Private::ReconnectToAppServer()
 
 
 struct _BPictureExtent_ {
-							_BPictureExtent_(int32 size = 0);
+							_BPictureExtent_(int32_t size = 0);
 							~_BPictureExtent_();
 
 			const void*		Data() const { return fNewData; }
-			status_t		ImportData(const void* data, int32 size);
+			status_t		ImportData(const void* data, int32_t size);
 
 			status_t		Flatten(BDataIO* stream);
 			status_t		Unflatten(BDataIO* stream);
 
-			int32			Size() const { return fNewSize; }
-			status_t		SetSize(int32 size);
+			int32_t			Size() const { return fNewSize; }
+			status_t		SetSize(int32_t size);
 
 			bool			AddPicture(BPicture* picture)
 								{ return fPictures.AddItem(picture); }
-			void			DeletePicture(int32 index)
+			void			DeletePicture(int32_t index)
 								{ delete static_cast<BPicture*>
 									(fPictures.RemoveItem(index)); }
 
 			BList*			Pictures() { return &fPictures; }
-			BPicture*		PictureAt(int32 index)
+			BPicture*		PictureAt(int32_t index)
 								{ return static_cast<BPicture*>
 									(fPictures.ItemAt(index)); }
 
-			int32			CountPictures() const
+			int32_t			CountPictures() const
 								{ return fPictures.CountItems(); }
 
 private:
 			void*	fNewData;
-			int32	fNewSize;
+			int32_t	fNewSize;
 
 			BList	fPictures;
 				// In R5 this is a BArray<BPicture*>
@@ -97,8 +97,8 @@ private:
 
 
 struct picture_header {
-	int32 magic1; // version ?
-	int32 magic2; // endianess ?
+	int32_t magic1; // version ?
+	int32_t magic2; // endianess ?
 };
 
 
@@ -123,11 +123,11 @@ BPicture::BPicture(const BPicture& otherPicture)
 	if (otherPicture.fToken != -1) {
 		BPrivate::AppServerLink link;
 		link.StartMessage(AS_CLONE_PICTURE);
-		link.Attach<int32>(otherPicture.fToken);
+		link.Attach<int32_t>(otherPicture.fToken);
 
 		status_t status = B_ERROR;
 		if (link.FlushWithReply(status) == B_OK && status == B_OK)
-			link.Read<int32>(&fToken);
+			link.Read<int32_t>(&fToken);
 
 		if (status < B_OK)
 			return;
@@ -137,7 +137,7 @@ BPicture::BPicture(const BPicture& otherPicture)
 		fExtent->ImportData(otherPicture.fExtent->Data(),
 			otherPicture.fExtent->Size());
 
-		for (int32 i = 0; i < otherPicture.fExtent->CountPictures(); i++) {
+		for (int32_t i = 0; i < otherPicture.fExtent->CountPictures(); i++) {
 			BPicture* picture
 				= new BPicture(*otherPicture.fExtent->PictureAt(i));
 			fExtent->AddPicture(picture);
@@ -154,7 +154,7 @@ BPicture::BPicture(BMessage* data)
 {
 	_InitData();
 
-	int32 version;
+	int32_t version;
 	if (data->FindInt32("_ver", &version) != B_OK)
 		version = 0;
 
@@ -169,7 +169,7 @@ BPicture::BPicture(BMessage* data)
 
 	// Load sub pictures
 	BMessage pictureMessage;
-	int32 i = 0;
+	int32_t i = 0;
 	while (data->FindMessage("piclib", i++, &pictureMessage) == B_OK) {
 		BPicture* picture = new BPicture(&pictureMessage);
 		fExtent->AddPicture(picture);
@@ -197,7 +197,7 @@ BPicture::BPicture(BMessage* data)
 }
 
 
-BPicture::BPicture(const void* data, int32 size)
+BPicture::BPicture(const void* data, int32_t size)
 {
 	_InitData();
 	// TODO: For now. We'll see if it's worth to support old style data
@@ -231,7 +231,7 @@ void BPicture::_DisposeData()
 		BPrivate::AppServerLink link;
 
 		link.StartMessage(AS_DELETE_PICTURE);
-		link.Attach<int32>(fToken);
+		link.Attach<int32_t>(fToken);
 		link.Flush();
 		SetToken(-1);
 	}
@@ -272,7 +272,7 @@ status_t BPicture::Archive(BMessage* data, bool deep) const
 	if (err != B_OK)
 		return err;
 
-	for (int32 i = 0; i < fExtent->CountPictures(); i++) {
+	for (int32_t i = 0; i < fExtent->CountPictures(); i++) {
 		BMessage pictureMessage;
 
 		err = fExtent->PictureAt(i)->Archive(&pictureMessage, deep);
@@ -294,7 +294,7 @@ status_t BPicture::Perform(perform_code code, void* arg)
 }
 
 
-status_t BPicture::Play(void** callBackTable, int32 tableEntries, void* user)
+status_t BPicture::Play(void** callBackTable, int32_t tableEntries, void* user)
 {
 	if (!_AssertLocalCopy())
 		return B_ERROR;
@@ -355,19 +355,19 @@ status_t BPicture::Unflatten(BDataIO* stream)
 }
 
 
-void BPicture::_ImportOldData(const void* data, int32 size)
+void BPicture::_ImportOldData(const void* data, int32_t size)
 {
 	// TODO: We don't support old data for now
 }
 
 
-void BPicture::SetToken(int32 token)
+void BPicture::SetToken(int32_t token)
 {
 	fToken = token;
 }
 
 
-int32 BPicture::Token() const
+int32_t BPicture::Token() const
 {
 	return fToken;
 }
@@ -401,7 +401,7 @@ bool BPicture::_AssertServerCopy()
 	if (fExtent->Data() == NULL)
 		return false;
 
-	for (int32 i = 0; i < fExtent->CountPictures(); i++) {
+	for (int32_t i = 0; i < fExtent->CountPictures(); i++) {
 		if (!fExtent->PictureAt(i)->_AssertServerCopy())
 			return false;
 	}
@@ -418,22 +418,22 @@ status_t BPicture::_Upload()
 	BPrivate::AppServerLink link;
 
 	link.StartMessage(AS_CREATE_PICTURE);
-	link.Attach<int32>(fExtent->CountPictures());
+	link.Attach<int32_t>(fExtent->CountPictures());
 
-	for (int32 i = 0; i < fExtent->CountPictures(); i++) {
+	for (int32_t i = 0; i < fExtent->CountPictures(); i++) {
 		BPicture* picture = fExtent->PictureAt(i);
 		if (picture != NULL)
-			link.Attach<int32>(picture->fToken);
+			link.Attach<int32_t>(picture->fToken);
 		else
-			link.Attach<int32>(-1);
+			link.Attach<int32_t>(-1);
 	}
-	link.Attach<int32>(fExtent->Size());
+	link.Attach<int32_t>(fExtent->Size());
 	link.Attach(fExtent->Data(), fExtent->Size());
 
 	status_t status = B_ERROR;
 	if (link.FlushWithReply(status) == B_OK
 		&& status == B_OK) {
-		link.Read<int32>(&fToken);
+		link.Read<int32_t>(&fToken);
 	}
 
 	return status;
@@ -448,22 +448,22 @@ status_t BPicture::_Download()
 	BPrivate::AppServerLink link;
 
 	link.StartMessage(AS_DOWNLOAD_PICTURE);
-	link.Attach<int32>(fToken);
+	link.Attach<int32_t>(fToken);
 
 	status_t status = B_ERROR;
 	if (link.FlushWithReply(status) == B_OK && status == B_OK) {
-		int32 count = 0;
-		link.Read<int32>(&count);
+		int32_t count = 0;
+		link.Read<int32_t>(&count);
 
 		// Read sub picture tokens
-		for (int32 i = 0; i < count; i++) {
+		for (int32_t i = 0; i < count; i++) {
 			BPicture* picture = new BPicture;
-			link.Read<int32>(&picture->fToken);
+			link.Read<int32_t>(&picture->fToken);
 			fExtent->AddPicture(picture);
 		}
 
-		int32 size;
-		link.Read<int32>(&size);
+		int32_t size;
+		link.Read<int32_t>(&size);
 		status = fExtent->SetSize(size);
 		if (status == B_OK)
 			link.Read(const_cast<void*>(fExtent->Data()), size);
@@ -482,7 +482,7 @@ const void*   BPicture::Data() const
 }
 
 
-int32 BPicture::DataSize() const
+int32_t BPicture::DataSize() const
 {
 	if (fExtent->Data() == NULL)
 		const_cast<BPicture*>(this)->_AssertLocalCopy();
@@ -526,7 +526,7 @@ BPicture::operator=(const BPicture&)
 
 
 // _BPictureExtent_
-_BPictureExtent_::_BPictureExtent_(int32 size)
+_BPictureExtent_::_BPictureExtent_(int32_t size)
 	:
 	fNewData(NULL),
 	fNewSize(0)
@@ -538,12 +538,12 @@ _BPictureExtent_::_BPictureExtent_(int32 size)
 _BPictureExtent_::~_BPictureExtent_()
 {
 	free(fNewData);
-	for (int32 i = 0; i < fPictures.CountItems(); i++)
+	for (int32_t i = 0; i < fPictures.CountItems(); i++)
 		delete static_cast<BPicture*>(fPictures.ItemAtFast(i));
 }
 
 
-status_t _BPictureExtent_::ImportData(const void* data, int32 size)
+status_t _BPictureExtent_::ImportData(const void* data, int32_t size)
 {
 	if (data == NULL)
 		return B_BAD_VALUE;
@@ -564,14 +564,14 @@ status_t _BPictureExtent_::Unflatten(BDataIO* stream)
 	if (stream == NULL)
 		return B_BAD_VALUE;
 
-	int32 count = 0;
+	int32_t count = 0;
 	ssize_t bytesRead = stream->Read(&count, sizeof(count));
 	if (bytesRead < B_OK)
 		return bytesRead;
 	if (bytesRead != (ssize_t)sizeof(count))
 		return B_BAD_DATA;
 
-	for (int32 i = 0; i < count; i++) {
+	for (int32_t i = 0; i < count; i++) {
 		BPicture* picture = new BPicture;
 		status_t status = picture->Unflatten(stream);
 		if (status < B_OK) {
@@ -582,7 +582,7 @@ status_t _BPictureExtent_::Unflatten(BDataIO* stream)
 		AddPicture(picture);
 	}
 
-	int32 size;
+	int32_t size;
 	bytesRead = stream->Read(&size, sizeof(size));
 	if (bytesRead < B_OK)
 		return bytesRead;
@@ -610,7 +610,7 @@ status_t _BPictureExtent_::Unflatten(BDataIO* stream)
 
 status_t _BPictureExtent_::Flatten(BDataIO* stream)
 {
-	int32 count = fPictures.CountItems();
+	int32_t count = fPictures.CountItems();
 	ssize_t bytesWritten = stream->Write(&count, sizeof(count));
 	if (bytesWritten < B_OK)
 		return bytesWritten;
@@ -618,7 +618,7 @@ status_t _BPictureExtent_::Flatten(BDataIO* stream)
 	if (bytesWritten != (ssize_t)sizeof(count))
 		return B_IO_ERROR;
 
-	for (int32 i = 0; i < count; i++) {
+	for (int32_t i = 0; i < count; i++) {
 		status_t status = PictureAt(i)->Flatten(stream);
 		if (status < B_OK)
 			return status;
@@ -642,7 +642,7 @@ status_t _BPictureExtent_::Flatten(BDataIO* stream)
 }
 
 
-status_t _BPictureExtent_::SetSize(int32 size)
+status_t _BPictureExtent_::SetSize(int32_t size)
 {
 	if (size < 0)
 		return B_BAD_VALUE;

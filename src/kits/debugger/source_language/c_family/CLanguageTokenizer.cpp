@@ -45,7 +45,7 @@ Token::Token(const Token& other)
 }
 
 
-Token::Token(const char* string, int32 length, int32 position, int32 type)
+Token::Token(const char* string, int32_t length, int32_t position, int32_t type)
 	:
 	string(string, length),
 	type(type),
@@ -137,7 +137,7 @@ Tokenizer::NextToken()
 			}
 		}
 
-		int32 length = fCurrentChar - begin;
+		int32_t length = fCurrentChar - begin;
 		if (length == 1 && decimal) {
 			// check for . operator
 			fCurrentChar = begin;
@@ -151,7 +151,7 @@ Tokenizer::NextToken()
 		test << "&_";
 		double value;
 		char t[2];
-		int32 matches = sscanf(test.String(), "%lf&%s", &value, t);
+		int32_t matches = sscanf(test.String(), "%lf&%s", &value, t);
 		if (matches != 2)
 			throw ParseException("error in constant", _CurrentPos() - length);
 
@@ -167,7 +167,7 @@ Tokenizer::NextToken()
 			|| isdigit(*fCurrentChar) || *fCurrentChar == '_')) {
 			fCurrentChar++;
 		}
-		int32 length = fCurrentChar - begin;
+		int32_t length = fCurrentChar - begin;
 		fCurrentToken = Token(begin, length, _CurrentPos() - length,
 			TOKEN_IDENTIFIER);
 	} else if (*fCurrentChar == '"' || *fCurrentChar == '\'') {
@@ -182,19 +182,19 @@ Tokenizer::NextToken()
 				break;
 			}
 		}
-		int32 tokenType = TOKEN_STRING_LITERAL;
+		int32_t tokenType = TOKEN_STRING_LITERAL;
 		if (!terminatorFound) {
 			tokenType = *begin == '"' ? TOKEN_DOUBLE_QUOTE
 					: TOKEN_SINGLE_QUOTE;
 			fCurrentChar = begin + 1;
 		}
 
-		int32 length = fCurrentChar - begin;
+		int32_t length = fCurrentChar - begin;
 		fCurrentToken = Token(begin, length, _CurrentPos() - length,
 			tokenType);
 	} else {
 		if (!_ParseOperator()) {
-			int32 type = TOKEN_NONE;
+			int32_t type = TOKEN_NONE;
 			switch (*fCurrentChar) {
 				case '\n':
 					type = TOKEN_END_OF_LINE;
@@ -261,8 +261,8 @@ Tokenizer::NextToken()
 
 bool Tokenizer::_ParseOperator()
 {
-	int32 type = TOKEN_NONE;
-	int32 length = 0;
+	int32_t type = TOKEN_NONE;
+	int32_t length = 0;
 	switch (*fCurrentChar) {
 		case '+':
 			type = TOKEN_PLUS;
@@ -445,14 +445,14 @@ Tokenizer::_ParseHexOperand()
 	while (_IsHexDigit(*fCurrentChar))
 		fCurrentChar++;
 
-	int32 length = fCurrentChar - begin;
+	int32_t length = fCurrentChar - begin;
 	fCurrentToken = Token(begin, length, _CurrentPos() - length,
 		TOKEN_CONSTANT);
 
 	if (length <= 10) {
 		// including the leading 0x, a 32-bit constant will be at most
 		// 10 characters. Anything larger, and 64 is necessary.
-		fCurrentToken.value.SetTo((uint32)strtoul(
+		fCurrentToken.value.SetTo((uint32_t)strtoul(
 			fCurrentToken.string.String(), NULL, 16));
 	} else {
 		fCurrentToken.value.SetTo((uint64)strtoull(
@@ -462,7 +462,7 @@ Tokenizer::_ParseHexOperand()
 }
 
 
-int32 Tokenizer::_CurrentPos() const
+int32_t Tokenizer::_CurrentPos() const
 {
 	return fCurrentChar - fString.String();
 }

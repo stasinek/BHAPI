@@ -87,13 +87,13 @@ static const tag_name_info kTagNameInfos[] = {
 };
 
 
-static const uint32 kTagNameInfoCount = DW_TAG_template_alias + 5;
+static const uint32_t kTagNameInfoCount = DW_TAG_template_alias + 5;
 static const char* sTagNames[kTagNameInfoCount];
 
 static struct InitTagNames {
 	InitTagNames()
 	{
-		for (uint32 i = 0; kTagNameInfos[i].name != NULL; i++) {
+		for (uint32_t i = 0; kTagNameInfos[i].name != NULL; i++) {
 			const tag_name_info& info = kTagNameInfos[i];
 			if (info.tag <= DW_TAG_template_alias)
 				sTagNames[info.tag] = info.name;

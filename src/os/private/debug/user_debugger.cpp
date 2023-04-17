@@ -60,13 +60,13 @@ static timer sProfilingTimers[SMP_MAX_CPUS];
 
 
 static void schedule_profiling_timer(Thread* thread, bigtime_t interval);
-static int32 profiling_event(timer* unused);
+static int32_t profiling_event(timer* unused);
 static status_t ensure_debugger_installed();
 static void get_team_debug_info(team_debug_info &teamDebugInfo);
 
 
 static inline status_t
-kill_interruptable_write_port(port_id port, int32 code, const void *buffer,
+kill_interruptable_write_port(port_id port, int32_t code, const void *buffer,
 	size_t bufferSize)
 {
 	return write_port_etc(port, code, buffer, bufferSize, B_KILL_CAN_INTERRUPT,
@@ -75,7 +75,7 @@ kill_interruptable_write_port(port_id port, int32 code, const void *buffer,
 
 
 static status_t
-debugger_write(port_id port, int32 code, const void *buffer, size_t bufferSize,
+debugger_write(port_id port, int32_t code, const void *buffer, size_t bufferSize,
 	bool dontWait)
 {
 	TRACE(("debugger_write(): thread: %" B_PRId32 ", team %" B_PRId32 ", "
@@ -94,7 +94,7 @@ debugger_write(port_id port, int32 code, const void *buffer, size_t bufferSize,
 	// get the write lock
 	TRACE(("debugger_write(): acquiring write lock...\n"));
 	error = acquire_sem_etc(writeLock, 1,
-		dontWait ? (uint32)B_RELATIVE_TIMEOUT : (uint32)B_KILL_CAN_INTERRUPT, 0);
+		dontWait ? (uint32_t)B_RELATIVE_TIMEOUT : (uint32_t)B_KILL_CAN_INTERRUPT, 0);
 	if (error != B_OK) {
 		TRACE(("debugger_write() done1: %" B_PRIx32 "\n", error));
 		return error;
@@ -115,7 +115,7 @@ debugger_write(port_id port, int32 code, const void *buffer, size_t bufferSize,
 		TRACE(("debugger_write(): writing to port...\n"));
 
 		error = write_port_etc(port, code, buffer, bufferSize,
-			dontWait ? (uint32)B_RELATIVE_TIMEOUT : (uint32)B_KILL_CAN_INTERRUPT, 0);
+			dontWait ? (uint32_t)B_RELATIVE_TIMEOUT : (uint32_t)B_KILL_CAN_INTERRUPT, 0);
 	}
 
 	// release the write lock
@@ -278,7 +278,7 @@ destroy_team_debug_info(struct team_debug_info *info)
 		// wait for the nub thread
 		if (info->nub_thread >= 0) {
 			if (info->nub_thread != thread_get_current_thread()->id) {
-				int32 result;
+				int32_t result;
 				wait_for_thread(info->nub_thread, &result);
 			}
 
@@ -526,13 +526,13 @@ get_team_debug_info(team_debug_info &teamDebugInfo)
 
 static status_t
 thread_hit_debug_event_internal(debug_debugger_message event,
-	const void *message, int32 size, bool requireDebugger, bool &restart)
+	const void *message, int32_t size, bool requireDebugger, bool &restart)
 {
 	restart = false;
 	Thread *thread = thread_get_current_thread();
 
 	TRACE(("thread_hit_debug_event(): thread: %" B_PRId32 ", event: %" B_PRIu32
-		", message: %p, size: %" B_PRId32 "\n", thread->id, (uint32)event,
+		", message: %p, size: %" B_PRId32 "\n", thread->id, (uint32_t)event,
 		message, size));
 
 	// check, if there's a debug port already
@@ -564,7 +564,7 @@ thread_hit_debug_event_internal(debug_debugger_message event,
 	GRAB_TEAM_DEBUG_INFO_LOCK(thread->team->debug_info);
 	SpinLocker threadDebugInfoLocker(thread->debug_info.lock);
 
-	uint32 threadFlags = thread->debug_info.flags;
+	uint32_t threadFlags = thread->debug_info.flags;
 	threadFlags &= ~B_THREAD_DEBUG_STOP;
 	bool debuggerInstalled
 		= (thread->team->debug_info.flags & B_TEAM_DEBUG_DEBUGGER_INSTALLED);
@@ -644,7 +644,7 @@ thread_hit_debug_event_internal(debug_debugger_message event,
 		bool done = false;
 		while (!done) {
 			// read a command from the debug port
-			int32 command;
+			int32_t command;
 			debugged_thread_message_data commandMessage;
 			ssize_t commandMessageSize = read_port_etc(port, &command,
 				&commandMessage, sizeof(commandMessage), B_KILL_CAN_INTERRUPT,
@@ -737,7 +737,7 @@ thread_hit_debug_event_internal(debug_debugger_message event,
 	threadDebugInfoLocker.Lock();
 
 	// check, if the team is still being debugged
-	int32 teamDebugFlags = atomic_get(&thread->team->debug_info.flags);
+	int32_t teamDebugFlags = atomic_get(&thread->team->debug_info.flags);
 	if (teamDebugFlags & B_TEAM_DEBUG_DEBUGGER_INSTALLED) {
 		// update the single-step flag
 		if (singleStep) {
@@ -746,7 +746,7 @@ thread_hit_debug_event_internal(debug_debugger_message event,
 			atomic_or(&thread->flags, THREAD_FLAGS_SINGLE_STEP);
 		} else {
 			atomic_and(&thread->debug_info.flags,
-				~(int32)B_THREAD_DEBUG_SINGLE_STEP);
+				~(int32_t)B_THREAD_DEBUG_SINGLE_STEP);
 		}
 
 		// unset the "stopped" state
@@ -776,7 +776,7 @@ thread_hit_debug_event_internal(debug_debugger_message event,
 
 static status_t
 thread_hit_debug_event(debug_debugger_message event, const void *message,
-	int32 size, bool requireDebugger)
+	int32_t size, bool requireDebugger)
 {
 	status_t result;
 	bool restart;
@@ -808,7 +808,7 @@ thread_hit_debug_event(debug_debugger_message event, const void *message,
 
 static status_t
 thread_hit_serious_debug_event(debug_debugger_message event,
-	const void *message, int32 messageSize)
+	const void *message, int32_t messageSize)
 {
 	// ensure that a debugger is installed for this team
 	status_t error = ensure_debugger_installed();
@@ -825,16 +825,16 @@ thread_hit_serious_debug_event(debug_debugger_message event,
 
 
 void
-user_debug_pre_syscall(uint32 syscall, void *args)
+user_debug_pre_syscall(uint32_t syscall, void *args)
 {
 	// check whether a debugger is installed
 	Thread *thread = thread_get_current_thread();
-	int32 teamDebugFlags = atomic_get(&thread->team->debug_info.flags);
+	int32_t teamDebugFlags = atomic_get(&thread->team->debug_info.flags);
 	if (!(teamDebugFlags & B_TEAM_DEBUG_DEBUGGER_INSTALLED))
 		return;
 
 	// check whether pre-syscall tracing is enabled for team or thread
-	int32 threadDebugFlags = atomic_get(&thread->debug_info.flags);
+	int32_t threadDebugFlags = atomic_get(&thread->debug_info.flags);
 	if (!(teamDebugFlags & B_TEAM_DEBUG_PRE_SYSCALL)
 			&& !(threadDebugFlags & B_THREAD_DEBUG_PRE_SYSCALL)) {
 		return;
@@ -845,7 +845,7 @@ user_debug_pre_syscall(uint32 syscall, void *args)
 	message.syscall = syscall;
 
 	// copy the syscall args
-	if (syscall < (uint32)kSyscallCount) {
+	if (syscall < (uint32_t)kSyscallCount) {
 		if (kSyscallInfos[syscall].parameter_size > 0)
 			memcpy(message.args, args, kSyscallInfos[syscall].parameter_size);
 	}
@@ -856,17 +856,17 @@ user_debug_pre_syscall(uint32 syscall, void *args)
 
 
 void
-user_debug_post_syscall(uint32 syscall, void *args, uint64 returnValue,
+user_debug_post_syscall(uint32_t syscall, void *args, uint64 returnValue,
 	bigtime_t startTime)
 {
 	// check whether a debugger is installed
 	Thread *thread = thread_get_current_thread();
-	int32 teamDebugFlags = atomic_get(&thread->team->debug_info.flags);
+	int32_t teamDebugFlags = atomic_get(&thread->team->debug_info.flags);
 	if (!(teamDebugFlags & B_TEAM_DEBUG_DEBUGGER_INSTALLED))
 		return;
 
 	// check whether post-syscall tracing is enabled for team or thread
-	int32 threadDebugFlags = atomic_get(&thread->debug_info.flags);
+	int32_t threadDebugFlags = atomic_get(&thread->debug_info.flags);
 	if (!(teamDebugFlags & B_TEAM_DEBUG_POST_SYSCALL)
 			&& !(threadDebugFlags & B_THREAD_DEBUG_POST_SYSCALL)) {
 		return;
@@ -880,7 +880,7 @@ user_debug_post_syscall(uint32 syscall, void *args, uint64 returnValue,
 	message.syscall = syscall;
 
 	// copy the syscall args
-	if (syscall < (uint32)kSyscallCount) {
+	if (syscall < (uint32_t)kSyscallCount) {
 		if (kSyscallInfos[syscall].parameter_size > 0)
 			memcpy(message.args, args, kSyscallInfos[syscall].parameter_size);
 	}
@@ -928,7 +928,7 @@ user_debug_handle_signal(int signal, struct sigaction *handler, bool deadly)
 {
 	// check, if a debugger is installed and is interested in signals
 	Thread *thread = thread_get_current_thread();
-	int32 teamDebugFlags = atomic_get(&thread->team->debug_info.flags);
+	int32_t teamDebugFlags = atomic_get(&thread->team->debug_info.flags);
 	if (~teamDebugFlags
 		& (B_TEAM_DEBUG_DEBUGGER_INSTALLED | B_TEAM_DEBUG_SIGNALS)) {
 		return true;
@@ -978,7 +978,7 @@ user_debug_team_created(team_id teamID)
 	// check, if a debugger is installed and is interested in team creation
 	// events
 	Thread *thread = thread_get_current_thread();
-	int32 teamDebugFlags = atomic_get(&thread->team->debug_info.flags);
+	int32_t teamDebugFlags = atomic_get(&thread->team->debug_info.flags);
 	if (~teamDebugFlags
 		& (B_TEAM_DEBUG_DEBUGGER_INSTALLED | B_TEAM_DEBUG_TEAM_CREATION)) {
 		return;
@@ -1016,7 +1016,7 @@ user_debug_team_exec()
 	// check, if a debugger is installed and is interested in team creation
 	// events
 	Thread *thread = thread_get_current_thread();
-	int32 teamDebugFlags = atomic_get(&thread->team->debug_info.flags);
+	int32_t teamDebugFlags = atomic_get(&thread->team->debug_info.flags);
 	if (~teamDebugFlags
 		& (B_TEAM_DEBUG_DEBUGGER_INSTALLED | B_TEAM_DEBUG_TEAM_CREATION)) {
 		return;
@@ -1053,7 +1053,7 @@ user_debug_thread_created(thread_id threadID)
 {
 	// check, if a debugger is installed and is interested in thread events
 	Thread *thread = thread_get_current_thread();
-	int32 teamDebugFlags = atomic_get(&thread->team->debug_info.flags);
+	int32_t teamDebugFlags = atomic_get(&thread->team->debug_info.flags);
 	if (~teamDebugFlags
 		& (B_TEAM_DEBUG_DEBUGGER_INSTALLED | B_TEAM_DEBUG_THREADS)) {
 		return;
@@ -1082,7 +1082,7 @@ user_debug_thread_deleted(team_id teamID, thread_id threadID)
 
 	InterruptsSpinLocker debugInfoLocker(team->debug_info.lock);
 
-	int32 teamDebugFlags = atomic_get(&team->debug_info.flags);
+	int32_t teamDebugFlags = atomic_get(&team->debug_info.flags);
 	port_id debuggerPort = team->debug_info.debugger_port;
 	sem_id writeLock = team->debug_info.debugger_write_lock;
 
@@ -1139,7 +1139,7 @@ user_debug_thread_exiting(Thread* thread)
 
 	GRAB_TEAM_DEBUG_INFO_LOCK(team->debug_info);
 
-	int32 teamDebugFlags = atomic_get(&team->debug_info.flags);
+	int32_t teamDebugFlags = atomic_get(&team->debug_info.flags);
 	port_id debuggerPort = team->debug_info.debugger_port;
 
 	RELEASE_TEAM_DEBUG_INFO_LOCK(team->debug_info);
@@ -1158,11 +1158,11 @@ user_debug_thread_exiting(Thread* thread)
 		return;
 
 	area_id sampleArea = threadDebugInfo.profile.sample_area;
-	int32 sampleCount = threadDebugInfo.profile.sample_count;
-	int32 droppedTicks = threadDebugInfo.profile.dropped_ticks;
-	int32 stackDepth = threadDebugInfo.profile.stack_depth;
+	int32_t sampleCount = threadDebugInfo.profile.sample_count;
+	int32_t droppedTicks = threadDebugInfo.profile.dropped_ticks;
+	int32_t stackDepth = threadDebugInfo.profile.stack_depth;
 	bool variableStackDepth = threadDebugInfo.profile.variable_stack_depth;
-	int32 imageEvent = threadDebugInfo.profile.image_event;
+	int32_t imageEvent = threadDebugInfo.profile.image_event;
 	threadDebugInfo.profile.sample_area = -1;
 	threadDebugInfo.profile.samples = NULL;
 	threadDebugInfo.profile.buffer_full = false;
@@ -1201,7 +1201,7 @@ user_debug_image_created(const image_info *imageInfo)
 {
 	// check, if a debugger is installed and is interested in image events
 	Thread *thread = thread_get_current_thread();
-	int32 teamDebugFlags = atomic_get(&thread->team->debug_info.flags);
+	int32_t teamDebugFlags = atomic_get(&thread->team->debug_info.flags);
 	if (~teamDebugFlags
 		& (B_TEAM_DEBUG_DEBUGGER_INSTALLED | B_TEAM_DEBUG_IMAGES)) {
 		return;
@@ -1223,7 +1223,7 @@ user_debug_image_deleted(const image_info *imageInfo)
 {
 	// check, if a debugger is installed and is interested in image events
 	Thread *thread = thread_get_current_thread();
-	int32 teamDebugFlags = atomic_get(&thread->team->debug_info.flags);
+	int32_t teamDebugFlags = atomic_get(&thread->team->debug_info.flags);
 	if (~teamDebugFlags
 		& (B_TEAM_DEBUG_DEBUGGER_INSTALLED | B_TEAM_DEBUG_IMAGES)) {
 		return;
@@ -1269,7 +1269,7 @@ user_debug_single_stepped()
 {
 	// clear the single-step thread flag
 	Thread* thread = thread_get_current_thread();
-	atomic_and(&thread->flags, ~(int32)THREAD_FLAGS_SINGLE_STEP);
+	atomic_and(&thread->flags, ~(int32_t)THREAD_FLAGS_SINGLE_STEP);
 
 	// prepare the message
 	debug_single_step message;
@@ -1311,10 +1311,10 @@ profiling_do_sample(bool& flushBuffer)
 
 	// Check, whether the buffer is full or an image event occurred since the
 	// last sample was taken.
-	int32 maxSamples = debugInfo.profile.max_samples;
-	int32 sampleCount = debugInfo.profile.sample_count;
-	int32 stackDepth = debugInfo.profile.stack_depth;
-	int32 imageEvent = thread->team->debug_info.image_event;
+	int32_t maxSamples = debugInfo.profile.max_samples;
+	int32_t sampleCount = debugInfo.profile.sample_count;
+	int32_t stackDepth = debugInfo.profile.stack_depth;
+	int32_t imageEvent = thread->team->debug_info.image_event;
 	if (debugInfo.profile.sample_count > 0) {
 		if (debugInfo.profile.last_image_event < imageEvent
 			&& debugInfo.profile.variable_stack_depth
@@ -1362,10 +1362,10 @@ profiling_do_sample(bool& flushBuffer)
 	} else {
 		// fixed sample count per hit
 		if (stackDepth > 1) {
-			int32 count = arch_debug_get_stack_trace(returnAddresses,
+			int32_t count = arch_debug_get_stack_trace(returnAddresses,
 				stackDepth, 1, 0, STACK_TRACE_KERNEL | STACK_TRACE_USER);
 
-			for (int32 i = count; i < stackDepth; i++)
+			for (int32_t i = count; i < stackDepth; i++)
 				returnAddresses[i] = 0;
 		} else
 			*returnAddresses = (addr_t)arch_debug_get_interrupt_pc(NULL);
@@ -1391,11 +1391,11 @@ profiling_buffer_full(void*)
 	SpinLocker threadDebugInfoLocker(debugInfo.lock);
 
 	if (debugInfo.profile.samples != NULL && debugInfo.profile.buffer_full) {
-		int32 sampleCount = debugInfo.profile.sample_count;
-		int32 droppedTicks = debugInfo.profile.dropped_ticks;
-		int32 stackDepth = debugInfo.profile.stack_depth;
+		int32_t sampleCount = debugInfo.profile.sample_count;
+		int32_t droppedTicks = debugInfo.profile.dropped_ticks;
+		int32_t stackDepth = debugInfo.profile.stack_depth;
 		bool variableStackDepth = debugInfo.profile.variable_stack_depth;
-		int32 imageEvent = debugInfo.profile.image_event;
+		int32_t imageEvent = debugInfo.profile.image_event;
 
 		// notify the debugger
 		debugInfo.profile.sample_count = 0;
@@ -1435,7 +1435,7 @@ profiling_buffer_full(void*)
 /*!	Profiling timer event callback.
 	Called with interrupts disabled.
 */
-static int32
+static int32_t
 profiling_event(timer* /*unused*/)
 {
 	Thread* thread = thread_get_current_thread();
@@ -1510,12 +1510,12 @@ user_debug_thread_scheduled(Thread* thread)
 		thus have a debug port).
 */
 static void
-broadcast_debugged_thread_message(Thread *nubThread, int32 code,
-	const void *message, int32 size)
+broadcast_debugged_thread_message(Thread *nubThread, int32_t code,
+	const void *message, int32_t size)
 {
 	// iterate through the threads
 	thread_info threadInfo;
-	int32 cookie = 0;
+	int32_t cookie = 0;
 	while (get_next_thread_info(nubThread->team->id, &cookie, &threadInfo)
 			== B_OK) {
 		// get the thread and lock it
@@ -1668,7 +1668,7 @@ debug_nub_thread(void *)
 
 	// command processing loop
 	while (true) {
-		int32 command;
+		int32_t command;
 		debug_nub_message_data message;
 		ssize_t messageSize = read_port_etc(port, &command, &message,
 			sizeof(message), B_KILL_CAN_INTERRUPT, 0);
@@ -1697,7 +1697,7 @@ debug_nub_thread(void *)
 			debug_nub_start_profiler_reply		start_profiler;
 			debug_profiler_update				profiler_update;
 		} reply;
-		int32 replySize = 0;
+		int32_t replySize = 0;
 		port_id replyPort = -1;
 
 		// process the command
@@ -1707,7 +1707,7 @@ debug_nub_thread(void *)
 				// get the parameters
 				replyPort = message.read_memory.reply_port;
 				void *address = message.read_memory.address;
-				int32 size = message.read_memory.size;
+				int32_t size = message.read_memory.size;
 				status_t result = B_OK;
 
 				// check the parameters
@@ -1741,9 +1741,9 @@ debug_nub_thread(void *)
 				// get the parameters
 				replyPort = message.write_memory.reply_port;
 				void *address = message.write_memory.address;
-				int32 size = message.write_memory.size;
+				int32_t size = message.write_memory.size;
 				const char *data = message.write_memory.data;
-				int32 realSize = (char*)&message + messageSize - data;
+				int32_t realSize = (char*)&message + messageSize - data;
 				status_t result = B_OK;
 
 				// check the parameters
@@ -1774,7 +1774,7 @@ debug_nub_thread(void *)
 			case B_DEBUG_MESSAGE_SET_TEAM_FLAGS:
 			{
 				// get the parameters
-				int32 flags = message.set_team_flags.flags
+				int32_t flags = message.set_team_flags.flags
 					& B_TEAM_DEBUG_USER_FLAG_MASK;
 
 				TRACE(("nub thread %" B_PRId32 ": B_DEBUG_MESSAGE_SET_TEAM_FLAGS"
@@ -1799,7 +1799,7 @@ debug_nub_thread(void *)
 			{
 				// get the parameters
 				thread_id threadID = message.set_thread_flags.thread;
-				int32 flags = message.set_thread_flags.flags
+				int32_t flags = message.set_thread_flags.flags
 					& B_THREAD_DEBUG_USER_FLAG_MASK;
 
 				TRACE(("nub thread %" B_PRId32 ": B_DEBUG_MESSAGE_SET_THREAD_FLAGS"
@@ -1829,7 +1829,7 @@ debug_nub_thread(void *)
 			{
 				// get the parameters
 				thread_id threadID;
-				uint32 handleEvent;
+				uint32_t handleEvent;
 				bool singleStep;
 
 				threadID = message.continue_thread.thread;
@@ -1994,8 +1994,8 @@ debug_nub_thread(void *)
 				// get the parameters
 				replyPort = message.set_watchpoint.reply_port;
 				void *address = message.set_watchpoint.address;
-				uint32 type = message.set_watchpoint.type;
-				int32 length = message.set_watchpoint.length;
+				uint32_t type = message.set_watchpoint.type;
+				int32_t length = message.set_watchpoint.length;
 
 				TRACE(("nub thread %" B_PRId32 ": B_DEBUG_MESSAGE_SET_WATCHPOINT"
 					": address: %p, type: %" B_PRIu32 ", length: %" B_PRId32 "\n",
@@ -2058,8 +2058,8 @@ debug_nub_thread(void *)
 				thread_id threadID = message.set_signal_masks.thread;
 				uint64 ignore = message.set_signal_masks.ignore_mask;
 				uint64 ignoreOnce = message.set_signal_masks.ignore_once_mask;
-				uint32 ignoreOp = message.set_signal_masks.ignore_op;
-				uint32 ignoreOnceOp = message.set_signal_masks.ignore_once_op;
+				uint32_t ignoreOp = message.set_signal_masks.ignore_op;
+				uint32_t ignoreOnceOp = message.set_signal_masks.ignore_once_op;
 
 				TRACE(("nub thread %" B_PRId32 ": B_DEBUG_MESSAGE_SET_SIGNAL_MASKS"
 					": thread: %" B_PRId32 ", ignore: %" B_PRIx64 " (op: %"
@@ -2241,7 +2241,7 @@ debug_nub_thread(void *)
 				thread_id threadID = message.start_profiler.thread;
 				replyPort = message.start_profiler.reply_port;
 				area_id sampleArea = message.start_profiler.sample_area;
-				int32 stackDepth = message.start_profiler.stack_depth;
+				int32_t stackDepth = message.start_profiler.stack_depth;
 				bool variableStackDepth
 					= message.start_profiler.variable_stack_depth;
 				bigtime_t interval = max_c(message.start_profiler.interval,
@@ -2286,7 +2286,7 @@ debug_nub_thread(void *)
 				}
 
 				// get the thread and set the profile info
-				int32 imageEvent = nubThread->team->debug_info.image_event;
+				int32_t imageEvent = nubThread->team->debug_info.image_event;
 				if (result == B_OK) {
 					Thread* thread = Thread::GetAndLock(threadID);
 					BReference<Thread> threadReference(thread, true);
@@ -2356,11 +2356,11 @@ debug_nub_thread(void *)
 
 				area_id sampleArea = -1;
 				addr_t* samples = NULL;
-				int32 sampleCount = 0;
-				int32 stackDepth = 0;
+				int32_t sampleCount = 0;
+				int32_t stackDepth = 0;
 				bool variableStackDepth = false;
-				int32 imageEvent = 0;
-				int32 droppedTicks = 0;
+				int32_t imageEvent = 0;
+				int32_t droppedTicks = 0;
 
 				// get the thread and detach the profile info
 				Thread* thread = Thread::GetAndLock(threadID);
@@ -2471,7 +2471,7 @@ install_team_debugger_init_debug_infos(Team *team, team_id debuggerTeam,
 		if (thread->id == nubThread) {
 			atomic_set(&thread->debug_info.flags, B_THREAD_DEBUG_NUB_THREAD);
 		} else {
-			int32 flags = thread->debug_info.flags
+			int32_t flags = thread->debug_info.flags
 				& ~B_THREAD_DEBUG_USER_FLAG_MASK;
 			atomic_set(&thread->debug_info.flags,
 				flags | B_THREAD_DEBUG_DEFAULT_FLAGS);
@@ -2539,7 +2539,7 @@ install_team_debugger(team_id teamID, port_id debuggerPort,
 	cpu_status state = disable_interrupts();
 	GRAB_TEAM_DEBUG_INFO_LOCK(team->debug_info);
 
-	int32 teamDebugFlags = team->debug_info.flags;
+	int32_t teamDebugFlags = team->debug_info.flags;
 
 	if (teamDebugFlags & B_TEAM_DEBUG_DEBUGGER_INSTALLED) {
 		// There's already a debugger installed.
@@ -2725,7 +2725,7 @@ install_team_debugger(team_id teamID, port_id debuggerPort,
 			delete_port(nubPort);
 		}
 		if (nubThread >= 0) {
-			int32 result;
+			int32_t result;
 			wait_for_thread(nubThread, &result);
 		}
 
@@ -2789,7 +2789,7 @@ _user_disable_debugger(int state)
 	cpu_status cpuState = disable_interrupts();
 	GRAB_TEAM_DEBUG_INFO_LOCK(team->debug_info);
 
-	int32 oldFlags;
+	int32_t oldFlags;
 	if (state) {
 		oldFlags = atomic_or(&team->debug_info.flags,
 			B_TEAM_DEBUG_DEBUGGER_DISABLED);
@@ -2951,7 +2951,7 @@ _user_wait_for_debugger(void)
 
 
 status_t
-_user_set_debugger_breakpoint(void *address, uint32 type, int32 length,
+_user_set_debugger_breakpoint(void *address, uint32_t type, int32_t length,
 	bool watchpoint)
 {
 	// check the address and size

@@ -42,7 +42,7 @@ enum {
 
 
 // Helper function that contacts the registrar for mime update calls
-status_t do_mime_update(int32 what, const char* path, int recursive,
+status_t do_mime_update(int32_t what, const char* path, int recursive,
 	int synchronous, int force)
 {
 	BEntry root;
@@ -105,7 +105,7 @@ status_t create_app_meta_mime(const char* path, int recursive, int synchronous,
 
 
 // Retrieves an icon associated with a given device.
-status_t get_device_icon(const char* device, void* icon, int32 size)
+status_t get_device_icon(const char* device, void* icon, int32_t size)
 {
 	if (device == NULL || icon == NULL
 		|| (size != B_LARGE_ICON && size != B_MINI_ICON))
@@ -186,7 +186,7 @@ status_t get_device_icon(const char* device, BBitmap* icon, icon_size which)
 		rect.Set(0, 0, 31, 31);
 
 	BBitmap* bitmap = icon;
-	int32 iconSize = which;
+	int32_t iconSize = which;
 
 	if (icon->ColorSpace() != B_CMAP8
 		|| (which != B_MINI_ICON && which != B_LARGE_ICON)) {
@@ -259,7 +259,7 @@ status_t get_device_icon(const char* device, uint8** _data, size_t* _size,
 	}
 
 	if (status == B_OK) {
-		if (iconData.icon_size > (int32)sizeof(data)) {
+		if (iconData.icon_size > (int32_t)sizeof(data)) {
 			// the stack buffer does not contain the data, see NOTE above
 			iconData.icon_data = *_data;
 			status = ioctl(fd, B_GET_VECTOR_ICON, &iconData,
@@ -325,7 +325,7 @@ status_t get_named_icon(const char* name, uint8** _data, size_t* _size, type_cod
 	BFile file;
 	off_t size;
 
-	for (uint32 i = 0; i < sizeof(kWhich) / sizeof(kWhich[0]); i++) {
+	for (uint32_t i = 0; i < sizeof(kWhich) / sizeof(kWhich[0]); i++) {
 		BPath path;
 		if (find_directory(kWhich[i], &path) != B_OK)
 			continue;

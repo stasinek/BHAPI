@@ -51,9 +51,9 @@ public:
 	virtual bool IsScalable() const;
 	virtual void ForceFontAliasing(bool enable);
 
-	virtual float StringWidth(const char *string, float size, float spacing, float shear, bool bold,  int32 length) const;
+	virtual float StringWidth(const char *string, float size, float spacing, float shear, bool bold,  int32_t length) const;
 	virtual void GetHeight(bhapi::font_height *height, float size, float shear, bool bold) const;
-	virtual BRect RenderString(BHandler *view, const char *string, float size, float spacing, float shear, bool bold,  int32 length);
+	virtual BRect RenderString(BHandler *view, const char *string, float size, float spacing, float shear, bool bold,  int32_t length);
 
 	virtual bhapi::font_detach_callback* Attach(void (*callback)(void*), void *data);
 	virtual bool Detach(bhapi::font_detach_callback *callback);
@@ -187,7 +187,7 @@ EDFBFont::ForceFontAliasing(bool enable)
 
 
 float
-EDFBFont::StringWidth(const char *string, float size, float spacing, float shear, bool bold,  int32 length) const
+EDFBFont::StringWidth(const char *string, float size, float spacing, float shear, bool bold,  int32_t length) const
 {
 	if(fEngine == NULL) return 0;
 	if((int)size <= 0 || string == NULL || *string == 0 || length == 0 || !IsAttached()) return 0;
@@ -201,7 +201,7 @@ EDFBFont::StringWidth(const char *string, float size, float spacing, float shear
 	if(size != (float)height) return 0;
 
 	float width = 0;
-	if(length < 0 || (size_t)length > strlen(string)) length = (int32)strlen(string);
+	if(length < 0 || (size_t)length > strlen(string)) length = (int32_t)strlen(string);
 	float delta = (float)ceil((double)(spacing * size));
 
 	uint8 bytes = 0;
@@ -209,7 +209,7 @@ EDFBFont::StringWidth(const char *string, float size, float spacing, float shear
 	const char *tmp = str;
 	while(!(tmp == NULL || bytes == 0 || (size_t)(tmp - string) > (size_t)length - (size_t)bytes))
 	{
-		BString aStr(tmp, (int32)bytes);
+		BString aStr(tmp, (int32_t)bytes);
 
 		int bWidth = -1;
 		fDFBFont->GetStringWidth(fDFBFont, aStr.String(), aStr.Length(), &bWidth);
@@ -250,7 +250,7 @@ EDFBFont::GetHeight(bhapi::font_height *height, float size, float shear, bool bo
 
 
 BRect
-EDFBFont::RenderString(BHandler *_view, const char *string, float size, float spacing, float shear, bool bold,  int32 length)
+EDFBFont::RenderString(BHandler *_view, const char *string, float size, float spacing, float shear, bool bold,  int32_t length)
 {
 	if(fEngine == NULL || (int)size <= 0 || string == NULL || *string == 0 || length == 0) return BRect();
 
@@ -278,7 +278,7 @@ EDFBFont::RenderString(BHandler *_view, const char *string, float size, float sp
 	if(size != (float)height) return BRect();
 
 	float width = 0;
-	if(length < 0 || (size_t)length > strlen(string)) length = (int32)strlen(string);
+	if(length < 0 || (size_t)length > strlen(string)) length = (int32_t)strlen(string);
 	float delta = (float)ceil((double)(spacing * size));
 
 	BPoint pt = view->ConvertToWindow(view->PenLocation());
@@ -294,12 +294,12 @@ EDFBFont::RenderString(BHandler *_view, const char *string, float size, float sp
 	const char *tmp = str;
 	while(!(tmp == NULL || bytes == 0 || (size_t)(tmp - string) > (size_t)length - (size_t)bytes))
 	{
-		BString aStr(tmp, (int32)bytes);
+		BString aStr(tmp, (int32_t)bytes);
 
 		int bWidth = -1;
 		fDFBFont->GetStringWidth(fDFBFont, aStr.String(), aStr.Length(), &bWidth);
 
-		for(int32 i = 0; i < dc->Clipping()->CountRects(); i++)
+		for(int32_t i = 0; i < dc->Clipping()->CountRects(); i++)
 		{
 			BRect rect = dc->Clipping()->RectAt(i).FloorCopy();
 
@@ -379,9 +379,9 @@ EDFBGraphicsEngine::UpdateFonts(bool check_only)
 	BStringArray *fonts_dirs_array = fonts_dirs.Split(":");
 	BHAPI_DEBUG("[FONT]: Fonts directory number: %d", (fonts_dirs_array ? fonts_dirs_array->CountItems() : 0));
 
-	int32 count = 0;
+	int32_t count = 0;
 	const BString *_fonts_dir;
-	for(int32 m = 0; (_fonts_dir = (fonts_dirs_array ? fonts_dirs_array->ItemAt(m) : NULL)) != NULL; m++)
+	for(int32_t m = 0; (_fonts_dir = (fonts_dirs_array ? fonts_dirs_array->ItemAt(m) : NULL)) != NULL; m++)
 	{
 		BDirectory directory(_fonts_dir->String());
 		if(directory.InitCheck() != B_OK)

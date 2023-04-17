@@ -71,8 +71,8 @@ PXAInterruptController::PXAInterruptController(fdt_module_info *fdt, fdt_device_
 void
 PXATimer::SetTimeout(bigtime_t timeout)
 {
-	uint32 val = timeout & UINT_MAX;
-	uint32 res = PXA_RES_US;
+	uint32_t val = timeout & UINT_MAX;
+	uint32_t res = PXA_RES_US;
 
 	if (timeout & ~UINT_MAX) {
 		// Does not fit, so scale resolution down to milliseconds
@@ -114,14 +114,14 @@ PXATimer::Time()
 }
 
 
-int32
+int32_t
 PXATimer::_InterruptWrapper(void *data)
 {
 	return ((PXATimer*)data)->HandleInterrupt();
 }
 
 
-int32
+int32_t
 PXATimer::HandleInterrupt()
 {
 	if (fRegBase[PXA_OSSR] & (1 << 4)) {

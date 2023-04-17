@@ -15,16 +15,16 @@ namespace BPrivate {
 
 class DragTrackingFilter : public BMessageFilter {
 public:
-						DragTrackingFilter(BView* targetView, uint32 messageWhat);
+						DragTrackingFilter(BView* targetView, uint32_t messageWhat);
 
 	filter_result		Filter(BMessage* message, BHandler** _target);
 
 private:
 			BView*		fTargetView;
-			uint32		fMessageWhat;
+			uint32_t		fMessageWhat;
 			bool		fIsTracking;
 			BPoint		fClickPoint;
-			uint32		fClickButtons;
+			uint32_t		fClickButtons;
 };
 
 }	// namespace BPrivate

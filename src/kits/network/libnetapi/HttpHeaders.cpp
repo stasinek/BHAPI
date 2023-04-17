@@ -159,7 +159,7 @@ BHttpHeaders::~BHttpHeaders()
 
 const char*  BHttpHeaders::HeaderValue(const char* name) const
 {
-	for (int32 i = 0; i < fHeaderList.CountItems(); i++) {
+	for (int32_t i = 0; i < fHeaderList.CountItems(); i++) {
 		BHttpHeader* header
 			= reinterpret_cast<BHttpHeader*>(fHeaderList.ItemAtFast(i));
 
@@ -172,7 +172,7 @@ const char*  BHttpHeaders::HeaderValue(const char* name) const
 
 
 BHttpHeader&
-BHttpHeaders::HeaderAt(int32 index) const
+BHttpHeaders::HeaderAt(int32_t index) const
 {
 	//! Note: index _must_ be in-bounds
 	BHttpHeader* header
@@ -185,7 +185,7 @@ BHttpHeaders::HeaderAt(int32 index) const
 // #pragma mark Header count
 
 
-int32 BHttpHeaders::CountHeaders() const
+int32_t BHttpHeaders::CountHeaders() const
 {
 	return fHeaderList.CountItems();
 }
@@ -194,9 +194,9 @@ int32 BHttpHeaders::CountHeaders() const
 // #pragma Header tests
 
 
-int32 BHttpHeaders::HasHeader(const char* name) const
+int32_t BHttpHeaders::HasHeader(const char* name) const
 {
-	for (int32 i = 0; i < fHeaderList.CountItems(); i++) {
+	for (int32_t i = 0; i < fHeaderList.CountItems(); i++) {
 		BHttpHeader* header
 			= reinterpret_cast<BHttpHeader*>(fHeaderList.ItemAt(i));
 
@@ -223,7 +223,7 @@ bool BHttpHeaders::AddHeader(const char* name, const char* value)
 }
 
 
-bool BHttpHeaders::AddHeader(const char* name, int32 value)
+bool BHttpHeaders::AddHeader(const char* name, int32_t value)
 {
 	BString strValue;
 	strValue << value;
@@ -250,7 +250,7 @@ BHttpHeaders::operator=(const BHttpHeaders& other)
 {
 	Clear();
 
-	for (int32 i = 0; i < other.CountHeaders(); i++)
+	for (int32_t i = 0; i < other.CountHeaders(); i++)
 		AddHeader(other.HeaderAt(i).Name(), other.HeaderAt(i).Value());
 
 	return *this;
@@ -258,7 +258,7 @@ BHttpHeaders::operator=(const BHttpHeaders& other)
 
 
 BHttpHeader&
-BHttpHeaders::operator[](int32 index) const
+BHttpHeaders::operator[](int32_t index) const
 {
 	//! Note: Index _must_ be in-bounds
 	BHttpHeader* header
@@ -277,7 +277,7 @@ const char*  BHttpHeaders::operator[](const char* name) const
 void BHttpHeaders::_EraseData()
 {
 	// Free allocated data;
-	for (int32 i = 0; i < fHeaderList.CountItems(); i++) {
+	for (int32_t i = 0; i < fHeaderList.CountItems(); i++) {
 		BHttpHeader* header
 			= reinterpret_cast<BHttpHeader*>(fHeaderList.ItemAtFast(i));
 

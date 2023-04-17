@@ -36,7 +36,7 @@ public:
 										= 0;
 
 	virtual	bool				IsKernelPageAccessible(addr_t virtualAddress,
-									uint32 protection) = 0;
+									uint32_t protection) = 0;
 };
 
 

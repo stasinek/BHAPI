@@ -64,12 +64,12 @@ private:
 };
 
 
-status_t NonParameterCommandRequest(uint8 ofg, uint8 ocf, int32* result, hci_id hId,
+status_t NonParameterCommandRequest(uint8 ofg, uint8 ocf, int32_t* result, hci_id hId,
 	BMessenger* messenger);
 
 template<typename PARAMETERCONTAINER, typename PARAMETERTYPE>
 status_t SingleParameterCommandRequest(uint8 ofg, uint8 ocf, PARAMETERTYPE parameter,
-	int32* result, hci_id hId, BMessenger* messenger)
+	int32_t* result, hci_id hId, BMessenger* messenger)
 {
 	int8 bt_status = BT_ERROR;
 
@@ -109,7 +109,7 @@ void* buildReadClassOfDevice(size_t* outsize);
 /* LINK CONTROL */
 void* buildRemoteNameRequest(bdaddr_t bdaddr, uint8 pscan_rep_mode,
 	uint16 clock_offset, size_t* outsize);
-void* buildInquiry(uint32 lap, uint8 length, uint8 num_rsp, size_t* outsize);
+void* buildInquiry(uint32_t lap, uint8 length, uint8 num_rsp, size_t* outsize);
 void* buildInquiryCancel(size_t* outsize);
 void* buildPinCodeRequestReply(bdaddr_t bdaddr, uint8 length, char pincode[16],
 	size_t* outsize);

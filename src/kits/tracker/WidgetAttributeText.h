@@ -49,7 +49,7 @@ class BColumn;
 
 // Tracker-only type for truncating the size string
 // (Used in InfoWindow.cpp)
-const uint32 kSizeType = 'kszt';
+const uint32_t kSizeType = 'kszt';
 
 class WidgetAttributeText {
 	// each of subclasses knows how to retrieve a specific attribute
@@ -98,7 +98,7 @@ public:
 	virtual float PreferredWidth(const BPoseView*) const = 0;
 
 	static status_t AttrAsString(const Model* model, BString* result,
-		const char* attrName, int32 attrType, float width,
+		const char* attrName, int32_t attrType, float width,
 		BView* view, int64* value = 0);
 
 	Model* TargetModel() const;
@@ -110,8 +110,8 @@ public:
 protected:
 	// generic fitting routines used by the different attributes
 	static float TruncString(BString* result, const char* src,
-		int32 length, const BPoseView*, float width,
-		uint32 truncMode = B_TRUNCATE_MIDDLE);
+		int32_t length, const BPoseView*, float width,
+		uint32_t truncMode = B_TRUNCATE_MIDDLE);
 
 	static float TruncTime(BString* result, int64 src,
 		const BPoseView* view, float width);
@@ -125,7 +125,7 @@ protected:
 
 	mutable Model* fModel;
 	const BColumn* fColumn;
-	// TODO: make these int32 only
+	// TODO: make these int32_t only
 	float fOldWidth;
 	float fTruncatedWidth;
 	bool fDirty;
@@ -200,8 +200,8 @@ union GenericValueStruct {
 	uint8	uint8t;
 	int16	int16t;
 	int16	uint16t;
-	int32	int32t;
-	int32	uint32t;
+	int32_t	int32_tt;
+	int32_t	uint32_tt;
 	int64	int64t;
 	int64	uint64t;
 
@@ -275,8 +275,8 @@ private:
 	virtual void FitValue(BString* result, const BPoseView* view);
 
 private:
-	int32 fCount;
-	int32 fMax;
+	int32_t fCount;
+	int32_t fMax;
 };
 
 
@@ -471,7 +471,7 @@ public:
 } // namespace BPrivate
 
 
-extern status_t TimeFormat(BString &string, int32 index,
+extern status_t TimeFormat(BString &string, int32_t index,
 	FormatSeparator format, DateOrder order, bool clockIs24Hour);
 
 using namespace BPrivate;

@@ -28,7 +28,7 @@ DeleteChildJob::~DeleteChildJob()
 // Do
 status_t DeleteChildJob::Do()
 {
-	int32 changeCounter = fPartition->ChangeCounter();
+	int32_t changeCounter = fPartition->ChangeCounter();
 	status_t error = _kern_delete_child_partition(fPartition->PartitionID(),
 		&changeCounter, fChild->PartitionID(), fChild->ChangeCounter());
 	if (error != B_OK)

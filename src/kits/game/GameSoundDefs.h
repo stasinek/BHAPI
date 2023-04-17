@@ -12,7 +12,7 @@
 #include <Haiku.h>
 
 
-typedef int32 gs_id;
+typedef int32_t gs_id;
 
 #define B_GS_CUR_API_VERSION B_BEOS_VERSION
 #define B_GS_MIN_API_VERSION 0x100
@@ -43,10 +43,10 @@ struct gs_audio_format {
 								// 0x7fffffff == top
 	};
 	float		frame_rate;
-	uint32		channel_count;	// 1 or 2, mostly
-	uint32		format;			// for compressed formats, go to
+	uint32_t		channel_count;	// 1 or 2, mostly
+	uint32_t		format;			// for compressed formats, go to
 								// media_encoded_audio_format
-	uint32		byte_order;		// 2 for little endian, 1 for big endian
+	uint32_t		byte_order;		// 2 for little endian, 1 for big endian
 	size_t		buffer_size;	// size of each buffer -- NOT GUARANTEED
 };
 
@@ -66,15 +66,15 @@ enum gs_attributes {
 
 
 struct gs_attribute {
-		int32		attribute;	// which attribute
+		int32_t		attribute;	// which attribute
 		bigtime_t	duration;	// how long of time to ramp over for the change
 		float		value;		// where the value stops changing
-		uint32		flags;		// whatever flags are for the attribute
+		uint32_t		flags;		// whatever flags are for the attribute
 };
 
 
 struct gs_attribute_info {
-		int32		attribute;
+		int32_t		attribute;
 		float		granularity;
 		float		minimum;
 		float		maximum;

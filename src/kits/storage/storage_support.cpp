@@ -286,12 +286,12 @@ status_t split_path(const char *fullPath, char **path, char **leaf)
 		   written into. \c 0 is returned, if there is no next component.
 	\return \c B_OK, if \a path is not \c NULL, \c B_BAD_VALUE otherwise
 */
-status_t parse_first_path_component(const char *path, int32& length,
-						   int32& nextComponent)
+status_t parse_first_path_component(const char *path, int32_t& length,
+						   int32_t& nextComponent)
 {
 	status_t error = (path ? B_OK : B_BAD_VALUE);
 	if (error == B_OK) {
-		int32 i = 0;
+		int32_t i = 0;
 		// find first '/' or end of name
 		for (; path[i] != '/' && path[i] != '\0'; i++);
 		// handle special case "/..." (absolute path)
@@ -320,9 +320,9 @@ status_t parse_first_path_component(const char *path, int32& length,
 	\return \c B_OK, if \a path is not \c NULL, \c B_BAD_VALUE otherwise
 */
 status_t parse_first_path_component(const char *path, char *&component,
-						   int32& nextComponent)
+						   int32_t& nextComponent)
 {
-	int32 length;
+	int32_t length;
 	status_t error = parse_first_path_component(path, length, nextComponent);
 	if (error == B_OK) {
 		component = new(nothrow) char[length + 1];
@@ -353,7 +353,7 @@ status_t check_entry_name(const char *entry)
 			error = B_NAME_TOO_LONG;
 	}
 	if (error == B_OK) {
-		for (int32 i = 0; error == B_OK && entry[i] != '\0'; i++) {
+		for (int32_t i = 0; error == B_OK && entry[i] != '\0'; i++) {
 			if (entry[i] == '/')
 				error = B_BAD_VALUE;
 		}
@@ -376,7 +376,7 @@ status_t check_path_name(const char *path)
 	status_t error = (path ? B_OK : B_BAD_VALUE);
 	// check the path components
 	const char *remainder = path;
-	int32 length, nextComponent;
+	int32_t length, nextComponent;
 	do {
 		error = parse_first_path_component(remainder, length, nextComponent);
 		if (error == B_OK) {
@@ -427,9 +427,9 @@ void to_lower(char *str)
 void escape_path(const char *str, char *result)
 {
 	if (str && result) {
-		int32 len = strlen(str);
+		int32_t len = strlen(str);
 		
-		for (int32 i = 0; i < len; i++) {
+		for (int32_t i = 0; i < len; i++) {
 			char ch = str[i];
 			char escapeChar = 0;
 			

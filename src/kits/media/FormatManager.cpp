@@ -173,8 +173,8 @@ void FormatManager::GetFormats(bigtime_t lastUpdate, BMessage& reply)
 	reply.AddBool("need_update", true);
 	reply.AddInt64("timestamp", system_time());
 
-	int32 count = fList.CountItems();
-	for (int32 i = 0; i < count; i++) {
+	int32_t count = fList.CountItems();
+	for (int32_t i = 0; i < count; i++) {
 		meta_format* format = fList.ItemAt(i);
 		reply.AddData("formats", MEDIA_META_FORMAT_TYPE, format,
 			sizeof(meta_format));
@@ -183,7 +183,7 @@ void FormatManager::GetFormats(bigtime_t lastUpdate, BMessage& reply)
 
 
 status_t FormatManager::MakeFormatFor(const media_format_description* descriptions,
-	int32 descriptionCount, media_format& format, uint32 flags, void* _reserved)
+	int32_t descriptionCount, media_format& format, uint32_t flags, void* _reserved)
 {
 	BAutolock locker(fLock);
 
@@ -235,7 +235,7 @@ status_t FormatManager::MakeFormatFor(const media_format_description* descriptio
 
 	status_t result = B_OK;
 	// TODO: Support "flags" (B_SET_DEFAULT, B_EXCLUSIVE, B_NO_MERGE)!
-	for (int32 i = 0; i < descriptionCount; i++) {
+	for (int32_t i = 0; i < descriptionCount; i++) {
 		meta_format* metaFormat = new(std::nothrow) meta_format(
 			descriptions[i], format, codec);
 		if (metaFormat == NULL
@@ -254,8 +254,8 @@ void FormatManager::RemoveFormat(const media_format& format)
 {
 	BAutolock locker(fLock);
 
-	int32 foundIndex = -1;
-	for (int32 i = fList.CountItems() - 1; i >= 0; i--) {
+	int32_t foundIndex = -1;
+	for (int32_t i = fList.CountItems() - 1; i >= 0; i--) {
 		meta_format* metaFormat = fList.ItemAt(i);
 		if (metaFormat->format == format) {
 			if (foundIndex != -1) {

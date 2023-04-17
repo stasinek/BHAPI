@@ -48,8 +48,8 @@ public:
 									{ return fDebugFrameSection != NULL
 										|| fEHFrameSection != NULL; }
 
-			int32				CountCompilationUnits() const;
-			CompilationUnit*	CompilationUnitAt(int32 index) const;
+			int32_t				CountCompilationUnits() const;
+			CompilationUnit*	CompilationUnitAt(int32_t index) const;
 			CompilationUnit*	CompilationUnitForDIE(
 									const DebugInfoEntry* entry) const;
 

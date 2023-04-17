@@ -40,11 +40,11 @@ public:
 			status_t			InitCheck() const;
 
 			// Global settings
-			int32				WindowFollowsCorner();
-			void				SetWindowFollowsCorner(int32 which_corner);
+			int32_t				WindowFollowsCorner();
+			void				SetWindowFollowsCorner(int32_t which_corner);
 
-			uint32				ShowStatusWindow();
-			void				SetShowStatusWindow(uint32 mode);
+			uint32_t				ShowStatusWindow();
+			void				SetShowStatusWindow(uint32_t mode);
 
 			bool				DaemonAutoStarts();
 			void				SetDaemonAutoStarts(bool does_it);
@@ -55,11 +55,11 @@ public:
 			void				SetStatusWindowFrame(BRect frame);
 			BRect				StatusWindowFrame();
 
-			int32				StatusWindowWorkspaces();
-			void				SetStatusWindowWorkspaces(int32 workspaces);
+			int32_t				StatusWindowWorkspaces();
+			void				SetStatusWindowWorkspaces(int32_t workspaces);
 
-			int32				StatusWindowLook();
-			void				SetStatusWindowLook(int32 look);
+			int32_t				StatusWindowLook();
+			void				SetStatusWindowLook(int32_t look);
 
 			bigtime_t			AutoCheckInterval();
 			void				SetAutoCheckInterval(bigtime_t);
@@ -70,12 +70,12 @@ public:
 			bool				SendOnlyIfPPPUp();
 			void				SetSendOnlyIfPPPUp(bool yes);
 
-			int32				DefaultOutboundAccount();
-			void				SetDefaultOutboundAccount(int32 to);
+			int32_t				DefaultOutboundAccount();
+			void				SetDefaultOutboundAccount(int32_t to);
 
 private:
 			BMessage			fData;
-			uint32				_reserved[4];
+			uint32_t				_reserved[4];
 };
 
 
@@ -110,11 +110,11 @@ public:
 	virtual	status_t			Load(const BMessage& message);
 	virtual	status_t			Save(BMessage& message);
 
-			int32				CountFilterSettings() const;
-			int32				AddFilterSettings(const entry_ref* ref = NULL);
-			void				RemoveFilterSettings(int32 index);
-			bool				MoveFilterSettings(int32 from, int32 to);
-			BMailAddOnSettings*	FilterSettingsAt(int32 index) const;
+			int32_t				CountFilterSettings() const;
+			int32_t				AddFilterSettings(const entry_ref* ref = NULL);
+			void				RemoveFilterSettings(int32_t index);
+			bool				MoveFilterSettings(int32_t from, int32_t to);
+			BMailAddOnSettings*	FilterSettingsAt(int32_t index) const;
 
 	virtual	bool				HasBeenModified() const;
 
@@ -131,8 +131,8 @@ public:
 
 			status_t			InitCheck() { return fStatus; }
 
-			void				SetAccountID(int32 id);
-			int32				AccountID() const;
+			void				SetAccountID(int32_t id);
+			int32_t				AccountID() const;
 
 			void				SetName(const char* name);
 			const char*			Name() const;
@@ -178,7 +178,7 @@ private:
 			status_t			fStatus;
 			BEntry				fAccountFile;
 
-			int32				fAccountID;
+			int32_t				fAccountID;
 
 			BString				fAccountName;
 			BString				fRealName;
@@ -201,10 +201,10 @@ public:
 
 	static	status_t			AccountsPath(BPath& path);
 
-			int32				CountAccounts();
-			BMailAccountSettings*	AccountAt(int32 index);
+			int32_t				CountAccounts();
+			BMailAccountSettings*	AccountAt(int32_t index);
 
-			BMailAccountSettings*	AccountByID(int32 id);
+			BMailAccountSettings*	AccountByID(int32_t id);
 			BMailAccountSettings*	AccountByName(const char* name);
 private:
 			BObjectList<BMailAccountSettings>	fAccounts;

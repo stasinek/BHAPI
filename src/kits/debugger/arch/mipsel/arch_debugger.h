@@ -8,7 +8,7 @@
 
 //#warning MIPSEL: fixme
 struct mipsel_debug_cpu_state {
-	uint32	dummy;
+	uint32_t	dummy;
 } __attribute__((aligned(8)));
 
 

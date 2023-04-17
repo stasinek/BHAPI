@@ -11,7 +11,7 @@
 
 typedef struct {
 	bigtime_t	key_repeat_delay;
-	int32		key_repeat_rate;
+	int32_t		key_repeat_rate;
 } kb_settings;
 
 #define kb_default_key_repeat_delay 500000
@@ -21,12 +21,12 @@ typedef struct {
 
 typedef struct {
 	bool		enabled;
-	int32		accel_factor;
-	int32		speed;
+	int32_t		accel_factor;
+	int32_t		speed;
 } mouse_accel;
 
 typedef struct {
-	int32		type;
+	int32_t		type;
 	mouse_map	map;
 	mouse_accel	accel;
 	bigtime_t	click_speed;

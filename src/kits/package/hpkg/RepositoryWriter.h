@@ -37,15 +37,15 @@ public:
 									const BPackageInfo& packageInfo) = 0;
 
 	virtual void				OnRepositoryInfoSectionDone(
-									uint32 uncompressedSize) = 0;
+									uint32_t uncompressedSize) = 0;
 	virtual void				OnPackageAttributesSectionDone(
-									uint32 stringCount,
-									uint32 uncompressedSize) = 0;
-	virtual void				OnRepositoryDone(uint32 headerSize,
-									uint32 repositoryInfoLength,
-									uint32 licenseCount,
-									uint32 packageCount,
-									uint32 packageAttributesSize,
+									uint32_t stringCount,
+									uint32_t uncompressedSize) = 0;
+	virtual void				OnRepositoryDone(uint32_t headerSize,
+									uint32_t repositoryInfoLength,
+									uint32_t licenseCount,
+									uint32_t packageCount,
+									uint32_t packageAttributesSize,
 									uint64 totalSize) = 0;
 };
 

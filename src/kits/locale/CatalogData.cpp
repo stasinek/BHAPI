@@ -8,7 +8,7 @@
 
 
 BCatalogData::BCatalogData(const char* signature, const char* language,
-	uint32 fingerprint)
+	uint32_t fingerprint)
 	:
 	fInitCheck(B_NO_INIT),
 	fSignature(signature),
@@ -50,7 +50,7 @@ status_t BCatalogData::GetData(const char* name, BMessage* msg)
 }
 
 
-status_t BCatalogData::GetData(uint32 id, BMessage* msg)
+status_t BCatalogData::GetData(uint32_t id, BMessage* msg)
 {
 	return EOPNOTSUPP;
 }
@@ -63,7 +63,7 @@ status_t BCatalogData::SetString(const char* string, const char* translated,
 }
 
 
-status_t BCatalogData::SetString(int32 id, const char* translated)
+status_t BCatalogData::SetString(int32_t id, const char* translated)
 {
 	return EOPNOTSUPP;
 }
@@ -81,7 +81,7 @@ status_t BCatalogData::SetData(const char* name, BMessage* msg)
 }
 
 
-status_t BCatalogData::SetData(uint32 id, BMessage* msg)
+status_t BCatalogData::SetData(uint32_t id, BMessage* msg)
 {
 	return EOPNOTSUPP;
 }
@@ -128,7 +128,7 @@ void BCatalogData::MakeEmpty()
 }
 
 
-int32 BCatalogData::CountItems() const
+int32_t BCatalogData::CountItems() const
 {
 	return 0;
 }

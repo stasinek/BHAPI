@@ -10,12 +10,12 @@
 
 class StringUtils {
 public:
-	static	uint32				HashValue(const char* string);
-	static	uint32				HashValue(const BString& string);
+	static	uint32_t				HashValue(const char* string);
+	static	uint32_t				HashValue(const BString& string);
 };
 
 
-/*static*/ inline uint32 StringUtils::HashValue(const BString& string)
+/*static*/ inline uint32_t StringUtils::HashValue(const BString& string)
 {
 	return HashValue(string.String());
 }

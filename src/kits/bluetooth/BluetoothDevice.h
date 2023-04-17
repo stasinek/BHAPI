@@ -31,7 +31,7 @@ public:
 	virtual DeviceClass GetDeviceClass()=0;
 
 	virtual BString 	GetProperty(const char* property)=0;
-	virtual status_t 	GetProperty(const char* property, uint32* value)=0;
+	virtual status_t 	GetProperty(const char* property, uint32_t* value)=0;
 
 	virtual bdaddr_t 	GetBluetoothAddress()=0;
 

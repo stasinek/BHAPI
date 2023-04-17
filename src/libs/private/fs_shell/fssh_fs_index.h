@@ -11,7 +11,7 @@
 
 
 typedef struct fssh_index_info {
-	uint32_t	type;
+	uint32_t_t	type;
 	fssh_off_t	size;
 	fssh_time_t	modification_time;
 	fssh_time_t	creation_time;
@@ -25,7 +25,7 @@ extern "C" {
 #endif
 
 extern int		fssh_fs_create_index(fssh_dev_t device, const char *name,
-						uint32_t type, uint32_t flags);
+						uint32_t_t type, uint32_t_t flags);
 extern int		fssh_fs_remove_index(fssh_dev_t device, const char *name);
 extern int		fssh_fs_stat_index(fssh_dev_t device, const char *name,
 						struct fssh_index_info *indexInfo);

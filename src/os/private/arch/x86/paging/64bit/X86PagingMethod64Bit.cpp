@@ -196,7 +196,7 @@ X86PagingMethod64Bit::MapEarly(kernel_args* args, addr_t virtualAddress,
 
 bool
 X86PagingMethod64Bit::IsKernelPageAccessible(addr_t virtualAddress,
-	uint32 protection)
+	uint32_t protection)
 {
 	return true;
 }
@@ -209,7 +209,7 @@ X86PagingMethod64Bit::IsKernelPageAccessible(addr_t virtualAddress,
 X86PagingMethod64Bit::PageDirectoryForAddress(uint64* virtualPML4,
 	addr_t virtualAddress, bool isKernel, bool allocateTables,
 	vm_page_reservation* reservation,
-	TranslationMapPhysicalPageMapper* pageMapper, int32& mapCount)
+	TranslationMapPhysicalPageMapper* pageMapper, int32_t& mapCount)
 {
 	// Get the PDPT.
 	uint64* pml4e = &virtualPML4[VADDR_TO_PML4E(virtualAddress)];
@@ -277,7 +277,7 @@ X86PagingMethod64Bit::PageDirectoryForAddress(uint64* virtualPML4,
 X86PagingMethod64Bit::PageDirectoryEntryForAddress(uint64* virtualPML4,
 	addr_t virtualAddress, bool isKernel, bool allocateTables,
 	vm_page_reservation* reservation,
-	TranslationMapPhysicalPageMapper* pageMapper, int32& mapCount)
+	TranslationMapPhysicalPageMapper* pageMapper, int32_t& mapCount)
 {
 	uint64* virtualPageDirectory = PageDirectoryForAddress(virtualPML4,
 		virtualAddress, isKernel, allocateTables, reservation, pageMapper,
@@ -296,7 +296,7 @@ X86PagingMethod64Bit::PageDirectoryEntryForAddress(uint64* virtualPML4,
 X86PagingMethod64Bit::PageTableForAddress(uint64* virtualPML4,
 	addr_t virtualAddress, bool isKernel, bool allocateTables,
 	vm_page_reservation* reservation,
-	TranslationMapPhysicalPageMapper* pageMapper, int32& mapCount)
+	TranslationMapPhysicalPageMapper* pageMapper, int32_t& mapCount)
 {
 	TRACE("X86PagingMethod64Bit::PageTableForAddress(%#" B_PRIxADDR ", "
 		"%d)\n", virtualAddress, allocateTables);
@@ -344,7 +344,7 @@ X86PagingMethod64Bit::PageTableForAddress(uint64* virtualPML4,
 X86PagingMethod64Bit::PageTableEntryForAddress(uint64* virtualPML4,
 	addr_t virtualAddress, bool isKernel, bool allocateTables,
 	vm_page_reservation* reservation,
-	TranslationMapPhysicalPageMapper* pageMapper, int32& mapCount)
+	TranslationMapPhysicalPageMapper* pageMapper, int32_t& mapCount)
 {
 	uint64* virtualPageTable = PageTableForAddress(virtualPML4, virtualAddress,
 		isKernel, allocateTables, reservation, pageMapper, mapCount);
@@ -357,7 +357,7 @@ X86PagingMethod64Bit::PageTableEntryForAddress(uint64* virtualPML4,
 
 /*static*/ void
 X86PagingMethod64Bit::PutPageTableEntryInTable(uint64* entry,
-	phys_addr_t physicalAddress, uint32 attributes, uint32 memoryType,
+	phys_addr_t physicalAddress, uint32_t attributes, uint32_t memoryType,
 	bool globalPage)
 {
 	uint64 page = (physicalAddress & X86_64_PTE_ADDRESS_MASK)

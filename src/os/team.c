@@ -19,7 +19,7 @@ wait_for_team(team_id team, status_t *_returnCode)
 
 
 status_t
-_get_team_usage_info(team_id team, int32 who, team_usage_info *info, size_t size)
+_get_team_usage_info(team_id team, int32_t who, team_usage_info *info, size_t size)
 {
 	return _kern_get_team_usage_info(team, who, info, size);
 }
@@ -43,7 +43,7 @@ _get_team_info(team_id team, team_info *info, size_t size)
 
 
 status_t
-_get_next_team_info(int32 *cookie, team_info *info, size_t size)
+_get_next_team_info(int32_t *cookie, team_info *info, size_t size)
 {
 	if (info == NULL || size != sizeof(team_info))
 		return B_BAD_VALUE;

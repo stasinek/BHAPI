@@ -20,13 +20,13 @@ public:
 			BView*				View() const;
 			BGridLayoutBuilder&	GetView(BView** _view);
 
-			BGridLayoutBuilder& Add(BView* view, int32 column, int32 row,
-									int32 columnCount = 1, int32 rowCount = 1);
-			BGridLayoutBuilder& Add(BLayoutItem* item, int32 column, int32 row,
-									int32 columnCount = 1, int32 rowCount = 1);
+			BGridLayoutBuilder& Add(BView* view, int32_t column, int32_t row,
+									int32_t columnCount = 1, int32_t rowCount = 1);
+			BGridLayoutBuilder& Add(BLayoutItem* item, int32_t column, int32_t row,
+									int32_t columnCount = 1, int32_t rowCount = 1);
 
-			BGridLayoutBuilder& SetColumnWeight(int32 column, float weight);
-			BGridLayoutBuilder& SetRowWeight(int32 row, float weight);
+			BGridLayoutBuilder& SetColumnWeight(int32_t column, float weight);
+			BGridLayoutBuilder& SetRowWeight(int32_t row, float weight);
 
 			BGridLayoutBuilder& SetInsets(float left, float top, float right,
 									float bottom);

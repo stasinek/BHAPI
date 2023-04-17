@@ -15,7 +15,7 @@
 
 class VMNullCache : public VMCache {
 public:
-			status_t			Init(uint32 allocationFlags);
+			status_t			Init(uint32_t allocationFlags);
 
 protected:
 	virtual	void				DeleteObject();

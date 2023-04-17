@@ -18,11 +18,11 @@ struct kernel_args;
 typedef struct {
 	module_info	info;
 
-	status_t (*get_size)(int32 *_width, int32 *_height);
-	void (*move_cursor)(int32 x, int32 y);
-	void (*put_glyph)(int32 x, int32 y, uint8 glyph, uint8 attr);
-	void (*fill_glyph)(int32 x, int32 y, int32 width, int32 height, uint8 glyph, uint8 attr);
-	void (*blit)(int32 srcx, int32 srcy, int32 width, int32 height, int32 destx, int32 desty);
+	status_t (*get_size)(int32_t *_width, int32_t *_height);
+	void (*move_cursor)(int32_t x, int32_t y);
+	void (*put_glyph)(int32_t x, int32_t y, uint8 glyph, uint8 attr);
+	void (*fill_glyph)(int32_t x, int32_t y, int32_t width, int32_t height, uint8 glyph, uint8 attr);
+	void (*blit)(int32_t srcx, int32_t srcy, int32_t width, int32_t height, int32_t destx, int32_t desty);
 	void (*clear)(uint8 attr);
 } console_module_info;
 

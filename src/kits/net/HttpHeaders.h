@@ -51,27 +51,27 @@ public:
 
 	// Header list access
 			const char*			HeaderValue(const char* name) const;
-			BHttpHeader&		HeaderAt(int32 index) const;
+			BHttpHeader&		HeaderAt(int32_t index) const;
 
 	// Header count
-			int32				CountHeaders() const;
+			int32_t				CountHeaders() const;
 
 	// Header list tests
-			int32				HasHeader(const char* name) const;
+			int32_t				HasHeader(const char* name) const;
 
 	// Header add or replacement
 			bool				AddHeader(const char* line);
 			bool				AddHeader(const char* name,
 									const char* value);
 			bool				AddHeader(const char* name,
-									int32 value);
+									int32_t value);
 
 	// Header deletion
 			void				Clear();
 
 	// Overloaded operators
 			BHttpHeaders&		operator=(const BHttpHeaders& other);
-			BHttpHeader&		operator[](int32 index) const;
+			BHttpHeader&		operator[](int32_t index) const;
 			const char*			operator[](const char* name) const;
 
 private:

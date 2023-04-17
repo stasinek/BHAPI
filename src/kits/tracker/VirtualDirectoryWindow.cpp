@@ -63,8 +63,8 @@ namespace BPrivate {
 
 
 VirtualDirectoryWindow::VirtualDirectoryWindow(LockingList<BWindow>* windowList,
-	uint32 containerWindowFlags, window_look look, window_feel feel,
-	uint32 flags, uint32 workspace)
+	uint32_t containerWindowFlags, window_look look, window_feel feel,
+	uint32_t flags, uint32_t workspace)
 	:
 	BContainerWindow(windowList, containerWindowFlags, look, feel, flags,
 		workspace)
@@ -85,7 +85,7 @@ void VirtualDirectoryWindow::CreatePoseView(Model* model)
 
 
 BPoseView*
-VirtualDirectoryWindow::NewPoseView(Model* model, uint32 viewMode)
+VirtualDirectoryWindow::NewPoseView(Model* model, uint32_t viewMode)
 {
 	// If the model (or rather the entry_ref to it) came from another
 	// application, it may refer to a subdirectory we cannot use directly. The

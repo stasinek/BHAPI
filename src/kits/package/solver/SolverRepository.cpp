@@ -16,7 +16,7 @@
 #include <package/solver/SolverPackage.h>
 
 
-static const int32 kInitialPackageListSize = 40;
+static const int32_t kInitialPackageListSize = 40;
 
 
 namespace BPackageKit {
@@ -219,13 +219,13 @@ BSolverRepository::Name() const
 }
 
 
-int32 BSolverRepository::Priority() const
+int32_t BSolverRepository::Priority() const
 {
 	return fPriority;
 }
 
 
-void BSolverRepository::SetPriority(int32 priority)
+void BSolverRepository::SetPriority(int32_t priority)
 {
 	fPriority = priority;
 	fChangeCount++;
@@ -238,14 +238,14 @@ bool BSolverRepository::IsEmpty() const
 }
 
 
-int32 BSolverRepository::CountPackages() const
+int32_t BSolverRepository::CountPackages() const
 {
 	return fPackages.CountItems();
 }
 
 
 BSolverPackage*
-BSolverRepository::PackageAt(int32 index) const
+BSolverRepository::PackageAt(int32_t index) const
 {
 	return fPackages.ItemAt(index);
 }

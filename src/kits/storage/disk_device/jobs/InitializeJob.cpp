@@ -47,7 +47,7 @@ status_t InitializeJob::Init(const char* diskSystem, const char* name,
 // Do
 status_t InitializeJob::Do()
 {
-	int32 changeCounter = fPartition->ChangeCounter();
+	int32_t changeCounter = fPartition->ChangeCounter();
 
 	status_t error = _kern_initialize_partition(fPartition->PartitionID(),
 		&changeCounter, fDiskSystem, fName, fParameters);

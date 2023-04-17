@@ -27,10 +27,10 @@ public:
 									TeamTypeInformation* info);
 	virtual						~CLanguageFamilySyntaxHighlightInfo();
 
-	virtual	int32				GetLineHighlightRanges(int32 line,
-									int32* _columns,
+	virtual	int32_t				GetLineHighlightRanges(int32_t line,
+									int32_t* _columns,
 									syntax_highlight_type* _types,
-									int32 maxCount);
+									int32_t maxCount);
 
 private:
 	class LineInfo;
@@ -39,7 +39,7 @@ private:
 
 private:
 			status_t			_ParseLines();
-			status_t			_ParseLine(int32 line,
+			status_t			_ParseLine(int32_t line,
 									syntax_highlight_type& _lastType,
 									LineInfo*& _info);
 			syntax_highlight_type _MapTokenToSyntaxType(

@@ -142,7 +142,7 @@ void BTitleView::Reset()
 {
 	fTitleList.MakeEmpty();
 
-	for (int32 index = 0; ; index++) {
+	for (int32_t index = 0; ; index++) {
 		BColumn* column = fPoseView->ColumnAt(index);
 		if (!column)
 			break;
@@ -154,8 +154,8 @@ void BTitleView::Reset()
 
 void BTitleView::AddTitle(BColumn* column, const BColumn* after)
 {
-	int32 count = fTitleList.CountItems();
-	int32 index;
+	int32_t count = fTitleList.CountItems();
+	int32_t index;
 	if (after) {
 		for (index = 0; index < count; index++) {
 			BColumn* titleColumn = fTitleList.ItemAt(index)->Column();
@@ -175,8 +175,8 @@ void BTitleView::AddTitle(BColumn* column, const BColumn* after)
 
 void BTitleView::RemoveTitle(BColumn* column)
 {
-	int32 count = fTitleList.CountItems();
-	for (int32 index = 0; index < count; index++) {
+	int32_t count = fTitleList.CountItems();
+	for (int32_t index = 0; index < count; index++) {
 		BColumnTitle* title = fTitleList.ItemAt(index);
 		if (title->Column() == column) {
 			fTitleList.RemoveItem(title);
@@ -239,10 +239,10 @@ void BTitleView::Draw(BRect /*updateRect*/, bool useOffscreen, bool updateOnly,
 	be_control_look->DrawButtonBackground(view, bounds, bounds, base, 0,
 		BControlLook::B_TOP_BORDER | BControlLook::B_BOTTOM_BORDER);
 
-	int32 count = fTitleList.CountItems();
+	int32_t count = fTitleList.CountItems();
 	float minx = bounds.right;
 	float maxx = bounds.left;
-	for (int32 index = 0; index < count; index++) {
+	for (int32_t index = 0; index < count; index++) {
 		BColumnTitle* title = fTitleList.ItemAt(index);
 		title->Draw(view, title == pressedColumn);
 		BRect titleBounds(title->Bounds());
@@ -295,7 +295,7 @@ void BTitleView::MouseDown(BPoint where)
 	BColumnTitle* title = FindColumnTitle(where);
 	BColumnTitle* resizedTitle = InColumnResizeArea(where);
 
-	uint32 buttons;
+	uint32_t buttons;
 	GetMouse(&where, &buttons);
 
 	// Check if the user clicked the secondary mouse button.
@@ -360,14 +360,14 @@ void BTitleView::MouseUp(BPoint where)
 }
 
 
-void BTitleView::MouseMoved(BPoint where, uint32 code, const BMessage* dragMessage)
+void BTitleView::MouseMoved(BPoint where, uint32_t code, const BMessage* dragMessage)
 {
 	BContainerWindow* window = dynamic_cast<BContainerWindow*>(Window());
 	if (window == NULL)
 		return;
 
 	if (fTrackingState != NULL) {
-		int32 buttons = 0;
+		int32_t buttons = 0;
 		if (Looper() != NULL && Looper()->CurrentMessage() != NULL)
 			Looper()->CurrentMessage()->FindInt32("buttons", &buttons);
 		fTrackingState->MouseMoved(where, buttons);
@@ -394,8 +394,8 @@ void BTitleView::MouseMoved(BPoint where, uint32 code, const BMessage* dragMessa
 BColumnTitle*
 BTitleView::InColumnResizeArea(BPoint where) const
 {
-	int32 count = fTitleList.CountItems();
-	for (int32 index = 0; index < count; index++) {
+	int32_t count = fTitleList.CountItems();
+	for (int32_t index = 0; index < count; index++) {
 		BColumnTitle* title = fTitleList.ItemAt(index);
 		if (title->InColumnResizeArea(where))
 			return title;
@@ -408,8 +408,8 @@ BTitleView::InColumnResizeArea(BPoint where) const
 BColumnTitle*
 BTitleView::FindColumnTitle(BPoint where) const
 {
-	int32 count = fTitleList.CountItems();
-	for (int32 index = 0; index < count; index++) {
+	int32_t count = fTitleList.CountItems();
+	for (int32_t index = 0; index < count; index++) {
 		BColumnTitle* title = fTitleList.ItemAt(index);
 		if (title->Bounds().Contains(where))
 			return title;
@@ -422,8 +422,8 @@ BTitleView::FindColumnTitle(BPoint where) const
 BColumnTitle*
 BTitleView::FindColumnTitle(const BColumn* column) const
 {
-	int32 count = fTitleList.CountItems();
-	for (int32 index = 0; index < count; index++) {
+	int32_t count = fTitleList.CountItems();
+	for (int32_t index = 0; index < count; index++) {
 		BColumnTitle* title = fTitleList.ItemAt(index);
 		if (title->Column() == column)
 			return title;
@@ -527,7 +527,7 @@ void BColumnTitle::Draw(BView* view, bool pressed)
 			triangle[2] = center + BPoint(0.0, 2.0);
 		}
 
-		uint32 flags = view->Flags();
+		uint32_t flags = view->Flags();
 		view->SetFlags(flags | B_SUBPIXEL_PRECISE);
 
 		if (secondary) {
@@ -574,7 +574,7 @@ void ColumnTrackState::MouseUp(BPoint where)
 }
 
 
-void ColumnTrackState::MouseMoved(BPoint where, uint32 buttons)
+void ColumnTrackState::MouseMoved(BPoint where, uint32_t buttons)
 {
 	if (!fHasMoved && system_time() < fPastClickTime) {
 		BRect moveMargin(fFirstClickPoint, fFirstClickPoint);
@@ -615,7 +615,7 @@ bool ColumnResizeState::ValueChanged(BPoint where)
 }
 
 
-void ColumnResizeState::Moved(BPoint where, uint32)
+void ColumnResizeState::Moved(BPoint where, uint32_t)
 {
 	float newWidth = where.x + fInitialTrackOffset
 		- fTitle->fColumn->Offset();
@@ -700,7 +700,7 @@ ColumnDragState::ColumnDragState(BTitleView* view, BColumnTitle* columnTitle,
 // Autoscroll when dragging column left/right
 // fix dragging back a column before the first column (now adds as last)
 // make column swaps/adds not invalidate/redraw columns to the left
-void ColumnDragState::Moved(BPoint where, uint32)
+void ColumnDragState::Moved(BPoint where, uint32_t)
 {
 	// figure out where we are with the mouse
 	BRect titleBounds(fTitleView->Bounds());
@@ -790,9 +790,9 @@ void ColumnDragState::Done(BPoint /*where*/)
 void ColumnDragState::Clicked(BPoint /*where*/)
 {
 	BPoseView* poseView = fTitleView->PoseView();
-	uint32 hash = fTitle->Column()->AttrHash();
-	uint32 primarySort = poseView->PrimarySort();
-	uint32 secondarySort = poseView->SecondarySort();
+	uint32_t hash = fTitle->Column()->AttrHash();
+	uint32_t primarySort = poseView->PrimarySort();
+	uint32_t secondarySort = poseView->SecondarySort();
 	bool shift = (modifiers() & B_SHIFT_KEY) != 0;
 
 	// For now:

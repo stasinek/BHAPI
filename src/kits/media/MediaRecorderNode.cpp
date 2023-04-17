@@ -45,7 +45,7 @@ BMediaRecorderNode::~BMediaRecorderNode()
 
 
 BMediaAddOn*
-BMediaRecorderNode::AddOn(int32* id) const
+BMediaRecorderNode::AddOn(int32_t* id) const
 {
 	CALLED();
 
@@ -67,7 +67,7 @@ void BMediaRecorderNode::SetRunMode(run_mode mode)
 {
 	CALLED();
 
-	int32 priority;
+	int32_t priority;
 
 	if (mode == BMediaNode::B_OFFLINE)
 		priority = B_OFFLINE_PROCESSING;
@@ -117,7 +117,7 @@ void BMediaRecorderNode::SetDataEnabled(bool enabled)
 {
 	CALLED();
 
-	int32 tag;
+	int32_t tag;
 
 	SetOutputEnabled(fInput.source,
 		fInput.destination, enabled, NULL, &tag);
@@ -179,7 +179,7 @@ void BMediaRecorderNode::TimeWarp(bigtime_t realTime, bigtime_t performanceTime)
 }
 
 
-status_t BMediaRecorderNode::HandleMessage(int32 message,
+status_t BMediaRecorderNode::HandleMessage(int32_t message,
 	const void* data, size_t size)
 {
 	CALLED();
@@ -208,7 +208,7 @@ status_t BMediaRecorderNode::AcceptFormat(const media_destination& dest,
 }
 
 
-status_t BMediaRecorderNode::GetNextInput(int32* cookie, media_input* outInput)
+status_t BMediaRecorderNode::GetNextInput(int32_t* cookie, media_input* outInput)
 {
 	CALLED();
 
@@ -222,7 +222,7 @@ status_t BMediaRecorderNode::GetNextInput(int32* cookie, media_input* outInput)
 }
 
 
-void BMediaRecorderNode::DisposeInputCookie(int32 cookie)
+void BMediaRecorderNode::DisposeInputCookie(int32_t cookie)
 {
 	CALLED();
 }
@@ -240,7 +240,7 @@ void BMediaRecorderNode::BufferReceived(BBuffer* buffer)
 
 
 void BMediaRecorderNode::ProducerDataStatus(
-	const media_destination& forWhom, int32 status,
+	const media_destination& forWhom, int32_t status,
 	bigtime_t performanceTime)
 {
 	CALLED();
@@ -290,7 +290,7 @@ void BMediaRecorderNode::Disconnected(const media_source& producer,
 
 
 status_t BMediaRecorderNode::FormatChanged(const media_source& producer,
-	const media_destination& consumer, int32 tag,
+	const media_destination& consumer, int32_t tag,
 	const media_format& format)
 {
 	CALLED();

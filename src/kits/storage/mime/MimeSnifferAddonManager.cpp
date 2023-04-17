@@ -54,7 +54,7 @@ struct MimeSnifferAddonManager::AddonReference {
 
 private:
 	BMimeSnifferAddon*	fAddon;
-	int32				fReferenceCount;
+	int32_t				fReferenceCount;
 };
 
 
@@ -142,14 +142,14 @@ MimeSnifferAddonManager::GuessMimeType(const char* fileName, BMimeType* type)
 {
 	// get addons
 	AddonReference** addons = NULL;
-	int32 count = 0;
+	int32_t count = 0;
 	status_t error = _GetAddons(addons, count);
 	if (error != B_OK)
 		return -1;
 
 	// iterate over the addons and find the most fitting type
 	float bestPriority = -1;
-	for (int32 i = 0; i < count; i++) {
+	for (int32_t i = 0; i < count; i++) {
 		BMimeType currentType;
 		float priority = addons[i]->Addon()->GuessMimeType(fileName,
 			&currentType);
@@ -168,18 +168,18 @@ MimeSnifferAddonManager::GuessMimeType(const char* fileName, BMimeType* type)
 // GuessMimeType
 float
 MimeSnifferAddonManager::GuessMimeType(BFile* file, const void* buffer,
-	int32 length, BMimeType* type)
+	int32_t length, BMimeType* type)
 {
 	// get addons
 	AddonReference** addons = NULL;
-	int32 count = 0;
+	int32_t count = 0;
 	status_t error = _GetAddons(addons, count);
 	if (error != B_OK)
 		return -1;
 
 	// iterate over the addons and find the most fitting type
 	float bestPriority = -1;
-	for (int32 i = 0; i < count; i++) {
+	for (int32_t i = 0; i < count; i++) {
 		BMimeType currentType;
 		float priority = addons[i]->Addon()->GuessMimeType(file, buffer,
 			length, &currentType);
@@ -196,7 +196,7 @@ MimeSnifferAddonManager::GuessMimeType(BFile* file, const void* buffer,
 }
 
 // _GetAddons
-status_t MimeSnifferAddonManager::_GetAddons(AddonReference**& references, int32& count)
+status_t MimeSnifferAddonManager::_GetAddons(AddonReference**& references, int32_t& count)
 {
 	BAutolock locker(fLock);
 	if (!locker.IsLocked())
@@ -207,7 +207,7 @@ status_t MimeSnifferAddonManager::_GetAddons(AddonReference**& references, int32
 	if (!references)
 		return B_NO_MEMORY;
 
-	for (int32 i = 0; i < count; i++) {
+	for (int32_t i = 0; i < count; i++) {
 		references[i] = (AddonReference*)fAddons.ItemAt(i);
 		references[i]->GetReference();
 	}
@@ -216,9 +216,9 @@ status_t MimeSnifferAddonManager::_GetAddons(AddonReference**& references, int32
 }
 
 // _PutAddons
-void MimeSnifferAddonManager::_PutAddons(AddonReference** references, int32 count)
+void MimeSnifferAddonManager::_PutAddons(AddonReference** references, int32_t count)
 {
-	for (int32 i = 0; i < count; i++)
+	for (int32_t i = 0; i < count; i++)
 		references[i]->PutReference();
 
 	delete[] references;

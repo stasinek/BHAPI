@@ -245,13 +245,13 @@ X86VMTranslationMapPAE::~X86VMTranslationMapPAE()
 	STATIC_ASSERT(KERNEL_BASE == 0x80000000 && KERNEL_SIZE == 0x80000000);
 		// assuming 1-1 split of the address space
 
-	for (uint32 k = 0; k < 2; k++) {
+	for (uint32_t k = 0; k < 2; k++) {
 		pae_page_directory_entry* pageDir
 			= fPagingStructures->VirtualPageDirs()[k];
 		if (pageDir == NULL)
 			continue;
 
-		for (uint32 i = 0; i < kPAEPageDirEntryCount; i++) {
+		for (uint32_t i = 0; i < kPAEPageDirEntryCount; i++) {
 			if ((pageDir[i] & X86_PAE_PDE_PRESENT) != 0) {
 				phys_addr_t address = pageDir[i] & X86_PAE_PDE_ADDRESS_MASK;
 				vm_page* page = vm_lookup_page(address / B_PAGE_SIZE);
@@ -321,13 +321,13 @@ X86VMTranslationMapPAE::Init(bool kernel)
 		memset(virtualPageDirs[0], 0, 2 * B_PAGE_SIZE);
 
 		// use the upper two kernel page directories
-		for (int32 i = 2; i < 4; i++) {
+		for (int32_t i = 2; i < 4; i++) {
 			virtualPageDirs[i] = method->KernelVirtualPageDirs()[i];
 			physicalPageDirs[i] = method->KernelPhysicalPageDirs()[i];
 		}
 
 		// look up the page directories' physical addresses
-		for (int32 i = 0; i < 2; i++) {
+		for (int32_t i = 0; i < 2; i++) {
 			vm_get_page_mapping(VMAddressSpace::KernelID(),
 				(addr_t)virtualPageDirs[i], &physicalPageDirs[i]);
 		}
@@ -344,7 +344,7 @@ X86VMTranslationMapPAE::Init(bool kernel)
 		}
 
 		// init the PDPT entries
-		for (int32 i = 0; i < 4; i++) {
+		for (int32_t i = 0; i < 4; i++) {
 			pdpt[i] = (physicalPageDirs[i] & X86_PAE_PDPTE_ADDRESS_MASK)
 				| X86_PAE_PDPTE_PRESENT;
 		}
@@ -375,7 +375,7 @@ X86VMTranslationMapPAE::MaxPagesNeededToMap(addr_t start, addr_t end) const
 
 status_t
 X86VMTranslationMapPAE::Map(addr_t virtualAddress, phys_addr_t physicalAddress,
-	uint32 attributes, uint32 memoryType, vm_page_reservation* reservation)
+	uint32_t attributes, uint32_t memoryType, vm_page_reservation* reservation)
 {
 	TRACE("X86VMTranslationMapPAE::Map(): %#" B_PRIxADDR " -> %#" B_PRIxPHYSADDR
 		"\n", virtualAddress, physicalAddress);
@@ -465,7 +465,7 @@ X86VMTranslationMapPAE::Unmap(addr_t start, addr_t end)
 			= (pae_page_table_entry*)fPageMapper->GetPageTableAt(
 				*pageDirEntry & X86_PAE_PDE_ADDRESS_MASK);
 
-		uint32 index = start / B_PAGE_SIZE % kPAEPageTableEntryCount;
+		uint32_t index = start / B_PAGE_SIZE % kPAEPageTableEntryCount;
 		for (; index < kPAEPageTableEntryCount && start < end;
 				index++, start += B_PAGE_SIZE) {
 			if ((pageTable[index] & X86_PAE_PTE_PRESENT) == 0) {
@@ -523,7 +523,7 @@ X86VMTranslationMapPAE::DebugMarkRangePresent(addr_t start, addr_t end,
 			= (pae_page_table_entry*)fPageMapper->GetPageTableAt(
 				*pageDirEntry & X86_PAE_PDE_ADDRESS_MASK);
 
-		uint32 index = start / B_PAGE_SIZE % kPAEPageTableEntryCount;
+		uint32_t index = start / B_PAGE_SIZE % kPAEPageTableEntryCount;
 		for (; index < kPAEPageTableEntryCount && start < end;
 				index++, start += B_PAGE_SIZE) {
 
@@ -661,7 +661,7 @@ X86VMTranslationMapPAE::UnmapPages(VMArea* area, addr_t base, size_t size,
 			= (pae_page_table_entry*)fPageMapper->GetPageTableAt(
 				*pageDirEntry & X86_PAE_PDE_ADDRESS_MASK);
 
-		uint32 index = start / B_PAGE_SIZE % kPAEPageTableEntryCount;
+		uint32_t index = start / B_PAGE_SIZE % kPAEPageTableEntryCount;
 		for (; index < kPAEPageTableEntryCount && start < end;
 				index++, start += B_PAGE_SIZE) {
 			pae_page_table_entry oldEntry
@@ -743,7 +743,7 @@ X86VMTranslationMapPAE::UnmapPages(VMArea* area, addr_t base, size_t size,
 
 	// free removed mappings
 	bool isKernelSpace = area->address_space == VMAddressSpace::Kernel();
-	uint32 freeFlags = CACHE_DONT_WAIT_FOR_MEMORY
+	uint32_t freeFlags = CACHE_DONT_WAIT_FOR_MEMORY
 		| (isKernelSpace ? CACHE_DONT_LOCK_KERNEL_SPACE : 0);
 	while (vm_page_mapping* mapping = queue.RemoveHead())
 		object_cache_free(gPageMappingsObjectCache, mapping, freeFlags);
@@ -871,7 +871,7 @@ X86VMTranslationMapPAE::UnmapArea(VMArea* area, bool deletingAddressSpace,
 	locker.Unlock();
 
 	bool isKernelSpace = area->address_space == VMAddressSpace::Kernel();
-	uint32 freeFlags = CACHE_DONT_WAIT_FOR_MEMORY
+	uint32_t freeFlags = CACHE_DONT_WAIT_FOR_MEMORY
 		| (isKernelSpace ? CACHE_DONT_LOCK_KERNEL_SPACE : 0);
 	while (vm_page_mapping* mapping = mappings.RemoveHead())
 		object_cache_free(gPageMappingsObjectCache, mapping, freeFlags);
@@ -880,7 +880,7 @@ X86VMTranslationMapPAE::UnmapArea(VMArea* area, bool deletingAddressSpace,
 
 status_t
 X86VMTranslationMapPAE::Query(addr_t virtualAddress,
-	phys_addr_t* _physicalAddress, uint32* _flags)
+	phys_addr_t* _physicalAddress, uint32_t* _flags)
 {
 	// default the flags to not present
 	*_flags = 0;
@@ -933,7 +933,7 @@ X86VMTranslationMapPAE::Query(addr_t virtualAddress,
 
 status_t
 X86VMTranslationMapPAE::QueryInterrupt(addr_t virtualAddress,
-	phys_addr_t* _physicalAddress, uint32* _flags)
+	phys_addr_t* _physicalAddress, uint32_t* _flags)
 {
 	// default the flags to not present
 	*_flags = 0;
@@ -981,8 +981,8 @@ X86VMTranslationMapPAE::QueryInterrupt(addr_t virtualAddress,
 
 
 status_t
-X86VMTranslationMapPAE::Protect(addr_t start, addr_t end, uint32 attributes,
-	uint32 memoryType)
+X86VMTranslationMapPAE::Protect(addr_t start, addr_t end, uint32_t attributes,
+	uint32_t memoryType)
 {
 	start = ROUNDDOWN(start, B_PAGE_SIZE);
 	if (start >= end)
@@ -1023,7 +1023,7 @@ X86VMTranslationMapPAE::Protect(addr_t start, addr_t end, uint32 attributes,
 			= (pae_page_table_entry*)fPageMapper->GetPageTableAt(
 				*pageDirEntry & X86_PAE_PDE_ADDRESS_MASK);
 
-		uint32 index = start / B_PAGE_SIZE % kPAEPageTableEntryCount;
+		uint32_t index = start / B_PAGE_SIZE % kPAEPageTableEntryCount;
 		for (; index < kPAEPageTableEntryCount && start < end;
 				index++, start += B_PAGE_SIZE) {
 			pae_page_table_entry entry = pageTable[index];
@@ -1069,7 +1069,7 @@ X86VMTranslationMapPAE::Protect(addr_t start, addr_t end, uint32 attributes,
 
 
 status_t
-X86VMTranslationMapPAE::ClearFlags(addr_t address, uint32 flags)
+X86VMTranslationMapPAE::ClearFlags(addr_t address, uint32_t flags)
 {
 	pae_page_directory_entry* pageDirEntry
 		= X86PagingMethodPAE::PageDirEntryForAddress(
@@ -1294,11 +1294,11 @@ X86VMTranslationMapPAE::DebugGetReverseMappingInfo(phys_addr_t physicalAddress,
 {
 	pae_page_directory_entry* const* pdpt
 		= fPagingStructures->VirtualPageDirs();
-	for (uint32 pageDirIndex = fIsKernelMap ? 2 : 0;
-		pageDirIndex < uint32(fIsKernelMap ? 4 : 2); pageDirIndex++) {
+	for (uint32_t pageDirIndex = fIsKernelMap ? 2 : 0;
+		pageDirIndex < uint32_t(fIsKernelMap ? 4 : 2); pageDirIndex++) {
 		// iterate through the page directory
 		pae_page_directory_entry* pageDirectory = pdpt[pageDirIndex];
-		for (uint32 pdeIndex = 0; pdeIndex < kPAEPageDirEntryCount;
+		for (uint32_t pdeIndex = 0; pdeIndex < kPAEPageDirEntryCount;
 			pdeIndex++) {
 			pae_page_directory_entry& pageDirEntry = pageDirectory[pdeIndex];
 			if ((pageDirEntry & X86_PAE_PDE_ADDRESS_MASK) == 0)
@@ -1309,7 +1309,7 @@ X86VMTranslationMapPAE::DebugGetReverseMappingInfo(phys_addr_t physicalAddress,
 				= (pae_page_table_entry*)X86PagingMethodPAE::Method()
 					->PhysicalPageMapper()->InterruptGetPageTableAt(
 						pageDirEntry & X86_PAE_PDE_ADDRESS_MASK);
-			for (uint32 pteIndex = 0; pteIndex < kPAEPageTableEntryCount;
+			for (uint32_t pteIndex = 0; pteIndex < kPAEPageTableEntryCount;
 				pteIndex++) {
 				pae_page_table_entry entry = pageTable[pteIndex];
 				if ((entry & X86_PAE_PTE_PRESENT) != 0

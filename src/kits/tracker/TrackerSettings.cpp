@@ -89,7 +89,7 @@ private:
 	bool fInited;
 	bool fSettingsLoaded;
 
-	int32 fUseCounter;
+	int32_t fUseCounter;
 
 	typedef Settings _inherited;
 };
@@ -98,7 +98,7 @@ private:
 static TTrackerState gTrackerState;
 
 
-rgb_color ValueToColor(int32 value)
+rgb_color ValueToColor(int32_t value)
 {
 	rgb_color color;
 	color.alpha = static_cast<uchar>((value >> 24L) & 0xff);
@@ -110,7 +110,7 @@ rgb_color ValueToColor(int32 value)
 }
 
 
-int32 ColorToValue(rgb_color color)
+int32_t ColorToValue(rgb_color color)
 {
 	return color.alpha << 24L | color.red << 16L | color.green << 8L
 		| color.blue;
@@ -487,8 +487,8 @@ void TrackerSettings::SetShowNavigator(bool enabled)
 }
 
 
-void TrackerSettings::RecentCounts(int32* applications, int32* documents,
-	int32* folders)
+void TrackerSettings::RecentCounts(int32_t* applications, int32_t* documents,
+	int32_t* folders)
 {
 	if (applications != NULL)
 		*applications = gTrackerState.fRecentApplicationsCount->Value();
@@ -501,19 +501,19 @@ void TrackerSettings::RecentCounts(int32* applications, int32* documents,
 }
 
 
-void TrackerSettings::SetRecentApplicationsCount(int32 count)
+void TrackerSettings::SetRecentApplicationsCount(int32_t count)
 {
 	gTrackerState.fRecentApplicationsCount->ValueChanged(count);
 }
 
 
-void TrackerSettings::SetRecentDocumentsCount(int32 count)
+void TrackerSettings::SetRecentDocumentsCount(int32_t count)
 {
 	gTrackerState.fRecentDocumentsCount->ValueChanged(count);
 }
 
 
-void TrackerSettings::SetRecentFoldersCount(int32 count)
+void TrackerSettings::SetRecentFoldersCount(int32_t count)
 {
 	gTrackerState.fRecentFoldersCount->ValueChanged(count);
 }

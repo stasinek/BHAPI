@@ -79,8 +79,8 @@ public:
 
 			ValuePieceLocation piece;
 			piece.SetToMemory(parentLocation->PieceAt(0).address
-				+ sizeof(uint32));
-			piece.SetSize(sizeof(uint32));
+				+ sizeof(uint32_t));
+			piece.SetSize(sizeof(uint32_t));
 			location->AddPiece(piece);
 		} else {
 			error = type->ResolveDataMemberLocation(fMember,
@@ -122,7 +122,7 @@ BMessageValueNode::BMessageValueNode(ValueNodeChild* nodeChild,
 BMessageValueNode::~BMessageValueNode()
 {
 	fType->ReleaseReference();
-	for (int32 i = 0; i < fChildren.CountItems(); i++)
+	for (int32_t i = 0; i < fChildren.CountItems(); i++)
 		fChildren.ItemAt(i)->ReleaseReference();
 
 	delete fHeader;
@@ -179,7 +179,7 @@ status_t BMessageValueNode::ResolvedLocationAndValue(ValueLoader* valueLoader,
 		fieldAddress.SetTo(headerAddress.ToUInt64()
 			+ sizeof(BMessage::message_header));
 	} else {
-		for (int32 i = 0; i < baseType->CountDataMembers(); i++) {
+		for (int32_t i = 0; i < baseType->CountDataMembers(); i++) {
 			DataMember* member = baseType->DataMemberAt(i);
 			if (strcmp(member->Name(), "fHeader") == 0) {
 				error = baseType->ResolveDataMemberLocation(member,
@@ -325,7 +325,7 @@ status_t BMessageValueNode::CreateChildren(TeamTypeInformation* info)
 {
 	DataMember* member = NULL;
 	CompoundType* messageType = dynamic_cast<CompoundType*>(fType);
-	for (int32 i = 0; i < messageType->CountDataMembers(); i++) {
+	for (int32_t i = 0; i < messageType->CountDataMembers(); i++) {
 		member = messageType->DataMemberAt(i);
 		if (strcmp(member->Name(), "what") == 0) {
 			ValueNodeChild* whatNode
@@ -342,10 +342,10 @@ status_t BMessageValueNode::CreateChildren(TeamTypeInformation* info)
 
 	char* name;
 	type_code type;
-	int32 count;
+	int32_t count;
 	Type* fieldType = NULL;
 	BReference<Type> typeRef;
-	for (int32 i = 0; fMessage.GetInfo(B_ANY_TYPE, i, &name, &type,
+	for (int32_t i = 0; fMessage.GetInfo(B_ANY_TYPE, i, &name, &type,
 		&count) == B_OK; i++) {
 		fieldType = NULL;
 
@@ -373,14 +373,14 @@ status_t BMessageValueNode::CreateChildren(TeamTypeInformation* info)
 }
 
 
-int32 BMessageValueNode::CountChildren() const
+int32_t BMessageValueNode::CountChildren() const
 {
 	return fChildren.CountItems();
 }
 
 
 ValueNodeChild*
-BMessageValueNode::ChildAt(int32 index) const
+BMessageValueNode::ChildAt(int32_t index) const
 {
 	return fChildren.ItemAt(index);
 }
@@ -419,12 +419,12 @@ status_t BMessageValueNode::_GetTypeForTypeCode(TeamTypeInformation* info,
 			break;
 
 		case B_INT32_TYPE:
-			typeName = "int32";
+			typeName = "int32_t";
 			constraints.SetTypeKind(TYPE_TYPEDEF);
 			break;
 
 		case B_UINT32_TYPE:
-			typeName = "uint32";
+			typeName = "uint32_t";
 			constraints.SetTypeKind(TYPE_TYPEDEF);
 			break;
 
@@ -521,8 +521,8 @@ status_t BMessageValueNode::_FindField(const char* name, type_code type,
 	if (fHeader->field_count == 0 || fFields == NULL || fData == NULL)
 		return B_NAME_NOT_FOUND;
 
-	uint32 hash = _HashName(name) % fHeader->hash_table_size;
-	int32 nextField = fHeader->hash_table[hash];
+	uint32_t hash = _HashName(name) % fHeader->hash_table_size;
+	int32_t nextField = fHeader->hash_table[hash];
 
 	while (nextField >= 0) {
 		BMessage::field_header* field = &fFields[nextField];
@@ -545,10 +545,10 @@ status_t BMessageValueNode::_FindField(const char* name, type_code type,
 }
 
 
-uint32 BMessageValueNode::_HashName(const char* name) const
+uint32_t BMessageValueNode::_HashName(const char* name) const
 {
 	char ch;
-	uint32 result = 0;
+	uint32_t result = 0;
 
 	while ((ch = *name++) != 0) {
 		result = (result << 7) ^ (result >> 24);
@@ -561,16 +561,16 @@ uint32 BMessageValueNode::_HashName(const char* name) const
 
 
 status_t BMessageValueNode::_FindDataLocation(const char* name, type_code type,
-	int32 index, ValueLocation& location) const
+	int32_t index, ValueLocation& location) const
 {
 	BMessage::field_header* field = NULL;
-	int32 offset = 0;
-	int32 size = 0;
+	int32_t offset = 0;
+	int32_t size = 0;
 	status_t result = _FindField(name, type, &field);
 	if (result != B_OK)
 		return result;
 
-	if (index < 0 || (uint32)index >= field->count)
+	if (index < 0 || (uint32_t)index >= field->count)
 		return B_BAD_INDEX;
 
 	if ((field->flags & FIELD_FLAG_FIXED_SIZE) != 0) {
@@ -579,13 +579,13 @@ status_t BMessageValueNode::_FindDataLocation(const char* name, type_code type,
 	} else {
 		offset = field->offset + field->name_length;
 		uint8 *pointer = fData + field->offset + field->name_length;
-		for (int32 i = 0; i < index; i++) {
-			pointer += *(uint32*)pointer + sizeof(uint32);
-			offset += *(uint32*)pointer + sizeof(uint32);
+		for (int32_t i = 0; i < index; i++) {
+			pointer += *(uint32_t*)pointer + sizeof(uint32_t);
+			offset += *(uint32_t*)pointer + sizeof(uint32_t);
 		}
 
-		size = *(uint32*)pointer;
-		offset += sizeof(uint32);
+		size = *(uint32_t*)pointer;
+		offset += sizeof(uint32_t);
 	}
 
 	ValuePieceLocation piece;
@@ -603,7 +603,7 @@ status_t BMessageValueNode::_FindDataLocation(const char* name, type_code type,
 
 BMessageValueNode::BMessageFieldNode::BMessageFieldNode(
 	BMessageFieldNodeChild *child, BMessageValueNode* parent,
-	const BString &name, type_code type, int32 count)
+	const BString &name, type_code type, int32_t count)
 	:
 	ValueNode(child),
 	fName(name),
@@ -639,7 +639,7 @@ status_t BMessageValueNode::BMessageFieldNode::CreateChildren(TeamTypeInformatio
 		return error;
 
 	BReference<Type> typeRef(type, true);
-	for (int32 i = 0; i < fFieldCount; i++) {
+	for (int32_t i = 0; i < fFieldCount; i++) {
 		BMessageFieldNodeChild* child = new(std::nothrow)
 			BMessageFieldNodeChild(fParent, type, fName, fFieldType,
 				fFieldCount, i);
@@ -662,13 +662,13 @@ status_t BMessageValueNode::BMessageFieldNode::CreateChildren(TeamTypeInformatio
 }
 
 
-int32 BMessageValueNode::BMessageFieldNode::CountChildren() const
+int32_t BMessageValueNode::BMessageFieldNode::CountChildren() const
 {
 	return fChildren.CountItems();
 }
 
 ValueNodeChild*
-BMessageValueNode::BMessageFieldNode::ChildAt(int32 index) const
+BMessageValueNode::BMessageFieldNode::ChildAt(int32_t index) const
 {
 	return fChildren.ItemAt(index);
 }
@@ -689,7 +689,7 @@ status_t BMessageValueNode::BMessageFieldNode::ResolvedLocationAndValue(
 
 BMessageValueNode::BMessageFieldNodeChild::BMessageFieldNodeChild(
 	BMessageValueNode* parent, Type* nodeType, const BString &name,
-	type_code type, int32 count, int32 index)
+	type_code type, int32_t count, int32_t index)
 	:
 	ValueNodeChild(),
 	fName(name),

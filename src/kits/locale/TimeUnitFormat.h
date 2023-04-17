@@ -50,7 +50,7 @@ public:
 	virtual						~BTimeUnitFormat();
 
 			status_t			Format(BString& buffer,
-									const int32 value,
+									const int32_t value,
 									const time_unit_element unit,
 									time_unit_style style = B_TIME_UNIT_FULL
 									) const;

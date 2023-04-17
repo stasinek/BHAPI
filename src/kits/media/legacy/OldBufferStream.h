@@ -31,7 +31,7 @@ typedef struct _sub_info {
   _sbuf_info		*fAcq;		/* next buf to be acquired */
   sem_id			fSem;		/* semaphore used for blocking */
   bigtime_t			fTotalTime;	/* accumulated time between acq/rel */
-  int32				fHeld;		/* # of buffers acq'd but not yet rel'd */
+  int32_t				fHeld;		/* # of buffers acq'd but not yet rel'd */
   sem_id			fBlockedOn;	/* the semaphore being waited on */
 								/* or B_BAD_SEM_ID if not blocked */
 } *subscriber_id;
@@ -48,8 +48,8 @@ typedef struct _sbuf_info {
   bigtime_t			fAcqTime;	/* time at which this buffer was acquired */
   area_id			fAreaID;	/* for system memory allocation calls */
   char				*fAddress;
-  int32				fSize;     /* usable portion can be smaller than ... */
-  int32				fAreaSize; /* ... the size of the area. */
+  int32_t				fSize;     /* usable portion can be smaller than ... */
+  int32_t				fAreaSize; /* ... the size of the area. */
   bool				fIsFinal;	/* TRUE => stream is stopping */
 } *buffer_id;
 
@@ -78,12 +78,12 @@ public:
 #endif
 
 	virtual	status_t	GetStreamParameters(size_t *bufferSize,
-											int32 *bufferCount,
+											int32_t *bufferCount,
 											bool *isRunning,
-											int32 *subscriberCount) const;
+											int32_t *subscriberCount) const;
 
 	virtual	status_t	SetStreamBuffers(size_t bufferSize, 
-										 int32 bufferCount);
+										 int32_t bufferCount);
 
 	virtual	status_t	StartStreaming();
 	virtual	status_t	StopStreaming();
@@ -138,12 +138,12 @@ public:
 
 /* These four functions are delegated to the stream controller */
 		status_t		GetStreamParameters(size_t *bufferSize,
-											int32 *bufferCount,
+											int32_t *bufferCount,
 											bool *isRunning,
-											int32 *subscriberCount) const;
+											int32_t *subscriberCount) const;
 
 		status_t		SetStreamBuffers(size_t bufferSize, 
-										 int32 bufferCount);
+										 int32_t bufferCount);
 
 		status_t		StartStreaming();
 		status_t		StopStreaming();
@@ -152,7 +152,7 @@ public:
 		BBufferStreamManager *StreamManager() const;
 
 /* number of buffers in stream */
-		int32			CountBuffers() const;
+		int32_t			CountBuffers() const;
 
 /* Create or delete a subscriber id for subsequent operations */
 		status_t		Subscribe(char *name, 
@@ -175,7 +175,7 @@ public:
 		status_t		SubscriberInfo(subscriber_id subID,
 									   char** name,
 									   stream_id* streamID,
-									   int32* position);
+									   int32_t* position);
 
 /* Force an error return of a subscriber if it's blocked */
 		status_t		UnblockSubscriber(subscriber_id subID);
@@ -192,11 +192,11 @@ public:
 		bool			IsFinalBuffer(buffer_id bufID) const;
 
 /* Get attributes of a particular subscriber */
-		int32			CountBuffersHeld(subscriber_id subID);
+		int32_t			CountBuffersHeld(subscriber_id subID);
 
 /* Queries for the BBufferStream */
-		int32			CountSubscribers() const;
-		int32			CountEnteredSubscribers() const;
+		int32_t			CountSubscribers() const;
+		int32_t			CountEnteredSubscribers() const;
 
 		subscriber_id	FirstSubscriber() const;
 		subscriber_id	LastSubscriber() const;
@@ -294,8 +294,8 @@ virtual	void		_ReservedBufferStream4();
 		_sub_info			*fLastSub;		/* last entered in itinerary */
 
 		sem_id				fFirstSem;		/* semaphore used by fFirstSub */
-		int32				fSubCount;
-		int32				fEnteredSubCount;
+		int32_t				fSubCount;
+		int32_t				fEnteredSubCount;
 
 		_sub_info			fSubscribers[B_MAX_SUBSCRIBER_COUNT];
 
@@ -306,11 +306,11 @@ virtual	void		_ReservedBufferStream4();
 		_sbuf_info			*fFreeBuffers;
 		_sbuf_info			*fOldestBuffer;	/* first in line */
 		_sbuf_info			*fNewestBuffer;	/* fNewest->fNext = NULL */
-		int32				fCountBuffers;
+		int32_t				fCountBuffers;
 
 		_sbuf_info			fBuffers[B_MAX_BUFFER_COUNT];
 
-		uint32				_reserved[4];
+		uint32_t				_reserved[4];
 };
 
 #endif 	// #ifdef _BUFFER_STREAM_H

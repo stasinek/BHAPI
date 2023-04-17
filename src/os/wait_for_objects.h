@@ -17,14 +17,14 @@ struct select_sync;
 typedef struct select_info {
 	struct select_info*	next;				// next in the object's list
 	struct select_sync*	sync;
-	int32				events;
+	int32_t				events;
 	uint16				selected_events;
 } select_info;
 
 typedef struct select_sync {
-	int32				ref_count;
+	int32_t				ref_count;
 	sem_id				sem;
-	uint32				count;
+	uint32_t				count;
 	struct select_info*	set;
 } select_sync;
 
@@ -41,7 +41,7 @@ extern status_t	notify_select_events(select_info* info, uint16 events);
 extern void		notify_select_events_list(select_info* list, uint16 events);
 
 extern ssize_t	_user_wait_for_objects(object_wait_info* userInfos,
-					int numInfos, uint32 flags, bigtime_t timeout);
+					int numInfos, uint32_t flags, bigtime_t timeout);
 
 
 #ifdef __cplusplus

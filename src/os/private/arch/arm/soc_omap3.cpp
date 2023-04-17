@@ -27,7 +27,7 @@ enum {
 void
 OMAP3InterruptController::EnableInterrupt(int irq)
 {
-	uint32 bit = irq % 32, bank = irq / 32;
+	uint32_t bit = irq % 32, bank = irq / 32;
 	fRegBase[INTCPS_MIR_CLEARn + (8 * bank)] = 1 << bit;
 }
 
@@ -35,7 +35,7 @@ OMAP3InterruptController::EnableInterrupt(int irq)
 void
 OMAP3InterruptController::DisableInterrupt(int irq)
 {
-	uint32 bit = irq % 32, bank = irq / 32;
+	uint32_t bit = irq % 32, bank = irq / 32;
 	fRegBase[INTCPS_MIR_SETn + (8 * bank)] = 1 << bit;
 }
 
@@ -47,7 +47,7 @@ OMAP3InterruptController::HandleInterrupt()
 	int irqnr = 0;
 
 	do {
-		for (uint32 i=0; i < fNumPending; i++) {
+		for (uint32_t i=0; i < fNumPending; i++) {
 			irqnr = fRegBase[INTCPS_PENDING_IRQn + (8 * i)];
 			if (irqnr)
 				break;
@@ -75,7 +75,7 @@ OMAP3InterruptController::HandleInterrupt()
 void
 OMAP3InterruptController::SoftReset()
 {
-	uint32 tmp = fRegBase[INTCPS_REVISION] & 0xff;
+	uint32_t tmp = fRegBase[INTCPS_REVISION] & 0xff;
 
 	dprintf("OMAP: INTC found at 0x%p (rev %ld.%ld)\n",
 		fRegBase, tmp >> 4, tmp & 0xf);
@@ -130,17 +130,17 @@ enum {
 	TOWR,
 };
 
-int32
+int32_t
 OMAP3Timer::_InterruptWrapper(void *data)
 {
 	return ((OMAP3Timer*)data)->HandleInterrupt();
 }
 
 
-int32
+int32_t
 OMAP3Timer::HandleInterrupt()
 {
-	uint32 ints = fRegBase[TISR] & 7;
+	uint32_t ints = fRegBase[TISR] & 7;
 
 	if (ints & 1) { // Match?
 		dprintf("OMAP3Timer: match!\n");
@@ -193,7 +193,7 @@ OMAP3Timer::OMAP3Timer(fdt_module_info *fdtModule, fdt_device_node node)
 	if (fInterrupt < 0)
 		panic("Cannot get OMAP3Timer interrupt!");
 
-	uint32 rev = fRegBase[TIDR];
+	uint32_t rev = fRegBase[TIDR];
 	dprintf("OMAP: Found timer @ 0x%p, IRQ %d (rev %ld.%ld)\n", fRegBase, fInterrupt, (rev >> 4) & 0xf, rev & 0xf);
 
 	// Let the timer run (so we can use it as clocksource)

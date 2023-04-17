@@ -219,7 +219,7 @@ void BTranslatorRoster::Private::MessageReceived(BMessage* message)
 			printf("translator roster node monitor: ");
 			message->PrintToStream();
 
-			int32 opcode;
+			int32_t opcode;
 			if (message->FindInt32("opcode", &opcode) != B_OK)
 				return;
 
@@ -317,7 +317,7 @@ void BTranslatorRoster::Private::MessageReceived(BMessage* message)
 		{
 			// A translator's refcount has been reduced to zero and it wants
 			// us to delete it.
-			int32 id;
+			int32_t id;
 			void* self;
 			if (message->FindInt32("id", &id) == B_OK
 				&& message->FindPointer("ptr", &self) == B_OK) {
@@ -343,7 +343,7 @@ void BTranslatorRoster::Private::AddDefaultPaths()
 		B_SYSTEM_ADDONS_DIRECTORY,
 	};
 
-	for (uint32 i = fSafeMode ? 4 : 0; i < sizeof(paths) / sizeof(paths[0]);
+	for (uint32_t i = fSafeMode ? 4 : 0; i < sizeof(paths) / sizeof(paths[0]);
 			i++) {
 		BPath path;
 		status_t status = find_directory(paths[i], &path, true);
@@ -369,7 +369,7 @@ status_t BTranslatorRoster::Private::AddPaths(const char* paths)
 		return B_BAD_VALUE;
 
 	status_t status = B_OK;
-	int32 added = 0;
+	int32_t added = 0;
 
 	while (paths != NULL) {
 		const char* end = strchr(paths, ':');
@@ -386,7 +386,7 @@ status_t BTranslatorRoster::Private::AddPaths(const char* paths)
 		// Keep the last error that occured, and return it
 		// but don't overwrite it, if the last path was
 		// added successfully.
-		int32 count;
+		int32_t count;
 		status_t error = AddPath(path.String(), &count);
 		if (error != B_NO_ERROR)
 			status = error;
@@ -407,7 +407,7 @@ status_t BTranslatorRoster::Private::AddPaths(const char* paths)
 	Note, the order in which these directories are added to actually matters,
 	see AddPaths().
 */
-status_t BTranslatorRoster::Private::AddPath(const char* path, int32* _added)
+status_t BTranslatorRoster::Private::AddPath(const char* path, int32_t* _added)
 {
 	BDirectory directory(path);
 	status_t status = directory.InitCheck();
@@ -439,8 +439,8 @@ status_t BTranslatorRoster::Private::AddPath(const char* path, int32* _added)
 		fDirectories.push_back(nodeRef);
 	}
 
-	int32 count = 0;
-	int32 files = 0;
+	int32_t count = 0;
+	int32_t files = 0;
 
 	entry_ref ref;
 	while (directory.GetNextRef(&ref) == B_OK) {
@@ -517,7 +517,7 @@ status_t BTranslatorRoster::Private::GetTranslatorData(image_id image,
 
 	// find all the symbols
 
-	int32* version;
+	int32_t* version;
 	if (get_image_symbol(image, "translatorName", B_SYMBOL_TYPE_DATA,
 			(void**)&data.name) < B_OK
 		|| get_image_symbol(image, "translatorInfo", B_SYMBOL_TYPE_DATA,
@@ -548,7 +548,7 @@ status_t BTranslatorRoster::Private::GetTranslatorData(image_id image,
 
 
 status_t BTranslatorRoster::Private::CreateTranslators(const entry_ref& ref,
-	int32& count, BMessage* update)
+	int32_t& count, BMessage* update)
 {
 	BAutolock locker(this);
 
@@ -578,7 +578,7 @@ status_t BTranslatorRoster::Private::CreateTranslators(const entry_ref& ref,
 		return image;
 
 	// Function pointer used to create post R4.5 style translators
-	BTranslator *(*makeNthTranslator)(int32 n, image_id you, uint32 flags, ...);
+	BTranslator *(*makeNthTranslator)(int32_t n, image_id you, uint32_t flags, ...);
 
 	status = get_image_symbol(image, "make_nth_translator",
 		B_SYMBOL_TYPE_TEXT, (void**)&makeNthTranslator);
@@ -587,8 +587,8 @@ status_t BTranslatorRoster::Private::CreateTranslators(const entry_ref& ref,
 		// translator creation mechanism, keep loading translators
 		// until MakeNthTranslator stops returning them.
 		BTranslator* translator = NULL;
-		int32 created = 0;
-		for (int32 n = 0; (translator = makeNthTranslator(n, image, 0)) != NULL;
+		int32_t created = 0;
+		for (int32_t n = 0; (translator = makeNthTranslator(n, image, 0)) != NULL;
 				n++) {
 			if (AddTranslator(translator, image, &ref, nodeRef.node) == B_OK) {
 				if (update)
@@ -701,8 +701,8 @@ status_t BTranslatorRoster::Private::StoreTranslators(BMessage& archive)
 
 
 status_t BTranslatorRoster::Private::Identify(BPositionIO* source,
-	BMessage* ioExtension, uint32 hintType, const char* hintMIME,
-	uint32 wantType, translator_info* _info)
+	BMessage* ioExtension, uint32_t hintType, const char* hintMIME,
+	uint32_t wantType, translator_info* _info)
 {
 	BAutolock locker(this);
 
@@ -722,7 +722,7 @@ status_t BTranslatorRoster::Private::Identify(BPositionIO* source,
 		if (pos != 0)
 			return pos < 0 ? (status_t)pos : B_IO_ERROR;
 
-		int32 formatsCount = 0;
+		int32_t formatsCount = 0;
 		const translation_format* formats = translator.InputFormats(
 			&formatsCount);
 		const translation_format* format = _CheckHints(formats, formatsCount,
@@ -754,20 +754,20 @@ status_t BTranslatorRoster::Private::Identify(BPositionIO* source,
 
 
 status_t BTranslatorRoster::Private::GetTranslators(BPositionIO* source,
-	BMessage* ioExtension, uint32 hintType, const char* hintMIME,
-	uint32 wantType, translator_info** _info, int32* _numInfo)
+	BMessage* ioExtension, uint32_t hintType, const char* hintMIME,
+	uint32_t wantType, translator_info** _info, int32_t* _numInfo)
 {
 	BAutolock locker(this);
 
 	_RescanChanged();
 
-	int32 arraySize = fTranslators.size();
+	int32_t arraySize = fTranslators.size();
 	translator_info* array = new (std::nothrow) translator_info[arraySize];
 	if (array == NULL)
 		return B_NO_MEMORY;
 
 	TranslatorMap::const_iterator iterator = fTranslators.begin();
-	int32 count = 0;
+	int32_t count = 0;
 
 	while (iterator != fTranslators.end()) {
 		BTranslator& translator = *iterator->second.translator;
@@ -778,7 +778,7 @@ status_t BTranslatorRoster::Private::GetTranslators(BPositionIO* source,
 			return pos < 0 ? status_t(pos) : B_IO_ERROR;
 		}
 
-		int32 formatsCount = 0;
+		int32_t formatsCount = 0;
 		const translation_format* formats = translator.InputFormats(
 			&formatsCount);
 		const translation_format* format = _CheckHints(formats, formatsCount,
@@ -805,19 +805,19 @@ status_t BTranslatorRoster::Private::GetTranslators(BPositionIO* source,
 
 
 status_t BTranslatorRoster::Private::GetAllTranslators(translator_id** _ids,
-	int32* _count)
+	int32_t* _count)
 {
 	BAutolock locker(this);
 
 	_RescanChanged();
 
-	int32 arraySize = fTranslators.size();
+	int32_t arraySize = fTranslators.size();
 	translator_id* array = new (std::nothrow) translator_id[arraySize];
 	if (array == NULL)
 		return B_NO_MEMORY;
 
 	TranslatorMap::const_iterator iterator = fTranslators.begin();
-	int32 count = 0;
+	int32_t count = 0;
 
 	while (iterator != fTranslators.end()) {
 		array[count++] = iterator->first;
@@ -860,7 +860,7 @@ void BTranslatorRoster::Private::_TranslatorDeleted(translator_id id, BTranslato
 
 	delete self;
 
-	int32 former = atomic_add(&fKnownImages[image], -1);
+	int32_t former = atomic_add(&fKnownImages[image], -1);
 	if (former == 1) {
 		unload_add_on(image);
 		fImageOrigins.erase(self);
@@ -900,7 +900,7 @@ void BTranslatorRoster::Private::_RescanChanged()
 {
 	while (!fRescanEntries.empty()) {
 		EntryRefSet::iterator iterator = fRescanEntries.begin();
-		int32 count;
+		int32_t count;
 		CreateTranslators(*iterator, count);
 
 		fRescanEntries.erase(iterator);
@@ -914,18 +914,18 @@ void BTranslatorRoster::Private::_RescanChanged()
 */
 const translation_format*
 BTranslatorRoster::Private::_CheckHints(const translation_format* formats,
-	int32 formatsCount, uint32 hintType, const char* hintMIME)
+	int32_t formatsCount, uint32_t hintType, const char* hintMIME)
 {
 	if (formats == NULL || formatsCount <= 0 || (!hintType && hintMIME == NULL))
 		return NULL;
 
 	// The provided MIME type hint may be a super type
-	int32 super = 0;
+	int32_t super = 0;
 	if (hintMIME && !strchr(hintMIME, '/'))
 		super = strlen(hintMIME);
 
 	// scan for suitable format
-	for (int32 i = 0; i < formatsCount && formats[i].type; i++) {
+	for (int32_t i = 0; i < formatsCount && formats[i].type; i++) {
 		if (formats[i].type == hintType
 			|| (hintMIME
 				&& ((super && !strncmp(formats[i].MIME, hintMIME, super))
@@ -1015,7 +1015,7 @@ BTranslatorRoster::Private::_FindTranslator(node_ref& nodeRef)
 	is to be found in two directories, the one with the higher priority is
 	chosen.
 */
-int32 BTranslatorRoster::Private::_CompareTranslatorDirectoryPriority(
+int32_t BTranslatorRoster::Private::_CompareTranslatorDirectoryPriority(
 	const entry_ref& a, const entry_ref& b) const
 {
 	// priority is determined by the order in the list
@@ -1122,7 +1122,7 @@ void BTranslatorRoster::Private::_EntryAdded(const entry_ref& ref)
 	}
 
 	BMessage update(B_TRANSLATOR_ADDED);
-	int32 count = 0;
+	int32_t count = 0;
 	CreateTranslators(ref, count, &update);
 
 	_NotifyListeners(update);
@@ -1173,12 +1173,12 @@ BTranslatorRoster::BTranslatorRoster(BMessage* model)
 
 	if (model) {
 		const char* path;
-		for (int32 i = 0;
+		for (int32_t i = 0;
 			model->FindString("be:translator_path", i, &path) == B_OK; i++) {
 			BEntry entry(path);
 			entry_ref ref;
 			if (entry.GetRef(&ref) == B_OK) {
-				int32 count = 0;
+				int32_t count = 0;
 				fPrivate->CreateTranslators(ref, count);
 			}
 		}
@@ -1227,7 +1227,7 @@ BTranslatorRoster::Instantiate(BMessage* from)
 BTranslatorRoster*
 BTranslatorRoster::Default()
 {
-	static int32 lock = 0;
+	static int32_t lock = 0;
 
 	if (sDefaultRoster != NULL)
 		return sDefaultRoster;
@@ -1311,7 +1311,7 @@ bool BTranslatorRoster::IsTranslator(entry_ref* ref)
 		return false;
 
 	// Function pointer used to create post R4.5 style translators
-	BTranslator* (*makeNthTranslator)(int32 n, image_id you, uint32 flags, ...);
+	BTranslator* (*makeNthTranslator)(int32_t n, image_id you, uint32_t flags, ...);
 
 	status_t status = get_image_symbol(image, "make_nth_translator",
 		B_SYMBOL_TYPE_TEXT, (void**)&makeNthTranslator);
@@ -1344,8 +1344,8 @@ bool BTranslatorRoster::IsTranslator(entry_ref* ref)
 		and other errors from accessing the source stream
 */
 status_t BTranslatorRoster::Identify(BPositionIO* source, BMessage* ioExtension,
-	translator_info* _info, uint32 hintType, const char* hintMIME,
-	uint32 wantType)
+	translator_info* _info, uint32_t hintType, const char* hintMIME,
+	uint32_t wantType)
 {
 	if (source == NULL || _info == NULL)
 		return B_BAD_VALUE;
@@ -1379,8 +1379,8 @@ status_t BTranslatorRoster::Identify(BPositionIO* source, BMessage* ioExtension,
 		other errors, problems using \a source
 */
 status_t BTranslatorRoster::GetTranslators(BPositionIO* source, BMessage* ioExtension,
-	translator_info** _info, int32* _numInfo, uint32 hintType,
-	const char* hintMIME, uint32 wantType)
+	translator_info** _info, int32_t* _numInfo, uint32_t hintType,
+	const char* hintMIME, uint32_t wantType)
 {
 	if (source == NULL || _info == NULL || _numInfo == NULL)
 		return B_BAD_VALUE;
@@ -1398,7 +1398,7 @@ status_t BTranslatorRoster::GetTranslators(BPositionIO* source, BMessage* ioExte
 	\param _ids the array is stored there (you own the array).
 	\param _count number of IDs in the array.
 */
-status_t BTranslatorRoster::GetAllTranslators(translator_id** _ids, int32* _count)
+status_t BTranslatorRoster::GetAllTranslators(translator_id** _ids, int32_t* _count)
 {
 	if (_ids == NULL || _count == NULL)
 		return B_BAD_VALUE;
@@ -1422,7 +1422,7 @@ status_t BTranslatorRoster::GetAllTranslators(translator_id** _ids, int32* _coun
 		B_NO_TRANSLATOR, \id didn't identify an existing translator
 */
 status_t BTranslatorRoster::GetTranslatorInfo(translator_id id, const char** _name,
-	const char** _info, int32* _version)
+	const char** _info, int32_t* _version)
 {
 	if (_name == NULL && _info == NULL && _version == NULL)
 		return B_BAD_VALUE;
@@ -1458,7 +1458,7 @@ status_t BTranslatorRoster::GetTranslatorInfo(translator_id id, const char** _na
 		B_NO_TRANSLATOR, \id didn't identify an existing translator
 */
 status_t BTranslatorRoster::GetInputFormats(translator_id id,
-	const translation_format** _formats, int32* _numFormats)
+	const translation_format** _formats, int32_t* _numFormats)
 {
 	if (_formats == NULL || _numFormats == NULL)
 		return B_BAD_VALUE;
@@ -1488,7 +1488,7 @@ status_t BTranslatorRoster::GetInputFormats(translator_id id,
 		B_NO_TRANSLATOR, \id didn't identify an existing translator
 */
 status_t BTranslatorRoster::GetOutputFormats(translator_id id,
-	const translation_format** _formats, int32* _numFormats)
+	const translation_format** _formats, int32_t* _numFormats)
 {
 	if (_formats == NULL || _numFormats == NULL)
 		return B_BAD_VALUE;
@@ -1525,8 +1525,8 @@ status_t BTranslatorRoster::GetOutputFormats(translator_id id,
 		and other errors from accessing the source and destination streams
 */
 status_t BTranslatorRoster::Translate(BPositionIO* source, const translator_info* info,
-	BMessage* ioExtension, BPositionIO* destination, uint32 wantOutType,
-	uint32 hintType, const char* hintMIME)
+	BMessage* ioExtension, BPositionIO* destination, uint32_t wantOutType,
+	uint32_t hintType, const char* hintMIME)
 {
 	if (source == NULL || destination == NULL)
 		return B_BAD_VALUE;
@@ -1589,7 +1589,7 @@ status_t BTranslatorRoster::Translate(BPositionIO* source, const translator_info
 		and other errors from accessing the source and destination streams
 */
 status_t BTranslatorRoster::Translate(translator_id id, BPositionIO* source,
-	BMessage* ioExtension, BPositionIO* destination, uint32 wantOutType)
+	BMessage* ioExtension, BPositionIO* destination, uint32_t wantOutType)
 {
 	if (source == NULL || destination == NULL)
 		return B_BAD_VALUE;
@@ -1662,7 +1662,7 @@ status_t BTranslatorRoster::MakeConfigurationView(translator_id id,
 
 
 BTranslatorReleaseDelegate*
-BTranslatorRoster::AcquireTranslator(int32 id)
+BTranslatorRoster::AcquireTranslator(int32_t id)
 {
 	BAutolock locker(fPrivate);
 
@@ -1752,8 +1752,8 @@ BTranslatorRoster::operator=(const BTranslatorRoster &tr)
 
 #if __GNUC__ == 2	// gcc 2
 
-/*static*/ const char*  BTranslatorRoster::Version(int32* outCurVersion, int32* outMinVersion,
-	int32 inAppVersion)
+/*static*/ const char*  BTranslatorRoster::Version(int32_t* outCurVersion, int32_t* outMinVersion,
+	int32_t inAppVersion)
 {
 	if (!outCurVersion || !outMinVersion)
 		return "";

@@ -21,7 +21,7 @@ public:
 
 	virtual	void				Hide();
 
-			void				AddAction(uint32 command, BHandler* target,
+			void				AddAction(uint32_t command, BHandler* target,
 									const BBitmap* icon,
 									const char* toolTipText = NULL,
 									const char* text = NULL,
@@ -35,11 +35,11 @@ public:
 			void				AddGlue();
 			void				AddView(BView* view);
 
-			void				SetActionEnabled(uint32 command, bool enabled);
-			void				SetActionPressed(uint32 command, bool pressed);
-			void				SetActionVisible(uint32 command, bool visible);
+			void				SetActionEnabled(uint32_t command, bool enabled);
+			void				SetActionPressed(uint32_t command, bool pressed);
+			void				SetActionVisible(uint32_t command, bool visible);
 
-			BButton*			FindButton(uint32 command) const;
+			BButton*			FindButton(uint32_t command) const;
 
 private:
 	virtual	void				Pulse();

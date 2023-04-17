@@ -37,7 +37,7 @@ get_tls()
 }
 
 
-int32 tls_allocate()
+int32_t tls_allocate()
 {
 	if (gNextSlot < TLS_MAX_KEYS) {
 		auto next = gNextSlot++;
@@ -49,20 +49,20 @@ int32 tls_allocate()
 }
 
 
-void*   tls_get(int32 index)
+void*   tls_get(int32_t index)
 {
 	return get_tls()[index];
 }
 
 
 void**
-tls_address(int32 index)
+tls_address(int32_t index)
 {
 	return get_tls() + index;
 }
 
 
-void tls_set(int32 index, void* value)
+void tls_set(int32_t index, void* value)
 {
 	get_tls()[index] = value;
 }

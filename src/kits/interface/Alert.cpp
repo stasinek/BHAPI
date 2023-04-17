@@ -75,7 +75,7 @@ public:
 class BAlertButton : public BButton {
 public:
     BAlertButton(BRect frame, const char *name, const char *label, BMessage *message,
-		      __be_uint32 resizeMode,  __be_uint32 flags,  __be_uint8 index);
+		      __be_uint32_t resizeMode,  __be_uint32_t flags,  __be_uint8 index);
 	virtual status_t Invoke(const BMessage *msg);
 
 private:
@@ -165,7 +165,7 @@ BAlertTypeView::GetPreferredSize(float *width, float *height)
 
 
 BAlertButton::BAlertButton(BRect frame, const char *name, const char *label, BMessage *message,
-			    __be_uint32 resizeMode,  __be_uint32 flags,  __be_uint8 index)
+			    __be_uint32_t resizeMode,  __be_uint32_t flags,  __be_uint8 index)
 	: BButton(frame, name, label, message, resizeMode, flags)
 {
 	fIndex = index;
@@ -190,7 +190,7 @@ BAlertButton::Invoke(const BMessage *msg)
 		if(!(alert_view->fInvoker == NULL || alert_view->fInvoker->Message() == NULL))
 		{
 			BMessage aMsg = *(alert_view->fInvoker->Message());
-			aMsg.AddInt32("which", (__be_int32)fIndex);
+			aMsg.AddInt32("which", (__be_int32_t)fIndex);
 			alert_view->fInvoker->Invoke(&aMsg);
 		}
 	}
@@ -300,7 +300,7 @@ BAlert::QuitRequested()
 }
 
 
-__be_int32
+__be_int32_t
 BAlert::Go(bool could_proxy)
 {
 	if(IsRunning() || Proxy() != this || IsLockedByCurrentThread())
@@ -330,7 +330,7 @@ BAlert::Go(bool could_proxy)
 	SendBehind(NULL);
 	Activate();
 
-	__be_int32 retVal = -1;
+	__be_int32_t retVal = -1;
 
 	if(Proxy() != this)
 	{
@@ -362,7 +362,7 @@ BAlert::Go(bool could_proxy)
 		     bhapi::get_sem_count(trackingSem, &count) != B_OK ||
 		     count < 0 || count > 2))
 		{
-			retVal = (__be_int32)count;
+			retVal = (__be_int32_t)count;
 		}
 		bhapi::delete_sem(trackingSem);
 	}
@@ -396,7 +396,7 @@ BAlert::Go(BInvoker *invoker)
 
 
 BButton*
-BAlert::ButtonAt(__be_int32 index) const
+BAlert::ButtonAt(__be_int32_t index) const
 {
 	if(index < 0 || index > 2) return NULL;
 	return fButtons[index];

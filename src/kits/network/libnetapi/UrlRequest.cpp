@@ -178,7 +178,7 @@ status_t BUrlRequest::Status() const
 // #pragma mark Thread management
 
 
-/*static*/ int32 BUrlRequest::_ThreadEntry(void* arg)
+/*static*/ int32_t BUrlRequest::_ThreadEntry(void* arg)
 {
 	BUrlRequest* request = reinterpret_cast<BUrlRequest*>(arg);
 	request->fThreadStatus = B_BUSY;

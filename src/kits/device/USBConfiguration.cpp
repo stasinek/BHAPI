@@ -13,7 +13,7 @@
 #include <new>
 
 
-BUSBConfiguration::BUSBConfiguration(BUSBDevice *device, uint32 index, int rawFD)
+BUSBConfiguration::BUSBConfiguration(BUSBDevice *device, uint32_t index, int rawFD)
 	:	fDevice(device),
 		fIndex(index),
 		fRawFD(rawFD),
@@ -32,7 +32,7 @@ BUSBConfiguration::BUSBConfiguration(BUSBDevice *device, uint32 index, int rawFD
 	if (fInterfaces == NULL)
 		return;
 
-	for (uint32 i = 0; i < fDescriptor.number_interfaces; i++) {
+	for (uint32_t i = 0; i < fDescriptor.number_interfaces; i++) {
 		fInterfaces[i] = new(std::nothrow) BUSBInterface(this, i,
 			B_USB_RAW_ACTIVE_ALTERNATE, fRawFD);
 	}
@@ -43,14 +43,14 @@ BUSBConfiguration::~BUSBConfiguration()
 {
 	delete[] fConfigurationString;
 	if (fInterfaces != NULL) {
-		for (int32 i = 0; i < fDescriptor.number_interfaces; i++)
+		for (int32_t i = 0; i < fDescriptor.number_interfaces; i++)
 			delete fInterfaces[i];
 		delete[] fInterfaces;
 	}
 }
 
 
-uint32 BUSBConfiguration::Index() const
+uint32_t BUSBConfiguration::Index() const
 {
 	return fIndex;
 }
@@ -88,14 +88,14 @@ BUSBConfiguration::Descriptor() const
 }
 
 
-uint32 BUSBConfiguration::CountInterfaces() const
+uint32_t BUSBConfiguration::CountInterfaces() const
 {
 	return fDescriptor.number_interfaces;
 }
 
 
 const BUSBInterface *
-BUSBConfiguration::InterfaceAt(uint32 index) const
+BUSBConfiguration::InterfaceAt(uint32_t index) const
 {
 	if (index >= fDescriptor.number_interfaces || fInterfaces == NULL)
 		return NULL;

@@ -13,9 +13,9 @@
 struct BitBuffer::BitReader {
 	const uint8*	data;
 	uint64			bitSize;
-	uint32			bitOffset;
+	uint32_t			bitOffset;
 
-	BitReader(const uint8* data, uint64 bitSize, uint32 bitOffset)
+	BitReader(const uint8* data, uint64 bitSize, uint32_t bitOffset)
 		:
 		data(data),
 		bitSize(bitSize),
@@ -35,7 +35,7 @@ struct BitBuffer::BitReader {
 		return (byte << bitOffset) | (*data >> (8 - bitOffset));
 	}
 
-	uint8 ReadBits(uint32 count)
+	uint8 ReadBits(uint32_t count)
 	{
 		uint8 byte = *data;
 		bitSize -= count;
@@ -92,7 +92,7 @@ bool BitBuffer::AddBytes(const void* data, size_t size)
 }
 
 
-bool BitBuffer::AddBits(const void* _data, uint64 bitSize, uint32 bitOffset)
+bool BitBuffer::AddBits(const void* _data, uint64 bitSize, uint32_t bitOffset)
 {
 	if (bitSize == 0)
 		return true;

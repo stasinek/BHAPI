@@ -22,7 +22,7 @@ typedef struct cpuidle_module_info {
 	void			(*cpuidle_set_scheduler_mode)(enum scheduler_mode mode);
 
 	void			(*cpuidle_idle)(void);
-	void			(*cpuidle_wait)(int32* variable, int32 test);
+	void			(*cpuidle_wait)(int32_t* variable, int32_t test);
 } cpuidle_module_info;
 
 

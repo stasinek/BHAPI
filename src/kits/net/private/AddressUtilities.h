@@ -48,7 +48,7 @@ public:
 		return fModule->is_empty_address(fAddress, checkPort);
 	}
 
-	uint32 HashPair(const sockaddr* second) const
+	uint32_t HashPair(const sockaddr* second) const
 	{
 		return fModule->hash_address_pair(fAddress, second);
 	}
@@ -181,7 +181,7 @@ public:
 		return fModule->is_empty_address(fAddress, checkPort);
 	}
 
-	uint32 HashPair(const sockaddr* second) const
+	uint32_t HashPair(const sockaddr* second) const
 	{
 		return fModule->hash_address_pair(fAddress, second);
 	}

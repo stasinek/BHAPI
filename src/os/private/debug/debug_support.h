@@ -24,9 +24,9 @@ status_t init_debug_context(debug_context *context, team_id team,
 	port_id nubPort);
 void destroy_debug_context(debug_context *context);
 
-status_t send_debug_message(debug_context *context, int32 messageCode,
-			const void *message, int32 messageSize, void *reply,
-			int32 replySize);
+status_t send_debug_message(debug_context *context, int32_t messageCode,
+			const void *message, int32_t messageSize, void *reply,
+			int32_t replySize);
 
 ssize_t debug_read_memory_partial(debug_context *context, const void *address,
 			void *buffer, size_t size);
@@ -71,11 +71,11 @@ void debug_delete_symbol_lookup_context(
 			debug_symbol_lookup_context *lookupContext);
 
 status_t debug_get_symbol(debug_symbol_lookup_context* lookupContext,
-			image_id image, const char* name, int32 symbolType,
-			void** _symbolLocation, size_t* _symbolSize, int32* _symbolType);
+			image_id image, const char* name, int32_t symbolType,
+			void** _symbolLocation, size_t* _symbolSize, int32_t* _symbolType);
 status_t debug_lookup_symbol_address(debug_symbol_lookup_context *lookupContext,
 			const void *address, void **baseAddress, char *symbolName,
-			int32 symbolNameSize, char *imageName, int32 imageNameSize,
+			int32_t symbolNameSize, char *imageName, int32_t imageNameSize,
 			bool *exactMatch);
 
 status_t debug_create_image_symbol_iterator(
@@ -87,7 +87,7 @@ status_t debug_create_file_symbol_iterator(const char* path,
 void debug_delete_symbol_iterator(debug_symbol_iterator* iterator);
 
 status_t debug_next_image_symbol(debug_symbol_iterator* iterator,
-			char* nameBuffer, size_t nameBufferLength, int32* _symbolType,
+			char* nameBuffer, size_t nameBufferLength, int32_t* _symbolType,
 			void** _symbolLocation, size_t* _symbolSize);
 status_t debug_get_symbol_iterator_image_info(debug_symbol_iterator* iterator,
 			image_info* info);

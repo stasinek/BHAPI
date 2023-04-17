@@ -42,7 +42,7 @@ void BScreenSaver::StopSaver()
 }
 
 
-void BScreenSaver::Draw(BView *view, int32 frame)
+void BScreenSaver::Draw(BView *view, int32_t frame)
 {
 	// This method is meant to be overridden
 	return;
@@ -56,7 +56,7 @@ void BScreenSaver::DirectConnected(direct_buffer_info *info)
 }
 
 
-void BScreenSaver::DirectDraw(int32 frame)
+void BScreenSaver::DirectDraw(int32_t frame)
 {
 	// This method is meant to be overridden
 	return;
@@ -111,20 +111,20 @@ BScreenSaver::TickSize() const
 }
 
 
-void BScreenSaver::SetLoop(int32 onCount, int32 offCount)
+void BScreenSaver::SetLoop(int32_t onCount, int32_t offCount)
 {
 	fLoopOnCount = onCount;
 	fLoopOffCount = offCount;
 }
 
 
-int32 BScreenSaver::LoopOnCount() const
+int32_t BScreenSaver::LoopOnCount() const
 {
     return fLoopOnCount;
 }
 
 
-int32 BScreenSaver::LoopOffCount() const
+int32_t BScreenSaver::LoopOffCount() const
 {
     return fLoopOffCount;
 }

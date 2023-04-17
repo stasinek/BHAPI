@@ -43,7 +43,7 @@ BMidiRosterLooper::~BMidiRosterLooper()
 	// It would have been better to jump into the debugger, but I
 	// did not want to risk breaking any (misbehaving) old apps.
 
-	for (int32 t = 0; t < CountEndpoints(); ++t) {
+	for (int32_t t = 0; t < CountEndpoints(); ++t) {
 		BMidiEndpoint* endp = EndpointAt(t);
 		if (endp->fRefCount > 0) {
 			fprintf(
@@ -88,11 +88,11 @@ bool BMidiRosterLooper::Init(BMidiRoster* roster_)
 
 
 BMidiEndpoint* 
-BMidiRosterLooper::NextEndpoint(int32* id)
+BMidiRosterLooper::NextEndpoint(int32_t* id)
 {
 	ASSERT(id != NULL)
 
-	for (int32 t = 0; t < CountEndpoints(); ++t) {
+	for (int32_t t = 0; t < CountEndpoints(); ++t) {
 		BMidiEndpoint* endp = EndpointAt(t);
 		if (endp->ID() > *id) {
 			if (endp->IsRemote() && endp->IsRegistered()) {
@@ -107,9 +107,9 @@ BMidiRosterLooper::NextEndpoint(int32* id)
 
 
 BMidiEndpoint* 
-BMidiRosterLooper::FindEndpoint(int32 id)
+BMidiRosterLooper::FindEndpoint(int32_t id)
 {
-	for (int32 t = 0; t < CountEndpoints(); ++t) {
+	for (int32_t t = 0; t < CountEndpoints(); ++t) {
 		BMidiEndpoint* endp = EndpointAt(t);
 		if (endp->ID() == id) {
 			return endp;
@@ -131,7 +131,7 @@ void BMidiRosterLooper::AddEndpoint(BMidiEndpoint* endp)
 	// order, we can't assume that the mNEW messages also
 	// are delivered in this order (mostly they will be).
 
-	int32 t;
+	int32_t t;
 	for (t = CountEndpoints(); t > 0; --t) {
 		BMidiEndpoint* other = EndpointAt(t - 1);
 		if (endp->ID() > other->ID()) {
@@ -211,7 +211,7 @@ void BMidiRosterLooper::OnAppRegistered(BMessage* msg)
 
 void BMidiRosterLooper::OnEndpointCreated(BMessage* msg)
 {
-	int32 id;
+	int32_t id;
 	bool isRegistered;
 	BString name;
 	BMessage properties;
@@ -223,7 +223,7 @@ void BMidiRosterLooper::OnEndpointCreated(BMessage* msg)
 		&&  (msg->FindMessage("midi:properties", &properties) == B_OK)
 		&&  (msg->FindBool("midi:consumer", &isConsumer) == B_OK)) {
 		if (isConsumer) {
-			int32 port;
+			int32_t port;
 			bigtime_t latency;
 
 			if ((msg->FindInt32("midi:port", &port) == B_OK)
@@ -255,7 +255,7 @@ void BMidiRosterLooper::OnEndpointCreated(BMessage* msg)
 
 void BMidiRosterLooper::OnEndpointDeleted(BMessage* msg)
 {
-	int32 id;
+	int32_t id;
 	if (msg->FindInt32("midi:id", &id) == B_OK) {
 		BMidiEndpoint* endp = FindEndpoint(id);
 		if (endp != NULL) {
@@ -297,7 +297,7 @@ void BMidiRosterLooper::OnEndpointDeleted(BMessage* msg)
 
 void BMidiRosterLooper::OnEndpointChanged(BMessage* msg)
 {
-	int32 id;
+	int32_t id;
 	if (msg->FindInt32("midi:id", &id) == B_OK) {
 		BMidiEndpoint* endp = FindEndpoint(id);
 		if ((endp != NULL) && endp->IsRemote()) {
@@ -320,7 +320,7 @@ void BMidiRosterLooper::OnEndpointChanged(BMessage* msg)
 
 void BMidiRosterLooper::OnConnectedDisconnected(BMessage* msg)
 {
-	int32 prodId, consId;
+	int32_t prodId, consId;
 	if ((msg->FindInt32("midi:producer", &prodId) == B_OK)
 		&&  (msg->FindInt32("midi:consumer", &consId) == B_OK)) {
 		BMidiEndpoint* endp1 = FindEndpoint(prodId);
@@ -447,7 +447,7 @@ void BMidiRosterLooper::ChangeLatency(BMessage* msg, BMidiEndpoint* endp)
 void BMidiRosterLooper::AllEndpoints()
 {
 	BMessage notify;
-	for (int32 t = 0; t < CountEndpoints(); ++t) {
+	for (int32_t t = 0; t < CountEndpoints(); ++t) {
 		BMidiEndpoint* endp = EndpointAt(t);
 		if (endp->IsRemote() && endp->IsRegistered()) {
 			notify.MakeEmpty();
@@ -460,13 +460,13 @@ void BMidiRosterLooper::AllEndpoints()
 
 void BMidiRosterLooper::AllConnections()
 {
-	for (int32 t = 0; t < CountEndpoints(); ++t) {
+	for (int32_t t = 0; t < CountEndpoints(); ++t) {
 		BMidiEndpoint* endp = EndpointAt(t);
 		if (endp->IsRemote() && endp->IsRegistered()) {
 			if (endp->IsProducer()) {
 				BMidiProducer* prod = (BMidiProducer*) endp;
 				if (prod->LockProducer()) {
-					for (int32 k = 0; k < prod->CountConsumers(); ++k) {
+					for (int32_t k = 0; k < prod->CountConsumers(); ++k) {
 						ConnectionEvent(prod, prod->ConsumerAt(k), true);
 					}
 					prod->UnlockProducer();
@@ -526,7 +526,7 @@ void BMidiRosterLooper::DisconnectDeadConsumer(BMidiConsumer* cons)
 	// of connected consumers, we let ConnectionBroken() tell
 	// us whether the consumer really was connected.
 
-	for (int32 t = 0; t < CountEndpoints(); ++t) {
+	for (int32_t t = 0; t < CountEndpoints(); ++t) {
 		BMidiEndpoint* endp = EndpointAt(t);
 		if (endp->IsProducer()) {
 			BMidiProducer* prod = (BMidiProducer*) endp;
@@ -549,14 +549,14 @@ void BMidiRosterLooper::DisconnectDeadProducer(BMidiProducer* prod)
 	// function is called, we're destroying the object.
 
 	if (prod->IsRemote() && (fWatcher != NULL)) {
-		for (int32 t = 0; t < prod->CountConsumers(); ++t) {
+		for (int32_t t = 0; t < prod->CountConsumers(); ++t) {
 			ConnectionEvent(prod, prod->ConsumerAt(t), false);
 		}
 	}
 }
 
 
-int32 
+int32_t 
 BMidiRosterLooper::CountEndpoints()
 {
 	return fEndpoints.CountItems();
@@ -564,7 +564,7 @@ BMidiRosterLooper::CountEndpoints()
 
 
 BMidiEndpoint* 
-BMidiRosterLooper::EndpointAt(int32 index)
+BMidiRosterLooper::EndpointAt(int32_t index)
 {
 	ASSERT(index >= 0 && index < CountEndpoints())
 
@@ -578,7 +578,7 @@ void BMidiRosterLooper::DumpEndpoints()
 	if (Lock()) {
 		printf("*** START DumpEndpoints\n");
 
-		for (int32 t = 0; t < CountEndpoints(); ++t) {
+		for (int32_t t = 0; t < CountEndpoints(); ++t) {
 			BMidiEndpoint* endp = EndpointAt(t);
 
 			printf("\tendpoint %" B_PRId32 " (%p):\n", t, endp);
@@ -602,7 +602,7 @@ void BMidiRosterLooper::DumpEndpoints()
 				BMidiProducer* prod = (BMidiProducer*) endp;
 				if (prod->LockProducer()) {
 					printf("\t\tconnections:\n");
-					for (int32 k = 0; k < prod->CountConsumers(); ++k) {
+					for (int32_t k = 0; k < prod->CountConsumers(); ++k) {
 						BMidiConsumer* cons = prod->ConsumerAt(k);
 						printf("\t\t\tid %" B_PRId32 " (%p)\n", cons->ID(),
 							cons);

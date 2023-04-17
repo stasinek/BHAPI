@@ -50,14 +50,14 @@ class BColumnTitle;
 class ColumnTrackState;
 class OffscreenBitmap;
 
-const int32 kEdgeSize = 6;
-const int32 kTitleColumnLeftExtraMargin = 11;
-const int32 kTitleColumnRightExtraMargin = 5;
-const int32 kTitleColumnExtraMargin = kTitleColumnLeftExtraMargin
+const int32_t kEdgeSize = 6;
+const int32_t kTitleColumnLeftExtraMargin = 11;
+const int32_t kTitleColumnRightExtraMargin = 5;
+const int32_t kTitleColumnExtraMargin = kTitleColumnLeftExtraMargin
 	+ kTitleColumnRightExtraMargin;
-const int32 kMinColumnWidth = 20;
-const int32 kRemoveTitleMargin = 10;
-const int32 kColumnStart = 40;
+const int32_t kMinColumnWidth = 20;
+const int32_t kRemoveTitleMargin = 10;
+const int32_t kColumnStart = 40;
 
 
 class BTitleView : public BView {
@@ -85,7 +85,7 @@ public:
 	BPoseView* PoseView() const;
 
 protected:
-	void MouseMoved(BPoint, uint32, const BMessage*);
+	void MouseMoved(BPoint, uint32_t, const BMessage*);
 
 private:
 	BColumnTitle* FindColumnTitle(BPoint) const;
@@ -138,11 +138,11 @@ public:
 		BPoint where, bigtime_t pastClickTime);
 	virtual ~ColumnTrackState() {}
 
-	void MouseMoved(BPoint where, uint32 buttons);
+	void MouseMoved(BPoint where, uint32_t buttons);
 	void MouseUp(BPoint where);
 
 protected:
-	virtual void Moved(BPoint where, uint32 buttons) = 0;
+	virtual void Moved(BPoint where, uint32_t buttons) = 0;
 	virtual void Clicked(BPoint where) = 0;
 	virtual void Done(BPoint where) = 0;
 	virtual bool ValueChanged(BPoint where) = 0;
@@ -161,7 +161,7 @@ public:
 		BPoint where, bigtime_t pastClickTime);
 
 protected:
-	virtual void Moved(BPoint where, uint32 buttons);
+	virtual void Moved(BPoint where, uint32_t buttons);
 	virtual void Done(BPoint where);
 	virtual void Clicked(BPoint where);
 	virtual bool ValueChanged(BPoint);
@@ -183,7 +183,7 @@ public:
 		BPoint where, bigtime_t pastClickTime);
 
 protected:
-	virtual void Moved(BPoint where, uint32 buttons);
+	virtual void Moved(BPoint where, uint32_t buttons);
 	virtual void Done(BPoint where);
 	virtual void Clicked(BPoint where);
 	virtual bool ValueChanged(BPoint);

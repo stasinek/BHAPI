@@ -33,30 +33,30 @@ typedef struct _pthread_condattr {
 } pthread_condattr;
 
 typedef struct _pthread_mutexattr {
-	int32		type;
+	int32_t		type;
 	bool		process_shared;
 } pthread_mutexattr;
 
 typedef struct _pthread_attr {
-	int32		detach_state;
-	int32		sched_priority;
+	int32_t		detach_state;
+	int32_t		sched_priority;
 	size_t		stack_size;
 	size_t		guard_size;
 } pthread_attr;
 
 typedef struct _pthread_rwlockattr {
-	uint32_t	flags;
+	uint32_t_t	flags;
 } pthread_rwlockattr;
 
 typedef void (*pthread_key_destructor)(void *data);
 
 struct pthread_key {
-	int32		sequence;
+	int32_t		sequence;
 	pthread_key_destructor destructor;
 };
 
 struct pthread_key_data {
-	int32		sequence;
+	int32_t		sequence;
 	void		*value;
 };
 
@@ -64,7 +64,7 @@ struct pthread_key_data {
 
 typedef struct _pthread_thread {
 	thread_id	id;
-	int32		flags;
+	int32_t		flags;
 	void		*(*entry)(void*);
 	void		*entry_argument;
 	void		*exit_value;

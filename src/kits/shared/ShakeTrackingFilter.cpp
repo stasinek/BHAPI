@@ -28,11 +28,11 @@
 #include <View.h>
 
 
-const uint32 kMsgCancel = 'Canc';
+const uint32_t kMsgCancel = 'Canc';
 
 
-ShakeTrackingFilter::ShakeTrackingFilter(BView* targetView, uint32 messageWhat,
-	uint32 countThreshold, bigtime_t timeThreshold)
+ShakeTrackingFilter::ShakeTrackingFilter(BView* targetView, uint32_t messageWhat,
+	uint32_t countThreshold, bigtime_t timeThreshold)
 	:
 	BMessageFilter(B_ANY_DELIVERY, B_ANY_SOURCE),
 	fTargetView(targetView),
@@ -128,7 +128,7 @@ ShakeTrackingFilter::Filter(BMessage* message, BHandler** /*_target*/)
 //	#pragma mark -
 
 
-LowPassFilter::LowPassFilter(uint32 size)
+LowPassFilter::LowPassFilter(uint32_t size)
 	:
 	fSize(size)
 {
@@ -146,7 +146,7 @@ void LowPassFilter::Input(const BPoint& p)
 {
 	// A fifo buffer that maintains a sum of its elements
 	fSum -= fPoints[0];
-	for (uint32 i = 0; i < fSize - 1; i++)
+	for (uint32_t i = 0; i < fSize - 1; i++)
 		fPoints[i] = fPoints[i + 1];
 	fPoints[fSize - 1] = p;
 	fSum += p;

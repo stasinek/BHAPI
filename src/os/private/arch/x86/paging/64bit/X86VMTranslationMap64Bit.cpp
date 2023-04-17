@@ -55,19 +55,19 @@ X86VMTranslationMap64Bit::~X86VMTranslationMap64Bit()
 
 		// Free all structures in the bottom half of the PML4 (user memory).
 		uint64* virtualPML4 = fPagingStructures->VirtualPML4();
-		for (uint32 i = 0; i < 256; i++) {
+		for (uint32_t i = 0; i < 256; i++) {
 			if ((virtualPML4[i] & X86_64_PML4E_PRESENT) == 0)
 				continue;
 
 			uint64* virtualPDPT = (uint64*)fPageMapper->GetPageTableAt(
 				virtualPML4[i] & X86_64_PML4E_ADDRESS_MASK);
-			for (uint32 j = 0; j < 512; j++) {
+			for (uint32_t j = 0; j < 512; j++) {
 				if ((virtualPDPT[j] & X86_64_PDPTE_PRESENT) == 0)
 					continue;
 
 				uint64* virtualPageDir = (uint64*)fPageMapper->GetPageTableAt(
 					virtualPDPT[j] & X86_64_PDPTE_ADDRESS_MASK);
-				for (uint32 k = 0; k < 512; k++) {
+				for (uint32_t k = 0; k < 512; k++) {
 					if ((virtualPageDir[k] & X86_64_PDE_PRESENT) == 0)
 						continue;
 
@@ -190,7 +190,7 @@ X86VMTranslationMap64Bit::MaxPagesNeededToMap(addr_t start, addr_t end) const
 
 status_t
 X86VMTranslationMap64Bit::Map(addr_t virtualAddress, phys_addr_t physicalAddress,
-	uint32 attributes, uint32 memoryType, vm_page_reservation* reservation)
+	uint32_t attributes, uint32_t memoryType, vm_page_reservation* reservation)
 {
 	TRACE("X86VMTranslationMap64Bit::Map(%#" B_PRIxADDR ", %#" B_PRIxPHYSADDR
 		")\n", virtualAddress, physicalAddress);
@@ -244,7 +244,7 @@ X86VMTranslationMap64Bit::Unmap(addr_t start, addr_t end)
 			continue;
 		}
 
-		for (uint32 index = start / B_PAGE_SIZE % k64BitTableEntryCount;
+		for (uint32_t index = start / B_PAGE_SIZE % k64BitTableEntryCount;
 				index < k64BitTableEntryCount && start < end;
 				index++, start += B_PAGE_SIZE) {
 			if ((pageTable[index] & X86_64_PTE_PRESENT) == 0)
@@ -294,7 +294,7 @@ X86VMTranslationMap64Bit::DebugMarkRangePresent(addr_t start, addr_t end,
 			continue;
 		}
 
-		for (uint32 index = start / B_PAGE_SIZE % k64BitTableEntryCount;
+		for (uint32_t index = start / B_PAGE_SIZE % k64BitTableEntryCount;
 				index < k64BitTableEntryCount && start < end;
 				index++, start += B_PAGE_SIZE) {
 			if ((pageTable[index] & X86_64_PTE_PRESENT) == 0) {
@@ -411,7 +411,7 @@ X86VMTranslationMap64Bit::UnmapPages(VMArea* area, addr_t base, size_t size,
 			continue;
 		}
 
-		for (uint32 index = start / B_PAGE_SIZE % k64BitTableEntryCount;
+		for (uint32_t index = start / B_PAGE_SIZE % k64BitTableEntryCount;
 				index < k64BitTableEntryCount && start < end;
 				index++, start += B_PAGE_SIZE) {
 			uint64 oldEntry = X86PagingMethod64Bit::ClearTableEntry(
@@ -491,7 +491,7 @@ X86VMTranslationMap64Bit::UnmapPages(VMArea* area, addr_t base, size_t size,
 
 	// free removed mappings
 	bool isKernelSpace = area->address_space == VMAddressSpace::Kernel();
-	uint32 freeFlags = CACHE_DONT_WAIT_FOR_MEMORY
+	uint32_t freeFlags = CACHE_DONT_WAIT_FOR_MEMORY
 		| (isKernelSpace ? CACHE_DONT_LOCK_KERNEL_SPACE : 0);
 	while (vm_page_mapping* mapping = queue.RemoveHead())
 		object_cache_free(gPageMappingsObjectCache, mapping, freeFlags);
@@ -587,7 +587,7 @@ X86VMTranslationMap64Bit::UnmapArea(VMArea* area, bool deletingAddressSpace,
 	locker.Unlock();
 
 	bool isKernelSpace = area->address_space == VMAddressSpace::Kernel();
-	uint32 freeFlags = CACHE_DONT_WAIT_FOR_MEMORY
+	uint32_t freeFlags = CACHE_DONT_WAIT_FOR_MEMORY
 		| (isKernelSpace ? CACHE_DONT_LOCK_KERNEL_SPACE : 0);
 	while (vm_page_mapping* mapping = mappings.RemoveHead())
 		object_cache_free(gPageMappingsObjectCache, mapping, freeFlags);
@@ -596,7 +596,7 @@ X86VMTranslationMap64Bit::UnmapArea(VMArea* area, bool deletingAddressSpace,
 
 status_t
 X86VMTranslationMap64Bit::Query(addr_t virtualAddress,
-	phys_addr_t* _physicalAddress, uint32* _flags)
+	phys_addr_t* _physicalAddress, uint32_t* _flags)
 {
 	*_flags = 0;
 	*_physicalAddress = 0;
@@ -648,7 +648,7 @@ X86VMTranslationMap64Bit::Query(addr_t virtualAddress,
 
 status_t
 X86VMTranslationMap64Bit::QueryInterrupt(addr_t virtualAddress,
-	phys_addr_t* _physicalAddress, uint32* _flags)
+	phys_addr_t* _physicalAddress, uint32_t* _flags)
 {
 	// With our page mapper, there is no difference in getting a page table
 	// when interrupts are enabled or disabled, so just call Query().
@@ -657,8 +657,8 @@ X86VMTranslationMap64Bit::QueryInterrupt(addr_t virtualAddress,
 
 
 status_t
-X86VMTranslationMap64Bit::Protect(addr_t start, addr_t end, uint32 attributes,
-	uint32 memoryType)
+X86VMTranslationMap64Bit::Protect(addr_t start, addr_t end, uint32_t attributes,
+	uint32_t memoryType)
 {
 	start = ROUNDDOWN(start, B_PAGE_SIZE);
 	if (start >= end)
@@ -692,7 +692,7 @@ X86VMTranslationMap64Bit::Protect(addr_t start, addr_t end, uint32 attributes,
 			continue;
 		}
 
-		for (uint32 index = start / B_PAGE_SIZE % k64BitTableEntryCount;
+		for (uint32_t index = start / B_PAGE_SIZE % k64BitTableEntryCount;
 				index < k64BitTableEntryCount && start < end;
 				index++, start += B_PAGE_SIZE) {
 			uint64 entry = pageTable[index];
@@ -733,7 +733,7 @@ X86VMTranslationMap64Bit::Protect(addr_t start, addr_t end, uint32 attributes,
 
 
 status_t
-X86VMTranslationMap64Bit::ClearFlags(addr_t address, uint32 flags)
+X86VMTranslationMap64Bit::ClearFlags(addr_t address, uint32_t flags)
 {
 	TRACE("X86VMTranslationMap64Bit::ClearFlags(%#" B_PRIxADDR ", %#" B_PRIx32
 		")\n", address, flags);

@@ -16,41 +16,41 @@ class BOptionPopUp : public BOptionControl {
 public:
 								BOptionPopUp(BRect frame, const char* name,
 									const char* label, BMessage* message,
-									uint32 resizeMask = B_FOLLOW_LEFT
+									uint32_t resizeMask = B_FOLLOW_LEFT
 										| B_FOLLOW_TOP,
-									uint32 flags = B_WILL_DRAW);
+									uint32_t flags = B_WILL_DRAW);
 								BOptionPopUp(BRect frame, const char* name,
 									const char* label,  BMessage* message,
-									bool fixed, uint32 resizeMask
+									bool fixed, uint32_t resizeMask
 										= B_FOLLOW_LEFT | B_FOLLOW_TOP,
-									uint32 flags = B_WILL_DRAW);
+									uint32_t flags = B_WILL_DRAW);
 								BOptionPopUp(const char* name,
 									const char* label, BMessage* message,
-									uint32 flags = B_WILL_DRAW);
+									uint32_t flags = B_WILL_DRAW);
 
 	virtual						~BOptionPopUp();
 
 			BMenuField*			MenuField();
 
-	virtual	bool				GetOptionAt(int32 index, const char** _name,
-									int32* _value);
-	virtual	void				RemoveOptionAt(int32 index);
-	virtual	int32				CountOptions() const;
-	virtual	status_t 			AddOptionAt(const char* name, int32 value,
-									int32 index);
+	virtual	bool				GetOptionAt(int32_t index, const char** _name,
+									int32_t* _value);
+	virtual	void				RemoveOptionAt(int32_t index);
+	virtual	int32_t				CountOptions() const;
+	virtual	status_t 			AddOptionAt(const char* name, int32_t value,
+									int32_t index);
 
 	virtual	void				AllAttached();
 	virtual	void				AttachedToWindow();
 	virtual	void				MessageReceived(BMessage* message);
 	virtual	void				SetLabel(const char* text);
-	virtual	void				SetValue(int32 value);
+	virtual	void				SetValue(int32_t value);
 	virtual	void				SetEnabled(bool enabled);
 	virtual	void				GetPreferredSize(float* _width,
 									float* _height);
 	virtual	void				ResizeToPreferred();
 
-	virtual	int32				SelectedOption(const char** _name = 0,
-									int32* _value = 0) const;
+	virtual	int32_t				SelectedOption(const char** _name = 0,
+									int32_t* _value = 0) const;
 private:
 	// Forbidden and FBC padding
 								BOptionPopUp();
@@ -75,7 +75,7 @@ private:
 private:
 			BMenuField*			fMenuField;
 
-			uint32				_reserved[8];
+			uint32_t				_reserved[8];
 };
 
 #endif // _OPTION_POP_UP_H

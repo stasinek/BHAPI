@@ -44,7 +44,7 @@ using namespace bhapi;
 
 #include <ctype.h>
 
-BMenuItem::BMenuItem(const char *label, BMessage *message, char shortcut,  __be_uint32 modifiers)
+BMenuItem::BMenuItem(const char *label, BMessage *message, char shortcut,  __be_uint32_t modifiers)
 	: BArchivable(), BInvoker(message, NULL, NULL),
 	  fShortcut(0), fModifiers(0), fMarked(false), fEnabled(true),
 	  fLabel(NULL), fShortcuts(NULL), fSubmenu(NULL), fMenu(NULL)
@@ -142,7 +142,7 @@ BMenuItem::SetMarked(bool state)
 		fMarked = state;
 		if(fMenu)
 		{
-			__be_int32 index = fMenu->IndexOf(this);
+			__be_int32_t index = fMenu->IndexOf(this);
 
 			if(fMenu->fRadioMode)
 			{
@@ -150,7 +150,7 @@ BMenuItem::SetMarked(bool state)
 				{
 					if(fMenu->fMarkedIndex != index)
 					{
-						__be_int32 oldIndex = fMenu->fMarkedIndex;
+						__be_int32_t oldIndex = fMenu->fMarkedIndex;
 						fMenu->fMarkedIndex = index;
 						if(oldIndex >= 0) fMenu->Invalidate(fMenu->ItemFrame(oldIndex));
 					}
@@ -171,7 +171,7 @@ BMenuItem::SetMarked(bool state)
 
 
 void 
-BMenuItem::SetShortcut(char ch,  __be_uint32 modifiers)
+BMenuItem::SetShortcut(char ch,  __be_uint32_t modifiers)
 {
 	if(fShortcut != ch || fModifiers != modifiers)
 	{
@@ -268,7 +268,7 @@ BMenuItem::IsMarked() const
 
 
 char
-BMenuItem::Shortcut(__be_uint32 *modifiers) const
+BMenuItem::Shortcut(__be_uint32_t *modifiers) const
 {
 	if(modifiers) *modifiers = fModifiers;
 	return fShortcut;
@@ -293,7 +293,7 @@ BRect
 BMenuItem::Frame() const
 {
 	if(!fMenu) return BRect();
-	__be_int32 index = fMenu->IndexOf(this);
+	__be_int32_t index = fMenu->IndexOf(this);
 	return fMenu->ItemFrame(index);
 }
 
@@ -431,7 +431,7 @@ BMenuItem::Draw()
 {
 	if(fMenu == NULL || fMenu->Window() == NULL || fMenu->IsVisible() == false) return;
 
-	__be_int32 index = fMenu->IndexOf(this);
+	__be_int32_t index = fMenu->IndexOf(this);
 	BRect frame = fMenu->ItemFrame(index);
 	if(index < 0 || frame.IsValid() == false) return;
 

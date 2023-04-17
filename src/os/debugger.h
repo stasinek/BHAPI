@@ -52,8 +52,8 @@ extern void		wait_for_debugger(void);
 // be installed for the team.
 extern status_t	set_debugger_breakpoint(void *address);
 extern status_t	clear_debugger_breakpoint(void *address);
-extern status_t	set_debugger_watchpoint(void *address, uint32 type,
-					int32 length);
+extern status_t	set_debugger_watchpoint(void *address, uint32_t type,
+					int32_t length);
 extern status_t	clear_debugger_watchpoint(void *address);
 
 
@@ -216,12 +216,12 @@ enum {
 typedef struct {
 	port_id		reply_port;		// port to send the reply to
 	void		*address;		// address from which to read
-	int32		size;			// number of bytes to read
+	int32_t		size;			// number of bytes to read
 } debug_nub_read_memory;
 
 typedef struct {
 	status_t	error;			// B_OK, if reading went fine
-	int32		size;			// the number of bytes actually read
+	int32_t		size;			// the number of bytes actually read
 								// > 0, iff error == B_OK
 	char		data[B_MAX_READ_WRITE_MEMORY_SIZE];
 								// the read data
@@ -232,34 +232,34 @@ typedef struct {
 typedef struct {
 	port_id		reply_port;		// port to send the reply to
 	void		*address;		// address to which to write
-	int32		size;			// number of bytes to write
+	int32_t		size;			// number of bytes to write
 	char		data[B_MAX_READ_WRITE_MEMORY_SIZE];
 								// data to write
 } debug_nub_write_memory;
 
 typedef struct {
 	status_t	error;			// B_OK, if writing went fine
-	int32		size;			// the number of bytes actually written
+	int32_t		size;			// the number of bytes actually written
 } debug_nub_write_memory_reply;
 
 // B_DEBUG_MESSAGE_SET_TEAM_FLAGS
 
 typedef struct {
-	int32		flags;			// the new team debugging flags
+	int32_t		flags;			// the new team debugging flags
 } debug_nub_set_team_flags;
 
 // B_DEBUG_MESSAGE_SET_THREAD_FLAGS
 
 typedef struct {
 	thread_id	thread;			// the thread
-	int32		flags;			// the new thread debugging flags
+	int32_t		flags;			// the new thread debugging flags
 } debug_nub_set_thread_flags;
 
 // B_DEBUG_MESSAGE_CONTINUE_THREAD
 
 typedef struct {
 	thread_id	thread;			// the thread
-	uint32		handle_event;	// how to handle the occurred event
+	uint32_t		handle_event;	// how to handle the occurred event
 	bool		single_step;	// true == single step, false == run full speed
 } debug_nub_continue_thread;
 
@@ -307,8 +307,8 @@ typedef struct {
 typedef struct {
 	port_id		reply_port;		// port to send the reply to
 	void		*address;		// watchpoint address
-	uint32		type;			// watchpoint type (see type constants above)
-	int32		length;			// number of bytes to watch (typically 1, 2,
+	uint32_t		type;			// watchpoint type (see type constants above)
+	int32_t		length;			// number of bytes to watch (typically 1, 2,
 								// 4); architecture specific alignment
 								// restrictions apply.
 } debug_nub_set_watchpoint;
@@ -392,7 +392,7 @@ typedef struct {
 	bigtime_t			interval;		// sample interval
 	area_id				sample_area;	// area into which the sample will be
 										// written
-	int32				stack_depth;	// number of return address per hit
+	int32_t				stack_depth;	// number of return address per hit
 	bool				variable_stack_depth;
 										// variable number of samples per hit;
 										// cf. debug_profiler_update
@@ -400,7 +400,7 @@ typedef struct {
 
 typedef struct {
 	status_t			error;
-	int32				image_event;	// number of the last image event
+	int32_t				image_event;	// number of the last image event
 	bigtime_t			interval;		// actual sample interval (might
 										// differ from the requested one)
 } debug_nub_start_profiler_reply;
@@ -486,7 +486,7 @@ typedef struct {
 
 typedef struct {
 	debug_origin	origin;
-	uint32			syscall;		// the syscall number
+	uint32_t			syscall;		// the syscall number
 	uint8			args[128];		// syscall arguments
 } debug_pre_syscall;
 
@@ -497,7 +497,7 @@ typedef struct {
 	bigtime_t		start_time;		// time of syscall start
 	bigtime_t		end_time;		// time of syscall completion
 	uint64			return_value;	// the syscall's return value
-	uint32			syscall;		// the syscall number
+	uint32_t			syscall;		// the syscall number
 	uint8			args[128];		// syscall arguments
 } debug_post_syscall;
 
@@ -539,7 +539,7 @@ typedef struct {
 
 typedef struct {
 	debug_origin	origin;
-	int32			image_event;	// number of the image event
+	int32_t			image_event;	// number of the image event
 } debug_team_exec;
 
 // B_DEBUGGER_MESSAGE_THREAD_CREATED
@@ -560,7 +560,7 @@ typedef struct {
 typedef struct {
 	debug_origin	origin;
 	image_info		info;			// info for the image
-	int32			image_event;	// number of the image event
+	int32_t			image_event;	// number of the image event
 } debug_image_created;
 
 // B_DEBUGGER_MESSAGE_IMAGE_DELETED
@@ -568,19 +568,19 @@ typedef struct {
 typedef struct {
 	debug_origin	origin;
 	image_info		info;			// info for the image
-	int32			image_event;	// number of the image event
+	int32_t			image_event;	// number of the image event
 } debug_image_deleted;
 
 // B_DEBUGGER_MESSAGE_PROFILER_UPDATE
 
 typedef struct {
 	debug_origin		origin;
-	int32				image_event;	// number of the last image event; all
+	int32_t				image_event;	// number of the last image event; all
 										// samples were recorded after this
 										// event and before the next one
-	int32				stack_depth;	// number of return addresses per tick
-	int32				sample_count;	// number of samples in the buffer
-	int32				dropped_ticks;	// number of ticks that had been
+	int32_t				stack_depth;	// number of return addresses per tick
+	int32_t				sample_count;	// number of samples in the buffer
+	int32_t				dropped_ticks;	// number of ticks that had been
 										// dropped, since the buffer was full
 	bool				variable_stack_depth;
 										// the number of samples per hit is
@@ -631,9 +631,9 @@ typedef union {
 
 
 extern void get_debug_message_string(debug_debugger_message message,
-		char *buffer, int32 bufferSize);
+		char *buffer, int32_t bufferSize);
 extern void get_debug_exception_string(debug_exception_type exception,
-		char *buffer, int32 bufferSize);
+		char *buffer, int32_t bufferSize);
 
 
 #ifdef __cplusplus

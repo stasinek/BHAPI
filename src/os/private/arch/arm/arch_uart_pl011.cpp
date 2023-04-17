@@ -151,7 +151,7 @@ ArchUARTPL011::ArchUARTPL011(addr_t base, int64 clock)
 	Barrier();
 
 	// ** Loopback test
-	uint32 cr = PL01x_CR_UARTEN;
+	uint32_t cr = PL01x_CR_UARTEN;
 		// Enable UART
 	cr |= PL011_CR_TXE;
 		// Enable TX
@@ -188,16 +188,16 @@ ArchUARTPL011::~ArchUARTPL011()
 
 
 void
-ArchUARTPL011::Out32(int reg, uint32 data)
+ArchUARTPL011::Out32(int reg, uint32_t data)
 {
-	*(volatile uint32*)(Base() + reg) = data;
+	*(volatile uint32_t*)(Base() + reg) = data;
 }
 
 
-uint32
+uint32_t
 ArchUARTPL011::In32(int reg)
 {
-	return *(volatile uint32*)(Base() + reg);
+	return *(volatile uint32_t*)(Base() + reg);
 }
 
 
@@ -209,12 +209,12 @@ ArchUARTPL011::Barrier()
 
 
 void
-ArchUARTPL011::InitPort(uint32 baud)
+ArchUARTPL011::InitPort(uint32_t baud)
 {
 	// Calculate baud divisor
-	uint32 baudDivisor = Clock() / (16 * baud);
-	uint32 remainder = Clock() % (16 * baud);
-	uint32 baudFractional = ((8 * remainder) / baud >> 1)
+	uint32_t baudDivisor = Clock() / (16 * baud);
+	uint32_t remainder = Clock() % (16 * baud);
+	uint32_t baudFractional = ((8 * remainder) / baud >> 1)
 		+ ((8 * remainder) / baud & 1);
 
 	// Disable UART
@@ -242,7 +242,7 @@ ArchUARTPL011::InitEarly()
 void
 ArchUARTPL011::Enable()
 {
-	uint32 cr = PL01x_CR_UARTEN;
+	uint32_t cr = PL01x_CR_UARTEN;
 		// Enable UART
 	cr |= PL011_CR_TXE | PL011_CR_RXE;
 		// Enable TX and RX

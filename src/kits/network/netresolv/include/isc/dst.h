@@ -7,7 +7,7 @@ typedef struct dst_key {
 	int	dk_key_size;    /*%< this is the size of the key in bits */
 	int	dk_proto;       /*%< what protocols this key can be used for */
 	int	dk_alg;         /*%< algorithm number from key record */
-	u_int32_t dk_flags;     /*%< and the flags of the public key */
+	u_int32_t_t dk_flags;     /*%< and the flags of the public key */
 	u_int16_t dk_id;        /*%< identifier of the key */
 } DST_KEY;
 #endif /* HAS_DST_KEY */
@@ -38,9 +38,9 @@ typedef struct dst_key {
 #define	dst_s_filename_length	__dst_s_filename_length
 #define	dst_s_fopen		__dst_s_fopen
 #define	dst_s_get_int16		__dst_s_get_int16
-#define	dst_s_get_int32		__dst_s_get_int32 #define	dst_s_id_calc		__dst_s_id_calc
+#define	dst_s_get_int32_t		__dst_s_get_int32_t #define	dst_s_id_calc		__dst_s_id_calc
 #define	dst_s_put_int16		__dst_s_put_int16
-#define	dst_s_put_int32		__dst_s_put_int32 #define	dst_s_quick_random	__dst_s_quick_random
+#define	dst_s_put_int32_t		__dst_s_put_int32_t #define	dst_s_quick_random	__dst_s_quick_random
 #define	dst_s_quick_random_set	__dst_s_quick_random_set
 #define	dst_s_random		__dst_s_random
 #define	dst_s_semi_random	__dst_s_semi_random

@@ -28,7 +28,7 @@
  */
 
 
-static inline int32
+static inline int32_t
 space_left_in_buffer(struct ring_buffer *buffer)
 {
 	return buffer->size - buffer->in;
@@ -39,7 +39,7 @@ static ssize_t
 read_from_buffer(struct ring_buffer *buffer, uint8 *data, ssize_t length,
 	bool user)
 {
-	int32 available = buffer->in;
+	int32_t available = buffer->in;
 
 	if (length > available)
 		length = available;
@@ -82,7 +82,7 @@ static ssize_t
 write_to_buffer(struct ring_buffer *buffer, const uint8 *data, ssize_t length,
 	bool user)
 {
-	int32 left = space_left_in_buffer(buffer);
+	int32_t left = space_left_in_buffer(buffer);
 	if (length > left)
 		length = left;
 
@@ -90,7 +90,7 @@ write_to_buffer(struct ring_buffer *buffer, const uint8 *data, ssize_t length,
 		return 0;
 
 	ssize_t bytesWritten = length;
-	int32 position = (buffer->first + buffer->in) % buffer->size;
+	int32_t position = (buffer->first + buffer->in) % buffer->size;
 
 	if (position + length <= buffer->size) {
 		// simple copy
@@ -131,7 +131,7 @@ create_ring_buffer(size_t size)
 
 
 struct ring_buffer*
-create_ring_buffer_etc(void* memory, size_t size, uint32 flags)
+create_ring_buffer_etc(void* memory, size_t size, uint32_t flags)
 {
 	if (memory == NULL) {
 		ring_buffer* buffer = (ring_buffer*)malloc(sizeof(ring_buffer) + size);
@@ -276,7 +276,7 @@ ring_buffer_peek(struct ring_buffer* buffer, size_t offset, void* data,
 	\return The number of iovecs the function has filled in to describe the
 		contents of the ring buffer. \c 0, if empty, \c 2 at maximum.
 */
-int32
+int32_t
 ring_buffer_get_vecs(struct ring_buffer* buffer, struct iovec* vecs)
 {
 	if (buffer->in == 0)
@@ -308,10 +308,10 @@ ring_buffer_get_vecs(struct ring_buffer* buffer, struct iovec* vecs)
  */
 
 status_t
-ring_buffer_write_to_port(struct ring_buffer *buffer, port_id port, int32 code,
-	uint32 flags, bigtime_t timeout)
+ring_buffer_write_to_port(struct ring_buffer *buffer, port_id port, int32_t code,
+	uint32_t flags, bigtime_t timeout)
 {
-	int32 length = buffer->in;
+	int32_t length = buffer->in;
 	if (length == 0)
 		return B_OK;
 

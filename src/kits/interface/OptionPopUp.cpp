@@ -29,7 +29,7 @@ const float kHeightModifier = 10.0;
 	\param flags View flags. They will be passed to the base class.
 */	
 BOptionPopUp::BOptionPopUp(BRect frame, const char* name, const char* label,
-		BMessage* message, uint32 resize, uint32 flags)
+		BMessage* message, uint32_t resize, uint32_t flags)
 	: BOptionControl(frame, name, label, message, resize, flags)
 {
 	BPopUpMenu* popUp = new BPopUpMenu(label, true, true);
@@ -49,7 +49,7 @@ BOptionPopUp::BOptionPopUp(BRect frame, const char* name, const char* label,
 	\param flags View flags. They will be passed to the base class.
 */
 BOptionPopUp::BOptionPopUp(BRect frame, const char* name, const char* label, 
-		BMessage* message, bool fixed, uint32 resize, uint32 flags)
+		BMessage* message, bool fixed, uint32_t resize, uint32_t flags)
 	: BOptionControl(frame, name, label, message, resize, flags)
 {
 	BPopUpMenu* popUp = new BPopUpMenu(label, true, true);
@@ -59,7 +59,7 @@ BOptionPopUp::BOptionPopUp(BRect frame, const char* name, const char* label,
 
 
 BOptionPopUp::BOptionPopUp(const char* name, const char* label,
-		BMessage* message, uint32 flags)
+		BMessage* message, uint32_t flags)
 	: BOptionControl(name, label, message, flags)
 {
 	// TODO: Is this really needed ? Without this, the view
@@ -96,7 +96,7 @@ BOptionPopUp::MenuField()
 	\return \c true if The wanted option was found,
 			\c false otherwise.
 */ 
-bool BOptionPopUp::GetOptionAt(int32 index, const char** outName, int32* outValue)
+bool BOptionPopUp::GetOptionAt(int32_t index, const char** outName, int32_t* outValue)
 {
 	bool result = false;
 	BMenu* menu = fMenuField->Menu();
@@ -120,7 +120,7 @@ bool BOptionPopUp::GetOptionAt(int32 index, const char** outName, int32* outValu
 /*! \brief Removes the option at the given index.
 	\param index The index of the option to remove.
 */
-void BOptionPopUp::RemoveOptionAt(int32 index)
+void BOptionPopUp::RemoveOptionAt(int32_t index)
 {
 	BMenu* menu = fMenuField->Menu();
 	if (menu != NULL)
@@ -130,7 +130,7 @@ void BOptionPopUp::RemoveOptionAt(int32 index)
 
 /*! \brief Returns the amount of "Options" (entries) contained in the control.
 */
-int32 BOptionPopUp::CountOptions() const
+int32_t BOptionPopUp::CountOptions() const
 {
 	BMenu* menu = fMenuField->Menu();	
 	return (menu != NULL) ? menu->CountItems() : 0;
@@ -145,13 +145,13 @@ int32 BOptionPopUp::CountOptions() const
 		\c B_BAD_VALUE if the given index was invalid.
 		\c B_ERROR if something else happened.
 */
-status_t BOptionPopUp::AddOptionAt(const char* name, int32 value, int32 index)
+status_t BOptionPopUp::AddOptionAt(const char* name, int32_t value, int32_t index)
 {
 	BMenu* menu = fMenuField->Menu();
 	if (menu == NULL)
 		return B_ERROR;
 	
-	int32 numItems = menu->CountItems();
+	int32_t numItems = menu->CountItems();
 	if (index < 0 || index > numItems)
 		return B_BAD_VALUE;
 	
@@ -230,18 +230,18 @@ void BOptionPopUp::SetLabel(const char* text)
 	\param value The new value of the control.
 	Selects the option which has the given value.
 */
-void BOptionPopUp::SetValue(int32 value)
+void BOptionPopUp::SetValue(int32_t value)
 {
 	BControl::SetValue(value);
 	BMenu* menu = fMenuField->Menu();
 	if (menu == NULL)
 		return;
 
-	int32 numItems = menu->CountItems();
-	for (int32 i = 0; i < numItems; i++) {
+	int32_t numItems = menu->CountItems();
+	for (int32_t i = 0; i < numItems; i++) {
 		BMenuItem* item = menu->ItemAt(i);
 		if (item && item->Message()) {
-			int32 itemValue;
+			int32_t itemValue;
 			item->Message()->FindInt32("be:value", &itemValue);
 			if (itemValue == value) {
 				item->SetMarked(true);
@@ -308,7 +308,7 @@ void BOptionPopUp::ResizeToPreferred()
 	\param outValue A pointer to an integer which will held the option's value.
 	\return The index of the selected option.
 */
-int32 BOptionPopUp::SelectedOption(const char** outName, int32* outValue) const
+int32_t BOptionPopUp::SelectedOption(const char** outName, int32_t* outValue) const
 {
 	BMenu* menu = fMenuField->Menu();
 	if (menu == NULL)

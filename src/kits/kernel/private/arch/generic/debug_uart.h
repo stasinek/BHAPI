@@ -24,7 +24,7 @@ public:
 
 	virtual	void			InitEarly() {};
 	virtual	void			Init() {};
-	virtual	void			InitPort(uint32 baud) {};
+	virtual	void			InitPort(uint32_t baud) {};
 
 	virtual	void			Enable() { fEnabled = true; }
 	virtual	void			Disable() { fEnabled = false; }

@@ -60,9 +60,9 @@ public:
 	virtual ~BTextWidget();
 
 	void Draw(BRect widgetRect, BRect widgetTextRect, float width, BPoseView*,
-		bool selected, uint32 clipboardMode);
+		bool selected, uint32_t clipboardMode);
 	void Draw(BRect widgetRect, BRect widgetTextRect, float width, BPoseView*,
-		BView* drawView, bool selected, uint32 clipboardMode, BPoint offset,
+		BView* drawView, bool selected, uint32_t clipboardMode, BPoint offset,
 		bool direct);
 		// second call is used for offscreen drawing, where PoseView
 		// and current drawing view are different
@@ -84,12 +84,12 @@ public:
 
 	void StartEdit(BRect bounds, BPoseView*, BPose*);
 	void StopEdit(bool saveChanges, BPoint loc, BPoseView*, BPose*,
-		int32 index);
+		int32_t index);
 
 	void SelectAll(BPoseView* view);
 	void CheckAndUpdate(BPoint, const BColumn*, BPoseView*, bool visible);
 
-	uint32 AttrHash() const;
+	uint32_t AttrHash() const;
 	bool IsEditable() const;
 	void SetEditable(bool);
 	bool IsVisible() const;
@@ -112,7 +112,7 @@ private:
 		float width);
 
 	WidgetAttributeText* fText;
-	uint32 fAttrHash;
+	uint32_t fAttrHash;
 		// TODO: get rid of this
 	alignment fAlignment;
 
@@ -126,7 +126,7 @@ private:
 };
 
 
-inline uint32 BTextWidget::AttrHash() const
+inline uint32_t BTextWidget::AttrHash() const
 {
 	return fAttrHash;
 }
@@ -169,7 +169,7 @@ inline void BTextWidget::SetActive(bool on)
 
 
 inline void BTextWidget::Draw(BRect widgetRect, BRect widgetTextRect, float width,
-	BPoseView* view, bool selected, uint32 clipboardMode)
+	BPoseView* view, bool selected, uint32_t clipboardMode)
 {
 	Draw(widgetRect, widgetTextRect, width, view, (BView*)view, selected,
 		clipboardMode, BPoint(0, 0), true);

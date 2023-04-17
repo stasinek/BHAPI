@@ -211,7 +211,7 @@ status_t BLaunchRoster::StartSession(const char* login)
 
 
 status_t BLaunchRoster::RegisterEvent(const BMessenger& source, const char* name,
-	uint32 flags)
+	uint32_t flags)
 {
 	return _UpdateEvent(B_REGISTER_LAUNCH_EVENT, source, name, flags);
 }
@@ -313,8 +313,8 @@ status_t BLaunchRoster::_SendRequest(BMessage& request, BMessage& result)
 }
 
 
-status_t BLaunchRoster::_UpdateEvent(uint32 what, const BMessenger& source,
-	const char* name, uint32 flags)
+status_t BLaunchRoster::_UpdateEvent(uint32_t what, const BMessenger& source,
+	const char* name, uint32_t flags)
 {
 	if (__be_app == NULL || name == NULL || name[0] == '\0')
 		return B_BAD_VALUE;
@@ -336,7 +336,7 @@ status_t BLaunchRoster::_UpdateEvent(uint32 what, const BMessenger& source,
 }
 
 
-status_t BLaunchRoster::_GetInfo(uint32 what, const char* name, BMessage& info)
+status_t BLaunchRoster::_GetInfo(uint32_t what, const char* name, BMessage& info)
 {
 	if (name == NULL || name[0] == '\0')
 		return B_BAD_VALUE;

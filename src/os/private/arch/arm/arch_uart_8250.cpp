@@ -63,14 +63,14 @@ ArchUART8250::InitEarly()
 void
 ArchUART8250::Out8(int reg, uint8 value)
 {
-	*((uint8 *)Base() + reg * sizeof(uint32)) = value;
+	*((uint8 *)Base() + reg * sizeof(uint32_t)) = value;
 }
 
 
 uint8
 ArchUART8250::In8(int reg)
 {
-	return *((uint8 *)Base() + reg * sizeof(uint32));
+	return *((uint8 *)Base() + reg * sizeof(uint32_t));
 }
 
 

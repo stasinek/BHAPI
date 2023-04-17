@@ -58,7 +58,7 @@
 // defined in BHAPI_wrapper_os.cpp
 extern "C" {
 namespace bhapi {
-char* win32_convert_utf8_to_active(const char *str,  int32 length);
+char* win32_convert_utf8_to_active(const char *str,  int32_t length);
 }
 }
 #endif

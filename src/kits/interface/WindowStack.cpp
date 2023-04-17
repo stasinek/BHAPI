@@ -49,21 +49,21 @@ status_t BWindowStack::AddWindow(const BMessenger& window)
 }
 
 
-status_t BWindowStack::AddWindowAt(const BWindow* window, int32 position)
+status_t BWindowStack::AddWindowAt(const BWindow* window, int32_t position)
 {
 	BMessenger messenger(window);
 	return AddWindowAt(messenger, position);
 }
 
 
-status_t BWindowStack::AddWindowAt(const BMessenger& window, int32 position)
+status_t BWindowStack::AddWindowAt(const BMessenger& window, int32_t position)
 {
 	_StartMessage(kAddWindowToStack);
 
 	_AttachMessenger(window);
-	fLink->Attach<int32>(position);
+	fLink->Attach<int32_t>(position);
 
-	int32 code = B_ERROR;
+	int32_t code = B_ERROR;
 	if (fLink->FlushWithReply(code) != B_OK)
 		return code;
 
@@ -90,12 +90,12 @@ status_t BWindowStack::RemoveWindow(const BMessenger& window)
 }
 
 
-status_t BWindowStack::RemoveWindowAt(int32 position, BMessenger* window)
+status_t BWindowStack::RemoveWindowAt(int32_t position, BMessenger* window)
 {
 	_StartMessage(kRemoveWindowFromStackAt);
-	fLink->Attach<int32>(position);
+	fLink->Attach<int32_t>(position);
 
-	int32 code = B_ERROR;
+	int32_t code = B_ERROR;
 	if (fLink->FlushWithReply(code) != B_OK)
 		return code;
 
@@ -106,29 +106,29 @@ status_t BWindowStack::RemoveWindowAt(int32 position, BMessenger* window)
 }
 
 
-int32 BWindowStack::CountWindows()
+int32_t BWindowStack::CountWindows()
 {
 	_StartMessage(kCountWindowsOnStack);
 
-	int32 code = B_ERROR;
+	int32_t code = B_ERROR;
 	fLink->FlushWithReply(code);
 	if (code != B_OK)
 		return -1;
 
-	int32 count;
-	if (fLink->Read<int32>(&count) != B_OK)
+	int32_t count;
+	if (fLink->Read<int32_t>(&count) != B_OK)
 		return -1;
 
 	return count;
 }
 
 
-status_t BWindowStack::WindowAt(int32 position, BMessenger& messenger)
+status_t BWindowStack::WindowAt(int32_t position, BMessenger& messenger)
 {
 	_StartMessage(kWindowOnStackAt);
-	fLink->Attach<int32>(position);
+	fLink->Attach<int32_t>(position);
 
-	int32 code = B_ERROR;
+	int32_t code = B_ERROR;
 	fLink->FlushWithReply(code);
 	if (code != B_OK)
 		return code;
@@ -149,7 +149,7 @@ bool BWindowStack::HasWindow(const BMessenger& window)
 	_StartMessage(kStackHasWindow);
 	_AttachMessenger(window);
 
-	int32 code = B_ERROR;
+	int32_t code = B_ERROR;
 	fLink->FlushWithReply(code);
 	if (code != B_OK)
 		return false;
@@ -166,7 +166,7 @@ status_t BWindowStack::_AttachMessenger(const BMessenger& window)
 {
 	BMessenger::Private messengerPrivate(const_cast<BMessenger&>(window));
 	fLink->Attach<port_id>(messengerPrivate.Port());
-	fLink->Attach<int32>(messengerPrivate.Token());
+	fLink->Attach<int32_t>(messengerPrivate.Token());
 	return fLink->Attach<team_id>(messengerPrivate.Team());
 }
 
@@ -174,10 +174,10 @@ status_t BWindowStack::_AttachMessenger(const BMessenger& window)
 status_t BWindowStack::_ReadMessenger(BMessenger& window)
 {
 	port_id port;
-	int32 token;
+	int32_t token;
 	team_id team;
 	fLink->Read<port_id>(&port);
-	fLink->Read<int32>(&token);
+	fLink->Read<int32_t>(&token);
 	status_t status = fLink->Read<team_id>(&team);
 	if (status != B_OK)
 		return status;
@@ -187,10 +187,10 @@ status_t BWindowStack::_ReadMessenger(BMessenger& window)
 }
 
 
-status_t BWindowStack::_StartMessage(int32 what)
+status_t BWindowStack::_StartMessage(int32_t what)
 {
 	fLink->StartMessage(AS_TALK_TO_DESKTOP_LISTENER);
-	fLink->Attach<int32>(kMagicSATIdentifier);
-	fLink->Attach<int32>(kStacking);
-	return fLink->Attach<int32>(what);
+	fLink->Attach<int32_t>(kMagicSATIdentifier);
+	fLink->Attach<int32_t>(kStacking);
+	return fLink->Attach<int32_t>(what);
 }

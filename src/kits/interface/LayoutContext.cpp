@@ -36,7 +36,7 @@ BLayoutContext::BLayoutContext()
 BLayoutContext::~BLayoutContext()
 {
 	// notify the listeners
-	for (int32 i = 0;
+	for (int32_t i = 0;
 		 BLayoutContextListener* listener
 		 	= (BLayoutContextListener*)fListeners.ItemAt(i);
 		 i++) {

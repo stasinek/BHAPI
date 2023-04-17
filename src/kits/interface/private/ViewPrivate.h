@@ -19,9 +19,9 @@
 #include <View.h>
 
 
-const static uint32 kDeleteReplicant = 'JAHA';
+const static uint32_t kDeleteReplicant = 'JAHA';
 
-const static uint32 kWorkspacesViewFlag = 0x40000000UL;
+const static uint32_t kWorkspacesViewFlag = 0x40000000UL;
 	// was/is _B_RESERVED1_ in View.h
 
 enum {
@@ -67,8 +67,8 @@ public:
 			bool				WillLayout();
 			bool				MinMaxValid();
 
-			BLayoutItem*		LayoutItemAt(int32 index);
-			int32				CountLayoutItems();
+			BLayoutItem*		LayoutItemAt(int32_t index);
+			int32_t				CountLayoutItems();
 			void				RegisterLayoutItem(BLayoutItem* item);
 			void				DeregisterLayoutItem(BLayoutItem* item);
 
@@ -90,7 +90,7 @@ class ViewState {
 	public:
 		ViewState();
 
-		inline bool IsValid(uint32 bit) const;
+		inline bool IsValid(uint32_t bit) const;
 		inline bool IsAllValid() const;
 
 		void UpdateServerFontState(BPrivate::PortLink &link);
@@ -125,7 +125,7 @@ class ViewState {
 		float				miter_limit;
 
 		// fill rule
-		int32				fill_rule;
+		int32_t				fill_rule;
 
 		// alpha blending
 		source_alpha		alpha_source_mode;
@@ -138,16 +138,16 @@ class ViewState {
 			// font aliasing. Used for printing only!
 
 		// flags used for synchronization with app_server
-		uint32				valid_flags;
+		uint32_t				valid_flags;
 		// flags used for archiving
-		uint32				archiving_flags;
+		uint32_t				archiving_flags;
 
 		// maintain our own rect as seen from the app while printing
 		BRect				print_rect;
 };
 
 
-inline bool ViewState::IsValid(uint32 bit) const
+inline bool ViewState::IsValid(uint32_t bit) const
 {
 	return valid_flags & bit;
 }
@@ -165,9 +165,9 @@ inline bool ViewState::IsAllValid() const
 
 struct _array_data_{
 		// the max number of points in the array
-	uint32				maxCount;
+	uint32_t				maxCount;
 		// the current number of points in the array
-	uint32				count;
+	uint32_t				count;
 		// the array of points
 	ViewLineArrayInfo*	array;
 };

@@ -59,7 +59,7 @@ M68KVMTranslationMap040::~M68KVMTranslationMap040()
 		// since the size of tables don't match B_PAGE_SIZE,
 		// we alloc several at once, based on modulos,
 		// we make sure they are either all in the tree or none.
-		for (uint32 i = VADDR_TO_PRENT(USER_BASE);
+		for (uint32_t i = VADDR_TO_PRENT(USER_BASE);
 				i <= VADDR_TO_PRENT(USER_BASE + (USER_SIZE - 1)); i++) {
 			addr_t pgdir_pn;
 			page_directory_entry *pgdir;
@@ -76,7 +76,7 @@ M68KVMTranslationMap040::~M68KVMTranslationMap040()
 			dirpage = vm_lookup_page(pgdir_pn);
 			pgdir = &(((page_directory_entry *)dirpage)[i%NUM_DIRTBL_PER_PAGE]);
 
-			for (uint32 j = 0; j <= NUM_DIRENT_PER_TBL;
+			for (uint32_t j = 0; j <= NUM_DIRENT_PER_TBL;
 					j+=NUM_PAGETBL_PER_PAGE) {
 				addr_t pgtbl_pn;
 				page_table_entry *pgtbl;
@@ -108,7 +108,7 @@ M68KVMTranslationMap040::~M68KVMTranslationMap040()
 
 #if 0
 //X86
-		for (uint32 i = VADDR_TO_PDENT(USER_BASE);
+		for (uint32_t i = VADDR_TO_PDENT(USER_BASE);
 				i <= VADDR_TO_PDENT(USER_BASE + (USER_SIZE - 1)); i++) {
 			if ((fPagingStructures->pgdir_virt[i] & M68K_PDE_PRESENT) != 0) {
 				addr_t address = fPagingStructures->pgdir_virt[i]
@@ -208,8 +208,8 @@ M68KVMTranslationMap040::MaxPagesNeededToMap(addr_t start, addr_t end) const
 
 
 status_t
-M68KVMTranslationMap040::Map(addr_t va, phys_addr_t pa, uint32 attributes,
-	uint32 memoryType, vm_page_reservation* reservation)
+M68KVMTranslationMap040::Map(addr_t va, phys_addr_t pa, uint32_t attributes,
+	uint32_t memoryType, vm_page_reservation* reservation)
 {
 	TRACE("M68KVMTranslationMap040::Map: entry pa 0x%lx va 0x%lx\n", pa, va);
 
@@ -225,7 +225,7 @@ M68KVMTranslationMap040::Map(addr_t va, phys_addr_t pa, uint32 attributes,
 	page_directory_entry *pd;
 	page_table_entry *pt;
 	addr_t pd_pg, pt_pg;
-	uint32 rindex, dindex, pindex;
+	uint32_t rindex, dindex, pindex;
 
 
 	// check to see if a page directory exists for this range
@@ -233,7 +233,7 @@ M68KVMTranslationMap040::Map(addr_t va, phys_addr_t pa, uint32 attributes,
 	if (PRE_TYPE(pr[rindex]) != DT_ROOT) {
 		phys_addr_t pgdir;
 		vm_page *page;
-		uint32 i;
+		uint32_t i;
 
 		// we need to allocate a pgdir group
 		page = vm_page_allocate_page(reservation,
@@ -247,7 +247,7 @@ M68KVMTranslationMap040::Map(addr_t va, phys_addr_t pa, uint32 attributes,
 
 		// for each pgdir on the allocated page:
 		for (i = 0; i < NUM_DIRTBL_PER_PAGE; i++) {
-			uint32 aindex = rindex & ~(NUM_DIRTBL_PER_PAGE-1); /* aligned */
+			uint32_t aindex = rindex & ~(NUM_DIRTBL_PER_PAGE-1); /* aligned */
 			page_root_entry *apr = &pr[aindex + i];
 
 			// put in the pgroot
@@ -284,7 +284,7 @@ M68KVMTranslationMap040::Map(addr_t va, phys_addr_t pa, uint32 attributes,
 	if (PDE_TYPE(pd[dindex]) != DT_DIR) {
 		phys_addr_t pgtable;
 		vm_page *page;
-		uint32 i;
+		uint32_t i;
 
 		// we need to allocate a pgtable group
 		page = vm_page_allocate_page(reservation,
@@ -298,7 +298,7 @@ M68KVMTranslationMap040::Map(addr_t va, phys_addr_t pa, uint32 attributes,
 
 		// for each pgtable on the allocated page:
 		for (i = 0; i < NUM_PAGETBL_PER_PAGE; i++) {
-			uint32 aindex = dindex & ~(NUM_PAGETBL_PER_PAGE-1); /* aligned */
+			uint32_t aindex = dindex & ~(NUM_PAGETBL_PER_PAGE-1); /* aligned */
 			page_directory_entry *apd = &pd[aindex + i];
 
 			// put in the pgdir
@@ -634,7 +634,7 @@ M68KVMTranslationMap040::UnmapPages(VMArea* area, addr_t base, size_t size,
 
 	// free removed mappings
 	bool isKernelSpace = area->address_space == VMAddressSpace::Kernel();
-	uint32 freeFlags = CACHE_DONT_WAIT_FOR_MEMORY
+	uint32_t freeFlags = CACHE_DONT_WAIT_FOR_MEMORY
 		| (isKernelSpace ? CACHE_DONT_LOCK_KERNEL_SPACE : 0);
 	while (vm_page_mapping* mapping = queue.RemoveHead())
 		object_cache_free(gPageMappingsObjectCache, mapping, freeFlags);
@@ -751,7 +751,7 @@ M68KVMTranslationMap040::UnmapArea(VMArea* area, bool deletingAddressSpace,
 	locker.Unlock();
 
 	bool isKernelSpace = area->address_space == VMAddressSpace::Kernel();
-	uint32 freeFlags = CACHE_DONT_WAIT_FOR_MEMORY
+	uint32_t freeFlags = CACHE_DONT_WAIT_FOR_MEMORY
 		| (isKernelSpace ? CACHE_DONT_LOCK_KERNEL_SPACE : 0);
 	while (vm_page_mapping* mapping = mappings.RemoveHead())
 		object_cache_free(gPageMappingsObjectCache, mapping, freeFlags);
@@ -760,7 +760,7 @@ M68KVMTranslationMap040::UnmapArea(VMArea* area, bool deletingAddressSpace,
 
 status_t
 M68KVMTranslationMap040::Query(addr_t va, phys_addr_t *_physical,
-	uint32 *_flags)
+	uint32_t *_flags)
 {
 	// default the flags to not present
 	*_flags = 0;
@@ -822,7 +822,7 @@ M68KVMTranslationMap040::Query(addr_t va, phys_addr_t *_physical,
 
 status_t
 M68KVMTranslationMap040::QueryInterrupt(addr_t va, phys_addr_t *_physical,
-	uint32 *_flags)
+	uint32_t *_flags)
 {
 	*_flags = 0;
 	*_physical = 0;
@@ -885,8 +885,8 @@ M68KVMTranslationMap040::QueryInterrupt(addr_t va, phys_addr_t *_physical,
 
 
 status_t
-M68KVMTranslationMap040::Protect(addr_t start, addr_t end, uint32 attributes,
-	uint32 memoryType)
+M68KVMTranslationMap040::Protect(addr_t start, addr_t end, uint32_t attributes,
+	uint32_t memoryType)
 {
 	start = ROUNDDOWN(start, B_PAGE_SIZE);
 	if (start >= end)
@@ -898,7 +898,7 @@ M68KVMTranslationMap040::Protect(addr_t start, addr_t end, uint32 attributes,
 	return ENOSYS;
 #if 0
 	// compute protection flags
-	uint32 newProtectionFlags = 0;
+	uint32_t newProtectionFlags = 0;
 	if ((attributes & B_USER_PROTECTION) != 0) {
 		newProtectionFlags = M68K_PTE_USER;
 		if ((attributes & B_WRITE_AREA) != 0)
@@ -964,7 +964,7 @@ M68KVMTranslationMap040::Protect(addr_t start, addr_t end, uint32 attributes,
 
 
 status_t
-M68KVMTranslationMap040::ClearFlags(addr_t va, uint32 flags)
+M68KVMTranslationMap040::ClearFlags(addr_t va, uint32_t flags)
 {
 	return ENOSYS;
 #if 0
@@ -975,7 +975,7 @@ M68KVMTranslationMap040::ClearFlags(addr_t va, uint32 flags)
 		return B_OK;
 	}
 
-	uint32 flagsToClear = ((flags & PAGE_MODIFIED) ? M68K_PTE_DIRTY : 0)
+	uint32_t flagsToClear = ((flags & PAGE_MODIFIED) ? M68K_PTE_DIRTY : 0)
 		| ((flags & PAGE_ACCESSED) ? M68K_PTE_ACCESSED : 0);
 
 	struct thread* thread = thread_get_current_thread();
@@ -1101,7 +1101,7 @@ M68KVMTranslationMap040::MapperGetPageTableAt(phys_addr_t physicalAddress,
 	bool indirect)
 {
 	// M68K fits several page tables in a single page...
-	uint32 offset = physicalAddress % B_PAGE_SIZE;
+	uint32_t offset = physicalAddress % B_PAGE_SIZE;
 	ASSERT((indirect && (offset % 4) == 0) || (offset % SIZ_ROOTTBL) == 0);
 	physicalAddress &= ~(B_PAGE_SIZE-1);
 	void *va = fPageMapper->GetPageTableAt(physicalAddress);

@@ -115,7 +115,7 @@ public:
 			status_t			Enqueue(net_buffer* buffer);
 			status_t			EnqueueClone(net_buffer* buffer);
 
-			status_t			Dequeue(uint32 flags, net_buffer** _buffer);
+			status_t			Dequeue(uint32_t flags, net_buffer** _buffer);
 			net_buffer*			Dequeue(bool clone);
 			status_t			BlockingDequeue(bool peek, bigtime_t timeout,
 									net_buffer** _buffer);
@@ -139,7 +139,7 @@ private:
 			status_t			_Wait(bigtime_t timeout);
 			void				_NotifyOneReader(bool notifySocket);
 
-			bigtime_t			_SocketTimeout(uint32 flags) const;
+			bigtime_t			_SocketTimeout(uint32_t flags) const;
 
 protected:
 	typedef typename LockingBase::Type LockType;
@@ -209,7 +209,7 @@ DECL_DATAGRAM_SOCKET(inline status_t)::EnqueueClone(net_buffer* _buffer)
 }
 
 
-DECL_DATAGRAM_SOCKET(inline status_t)::Dequeue(uint32 flags,
+DECL_DATAGRAM_SOCKET(inline status_t)::Dequeue(uint32_t flags,
 	net_buffer** _buffer)
 {
 	return BlockingDequeue((flags & MSG_PEEK) != 0, _SocketTimeout(flags),
@@ -364,7 +364,7 @@ DECL_DATAGRAM_SOCKET(inline void)::_NotifyOneReader(bool notifySocket)
 }
 
 
-DECL_DATAGRAM_SOCKET(inline bigtime_t)::_SocketTimeout(uint32 flags) const
+DECL_DATAGRAM_SOCKET(inline bigtime_t)::_SocketTimeout(uint32_t flags) const
 {
 	if (ModuleBundle::Stack()->is_restarted_syscall())
 		return ModuleBundle::Stack()->restore_syscall_restart_timeout();
