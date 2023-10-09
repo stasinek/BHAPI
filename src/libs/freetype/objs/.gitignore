@@ -6,7 +6,7 @@
 *.il*
 *.ii
 *.o
-/*/objs/*.s
+*.s
 *.il
 *.ii
 *.ilk
