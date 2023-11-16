@@ -53,7 +53,7 @@ public:
     virtual  ssize_t		ReadAt(int64_t pos, void *buffer, size_t size) = 0;
     virtual  ssize_t		WriteAt(int64_t pos, const void *buffer, size_t size) = 0;
 
-    virtual  off_t		Seek(int64_t position,  uint32_t_t seek_mode);
+    virtual  off_t		Seek(int64_t position,  uint32_t seek_mode);
     virtual  off_t		Position() const = 0;
     virtual status_t	SetSize(int64_t size) = 0;
 };
@@ -67,7 +67,7 @@ public:
     virtual  ssize_t		ReadAt(int64_t pos, void *buffer, size_t size);
     virtual  ssize_t		WriteAt(int64_t pos, const void *buffer, size_t size);
 
-    virtual  off_t		Seek(int64_t position,  uint32_t_t seek_mode);
+    virtual  off_t		Seek(int64_t position,  uint32_t seek_mode);
     virtual  off_t		Position() const;
     virtual status_t	SetSize(int64_t size);
 
@@ -92,7 +92,7 @@ public:
     virtual  ssize_t		ReadAt(int64_t pos, void *buffer, size_t size);
     virtual  ssize_t		WriteAt(int64_t pos, const void *buffer, size_t size);
 
-    virtual  off_t		Seek(int64_t position,  uint32_t_t seek_mode);
+    virtual  off_t		Seek(int64_t position,  uint32_t seek_mode);
     virtual  off_t		Position() const;
     virtual status_t	SetSize(int64_t size);
 

@@ -83,12 +83,12 @@ inline rgb_color& set_to(const rgb_color& other)
 
 inline bool operator==(const rgb_color& other) const
 {
-    return *(const uint32_t_t *)this == *(const uint32_t_t *)&other;
+    return *(const uint32_t *)this == *(const uint32_t *)&other;
 }
 
 inline bool operator!=(const rgb_color& other) const
 {
-    return *(const uint32_t_t *)this != *(const uint32_t_t *)&other;
+    return *(const uint32_t *)this != *(const uint32_t *)&other;
 }
 
 inline rgb_color& operator=(const rgb_color& other)
@@ -116,7 +116,7 @@ inline rgb_color make_color(uint8_t red, uint8_t green, uint8_t blue, uint8_t al
 #endif
 // color map
 typedef struct color_map {
-    int32_t_t				id;
+    int32_t				id;
     rgb_color			color_list[256];
     uint8_t				inversion_map[256];
     uint8_t				index_map[32768];
@@ -131,7 +131,7 @@ typedef struct overlay_rect_limits {
     uint16_t				max_width;
     uint16_t				min_height;
     uint16_t				max_height;
-    uint32_t_t				reserved[8];
+    uint32_t				reserved[8];
 } overlay_rect_limits;
 // overlay restrictions
 typedef struct overlay_restrictions {
@@ -141,10 +141,10 @@ typedef struct overlay_restrictions {
     float				max_width_scale;
     float				min_height_scale;
     float				max_height_scale;
-    uint32_t_t				reserved[8];
+    uint32_t				reserved[8];
 } overlay_restrictions;
 // Screen ID
-typedef struct screen_id { int32_t_t id; } screen_id;
+typedef struct screen_id { int32_t id; } screen_id;
 // Color spaces
 typedef enum {
     B_NO_COLOR_SPACE	= 0x0000,
@@ -311,12 +311,12 @@ extern const bhapi::rgb_color 	B_TRANSPARENT_COLOR;
 extern const uint8_t		B_TRANSPARENT_MAGIC_CMAP8;
 extern const uint16_t		B_TRANSPARENT_MAGIC_RGBA15;
 extern const uint16_t		B_TRANSPARENT_MAGIC_RGBA15_BIG;
-extern const uint32_t_t		B_TRANSPARENT_MAGIC_RGBA32;
-extern const uint32_t_t		B_TRANSPARENT_MAGIC_RGBA32_BIG;
+extern const uint32_t		B_TRANSPARENT_MAGIC_RGBA32;
+extern const uint32_t		B_TRANSPARENT_MAGIC_RGBA32_BIG;
 extern const uint8_t 		B_TRANSPARENT_8_BIT;
 extern const bhapi::rgb_color	B_TRANSPARENT_32_BIT;
 extern const screen_id B_MAIN_SCREEN_ID;
-bool bitmaps_support_space(color_space space, uint32_t_t* _supportFlags);
+bool bitmaps_support_space(color_space space, uint32_t* _supportFlags);
 status_t get_pixel_size_for(color_space space, size_t* _pixelChunk, size_t* _rowAlignment, size_t* _pixelsPerChunk);
 #ifdef __cplusplus // just for C++
 inline pattern make_pattern(uint8_t d1,  uint8_t d2,  uint8_t d3,  uint8_t d4,  uint8_t d5,  uint8_t d6,  uint8_t d7,  uint8_t d8)

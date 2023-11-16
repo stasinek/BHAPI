@@ -59,17 +59,17 @@ using namespace bhapi;
 #define IGNORE_CASE true
 // define proper names for count-option of __DoReplace()
 #define REPLACE_ALL 0x7FFFFFFF
-static const uint32_t_t kPrivateDataOffset = BString::Private::kPrivateDataOffset;
+static const uint32_t kPrivateDataOffset = BString::Private::kPrivateDataOffset;
 BHAPI_EXPORT const char* B_EMPTY_STRING = "";
 // helper function, returns minimum of two given values (but clamps to 0):
-static inline int32_t_t min_clamp0(int32_t_t num1, int32_t_t num2)
+static inline int32_t min_clamp0(int32_t num1, int32_t num2)
 {
     if (num1 < num2) return num1 > 0 ? num1 : 0;
     return num2 > 0 ? num2 : 0;
 }
 
 //! Returns length of given string (but clamps to given maximum).
-static inline int32_t_t strlen_clamp(const char* string, int32_t_t max)
+static inline int32_t strlen_clamp(const char* string, int32_t max)
 {
     // this should yield 0 for max<0:
     return max <= 0 ? 0 : strnlen(string, max);
@@ -103,11 +103,11 @@ public:
         free(fBuffer);
     }
 
-    bool Add(int32_t_t pos)
+    bool Add(int32_t pos)
     {
         if (fBuffer == NULL || fSize == fBufferSize) {
             if (fBuffer != NULL) fBufferSize *= 2;
-            int32_t_t* newBuffer = (int32_t_t*)realloc(fBuffer, fBufferSize * sizeof(int32_t_t));
+            int32_t* newBuffer = (int32_t*)realloc(fBuffer, fBufferSize * sizeof(int32_t));
             if (newBuffer == NULL)  return false;
             fBuffer = newBuffer;
         }
@@ -115,24 +115,24 @@ public:
         return true;
     }
 
-    inline int32_t_t ItemAt(int32_t_t index) const
+    inline int32_t ItemAt(int32_t index) const
     {
         return fBuffer[index];
     }
 
-    inline int32_t_t CountItems() const
+    inline int32_t CountItems() const
     {
         return fSize;
     }
 private:
-    int32_t_t	fSize;
-    int32_t_t	fBufferSize;
-    int32_t_t*	fBuffer;
+    int32_t	fSize;
+    int32_t	fBufferSize;
+    int32_t*	fBuffer;
 };
 //	#pragma mark - BStringRef
 //-------------------------------------------------------------------------------------------------
 
-BStringRef::BStringRef(BString& string, int32_t_t position)
+BStringRef::BStringRef(BString& string, int32_t position)
     :
     fString(string), fPosition(position)
 {
@@ -175,13 +175,13 @@ char* BStringRef::operator&()
 //	#pragma mark - BString
 //-------------------------------------------------------------------------------------------------
 
-inline int32_t_t& BString::__ReferenceCount()
+inline int32_t& BString::__ReferenceCount()
 {
     return Private::DataRefCount(fPrivateData);
 }
 //-------------------------------------------------------------------------------------------------
 
-inline const int32_t_t& BString::__ReferenceCount() const
+inline const int32_t& BString::__ReferenceCount() const
 {
     return Private::DataRefCount(fPrivateData);
 }
@@ -223,7 +223,7 @@ BString::BString(const BString& string)
 }
 //-------------------------------------------------------------------------------------------------
 
-BString::BString(const char* string, int32_t_t maxLength)
+BString::BString(const char* string, int32_t maxLength)
     : fPrivateData(NULL)
 {
     __Init(string, strlen_clamp(safestr(string), maxLength));
@@ -238,26 +238,26 @@ BString::~BString()
 //-------------------------------------------------------------------------------------------------
 //	#pragma mark - Access
 
-int32_t_t BString::CountChars() const
+int32_t BString::CountChars() const
 {
     return UTF8CountChars(fPrivateData, Length());
 }
 //-------------------------------------------------------------------------------------------------
 
-int32_t_t BString::CountBytes(int32_t_t fromCharOffset, int32_t_t charCount) const
+int32_t BString::CountBytes(int32_t fromCharOffset, int32_t charCount) const
 {
     return UTF8CountBytes(
         fPrivateData + UTF8CountBytes(fPrivateData, fromCharOffset), charCount);
 }
 //-------------------------------------------------------------------------------------------------
 
-/*static*/ uint32_t_t BString::HashValue(const char* string)
+/*static*/ uint32_t BString::HashValue(const char* string)
 {
     // from the Dragon Book: a slightly modified hashpjw()
      if (string == NULL) return 0;
-    uint32_t_t h = 0;
+    uint32_t h = 0;
     for (; *string; string++) {
-         uint32_t_t g = h & 0xf0000000;
+         uint32_t g = h & 0xf0000000;
          if (g) h ^= g >> 24;
          h = (h << 4) + *string;
         }
@@ -286,7 +286,7 @@ BString& BString::operator=(char c)
 }
 //-------------------------------------------------------------------------------------------------
 
-BString& BString::SetTo(const char* string, int32_t_t maxLength)
+BString& BString::SetTo(const char* string, int32_t maxLength)
 {
     if (maxLength < 0) maxLength = INT32_MAX;
     maxLength = strlen_clamp(safestr(string), maxLength);
@@ -328,7 +328,7 @@ BString& BString::Adopt(BString& from)
 }
 //-------------------------------------------------------------------------------------------------
 
-BString& BString::SetTo(const BString& string, int32_t_t maxLength)
+BString& BString::SetTo(const BString& string, int32_t maxLength)
 {
     if (maxLength < 0)
         maxLength = INT32_MAX;
@@ -343,7 +343,7 @@ BString& BString::SetTo(const BString& string, int32_t_t maxLength)
 }
 //-------------------------------------------------------------------------------------------------
 
-BString& BString::Adopt(BString& from, int32_t_t maxLength)
+BString& BString::Adopt(BString& from, int32_t maxLength)
 {
     SetTo(from, maxLength);
     from.SetTo("");
@@ -351,7 +351,7 @@ BString& BString::Adopt(BString& from, int32_t_t maxLength)
     return *this;
 }
 
-BString& BString::SetTo(char c, int32_t_t count)
+BString& BString::SetTo(char c, int32_t count)
 {
     if (count < 0) count = 0;
     if (__MakeWritable(count, false) == B_OK) memset(fPrivateData, c, count);
@@ -359,19 +359,19 @@ BString& BString::SetTo(char c, int32_t_t count)
 }
 //-------------------------------------------------------------------------------------------------
 
-BString& BString::SetToChars(const char* string, int32_t_t charCount)
+BString& BString::SetToChars(const char* string, int32_t charCount)
 {
     return SetTo(string, UTF8CountBytes(string, charCount));
 }
 //-------------------------------------------------------------------------------------------------
 
-BString& BString::SetToChars(const BString& string, int32_t_t charCount)
+BString& BString::SetToChars(const BString& string, int32_t charCount)
 {
     return SetTo(string, UTF8CountBytes(string.String(), charCount));
 }
 //-------------------------------------------------------------------------------------------------
 
-BString& BString::AdoptChars(BString& string, int32_t_t charCount)
+BString& BString::AdoptChars(BString& string, int32_t charCount)
 {
     return Adopt(string, UTF8CountBytes(string.String(), charCount));
 }
@@ -392,7 +392,7 @@ BString& BString::SetToFormatVarArgs(const char* format, va_list args)
 {
     // Use a small on-stack buffer to save a second vsnprintf() call for most
     // use cases.
-    int32_t_t bufferSize = 1024;
+    int32_t bufferSize = 1024;
     char buffer[bufferSize];
 
     va_list clonedArgs;
@@ -401,7 +401,7 @@ BString& BString::SetToFormatVarArgs(const char* format, va_list args)
 #else
     va_copy(clonedArgs, args);
 #endif
-    int32_t_t bytes = vsnprintf(buffer, bufferSize, format, clonedArgs);
+    int32_t bytes = vsnprintf(buffer, bufferSize, format, clonedArgs);
     va_end(clonedArgs);
 
     if (bytes < 0) return Truncate(0);
@@ -436,14 +436,14 @@ int BString::ScanWithFormatVarArgs(const char* format, va_list args)
 //-------------------------------------------------------------------------------------------------
 //	#pragma mark - Substring copying
 
-BString& BString::CopyInto(BString& into, int32_t_t fromOffset, int32_t_t length) const
+BString& BString::CopyInto(BString& into, int32_t fromOffset, int32_t length) const
 {
     if (this != &into) into.SetTo(fPrivateData + fromOffset, length);
     return into;
 }
 //-------------------------------------------------------------------------------------------------
 
-void BString::CopyInto(char* into, int32_t_t fromOffset, int32_t_t length) const
+void BString::CopyInto(char* into, int32_t fromOffset, int32_t length) const
 {
     if (into==0) return;
     length = min_clamp0(length, Length() - fromOffset);
@@ -451,19 +451,19 @@ void BString::CopyInto(char* into, int32_t_t fromOffset, int32_t_t length) const
 }
 //-------------------------------------------------------------------------------------------------
 
-BString& BString::CopyCharsInto(BString& into, int32_t_t fromCharOffset, int32_t_t charCount) const
+BString& BString::CopyCharsInto(BString& into, int32_t fromCharOffset, int32_t charCount) const
 {
-    int32_t_t fromOffset = UTF8CountBytes(fPrivateData, fromCharOffset);
-    int32_t_t length = UTF8CountBytes(fPrivateData + fromOffset, charCount);
+    int32_t fromOffset = UTF8CountBytes(fPrivateData, fromCharOffset);
+    int32_t length = UTF8CountBytes(fPrivateData + fromOffset, charCount);
     return CopyInto(into, fromOffset, length);
 }
 //-------------------------------------------------------------------------------------------------
 
-bool BString::CopyCharsInto(char* into, int32_t_t* intoLength, int32_t_t fromCharOffset, int32_t_t charCount) const
+bool BString::CopyCharsInto(char* into, int32_t* intoLength, int32_t fromCharOffset, int32_t charCount) const
 {
     if (into == NULL) return false;
-    int32_t_t fromOffset = UTF8CountBytes(fPrivateData, fromCharOffset);
-    int32_t_t length = UTF8CountBytes(fPrivateData + fromOffset, charCount);
+    int32_t fromOffset = UTF8CountBytes(fPrivateData, fromCharOffset);
+    int32_t length = UTF8CountBytes(fPrivateData + fromOffset, charCount);
     length = min_clamp0(length, Length() - fromOffset);
     if (intoLength != NULL) {
         if (*intoLength < length) return false;
@@ -476,16 +476,16 @@ bool BString::CopyCharsInto(char* into, int32_t_t* intoLength, int32_t_t fromCha
 
 bool BString::Split(const char* separator, bool noEmptyStrings, BStringList& _list) const
 {
-    int32_t_t separatorLength = strlen(separator);
-    int32_t_t length = Length();
+    int32_t separatorLength = strlen(separator);
+    int32_t length = Length();
     if (separatorLength == 0 || length == 0 || separatorLength > length) {
         if (length == 0 && noEmptyStrings)
             return true;
         return _list.Add(*this);
     }
-    int32_t_t index = 0;
+    int32_t index = 0;
     for (;;) {
-        int32_t_t endIndex = index < length ? FindFirst(separator, index) : length;
+        int32_t endIndex = index < length ? FindFirst(separator, index) : length;
         if (endIndex < 0)
             endIndex = length;
 
@@ -509,7 +509,7 @@ bool BString::Split(const char* separator, bool noEmptyStrings, BStringList& _li
 BString& BString::operator+=(const char* string)
 {
     if (string) {
-        int32_t_t length = strlen(string);
+        int32_t length = strlen(string);
         if (length > 0)
             __DoAppend(string, length);
     }
@@ -524,7 +524,7 @@ BString& BString::operator+=(char c)
 }
 //-------------------------------------------------------------------------------------------------
 
-BString& BString::Append(const BString& string, int32_t_t length)
+BString& BString::Append(const BString& string, int32_t length)
 {
     if (&string != this) {
         length = min_clamp0(length, string.Length());
@@ -535,7 +535,7 @@ BString& BString::Append(const BString& string, int32_t_t length)
 }
 //-------------------------------------------------------------------------------------------------
 
-BString& BString::Append(const char* string, int32_t_t length)
+BString& BString::Append(const char* string, int32_t length)
 {
     if (string) {
         length = strlen_clamp(string, length);
@@ -546,21 +546,21 @@ BString& BString::Append(const char* string, int32_t_t length)
 }
 //-------------------------------------------------------------------------------------------------
 
-BString& BString::Append(char c, int32_t_t count)
+BString& BString::Append(char c, int32_t count)
 {
-    int32_t_t oldLength = Length();
+    int32_t oldLength = Length();
     if (count > 0 && __DoAppend("", count))
         memset(fPrivateData + oldLength, c, count);
     return *this;
 }
 
-BString& BString::AppendChars(const BString& string, int32_t_t charCount)
+BString& BString::AppendChars(const BString& string, int32_t charCount)
 {
     return Append(string, UTF8CountBytes(string.String(), charCount));
 }
 //-------------------------------------------------------------------------------------------------
 
-BString& BString::AppendChars(const char* string, int32_t_t charCount)
+BString& BString::AppendChars(const char* string, int32_t charCount)
 {
     return Append(string, UTF8CountBytes(string, charCount));
 }
@@ -583,7 +583,7 @@ BString& BString::Prepend(const BString& string)
 }
 //-------------------------------------------------------------------------------------------------
 
-BString& BString::Prepend(const char* string, int32_t_t length)
+BString& BString::Prepend(const char* string, int32_t length)
 {
     if (string)
         __DoPrepend(string, strlen_clamp(string, length));
@@ -591,38 +591,38 @@ BString& BString::Prepend(const char* string, int32_t_t length)
 }
 //-------------------------------------------------------------------------------------------------
 
-BString& BString::Prepend(const BString& string, int32_t_t length)
+BString& BString::Prepend(const BString& string, int32_t length)
 {
     if (&string != this)
         __DoPrepend(string.fPrivateData, min_clamp0(length, string.Length()));
     return *this;
 }
 
-BString& BString::Prepend(char c, int32_t_t count)
+BString& BString::Prepend(char c, int32_t count)
 {
     if (count > 0 && __DoPrepend("", count)) memset(fPrivateData, c, count);
     return *this;
 }
 //-------------------------------------------------------------------------------------------------
 
-BString& BString::PrependChars(const char* string, int32_t_t charCount)
+BString& BString::PrependChars(const char* string, int32_t charCount)
 {
     return Prepend(string, UTF8CountBytes(string, charCount));
 }
 
-BString& BString::PrependChars(const BString& string, int32_t_t charCount)
+BString& BString::PrependChars(const BString& string, int32_t charCount)
 {
     return Prepend(string, UTF8CountBytes(string.String(), charCount));
 }
 //-------------------------------------------------------------------------------------------------
 //	#pragma mark - Inserting
 
-BString& BString::Insert(const char* string, int32_t_t position)
+BString& BString::Insert(const char* string, int32_t position)
 {
     if (string != NULL && position <= Length()) {
-        int32_t_t len = int32_t_t(strlen(string));
+        int32_t len = int32_t(strlen(string));
         if (position < 0) {
-            int32_t_t skipLen = min_clamp0(-1 * position, len);
+            int32_t skipLen = min_clamp0(-1 * position, len);
             string += skipLen;
             len -= skipLen;
             position = 0;
@@ -635,12 +635,12 @@ BString& BString::Insert(const char* string, int32_t_t position)
 }
 //-------------------------------------------------------------------------------------------------
 
-BString& BString::Insert(const char* string, int32_t_t length, int32_t_t position)
+BString& BString::Insert(const char* string, int32_t length, int32_t position)
 {
     if (string != NULL && position <= Length()) {
-        int32_t_t len = strlen_clamp(string, length);
+        int32_t len = strlen_clamp(string, length);
         if (position < 0) {
-            int32_t_t skipLen = min_clamp0(-1 * position, len);
+            int32_t skipLen = min_clamp0(-1 * position, len);
             string += skipLen;
             len -= skipLen;
             position = 0;
@@ -653,8 +653,8 @@ BString& BString::Insert(const char* string, int32_t_t length, int32_t_t positio
 }
 //-------------------------------------------------------------------------------------------------
 
-BString& BString::Insert(const char* string, int32_t_t fromOffset, int32_t_t length,
-    int32_t_t position)
+BString& BString::Insert(const char* string, int32_t fromOffset, int32_t length,
+    int32_t position)
 {
     if (string)
         Insert(string + fromOffset, length, position);
@@ -662,7 +662,7 @@ BString& BString::Insert(const char* string, int32_t_t fromOffset, int32_t_t len
 }
 //-------------------------------------------------------------------------------------------------
 
-BString& BString::Insert(const BString& string, int32_t_t position)
+BString& BString::Insert(const BString& string, int32_t position)
 {
     if (&string != this && string.Length() > 0)
         Insert(string.fPrivateData, position);
@@ -670,7 +670,7 @@ BString& BString::Insert(const BString& string, int32_t_t position)
 }
 //-------------------------------------------------------------------------------------------------
 
-BString& BString::Insert(const BString& string, int32_t_t length, int32_t_t position)
+BString& BString::Insert(const BString& string, int32_t length, int32_t position)
 {
     if (&string != this && string.Length() > 0)
         Insert(string.String(), length, position);
@@ -678,8 +678,8 @@ BString& BString::Insert(const BString& string, int32_t_t length, int32_t_t posi
 }
 //-------------------------------------------------------------------------------------------------
 
-BString& BString::Insert(const BString& string, int32_t_t fromOffset, int32_t_t length,
-    int32_t_t position)
+BString& BString::Insert(const BString& string, int32_t fromOffset, int32_t length,
+    int32_t position)
 {
     if (&string != this && string.Length() > 0)
         Insert(string.String() + fromOffset, length, position);
@@ -687,7 +687,7 @@ BString& BString::Insert(const BString& string, int32_t_t fromOffset, int32_t_t 
 }
 //-------------------------------------------------------------------------------------------------
 
-BString& BString::Insert(char c, int32_t_t count, int32_t_t position)
+BString& BString::Insert(char c, int32_t count, int32_t position)
 {
     if (position < 0) {
         count = max_c(count + position, 0);
@@ -702,46 +702,46 @@ BString& BString::Insert(char c, int32_t_t count, int32_t_t position)
 }
 //-------------------------------------------------------------------------------------------------
 
-BString& BString::InsertChars(const char* string, int32_t_t charPosition)
+BString& BString::InsertChars(const char* string, int32_t charPosition)
 {
     return Insert(string, UTF8CountBytes(fPrivateData, charPosition));
 }
 //-------------------------------------------------------------------------------------------------
 
-BString& BString::InsertChars(const char* string, int32_t_t charCount, int32_t_t charPosition)
+BString& BString::InsertChars(const char* string, int32_t charCount, int32_t charPosition)
 {
     return Insert(string, UTF8CountBytes(string, charCount),
         UTF8CountBytes(fPrivateData, charPosition));
 }
 //-------------------------------------------------------------------------------------------------
 
-BString& BString::InsertChars(const char* string, int32_t_t fromCharOffset,
-    int32_t_t charCount, int32_t_t charPosition)
+BString& BString::InsertChars(const char* string, int32_t fromCharOffset,
+    int32_t charCount, int32_t charPosition)
 {
-    int32_t_t fromOffset = UTF8CountBytes(string, fromCharOffset);
+    int32_t fromOffset = UTF8CountBytes(string, fromCharOffset);
     return Insert(string, fromOffset,
         UTF8CountBytes(string + fromOffset, charCount),
         UTF8CountBytes(fPrivateData, charPosition));
 }
 //-------------------------------------------------------------------------------------------------
 
-BString& BString::InsertChars(const BString& string, int32_t_t charPosition)
+BString& BString::InsertChars(const BString& string, int32_t charPosition)
 {
     return Insert(string, UTF8CountBytes(fPrivateData, charPosition));
 }
 //-------------------------------------------------------------------------------------------------
 
-BString& BString::InsertChars(const BString& string, int32_t_t charCount, int32_t_t charPosition)
+BString& BString::InsertChars(const BString& string, int32_t charCount, int32_t charPosition)
 {
     return Insert(string, UTF8CountBytes(string.String(), charCount),
         UTF8CountBytes(fPrivateData, charPosition));
 }
 //-------------------------------------------------------------------------------------------------
 
-BString& BString::InsertChars(const BString& string, int32_t_t fromCharOffset,
-    int32_t_t charCount, int32_t_t charPosition)
+BString& BString::InsertChars(const BString& string, int32_t fromCharOffset,
+    int32_t charCount, int32_t charPosition)
 {
-    int32_t_t fromOffset = UTF8CountBytes(string.String(), fromCharOffset);
+    int32_t fromOffset = UTF8CountBytes(string.String(), fromCharOffset);
     return Insert(string, fromOffset,
         UTF8CountBytes(string.String() + fromOffset, charCount),
         UTF8CountBytes(fPrivateData, charPosition));
@@ -749,7 +749,7 @@ BString& BString::InsertChars(const BString& string, int32_t_t fromCharOffset,
 //-------------------------------------------------------------------------------------------------
 //	#pragma mark - Removing
 
-BString& BString::Truncate(int32_t_t newLength, bool lazy)
+BString& BString::Truncate(int32_t newLength, bool lazy)
 {
     if (newLength < 0)
         newLength = 0;
@@ -763,13 +763,13 @@ BString& BString::Truncate(int32_t_t newLength, bool lazy)
 }
 //-------------------------------------------------------------------------------------------------
 
-BString& BString::TruncateChars(int32_t_t newCharCount, bool lazy)
+BString& BString::TruncateChars(int32_t newCharCount, bool lazy)
 {
     return Truncate(UTF8CountBytes(fPrivateData, newCharCount));
 }
 //-------------------------------------------------------------------------------------------------
 
-BString& BString::Remove(int32_t_t from, int32_t_t length)
+BString& BString::Remove(int32_t from, int32_t length)
 {
     if (length > 0 && from < Length())
         __ShrinkAtBy(from, min_clamp0(length, (Length() - from)));
@@ -777,9 +777,9 @@ BString& BString::Remove(int32_t_t from, int32_t_t length)
 }
 //-------------------------------------------------------------------------------------------------
 
-BString& BString::RemoveChars(int32_t_t fromCharOffset, int32_t_t charCount)
+BString& BString::RemoveChars(int32_t fromCharOffset, int32_t charCount)
 {
-    int32_t_t fromOffset = UTF8CountBytes(fPrivateData, fromCharOffset);
+    int32_t fromOffset = UTF8CountBytes(fPrivateData, fromCharOffset);
     return Remove(fromOffset,
         UTF8CountBytes(fPrivateData + fromOffset, charCount));
 }
@@ -788,7 +788,7 @@ BString& BString::RemoveChars(int32_t_t fromCharOffset, int32_t_t charCount)
 BString& BString::RemoveFirst(const BString& string)
 {
     if (string.Length() > 0) {
-        int32_t_t pos = __ShortFindAfter(string.String(), string.Length());
+        int32_t pos = __ShortFindAfter(string.String(), string.Length());
         if (pos >= 0)
             __ShrinkAtBy(pos, string.Length());
     }
@@ -798,7 +798,7 @@ BString& BString::RemoveFirst(const BString& string)
 
 BString& BString::RemoveLast(const BString& string)
 {
-    int32_t_t pos = __FindBefore(string.String(), Length(), string.Length());
+    int32_t pos = __FindBefore(string.String(), Length(), string.Length());
     if (pos >= 0)
         __ShrinkAtBy(pos, string.Length());
 
@@ -820,9 +820,9 @@ BString& BString::RemoveAll(const BString& string)
 
 BString& BString::RemoveFirst(const char* string)
 {
-    int32_t_t length = string ? strlen(string) : 0;
+    int32_t length = string ? strlen(string) : 0;
     if (length > 0) {
-        int32_t_t pos = __ShortFindAfter(string, length);
+        int32_t pos = __ShortFindAfter(string, length);
         if (pos >= 0)
             __ShrinkAtBy(pos, length);
     }
@@ -832,9 +832,9 @@ BString& BString::RemoveFirst(const char* string)
 
 BString& BString::RemoveLast(const char* string)
 {
-    int32_t_t length = string ? strlen(string) : 0;
+    int32_t length = string ? strlen(string) : 0;
     if (length > 0) {
-        int32_t_t pos = __FindBefore(string, Length(), length);
+        int32_t pos = __FindBefore(string, Length(), length);
         if (pos >= 0)
             __ShrinkAtBy(pos, length);
     }
@@ -870,7 +870,7 @@ BString::RemoveCharsSet(const char* setOfCharsToRemove)
 
 
 BString&
-BString::MoveInto(BString& into, int32_t_t from, int32_t_t length)
+BString::MoveInto(BString& into, int32_t from, int32_t length)
 {
     if (length) {
         CopyInto(into, from, length);
@@ -881,7 +881,7 @@ BString::MoveInto(BString& into, int32_t_t from, int32_t_t length)
 
 
 void
-BString::MoveInto(char* into, int32_t_t from, int32_t_t length)
+BString::MoveInto(char* into, int32_t from, int32_t length)
 {
     if (into) {
         CopyInto(into, from, length);
@@ -891,7 +891,7 @@ BString::MoveInto(char* into, int32_t_t from, int32_t_t length)
 
 
 BString&
-BString::MoveCharsInto(BString& into, int32_t_t fromCharOffset, int32_t_t charCount)
+BString::MoveCharsInto(BString& into, int32_t fromCharOffset, int32_t charCount)
 {
     if (charCount > 0) {
         CopyCharsInto(into, fromCharOffset, charCount);
@@ -903,8 +903,8 @@ BString::MoveCharsInto(BString& into, int32_t_t fromCharOffset, int32_t_t charCo
 
 
 bool
-BString::MoveCharsInto(char* into, int32_t_t* intoLength, int32_t_t fromCharOffset,
-    int32_t_t charCount)
+BString::MoveCharsInto(char* into, int32_t* intoLength, int32_t fromCharOffset,
+    int32_t charCount)
 {
     if (!CopyCharsInto(into, intoLength, fromCharOffset, charCount))
         return false;
@@ -970,28 +970,28 @@ BString::Compare(const char* string) const
 
 
 int
-BString::Compare(const BString& string, int32_t_t length) const
+BString::Compare(const BString& string, int32_t length) const
 {
     return strncmp(String(), string.String(), length);
 }
 
 
 int
-BString::Compare(const char* string, int32_t_t length) const
+BString::Compare(const char* string, int32_t length) const
 {
     return strncmp(String(), safestr(string), length);
 }
 
 
 int
-BString::CompareChars(const BString& string, int32_t_t charCount) const
+BString::CompareChars(const BString& string, int32_t charCount) const
 {
     return Compare(string, UTF8CountBytes(fPrivateData, charCount));
 }
 
 
 int
-BString::CompareChars(const char* string, int32_t_t charCount) const
+BString::CompareChars(const char* string, int32_t charCount) const
 {
     return Compare(string, UTF8CountBytes(fPrivateData, charCount));
 }
@@ -1012,14 +1012,14 @@ BString::ICompare(const char* string) const
 
 
 int
-BString::ICompare(const BString& string, int32_t_t length) const
+BString::ICompare(const BString& string, int32_t length) const
 {
     return strncasecmp(String(), string.String(), length);
 }
 
 
 int
-BString::ICompare(const char* string, int32_t_t length) const
+BString::ICompare(const char* string, int32_t length) const
 {
     return strncasecmp(String(), safestr(string), length);
 }
@@ -1028,14 +1028,14 @@ BString::ICompare(const char* string, int32_t_t length) const
 //	#pragma mark - Searching
 
 
-int32_t_t
+int32_t
 BString::FindFirst(const BString& string) const
 {
     return __ShortFindAfter(string.String(), string.Length());
 }
 //-------------------------------------------------------------------------------------------------
 
-int32_t_t BString::FindFirst(const char* string) const
+int32_t BString::FindFirst(const char* string) const
 {
     if (string == NULL)
         return B_BAD_VALUE;
@@ -1044,7 +1044,7 @@ int32_t_t BString::FindFirst(const char* string) const
 }
 //-------------------------------------------------------------------------------------------------
 
-int32_t_t BString::FindFirst(const BString& string, int32_t_t fromOffset) const
+int32_t BString::FindFirst(const BString& string, int32_t fromOffset) const
 {
     if (fromOffset < 0)
         return B_ERROR;
@@ -1054,7 +1054,7 @@ int32_t_t BString::FindFirst(const BString& string, int32_t_t fromOffset) const
 }
 //-------------------------------------------------------------------------------------------------
 
-int32_t_t BString::FindFirst(const char* string, int32_t_t fromOffset) const
+int32_t BString::FindFirst(const char* string, int32_t fromOffset) const
 {
     if (string == NULL)
         return B_BAD_VALUE;
@@ -1067,7 +1067,7 @@ int32_t_t BString::FindFirst(const char* string, int32_t_t fromOffset) const
 }
 //-------------------------------------------------------------------------------------------------
 
-int32_t_t BString::FindFirst(char c) const
+int32_t BString::FindFirst(char c) const
 {
     const char* start = String();
     const char* end = String() + Length();
@@ -1085,7 +1085,7 @@ int32_t_t BString::FindFirst(char c) const
 }
 //-------------------------------------------------------------------------------------------------
 
-int32_t_t BString::FindFirst(char c, int32_t_t fromOffset) const
+int32_t BString::FindFirst(char c, int32_t fromOffset) const
 {
     if (fromOffset < 0)
         return B_ERROR;
@@ -1106,25 +1106,25 @@ int32_t_t BString::FindFirst(char c, int32_t_t fromOffset) const
 }
 //-------------------------------------------------------------------------------------------------
 
-int32_t_t BString::FindFirstChars(const BString& string, int32_t_t fromCharOffset) const
+int32_t BString::FindFirstChars(const BString& string, int32_t fromCharOffset) const
 {
     return FindFirst(string, UTF8CountBytes(fPrivateData, fromCharOffset));
 }
 //-------------------------------------------------------------------------------------------------
 
-int32_t_t BString::FindFirstChars(const char* string, int32_t_t fromCharOffset) const
+int32_t BString::FindFirstChars(const char* string, int32_t fromCharOffset) const
 {
     return FindFirst(string, UTF8CountBytes(fPrivateData, fromCharOffset));
 }
 //-------------------------------------------------------------------------------------------------
 
-int32_t_t BString::FindLast(const BString& string) const
+int32_t BString::FindLast(const BString& string) const
 {
     return __FindBefore(string.String(), Length(), string.Length());
 }
 //-------------------------------------------------------------------------------------------------
 
-int32_t_t BString::FindLast(const char* string) const
+int32_t BString::FindLast(const char* string) const
 {
     if (string == NULL)
         return B_BAD_VALUE;
@@ -1133,7 +1133,7 @@ int32_t_t BString::FindLast(const char* string) const
 }
 //-------------------------------------------------------------------------------------------------
 
-int32_t_t BString::FindLast(const BString& string, int32_t_t beforeOffset) const
+int32_t BString::FindLast(const BString& string, int32_t beforeOffset) const
 {
     if (beforeOffset < 0)
         return B_ERROR;
@@ -1143,7 +1143,7 @@ int32_t_t BString::FindLast(const BString& string, int32_t_t beforeOffset) const
 }
 //-------------------------------------------------------------------------------------------------
 
-int32_t_t BString::FindLast(const char* string, int32_t_t beforeOffset) const
+int32_t BString::FindLast(const char* string, int32_t beforeOffset) const
 {
     if (string == NULL)
         return B_BAD_VALUE;
@@ -1156,7 +1156,7 @@ int32_t_t BString::FindLast(const char* string, int32_t_t beforeOffset) const
 }
 //-------------------------------------------------------------------------------------------------
 
-int32_t_t BString::FindLast(char c) const
+int32_t BString::FindLast(char c) const
 {
     const char* const start = String();
     const char* end = String() + Length() - 1;
@@ -1174,7 +1174,7 @@ int32_t_t BString::FindLast(char c) const
 }
 //-------------------------------------------------------------------------------------------------
 
-int32_t_t BString::FindLast(char c, int32_t_t beforeOffset) const
+int32_t BString::FindLast(char c, int32_t beforeOffset) const
 {
     if (beforeOffset < 0)
         return B_ERROR;
@@ -1195,25 +1195,25 @@ int32_t_t BString::FindLast(char c, int32_t_t beforeOffset) const
 }
 //-------------------------------------------------------------------------------------------------
 
-int32_t_t BString::FindLastChars(const BString& string, int32_t_t beforeCharOffset) const
+int32_t BString::FindLastChars(const BString& string, int32_t beforeCharOffset) const
 {
     return FindLast(string, UTF8CountBytes(fPrivateData, beforeCharOffset));
 }
 //-------------------------------------------------------------------------------------------------
 
-int32_t_t BString::FindLastChars(const char* string, int32_t_t beforeCharOffset) const
+int32_t BString::FindLastChars(const char* string, int32_t beforeCharOffset) const
 {
     return FindLast(string, UTF8CountBytes(fPrivateData, beforeCharOffset));
 }
 //-------------------------------------------------------------------------------------------------
 
-int32_t_t BString::IFindFirst(const BString& string) const
+int32_t BString::IFindFirst(const BString& string) const
 {
     return __IFindAfter(string.String(), 0, string.Length());
 }
 
 
-int32_t_t
+int32_t
 BString::IFindFirst(const char* string) const
 {
     if (string == NULL)
@@ -1223,8 +1223,8 @@ BString::IFindFirst(const char* string) const
 }
 
 
-int32_t_t
-BString::IFindFirst(const BString& string, int32_t_t fromOffset) const
+int32_t
+BString::IFindFirst(const BString& string, int32_t fromOffset) const
 {
     if (fromOffset < 0)
         return B_ERROR;
@@ -1234,7 +1234,7 @@ BString::IFindFirst(const BString& string, int32_t_t fromOffset) const
 }
 //-------------------------------------------------------------------------------------------------
 
-int32_t_t BString::IFindFirst(const char* string, int32_t_t fromOffset) const
+int32_t BString::IFindFirst(const char* string, int32_t fromOffset) const
 {
     if (string == NULL)
         return B_BAD_VALUE;
@@ -1247,13 +1247,13 @@ int32_t_t BString::IFindFirst(const char* string, int32_t_t fromOffset) const
 }
 //-------------------------------------------------------------------------------------------------
 
-int32_t_t BString::IFindLast(const BString& string) const
+int32_t BString::IFindLast(const BString& string) const
 {
     return __IFindBefore(string.String(), Length(), string.Length());
 }
 //-------------------------------------------------------------------------------------------------
 
-int32_t_t BString::IFindLast(const char* string) const
+int32_t BString::IFindLast(const char* string) const
 {
     if (string == NULL)
         return B_BAD_VALUE;
@@ -1262,7 +1262,7 @@ int32_t_t BString::IFindLast(const char* string) const
 }
 //-------------------------------------------------------------------------------------------------
 
-int32_t_t BString::IFindLast(const BString& string, int32_t_t beforeOffset) const
+int32_t BString::IFindLast(const BString& string, int32_t beforeOffset) const
 {
     if (beforeOffset < 0)
         return B_ERROR;
@@ -1272,7 +1272,7 @@ int32_t_t BString::IFindLast(const BString& string, int32_t_t beforeOffset) cons
 }
 //-------------------------------------------------------------------------------------------------
 
-int32_t_t BString::IFindLast(const char* string, int32_t_t beforeOffset) const
+int32_t BString::IFindLast(const char* string, int32_t beforeOffset) const
 {
     if (string == NULL)
         return B_BAD_VALUE;
@@ -1297,7 +1297,7 @@ bool BString::StartsWith(const char* string) const
 }
 //-------------------------------------------------------------------------------------------------
 
-bool BString::StartsWith(const char* string, int32_t_t length) const
+bool BString::StartsWith(const char* string, int32_t length) const
 {
     if (length > Length())
         return false;
@@ -1318,9 +1318,9 @@ bool BString::EndsWith(const char* string) const
 }
 //-------------------------------------------------------------------------------------------------
 
-bool BString::EndsWith(const char* string, int32_t_t length) const
+bool BString::EndsWith(const char* string, int32_t length) const
 {
-    int32_t_t offset = Length() - length;
+    int32_t offset = Length() - length;
     if (offset < 0)
         return false;
 
@@ -1331,7 +1331,7 @@ bool BString::EndsWith(const char* string, int32_t_t length) const
 
 BString& BString::ReplaceFirst(char replaceThis, char withThis)
 {
-    int32_t_t pos = FindFirst(replaceThis);
+    int32_t pos = FindFirst(replaceThis);
     if (pos >= 0 && __MakeWritable() == B_OK)
         fPrivateData[pos] = withThis;
     return *this;
@@ -1340,17 +1340,17 @@ BString& BString::ReplaceFirst(char replaceThis, char withThis)
 
 BString& BString::ReplaceLast(char replaceThis, char withThis)
 {
-    int32_t_t pos = FindLast(replaceThis);
+    int32_t pos = FindLast(replaceThis);
     if (pos >= 0 && __MakeWritable() == B_OK)
         fPrivateData[pos] = withThis;
     return *this;
 }
 //-------------------------------------------------------------------------------------------------
 
-BString& BString::ReplaceAll(char replaceThis, char withThis, int32_t_t fromOffset)
+BString& BString::ReplaceAll(char replaceThis, char withThis, int32_t fromOffset)
 {
     fromOffset = min_clamp0(fromOffset, Length());
-    int32_t_t pos = FindFirst(replaceThis, fromOffset);
+    int32_t pos = FindFirst(replaceThis, fromOffset);
 
     // detach and set first match
     if (pos >= 0 && __MakeWritable() == B_OK) {
@@ -1361,11 +1361,11 @@ BString& BString::ReplaceAll(char replaceThis, char withThis, int32_t_t fromOffs
 }
 //-------------------------------------------------------------------------------------------------
 
-BString& BString::Replace(char replaceThis, char withThis, int32_t_t maxReplaceCount,
-    int32_t_t fromOffset)
+BString& BString::Replace(char replaceThis, char withThis, int32_t maxReplaceCount,
+    int32_t fromOffset)
 {
     fromOffset = min_clamp0(fromOffset, Length());
-    int32_t_t pos = FindFirst(replaceThis, fromOffset);
+    int32_t pos = FindFirst(replaceThis, fromOffset);
 
     if (maxReplaceCount > 0 && pos >= 0 && __MakeWritable() == B_OK) {
         for( ; maxReplaceCount > 0 && pos >= 0;
@@ -1395,12 +1395,12 @@ BString& BString::ReplaceLast(const char* replaceThis, const char* withThis)
     if (!replaceThis || !withThis)
         return *this;
 
-    int32_t_t replaceThisLength = strlen(replaceThis);
-    int32_t_t pos = __FindBefore(replaceThis, Length(), replaceThisLength);
+    int32_t replaceThisLength = strlen(replaceThis);
+    int32_t pos = __FindBefore(replaceThis, Length(), replaceThisLength);
 
     if (pos >= 0) {
-        int32_t_t withThisLength =  strlen(withThis);
-        int32_t_t difference = withThisLength - replaceThisLength;
+        int32_t withThisLength =  strlen(withThis);
+        int32_t difference = withThisLength - replaceThisLength;
 
         if (difference > 0) {
             if (!__OpenAtBy(pos, difference))
@@ -1419,7 +1419,7 @@ BString& BString::ReplaceLast(const char* replaceThis, const char* withThis)
 }
 //-------------------------------------------------------------------------------------------------
 
-BString& BString::ReplaceAll(const char* replaceThis, const char* withThis, int32_t_t fromOffset)
+BString& BString::ReplaceAll(const char* replaceThis, const char* withThis, int32_t fromOffset)
 {
     if (!replaceThis || !withThis || FindFirst(replaceThis) < 0)
         return *this;
@@ -1432,7 +1432,7 @@ BString& BString::ReplaceAll(const char* replaceThis, const char* withThis, int3
 }
 //-------------------------------------------------------------------------------------------------
 
-BString& BString::Replace(const char* replaceThis, const char* withThis, int32_t_t maxReplaceCount, int32_t_t fromOffset)
+BString& BString::Replace(const char* replaceThis, const char* withThis, int32_t maxReplaceCount, int32_t fromOffset)
 {
     if (!replaceThis || !withThis || maxReplaceCount <= 0
         || FindFirst(replaceThis) < 0)
@@ -1446,14 +1446,14 @@ BString& BString::Replace(const char* replaceThis, const char* withThis, int32_t
 }
 //-------------------------------------------------------------------------------------------------
 
-BString& BString::ReplaceAllChars(const char* replaceThis, const char* withThis, int32_t_t fromCharOffset)
+BString& BString::ReplaceAllChars(const char* replaceThis, const char* withThis, int32_t fromCharOffset)
 {
     return ReplaceAll(replaceThis, withThis,
         UTF8CountBytes(fPrivateData, fromCharOffset));
 }
 //-------------------------------------------------------------------------------------------------
 
-BString& BString::ReplaceChars(const char* replaceThis, const char* withThis, int32_t_t maxReplaceCount, int32_t_t fromCharOffset)
+BString& BString::ReplaceChars(const char* replaceThis, const char* withThis, int32_t maxReplaceCount, int32_t fromCharOffset)
 {
     return Replace(replaceThis, withThis, maxReplaceCount,
         UTF8CountBytes(fPrivateData, fromCharOffset));
@@ -1464,7 +1464,7 @@ BString& BString::IReplaceFirst(char replaceThis, char withThis)
 {
     char tmp[2] = { replaceThis, '\0' };
 
-    int32_t_t pos = __IFindAfter(tmp, 0, 1);
+    int32_t pos = __IFindAfter(tmp, 0, 1);
     if (pos >= 0 && __MakeWritable() == B_OK)
         fPrivateData[pos] = withThis;
     return *this;
@@ -1475,18 +1475,18 @@ BString& BString::IReplaceLast(char replaceThis, char withThis)
 {
     char tmp[2] = { replaceThis, '\0' };
 
-    int32_t_t pos = __IFindBefore(tmp, Length(), 1);
+    int32_t pos = __IFindBefore(tmp, Length(), 1);
     if (pos >= 0 && __MakeWritable() == B_OK)
         fPrivateData[pos] = withThis;
     return *this;
 }
 //-------------------------------------------------------------------------------------------------
 
-BString& BString::IReplaceAll(char replaceThis, char withThis, int32_t_t fromOffset)
+BString& BString::IReplaceAll(char replaceThis, char withThis, int32_t fromOffset)
 {
     char tmp[2] = { replaceThis, '\0' };
     fromOffset = min_clamp0(fromOffset, Length());
-    int32_t_t pos = __IFindAfter(tmp, fromOffset, 1);
+    int32_t pos = __IFindAfter(tmp, fromOffset, 1);
 
     if (pos >= 0 && __MakeWritable() == B_OK) {
         for( ; pos >= 0; pos = __IFindAfter(tmp, pos + 1, 1))
@@ -1496,11 +1496,11 @@ BString& BString::IReplaceAll(char replaceThis, char withThis, int32_t_t fromOff
 }
 //-------------------------------------------------------------------------------------------------
 
-BString& BString::IReplace(char replaceThis, char withThis, int32_t_t maxReplaceCount, int32_t_t fromOffset)
+BString& BString::IReplace(char replaceThis, char withThis, int32_t maxReplaceCount, int32_t fromOffset)
 {
     char tmp[2] = { replaceThis, '\0' };
     fromOffset = min_clamp0(fromOffset, Length());
-    int32_t_t pos = __IFindAfter(tmp, fromOffset, 1);
+    int32_t pos = __IFindAfter(tmp, fromOffset, 1);
 
     if (maxReplaceCount > 0 && pos >= 0 && __MakeWritable() == B_OK) {
         for( ; maxReplaceCount > 0 && pos >= 0;
@@ -1530,12 +1530,12 @@ BString& BString::IReplaceLast(const char* replaceThis, const char* withThis)
     if (!replaceThis || !withThis)
         return *this;
 
-    int32_t_t replaceThisLength = strlen(replaceThis);
-    int32_t_t pos = __IFindBefore(replaceThis, Length(), replaceThisLength);
+    int32_t replaceThisLength = strlen(replaceThis);
+    int32_t pos = __IFindBefore(replaceThis, Length(), replaceThisLength);
 
     if (pos >= 0) {
-        int32_t_t withThisLength = strlen(withThis);
-        int32_t_t difference = withThisLength - replaceThisLength;
+        int32_t withThisLength = strlen(withThis);
+        int32_t difference = withThisLength - replaceThisLength;
 
         if (difference > 0) {
             if (!__OpenAtBy(pos, difference))
@@ -1554,7 +1554,7 @@ BString& BString::IReplaceLast(const char* replaceThis, const char* withThis)
 }
 //-------------------------------------------------------------------------------------------------
 
-BString& BString::IReplaceAll(const char* replaceThis, const char* withThis, int32_t_t fromOffset)
+BString& BString::IReplaceAll(const char* replaceThis, const char* withThis, int32_t fromOffset)
 {
     if (!replaceThis || !withThis || IFindFirst(replaceThis) < 0)
         return *this;
@@ -1567,7 +1567,7 @@ BString& BString::IReplaceAll(const char* replaceThis, const char* withThis, int
 }
 //-------------------------------------------------------------------------------------------------
 
-BString& BString::IReplace(const char* replaceThis, const char* withThis, int32_t_t maxReplaceCount, int32_t_t fromOffset)
+BString& BString::IReplace(const char* replaceThis, const char* withThis, int32_t maxReplaceCount, int32_t fromOffset)
 {
     if (!replaceThis || !withThis || maxReplaceCount <= 0
         || FindFirst(replaceThis) < 0)
@@ -1583,15 +1583,15 @@ BString& BString::IReplace(const char* replaceThis, const char* withThis, int32_
 
 BString& BString::ReplaceSet(const char* setOfBytes, char with)
 {
-    if (!setOfBytes || strcspn(fPrivateData, setOfBytes) >= uint32_t_t(Length()))
+    if (!setOfBytes || strcspn(fPrivateData, setOfBytes) >= uint32_t(Length()))
         return *this;
 
     if (__MakeWritable() != B_OK)
         return *this;
 
-    int32_t_t offset = 0;
-    int32_t_t length = Length();
-    for (int32_t_t pos;;) {
+    int32_t offset = 0;
+    int32_t length = Length();
+    for (int32_t pos;;) {
         pos = strcspn(fPrivateData + offset, setOfBytes);
 
         offset += pos;
@@ -1609,23 +1609,23 @@ BString& BString::ReplaceSet(const char* setOfBytes, char with)
 BString& BString::ReplaceSet(const char* setOfBytes, const char* with)
 {
     if (!setOfBytes || !with
-        || strcspn(fPrivateData, setOfBytes) >= uint32_t_t(Length()))
+        || strcspn(fPrivateData, setOfBytes) >= uint32_t(Length()))
         return *this;
 
     // delegate simple case
-    int32_t_t withLen = strlen(with);
+    int32_t withLen = strlen(with);
     if (withLen == 1)
         return ReplaceSet(setOfBytes, *with);
 
     if (__MakeWritable() != B_OK)
         return *this;
 
-    int32_t_t pos = 0;
-    int32_t_t searchLen = 1;
-    int32_t_t len = Length();
+    int32_t pos = 0;
+    int32_t searchLen = 1;
+    int32_t len = Length();
 
     PosVect positions;
-    for (int32_t_t offset = 0; offset < len; offset += (pos + searchLen)) {
+    for (int32_t offset = 0; offset < len; offset += (pos + searchLen)) {
         pos = strcspn(fPrivateData + offset, setOfBytes);
         if (pos + offset >= len)
             break;
@@ -1644,8 +1644,8 @@ BString::ReplaceCharsSet(const char* setOfChars, const char* with)
     if (!setOfChars || !with)
         return *this;
 
-    int32_t_t setCharCount = UTF8CountChars(setOfChars, -1);
-    if ((uint32_t_t)setCharCount == strlen(setOfChars)) {
+    int32_t setCharCount = UTF8CountChars(setOfChars, -1);
+    if ((uint32_t)setCharCount == strlen(setOfChars)) {
         // no multi-byte chars at all
         return ReplaceSet(setOfChars, with);
     }
@@ -1653,15 +1653,15 @@ BString::ReplaceCharsSet(const char* setOfChars, const char* with)
     BString setString(setOfChars);
     BString result;
 
-    int32_t_t withLength = strlen(with);
-    int32_t_t charCount = CountChars();
-    for (int32_t_t i = 0; i < charCount; i++) {
-        int32_t_t charLength;
+    int32_t withLength = strlen(with);
+    int32_t charCount = CountChars();
+    for (int32_t i = 0; i < charCount; i++) {
+        int32_t charLength;
         const char* sourceChar = CharAt(i, &charLength);
         bool match = false;
 
-        for (int32_t_t j = 0; j < setCharCount; j++) {
-            int32_t_t setCharLength;
+        for (int32_t j = 0; j < setCharCount; j++) {
+            int32_t setCharLength;
             const char* setChar = setString.CharAt(j, &setCharLength);
             if (charLength == setCharLength
                 && memcmp(sourceChar, setChar, charLength) == 0) {
@@ -1686,13 +1686,13 @@ BString::ReplaceCharsSet(const char* setOfChars, const char* with)
 
 #if __GNUC__ > 3
 BStringRef
-BString::operator[](int32_t_t index)
+BString::operator[](int32_t index)
 {
     return BStringRef(*this, index);
 }
 #else
 char&
-BString::operator[](int32_t_t index)
+BString::operator[](int32_t index)
 {
     if (__MakeWritable() != B_OK) {
         static char invalid;
@@ -1708,9 +1708,9 @@ BString::operator[](int32_t_t index)
 
 
 const char*
-BString::CharAt(int32_t_t charIndex, int32_t_t* bytes) const
+BString::CharAt(int32_t charIndex, int32_t* bytes) const
 {
-    int32_t_t offset = UTF8CountBytes(fPrivateData, charIndex);
+    int32_t offset = UTF8CountBytes(fPrivateData, charIndex);
     if (bytes != NULL)
         *bytes = UTF8NextCharLen(fPrivateData + offset);
     return fPrivateData + offset;
@@ -1718,9 +1718,9 @@ BString::CharAt(int32_t_t charIndex, int32_t_t* bytes) const
 
 
 bool
-BString::CharAt(int32_t_t charIndex, char* buffer, int32_t_t* bytes) const
+BString::CharAt(int32_t charIndex, char* buffer, int32_t* bytes) const
 {
-    int32_t_t length;
+    int32_t length;
     const char* charAt = CharAt(charIndex, &length);
     if (bytes != NULL) {
         if (*bytes < length)
@@ -1734,9 +1734,9 @@ BString::CharAt(int32_t_t charIndex, char* buffer, int32_t_t* bytes) const
 //-------------------------------------------------------------------------------------------------
 //	#pragma mark - Fast low-level manipulation
 
-char* BString::LockBuffer(int32_t_t maxLength)
+char* BString::LockBuffer(int32_t maxLength)
 {
-    int32_t_t length = Length();
+    int32_t length = Length();
     if (maxLength > length)
         length = maxLength;
 
@@ -1750,7 +1750,7 @@ char* BString::LockBuffer(int32_t_t maxLength)
 }
 //-------------------------------------------------------------------------------------------------
 
-BString& BString::UnlockBuffer(int32_t_t length)
+BString& BString::UnlockBuffer(int32_t length)
 {
     if (length > 0)
         length = min_clamp0(length, Length());
@@ -1771,9 +1771,9 @@ BString& BString::UnlockBuffer(int32_t_t length)
 
 BString& BString::ToLower()
 {
-    int32_t_t length = Length();
+    int32_t length = Length();
     if (length > 0 && __MakeWritable() == B_OK) {
-        for (int32_t_t count = 0; count < length; count++)
+        for (int32_t count = 0; count < length; count++)
             fPrivateData[count] = tolower(fPrivateData[count]);
     }
     return *this;
@@ -1782,9 +1782,9 @@ BString& BString::ToLower()
 
 BString& BString::ToUpper()
 {
-    int32_t_t length = Length();
+    int32_t length = Length();
     if (length > 0 && __MakeWritable() == B_OK) {
-        for (int32_t_t count = 0; count < length; count++)
+        for (int32_t count = 0; count < length; count++)
             fPrivateData[count] = toupper(fPrivateData[count]);
     }
     return *this;
@@ -1793,11 +1793,11 @@ BString& BString::ToUpper()
 
 BString& BString::Capitalize()
 {
-    int32_t_t length = Length();
+    int32_t length = Length();
 
     if (length > 0 && __MakeWritable() == B_OK) {
         fPrivateData[0] = toupper(fPrivateData[0]);
-        for (int32_t_t count = 1; count < length; count++)
+        for (int32_t count = 1; count < length; count++)
             fPrivateData[count] = tolower(fPrivateData[count]);
     }
     return *this;
@@ -1806,10 +1806,10 @@ BString& BString::Capitalize()
 
 BString& BString::CapitalizeEachWord()
 {
-    int32_t_t length = Length();
+    int32_t length = Length();
 
     if (length > 0 && __MakeWritable() == B_OK) {
-        int32_t_t count = 0;
+        int32_t count = 0;
         do {
             // Find the first alphabetical character...
             for (; count < length; count++) {
@@ -1876,11 +1876,11 @@ BString& BString::Trim()
     const char* string = String();
 
     // string is \0 terminated thus we don't need to check if we reached the end
-    int32_t_t startCount = 0;
+    int32_t startCount = 0;
     while (isspace(string[startCount]))
         startCount++;
 
-    int32_t_t endIndex = Length() - 1;
+    int32_t endIndex = Length() - 1;
     while (endIndex >= startCount && isspace(string[endIndex]))
         endIndex--;
 
@@ -1908,7 +1908,7 @@ BString&
 BString::operator<<(const char* string)
 {
     if (string != NULL) {
-        int32_t_t length = strlen(string);
+        int32_t length = strlen(string);
         if (length > 0)
             __DoAppend(string, length);
     }
@@ -1945,7 +1945,7 @@ BString& BString::operator<<(bool value)
 BString& BString::operator<<(int i)
 {
     char num[32];
-    int32_t_t length = snprintf(num, sizeof(num), "%d", i);
+    int32_t length = snprintf(num, sizeof(num), "%d", i);
 
     __DoAppend(num, length);
     return *this;
@@ -1955,7 +1955,7 @@ BString& BString::operator<<(int i)
 BString& BString::operator<<(unsigned int i)
 {
     char num[32];
-    int32_t_t length = snprintf(num, sizeof(num), "%u", i);
+    int32_t length = snprintf(num, sizeof(num), "%u", i);
 
     __DoAppend(num, length);
     return *this;
@@ -1965,7 +1965,7 @@ BString& BString::operator<<(unsigned int i)
 BString& BString::operator<<(unsigned long i)
 {
     char num[32];
-    int32_t_t length = snprintf(num, sizeof(num), "%lu", i);
+    int32_t length = snprintf(num, sizeof(num), "%lu", i);
 
     __DoAppend(num, length);
     return *this;
@@ -1975,7 +1975,7 @@ BString& BString::operator<<(unsigned long i)
 BString& BString::operator<<(long i)
 {
     char num[32];
-    int32_t_t length = snprintf(num, sizeof(num), "%ld", i);
+    int32_t length = snprintf(num, sizeof(num), "%ld", i);
     __DoAppend(num, length);
     return *this;
 }
@@ -1984,7 +1984,7 @@ BString& BString::operator<<(long i)
 BString& BString::operator<<(unsigned long long i)
 {
     char num[64];
-    int32_t_t length = snprintf(num, sizeof(num), "%llu", i);
+    int32_t length = snprintf(num, sizeof(num), "%llu", i);
     __DoAppend(num, length);
     return *this;
 }
@@ -1993,7 +1993,7 @@ BString& BString::operator<<(unsigned long long i)
 BString& BString::operator<<(long long i)
 {
     char num[64];
-    int32_t_t length = snprintf(num, sizeof(num), "%lld", i);
+    int32_t length = snprintf(num, sizeof(num), "%lld", i);
     __DoAppend(num, length);
     return *this;
 }
@@ -2002,7 +2002,7 @@ BString& BString::operator<<(long long i)
 BString& BString::operator<<(float f)
 {
     char num[64];
-    int32_t_t length = snprintf(num, sizeof(num), "%.2f", f);
+    int32_t length = snprintf(num, sizeof(num), "%.2f", f);
     __DoAppend(num, length);
     return *this;
 }
@@ -2011,7 +2011,7 @@ BString& BString::operator<<(float f)
 BString& BString::operator<<(double value)
 {
     char num[64];
-    int32_t_t length = snprintf(num, sizeof(num), "%.2f", value);
+    int32_t length = snprintf(num, sizeof(num), "%.2f", value);
     __DoAppend(num, length);
     return *this;
 }
@@ -2049,7 +2049,7 @@ status_t BString::__MakeWritable()
     @param length The length of the new buffer in bytes.
     @param copy If true, the current string will be copied into the new string.
 */
-status_t BString::__MakeWritable(int32_t_t length, bool copy)
+status_t BString::__MakeWritable(int32_t length, bool copy)
 {
     char* newData = NULL;
 
@@ -2079,7 +2079,7 @@ status_t BString::__MakeWritable(int32_t_t length, bool copy)
 /*!	Allocates a new private data buffer with the space to store \a length bytes
     (not including the terminating null).
 */
-/*static*/ char* BString::__Allocate(int32_t_t length)
+/*static*/ char* BString::__Allocate(int32_t length)
 {
     if (length < 0) return NULL;
 
@@ -2097,7 +2097,7 @@ status_t BString::__MakeWritable(int32_t_t length, bool copy)
 /*!	Resizes the private data buffer. You must already have a writable buffer
     when you call this method.
 */
-char* BString::__Resize(int32_t_t length)
+char* BString::__Resize(int32_t length)
 {
     ASSERT(__ReferenceCount() == 1 || __ReferenceCount() == -1);
 
@@ -2116,14 +2116,14 @@ char* BString::__Resize(int32_t_t length)
 }
 //-------------------------------------------------------------------------------------------------
 
-void BString::__Init(const char* src, int32_t_t length)
+void BString::__Init(const char* src, int32_t length)
 {
     fPrivateData = __Clone(src, length);
     if (fPrivateData == NULL) fPrivateData = __Clone(NULL, 0);
 }
 //-------------------------------------------------------------------------------------------------
 
-char* BString::__Clone(const char* data, int32_t_t length)
+char* BString::__Clone(const char* data, int32_t length)
 {
     char* newData = __Allocate(length);
     if (newData == NULL)
@@ -2136,9 +2136,9 @@ char* BString::__Clone(const char* data, int32_t_t length)
 }
 //-------------------------------------------------------------------------------------------------
 
-char* BString::__OpenAtBy(int32_t_t offset, int32_t_t length)
+char* BString::__OpenAtBy(int32_t offset, int32_t length)
 {
-    int32_t_t oldLength = Length();
+    int32_t oldLength = Length();
     if (__MakeWritable() != B_OK)
         return NULL;
     memmove(fPrivateData + offset + length, fPrivateData + offset,
@@ -2147,9 +2147,9 @@ char* BString::__OpenAtBy(int32_t_t offset, int32_t_t length)
 }
 //-------------------------------------------------------------------------------------------------
 
-char* BString::__ShrinkAtBy(int32_t_t offset, int32_t_t length)
+char* BString::__ShrinkAtBy(int32_t offset, int32_t length)
 {
-    int32_t_t oldLength = Length();
+    int32_t oldLength = Length();
     if (__MakeWritable() != B_OK)
         return NULL;
     memmove(fPrivateData + offset, fPrivateData + offset + length,
@@ -2158,7 +2158,7 @@ char* BString::__ShrinkAtBy(int32_t_t offset, int32_t_t length)
 }
 //-------------------------------------------------------------------------------------------------
 
-void BString::__SetLength(int32_t_t length)
+void BString::__SetLength(int32_t length)
 {
     Private::DataLength(fPrivateData) = length & 0x7fffffff;
 }
@@ -2173,9 +2173,9 @@ void BString::__FreePrivateData()
 }
 //-------------------------------------------------------------------------------------------------
 
-bool BString::__DoAppend(const char* string, int32_t_t length)
+bool BString::__DoAppend(const char* string, int32_t length)
 {
-    int32_t_t oldLength = Length();
+    int32_t oldLength = Length();
     if (__MakeWritable(oldLength + length, true) == B_OK) {
         strncpy(fPrivateData + oldLength, string, length);
         return true;
@@ -2184,10 +2184,10 @@ bool BString::__DoAppend(const char* string, int32_t_t length)
 }
 //-------------------------------------------------------------------------------------------------
 
-bool BString::__DoPrepend(const char* string, int32_t_t length)
+bool BString::__DoPrepend(const char* string, int32_t length)
 {
     // TODO: this could be optimized (allocate a new buffer, use memcpy())
-    int32_t_t oldLength = Length();
+    int32_t oldLength = Length();
     if (__MakeWritable(oldLength + length, true) == B_OK) {
         memmove(fPrivateData + length, fPrivateData, oldLength);
         if (string && length)
@@ -2198,9 +2198,9 @@ bool BString::__DoPrepend(const char* string, int32_t_t length)
 }
 //-------------------------------------------------------------------------------------------------
 
-bool BString::__DoInsert(const char* string, int32_t_t offset, int32_t_t length)
+bool BString::__DoInsert(const char* string, int32_t offset, int32_t length)
 {
-    int32_t_t oldLength = Length();
+    int32_t oldLength = Length();
     if (__MakeWritable(oldLength + length, true) == B_OK) {
         memmove(fPrivateData + offset + length, fPrivateData + offset,
             oldLength - offset);
@@ -2212,7 +2212,7 @@ bool BString::__DoInsert(const char* string, int32_t_t offset, int32_t_t length)
 }
 //-------------------------------------------------------------------------------------------------
 
-int32_t_t BString::__ShortFindAfter(const char* string, int32_t_t len) const
+int32_t BString::__ShortFindAfter(const char* string, int32_t len) const
 {
     const char* ptr = strstr(String(), string);
     if (ptr != NULL)
@@ -2221,7 +2221,7 @@ int32_t_t BString::__ShortFindAfter(const char* string, int32_t_t len) const
 }
 //-------------------------------------------------------------------------------------------------
 
-int32_t_t BString::__FindAfter(const char* string, int32_t_t offset, int32_t_t length) const
+int32_t BString::__FindAfter(const char* string, int32_t offset, int32_t length) const
 {
     const char* ptr = strstr(String() + offset, string);
     if (ptr != NULL)
@@ -2230,7 +2230,7 @@ int32_t_t BString::__FindAfter(const char* string, int32_t_t offset, int32_t_t l
 }
 //-------------------------------------------------------------------------------------------------
 
-int32_t_t BString::__IFindAfter(const char* string, int32_t_t offset, int32_t_t length) const
+int32_t BString::__IFindAfter(const char* string, int32_t offset, int32_t length) const
 {
     const char* ptr = strcasestr(String() + offset, string);
     if (ptr != NULL)
@@ -2239,7 +2239,7 @@ int32_t_t BString::__IFindAfter(const char* string, int32_t_t offset, int32_t_t 
 }
 //-------------------------------------------------------------------------------------------------
 
-int32_t_t BString::__FindBefore(const char* string, int32_t_t offset, int32_t_t length) const
+int32_t BString::__FindBefore(const char* string, int32_t offset, int32_t length) const
 {
     if (fPrivateData != NULL) {
         const char* ptr = fPrivateData + offset - length;
@@ -2254,7 +2254,7 @@ int32_t_t BString::__FindBefore(const char* string, int32_t_t offset, int32_t_t 
 }
 //-------------------------------------------------------------------------------------------------
 
-int32_t_t BString::__IFindBefore(const char* string, int32_t_t offset, int32_t_t length) const
+int32_t BString::__IFindBefore(const char* string, int32_t offset, int32_t length) const
 {
     if (fPrivateData != NULL) {
         char* ptr1 = fPrivateData + offset - length;
@@ -2278,16 +2278,16 @@ BString& BString::__DoCharacterEscape(const char* string, const char* setOfChars
     memcpy(fPrivateData, string, Length());
 
     PosVect positions;
-    int32_t_t length = Length();
-    int32_t_t pos;
-    for (int32_t_t offset = 0; offset < length; offset += pos + 1) {
+    int32_t length = Length();
+    int32_t pos;
+    for (int32_t offset = 0; offset < length; offset += pos + 1) {
         pos = strcspn(fPrivateData + offset, setOfCharsToEscape);
         if (pos < length - offset && !positions.Add(offset + pos))
             return *this;
     }
 
-    uint32_t_t count = positions.CountItems();
-    int32_t_t newLength = length + count;
+    uint32_t count = positions.CountItems();
+    int32_t newLength = length + count;
     if (!newLength) {
         __Resize(0);
         return *this;
@@ -2297,9 +2297,9 @@ BString& BString::__DoCharacterEscape(const char* string, const char* setOfChars
     if (newData) {
         char* oldString = fPrivateData;
         char* newString = newData;
-        int32_t_t lastPos = 0;
+        int32_t lastPos = 0;
 
-        for (uint32_t_t i = 0; i < count; ++i) {
+        for (uint32_t i = 0; i < count; ++i) {
             pos = positions.ItemAt(i);
             length = pos - lastPos;
             if (length > 0) {
@@ -2337,27 +2337,27 @@ BString::__DoCharacterDeescape(const char* string, char escapeChar)
 
 BString&
 BString::__DoReplace(const char* findThis, const char* replaceWith,
-    int32_t_t maxReplaceCount, int32_t_t fromOffset, bool ignoreCase)
+    int32_t maxReplaceCount, int32_t fromOffset, bool ignoreCase)
 {
     if (findThis == NULL || maxReplaceCount <= 0
         || fromOffset < 0 || fromOffset >= Length())
         return *this;
 
-    int32_t_t findLen = strlen(findThis);
+    int32_t findLen = strlen(findThis);
     if (findLen == 0)
         return *this;
 
-    typedef int32_t_t (BString::*TFindMethod)(const char*, int32_t_t, int32_t_t) const;
+    typedef int32_t (BString::*TFindMethod)(const char*, int32_t, int32_t) const;
     TFindMethod findMethod = ignoreCase
         ? &BString::__IFindAfter : &BString::__FindAfter;
 
     if (!replaceWith)
         replaceWith = "";
 
-    int32_t_t replaceLen = strlen(replaceWith);
-    int32_t_t lastSrcPos = fromOffset;
+    int32_t replaceLen = strlen(replaceWith);
+    int32_t lastSrcPos = fromOffset;
     PosVect positions;
-    for (int32_t_t srcPos = 0; maxReplaceCount > 0
+    for (int32_t srcPos = 0; maxReplaceCount > 0
         && (srcPos = (this->*findMethod)(findThis, lastSrcPos, findLen)) >= 0;
             maxReplaceCount--) {
         positions.Add(srcPos);
@@ -2368,11 +2368,11 @@ BString::__DoReplace(const char* findThis, const char* replaceWith,
 }
 //-------------------------------------------------------------------------------------------------
 
-void BString::__ReplaceAtPositions(const PosVect* positions, int32_t_t searchLength, const char* with, int32_t_t withLength)
+void BString::__ReplaceAtPositions(const PosVect* positions, int32_t searchLength, const char* with, int32_t withLength)
 {
-    int32_t_t length = Length();
-    uint32_t_t count = positions->CountItems();
-    int32_t_t newLength = length + count * (withLength - searchLength);
+    int32_t length = Length();
+    uint32_t count = positions->CountItems();
+    int32_t newLength = length + count * (withLength - searchLength);
     if (!newLength) {
         __Resize(0);
         return;
@@ -2384,10 +2384,10 @@ void BString::__ReplaceAtPositions(const PosVect* positions, int32_t_t searchLen
 
     char* oldString = fPrivateData;
     char* newString = newData;
-    int32_t_t lastPos = 0;
+    int32_t lastPos = 0;
 
-    for (uint32_t_t i = 0; i < count; ++i) {
-        int32_t_t pos = positions->ItemAt(i);
+    for (uint32_t i = 0; i < count; ++i) {
+        int32_t pos = positions->ItemAt(i);
         length = pos - lastPos;
         if (length > 0) {
             memcpy(newString, oldString, length);
@@ -2552,18 +2552,18 @@ static long double modfl(long double value, long double *iptr)
 
 //-----------------------------------------------------------------------------
 
-BHAPI_EXPORT char *strdup_dirty(const char *src,  __be_int32_t length)
+BHAPI_EXPORT char *strdup_dirty(const char *src,  __be_int32 length)
 {
     char    *dest;
 
-     __be_int32_t len = 0;
+     __be_int32 len = 0;
 
     if (src == NULL || *src == 0 || length == 0) return NULL;
 
     if (length < 0)
-        len = (__be_int32_t) strlen(src);
+        len = (__be_int32) strlen(src);
     else
-        len = min_c(length, (__be_int32_t) strlen(src));
+        len = min_c(length, (__be_int32) strlen(src));
 
     dest = new char[len + 1];
 

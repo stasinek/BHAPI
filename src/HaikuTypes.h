@@ -17,8 +17,8 @@ typedef signed char			__haiku_std_int8;
 typedef unsigned char		__haiku_std_uint8;
 typedef signed short		__haiku_std_int16;
 typedef unsigned short		__haiku_std_uint16;
-typedef signed int			__haiku_std_int32_t;
-typedef unsigned int		__haiku_std_uint32_t;
+typedef signed int			__haiku_std_int32;
+typedef unsigned int		__haiku_std_uint32;
 #ifdef __HAIKU_ARCH_64_BIT
 typedef signed long			__haiku_std_int64;
 typedef unsigned long		__haiku_std_uint64;
@@ -35,8 +35,8 @@ typedef __haiku_std_uint16	__haiku_uint16;
 typedef signed long int		__haiku_int32_t;
 typedef unsigned long int	__haiku_uint32_t;
 #else
-typedef __haiku_std_int32_t	__haiku_int32_t;
-typedef __haiku_std_uint32_t	__haiku_uint32_t;
+typedef __haiku_std_int32	__haiku_int32_t;
+typedef __haiku_std_uint32	__haiku_uint32_t;
 #endif
 typedef __haiku_std_int64	__haiku_int64;
 typedef __haiku_std_uint64	__haiku_uint64;
@@ -114,8 +114,8 @@ typedef __haiku_std_int8   int8_t;
 typedef __haiku_std_uint8   uint8_t;
 typedef __haiku_std_int16  int16_t;
 typedef __haiku_std_uint16  uint16_t;
-typedef __haiku_std_int32_t  int32_t_t;
-typedef __haiku_std_uint32_t  uint32_t_t;
+typedef __haiku_std_int32  int32_t;
+typedef __haiku_std_uint32  uint32_t;
 typedef __haiku_std_int64  int64_t;
 typedef __haiku_std_uint64  uint64_t;
 #elif defined(__GNUC__)
@@ -123,8 +123,8 @@ typedef	__haiku_std_int8  int8_t;
 typedef	__haiku_std_uint8 uint8_t;
 typedef	__haiku_std_int16 int16_t;
 typedef	__haiku_std_uint16 uint16_t;
-typedef	__haiku_std_int32_t int32_t_t;
-typedef	__haiku_std_uint32_t uint32_t_t;
+typedef	__haiku_std_int32 int32_t;
+typedef	__haiku_std_uint32 uint32_t;
 typedef	__haiku_std_int64 int64_t;
 typedef	__haiku_std_uint64 uint64_t;
 #endif
@@ -133,8 +133,8 @@ typedef	__haiku_std_int8  __be_int8;
 typedef	__haiku_std_uint8  __be_uint8;
 typedef	__haiku_std_int16  __be_int16;
 typedef	__haiku_std_uint16  __be_uint16;
-typedef	__haiku_std_int32_t  __be_int32_t;
-typedef	__haiku_std_uint32_t  __be_uint32_t;
+typedef	__haiku_std_int32  __be_int32;
+typedef	__haiku_std_uint32  __be_uint32;
 typedef	__haiku_std_int64  __be_int64;
 typedef	__haiku_std_uint64  __be_uint64;
 
@@ -142,8 +142,8 @@ typedef volatile __haiku_std_int8 	vint8;
 typedef volatile __haiku_std_uint8 	vuint8;
 typedef volatile __haiku_std_int16 	vint16;
 typedef volatile __haiku_std_uint16 	vuint16;
-typedef volatile __haiku_std_int32_t 	vint32_t;
-typedef volatile __haiku_std_uint32_t 	vuint32_t;
+typedef volatile __haiku_std_int32 	vint32;
+typedef volatile __haiku_std_uint32 	vuint32;
 typedef volatile __haiku_std_int64 	vint64;
 typedef volatile __haiku_std_uint64 	vuint64;
 
@@ -159,11 +159,11 @@ typedef volatile unsigned char 	vuchar;
 typedef unsigned char 	uchar;
 typedef unsigned short 	unichar;
 typedef __haiku_std_uint16 unichar16;
-typedef __haiku_std_uint32_t unichar32;
+typedef __haiku_std_uint32 unichar32;
 
-typedef __haiku_std_int32_t __haiku_status_t;
-typedef __haiku_std_int32_t __be_status_t;
-typedef __haiku_std_int32_t status_t;
+typedef __haiku_std_int32 __haiku_status_t;
+typedef __haiku_std_int32 __be_status_t;
+typedef __haiku_std_int32 status_t;
 // 	Represents one of the status codes defined in Error.h. More...
 typedef __haiku_std_int64 __haiku_bigtime_t;
 typedef __haiku_std_int64 __be_bigtime_t;
@@ -173,13 +173,13 @@ typedef __haiku_std_int64 __haiku_nanotime_t;
 typedef __haiku_std_int64 __be_nanotime_t;
 typedef __haiku_std_int64 nanotime_t;
 // 	Represents time in nanoseconds.
-typedef __haiku_std_uint32_t 	__haiku_type_code;
-typedef __haiku_std_uint32_t 	__be_type_code;
-typedef __haiku_std_uint32_t 	type_code;
+typedef __haiku_std_uint32 	__haiku_type_code;
+typedef __haiku_std_uint32 	__be_type_code;
+typedef __haiku_std_uint32 	type_code;
 // 	Represents a certain type of data. See HaikuConstants.h for possible values. More...
-typedef __haiku_std_uint32_t 	__haiku_perform_code;
-typedef __haiku_std_uint32_t 	__be_perform_code;
-typedef __haiku_std_uint32_t 	perform_code;
+typedef __haiku_std_uint32 	__haiku_perform_code;
+typedef __haiku_std_uint32 	__be_perform_code;
+typedef __haiku_std_uint32 	perform_code;
 
 //typedef __haiku_phys_addr_t  gid_t;
 //typedef __haiku_phys_addr_t  uid_t;

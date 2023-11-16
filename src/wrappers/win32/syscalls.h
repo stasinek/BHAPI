@@ -214,12 +214,12 @@ extern status_t		_kern_unlock_node(int fd);
 
 /* atomic_* ops (needed for CPUs that don't support them directly) */
 // #ifdef ATOMIC_FUNCS_ARE_SYSCALLS
-// extern int32_t		_kern_atomic_set(vint32_t *value, int32_t newValue);
-// extern int32_t		_kern_atomic_test_and_set(vint32_t *value, int32_t newValue, int32_t testAgainst);
-// extern int32_t		_kern_atomic_add(vint32_t *value, int32_t addValue);
-// extern int32_t		_kern_atomic_and(vint32_t *value, int32_t andValue);
-// extern int32_t		_kern_atomic_or(vint32_t *value, int32_t orValue);
-// extern int32_t		_kern_atomic_get(vint32_t *value);
+// extern int32_t		_kern_atomic_set(vint32 *value, int32_t newValue);
+// extern int32_t		_kern_atomic_test_and_set(vint32 *value, int32_t newValue, int32_t testAgainst);
+// extern int32_t		_kern_atomic_add(vint32 *value, int32_t addValue);
+// extern int32_t		_kern_atomic_and(vint32 *value, int32_t andValue);
+// extern int32_t		_kern_atomic_or(vint32 *value, int32_t orValue);
+// extern int32_t		_kern_atomic_get(vint32 *value);
 // #endif	// ATOMIC_FUNCS_ARE_SYSCALLS
 
 // #ifdef ATOMIC64_FUNCS_ARE_SYSCALLS

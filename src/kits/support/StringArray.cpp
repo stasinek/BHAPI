@@ -90,7 +90,7 @@ void BStringArray::MakeEmpty(void)
 {
     if (!list.IsEmpty())
     {
-        for (int32_t_t i = 0; i < list.CountItems(); i++) delete (__string_node *)list.ItemAt(i);
+        for (int32_t i = 0; i < list.CountItems(); i++) delete (__string_node *)list.ItemAt(i);
         list.MakeEmpty();
     }
 }
@@ -102,7 +102,7 @@ bool BStringArray::IsEmpty(void) const
 }
 //-----------------------------------------------------------------------------
 
-int32_t_t BStringArray::CountItems(void) const
+int32_t BStringArray::CountItems(void) const
 {
     return list.CountItems();
 }
@@ -191,7 +191,7 @@ bool BStringArray::AddItem(const char *item, void *attach_data)
 }
 //-----------------------------------------------------------------------------
 
-bool BStringArray::AddItem(const char *item,  int32_t_t atIndex, void *attach_data)
+bool BStringArray::AddItem(const char *item,  int32_t atIndex, void *attach_data)
 {
     __string_node *data = new __string_node;
     if (!data || !data->str)
@@ -219,7 +219,7 @@ bool BStringArray::AddItem(const BString &item, void *attach_data)
 }
 //-----------------------------------------------------------------------------
 
-bool BStringArray::AddItem(const BString &item,  int32_t_t atIndex, void *attach_data)
+bool BStringArray::AddItem(const BString &item,  int32_t atIndex, void *attach_data)
 {
     return AddItem(item.String(), atIndex, attach_data);
 }
@@ -230,7 +230,7 @@ bool BStringArray::AddArray(const BStringArray &array)
     BStringArray    __array;
     if (array.list.IsEmpty()) return false;
 
-    for (int32_t_t i = 0; i < array.list.CountItems(); i++)
+    for (int32_t i = 0; i < array.list.CountItems(); i++)
     {
         const __string_node   *node = (const __string_node *)array.list.ItemAt(i);
         if (!node || !node->str) continue;
@@ -247,13 +247,13 @@ bool BStringArray::AddArray(const BStringArray &array)
 }
 //-----------------------------------------------------------------------------
 
-bool BStringArray::AddArray(const BStringArray &array,  int32_t_t atIndex)
+bool BStringArray::AddArray(const BStringArray &array,  int32_t atIndex)
 {
     BStringArray    __array;
     if (array.list.IsEmpty()) return false;
     if (atIndex < 0 || atIndex >= list.CountItems()) return false;
 
-    for (int32_t_t i = 0; i < array.list.CountItems(); i++)
+    for (int32_t i = 0; i < array.list.CountItems(); i++)
     {
         const __string_node   *node = (const __string_node *)array.list.ItemAt(i);
         if (!node || !node->str) continue;
@@ -270,7 +270,7 @@ bool BStringArray::AddArray(const BStringArray &array,  int32_t_t atIndex)
 }
 //-----------------------------------------------------------------------------
 
-const BString *BStringArray::ItemAt(int32_t_t index, void **attach_data) const
+const BString *BStringArray::ItemAt(int32_t index, void **attach_data) const
 {
     const __string_node   *node = (const __string_node *)list.ItemAt(index);
     if (!node) return NULL;
@@ -297,7 +297,7 @@ const BString *BStringArray::LastItem(void **attach_data) const
 }
 //-----------------------------------------------------------------------------
 
-bool BStringArray::RemoveItem(int32_t_t index)
+bool BStringArray::RemoveItem(int32_t index)
 {
     __string_node *node = (__string_node *)list.RemoveItem(index);
 
@@ -311,7 +311,7 @@ bool BStringArray::RemoveItem(int32_t_t index)
 }
 //-----------------------------------------------------------------------------
 
-bool BStringArray::RemoveItems(int32_t_t index,  int32_t_t count)
+bool BStringArray::RemoveItems(int32_t index,  int32_t count)
 {
     BList   list_store(list);
     if (index < 0 || index >= list.CountItems()) return false;
@@ -329,7 +329,7 @@ bool BStringArray::RemoveItems(int32_t_t index,  int32_t_t count)
 
     if (list.RemoveItems(index, count))
     {
-        for (int32_t_t i = 0; i < list_store.CountItems(); i++) delete (__string_node *)list_store.ItemAt(i);
+        for (int32_t i = 0; i < list_store.CountItems(); i++) delete (__string_node *)list_store.ItemAt(i);
         list_store.MakeEmpty();
         return true;
     }
@@ -338,7 +338,7 @@ bool BStringArray::RemoveItems(int32_t_t index,  int32_t_t count)
 }
 //-----------------------------------------------------------------------------
 
-bool BStringArray::ReplaceItem(int32_t_t index, const char *string, void *attach_data)
+bool BStringArray::ReplaceItem(int32_t index, const char *string, void *attach_data)
 {
     __string_node *node = (__string_node *)list.ItemAt(index);
 
@@ -353,7 +353,7 @@ bool BStringArray::ReplaceItem(int32_t_t index, const char *string, void *attach
 }
 //-----------------------------------------------------------------------------
 
-bool BStringArray::ReplaceItem(int32_t_t index, const BString &string, void *attach_data)
+bool BStringArray::ReplaceItem(int32_t index, const BString &string, void *attach_data)
 {
     __string_node *node = (__string_node *)list.ItemAt(index);
 
@@ -376,7 +376,7 @@ BStringArray &BStringArray::SortItems(int (*cmp) (const BString **, const BStrin
 }
 //-----------------------------------------------------------------------------
 
-bool BStringArray::SwapItems(int32_t_t indexA,  int32_t_t indexB)
+bool BStringArray::SwapItems(int32_t indexA,  int32_t indexB)
 {
     if (indexA != indexB) return list.SwapItems(indexA, indexB);
 
@@ -384,7 +384,7 @@ bool BStringArray::SwapItems(int32_t_t indexA,  int32_t_t indexB)
 }
 //-----------------------------------------------------------------------------
 
-bool BStringArray::MoveItem(int32_t_t fromIndex,  int32_t_t toIndex)
+bool BStringArray::MoveItem(int32_t fromIndex,  int32_t toIndex)
 {
     if (fromIndex != toIndex) return list.MoveItem(fromIndex, toIndex);
 
@@ -392,9 +392,9 @@ bool BStringArray::MoveItem(int32_t_t fromIndex,  int32_t_t toIndex)
 }
 //-----------------------------------------------------------------------------
 
-int32_t_t BStringArray::FindString(const char *string,  int32_t_t startIndex, bool all_equal, bool invert) const
+int32_t BStringArray::FindString(const char *string,  int32_t startIndex, bool all_equal, bool invert) const
 {
-     int32_t_t i = startIndex;
+     int32_t i = startIndex;
 
     if (startIndex < 0 || startIndex >= list.CountItems()) return -1;
 
@@ -430,16 +430,16 @@ int32_t_t BStringArray::FindString(const char *string,  int32_t_t startIndex, bo
 
 //-----------------------------------------------------------------------------
 
-int32_t_t BStringArray::FindString(const BString &string,  int32_t_t startIndex, bool all_equal, bool invert) const
+int32_t BStringArray::FindString(const BString &string,  int32_t startIndex, bool all_equal, bool invert) const
 {
     return FindString(string.String(), startIndex, all_equal, invert);
 }
 
 //-----------------------------------------------------------------------------
 
-int32_t_t BStringArray::IFindString(const char *string,  int32_t_t startIndex, bool all_equal, bool invert) const
+int32_t BStringArray::IFindString(const char *string,  int32_t startIndex, bool all_equal, bool invert) const
 {
-     int32_t_t i = startIndex;
+     int32_t i = startIndex;
 
     if (startIndex < 0 || startIndex >= list.CountItems()) return -1;
 
@@ -474,7 +474,7 @@ int32_t_t BStringArray::IFindString(const char *string,  int32_t_t startIndex, b
 }
 //-----------------------------------------------------------------------------
 
-int32_t_t BStringArray::IFindString(const BString &string,  int32_t_t startIndex, bool all_equal, bool invert) const
+int32_t BStringArray::IFindString(const BString &string,  int32_t startIndex, bool all_equal, bool invert) const
 {
     return IFindString(string.String(), startIndex, all_equal, invert);
 }
